@@ -1,0 +1,7 @@
+D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory10\bin\Release\GODInventory10.exe
+D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory10\bin\Release\GODInventory10.pdb
+D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory10\obj\x86\Release\GODInventory.csprojResolveAssemblyReference.cache
+D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory10\obj\x86\Release\GODInventory10.Properties.Resources.resources
+D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory10\obj\x86\Release\GODInventory.csproj.GenerateResource.Cache
+D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory10\obj\x86\Release\GODInventory10.exe
+D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory10\obj\x86\Release\GODInventory10.pdb
