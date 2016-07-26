@@ -104,7 +104,7 @@ namespace GODInventoryWinForm
             using (var ctx = new GODDbContext())
             {
                 int progress = 0;
-                CustomMySqlParameters sql_parameters = null;
+                
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {
                     try
@@ -118,29 +118,24 @@ namespace GODInventoryWinForm
                             var model = models.ElementAt(i);
                             progress = Convert.ToInt16(((i + 1) * 1.0 / models.Count) * 100);
                             // use sql instead of orm
-                            var order = model.ConverToEntity( ctx );
-                            if (order != null)
-                            {
+                            //var order = model.ConverToEntity( ctx );
+                            int count = 0;
+                            
                                 //sql_parameters = model.ToSqlArguments(shop, item);
                                 var sql = model.ToRawSql();
                                 //Console.WriteLine("sql = #{0}", sql);
-                                sqls.Add(sql);
-                                if ((i == models.Count - 1) || (arg.CurrentIndex % 25 == 0))
-                                {
-                                    var multisql = String.Join("", sqls.ToArray());
-                                    ctx.Database.ExecuteSqlCommand(multisql);
-                                    sqls.Clear();
+                                
+                                if( ctx.Database.ExecuteSqlCommand(sql) ==0 ){
+                                   throw new Exception(String.Format("Can not find order by 店舗コード {0} and 伝票番号 {1} in 3 months.", model.StoreCode, model.InvoiceCode));
                                 }
-
+                                
                                 arg.CurrentIndex = i + 1;
                                 if (i % 25 == 0)
                                 {
                                     backgroundWorker1.ReportProgress(progress, arg);
                                 }
-                            }
-                            else {
-                                throw new Exception(String.Format("Can not find order by 店舗コード {0} and 伝票番号 {1} in 3 months.", model.StoreCode, model.InvoiceCode));
-                            }
+                           
+                            
                         }
                         backgroundWorker1.ReportProgress(100, arg);
                         ctxTransaction.Commit();

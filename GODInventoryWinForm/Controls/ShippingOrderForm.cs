@@ -134,6 +134,7 @@ namespace GODInventoryWinForm.Controls
 
                 OrderSqlHelper.GenerateASN(orderIds);
                 pager1.Bind();
+                InitializeEdiData();
                 pager3.Bind();
             }
             else

@@ -44,12 +44,6 @@ D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInven
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventoryWinForm\bin\Release\log4net.dll
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventoryWinForm\bin\Release\log4net.xml
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventoryWinForm\bin\Release\log4net.config
-D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventoryWinForm\bin\Release\Resources\FirstRecord_small.png
-D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventoryWinForm\bin\Release\Resources\LastRecord_small.png
-D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventoryWinForm\bin\Release\Resources\NextRecord_small.png
-D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventoryWinForm\bin\Release\Resources\PreviousRecord_small.png
-D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventoryWinForm\bin\Release\Resources\1_50.png
-D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventoryWinForm\bin\Release\Resources\2_50.png
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventoryWinForm\bin\Release\InventoryDemoV1.exe.manifest
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventoryWinForm\bin\Release\InventoryDemoV1.application
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventoryWinForm\obj\Release\InventoryDemoV1.exe.manifest

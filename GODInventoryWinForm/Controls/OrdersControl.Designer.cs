@@ -54,6 +54,7 @@
             // 
             // receiveOrderButton
             // 
+            this.receiveOrderButton.Enabled = false;
             this.receiveOrderButton.Location = new System.Drawing.Point(34, 73);
             this.receiveOrderButton.Name = "receiveOrderButton";
             this.receiveOrderButton.Size = new System.Drawing.Size(168, 65);
@@ -84,6 +85,7 @@
             // 
             // button6
             // 
+            this.button6.Enabled = false;
             this.button6.Location = new System.Drawing.Point(199, 314);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(122, 43);
@@ -111,6 +113,7 @@
             // 
             // orderConfirmButton
             // 
+            this.orderConfirmButton.Enabled = false;
             this.orderConfirmButton.Location = new System.Drawing.Point(319, 73);
             this.orderConfirmButton.Name = "orderConfirmButton";
             this.orderConfirmButton.Size = new System.Drawing.Size(168, 65);

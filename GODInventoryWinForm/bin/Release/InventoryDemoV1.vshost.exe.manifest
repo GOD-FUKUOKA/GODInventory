@@ -86,31 +86,31 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>f2HUKnZo9htuoJAUbeA1TMsQ9YOYiPOKw5OEkRUvUSY=</dsig:DigestValue>
+        <dsig:DigestValue>Af3jvH1HmPH1vVq/gwEP+Jino9+gjJmc7SamYh5sz+A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GODInventory.ViewModel.dll" size="130560">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GODInventory.ViewModel.dll" size="131072">
       <assemblyIdentity name="GODInventory.ViewModel" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FzecGfB3Hv/2Jy9F+CF1owO4qSD3mYZPKV2CRTK+TGU=</dsig:DigestValue>
+        <dsig:DigestValue>6iESMx6h589FNQF8Y57k+vxm3N8R8yeTeDZ003xfmPg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InventoryDemoV1.exe" size="314880">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InventoryDemoV1.exe" size="337408">
       <assemblyIdentity name="InventoryDemoV1" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qhUA3CiJS33R7zqxGmk06NQOrWXvzL+QMiLbZBU+/AU=</dsig:DigestValue>
+        <dsig:DigestValue>RGAAqAix9r6/2JLoTqw8Q61bBdZNxXbcG8m0i6T86aQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -279,13 +279,67 @@
       <dsig:DigestValue>9i5RYOlsxv3VpwceHC0VvxMQxbf0tA/Vkh2XNFrlW48=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="sql_changes.txt" size="2729">
+  <file name="Resources\order.png" size="4324">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>nDf3tgrMFBqSGLHheFa4JKIFB/hMq1r7DH4CdWDPuOE=</dsig:DigestValue>
+      <dsig:DigestValue>0XP13ExWGyKKyYaSSsXKuaFq9IgqR0Pzfy1MnIhwFGI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\product.png" size="5894">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jAz49AQLqZwRFiF9RW4/pVtj74olUg1eohBXcy1AAR4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\setting.png" size="5300">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>iqJmm6KJuePXjl7IFwoee2YE+xIBZPt9xNLQD5QVh0g=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\store.png" size="4446">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>0Os/kU7neh+B/N+HR+t+4yQjdTuRtC6LyEY9JCag/sU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\tools.png" size="4761">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>w+iBao0zBPIVCGlCKsLKzI6ZolhasDueXfYN+gnIyPw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\warehouse.png" size="4727">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>fvKIrs5f0DOuu8C/hWv7nm779ybMzbxcQvd24jwrfVQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="sql_changes.txt" size="2794">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jd9jDdD7xenyt58tkWGScicgudxUOwSvuFofGTE3jbs=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

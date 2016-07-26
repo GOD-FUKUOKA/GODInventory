@@ -412,7 +412,7 @@ namespace GODInventory.ViewModel.EDI
             orderdata.規格名カナ = EncodingUtility.ConvertShiftJisToUtf8(this.規格名カナ).Trim();
 
 
-            orderdata.発注数量 = Convert.ToInt32(Encoding.ASCII.GetString(this.発注数量));
+            orderdata.発注数量 = Convert.ToInt32(Encoding.ASCII.GetString(this.発注数量))/10;
 
             orderdata.最小発注単位数量 = Convert.ToInt32(Encoding.ASCII.GetString(this.最小発注単位数量));
             orderdata.発注単位名称漢字 = EncodingUtility.ConvertShiftJisToUtf8(this.発注単位名称漢字).Trim();

@@ -2,7 +2,7 @@
 ------------------------------------------------------------------
 CREATE TABLE `god_inventory`.`t_edidata` (
   `Id` INT NOT NULL AUTO_INCREMENT,
-  `データID` INT NOT NULL DEFAULT 0, -- 0 AH1, 1 CH1, 2 CH2
+  `データID` VARCHAR(12) NOT NULL, -- 0 AH1, 1 CH1, 2 CH2
   `管理連番` BIGINT(20) NOT NULL DEFAULT 0,
   `レコード件数` INT NOT NULL DEFAULT 0,
   `created_at` DATETIME NULL,

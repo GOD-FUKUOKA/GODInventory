@@ -263,9 +263,9 @@ WHERE id受注データ= @P0;";
         public string ToRawSql() {
 
             var o = this.entity;
-            string format = @"UPDATE  `t_orderdata` SET `受領確認`= 1, `受領数量`= {1} WHERE id受注データ= {0};";
+            string format = @"UPDATE  `t_orderdata` SET `受領確認`= 1, `受領数量`= {2}, `Status`=4 WHERE `Status`=3 and `伝票番号`= {0} and `店舗コード`={1};";
 
-            return String.Format(format, this.entity.id受注データ, this.ReceivedQuantity);
+            return String.Format(format, this.InvoiceCode, this.StoreCode, this.ReceivedQuantity);
         
         }
 

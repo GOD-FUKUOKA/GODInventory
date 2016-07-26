@@ -86,7 +86,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0DDXz/49A26Db9hd/VZN6G3s7hb5P2xZonh7+CORquc=</dsig:DigestValue>
+        <dsig:DigestValue>0bCdCtnuHxsQKPrRfF0/LGl2k5ihFOABi17C665UUd0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -98,7 +98,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>67FPsGpDyyjtwvhtmpUo/B4kGE1tiGvGgpzcl1+3mnk=</dsig:DigestValue>
+        <dsig:DigestValue>zoAXLQIKSMkRj5XenI4SXxNaAsSg9epPJmTOoGT9bu8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -110,7 +110,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>xtZX1w9AM4qX3h0qHcvFuoTTh9jsoejzpI7l/xGfjNA=</dsig:DigestValue>
+        <dsig:DigestValue>laeC6KyEVFTXv7c5Q1lweF00TswoaVFUXjcArS9JLa8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -333,13 +333,13 @@
       <dsig:DigestValue>fvKIrs5f0DOuu8C/hWv7nm779ybMzbxcQvd24jwrfVQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="sql_changes.txt" size="2729">
+  <file name="sql_changes.txt" size="2794">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>nDf3tgrMFBqSGLHheFa4JKIFB/hMq1r7DH4CdWDPuOE=</dsig:DigestValue>
+      <dsig:DigestValue>jd9jDdD7xenyt58tkWGScicgudxUOwSvuFofGTE3jbs=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

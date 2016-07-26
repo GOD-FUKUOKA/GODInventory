@@ -22,6 +22,8 @@ namespace GODInventory.MyLinq
 
         public int 店舗コード { get; set; }
 
+        public string 店舗名カナ { get; set; }
+
         public int? 社内伝番 { get; set; }
 
         public short? 行数 { get; set; }
