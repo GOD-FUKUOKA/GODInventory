@@ -29,6 +29,7 @@ namespace GODInventoryWinForm.Controls
 
             var ctx = entityDataSource1.DbContext as GODDbContext;
             this.stockstates = ctx.t_stockstate.Select(s => s).ToList();
+            
             InitializePager();
             
         }
@@ -40,10 +41,7 @@ namespace GODInventoryWinForm.Controls
             this.pager1.PageSize = 5000; //页数   
             this.pager1.Bind();
         }
-        public void RefreshPager()
-        {
-            this.pager1.Bind();
-        }
+
 
         #endregion
 
@@ -265,49 +263,56 @@ namespace GODInventoryWinForm.Controls
             var cq = OrderSqlHelper.PendingOrderQuery(entityDataSource1);
             var count = cq.Count();
 
-            var q = OrderSqlHelper.PendingOrderQueryEx(entityDataSource1);
-            // 分页
-            
-            //if (pager1.PageCurrent > 1) { 
-              q = q.Skip(pager1.OffSet(pager1.PageCurrent - 1));
-            //}
-            q = q.Take(pager1.OffSet(pager1.PageCurrent));
-
-            // create BindingList (sortable/filterable)
-            var bindinglist = entityDataSource1.CreateView(q) as EntityBindingList<v_pendingorder>;
-            
-            var list = new List<v_pendingorder>();
-            if(  bindinglist!= null){
-              list =  bindinglist.ToList();
-            }
-
-            IEnumerable<IGrouping<int, v_pendingorder>> grouped_orders = list.GroupBy( o => o.自社コード, o => o);
-            foreach (var gos in grouped_orders)
+            if (count > 0)
             {
-                int total = 0; 
+                var q = OrderSqlHelper.PendingOrderQueryEx(entityDataSource1);
+                // 分页
 
-                foreach (var o in gos) {
-                    total += o.発注数量;
+                if (pager1.PageCurrent > 1)
+                {
+                    q = q.Skip(pager1.OffSet(pager1.PageCurrent - 1));
+                }
+                q = q.Take(pager1.OffSet(pager1.PageCurrent));
 
-                    if (o.在庫数 >= total)
+                // create BindingList (sortable/filterable)
+                var bindinglist = entityDataSource1.CreateView(q) as EntityBindingList<v_pendingorder>;
+
+
+                var list = bindinglist.ToList();
+
+
+                IEnumerable<IGrouping<int, v_pendingorder>> grouped_orders = list.GroupBy(o => o.自社コード, o => o);
+                foreach (var gos in grouped_orders)
+                {
+                    int total = 0;
+
+                    foreach (var o in gos)
                     {
-                        o.在庫状態 = "あり";
-                    }
-                    else if (o.在庫数 > o.口数)
-                    {
-                        o.在庫状態 = "一部不足";
-                    }
-                    else {
-                        o.在庫状態 = "なし";
+                        total += o.発注数量;
+
+                        if (o.在庫数 >= total)
+                        {
+                            o.在庫状態 = "あり";
+                        }
+                        else if (o.在庫数 > o.口数)
+                        {
+                            o.在庫状態 = "一部不足";
+                        }
+                        else
+                        {
+                            o.在庫状態 = "なし";
+                        }
                     }
                 }
-            }
-               
-            this.bindingSource1.DataSource = bindinglist;
-            // assign BindingList to grid
-            dataGridView1.DataSource = this.bindingSource1;
+                this.bindingSource1.DataSource = bindinglist;
+                // assign BindingList to grid
 
-            InitializeFormDataSource();
+                InitializeFormDataSource();
+            }
+            else {
+                this.bindingSource1.DataSource = null;            
+            }
+            dataGridView1.DataSource = this.bindingSource1;
 
             return count;
         }

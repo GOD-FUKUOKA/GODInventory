@@ -86,19 +86,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Af3jvH1HmPH1vVq/gwEP+Jino9+gjJmc7SamYh5sz+A=</dsig:DigestValue>
+        <dsig:DigestValue>4EYGOSy53O3KPyZkfaBckJAEvxRAh8kZWQhTW6o57YY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GODInventory.ViewModel.dll" size="131072">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GODInventory.ViewModel.dll" size="130560">
       <assemblyIdentity name="GODInventory.ViewModel" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>6iESMx6h589FNQF8Y57k+vxm3N8R8yeTeDZ003xfmPg=</dsig:DigestValue>
+        <dsig:DigestValue>ixLFnAOi8JzO/F1e9aSbxVtmfXIoyBHx3R3K7ffIh9Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -110,7 +110,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>RGAAqAix9r6/2JLoTqw8Q61bBdZNxXbcG8m0i6T86aQ=</dsig:DigestValue>
+        <dsig:DigestValue>scORQUT67Sr1kcIjGU9/DV5hB5Nzlye7HhbZXxgZMmY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -79,3 +79,22 @@ D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInven
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory.Tester\obj\Debug\GODInventory.Tester.csprojResolveAssemblyReference.cache
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory.Tester\obj\Debug\GODInventory.Tester.exe
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory.Tester\obj\Debug\GODInventory.Tester.pdb
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\GODInventory.Tester.exe.config
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\GODInventory.Tester.exe
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\GODInventory.Tester.pdb
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\CommonLibrary.dll
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\EntityFramework.dll
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\EntityFramework.SqlServer.dll
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\GODInventory.MyLinq.dll
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\GODInventory.ViewModel.dll
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\log4net.dll
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\MySql.Data.dll
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\MySql.Data.Entity.EF6.dll
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\GODInventory.MyLinq.pdb
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\GODInventory.ViewModel.pdb
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\EntityFramework.xml
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\EntityFramework.SqlServer.xml
+D:\workspace\GODInventory\GODInventory.Tester\bin\Debug\log4net.xml
+D:\workspace\GODInventory\GODInventory.Tester\obj\Debug\GODInventory.Tester.csprojResolveAssemblyReference.cache
+D:\workspace\GODInventory\GODInventory.Tester\obj\Debug\GODInventory.Tester.exe
+D:\workspace\GODInventory\GODInventory.Tester\obj\Debug\GODInventory.Tester.pdb

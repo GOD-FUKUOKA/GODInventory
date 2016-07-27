@@ -58,16 +58,18 @@
             this.orderQuantityTextBox11 = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ordersTabPage = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.newOrderbutton = new System.Windows.Forms.Button();
+            this.detailButton = new System.Windows.Forms.Button();
+            this.editButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.filterButton = new System.Windows.Forms.Button();
             this.storeCodeFilterTextBox3 = new System.Windows.Forms.TextBox();
             this.invoiceNoFilterTextBox = new System.Windows.Forms.TextBox();
-            this.newOrderbutton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.editButton = new System.Windows.Forms.Button();
-            this.detailButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreCodeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,16 +100,14 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.formTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // id受注データDataGridViewTextBoxColumn
@@ -377,6 +377,85 @@
             this.ordersTabPage.Text = "Orders";
             this.ordersTabPage.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.newOrderbutton);
+            this.panel1.Controls.Add(this.detailButton);
+            this.panel1.Controls.Add(this.editButton);
+            this.panel1.Controls.Add(this.saveButton);
+            this.panel1.Controls.Add(this.cancelButton);
+            this.panel1.Location = new System.Drawing.Point(665, 6);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(328, 76);
+            this.panel1.TabIndex = 26;
+            // 
+            // newOrderbutton
+            // 
+            this.newOrderbutton.Location = new System.Drawing.Point(206, 14);
+            this.newOrderbutton.Name = "newOrderbutton";
+            this.newOrderbutton.Size = new System.Drawing.Size(108, 52);
+            this.newOrderbutton.TabIndex = 20;
+            this.newOrderbutton.Text = "New orders";
+            this.newOrderbutton.UseVisualStyleBackColor = true;
+            this.newOrderbutton.Click += new System.EventHandler(this.newOrderbutton_Click);
+            // 
+            // detailButton
+            // 
+            this.detailButton.Enabled = false;
+            this.detailButton.Location = new System.Drawing.Point(0, 15);
+            this.detailButton.Name = "detailButton";
+            this.detailButton.Size = new System.Drawing.Size(97, 23);
+            this.detailButton.TabIndex = 14;
+            this.detailButton.Text = "DetailTab";
+            this.detailButton.UseVisualStyleBackColor = true;
+            // 
+            // editButton
+            // 
+            this.editButton.Enabled = false;
+            this.editButton.Location = new System.Drawing.Point(102, 16);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(97, 22);
+            this.editButton.TabIndex = 15;
+            this.editButton.Text = "EditFormTab";
+            this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(0, 44);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(97, 23);
+            this.saveButton.TabIndex = 16;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(103, 44);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(97, 22);
+            this.cancelButton.TabIndex = 19;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(6, 419);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(977, 31);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
+            // 
             // filterButton
             // 
             this.filterButton.Location = new System.Drawing.Point(218, 21);
@@ -401,26 +480,6 @@
             this.invoiceNoFilterTextBox.Size = new System.Drawing.Size(100, 21);
             this.invoiceNoFilterTextBox.TabIndex = 22;
             // 
-            // newOrderbutton
-            // 
-            this.newOrderbutton.Location = new System.Drawing.Point(206, 14);
-            this.newOrderbutton.Name = "newOrderbutton";
-            this.newOrderbutton.Size = new System.Drawing.Size(108, 52);
-            this.newOrderbutton.TabIndex = 20;
-            this.newOrderbutton.Text = "New orders";
-            this.newOrderbutton.UseVisualStyleBackColor = true;
-            this.newOrderbutton.Click += new System.EventHandler(this.newOrderbutton_Click);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Location = new System.Drawing.Point(103, 44);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(97, 22);
-            this.cancelButton.TabIndex = 19;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -438,37 +497,6 @@
             this.label14.Size = new System.Drawing.Size(65, 12);
             this.label14.TabIndex = 17;
             this.label14.Text = "店舗コード";
-            // 
-            // saveButton
-            // 
-            this.saveButton.Location = new System.Drawing.Point(0, 44);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(97, 23);
-            this.saveButton.TabIndex = 16;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // editButton
-            // 
-            this.editButton.Enabled = false;
-            this.editButton.Location = new System.Drawing.Point(102, 16);
-            this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(97, 22);
-            this.editButton.TabIndex = 15;
-            this.editButton.Text = "EditFormTab";
-            this.editButton.UseVisualStyleBackColor = true;
-            this.editButton.Click += new System.EventHandler(this.editButton_Click);
-            // 
-            // detailButton
-            // 
-            this.detailButton.Enabled = false;
-            this.detailButton.Location = new System.Drawing.Point(0, 15);
-            this.detailButton.Name = "detailButton";
-            this.detailButton.Size = new System.Drawing.Size(97, 23);
-            this.detailButton.TabIndex = 14;
-            this.detailButton.Text = "DetailTab";
-            this.detailButton.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -726,34 +754,6 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.newOrderbutton);
-            this.panel1.Controls.Add(this.detailButton);
-            this.panel1.Controls.Add(this.editButton);
-            this.panel1.Controls.Add(this.saveButton);
-            this.panel1.Controls.Add(this.cancelButton);
-            this.panel1.Location = new System.Drawing.Point(665, 6);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(328, 76);
-            this.panel1.TabIndex = 26;
-            // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(6, 419);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(977, 31);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
-            // 
             // PendingOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -764,19 +764,19 @@
             this.MinimizeBox = false;
             this.Name = "PendingOrderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ValidOrderForm";
+            this.Text = "PendingOrderForm";
             this.Load += new System.EventHandler(this.OrderCheckForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.ordersTabPage.ResumeLayout(false);
             this.ordersTabPage.PerformLayout();
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.formTabPage.ResumeLayout(false);
             this.formTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

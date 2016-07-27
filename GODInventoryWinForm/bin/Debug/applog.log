@@ -69,3 +69,33 @@ MySql.Data.MySqlClient.MySqlException (0x80004005): Authentication to host 'loca
  - Start application GodInventory
 2016-07-26 09:51:57,879 [10] INFO  loginfo [(null)] <(null)>
  - Start application GodInventory
+2016-07-26 14:00:07,341 [10] ERROR logerror [(null)] <(null)>
+ - DB open error
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+   在 MySql.Data.MySqlClient.NativeDriver.Open()
+   在 MySql.Data.MySqlClient.Driver.Open()
+   在 MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   在 MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnection()
+   在 MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   在 MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   在 MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   在 MySql.Data.MySqlClient.MySqlConnection.Open()
+   在 GODInventoryWinForm.Program.DbConnectable() 位置 d:\workspace\GODInventory\GODInventoryWinForm\Program.cs:行号 61
+2016-07-26 14:00:07,663 [10] INFO  loginfo [(null)] <(null)>
+ - DB connection string is server=localhost;user id=root;database=god_inventory;allowuservariables=True;characterset=utf8
+2016-07-27 09:43:32,708 [8] INFO  loginfo [(null)] <(null)>
+ - Start application GodInventory
+2016-07-27 09:55:04,825 [9] INFO  loginfo [(null)] <(null)>
+ - Start application GodInventory
+2016-07-27 10:01:39,545 [9] INFO  loginfo [(null)] <(null)>
+ - Start application GodInventory
+2016-07-27 10:05:15,506 [10] INFO  loginfo [(null)] <(null)>
+ - Start application GodInventory
+2016-07-27 10:08:36,824 [8] INFO  loginfo [(null)] <(null)>
+ - Start application GodInventory
+2016-07-27 10:14:31,825 [10] INFO  loginfo [(null)] <(null)>
+ - Start application GodInventory
+2016-07-27 10:17:46,018 [10] INFO  loginfo [(null)] <(null)>
+ - Start application GodInventory
+2016-07-27 10:21:32,821 [10] INFO  loginfo [(null)] <(null)>
+ - Start application GodInventory

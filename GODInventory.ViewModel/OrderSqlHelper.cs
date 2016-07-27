@@ -56,8 +56,7 @@ namespace GODInventory.ViewModel
         {
             var a = entityDataSource1.EntitySets["t_orderdatas"];
             var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                    where o.配送担当受信時刻 == null
-                    orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
+                    where o.Status == 0
                     select o;
             return q;
         }

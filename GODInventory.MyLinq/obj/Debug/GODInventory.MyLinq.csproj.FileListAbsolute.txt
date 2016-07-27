@@ -28,3 +28,12 @@ D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInven
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory.MyLinq\obj\Debug\GODInventory.MyLinq.dll
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory.MyLinq\obj\Debug\GODInventory.MyLinq.pdb
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory.MyLinq\obj\Debug\GODInventory.MyLinq.csprojResolveAssemblyReference.cache
+D:\workspace\GODInventory\GODInventory.MyLinq\bin\Debug\GODInventory.MyLinq.dll.config
+D:\workspace\GODInventory\GODInventory.MyLinq\bin\Debug\GODInventory.MyLinq.dll
+D:\workspace\GODInventory\GODInventory.MyLinq\bin\Debug\GODInventory.MyLinq.pdb
+D:\workspace\GODInventory\GODInventory.MyLinq\bin\Debug\EntityFramework.dll
+D:\workspace\GODInventory\GODInventory.MyLinq\bin\Debug\MySql.Data.dll
+D:\workspace\GODInventory\GODInventory.MyLinq\bin\Debug\MySql.Data.Entity.EF6.dll
+D:\workspace\GODInventory\GODInventory.MyLinq\bin\Debug\EntityFramework.xml
+D:\workspace\GODInventory\GODInventory.MyLinq\obj\Debug\GODInventory.MyLinq.dll
+D:\workspace\GODInventory\GODInventory.MyLinq\obj\Debug\GODInventory.MyLinq.pdb

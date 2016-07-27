@@ -29,7 +29,7 @@ namespace GODInventoryWinForm.Controls
         private void pendingButton_Click(object sender, EventArgs e)
         {
             AdjustSubformSize(pendingOrderForm);
-            pendingOrderForm.RefreshPager();
+            pendingOrderForm.InitializePager();
             pendingOrderForm.ShowDialog(  );
         }
 

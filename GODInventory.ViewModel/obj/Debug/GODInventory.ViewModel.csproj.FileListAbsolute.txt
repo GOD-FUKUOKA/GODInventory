@@ -54,3 +54,20 @@ D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInven
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory.ViewModel\obj\Debug\GODInventory.ViewModel.csproj.GenerateResource.Cache
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory.ViewModel\obj\Debug\GODInventory.ViewModel.dll
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory.ViewModel\obj\Debug\GODInventory.ViewModel.pdb
+D:\workspace\GODInventory\GODInventory.ViewModel\bin\Debug\GODInventory.ViewModel.dll.config
+D:\workspace\GODInventory\GODInventory.ViewModel\bin\Debug\GODInventory.ViewModel.dll
+D:\workspace\GODInventory\GODInventory.ViewModel\bin\Debug\GODInventory.ViewModel.pdb
+D:\workspace\GODInventory\GODInventory.ViewModel\bin\Debug\EntityFramework.dll
+D:\workspace\GODInventory\GODInventory.ViewModel\bin\Debug\EntityFramework.SqlServer.dll
+D:\workspace\GODInventory\GODInventory.ViewModel\bin\Debug\GODInventory.MyLinq.dll
+D:\workspace\GODInventory\GODInventory.ViewModel\bin\Debug\MySql.Data.dll
+D:\workspace\GODInventory\GODInventory.ViewModel\bin\Debug\MySql.Data.Entity.EF6.dll
+D:\workspace\GODInventory\GODInventory.ViewModel\bin\Debug\GODInventory.MyLinq.pdb
+D:\workspace\GODInventory\GODInventory.ViewModel\bin\Debug\EntityFramework.xml
+D:\workspace\GODInventory\GODInventory.ViewModel\bin\Debug\EntityFramework.SqlServer.xml
+D:\workspace\GODInventory\GODInventory.ViewModel\obj\Debug\GODInventory.ViewModel.csprojResolveAssemblyReference.cache
+D:\workspace\GODInventory\GODInventory.ViewModel\obj\Debug\GODInventory.ViewModel.g.resources
+D:\workspace\GODInventory\GODInventory.ViewModel\obj\Debug\GODInventory.ViewModel.Properties.Resources.resources
+D:\workspace\GODInventory\GODInventory.ViewModel\obj\Debug\GODInventory.ViewModel.csproj.GenerateResource.Cache
+D:\workspace\GODInventory\GODInventory.ViewModel\obj\Debug\GODInventory.ViewModel.dll
+D:\workspace\GODInventory\GODInventory.ViewModel\obj\Debug\GODInventory.ViewModel.pdb
