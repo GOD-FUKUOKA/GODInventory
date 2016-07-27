@@ -277,8 +277,13 @@ namespace GODInventoryWinForm.Controls
                 // create BindingList (sortable/filterable)
                 var bindinglist = entityDataSource1.CreateView(q) as EntityBindingList<v_pendingorder>;
 
-
-                var list = bindinglist.ToList();
+                // count 计算t_orderdata 表， list 是 orderdata join itemlist join stockstate
+                // 所以有可能 bindinglist is null 
+                var list = new List<v_pendingorder>();
+                if (bindinglist != null)
+                {
+                    list = bindinglist.ToList();
+                }
 
 
                 IEnumerable<IGrouping<int, v_pendingorder>> grouped_orders = list.GroupBy(o => o.自社コード, o => o);

@@ -64,6 +64,7 @@ namespace GODInventoryWinForm
 
                 if (myconn.State.ToString() == "Open")
                 {
+                    LogHelper.WriteLog("Connect DB successfully"); 
                     success = true;
                 }
 
@@ -86,8 +87,9 @@ namespace GODInventoryWinForm
         {
             LogHelper.WriteLog("ThreadException", eventArgs.Exception);
 
-            //string message = string.Format("{0}\r\n操作发生错误，您需要退出系统么？", ex.Exception.Message);
-            //if (DialogResult.Yes == MessageBox.Show(message))
+            string message = string.Format("{0}\r\nThis is serial error， please call system administrator!", eventArgs.Exception.Message);
+            MessageBox.Show(message);
+            
             {
                 Application.Exit();
             }
