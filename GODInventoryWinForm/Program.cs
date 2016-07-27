@@ -35,6 +35,8 @@ namespace GODInventoryWinForm
 #endif
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException); 
+            
             Application.Run(new MainForm());
         
         }
@@ -78,6 +80,17 @@ namespace GODInventoryWinForm
             }
 
             return success;
+        }
+
+        private static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs eventArgs)
+        {
+            LogHelper.WriteLog("ThreadException", eventArgs.Exception);
+
+            //string message = string.Format("{0}\r\n操作发生错误，您需要退出系统么？", ex.Exception.Message);
+            //if (DialogResult.Yes == MessageBox.Show(message))
+            {
+                Application.Exit();
+            }
         }
     }
 }
