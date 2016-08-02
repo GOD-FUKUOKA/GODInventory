@@ -16,3 +16,22 @@ D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInven
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory.Tester\obj\Release\GODInventory.Tester.pdb
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory.Tester\bin\Release\log4net.dll
 D:\用户目录\我的文档\Visual Studio 2012\Projects\GODInventory10\GODInventory.Tester\bin\Release\log4net.xml
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\GODInventory.Tester.exe.config
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\GODInventory.Tester.exe
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\GODInventory.Tester.pdb
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\CommonLibrary.dll
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\EntityFramework.dll
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\EntityFramework.SqlServer.dll
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\GODInventory.MyLinq.dll
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\GODInventory.ViewModel.dll
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\log4net.dll
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\MySql.Data.dll
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\MySql.Data.Entity.EF6.dll
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\GODInventory.MyLinq.pdb
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\GODInventory.ViewModel.pdb
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\EntityFramework.xml
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\EntityFramework.SqlServer.xml
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\bin\Release\log4net.xml
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\obj\Release\GODInventory.Tester.csprojResolveAssemblyReference.cache
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\obj\Release\GODInventory.Tester.exe
+C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventory.Tester\obj\Release\GODInventory.Tester.pdb
