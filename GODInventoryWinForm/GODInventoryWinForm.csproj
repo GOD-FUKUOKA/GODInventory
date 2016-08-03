@@ -372,6 +372,7 @@
     <None Include="Resources\dashboard.png" />
     <None Include="Resources\dashboard1.png" />
     <None Include="Resources\add - 副本.gif" />
+    <None Include="Resources\16-on-black.gif" />
     <Content Include="Resources\order.png" />
     <None Include="Resources\order1.png" />
     <Content Include="Resources\product.png" />

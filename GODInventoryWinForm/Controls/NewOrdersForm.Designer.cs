@@ -49,9 +49,12 @@
             this.storeCodeTextBox = new System.Windows.Forms.TextBox();
             this.productCodeTextBox = new System.Windows.Forms.TextBox();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.二次製品ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderQuantityUpDown)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // submitButton
@@ -223,6 +226,8 @@
             this.storeCodeTextBox.Name = "storeCodeTextBox";
             this.storeCodeTextBox.Size = new System.Drawing.Size(160, 20);
             this.storeCodeTextBox.TabIndex = 18;
+            this.storeCodeTextBox.Click += new System.EventHandler(this.storeCodeTextBox_Click);
+            this.storeCodeTextBox.TextChanged += new System.EventHandler(this.storeCodeTextBox_TextChanged);
             // 
             // productCodeTextBox
             // 
@@ -237,24 +242,43 @@
             // 
             this.entityDataSource1.DbContextType = null;
             // 
-            // button1
+            // toolStrip1
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(12, 378);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 35);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Clear All";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownButton1});
+            this.toolStrip1.Location = new System.Drawing.Point(15, 375);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(306, 35);
+            this.toolStrip1.TabIndex = 20;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.二次製品ToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = global::GODInventoryWinForm.Properties.Resources._16_on_black;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.ShowDropDownArrow = false;
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(60, 32);
+            this.toolStripDropDownButton1.Text = "MORE";
+            // 
+            // 二次製品ToolStripMenuItem
+            // 
+            this.二次製品ToolStripMenuItem.Name = "二次製品ToolStripMenuItem";
+            this.二次製品ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.二次製品ToolStripMenuItem.Text = "二次製品";
+            this.二次製品ToolStripMenuItem.Click += new System.EventHandler(this.二次製品ToolStripMenuItem_Click);
             // 
             // NewOrdersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(896, 413);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.productCodeTextBox);
             this.Controls.Add(this.storeCodeTextBox);
             this.Controls.Add(this.invoiceNOTextBox);
@@ -275,6 +299,8 @@
             this.Load += new System.EventHandler(this.NewOrdersForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderQuantityUpDown)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,6 +328,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 店舗コード;
         private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注数量;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem 二次製品ToolStripMenuItem;
     }
 }

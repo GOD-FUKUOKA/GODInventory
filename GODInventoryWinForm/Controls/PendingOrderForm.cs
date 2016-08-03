@@ -473,39 +473,41 @@ namespace GODInventoryWinForm.Controls
 
         private void newOrderbutton_Click(object sender, EventArgs e)
         {
-            //var form = new NewOrdersForm();
-            //if (form.ShowDialog() == DialogResult.OK)
+            var form = new NewOrdersForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                pager1.Bind();
+            }
+            #region MyRegion
+            //if (NewOrdersForm == null)
             //{
-            //    pager1.Bind();
+            //    NewOrdersForm = new NewOrdersForm();
+            //    NewOrdersForm.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
             //}
-            if (NewOrdersForm == null)
-            {
-                NewOrdersForm = new NewOrdersForm();
-                NewOrdersForm.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
-            }
-            if (NewOrdersForm == null)
-            {
-                NewOrdersForm = new NewOrdersForm();
-            }
-            NewOrdersForm.ShowDialog();
+            //if (NewOrdersForm == null)
+            //{
+            //    NewOrdersForm = new NewOrdersForm();
+            //}
+            //NewOrdersForm.ShowDialog();
 
-            #region 直接刷新
+            //#region 直接刷新
 
-            DataSet dsSource = new DataSet(); //这是源数据库记录集，先获取源数据库所有数据在此记录集
-            string Conn = "server=localhost;User Id=root ;Database=test";
+            //DataSet dsSource = new DataSet(); //这是源数据库记录集，先获取源数据库所有数据在此记录集
+            //string Conn = "server=localhost;User Id=root ;Database=test";
 
-            MySqlConnection mycn = new MySqlConnection(Conn);
-            mycn.Open();
-            string sql = "select *from t_maruken_trans";
-            MySqlCommand cmd = new MySqlCommand(sql, mycn);
-            cmd.Connection = mycn;
-            MySqlDataAdapter Da = new MySqlDataAdapter(sql, mycn);
-            Da.Fill(dsSource, "t_maruken_trans");
-            //dataGridView1.DataSource = dsSource;
-            // dataGridView1.DataSource = DataBindings;
+            //MySqlConnection mycn = new MySqlConnection(Conn);
+            //mycn.Open();
+            //string sql = "select *from t_maruken_trans";
+            //MySqlCommand cmd = new MySqlCommand(sql, mycn);
+            //cmd.Connection = mycn;
+            //MySqlDataAdapter Da = new MySqlDataAdapter(sql, mycn);
+            //Da.Fill(dsSource, "t_maruken_trans");
+            ////dataGridView1.DataSource = dsSource;
+            //// dataGridView1.DataSource = DataBindings;
 
-            dataGridView1.DataSource = dsSource.Tables[0];
-            mycn.Close();
+            //dataGridView1.DataSource = dsSource.Tables[0];
+            //mycn.Close(); 
+            //#endregion
             #endregion
         }
 
@@ -548,27 +550,80 @@ namespace GODInventoryWinForm.Controls
             this.bindingSource1.Filter = filter;
 
         }
+        private void ApplyFilter2()
+        {
+            string filter = "";
+            if (this.storeCodeFilterTextBox3.Text.Length > 0)
+            {
+                filter += "(店舗コード=" + this.storeCodeFilterTextBox3.Text + ")";
+            }
+            if (this.invoiceNoFilterTextBox.Text.Length > 0)
+            {
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(伝票番号=" + this.invoiceNoFilterTextBox.Text + ")";
+            }
+            {
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(社内伝番>" + 0 + ")";
+            }
 
+
+            this.bindingSource1.Filter = filter;
+
+        }
         private void filterButton_Click(object sender, EventArgs e)
         {
-            ApplyFilter();
+            if (checkBox1.Checked == true)
+            {
+
+                List<t_orderdata> newlis = new List<t_orderdata>();
+
+                using (var ctx = new GODDbContext())
+                {
+                    var results = from s in ctx.t_orderdata
+                                  where s.社内伝番 > 0
+                                  select s;
+
+
+                    foreach (var emp in results)
+                    {
+                        if (emp.社内伝番.ToString().StartsWith("6"))
+                        {
+                            t_orderdata item = new t_orderdata();
+
+                            item = emp;
+                            newlis.Add(item);
+
+                        }
+                    }
+                }
+                ApplyFilter2();
+            }
+            else
+                ApplyFilter();
 
 
             ///筛选调价
             ///
-            if (storeCodeFilterTextBox3.Text != "" && invoiceNoFilterTextBox.Text == "")
-            {
+            //if (storeCodeFilterTextBox3.Text != "" && invoiceNoFilterTextBox.Text == "")
+            //{
 
-                CheckUserInfo(storeCodeFilterTextBox3.Text, "1", "");
-                this.dataGridView1.AutoGenerateColumns = false;
-                this.dataGridView1.DataSource = Findorderdataresults;
-            }
-            else if (storeCodeFilterTextBox3.Text != "" && invoiceNoFilterTextBox.Text != "")
-            {
-                CheckUserInfo(storeCodeFilterTextBox3.Text, "2", invoiceNoFilterTextBox.Text);
-                this.dataGridView1.AutoGenerateColumns = false;
-                this.dataGridView1.DataSource = Findorderdataresults;
-            }
+            //    CheckUserInfo(storeCodeFilterTextBox3.Text, "1", "");
+            //    this.dataGridView1.AutoGenerateColumns = false;
+            //    this.dataGridView1.DataSource = Findorderdataresults;
+            //}
+            //else if (storeCodeFilterTextBox3.Text != "" && invoiceNoFilterTextBox.Text != "")
+            //{
+            //    CheckUserInfo(storeCodeFilterTextBox3.Text, "2", invoiceNoFilterTextBox.Text);
+            //    this.dataGridView1.AutoGenerateColumns = false;
+            //    this.dataGridView1.DataSource = Findorderdataresults;
+            //}
 
 
         }

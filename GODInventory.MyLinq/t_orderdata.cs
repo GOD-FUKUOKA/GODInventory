@@ -293,5 +293,7 @@ namespace GODInventory.MyLinq
             this.配送担当受信 = false;
             this.Status = 0;
         }
+
+        
     }
 }
