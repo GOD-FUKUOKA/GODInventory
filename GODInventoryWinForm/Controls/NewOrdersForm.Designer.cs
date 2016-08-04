@@ -61,7 +61,7 @@
             // 
             this.submitButton.BackColor = System.Drawing.Color.Lime;
             this.submitButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.submitButton.Location = new System.Drawing.Point(712, 375);
+            this.submitButton.Location = new System.Drawing.Point(712, 464);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(75, 35);
             this.submitButton.TabIndex = 0;
@@ -72,7 +72,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(809, 375);
+            this.cancelButton.Location = new System.Drawing.Point(809, 464);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 35);
             this.cancelButton.TabIndex = 1;
@@ -85,7 +85,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Silver;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(38, 17);
+            this.label1.Location = new System.Drawing.Point(38, 106);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 15);
             this.label1.TabIndex = 2;
@@ -93,7 +93,7 @@
             // 
             // orderCreatedAtDateTimePicker
             // 
-            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(94, 13);
+            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(94, 102);
             this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
             this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(160, 20);
             this.orderCreatedAtDateTimePicker.TabIndex = 3;
@@ -107,7 +107,7 @@
             this.店舗コード,
             this.伝票番号,
             this.発注数量});
-            this.dataGridView1.Location = new System.Drawing.Point(15, 116);
+            this.dataGridView1.Location = new System.Drawing.Point(15, 205);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(869, 256);
@@ -148,7 +148,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Silver;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(16, 46);
+            this.label2.Location = new System.Drawing.Point(16, 135);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 15);
             this.label2.TabIndex = 5;
@@ -159,7 +159,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Silver;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 74);
+            this.label3.Location = new System.Drawing.Point(10, 163);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 15);
             this.label3.TabIndex = 7;
@@ -170,7 +170,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Silver;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(630, 74);
+            this.label4.Location = new System.Drawing.Point(630, 163);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 15);
             this.label4.TabIndex = 9;
@@ -179,7 +179,7 @@
             // orderQuantityUpDown
             // 
             this.orderQuantityUpDown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.orderQuantityUpDown.Location = new System.Drawing.Point(704, 69);
+            this.orderQuantityUpDown.Location = new System.Drawing.Point(704, 158);
             this.orderQuantityUpDown.Name = "orderQuantityUpDown";
             this.orderQuantityUpDown.Size = new System.Drawing.Size(160, 20);
             this.orderQuantityUpDown.TabIndex = 10;
@@ -191,7 +191,7 @@
             this.addButton.ForeColor = System.Drawing.Color.Crimson;
             this.addButton.Image = global::GODInventoryWinForm.Properties.Resources.add___副本;
             this.addButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addButton.Location = new System.Drawing.Point(409, 61);
+            this.addButton.Location = new System.Drawing.Point(409, 150);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(125, 46);
             this.addButton.TabIndex = 15;
@@ -204,7 +204,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Silver;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(630, 46);
+            this.label7.Location = new System.Drawing.Point(630, 135);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(67, 15);
             this.label7.TabIndex = 16;
@@ -213,7 +213,7 @@
             // invoiceNOTextBox
             // 
             this.invoiceNOTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.invoiceNOTextBox.Location = new System.Drawing.Point(704, 41);
+            this.invoiceNOTextBox.Location = new System.Drawing.Point(704, 130);
             this.invoiceNOTextBox.Name = "invoiceNOTextBox";
             this.invoiceNOTextBox.Size = new System.Drawing.Size(160, 20);
             this.invoiceNOTextBox.TabIndex = 17;
@@ -222,7 +222,7 @@
             // storeCodeTextBox
             // 
             this.storeCodeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.storeCodeTextBox.Location = new System.Drawing.Point(94, 41);
+            this.storeCodeTextBox.Location = new System.Drawing.Point(94, 130);
             this.storeCodeTextBox.Name = "storeCodeTextBox";
             this.storeCodeTextBox.Size = new System.Drawing.Size(160, 20);
             this.storeCodeTextBox.TabIndex = 18;
@@ -232,7 +232,7 @@
             // productCodeTextBox
             // 
             this.productCodeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.productCodeTextBox.Location = new System.Drawing.Point(94, 69);
+            this.productCodeTextBox.Location = new System.Drawing.Point(94, 158);
             this.productCodeTextBox.Name = "productCodeTextBox";
             this.productCodeTextBox.Size = new System.Drawing.Size(160, 20);
             this.productCodeTextBox.TabIndex = 19;
@@ -249,7 +249,7 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(15, 375);
+            this.toolStrip1.Location = new System.Drawing.Point(15, 464);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(306, 35);
             this.toolStrip1.TabIndex = 20;
@@ -269,7 +269,7 @@
             // 二次製品ToolStripMenuItem
             // 
             this.二次製品ToolStripMenuItem.Name = "二次製品ToolStripMenuItem";
-            this.二次製品ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.二次製品ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.二次製品ToolStripMenuItem.Text = "二次製品";
             this.二次製品ToolStripMenuItem.Click += new System.EventHandler(this.二次製品ToolStripMenuItem_Click);
             // 
@@ -277,7 +277,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(896, 413);
+            this.ClientSize = new System.Drawing.Size(943, 515);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.productCodeTextBox);
             this.Controls.Add(this.storeCodeTextBox);

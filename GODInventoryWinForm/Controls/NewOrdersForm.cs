@@ -83,13 +83,11 @@ namespace GODInventoryWinForm.Controls
                 //if ( row)
                 //order.店舗名漢字 =
                 int index = this.dataGridView1.Rows.Add();
-
                 dataGridView1.Rows[index].Cells[0].Value = order.発注日;
                 dataGridView1.Rows[index].Cells[1].Value = order.商品コード;
                 dataGridView1.Rows[index].Cells[2].Value = order.店舗コード;
                 dataGridView1.Rows[index].Cells[3].Value = order.伝票番号;
                 dataGridView1.Rows[index].Cells[4].Value = order.発注数量;
-
 
                 #region 判断所添加的订单号码
                 //string maxid = "Select max id form t_orderdata";
@@ -136,7 +134,6 @@ namespace GODInventoryWinForm.Controls
             {
                 MessageBox.Show("Ex" + ex, "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-
                 throw ex;
             }
         }
@@ -231,13 +228,14 @@ namespace GODInventoryWinForm.Controls
 
                         //  item.品名漢字
                         aaa.Add(sqlInsert1);
+
+
                         #region old
                         //sqlInsert1 = "  insert into t_orderdata(id受注データ) values( " + "'" + 10086 + "'"+ ")";
                         //MySqlCommand mySqlCommand = getSqlCommand(sqlInsert1, mysql);
                         //getInsert(mySqlCommand);
                         #endregion
                         #region 插入数据
-
                         using (var ctx = new GODDbContext())
                         {
                             ctx.t_orderdata.Add(item);
@@ -281,8 +279,6 @@ namespace GODInventoryWinForm.Controls
                     //    MessageBox.Show(dr[j++].ToString());
                     //}
                     //mycon.Close();
-
-
                     #endregion
 
                 }
@@ -485,7 +481,6 @@ namespace GODInventoryWinForm.Controls
             newfaxno = new List<int>();
             List<string> datenewfaxno = new List<string>();
 
-
             #region new connect
             using (var ctx = new GODDbContext())
             {
@@ -514,9 +509,34 @@ namespace GODInventoryWinForm.Controls
 
             int Add_1 = Convert.ToInt32(newfaxno[datenewfaxno.Count - 1]) + 1;
 
-            string fax = "00" + Add_1;
+            string fax = "00" + Add_1.ToString();
 
             this.invoiceNOTextBox.Text = fax.Trim();
+            if (fax.Length == 8)
+            {
+                double dataamout = Convert.ToDouble(fax.Substring(0, 1)) + Convert.ToDouble(fax.Substring(1, 1)) + Convert.ToDouble(fax.Substring(2, 1)) + Convert.ToDouble(fax.Substring(3, 1)) + Convert.ToDouble(fax.Substring(4, 1)) + Convert.ToDouble(fax.Substring(5, 1)) + Convert.ToDouble(fax.Substring(6, 1)) + Convert.ToDouble(fax.Substring(7, 1)) + Convert.ToDouble(fax.Substring(8, 1));
+
+            }
+            else if (fax.Length < 8)
+            {
+                int add_0 = 8 - fax.Length;
+                for (int i = 0; i < add_0; i++)
+                {
+                    //if (i == 0)
+                    //    fax = "0" + Add_1;
+                    //else
+                    fax = "0" + fax;
+                }
+                double dataamout = Convert.ToDouble(fax.Substring(0, 1)) + Convert.ToDouble(fax.Substring(1, 1)) + Convert.ToDouble(fax.Substring(2, 1)) + Convert.ToDouble(fax.Substring(3, 1)) + Convert.ToDouble(fax.Substring(4, 1)) + Convert.ToDouble(fax.Substring(5, 1)) + Convert.ToDouble(fax.Substring(6, 1)) + Convert.ToDouble(fax.Substring(7, 1));
+                double datare = dataamout / 7;
+
+               double sishewuru= Math.Round(datare, MidpointRounding.AwayFromZero);
+
+
+
+            }
+
+
 
         }
 
@@ -551,6 +571,8 @@ namespace GODInventoryWinForm.Controls
 
                 newfaxno = new List<int>();
 
+                List<t_orderdata> newlis1 = new List<t_orderdata>();
+
                 foreach (var emp in results)
                 {
 
@@ -558,20 +580,27 @@ namespace GODInventoryWinForm.Controls
                     item.社内伝番 = emp.社内伝番;
 
                     newfaxno.Add(Convert.ToInt32(item.社内伝番));
+                    newlis1.Add(emp);
+
 
                 }
                 newfaxno.Sort();
 
-                IQueryable<t_shoplist> pages = from p in ctx.t_shoplist
-                                               where p.店番 > 0
-                                               select p;
+                //IQueryable<t_shoplist> pages = from p in ctx.t_shoplist
+                //                               where p.店番 > 0
+                //                               select p;
 
+                var resultsshoplist = from p in ctx.t_shoplist
+                                      where p.店番 > 0
+                                      select p;
                 //var query1 = Query<t_orderdata>.Matches(c => c.TIAOXINGMA, new BsonRegularExpression(new Regex(findtext)));
+
+
                 List<t_orderdata> newlis = new List<t_orderdata>();
 
-                foreach (var emp in pages)
+                foreach (var emp in resultsshoplist)
                 {
-                    foreach (var temp in results)
+                    foreach (var temp in newlis1)
                     {
                         if (emp.店番 == temp.店舗コード)
                         {
@@ -579,11 +608,15 @@ namespace GODInventoryWinForm.Controls
                             {
                                 newlis.Add(temp);
                             }
-
                         }
                     }
                 }
 
+                if (newlis.Count != 0)
+                {
+                    MessageBox.Show("未処理内容ありません！");
+                    return;
+                }
                 //社内伝番
             }
 
@@ -621,20 +654,16 @@ namespace GODInventoryWinForm.Controls
                         //
                         item.社内伝番 = 1000000;
                         社内伝番index = Convert.ToInt32(item.社内伝番);
-                    } 
+                    }
                     #endregion
                     index++;
-
+                    //社内伝番最大値を調べ取り込み完了
                     item.社内伝番 = newfaxno[newfaxno.Count - 1] + 1;
-
                     item.行数 = index;
-
                     item.最大行数 = index;
-                   
-
                     orders1.Add(item);
                 }
-                #region 插入数据
+                #region 插入数据  二次製品データ処理後登録
                 using (var ctx = new GODDbContext())
                 {
                     foreach (t_orderdata item in orders1)
