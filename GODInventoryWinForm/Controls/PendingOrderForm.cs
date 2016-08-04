@@ -13,14 +13,21 @@ namespace GODInventoryWinForm.Controls
     using GODInventory.MyLinq;
     using GODInventory.ViewModel;
     using MySql.Data.MySqlClient;
+    using System.Data.SqlClient;
 
     public partial class PendingOrderForm : Form
     {
         public Size ParentContainerSize { get; set; }
-        
+
         //  [c1_r1_changed=> new_value,c1_r1=> original_value] ]
         private Hashtable datagrid_changes = null;
         private List<t_stockstate> stockstates;
+        List<t_orderdata> Findorderdataresults;
+        private NewOrdersForm NewOrdersForm;
+        int RowRemark = 0;
+        int cloumn = 0;
+        private string id受注データdemo;
+
 
         public PendingOrderForm()
         {
@@ -29,14 +36,15 @@ namespace GODInventoryWinForm.Controls
 
             var ctx = entityDataSource1.DbContext as GODDbContext;
             this.stockstates = ctx.t_stockstate.Select(s => s).ToList();
-            
+
             InitializePager();
-            
+
         }
 
         #region Pager Methods
 
-        public void InitializePager(){
+        public void InitializePager()
+        {
             this.pager1.PageCurrent = 1; //当前页为第一页   
             this.pager1.PageSize = 5000; //页数   
             this.pager1.Bind();
@@ -53,26 +61,26 @@ namespace GODInventoryWinForm.Controls
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-/*
-            entityDataSource1.SaveChanges();
-            List<object> canceled_data = new List<object>();
-            foreach (t_orderdata data in bindingSource1.List)
-            {
-                if (data.キャンセル == "yes")
-                {
-                    canceled_data.Add(data);
-                }
-            }
-            foreach (var data in canceled_data)
-            {
-                bindingSource1.Remove(data);
-            }
-            */
+            /*
+                        entityDataSource1.SaveChanges();
+                        List<object> canceled_data = new List<object>();
+                        foreach (t_orderdata data in bindingSource1.List)
+                        {
+                            if (data.キャンセル == "yes")
+                            {
+                                canceled_data.Add(data);
+                            }
+                        }
+                        foreach (var data in canceled_data)
+                        {
+                            bindingSource1.Remove(data);
+                        }
+                        */
         }
 
         private void OrderCheckForm_Load(object sender, EventArgs e)
         {
-           
+
 
             //this.Location = new Point(50, 25);
 
@@ -82,22 +90,22 @@ namespace GODInventoryWinForm.Controls
         {
             //if(dateTimePicker1.Text == String.Empty)
             {
-            //    this.dateTimePicker1.CustomFormat =  " ";
-            //    this.dateTimePicker1.Format = DateTimePickerFormat.Custom;
+                //    this.dateTimePicker1.CustomFormat =  " ";
+                //    this.dateTimePicker1.Format = DateTimePickerFormat.Custom;
             }
             //else
             {
                 this.dateTimePicker1.Format = DateTimePickerFormat.Short;
             }
 
-       
+
         }
 
         private void submitFormButton_Click(object sender, EventArgs e)
         {
             //string oid = orderIDTextBox.Text;
             int oid = GetSelectedOrderID();
-            if ( oid > 0 )
+            if (oid > 0)
             {
                 using (var ctx = new GODDbContext())
                 {
@@ -112,8 +120,9 @@ namespace GODInventoryWinForm.Controls
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.RowCount > 0) {
-                this.tabControl1.SelectTab(formTabPage);                
+            if (dataGridView1.RowCount > 0)
+            {
+                this.tabControl1.SelectTab(formTabPage);
             }
         }
 
@@ -148,7 +157,7 @@ namespace GODInventoryWinForm.Controls
         private void cancelButton_Click(object sender, EventArgs e)
         {
             IEnumerable<int> rows = GetChangedRowIndexes();
-            if( rows.Count()> 0)
+            if (rows.Count() > 0)
             {
                 pager1.Bind();
             }
@@ -167,7 +176,8 @@ namespace GODInventoryWinForm.Controls
         }
 
 
-        private int GetDatagridRowCount() {
+        private int GetDatagridRowCount()
+        {
             return dataGridView1.RowCount;
         }
 
@@ -182,7 +192,7 @@ namespace GODInventoryWinForm.Controls
                 DataGridViewRow dgrSingle = dataGridView1.Rows[e.RowIndex];
                 try
                 {
-                    if(datagrid_changes.ContainsKey(e.RowIndex))//if (dgrSingle.Cells["列名"].Value.ToString().Contains("比较值"))
+                    if (datagrid_changes.ContainsKey(e.RowIndex))//if (dgrSingle.Cells["列名"].Value.ToString().Contains("比较值"))
                     {
                         dgrSingle.DefaultCellStyle.ForeColor = Color.Red;
                     }
@@ -212,13 +222,16 @@ namespace GODInventoryWinForm.Controls
             var original_cell_value = datagrid_changes[cell_key];
             // original_cell_value could null
             //Console.WriteLine(" original = {0} {3}, new ={1} {4}, compare = {2}, {5}", original_cell_value, new_cell_value, original_cell_value == new_cell_value, original_cell_value.GetType(), new_cell_value.GetType(), new_cell_value.Equals(original_cell_value));
-            if (new_cell_value == null && original_cell_value == null) {
+            if (new_cell_value == null && original_cell_value == null)
+            {
                 datagrid_changes.Remove(cell_key + "_changed");
-            } else if ( (new_cell_value ==null && original_cell_value!=null) || (new_cell_value != null && original_cell_value == null) || !new_cell_value.Equals(original_cell_value) ) 
+            }
+            else if ((new_cell_value == null && original_cell_value != null) || (new_cell_value != null && original_cell_value == null) || !new_cell_value.Equals(original_cell_value))
             {
                 datagrid_changes[cell_key + "_changed"] = new_cell_value;
             }
-            else {
+            else
+            {
                 datagrid_changes.Remove(cell_key + "_changed");
             }
 
@@ -239,9 +252,9 @@ namespace GODInventoryWinForm.Controls
             string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString() + "_changed";
 
             if (datagrid_changes.ContainsKey(cell_key))
-            {              
-                    e.CellStyle.BackColor = Color.Red;
-                    e.CellStyle.SelectionBackColor = Color.DarkRed;               
+            {
+                e.CellStyle.BackColor = Color.Red;
+                e.CellStyle.SelectionBackColor = Color.DarkRed;
             }
 
         }
@@ -314,8 +327,9 @@ namespace GODInventoryWinForm.Controls
 
                 InitializeFormDataSource();
             }
-            else {
-                this.bindingSource1.DataSource = null;            
+            else
+            {
+                this.bindingSource1.DataSource = null;
             }
             dataGridView1.DataSource = this.bindingSource1;
 
@@ -333,7 +347,7 @@ namespace GODInventoryWinForm.Controls
             productKanjiSpecificationTextBox.DataBindings.Clear();
             productReceivedAtTextBox3.DataBindings.Clear();
 
-            if( this.bindingSource1.Count > 0)
+            if (this.bindingSource1.Count > 0)
             {
                 //invoiceNOTextBox.DataBindings.Clear();
                 orderIDTextBox.DataBindings.Add("Text", bindingSource1, "id受注データ");
@@ -364,7 +378,8 @@ namespace GODInventoryWinForm.Controls
             return Convert.ToInt32(orderIDTextBox.Text);
         }
 
-        private IEnumerable<int> GetChangedRowIndexes() {
+        private IEnumerable<int> GetChangedRowIndexes()
+        {
 
             List<int> rows = new List<int>();
             foreach (DictionaryEntry entry in datagrid_changes)
@@ -389,7 +404,8 @@ namespace GODInventoryWinForm.Controls
                 OrderSqlHelper.SendOrderToShipper(oids);
                 pager1.Bind();
             }
-            else {
+            else
+            {
                 MessageBox.Show(" please select rows in the order list first.");
             }
         }
@@ -445,12 +461,54 @@ namespace GODInventoryWinForm.Controls
 
         }
 
+        void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (sender is NewOrdersForm)
+            {
+                NewOrdersForm = null;
+            }
+
+
+        }
+
         private void newOrderbutton_Click(object sender, EventArgs e)
         {
             var form = new NewOrdersForm();
-            if (form.ShowDialog() == DialogResult.OK) {
+            if (form.ShowDialog() == DialogResult.OK)
+            {
                 pager1.Bind();
             }
+            #region MyRegion
+            //if (NewOrdersForm == null)
+            //{
+            //    NewOrdersForm = new NewOrdersForm();
+            //    NewOrdersForm.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
+            //}
+            //if (NewOrdersForm == null)
+            //{
+            //    NewOrdersForm = new NewOrdersForm();
+            //}
+            //NewOrdersForm.ShowDialog();
+
+            //#region 直接刷新
+
+            //DataSet dsSource = new DataSet(); //这是源数据库记录集，先获取源数据库所有数据在此记录集
+            //string Conn = "server=localhost;User Id=root ;Database=test";
+
+            //MySqlConnection mycn = new MySqlConnection(Conn);
+            //mycn.Open();
+            //string sql = "select *from t_maruken_trans";
+            //MySqlCommand cmd = new MySqlCommand(sql, mycn);
+            //cmd.Connection = mycn;
+            //MySqlDataAdapter Da = new MySqlDataAdapter(sql, mycn);
+            //Da.Fill(dsSource, "t_maruken_trans");
+            ////dataGridView1.DataSource = dsSource;
+            //// dataGridView1.DataSource = DataBindings;
+
+            //dataGridView1.DataSource = dsSource.Tables[0];
+            //mycn.Close(); 
+            //#endregion
+            #endregion
         }
 
         private void toolStripLabel1_Click(object sender, EventArgs e)
@@ -459,7 +517,8 @@ namespace GODInventoryWinForm.Controls
         }
 
 
-        private IEnumerable<DataGridViewRow> GetSelectedRowsBySelectedCells() {
+        private IEnumerable<DataGridViewRow> GetSelectedRowsBySelectedCells()
+        {
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
             foreach (DataGridViewCell cell in this.dataGridView1.SelectedCells)
             {
@@ -491,16 +550,202 @@ namespace GODInventoryWinForm.Controls
             this.bindingSource1.Filter = filter;
 
         }
+        private void ApplyFilter2()
+        {
+            string filter = "";
+            if (this.storeCodeFilterTextBox3.Text.Length > 0)
+            {
+                filter += "(店舗コード=" + this.storeCodeFilterTextBox3.Text + ")";
+            }
+            if (this.invoiceNoFilterTextBox.Text.Length > 0)
+            {
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(伝票番号=" + this.invoiceNoFilterTextBox.Text + ")";
+            }
+            {
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(社内伝番>" + 0 + ")";
+            }
 
+
+            this.bindingSource1.Filter = filter;
+
+        }
         private void filterButton_Click(object sender, EventArgs e)
         {
-            ApplyFilter();
-        }
+            if (checkBox1.Checked == true)
+            {
 
+                List<t_orderdata> newlis = new List<t_orderdata>();
+
+                using (var ctx = new GODDbContext())
+                {
+                    var results = from s in ctx.t_orderdata
+                                  where s.社内伝番 > 0
+                                  select s;
+
+
+                    foreach (var emp in results)
+                    {
+                        if (emp.社内伝番.ToString().StartsWith("6"))
+                        {
+                            t_orderdata item = new t_orderdata();
+
+                            item = emp;
+                            newlis.Add(item);
+
+                        }
+                    }
+                }
+                ApplyFilter2();
+            }
+            else
+                ApplyFilter();
+
+
+            ///筛选调价
+            ///
+            //if (storeCodeFilterTextBox3.Text != "" && invoiceNoFilterTextBox.Text == "")
+            //{
+
+            //    CheckUserInfo(storeCodeFilterTextBox3.Text, "1", "");
+            //    this.dataGridView1.AutoGenerateColumns = false;
+            //    this.dataGridView1.DataSource = Findorderdataresults;
+            //}
+            //else if (storeCodeFilterTextBox3.Text != "" && invoiceNoFilterTextBox.Text != "")
+            //{
+            //    CheckUserInfo(storeCodeFilterTextBox3.Text, "2", invoiceNoFilterTextBox.Text);
+            //    this.dataGridView1.AutoGenerateColumns = false;
+            //    this.dataGridView1.DataSource = Findorderdataresults;
+            //}
+
+
+        }
+        public void CheckUserInfo(string username, string tyoe, string conditon2)
+        {
+            string SQLStr = "";
+
+            Findorderdataresults = new List<t_orderdata>();
+            if (tyoe == "1")
+                SQLStr = String.Format(" select * From t_orderdata where 店舗コード='{0}'", username);
+            else if (tyoe == "2")
+                SQLStr = String.Format(" select * From t_orderdata where 店舗コード='{0}',伝票番号='{1}'", username, conditon2);
+
+            try
+            {
+                string constr = "server=localhost;User Id=root ;Database=test";
+                NewOrdersForm SqlData = new NewOrdersForm();
+                MySqlConnection mycon = new MySqlConnection(constr);
+                mycon.Open();
+                //MySqlCommand mycmd = new MySqlCommand("select * from t_maruken_trans  where 店舗コード='87'", mycon);
+                MySqlCommand mycmd = new MySqlCommand(SQLStr, mycon);
+
+                //SqlDataReader DataReader = mycmd.ExSQLReader( );
+                MySqlDataReader DataReader = mycmd.ExecuteReader();
+                while (DataReader.Read())
+                {
+                    t_orderdata userinfo = new t_orderdata();
+
+                    #region 集合
+                    //if (DataReader.GetValue(0).ToString() != null && DataReader.GetValue(0).ToString() != "")
+                    //userinfo.id受注データ= Convert.ToInt32(DataReader.GetValue(0).ToString()); 
+
+
+                    //userinfo.id = DataReader.GetValue(0).ToString();
+                    //userinfo.受注日 = Convert.ToDateTime(DataReader.GetValue(1).ToString());
+                    //userinfo.店舗コード = Convert.ToInt16(DataReader.GetValue(2).ToString());
+                    //userinfo.店舗名漢字 = DataReader.GetValue(3).ToString();
+                    //userinfo.伝票番号 = Convert.ToInt32(DataReader.GetValue(4).ToString());
+                    //userinfo.キャンセル = DataReader.GetValue(5).ToString();
+                    //if (DataReader.GetValue(6).ToString() != null && DataReader.GetValue(6).ToString() != "")
+                    //    userinfo.キャンセル時刻 = Convert.ToDateTime(DataReader.GetValue(6).ToString());
+                    //userinfo.ジャンル = Convert.ToInt16(DataReader.GetValue(7).ToString());
+                    //userinfo.品名漢字 = DataReader.GetValue(8).ToString();
+                    //userinfo.規格名漢字 = DataReader.GetValue(9).ToString();
+                    //userinfo.発注数量 = Convert.ToInt32(DataReader.GetValue(10).ToString());
+                    //userinfo.口数 = Convert.ToInt32(DataReader.GetValue(11).ToString());
+                    //if (DataReader.GetValue(12).ToString() != null && DataReader.GetValue(12).ToString() != "")
+                    //    userinfo.重量 = Convert.ToInt32(DataReader.GetValue(12).ToString());
+                    //userinfo.単位 = DataReader.GetValue(13).ToString();
+                    //userinfo.実際配送担当 = DataReader.GetValue(14).ToString();
+
+                    //userinfo.県別 = DataReader.GetValue(15).ToString();
+                    //userinfo.配送担当受信 = Convert.ToBoolean(DataReader.GetValue(16).ToString());
+                    //if (DataReader.GetValue(17).ToString() != null && DataReader.GetValue(17).ToString() != "")
+                    //    userinfo.配送担当受信時刻 = Convert.ToDateTime(DataReader.GetValue(17).ToString());
+                    //userinfo.専務受信 = Convert.ToBoolean(DataReader.GetValue(18).ToString());
+                    //if (DataReader.GetValue(19).ToString() != null && DataReader.GetValue(19).ToString() != "")
+                    //    userinfo.専務受信時刻 = Convert.ToDateTime(DataReader.GetValue(19).ToString());
+                    //userinfo.納品指示 = DataReader.GetValue(20).ToString();
+                    //userinfo.備考 = DataReader.GetValue(21).ToString();
+
+                    ////MessageBox.Show("服务器查找成功");
+                    //Findorderdataresults.Add(userinfo);
+                    #endregion
+                    #region new
+
+                    if (DataReader.GetValue(0).ToString() != null && DataReader.GetValue(0).ToString() != "")
+                        userinfo.id受注データ = Convert.ToInt32(DataReader.GetValue(0).ToString());
+
+
+                    userinfo.id = DataReader.GetValue(1).ToString();
+                    userinfo.受注日 = Convert.ToDateTime(DataReader.GetValue(3).ToString());
+                    userinfo.店舗コード = Convert.ToInt16(DataReader.GetValue(6).ToString());
+                    userinfo.店舗名漢字 = DataReader.GetValue(7).ToString();
+                    userinfo.伝票番号 = Convert.ToInt32(DataReader.GetValue(11).ToString());
+                    userinfo.キャンセル = DataReader.GetValue(14).ToString();
+                    if (DataReader.GetValue(15).ToString() != null && DataReader.GetValue(15).ToString() != "")
+                        userinfo.キャンセル時刻 = Convert.ToDateTime(DataReader.GetValue(15).ToString());
+                    if (DataReader.GetValue(16).ToString() != null && DataReader.GetValue(16).ToString() != "")
+                        userinfo.ジャンル = Convert.ToInt16(DataReader.GetValue(16).ToString());
+                    userinfo.品名漢字 = DataReader.GetValue(19).ToString();
+                    userinfo.規格名漢字 = DataReader.GetValue(20).ToString();
+                    userinfo.発注数量 = Convert.ToInt32(DataReader.GetValue(21).ToString());
+                    if (DataReader.GetValue(23).ToString() != null && DataReader.GetValue(23).ToString() != "")
+                        userinfo.口数 = Convert.ToInt32(DataReader.GetValue(23).ToString());
+                    if (DataReader.GetValue(25).ToString() != null && DataReader.GetValue(25).ToString() != "")
+                        userinfo.重量 = Convert.ToInt32(DataReader.GetValue(25).ToString());
+                    userinfo.単位 = DataReader.GetValue(26).ToString();
+                    userinfo.実際配送担当 = DataReader.GetValue(32).ToString();
+                    if (DataReader.GetValue(111).ToString() != null && DataReader.GetValue(111).ToString() != "")
+
+                        userinfo.県別 = DataReader.GetValue(111).ToString();
+                    userinfo.配送担当受信 = Convert.ToBoolean(DataReader.GetValue(33).ToString());
+                    if (DataReader.GetValue(34).ToString() != null && DataReader.GetValue(34).ToString() != "")
+                        userinfo.配送担当受信時刻 = Convert.ToDateTime(DataReader.GetValue(34).ToString());
+                    userinfo.専務受信 = Convert.ToBoolean(DataReader.GetValue(35).ToString());
+                    if (DataReader.GetValue(36).ToString() != null && DataReader.GetValue(36).ToString() != "")
+                        userinfo.専務受信時刻 = Convert.ToDateTime(DataReader.GetValue(36).ToString());
+                    userinfo.納品指示 = DataReader.GetValue(37).ToString();
+                    userinfo.備考 = DataReader.GetValue(41).ToString();
+
+                    //MessageBox.Show("服务器查找成功");
+                    Findorderdataresults.Add(userinfo);
+
+
+                    #endregion
+                }
+                mycon.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            finally
+            {
+
+            }
+        }
         private int pager1_EventPaging(EventPagingArg e)
         {
             int order_count = InitializeOrderData();
-            
+
             return order_count;
         }
 
@@ -551,7 +796,200 @@ namespace GODInventoryWinForm.Controls
 
         private void PendingOrderForm_SizeChanged(object sender, EventArgs e)
         {
-           
+
+        }
+
+        private void detailButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cancelFormButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int s = this.tabControl1.SelectedIndex;
+            if (s == 0 && RowRemark >= 0)
+            {
+
+                string id = dataGridView1.Rows[RowRemark].Cells["StoreCodeColumn1"].EditedFormattedValue.ToString() + "a" + dataGridView1.Rows[RowRemark].Cells["InvoiceNOColumn1"].EditedFormattedValue.ToString();
+
+                CheckUserInfo_ID(id, "1", invoiceNoFilterTextBox.Text);
+
+                foreach (t_orderdata item in Findorderdataresults)
+                {
+                    if (item.受注日 != null)
+                        textBox2.Text = item.受注日.ToString();
+                    if (item.店舗コード != null)
+                        textBox3.Text = item.店舗コード.ToString();
+                    if (item.店舗名漢字 != null)
+                        textBox4.Text = item.店舗名漢字.ToString();
+                    if (item.伝票番号 != null)
+                        textBox5.Text = item.伝票番号.ToString();
+                    if (item.キャンセル != null)
+                        textBox6.Text = item.キャンセル.ToString();
+                    if (item.キャンセル時刻 != null)
+                        textBox7.Text = item.キャンセル時刻.ToString();
+                    //textBox8.Text = item.品名漢字.ToString();
+                    if (item.ジャンル != null)
+                        textBox9.Text = item.ジャンル.ToString();
+                    if (item.品名漢字 != null)
+                        textBox10.Text = item.品名漢字.ToString();
+                    if (item.規格名漢字 != null)
+                        textBox11.Text = item.規格名漢字.ToString();
+                    if (item.発注数量 != null)
+                        //textBox12.Text = item.重量.ToString();
+                        textBox13.Text = item.発注数量.ToString();
+                    if (item.口数 != null)
+                        textBox14.Text = item.口数.ToString();
+                    if (item.重量 != null)
+                        textBox15.Text = item.重量.ToString();
+                    if (item.単位 != null)
+                        textBox16.Text = item.単位.ToString();
+                    if (item.実際配送担当 != null)
+                        textBox17.Text = item.実際配送担当.ToString();
+                    if (item.県別 != null)
+                        textBox18.Text = item.県別.ToString();
+                    if (item.配送担当受信 != null)
+                        textBox19.Text = item.配送担当受信.ToString();
+                    if (item.配送担当受信時刻 != null)
+                        textBox20.Text = item.配送担当受信時刻.ToString();
+                    if (item.専務受信 != null)
+                        textBox21.Text = item.専務受信.ToString();
+                    if (item.専務受信時刻 != null)
+                        textBox22.Text = item.専務受信時刻.ToString();
+                    if (item.受注日 != null)
+                        textBox23.Text = item.受注日.ToString();
+                    if (item.納品指示 != null)
+                        textBox24.Text = item.納品指示.ToString();
+                    if (item.備考 != null)
+                        textBox25.Text = item.備考.ToString();
+                }
+            }
+
+
+        }
+        public void CheckUserInfo_ID(string username, string tyoe, string conditon2)
+        {
+            string SQLStr = "";
+
+            Findorderdataresults = new List<t_orderdata>();
+            if (tyoe == "1")
+                SQLStr = String.Format(" select * From t_orderdata where id='{0}'", username);
+
+            try
+            {
+                string constr = "server=localhost;User Id=root ;Database=test";
+                NewOrdersForm SqlData = new NewOrdersForm();
+                MySqlConnection mycon = new MySqlConnection(constr);
+                mycon.Open();
+                //MySqlCommand mycmd = new MySqlCommand("select * from t_maruken_trans  where 店舗コード='87'", mycon);
+                MySqlCommand mycmd = new MySqlCommand(SQLStr, mycon);
+
+                //SqlDataReader DataReader = mycmd.ExSQLReader( );
+                MySqlDataReader DataReader = mycmd.ExecuteReader();
+                while (DataReader.Read())
+                {
+                    t_orderdata userinfo = new t_orderdata();
+
+                    #region 集合
+                    //userinfo.id = DataReader.GetValue(0).ToString();
+                    //userinfo.受注日 = Convert.ToDateTime(DataReader.GetValue(1).ToString());
+                    //userinfo.店舗コード = Convert.ToInt16(DataReader.GetValue(2).ToString());
+                    //userinfo.店舗名漢字 = DataReader.GetValue(3).ToString();
+                    //userinfo.伝票番号 = Convert.ToInt32(DataReader.GetValue(4).ToString());
+                    //userinfo.キャンセル = DataReader.GetValue(5).ToString();
+                    //if (DataReader.GetValue(6).ToString() != null && DataReader.GetValue(6).ToString() != "")
+                    //    userinfo.キャンセル時刻 = Convert.ToDateTime(DataReader.GetValue(6).ToString());
+                    //userinfo.ジャンル = Convert.ToInt16(DataReader.GetValue(7).ToString());
+                    //userinfo.品名漢字 = DataReader.GetValue(8).ToString();
+                    //userinfo.規格名漢字 = DataReader.GetValue(9).ToString();
+                    //userinfo.発注数量 = Convert.ToInt32(DataReader.GetValue(10).ToString());
+                    //userinfo.口数 = Convert.ToInt32(DataReader.GetValue(11).ToString());
+                    //if (DataReader.GetValue(12).ToString() != null && DataReader.GetValue(12).ToString() != "")
+                    //    userinfo.重量 = Convert.ToInt32(DataReader.GetValue(12).ToString());
+                    //userinfo.単位 = DataReader.GetValue(13).ToString();
+                    //userinfo.実際配送担当 = DataReader.GetValue(14).ToString();
+
+                    //userinfo.県別 = DataReader.GetValue(15).ToString();
+                    //userinfo.配送担当受信 = Convert.ToBoolean(DataReader.GetValue(16).ToString());
+                    //if (DataReader.GetValue(17).ToString() != null && DataReader.GetValue(17).ToString() != "")
+                    //    userinfo.配送担当受信時刻 = Convert.ToDateTime(DataReader.GetValue(17).ToString());
+                    //userinfo.専務受信 = Convert.ToBoolean(DataReader.GetValue(18).ToString());
+                    //if (DataReader.GetValue(19).ToString() != null && DataReader.GetValue(19).ToString() != "")
+                    //    userinfo.専務受信時刻 = Convert.ToDateTime(DataReader.GetValue(19).ToString());
+                    //userinfo.納品指示 = DataReader.GetValue(20).ToString();
+                    //userinfo.備考 = DataReader.GetValue(21).ToString();
+
+                    ////MessageBox.Show("服务器查找成功");
+                    //Findorderdataresults.Add(userinfo);
+                    #endregion
+                    #region new
+
+                    if (DataReader.GetValue(0).ToString() != null && DataReader.GetValue(0).ToString() != "")
+                        userinfo.id受注データ = Convert.ToInt32(DataReader.GetValue(0).ToString());
+
+
+                    userinfo.id = DataReader.GetValue(1).ToString();
+                    userinfo.受注日 = Convert.ToDateTime(DataReader.GetValue(3).ToString());
+                    userinfo.店舗コード = Convert.ToInt16(DataReader.GetValue(6).ToString());
+                    userinfo.店舗名漢字 = DataReader.GetValue(7).ToString();
+                    userinfo.伝票番号 = Convert.ToInt32(DataReader.GetValue(11).ToString());
+                    userinfo.キャンセル = DataReader.GetValue(14).ToString();
+                    if (DataReader.GetValue(15).ToString() != null && DataReader.GetValue(15).ToString() != "")
+                        userinfo.キャンセル時刻 = Convert.ToDateTime(DataReader.GetValue(15).ToString());
+                    if (DataReader.GetValue(16).ToString() != null && DataReader.GetValue(16).ToString() != "")
+                        userinfo.ジャンル = Convert.ToInt16(DataReader.GetValue(16).ToString());
+                    userinfo.品名漢字 = DataReader.GetValue(19).ToString();
+                    userinfo.規格名漢字 = DataReader.GetValue(20).ToString();
+                    userinfo.発注数量 = Convert.ToInt32(DataReader.GetValue(21).ToString());
+                    if (DataReader.GetValue(23).ToString() != null && DataReader.GetValue(23).ToString() != "")
+                        userinfo.口数 = Convert.ToInt32(DataReader.GetValue(23).ToString());
+                    if (DataReader.GetValue(25).ToString() != null && DataReader.GetValue(25).ToString() != "")
+                        userinfo.重量 = Convert.ToInt32(DataReader.GetValue(25).ToString());
+                    userinfo.単位 = DataReader.GetValue(26).ToString();
+                    userinfo.実際配送担当 = DataReader.GetValue(32).ToString();
+                    if (DataReader.GetValue(111).ToString() != null && DataReader.GetValue(111).ToString() != "")
+
+                        userinfo.県別 = DataReader.GetValue(111).ToString();
+                    userinfo.配送担当受信 = Convert.ToBoolean(DataReader.GetValue(33).ToString());
+                    if (DataReader.GetValue(34).ToString() != null && DataReader.GetValue(34).ToString() != "")
+                        userinfo.配送担当受信時刻 = Convert.ToDateTime(DataReader.GetValue(34).ToString());
+                    userinfo.専務受信 = Convert.ToBoolean(DataReader.GetValue(35).ToString());
+                    if (DataReader.GetValue(36).ToString() != null && DataReader.GetValue(36).ToString() != "")
+                        userinfo.専務受信時刻 = Convert.ToDateTime(DataReader.GetValue(36).ToString());
+                    userinfo.納品指示 = DataReader.GetValue(37).ToString();
+                    userinfo.備考 = DataReader.GetValue(41).ToString();
+
+                    //MessageBox.Show("服务器查找成功");
+                    Findorderdataresults.Add(userinfo);
+
+
+                    #endregion
+                }
+                mycon.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            finally
+            {
+
+            }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            RowRemark = e.RowIndex;
+            cloumn = e.ColumnIndex;
+            id受注データdemo = dataGridView1.Rows[RowRemark].Cells["id受注データ"].EditedFormattedValue.ToString();
+
         }
 
     }
