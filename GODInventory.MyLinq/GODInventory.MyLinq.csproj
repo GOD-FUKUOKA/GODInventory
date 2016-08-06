@@ -60,6 +60,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="t_manufacturers.cs" />
+    <Compile Include="t_shippers.cs" />
     <Compile Include="EFIntercepterLogging.cs" />
     <Compile Include="GODDbContext.cs" />
     <Compile Include="GODDbContext.Views.cs" />
