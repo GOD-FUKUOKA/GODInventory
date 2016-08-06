@@ -1,5 +1,5 @@
 ﻿-- SQL
-------------------------------------------------------------------
+-- ----------------------------------------------------------------
 CREATE TABLE `god_inventory`.`t_edidata` (
   `Id` INT NOT NULL AUTO_INCREMENT,
   `データID` VARCHAR(12) NOT NULL, -- 0 AH1, 1 CH1, 2 CH2
@@ -12,7 +12,7 @@ CREATE TABLE `god_inventory`.`t_edidata` (
   `printed_at` DATETIME NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC));
-------------------------------------------------------------------
+-- ----------------------------------------------------------------
 ALTER TABLE `god_inventory`.`t_orderdata` 
 CHANGE COLUMN `ジャンル` `ジャンル` INT(3) NULL ,
 CHANGE COLUMN `ＪＡＮコード` `ＪＡＮコード` BIGINT(20) NOT NULL DEFAULT 0;
@@ -26,7 +26,7 @@ UPDATE `god_inventory`.`t_itemlist` SET `JANコード`='0' WHERE `自社コー�
 UPDATE `god_inventory`.`t_itemlist` SET `JANコード`='0' WHERE `自社コード`='130005';
 
 
--------------------------------------------------------------------
+-- -----------------------------------------------------------------
 ALTER TABLE `god_inventory`.`t_orderdata` 
 ADD COLUMN `ASN管理連番` BIGINT(20) NOT NULL DEFAULT 0 AFTER `センター名カナ`;
 
@@ -55,4 +55,19 @@ ADD COLUMN `県別` VARCHAR(45) NULL AFTER `Status`;
 ALTER TABLE `god_inventory`.`t_orderdata` 
 ADD INDEX `t_orderdata_combo` (`Status` ASC, `実際配送担当` ASC, `県別` ASC, `店舗コード` ASC, `ＪＡＮコード` ASC, `受注日` ASC, `伝票番号` ASC);
 
--------------------------------------------------------------------
+-- -----------------------------------------------------------------
+CREATE TABLE `god_inventory`.`t_shippers` (
+  `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ShortName` VARCHAR(45) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `FullName` VARCHAR(45) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`));
+CREATE TABLE `god_inventory`.`t_manufacturers` (
+  `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ShortName` VARCHAR(45) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `FullName` VARCHAR(45)  CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`));
+
+INSERT INTO `god_inventory`.`t_manufacturers` (`Id`, `ShortName`, `FullName`) VALUES ('1', '青島華天', '青島華天');
+INSERT INTO `god_inventory`.`t_shippers` (`Id`, `ShortName`, `FullName`) VALUES ('1', 'GOD', 'GOD');
+INSERT INTO `god_inventory`.`t_shippers` (`Id`, `ShortName`, `FullName`) VALUES ('2', 'MKL', 'MKL');
+INSERT INTO `god_inventory`.`t_shippers` (`Id`, `ShortName`, `FullName`) VALUES ('3', 'マツモト産業', 'マツモト産業');

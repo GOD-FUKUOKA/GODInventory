@@ -60,7 +60,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="EFIntercepterLogging.cs" />
     <Compile Include="GODDbContext.cs" />
     <Compile Include="GODDbContext.Views.cs" />
