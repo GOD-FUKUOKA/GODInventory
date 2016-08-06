@@ -382,7 +382,6 @@
             this.storeCodeTextBox.Size = new System.Drawing.Size(58, 21);
             this.storeCodeTextBox.TabIndex = 18;
             this.storeCodeTextBox.Text = "000";
-            this.storeCodeTextBox.Click += new System.EventHandler(this.storeCodeTextBox_Click);
             this.storeCodeTextBox.TextChanged += new System.EventHandler(this.storeCodeTextBox_TextChanged);
             // 
             // productCodeTextBox

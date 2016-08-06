@@ -217,10 +217,10 @@
     <Compile Include="Controls\MainControl.Designer.cs">
       <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewOrdersForm.cs">
+    <Compile Include="Controls\NewOrdersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewOrdersForm.Designer.cs">
+    <Compile Include="Controls\NewOrdersForm.Designer.cs">
       <DependentUpon>NewOrdersForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -310,7 +310,7 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewOrdersForm.resx">
+    <EmbeddedResource Include="Controls\NewOrdersForm.resx">
       <DependentUpon>NewOrdersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

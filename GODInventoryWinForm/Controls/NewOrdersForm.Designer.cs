@@ -1,4 +1,4 @@
-﻿namespace GODInventoryWinForm
+﻿namespace GODInventoryWinForm.Controls
 {
     partial class NewOrdersForm
     {

@@ -22,17 +22,15 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class CreateOrderForm : Form
     {
-        private Thread GetDataforOutlookThread;
-        private IBindingListView shops = null;
-        private IBindingListView products = null;
-        private DbSet<t_orderdata> orders;
+
         List<int> newfaxno = new List<int>();
         private List<t_orderdata> orders1;
-        public enum OrderStatusEnum { Pending = 0, WaitToShip = 1, PendingShipment = 2, ASN = 3, Received = 4, Completed = 5 };
         private List<t_shoplist> t_shoplistR;
         //private List<> t_shoplistR;
         private List<t_rcvdata> t_rcvdataR;
         private List<t_locations> t_locationsR;
+        private BindingList<t_orderdata> orderList;
+
         int RowRemark = 0;
         int cloumn = 0;
 
@@ -40,8 +38,8 @@ namespace GODInventoryWinForm.Controls
         {
             InitializeComponent();
 
-            //shops = entityDataSource1.EntitySets["t_shoplist"].List;
-            //products = entityDataSource1.EntitySets["t_dataitem"].List;
+            orderList = new BindingList<t_orderdata>();
+
             t_shoplistR = new List<t_shoplist>();
             t_rcvdataR = new List<t_rcvdata>();
             t_locationsR = new List<t_locations>();
@@ -73,7 +71,7 @@ namespace GODInventoryWinForm.Controls
             //textBox3.Text = temp1[3]; 
             #endregion
 
-
+            this.dataGridView1.DataSource = orderList;
         }
 
         private void NewOrdersForm_Load(object sender, EventArgs e)
@@ -85,6 +83,7 @@ namespace GODInventoryWinForm.Controls
         {
             try
             {
+
 
                 if (storeCodeTextBox.Text == "" || productCodeTextBox.Text == "")
                 {
@@ -100,22 +99,21 @@ namespace GODInventoryWinForm.Controls
                     return;
 
                 }
-                if (invoiceNOTextBox.Text.Length != 8)
-                {
-                    if (MessageBox.Show("伝票番号  キャラクタ丈正しくない, 引き続き?", "Info", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                    {
-
-                    }
-                    else
-                        return;
-                }
+                //if (invoiceNOTextBox.Text.Length != 8)
+                //{
+                //    if (MessageBox.Show("伝票番号  キャラクタ丈正しくない, 引き続き?", "Info", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                //    {
+                //    }
+                //    else
+                //        return;
+                //}
                 //受注日, 伝票番号, 発注日, 店舗コード, 店舗名漢字, JANコード, 商品コード, 品名漢字, 規格名漢字,  発注数量
                 //原単価(税抜),原価金額(税抜), 売単価(税抜),納品先店舗コード, 納品先店舗名漢字, 納品場所名漢字
 
                 t_orderdata order = new t_orderdata();
                 order.受注日 = DateTime.Now;
                 order.発注日 = orderCreatedAtDateTimePicker.Value;
-                order.伝票番号 = Convert.ToInt32(invoiceNOTextBox.Text);
+               
                 order.店舗コード = Convert.ToInt16(storeCodeTextBox.Text);
                 order.商品コード = Convert.ToInt32(productCodeTextBox.Text);
                 order.発注数量 = Convert.ToInt32(orderQuantityUpDown.Value);
@@ -130,10 +128,10 @@ namespace GODInventoryWinForm.Controls
                 order.納品予定日 = this.dateTimePicker1.Value;
                 order.納品場所コード = Convert.ToInt16(this.textBox6.Text);
                 order.納品先店舗名漢字 = this.comboBox3.Text;
-                
-                //int row_index = shops.Find(order.店舗コード);
-                //if ( row)
-                //order.店舗名漢字 =
+
+                order.伝票番号 = GenerateInvoiceNumber( order.店舗コード );
+                orderList.Add(order);
+                /* 
                 int index = this.dataGridView1.Rows.Add();
                 if (order.発注日 != null)
                     dataGridView1.Rows[index].Cells["発注日"].Value = order.発注日;
@@ -176,7 +174,7 @@ namespace GODInventoryWinForm.Controls
                     dataGridView1.Rows[index].Cells["仕入先名カナ"].Value = order.仕入先名カナ;
                 if (order.出荷業務仕入先コード != null)
                     dataGridView1.Rows[index].Cells["出荷業務仕入先コード"].Value = order.出荷業務仕入先コード;
- 
+                */
 
                 #region 判断所添加的订单号码
                 //string maxid = "Select max id form t_orderdata";
@@ -232,161 +230,20 @@ namespace GODInventoryWinForm.Controls
 
             try
             {
-                orders1 = new List<t_orderdata>();
-                //打开
-                MySqlConnection mysql = getMySqlCon();
-                mysql.Open();
-                if (dataGridView1.RowCount != 0)
+
+               
+                if (orderList.Count > 0)
                 {
-                    List<string> aaa = new List<string>();
-
-                    #region    //读取当前商户订单中的最大订单号
-                    ////    SELECT MAX(column_name) FROM table_name
-                    //string maxid = "Select max id form t_orderdata";
-                    //maxid = " SELECT MAX(id) AS LargestOrderPrice FROM t_orderdata";
-                    //string constr1 = "server=localhost;User Id=root ;Database=test";
-
-                    //MySqlConnection mycon1 = new MySqlConnection(constr1);
-                    //mycon1.Open();
-                    //MySqlCommand mycmd1 = new MySqlCommand(maxid, mycon1);
-                    //MySqlDataReader dr1 = mycmd1.ExecuteReader();
-                    ////将结果赋值到了dr，下面开始输出                      
-                    //int jk = 0;
-
-                    //string maxidname = "";
-
-                    //while (dr1.Read())
-                    //{
-                    //    maxidname = dr1[jk++].ToString();
-
-                    //}
-                    //mycon1.Close();
-                    //string[] temp1 = System.Text.RegularExpressions.Regex.Split(maxidname, "a");
-
-                    #endregion
-
-                    for (int i = 0; i < dataGridView1.RowCount; i++)
+                    using (var ctx = new GODDbContext())
                     {
-                        if (dataGridView1.Rows[i].Cells["発注日"].EditedFormattedValue.ToString() == null || dataGridView1.Rows[i].Cells["発注日"].EditedFormattedValue.ToString() == "")
-                            break;
-
-                        t_orderdata item = new t_orderdata();
-                        item.発注日 = Convert.ToDateTime(dataGridView1.Rows[i].Cells["発注日"].EditedFormattedValue.ToString());
-                        item.伝票番号 = Convert.ToInt32(dataGridView1.Rows[i].Cells["伝票番号"].EditedFormattedValue.ToString());
-                        item.店舗コード = Convert.ToInt16(dataGridView1.Rows[i].Cells["店舗コード"].EditedFormattedValue.ToString());// Convert.ToInt32(dataGridView1.Rows[i].Cells["店舗コード"].EditedFormattedValue.ToString());
-                        item.店舗名漢字 = dataGridView1.Rows[i].Cells["店舗名漢字"].EditedFormattedValue.ToString();
-
-
-                        item.商品コード = Convert.ToInt32(dataGridView1.Rows[i].Cells["商品コード"].EditedFormattedValue.ToString());
-                        item.発注数量 = Convert.ToInt32(dataGridView1.Rows[i].Cells["発注数量"].EditedFormattedValue.ToString());
-
-                        System.Globalization.DateTimeFormatInfo dtFormat = new System.Globalization.DateTimeFormatInfo();
-
-                        dtFormat.ShortDatePattern = "yyyy-MM-dd";
-                        item.受注日 = Convert.ToDateTime(item.発注日.ToString("yyyy-MM-dd", dtFormat));
-
-                        item.法人コード = Convert.ToInt16(dataGridView1.Rows[i].Cells["法人コード"].EditedFormattedValue.ToString());
-
-                        item.法人名漢字 = dataGridView1.Rows[i].Cells["法人名漢字"].EditedFormattedValue.ToString();
-                        item.部門コード = Convert.ToInt16(dataGridView1.Rows[i].Cells["部門コード"].EditedFormattedValue.ToString());
-                        item.納品予定日 = Convert.ToDateTime(dataGridView1.Rows[i].Cells["納品予定日"].EditedFormattedValue.ToString());
-                        item.納品場所コード = Convert.ToInt16(dataGridView1.Rows[i].Cells["納品場所コード"].EditedFormattedValue.ToString());
-                        item.納品先店舗名漢字 = dataGridView1.Rows[i].Cells["納品先店舗名漢字"].EditedFormattedValue.ToString();
-                        item.仕入先コード = Convert.ToInt32(dataGridView1.Rows[i].Cells["仕入先コード"].EditedFormattedValue.ToString());
-
-                        item.出荷業務仕入先コード = Convert.ToInt32(dataGridView1.Rows[i].Cells["出荷業務仕入先コード"].EditedFormattedValue.ToString());
-                        item.仕入先名カナ = dataGridView1.Rows[i].Cells["仕入先名カナ"].EditedFormattedValue.ToString();
-
-                        orders1.Add(item);
-
-                        //int add_1 = Convert.ToInt32(temp1[1]) + 1;
-                        //if (add_1 > 99999)
-                        //    add_1 = 00001;
-
-                        //string id = item.店舗コード + "a" + add_1.ToString();
-
-                        #region 确认是否重复
-                        #region 查询
-                        //mycon1.Open();
-                        //mycmd1 = new MySqlCommand("select * from t_orderdata  where id=" + "'" + id + "'", mycon1);
-
-                        //MySqlDataReader dr = mycmd1.ExecuteReader();
-                        ////将结果赋值到了dr，下面开始输出                      
-                        //int j = 0;
-                        //int aog = 0;
-                        //while (dr.Read())
-                        //{
-                        //    aog++;
-                        //    MessageBox.Show(dr[j++].ToString() + "--を繰り返し");
-                        //    break;
-                        //}
-                        //mycon1.Close();
-                        //if (aog != 0)
-                        //    continue;
-                        #endregion
-                        #endregion
-                        //String sqlInsert1 = "  insert into t_maruken_trans(id,発注日,伝票番号,店舗コード,商品コード,発注数量) values( " + "'" + id + "'" + "," + "'" + item.発注日 + "'" + "," + "'" + item.伝票番号 + "'" + "," + "'" + item.店舗コード + "'" + "," + "'" + item.商品コード + "'" + "," + "'" + item.発注数量 + "'" + ")";
-
-                        //String sqlInsert1 = "  insert into t_orderdata(id受注データ,id,配送担当受信時刻,伝票番号,店舗コード,品名漢字,発注数量,受注日) values( " + "'" + item.伝票番号 + "'" + "," + "'" + item.伝票番号 + "'" + "," + "'" + item.発注日.ToString("yyyy-MM-dd HH:mm:ss") + "'" + "," + "'" + item.伝票番号 + "'" + "," + "'" + item.店舗コード + "'" + "," + "'" + item.商品コード + "'" + "," + "'" + item.発注数量 + "'" + "," + "'" + DateTime.Now.ToString("yyyy-MM-dd") + "'" + ")";
-                        #region MyRegion
-                        //String sqlInsert1 = "  insert into t_orderdata(id受注データ,id,配送担当受信時刻,伝票番号,店舗コード,商品コード,品名漢字,発注数量,受注日,ダブリ,キャンセル,ＪＡＮコード,実際出荷数量,原単価(税抜),納品原価金額,一旦保留,実際配送担当,配送担当受信,専務受信,受領,受領確認,受領数量,ASN管理連番,出荷No,自社コード,Status) values( " + "'" + item.伝票番号 + "'" + "," + "'" + item.伝票番号 + "'" + "," + "'" + item.発注日.ToString("yyyy-MM-dd HH:mm:ss") + "'" + "," + "'" + item.伝票番号 + "'" + "," + "'" + item.店舗コード + "'" + "," + "'" + item.商品コード + "'" + "'" + "t" + "'" + "," + "'" + item.発注数量 + "'" + "," + "'" + DateTime.Now.ToString("yyyy-MM-dd") + "'" + "'" + "12" + "'" + "'" + "34" + "'" + "'" + "'" + "2100000008888" + "'" + "'" + "56" + "'" + "'" + "78" + "'" + "'" + "910" + "'" + "'" + "1" + "'" + "'" + "1213" + "'" + "'" + "1" + "'" + "'" + "1" + "'" + "'" + "1" + "'" + "'" + "1" + "'" + "'" + "1415" + "'" + "'" + "2016080200001" + "'" + "'" + "2016080200001" + "'" + "'" + "20160802000" + "'" + "'" + "02000" + "'" + ")";
-                        //  item.品名漢字
-                        //aaa.Add(sqlInsert1);
-                        #endregion
-
-
-
-                        #region old
-                        //sqlInsert1 = "  insert into t_orderdata(id受注データ) values( " + "'" + 10086 + "'"+ ")";
-                        //MySqlCommand mySqlCommand = getSqlCommand(sqlInsert1, mysql);
-                        //getInsert(mySqlCommand);
-                        #endregion
-                        #region 插入数据
-                        using (var ctx = new GODDbContext())
-                        {
-                            ctx.t_orderdata.Add(item);
-                            ctx.SaveChanges();
-
-                        }
-                        #endregion
+                        ctx.t_orderdata.AddRange(orderList);
+                        ctx.SaveChanges();
+                        MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", orderList.Count));
+                        orderList.Clear();
                     }
-                    mysql.Close();
-                    #region Read
 
-                    // MySqlConnection mysql = getMySqlCon();
-                    // String sqlInsert = "  insert into list1 (name1,name2) values('pengchao','19')";
-                    // MySqlCommand mySqlCommand = getSqlCommand(sqlInsert, mysql);
-                    // mysql.Open();
-                    // MySqlCommand mycmd = new MySqlCommand(
-                    //"insert into lsit1(name1,name2) values('pengchao','19')",
-                    // mysql);
-                    // aaa.Add(sqlInsert);
-                    // ExecuteSqlTran(aaa);
-                    // getInsert(mySqlCommand);
 
-                    #endregion
-                    //MySqlConnection mysql = getMySqlCon();
-                    //String sqlInsert = "  insert into t_maruken_trans (単位,県別,id) values('pengchao','19','101a100000')";
-                    //MySqlCommand mySqlCommand = getSqlCommand(sqlInsert, mysql);
-                    //mysql.Open();
-                    //getInsert(mySqlCommand);
-                    // CheckUserInfo("888a00001");
-                    #region 查询
-                    //string constr = "server=localhost;User Id=root ;Database=test";
-
-                    //MySqlConnection mycon = new MySqlConnection(constr);
-                    //mycon.Open();
-                    //MySqlCommand mycmd = new MySqlCommand("select * from t_maruken_trans  where id='888a00001'", mycon);
-                    //MySqlDataReader dr = mycmd.ExecuteReader();
-                    ////将结果赋值到了dr，下面开始输出                      
-                    //int j = 0;
-                    //while (dr.Read())
-                    //{
-                    //    MessageBox.Show(dr[j++].ToString());
-                    //}
-                    //mycon.Close();
-                    #endregion
-
+                    
                 }
                 else
                 {
@@ -403,141 +260,7 @@ namespace GODInventoryWinForm.Controls
                 throw;
             }
         }
-        public static void ExecuteSqlTran(List<string> SQLStringList)
-        {
-            string constr = "server=localhost;User Id=root ;Database=test";
 
-            using (MySqlConnection conn = new MySqlConnection(constr))
-            {
-                conn.Open();
-
-                MySqlCommand cmd = new MySqlCommand();
-                cmd.Connection = conn;
-                MySqlTransaction tx = conn.BeginTransaction();
-                cmd.Transaction = tx;
-                try
-                {
-                    for (int n = 0; n < SQLStringList.Count; n++)
-                    {
-                        string strsql = SQLStringList[n].ToString();
-                        if (strsql.Trim().Length > 1)
-                        {
-                            cmd.CommandText = strsql;
-                            cmd.ExecuteNonQuery();
-                        }
-                        //后来加上的  
-                        if (n > 0 && (n % 500 == 0 || n == SQLStringList.Count - 1))
-                        {
-                            tx.Commit();
-                            tx = conn.BeginTransaction();
-                        }
-                    }
-                    //tx.Commit();//原来一次性提交  
-                }
-                catch (System.Data.SqlClient.SqlException E)
-                {
-                    tx.Rollback();
-                    throw new Exception(E.Message);
-                }
-            }
-        }
-
-        #region 查询代码
-
-        public SqlDataReader ExSQLReader(string SQLStr)//执行SQL语句，返回一个SqlDataReader
-        {
-            try
-            {
-                string connString = @"Data Source=test;Initial Catalog=t_maruken_trans;Integrated Security=false;Pooling=False";
-
-                SqlConnection connection = new SqlConnection(connString);
-                SqlCommand command = new SqlCommand(SQLStr, connection);
-                connection.Open();
-                SqlDataReader dr;
-                dr = command.ExecuteReader();
-                return dr;
-            }
-            catch { return null; }
-        }
-
-
-        public void CheckUserInfo(string username)
-        {
-            string SQLStr = String.Format(" select * From [t_maruken_trans] where id='{0}'", username);
-            try
-            {
-                CreateOrderForm SqlData = new CreateOrderForm();
-                SqlDataReader DataReader = SqlData.ExSQLReader(SQLStr);
-                t_orderdata userinfo = new t_orderdata();
-                while (DataReader.Read())
-                {
-                    userinfo.id = DataReader.GetValue(0).ToString();
-                    //userinfo.PassWord = DataReader.GetValue(1).ToString();
-                    //userinfo.UserAge = Convert.ToInt32(DataReader.GetValue(2).ToString());
-                    //userinfo.UserSex = DataReader.GetValue(3).ToString();
-                    //userinfo.NickName = DataReader.GetValue(4).ToString();
-                    //userinfo.RealName = DataReader.GetValue(5).ToString();
-                    //userinfo.UserStar = DataReader.GetValue(6).ToString();
-                    //userinfo.UserBlood = DataReader.GetValue(7).ToString();
-                    //userinfo.UserId = Convert.ToInt32(DataReader.GetValue(8).ToString());
-                    MessageBox.Show("服务器查找成功");
-                }
-                SqlData.Dispose();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-            }
-            finally
-            {
-
-            }
-        }
-        #endregion
-
-        public static MySqlConnection getMySqlCon()
-        {
-            try
-            {
-                // <add name="GODDbContext" connectionString="server=127.0.0.1;user id=root;database=demo1;allowuservariables=True;characterset=utf8" providerName="MySql.Data.MySqlClient" />
-
-
-
-                String mysqlStr = "server=localhost_3306;Database=test;Data Source=127.0.0.1;User Id=root;allowuservariables=True;pooling=false;CharSet=utf8;port=3306;;  ";//Password=root;
-                // String mySqlCon = ConfigurationManager.ConnectionStrings["MySqlCon"].ConnectionString;
-                mysqlStr = "server=localhost;User Id=root; Database=demo1";
-
-                MySqlConnection mysql = new MySqlConnection(mysqlStr);
-                return mysql;
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
-
-        public static MySqlCommand getSqlCommand(String sql, MySqlConnection mysql)
-        {
-            MySqlCommand mySqlCommand = new MySqlCommand(sql, mysql);
-            //  MySqlCommand mySqlCommand = new MySqlCommand(sql);
-            // mySqlCommand.Connection = mysql;
-            return mySqlCommand;
-        }
-
-        public static void getInsert(MySqlCommand mySqlCommand)
-        {
-            try
-            {
-                mySqlCommand.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                String message = ex.Message;
-                Console.WriteLine("插入数据失败了！" + message);
-            }
-
-        }
        
         private void cancelButton_Click(object sender, EventArgs e)
         {
@@ -894,7 +617,22 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
+        private int GenerateInvoiceNumber( int store_id) {
 
+            int num = 1;
+            using (var ctx = new GODDbContext())
+            {
+                var last_order = (from s in ctx.t_orderdata
+                              where s.店舗コード == ((short)store_id)
+                              orderby s.発注日 descending, s.伝票番号 descending
+                                  select s).FirstOrDefault();
+                if (last_order != null) {
+
+                    num = last_order.伝票番号 + 1; 
+                }
+            }
+            return num;
+        }
 
     }
 }
