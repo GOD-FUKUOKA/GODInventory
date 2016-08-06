@@ -11,30 +11,111 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
+using System.Threading;
+using Spring.Context;
+using Spring.Context.Support;
+using System.Collections;
+using System.Configuration;
+
 
 namespace GODInventoryWinForm.Controls
 {
     public partial class NewOrdersForm : Form
     {
-
+        private Thread GetDataforOutlookThread;
         private IBindingListView shops = null;
         private IBindingListView products = null;
         private DbSet<t_orderdata> orders;
         List<int> newfaxno = new List<int>();
-
+        private cfgList cfgListInfo;
         private List<t_orderdata> orders1;
         public enum OrderStatusEnum { Pending = 0, WaitToShip = 1, PendingShipment = 2, ASN = 3, Received = 4, Completed = 5 };
-
+        private List<t_shoplist> t_shoplistR;
+        //private List<> t_shoplistR;
+        private List<t_rcvdata> t_rcvdataR;
         public NewOrdersForm()
         {
             InitializeComponent();
+
             //shops = entityDataSource1.EntitySets["t_shoplist"].List;
             //products = entityDataSource1.EntitySets["t_dataitem"].List;
+            t_shoplistR = new List<t_shoplist>();
+            t_rcvdataR = new List<t_rcvdata>();
+
+            using (var ctx = new GODDbContext())
+            {
+                var results = from s in ctx.t_shoplist
+                              where s.店番 > 0
+                              select s;
+
+                foreach (var emp in results)
+                {
+                    t_shoplist item = new t_shoplist();
+                    item = emp;
+                    t_shoplistR.Add(item);
+                }
+            }
+            using (var ctx = new GODDbContext())
+            {
+                var results = from s in ctx.t_rcvdata
+                              where s.id受領データ > 0
+                              select s;
+                foreach (var emp in results)
+                {
+                    t_rcvdata item = new t_rcvdata();
+                    item = emp;
+                    t_rcvdataR.Add(item);
+                }
+            }
+            //using (var ctx = new GODDbContext())
+            //{
+            //    var results = from s in ctx.t_date
+            //                  where s.日付 !=null
+            //                  select s;
+
+            //    foreach (var emp in results)
+            //    { 
+
+            //    }
+            //}
+
+            //指定config文件读取
+            string file = System.Windows.Forms.Application.ExecutablePath;
+            System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(@"C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventoryWinForm\cfgList.config");
+            string connectionString = config.ConnectionStrings.ConnectionStrings["仕入先コード"].ConnectionString.ToString();
+
+
+
+            var execonfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var db = execonfig.ConnectionStrings.ConnectionStrings["JDBDatabase"];
+
+
+            //String str = ConfigurationManager.AppSettings["仕入先コード"];
+
+            //ExeConfigurationFileMap map = new ExeConfigurationFileMap();
+            //map.ExeConfigFilename = "cfgList.config";
+
+            //Configuration libConfig = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+            //string connstr = libConfig.ConnectionStrings.ConnectionStrings["connStr"].ConnectionString;
+
+
+
+            //string strValue = libConfig.AppSettings.Settings["somekey"].Value;
+            IApplicationContext AppContext = ContextRegistry.GetContext();
+            cfgListInfo = AppContext.GetObject("ListInfo") as cfgList;
         }
 
         private void NewOrdersForm_Load(object sender, EventArgs e)
         {
-
+            if (cfgListInfo != null)
+            {
+                if (cfgListInfo._仕入先コード != null)
+                    this.textBox1.Text = cfgListInfo._仕入先コード;
+                if (cfgListInfo._仕入先名カナ != null)
+                    this.textBox2.Text = cfgListInfo._仕入先名カナ;
+                if (cfgListInfo._出荷業務仕入先コード != null)
+                    this.textBox3.Text = cfgListInfo._出荷業務仕入先コード;
+            }
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -55,11 +136,9 @@ namespace GODInventoryWinForm.Controls
                     MessageBox.Show(" 発注数量  ゼロにできない", "誤っ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
 
-
                 }
                 if (invoiceNOTextBox.Text.Length != 7)
                 {
-
                     if (MessageBox.Show("伝票番号  キャラクタ丈正しくない, 引き続き?", "Info", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
 
@@ -78,16 +157,24 @@ namespace GODInventoryWinForm.Controls
                 order.商品コード = Convert.ToInt32(productCodeTextBox.Text);
                 order.発注数量 = Convert.ToInt32(orderQuantityUpDown.Value);
 
-
                 //int row_index = shops.Find(order.店舗コード);
                 //if ( row)
                 //order.店舗名漢字 =
                 int index = this.dataGridView1.Rows.Add();
-                dataGridView1.Rows[index].Cells[0].Value = order.発注日;
-                dataGridView1.Rows[index].Cells[1].Value = order.商品コード;
-                dataGridView1.Rows[index].Cells[2].Value = order.店舗コード;
-                dataGridView1.Rows[index].Cells[3].Value = order.伝票番号;
-                dataGridView1.Rows[index].Cells[4].Value = order.発注数量;
+                dataGridView1.Rows[index].Cells["発注日"].Value = order.発注日;
+                dataGridView1.Rows[index].Cells["商品コード"].Value = order.商品コード;
+                dataGridView1.Rows[index].Cells["店舗コード"].Value = order.店舗コード;
+                dataGridView1.Rows[index].Cells["伝票番号"].Value = order.伝票番号;
+                dataGridView1.Rows[index].Cells["発注数量"].Value = order.発注数量;
+                dataGridView1.Rows[index].Cells["仕入先コード"].Value = order.仕入先コード;
+                dataGridView1.Rows[index].Cells["出荷業務仕入先コード"].Value = order.出荷業務仕入先コード;
+                dataGridView1.Rows[index].Cells["仕入先名漢字"].Value = order.仕入先名漢字;
+                dataGridView1.Rows[index].Cells["法人コード"].Value = order.法人コード;
+                dataGridView1.Rows[index].Cells["部門コード"].Value = order.部門コード;
+                dataGridView1.Rows[index].Cells["納品場所コード"].Value = order.納品場所コード;
+                dataGridView1.Rows[index].Cells["納品予定日"].Value = order.納品予定日;
+
+
 
                 #region 判断所添加的订单号码
                 //string maxid = "Select max id form t_orderdata";
@@ -473,7 +560,19 @@ namespace GODInventoryWinForm.Controls
 
         private void storeCodeTextBox_TextChanged(object sender, EventArgs e)
         {
+            if (storeCodeTextBox.Text != "")
+            {
 
+                foreach (t_shoplist item in t_shoplistR)
+                {
+                    if (item.店番 == Convert.ToInt32(storeCodeTextBox.Text))
+                        comboBox1.Text = item.店名;
+
+                }
+
+
+
+            }
         }
 
         private void storeCodeTextBox_Click(object sender, EventArgs e)
@@ -506,37 +605,47 @@ namespace GODInventoryWinForm.Controls
             #endregion
             newfaxno.Sort();
             datenewfaxno.Sort();
-
-            int Add_1 = Convert.ToInt32(newfaxno[datenewfaxno.Count - 1]) + 1;
-
-            string fax = "00" + Add_1.ToString();
-
-            this.invoiceNOTextBox.Text = fax.Trim();
-            if (fax.Length == 8)
+            int datare = 0;
+            if (newfaxno[datenewfaxno.Count - 1] != null && newfaxno[datenewfaxno.Count - 1].ToString().Length == 6)
             {
-                double dataamout = Convert.ToDouble(fax.Substring(0, 1)) + Convert.ToDouble(fax.Substring(1, 1)) + Convert.ToDouble(fax.Substring(2, 1)) + Convert.ToDouble(fax.Substring(3, 1)) + Convert.ToDouble(fax.Substring(4, 1)) + Convert.ToDouble(fax.Substring(5, 1)) + Convert.ToDouble(fax.Substring(6, 1)) + Convert.ToDouble(fax.Substring(7, 1)) + Convert.ToDouble(fax.Substring(8, 1));
+                string jiequ = newfaxno[datenewfaxno.Count - 1].ToString().Substring(0, 5);
 
-            }
-            else if (fax.Length < 8)
-            {
-                int add_0 = 8 - fax.Length;
-                for (int i = 0; i < add_0; i++)
+                int Add_1 = Convert.ToInt32(jiequ) + 1;
+
+                string fax = "00" + Add_1.ToString();
+
+                this.invoiceNOTextBox.Text = fax.Trim();
+                if (fax.Length == 8)
                 {
-                    //if (i == 0)
-                    //    fax = "0" + Add_1;
-                    //else
-                    fax = "0" + fax;
+                    double dataamout = Convert.ToDouble(fax.Substring(0, 1)) + Convert.ToDouble(fax.Substring(1, 1)) + Convert.ToDouble(fax.Substring(2, 1)) + Convert.ToDouble(fax.Substring(3, 1)) + Convert.ToDouble(fax.Substring(4, 1)) + Convert.ToDouble(fax.Substring(5, 1)) + Convert.ToDouble(fax.Substring(6, 1)) + Convert.ToDouble(fax.Substring(7, 1));
+                    datare = Convert.ToInt32(dataamout) % 7;
+
+                    //double sishewuru = Math.Round(datare, MidpointRounding.AwayFromZero);
+
+
                 }
-                double dataamout = Convert.ToDouble(fax.Substring(0, 1)) + Convert.ToDouble(fax.Substring(1, 1)) + Convert.ToDouble(fax.Substring(2, 1)) + Convert.ToDouble(fax.Substring(3, 1)) + Convert.ToDouble(fax.Substring(4, 1)) + Convert.ToDouble(fax.Substring(5, 1)) + Convert.ToDouble(fax.Substring(6, 1)) + Convert.ToDouble(fax.Substring(7, 1));
-                double datare = dataamout / 7;
+                else if (fax.Length < 8)
+                {
+                    int add_0 = 7 - fax.Length;
+                    for (int i = 0; i < add_0; i++)
+                    {
+                        //if (i == 0)
+                        //    fax = "0" + Add_1;
+                        //else
+                        fax = "0" + fax;
+                    }
+                    double dataamout = Convert.ToDouble(fax.Substring(0, 1)) + Convert.ToDouble(fax.Substring(1, 1)) + Convert.ToDouble(fax.Substring(2, 1)) + Convert.ToDouble(fax.Substring(3, 1)) + Convert.ToDouble(fax.Substring(4, 1)) + Convert.ToDouble(fax.Substring(5, 1)) + Convert.ToDouble(fax.Substring(6, 1));
+                    //double datare = dataamout / 7;
 
-               double sishewuru= Math.Round(datare, MidpointRounding.AwayFromZero);
+                    //double sishewuru = Math.Round(datare, MidpointRounding.AwayFromZero);
 
+                    datare = Convert.ToInt32(dataamout) % 7;
 
+                }
+
+                this.invoiceNOTextBox.Text = fax + datare.ToString();
 
             }
-
-
 
         }
 
@@ -679,6 +788,31 @@ namespace GODInventoryWinForm.Controls
                 MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+
+            if (textBox4.Text != "")
+            {
+
+                foreach (t_rcvdata item in t_rcvdataR)
+                {
+                    if (item.法人コード == Convert.ToInt32(textBox4.Text))
+                        comboBox2.Text = item.法人名漢字;
+
+                }
+
+
+
+            }
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
 
