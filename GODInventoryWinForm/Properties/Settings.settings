@@ -5,5 +5,14 @@
     <Setting Name="NFWEInstallDir" Type="System.String" Scope="User">
       <Value Profile="(Default)">d:\NAFCO\NFWE\client</Value>
     </Setting>
+    <Setting Name="Createorder_scc" Type="System.String" Scope="User">
+      <Value Profile="(Default)">249706</Value>
+    </Setting>
+    <Setting Name="Createorder_hsbsc" Type="System.String" Scope="User">
+      <Value Profile="(Default)">249706</Value>
+    </Setting>
+    <Setting Name="Createorder_sog" Type="System.String" Scope="User">
+      <Value Profile="(Default)">123</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

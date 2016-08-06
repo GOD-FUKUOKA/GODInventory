@@ -76,8 +76,17 @@
             this.受領数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店舗コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店舗名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.仕入先コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.仕入先名カナ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.出荷業務仕入先コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.法人コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.法人名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.部門コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品場所コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品先店舗名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品予定日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderQuantityUpDown)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -140,14 +149,25 @@
             this.受領数量,
             this.発注日,
             this.店舗コード,
+            this.店舗名漢字,
             this.発注数量,
-            this.仕入先コード});
+            this.仕入先コード,
+            this.仕入先名カナ,
+            this.出荷業務仕入先コード,
+            this.法人コード,
+            this.法人名漢字,
+            this.部門コード,
+            this.納品場所コード,
+            this.納品先店舗名漢字,
+            this.納品予定日});
             this.dataGridView1.Location = new System.Drawing.Point(5, 205);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(960, 256);
             this.dataGridView1.TabIndex = 4;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             // 
             // label2
             // 
@@ -275,7 +295,7 @@
             // 二次製品ToolStripMenuItem
             // 
             this.二次製品ToolStripMenuItem.Name = "二次製品ToolStripMenuItem";
-            this.二次製品ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.二次製品ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.二次製品ToolStripMenuItem.Text = "二次製品";
             this.二次製品ToolStripMenuItem.Click += new System.EventHandler(this.二次製品ToolStripMenuItem_Click);
             // 
@@ -436,10 +456,13 @@
             // 
             // クリア
             // 
-            this.クリア.HeaderText = "クリア";
+            this.クリア.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.クリア.FillWeight = 30F;
+            this.クリア.HeaderText = "";
             this.クリア.Name = "クリア";
             this.クリア.Text = "クリア";
             this.クリア.ToolTipText = "クリア";
+            this.クリア.Width = 40;
             // 
             // 伝票番号
             // 
@@ -458,6 +481,7 @@
             this.ＪＡＮコード.DataPropertyName = "ＪＡＮコード";
             this.ＪＡＮコード.HeaderText = "ＪＡＮコード";
             this.ＪＡＮコード.Name = "ＪＡＮコード";
+            this.ＪＡＮコード.Visible = false;
             // 
             // 商品コード
             // 
@@ -470,30 +494,35 @@
             this.品名漢字.DataPropertyName = "品名漢字";
             this.品名漢字.HeaderText = "品名漢字";
             this.品名漢字.Name = "品名漢字";
+            this.品名漢字.Visible = false;
             // 
             // 規格名漢字
             // 
             this.規格名漢字.DataPropertyName = "規格名漢字";
             this.規格名漢字.HeaderText = "規格名漢字";
             this.規格名漢字.Name = "規格名漢字";
+            this.規格名漢字.Visible = false;
             // 
             // 原単価
             // 
             this.原単価.DataPropertyName = "原単価";
             this.原単価.HeaderText = "原単価";
             this.原単価.Name = "原単価";
+            this.原単価.Visible = false;
             // 
             // 売単価
             // 
             this.売単価.DataPropertyName = "売単価";
             this.売単価.HeaderText = "売単価";
             this.売単価.Name = "売単価";
+            this.売単価.Visible = false;
             // 
             // 受領数量
             // 
             this.受領数量.DataPropertyName = "受領数量";
             this.受領数量.HeaderText = "受領数量";
             this.受領数量.Name = "受領数量";
+            this.受領数量.Visible = false;
             // 
             // 発注日
             // 
@@ -507,6 +536,12 @@
             this.店舗コード.HeaderText = "店舗コード";
             this.店舗コード.Name = "店舗コード";
             // 
+            // 店舗名漢字
+            // 
+            this.店舗名漢字.DataPropertyName = "店舗名漢字";
+            this.店舗名漢字.HeaderText = "店舗名漢字";
+            this.店舗名漢字.Name = "店舗名漢字";
+            // 
             // 発注数量
             // 
             this.発注数量.DataPropertyName = "発注数量";
@@ -518,7 +553,55 @@
             this.仕入先コード.HeaderText = "仕入先コード";
             this.仕入先コード.Name = "仕入先コード";
             // 
-            // NewOrdersForm
+            // 仕入先名カナ
+            // 
+            this.仕入先名カナ.DataPropertyName = "仕入先名カナ";
+            this.仕入先名カナ.HeaderText = "仕入先名カナ";
+            this.仕入先名カナ.Name = "仕入先名カナ";
+            // 
+            // 出荷業務仕入先コード
+            // 
+            this.出荷業務仕入先コード.DataPropertyName = "出荷業務仕入先コード";
+            this.出荷業務仕入先コード.HeaderText = "出荷業務仕入先コード";
+            this.出荷業務仕入先コード.Name = "出荷業務仕入先コード";
+            // 
+            // 法人コード
+            // 
+            this.法人コード.DataPropertyName = "法人コード";
+            this.法人コード.HeaderText = "法人コード";
+            this.法人コード.Name = "法人コード";
+            // 
+            // 法人名漢字
+            // 
+            this.法人名漢字.DataPropertyName = "法人名漢字";
+            this.法人名漢字.HeaderText = "法人名漢字";
+            this.法人名漢字.Name = "法人名漢字";
+            // 
+            // 部門コード
+            // 
+            this.部門コード.DataPropertyName = "部門コード";
+            this.部門コード.HeaderText = "部門コード";
+            this.部門コード.Name = "部門コード";
+            // 
+            // 納品場所コード
+            // 
+            this.納品場所コード.DataPropertyName = "納品場所コード";
+            this.納品場所コード.HeaderText = "納品場所コード";
+            this.納品場所コード.Name = "納品場所コード";
+            // 
+            // 納品先店舗名漢字
+            // 
+            this.納品先店舗名漢字.DataPropertyName = "納品先店舗名漢字";
+            this.納品先店舗名漢字.HeaderText = "納品先店舗名漢字";
+            this.納品先店舗名漢字.Name = "納品先店舗名漢字";
+            // 
+            // 納品予定日
+            // 
+            this.納品予定日.DataPropertyName = "納品予定日";
+            this.納品予定日.HeaderText = "納品予定日";
+            this.納品予定日.Name = "納品予定日";
+            // 
+            // CreateOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -555,7 +638,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.submitButton);
-            this.Name = "NewOrdersForm";
+            this.Name = "CreateOrderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewOrdersForm";
             this.Load += new System.EventHandler(this.NewOrdersForm_Load);
@@ -617,7 +700,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 受領数量;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注日;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店舗コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 店舗名漢字;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注数量;
         private System.Windows.Forms.DataGridViewTextBoxColumn 仕入先コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 仕入先名カナ;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 出荷業務仕入先コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 法人コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 法人名漢字;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 部門コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 納品場所コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 納品先店舗名漢字;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 納品予定日;
     }
 }

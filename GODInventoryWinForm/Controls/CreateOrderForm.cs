@@ -27,7 +27,6 @@ namespace GODInventoryWinForm.Controls
         private IBindingListView products = null;
         private DbSet<t_orderdata> orders;
         List<int> newfaxno = new List<int>();
-        private cfgList cfgListInfo;
         private List<t_orderdata> orders1;
         public enum OrderStatusEnum { Pending = 0, WaitToShip = 1, PendingShipment = 2, ASN = 3, Received = 4, Completed = 5 };
         private List<t_shoplist> t_shoplistR;
@@ -54,32 +53,32 @@ namespace GODInventoryWinForm.Controls
                 t_rcvdataR = ctx.t_rcvdata.ToList();
                 t_locationsR = ctx.t_locations.ToList();
             }
-            //Configuration config = ConfigurationManager.OpenExeConfiguration("app.config");
-            //String str = ConfigurationManager.AppSettings["orderformnew"];
-            var execonfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var db = execonfig.ConnectionStrings.ConnectionStrings["orderformnew"];
-            string aa = db.ConnectionString.ToString();
-            string[] temp1 = System.Text.RegularExpressions.Regex.Split(aa, "=");
-            string[] temp2 = System.Text.RegularExpressions.Regex.Split(temp1[1], ";");
-            textBox1.Text = temp2[0];
-            temp2 = System.Text.RegularExpressions.Regex.Split(temp1[2], ";");
-            textBox2.Text = temp2[0];
-            textBox3.Text = temp1[3];
+
+            textBox1.Text = Properties.Settings.Default.Createorder_scc;
+            textBox2.Text = Properties.Settings.Default.Createorder_hsbsc;
+            textBox3.Text = Properties.Settings.Default.Createorder_sog;
+
+            #region 直接读取 config
+
+            ////Configuration config = ConfigurationManager.OpenExeConfiguration("app.config");
+            ////String str = ConfigurationManager.AppSettings["orderformnew"];
+            //var execonfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            //var db = execonfig.ConnectionStrings.ConnectionStrings["orderformnew"];
+            //string aa = db.ConnectionString.ToString();
+            //string[] temp1 = System.Text.RegularExpressions.Regex.Split(aa, "=");
+            //string[] temp2 = System.Text.RegularExpressions.Regex.Split(temp1[1], ";");
+            //textBox1.Text = temp2[0];
+            //temp2 = System.Text.RegularExpressions.Regex.Split(temp1[2], ";");
+            //textBox2.Text = temp2[0];
+            //textBox3.Text = temp1[3]; 
+            #endregion
 
 
         }
 
         private void NewOrdersForm_Load(object sender, EventArgs e)
         {
-            if (cfgListInfo != null)
-            {
-                if (cfgListInfo._仕入先コード != null)
-                    this.textBox1.Text = cfgListInfo._仕入先コード;
-                if (cfgListInfo._仕入先名カナ != null)
-                    this.textBox2.Text = cfgListInfo._仕入先名カナ;
-                if (cfgListInfo._出荷業務仕入先コード != null)
-                    this.textBox3.Text = cfgListInfo._出荷業務仕入先コード;
-            }
+
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -101,7 +100,7 @@ namespace GODInventoryWinForm.Controls
                     return;
 
                 }
-                if (invoiceNOTextBox.Text.Length != 7)
+                if (invoiceNOTextBox.Text.Length != 8)
                 {
                     if (MessageBox.Show("伝票番号  キャラクタ丈正しくない, 引き続き?", "Info", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
@@ -121,24 +120,63 @@ namespace GODInventoryWinForm.Controls
                 order.商品コード = Convert.ToInt32(productCodeTextBox.Text);
                 order.発注数量 = Convert.ToInt32(orderQuantityUpDown.Value);
 
+                order.仕入先コード = Convert.ToInt32(textBox1.Text);
+                order.出荷業務仕入先コード = Convert.ToInt32(this.textBox2.Text);
+                order.仕入先名カナ =  this.textBox3.Text;
+                order.店舗名漢字 = this.comboBox1.Text;
+                order.法人コード = Convert.ToInt16(this.textBox4.Text);
+                order.法人名漢字 = this.comboBox2.Text;
+                order.部門コード = Convert.ToInt16( this.textBox5.Text);
+                order.納品予定日 = this.dateTimePicker1.Value;
+                order.納品場所コード = Convert.ToInt16(this.textBox6.Text);
+                order.納品先店舗名漢字 = this.comboBox3.Text;
+                
                 //int row_index = shops.Find(order.店舗コード);
                 //if ( row)
                 //order.店舗名漢字 =
                 int index = this.dataGridView1.Rows.Add();
-                dataGridView1.Rows[index].Cells["発注日"].Value = order.発注日;
-                dataGridView1.Rows[index].Cells["商品コード"].Value = order.商品コード;
-                dataGridView1.Rows[index].Cells["店舗コード"].Value = order.店舗コード;
-                dataGridView1.Rows[index].Cells["伝票番号"].Value = order.伝票番号;
-                dataGridView1.Rows[index].Cells["発注数量"].Value = order.発注数量;
-                dataGridView1.Rows[index].Cells["仕入先コード"].Value = order.仕入先コード;
-                dataGridView1.Rows[index].Cells["出荷業務仕入先コード"].Value = order.出荷業務仕入先コード;
-                dataGridView1.Rows[index].Cells["仕入先名漢字"].Value = order.仕入先名漢字;
-                dataGridView1.Rows[index].Cells["法人コード"].Value = order.法人コード;
-                dataGridView1.Rows[index].Cells["部門コード"].Value = order.部門コード;
-                dataGridView1.Rows[index].Cells["納品場所コード"].Value = order.納品場所コード;
-                dataGridView1.Rows[index].Cells["納品予定日"].Value = order.納品予定日;
+                if (order.発注日 != null)
+                    dataGridView1.Rows[index].Cells["発注日"].Value = order.発注日;
+                if (order.商品コード != null)
+                    dataGridView1.Rows[index].Cells["商品コード"].Value = order.商品コード;
+                if (order.店舗コード != null)
+                    dataGridView1.Rows[index].Cells["店舗コード"].Value = order.店舗コード;
+                if (order.伝票番号 != null)
+                    dataGridView1.Rows[index].Cells["伝票番号"].Value = order.伝票番号;
+                if (order.発注数量 != null)
+                    dataGridView1.Rows[index].Cells["発注数量"].Value = order.発注数量;
+                if (order.仕入先コード != null)
+                    dataGridView1.Rows[index].Cells["仕入先コード"].Value = order.仕入先コード;
+                if (order.出荷業務仕入先コード != null)
+                    dataGridView1.Rows[index].Cells["出荷業務仕入先コード"].Value = order.出荷業務仕入先コード;
+                if (order.仕入先名漢字 != null)
+                    dataGridView1.Rows[index].Cells["仕入先名漢字"].Value = order.仕入先名漢字;
+                if (order.法人コード != null)
+                    dataGridView1.Rows[index].Cells["法人コード"].Value = order.法人コード;
+                if (order.部門コード != null)
+                    dataGridView1.Rows[index].Cells["部門コード"].Value = order.部門コード;
+                if (order.納品場所コード != null)
+                    dataGridView1.Rows[index].Cells["納品場所コード"].Value = order.納品場所コード;
+                if (order.納品予定日 != null)
+                    dataGridView1.Rows[index].Cells["納品予定日"].Value = order.納品予定日;
 
-
+                if (order.納品先店舗名漢字 != null)
+                    dataGridView1.Rows[index].Cells["納品先店舗名漢字"].Value = order.納品先店舗名漢字;
+                if (order.納品場所コード != null)
+                    dataGridView1.Rows[index].Cells["納品場所コード"].Value = order.納品場所コード;
+                if (order.納品予定日 != null)
+                    dataGridView1.Rows[index].Cells["納品予定日"].Value = order.納品予定日;
+                if (order.部門コード != null)
+                    dataGridView1.Rows[index].Cells["部門コード"].Value = order.部門コード;
+                if (order.法人名漢字 != null)
+                    dataGridView1.Rows[index].Cells["法人名漢字"].Value = order.法人名漢字;
+                if (order.店舗名漢字 != null)
+                    dataGridView1.Rows[index].Cells["店舗名漢字"].Value = order.店舗名漢字;
+                if (order.仕入先名カナ != null)
+                    dataGridView1.Rows[index].Cells["仕入先名カナ"].Value = order.仕入先名カナ;
+                if (order.出荷業務仕入先コード != null)
+                    dataGridView1.Rows[index].Cells["出荷業務仕入先コード"].Value = order.出荷業務仕入先コード;
+ 
 
                 #region 判断所添加的订单号码
                 //string maxid = "Select max id form t_orderdata";
@@ -236,6 +274,9 @@ namespace GODInventoryWinForm.Controls
                         item.発注日 = Convert.ToDateTime(dataGridView1.Rows[i].Cells["発注日"].EditedFormattedValue.ToString());
                         item.伝票番号 = Convert.ToInt32(dataGridView1.Rows[i].Cells["伝票番号"].EditedFormattedValue.ToString());
                         item.店舗コード = Convert.ToInt16(dataGridView1.Rows[i].Cells["店舗コード"].EditedFormattedValue.ToString());// Convert.ToInt32(dataGridView1.Rows[i].Cells["店舗コード"].EditedFormattedValue.ToString());
+                        item.店舗名漢字 = dataGridView1.Rows[i].Cells["店舗名漢字"].EditedFormattedValue.ToString();
+
+
                         item.商品コード = Convert.ToInt32(dataGridView1.Rows[i].Cells["商品コード"].EditedFormattedValue.ToString());
                         item.発注数量 = Convert.ToInt32(dataGridView1.Rows[i].Cells["発注数量"].EditedFormattedValue.ToString());
 
@@ -243,6 +284,18 @@ namespace GODInventoryWinForm.Controls
 
                         dtFormat.ShortDatePattern = "yyyy-MM-dd";
                         item.受注日 = Convert.ToDateTime(item.発注日.ToString("yyyy-MM-dd", dtFormat));
+
+                        item.法人コード = Convert.ToInt16(dataGridView1.Rows[i].Cells["法人コード"].EditedFormattedValue.ToString());
+
+                        item.法人名漢字 = dataGridView1.Rows[i].Cells["法人名漢字"].EditedFormattedValue.ToString();
+                        item.部門コード = Convert.ToInt16(dataGridView1.Rows[i].Cells["部門コード"].EditedFormattedValue.ToString());
+                        item.納品予定日 = Convert.ToDateTime(dataGridView1.Rows[i].Cells["納品予定日"].EditedFormattedValue.ToString());
+                        item.納品場所コード = Convert.ToInt16(dataGridView1.Rows[i].Cells["納品場所コード"].EditedFormattedValue.ToString());
+                        item.納品先店舗名漢字 = dataGridView1.Rows[i].Cells["納品先店舗名漢字"].EditedFormattedValue.ToString();
+                        item.仕入先コード = Convert.ToInt32(dataGridView1.Rows[i].Cells["仕入先コード"].EditedFormattedValue.ToString());
+
+                        item.出荷業務仕入先コード = Convert.ToInt32(dataGridView1.Rows[i].Cells["出荷業務仕入先コード"].EditedFormattedValue.ToString());
+                        item.仕入先名カナ = dataGridView1.Rows[i].Cells["仕入先名カナ"].EditedFormattedValue.ToString();
 
                         orders1.Add(item);
 
@@ -275,10 +328,12 @@ namespace GODInventoryWinForm.Controls
                         //String sqlInsert1 = "  insert into t_maruken_trans(id,発注日,伝票番号,店舗コード,商品コード,発注数量) values( " + "'" + id + "'" + "," + "'" + item.発注日 + "'" + "," + "'" + item.伝票番号 + "'" + "," + "'" + item.店舗コード + "'" + "," + "'" + item.商品コード + "'" + "," + "'" + item.発注数量 + "'" + ")";
 
                         //String sqlInsert1 = "  insert into t_orderdata(id受注データ,id,配送担当受信時刻,伝票番号,店舗コード,品名漢字,発注数量,受注日) values( " + "'" + item.伝票番号 + "'" + "," + "'" + item.伝票番号 + "'" + "," + "'" + item.発注日.ToString("yyyy-MM-dd HH:mm:ss") + "'" + "," + "'" + item.伝票番号 + "'" + "," + "'" + item.店舗コード + "'" + "," + "'" + item.商品コード + "'" + "," + "'" + item.発注数量 + "'" + "," + "'" + DateTime.Now.ToString("yyyy-MM-dd") + "'" + ")";
-                        String sqlInsert1 = "  insert into t_orderdata(id受注データ,id,配送担当受信時刻,伝票番号,店舗コード,商品コード,品名漢字,発注数量,受注日,ダブリ,キャンセル,ＪＡＮコード,実際出荷数量,原単価(税抜),納品原価金額,一旦保留,実際配送担当,配送担当受信,専務受信,受領,受領確認,受領数量,ASN管理連番,出荷No,自社コード,Status) values( " + "'" + item.伝票番号 + "'" + "," + "'" + item.伝票番号 + "'" + "," + "'" + item.発注日.ToString("yyyy-MM-dd HH:mm:ss") + "'" + "," + "'" + item.伝票番号 + "'" + "," + "'" + item.店舗コード + "'" + "," + "'" + item.商品コード + "'" + "'" + "t" + "'" + "," + "'" + item.発注数量 + "'" + "," + "'" + DateTime.Now.ToString("yyyy-MM-dd") + "'" + "'" + "12" + "'" + "'" + "34" + "'" + "'" + "'" + "2100000008888" + "'" + "'" + "56" + "'" + "'" + "78" + "'" + "'" + "910" + "'" + "'" + "1" + "'" + "'" + "1213" + "'" + "'" + "1" + "'" + "'" + "1" + "'" + "'" + "1" + "'" + "'" + "1" + "'" + "'" + "1415" + "'" + "'" + "2016080200001" + "'" + "'" + "2016080200001" + "'" + "'" + "20160802000" + "'" + "'" + "02000" + "'" + ")";
-
+                        #region MyRegion
+                        //String sqlInsert1 = "  insert into t_orderdata(id受注データ,id,配送担当受信時刻,伝票番号,店舗コード,商品コード,品名漢字,発注数量,受注日,ダブリ,キャンセル,ＪＡＮコード,実際出荷数量,原単価(税抜),納品原価金額,一旦保留,実際配送担当,配送担当受信,専務受信,受領,受領確認,受領数量,ASN管理連番,出荷No,自社コード,Status) values( " + "'" + item.伝票番号 + "'" + "," + "'" + item.伝票番号 + "'" + "," + "'" + item.発注日.ToString("yyyy-MM-dd HH:mm:ss") + "'" + "," + "'" + item.伝票番号 + "'" + "," + "'" + item.店舗コード + "'" + "," + "'" + item.商品コード + "'" + "'" + "t" + "'" + "," + "'" + item.発注数量 + "'" + "," + "'" + DateTime.Now.ToString("yyyy-MM-dd") + "'" + "'" + "12" + "'" + "'" + "34" + "'" + "'" + "'" + "2100000008888" + "'" + "'" + "56" + "'" + "'" + "78" + "'" + "'" + "910" + "'" + "'" + "1" + "'" + "'" + "1213" + "'" + "'" + "1" + "'" + "'" + "1" + "'" + "'" + "1" + "'" + "'" + "1" + "'" + "'" + "1415" + "'" + "'" + "2016080200001" + "'" + "'" + "2016080200001" + "'" + "'" + "20160802000" + "'" + "'" + "02000" + "'" + ")";
                         //  item.品名漢字
-                        aaa.Add(sqlInsert1);
+                        //aaa.Add(sqlInsert1);
+                        #endregion
+
 
 
                         #region old
@@ -817,12 +872,25 @@ namespace GODInventoryWinForm.Controls
             cloumn = e.ColumnIndex;
             if (RowRemark < 0)
                 return;
-            if (cloumn == 1)
+            int RowNumber;
+            if (cloumn == 0)
             {
-
+                RowNumber = dataGridView1.CurrentCell.RowIndex;
+                dataGridView1.Rows.RemoveAt(RowNumber);
 
             }
 
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                if (dataGridView1.Rows[e.RowIndex].Cells["発注日"].EditedFormattedValue.ToString() == null || dataGridView1.Rows[e.RowIndex].Cells["発注日"].EditedFormattedValue.ToString() == "")
+                { }
+                else
+                    dataGridView1.Rows[e.RowIndex].Cells[0].Value = "クリア";
+            }
         }
 
 

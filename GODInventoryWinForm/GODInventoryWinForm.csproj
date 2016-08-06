@@ -95,13 +95,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cfgList.cs" />
-    <Compile Include="Controls\NewOrdersForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\NewOrdersForm.Designer.cs">
-      <DependentUpon>NewOrdersForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="DBConnection.cs" />
     <Compile Include="DBConfigurationForm.cs">
       <SubType>Form</SubType>
@@ -224,6 +217,12 @@
     <Compile Include="Controls\MainControl.Designer.cs">
       <DependentUpon>MainControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewOrdersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewOrdersForm.Designer.cs">
+      <DependentUpon>NewOrdersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\OrderCheckForm.cs">
@@ -251,9 +250,6 @@
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkerArgument.cs" />
-    <EmbeddedResource Include="Controls\NewOrdersForm.resx">
-      <DependentUpon>NewOrdersForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DBConfigurationForm.resx">
       <DependentUpon>DBConfigurationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -314,6 +310,9 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewOrdersForm.resx">
+      <DependentUpon>NewOrdersForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -344,12 +343,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="app2.config" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="cfgList.config">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="GODInventoryWinForm_TemporaryKey.pfx" />
     <None Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
 namespace GODInventoryWinForm.Properties {
     
     
@@ -23,7 +22,7 @@ namespace GODInventoryWinForm.Properties {
                 return defaultInstance;
             }
         }
-         
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("d:\\NAFCO\\NFWE\\client")]
@@ -35,16 +34,41 @@ namespace GODInventoryWinForm.Properties {
                 this["NFWEInstallDir"] = value;
             }
         }
-        //string path = AppDomain.CurrentDomain.BaseDirectory + "app.config";
         
-  
-        //[global::System.Configuration.DefaultSettingValueAttribute(@path)]
-        //private string 仕入先コード;
-        //public string _仕入先コード
-        //{
-        //    get { return 仕入先コード; }
-        //    set { 仕入先コード = value; }
-        //}
-
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("249706")]
+        public string Createorder_scc {
+            get {
+                return ((string)(this["Createorder_scc"]));
+            }
+            set {
+                this["Createorder_scc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("249706")]
+        public string Createorder_hsbsc {
+            get {
+                return ((string)(this["Createorder_hsbsc"]));
+            }
+            set {
+                this["Createorder_hsbsc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("123")]
+        public string Createorder_sog {
+            get {
+                return ((string)(this["Createorder_sog"]));
+            }
+            set {
+                this["Createorder_sog"] = value;
+            }
+        }
     }
 }
