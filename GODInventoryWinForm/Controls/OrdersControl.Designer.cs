@@ -49,7 +49,7 @@
             this.pendingButton.Location = new System.Drawing.Point(183, 212);
             this.pendingButton.Name = "pendingButton";
             this.pendingButton.Size = new System.Drawing.Size(122, 43);
-            this.pendingButton.TabIndex = 0;
+            this.pendingButton.TabIndex = 1;
             this.pendingButton.Text = "PendingOrders";
             this.pendingButton.UseVisualStyleBackColor = true;
             this.pendingButton.Click += new System.EventHandler(this.pendingButton_Click);
@@ -60,7 +60,7 @@
             this.receiveOrderButton.Location = new System.Drawing.Point(16, 78);
             this.receiveOrderButton.Name = "receiveOrderButton";
             this.receiveOrderButton.Size = new System.Drawing.Size(168, 65);
-            this.receiveOrderButton.TabIndex = 1;
+            this.receiveOrderButton.TabIndex = 4;
             this.receiveOrderButton.Text = "Connect Server For New Orders";
             this.receiveOrderButton.UseVisualStyleBackColor = true;
             this.receiveOrderButton.Click += new System.EventHandler(this.receiveOrderButton_Click);
@@ -70,7 +70,7 @@
             this.waitToShipButton.Location = new System.Drawing.Point(350, 212);
             this.waitToShipButton.Name = "waitToShipButton";
             this.waitToShipButton.Size = new System.Drawing.Size(122, 43);
-            this.waitToShipButton.TabIndex = 4;
+            this.waitToShipButton.TabIndex = 2;
             this.waitToShipButton.Text = "WaitForShip";
             this.waitToShipButton.UseVisualStyleBackColor = true;
             this.waitToShipButton.Click += new System.EventHandler(this.button4_Click);
@@ -80,7 +80,7 @@
             this.shippingOrderButton.Location = new System.Drawing.Point(517, 212);
             this.shippingOrderButton.Name = "shippingOrderButton";
             this.shippingOrderButton.Size = new System.Drawing.Size(122, 43);
-            this.shippingOrderButton.TabIndex = 5;
+            this.shippingOrderButton.TabIndex = 3;
             this.shippingOrderButton.Text = "ShippingOrders";
             this.shippingOrderButton.UseVisualStyleBackColor = true;
             this.shippingOrderButton.Click += new System.EventHandler(this.shippedOrderButton_Click);
@@ -91,7 +91,7 @@
             this.button6.Location = new System.Drawing.Point(265, 328);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(122, 43);
-            this.button6.TabIndex = 0;
+            this.button6.TabIndex = 6;
             this.button6.Text = "OrderHistory";
             this.button6.UseVisualStyleBackColor = true;
             // 
@@ -119,7 +119,7 @@
             this.orderConfirmButton.Location = new System.Drawing.Point(471, 78);
             this.orderConfirmButton.Name = "orderConfirmButton";
             this.orderConfirmButton.Size = new System.Drawing.Size(168, 65);
-            this.orderConfirmButton.TabIndex = 10;
+            this.orderConfirmButton.TabIndex = 5;
             this.orderConfirmButton.Text = "Connect Server For Order Confirm";
             this.orderConfirmButton.UseVisualStyleBackColor = true;
             // 
@@ -176,7 +176,7 @@
             this.newButton.Location = new System.Drawing.Point(16, 212);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(122, 43);
-            this.newButton.TabIndex = 13;
+            this.newButton.TabIndex = 0;
             this.newButton.Text = "NewOrders";
             this.newButton.UseVisualStyleBackColor = true;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
