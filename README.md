@@ -9,3 +9,6 @@ Edi order and product management system, for Janpa FRV
 ## 建立数据库
   mysql, utf8 
   库名： god_inventory
+
+## EF
+https://msdn.microsoft.com/en-us/data/dn469601
