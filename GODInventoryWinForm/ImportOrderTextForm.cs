@@ -21,6 +21,8 @@ namespace GODInventoryWinForm
         public ImportOrderTextForm()
         {
             InitializeComponent();
+            this.ControlBox = false;   // 设置不出现关闭按钮
+
         }
 
         public int ProgressValue 
@@ -40,9 +42,9 @@ namespace GODInventoryWinForm
         private void importButton_Click(object sender, EventArgs e)
         {
             this.importButton.Enabled = false;
-            this.cancelButton.Enabled = false;
+            this.cancelButton.Enabled = true;
+            this.closeButton.Enabled = false;
             backgroundWorker1.RunWorkerAsync(new WorkerArgument { OrderCount = 0, CurrentIndex = 0 });
-
            
         }
 
@@ -72,15 +74,30 @@ namespace GODInventoryWinForm
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (!e.Cancelled)
+            this.cancelButton.Enabled = false;
+            this.closeButton.Enabled = true;
+            this.importButton.Enabled = true;
+
+            if (e.Error != null)
             {
-                this.importButton.Enabled = true;
-                this.cancelButton.Enabled = true;
+                MessageBox.Show(e.Error.Message);
+            }
+            else if (e.Cancelled)
+            {
+            }
+            else
+            {
                 this.progressMsgLabel.Text = "Great, it is done!";
             }
-            else {
-                this.cancelButton.Enabled = true;
-            }
+            //if (!e.Cancelled)
+            //{
+            //    this.importButton.Enabled = true;
+            //    this.cancelButton.Enabled = true;
+            //    this.progressMsgLabel.Text = "Great, it is done!";
+            //}
+            //else {
+            //    this.cancelButton.Enabled = true;
+            //}
         }
 
 
@@ -199,6 +216,11 @@ namespace GODInventoryWinForm
             byte[] bytes = File.ReadAllBytes(path);
             string text_in_utf8 = EncodingUtility.ConvertShiftJisToUtf8(bytes);
             return text_in_utf8.Split(System.Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

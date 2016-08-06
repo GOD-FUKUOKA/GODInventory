@@ -10,8 +10,8 @@
     public partial class t_locations
     {
         [Key]
-       [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int 通番 { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
 
         public int 店舗コード { get; set; }
 

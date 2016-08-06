@@ -73,7 +73,7 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {
                 var results = from s in ctx.t_locations
-                              where s.通番 > 0
+                              where s.Id > 0
                               select s;
                 foreach (var emp in results)
                 {
@@ -845,7 +845,7 @@ namespace GODInventoryWinForm.Controls
 
                 foreach (t_locations item in t_locationsR)
                 {
-                    if (item.通番 == Convert.ToInt32(textBox6.Text))
+                    if (item.Id == Convert.ToInt32(textBox6.Text))
                         textBox6.Text = item.納品場所名漢字;
 
                 }

@@ -38,6 +38,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.progressMsgLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.closeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -46,9 +47,9 @@
             // 
             // openFileBtton
             // 
-            this.openFileBtton.Location = new System.Drawing.Point(413, 83);
+            this.openFileBtton.Location = new System.Drawing.Point(413, 85);
             this.openFileBtton.Name = "openFileBtton";
-            this.openFileBtton.Size = new System.Drawing.Size(31, 23);
+            this.openFileBtton.Size = new System.Drawing.Size(31, 21);
             this.openFileBtton.TabIndex = 0;
             this.openFileBtton.Text = "...";
             this.openFileBtton.UseVisualStyleBackColor = true;
@@ -72,7 +73,7 @@
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(271, 192);
+            this.importButton.Location = new System.Drawing.Point(193, 192);
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(75, 23);
             this.importButton.TabIndex = 3;
@@ -82,13 +83,14 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(369, 192);
+            this.cancelButton.Enabled = false;
+            this.cancelButton.Location = new System.Drawing.Point(281, 192);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 4;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // backgroundWorker1
             // 
@@ -116,7 +118,7 @@
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(12, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(458, 23);
@@ -124,11 +126,22 @@
             this.label2.Text = "Import HACCYU.txt";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // closeButton
+            // 
+            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.closeButton.Location = new System.Drawing.Point(369, 192);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(75, 23);
+            this.closeButton.TabIndex = 8;
+            this.closeButton.Text = "Close";
+            this.closeButton.UseVisualStyleBackColor = true;
+            // 
             // ImportOrderTextForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 242);
+            this.Controls.Add(this.closeButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.progressMsgLabel);
             this.Controls.Add(this.progressBar1);
@@ -161,5 +174,6 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label progressMsgLabel;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button closeButton;
     }
 }

@@ -67,7 +67,12 @@ CREATE TABLE `god_inventory`.`t_manufacturers` (
   `FullName` VARCHAR(45)  CHARACTER SET 'utf8' NULL DEFAULT NULL,
   PRIMARY KEY (`Id`));
 
-INSERT INTO `god_inventory`.`t_manufacturers` (`Id`, `ShortName`, `FullName`) VALUES ('1', '青島華天', '青島華天');
-INSERT INTO `god_inventory`.`t_shippers` (`Id`, `ShortName`, `FullName`) VALUES ('1', 'GOD', 'GOD');
-INSERT INTO `god_inventory`.`t_shippers` (`Id`, `ShortName`, `FullName`) VALUES ('2', 'MKL', 'MKL');
-INSERT INTO `god_inventory`.`t_shippers` (`Id`, `ShortName`, `FullName`) VALUES ('3', 'マツモト産業', 'マツモト産業');
+CREATE TABLE `t_locations` (
+  `Id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `店舗コード` int(4) DEFAULT NULL,
+  `納品場所コード` varchar(64) CHARACTER SET 'utf8' DEFAULT NULL,
+  `納品場所名カナ` varchar(64) CHARACTER SET 'utf8' DEFAULT NULL,
+  `納品場所名漢字` varchar(64) CHARACTER SET 'utf8' DEFAULT NULL,
+  `納品場所名略称` varchar(64) CHARACTER SET 'utf8' DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 ;
