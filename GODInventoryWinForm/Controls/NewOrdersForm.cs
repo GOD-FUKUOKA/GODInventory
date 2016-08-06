@@ -1,18 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GODInventory.MyLinq;
+using MySql.Data.MySqlClient;
 
 namespace GODInventoryWinForm.Controls
 {
     public partial class NewOrdersForm : Form
     {
-<<<<<<< HEAD
+//<<<<<<< HEAD
         private Thread GetDataforOutlookThread;
         private IBindingListView shops = null;
         private IBindingListView products = null;
@@ -817,11 +823,11 @@ namespace GODInventoryWinForm.Controls
 
 
 
-=======
-        public NewOrdersForm()
-        {
-            InitializeComponent();
-        }
->>>>>>> origin/master
+//=======
+        //public NewOrdersForm()
+        //{
+        //    InitializeComponent();
+        //}
+//>>>>>>> origin/master
     }
 }
