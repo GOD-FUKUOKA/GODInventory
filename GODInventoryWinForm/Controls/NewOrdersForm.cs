@@ -18,6 +18,7 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class NewOrdersForm : Form
     {
+<<<<<<< HEAD
 //<<<<<<< HEAD
         private Thread GetDataforOutlookThread;
         private IBindingListView shops = null;
@@ -829,5 +830,11 @@ namespace GODInventoryWinForm.Controls
         //    InitializeComponent();
         //}
 //>>>>>>> origin/master
+=======
+        public NewOrdersForm()
+        {
+            InitializeComponent();
+        }
+>>>>>>> origin/master
     }
 }

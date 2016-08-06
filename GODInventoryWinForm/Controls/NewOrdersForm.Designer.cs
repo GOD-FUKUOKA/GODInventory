@@ -30,6 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+<<<<<<< HEAD
 //<<<<<<< HEAD
             this.クリア = new System.Windows.Forms.DataGridViewButtonColumn();
             this.伝票番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,6 +79,9 @@
 //=======
             this.pager1 = new GODInventoryWinForm.Controls.Pager();
 //>>>>>>> origin/master
+=======
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
+>>>>>>> origin/master
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,6 +103,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 83);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
+<<<<<<< HEAD
 //<<<<<<< HEAD
             this.dataGridView1.Size = new System.Drawing.Size(960, 256);
             this.dataGridView1.TabIndex = 4;
@@ -473,6 +478,8 @@
             this.label12.TabIndex = 35;
             this.label12.Text = "納品場所コード:";
 //=======
+=======
+>>>>>>> origin/master
             this.dataGridView1.Size = new System.Drawing.Size(973, 344);
             this.dataGridView1.TabIndex = 1;
             // 
@@ -489,7 +496,10 @@
             this.pager1.PageSize = 5000;
             this.pager1.Size = new System.Drawing.Size(973, 31);
             this.pager1.TabIndex = 2;
+<<<<<<< HEAD
 //>>>>>>> origin/master
+=======
+>>>>>>> origin/master
             // 
             // NewOrdersForm
             // 
