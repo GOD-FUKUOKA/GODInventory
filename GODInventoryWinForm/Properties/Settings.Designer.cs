@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
 namespace GODInventoryWinForm.Properties {
     
     
@@ -34,5 +35,16 @@ namespace GODInventoryWinForm.Properties {
                 this["NFWEInstallDir"] = value;
             }
         }
+        //string path = AppDomain.CurrentDomain.BaseDirectory + "app.config";
+        
+  
+        //[global::System.Configuration.DefaultSettingValueAttribute(@path)]
+        //private string 仕入先コード;
+        //public string _仕入先コード
+        //{
+        //    get { return 仕入先コード; }
+        //    set { 仕入先コード = value; }
+        //}
+
     }
 }

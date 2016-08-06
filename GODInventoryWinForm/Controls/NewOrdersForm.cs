@@ -12,9 +12,9 @@ using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Spring.Context;
-using Spring.Context.Support;
-using System.Collections;
+//using Spring.Context;
+//using Spring.Context.Support;
+//using System.Collections;
 using System.Configuration;
 
 
@@ -33,6 +33,8 @@ namespace GODInventoryWinForm.Controls
         private List<t_shoplist> t_shoplistR;
         //private List<> t_shoplistR;
         private List<t_rcvdata> t_rcvdataR;
+        private List<t_locations> t_locationsR;
+
         public NewOrdersForm()
         {
             InitializeComponent();
@@ -67,6 +69,21 @@ namespace GODInventoryWinForm.Controls
                     t_rcvdataR.Add(item);
                 }
             }
+
+            using (var ctx = new GODDbContext())
+            {
+                var results = from s in ctx.t_locations
+                              where s.通番 > 0
+                              select s;
+                foreach (var emp in results)
+                {
+                    t_locations item = new t_locations();
+                    item = emp;
+                    t_locationsR.Add(item);
+                }
+            }
+
+
             //using (var ctx = new GODDbContext())
             //{
             //    var results = from s in ctx.t_date
@@ -78,17 +95,28 @@ namespace GODInventoryWinForm.Controls
 
             //    }
             //}
+            Configuration config = ConfigurationManager.OpenExeConfiguration("app.config");
+            String str = ConfigurationManager.AppSettings["orderformnew"];
 
-            //指定config文件读取
-            string file = System.Windows.Forms.Application.ExecutablePath;
-            System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(@"C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventoryWinForm\cfgList.config");
-            string connectionString = config.ConnectionStrings.ConnectionStrings["仕入先コード"].ConnectionString.ToString();
+            ////指定config文件读取
+            //string file = System.Windows.Forms.Application.ExecutablePath;
+            //System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(@"C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventoryWinForm\cfgList.config");
+            //string connectionString = config.ConnectionStrings.ConnectionStrings["仕入先コード"].ConnectionString.ToString();
 
 
 
             var execonfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var db = execonfig.ConnectionStrings.ConnectionStrings["JDBDatabase"];
+            var db = execonfig.ConnectionStrings.ConnectionStrings["GODDbContext"];
 
+            //if (cfgListInfo != null)
+            {
+                //if (db != null)
+                //    this.textBox1.Text = db;
+                if (cfgListInfo._仕入先名カナ != null)
+                    this.textBox2.Text = cfgListInfo._仕入先名カナ;
+                if (cfgListInfo._出荷業務仕入先コード != null)
+                    this.textBox3.Text = cfgListInfo._出荷業務仕入先コード;
+            }
 
             //String str = ConfigurationManager.AppSettings["仕入先コード"];
 
@@ -101,8 +129,8 @@ namespace GODInventoryWinForm.Controls
 
 
             //string strValue = libConfig.AppSettings.Settings["somekey"].Value;
-            IApplicationContext AppContext = ContextRegistry.GetContext();
-            cfgListInfo = AppContext.GetObject("ListInfo") as cfgList;
+            //IApplicationContext AppContext = ContextRegistry.GetContext();
+            //cfgListInfo = AppContext.GetObject("ListInfo") as cfgList;
         }
 
         private void NewOrdersForm_Load(object sender, EventArgs e)
@@ -812,6 +840,19 @@ namespace GODInventoryWinForm.Controls
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
+            if (textBox6.Text != "")
+            {
+
+                foreach (t_locations item in t_locationsR)
+                {
+                    if (item.通番 == Convert.ToInt32(textBox6.Text))
+                        textBox6.Text = item.納品場所名漢字;
+
+                }
+
+
+
+            }
 
         }
 

@@ -70,6 +70,7 @@
     <Compile Include="t_edidata.cs" />
     <Compile Include="t_genre.cs" />
     <Compile Include="t_itemlist.cs" />
+    <Compile Include="t_locations.cs" />
     <Compile Include="t_maruken_trans.cs" />
     <Compile Include="t_orderdata.cs" />
     <Compile Include="t_rcvdata.cs" />
