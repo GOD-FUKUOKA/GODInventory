@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(GODInventory.MyLinq.GODDbContext),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsa81a575cb19c48cf3a6ad81e978af4eb6b4da69b0e90dc87dcd48824fc95056e))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets3d405a5267b3aef7041a243bc0e6e1dfed9bbf8de924efb848441e69a5840f42))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework Power Tools", "0.9.0.0")]
-    internal sealed class ViewsForBaseEntitySetsa81a575cb19c48cf3a6ad81e978af4eb6b4da69b0e90dc87dcd48824fc95056e : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySets3d405a5267b3aef7041a243bc0e6e1dfed9bbf8de924efb848441e69a5840f42 : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "a81a575cb19c48cf3a6ad81e978af4eb6b4da69b0e90dc87dcd48824fc95056e"; }
+            get { return "3d405a5267b3aef7041a243bc0e6e1dfed9bbf8de924efb848441e69a5840f42"; }
         }
 
         /// <summary>
@@ -587,7 +587,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.[センター名カナ] AS [t_orderdata.センター名カナ], 
             T.[ASN管理連番] AS [t_orderdata.ASN管理連番], 
             T.[出荷No] AS [t_orderdata.出荷No], 
-            T.Status AS [t_orderdata.Status], 
+            CAST(T.Status AS [Edm.Int32]) AS [t_orderdata.Status], 
             T.[県別] AS [t_orderdata.県別], 
             True AS _from0
         FROM GODDbContext.t_orderdata AS T
@@ -715,7 +715,7 @@ namespace Edm_EntityMappingGeneratedViews
             T.[センター名カナ] AS [t_orderdata.センター名カナ], 
             T.[ASN管理連番] AS [t_orderdata.ASN管理連番], 
             T.[出荷No] AS [t_orderdata.出荷No], 
-            T.Status AS [t_orderdata.Status], 
+            CAST(T.Status AS [GODInventory.MyLinq.OrderStatus]) AS [t_orderdata.Status], 
             T.[県別] AS [t_orderdata.県別], 
             True AS _from0
         FROM CodeFirstDatabase.t_orderdata AS T

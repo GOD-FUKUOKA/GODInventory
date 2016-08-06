@@ -11,6 +11,7 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class OrdersControl : UserControl
     {
+        private NewOrdersForm newOrdersForm;
         private PendingOrderForm pendingOrderForm;
         private WaitToShipForm waitToShipOrderForm;
         private ShippingOrderForm shippingOrderForm;
@@ -18,9 +19,11 @@ namespace GODInventoryWinForm.Controls
         public OrdersControl()
         {
             InitializeComponent();
+            this.newOrdersForm = new NewOrdersForm();
             this.pendingOrderForm = new PendingOrderForm();
             this.waitToShipOrderForm = new WaitToShipForm();
             this.shippingOrderForm = new ShippingOrderForm();
+            
             this.Disposed += new EventHandler(OrdersControl_Disposed);
             
         }
@@ -100,6 +103,15 @@ namespace GODInventoryWinForm.Controls
             this.pendingOrderForm.Dispose();
             this.waitToShipOrderForm.Dispose();
             this.shippingOrderForm.Dispose();
+        }
+
+        private void newButton_Click(object sender, EventArgs e)
+        {
+            AdjustSubformSize(newOrdersForm);
+            // 显示之前重新加载数据，订单数据可能已更新。
+            //newOrdersForm.RefreshPager();
+            newOrdersForm.ShowDialog();
+
         }
     }
 }

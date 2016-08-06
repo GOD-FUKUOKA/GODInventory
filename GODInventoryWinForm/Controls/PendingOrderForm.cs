@@ -23,7 +23,7 @@ namespace GODInventoryWinForm.Controls
         private Hashtable datagrid_changes = null;
         private List<t_stockstate> stockstates;
         List<t_orderdata> Findorderdataresults;
-        private NewOrdersForm NewOrdersForm;
+        private CreateOrderForm NewOrdersForm;
         int RowRemark = 0;
         int cloumn = 0;
         private string id受注データdemo;
@@ -463,7 +463,7 @@ namespace GODInventoryWinForm.Controls
 
         void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (sender is NewOrdersForm)
+            if (sender is CreateOrderForm)
             {
                 NewOrdersForm = null;
             }
@@ -473,7 +473,7 @@ namespace GODInventoryWinForm.Controls
 
         private void newOrderbutton_Click(object sender, EventArgs e)
         {
-            var form = new NewOrdersForm();
+            var form = new CreateOrderForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 pager1.Bind();
@@ -640,7 +640,7 @@ namespace GODInventoryWinForm.Controls
             try
             {
                 string constr = "server=localhost;User Id=root ;Database=test";
-                NewOrdersForm SqlData = new NewOrdersForm();
+                CreateOrderForm SqlData = new CreateOrderForm();
                 MySqlConnection mycon = new MySqlConnection(constr);
                 mycon.Open();
                 //MySqlCommand mycmd = new MySqlCommand("select * from t_maruken_trans  where 店舗コード='87'", mycon);
@@ -885,7 +885,7 @@ namespace GODInventoryWinForm.Controls
             try
             {
                 string constr = "server=localhost;User Id=root ;Database=test";
-                NewOrdersForm SqlData = new NewOrdersForm();
+                CreateOrderForm SqlData = new CreateOrderForm();
                 MySqlConnection mycon = new MySqlConnection(constr);
                 mycon.Open();
                 //MySqlCommand mycmd = new MySqlCommand("select * from t_maruken_trans  where 店舗コード='87'", mycon);
