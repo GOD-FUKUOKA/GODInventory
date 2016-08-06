@@ -34,6 +34,8 @@ namespace GODInventoryWinForm.Controls
         //private List<> t_shoplistR;
         private List<t_rcvdata> t_rcvdataR;
         private List<t_locations> t_locationsR;
+        int RowRemark = 0;
+        int cloumn = 0;
 
         public CreateOrderForm()
         {
@@ -43,96 +45,28 @@ namespace GODInventoryWinForm.Controls
             //products = entityDataSource1.EntitySets["t_dataitem"].List;
             t_shoplistR = new List<t_shoplist>();
             t_rcvdataR = new List<t_rcvdata>();
-
-
-            using (var ctx = new GODDbContext())
-            {
-                var results = from s in ctx.t_shoplist
-                              where s.店番 > 0
-                              select s;
-
-                foreach (var emp in results)
-                {
-                    t_shoplist item = new t_shoplist();
-                    item = emp;
-                    t_shoplistR.Add(item);
-                }
-            }
-            using (var ctx = new GODDbContext())
-            {
-                var results = from s in ctx.t_rcvdata
-                              where s.id受領データ > 0
-                              select s;
-                foreach (var emp in results)
-                {
-                    t_rcvdata item = new t_rcvdata();
-                    item = emp;
-                    t_rcvdataR.Add(item);
-                }
-            }
+            t_locationsR = new List<t_locations>();
 
             using (var ctx = new GODDbContext())
             {
-               
-                var results = from s in ctx.t_locations
-                              where s.Id > 0
-                              select s;
-                foreach (var emp in results)
-                {
-                    t_locations item = new t_locations();
-                    item = emp;
-                    t_locationsR.Add(item);
-                }
+
+                t_shoplistR = ctx.t_shoplist.ToList();
+                t_rcvdataR = ctx.t_rcvdata.ToList();
+                t_locationsR = ctx.t_locations.ToList();
             }
-
-
-            //using (var ctx = new GODDbContext())
-            //{
-            //    var results = from s in ctx.t_date
-            //                  where s.日付 !=null
-            //                  select s;
-
-            //    foreach (var emp in results)
-            //    { 
-
-            //    }
-            //}
-            Configuration config = ConfigurationManager.OpenExeConfiguration("app.config");
-            String str = ConfigurationManager.AppSettings["orderformnew"];
-
-            ////指定config文件读取
-            //string file = System.Windows.Forms.Application.ExecutablePath;
-            //System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(@"C:\mysteap\work_office\ProjectOut\关于订单管理系统的资料\project\GODInventory\GODInventoryWinForm\cfgList.config");
-            //string connectionString = config.ConnectionStrings.ConnectionStrings["仕入先コード"].ConnectionString.ToString();
-
-
-
+            //Configuration config = ConfigurationManager.OpenExeConfiguration("app.config");
+            //String str = ConfigurationManager.AppSettings["orderformnew"];
             var execonfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var db = execonfig.ConnectionStrings.ConnectionStrings["GODDbContext"];
-
-            //if (cfgListInfo != null)
-            {
-                //if (db != null)
-                //    this.textBox1.Text = db;
-                if (cfgListInfo._仕入先名カナ != null)
-                    this.textBox2.Text = cfgListInfo._仕入先名カナ;
-                if (cfgListInfo._出荷業務仕入先コード != null)
-                    this.textBox3.Text = cfgListInfo._出荷業務仕入先コード;
-            }
-
-            //String str = ConfigurationManager.AppSettings["仕入先コード"];
-
-            //ExeConfigurationFileMap map = new ExeConfigurationFileMap();
-            //map.ExeConfigFilename = "cfgList.config";
-
-            //Configuration libConfig = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
-            //string connstr = libConfig.ConnectionStrings.ConnectionStrings["connStr"].ConnectionString;
+            var db = execonfig.ConnectionStrings.ConnectionStrings["orderformnew"];
+            string aa = db.ConnectionString.ToString();
+            string[] temp1 = System.Text.RegularExpressions.Regex.Split(aa, "=");
+            string[] temp2 = System.Text.RegularExpressions.Regex.Split(temp1[1], ";");
+            textBox1.Text = temp2[0];
+            temp2 = System.Text.RegularExpressions.Regex.Split(temp1[2], ";");
+            textBox2.Text = temp2[0];
+            textBox3.Text = temp1[3];
 
 
-
-            //string strValue = libConfig.AppSettings.Settings["somekey"].Value;
-            //IApplicationContext AppContext = ContextRegistry.GetContext();
-            //cfgListInfo = AppContext.GetObject("ListInfo") as cfgList;
         }
 
         private void NewOrdersForm_Load(object sender, EventArgs e)
@@ -590,18 +524,23 @@ namespace GODInventoryWinForm.Controls
 
         private void storeCodeTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (storeCodeTextBox.Text != "")
+            try
             {
-
-                foreach (t_shoplist item in t_shoplistR)
+                if (storeCodeTextBox.Text != "")
                 {
-                    if (item.店番 == Convert.ToInt32(storeCodeTextBox.Text))
-                        comboBox1.Text = item.店名;
 
+                    foreach (t_shoplist item in t_shoplistR)
+                    {
+                        if (item.店番 == Convert.ToInt32(storeCodeTextBox.Text))
+                            comboBox1.Text = item.店名;
+
+                    }
                 }
-
-
-
+            }
+            catch (Exception ex)
+            {
+                return;
+                throw;
             }
         }
 
@@ -824,34 +763,62 @@ namespace GODInventoryWinForm.Controls
         {
 
 
-            if (textBox4.Text != "")
+            try
             {
-
-                foreach (t_rcvdata item in t_rcvdataR)
+                if (textBox4.Text != "")
                 {
-                    if (item.法人コード == Convert.ToInt32(textBox4.Text))
-                        comboBox2.Text = item.法人名漢字;
+
+                    foreach (t_rcvdata item in t_rcvdataR)
+                    {
+                        if (item.法人コード == Convert.ToInt32(textBox4.Text))
+                            comboBox2.Text = item.法人名漢字;
+
+                    }
+
+
 
                 }
+            }
+            catch (Exception ex)
+            {
+                return;
 
-
-
+                throw;
             }
 
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-            if (textBox6.Text != "")
+            try
             {
-
-                foreach (t_locations item in t_locationsR)
+                if (textBox6.Text != "")
                 {
-                    if (item.Id == Convert.ToInt32(textBox6.Text))
-                        textBox6.Text = item.納品場所名漢字;
+                    foreach (t_locations item in t_locationsR)
+                    {
+                        if (item.Id == Convert.ToInt32(textBox6.Text))
+                            this.comboBox3.Text = item.納品場所名漢字;
 
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                return;
 
+                throw;
+            }
+
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            RowRemark = e.RowIndex;
+            cloumn = e.ColumnIndex;
+            if (RowRemark < 0)
+                return;
+            if (cloumn == 1)
+            {
 
 
             }
