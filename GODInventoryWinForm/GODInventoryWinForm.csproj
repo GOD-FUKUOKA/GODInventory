@@ -96,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="cfgList.cs" />
+    <Compile Include="Controls\NewOrdersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\NewOrdersForm.Designer.cs">
+      <DependentUpon>NewOrdersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DBConnection.cs" />
     <Compile Include="DBConfigurationForm.cs">
       <SubType>Form</SubType>
@@ -103,11 +109,11 @@
     <Compile Include="DBConfigurationForm.Designer.cs">
       <DependentUpon>DBConfigurationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\NewOrdersForm.cs">
+    <Compile Include="Controls\CreateOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\NewOrdersForm.Designer.cs">
-      <DependentUpon>NewOrdersForm.cs</DependentUpon>
+    <Compile Include="Controls\CreateOrderForm.Designer.cs">
+      <DependentUpon>CreateOrderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\OrderFormControl.cs">
       <SubType>UserControl</SubType>
@@ -245,11 +251,14 @@
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkerArgument.cs" />
+    <EmbeddedResource Include="Controls\NewOrdersForm.resx">
+      <DependentUpon>NewOrdersForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DBConfigurationForm.resx">
       <DependentUpon>DBConfigurationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\NewOrdersForm.resx">
-      <DependentUpon>NewOrdersForm.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\CreateOrderForm.resx">
+      <DependentUpon>CreateOrderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\OrderFormControl.resx">
       <DependentUpon>OrderFormControl.cs</DependentUpon>

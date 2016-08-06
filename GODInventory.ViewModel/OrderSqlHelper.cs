@@ -13,7 +13,7 @@ namespace GODInventory.ViewModel
 {
     public class OrderSqlHelper
     {
-        public  enum OrderStatusEnum { Pending =0,  WaitToShip=1, PendingShipment=2, ASN=3, Received=4, Completed=5  };
+        public  enum OrderStatusEnum { New = 0, Pending = 9,  WaitToShip=1, PendingShipment=2, ASN=3, Received=4, Completed=5  };
         // file 受注管理★受注作業用/m4
         // SELECT t_orderdata.`出荷日`,t_orderdata.`納品日`,t_orderdata.`受注日`,t_orderdata.`店舗コード`," _
         //&" t_shoplist.`店名`,t_orderdata.`伝票番号`,t_orderdata.`口数`,t_orderdata.`ジャンル`,t_orderdata.`品名漢字`,t_orderdata.`規格名漢字`," _
@@ -56,7 +56,7 @@ namespace GODInventory.ViewModel
         {
             var a = entityDataSource1.EntitySets["t_orderdatas"];
             var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                    where o.Status == 0
+                    where o.Status == OrderStatus.Pending
                     select o;
             return q;
         }
@@ -85,7 +85,7 @@ namespace GODInventory.ViewModel
                      //join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on new { jid = o.ＪＡＮコード, sid = o.実際配送担当 } equals new { jid = i.JANコード, sid = i.配送担当 }
                      //join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on o.自社コード equals  i.自社コード
                      join t_stockstate k in entityDataSource1.EntitySets["t_stockstate"] on o.自社コード equals k.自社コード
-                     where o.Status == 0
+                     where o.Status == OrderStatus.Pending
                      orderby o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                      select new v_pendingorder
                      {
@@ -139,7 +139,7 @@ namespace GODInventory.ViewModel
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
                      join t_shoplist s in entityDataSource1.EntitySets["t_shoplist"] on o.店舗コード equals s.店番
                      //where o.配送担当受信  && o.出荷日 == null
-                     where o.Status == 1
+                     where o.Status == OrderStatus.WaitToShip
                      orderby o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                      select new v_pendingorder
                      {
@@ -177,7 +177,7 @@ namespace GODInventory.ViewModel
         {
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
                      join t_shoplist s in entityDataSource1.EntitySets["t_shoplist"] on o.店舗コード equals s.店番
-                     where o.Status == 2
+                     where o.Status == OrderStatus.PendingShipment
                      //where o.出荷日 != null && o.ASN管理連番==0 && !o.受領確認 
                      orderby o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                      select new v_pendingorder
@@ -212,7 +212,7 @@ namespace GODInventory.ViewModel
         public static IQueryable<t_orderdata> ASNOrderSql(EntityDataSource entityDataSource1)
         {
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                     where o.Status == ((int)OrderStatusEnum.ASN) || o.Status == ((int)OrderStatusEnum.Received)
+                     where o.Status == OrderStatus.ASN || o.Status == OrderStatus.Received
                      orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                      select o
                      );

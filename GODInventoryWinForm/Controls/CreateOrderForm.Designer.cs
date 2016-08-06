@@ -1,6 +1,6 @@
 ﻿namespace GODInventoryWinForm.Controls
 {
-    partial class NewOrdersForm
+    partial class CreateOrderForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,23 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.submitButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.orderCreatedAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-<<<<<<< HEAD
-            this.クリア = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.伝票番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.発注形態 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ＪＡＮコード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.商品コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.品名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.原単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.売単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.受領数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.発注日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.店舗コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.発注数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.仕入先コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -75,118 +64,90 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-=======
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
->>>>>>> origin/master
+            this.クリア = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.伝票番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注形態 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ＪＡＮコード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.品名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.原単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.売単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.受領数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店舗コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.仕入先コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderQuantityUpDown)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // submitButton
+            // 
+            this.submitButton.BackColor = System.Drawing.Color.Lime;
+            this.submitButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.submitButton.Location = new System.Drawing.Point(712, 464);
+            this.submitButton.Name = "submitButton";
+            this.submitButton.Size = new System.Drawing.Size(75, 35);
+            this.submitButton.TabIndex = 0;
+            this.submitButton.Text = "Submit";
+            this.submitButton.UseVisualStyleBackColor = false;
+            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.Location = new System.Drawing.Point(809, 464);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 35);
+            this.cancelButton.TabIndex = 1;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 43);
+            this.label1.BackColor = System.Drawing.Color.Silver;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(745, 48);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "this is new orders form";
+            this.label1.Size = new System.Drawing.Size(54, 15);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "発注日 :";
+            // 
+            // orderCreatedAtDateTimePicker
+            // 
+            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(805, 44);
+            this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
+            this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(160, 20);
+            this.orderCreatedAtDateTimePicker.TabIndex = 3;
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 83);
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.クリア,
+            this.伝票番号,
+            this.発注形態,
+            this.ＪＡＮコード,
+            this.商品コード,
+            this.品名漢字,
+            this.規格名漢字,
+            this.原単価,
+            this.売単価,
+            this.受領数量,
+            this.発注日,
+            this.店舗コード,
+            this.発注数量,
+            this.仕入先コード});
+            this.dataGridView1.Location = new System.Drawing.Point(5, 205);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
-<<<<<<< HEAD
             this.dataGridView1.Size = new System.Drawing.Size(960, 256);
             this.dataGridView1.TabIndex = 4;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // クリア
-            // 
-            this.クリア.HeaderText = "クリア";
-            this.クリア.Name = "クリア";
-            this.クリア.Text = "クリア";
-            this.クリア.ToolTipText = "クリア";
-            // 
-            // 伝票番号
-            // 
-            this.伝票番号.DataPropertyName = "伝票番号";
-            this.伝票番号.HeaderText = "伝票番号";
-            this.伝票番号.Name = "伝票番号";
-            // 
-            // 発注形態
-            // 
-            this.発注形態.DataPropertyName = "発注形態";
-            this.発注形態.HeaderText = "発注形態";
-            this.発注形態.Name = "発注形態";
-            // 
-            // ＪＡＮコード
-            // 
-            this.ＪＡＮコード.DataPropertyName = "ＪＡＮコード";
-            this.ＪＡＮコード.HeaderText = "ＪＡＮコード";
-            this.ＪＡＮコード.Name = "ＪＡＮコード";
-            // 
-            // 商品コード
-            // 
-            this.商品コード.DataPropertyName = "商品コード";
-            this.商品コード.HeaderText = "商品コード";
-            this.商品コード.Name = "商品コード";
-            // 
-            // 品名漢字
-            // 
-            this.品名漢字.DataPropertyName = "品名漢字";
-            this.品名漢字.HeaderText = "品名漢字";
-            this.品名漢字.Name = "品名漢字";
-            // 
-            // 規格名漢字
-            // 
-            this.規格名漢字.DataPropertyName = "規格名漢字";
-            this.規格名漢字.HeaderText = "規格名漢字";
-            this.規格名漢字.Name = "規格名漢字";
-            // 
-            // 原単価
-            // 
-            this.原単価.DataPropertyName = "原単価";
-            this.原単価.HeaderText = "原単価";
-            this.原単価.Name = "原単価";
-            // 
-            // 売単価
-            // 
-            this.売単価.DataPropertyName = "売単価";
-            this.売単価.HeaderText = "売単価";
-            this.売単価.Name = "売単価";
-            // 
-            // 受領数量
-            // 
-            this.受領数量.DataPropertyName = "受領数量";
-            this.受領数量.HeaderText = "受領数量";
-            this.受領数量.Name = "受領数量";
-            // 
-            // 発注日
-            // 
-            this.発注日.DataPropertyName = "発注日";
-            this.発注日.HeaderText = "発注日";
-            this.発注日.Name = "発注日";
-            // 
-            // 店舗コード
-            // 
-            this.店舗コード.DataPropertyName = "店舗コード";
-            this.店舗コード.HeaderText = "店舗コード";
-            this.店舗コード.Name = "店舗コード";
-            // 
-            // 発注数量
-            // 
-            this.発注数量.DataPropertyName = "発注数量";
-            this.発注数量.HeaderText = "発注数量";
-            this.発注数量.Name = "発注数量";
-            // 
-            // 仕入先コード
-            // 
-            this.仕入先コード.HeaderText = "仕入先コード";
-            this.仕入先コード.Name = "仕入先コード";
             // 
             // label2
             // 
@@ -314,7 +275,7 @@
             // 二次製品ToolStripMenuItem
             // 
             this.二次製品ToolStripMenuItem.Name = "二次製品ToolStripMenuItem";
-            this.二次製品ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.二次製品ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.二次製品ToolStripMenuItem.Text = "二次製品";
             this.二次製品ToolStripMenuItem.Click += new System.EventHandler(this.二次製品ToolStripMenuItem_Click);
             // 
@@ -472,39 +433,136 @@
             this.label12.Size = new System.Drawing.Size(102, 15);
             this.label12.TabIndex = 35;
             this.label12.Text = "納品場所コード:";
-=======
-            this.dataGridView1.Size = new System.Drawing.Size(973, 344);
-            this.dataGridView1.TabIndex = 1;
             // 
-            // pager1
+            // クリア
             // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(12, 433);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 5000;
-            this.pager1.Size = new System.Drawing.Size(973, 31);
-            this.pager1.TabIndex = 2;
->>>>>>> origin/master
+            this.クリア.HeaderText = "クリア";
+            this.クリア.Name = "クリア";
+            this.クリア.Text = "クリア";
+            this.クリア.ToolTipText = "クリア";
+            // 
+            // 伝票番号
+            // 
+            this.伝票番号.DataPropertyName = "伝票番号";
+            this.伝票番号.HeaderText = "伝票番号";
+            this.伝票番号.Name = "伝票番号";
+            // 
+            // 発注形態
+            // 
+            this.発注形態.DataPropertyName = "発注形態";
+            this.発注形態.HeaderText = "発注形態";
+            this.発注形態.Name = "発注形態";
+            // 
+            // ＪＡＮコード
+            // 
+            this.ＪＡＮコード.DataPropertyName = "ＪＡＮコード";
+            this.ＪＡＮコード.HeaderText = "ＪＡＮコード";
+            this.ＪＡＮコード.Name = "ＪＡＮコード";
+            // 
+            // 商品コード
+            // 
+            this.商品コード.DataPropertyName = "商品コード";
+            this.商品コード.HeaderText = "商品コード";
+            this.商品コード.Name = "商品コード";
+            // 
+            // 品名漢字
+            // 
+            this.品名漢字.DataPropertyName = "品名漢字";
+            this.品名漢字.HeaderText = "品名漢字";
+            this.品名漢字.Name = "品名漢字";
+            // 
+            // 規格名漢字
+            // 
+            this.規格名漢字.DataPropertyName = "規格名漢字";
+            this.規格名漢字.HeaderText = "規格名漢字";
+            this.規格名漢字.Name = "規格名漢字";
+            // 
+            // 原単価
+            // 
+            this.原単価.DataPropertyName = "原単価";
+            this.原単価.HeaderText = "原単価";
+            this.原単価.Name = "原単価";
+            // 
+            // 売単価
+            // 
+            this.売単価.DataPropertyName = "売単価";
+            this.売単価.HeaderText = "売単価";
+            this.売単価.Name = "売単価";
+            // 
+            // 受領数量
+            // 
+            this.受領数量.DataPropertyName = "受領数量";
+            this.受領数量.HeaderText = "受領数量";
+            this.受領数量.Name = "受領数量";
+            // 
+            // 発注日
+            // 
+            this.発注日.DataPropertyName = "発注日";
+            this.発注日.HeaderText = "発注日";
+            this.発注日.Name = "発注日";
+            // 
+            // 店舗コード
+            // 
+            this.店舗コード.DataPropertyName = "店舗コード";
+            this.店舗コード.HeaderText = "店舗コード";
+            this.店舗コード.Name = "店舗コード";
+            // 
+            // 発注数量
+            // 
+            this.発注数量.DataPropertyName = "発注数量";
+            this.発注数量.HeaderText = "発注数量";
+            this.発注数量.Name = "発注数量";
+            // 
+            // 仕入先コード
+            // 
+            this.仕入先コード.HeaderText = "仕入先コード";
+            this.仕入先コード.Name = "仕入先コード";
             // 
             // NewOrdersForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(997, 476);
-            this.Controls.Add(this.pager1);
+            this.ClientSize = new System.Drawing.Size(971, 515);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.productCodeTextBox);
+            this.Controls.Add(this.storeCodeTextBox);
+            this.Controls.Add(this.invoiceNOTextBox);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.addButton);
+            this.Controls.Add(this.orderQuantityUpDown);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.orderCreatedAtDateTimePicker);
             this.Controls.Add(this.label1);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.submitButton);
             this.Name = "NewOrdersForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewOrdersForm";
+            this.Load += new System.EventHandler(this.NewOrdersForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderQuantityUpDown)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -512,8 +570,54 @@
 
         #endregion
 
+        private System.Windows.Forms.Button submitButton;
+        private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker orderCreatedAtDateTimePicker;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private Pager pager1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown orderQuantityUpDown;
+        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox invoiceNOTextBox;
+        private System.Windows.Forms.TextBox storeCodeTextBox;
+        private System.Windows.Forms.TextBox productCodeTextBox;
+        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem 二次製品ToolStripMenuItem;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.DataGridViewButtonColumn クリア;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注形態;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ＪＡＮコード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 商品コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 品名漢字;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 規格名漢字;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 原単価;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 売単価;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 受領数量;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注日;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 店舗コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注数量;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 仕入先コード;
     }
 }
