@@ -34,6 +34,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.orderCreatedAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.クリア = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.伝票番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注形態 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ＪＡＮコード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.品名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.原単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.売単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.受領数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店舗コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.仕入先コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -64,20 +78,6 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.クリア = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.伝票番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.発注形態 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ＪＡＮコード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.商品コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.品名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.原単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.売単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.受領数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.発注日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.店舗コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.発注数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.仕入先コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderQuantityUpDown)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -148,6 +148,91 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(960, 256);
             this.dataGridView1.TabIndex = 4;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            // 
+            // クリア
+            // 
+            this.クリア.HeaderText = "クリア";
+            this.クリア.Name = "クリア";
+            this.クリア.Text = "クリア";
+            this.クリア.ToolTipText = "クリア";
+            // 
+            // 伝票番号
+            // 
+            this.伝票番号.DataPropertyName = "伝票番号";
+            this.伝票番号.HeaderText = "伝票番号";
+            this.伝票番号.Name = "伝票番号";
+            // 
+            // 発注形態
+            // 
+            this.発注形態.DataPropertyName = "発注形態";
+            this.発注形態.HeaderText = "発注形態";
+            this.発注形態.Name = "発注形態";
+            // 
+            // ＪＡＮコード
+            // 
+            this.ＪＡＮコード.DataPropertyName = "ＪＡＮコード";
+            this.ＪＡＮコード.HeaderText = "ＪＡＮコード";
+            this.ＪＡＮコード.Name = "ＪＡＮコード";
+            // 
+            // 商品コード
+            // 
+            this.商品コード.DataPropertyName = "商品コード";
+            this.商品コード.HeaderText = "商品コード";
+            this.商品コード.Name = "商品コード";
+            // 
+            // 品名漢字
+            // 
+            this.品名漢字.DataPropertyName = "品名漢字";
+            this.品名漢字.HeaderText = "品名漢字";
+            this.品名漢字.Name = "品名漢字";
+            // 
+            // 規格名漢字
+            // 
+            this.規格名漢字.DataPropertyName = "規格名漢字";
+            this.規格名漢字.HeaderText = "規格名漢字";
+            this.規格名漢字.Name = "規格名漢字";
+            // 
+            // 原単価
+            // 
+            this.原単価.DataPropertyName = "原単価";
+            this.原単価.HeaderText = "原単価";
+            this.原単価.Name = "原単価";
+            // 
+            // 売単価
+            // 
+            this.売単価.DataPropertyName = "売単価";
+            this.売単価.HeaderText = "売単価";
+            this.売単価.Name = "売単価";
+            // 
+            // 受領数量
+            // 
+            this.受領数量.DataPropertyName = "受領数量";
+            this.受領数量.HeaderText = "受領数量";
+            this.受領数量.Name = "受領数量";
+            // 
+            // 発注日
+            // 
+            this.発注日.DataPropertyName = "発注日";
+            this.発注日.HeaderText = "発注日";
+            this.発注日.Name = "発注日";
+            // 
+            // 店舗コード
+            // 
+            this.店舗コード.DataPropertyName = "店舗コード";
+            this.店舗コード.HeaderText = "店舗コード";
+            this.店舗コード.Name = "店舗コード";
+            // 
+            // 発注数量
+            // 
+            this.発注数量.DataPropertyName = "発注数量";
+            this.発注数量.HeaderText = "発注数量";
+            this.発注数量.Name = "発注数量";
+            // 
+            // 仕入先コード
+            // 
+            this.仕入先コード.HeaderText = "仕入先コード";
+            this.仕入先コード.Name = "仕入先コード";
             // 
             // label2
             // 
@@ -275,7 +360,7 @@
             // 二次製品ToolStripMenuItem
             // 
             this.二次製品ToolStripMenuItem.Name = "二次製品ToolStripMenuItem";
-            this.二次製品ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.二次製品ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.二次製品ToolStripMenuItem.Text = "二次製品";
             this.二次製品ToolStripMenuItem.Click += new System.EventHandler(this.二次製品ToolStripMenuItem_Click);
             // 
@@ -433,90 +518,6 @@
             this.label12.Size = new System.Drawing.Size(102, 15);
             this.label12.TabIndex = 35;
             this.label12.Text = "納品場所コード:";
-            // 
-            // クリア
-            // 
-            this.クリア.HeaderText = "クリア";
-            this.クリア.Name = "クリア";
-            this.クリア.Text = "クリア";
-            this.クリア.ToolTipText = "クリア";
-            // 
-            // 伝票番号
-            // 
-            this.伝票番号.DataPropertyName = "伝票番号";
-            this.伝票番号.HeaderText = "伝票番号";
-            this.伝票番号.Name = "伝票番号";
-            // 
-            // 発注形態
-            // 
-            this.発注形態.DataPropertyName = "発注形態";
-            this.発注形態.HeaderText = "発注形態";
-            this.発注形態.Name = "発注形態";
-            // 
-            // ＪＡＮコード
-            // 
-            this.ＪＡＮコード.DataPropertyName = "ＪＡＮコード";
-            this.ＪＡＮコード.HeaderText = "ＪＡＮコード";
-            this.ＪＡＮコード.Name = "ＪＡＮコード";
-            // 
-            // 商品コード
-            // 
-            this.商品コード.DataPropertyName = "商品コード";
-            this.商品コード.HeaderText = "商品コード";
-            this.商品コード.Name = "商品コード";
-            // 
-            // 品名漢字
-            // 
-            this.品名漢字.DataPropertyName = "品名漢字";
-            this.品名漢字.HeaderText = "品名漢字";
-            this.品名漢字.Name = "品名漢字";
-            // 
-            // 規格名漢字
-            // 
-            this.規格名漢字.DataPropertyName = "規格名漢字";
-            this.規格名漢字.HeaderText = "規格名漢字";
-            this.規格名漢字.Name = "規格名漢字";
-            // 
-            // 原単価
-            // 
-            this.原単価.DataPropertyName = "原単価";
-            this.原単価.HeaderText = "原単価";
-            this.原単価.Name = "原単価";
-            // 
-            // 売単価
-            // 
-            this.売単価.DataPropertyName = "売単価";
-            this.売単価.HeaderText = "売単価";
-            this.売単価.Name = "売単価";
-            // 
-            // 受領数量
-            // 
-            this.受領数量.DataPropertyName = "受領数量";
-            this.受領数量.HeaderText = "受領数量";
-            this.受領数量.Name = "受領数量";
-            // 
-            // 発注日
-            // 
-            this.発注日.DataPropertyName = "発注日";
-            this.発注日.HeaderText = "発注日";
-            this.発注日.Name = "発注日";
-            // 
-            // 店舗コード
-            // 
-            this.店舗コード.DataPropertyName = "店舗コード";
-            this.店舗コード.HeaderText = "店舗コード";
-            this.店舗コード.Name = "店舗コード";
-            // 
-            // 発注数量
-            // 
-            this.発注数量.DataPropertyName = "発注数量";
-            this.発注数量.HeaderText = "発注数量";
-            this.発注数量.Name = "発注数量";
-            // 
-            // 仕入先コード
-            // 
-            this.仕入先コード.HeaderText = "仕入先コード";
-            this.仕入先コード.Name = "仕入先コード";
             // 
             // NewOrdersForm
             // 
