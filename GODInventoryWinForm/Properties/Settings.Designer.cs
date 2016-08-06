@@ -22,7 +22,7 @@ namespace GODInventoryWinForm.Properties {
                 return defaultInstance;
             }
         }
-        
+         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("d:\\NAFCO\\NFWE\\client")]
