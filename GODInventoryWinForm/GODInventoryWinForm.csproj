@@ -402,10 +402,7 @@
     <Content Include="Resources\tools.png" />
     <Content Include="Resources\warehouse.png" />
     <None Include="Resources\warehouse1.png" />
-<<<<<<< HEAD
-=======
     <Content Include="Doc\sql_changes.txt" />
->>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
