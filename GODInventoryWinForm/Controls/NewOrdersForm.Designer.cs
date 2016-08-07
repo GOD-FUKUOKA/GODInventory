@@ -44,13 +44,12 @@
             this.cancelOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uncancleOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
-            this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
-            this.ダブリ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id受注データ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ダブリ = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreCodeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreNameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.場所 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InvoiceNOColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +64,9 @@
             this.IsPendingColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id受注データ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
+            this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
@@ -157,6 +159,7 @@
             this.cancelButton.TabIndex = 19;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // dataGridView1
             // 
@@ -169,10 +172,11 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ダブリ,
-            this.id受注データ,
             this.OrderReceivedAtColumn1,
             this.StoreCodeColumn1,
             this.商品コード,
+            this.出荷日,
+            this.納品日,
             this.StoreNameColumn1,
             this.場所,
             this.InvoiceNOColumn1,
@@ -186,10 +190,12 @@
             this.Column2,
             this.IsPendingColumn1,
             this.Column3,
-            this.Column4});
+            this.Column4,
+            this.id受注データ});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Location = new System.Drawing.Point(6, 95);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(961, 315);
             this.dataGridView1.TabIndex = 11;
@@ -229,52 +235,17 @@
             this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
             this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
             // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Controls.Add(this.bindingNavigator1);
-            this.pager1.Location = new System.Drawing.Point(6, 377);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(961, 68);
-            this.pager1.TabIndex = 25;
-            // 
-            // bindingNavigator1
-            // 
-            this.bindingNavigator1.AddNewItem = null;
-            this.bindingNavigator1.AutoSize = false;
-            this.bindingNavigator1.CountItem = null;
-            this.bindingNavigator1.DeleteItem = null;
-            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bindingNavigator1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.bindingNavigator1.Location = new System.Drawing.Point(0, 34);
-            this.bindingNavigator1.MoveFirstItem = null;
-            this.bindingNavigator1.MoveLastItem = null;
-            this.bindingNavigator1.MoveNextItem = null;
-            this.bindingNavigator1.MovePreviousItem = null;
-            this.bindingNavigator1.Name = "bindingNavigator1";
-            this.bindingNavigator1.PositionItem = null;
-            this.bindingNavigator1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.bindingNavigator1.Size = new System.Drawing.Size(961, 34);
-            this.bindingNavigator1.TabIndex = 0;
-            this.bindingNavigator1.Text = "bindingNavigator1";
-            // 
             // ダブリ
             // 
             this.ダブリ.DataPropertyName = "ダブリ";
             this.ダブリ.HeaderText = "ダブリ";
+            this.ダブリ.Items.AddRange(new object[] {
+            "yes",
+            "no"});
             this.ダブリ.Name = "ダブリ";
-            // 
-            // id受注データ
-            // 
-            this.id受注データ.DataPropertyName = "id受注データ";
-            this.id受注データ.HeaderText = "id受注データ";
-            this.id受注データ.Name = "id受注データ";
+            this.ダブリ.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ダブリ.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ダブリ.Width = 60;
             // 
             // OrderReceivedAtColumn1
             // 
@@ -293,6 +264,18 @@
             this.商品コード.DataPropertyName = "商品コード";
             this.商品コード.HeaderText = "商品コード";
             this.商品コード.Name = "商品コード";
+            // 
+            // 出荷日
+            // 
+            this.出荷日.DataPropertyName = "出荷日";
+            this.出荷日.HeaderText = "出荷日";
+            this.出荷日.Name = "出荷日";
+            // 
+            // 納品日
+            // 
+            this.納品日.DataPropertyName = "納品日";
+            this.納品日.HeaderText = "納品日";
+            this.納品日.Name = "納品日";
             // 
             // StoreNameColumn1
             // 
@@ -378,6 +361,47 @@
             this.Column4.HeaderText = "在庫数";
             this.Column4.Name = "Column4";
             // 
+            // id受注データ
+            // 
+            this.id受注データ.DataPropertyName = "id受注データ";
+            this.id受注データ.HeaderText = "id受注データ";
+            this.id受注データ.Name = "id受注データ";
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Controls.Add(this.bindingNavigator1);
+            this.pager1.Location = new System.Drawing.Point(6, 377);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(961, 68);
+            this.pager1.TabIndex = 25;
+            // 
+            // bindingNavigator1
+            // 
+            this.bindingNavigator1.AddNewItem = null;
+            this.bindingNavigator1.AutoSize = false;
+            this.bindingNavigator1.CountItem = null;
+            this.bindingNavigator1.DeleteItem = null;
+            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bindingNavigator1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.bindingNavigator1.Location = new System.Drawing.Point(0, 34);
+            this.bindingNavigator1.MoveFirstItem = null;
+            this.bindingNavigator1.MoveLastItem = null;
+            this.bindingNavigator1.MoveNextItem = null;
+            this.bindingNavigator1.MovePreviousItem = null;
+            this.bindingNavigator1.Name = "bindingNavigator1";
+            this.bindingNavigator1.PositionItem = null;
+            this.bindingNavigator1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.bindingNavigator1.Size = new System.Drawing.Size(961, 34);
+            this.bindingNavigator1.TabIndex = 0;
+            this.bindingNavigator1.Text = "bindingNavigator1";
+            // 
             // NewOrdersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -385,6 +409,7 @@
             this.ClientSize = new System.Drawing.Size(981, 473);
             this.Controls.Add(this.tabControl1);
             this.Name = "NewOrdersForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewOrdersForm";
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.tabControl1.ResumeLayout(false);
@@ -418,11 +443,12 @@
         private System.Windows.Forms.ToolStripMenuItem uncancleOrderToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn id受注データDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button detailButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ダブリ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id受注データ;
+        private System.Windows.Forms.DataGridViewComboBoxColumn ダブリ;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderReceivedAtColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn StoreCodeColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 商品コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 納品日;
         private System.Windows.Forms.DataGridViewTextBoxColumn StoreNameColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 場所;
         private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceNOColumn1;
@@ -437,5 +463,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IsPendingColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id受注データ;
     }
 }

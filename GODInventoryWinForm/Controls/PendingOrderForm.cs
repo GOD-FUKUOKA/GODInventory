@@ -572,7 +572,9 @@ namespace GODInventoryWinForm.Controls
                 }
                 filter += "(社内伝番>" + 0 + ")";
             }
+            //不读取 canel 的订单
 
+            filter += "(キャンセル<>" + "no" + ")";
 
             this.bindingSource1.Filter = filter;
 
