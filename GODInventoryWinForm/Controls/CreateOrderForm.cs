@@ -25,10 +25,9 @@ namespace GODInventoryWinForm.Controls
 
         List<int> newfaxno = new List<int>();
         private List<t_orderdata> orders1;
-        private List<t_shoplist> t_shoplistR;
-        //private List<> t_shoplistR;
+        private List<t_shoplist> shopList;
         private List<t_rcvdata> t_rcvdataR;
-        private List<t_locations> t_locationsR;
+        private List<t_locations> locationList;
         private BindingList<t_orderdata> orderList;
 
         public CreateOrderForm()
@@ -37,17 +36,24 @@ namespace GODInventoryWinForm.Controls
 
             orderList = new BindingList<t_orderdata>();
 
-            t_shoplistR = new List<t_shoplist>();
+            shopList = new List<t_shoplist>();
             t_rcvdataR = new List<t_rcvdata>();
-            t_locationsR = new List<t_locations>();
+            locationList = new List<t_locations>();
 
             using (var ctx = new GODDbContext())
             {
 
-                t_shoplistR = ctx.t_shoplist.ToList();
+                shopList = ctx.t_shoplist.ToList();
                 t_rcvdataR = ctx.t_rcvdata.ToList();
-                t_locationsR = ctx.t_locations.ToList();
+                locationList = ctx.t_locations.ToList();
             }
+
+            this.storeComboBox.DisplayMember = "店名";
+            this.storeComboBox.ValueMember = "店番";
+            //this.storeComboBox.DataSource = null;
+
+            this.locationComboBox.DisplayMember = "納品場所名略称";
+            this.locationComboBox.ValueMember = "Id";
 
             textBox1.Text = Properties.Settings.Default.Createorder_scc;
             textBox2.Text = Properties.Settings.Default.Createorder_hsbsc;
@@ -72,7 +78,7 @@ namespace GODInventoryWinForm.Controls
             orderReasonDataGridviewComboBox.ValueType = typeof(OrderReasonEnum);
             orderReasonDataGridviewComboBox.ValueMember = "Value";
             orderReasonDataGridviewComboBox.DisplayMember = "Display";
-            orderReasonDataGridviewComboBox.DataSource = new OrderReasonEnum[] { OrderReasonEnum.補充, OrderReasonEnum.広告, OrderReasonEnum.客注 }
+            orderReasonDataGridviewComboBox.DataSource = new OrderReasonEnum[] { OrderReasonEnum.補充, OrderReasonEnum.客注, OrderReasonEnum.用度品, OrderReasonEnum.広告, OrderReasonEnum.新店 }
                 .Select(value => new { Display = value.ToString(), Value = (short)value })
                 .ToList();
 
@@ -127,13 +133,13 @@ namespace GODInventoryWinForm.Controls
                 order.仕入先コード = Convert.ToInt32(textBox1.Text);
                 order.出荷業務仕入先コード = Convert.ToInt32(this.textBox2.Text);
                 order.仕入先名カナ =  this.textBox3.Text;
-                order.店舗名漢字 = this.comboBox1.Text;
+                order.店舗名漢字 = this.storeComboBox.Text;
                 order.法人コード = Convert.ToInt16(this.textBox4.Text);
                 order.法人名漢字 = this.comboBox2.Text;
                 order.部門コード = Convert.ToInt16( this.textBox5.Text);
                 order.納品予定日 = this.dateTimePicker1.Value;
-                order.納品場所コード = Convert.ToInt16(this.textBox6.Text);
-                order.納品先店舗名漢字 = this.comboBox3.Text;
+                order.納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
+                order.納品先店舗名漢字 = this.locationComboBox.Text;
 
                 order.伝票番号 = GenerateInvoiceNo( order.店舗コード );
                 orderList.Add(order);
@@ -307,24 +313,41 @@ namespace GODInventoryWinForm.Controls
 
         private void storeCodeTextBox_TextChanged(object sender, EventArgs e)
         {
-            try
+            if( storeCodeTextBox.Text.Trim().Length > 0 )
             {
-                if (storeCodeTextBox.Text != "")
+                int storeId = Convert.ToInt32(storeCodeTextBox.Text);
+                if (storeId > 0)
                 {
-
-                    foreach (t_shoplist item in t_shoplistR)
+                    //this.storeComboBox.SelectedValue = storeId;
+                    var shops = this.shopList.Where(s => s.店番.ToString().StartsWith(storeId.ToString())).ToList();
+                    if (shops.Count > 0)
                     {
-                        if (item.店番 == Convert.ToInt32(storeCodeTextBox.Text))
-                            comboBox1.Text = item.店名;
-
+                        var store = shops.First();
+                        this.storeComboBox.DataSource = shops;
+                        //this.storeBindingSource.DataSource = list;
+                        var locations = this.locationList.Where(l => l.店舗コード == store.店番).ToList();
+                        this.locationComboBox.DataSource = locations;
+                        if (locations.Count > 0)
+                        {
+                            this.locationTextBox.Text = locations.First().納品場所コード.ToString();
+                        }
+                        else {
+                            this.locationTextBox.Text = "";
+                        }
                     }
+                    else
+                    {
+                        this.storeComboBox.DataSource = null;
+                        this.locationComboBox.DataSource = null;
+                        errorProvider1.SetError(storeComboBox, String.Format("Can not find store by ID {0}", storeId));
+                    }
+
+                }
+                else {
+                    errorProvider1.SetError(storeComboBox, String.Format("Can not find store by ID {0}", storeCodeTextBox.Text));
                 }
             }
-            catch (Exception ex)
-            {
-                return;
-                throw;
-            }
+           
         }
 
         private void storeCodeTextBox_Click(object sender, EventArgs e)
@@ -575,12 +598,12 @@ namespace GODInventoryWinForm.Controls
         {
             try
             {
-                if (textBox6.Text != "")
+                if (locationTextBox.Text != "")
                 {
-                    foreach (t_locations item in t_locationsR)
+                    foreach (t_locations item in locationList)
                     {
-                        if (item.Id == Convert.ToInt32(textBox6.Text))
-                            this.comboBox3.Text = item.納品場所名漢字;
+                        if (item.Id == Convert.ToInt32(locationTextBox.Text))
+                            this.locationComboBox.Text = item.納品場所名漢字;
 
                     }
                 }
@@ -695,6 +718,11 @@ namespace GODInventoryWinForm.Controls
                 orderList[e.RowIndex].発注形態名称漢字 = (string)cell.FormattedValue;
             }
 
+        }
+
+        private void storeBindingSource_DataError(object sender, BindingManagerDataErrorEventArgs e)
+        {
+            MessageBox.Show(e.Exception.Message);
         }
 
     }
