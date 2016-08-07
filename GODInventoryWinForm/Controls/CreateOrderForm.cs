@@ -31,6 +31,7 @@ namespace GODInventoryWinForm.Controls
         private List<t_locations> t_locationsR;
         private BindingList<t_orderdata> orderList;
 
+       
         int RowRemark = 0;
         int cloumn = 0;
 
@@ -129,7 +130,7 @@ namespace GODInventoryWinForm.Controls
                 order.納品場所コード = Convert.ToInt16(this.textBox6.Text);
                 order.納品先店舗名漢字 = this.comboBox3.Text;
 
-                order.伝票番号 = GenerateInvoiceNumber( order.店舗コード );
+                order.伝票番号 = GenerateInvoiceNo( order.店舗コード );
                 orderList.Add(order);
                 /* 
                 int index = this.dataGridView1.Rows.Add();
@@ -632,6 +633,45 @@ namespace GODInventoryWinForm.Controls
                 }
             }
             return num;
+        }
+
+
+        private int GenerateInvoiceNo(int storeId) {
+            int invoiceNo = lastInvoiceNOByStoreId(storeId);
+
+            int position = GetPositionByInvoiceNO(invoiceNo);
+
+            position += (1 + orderList.Count);
+
+            return (position * 10) + (position % 7);
+        
+        }
+
+        private int lastInvoiceNOByStoreId(int storeId)
+        {
+
+
+            int invoiceNo = 0;
+            using (var ctx = new GODDbContext())
+            {
+                var last_order = (from s in ctx.t_orderdata
+                                    where s.店舗コード == ((short)storeId)
+                                    orderby s.発注日 descending, s.伝票番号 descending
+                                    select s).FirstOrDefault();
+                if (last_order != null)
+                {
+
+                    invoiceNo = last_order.伝票番号;
+                }
+            }
+            return invoiceNo;
+            
+           
+        }
+
+        private int GetPositionByInvoiceNO(int invoiceNo) {
+
+            return invoiceNo / 10;
         }
 
     }
