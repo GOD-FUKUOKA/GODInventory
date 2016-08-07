@@ -289,6 +289,8 @@ namespace GODInventory.MyLinq
         {
             this.キャンセル = "no";
             this.ダブリ = "no";
+            this.発注形態区分 = (int)OrderReasonEnum.補充;
+            this.発注形態名称漢字 = OrderReasonEnum.補充.ToString();
             this.実際配送担当 = "丸健";
             this.配送担当受信 = false;
             this.Status = 0;

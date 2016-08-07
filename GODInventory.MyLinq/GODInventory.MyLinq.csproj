@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderReasonEnum.cs" />
     <Compile Include="OrderStatus.cs" />
     <Compile Include="t_manufacturers.cs" />
     <Compile Include="t_shippers.cs" />

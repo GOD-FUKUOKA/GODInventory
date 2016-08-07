@@ -31,10 +31,6 @@ namespace GODInventoryWinForm.Controls
         private List<t_locations> t_locationsR;
         private BindingList<t_orderdata> orderList;
 
-       
-        int RowRemark = 0;
-        int cloumn = 0;
-
         public CreateOrderForm()
         {
             InitializeComponent();
@@ -72,6 +68,15 @@ namespace GODInventoryWinForm.Controls
             //textBox3.Text = temp1[3]; 
             #endregion
 
+            
+            orderReasonDataGridviewComboBox.ValueType = typeof(OrderReasonEnum);
+            orderReasonDataGridviewComboBox.ValueMember = "Value";
+            orderReasonDataGridviewComboBox.DisplayMember = "Display";
+            orderReasonDataGridviewComboBox.DataSource = new OrderReasonEnum[] { OrderReasonEnum.補充, OrderReasonEnum.広告, OrderReasonEnum.客注 }
+                .Select(value => new { Display = value.ToString(), Value = (short)value })
+                .ToList();
+
+            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.DataSource = orderList;
         }
 
@@ -94,7 +99,7 @@ namespace GODInventoryWinForm.Controls
                     return;
 
                 }
-                if (Convert.ToInt32(orderQuantityUpDown.Value) == 0)
+                if (Convert.ToInt32(orderQuantityTextBox.Text) == 0)
                 {
                     MessageBox.Show(" 発注数量  ゼロにできない", "誤っ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -117,7 +122,7 @@ namespace GODInventoryWinForm.Controls
                
                 order.店舗コード = Convert.ToInt16(storeCodeTextBox.Text);
                 order.商品コード = Convert.ToInt32(productCodeTextBox.Text);
-                order.発注数量 = Convert.ToInt32(orderQuantityUpDown.Value);
+                order.発注数量 = Convert.ToInt32(orderQuantityTextBox.Text);
 
                 order.仕入先コード = Convert.ToInt32(textBox1.Text);
                 order.出荷業務仕入先コード = Convert.ToInt32(this.textBox2.Text);
@@ -283,12 +288,10 @@ namespace GODInventoryWinForm.Controls
         {
             try
             {
-                invoiceNOTextBox.Text = "";
 
                 storeCodeTextBox.Text = "";
                 productCodeTextBox.Text = "";
-                orderQuantityUpDown.Value = 0;
-
+               
                 //this.dataGridView1.DataSource = null;
                 //this.dataGridView1.Refresh();
 
@@ -363,7 +366,7 @@ namespace GODInventoryWinForm.Controls
 
                 string fax = "00" + Add_1.ToString();
 
-                this.invoiceNOTextBox.Text = fax.Trim();
+                //this.invoiceNOTextBox.Text = fax.Trim();
                 if (fax.Length == 8)
                 {
                     double dataamout = Convert.ToDouble(fax.Substring(0, 1)) + Convert.ToDouble(fax.Substring(1, 1)) + Convert.ToDouble(fax.Substring(2, 1)) + Convert.ToDouble(fax.Substring(3, 1)) + Convert.ToDouble(fax.Substring(4, 1)) + Convert.ToDouble(fax.Substring(5, 1)) + Convert.ToDouble(fax.Substring(6, 1)) + Convert.ToDouble(fax.Substring(7, 1));
@@ -392,7 +395,7 @@ namespace GODInventoryWinForm.Controls
 
                 }
 
-                this.invoiceNOTextBox.Text = fax + datare.ToString();
+                //this.invoiceNOTextBox.Text = fax + datare.ToString();
 
             }
 
@@ -593,29 +596,25 @@ namespace GODInventoryWinForm.Controls
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            RowRemark = e.RowIndex;
-            cloumn = e.ColumnIndex;
-            if (RowRemark < 0)
-                return;
-            int RowNumber;
-            if (cloumn == 0)
+            // remove proper row when click delete.
+            int cloumn = e.ColumnIndex;
+                        
+            if (cloumn == dataGridView1.ColumnCount - 1)
             {
-                RowNumber = dataGridView1.CurrentCell.RowIndex;
-                dataGridView1.Rows.RemoveAt(RowNumber);
-
+                this.orderList.RemoveAt(e.RowIndex);
             }
 
         }
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.ColumnIndex == 0)
-            {
-                if (dataGridView1.Rows[e.RowIndex].Cells["発注日"].EditedFormattedValue.ToString() == null || dataGridView1.Rows[e.RowIndex].Cells["発注日"].EditedFormattedValue.ToString() == "")
-                { }
-                else
-                    dataGridView1.Rows[e.RowIndex].Cells[0].Value = "クリア";
-            }
+            //if (e.ColumnIndex == 0)
+            //{
+            //    if (dataGridView1.Rows[e.RowIndex].Cells["発注日"].EditedFormattedValue.ToString() == null || dataGridView1.Rows[e.RowIndex].Cells["発注日"].EditedFormattedValue.ToString() == "")
+            //    { }
+            //    else
+            //        dataGridView1.Rows[e.RowIndex].Cells[0].Value = "クリア";
+            //}
         }
 
         private int GenerateInvoiceNumber( int store_id) {
@@ -640,7 +639,7 @@ namespace GODInventoryWinForm.Controls
             int invoiceNo = lastInvoiceNOByStoreId(storeId);
 
             int position = GetPositionByInvoiceNO(invoiceNo);
-
+            position %= 99999; // max position is 99999,
             position += (1 + orderList.Count);
 
             return (position * 10) + (position % 7);
@@ -672,6 +671,30 @@ namespace GODInventoryWinForm.Controls
         private int GetPositionByInvoiceNO(int invoiceNo) {
 
             return invoiceNo / 10;
+        }
+
+        //  発注形態 is enum, binding is not working, we have to handle it manually
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            // fix 発注形態 combobox
+            var row = dataGridView1.Rows[e.RowIndex];
+
+            var order = row.DataBoundItem as t_orderdata;
+
+            row.Cells["orderReasonDataGridviewComboBox"].Value = order.発注形態区分;
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            // fix 発注形態 combobox when user change it
+           
+            var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            if (cell.OwningColumn == orderReasonDataGridviewComboBox) {
+                orderList[e.RowIndex].発注形態区分 = (short)cell.Value;
+                orderList[e.RowIndex].発注形態名称漢字 = (string)cell.FormattedValue;
+            }
+
         }
 
     }
