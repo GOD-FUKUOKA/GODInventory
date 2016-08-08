@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(GODInventory.MyLinq.GODDbContext),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets3d405a5267b3aef7041a243bc0e6e1dfed9bbf8de924efb848441e69a5840f42))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetsc972cabf51ea395853542b8f01160635fac5fb673d58daa80505e382bcd0cbb7))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework Power Tools", "0.9.0.0")]
-    internal sealed class ViewsForBaseEntitySets3d405a5267b3aef7041a243bc0e6e1dfed9bbf8de924efb848441e69a5840f42 : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySetsc972cabf51ea395853542b8f01160635fac5fb673d58daa80505e382bcd0cbb7 : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "3d405a5267b3aef7041a243bc0e6e1dfed9bbf8de924efb848441e69a5840f42"; }
+            get { return "c972cabf51ea395853542b8f01160635fac5fb673d58daa80505e382bcd0cbb7"; }
         }
 
         /// <summary>
@@ -97,64 +97,84 @@ namespace Edm_EntityMappingGeneratedViews
                 return GetView9();
             }
 
-            if (extentName == "CodeFirstDatabase.t_maruken_trans")
+            if (extentName == "CodeFirstDatabase.t_manufacturers")
             {
                 return GetView10();
             }
 
-            if (extentName == "GODDbContext.t_maruken_trans")
+            if (extentName == "GODDbContext.t_manufacturers")
             {
                 return GetView11();
             }
 
-            if (extentName == "CodeFirstDatabase.t_orderdata")
+            if (extentName == "CodeFirstDatabase.t_maruken_trans")
             {
                 return GetView12();
             }
 
-            if (extentName == "GODDbContext.t_orderdata")
+            if (extentName == "GODDbContext.t_maruken_trans")
             {
                 return GetView13();
             }
 
-            if (extentName == "CodeFirstDatabase.t_rcvdata")
+            if (extentName == "CodeFirstDatabase.t_orderdata")
             {
                 return GetView14();
             }
 
-            if (extentName == "GODDbContext.t_rcvdata")
+            if (extentName == "GODDbContext.t_orderdata")
             {
                 return GetView15();
             }
 
-            if (extentName == "CodeFirstDatabase.t_shoplist")
+            if (extentName == "CodeFirstDatabase.t_rcvdata")
             {
                 return GetView16();
             }
 
-            if (extentName == "GODDbContext.t_shoplist")
+            if (extentName == "GODDbContext.t_rcvdata")
             {
                 return GetView17();
             }
 
-            if (extentName == "CodeFirstDatabase.t_stockrec")
+            if (extentName == "CodeFirstDatabase.t_shippers")
             {
                 return GetView18();
             }
 
-            if (extentName == "GODDbContext.t_stockrec")
+            if (extentName == "GODDbContext.t_shippers")
             {
                 return GetView19();
             }
 
-            if (extentName == "CodeFirstDatabase.t_stockstate")
+            if (extentName == "CodeFirstDatabase.t_shoplist")
             {
                 return GetView20();
             }
 
-            if (extentName == "GODDbContext.t_stockstate")
+            if (extentName == "GODDbContext.t_shoplist")
             {
                 return GetView21();
+            }
+
+            if (extentName == "CodeFirstDatabase.t_stockrec")
+            {
+                return GetView22();
+            }
+
+            if (extentName == "GODDbContext.t_stockrec")
+            {
+                return GetView23();
+            }
+
+            if (extentName == "CodeFirstDatabase.t_stockstate")
+            {
+                return GetView24();
+            }
+
+            if (extentName == "GODDbContext.t_stockstate")
+            {
+                return GetView25();
             }
 
             return null;
@@ -391,10 +411,48 @@ namespace Edm_EntityMappingGeneratedViews
         }
 
         /// <summary>
-        /// Gets the view for CodeFirstDatabase.t_maruken_trans.
+        /// Gets the view for CodeFirstDatabase.t_manufacturers.
         /// </summary>
         /// <returns>The mapping view.</returns>
         private static DbMappingView GetView10()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing t_manufacturers
+        [CodeFirstDatabaseSchema.t_manufacturers](T1.[t_manufacturers.Id], T1.[t_manufacturers.ShortName], T1.[t_manufacturers.FullName])
+    FROM (
+        SELECT 
+            T.Id AS [t_manufacturers.Id], 
+            T.ShortName AS [t_manufacturers.ShortName], 
+            T.FullName AS [t_manufacturers.FullName], 
+            True AS _from0
+        FROM GODDbContext.t_manufacturers AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for GODDbContext.t_manufacturers.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView11()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing t_manufacturers
+        [GODInventory.MyLinq.t_manufacturers](T1.[t_manufacturers.Id], T1.[t_manufacturers.ShortName], T1.[t_manufacturers.FullName])
+    FROM (
+        SELECT 
+            T.Id AS [t_manufacturers.Id], 
+            T.ShortName AS [t_manufacturers.ShortName], 
+            T.FullName AS [t_manufacturers.FullName], 
+            True AS _from0
+        FROM CodeFirstDatabase.t_manufacturers AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for CodeFirstDatabase.t_maruken_trans.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView12()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_maruken_trans
@@ -432,7 +490,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for GODDbContext.t_maruken_trans.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView11()
+        private static DbMappingView GetView13()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_maruken_trans
@@ -470,7 +528,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for CodeFirstDatabase.t_orderdata.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView12()
+        private static DbMappingView GetView14()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_orderdata
@@ -598,7 +656,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for GODDbContext.t_orderdata.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView13()
+        private static DbMappingView GetView15()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_orderdata
@@ -726,7 +784,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for CodeFirstDatabase.t_rcvdata.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView14()
+        private static DbMappingView GetView16()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_rcvdata
@@ -803,7 +861,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for GODDbContext.t_rcvdata.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView15()
+        private static DbMappingView GetView17()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_rcvdata
@@ -877,10 +935,48 @@ namespace Edm_EntityMappingGeneratedViews
         }
 
         /// <summary>
+        /// Gets the view for CodeFirstDatabase.t_shippers.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView18()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing t_shippers
+        [CodeFirstDatabaseSchema.t_shippers](T1.[t_shippers.Id], T1.[t_shippers.ShortName], T1.[t_shippers.FullName])
+    FROM (
+        SELECT 
+            T.Id AS [t_shippers.Id], 
+            T.ShortName AS [t_shippers.ShortName], 
+            T.FullName AS [t_shippers.FullName], 
+            True AS _from0
+        FROM GODDbContext.t_shippers AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for GODDbContext.t_shippers.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView19()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing t_shippers
+        [GODInventory.MyLinq.t_shippers](T1.[t_shippers.Id], T1.[t_shippers.ShortName], T1.[t_shippers.FullName])
+    FROM (
+        SELECT 
+            T.Id AS [t_shippers.Id], 
+            T.ShortName AS [t_shippers.ShortName], 
+            T.FullName AS [t_shippers.FullName], 
+            True AS _from0
+        FROM CodeFirstDatabase.t_shippers AS T
+    ) AS T1");
+        }
+
+        /// <summary>
         /// Gets the view for CodeFirstDatabase.t_shoplist.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView16()
+        private static DbMappingView GetView20()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_shoplist
@@ -906,7 +1002,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for GODDbContext.t_shoplist.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView17()
+        private static DbMappingView GetView21()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_shoplist
@@ -932,7 +1028,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for CodeFirstDatabase.t_stockrec.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView18()
+        private static DbMappingView GetView22()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_stockrec
@@ -957,7 +1053,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for GODDbContext.t_stockrec.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView19()
+        private static DbMappingView GetView23()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_stockrec
@@ -982,7 +1078,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for CodeFirstDatabase.t_stockstate.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView20()
+        private static DbMappingView GetView24()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_stockstate
@@ -1001,7 +1097,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for GODDbContext.t_stockstate.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView21()
+        private static DbMappingView GetView25()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_stockstate

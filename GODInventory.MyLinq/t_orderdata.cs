@@ -27,7 +27,7 @@ namespace GODInventory.MyLinq
         [Column(TypeName = "date")]
         public DateTime? 納品日 { get; set; }
 
-        public short 店舗コード { get; set; }
+        public int 店舗コード { get; set; }
 
         [StringLength(255)]
         public string 店舗名漢字 { get; set; }

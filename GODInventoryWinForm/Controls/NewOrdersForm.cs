@@ -31,6 +31,7 @@ namespace GODInventoryWinForm.Controls
             this.dataGridView1.DataSource = orderList;
         }
 
+
         private void detailButton_Click_1(object sender, EventArgs e)
         {
             orderList = new BindingList<t_orderdata>();
@@ -171,6 +172,41 @@ namespace GODInventoryWinForm.Controls
         }
 
 
+        private int InitializeOrderData()
+        {
+            // 记录DataGridView改变数据
+            this.datagrid_changes = new Hashtable();
+
+            //var ctx = entityDataSource1.DbContext as GODDbContext;
+            //var stockstates = ctx.t_stockstate.Select(s => s).ToList();
+            var cq = OrderSqlHelper.NewOrderQuery(entityDataSource1);
+            var count = cq.Count();
+
+            if (count > 0)
+            {
+                var q = OrderSqlHelper.NewOrderQuery(entityDataSource1);
+                // 分页
+
+                if (pager1.PageCurrent > 1)
+                {
+                    q = q.Skip(pager1.OffSet(pager1.PageCurrent - 1));
+                }
+                q = q.Take(pager1.OffSet(pager1.PageCurrent));
+
+                // create BindingList (sortable/filterable)
+                var bindinglist = entityDataSource1.CreateView(q) as EntityBindingList<t_orderdata>;
+
+                this.bindingSource1.DataSource = bindinglist;
+
+            }
+            else
+            {
+                this.bindingSource1.DataSource = null;
+            }
+            dataGridView1.DataSource = this.bindingSource1;
+
+            return count;
+        }
 
 
 

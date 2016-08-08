@@ -147,8 +147,14 @@ namespace GODInventoryWinForm
 
             using (var ctx = new GODDbContext())
             {
-                List<t_itemlist> items = ctx.t_itemlist.Select(s => s).ToList();
-                List<t_shoplist> shops = ctx.t_shoplist.Select(s => s).ToList();
+                var date = DateTime.Now.Date;
+                List<t_itemlist> items = ctx.t_itemlist.ToList();
+                List<v_storeorder> orders = ( from t_orderdata o  in ctx.t_orderdata
+                                             where o.Status == OrderStatus.New || o.Status == OrderStatus.Pending || o.Status == OrderStatus.WaitToShip || o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.ASN || o.Status == OrderStatus.Received
+                                             group o by new { o.店舗コード, o.商品コード} into g
+                                              select new v_storeorder { 店舗コード = g.Key.店舗コード, 商品コード = g.Key.商品コード }).ToList();
+                    
+                List<t_shoplist> shops = ctx.t_shoplist.ToList();
 
                 OrderModel model = null;
                 int progress = 0;
@@ -186,7 +192,7 @@ namespace GODInventoryWinForm
                             }
 
                             //sql_parameters = model.ToSqlArguments(shop, item);
-                            var sql = model.ToRawSql(shop, item);
+                            var sql = model.ToRawSql(shop, item, orders);
                             //Console.WriteLine("sql = #{0}", sql);
                             sqls.Add(sql);
                             if ((i == models.Count - 1) || (arg.CurrentIndex % 25 ==0))

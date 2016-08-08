@@ -6,5 +6,10 @@ using System.Threading.Tasks;
 
 namespace GODInventory.MyLinq
 {
-    public enum OrderStatus { New = 0, Pending = 1, WaitToShip = 3, PendingShipment = 5, ASN = 6, Received = 8, Completed = 10, Cancelled = 14 }
+    public partial class v_storeorder
+    {
+        public int 店舗コード { get; set; }
+
+        public int 商品コード { get; set; }
+    }
 }

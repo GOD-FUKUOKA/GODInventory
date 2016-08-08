@@ -80,6 +80,7 @@
     <Compile Include="t_stockstate.cs" />
     <Compile Include="v_receivedorder.cs" />
     <Compile Include="v_pendingorder.cs" />
+    <Compile Include="v_storeorder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

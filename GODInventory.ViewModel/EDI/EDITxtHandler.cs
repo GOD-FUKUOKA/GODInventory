@@ -160,7 +160,7 @@ namespace GODInventory.ViewModel.EDI
             {
                 try
                 {
-                    var orders = order_models.Select(x => x.ConverToEntity(null,null));
+                    var orders = order_models.Select(x => x.ConverToEntity());
                     var result = ctx.Entry(orders.First()).GetValidationResult();
                     ctx.t_orderdata.AddRange(orders);
                     ctx.SaveChanges();
