@@ -24,6 +24,7 @@
         public virtual DbSet<t_stockstate> t_stockstate { get; set; }
         public virtual DbSet<t_edidata> t_edidata { get; set; }
         public virtual DbSet<t_locations> t_locations { get; set; }
+        public virtual DbSet<t_stocklist> t_stocklist { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

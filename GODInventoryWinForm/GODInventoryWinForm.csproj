@@ -95,6 +95,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\InputStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\InputStock.Designer.cs">
+      <DependentUpon>InputStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StockOrderForm .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\StockOrderForm .Designer.cs">
+      <DependentUpon>StockOrderForm .cs</DependentUpon>
+    </Compile>
     <Compile Include="DBConnection.cs" />
     <Compile Include="DBConfigurationForm.cs">
       <SubType>Form</SubType>
@@ -250,6 +262,12 @@
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkerArgument.cs" />
+    <EmbeddedResource Include="Controls\InputStock.resx">
+      <DependentUpon>InputStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\StockOrderForm .resx">
+      <DependentUpon>StockOrderForm .cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DBConfigurationForm.resx">
       <DependentUpon>DBConfigurationForm.cs</DependentUpon>
     </EmbeddedResource>
