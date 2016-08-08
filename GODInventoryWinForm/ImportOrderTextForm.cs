@@ -44,17 +44,18 @@ namespace GODInventoryWinForm
             this.importButton.Enabled = false;
             this.cancelButton.Enabled = true;
             this.closeButton.Enabled = false;
-            backgroundWorker1.RunWorkerAsync(new WorkerArgument { OrderCount = 0, CurrentIndex = 0 });
-           
+            if (backgroundWorker1.IsBusy != true)
+            {
+                backgroundWorker1.RunWorkerAsync(new WorkerArgument { OrderCount = 0, CurrentIndex = 0 });
+            }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            WorkerArgument arg = e.Argument as WorkerArgument;
-            bool success = ImportOrderTxt( pathTextBox.Text, arg);
-            e.Cancel = !success;
-
+           
+            bool success = ImportOrderTxt(pathTextBox.Text, worker, e);
+            
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -74,6 +75,7 @@ namespace GODInventoryWinForm
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            
             this.cancelButton.Enabled = false;
             this.closeButton.Enabled = true;
             this.importButton.Enabled = true;
@@ -84,31 +86,28 @@ namespace GODInventoryWinForm
             }
             else if (e.Cancelled)
             {
+                MessageBox.Show(string.Format("It is cancelled!"));
             }
             else
             {
-                this.progressMsgLabel.Text = "Great, it is done!";
+                MessageBox.Show(string.Format("{0}", e.Result));
+                //this.progressMsgLabel.Text = "Great, it is done!";
             }
-            //if (!e.Cancelled)
-            //{
-            //    this.importButton.Enabled = true;
-            //    this.cancelButton.Enabled = true;
-            //    this.progressMsgLabel.Text = "Great, it is done!";
-            //}
-            //else {
-            //    this.cancelButton.Enabled = true;
-            //}
+            
         }
 
 
-        private bool ImportOrderTxt(string path, WorkerArgument arg)
+        private bool ImportOrderTxt(string path, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            
+            WorkerArgument arg = e.Argument as WorkerArgument;
+
             bool success = true;
             //File.ReadLines(path, Encoding.)
             //File.ReadAllBytes(path);
 
             //var lines = ConvertToUtf8Strings(path);
-            List<OrderModel> order_models = new List<OrderModel>();
+            List<OrderModel> models = new List<OrderModel>();
 
             try
             {
@@ -117,23 +116,33 @@ namespace GODInventoryWinForm
                 using (BinaryReader br = new BinaryReader(new FileStream(path, FileMode.Open, FileAccess.Read)))
                 {
                     OrderHeadModel order_head = new OrderHeadModel(br);
-                    Console.WriteLine(" write head ={0}", order_head.DetailCount);
+                    //Console.WriteLine(" write head ={0}", order_head.DetailCount);
                     for (var i = 0; i < order_head.DetailCount; i++)
                     {
-                        int progress = Convert.ToInt16( (i + 1) * 0.5 / order_head.DetailCount *100);
-                        order_models.Add(new OrderModel(br));
+                        if (worker.CancellationPending == true)
+                        {
+                            e.Cancel = true;
+                            throw new Exception("It is Cancelled successfully!");
+                        }
+                        int progress = Convert.ToInt16((i + 1) * 0.5 / order_head.DetailCount * 100);
+                        models.Add(new OrderModel(br));
                         //if (progress != last)
                         //
                         //    backgroundWorker1.ReportProgress(progress);
                         //    last = progress;
                         //}
                     }
-                   
+
                 }
             }
-            catch (EndOfStreamException e)
+            catch (EndOfStreamException exception)
             {
-
+                models.Clear();
+                success = false;
+            }
+            catch (Exception exception) {
+                models.Clear();
+                success = false;
             }
 
             using (var ctx = new GODDbContext())
@@ -148,18 +157,23 @@ namespace GODInventoryWinForm
                     try
                     {
                         List<string> sqls = new List<string>(100);
-                        //var orders = order_models.Select(x => x.ConverToEntity());
+                        //var orders = models.Select(x => x.ConverToEntity());
                         //var result = ctx.Entry(orders.First()).GetValidationResult();
                         //ctx.t_orderdata.AddRange(orders);                        
                         //ctx.SaveChanges();
-                        arg.OrderCount = order_models.Count;
-                        CustomMySqlParameters sql_parameters = null;
-                        for (var i = 0; i < order_models.Count; i++)
+                        arg.OrderCount = models.Count;
+
+                        for (var i = 0; i < models.Count; i++)
                         {
+                            if (worker.CancellationPending == true)
+                            {
+                                e.Cancel = true;
+                                throw new Exception( "It is Cancelled successfully!");
+                            }
                             arg.CurrentIndex = i + 1;
 
-                            progress = Convert.ToInt16( ( (i+1)*1.0 / order_models.Count )* 100);
-                            model = order_models.ElementAt(i);
+                            progress = Convert.ToInt16( ( (i+1)*1.0 / models.Count )* 100);
+                            model = models.ElementAt(i);
                             var item = items.FirstOrDefault(s => s.JANコード == model.JanCode);
                             if(item == null)
                             {
@@ -175,7 +189,7 @@ namespace GODInventoryWinForm
                             var sql = model.ToRawSql(shop, item);
                             //Console.WriteLine("sql = #{0}", sql);
                             sqls.Add(sql);
-                            if ((i == order_models.Count - 1) || (arg.CurrentIndex % 25 ==0))
+                            if ((i == models.Count - 1) || (arg.CurrentIndex % 25 ==0))
                             {
                                 var multisql = String.Join("", sqls.ToArray());
                                 ctx.Database.ExecuteSqlCommand(multisql);
@@ -183,7 +197,7 @@ namespace GODInventoryWinForm
                             }
                             //ctx.Database.ExecuteSqlCommand(sql_parameters.SqlString, sql_parameters.Parameters);
                             // use sql instead of orm
-                            //var order = order_models.ElementAt(i).ConverToEntity();
+                            //var order = models.ElementAt(i).ConverToEntity();
                             //ctx.t_orderdata.Add(order);
                             //ctx.SaveChanges();
                             if (arg.CurrentIndex % 25 == 0)
@@ -195,15 +209,20 @@ namespace GODInventoryWinForm
                         backgroundWorker1.ReportProgress(100, arg);
 
                         ctxTransaction.Commit();
+
+                        e.Result = string.Format("{0}条受注订单正常导入成功", models.Count);
                     }
                    
-                    catch (Exception e)
+                    catch (Exception exception)
                     {
                         ctxTransaction.Rollback();
-                        arg.HasError = true;
-                        arg.ErrorMessage = e.Message;                            
+                        if (!e.Cancel)
+                        {
+                            //arg.HasError = true;
+                            //arg.ErrorMessage = exception.Message;
+                            e.Result = exception.Message;
+                        }
                         
-                        backgroundWorker1.ReportProgress(progress, arg);
                         success = false;
                     }
                 }
@@ -220,7 +239,12 @@ namespace GODInventoryWinForm
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
+            if (this.backgroundWorker1.IsBusy) {
 
+                this.backgroundWorker1.CancelAsync();
+                // Disable the Cancel button.
+                this.cancelButton.Enabled = false;
+            }
         }
 
     }
