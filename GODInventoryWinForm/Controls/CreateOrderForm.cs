@@ -29,6 +29,7 @@ namespace GODInventoryWinForm.Controls
         private List<t_rcvdata> t_rcvdataR;
         private List<t_locations> locationList;
         private BindingList<t_orderdata> orderList;
+        int cloumn = 0;
 
         public CreateOrderForm()
         {
@@ -74,7 +75,7 @@ namespace GODInventoryWinForm.Controls
             //textBox3.Text = temp1[3]; 
             #endregion
 
-            
+
             orderReasonDataGridviewComboBox.ValueType = typeof(OrderReasonEnum);
             orderReasonDataGridviewComboBox.ValueMember = "Value";
             orderReasonDataGridviewComboBox.DisplayMember = "Display";
@@ -125,24 +126,49 @@ namespace GODInventoryWinForm.Controls
                 t_orderdata order = new t_orderdata();
                 order.受注日 = DateTime.Now;
                 order.発注日 = orderCreatedAtDateTimePicker.Value;
-               
+
                 order.店舗コード = Convert.ToInt16(storeCodeTextBox.Text);
                 order.商品コード = Convert.ToInt32(productCodeTextBox.Text);
                 order.発注数量 = Convert.ToInt32(orderQuantityTextBox.Text);
 
                 order.仕入先コード = Convert.ToInt32(textBox1.Text);
                 order.出荷業務仕入先コード = Convert.ToInt32(this.textBox2.Text);
-                order.仕入先名カナ =  this.textBox3.Text;
+                order.仕入先名カナ = this.textBox3.Text;
                 order.店舗名漢字 = this.storeComboBox.Text;
                 order.法人コード = Convert.ToInt16(this.textBox4.Text);
                 order.法人名漢字 = this.comboBox2.Text;
-                order.部門コード = Convert.ToInt16( this.textBox5.Text);
+                order.部門コード = Convert.ToInt16(this.textBox5.Text);
                 order.納品予定日 = this.dateTimePicker1.Value;
                 order.納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
                 order.納品先店舗名漢字 = this.locationComboBox.Text;
 
-                order.伝票番号 = GenerateInvoiceNo( order.店舗コード );
+                order.伝票番号 = GenerateInvoiceNo(order.店舗コード);
+
+                #region 联动
+                foreach (t_rcvdata item in t_rcvdataR)
+                {
+
+                    if (item.商品コード == Convert.ToDouble(order.商品コード))
+                    {
+                        order.品名漢字 = item.品名漢字.ToString();
+                        order.規格名漢字 = item.規格名漢字.ToString();
+                        order.原単価_税抜_ = Convert.ToInt32(item.原単価_税抜_.ToString());
+                        order.売単価_税抜_ = Convert.ToInt32(item.売単価_税抜_.ToString());
+                        order.ＪＡＮコード = long.Parse(item.ＪＡＮコード.ToString());
+                        break;
+
+                    }
+
+
+
+
+                }
+                #endregion
+
                 orderList.Add(order);
+
+
+                #region MyRegion
                 /* 
                 int index = this.dataGridView1.Rows.Add();
                 if (order.発注日 != null)
@@ -187,6 +213,8 @@ namespace GODInventoryWinForm.Controls
                 if (order.出荷業務仕入先コード != null)
                     dataGridView1.Rows[index].Cells["出荷業務仕入先コード"].Value = order.出荷業務仕入先コード;
                 */
+
+                #endregion
 
                 #region 判断所添加的订单号码
                 //string maxid = "Select max id form t_orderdata";
@@ -240,10 +268,11 @@ namespace GODInventoryWinForm.Controls
         private void submitButton_Click(object sender, EventArgs e)
         {
 
+
             try
             {
 
-               
+
                 if (orderList.Count > 0)
                 {
                     using (var ctx = new GODDbContext())
@@ -255,7 +284,7 @@ namespace GODInventoryWinForm.Controls
                     }
 
 
-                    
+
                 }
                 else
                 {
@@ -273,7 +302,7 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
-       
+
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -297,7 +326,7 @@ namespace GODInventoryWinForm.Controls
 
                 storeCodeTextBox.Text = "";
                 productCodeTextBox.Text = "";
-               
+
                 //this.dataGridView1.DataSource = null;
                 //this.dataGridView1.Refresh();
 
@@ -313,7 +342,7 @@ namespace GODInventoryWinForm.Controls
 
         private void storeCodeTextBox_TextChanged(object sender, EventArgs e)
         {
-            if( storeCodeTextBox.Text.Trim().Length > 0 )
+            if (storeCodeTextBox.Text.Trim().Length > 0)
             {
                 int storeId = Convert.ToInt32(storeCodeTextBox.Text);
                 if (storeId > 0)
@@ -331,7 +360,8 @@ namespace GODInventoryWinForm.Controls
                         {
                             this.locationTextBox.Text = locations.First().納品場所コード.ToString();
                         }
-                        else {
+                        else
+                        {
                             this.locationTextBox.Text = "";
                         }
                     }
@@ -343,11 +373,12 @@ namespace GODInventoryWinForm.Controls
                     }
 
                 }
-                else {
+                else
+                {
                     errorProvider1.SetError(storeComboBox, String.Format("Can not find store by ID {0}", storeCodeTextBox.Text));
                 }
             }
-           
+
         }
 
         private void storeCodeTextBox_Click(object sender, EventArgs e)
@@ -620,8 +651,8 @@ namespace GODInventoryWinForm.Controls
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // remove proper row when click delete.
-            int cloumn = e.ColumnIndex;
-                        
+            cloumn = e.ColumnIndex;
+
             if (cloumn == dataGridView1.ColumnCount - 1)
             {
                 this.orderList.RemoveAt(e.RowIndex);
@@ -640,25 +671,28 @@ namespace GODInventoryWinForm.Controls
             //}
         }
 
-        private int GenerateInvoiceNumber( int store_id) {
+        private int GenerateInvoiceNumber(int store_id)
+        {
 
             int num = 1;
             using (var ctx = new GODDbContext())
             {
                 var last_order = (from s in ctx.t_orderdata
-                              where s.店舗コード == ((short)store_id)
-                              orderby s.発注日 descending, s.伝票番号 descending
+                                  where s.店舗コード == ((short)store_id)
+                                  orderby s.発注日 descending, s.伝票番号 descending
                                   select s).FirstOrDefault();
-                if (last_order != null) {
+                if (last_order != null)
+                {
 
-                    num = last_order.伝票番号 + 1; 
+                    num = last_order.伝票番号 + 1;
                 }
             }
             return num;
         }
 
 
-        private int GenerateInvoiceNo(int storeId) {
+        private int GenerateInvoiceNo(int storeId)
+        {
             int invoiceNo = lastInvoiceNOByStoreId(storeId);
 
             int position = GetPositionByInvoiceNO(invoiceNo);
@@ -666,7 +700,7 @@ namespace GODInventoryWinForm.Controls
             position += (1 + orderList.Count);
 
             return (position * 10) + (position % 7);
-        
+
         }
 
         private int lastInvoiceNOByStoreId(int storeId)
@@ -677,9 +711,9 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {
                 var last_order = (from s in ctx.t_orderdata
-                                    where s.店舗コード == ((short)storeId)
-                                    orderby s.発注日 descending, s.伝票番号 descending
-                                    select s).FirstOrDefault();
+                                  where s.店舗コード == ((short)storeId)
+                                  orderby s.発注日 descending, s.伝票番号 descending
+                                  select s).FirstOrDefault();
                 if (last_order != null)
                 {
 
@@ -687,11 +721,12 @@ namespace GODInventoryWinForm.Controls
                 }
             }
             return invoiceNo;
-            
-           
+
+
         }
 
-        private int GetPositionByInvoiceNO(int invoiceNo) {
+        private int GetPositionByInvoiceNO(int invoiceNo)
+        {
 
             return invoiceNo / 10;
         }
@@ -710,19 +745,75 @@ namespace GODInventoryWinForm.Controls
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             // fix 発注形態 combobox when user change it
-           
+
             var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
-            if (cell.OwningColumn == orderReasonDataGridviewComboBox) {
+            if (cell.OwningColumn == orderReasonDataGridviewComboBox)
+            {
                 orderList[e.RowIndex].発注形態区分 = (short)cell.Value;
                 orderList[e.RowIndex].発注形態名称漢字 = (string)cell.FormattedValue;
             }
+            #region MyRegion
+            try
+            {
+                if (dataGridView1.RowCount < 1)
+                    return;
+                {
+                    foreach (t_rcvdata item in t_rcvdataR)
+                    {
+                        if (dataGridView1.Rows[e.RowIndex].Cells["ＪＡＮコード"].EditedFormattedValue != null && dataGridView1.Rows[e.RowIndex].Cells["ＪＡＮコード"].EditedFormattedValue != "" && item.ＪＡＮコード == Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells["ＪＡＮコード"].EditedFormattedValue))
+                        {
+                            dataGridView1.Rows[e.RowIndex].Cells["品名漢字"].Value = item.品名漢字.ToString();
+                            dataGridView1.Rows[e.RowIndex].Cells["規格名漢字"].Value = item.規格名漢字.ToString();
+                            dataGridView1.Rows[e.RowIndex].Cells["原単価"].Value = item.原単価_税抜_.ToString();
+                            dataGridView1.Rows[e.RowIndex].Cells["売単価"].Value = item.売単価_税抜_.ToString();
+                            break;
+
+                        }
+                        if (item.商品コード == Convert.ToDouble(dataGridView1.Rows[e.RowIndex].Cells["商品コード"].EditedFormattedValue))
+                        {
+                            dataGridView1.Rows[e.RowIndex].Cells["品名漢字"].Value = item.品名漢字.ToString();
+                            dataGridView1.Rows[e.RowIndex].Cells["規格名漢字"].Value = item.規格名漢字.ToString();
+                            dataGridView1.Rows[e.RowIndex].Cells["原単価"].Value = item.原単価_税抜_.ToString();
+                            dataGridView1.Rows[e.RowIndex].Cells["売単価"].Value = item.売単価_税抜_.ToString();
+                            //dataGridView1.Rows[e.RowIndex].Cells["ＪＡＮコード"].Value = item.ＪＡＮコード.ToString();    
+                            break;
+
+                        }
+
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return;
+
+                throw;
+
+
+            }
+
+
+            #endregion
 
         }
 
         private void storeBindingSource_DataError(object sender, BindingManagerDataErrorEventArgs e)
         {
             MessageBox.Show(e.Exception.Message);
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+          
+
         }
 
     }
