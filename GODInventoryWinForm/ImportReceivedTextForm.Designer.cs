@@ -38,6 +38,7 @@
             this.progressMsgLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label2 = new System.Windows.Forms.Label();
+            this.closeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -46,17 +47,18 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(369, 193);
+            this.cancelButton.Enabled = false;
+            this.cancelButton.Location = new System.Drawing.Point(286, 193);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 11;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(272, 193);
+            this.importButton.Location = new System.Drawing.Point(203, 193);
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(75, 23);
             this.importButton.TabIndex = 10;
@@ -115,7 +117,7 @@
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(14, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(458, 23);
@@ -123,11 +125,22 @@
             this.label2.Text = "Import JURYOU.txt";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // closeButton
+            // 
+            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.closeButton.Location = new System.Drawing.Point(369, 193);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(75, 23);
+            this.closeButton.TabIndex = 15;
+            this.closeButton.Text = "Close";
+            this.closeButton.UseVisualStyleBackColor = true;
+            // 
             // ImportReceivedTextForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 242);
+            this.Controls.Add(this.closeButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.importButton);
@@ -159,5 +172,6 @@
         private System.Windows.Forms.Label progressMsgLabel;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button closeButton;
     }
 }

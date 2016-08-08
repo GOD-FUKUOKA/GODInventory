@@ -76,3 +76,9 @@ CREATE TABLE `t_locations` (
   `納品場所名略称` varchar(64) CHARACTER SET 'utf8' DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 ;
+
+-- ----------------------------------------------------------------- 
+-- t_orderdata.店舗コード  int(4)      // same as t_shoplist
+
+ALTER TABLE `god_inventory`.`t_orderdata` 
+CHANGE COLUMN `店舗コード` `店舗コード` INT(4) NOT NULL DEFAULT 0;

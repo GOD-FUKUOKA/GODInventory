@@ -17,13 +17,18 @@ namespace GODInventoryWinForm
         public ImportReceivedTextForm()
         {
             InitializeComponent();
+            this.ControlBox = false;   // 设置不出现关闭按钮
         }
 
         private void importButton_Click(object sender, EventArgs e)
         {
             this.importButton.Enabled = false;
-            this.cancelButton.Enabled = false;
-            backgroundWorker1.RunWorkerAsync(new WorkerArgument { OrderCount = 0, CurrentIndex = 0 });
+            this.cancelButton.Enabled = true;
+            this.closeButton.Enabled = false;
+            if (backgroundWorker1.IsBusy != true)
+            {
+                backgroundWorker1.RunWorkerAsync(new WorkerArgument { OrderCount = 0, CurrentIndex = 0 });
+            }
 
         }
 
@@ -45,9 +50,7 @@ namespace GODInventoryWinForm
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            WorkerArgument arg = e.Argument as WorkerArgument;
-            bool success = ImportJuryouTxt(pathTextBox.Text, arg);
-            e.Cancel = !success;
+            bool success = ImportJuryouTxt(pathTextBox.Text, worker, e);
 
         }
 
@@ -68,21 +71,29 @@ namespace GODInventoryWinForm
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (!e.Cancelled)
+            this.cancelButton.Enabled = false;
+            this.closeButton.Enabled = true;
+            this.importButton.Enabled = true;
+
+            if (e.Error != null)
             {
-                this.importButton.Enabled = true;
-                this.cancelButton.Enabled = true;
-                this.progressMsgLabel.Text = "Great, it is done!";
+                MessageBox.Show(e.Error.Message);
+            }
+            else if (e.Cancelled)
+            {
+                MessageBox.Show(string.Format("It is cancelled!"));
             }
             else
             {
-                this.cancelButton.Enabled = true;
+                MessageBox.Show(string.Format("{0}", e.Result));
+                //this.progressMsgLabel.Text = "Great, it is done!";
             }
         }
 
-        private bool ImportJuryouTxt(string path, WorkerArgument arg)
+        private bool ImportJuryouTxt(string path, BackgroundWorker worker, DoWorkEventArgs e)
         {
             bool success = true;
+            WorkerArgument arg = e.Argument as WorkerArgument;
             ReceivedOrderHeadModel order_head = null;
             List<ReceivedOrderModel> models;
             try
@@ -92,13 +103,17 @@ namespace GODInventoryWinForm
                 using (BinaryReader br = new BinaryReader(new FileStream(path, FileMode.Open, FileAccess.Read)))
                 {
                     order_head = new ReceivedOrderHeadModel(br);
-                    Console.WriteLine(" write head ={0}", order_head.DetailCount);
+                    //Console.WriteLine(" write head ={0}", order_head.DetailCount);
                     
                 }
             }
-            catch (EndOfStreamException e)
-            {
-
+            catch (EndOfStreamException exception)
+            {                
+                success = false;
+            }
+            catch (Exception exception)
+            {                
+                success = false;
             }
 
             using (var ctx = new GODDbContext())
@@ -115,6 +130,11 @@ namespace GODInventoryWinForm
                         models = order_head.Models;
                         for (var i = 0; i < models.Count; i++)
                         {
+                            if (worker.CancellationPending == true)
+                            {
+                                e.Cancel = true;
+                                throw new Exception("It is Cancelled successfully!");
+                            }
                             var model = models.ElementAt(i);
                             progress = Convert.ToInt16(((i + 1) * 1.0 / models.Count) * 100);
                             // use sql instead of orm
@@ -126,7 +146,7 @@ namespace GODInventoryWinForm
                                 //Console.WriteLine("sql = #{0}", sql);
                                 
                                 if( ctx.Database.ExecuteSqlCommand(sql) ==0 ){
-                                   throw new Exception(String.Format("Can not find order by 店舗コード {0} and 伝票番号 {1} in 3 months.", model.StoreCode, model.InvoiceCode));
+                                   throw new Exception(String.Format("Can not find any order by 店舗コード {0} and 伝票番号 {1} in 3 months.", model.StoreCode, model.InvoiceCode));
                                 }
                                 
                                 arg.CurrentIndex = i + 1;
@@ -139,16 +159,19 @@ namespace GODInventoryWinForm
                         }
                         backgroundWorker1.ReportProgress(100, arg);
                         ctxTransaction.Commit();
+                        e.Result = string.Format("{0}条受領订单正常导入成功", models.Count);
+
                     }
-                    catch (Exception e)
+                    catch (Exception exception)
                     {
                         ctxTransaction.Rollback();
-                        arg.HasError = true;
-                        if (e.Message.StartsWith("Can"))
-                        {
-                            arg.ErrorMessage = e.Message;
+                        if (!e.Cancel)
+                        {                            
+                            //arg.HasError = true;
+                            //arg.ErrorMessage = exception.Message;
+                            e.Result = exception.Message;
                         }
-                        backgroundWorker1.ReportProgress(progress, arg);
+                        
                         success = false;
                     }
                 }
@@ -156,6 +179,17 @@ namespace GODInventoryWinForm
             }
             return success;
 
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            if (this.backgroundWorker1.IsBusy)
+            {
+
+                this.backgroundWorker1.CancelAsync();
+                // Disable the Cancel button.
+                this.cancelButton.Enabled = false;
+            }
         }
 
     }

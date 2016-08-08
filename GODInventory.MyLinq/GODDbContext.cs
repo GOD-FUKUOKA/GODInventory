@@ -24,7 +24,12 @@
         public virtual DbSet<t_stockstate> t_stockstate { get; set; }
         public virtual DbSet<t_edidata> t_edidata { get; set; }
         public virtual DbSet<t_locations> t_locations { get; set; }
+<<<<<<< HEAD
         public virtual DbSet<t_stocklist> t_stocklist { get; set; }
+=======
+        public virtual DbSet<t_shippers> t_shippers { get; set; }
+        public virtual DbSet<t_manufacturers> t_manufacturers { get; set; }
+>>>>>>> origin/master
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -227,6 +232,10 @@
             modelBuilder.Entity<t_orderdata>()
                 .Property(e => e.センター名カナ)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<t_orderdata>()
+                .Property(e => e.Status)
+                .IsRequired();
 
             modelBuilder.Entity<t_rcvdata>()
                 .Property(e => e.法人名漢字)
