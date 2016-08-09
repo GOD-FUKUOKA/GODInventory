@@ -25,7 +25,7 @@
         public virtual DbSet<t_edidata> t_edidata { get; set; }
         public virtual DbSet<t_locations> t_locations { get; set; }
 //<<<<<<< HEAD
-        public virtual DbSet<t_stocklist> t_stocklist { get; set; }
+        //public virtual DbSet<t_stocklist> t_stocklist { get; set; }
 //=======
         public virtual DbSet<t_shippers> t_shippers { get; set; }
         public virtual DbSet<t_manufacturers> t_manufacturers { get; set; }

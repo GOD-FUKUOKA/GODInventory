@@ -18,6 +18,7 @@ namespace GODInventoryWinForm
         // initialize it on running, it is time consuming.
         private WarehouseControl warehouseControl;
         private OrdersControl orders_control;
+        private StockOrderForm StockOrderForm;
 
         public MainForm()
         {
@@ -81,8 +82,17 @@ namespace GODInventoryWinForm
 
         private void customerToolStripButton_Click(object sender, EventArgs e)
         {
+            if (StockOrderForm == null)
+            {
+                LogHelper.WriteLog("Start initialize StockOrderForm ");
+                StockOrderForm = new StockOrderForm();
+                StockOrderForm.Dock = DockStyle.Fill;
+            }
+
+
             this.panel1.Controls.Clear();
-            this.panel1.Controls.Add(storesControl);
+            //this.panel1.Controls.Add(storesControl);
+            this.panel1.Controls.Add(StockOrderForm);
         }
 
         private void settingToolStripButton_Click(object sender, EventArgs e)

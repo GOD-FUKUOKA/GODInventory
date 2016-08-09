@@ -76,7 +76,6 @@
     <Compile Include="t_orderdata.cs" />
     <Compile Include="t_rcvdata.cs" />
     <Compile Include="t_shoplist.cs" />
-    <Compile Include="t_stocklist.cs" />
     <Compile Include="t_stockrec.cs" />
     <Compile Include="t_stockstate.cs" />
     <Compile Include="v_receivedorder.cs" />
