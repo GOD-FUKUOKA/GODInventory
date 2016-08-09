@@ -38,17 +38,17 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.orderCreatedAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.btadd = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.orderCreatedAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.storeComboBox = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -115,12 +115,12 @@
             this.tableLayoutPanel2.Controls.Add(this.textBox5, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.label2, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBox1, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.textBox3, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label4, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.textBox4, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.orderCreatedAtDateTimePicker, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.storeComboBox, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -208,15 +208,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "仓库：";
             // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Location = new System.Drawing.Point(133, 3);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(130, 22);
-            this.textBox1.TabIndex = 1;
-            // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -254,6 +245,13 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(130, 22);
             this.textBox4.TabIndex = 7;
+            // 
+            // orderCreatedAtDateTimePicker
+            // 
+            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(415, 3);
+            this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
+            this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(123, 20);
+            this.orderCreatedAtDateTimePicker.TabIndex = 14;
             // 
             // btadd
             // 
@@ -316,12 +314,13 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // orderCreatedAtDateTimePicker
+            // storeComboBox
             // 
-            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(415, 3);
-            this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
-            this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(123, 20);
-            this.orderCreatedAtDateTimePicker.TabIndex = 14;
+            this.storeComboBox.FormattingEnabled = true;
+            this.storeComboBox.Location = new System.Drawing.Point(133, 3);
+            this.storeComboBox.Name = "storeComboBox";
+            this.storeComboBox.Size = new System.Drawing.Size(130, 21);
+            this.storeComboBox.TabIndex = 28;
             // 
             // InputStock
             // 
@@ -352,7 +351,6 @@
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label4;
@@ -363,5 +361,6 @@
         private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.DateTimePicker orderCreatedAtDateTimePicker;
+        private System.Windows.Forms.ComboBox storeComboBox;
     }
 }

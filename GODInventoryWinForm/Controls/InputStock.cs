@@ -41,7 +41,7 @@ namespace GODInventoryWinForm.Controls
         {
             try
             {
-                if (textBox1.Text == "" || textBox1.Text == "")
+                if (this.storeComboBox.Text == "" || storeComboBox.Text == "")
                 {
                     MessageBox.Show("仓库", "誤っ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -53,7 +53,7 @@ namespace GODInventoryWinForm.Controls
                 }
                 t_stocklist order = new t_stocklist();                
                 order.期日 = orderCreatedAtDateTimePicker.Value;
-                order.仓库 =  textBox1.Text ;
+                order.仓库 = storeComboBox.Text;
                 order.商品別 = textBox5.Text  ;
                 order.工場 = textBox3.Text ;
                 order.入庫番号 = textBox4.Text ;

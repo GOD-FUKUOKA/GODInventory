@@ -24,12 +24,12 @@
         public virtual DbSet<t_stockstate> t_stockstate { get; set; }
         public virtual DbSet<t_edidata> t_edidata { get; set; }
         public virtual DbSet<t_locations> t_locations { get; set; }
-<<<<<<< HEAD
+//<<<<<<< HEAD
         public virtual DbSet<t_stocklist> t_stocklist { get; set; }
-=======
+//=======
         public virtual DbSet<t_shippers> t_shippers { get; set; }
         public virtual DbSet<t_manufacturers> t_manufacturers { get; set; }
->>>>>>> origin/master
+//>>>>>>> origin/master
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
