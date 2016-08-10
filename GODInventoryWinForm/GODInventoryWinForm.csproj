@@ -107,6 +107,12 @@
     <Compile Include="Controls\OutputStock.Designer.cs">
       <DependentUpon>OutputStock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Search_Strock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Search_Strock.Designer.cs">
+      <DependentUpon>Search_Strock.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\StockOrderForm .cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -118,6 +124,12 @@
     </Compile>
     <Compile Include="Controls\StockTransfer.Designer.cs">
       <DependentUpon>StockTransfer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Strock_CompanyCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Strock_CompanyCode.Designer.cs">
+      <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
     </Compile>
     <Compile Include="DBConnection.cs" />
     <Compile Include="DBConfigurationForm.cs">
@@ -276,15 +288,23 @@
     <Compile Include="WorkerArgument.cs" />
     <EmbeddedResource Include="Controls\InputStock.resx">
       <DependentUpon>InputStock.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\OutputStock.resx">
       <DependentUpon>OutputStock.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Search_Strock.resx">
+      <DependentUpon>Search_Strock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockOrderForm .resx">
       <DependentUpon>StockOrderForm .cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockTransfer.resx">
       <DependentUpon>StockTransfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Strock_CompanyCode.resx">
+      <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DBConfigurationForm.resx">
       <DependentUpon>DBConfigurationForm.cs</DependentUpon>

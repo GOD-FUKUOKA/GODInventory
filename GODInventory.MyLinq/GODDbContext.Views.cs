@@ -1023,7 +1023,7 @@ namespace Edm_EntityMappingGeneratedViews
         FROM CodeFirstDatabase.t_shoplist AS T
     ) AS T1");
         }
-
+      //  , T1.[t_stockrec.仓库, T1.[t_stockrec.出庫事由]
         /// <summary>
         /// Gets the view for CodeFirstDatabase.t_stockrec.
         /// </summary>
@@ -1032,7 +1032,7 @@ namespace Edm_EntityMappingGeneratedViews
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing t_stockrec
-        [CodeFirstDatabaseSchema.t_stockrec](T1.[t_stockrec.id], T1.[t_stockrec.日付], T1.[t_stockrec.区分], T1.[t_stockrec.自社コード], T1.[t_stockrec.数量], T1.[t_stockrec.状態], T1.[t_stockrec.元], T1.[t_stockrec.先], T1.[t_stockrec.納品書番号])
+        [CodeFirstDatabaseSchema.t_stockrec](T1.[t_stockrec.id], T1.[t_stockrec.日付], T1.[t_stockrec.区分], T1.[t_stockrec.自社コード], T1.[t_stockrec.数量], T1.[t_stockrec.状態], T1.[t_stockrec.元], T1.[t_stockrec.先], T1.[t_stockrec.納品書番号)
     FROM (
         SELECT 
             T.id AS [t_stockrec.id], 
@@ -1044,11 +1044,16 @@ namespace Edm_EntityMappingGeneratedViews
             T.[元] AS [t_stockrec.元], 
             T.[先] AS [t_stockrec.先], 
             T.[納品書番号] AS [t_stockrec.納品書番号], 
+        
             True AS _from0
         FROM GODDbContext.t_stockrec AS T
     ) AS T1");
         }
+            //T.[仓库] AS [t_stockrec.仓库], 
+            //T.[出庫事由] AS [t_stockrec.出庫事由], 
 
+
+        //, T1.[t_stockrec.仓库, T1.[t_stockrec.出庫事由
         /// <summary>
         /// Gets the view for GODDbContext.t_stockrec.
         /// </summary>
@@ -1069,10 +1074,14 @@ namespace Edm_EntityMappingGeneratedViews
             T.[元] AS [t_stockrec.元], 
             T.[先] AS [t_stockrec.先], 
             T.[納品書番号] AS [t_stockrec.納品書番号], 
+
             True AS _from0
         FROM CodeFirstDatabase.t_stockrec AS T
     ) AS T1");
         }
+        //            T.[仓库] AS [t_stockrec.仓库], 
+        //            T.[出庫事由] AS [t_stockrec.出庫事由], 
+
 
         /// <summary>
         /// Gets the view for CodeFirstDatabase.t_stockstate.

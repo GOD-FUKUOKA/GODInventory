@@ -31,6 +31,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btclearzero = new System.Windows.Forms.Button();
+            this.btlogin = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -43,18 +45,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.orderCreatedAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.btadd = new System.Windows.Forms.Button();
+            this.brbringStockCN = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -88,8 +90,12 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.brbringStockCN);
+            this.tabPage1.Controls.Add(this.btadd);
+            this.tabPage1.Controls.Add(this.comboBox3);
+            this.tabPage1.Controls.Add(this.comboBox2);
+            this.tabPage1.Controls.Add(this.btclearzero);
+            this.tabPage1.Controls.Add(this.btlogin);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.textBox3);
             this.tabPage1.Controls.Add(this.label7);
@@ -102,9 +108,7 @@
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.orderCreatedAtDateTimePicker);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.textBox2);
             this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -112,6 +116,25 @@
             this.tabPage1.Size = new System.Drawing.Size(843, 284);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btclearzero
+            // 
+            this.btclearzero.Location = new System.Drawing.Point(704, 234);
+            this.btclearzero.Name = "btclearzero";
+            this.btclearzero.Size = new System.Drawing.Size(75, 32);
+            this.btclearzero.TabIndex = 38;
+            this.btclearzero.Text = "清零";
+            this.btclearzero.UseVisualStyleBackColor = true;
+            // 
+            // btlogin
+            // 
+            this.btlogin.Location = new System.Drawing.Point(569, 234);
+            this.btlogin.Name = "btlogin";
+            this.btlogin.Size = new System.Drawing.Size(75, 32);
+            this.btlogin.TabIndex = 37;
+            this.btlogin.Text = "ログイン";
+            this.btlogin.UseVisualStyleBackColor = true;
+            this.btlogin.Click += new System.EventHandler(this.btlogin_Click);
             // 
             // label8
             // 
@@ -168,8 +191,9 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(468, 126);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(176, 21);
+            this.comboBox1.Size = new System.Drawing.Size(192, 21);
             this.comboBox1.TabIndex = 32;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -186,8 +210,9 @@
             this.storeComboBox.FormattingEnabled = true;
             this.storeComboBox.Location = new System.Drawing.Point(116, 123);
             this.storeComboBox.Name = "storeComboBox";
-            this.storeComboBox.Size = new System.Drawing.Size(176, 21);
+            this.storeComboBox.Size = new System.Drawing.Size(190, 21);
             this.storeComboBox.TabIndex = 30;
+            this.storeComboBox.SelectedIndexChanged += new System.EventHandler(this.storeComboBox_SelectedIndexChanged);
             // 
             // dateTimePicker1
             // 
@@ -221,13 +246,6 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "出庫日程 :";
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(468, 32);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 3;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -236,13 +254,6 @@
             this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "工場 :";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(116, 32);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
             // 
             // label1
             // 
@@ -268,24 +279,6 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(851, 279);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(569, 234);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 32);
-            this.button1.TabIndex = 37;
-            this.button1.Text = "ログイン";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(704, 234);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 32);
-            this.button2.TabIndex = 38;
-            this.button2.Text = "清零";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // 番号
             // 
@@ -317,6 +310,44 @@
             this.数量.HeaderText = "数量";
             this.数量.Name = "数量";
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(468, 28);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(192, 21);
+            this.comboBox2.TabIndex = 39;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(114, 29);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(192, 21);
+            this.comboBox3.TabIndex = 40;
+            // 
+            // btadd
+            // 
+            this.btadd.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btadd.Location = new System.Drawing.Point(684, 32);
+            this.btadd.Name = "btadd";
+            this.btadd.Size = new System.Drawing.Size(156, 32);
+            this.btadd.TabIndex = 41;
+            this.btadd.Text = "商品リストにつけ込み";
+            this.btadd.UseVisualStyleBackColor = true;
+            this.btadd.Click += new System.EventHandler(this.btadd_Click);
+            // 
+            // brbringStockCN
+            // 
+            this.brbringStockCN.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.brbringStockCN.Location = new System.Drawing.Point(311, 225);
+            this.brbringStockCN.Name = "brbringStockCN";
+            this.brbringStockCN.Size = new System.Drawing.Size(107, 41);
+            this.brbringStockCN.TabIndex = 42;
+            this.brbringStockCN.Text = "Add";
+            this.brbringStockCN.UseVisualStyleBackColor = true;
+            this.brbringStockCN.Click += new System.EventHandler(this.brbringStockCN_Click);
+            // 
             // StockTransfer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -340,9 +371,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label4;
@@ -356,12 +385,16 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btclearzero;
+        private System.Windows.Forms.Button btlogin;
         private System.Windows.Forms.DataGridViewTextBoxColumn 番号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;
         private System.Windows.Forms.DataGridViewTextBoxColumn 商品名;
         private System.Windows.Forms.DataGridViewTextBoxColumn 規格;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Button btadd;
+        private System.Windows.Forms.Button brbringStockCN;
     }
 }

@@ -33,5 +33,12 @@ namespace GODInventory.MyLinq
 
         [StringLength(255)]
         public string 納品書番号 { get; set; }
+
+        //[StringLength(255)]
+        //public string 仓库 { get; set; }
+
+
+        //[StringLength(255)]
+        //public string 出庫事由 { get; set; }
     }
 }

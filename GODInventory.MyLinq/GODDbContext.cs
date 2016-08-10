@@ -10,7 +10,7 @@
         public GODDbContext()
             : base("name=GODDbContext")
         {
-            
+
         }
 
         public virtual DbSet<t_date> t_date { get; set; }
@@ -24,12 +24,12 @@
         public virtual DbSet<t_stockstate> t_stockstate { get; set; }
         public virtual DbSet<t_edidata> t_edidata { get; set; }
         public virtual DbSet<t_locations> t_locations { get; set; }
-//<<<<<<< HEAD
+        //<<<<<<< HEAD
         //public virtual DbSet<t_stocklist> t_stocklist { get; set; }
-//=======
+        //=======
         public virtual DbSet<t_shippers> t_shippers { get; set; }
         public virtual DbSet<t_manufacturers> t_manufacturers { get; set; }
-//>>>>>>> origin/master
+        //>>>>>>> origin/master
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -376,6 +376,14 @@
             modelBuilder.Entity<t_stockrec>()
                 .Property(e => e.納品書番号)
                 .IsUnicode(false);
+
+            //modelBuilder.Entity<t_stockrec>()
+            //     .Property(e => e.仓库)
+            //      .IsUnicode(false);
+
+            //modelBuilder.Entity<t_stockrec>()
+            //            .Property(e => e.出庫事由)
+            //            .IsUnicode(false);
 
             modelBuilder.Entity<t_stockstate>()
                 .Property(e => e.在庫状態)
