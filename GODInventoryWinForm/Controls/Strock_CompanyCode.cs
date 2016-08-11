@@ -19,7 +19,7 @@ namespace GODInventoryWinForm.Controls
         private BindingList<t_itemlist> t_itemlistR;
         private List<t_itemlist> itemlist;
         public int STATUS;
-
+        public t_itemlist item;
 
         public Strock_CompanyCode(int text)
         {
@@ -46,8 +46,16 @@ namespace GODInventoryWinForm.Controls
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            item = new t_itemlist();
 
-            STATUS = Convert.ToInt32(dataGridView1.Rows[RowRemark].Cells[1].EditedFormattedValue.ToString());
+
+            item.JANコード = RowRemark;
+            item.自社コード = Convert.ToInt32(dataGridView1.Rows[RowRemark].Cells[1].EditedFormattedValue.ToString());
+            item.商品名 = dataGridView1.Rows[RowRemark].Cells[2].EditedFormattedValue.ToString();
+            item.規格 = dataGridView1.Rows[RowRemark].Cells[3].EditedFormattedValue.ToString();
+            if (dataGridView1.Rows[RowRemark].Cells[4].EditedFormattedValue != null && dataGridView1.Rows[RowRemark].Cells[4].EditedFormattedValue != "")
+                item.PT入数 = Convert.ToInt32(dataGridView1.Rows[RowRemark].Cells[4].EditedFormattedValue.ToString());
+
             this.Close();
 
         }

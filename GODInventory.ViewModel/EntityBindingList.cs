@@ -500,7 +500,6 @@ namespace GODInventory.ViewModel
                     }
                     dt.Columns.Add(pi.Name, type);
                 }
-
                 // add calculated column that contains the filter
                 dt.Columns.Add("_filter", typeof(bool), _filter);
 

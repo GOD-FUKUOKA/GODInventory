@@ -377,13 +377,13 @@
                 .Property(e => e.納品書番号)
                 .IsUnicode(false);
 
-            //modelBuilder.Entity<t_stockrec>()
-            //     .Property(e => e.仓库)
-            //      .IsUnicode(false);
+            modelBuilder.Entity<t_stockrec>()
+                 .Property(e => e.仓库)
+                  .IsUnicode(false);
 
-            //modelBuilder.Entity<t_stockrec>()
-            //            .Property(e => e.出庫事由)
-            //            .IsUnicode(false);
+            modelBuilder.Entity<t_stockrec>()
+                        .Property(e => e.出庫事由)
+                        .IsUnicode(false);
 
             modelBuilder.Entity<t_stockstate>()
                 .Property(e => e.在庫状態)

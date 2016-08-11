@@ -406,7 +406,14 @@ namespace GODInventory.ViewModel
 
         }
 
-
+        public static IQueryable<t_stockrec> stockQuery(EntityDataSource entityDataSource1)
+        {
+            var a = entityDataSource1.EntitySets["t_stockrec"];
+            var q = from t_stockrec o in entityDataSource1.EntitySets["t_stockrec"]
+                    where o.id >0
+                    select o;
+            return q;
+        }
 
     }
 }

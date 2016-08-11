@@ -21,13 +21,14 @@ namespace GODInventoryWinForm.Controls
         private List<t_genre> t_genreR;
         private Strock_CompanyCode Strock_CompanyCode;
         private t_stockrec order;
-
+        private List<t_itemlist> t_itemlistR;
 
         public StockTransfer()
         {
             InitializeComponent();
             List<int> newcodemanufa = new List<int>();
             stocklist = new BindingList<t_stockrec>();
+            t_itemlistR = new List<t_itemlist>();
 
             using (var ctx = new GODDbContext())
             {
@@ -55,12 +56,38 @@ namespace GODInventoryWinForm.Controls
                 this.comboBox1.Items.Add(ll[j]);
             }
             this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.DataSource = stocklist;
+            this.dataGridView1.DataSource = t_itemlistR;
+         
         }
 
         private void btlogin_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                if (stocklist.Count > 0)
+                {
+                    using (var ctx = new GODDbContext())
+                    {
+                        ctx.t_stockrec.AddRange(stocklist);
+                        ctx.SaveChanges();
+                        MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", stocklist.Count));
+                        stocklist.Clear();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("" + ex);
+                return;
+
+                throw;
+            }
         }
 
         private void storeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -141,7 +168,6 @@ namespace GODInventoryWinForm.Controls
             {
                 if (item.ジャンル名 == comboBox3.Text)
                     id = item.idジャンル;
-
             }
             if (Strock_CompanyCode == null)
             {
@@ -153,6 +179,9 @@ namespace GODInventoryWinForm.Controls
                 Strock_CompanyCode = new Strock_CompanyCode(id);
             }
             Strock_CompanyCode.ShowDialog();
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.DataSource = t_itemlistR;
+         
         }
 
         void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
@@ -161,7 +190,10 @@ namespace GODInventoryWinForm.Controls
 
             if (sender is Strock_CompanyCode)
             {
-                order.自社コード = Strock_CompanyCode.STATUS;
+                t_itemlist o = new t_itemlist();
+
+                o = Strock_CompanyCode.item;
+                t_itemlistR.Add(o);
 
                 Strock_CompanyCode = null;
 
@@ -183,9 +215,9 @@ namespace GODInventoryWinForm.Controls
                 order.先 = storeComboBox.Text;
                 order.元 = this.comboBox2.Text;
                 order.納品書番号 = textBox4.Text;            
-                //
+           
                 //order.出庫事由 = comboBox2.Text;
-                //order.仓库 = storeComboBox.Text;
+                //order.仓库 = comboBox1.Text;
                 order.区分 = "出庫";
 
                 stocklist.Add(order);

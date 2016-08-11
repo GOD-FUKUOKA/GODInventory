@@ -31,6 +31,10 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.brbringStockCN = new System.Windows.Forms.Button();
+            this.btadd = new System.Windows.Forms.Button();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.btclearzero = new System.Windows.Forms.Button();
             this.btlogin = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -53,10 +57,6 @@
             this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.btadd = new System.Windows.Forms.Button();
-            this.brbringStockCN = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -116,6 +116,44 @@
             this.tabPage1.Size = new System.Drawing.Size(843, 284);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // brbringStockCN
+            // 
+            this.brbringStockCN.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.brbringStockCN.Location = new System.Drawing.Point(311, 225);
+            this.brbringStockCN.Name = "brbringStockCN";
+            this.brbringStockCN.Size = new System.Drawing.Size(107, 41);
+            this.brbringStockCN.TabIndex = 42;
+            this.brbringStockCN.Text = "Add";
+            this.brbringStockCN.UseVisualStyleBackColor = true;
+            this.brbringStockCN.Click += new System.EventHandler(this.brbringStockCN_Click);
+            // 
+            // btadd
+            // 
+            this.btadd.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btadd.Location = new System.Drawing.Point(684, 32);
+            this.btadd.Name = "btadd";
+            this.btadd.Size = new System.Drawing.Size(156, 32);
+            this.btadd.TabIndex = 41;
+            this.btadd.Text = "商品リストにつけ込み";
+            this.btadd.UseVisualStyleBackColor = true;
+            this.btadd.Click += new System.EventHandler(this.btadd_Click);
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(114, 29);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(192, 21);
+            this.comboBox3.TabIndex = 40;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(468, 28);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(192, 21);
+            this.comboBox2.TabIndex = 39;
             // 
             // btclearzero
             // 
@@ -282,7 +320,7 @@
             // 
             // 番号
             // 
-            this.番号.DataPropertyName = "番号";
+            this.番号.DataPropertyName = "JANコード";
             this.番号.HeaderText = "番号";
             this.番号.Name = "番号";
             // 
@@ -306,47 +344,9 @@
             // 
             // 数量
             // 
-            this.数量.DataPropertyName = "数量";
+            this.数量.DataPropertyName = "PT入数";
             this.数量.HeaderText = "数量";
             this.数量.Name = "数量";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(468, 28);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(192, 21);
-            this.comboBox2.TabIndex = 39;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(114, 29);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(192, 21);
-            this.comboBox3.TabIndex = 40;
-            // 
-            // btadd
-            // 
-            this.btadd.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btadd.Location = new System.Drawing.Point(684, 32);
-            this.btadd.Name = "btadd";
-            this.btadd.Size = new System.Drawing.Size(156, 32);
-            this.btadd.TabIndex = 41;
-            this.btadd.Text = "商品リストにつけ込み";
-            this.btadd.UseVisualStyleBackColor = true;
-            this.btadd.Click += new System.EventHandler(this.btadd_Click);
-            // 
-            // brbringStockCN
-            // 
-            this.brbringStockCN.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.brbringStockCN.Location = new System.Drawing.Point(311, 225);
-            this.brbringStockCN.Name = "brbringStockCN";
-            this.brbringStockCN.Size = new System.Drawing.Size(107, 41);
-            this.brbringStockCN.TabIndex = 42;
-            this.brbringStockCN.Text = "Add";
-            this.brbringStockCN.UseVisualStyleBackColor = true;
-            this.brbringStockCN.Click += new System.EventHandler(this.brbringStockCN_Click);
             // 
             // StockTransfer
             // 
@@ -387,14 +387,14 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btclearzero;
         private System.Windows.Forms.Button btlogin;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Button btadd;
+        private System.Windows.Forms.Button brbringStockCN;
         private System.Windows.Forms.DataGridViewTextBoxColumn 番号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;
         private System.Windows.Forms.DataGridViewTextBoxColumn 商品名;
         private System.Windows.Forms.DataGridViewTextBoxColumn 規格;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Button btadd;
-        private System.Windows.Forms.Button brbringStockCN;
     }
 }
