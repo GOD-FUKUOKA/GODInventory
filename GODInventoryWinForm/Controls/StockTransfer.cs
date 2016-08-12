@@ -22,13 +22,15 @@ namespace GODInventoryWinForm.Controls
         private Strock_CompanyCode Strock_CompanyCode;
         private t_stockrec order;
         private List<t_itemlist> t_itemlistR;
-
+        private t_itemlist itemlist;
+        private BindingList<t_itemlist> Titemlist;
         public StockTransfer()
         {
             InitializeComponent();
             List<int> newcodemanufa = new List<int>();
             stocklist = new BindingList<t_stockrec>();
             t_itemlistR = new List<t_itemlist>();
+            Titemlist = new BindingList<t_itemlist>();
 
             using (var ctx = new GODDbContext())
             {
@@ -38,9 +40,7 @@ namespace GODInventoryWinForm.Controls
             }
             foreach (t_manufacturers item in t_manufacturersR)
             {
-
                 this.comboBox2.Items.Add(item.FullName);
-
             }
             foreach (t_genre item in t_genreR)
             {
@@ -56,29 +56,94 @@ namespace GODInventoryWinForm.Controls
                 this.comboBox1.Items.Add(ll[j]);
             }
             this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.DataSource = t_itemlistR;
-         
+            this.dataGridView1.DataSource = Titemlist;
+
         }
 
         private void btlogin_Click(object sender, EventArgs e)
         {
             try
             {
-                if (stocklist.Count > 0)
+                foreach (t_itemlist item in Titemlist)
                 {
-                    using (var ctx = new GODDbContext())
-                    {
-                        ctx.t_stockrec.AddRange(stocklist);
-                        ctx.SaveChanges();
-                        MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", stocklist.Count));
-                        stocklist.Clear();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    stocklist = new BindingList<t_stockrec>();
 
+                    #region 取得信息
+                    if (this.storeComboBox.Text == "" || storeComboBox.Text == "")
+                    {
+                        MessageBox.Show("仓库", "誤っ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    order.日付 = orderCreatedAtDateTimePicker.Value;
+                    order.元 = storeComboBox.Text;
+                    order.先 = this.comboBox1.Text;
+                    order.納品書番号 = textBox4.Text;
+                    //order.出庫事由 = comboBox2.Text;
+                    //order.仓库 = comboBox1.Text;
+                    order.区分 = "出庫";
+                    order.数量 = Convert.ToInt32(item.PT入数);
+                    order.自社コード = Convert.ToInt32(item.自社コード);
+                    order.状態 = "確定";
+
+                    stocklist.Add(order);
+
+                    #endregion
+                    if (stocklist.Count > 0)
+                    {
+                        using (var ctx = new GODDbContext())
+                        {
+                            ctx.t_stockrec.AddRange(stocklist);
+                            ctx.SaveChanges();
+                            //MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", stocklist.Count));
+                            stocklist.Clear();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+
+                    }
+                    #region MyRegion
+
+                    stocklist = new BindingList<t_stockrec>();
+
+                    #region 取得信息
+                    if (this.comboBox2.Text == "" || comboBox2.Text == "")
+                    {
+                        MessageBox.Show("工場 ", "誤っ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    order.日付 = dateTimePicker1.Value;
+                    order.元 = storeComboBox.Text;
+                    order.先 = this.comboBox1.Text;
+                    order.納品書番号 = textBox3.Text;
+                    //order.出庫事由 = comboBox2.Text;
+                    //order.仓库 = comboBox1.Text;
+                    order.区分 = "入庫";
+                    order.自社コード = Convert.ToInt32(item.自社コード);
+                    order.数量 = Convert.ToInt32(item.PT入数);
+                    order.状態 = "確定";
+
+                    stocklist.Add(order);
+
+                    #endregion
+                    if (stocklist.Count > 0)
+                    {
+                        using (var ctx = new GODDbContext())
+                        {
+                            ctx.t_stockrec.AddRange(stocklist);
+                            ctx.SaveChanges();
+                            MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", stocklist.Count));
+                            stocklist.Clear();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    #endregion
                 }
             }
             catch (Exception ex)
@@ -178,10 +243,12 @@ namespace GODInventoryWinForm.Controls
             {
                 Strock_CompanyCode = new Strock_CompanyCode(id);
             }
+
+
             Strock_CompanyCode.ShowDialog();
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.DataSource = t_itemlistR;
-         
+
+            Titemlist.Add(itemlist);
+
         }
 
         void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
@@ -190,45 +257,17 @@ namespace GODInventoryWinForm.Controls
 
             if (sender is Strock_CompanyCode)
             {
-                t_itemlist o = new t_itemlist();
-
-                o = Strock_CompanyCode.item;
-                t_itemlistR.Add(o);
+                itemlist = new t_itemlist();
+                itemlist = Strock_CompanyCode.item;
 
                 Strock_CompanyCode = null;
-
-
             }
         }
 
-        private void brbringStockCN_Click(object sender, EventArgs e)
+
+        private void btclearzero_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (this.storeComboBox.Text == "" || storeComboBox.Text == "")
-                {
-                    MessageBox.Show("仓库", "誤っ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
 
-                order.日付 = orderCreatedAtDateTimePicker.Value;
-                order.先 = storeComboBox.Text;
-                order.元 = this.comboBox2.Text;
-                order.納品書番号 = textBox4.Text;            
-           
-                //order.出庫事由 = comboBox2.Text;
-                //order.仓库 = comboBox1.Text;
-                order.区分 = "出庫";
-
-                stocklist.Add(order);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ex" + ex
-                    + "商品リストにつけ込み 選択", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-                throw ex;
-            }
         }
 
     }

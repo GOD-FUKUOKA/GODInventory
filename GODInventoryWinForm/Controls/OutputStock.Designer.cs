@@ -41,25 +41,22 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btadd = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.btadd = new System.Windows.Forms.Button();
             this.brbringStockCN = new System.Windows.Forms.Button();
-            this.日付 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.区分 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.状態 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.元 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.先 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.納品書番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -207,34 +204,25 @@
             this.comboBox2.Size = new System.Drawing.Size(176, 21);
             this.comboBox2.TabIndex = 30;
             // 
-            // dataGridView1
+            // btadd
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.日付,
-            this.区分,
-            this.自社コード,
-            this.数量,
-            this.状態,
-            this.元,
-            this.先,
-            this.納品書番号});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 160);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(931, 268);
-            this.dataGridView1.TabIndex = 15;
+            this.btadd.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btadd.Location = new System.Drawing.Point(772, 69);
+            this.btadd.Name = "btadd";
+            this.btadd.Size = new System.Drawing.Size(156, 32);
+            this.btadd.TabIndex = 32;
+            this.btadd.Text = "商品リストにつけ込み";
+            this.btadd.UseVisualStyleBackColor = true;
+            this.btadd.Click += new System.EventHandler(this.btadd_Click_1);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.brbringStockCN, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -275,7 +263,7 @@
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.10596F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.89404F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 138F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 139F));
             this.tableLayoutPanel3.Controls.Add(this.submitButton, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.cancelButton, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -303,24 +291,13 @@
             // 
             this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(824, 7);
+            this.cancelButton.Location = new System.Drawing.Point(823, 7);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 35);
             this.cancelButton.TabIndex = 2;
             this.cancelButton.Text = "清零";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // btadd
-            // 
-            this.btadd.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btadd.Location = new System.Drawing.Point(772, 69);
-            this.btadd.Name = "btadd";
-            this.btadd.Size = new System.Drawing.Size(156, 32);
-            this.btadd.TabIndex = 32;
-            this.btadd.Text = "商品リストにつけ込み";
-            this.btadd.UseVisualStyleBackColor = true;
-            this.btadd.Click += new System.EventHandler(this.btadd_Click_1);
             // 
             // brbringStockCN
             // 
@@ -333,17 +310,26 @@
             this.brbringStockCN.UseVisualStyleBackColor = true;
             this.brbringStockCN.Click += new System.EventHandler(this.brbringStockCN_Click);
             // 
-            // 日付
+            // dataGridView1
             // 
-            this.日付.DataPropertyName = "日付";
-            this.日付.HeaderText = "日付";
-            this.日付.Name = "日付";
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.番号,
+            this.自社コード,
+            this.商品名,
+            this.規格,
+            this.数量});
+            this.dataGridView1.Location = new System.Drawing.Point(3, 160);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(931, 268);
+            this.dataGridView1.TabIndex = 18;
             // 
-            // 区分
+            // 番号
             // 
-            this.区分.DataPropertyName = "区分";
-            this.区分.HeaderText = "区分";
-            this.区分.Name = "区分";
+            this.番号.DataPropertyName = "JANコード";
+            this.番号.HeaderText = "番号";
+            this.番号.Name = "番号";
             // 
             // 自社コード
             // 
@@ -351,35 +337,23 @@
             this.自社コード.HeaderText = "自社コード";
             this.自社コード.Name = "自社コード";
             // 
+            // 商品名
+            // 
+            this.商品名.DataPropertyName = "商品名";
+            this.商品名.HeaderText = "商品名";
+            this.商品名.Name = "商品名";
+            // 
+            // 規格
+            // 
+            this.規格.DataPropertyName = "規格";
+            this.規格.HeaderText = "規格";
+            this.規格.Name = "規格";
+            // 
             // 数量
             // 
-            this.数量.DataPropertyName = "数量";
+            this.数量.DataPropertyName = "PT入数";
             this.数量.HeaderText = "数量";
             this.数量.Name = "数量";
-            // 
-            // 状態
-            // 
-            this.状態.DataPropertyName = "状態";
-            this.状態.HeaderText = "状態";
-            this.状態.Name = "状態";
-            // 
-            // 元
-            // 
-            this.元.DataPropertyName = "元";
-            this.元.HeaderText = "元";
-            this.元.Name = "元";
-            // 
-            // 先
-            // 
-            this.先.DataPropertyName = "先";
-            this.先.HeaderText = "先";
-            this.先.Name = "先";
-            // 
-            // 納品書番号
-            // 
-            this.納品書番号.DataPropertyName = "納品書番号";
-            this.納品書番号.HeaderText = "納品書番号";
-            this.納品書番号.Name = "納品書番号";
             // 
             // OutputStock
             // 
@@ -391,9 +365,9 @@
             this.Text = "OutputStock";
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -413,20 +387,17 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button btadd;
         private System.Windows.Forms.Button brbringStockCN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 日付;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 区分;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 番号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 商品名;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 規格;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 状態;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 元;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 先;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 納品書番号;
     }
 }

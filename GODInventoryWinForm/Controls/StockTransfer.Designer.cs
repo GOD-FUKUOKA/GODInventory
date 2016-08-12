@@ -31,7 +31,6 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.brbringStockCN = new System.Windows.Forms.Button();
             this.btadd = new System.Windows.Forms.Button();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -90,7 +89,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.brbringStockCN);
             this.tabPage1.Controls.Add(this.btadd);
             this.tabPage1.Controls.Add(this.comboBox3);
             this.tabPage1.Controls.Add(this.comboBox2);
@@ -116,17 +114,6 @@
             this.tabPage1.Size = new System.Drawing.Size(843, 284);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // brbringStockCN
-            // 
-            this.brbringStockCN.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.brbringStockCN.Location = new System.Drawing.Point(311, 225);
-            this.brbringStockCN.Name = "brbringStockCN";
-            this.brbringStockCN.Size = new System.Drawing.Size(107, 41);
-            this.brbringStockCN.TabIndex = 42;
-            this.brbringStockCN.Text = "Add";
-            this.brbringStockCN.UseVisualStyleBackColor = true;
-            this.brbringStockCN.Click += new System.EventHandler(this.brbringStockCN_Click);
             // 
             // btadd
             // 
@@ -163,6 +150,7 @@
             this.btclearzero.TabIndex = 38;
             this.btclearzero.Text = "清零";
             this.btclearzero.UseVisualStyleBackColor = true;
+            this.btclearzero.Click += new System.EventHandler(this.btclearzero_Click);
             // 
             // btlogin
             // 
@@ -390,7 +378,6 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Button btadd;
-        private System.Windows.Forms.Button brbringStockCN;
         private System.Windows.Forms.DataGridViewTextBoxColumn 番号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;
         private System.Windows.Forms.DataGridViewTextBoxColumn 商品名;
