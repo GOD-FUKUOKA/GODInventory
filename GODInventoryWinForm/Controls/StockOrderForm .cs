@@ -16,6 +16,8 @@ namespace GODInventoryWinForm.Controls
         private InputStock InputStock;
         private OutputStock OutputStock;
         private StockTransfer StockTransfer;
+        private Strock_Check Strock_Check;
+
 
         private Search_Strock Search_Strock;
 
@@ -41,6 +43,10 @@ namespace GODInventoryWinForm.Controls
             if (sender is Search_Strock)
             {
                 Search_Strock = null;
+            }
+            if (sender is Strock_Check)
+            {
+                Strock_Check = null;
             }
 
             
@@ -98,15 +104,15 @@ namespace GODInventoryWinForm.Controls
                 StockTransfer = new StockTransfer();
             }
             StockTransfer.ShowDialog();
-              
 
-            
+
+
             #endregion
         }
 
         private void btSearchtrock_Click(object sender, EventArgs e)
-        {    
-            
+        {
+
             #region MyRegion
             if (Search_Strock == null)
             {
@@ -120,6 +126,28 @@ namespace GODInventoryWinForm.Controls
             Search_Strock.ShowDialog();
 
             #endregion
+
+        }
+
+        private void bt库存清点界面_Click(object sender, EventArgs e)
+        {
+
+
+            #region MyRegion
+            if (Strock_Check == null)
+            {
+                Strock_Check = new Strock_Check();
+                Strock_Check.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
+            }
+            if (Strock_Check == null)
+            {
+                Strock_Check = new Strock_Check();
+            }
+            Strock_Check.ShowDialog();
+
+            #endregion
+
+
 
         }
 

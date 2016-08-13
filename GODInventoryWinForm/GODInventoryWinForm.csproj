@@ -125,6 +125,12 @@
     <Compile Include="Controls\StockTransfer.Designer.cs">
       <DependentUpon>StockTransfer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Strock_Check.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Strock_Check.Designer.cs">
+      <DependentUpon>Strock_Check.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Strock_CompanyCode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -302,6 +308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockTransfer.resx">
       <DependentUpon>StockTransfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Strock_Check.resx">
+      <DependentUpon>Strock_Check.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Strock_CompanyCode.resx">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>

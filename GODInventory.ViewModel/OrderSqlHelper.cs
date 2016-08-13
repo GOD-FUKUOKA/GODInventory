@@ -415,5 +415,40 @@ namespace GODInventory.ViewModel
             return q;
         }
 
+        public static List<t_itemlist> ASNstockrecDataListByMid(EntityDataSource entityDataSource1, long mid)
+        {
+
+            //var orders = (from t_itemlist o in entityDataSource1.EntitySets["t_orderdata"]
+            //              join t_shoplist s in entityDataSource1.EntitySets["t_shoplist"] on o.店舗コード equals s.店番
+            //              where o.ASN管理連番 == mid
+            //              select new v_pendingorder
+            //              {
+            //                  ASN管理連番 = o.ASN管理連番,
+            //                  出荷No = o.出荷No,
+            //                  店舗コード = o.店舗コード,
+            //                  伝票番号 = o.伝票番号,
+            //                  納品場所名カナ = o.納品場所名カナ,
+            //                  納品場所名漢字 = o.納品場所名漢字,
+            //                  出荷業務仕入先コード = o.出荷業務仕入先コード,
+            //                  発注形態区分 = o.発注形態区分,
+            //                  納品日 = o.納品日,
+            //                  ＪＡＮコード = o.ＪＡＮコード,
+            //                  商品コード = o.商品コード,
+            //                  品名漢字 = o.品名漢字,
+            //                  規格名漢字 = o.規格名漢字,
+            //                  実際出荷数量 = o.実際出荷数量,
+            //                  原単価_税抜_ = o.原単価_税抜_,
+            //                  口数 = o.口数,
+            //                  店舗名漢字 = o.店舗名漢字,
+            //                  直送区分 = "通常",
+            //                  店名 = s.店名,
+            //                  住所 = s.住所,
+            //                  電話番号 = s.電話番号
+            //              }).ToList();
+           return null;
+        }
+
+
+
     }
 }
