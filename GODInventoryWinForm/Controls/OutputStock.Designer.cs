@@ -263,7 +263,7 @@
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.10596F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.89404F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 139F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanel3.Controls.Add(this.submitButton, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.cancelButton, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -279,7 +279,7 @@
             this.submitButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.submitButton.BackColor = System.Drawing.SystemColors.Control;
             this.submitButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.submitButton.Location = new System.Drawing.Point(691, 7);
+            this.submitButton.Location = new System.Drawing.Point(690, 7);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(75, 35);
             this.submitButton.TabIndex = 1;
@@ -362,6 +362,7 @@
             this.ClientSize = new System.Drawing.Size(937, 486);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "OutputStock";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OutputStock";
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
