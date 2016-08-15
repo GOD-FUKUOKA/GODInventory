@@ -46,7 +46,6 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.brbringStockCN = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -221,7 +220,6 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.brbringStockCN, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -263,7 +261,7 @@
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.10596F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.89404F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141F));
             this.tableLayoutPanel3.Controls.Add(this.submitButton, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.cancelButton, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -279,7 +277,7 @@
             this.submitButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.submitButton.BackColor = System.Drawing.SystemColors.Control;
             this.submitButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.submitButton.Location = new System.Drawing.Point(690, 7);
+            this.submitButton.Location = new System.Drawing.Point(689, 7);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(75, 35);
             this.submitButton.TabIndex = 1;
@@ -291,24 +289,13 @@
             // 
             this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(823, 7);
+            this.cancelButton.Location = new System.Drawing.Point(822, 7);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 35);
             this.cancelButton.TabIndex = 2;
             this.cancelButton.Text = "清零";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // brbringStockCN
-            // 
-            this.brbringStockCN.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.brbringStockCN.Location = new System.Drawing.Point(827, 113);
-            this.brbringStockCN.Name = "brbringStockCN";
-            this.brbringStockCN.Size = new System.Drawing.Size(107, 41);
-            this.brbringStockCN.TabIndex = 17;
-            this.brbringStockCN.Text = "Add";
-            this.brbringStockCN.UseVisualStyleBackColor = true;
-            this.brbringStockCN.Click += new System.EventHandler(this.brbringStockCN_Click);
             // 
             // dataGridView1
             // 
@@ -393,7 +380,6 @@
         private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button btadd;
-        private System.Windows.Forms.Button brbringStockCN;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 番号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;

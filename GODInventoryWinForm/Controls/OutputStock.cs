@@ -180,22 +180,7 @@ namespace GODInventoryWinForm.Controls
 
             }
         }
-        private void brbringStockCN_Click(object sender, EventArgs e)
-        {
-            {
-                try
-                {
-                 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ex" + ex
-                        + "商品リストにつけ込み 選択", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                    throw ex;
-                }
-            }
-        }
+      
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
