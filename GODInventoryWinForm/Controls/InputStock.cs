@@ -91,8 +91,6 @@ namespace GODInventoryWinForm.Controls
                     order.状態 = "確定";
 
                     stocklist.Add(order);
-
-
                     if (stocklist.Count > 0)
                     {
                         using (var ctx = new GODDbContext())
@@ -107,7 +105,6 @@ namespace GODInventoryWinForm.Controls
                     {
                         MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
-
                     }
                 }
             }

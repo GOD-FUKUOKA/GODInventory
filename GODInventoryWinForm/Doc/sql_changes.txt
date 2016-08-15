@@ -82,3 +82,8 @@ CREATE TABLE `t_locations` (
 
 ALTER TABLE `god_inventory`.`t_orderdata` 
 CHANGE COLUMN `店舗コード` `店舗コード` INT(4) NOT NULL DEFAULT 0;
+
+
+--t_stockrec new Add two cloumn
+仓库  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL,
+出庫事由  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL,

@@ -261,8 +261,7 @@ namespace GODInventory.ViewModel
                      select o);
             return entityDataSource1.CreateView(q); ;
         }
-
-
+ 
         public static int ShippedOrderCount(EntityDataSource entityDataSource1) {
             int  count = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
                      where o.出荷日 != null && !o.受領確認
@@ -415,7 +414,7 @@ namespace GODInventory.ViewModel
             return q;
         }
 
-        public static List<t_itemlist> ASNstockrecDataListByMid(EntityDataSource entityDataSource1, long mid)
+        public static List<t_itemlist> ASNstockrecDataListByMid(EntityDataSource entityDataSource1, short? mid)
         {
 
             //var orders = (from t_itemlist o in entityDataSource1.EntitySets["t_orderdata"]
@@ -424,7 +423,7 @@ namespace GODInventory.ViewModel
             //              select new v_pendingorder
             //              {
             //                  ASN管理連番 = o.ASN管理連番,
-            //                  出荷No = o.出荷No,
+            //                  出荷No = o.出荷No,  
             //                  店舗コード = o.店舗コード,
             //                  伝票番号 = o.伝票番号,
             //                  納品場所名カナ = o.納品場所名カナ,

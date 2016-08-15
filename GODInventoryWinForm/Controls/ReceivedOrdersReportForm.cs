@@ -18,6 +18,7 @@ namespace GODInventoryWinForm.Controls
     public partial class ReceivedOrdersReportForm : Form
     {
         public List<v_pendingorder> OrderEnities{ get; set;}
+        public List<t_itemlist> ItemEnities { get; set; }
 
         public ReceivedOrdersReportForm()
         {
@@ -45,6 +46,22 @@ namespace GODInventoryWinForm.Controls
             }
 
         }
+        public void InitializeItemEnitiesDataSource()
+        {
+            if (ItemEnities != null)
+            {
+                this.reportViewer1.LocalReport.DataSources.Clear();
+
+                using (var ctx = new GODDbContext())
+                {
+                    var orders = ItemEnities.GroupBy(x => x.ジャンル).Select(y => y.First());
+
+                    this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", orders));
+                }
+            }
+
+        }
+
 
         void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
         {
