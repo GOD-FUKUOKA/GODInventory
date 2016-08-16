@@ -6,8 +6,8 @@ namespace GODInventory.MyLinq
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    //[Table("t_shippers")]
-    public partial class t_shippers
+    //[Table("t_warehouses")]
+    public partial class t_warehouses
     {
         [Key]
         public int Id { get; set; }

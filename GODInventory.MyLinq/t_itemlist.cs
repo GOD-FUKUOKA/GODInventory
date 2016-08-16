@@ -16,7 +16,7 @@ namespace GODInventory.MyLinq
         [StringLength(255)]
         public string 得意先 { get; set; }
 
-        public short? ジャンル { get; set; }
+        public short ジャンル { get; set; }
 
         [StringLength(255)]
         public string 商品名 { get; set; }

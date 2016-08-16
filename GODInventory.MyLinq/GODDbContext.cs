@@ -24,12 +24,9 @@
         public virtual DbSet<t_stockstate> t_stockstate { get; set; }
         public virtual DbSet<t_edidata> t_edidata { get; set; }
         public virtual DbSet<t_locations> t_locations { get; set; }
-        //<<<<<<< HEAD
-        //public virtual DbSet<t_stocklist> t_stocklist { get; set; }
-        //=======
-        public virtual DbSet<t_shippers> t_shippers { get; set; }
+
+        public virtual DbSet<t_warehouses> t_warehouses { get; set; }
         public virtual DbSet<t_manufacturers> t_manufacturers { get; set; }
-        //>>>>>>> origin/master
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -378,7 +375,7 @@
                 .IsUnicode(false);
 
             modelBuilder.Entity<t_stockrec>()
-                 .Property(e => e.仓库)
+                 .Property(e => e.客户)
                   .IsUnicode(false);
 
             modelBuilder.Entity<t_stockrec>()

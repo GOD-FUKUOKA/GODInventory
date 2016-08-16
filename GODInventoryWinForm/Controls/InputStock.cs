@@ -14,121 +14,111 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class InputStock : Form
     {
-        private List<t_manufacturers> t_manufacturersR;
-        private List<t_shippers> t_shippersR;
-        private List<t_stockrec> t_stocklistR;
-        private BindingList<t_stockrec> stocklist;
-        private List<t_genre> t_genreR;
-        private Strock_CompanyCode Strock_CompanyCode;
-        private t_stockrec order;
-        private t_itemlist itemlist;
-        private BindingList<t_itemlist> Titemlist;
+        private List<MockEntity> manufacturerList;
+        private BindingList<v_stockios> stockiosList;
+        private List<t_genre> genreList;
+        private List<t_warehouses> warehouseList;
+
+
         public InputStock()
         {
             InitializeComponent();
             List<int> newcodemanufa = new List<int>();
-            stocklist = new BindingList<t_stockrec>();
-            Titemlist = new BindingList<t_itemlist>();
-
-            using (var ctx = new GODDbContext())
-            {
-                t_manufacturersR = ctx.t_manufacturers.ToList();
-                t_shippersR = ctx.t_shippers.ToList();
-                t_genreR = ctx.t_genre.ToList();
-            }
-            foreach (t_manufacturers item in t_manufacturersR)
-            {
-                this.comboBox2.Items.Add(item.Id);
-                this.comboBox3.Items.Add(item.FullName);
-
-            }
-            foreach (t_genre item in t_genreR)
-            {
-                this.comboBox1.Items.Add(item.ジャンル名);
-            }
-            //foreach (t_shippers item in t_shippersR)
-            {
-                OrderSqlHelper item12 = new OrderSqlHelper();
-
-                string[] ll = item12.StrockReback();
-                for (int j = 0; j < ll.Length; j++)
-                {
-                    // this.storeComboBox.Items.Add(item.ShortName);
-                    this.storeComboBox.Items.Add(ll[j]);
-
-                }
-            }
-
-
+            stockiosList = new BindingList<v_stockios>();
+            
+         
             this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.DataSource = Titemlist;
+
+            this.dataGridView1.DataSource = stockiosList;
+
+            InitializeDataSource();
         }
 
+        private void InitializeDataSource() {
+
+            using (var ctx = new GODDbContext())
+            {                
+                genreList = ctx.t_genre.ToList();
+                warehouseList = ctx.t_warehouses.ToList();
+            }
+            this.genreComboBox.DisplayMember = "ジャンル名";
+            this.genreComboBox.ValueMember = "idジャンル";
+            this.genreComboBox.DataSource = genreList;
+
+
+            this.manufacturerList = ManufactureRespository.ToList();
+            this.manufacturerComboBox.DisplayMember = "FullName";
+            this.manufacturerComboBox.ValueMember = "Id"; 
+            this.manufacturerComboBox.DataSource = manufacturerList;
+
+
+            this.warehouseComboBox.DisplayMember = "FullName";
+            this.warehouseComboBox.ValueMember = "Id"; 
+            this.warehouseComboBox.DataSource = warehouseList;
+
+            this.stockStatusComboBox.SelectedIndex = 0;
+            this.clientComboBox.SelectedIndex = 0;
+            //BuildStockNO();
+        }
      
         private void submitButton_Click(object sender, EventArgs e)
         {
             try
             {
-                foreach (t_itemlist item in Titemlist)
+                List<t_stockrec> receivedList = new List<t_stockrec>();
+                foreach (var item in stockiosList)
                 {
-                    if (this.storeComboBox.Text == "" || storeComboBox.Text == "")
-                    {
-                        MessageBox.Show("仓库", "誤っ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                    if (item.qty > 0) {
+                        var order = new t_stockrec();
+
+                        order.日付 = orderCreatedAtDateTimePicker.Value;
+                        order.先 = manufacturerComboBox.Text;
+
+                        order.元 = this.warehouseComboBox.Text;
+                        order.納品書番号 = stockNOTextBox.Text;
+
+                        order.数量 = item.qty;
+                        order.区分 = "入庫";
+                        order.出庫事由 = this.remarkTextBox1.Text;
+                        //order.仓库 = storeComboBox.Text;
+                        order.自社コード = Convert.ToInt32(item.自社コード);
+                        order.状態 = this.stockStatusComboBox.Text;
+                        receivedList.Add(order);
+
                     }
 
-                    order.日付 = orderCreatedAtDateTimePicker.Value;
-                    order.先 = storeComboBox.Text;
 
-                    order.元 = this.comboBox3.Text;
-                    order.納品書番号 = textBox4.Text;
-
-                    order.数量 = Convert.ToInt32(this.numericUpDown1.Text);
-                    order.区分 = "入庫";
-                    //order.出庫事由 = comboBox2.Text;
-                    //order.仓库 = storeComboBox.Text;
-                    order.自社コード = Convert.ToInt32(item.自社コード);
-                    order.状態 = "確定";
-
-                    stocklist.Add(order);
-                    if (stocklist.Count > 0)
+                }
+                if (receivedList.Count > 0)
+                {
+                    using (var ctx = new GODDbContext())
                     {
-                        using (var ctx = new GODDbContext())
-                        {
-                            ctx.t_stockrec.AddRange(stocklist);
-                            ctx.SaveChanges();
-                            MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", stocklist.Count));
-                            stocklist.Clear();
-                        }
+                        ctx.t_stockrec.AddRange(receivedList);
+                        ctx.SaveChanges();
+                        MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", receivedList.Count));
+                        this.stockiosList.Clear();
                     }
-                    else
-                    {
-                        MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
+                    // rebuild stock no, new stockrec created.
+                    BuildStockNO();
+                }
+                else
+                {
+                    MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("" + ex);
                 return;
-
-                throw;
             }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int count = 0;
-            using (var ctx = new GODDbContext())
-            {
-                var results = from s in ctx.t_stockrec
-                              where s.日付 == DateTime.Now
-                              select s;
-                count = results.Count();
-            }
-            var shops = this.t_genreR.Where(s => s.ジャンル名.ToString().StartsWith(comboBox1.Text.ToString())).ToList();
-            this.textBox4.Text = this.storeComboBox.Text + "-" + DateTime.Now.ToString("yyyymmdd") + "-" + shops.First().idジャンル.ToString() + "-" + count + 1;
+           
+            BuildStockNO();
+           
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -136,46 +126,76 @@ namespace GODInventoryWinForm.Controls
             this.Close();
         }
 
-        private void btbringupcompanycode_Click(object sender, EventArgs e)
-        {
 
-            int id = 0;
 
-            foreach (t_genre item in t_genreR)
+        private void BuildStockNO() {
+            var genre_id = GetGenreId();
+            if (genre_id > 0)
             {
-                if (item.ジャンル名 == comboBox1.Text)
-                    id = item.idジャンル;
 
+
+                int count = 0;
+                var selected_date = this.orderCreatedAtDateTimePicker.Value;
+
+                using (var ctx = new GODDbContext())
+                {
+                    var results = from s in ctx.t_stockrec
+                                  where s.日付 == selected_date.Date
+                                  select s;
+                    count = results.Count();
+                }
+                
+                var stock_no = String.Format("GOD-{0:yyyyMMdd}-{1:D2}-{2:D2}", selected_date, genre_id, count + 1);
+                this.stockNOTextBox.Text = stock_no;
             }
-            if (Strock_CompanyCode == null)
-            {
-                Strock_CompanyCode = new Strock_CompanyCode(id);
-                Strock_CompanyCode.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
+            else {
+                this.stockNOTextBox.Text = "";
             }
-            if (Strock_CompanyCode == null)
-            {
-                Strock_CompanyCode = new Strock_CompanyCode(id);
-            }
-            Strock_CompanyCode.ShowDialog();
-            Titemlist.Add(itemlist);
-
-
-
         }
-        void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
+
+        private void orderCreatedAtDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            order = new t_stockrec();
+            BuildStockNO();
+        }
 
-            if (sender is Strock_CompanyCode)
+        private void loadItemListButton_Click(object sender, EventArgs e)
+        {
+            stockiosList.Clear();
+            var genre_id = GetGenreId();
+            if (genre_id > 0)
             {
-                order.自社コード = Strock_CompanyCode.STATUS;
-                //int lll = Strock_CompanyCode.STATUS;
-                itemlist = new t_itemlist();
-                itemlist = Strock_CompanyCode.item;
-                Strock_CompanyCode = null;
-
-
+                using (var ctx = new GODDbContext())
+                {
+                    var results = (from s in ctx.t_itemlist
+                                   where s.ジャンル == (short)genre_id
+                                   select new v_stockios { 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
+                    for (int i = 0;i< results.Count; i++) { 
+                       results[i].Id = i+1;                       
+                       stockiosList.Add(results[i]);
+                    }
+                }
             }
+        }
+
+
+        private int GetGenreId(){
+            
+           return ((this.genreComboBox.SelectedIndex >= 0) ? (int)this.genreComboBox.SelectedValue : 0 );
+        }
+
+        private void cancelButton_Click_1(object sender, EventArgs e)
+        {
+            foreach (var item in stockiosList)
+            {
+                item.qty = 0;
+            }
+            this.dataGridView1.Refresh();
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            this.stockiosList[e.RowIndex].qty = (int)cell.Value;
         }
     }
 }

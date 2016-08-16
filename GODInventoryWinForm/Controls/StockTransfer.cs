@@ -15,7 +15,7 @@ namespace GODInventoryWinForm.Controls
     public partial class StockTransfer : Form
     {
         private List<t_manufacturers> t_manufacturersR;
-        private List<t_shippers> t_shippersR;
+        private List<t_warehouses> warehouseList;
         private List<t_stockrec> t_stocklistR;
         private BindingList<t_stockrec> stocklist;
         private List<t_genre> t_genreR;
@@ -35,7 +35,7 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {
                 t_manufacturersR = ctx.t_manufacturers.ToList();
-                t_shippersR = ctx.t_shippers.ToList();
+                warehouseList = ctx.t_warehouses.ToList();
                 t_genreR = ctx.t_genre.ToList();
             }
             foreach (t_manufacturers item in t_manufacturersR)

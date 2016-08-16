@@ -18,7 +18,7 @@ namespace GODInventoryWinForm.Controls
         private BindingList<t_stockrec> stocklist;
         private Hashtable datagrid_changes = null;
         private List<t_manufacturers> t_manufacturersR;
-        private List<t_shippers> t_shippersR;
+        private List<t_warehouses> t_shippersR;
         private List<t_stockrec> t_stocklistR;
         private List<t_genre> t_genreR;
         private Strock_CompanyCode Strock_CompanyCode;
@@ -33,7 +33,7 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {
                 t_manufacturersR = ctx.t_manufacturers.ToList();
-                t_shippersR = ctx.t_shippers.ToList();
+               
                 t_genreR = ctx.t_genre.ToList();
                 //   t_stocklistR = ctx.t_stockrec.ToList();
             }

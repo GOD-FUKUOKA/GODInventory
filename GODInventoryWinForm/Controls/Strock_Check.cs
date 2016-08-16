@@ -15,7 +15,7 @@ namespace GODInventoryWinForm.Controls
     public partial class Strock_Check : Form
     {
         private List<t_manufacturers> t_manufacturersR;
-        private List<t_shippers> t_shippersR;
+        private List<t_warehouses> warehouseList;
         private List<t_stockrec> t_stocklistR;
         private List<t_stockstate> t_stockstateR;
         private BindingList<t_stockrec> stocklist;
@@ -45,7 +45,7 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {
                 t_manufacturersR = ctx.t_manufacturers.ToList();
-                t_shippersR = ctx.t_shippers.ToList();
+                warehouseList = ctx.t_warehouses.ToList();
                 t_genreR = ctx.t_genre.ToList();
                 t_stocklistR = ctx.t_stockrec.ToList();
                 t_stockstateR = ctx.t_stockstate.ToList();

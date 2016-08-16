@@ -56,7 +56,7 @@ ALTER TABLE `god_inventory`.`t_orderdata`
 ADD INDEX `t_orderdata_combo` (`Status` ASC, `実際配送担当` ASC, `県別` ASC, `店舗コード` ASC, `ＪＡＮコード` ASC, `受注日` ASC, `伝票番号` ASC);
 
 -- -----------------------------------------------------------------
-CREATE TABLE `god_inventory`.`t_shippers` (
+CREATE TABLE `god_inventory`.`t_warehouses` (
   `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ShortName` VARCHAR(45) CHARACTER SET 'utf8' NULL DEFAULT NULL,
   `FullName` VARCHAR(45) CHARACTER SET 'utf8' NULL DEFAULT NULL,
@@ -84,6 +84,7 @@ ALTER TABLE `god_inventory`.`t_orderdata`
 CHANGE COLUMN `店舗コード` `店舗コード` INT(4) NOT NULL DEFAULT 0;
 
 
---t_stockrec new Add two cloumn
-仓库  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL,
-出庫事由  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL,
+-- t_stockrec new Add two cloumn
+ALTER TABLE `god_inventory`.`t_stockrec` 
+ADD COLUMN `客户`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL,
+ADD COLUMN `出庫事由`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL;

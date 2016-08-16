@@ -59,10 +59,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="v_stockios.cs" />
+    <Compile Include="WarehouseRespository.cs" />
+    <Compile Include="ManufacturerRespository.cs" />
+    <Compile Include="MockEntity.cs" />
     <Compile Include="OrderReasonEnum.cs" />
     <Compile Include="OrderStatus.cs" />
     <Compile Include="t_manufacturers.cs" />
-    <Compile Include="t_shippers.cs" />
+    <Compile Include="t_warehouses.cs" />
     <Compile Include="EFIntercepterLogging.cs" />
     <Compile Include="GODDbContext.cs" />
     <Compile Include="v_strockcheck.cs" />
