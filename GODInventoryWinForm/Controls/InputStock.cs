@@ -23,10 +23,9 @@ namespace GODInventoryWinForm.Controls
         public InputStock()
         {
             InitializeComponent();
-            List<int> newcodemanufa = new List<int>();
+
             stockiosList = new BindingList<v_stockios>();
-            
-         
+                     
             this.dataGridView1.AutoGenerateColumns = false;
 
             this.dataGridView1.DataSource = stockiosList;
@@ -95,9 +94,9 @@ namespace GODInventoryWinForm.Controls
                     {
                         ctx.t_stockrec.AddRange(receivedList);
                         ctx.SaveChanges();
-                        MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", receivedList.Count));
                         this.stockiosList.Clear();
                     }
+                    MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", receivedList.Count));
                     // rebuild stock no, new stockrec created.
                     BuildStockNO();
                 }

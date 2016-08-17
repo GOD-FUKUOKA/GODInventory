@@ -13,7 +13,7 @@ namespace GODInventoryWinForm.Controls
     {
         private InputStock InputStock;
         private OutputStock OutputStock;
-        private StockTransfer StockTransfer;
+        private StockMovement StockTransfer;
         private Strock_Check Strock_Check;
 
 
@@ -61,7 +61,7 @@ namespace GODInventoryWinForm.Controls
             {
                 OutputStock = null;
             }
-            if (sender is StockTransfer)
+            if (sender is StockMovement)
             {
                 StockTransfer = null;
             }
@@ -118,12 +118,12 @@ namespace GODInventoryWinForm.Controls
             #region MyRegion
             if (StockTransfer == null)
             {
-                StockTransfer = new StockTransfer();
+                StockTransfer = new StockMovement();
                 StockTransfer.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
             }
             if (StockTransfer == null)
             {
-                StockTransfer = new StockTransfer();
+                StockTransfer = new StockMovement();
             }
             StockTransfer.ShowDialog();
 
