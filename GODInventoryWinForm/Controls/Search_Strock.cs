@@ -31,6 +31,9 @@ namespace GODInventoryWinForm.Controls
             InitializeComponent();
             var ctx1 = entityDataSource1.DbContext as GODDbContext;
             this.t_stocklistR = ctx1.t_stockrec.Select(s => s).ToList();
+            //this.t_stocklistR  =( from v in ctx1.t_stockrec. Select (s => s)).Distinct();
+
+            var value = (from v in ctx1.t_stockrec select v.自社コード).Distinct().ToList();
 
             using (var ctx = new GODDbContext())
             {
@@ -40,7 +43,7 @@ namespace GODInventoryWinForm.Controls
                 //   t_stocklistR = ctx.t_stockrec.ToList();
             }
             this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.DataSource = t_stocklistR;
+            this.dataGridView1.DataSource = value;
 
             OrderSqlHelper item12 = new OrderSqlHelper();
 
@@ -63,9 +66,9 @@ namespace GODInventoryWinForm.Controls
                 this.comboBox4.Items.Add(item.FullName);
             }
 
-            InitializePager();
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.DataSource = t_stocklistR;
+            //   InitializePager();
+            //this.dataGridView2.AllowUserToAddRows = false;
+            //this.dataGridView2.DataSource = t_stocklistR;
 
             list = new List<DateTime>();
             納品書番号list = new List<string>();
@@ -103,21 +106,35 @@ namespace GODInventoryWinForm.Controls
         #endregion
         private void btFind_Click(object sender, EventArgs e)
         {
-            ApplyFilter();
+            //ApplyFilter();
 
-            ApplyFilter2();
+            //ApplyFilter2();
+            //筛选出一个自社コード  ，一个日期，納品書番号  下的所有数量
 
-            t_stockrec item = new t_stockrec();
+            D2_t_stocklistR = new List<t_stockrec>();
+            list = new List<DateTime>();
 
-            for (int i = 0; i < dataGridView1.RowCount; i++)
+            //for (int ii = 0; ii < 納品書番号list.Count; ii++)
             {
-                string 自社コード = dataGridView1.Rows[i].Cells["自社コード"].EditedFormattedValue.ToString();
-                var locations = this.t_stocklistR.Where(l => l.自社コード == Convert.ToInt32(自社コード)).ToList();
-                for (int ii = 0; ii < list.Count; ii++)
+                for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
+
+                    string 自社コード = dataGridView1.Rows[i].Cells["自社コード"].EditedFormattedValue.ToString();
+                    var locations = this.t_stocklistR.Where(l => l.自社コード == Convert.ToInt32(自社コード)).ToList();
+
+                    t_stockrec item = new t_stockrec();
+
                     foreach (var emp in locations)
                     {
-                        if (emp.日付 == list[ii])
+                        int dou = 0;
+                        //将日期归类
+
+                        for (int iindex = 0; iindex < list.Count; iindex++)
+                            if (item.日付 == list[iindex])
+                                dou++;
+                        if (dou == 0)
+                            list.Add(item.日付);
+                        //if (emp.納品書番号 == 納品書番号list[ii])
                         {
                             item.自社コード = emp.自社コード;
                             item.数量 = item.数量 + emp.数量;
@@ -126,17 +143,111 @@ namespace GODInventoryWinForm.Controls
                             item.区分 = emp.区分;
                         }
                     }
-                    D2_t_stocklistR.Add(item);
-
+                    if (item.自社コード != null && item.自社コード != 0)
+                        D2_t_stocklistR.Add(item);
                 }
 
                 //dataGridView2.Rows[i].Cells[16].Value = item.日付;
                 //dataGridView2.Rows[i].Cells[16].Value = item.日付;
-                //dataGridView2.Rows[i].Cells[16].Value = item.日付;
             }
-            this.dataGridView2.AllowUserToAddRows = true;
-            this.dataGridView2.DataSource = D2_t_stocklistR;
+            int cloumnindex = 1;
 
+            for (int j = 0; j < list.Count; j++)
+            {
+                int introwindex = 4;
+                if (list[j] == null)
+                    continue;
+                int cahc = introwindex;
+
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+
+                    string 自社コード = dataGridView1.Rows[i].Cells["自社コード"].EditedFormattedValue.ToString();
+                    var locations = this.t_stocklistR.Where(l => l.自社コード == Convert.ToInt32(自社コード)).ToList();
+                    t_stockrec temp = new t_stockrec();
+
+                    //foreach (t_stockrec item in D2_t_stocklistR)
+                    foreach (var emp in locations)
+                    {
+
+                        #region MyRegion
+                        //if (item.納品書番号 == null)
+                        //    continue;
+
+                        //if (item.日付 == list[j] && item.自社コード.ToString() == 自社コード)
+                        //{
+                        //    introwindex++;
+                        //    DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+
+                        //    //DataGridViewColumn column = new DataGridViewColumn();
+                        //    this.dataGridView2.Rows.Add();
+                        //    column.HeaderText = cloumnindex.ToString();
+                        //    column.Name = "msisndColumn";
+                        //    column.HeaderText = "Klic";
+                        //    //this.dataGridView2.Columns.Add(column);
+                        //    dataGridView2.Columns.Insert(1, column);
+                        //    column.CellTemplate = new DataGridViewTextBoxCell();
+
+                        //    dataGridView2.Rows[1].Cells[cloumnindex].Value = item.日付.ToString("MM/dd/yyyy");
+                        //    this.dataGridView2.Rows.Add();
+                        //    dataGridView2.Rows[2].Cells[cloumnindex].Value = item.区分;
+                        //    this.dataGridView2.Rows.Add();
+                        //    dataGridView2.Rows[3].Cells[cloumnindex].Value = item.出庫事由;
+                        //    this.dataGridView2.Rows.Add();
+                        //    dataGridView2.Rows[4].Cells[cloumnindex].Value = item.納品書番号;
+                        //    this.dataGridView2.Rows.Add();
+                        //    dataGridView2.Rows[introwindex].Cells[cloumnindex].Value = item.数量;
+                        //} 
+                        #endregion
+
+                        if (emp.納品書番号 == null && list[j] != emp.日付)
+                            continue;
+
+                        temp.自社コード = emp.自社コード;
+                        temp.数量 = temp.数量 + emp.数量;
+                        temp.納品書番号 = emp.納品書番号;
+                        temp.日付 = emp.日付;
+                        temp.区分 = emp.区分;
+                    }
+
+                    #region MyRegion
+
+
+                    DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+
+                    //DataGridViewColumn column = new DataGridViewColumn();
+                    this.dataGridView2.Rows.Add();
+                    column.HeaderText = cloumnindex.ToString();
+                    column.Name = "msisndColumn";
+                    column.HeaderText = "Klic";
+                    //this.dataGridView2.Columns.Add(column);
+                    dataGridView2.Columns.Insert(1, column);
+                    column.CellTemplate = new DataGridViewTextBoxCell();
+                    if (cahc == introwindex)
+                    {
+                        dataGridView2.Rows[1].Cells[cloumnindex].Value = temp.日付.ToString("MM/dd/yyyy");
+                        this.dataGridView2.Rows.Add();
+                        dataGridView2.Rows[2].Cells[cloumnindex].Value = temp.区分;
+                        this.dataGridView2.Rows.Add();
+                        dataGridView2.Rows[3].Cells[cloumnindex].Value = temp.出庫事由;
+                        this.dataGridView2.Rows.Add();
+                        dataGridView2.Rows[4].Cells[cloumnindex].Value = temp.納品書番号;
+                    }
+
+                    this.dataGridView2.Rows.Add();
+                    introwindex++;
+                    dataGridView2.Rows[introwindex].Cells[cloumnindex].Value = temp.数量;
+
+                    #endregion
+                }
+
+
+            }
+
+            //this.dataGridView2.AllowUserToAddRows = true;
+            //this.dataGridView2.DataSource = D2_t_stocklistR;
+            dataGridView2.RowHeadersVisible = false;
+            dataGridView2.ColumnHeadersVisible = false;
         }
         private void ApplyFilter()
         {
@@ -358,7 +469,7 @@ namespace GODInventoryWinForm.Controls
 
             //dataGridView2.Columns.Add(column);
             dataGridView2.Rows[1].HeaderCell.Value = "编号2";
-            //
+           
             //dataGridView2.Columns.Add(column);
             //this.dataGridView2.RepeatDirection = "Vertical";
 
