@@ -20,7 +20,7 @@ namespace GODInventory.MyLinq
 
         public int 自社コード { get; set; }
 
-        public int 数量 { get; set; }
+        public int? 数量 { get; set; }
 
         [StringLength(255)]
         public string 状態 { get; set; }

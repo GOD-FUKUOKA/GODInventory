@@ -37,7 +37,7 @@ namespace GODInventory.MyLinq
 
         public decimal? 売価 { get; set; }
 
-        public int? 商品コード { get; set; }
+        public int 商品コード { get; set; }
 
         public long JANコード { get; set; }
 

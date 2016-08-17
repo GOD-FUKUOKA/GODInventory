@@ -336,6 +336,7 @@ namespace GODInventory.ViewModel
 
         }
 
+
         public static int GenerateASN(List<int> orderIds) {
             var now = DateTime.Now;
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, EDITxtHandler.ASNFolder, "NYOTEI_" + now.ToString("yyyyMMddHHmmss") + ".txt");
@@ -448,6 +449,31 @@ namespace GODInventory.ViewModel
         }
 
 
+        public static int UpdateStockState(GODDbContext ctx, List<int> productCodes)
+        {
+            int count = 0;
+
+                foreach( var pid in productCodes){
+                    //SELECT sum() FROM god_inventory.t_stockrec where `区分`='入庫' and `自社コード`=100234 and `状態`="完了";
+                    //SELECT * FROM god_inventory.t_stockrec where `区分`='出庫' and `自社コード`=100234 and `状態`="完了";
+                   var income = (from s in ctx.t_stockrec
+                     where s.区分 == "入庫" && s.自社コード == pid && s.状態 == "完了"
+                     select s.数量).Sum();
+                   var outcome = (from s in ctx.t_stockrec
+                                  where s.区分 == "出庫" && s.自社コード == pid && s.状態 == "完了"
+                                  select s.数量).Sum();
+                   // income/outcome may be null
+                   income = Convert.ToInt32(income);
+                   outcome = Convert.ToInt32(outcome);
+                   string sql = String.Format("UPDATE t_stockstate SET `在庫数`={1}  WHERE `自社コード` ={0} ", pid, income - outcome );
+                   count = ctx.Database.ExecuteSqlCommand(sql);
+                   
+                }
+            
+            
+            return count;
+
+        }
 
     }
 }
