@@ -28,363 +28,322 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.orderCreatedAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.storeComboBox = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.btadd = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.submitButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
+            this.remarkTextBox1 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.label8 = new System.Windows.Forms.Label();
+            this.stockStatusComboBox = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
+            this.submitButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.stockNOTextBox = new System.Windows.Forms.TextBox();
+            this.orderCreatedAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.loadItemListButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.genreComboBox = new System.Windows.Forms.ComboBox();
+            this.warehouseComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.manufacturerComboBox = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // tableLayoutPanel2
+            // remarkTextBox1
             // 
-            this.tableLayoutPanel2.ColumnCount = 6;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 182F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 198F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 139F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 182F));
-            this.tableLayoutPanel2.Controls.Add(this.label5, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label2, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label4, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.textBox4, 3, 1);
-            this.tableLayoutPanel2.Controls.Add(this.orderCreatedAtDateTimePicker, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.storeComboBox, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.comboBox1, 5, 0);
-            this.tableLayoutPanel2.Controls.Add(this.comboBox3, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label6, 4, 1);
-            this.tableLayoutPanel2.Controls.Add(this.comboBox2, 5, 1);
-            this.tableLayoutPanel2.Controls.Add(this.btadd, 5, 2);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(931, 104);
-            this.tableLayoutPanel2.TabIndex = 0;
+            this.remarkTextBox1.Location = new System.Drawing.Point(109, 166);
+            this.remarkTextBox1.Name = "remarkTextBox1";
+            this.remarkTextBox1.Size = new System.Drawing.Size(164, 20);
+            this.remarkTextBox1.TabIndex = 81;
+            this.remarkTextBox1.Text = "零售";
             // 
-            // label5
+            // label9
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(613, 10);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "商品別 :";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(28, 170);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(55, 13);
+            this.label9.TabIndex = 80;
+            this.label9.Text = "出库事由";
             // 
-            // label2
+            // label8
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(315, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "期日 :";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(52, 203);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(31, 13);
+            this.label8.TabIndex = 79;
+            this.label8.Text = "状態";
             // 
-            // label1
+            // stockStatusComboBox
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "仓库：";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 43);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "工場 :";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(315, 43);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "出庫番号 :";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox4.Enabled = false;
-            this.textBox4.Location = new System.Drawing.Point(415, 38);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(192, 22);
-            this.textBox4.TabIndex = 7;
-            // 
-            // orderCreatedAtDateTimePicker
-            // 
-            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(415, 3);
-            this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
-            this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(192, 20);
-            this.orderCreatedAtDateTimePicker.TabIndex = 14;
-            // 
-            // storeComboBox
-            // 
-            this.storeComboBox.FormattingEnabled = true;
-            this.storeComboBox.Location = new System.Drawing.Point(133, 3);
-            this.storeComboBox.Name = "storeComboBox";
-            this.storeComboBox.Size = new System.Drawing.Size(176, 21);
-            this.storeComboBox.TabIndex = 28;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(752, 6);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(176, 21);
-            this.comboBox1.TabIndex = 29;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(133, 39);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(176, 21);
-            this.comboBox3.TabIndex = 31;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(613, 43);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "出庫事由 :";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(752, 39);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(176, 21);
-            this.comboBox2.TabIndex = 30;
-            // 
-            // btadd
-            // 
-            this.btadd.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btadd.Location = new System.Drawing.Point(772, 69);
-            this.btadd.Name = "btadd";
-            this.btadd.Size = new System.Drawing.Size(156, 32);
-            this.btadd.TabIndex = 32;
-            this.btadd.Text = "商品リストにつけ込み";
-            this.btadd.UseVisualStyleBackColor = true;
-            this.btadd.Click += new System.EventHandler(this.btadd_Click_1);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 2);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 274F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(937, 486);
-            this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.10596F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.89404F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141F));
-            this.tableLayoutPanel3.Controls.Add(this.submitButton, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.cancelButton, 2, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 434);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(931, 49);
-            this.tableLayoutPanel3.TabIndex = 16;
-            // 
-            // submitButton
-            // 
-            this.submitButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.submitButton.BackColor = System.Drawing.SystemColors.Control;
-            this.submitButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.submitButton.Location = new System.Drawing.Point(689, 7);
-            this.submitButton.Name = "submitButton";
-            this.submitButton.Size = new System.Drawing.Size(75, 35);
-            this.submitButton.TabIndex = 1;
-            this.submitButton.Text = "ログイン";
-            this.submitButton.UseVisualStyleBackColor = false;
-            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(822, 7);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 35);
-            this.cancelButton.TabIndex = 2;
-            this.cancelButton.Text = "清零";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.stockStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.stockStatusComboBox.FormattingEnabled = true;
+            this.stockStatusComboBox.Items.AddRange(new object[] {
+            "完了",
+            "仮"});
+            this.stockStatusComboBox.Location = new System.Drawing.Point(109, 201);
+            this.stockStatusComboBox.Name = "stockStatusComboBox";
+            this.stockStatusComboBox.Size = new System.Drawing.Size(164, 21);
+            this.stockStatusComboBox.TabIndex = 78;
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.番号,
+            this.IdDataGridViewTextBoxColumn,
             this.自社コード,
             this.商品名,
             this.規格,
             this.数量});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 160);
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridView1.Location = new System.Drawing.Point(314, 31);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(931, 268);
-            this.dataGridView1.TabIndex = 18;
+            this.dataGridView1.Size = new System.Drawing.Size(573, 416);
+            this.dataGridView1.TabIndex = 70;
             // 
-            // 番号
+            // IdDataGridViewTextBoxColumn
             // 
-            this.番号.DataPropertyName = "JANコード";
-            this.番号.HeaderText = "番号";
-            this.番号.Name = "番号";
+            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
+            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
+            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.IdDataGridViewTextBoxColumn.Width = 60;
             // 
             // 自社コード
             // 
             this.自社コード.DataPropertyName = "自社コード";
             this.自社コード.HeaderText = "自社コード";
             this.自社コード.Name = "自社コード";
+            this.自社コード.ReadOnly = true;
             // 
             // 商品名
             // 
             this.商品名.DataPropertyName = "商品名";
             this.商品名.HeaderText = "商品名";
             this.商品名.Name = "商品名";
+            this.商品名.ReadOnly = true;
+            this.商品名.Width = 200;
             // 
             // 規格
             // 
             this.規格.DataPropertyName = "規格";
             this.規格.HeaderText = "規格";
             this.規格.Name = "規格";
+            this.規格.ReadOnly = true;
             // 
             // 数量
             // 
-            this.数量.DataPropertyName = "PT入数";
+            this.数量.DataPropertyName = "qty";
             this.数量.HeaderText = "数量";
             this.数量.Name = "数量";
+            // 
+            // submitButton
+            // 
+            this.submitButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.submitButton.BackColor = System.Drawing.SystemColors.Control;
+            this.submitButton.Location = new System.Drawing.Point(908, 29);
+            this.submitButton.Name = "submitButton";
+            this.submitButton.Size = new System.Drawing.Size(63, 25);
+            this.submitButton.TabIndex = 60;
+            this.submitButton.Text = "登录";
+            this.submitButton.UseVisualStyleBackColor = false;
+            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(28, 102);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 13);
+            this.label5.TabIndex = 66;
+            this.label5.Text = "商品分类";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(52, 69);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.TabIndex = 62;
+            this.label2.Text = "期日";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(28, 237);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.TabIndex = 64;
+            this.label4.Text = "出库编号";
+            // 
+            // stockNOTextBox
+            // 
+            this.stockNOTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.stockNOTextBox.Enabled = false;
+            this.stockNOTextBox.Location = new System.Drawing.Point(109, 235);
+            this.stockNOTextBox.Multiline = true;
+            this.stockNOTextBox.Name = "stockNOTextBox";
+            this.stockNOTextBox.ReadOnly = true;
+            this.stockNOTextBox.Size = new System.Drawing.Size(164, 22);
+            this.stockNOTextBox.TabIndex = 65;
+            // 
+            // orderCreatedAtDateTimePicker
+            // 
+            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(109, 65);
+            this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
+            this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(164, 20);
+            this.orderCreatedAtDateTimePicker.TabIndex = 69;
+            this.orderCreatedAtDateTimePicker.ValueChanged += new System.EventHandler(this.orderCreatedAtDateTimePicker_ValueChanged);
+            // 
+            // loadItemListButton
+            // 
+            this.loadItemListButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.loadItemListButton.Location = new System.Drawing.Point(209, 269);
+            this.loadItemListButton.Name = "loadItemListButton";
+            this.loadItemListButton.Size = new System.Drawing.Size(63, 25);
+            this.loadItemListButton.TabIndex = 76;
+            this.loadItemListButton.Text = "调出商品列表";
+            this.loadItemListButton.UseVisualStyleBackColor = true;
+            this.loadItemListButton.Click += new System.EventHandler(this.loadItemListButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cancelButton.Location = new System.Drawing.Point(908, 70);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(63, 25);
+            this.cancelButton.TabIndex = 61;
+            this.cancelButton.Text = "清零";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // genreComboBox
+            // 
+            this.genreComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.genreComboBox.FormattingEnabled = true;
+            this.genreComboBox.Location = new System.Drawing.Point(109, 99);
+            this.genreComboBox.Name = "genreComboBox";
+            this.genreComboBox.Size = new System.Drawing.Size(164, 21);
+            this.genreComboBox.TabIndex = 72;
+            // 
+            // warehouseComboBox
+            // 
+            this.warehouseComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.warehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.warehouseComboBox.FormattingEnabled = true;
+            this.warehouseComboBox.Location = new System.Drawing.Point(109, 31);
+            this.warehouseComboBox.Name = "warehouseComboBox";
+            this.warehouseComboBox.Size = new System.Drawing.Size(164, 21);
+            this.warehouseComboBox.TabIndex = 74;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(52, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 59;
+            this.label1.Text = "仓库";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(52, 136);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(31, 13);
+            this.label3.TabIndex = 63;
+            this.label3.Text = "工厂";
+            // 
+            // manufacturerComboBox
+            // 
+            this.manufacturerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.manufacturerComboBox.FormattingEnabled = true;
+            this.manufacturerComboBox.Location = new System.Drawing.Point(109, 133);
+            this.manufacturerComboBox.Name = "manufacturerComboBox";
+            this.manufacturerComboBox.Size = new System.Drawing.Size(164, 21);
+            this.manufacturerComboBox.TabIndex = 71;
             // 
             // OutputStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(937, 486);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(994, 490);
+            this.Controls.Add(this.remarkTextBox1);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.stockStatusComboBox);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.submitButton);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.stockNOTextBox);
+            this.Controls.Add(this.orderCreatedAtDateTimePicker);
+            this.Controls.Add(this.loadItemListButton);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.genreComboBox);
+            this.Controls.Add(this.warehouseComboBox);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.manufacturerComboBox);
             this.Name = "OutputStock";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OutputStock";
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.DateTimePicker orderCreatedAtDateTimePicker;
-        private System.Windows.Forms.ComboBox storeComboBox;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button submitButton;
-        private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button btadd;
+        private System.Windows.Forms.TextBox remarkTextBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox stockStatusComboBox;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 番号;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;
         private System.Windows.Forms.DataGridViewTextBoxColumn 商品名;
         private System.Windows.Forms.DataGridViewTextBoxColumn 規格;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
+        private System.Windows.Forms.Button submitButton;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox stockNOTextBox;
+        private System.Windows.Forms.DateTimePicker orderCreatedAtDateTimePicker;
+        private System.Windows.Forms.Button loadItemListButton;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.ComboBox genreComboBox;
+        private System.Windows.Forms.ComboBox warehouseComboBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox manufacturerComboBox;
+
+
+
     }
 }
