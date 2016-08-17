@@ -25,7 +25,7 @@ namespace GODInventoryWinForm.Controls
         private t_stockrec order;
         List<DateTime> list;
         List<string> 納品書番号list;
-
+        private List<t_stockrec> D2_t_stocklistR;
         public Search_Strock()
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {
                 t_manufacturersR = ctx.t_manufacturers.ToList();
-               
+
                 t_genreR = ctx.t_genre.ToList();
                 //   t_stocklistR = ctx.t_stockrec.ToList();
             }
@@ -107,26 +107,35 @@ namespace GODInventoryWinForm.Controls
 
             ApplyFilter2();
 
+            t_stockrec item = new t_stockrec();
 
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
                 string 自社コード = dataGridView1.Rows[i].Cells["自社コード"].EditedFormattedValue.ToString();
                 var locations = this.t_stocklistR.Where(l => l.自社コード == Convert.ToInt32(自社コード)).ToList();
-
-
-                foreach (t_stockrec item in t_stocklistR)
+                for (int ii = 0; ii < list.Count; ii++)
                 {
-
+                    foreach (var emp in locations)
+                    {
+                        if (emp.日付 == list[ii])
+                        {
+                            item.自社コード = emp.自社コード;
+                            item.数量 = item.数量 + emp.数量;
+                            item.納品書番号 = emp.納品書番号;
+                            item.日付 = emp.日付;
+                            item.区分 = emp.区分;
+                        }
+                    }
+                    D2_t_stocklistR.Add(item);
 
                 }
 
                 //dataGridView2.Rows[i].Cells[16].Value = item.日付;
                 //dataGridView2.Rows[i].Cells[16].Value = item.日付;
                 //dataGridView2.Rows[i].Cells[16].Value = item.日付;
-
-
-
             }
+            this.dataGridView2.AllowUserToAddRows = true;
+            this.dataGridView2.DataSource = D2_t_stocklistR;
 
         }
         private void ApplyFilter()

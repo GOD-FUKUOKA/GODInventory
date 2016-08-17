@@ -12,7 +12,6 @@
         {
 
         }
-
         public virtual DbSet<t_date> t_date { get; set; }
         public virtual DbSet<t_genre> t_genre { get; set; }
         public virtual DbSet<t_itemlist> t_itemlist { get; set; }
