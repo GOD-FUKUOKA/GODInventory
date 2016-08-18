@@ -165,12 +165,12 @@ namespace GODInventoryWinForm.Controls
                 {
                     results = (from s in ctx.t_stockrec
                                where s.区分 == 区分comboBox1.Text && s.先 == manufacturerComboBox.Text && s.元 == warehouseComboBox.Text && s.日付 > this.orderCreatedAtDateTimePicker.Value && this.dateTimePicker1.Value > s.日付
-                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 出庫事由 = s.出庫事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
+                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 事由 = s.事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
                 }
                 else
                     results = (from s in ctx.t_stockrec
                                where s.先 == manufacturerComboBox.Text && s.元 == warehouseComboBox.Text && s.日付 > this.orderCreatedAtDateTimePicker.Value && this.dateTimePicker1.Value > s.日付
-                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 出庫事由 = s.出庫事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
+                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 事由 = s.事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
 
 
                 //dataGridView2.RowHeadersVisible = false;
@@ -210,7 +210,7 @@ namespace GODInventoryWinForm.Controls
                             {
                                 item.数量 = temp.数量 + item.数量;
                                 item.区分 = temp.区分;
-                                item.出庫事由 = temp.出庫事由;
+                                item.事由 = temp.事由;
                                 item.納品書番号 = temp.納品書番号;
                             }
                         }
@@ -225,7 +225,7 @@ namespace GODInventoryWinForm.Controls
                         }
                         dataGridView2.Rows[1].Cells[cloumni].Value = emp.ToString("MM/dd/yyyy");
                         dataGridView2.Rows[2].Cells[cloumni].Value = item.区分;
-                        dataGridView2.Rows[3].Cells[cloumni].Value = item.出庫事由;
+                        dataGridView2.Rows[3].Cells[cloumni].Value = item.事由;
                         dataGridView2.Rows[4].Cells[cloumni].Value = item.納品書番号;
                         if (i == 0)
                             dataGridView2.Rows[i + 5].Cells[cloumni].Value = item.数量;
@@ -254,12 +254,12 @@ namespace GODInventoryWinForm.Controls
                 {
                     results = (from s in ctx.t_stockrec
                                where s.区分 == 区分comboBox1.Text && s.先 == manufacturerComboBox.Text && s.元 == warehouseComboBox.Text && s.日付 > this.orderCreatedAtDateTimePicker.Value && this.dateTimePicker1.Value > s.日付
-                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 出庫事由 = s.出庫事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
+                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 事由 = s.事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
                 }
                 else
                     results = (from s in ctx.t_stockrec
                                where s.先 == manufacturerComboBox.Text && s.元 == warehouseComboBox.Text && s.日付 > this.orderCreatedAtDateTimePicker.Value && this.dateTimePicker1.Value > s.日付
-                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 出庫事由 = s.出庫事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
+                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 事由 = s.事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
 
 
                 //dataGridView2.RowHeadersVisible = false;
@@ -299,7 +299,7 @@ namespace GODInventoryWinForm.Controls
                             {
                                 item.数量 = temp.数量 + item.数量;
                                 item.区分 = temp.区分;
-                                item.出庫事由 = temp.出庫事由;
+                                item.事由 = temp.事由;
                                 item.納品書番号 = temp.納品書番号;
                             }
                         }
@@ -314,7 +314,7 @@ namespace GODInventoryWinForm.Controls
                         }
                         dataGridView2.Rows[1].Cells[cloumni].Value = emp.ToString("MM/dd/yyyy");
                         dataGridView2.Rows[2].Cells[cloumni].Value = item.区分;
-                        dataGridView2.Rows[3].Cells[cloumni].Value = item.出庫事由;
+                        dataGridView2.Rows[3].Cells[cloumni].Value = item.事由;
                         dataGridView2.Rows[4].Cells[cloumni].Value = item.納品書番号;
                         if (i == 0)
                             dataGridView2.Rows[i + 5].Cells[cloumni].Value = item.数量;
@@ -364,7 +364,7 @@ namespace GODInventoryWinForm.Controls
                                     temp.元 = warehouseComboBox.Text;
                                     temp.自社コード = Convert.ToInt32(自社コード);
                                     temp.区分 = dataGridView2.Rows[2].Cells[i].EditedFormattedValue.ToString();
-                                    temp.出庫事由 = dataGridView2.Rows[2].Cells[i].EditedFormattedValue.ToString();
+                                    temp.事由 = dataGridView2.Rows[2].Cells[i].EditedFormattedValue.ToString();
 
                                     receivedList.Add(temp);
 
@@ -497,7 +497,7 @@ namespace GODInventoryWinForm.Controls
         //                //    this.dataGridView2.Rows.Add();
         //                //    dataGridView2.Rows[2].Cells[cloumnindex].Value = item.区分;
         //                //    this.dataGridView2.Rows.Add();
-        //                //    dataGridView2.Rows[3].Cells[cloumnindex].Value = item.出庫事由;
+        //                //    dataGridView2.Rows[3].Cells[cloumnindex].Value = item.事由;
         //                //    this.dataGridView2.Rows.Add();
         //                //    dataGridView2.Rows[4].Cells[cloumnindex].Value = item.納品書番号;
         //                //    this.dataGridView2.Rows.Add();
@@ -534,7 +534,7 @@ namespace GODInventoryWinForm.Controls
         //                this.dataGridView2.Rows.Add();
         //                dataGridView2.Rows[2].Cells[cloumnindex].Value = temp.区分;
         //                this.dataGridView2.Rows.Add();
-        //                dataGridView2.Rows[3].Cells[cloumnindex].Value = temp.出庫事由;
+        //                dataGridView2.Rows[3].Cells[cloumnindex].Value = temp.事由;
         //                this.dataGridView2.Rows.Add();
         //                dataGridView2.Rows[4].Cells[cloumnindex].Value = temp.納品書番号;
         //            }

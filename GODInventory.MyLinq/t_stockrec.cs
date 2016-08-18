@@ -39,6 +39,6 @@ namespace GODInventory.MyLinq
 
 
         [StringLength(255)]
-        public string 出庫事由 { get; set; }
+        public string 事由 { get; set; }
     }
 }

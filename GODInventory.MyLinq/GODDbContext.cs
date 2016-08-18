@@ -378,7 +378,7 @@
                   .IsUnicode(false);
 
             modelBuilder.Entity<t_stockrec>()
-                        .Property(e => e.出庫事由)
+                        .Property(e => e.事由)
                         .IsUnicode(false);
 
             modelBuilder.Entity<t_stockstate>()

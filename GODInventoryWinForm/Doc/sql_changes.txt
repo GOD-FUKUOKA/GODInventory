@@ -87,4 +87,4 @@ CHANGE COLUMN `店舗コード` `店舗コード` INT(4) NOT NULL DEFAULT 0;
 -- t_stockrec new Add two cloumn
 ALTER TABLE `god_inventory`.`t_stockrec` 
 ADD COLUMN `客户`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL,
-ADD COLUMN `出庫事由`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL;
+ADD COLUMN `事由`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL;

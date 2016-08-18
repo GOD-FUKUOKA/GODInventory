@@ -92,7 +92,7 @@ namespace GODInventoryWinForm.Controls
                             order.元 = this.fromWarehouseComboBox.Text;
                             order.先 = this.toWarehouseComboBox1.Text;
                             order.納品書番号 = stockOutNumTextBox.Text;
-                            order.出庫事由 = this.toWarehouseComboBox1.Text+"へ移動";
+                            order.事由 = this.toWarehouseComboBox1.Text+"へ移動";
                             //order.仓库 = comboBox1.Text;
                             order.区分 = "出庫";
                             order.数量 = item.qty;
@@ -110,7 +110,7 @@ namespace GODInventoryWinForm.Controls
                             order.元 = this.fromWarehouseComboBox.Text;
                             order.先 = this.toWarehouseComboBox1.Text;
                             order.納品書番号 = stockInNumTextBox.Text;
-                            order.出庫事由 = this.fromWarehouseComboBox.Text + "から";
+                            order.事由 = this.fromWarehouseComboBox.Text + "から";
                             order.区分 = "入庫";
                             var to_item = to_itemlist.Find(i => i.商品コード == item.商品コード);
                             if (to_item != null)

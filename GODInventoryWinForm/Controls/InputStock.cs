@@ -78,7 +78,7 @@ namespace GODInventoryWinForm.Controls
 
                         order.数量 = item.qty;
                         order.区分 = "入庫";
-                        order.出庫事由 = this.remarkTextBox1.Text;
+                        order.事由 = this.remarkTextBox1.Text;
                         //order.仓库 = storeComboBox.Text;
                         order.自社コード = Convert.ToInt32(item.自社コード);
                         order.状態 = this.stockStatusComboBox.Text;

@@ -16,8 +16,8 @@ namespace GODInventory.MyLinq
         public int yingYouKuCunShu { get; set; }
         public int daiFaHuoShu { get; set; }
         public int shiJiKuCunShu { get; set; }
-        public int qingDianShu { get; set; }
-        public int chaZhi { get; set; }
+        public int? qingDianShu { get; set; }
+        public int? chaZhi { get; set; }
         public int? 数量 { get; set; }
     }
 }

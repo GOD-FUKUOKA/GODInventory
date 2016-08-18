@@ -17,12 +17,11 @@ namespace GODInventoryWinForm.Controls
         private List<MockEntity> manufacturerList;
         private List<t_warehouses> warehouseList;
 
-        private BindingList<t_stockrec> stocklist;
+       
         private List<t_genre> genreList;
 
-        private t_stockrec order;
+
         //private t_itemlist itemlist;
-        private BindingList<t_itemlist> Titemlist;
         private List<t_itemlist> itemlist;
 
         public t_itemlist item;
@@ -34,8 +33,6 @@ namespace GODInventoryWinForm.Controls
         {
             InitializeComponent();
 
-            stocklist = new BindingList<t_stockrec>();
-            Titemlist = new BindingList<t_itemlist>();
             this.stockcheckList = new BindingList<v_stockcheck>();
 
             dataGridView1.AutoGenerateColumns = false;
@@ -72,17 +69,18 @@ namespace GODInventoryWinForm.Controls
         {
             var warehouse = this.warehouseComboBox.Text;
             var genreId = Convert.ToInt16( this.genreComboBox.SelectedValue );
-            var endDate = this.endDateTimePicker1.Value;
+
+            var endDate = this.endDateTimePicker1.Value.AddDays(1).Date;
             using (var ctx = new GODDbContext())
             {
                 int i = 0;
-                string sql = @"SELECT i.`規格`,i.`商品名`, SUM(s.`数量`) as `数量`,s.id,s.`自社コード` FROM t_stockrec s
+                string sql = @"SELECT i.`規格`,i.`商品名`, SUM(s.`数量`) as `数量`, s.`自社コード` FROM t_stockrec s
     INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = {0}
-    WHERE (s.`先` = {1} and s.`状態`={2} and s.`日付`<= {3})
+    WHERE (s.`先` = {1} and s.`状態`={2} and s.`日付`< {3})
     GROUP by s.`自社コード`;";
-                var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoEnum.完了.ToString(), endDate).ToList();
+                var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.完了.ToString(), endDate).ToList();
 
-                var summaries4plan = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoEnum.仮.ToString(), endDate).ToList();
+                var summaries4plan = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.仮.ToString(), endDate).ToList();
 
                 //stockcheckList = (from a in ctx.t_stockrec
                 //                 where a.先 == warehouse && a.状態== StockIoEnum.完了.ToString()
@@ -120,63 +118,41 @@ namespace GODInventoryWinForm.Controls
 
         private void btprint_Click(object sender, EventArgs e)
         {
-            var rows = dataGridView1.SelectedRows;
-            if (rows.Count > 0)
-            {
-                var edidata = rows[0].DataBoundItem as t_itemlist;
-                var orders = OrderSqlHelper.ASNstockrecDataListByMid(entityDataSource1, edidata.ジャンル);
-
-                reportForm.ItemEnities = orders;
-                reportForm.InitializeItemEnitiesDataSource();
-                reportForm.ShowDialog();
-                InitializeEdiData();
-            }
-
-
 
         }
-        private void InitializeEdiData()
-        {
-            int id = 0;
 
-            foreach (t_genre item in this.genreList)
-            {
-                if (item.ジャンル名 == genreComboBox.Text)
-                    id = item.idジャンル;
-            }
-            Titemlist = new BindingList<t_itemlist>();
-
-            using (var ctx = new GODDbContext())
-            {
-                itemlist = ctx.t_itemlist.ToList();
-            }
-            var locations = this.itemlist.Where(l => l.ジャンル == id).ToList();
-            locations = this.itemlist.Where(l => l.ジャンル == id).ToList();
-            this.bindingSource2.DataSource = locations;
-            dataGridView1.DataSource = this.bindingSource2;
-
-        }
 
         private void btconfirm_Click(object sender, EventArgs e)
         {
-            foreach (v_stockcheck item in stockcheckList)
-            {
+            var warehouse = this.warehouseComboBox.Text;
 
-                if (stockcheckList.Count > 0)
+            using (var ctx = new GODDbContext())
+            {   
+                List<t_stockrec> changes = new List<t_stockrec>();
+
+                foreach (var item in stockcheckList)
                 {
-                    using (var ctx = new GODDbContext())
-                    {
-                        ctx.t_stockrec.AddRange(stocklist);
-                        ctx.SaveChanges();
-                        MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", stockcheckList.Count));
-                        stockcheckList.Clear();
+                    if( Convert.ToInt32( item.chaZhi ) > 0 ){
+
+                        var s = new t_stockrec();
+                        s.元 = warehouse;
+                        s.先 = warehouse;
+                        s.数量 = item.chaZhi;
+                        s.自社コード = item.自社コード;
+                        s.日付 = DateTime.Now;
+                        s.区分 = StockIoEnum.入庫.ToString();
+                        s.状態 = StockIoProgressEnum.完了.ToString();
+                        s.事由 = StockIoClueEnum.清点库存.ToString();
+                        changes.Add(s);
                     }
+                   
                 }
-                else
-                {
-                    MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+
+                ctx.t_stockrec.AddRange(changes);
+                ctx.SaveChanges();
+                MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", changes.Count));
+                stockcheckList.Clear();
+
             }
 
         }
@@ -184,6 +160,34 @@ namespace GODInventoryWinForm.Controls
         private void InventoryForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+
+            var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (cell.Value != null)
+            {
+                int v = Convert.ToInt32(cell.Value);
+                this.stockcheckList[e.RowIndex].qingDianShu = v;
+                this.stockcheckList[e.RowIndex].chaZhi = v - this.stockcheckList[e.RowIndex].shiJiKuCunShu ;
+                //this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = this.stockcheckList[e.RowIndex].chaZhi;
+
+            }
+            
+
+            this.dataGridView1.Refresh();
+
+        }
+
+        private void btclear_zero_Click(object sender, EventArgs e)
+        {
+            for (var i = 0; i < stockcheckList.Count; i++) {
+
+                this.stockcheckList[i].qingDianShu = null;
+                this.stockcheckList[i].chaZhi = null;
+            }
+            dataGridView1.Refresh();
         }
     }
 }

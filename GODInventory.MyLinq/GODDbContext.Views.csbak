@@ -1023,7 +1023,7 @@ namespace Edm_EntityMappingGeneratedViews
         FROM CodeFirstDatabase.t_shoplist AS T
     ) AS T1");
         }
-        //  , T1.[t_stockrec.仓库], T1.[t_stockrec.出庫事由]
+        //  , T1.[t_stockrec.仓库], T1.[t_stockrec.事由]
         /// <summary>
         /// Gets the view for CodeFirstDatabase.t_stockrec.
         /// </summary>
@@ -1052,8 +1052,8 @@ namespace Edm_EntityMappingGeneratedViews
         }
 
              //  T.[仓库] AS [t_stockrec.仓库], 
-             //T.[出庫事由] AS [t_stockrec.出庫事由], 
-        //, T1.[t_stockrec.仓库], T1.[t_stockrec.出庫事由]
+             //T.[事由] AS [t_stockrec.事由], 
+        //, T1.[t_stockrec.仓库], T1.[t_stockrec.事由]
         /// <summary>
         /// Gets the view for GODDbContext.t_stockrec.
         /// </summary>
@@ -1082,7 +1082,7 @@ namespace Edm_EntityMappingGeneratedViews
         }
        
            //T.[仓库] AS [t_stockrec.仓库], 
-           // T.[出庫事由] AS [t_stockrec.出庫事由], 
+           // T.[事由] AS [t_stockrec.事由], 
         /// <summary>
         /// Gets the view for CodeFirstDatabase.t_stockstate.
         /// </summary>

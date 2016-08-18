@@ -390,7 +390,7 @@ namespace GODInventory.ViewModel
         }
         public string[] Strock_out()
         {
-            //出庫事由
+            //事由
             //string[] names = new string[5,4];
             string[] names = { "零售"  };
 
@@ -399,7 +399,7 @@ namespace GODInventory.ViewModel
         }
         public string[] Strock_QuFenout()
         {
-            //出庫事由
+            //事由
             string[] names = { "出庫", "入庫" };
 
             return names;

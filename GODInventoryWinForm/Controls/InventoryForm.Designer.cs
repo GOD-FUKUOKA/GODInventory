@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.btconfirm = new System.Windows.Forms.Button();
@@ -52,8 +53,8 @@
             this.daiFaHuoShuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shiJiKuCunShuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.jiHuaRuCunShuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chaZhiColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qingDianColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chaZhiColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -76,6 +77,7 @@
             this.btconfirm.TabIndex = 34;
             this.btconfirm.Text = "确定并调整库存";
             this.btconfirm.UseVisualStyleBackColor = true;
+            this.btconfirm.Click += new System.EventHandler(this.btconfirm_Click);
             // 
             // label4
             // 
@@ -106,6 +108,7 @@
             this.btclear_zero.TabIndex = 36;
             this.btclear_zero.Text = "清点数量清零";
             this.btclear_zero.UseVisualStyleBackColor = true;
+            this.btclear_zero.Click += new System.EventHandler(this.btclear_zero_Click);
             // 
             // btfind
             // 
@@ -154,13 +157,14 @@
             this.daiFaHuoShuColumn,
             this.shiJiKuCunShuColumn,
             this.jiHuaRuCunShuColumn,
-            this.chaZhiColumn,
-            this.qingDianColumn});
+            this.qingDianColumn,
+            this.chaZhiColumn});
             this.dataGridView1.Location = new System.Drawing.Point(12, 120);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(918, 368);
             this.dataGridView1.TabIndex = 38;
+            this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
             // genreComboBox
             // 
@@ -207,6 +211,8 @@
             // idColumn
             // 
             this.idColumn.DataPropertyName = "Id";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.idColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.idColumn.HeaderText = "序号";
             this.idColumn.Name = "idColumn";
             this.idColumn.ReadOnly = true;
@@ -241,7 +247,7 @@
             // 
             // yingYouKuCunShuColumn
             // 
-            this.yingYouKuCunShuColumn.DataPropertyName = "yingYouKuCunShu ";
+            this.yingYouKuCunShuColumn.DataPropertyName = "yingYouKuCunShu";
             this.yingYouKuCunShuColumn.HeaderText = "应有库存数量";
             this.yingYouKuCunShuColumn.Name = "yingYouKuCunShuColumn";
             this.yingYouKuCunShuColumn.ReadOnly = true;
@@ -275,18 +281,21 @@
             this.jiHuaRuCunShuColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.jiHuaRuCunShuColumn.Width = 70;
             // 
+            // qingDianColumn
+            // 
+            this.qingDianColumn.DataPropertyName = "qingDianShu";
+            this.qingDianColumn.HeaderText = "清点数量";
+            this.qingDianColumn.Name = "qingDianColumn";
+            this.qingDianColumn.Width = 80;
+            // 
             // chaZhiColumn
             // 
             this.chaZhiColumn.DataPropertyName = "chaZhi";
             this.chaZhiColumn.HeaderText = "差値";
             this.chaZhiColumn.Name = "chaZhiColumn";
+            this.chaZhiColumn.ReadOnly = true;
+            this.chaZhiColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.chaZhiColumn.Width = 70;
-            // 
-            // qingDianColumn
-            // 
-            this.qingDianColumn.HeaderText = "清点数量";
-            this.qingDianColumn.Name = "qingDianColumn";
-            this.qingDianColumn.Width = 70;
             // 
             // InventoryForm
             // 
@@ -342,7 +351,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn daiFaHuoShuColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn shiJiKuCunShuColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn jiHuaRuCunShuColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chaZhiColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn qingDianColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chaZhiColumn;
     }
 }

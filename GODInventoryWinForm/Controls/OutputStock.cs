@@ -108,7 +108,7 @@ namespace GODInventoryWinForm.Controls
                         order.納品書番号 = stockNOTextBox.Text;
                         order.数量 = item.qty;
                         order.区分 = "出庫";
-                        order.出庫事由 = this.remarkTextBox1.Text;                   
+                        order.事由 = this.remarkTextBox1.Text;                   
                         order.自社コード = Convert.ToInt32(item.自社コード);
                         order.状態 = this.stockStatusComboBox.Text;
                         receivedList.Add(order);
@@ -236,7 +236,7 @@ namespace GODInventoryWinForm.Controls
         //            order.元 = this.comboBox3.Text;
         //            order.納品書番号 = textBox4.Text;
         //            //
-        //            order.出庫事由 = comboBox2.Text;
+        //            order.事由 = comboBox2.Text;
         //            //order.仓库 = storeComboBox.Text;
 
         //            order.区分 = "出庫";
