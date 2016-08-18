@@ -71,7 +71,7 @@
     <Compile Include="t_warehouses.cs" />
     <Compile Include="EFIntercepterLogging.cs" />
     <Compile Include="GODDbContext.cs" />
-    <Compile Include="v_strockcheck.cs" />
+    <Compile Include="v_stockcheck.cs" />
     <None Include="GODDbContext.Views.csbak" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="t_date.cs" />

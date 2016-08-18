@@ -12,7 +12,10 @@
       <Value Profile="(Default)">249706</Value>
     </Setting>
     <Setting Name="Createorder_sog" Type="System.String" Scope="User">
-      <Value Profile="(Default)">123</Value>
+      <Value Profile="(Default)">株式会社ジー・オー・ディ</Value>
+    </Setting>
+    <Setting Name="InventoryStartAt" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2016-01-01</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -14,7 +14,7 @@ namespace GODInventoryWinForm.Controls
         private InputStock InputStock;
         private OutputStock OutputStock;
         private StockMovement StockTransfer;
-        private Strock_Check Strock_Check;
+        private InventoryForm Strock_Check;
 
 
         private Search_Strock Search_Strock;
@@ -69,7 +69,7 @@ namespace GODInventoryWinForm.Controls
             {
                 Search_Strock = null;
             }
-            if (sender is Strock_Check)
+            if (sender is InventoryForm)
             {
                 Strock_Check = null;
             }
@@ -137,12 +137,12 @@ namespace GODInventoryWinForm.Controls
             #region MyRegion
             if (Strock_Check == null)
             {
-                Strock_Check = new Strock_Check();
+                Strock_Check = new InventoryForm();
                 Strock_Check.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
             }
             if (Strock_Check == null)
             {
-                Strock_Check = new Strock_Check();
+                Strock_Check = new InventoryForm();
             }
             Strock_Check.ShowDialog();
 

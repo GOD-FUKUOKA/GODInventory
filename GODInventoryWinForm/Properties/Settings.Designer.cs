@@ -61,13 +61,25 @@ namespace GODInventoryWinForm.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("123")]
+        [global::System.Configuration.DefaultSettingValueAttribute("株式会社ジー・オー・ディ")]
         public string Createorder_sog {
             get {
                 return ((string)(this["Createorder_sog"]));
             }
             set {
                 this["Createorder_sog"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2016-01-01")]
+        public global::System.DateTime InventoryStartAt {
+            get {
+                return ((global::System.DateTime)(this["InventoryStartAt"]));
+            }
+            set {
+                this["InventoryStartAt"] = value;
             }
         }
     }

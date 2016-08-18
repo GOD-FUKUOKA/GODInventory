@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GODInventory.MyLinq
 {
-    class StockRelatedStatus
+    public enum StockIoEnum
     {
-        static List<string> list;
+        完了= 0, 仮 =1
     }
 }
