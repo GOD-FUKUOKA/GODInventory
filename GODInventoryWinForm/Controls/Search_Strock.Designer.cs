@@ -80,6 +80,7 @@
             this.区分comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.区分comboBox1.FormattingEnabled = true;
             this.区分comboBox1.Items.AddRange(new object[] {
+            "All",
             "入庫",
             "出庫"});
             this.区分comboBox1.Location = new System.Drawing.Point(93, 35);
@@ -184,11 +185,11 @@
             this.規格,
             this.数量});
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 126);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 141);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(573, 315);
+            this.dataGridView1.Size = new System.Drawing.Size(573, 300);
             this.dataGridView1.TabIndex = 87;
             // 
             // IdDataGridViewTextBoxColumn
@@ -236,13 +237,14 @@
             this.loadItemListButton.TabIndex = 88;
             this.loadItemListButton.Text = "查询";
             this.loadItemListButton.UseVisualStyleBackColor = true;
+            this.loadItemListButton.Click += new System.EventHandler(this.loadItemListButton_Click);
             // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(591, 92);
+            this.dataGridView2.Location = new System.Drawing.Point(591, 72);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(581, 349);
+            this.dataGridView2.Size = new System.Drawing.Size(581, 369);
             this.dataGridView2.TabIndex = 89;
             // 
             // button1

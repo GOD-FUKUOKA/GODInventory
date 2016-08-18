@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="v_stockrec.cs" />
     <Compile Include="StockRelatedStatus.cs" />
     <Compile Include="v_stockios.cs" />
     <Compile Include="WarehouseRespository.cs" />
