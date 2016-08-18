@@ -19,6 +19,10 @@ namespace GODInventoryWinForm.Controls
         private BindingList<v_stockios> stockiosList;
         private List<t_genre> genreList;
         private List<t_warehouses> warehouseList;
+
+        private List<v_stockrec> stockrecList;
+
+
         public Search_Strock()
         {
             InitializeComponent();
@@ -152,6 +156,97 @@ namespace GODInventoryWinForm.Controls
 
         private void loadItemListButton_Click(object sender, EventArgs e)
         {
+            stockrecList = new List<v_stockrec>();
+
+            using (var ctx = new GODDbContext())
+            {
+                var results = new List<v_stockrec>();
+                if (区分comboBox1.Text != "All")
+                {
+                    results = (from s in ctx.t_stockrec
+                               where s.区分 == 区分comboBox1.Text && s.先 == manufacturerComboBox.Text && s.元 == warehouseComboBox.Text && s.日付 > this.orderCreatedAtDateTimePicker.Value && this.dateTimePicker1.Value > s.日付
+                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 出庫事由 = s.出庫事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
+                }
+                else
+                    results = (from s in ctx.t_stockrec
+                               where s.先 == manufacturerComboBox.Text && s.元 == warehouseComboBox.Text && s.日付 > this.orderCreatedAtDateTimePicker.Value && this.dateTimePicker1.Value > s.日付
+                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 出庫事由 = s.出庫事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
+
+
+                //dataGridView2.RowHeadersVisible = false;
+                //dataGridView2.ColumnHeadersVisible = false;
+                //this.dataGridView2.DataSource = results;
+
+                dataGridView2.Rows.Clear();
+                dataGridView2.Columns.Clear();
+                DataGridViewTextBoxColumn columnil = new DataGridViewTextBoxColumn();
+                columnil.HeaderText = "1";
+                columnil.Name = "1";
+                dataGridView2.Columns.Insert(0, columnil);
+                columnil.CellTemplate = new DataGridViewTextBoxCell();
+
+
+                #region 显示结果对应到相应的列中
+                var value = (from v in results select v.日付).Distinct().ToList();
+                for (int i = 0; i < dataGridView1.RowCount + 4; i++)
+                {
+                    this.dataGridView2.Rows.Add();
+
+                }
+
+                int cloumni = 1;
+                foreach (var emp in value)
+                {
+
+                    for (int i = 0; i < dataGridView1.RowCount; i++)
+                    {
+                        string 自社コード = dataGridView1.Rows[i].Cells["自社コード"].EditedFormattedValue.ToString();
+                        v_stockrec item = new v_stockrec();
+                        item.数量 = 0;
+
+                        foreach (var temp in results)
+                        {
+                            if (emp == temp.日付 && 自社コード == temp.自社コード.ToString())
+                            {
+                                item.数量 = temp.数量 + item.数量;
+                                item.区分 = temp.区分;
+                                item.出庫事由 = temp.出庫事由;
+                                item.納品書番号 = temp.納品書番号;
+                            }
+                        }
+                        if (i == 0)
+                        {
+                            DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+                            column.HeaderText = emp.ToString("MM/dd/yyyy");
+                            column.Name = emp.ToString();
+
+                            dataGridView2.Columns.Insert(cloumni, column);
+                            column.CellTemplate = new DataGridViewTextBoxCell();
+                        }
+                        dataGridView2.Rows[1].Cells[cloumni].Value = emp.ToString("MM/dd/yyyy");
+                        dataGridView2.Rows[2].Cells[cloumni].Value = item.区分;
+                        dataGridView2.Rows[3].Cells[cloumni].Value = item.出庫事由;
+                        dataGridView2.Rows[4].Cells[cloumni].Value = item.納品書番号;
+                        if (i == 0)
+                            dataGridView2.Rows[i + 5].Cells[cloumni].Value = item.数量;
+                        item.自社コード = Convert.ToInt32(自社コード);
+                        item.日付 = emp;
+
+                        stockrecList.Add(item);
+                    }
+                    cloumni++;
+
+                }
+                this.dataGridView2.Rows[0].Visible = false;
+                dataGridView2.Columns[0].Visible = false;
+                dataGridView2.RowHeadersVisible = false;
+                dataGridView2.ColumnHeadersVisible = false;
+                #endregion
+            }
+        }
+
+        private void btcanel_Click(object sender, EventArgs e)
+        {
             using (var ctx = new GODDbContext())
             {
                 var results = new List<v_stockrec>();
@@ -224,6 +319,7 @@ namespace GODInventoryWinForm.Controls
                         if (i == 0)
                             dataGridView2.Rows[i + 5].Cells[cloumni].Value = item.数量;
 
+
                     }
                     cloumni++;
 
@@ -234,6 +330,71 @@ namespace GODInventoryWinForm.Controls
                 dataGridView2.ColumnHeadersVisible = false;
                 #endregion
             }
+        }
+
+
+        private void btSave_Click(object sender, EventArgs e)
+        {
+            //stockrecList = new List<v_stockrec>();
+            List<t_stockrec> receivedList = new List<t_stockrec>();
+
+            for (int i = 0; i < dataGridView2.ColumnCount; i++)
+            {
+                string 納品書番号 = dataGridView2.Rows[4].Cells[i].EditedFormattedValue.ToString();
+                foreach (v_stockrec item in stockrecList)
+                {
+                    if (item.納品書番号 == 納品書番号)
+                    {
+                        for (int j = 0; j < dataGridView1.RowCount; j++)
+                        {
+                            t_stockrec temp = new t_stockrec();
+                            string 自社コード = dataGridView1.Rows[j].Cells["自社コード"].EditedFormattedValue.ToString();
+
+                            if (item.自社コード.ToString() == 自社コード.ToString())
+                            {
+                                string 数量 = dataGridView2.Rows[j + 5].Cells[i].EditedFormattedValue.ToString();
+
+                                if (数量 != item.数量.ToString())
+                                {
+                                    temp.納品書番号 = item.納品書番号;
+                                    temp.数量 = Convert.ToInt32(数量);
+                                    temp.日付 = item.日付;
+
+                                    temp.先 = manufacturerComboBox.Text;
+                                    temp.元 = warehouseComboBox.Text;
+                                    temp.自社コード = Convert.ToInt32(自社コード);
+                                    temp.区分 = dataGridView2.Rows[2].Cells[i].EditedFormattedValue.ToString();
+                                    temp.出庫事由 = dataGridView2.Rows[2].Cells[i].EditedFormattedValue.ToString();
+
+                                    receivedList.Add(temp);
+
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+
+
+            }
+            if (receivedList.Count > 0)
+            {
+                using (var ctx = new GODDbContext())
+                {
+                    ctx.t_stockrec.AddRange(receivedList);
+                    ctx.SaveChanges();
+                    this.stockiosList.Clear();
+                }
+                MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", receivedList.Count));
+
+            }
+            else
+            {
+                MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
         }
 
         #region MyRegion
