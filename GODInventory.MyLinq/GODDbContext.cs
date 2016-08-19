@@ -26,7 +26,7 @@
 
         public virtual DbSet<t_warehouses> t_warehouses { get; set; }
         public virtual DbSet<t_manufacturers> t_manufacturers { get; set; }
-        public virtual DbSet<t_manufacturers> t_pricelist { get; set; }
+        public virtual DbSet<t_pricelist> t_pricelist { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
