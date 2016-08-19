@@ -40,11 +40,6 @@
             this.warehouseComboBox = new System.Windows.Forms.ComboBox();
             this.manufacturerComboBox = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.genreComboBox = new System.Windows.Forms.ComboBox();
-            this.btprint = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.endDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,7 +49,16 @@
             this.shiJiKuCunShuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.jiHuaRuCunShuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qingDianColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+<<<<<<< HEAD
             this.chaZhiColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+=======
+            this.genreComboBox = new System.Windows.Forms.ComboBox();
+            this.btprint = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.endDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+>>>>>>> origin/master
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -63,17 +67,17 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 33);
+            this.label1.Location = new System.Drawing.Point(20, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 32;
             this.label1.Text = "仓库";
             // 
             // btconfirm
             // 
-            this.btconfirm.Location = new System.Drawing.Point(646, 501);
+            this.btconfirm.Location = new System.Drawing.Point(646, 543);
             this.btconfirm.Name = "btconfirm";
-            this.btconfirm.Size = new System.Drawing.Size(139, 26);
+            this.btconfirm.Size = new System.Drawing.Size(139, 28);
             this.btconfirm.TabIndex = 34;
             this.btconfirm.Text = "确定并调整库存";
             this.btconfirm.UseVisualStyleBackColor = true;
@@ -83,9 +87,9 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(675, 33);
+            this.label4.Location = new System.Drawing.Point(675, 36);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 40;
             this.label4.Text = "日期";
             // 
@@ -93,18 +97,18 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(457, 33);
+            this.label3.Location = new System.Drawing.Point(457, 36);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 39;
             this.label3.Text = "工厂";
             // 
             // btclear_zero
             // 
             this.btclear_zero.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btclear_zero.Location = new System.Drawing.Point(791, 501);
+            this.btclear_zero.Location = new System.Drawing.Point(791, 543);
             this.btclear_zero.Name = "btclear_zero";
-            this.btclear_zero.Size = new System.Drawing.Size(139, 26);
+            this.btclear_zero.Size = new System.Drawing.Size(139, 28);
             this.btclear_zero.TabIndex = 36;
             this.btclear_zero.Text = "清点数量清零";
             this.btclear_zero.UseVisualStyleBackColor = true;
@@ -113,9 +117,9 @@
             // btfind
             // 
             this.btfind.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btfind.Location = new System.Drawing.Point(776, 73);
+            this.btfind.Location = new System.Drawing.Point(776, 79);
             this.btfind.Name = "btfind";
-            this.btfind.Size = new System.Drawing.Size(75, 28);
+            this.btfind.Size = new System.Drawing.Size(75, 30);
             this.btfind.TabIndex = 35;
             this.btfind.Text = "查询";
             this.btfind.UseVisualStyleBackColor = true;
@@ -126,9 +130,9 @@
             this.warehouseComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.warehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.warehouseComboBox.FormattingEnabled = true;
-            this.warehouseComboBox.Location = new System.Drawing.Point(55, 29);
+            this.warehouseComboBox.Location = new System.Drawing.Point(55, 31);
             this.warehouseComboBox.Name = "warehouseComboBox";
-            this.warehouseComboBox.Size = new System.Drawing.Size(141, 20);
+            this.warehouseComboBox.Size = new System.Drawing.Size(141, 21);
             this.warehouseComboBox.TabIndex = 42;
             // 
             // manufacturerComboBox
@@ -136,9 +140,9 @@
             this.manufacturerComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.manufacturerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.manufacturerComboBox.FormattingEnabled = true;
-            this.manufacturerComboBox.Location = new System.Drawing.Point(492, 29);
+            this.manufacturerComboBox.Location = new System.Drawing.Point(492, 31);
             this.manufacturerComboBox.Name = "manufacturerComboBox";
-            this.manufacturerComboBox.Size = new System.Drawing.Size(141, 20);
+            this.manufacturerComboBox.Size = new System.Drawing.Size(141, 21);
             this.manufacturerComboBox.TabIndex = 43;
             // 
             // dataGridView1
@@ -157,56 +161,20 @@
             this.daiFaHuoShuColumn,
             this.shiJiKuCunShuColumn,
             this.jiHuaRuCunShuColumn,
+<<<<<<< HEAD
             this.qingDianColumn,
             this.chaZhiColumn});
             this.dataGridView1.Location = new System.Drawing.Point(12, 120);
+=======
+            this.chaZhiColumn,
+            this.qingDianColumn});
+            this.dataGridView1.Location = new System.Drawing.Point(12, 130);
+>>>>>>> origin/master
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(918, 368);
+            this.dataGridView1.Size = new System.Drawing.Size(918, 399);
             this.dataGridView1.TabIndex = 38;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
-            // 
-            // genreComboBox
-            // 
-            this.genreComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(284, 29);
-            this.genreComboBox.Name = "genreComboBox";
-            this.genreComboBox.Size = new System.Drawing.Size(141, 20);
-            this.genreComboBox.TabIndex = 44;
-            // 
-            // btprint
-            // 
-            this.btprint.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btprint.Location = new System.Drawing.Point(12, 501);
-            this.btprint.Name = "btprint";
-            this.btprint.Size = new System.Drawing.Size(139, 26);
-            this.btprint.TabIndex = 33;
-            this.btprint.Text = "打印清点用表格";
-            this.btprint.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(225, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 37;
-            this.label2.Text = "商品分类";
-            // 
-            // endDateTimePicker1
-            // 
-            this.endDateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.endDateTimePicker1.Location = new System.Drawing.Point(710, 29);
-            this.endDateTimePicker1.Name = "endDateTimePicker1";
-            this.endDateTimePicker1.Size = new System.Drawing.Size(141, 21);
-            this.endDateTimePicker1.TabIndex = 41;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = null;
             // 
             // idColumn
             // 
@@ -297,11 +265,73 @@
             this.chaZhiColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.chaZhiColumn.Width = 70;
             // 
+<<<<<<< HEAD
+=======
+            // qingDianColumn
+            // 
+            this.qingDianColumn.HeaderText = "清点数量";
+            this.qingDianColumn.Name = "qingDianColumn";
+            this.qingDianColumn.Width = 70;
+            // 
+            // genreComboBox
+            // 
+            this.genreComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.genreComboBox.FormattingEnabled = true;
+            this.genreComboBox.Location = new System.Drawing.Point(284, 31);
+            this.genreComboBox.Name = "genreComboBox";
+            this.genreComboBox.Size = new System.Drawing.Size(141, 21);
+            this.genreComboBox.TabIndex = 44;
+            // 
+            // btprint
+            // 
+            this.btprint.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btprint.Location = new System.Drawing.Point(12, 543);
+            this.btprint.Name = "btprint";
+            this.btprint.Size = new System.Drawing.Size(139, 28);
+            this.btprint.TabIndex = 33;
+            this.btprint.Text = "打印清点用表格";
+            this.btprint.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(225, 36);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 37;
+            this.label2.Text = "商品分类";
+            // 
+            // endDateTimePicker1
+            // 
+            this.endDateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.endDateTimePicker1.Location = new System.Drawing.Point(710, 31);
+            this.endDateTimePicker1.Name = "endDateTimePicker1";
+            this.endDateTimePicker1.Size = new System.Drawing.Size(141, 20);
+            this.endDateTimePicker1.TabIndex = 41;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = null;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(311, 535);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(139, 28);
+            this.button1.TabIndex = 45;
+            this.button1.Text = "Test Copy";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+>>>>>>> origin/master
             // InventoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(942, 538);
+            this.ClientSize = new System.Drawing.Size(942, 583);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btconfirm);
             this.Controls.Add(this.label4);
@@ -352,6 +382,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn shiJiKuCunShuColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn jiHuaRuCunShuColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn qingDianColumn;
+<<<<<<< HEAD
         private System.Windows.Forms.DataGridViewTextBoxColumn chaZhiColumn;
+=======
+        private System.Windows.Forms.Button button1;
+>>>>>>> origin/master
     }
 }

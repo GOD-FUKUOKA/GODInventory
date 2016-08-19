@@ -10,6 +10,8 @@ namespace GODInventory.MyLinq
     {
         入庫 = 0, 出庫 = 1
     }
+
+
     public enum StockIoProgressEnum
     {
         完了= 0, 仮 =1
@@ -18,5 +20,9 @@ namespace GODInventory.MyLinq
     public enum StockIoClueEnum
     {
         清点库存 = 0
+    }
+
+    public enum StockInClueEnum {
+        仕入 = 2
     }
 }

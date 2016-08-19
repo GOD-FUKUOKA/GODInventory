@@ -23,6 +23,7 @@ namespace GODInventoryWinForm.Controls
 
         //private t_itemlist itemlist;
         private List<t_itemlist> itemlist;
+        private testingCC testingCC;
 
         public t_itemlist item;
         public ReceivedOrdersReportForm reportForm;
@@ -188,6 +189,30 @@ namespace GODInventoryWinForm.Controls
                 this.stockcheckList[i].chaZhi = null;
             }
             dataGridView1.Refresh();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            #region MyRegion
+            if (testingCC == null)
+            {
+                testingCC = new testingCC();
+                testingCC.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
+            }
+            if (testingCC == null)
+            {
+                testingCC = new testingCC();
+            }
+            testingCC.ShowDialog();
+
+            #endregion
+        }
+        void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (sender is testingCC)
+            {
+                testingCC = null;
+            }
         }
     }
 }
