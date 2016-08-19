@@ -24,8 +24,8 @@ namespace GODInventory.MyLinq
         [StringLength(255)]
         public string 規格 { get; set; }
 
-        [StringLength(255)]
-        public string 配送担当 { get; set; }
+        //[StringLength(255)]
+        //public string 配送担当 { get; set; }
 
         public DateTime? 価格発動日 { get; set; }
 
@@ -35,7 +35,7 @@ namespace GODInventory.MyLinq
 
         public decimal? 単価 { get; set; }
 
-        public decimal? 売価 { get; set; }
+        //public decimal? 売価 { get; set; }
 
         public int? 商品コード { get; set; }
 

@@ -26,6 +26,7 @@
 
         public virtual DbSet<t_warehouses> t_warehouses { get; set; }
         public virtual DbSet<t_manufacturers> t_manufacturers { get; set; }
+        public virtual DbSet<t_manufacturers> t_pricelist { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -45,9 +46,9 @@
                 .Property(e => e.規格)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<t_itemlist>()
-                .Property(e => e.配送担当)
-                .IsUnicode(false);
+            //modelBuilder.Entity<t_itemlist>()
+            //    .Property(e => e.配送担当)
+            //    .IsUnicode(false);
 
             modelBuilder.Entity<t_itemlist>()
                 .Property(e => e.単位)
@@ -383,6 +384,13 @@
 
             modelBuilder.Entity<t_stockstate>()
                 .Property(e => e.在庫状態)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<t_pricelist>()
+                .Property(e => e.店名)
+                .IsUnicode(false);
+            modelBuilder.Entity<t_pricelist>()
+                .Property(e => e.県別)
                 .IsUnicode(false);
         }
     }

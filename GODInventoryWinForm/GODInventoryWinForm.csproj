@@ -449,6 +449,8 @@
     <None Include="Resources\add - 副本.gif" />
     <None Include="Resources\16-on-black.gif" />
     <Content Include="Doc\sql_seeds.txt" />
+    <Content Include="Doc\sql_t_itemlist_new.txt" />
+    <Content Include="Doc\sql_t_pricelist.txt" />
     <Content Include="Resources\order.png" />
     <None Include="Resources\order1.png" />
     <Content Include="Resources\product.png" />

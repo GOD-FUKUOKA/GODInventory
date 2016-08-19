@@ -78,9 +78,7 @@ namespace GODInventoryWinForm.Controls
                 using (var ctx = new GODDbContext())
                 {
                     var to_warehouse = this.toWarehouseComboBox1.Text;
-                    var to_itemlist = (from i in ctx.t_itemlist 
-                                        where i.配送担当== to_warehouse
-                                           select i).ToList();
+
                     foreach (var item in stockiosList)
                     {
                         stocklist = new BindingList<t_stockrec>();
@@ -112,15 +110,9 @@ namespace GODInventoryWinForm.Controls
                             order.納品書番号 = stockInNumTextBox.Text;
                             order.事由 = this.fromWarehouseComboBox.Text + "から";
                             order.区分 = "入庫";
-                            var to_item = to_itemlist.Find(i => i.商品コード == item.商品コード);
-                            if (to_item != null)
-                            {
-                                order.自社コード = to_item.自社コード;
-                            }
-                            else { 
-                            
-                              throw new Exception(String.Format("Can not find product {0} in warehouse {1}!", item.商品コード, to_warehouse));
-                            }
+                            var to_item = item.自社コード;
+                           
+
                             order.数量 = item.qty;
                             order.状態 = this.toStatusComboBox.Text;
 
@@ -171,7 +163,7 @@ namespace GODInventoryWinForm.Controls
                 using (var ctx = new GODDbContext())
                 {
                     var results = (from s in ctx.t_itemlist
-                                   where s.ジャンル == (short)genre_id && s.配送担当 == from_warehouse
+                                   where s.ジャンル == (short)genre_id 
                                    select new v_stockios {商品コード=s.商品コード, 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
                     for (int i = 0; i < results.Count; i++)
                     {
