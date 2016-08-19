@@ -88,3 +88,8 @@ CHANGE COLUMN `店舗コード` `店舗コード` INT(4) NOT NULL DEFAULT 0;
 ALTER TABLE `god_inventory`.`t_stockrec` 
 ADD COLUMN `客户`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL,
 ADD COLUMN `事由`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL;
+
+-- -----------------------------------------------------------------
+-- from date to datetime
+ALTER TABLE `god_inventory`.`t_stockrec` 
+CHANGE COLUMN `日付` `日付` DATETIME NOT NULL ;

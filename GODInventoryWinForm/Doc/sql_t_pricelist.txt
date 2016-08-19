@@ -20,13 +20,16 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_pricelist`;
 CREATE TABLE `t_pricelist` (
-  `自社コード` int(11) NOT NULL,
+   `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+   `自社コード` int(11) NOT NULL,
   `店番` int(4) NOT NULL,
   `店名` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `県別` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `通常売価` decimal(11,0) DEFAULT NULL,
   `広告売価` decimal(11,0) DEFAULT NULL,
-  `特売売価` decimal(11,0) DEFAULT NULL
+  `特売売価` decimal(11,0) DEFAULT NULL,
+   PRIMARY KEY (`Id`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
