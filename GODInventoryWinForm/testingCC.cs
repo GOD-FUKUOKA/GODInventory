@@ -21,13 +21,9 @@ namespace GODInventoryWinForm
         public testingCC()
         {
             InitializeComponent();
-
-
             using (var ctx = new GODDbContext())
             {
                 t_stockrecList = ctx.t_stockrec.ToList();
-
-
             }
             this.dataGridView1.AutoGenerateColumns = true;
             this.dataGridView1.DataSource = t_stockrecList;
@@ -43,7 +39,6 @@ namespace GODInventoryWinForm
         {
             if (e.Button == MouseButtons.Right)
             {
-
                 if (e.RowIndex >= 0)
                 {
                     //若行已是选中状态就不再进行设置
