@@ -8,7 +8,7 @@ namespace GODInventory.MyLinq
 {
 
     public class WarehouseRespository { 
-
+        
         static List<MockEntity> list;
         static WarehouseRespository()
         {
@@ -21,6 +21,11 @@ namespace GODInventory.MyLinq
         {
 
             return list;
+        }
+
+        public static string OptionTextAll
+        {
+            get { return "全部"; }
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GODInventory.MyLinq;
 using GODInventory.ViewModel;
+using MySql.Data.MySqlClient;
 
 namespace GODInventoryWinForm.Controls
 {
@@ -20,8 +21,8 @@ namespace GODInventoryWinForm.Controls
         private List<t_genre> genreList;
         private List<t_warehouses> warehouseList;
 
-        private List<v_stockrec> stockrecList;
-
+        private List<v_stockcheck> productList = null;
+        private List<t_stockrec> stockList = null;
 
         public Search_Strock()
         {
@@ -29,9 +30,11 @@ namespace GODInventoryWinForm.Controls
 
             stockiosList = new BindingList<v_stockios>();
 
-            this.dataGridView1.AutoGenerateColumns = false;
+            this.productDataGridView.AutoGenerateColumns = false;
+            this.stockIoDataGridView.AutoGenerateColumns = false;
+            this.qtyDataGridView.AutoGenerateColumns = false;
 
-            this.dataGridView1.DataSource = stockiosList;
+            this.productDataGridView.DataSource = stockiosList;
 
             InitializeDataSource();
 
@@ -119,13 +122,13 @@ namespace GODInventoryWinForm.Controls
             this.manufacturerComboBox.ValueMember = "Id";
             this.manufacturerComboBox.DataSource = manufacturerList;
 
-
+            warehouseList.Add(new t_warehouses() { Id = 0, FullName = WarehouseRespository.OptionTextAll });
             this.warehouseComboBox.DisplayMember = "FullName";
             this.warehouseComboBox.ValueMember = "Id";
             this.warehouseComboBox.DataSource = warehouseList;
 
 
-            //BuildStockNO();
+            this.ioComboBox.SelectedIndex = 0;
         }
 
         private void genreComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -156,237 +159,138 @@ namespace GODInventoryWinForm.Controls
 
         private void loadItemListButton_Click(object sender, EventArgs e)
         {
-            stockrecList = new List<v_stockrec>();
 
-            using (var ctx = new GODDbContext())
-            {
-                var results = new List<v_stockrec>();
-                if (区分comboBox1.Text != "All")
+            var startAt = this.startDateTimePicker.Value.AddDays(-1).Date;
+            var endAt = this.endDateTimePicker.Value.AddDays(1).Date;
+            var ioState = this.ioComboBox.Text;
+            var genreId = Convert.ToInt16(this.genreComboBox.SelectedValue);
+            var warehouse = this.warehouseComboBox.Text;
+            var manufacturer = this.manufacturerComboBox.Text;
+
+            var isAllManufacturerSelected = ( manufacturer == ManufactureRespository.OptionTextAll );
+            var isAllStockIoSelected = (ioState == StockIoEnum.全部.ToString());
+
+
+                string conditions = "s.日付 > @startAt AND @endAt > s.日付";
+                List<MySqlParameter> condition_params = new  List<MySqlParameter>();
+
+                #region 构建查询条件
+
+
+                if ( !isAllStockIoSelected )
                 {
-                    results = (from s in ctx.t_stockrec
-                               where s.区分 == 区分comboBox1.Text && s.先 == manufacturerComboBox.Text && s.元 == warehouseComboBox.Text && s.日付 > this.orderCreatedAtDateTimePicker.Value && this.dateTimePicker1.Value > s.日付
-                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 事由 = s.事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
+                    conditions += " AND (s.`区分` = @ioState)";
                 }
-                else
-                    results = (from s in ctx.t_stockrec
-                               where s.先 == manufacturerComboBox.Text && s.元 == warehouseComboBox.Text && s.日付 > this.orderCreatedAtDateTimePicker.Value && this.dateTimePicker1.Value > s.日付
-                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 事由 = s.事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
-
-
-                //dataGridView2.RowHeadersVisible = false;
-                //dataGridView2.ColumnHeadersVisible = false;
-                //this.dataGridView2.DataSource = results;
-
-                dataGridView2.Rows.Clear();
-                dataGridView2.Columns.Clear();
-                DataGridViewTextBoxColumn columnil = new DataGridViewTextBoxColumn();
-                columnil.HeaderText = "1";
-                columnil.Name = "1";
-                dataGridView2.Columns.Insert(0, columnil);
-                columnil.CellTemplate = new DataGridViewTextBoxCell();
-
-
-                #region 显示结果对应到相应的列中
-                var value = (from v in results select v.日付).Distinct().ToList();
-                for (int i = 0; i < dataGridView1.RowCount + 4; i++)
-                {
-                    this.dataGridView2.Rows.Add();
-
-                }
-
-                int cloumni = 1;
-                foreach (var emp in value)
-                {
-
-                    for (int i = 0; i < dataGridView1.RowCount; i++)
+                            
+                if( warehouse != WarehouseRespository.OptionTextAll) {
+                    
+                     conditions += " AND ";
+                    
+                    if (ioState == StockIoEnum.全部.ToString())
                     {
-                        string 自社コード = dataGridView1.Rows[i].Cells["自社コード"].EditedFormattedValue.ToString();
-                        v_stockrec item = new v_stockrec();
-                        item.数量 = 0;
-
-                        foreach (var temp in results)
+                        if (isAllManufacturerSelected){
+                            // 某一个仓库的所有生产商的出入库记录
+                            conditions += "( s.元 = @warehouse OR s.先 = @warehouse )";
+                        }else
                         {
-                            if (emp == temp.日付 && 自社コード == temp.自社コード.ToString())
-                            {
-                                item.数量 = temp.数量 + item.数量;
-                                item.区分 = temp.区分;
-                                item.事由 = temp.事由;
-                                item.納品書番号 = temp.納品書番号;
-                            }
-                        }
-                        if (i == 0)
-                        {
-                            DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
-                            column.HeaderText = emp.ToString("MM/dd/yyyy");
-                            column.Name = emp.ToString();
-
-                            dataGridView2.Columns.Insert(cloumni, column);
-                            column.CellTemplate = new DataGridViewTextBoxCell();
-                        }
-                        dataGridView2.Rows[1].Cells[cloumni].Value = emp.ToString("MM/dd/yyyy");
-                        dataGridView2.Rows[2].Cells[cloumni].Value = item.区分;
-                        dataGridView2.Rows[3].Cells[cloumni].Value = item.事由;
-                        dataGridView2.Rows[4].Cells[cloumni].Value = item.納品書番号;
-                        if (i == 0)
-                            dataGridView2.Rows[i + 5].Cells[cloumni].Value = item.数量;
-                        item.自社コード = Convert.ToInt32(自社コード);
-                        item.日付 = emp;
-
-                        stockrecList.Add(item);
+                            // 某一个仓库的某一生产商的出入库记录
+                            conditions += "((s.`元` = @manufacturer AND  s.先 = @warehouse ) OR (s.`元` = @warehouse AND  s.先 = @manufacturer ))";
+                        }                            
                     }
-                    cloumni++;
+                    else if (ioState == StockIoEnum.入庫.ToString()) {
+                        if (isAllManufacturerSelected){
+                            // 某一个仓库的所有生产商的入库记录
+                            conditions += "( s.先 = @warehouse )";
+                        }else{
+                            // 某一个仓库的某一生产商的入库记录
+                            conditions += "( s.`元` = @manufacturer AND  s.先 = @warehouse )";
+                        }
+                    }
+                    else if (ioState == StockIoEnum.出庫.ToString()) { 
+                        if (isAllManufacturerSelected){
+                            // 某一个仓库的所有生产商的出库记录, 即出库记录
+                            conditions += "( s.元 = @warehouse )";
+                        }else{
+                            // 某一个仓库的某一生产商的出库记录
+                            conditions += "( s.元 = @warehouse AND s.`先` = @manufacturer )";
+                        }
+                    }
+                }else{
+                    if (!isAllManufacturerSelected ){
+                        // 所有仓库的某一生产商的出入库记录
+                        conditions += " AND (s.`元` = @manufacturer OR  s.先 = @manufacturer )";
+                    }
+                }
+
+
+                condition_params.Add(new MySqlParameter("@genreId", genreId));
+                condition_params.Add(new MySqlParameter("@ioState", ioState));
+                condition_params.Add(new MySqlParameter("@warehouse", warehouse));
+                condition_params.Add(new MySqlParameter("@manufacturer", manufacturer));
+                condition_params.Add(new MySqlParameter("@startAt", startAt));
+                condition_params.Add(new MySqlParameter("@endAt", endAt));
+
+                using (var ctx = new GODDbContext())
+                {
+                    string productFormat = @"SELECT s.`自社コード`, i.`規格`,i.`商品名`  FROM t_stockrec s
+INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = @genreId 
+WHERE (s.日付 > @startAt AND @endAt > s.日付)
+GROUP by s.`自社コード`;";
+                    string qtyFormat = @"SELECT s.* FROM t_stockrec s
+INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = @genreId 
+WHERE ({0});";
+
+                    productList = ctx.Database.SqlQuery<v_stockcheck>(productFormat, condition_params.ToArray()).ToList();
+                    string sql = String.Format(qtyFormat,  conditions);
+                    stockList = ctx.Database.SqlQuery<t_stockrec>(sql, condition_params.ToArray()).ToList();
 
                 }
-                this.dataGridView2.Rows[0].Visible = false;
-                dataGridView2.Columns[0].Visible = false;
-                dataGridView2.RowHeadersVisible = false;
-                dataGridView2.ColumnHeadersVisible = false;
                 #endregion
-            }
+
+
+                this.BuildDataSources();
+
+              
+            
         }
 
         private void btcanel_Click(object sender, EventArgs e)
         {
-            using (var ctx = new GODDbContext())
+            for (int i = 0; i < stockIoDataGridView.ColumnCount; i++)
             {
-                var results = new List<v_stockrec>();
-                if (区分comboBox1.Text != "All")
-                {
-                    results = (from s in ctx.t_stockrec
-                               where s.区分 == 区分comboBox1.Text && s.先 == manufacturerComboBox.Text && s.元 == warehouseComboBox.Text && s.日付 > this.orderCreatedAtDateTimePicker.Value && this.dateTimePicker1.Value > s.日付
-                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 事由 = s.事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
-                }
-                else
-                    results = (from s in ctx.t_stockrec
-                               where s.先 == manufacturerComboBox.Text && s.元 == warehouseComboBox.Text && s.日付 > this.orderCreatedAtDateTimePicker.Value && this.dateTimePicker1.Value > s.日付
-                               select new v_stockrec { 自社コード = s.自社コード, 日付 = s.日付, 区分 = s.区分, 事由 = s.事由, 納品書番号 = s.納品書番号, 数量 = s.数量 }).ToList();
-
-
-                //dataGridView2.RowHeadersVisible = false;
-                //dataGridView2.ColumnHeadersVisible = false;
-                //this.dataGridView2.DataSource = results;
-
-                dataGridView2.Rows.Clear();
-                dataGridView2.Columns.Clear();
-                DataGridViewTextBoxColumn columnil = new DataGridViewTextBoxColumn();
-                columnil.HeaderText = "1";
-                columnil.Name = "1";
-                dataGridView2.Columns.Insert(0, columnil);
-                columnil.CellTemplate = new DataGridViewTextBoxCell();
-
-
-                #region 显示结果对应到相应的列中
-                var value = (from v in results select v.日付).Distinct().ToList();
-                for (int i = 0; i < dataGridView1.RowCount + 4; i++)
-                {
-                    this.dataGridView2.Rows.Add();
-
-                }
-
-                int cloumni = 1;
-                foreach (var emp in value)
-                {
-
-                    for (int i = 0; i < dataGridView1.RowCount; i++)
-                    {
-                        string 自社コード = dataGridView1.Rows[i].Cells["自社コード"].EditedFormattedValue.ToString();
-                        v_stockrec item = new v_stockrec();
-                        item.数量 = 0;
-
-                        foreach (var temp in results)
-                        {
-                            if (emp == temp.日付 && 自社コード == temp.自社コード.ToString())
-                            {
-                                item.数量 = temp.数量 + item.数量;
-                                item.区分 = temp.区分;
-                                item.事由 = temp.事由;
-                                item.納品書番号 = temp.納品書番号;
-                            }
-                        }
-                        if (i == 0)
-                        {
-                            DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
-                            column.HeaderText = emp.ToString("MM/dd/yyyy");
-                            column.Name = emp.ToString();
-
-                            dataGridView2.Columns.Insert(cloumni, column);
-                            column.CellTemplate = new DataGridViewTextBoxCell();
-                        }
-                        dataGridView2.Rows[1].Cells[cloumni].Value = emp.ToString("MM/dd/yyyy");
-                        dataGridView2.Rows[2].Cells[cloumni].Value = item.区分;
-                        dataGridView2.Rows[3].Cells[cloumni].Value = item.事由;
-                        dataGridView2.Rows[4].Cells[cloumni].Value = item.納品書番号;
-                        if (i == 0)
-                            dataGridView2.Rows[i + 5].Cells[cloumni].Value = item.数量;
-
-
-                    }
-                    cloumni++;
-
-                }
-                this.dataGridView2.Rows[0].Visible = false;
-                dataGridView2.Columns[0].Visible = false;
-                dataGridView2.RowHeadersVisible = false;
-                dataGridView2.ColumnHeadersVisible = false;
-                #endregion
+                stockIoDataGridView.Columns[i].Visible = true;
+                qtyDataGridView.Columns[i].Visible = true;
             }
         }
 
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            //stockrecList = new List<v_stockrec>();
-            List<t_stockrec> receivedList = new List<t_stockrec>();
-
-            for (int i = 0; i < dataGridView2.ColumnCount; i++)
-            {
-                string 納品書番号 = dataGridView2.Rows[4].Cells[i].EditedFormattedValue.ToString();
-                foreach (v_stockrec item in stockrecList)
-                {
-                    if (item.納品書番号 == 納品書番号)
-                    {
-                        for (int j = 0; j < dataGridView1.RowCount; j++)
-                        {
-                            t_stockrec temp = new t_stockrec();
-                            string 自社コード = dataGridView1.Rows[j].Cells["自社コード"].EditedFormattedValue.ToString();
-
-                            if (item.自社コード.ToString() == 自社コード.ToString())
-                            {
-                                string 数量 = dataGridView2.Rows[j + 5].Cells[i].EditedFormattedValue.ToString();
-
-                                if (数量 != item.数量.ToString())
-                                {
-                                    temp.納品書番号 = item.納品書番号;
-                                    temp.数量 = Convert.ToInt32(数量);
-                                    temp.日付 = item.日付;
-
-                                    temp.先 = manufacturerComboBox.Text;
-                                    temp.元 = warehouseComboBox.Text;
-                                    temp.自社コード = Convert.ToInt32(自社コード);
-                                    temp.区分 = dataGridView2.Rows[2].Cells[i].EditedFormattedValue.ToString();
-                                    temp.事由 = dataGridView2.Rows[2].Cells[i].EditedFormattedValue.ToString();
-
-                                    receivedList.Add(temp);
-
-                                }
-                            }
-                        }
-                    }
-
-
+            var deletedList = new List<t_stockrec>();
+            DataGridViewColumn col ;
+            string stockNum = null;
+            for (int i = 0; i < stockIoDataGridView.ColumnCount; i++){
+                col = stockIoDataGridView.Columns[i];
+                if( !col.Visible ){
+                
+                    stockNum = Convert.ToString( stockIoDataGridView.Rows[4].Cells[i].Value );
+                    deletedList.AddRange( this.stockList.FindAll( s=>s.納品書番号 == stockNum) );
                 }
-
-
+            
             }
-            if (receivedList.Count > 0)
+
+
+            if (deletedList.Count > 0)
             {
                 using (var ctx = new GODDbContext())
                 {
-                    ctx.t_stockrec.AddRange(receivedList);
+                    ctx.t_stockrec.RemoveRange(deletedList);
                     ctx.SaveChanges();
-                    this.stockiosList.Clear();
+                    foreach( var stock in deletedList){
+                      this.stockList.Remove(stock);
+                    }
                 }
-                MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", receivedList.Count));
+                MessageBox.Show(String.Format("Congratulations, You have {0} items removed successfully!", deletedList.Count));
 
             }
             else
@@ -395,6 +299,141 @@ namespace GODInventoryWinForm.Controls
                 return;
             }
 
+        }
+
+        private void BuildDataSources(){
+        
+            for (int i = 0; i < this.productList.Count; i++) {
+
+                this.productList[i].Id = i + 1;
+            }
+
+            this.productDataGridView.DataSource = productList;
+
+            var qtyTable = new DataTable();
+            var ioTable = new DataTable();
+
+            this.stockIoDataGridView.Columns.Clear();
+            this.qtyDataGridView.Columns.Clear();
+            int j = 0;
+
+            var groupedStockList = stockList.GroupBy(s => s.納品書番号);
+
+            #region 构建 DataTable
+
+
+            // build table columns
+            j = 0;
+            foreach (var igrouping in groupedStockList)
+            {
+                // 生成 ioTable, use c{j}  instead of igrouping.Key, datagridview required
+                ioTable.Columns.Add(igrouping.Key, System.Type.GetType("System.String"));
+                qtyTable.Columns.Add(igrouping.Key, System.Type.GetType("System.Int32"));
+            }
+            // build table rows
+            for (var i = 0; i < 5; i++) {
+
+                ioTable.Rows.Add(ioTable.NewRow());
+            }
+
+            foreach (var k in productList)
+            {
+                qtyTable.Rows.Add(qtyTable.NewRow());
+            }
+            j = 0;
+            foreach (var igrouping in groupedStockList)
+            {
+                var item = igrouping.First();
+                //igrouping.Key cause add new column
+                ioTable.Rows[0][j] = string.Format("{0:HH:mm:ss}", item.日付);
+                ioTable.Rows[1][j] = item.区分;
+                ioTable.Rows[2][j] = item.事由;
+                ioTable.Rows[3][j] = item.状態;
+                ioTable.Rows[4][j] = item.納品書番号;
+                j++;
+            }
+
+            var groupedProductCodeList = stockList.GroupBy(s => s.自社コード);
+            foreach (var igrouping in groupedProductCodeList)
+            {
+                var i = productList.FindIndex(o => o.自社コード == igrouping.Key);
+                foreach (var stock in igrouping.ToList()) {
+                    qtyTable.Rows[i][stock.納品書番号] = stock.数量;
+                }
+            }
+
+            #endregion
+
+
+            #region DataGridView 数据绑定
+
+            qtyDataGridView.Columns.Clear();
+            stockIoDataGridView.Columns.Clear();
+            foreach (var igrouping in groupedStockList)
+            {
+                qtyDataGridView.Columns.Add(new DataGridViewTextBoxColumn() { Width = 80, DataPropertyName = igrouping.Key });
+                stockIoDataGridView.Columns.Add(new DataGridViewTextBoxColumn() { Width = 80, DataPropertyName = igrouping.Key });
+            }
+            qtyDataGridView.DataSource = qtyTable;
+            stockIoDataGridView.DataSource = ioTable;
+            #endregion
+
+            InitializeScrollBar();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int i = stockIoDataGridView.CurrentCell.OwningColumn.Index;
+            stockIoDataGridView.Columns[i].Visible = false;
+            qtyDataGridView.Columns[i].Visible = false;
+        }
+
+        private void stockIoDataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right) 
+            { 
+               if (e.RowIndex >= 0) 
+               {
+                   stockIoDataGridView.ClearSelection();
+                   stockIoDataGridView.Rows[e.RowIndex].Selected = true;
+                   stockIoDataGridView.CurrentCell = stockIoDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex]; 
+                   //contextMenuStrip_ListViewItemRightClick.Show（MousePosition.X， MousePosition.Y）; 
+               } 
+            } 
+        }
+
+        private void qtyDataGridView_Scroll(object sender, ScrollEventArgs e)
+        {
+            // http://stackoverflow.com/questions/4766409/how-do-i-programmatically-scroll-a-winforms-datagridview-control
+            if (e.ScrollOrientation == ScrollOrientation.VerticalScroll)
+            {
+                productDataGridView.FirstDisplayedScrollingRowIndex = this.qtyDataGridView.FirstDisplayedScrollingRowIndex;
+            }
+            else {
+
+                this.stockIoDataGridView.HorizontalScrollingOffset = e.NewValue;            
+            
+            }
+        }
+
+        private void InitializeScrollBar(){
+
+
+            int overflow = 80 * this.qtyDataGridView.Columns.Count - this.qtyDataGridView.Width;
+
+            if (overflow > 0)
+            {
+                hScrollBar1.SmallChange = 20;
+                hScrollBar1.Maximum = overflow;
+            }
+
+            hScrollBar1.Visible = (overflow > 0);
+        }
+
+        private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+            this.qtyDataGridView.HorizontalScrollingOffset = e.NewValue;
+            this.stockIoDataGridView.HorizontalScrollingOffset = e.NewValue;
         }
 
         #region MyRegion

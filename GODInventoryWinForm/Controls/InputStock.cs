@@ -134,17 +134,18 @@ namespace GODInventoryWinForm.Controls
 
 
                 int count = 0;
-                var selected_date = this.orderCreatedAtDateTimePicker.Value;
-
+                var startAt = this.orderCreatedAtDateTimePicker.Value.Date;
+                var endAt = startAt.AddDays(1).Date;
                 using (var ctx = new GODDbContext())
                 {
                     var results = from s in ctx.t_stockrec
-                                  where s.日付 == selected_date.Date
-                                  select s;
+                                  where s.日付 >= startAt && s.日付 < endAt
+                                  group s by s.納品書番号 into g
+                                  select g;
                     count = results.Count();
                 }
                 
-                var stock_no = String.Format("GOD-{0:yyyyMMdd}-{1:D2}-{2:D2}", selected_date, genre_id, count + 1);
+                var stock_no = String.Format("GOD-{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
                 this.stockNOTextBox.Text = stock_no;
             }
             else {

@@ -19,5 +19,10 @@ namespace GODInventory.MyLinq
 
             return list;
         }
+
+        public static string OptionTextAll
+        {
+            get { return "全部"; }
+        }
     }
 }

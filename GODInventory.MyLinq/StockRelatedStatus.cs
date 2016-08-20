@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace GODInventory.MyLinq
 {
+
+
     public enum StockIoEnum
     {
-        入庫 = 0, 出庫 = 1
+       全部=0, 入庫 = 1, 出庫 = 2
     }
 
 
