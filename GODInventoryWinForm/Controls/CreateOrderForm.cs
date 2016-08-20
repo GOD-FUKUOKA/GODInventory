@@ -29,6 +29,7 @@ namespace GODInventoryWinForm.Controls
         private List<t_rcvdata> t_rcvdataR;
         private List<t_locations> locationList;
         private BindingList<t_orderdata> orderList;
+        private List<t_pricelist> t_pricelistR;
         int cloumn = 0;
         private CreateorderForm_ShopCode CreateorderForm_ShopCode;
         int davX = 0;
@@ -50,6 +51,8 @@ namespace GODInventoryWinForm.Controls
                 shopList = ctx.t_shoplist.ToList();
                 t_rcvdataR = ctx.t_rcvdata.ToList();
                 locationList = ctx.t_locations.ToList();
+                t_pricelistR = ctx.t_pricelist.ToList();
+
             }
 
             this.storeComboBox.DisplayMember = "店名";
@@ -395,9 +398,9 @@ namespace GODInventoryWinForm.Controls
                             //order.納品予定日 = this.dateTimePicker1.Value;
                             //order.納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
                             //order.納品先店舗名漢字 = this.locationComboBox.Text;
-                            order.発注形態名称漢字 = "補充";
+                             // order.発注形態名称漢字 = "補充";
 
-
+ 
                             order.伝票番号 = GenerateInvoiceNo(order.店舗コード);
 
                             #region 联动
@@ -836,9 +839,11 @@ namespace GODInventoryWinForm.Controls
 
             if (cell.OwningColumn == orderReasonDataGridviewComboBox)
             {
-                if (cell.Value != null)
+                //if (cell.Value != null)
+                {
                     orderList[e.RowIndex].発注形態区分 = (short)cell.Value;
-                orderList[e.RowIndex].発注形態名称漢字 = (string)cell.FormattedValue;
+                    orderList[e.RowIndex].発注形態名称漢字 = (string)cell.FormattedValue;
+                }
             }
             #region MyRegion
             try
@@ -941,8 +946,6 @@ namespace GODInventoryWinForm.Controls
                     orderList[davX].納品予定日 = this.dateTimePicker1.Value;
                     orderList[davX].納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
                     orderList[davX].納品先店舗名漢字 = this.locationComboBox.Text;
-
-
                 }
 
 
@@ -1023,6 +1026,37 @@ namespace GODInventoryWinForm.Controls
                     orderList[davX].規格名漢字 = v_stockiositem.規格;
                     orderList[davX].ＪＡＮコード = v_stockiositem.JANコード;
                     orderList[davX].発注数量 = Convert.ToInt32(v_stockiositem.ロット);
+                    #region 从 t_pricelist 表中读取的价格
+                    //var pricelist = this.t_pricelistR.Where(s => s.自社コード == v_stockiositem.自社コード && s.店番 == Convert.ToInt32(orderList[davX].ジャンル)).ToList();
+
+                    //if (pricelist.Count > 0)
+                    //{
+                    //    orderList[davX].原単価_税抜_ = Convert.ToInt32(pricelist[0].通常売価);
+                    //    orderList[davX].売単価_税抜_ = Convert.ToInt32(pricelist[0].特売売価);
+                    //}
+                    #endregion
+                    #region 从t_rcvdata 中读取的价格
+                    var pricelist1 = this.t_rcvdataR.Where(s => s.商品コード == v_stockiositem.商品コード).ToList();
+                    if (pricelist1.Count > 0)
+                    {
+                        orderList[davX].原単価_税抜_ = Convert.ToInt32(pricelist1[0].原単価_税抜_);
+                        orderList[davX].売単価_税抜_ = Convert.ToInt32(pricelist1[0].売単価_税抜_);
+                    }
+                    #endregion
+                    #region 联动
+                    //foreach (t_rcvdata item in t_rcvdataR)
+                    //{
+
+                    //    if (item.商品コード == Convert.ToDouble(v_stockiositem.商品コード))
+                    //    {
+
+
+                    //        orderList[davX].原単価_税抜_ = Convert.ToInt32(item.原単価_税抜_.ToString());
+                    //        orderList[davX].売単価_税抜_ = Convert.ToInt32(item.売単価_税抜_.ToString());                        
+                    //        break;
+                    //    }
+                    //}
+                    #endregion
                 }
                 else
                 {

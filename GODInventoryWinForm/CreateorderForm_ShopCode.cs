@@ -62,7 +62,7 @@ namespace GODInventoryWinForm
                 {
                     var results = (from s in ctx.t_itemlist
                                    where s.ジャンル == (short)genre_id
-                                   select new v_itemlist { 商品コード = s.商品コード, 規格 = s.規格, 商品名 = s.商品名, ジャンル = s.ジャンル, JANコード = s.JANコード, ロット = s.PT入数 }).ToList();
+                                   select new v_itemlist { 商品コード = s.商品コード, 規格 = s.規格, 商品名 = s.商品名, ジャンル = s.ジャンル, JANコード = s.JANコード, ロット = s.PT入数, 自社コード = s.自社コード }).ToList();
                     for (int i = 0; i < results.Count; i++)
                     {
                         results[i].Id = i + 1;
