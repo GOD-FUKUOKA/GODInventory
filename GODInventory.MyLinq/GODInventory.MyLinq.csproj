@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="v_itemlist.cs" />
     <Compile Include="t_pricelist.cs" />
     <Compile Include="v_stockrec.cs" />
     <Compile Include="StockRelatedStatus.cs" />

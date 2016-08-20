@@ -131,6 +131,12 @@
     <Compile Include="Controls\Strock_CompanyCode.Designer.cs">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateorderForm_ShopCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateorderForm_ShopCode.Designer.cs">
+      <DependentUpon>CreateorderForm_ShopCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="DBConnection.cs" />
     <Compile Include="DBConfigurationForm.cs">
       <SubType>Form</SubType>
@@ -311,6 +317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Strock_CompanyCode.resx">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateorderForm_ShopCode.resx">
+      <DependentUpon>CreateorderForm_ShopCode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DBConfigurationForm.resx">
       <DependentUpon>DBConfigurationForm.cs</DependentUpon>

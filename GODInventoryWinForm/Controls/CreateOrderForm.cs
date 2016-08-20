@@ -30,6 +30,9 @@ namespace GODInventoryWinForm.Controls
         private List<t_locations> locationList;
         private BindingList<t_orderdata> orderList;
         int cloumn = 0;
+        private CreateorderForm_ShopCode CreateorderForm_ShopCode;
+        int davX = 0;
+        int davY = 0;
 
         public CreateOrderForm()
         {
@@ -271,13 +274,15 @@ namespace GODInventoryWinForm.Controls
 
             try
             {
+                //BindingList<t_orderdata> NeworderList = new BindingList<t_orderdata>();
+                var NeworderList = this.orderList.Where(l => l.発注数量 > 0).ToList();
 
 
                 if (orderList.Count > 0)
                 {
                     using (var ctx = new GODDbContext())
                     {
-                        ctx.t_orderdata.AddRange(orderList);
+                        ctx.t_orderdata.AddRange(NeworderList);
                         ctx.SaveChanges();
                         MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", orderList.Count));
                         orderList.Clear();
@@ -339,7 +344,6 @@ namespace GODInventoryWinForm.Controls
         }
 
 
-
         private void storeCodeTextBox_TextChanged(object sender, EventArgs e)
         {
             if (storeCodeTextBox.Text.Trim().Length > 0)
@@ -364,6 +368,59 @@ namespace GODInventoryWinForm.Controls
                         {
                             this.locationTextBox.Text = "";
                         }
+
+                        #region new
+
+                        //dataGridView1.Rows.Clear();
+                        //dataGridView1.Columns.Clear();
+                        orderList = new BindingList<t_orderdata>();
+
+                        for (int i = 0; i < 10; i++)
+                        {
+                            t_orderdata order = new t_orderdata();
+                            //order.受注日 = DateTime.Now;
+                            //order.発注日 = orderCreatedAtDateTimePicker.Value;
+
+                            //order.店舗コード = Convert.ToInt16(storeCodeTextBox.Text);
+                            //order.商品コード = Convert.ToInt32(productCodeTextBox.Text);
+                            //order.発注数量 = Convert.ToInt32(orderQuantityTextBox.Text);
+
+                            //order.仕入先コード = Convert.ToInt32(textBox1.Text);
+                            //order.出荷業務仕入先コード = Convert.ToInt32(this.textBox2.Text);
+                            //order.仕入先名カナ = this.textBox3.Text;
+                            //order.店舗名漢字 = this.storeComboBox.Text;
+                            //order.法人コード = Convert.ToInt16(this.textBox4.Text);
+                            //order.法人名漢字 = this.comboBox2.Text;
+                            //order.部門コード = Convert.ToInt16(this.textBox5.Text);
+                            //order.納品予定日 = this.dateTimePicker1.Value;
+                            //order.納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
+                            //order.納品先店舗名漢字 = this.locationComboBox.Text;
+                            order.発注形態名称漢字 = "補充";
+
+
+                            order.伝票番号 = GenerateInvoiceNo(order.店舗コード);
+
+                            #region 联动
+                            foreach (t_rcvdata item in t_rcvdataR)
+                            {
+
+                                if (item.商品コード == Convert.ToDouble(order.商品コード))
+                                {
+                                    order.品名漢字 = item.品名漢字.ToString();
+                                    order.規格名漢字 = item.規格名漢字.ToString();
+                                    order.原単価_税抜_ = Convert.ToInt32(item.原単価_税抜_.ToString());
+                                    order.売単価_税抜_ = Convert.ToInt32(item.売単価_税抜_.ToString());
+                                    order.ＪＡＮコード = long.Parse(item.ＪＡＮコード.ToString());
+                                    break;
+
+                                }
+                            }
+                            #endregion
+                            orderList.Add(order);
+                        }
+                        this.dataGridView1.AutoGenerateColumns = false;
+                        this.dataGridView1.DataSource = orderList;
+                        #endregion
                     }
                     else
                     {
@@ -605,14 +662,11 @@ namespace GODInventoryWinForm.Controls
                 if (textBox4.Text != "")
                 {
 
-                    foreach (t_rcvdata item in t_rcvdataR)
-                    {
-                        if (item.法人コード == Convert.ToInt32(textBox4.Text))
-                            comboBox2.Text = item.法人名漢字;
-
-                    }
-
-
+                    var locations = this.t_rcvdataR.Where(l => l.法人コード == Convert.ToInt32(textBox4.Text)).Distinct().ToList();
+                    var value = (from v in locations select v.法人名漢字).Distinct().ToList();
+                    this.comboBox2.DisplayMember = "法人名漢字";
+                    this.comboBox2.ValueMember = "id受領データ";
+                    this.comboBox2.DataSource = value;
 
                 }
             }
@@ -669,6 +723,38 @@ namespace GODInventoryWinForm.Controls
             //    else
             //        dataGridView1.Rows[e.RowIndex].Cells[0].Value = "クリア";
             //}
+            var cell1 = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            if (cell1.OwningColumn == 受注数)
+            {
+
+                orderList[davX].受注日 = DateTime.Now;
+                orderList[davX].発注日 = orderCreatedAtDateTimePicker.Value;
+                if (storeCodeTextBox.Text != "")
+                    orderList[davX].店舗コード = Convert.ToInt16(storeCodeTextBox.Text);
+                if (productCodeTextBox.Text != "")
+                    orderList[davX].商品コード = Convert.ToInt32(productCodeTextBox.Text);
+                if (orderQuantityTextBox.Text != "")
+                    orderList[davX].発注数量 = Convert.ToInt32(orderQuantityTextBox.Text);
+                if (textBox1.Text != "")
+                    orderList[davX].仕入先コード = Convert.ToInt32(textBox1.Text);
+                if (textBox2.Text != "")
+                    orderList[davX].出荷業務仕入先コード = Convert.ToInt32(this.textBox2.Text);
+                orderList[davX].仕入先名カナ = this.textBox3.Text;
+                orderList[davX].店舗名漢字 = this.storeComboBox.Text;
+                if (textBox4.Text != "")
+                    orderList[davX].法人コード = Convert.ToInt16(this.textBox4.Text);
+                orderList[davX].法人名漢字 = this.comboBox2.Text;
+                if (textBox5.Text != "")
+                    orderList[davX].部門コード = Convert.ToInt16(this.textBox5.Text);
+                orderList[davX].納品予定日 = this.dateTimePicker1.Value;
+                if (locationTextBox.Text != "")
+                    orderList[davX].納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
+                orderList[davX].納品先店舗名漢字 = this.locationComboBox.Text;
+
+
+            }
+
         }
 
         private int GenerateInvoiceNumber(int store_id)
@@ -750,7 +836,8 @@ namespace GODInventoryWinForm.Controls
 
             if (cell.OwningColumn == orderReasonDataGridviewComboBox)
             {
-                orderList[e.RowIndex].発注形態区分 = (short)cell.Value;
+                if (cell.Value != null)
+                    orderList[e.RowIndex].発注形態区分 = (short)cell.Value;
                 orderList[e.RowIndex].発注形態名称漢字 = (string)cell.FormattedValue;
             }
             #region MyRegion
@@ -798,6 +885,71 @@ namespace GODInventoryWinForm.Controls
 
             #endregion
 
+            #region MyRegion
+            if (e.RowIndex >= 0)
+            {
+                var cell1 = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (cell1.OwningColumn == 雑コード)
+                {
+                    if (cell1.Value != null && cell1.Value.ToString() == "No")
+                    {
+                        // fix 発注形態 combobox
+                        var row = dataGridView1.Rows[e.RowIndex];
+                        //row.Cells["商品コード"].ReadOnly = true;
+                        row.Cells["ジャンル"].ReadOnly = true;
+                        row.Cells["品名漢字"].ReadOnly = true;
+                        row.Cells["規格名漢字"].ReadOnly = true;
+                        row.Cells["ＪＡＮコード"].ReadOnly = true;
+                        row.Cells["原単価"].ReadOnly = true;
+                        row.Cells["売単価"].ReadOnly = true;
+                        row.Cells["ロット"].ReadOnly = true;
+
+                    }
+                    else if (cell1.Value != null && cell1.Value.ToString() == "Yes")
+                    {
+                        // fix 発注形態 combobox
+                        var row = dataGridView1.Rows[e.RowIndex];
+                        //row.Cells["商品コード"].ReadOnly = true;
+                        row.Cells["ジャンル"].ReadOnly = true;
+                        row.Cells["品名漢字"].ReadOnly = true;
+                        row.Cells["規格名漢字"].ReadOnly = true;
+                        row.Cells["ＪＡＮコード"].ReadOnly = true;
+                        row.Cells["原単価"].ReadOnly = true;
+                        row.Cells["売単価"].ReadOnly = true;
+                        row.Cells["ロット"].ReadOnly = true;
+
+                    }
+
+                }
+                else if (cell1.OwningColumn == 受注数)
+                {
+
+                    orderList[davX].受注日 = DateTime.Now;
+                    orderList[davX].発注日 = orderCreatedAtDateTimePicker.Value;
+                    orderList[davX].店舗コード = Convert.ToInt16(storeCodeTextBox.Text);
+                    if (productCodeTextBox.Text != "")
+                        orderList[davX].商品コード = Convert.ToInt32(productCodeTextBox.Text);
+                    orderList[davX].発注数量 = Convert.ToInt32(orderQuantityTextBox.Text);
+                    orderList[davX].仕入先コード = Convert.ToInt32(textBox1.Text);
+                    orderList[davX].出荷業務仕入先コード = Convert.ToInt32(this.textBox2.Text);
+                    orderList[davX].仕入先名カナ = this.textBox3.Text;
+                    orderList[davX].店舗名漢字 = this.storeComboBox.Text;
+                    orderList[davX].法人コード = Convert.ToInt16(this.textBox4.Text);
+                    orderList[davX].法人名漢字 = this.comboBox2.Text;
+                    orderList[davX].部門コード = Convert.ToInt16(this.textBox5.Text);
+                    orderList[davX].納品予定日 = this.dateTimePicker1.Value;
+                    orderList[davX].納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
+                    orderList[davX].納品先店舗名漢字 = this.locationComboBox.Text;
+
+
+                }
+
+
+            }
+
+            #endregion
+
         }
 
         private void storeBindingSource_DataError(object sender, BindingManagerDataErrorEventArgs e)
@@ -807,13 +959,87 @@ namespace GODInventoryWinForm.Controls
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-
         }
 
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-          
 
+
+        }
+
+        private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    davX = e.RowIndex;
+                    davY = e.ColumnIndex;
+
+                    #region MyRegion
+                    if (CreateorderForm_ShopCode == null)
+                    {
+                        CreateorderForm_ShopCode = new CreateorderForm_ShopCode();
+                        CreateorderForm_ShopCode.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
+                    }
+                    if (CreateorderForm_ShopCode == null)
+                    {
+                        CreateorderForm_ShopCode = new CreateorderForm_ShopCode();
+                    }
+                    CreateorderForm_ShopCode.ShowDialog();
+
+                    #endregion
+
+
+                    //若行已是选中状态就不再进行设置
+                    if (dataGridView1.Rows[e.RowIndex].Selected == false)
+                    {
+                        // dataGridView1.ClearSelection();
+                        // dataGridView1.Rows[e.RowIndex].Selected = true;
+                    }
+                    //只选中一行时设置活动单元格
+                    if (dataGridView1.SelectedRows.Count == 1)
+                    {
+                        //  dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    }
+                    //弹出操作菜单
+                    // contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+
+                }
+            }
+        }
+        void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (sender is CreateorderForm_ShopCode)
+            {
+                if (CreateorderForm_ShopCode.ischeckmunal == false)
+                {
+                    v_itemlist v_stockiositem = CreateorderForm_ShopCode.v_stockiositem;
+                    int inr = 0;
+
+                    orderList[davX].商品コード = Convert.ToInt32(v_stockiositem.商品コード);
+                    orderList[davX].ジャンル = v_stockiositem.ジャンル;
+                    orderList[davX].品名漢字 = v_stockiositem.商品名;
+                    orderList[davX].規格名漢字 = v_stockiositem.規格;
+                    orderList[davX].ＪＡＮコード = v_stockiositem.JANコード;
+                    orderList[davX].発注数量 = Convert.ToInt32(v_stockiositem.ロット);
+                }
+                else
+                {
+                    var row = dataGridView1.Rows[davX];
+
+                    row.Cells["品名漢字"].ReadOnly = true;
+                    orderList[davX].規格名漢字 = "";
+                    orderList[davX].ＪＡＮコード = 0;
+                    orderList[davX].発注数量 = 0;
+                    orderList[davX].原単価_税抜_ = 0;
+                    orderList[davX].売単価_税抜_ = 0;
+                    orderList[davX].口数 = 0;
+                }
+                this.dataGridView1.Refresh();
+
+                CreateorderForm_ShopCode = null;
+            }
         }
 
     }
