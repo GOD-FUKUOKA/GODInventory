@@ -14,7 +14,7 @@ using MySql.Data.MySqlClient;
 
 namespace GODInventoryWinForm.Controls
 {
-    public partial class Search_Strock : Form
+    public partial class SearchStock : Form
     {
         private List<MockEntity> manufacturerList;
         private BindingList<v_stockios> stockiosList;
@@ -24,7 +24,7 @@ namespace GODInventoryWinForm.Controls
         private List<v_stockcheck> productList = null;
         private List<t_stockrec> stockList = null;
 
-        public Search_Strock()
+        public SearchStock()
         {
             InitializeComponent();
 

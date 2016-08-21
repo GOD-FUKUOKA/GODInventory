@@ -107,11 +107,11 @@
     <Compile Include="Controls\OutputStock.Designer.cs">
       <DependentUpon>OutputStock.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Search_Strock.cs">
+    <Compile Include="Controls\SearchStock.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\Search_Strock.Designer.cs">
-      <DependentUpon>Search_Strock.cs</DependentUpon>
+    <Compile Include="Controls\SearchStock.Designer.cs">
+      <DependentUpon>SearchStock.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\StockMovement.cs">
       <SubType>Form</SubType>
@@ -306,8 +306,8 @@
       <DependentUpon>OutputStock.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Search_Strock.resx">
-      <DependentUpon>Search_Strock.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\SearchStock.resx">
+      <DependentUpon>SearchStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\StockMovement.resx">
       <DependentUpon>StockMovement.cs</DependentUpon>

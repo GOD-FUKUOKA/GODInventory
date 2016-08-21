@@ -1,6 +1,6 @@
 ﻿namespace GODInventoryWinForm.Controls
 {
-    partial class Search_Strock
+    partial class SearchStock
     {
         /// <summary>
         /// Required designer variable.
