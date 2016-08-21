@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.warehouseComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ioComboBox = new System.Windows.Forms.ComboBox();
@@ -45,10 +45,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.productDataGridView = new System.Windows.Forms.DataGridView();
-            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productSpecColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.loadItemListButton = new System.Windows.Forms.Button();
             this.qtyDataGridView = new System.Windows.Forms.DataGridView();
             this.btSave = new System.Windows.Forms.Button();
@@ -58,6 +54,14 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productSpecColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qtyDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockIoDataGridView)).BeginInit();
@@ -121,7 +125,6 @@
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(128, 20);
             this.genreComboBox.TabIndex = 80;
-            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -188,14 +191,14 @@
             this.productCodeColumn,
             this.productNameColumn,
             this.productSpecColumn});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.productDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.productDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
             this.productDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.productDataGridView.Location = new System.Drawing.Point(18, 196);
             this.productDataGridView.MultiSelect = false;
@@ -205,40 +208,6 @@
             this.productDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.productDataGridView.Size = new System.Drawing.Size(465, 224);
             this.productDataGridView.TabIndex = 87;
-            // 
-            // IdDataGridViewTextBoxColumn
-            // 
-            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
-            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
-            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.IdDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.IdDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // productCodeColumn
-            // 
-            this.productCodeColumn.DataPropertyName = "自社コード";
-            this.productCodeColumn.HeaderText = "自社コード";
-            this.productCodeColumn.Name = "productCodeColumn";
-            this.productCodeColumn.ReadOnly = true;
-            this.productCodeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // productNameColumn
-            // 
-            this.productNameColumn.DataPropertyName = "商品名";
-            this.productNameColumn.HeaderText = "商品名";
-            this.productNameColumn.Name = "productNameColumn";
-            this.productNameColumn.ReadOnly = true;
-            this.productNameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.productNameColumn.Width = 200;
-            // 
-            // productSpecColumn
-            // 
-            this.productSpecColumn.DataPropertyName = "規格";
-            this.productSpecColumn.HeaderText = "規格";
-            this.productSpecColumn.Name = "productSpecColumn";
-            this.productSpecColumn.ReadOnly = true;
-            this.productSpecColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // loadItemListButton
             // 
@@ -262,14 +231,14 @@
             this.qtyDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.qtyDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.qtyDataGridView.ColumnHeadersVisible = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.qtyDataGridView.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.qtyDataGridView.DefaultCellStyle = dataGridViewCellStyle9;
             this.qtyDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.qtyDataGridView.Location = new System.Drawing.Point(483, 196);
             this.qtyDataGridView.MultiSelect = false;
@@ -315,14 +284,14 @@
             this.stockIoDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.stockIoDataGridView.ColumnHeadersVisible = false;
             this.stockIoDataGridView.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.stockIoDataGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.stockIoDataGridView.DefaultCellStyle = dataGridViewCellStyle10;
             this.stockIoDataGridView.Location = new System.Drawing.Point(483, 58);
             this.stockIoDataGridView.MultiSelect = false;
             this.stockIoDataGridView.Name = "stockIoDataGridView";
@@ -354,6 +323,7 @@
             this.vScrollBar1.Name = "vScrollBar1";
             this.vScrollBar1.Size = new System.Drawing.Size(17, 224);
             this.vScrollBar1.TabIndex = 93;
+            this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             // 
             // hScrollBar1
             // 
@@ -363,11 +333,94 @@
             this.hScrollBar1.TabIndex = 94;
             this.hScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
             // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label7.Location = new System.Drawing.Point(18, 151);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 46);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "序号";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label8.Location = new System.Drawing.Point(82, 151);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(97, 46);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "自社コード";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label9.Location = new System.Drawing.Point(178, 151);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(200, 46);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "商品名";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label10.Location = new System.Drawing.Point(377, 151);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(106, 46);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "規格";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // IdDataGridViewTextBoxColumn
+            // 
+            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
+            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
+            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.IdDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.IdDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // productCodeColumn
+            // 
+            this.productCodeColumn.DataPropertyName = "自社コード";
+            this.productCodeColumn.HeaderText = "自社コード";
+            this.productCodeColumn.Name = "productCodeColumn";
+            this.productCodeColumn.ReadOnly = true;
+            this.productCodeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // productNameColumn
+            // 
+            this.productNameColumn.DataPropertyName = "商品名";
+            this.productNameColumn.HeaderText = "商品名";
+            this.productNameColumn.Name = "productNameColumn";
+            this.productNameColumn.ReadOnly = true;
+            this.productNameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.productNameColumn.Width = 200;
+            // 
+            // productSpecColumn
+            // 
+            this.productSpecColumn.DataPropertyName = "規格";
+            this.productSpecColumn.HeaderText = "規格";
+            this.productSpecColumn.Name = "productSpecColumn";
+            this.productSpecColumn.ReadOnly = true;
+            this.productSpecColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.productSpecColumn.Width = 105;
+            // 
             // Search_Strock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1129, 477);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.stockIoDataGridView);
@@ -420,14 +473,18 @@
         private System.Windows.Forms.Button btSave;
         private System.Windows.Forms.Button btcanel;
         private System.Windows.Forms.DataGridView stockIoDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productSpecColumn;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.HScrollBar hScrollBar1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productSpecColumn;
 
 
 

@@ -376,6 +376,10 @@ WHERE ({0});";
             }
             qtyDataGridView.DataSource = qtyTable;
             stockIoDataGridView.DataSource = ioTable;
+
+            if( ioTable.Rows.Count>0){
+                stockIoDataGridView.Rows[4].Height = 23 * 2;
+            }
             #endregion
 
             InitializeScrollBar();
@@ -418,22 +422,36 @@ WHERE ({0});";
 
         private void InitializeScrollBar(){
 
-
-            int overflow = 80 * this.qtyDataGridView.Columns.Count - this.qtyDataGridView.Width;
-
-            if (overflow > 0)
+            int voverflow = (23 + 1) * this.productDataGridView.RowCount - this.productDataGridView.Height;
+            int hoverflow = (80+1) * this.qtyDataGridView.Columns.Count - this.qtyDataGridView.Width;
+           
+            if (hoverflow > 0)
             {
                 hScrollBar1.SmallChange = 20;
-                hScrollBar1.Maximum = overflow;
+                hScrollBar1.Maximum = hoverflow;
             }
 
-            hScrollBar1.Visible = (overflow > 0);
+            if (voverflow > 0) {
+
+                hScrollBar1.SmallChange = 23;
+                vScrollBar1.Maximum = voverflow ;            
+            }
+
+            hScrollBar1.Visible = (hoverflow > 0);
+            hScrollBar1.Visible = (voverflow > 0);
         }
 
         private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
             this.qtyDataGridView.HorizontalScrollingOffset = e.NewValue;
             this.stockIoDataGridView.HorizontalScrollingOffset = e.NewValue;
+        }
+
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+
+            this.productDataGridView.FirstDisplayedScrollingRowIndex = e.NewValue/23;
+            this.qtyDataGridView.FirstDisplayedScrollingRowIndex = e.NewValue/23;
         }
 
         #region MyRegion
