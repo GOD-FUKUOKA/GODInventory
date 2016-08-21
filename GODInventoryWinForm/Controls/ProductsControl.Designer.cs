@@ -30,25 +30,23 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
             this.自社コードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.得意先DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ジャンルDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品名DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.規格DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.配送担当DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.価格発動日DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pT入数DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.仕入原価DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.単価DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.売価DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品コードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.jANコードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.インストアコードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.単品重量DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.単位DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pT単位かDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -63,12 +61,10 @@
             this.ジャンルDataGridViewTextBoxColumn,
             this.商品名DataGridViewTextBoxColumn,
             this.規格DataGridViewTextBoxColumn,
-            this.配送担当DataGridViewTextBoxColumn,
             this.価格発動日DataGridViewTextBoxColumn,
             this.pT入数DataGridViewTextBoxColumn,
             this.仕入原価DataGridViewTextBoxColumn,
             this.単価DataGridViewTextBoxColumn,
-            this.売価DataGridViewTextBoxColumn,
             this.商品コードDataGridViewTextBoxColumn,
             this.jANコードDataGridViewTextBoxColumn,
             this.インストアコードDataGridViewTextBoxColumn,
@@ -83,6 +79,22 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(754, 389);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.dataGridView1);
+            this.panel1.Location = new System.Drawing.Point(0, 46);
+            this.panel1.Margin = new System.Windows.Forms.Padding(8);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(754, 389);
+            this.panel1.TabIndex = 2;
             // 
             // 自社コードDataGridViewTextBoxColumn
             // 
@@ -114,12 +126,6 @@
             this.規格DataGridViewTextBoxColumn.HeaderText = "規格";
             this.規格DataGridViewTextBoxColumn.Name = "規格DataGridViewTextBoxColumn";
             // 
-            // 配送担当DataGridViewTextBoxColumn
-            // 
-            this.配送担当DataGridViewTextBoxColumn.DataPropertyName = "配送担当";
-            this.配送担当DataGridViewTextBoxColumn.HeaderText = "配送担当";
-            this.配送担当DataGridViewTextBoxColumn.Name = "配送担当DataGridViewTextBoxColumn";
-            // 
             // 価格発動日DataGridViewTextBoxColumn
             // 
             this.価格発動日DataGridViewTextBoxColumn.DataPropertyName = "価格発動日";
@@ -143,12 +149,6 @@
             this.単価DataGridViewTextBoxColumn.DataPropertyName = "単価";
             this.単価DataGridViewTextBoxColumn.HeaderText = "単価";
             this.単価DataGridViewTextBoxColumn.Name = "単価DataGridViewTextBoxColumn";
-            // 
-            // 売価DataGridViewTextBoxColumn
-            // 
-            this.売価DataGridViewTextBoxColumn.DataPropertyName = "売価";
-            this.売価DataGridViewTextBoxColumn.HeaderText = "売価";
-            this.売価DataGridViewTextBoxColumn.Name = "売価DataGridViewTextBoxColumn";
             // 
             // 商品コードDataGridViewTextBoxColumn
             // 
@@ -186,22 +186,6 @@
             this.pT単位かDataGridViewTextBoxColumn.HeaderText = "PT単位か";
             this.pT単位かDataGridViewTextBoxColumn.Name = "pT単位かDataGridViewTextBoxColumn";
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Location = new System.Drawing.Point(0, 46);
-            this.panel1.Margin = new System.Windows.Forms.Padding(8);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(754, 389);
-            this.panel1.TabIndex = 2;
-            // 
             // ProductsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -220,23 +204,23 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 配送担当DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 売価DataGridViewTextBoxColumn;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 自社コードDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 得意先DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ジャンルDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 商品名DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 規格DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 配送担当DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 価格発動日DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pT入数DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 仕入原価DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 単価DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 売価DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 商品コードDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn jANコードDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn インストアコードDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 単品重量DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 単位DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pT単位かDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Panel panel1;
     }
 }

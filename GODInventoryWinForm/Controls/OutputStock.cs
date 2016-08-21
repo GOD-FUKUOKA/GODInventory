@@ -103,11 +103,11 @@ namespace GODInventoryWinForm.Controls
                     {
                         var order = new t_stockrec();
                         order.日付 = orderCreatedAtDateTimePicker.Value;
-                        order.先 = manufacturerComboBox.Text;
                         order.元 = this.warehouseComboBox.Text;
+                        order.先 = this.clientComboBox.Text;
                         order.納品書番号 = stockNOTextBox.Text;
                         order.数量 = item.qty;
-                        order.区分 = "出庫";
+                        order.区分 = StockIoEnum.出庫.ToString();
                         order.事由 = this.remarkTextBox1.Text;                   
                         order.自社コード = Convert.ToInt32(item.自社コード);
                         order.状態 = this.stockStatusComboBox.Text;
@@ -147,17 +147,20 @@ namespace GODInventoryWinForm.Controls
 
 
                 int count = 0;
-                var selected_date = this.orderCreatedAtDateTimePicker.Value;
-
+                var startAt = this.orderCreatedAtDateTimePicker.Value.Date;
+                var endAt = startAt.AddDays(1).Date;
                 using (var ctx = new GODDbContext())
                 {
                     var results = from s in ctx.t_stockrec
-                                  where s.日付 == selected_date.Date
-                                  select s;
+                                  where s.日付 >= startAt && s.日付 < endAt
+                                  group s by s.納品書番号 into g
+                                  select g;
+
                     count = results.Count();
                 }
 
-                var stock_no = String.Format("GOD-{0:yyyyMMdd}-{1:D2}-{2:D2}", selected_date, genre_id, count + 1);
+                var stock_no = String.Format("GOD-{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
+
                 this.stockNOTextBox.Text = stock_no;
             }
             else
@@ -167,6 +170,11 @@ namespace GODInventoryWinForm.Controls
         }
 
         private void orderCreatedAtDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            BuildStockNO();
+        }
+
+        private void genreComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             BuildStockNO();
         }
