@@ -1,0 +1,9 @@
+﻿#v2
+============================================
+1. sql_change.sql
+
+2. sql_seeds.sql
+
+3. sql_t_itemlist_new.sql
+
+4. sql_t_pricelist

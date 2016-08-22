@@ -204,7 +204,7 @@ WHERE ({0});";
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            var deletedList = new List<t_stockrec>();
+            var deletedStockNumList = new List<string>();
             DataGridViewColumn col ;
             string stockNum = null;
             for (int i = 0; i < stockIoDataGridView.ColumnCount; i++){
@@ -212,23 +212,29 @@ WHERE ({0});";
                 if( !col.Visible ){
                 
                     stockNum = Convert.ToString( stockIoDataGridView.Rows[4].Cells[i].Value );
-                    deletedList.AddRange( this.stockList.FindAll( s=>s.納品書番号 == stockNum) );
+                    deletedStockNumList.Add(stockNum);
                 }
             
             }
 
 
-            if (deletedList.Count > 0)
+            if (deletedStockNumList.Count > 0)
             {
+                int deletedCount = 0;
                 using (var ctx = new GODDbContext())
                 {
-                    ctx.t_stockrec.RemoveRange(deletedList);
+
+                    var stockrecs = (from s in ctx.t_stockrec
+                     where deletedStockNumList.Contains(s.納品書番号)
+                     select s).ToList();
+                    ctx.t_stockrec.RemoveRange(stockrecs);
                     ctx.SaveChanges();
-                    foreach( var stock in deletedList){
-                      this.stockList.Remove(stock);
-                    }
+
+                    deletedCount = stockrecs.Count;
+                    this.stockList.RemoveAll(s => deletedStockNumList.Contains(s.納品書番号));
+                    
                 }
-                MessageBox.Show(String.Format("Congratulations, You have {0} items removed successfully!", deletedList.Count));
+                MessageBox.Show(String.Format("Congratulations, You have {0} items removed successfully!", deletedCount));
 
             }
             else

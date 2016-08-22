@@ -55,6 +55,9 @@ namespace GODInventoryWinForm.Controls
             this.warehouseComboBox.DataSource = warehouseList;
 
             this.stockStatusComboBox.SelectedIndex = 0;
+            if (this.clientComboBox.Items.Count > 0) {
+                this.clientComboBox.SelectedIndex = 0;              
+            }
             //BuildStockNO();
         }
 

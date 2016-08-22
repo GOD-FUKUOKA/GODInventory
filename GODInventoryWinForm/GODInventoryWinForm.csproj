@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GODInventoryWinForm</RootNamespace>
-    <AssemblyName>InventoryDemoV1</AssemblyName>
+    <AssemblyName>InventoryDemoV2</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
@@ -457,6 +457,7 @@
     <None Include="Resources\dashboard1.png" />
     <None Include="Resources\add - 副本.gif" />
     <None Include="Resources\16-on-black.gif" />
+    <Content Include="Doc\install.txt" />
     <Content Include="Doc\sql_seeds.txt" />
     <Content Include="Doc\sql_t_itemlist_new.txt" />
     <Content Include="Doc\sql_t_pricelist.txt" />
