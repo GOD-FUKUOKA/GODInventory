@@ -314,6 +314,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InventoryForm.resx">
       <DependentUpon>InventoryForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Strock_CompanyCode.resx">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>

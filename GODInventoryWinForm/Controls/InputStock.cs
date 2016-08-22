@@ -25,7 +25,7 @@ namespace GODInventoryWinForm.Controls
             InitializeComponent();
 
             stockiosList = new BindingList<v_stockios>();
-                     
+
             this.dataGridView1.AutoGenerateColumns = false;
 
             this.dataGridView1.DataSource = stockiosList;
@@ -33,10 +33,11 @@ namespace GODInventoryWinForm.Controls
             InitializeDataSource();
         }
 
-        private void InitializeDataSource() {
+        private void InitializeDataSource()
+        {
 
             using (var ctx = new GODDbContext())
-            {                
+            {
                 genreList = ctx.t_genre.ToList();
                 warehouseList = ctx.t_warehouses.ToList();
             }
@@ -47,19 +48,21 @@ namespace GODInventoryWinForm.Controls
 
             this.manufacturerList = ManufactureRespository.ToList();
             this.manufacturerComboBox.DisplayMember = "FullName";
-            this.manufacturerComboBox.ValueMember = "Id"; 
+            this.manufacturerComboBox.ValueMember = "Id";
             this.manufacturerComboBox.DataSource = manufacturerList;
 
 
             this.warehouseComboBox.DisplayMember = "FullName";
-            this.warehouseComboBox.ValueMember = "Id"; 
+            this.warehouseComboBox.ValueMember = "Id";
             this.warehouseComboBox.DataSource = warehouseList;
 
             this.stockStatusComboBox.SelectedIndex = 0;
             this.clientComboBox.SelectedIndex = 0;
+            this.remarkTextBox1.SelectedIndex = 0;
+    
             //BuildStockNO();
         }
-     
+
         private void submitButton_Click(object sender, EventArgs e)
         {
             try
@@ -67,7 +70,8 @@ namespace GODInventoryWinForm.Controls
                 List<t_stockrec> receivedList = new List<t_stockrec>();
                 foreach (var item in stockiosList)
                 {
-                    if (item.qty > 0) {
+                    if (item.qty > 0)
+                    {
                         var order = new t_stockrec();
 
                         order.日付 = orderCreatedAtDateTimePicker.Value;
@@ -115,9 +119,9 @@ namespace GODInventoryWinForm.Controls
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
             BuildStockNO();
-           
+
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -127,12 +131,13 @@ namespace GODInventoryWinForm.Controls
 
 
 
-        private void BuildStockNO() {
+        private void BuildStockNO()
+        {
             var genre_id = GetGenreId();
             if (genre_id > 0)
             {
 
-
+                string sn = "";
                 int count = 0;
                 var startAt = this.orderCreatedAtDateTimePicker.Value.Date;
                 var endAt = startAt.AddDays(1).Date;
@@ -143,12 +148,20 @@ namespace GODInventoryWinForm.Controls
                                   group s by s.納品書番号 into g
                                   select g;
                     count = results.Count();
+                    var warehouse = warehouseComboBox1();
+                    if (warehouse > 0)
+                    {
+                        var shorname = warehouseList.Find(o => o.Id == Convert.ToInt32(warehouse));
+                        if (shorname != null)
+                            sn = shorname.ShortName;
+                    }
                 }
-                
-                var stock_no = String.Format("GOD-{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
+
+                var stock_no = String.Format("GOD-" + sn + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
                 this.stockNOTextBox.Text = stock_no;
             }
-            else {
+            else
+            {
                 this.stockNOTextBox.Text = "";
             }
         }
@@ -169,20 +182,26 @@ namespace GODInventoryWinForm.Controls
                     var results = (from s in ctx.t_itemlist
                                    where s.ジャンル == (short)genre_id
                                    select new v_stockios { 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
-                    for (int i = 0;i< results.Count; i++) { 
-                       results[i].Id = i+1;                       
-                       stockiosList.Add(results[i]);
+                    for (int i = 0; i < results.Count; i++)
+                    {
+                        results[i].Id = i + 1;
+                        stockiosList.Add(results[i]);
                     }
                 }
             }
         }
 
 
-        private int GetGenreId(){
-            
-           return ((this.genreComboBox.SelectedIndex >= 0) ? (int)this.genreComboBox.SelectedValue : 0 );
-        }
+        private int GetGenreId()
+        {
 
+            return ((this.genreComboBox.SelectedIndex >= 0) ? (int)this.genreComboBox.SelectedValue : 0);
+        }
+        private int warehouseComboBox1()
+        {
+
+            return ((this.warehouseComboBox.SelectedIndex >= 0) ? (int)this.warehouseComboBox.SelectedValue : 0);
+        }
         private void cancelButton_Click_1(object sender, EventArgs e)
         {
             foreach (var item in stockiosList)
@@ -196,6 +215,16 @@ namespace GODInventoryWinForm.Controls
         {
             var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
             this.stockiosList[e.RowIndex].qty = (int)cell.Value;
+        }
+
+        private void warehouseComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BuildStockNO();
+        }
+
+        private void remarkTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

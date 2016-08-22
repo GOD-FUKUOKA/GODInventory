@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.btconfirm = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -132,7 +132,6 @@
             this.manufacturerComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.manufacturerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.manufacturerComboBox.FormattingEnabled = true;
-
             this.manufacturerComboBox.Location = new System.Drawing.Point(487, 29);
             this.manufacturerComboBox.Name = "manufacturerComboBox";
             this.manufacturerComboBox.Size = new System.Drawing.Size(141, 21);
@@ -156,7 +155,6 @@
             this.jiHuaRuCunShuColumn,
             this.qingDianColumn,
             this.chaZhiColumn});
-
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(12, 73);
             this.dataGridView1.Name = "dataGridView1";
@@ -168,8 +166,8 @@
             // idColumn
             // 
             this.idColumn.DataPropertyName = "Id";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.idColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.idColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.idColumn.HeaderText = "序号";
             this.idColumn.Name = "idColumn";
             this.idColumn.ReadOnly = true;
@@ -275,12 +273,12 @@
             this.btprint.Text = "打印清点用表格";
             this.btprint.UseVisualStyleBackColor = true;
             this.btprint.Visible = false;
+            this.btprint.Click += new System.EventHandler(this.btprint_Click_1);
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-
             this.label2.Location = new System.Drawing.Point(222, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
@@ -290,7 +288,6 @@
             // endDateTimePicker1
             // 
             this.endDateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-
             this.endDateTimePicker1.Location = new System.Drawing.Point(688, 29);
             this.endDateTimePicker1.Name = "endDateTimePicker1";
             this.endDateTimePicker1.Size = new System.Drawing.Size(141, 20);
@@ -300,7 +297,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-
             this.ClientSize = new System.Drawing.Size(942, 538);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btconfirm);

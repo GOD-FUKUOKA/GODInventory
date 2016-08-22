@@ -239,5 +239,10 @@ namespace GODInventoryWinForm.Controls
            
             return stock_no;
         }
+
+        private void btprint_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
