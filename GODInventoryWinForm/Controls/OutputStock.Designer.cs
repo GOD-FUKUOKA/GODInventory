@@ -243,6 +243,7 @@
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(164, 21);
             this.genreComboBox.TabIndex = 72;
+            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged);
             // 
             // warehouseComboBox
             // 

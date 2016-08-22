@@ -78,11 +78,11 @@
             this.規格,
             this.数量});
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(344, 23);
+            this.dataGridView1.Location = new System.Drawing.Point(344, 25);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(573, 384);
+            this.dataGridView1.Size = new System.Drawing.Size(573, 416);
             this.dataGridView1.TabIndex = 45;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
@@ -125,9 +125,9 @@
             // cancelButton
             // 
             this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cancelButton.Location = new System.Drawing.Point(938, 59);
+            this.cancelButton.Location = new System.Drawing.Point(938, 64);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(63, 23);
+            this.cancelButton.Size = new System.Drawing.Size(63, 25);
             this.cancelButton.TabIndex = 36;
             this.cancelButton.Text = "清零";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -137,9 +137,9 @@
             // 
             this.submitButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.submitButton.BackColor = System.Drawing.SystemColors.Control;
-            this.submitButton.Location = new System.Drawing.Point(938, 21);
+            this.submitButton.Location = new System.Drawing.Point(938, 23);
             this.submitButton.Name = "submitButton";
-            this.submitButton.Size = new System.Drawing.Size(63, 23);
+            this.submitButton.Size = new System.Drawing.Size(63, 25);
             this.submitButton.TabIndex = 35;
             this.submitButton.Text = "登录";
             this.submitButton.UseVisualStyleBackColor = false;
@@ -148,9 +148,9 @@
             // loadItemListButton
             // 
             this.loadItemListButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.loadItemListButton.Location = new System.Drawing.Point(234, 279);
+            this.loadItemListButton.Location = new System.Drawing.Point(234, 302);
             this.loadItemListButton.Name = "loadItemListButton";
-            this.loadItemListButton.Size = new System.Drawing.Size(63, 23);
+            this.loadItemListButton.Size = new System.Drawing.Size(63, 25);
             this.loadItemListButton.TabIndex = 51;
             this.loadItemListButton.Text = "调出商品列表";
             this.loadItemListButton.UseVisualStyleBackColor = true;
@@ -160,9 +160,9 @@
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(77, 350);
+            this.label7.Location = new System.Drawing.Point(77, 379);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(29, 12);
+            this.label7.Size = new System.Drawing.Size(31, 13);
             this.label7.TabIndex = 43;
             this.label7.Text = "数量";
             // 
@@ -170,9 +170,9 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(53, 125);
+            this.label5.Location = new System.Drawing.Point(53, 135);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 41;
             this.label5.Text = "商品分类";
             // 
@@ -180,9 +180,9 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(77, 94);
+            this.label2.Location = new System.Drawing.Point(77, 102);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 37;
             this.label2.Text = "期日";
             // 
@@ -190,9 +190,9 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(53, 249);
+            this.label4.Location = new System.Drawing.Point(53, 270);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 39;
             this.label4.Text = "入库编号";
             // 
@@ -200,18 +200,18 @@
             // 
             this.stockNOTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.stockNOTextBox.Enabled = false;
-            this.stockNOTextBox.Location = new System.Drawing.Point(134, 247);
+            this.stockNOTextBox.Location = new System.Drawing.Point(134, 268);
             this.stockNOTextBox.Multiline = true;
             this.stockNOTextBox.Name = "stockNOTextBox";
             this.stockNOTextBox.ReadOnly = true;
-            this.stockNOTextBox.Size = new System.Drawing.Size(164, 21);
+            this.stockNOTextBox.Size = new System.Drawing.Size(164, 22);
             this.stockNOTextBox.TabIndex = 40;
             // 
             // orderCreatedAtDateTimePicker
             // 
-            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(134, 90);
+            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(134, 98);
             this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
-            this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(164, 21);
+            this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(164, 20);
             this.orderCreatedAtDateTimePicker.TabIndex = 44;
             this.orderCreatedAtDateTimePicker.ValueChanged += new System.EventHandler(this.orderCreatedAtDateTimePicker_ValueChanged);
             // 
@@ -220,9 +220,9 @@
             this.genreComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(134, 122);
+            this.genreComboBox.Location = new System.Drawing.Point(134, 132);
             this.genreComboBox.Name = "genreComboBox";
-            this.genreComboBox.Size = new System.Drawing.Size(164, 20);
+            this.genreComboBox.Size = new System.Drawing.Size(164, 21);
             this.genreComboBox.TabIndex = 47;
             this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -231,17 +231,17 @@
             this.warehouseComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.warehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.warehouseComboBox.FormattingEnabled = true;
-            this.warehouseComboBox.Location = new System.Drawing.Point(134, 59);
+            this.warehouseComboBox.Location = new System.Drawing.Point(134, 64);
             this.warehouseComboBox.Name = "warehouseComboBox";
-            this.warehouseComboBox.Size = new System.Drawing.Size(164, 20);
+            this.warehouseComboBox.Size = new System.Drawing.Size(164, 21);
             this.warehouseComboBox.TabIndex = 49;
             // 
             // numericUpDown1
             // 
             this.numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.numericUpDown1.Location = new System.Drawing.Point(134, 349);
+            this.numericUpDown1.Location = new System.Drawing.Point(134, 378);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(164, 21);
+            this.numericUpDown1.Size = new System.Drawing.Size(164, 20);
             this.numericUpDown1.TabIndex = 50;
             this.numericUpDown1.Value = new decimal(new int[] {
             1,
@@ -253,19 +253,20 @@
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(53, 319);
+            this.label6.Location = new System.Drawing.Point(53, 346);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.Size = new System.Drawing.Size(55, 13);
             this.label6.TabIndex = 42;
             this.label6.Text = "工厂编码";
+            this.label6.Visible = false;
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(77, 63);
+            this.label1.Location = new System.Drawing.Point(77, 68);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 34;
             this.label1.Text = "仓库";
             // 
@@ -273,9 +274,9 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(77, 156);
+            this.label3.Location = new System.Drawing.Point(77, 169);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 38;
             this.label3.Text = "工厂";
             // 
@@ -283,25 +284,26 @@
             // 
             this.manufacturerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.manufacturerComboBox.FormattingEnabled = true;
-            this.manufacturerComboBox.Location = new System.Drawing.Point(134, 153);
+            this.manufacturerComboBox.Location = new System.Drawing.Point(134, 166);
             this.manufacturerComboBox.Name = "manufacturerComboBox";
-            this.manufacturerComboBox.Size = new System.Drawing.Size(164, 20);
+            this.manufacturerComboBox.Size = new System.Drawing.Size(164, 21);
             this.manufacturerComboBox.TabIndex = 46;
             // 
             // codeComboBox
             // 
             this.codeComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.codeComboBox.FormattingEnabled = true;
-            this.codeComboBox.Location = new System.Drawing.Point(134, 318);
+            this.codeComboBox.Location = new System.Drawing.Point(134, 345);
             this.codeComboBox.Name = "codeComboBox";
-            this.codeComboBox.Size = new System.Drawing.Size(164, 20);
+            this.codeComboBox.Size = new System.Drawing.Size(164, 21);
             this.codeComboBox.TabIndex = 48;
+            this.codeComboBox.Visible = false;
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(234, 398);
+            this.addButton.Location = new System.Drawing.Point(234, 431);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(63, 23);
+            this.addButton.Size = new System.Drawing.Size(63, 25);
             this.addButton.TabIndex = 52;
             this.addButton.Text = "添加";
             this.addButton.UseVisualStyleBackColor = true;
@@ -313,43 +315,43 @@
             this.stockStatusComboBox.Items.AddRange(new object[] {
             "完了",
             "仮"});
-            this.stockStatusComboBox.Location = new System.Drawing.Point(134, 216);
+            this.stockStatusComboBox.Location = new System.Drawing.Point(134, 234);
             this.stockStatusComboBox.Name = "stockStatusComboBox";
-            this.stockStatusComboBox.Size = new System.Drawing.Size(164, 20);
+            this.stockStatusComboBox.Size = new System.Drawing.Size(164, 21);
             this.stockStatusComboBox.TabIndex = 53;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(77, 218);
+            this.label8.Location = new System.Drawing.Point(77, 236);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 12);
+            this.label8.Size = new System.Drawing.Size(31, 13);
             this.label8.TabIndex = 54;
             this.label8.Text = "状態";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(53, 187);
+            this.label9.Location = new System.Drawing.Point(53, 203);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.Size = new System.Drawing.Size(55, 13);
             this.label9.TabIndex = 55;
             this.label9.Text = "入库事由";
             // 
             // remarkTextBox1
             // 
-            this.remarkTextBox1.Location = new System.Drawing.Point(134, 184);
+            this.remarkTextBox1.Location = new System.Drawing.Point(134, 199);
             this.remarkTextBox1.Name = "remarkTextBox1";
-            this.remarkTextBox1.Size = new System.Drawing.Size(164, 21);
+            this.remarkTextBox1.Size = new System.Drawing.Size(164, 20);
             this.remarkTextBox1.TabIndex = 56;
             this.remarkTextBox1.Text = "仕入";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(79, 31);
+            this.label10.Location = new System.Drawing.Point(79, 34);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.Size = new System.Drawing.Size(31, 13);
             this.label10.TabIndex = 57;
             this.label10.Text = "客户";
             // 
@@ -359,16 +361,16 @@
             this.clientComboBox.FormattingEnabled = true;
             this.clientComboBox.Items.AddRange(new object[] {
             "ナフコ"});
-            this.clientComboBox.Location = new System.Drawing.Point(134, 31);
+            this.clientComboBox.Location = new System.Drawing.Point(134, 34);
             this.clientComboBox.Name = "clientComboBox";
-            this.clientComboBox.Size = new System.Drawing.Size(163, 20);
+            this.clientComboBox.Size = new System.Drawing.Size(163, 21);
             this.clientComboBox.TabIndex = 58;
             // 
             // InputStock
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 437);
+            this.ClientSize = new System.Drawing.Size(1034, 473);
             this.Controls.Add(this.clientComboBox);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.remarkTextBox1);

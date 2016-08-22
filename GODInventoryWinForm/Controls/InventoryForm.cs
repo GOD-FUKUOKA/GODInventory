@@ -214,5 +214,15 @@ namespace GODInventoryWinForm.Controls
                 testingCC = null;
             }
         }
+
+        private void btprint_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void manufacturerComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

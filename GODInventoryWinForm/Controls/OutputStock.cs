@@ -171,6 +171,12 @@ namespace GODInventoryWinForm.Controls
             BuildStockNO();
         }
 
+        private void genreComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            BuildStockNO();
+        }
+
         #region MyRegion
         //public OutputStock()
         //{
