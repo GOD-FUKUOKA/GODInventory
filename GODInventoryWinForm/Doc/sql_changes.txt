@@ -98,7 +98,7 @@ CHANGE COLUMN `日付` `日付` DATETIME NOT NULL ;
 
 -- t_stockrec new Add two cloumn
 ALTER TABLE `god_inventory`.`t_stockrec` 
-ADD COLUMN `工厂`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL
+ADD COLUMN `工厂`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL;
 
 ALTER TABLE `god_inventory`.`t_manufacturers` 
 ADD COLUMN `genreId` INT(11) UNSIGNED NOT NULL;
