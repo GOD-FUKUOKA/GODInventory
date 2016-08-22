@@ -53,7 +53,7 @@ namespace GODInventoryWinForm.Controls
             this.warehouseComboBox.DisplayMember = "FullName";
             this.warehouseComboBox.ValueMember = "Id";
             this.warehouseComboBox.DataSource = warehouseList;
-
+            this.remarkTextBox1.SelectedIndex = 0;
             this.stockStatusComboBox.SelectedIndex = 0;
             if (this.clientComboBox.Items.Count > 0) {
                 this.clientComboBox.SelectedIndex = 0;              
@@ -148,7 +148,7 @@ namespace GODInventoryWinForm.Controls
             if (genre_id > 0)
             {
 
-
+                string sn = "";
                 int count = 0;
                 var startAt = this.orderCreatedAtDateTimePicker.Value.Date;
                 var endAt = startAt.AddDays(1).Date;
@@ -160,9 +160,17 @@ namespace GODInventoryWinForm.Controls
                                   select g;
 
                     count = results.Count();
+                    var warehouse = warehouseComboBox1();
+                    if (warehouse > 0)
+                    {
+                        var shorname = warehouseList.Find(o => o.Id == Convert.ToInt32(warehouse));
+                        if (shorname != null)
+                            sn = shorname.ShortName;
+                    }
+
                 }
 
-                var stock_no = String.Format("GOD-{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
+                var stock_no = String.Format("GOD-" + sn + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
 
                 this.stockNOTextBox.Text = stock_no;
             }
@@ -171,7 +179,11 @@ namespace GODInventoryWinForm.Controls
                 this.stockNOTextBox.Text = "";
             }
         }
+        private int warehouseComboBox1()
+        {
 
+            return ((this.warehouseComboBox.SelectedIndex >= 0) ? (int)this.warehouseComboBox.SelectedValue : 0);
+        }
         private void orderCreatedAtDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
             BuildStockNO();
@@ -180,6 +192,11 @@ namespace GODInventoryWinForm.Controls
         private void genreComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            BuildStockNO();
+        }
+
+        private void warehouseComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
             BuildStockNO();
         }
 

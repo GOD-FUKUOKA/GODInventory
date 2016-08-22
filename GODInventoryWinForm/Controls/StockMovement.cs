@@ -195,7 +195,7 @@ namespace GODInventoryWinForm.Controls
         {
             var selected_date = this.stockOutDateTimePicker.Value;
             var genre_id = GetGenreId();
-            var stock_no = BuildStockNum(genre_id, selected_date);
+            var stock_no = outBuildStockNum(genre_id, selected_date);
             this.stockOutNumTextBox.Text = stock_no;
 
         }
@@ -214,7 +214,7 @@ namespace GODInventoryWinForm.Controls
             string stock_no = "";
             if (genre_id > 0)
             {
-                
+                string sn = "";
                 int count = 0;
                 var startAt = selected_date.Date;
                 var endAt = startAt.AddDays(1).Date;              
@@ -225,14 +225,61 @@ namespace GODInventoryWinForm.Controls
                                   group s by s.納品書番号 into g
                                   select g;
                     count = results.Count();
+                    var warehouse = warehouseComboBox1();
+                    if (warehouse > 0)
+                    {
+                        var shorname = warehouseList.Find(o => o.Id == Convert.ToInt32(warehouse));
+                        if (shorname != null)
+                            sn = shorname.ShortName;
+                    }
                 }
 
-                stock_no = String.Format("GOD-{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
+                stock_no = String.Format("GOD-" + sn + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
                
             }
             return stock_no;
         }
+        private string outBuildStockNum(int genre_id, DateTime selected_date)
+        {
+            string stock_no = "";
+            if (genre_id > 0)
+            {
+                string sn = "";
+                int count = 0;
+                var startAt = selected_date.Date;
+                var endAt = startAt.AddDays(1).Date;
+                using (var ctx = new GODDbContext())
+                {
+                    var results = from s in ctx.t_stockrec
+                                  where s.日付 >= startAt && s.日付 < endAt
+                                  group s by s.納品書番号 into g
+                                  select g;
+                    count = results.Count();
+                    var warehouse = warehouseComboBox2();
+                    if (warehouse > 0)
+                    {
+                        var shorname = warehouseList.Find(o => o.Id == Convert.ToInt32(warehouse));
+                        if (shorname != null)
+                            sn = shorname.ShortName;
+                    }
+                }
 
+                stock_no = String.Format("GOD-" + sn + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
+
+            }
+            return stock_no;
+        }
+
+        private int warehouseComboBox1()
+        {
+
+            return ((this.toWarehouseComboBox1.SelectedIndex >= 0) ? (int)this.toWarehouseComboBox1.SelectedValue : 0);
+        }
+        private int warehouseComboBox2()
+        {
+
+            return ((this.fromWarehouseComboBox.SelectedIndex >= 0) ? (int)this.fromWarehouseComboBox.SelectedValue : 0);
+        }
         private int GetGenreId()
         {
 
@@ -259,6 +306,17 @@ namespace GODInventoryWinForm.Controls
         {
             var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
             this.stockiosList[e.RowIndex].qty = (int)cell.Value;
+        }
+
+        private void toWarehouseComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BuildStockInNum();
+        }
+
+        private void fromWarehouseComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BuildStockOutNum();
+            
         }
 
     }
