@@ -261,6 +261,7 @@
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(141, 21);
             this.genreComboBox.TabIndex = 44;
+            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged);
             // 
             // btprint
             // 

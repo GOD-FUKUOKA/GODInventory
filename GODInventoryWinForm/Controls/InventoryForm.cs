@@ -14,9 +14,10 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class InventoryForm : Form
     {
-        private List<MockEntity> manufacturerList;
+        //private List<MockEntity> manufacturerList;
         private List<t_warehouses> warehouseList;
-
+        private List<t_manufacturers> manufacturerList;
+      
        
         private List<t_genre> genreList;
 
@@ -54,7 +55,7 @@ namespace GODInventoryWinForm.Controls
             this.genreComboBox.ValueMember = "idジャンル";
             this.genreComboBox.DataSource = genreList;
 
-            this.manufacturerList = ManufactureRespository.ToList();
+            //this.manufacturerList = ManufactureRespository.ToList();
             this.manufacturerComboBox.DisplayMember = "FullName";
             this.manufacturerComboBox.ValueMember = "Id";
             this.manufacturerComboBox.DataSource = manufacturerList;
@@ -243,6 +244,20 @@ namespace GODInventoryWinForm.Controls
         private void btprint_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void genreComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var filtered = manufacturerList.FindAll(s => s.genreId == (int)this.genreComboBox.SelectedValue);
+            if (filtered.Count > 0)
+            {
+                this.manufacturerComboBox.DataSource = filtered;
+            }
+            else
+            {
+                this.manufacturerComboBox.DataSource = manufacturerList;
+
+            }
         }
     }
 }
