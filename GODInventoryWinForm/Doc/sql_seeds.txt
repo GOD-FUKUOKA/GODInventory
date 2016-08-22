@@ -168,3 +168,9 @@ INSERT INTO `t_locations` VALUES ('159', '406', '0', 'ﾎﾝｶﾝ', '本館', '
 INSERT INTO `t_locations` VALUES ('160', '406', '1', 'ｶﾜﾁﾅｶﾞﾉﾃﾝ', '河内長野店', '河内長野店');
 INSERT INTO `t_locations` VALUES ('161', '409', '0', 'ﾎｰﾑｾﾝﾀｰ', 'ホームセンター', 'ホームセンター');
 INSERT INTO `t_locations` VALUES ('162', '409', '1', 'ｼｻﾞｲｶﾝ', '資材館', '資材館');
+
+-- V2.1-----------------------------------------------------------------------
+INSERT INTO `god_inventory`.`t_manufacturers` (`Id`, `ShortName`, `FullName`, `genreId`) VALUES ('1', '青岛华天', '青岛华天', '1002');
+INSERT INTO `god_inventory`.`t_manufacturers` (`Id`, `ShortName`, `FullName`, `genreId`) VALUES ('2', '自社工場', '自社工場', '1001');
+INSERT INTO `god_inventory`.`t_manufacturers` (`Id`, `ShortName`, `FullName`, `genreId`) VALUES ('3', '興和日東', '興和日東', '6');
+INSERT INTO `god_inventory`.`t_manufacturers` (`Id`, `ShortName`, `FullName`, `genreId`) VALUES ('4', 'ランデス', 'ランデス', '6');
