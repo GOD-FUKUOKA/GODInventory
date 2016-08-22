@@ -91,7 +91,7 @@
             this.btadd.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btadd.Location = new System.Drawing.Point(664, 27);
             this.btadd.Name = "btadd";
-            this.btadd.Size = new System.Drawing.Size(156, 30);
+            this.btadd.Size = new System.Drawing.Size(113, 30);
             this.btadd.TabIndex = 61;
             this.btadd.Text = "调出商品列表";
             this.btadd.UseVisualStyleBackColor = true;
@@ -120,7 +120,7 @@
             // 
             this.btclearzero.Location = new System.Drawing.Point(664, 235);
             this.btclearzero.Name = "btclearzero";
-            this.btclearzero.Size = new System.Drawing.Size(75, 30);
+            this.btclearzero.Size = new System.Drawing.Size(113, 30);
             this.btclearzero.TabIndex = 58;
             this.btclearzero.Text = "清零";
             this.btclearzero.UseVisualStyleBackColor = true;
@@ -130,7 +130,7 @@
             // 
             this.btlogin.Location = new System.Drawing.Point(664, 199);
             this.btlogin.Name = "btlogin";
-            this.btlogin.Size = new System.Drawing.Size(75, 30);
+            this.btlogin.Size = new System.Drawing.Size(113, 30);
             this.btlogin.TabIndex = 57;
             this.btlogin.Text = "登录";
             this.btlogin.UseVisualStyleBackColor = true;
@@ -344,12 +344,13 @@
             this.数量.DataPropertyName = "qty";
             this.数量.HeaderText = "数量";
             this.数量.Name = "数量";
+            this.数量.Width = 70;
             // 
             // StockMovement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(857, 490);
+            this.ClientSize = new System.Drawing.Size(804, 490);
             this.Controls.Add(this.toStatusComboBox);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.fromStatusComboBox4);
@@ -374,9 +375,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "StockMovement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "StockMovement";
+            this.Text = "仓库间移动界面";
             this.Load += new System.EventHandler(this.StockMovement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fromBindingSource)).EndInit();

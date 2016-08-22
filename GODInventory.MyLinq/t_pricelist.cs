@@ -10,7 +10,8 @@ namespace GODInventory.MyLinq
     public partial class t_pricelist
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
+
         public int 自社コード { get; set; }
 
         public int 店番 { get; set; }

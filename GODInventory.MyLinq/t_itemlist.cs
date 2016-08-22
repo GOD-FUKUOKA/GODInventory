@@ -27,13 +27,13 @@ namespace GODInventory.MyLinq
         //[StringLength(255)]
         //public string 配送担当 { get; set; }
 
-        public DateTime? 価格発動日 { get; set; }
+        //public DateTime? 価格発動日 { get; set; }
 
         public int? PT入数 { get; set; }
 
-        public decimal? 仕入原価 { get; set; }
+        //public decimal? 仕入原価 { get; set; }
 
-        public decimal? 単価 { get; set; }
+        //public decimal? 単価 { get; set; }
 
         //public decimal? 売価 { get; set; }
 

@@ -68,20 +68,21 @@ namespace GODInventoryWinForm.Controls
 
         private void btfind_Click(object sender, EventArgs e)
         {
+            this.stockcheckList.Clear();
             var warehouse = this.warehouseComboBox.Text;
             var genreId = Convert.ToInt16( this.genreComboBox.SelectedValue );
-
+            var startDate = Properties.Settings.Default.InventoryStartAt.Date;
             var endDate = this.endDateTimePicker1.Value.AddDays(1).Date;
             using (var ctx = new GODDbContext())
             {
                 int i = 0;
                 string sql = @"SELECT i.`規格`,i.`商品名`, SUM(s.`数量`) as `数量`, s.`自社コード` FROM t_stockrec s
     INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = {0}
-    WHERE (s.`先` = {1} and s.`状態`={2} and s.`日付`< {3})
+    WHERE (s.`先` = {1} and s.`状態`={2} and s.`日付`< {3} and s.`日付`> {4} )
     GROUP by s.`自社コード`;";
-                var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.完了.ToString(), endDate).ToList();
+                var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.完了.ToString(), endDate, startDate).ToList();
 
-                var summaries4plan = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.仮.ToString(), endDate).ToList();
+                var summaries4plan = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.仮.ToString(), endDate, startDate).ToList();
 
                 //stockcheckList = (from a in ctx.t_stockrec
                 //                 where a.先 == warehouse && a.状態== StockIoEnum.完了.ToString()
@@ -130,6 +131,9 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {   
                 List<t_stockrec> changes = new List<t_stockrec>();
+                var genreId = Convert.ToInt16( this.genreComboBox.SelectedValue );
+                var date = DateTime.Now;
+                string stockNum = BuildStockNum(ctx, genreId, date);
 
                 foreach (var item in stockcheckList)
                 {
@@ -140,10 +144,11 @@ namespace GODInventoryWinForm.Controls
                         s.先 = warehouse;
                         s.数量 = item.chaZhi;
                         s.自社コード = item.自社コード;
-                        s.日付 = DateTime.Now;
+                        s.日付 = date;
                         s.区分 = StockIoEnum.入庫.ToString();
                         s.状態 = StockIoProgressEnum.完了.ToString();
                         s.事由 = StockIoClueEnum.清点库存.ToString();
+                        s.納品書番号 = stockNum;
                         changes.Add(s);
                     }
                    
@@ -215,6 +220,7 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
+<<<<<<< HEAD
         private void btprint_Click_1(object sender, EventArgs e)
         {
 
@@ -223,6 +229,25 @@ namespace GODInventoryWinForm.Controls
         private void manufacturerComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+=======
+        private string BuildStockNum(GODDbContext ctx, int genre_id, DateTime selectedDate)
+        {
+
+            var startAt = selectedDate.Date;
+            var endAt = startAt.AddDays(1).Date;  
+
+            var results = from s in ctx.t_stockrec
+                          where s.日付 >= startAt && s.日付 < endAt
+                          group s by s.納品書番号 into g
+                          select g;
+
+            int    count = results.Count();
+
+            string stock_no = String.Format("GOD-{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
+
+           
+            return stock_no;
+>>>>>>> origin/master
         }
     }
 }

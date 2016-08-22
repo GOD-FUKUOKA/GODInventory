@@ -40,5 +40,9 @@ namespace GODInventory.MyLinq
 
         [StringLength(255)]
         public string 事由 { get; set; }
+        [StringLength(255)]
+        public string 工厂 { get; set; }
+
+
     }
 }

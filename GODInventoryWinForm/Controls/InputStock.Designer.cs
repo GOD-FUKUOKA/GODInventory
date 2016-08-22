@@ -70,6 +70,9 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdDataGridViewTextBoxColumn,
@@ -115,6 +118,7 @@
             this.規格.HeaderText = "規格";
             this.規格.Name = "規格";
             this.規格.ReadOnly = true;
+            this.規格.Width = 110;
             // 
             // 数量
             // 
@@ -124,8 +128,13 @@
             // 
             // cancelButton
             // 
+<<<<<<< HEAD
             this.cancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cancelButton.Location = new System.Drawing.Point(938, 64);
+=======
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.Location = new System.Drawing.Point(938, 59);
+>>>>>>> origin/master
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 25);
             this.cancelButton.TabIndex = 36;
@@ -135,7 +144,7 @@
             // 
             // submitButton
             // 
-            this.submitButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.submitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.submitButton.BackColor = System.Drawing.SystemColors.Control;
             this.submitButton.Location = new System.Drawing.Point(938, 23);
             this.submitButton.Name = "submitButton";
@@ -147,8 +156,12 @@
             // 
             // loadItemListButton
             // 
+<<<<<<< HEAD
             this.loadItemListButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.loadItemListButton.Location = new System.Drawing.Point(234, 302);
+=======
+            this.loadItemListButton.Location = new System.Drawing.Point(234, 279);
+>>>>>>> origin/master
             this.loadItemListButton.Name = "loadItemListButton";
             this.loadItemListButton.Size = new System.Drawing.Size(63, 25);
             this.loadItemListButton.TabIndex = 51;
@@ -158,7 +171,6 @@
             // 
             // label7
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(77, 379);
             this.label7.Name = "label7";
@@ -168,7 +180,6 @@
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(53, 135);
             this.label5.Name = "label5";
@@ -178,9 +189,12 @@
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
+<<<<<<< HEAD
             this.label2.Location = new System.Drawing.Point(77, 102);
+=======
+            this.label2.Location = new System.Drawing.Point(77, 95);
+>>>>>>> origin/master
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 37;
@@ -188,9 +202,12 @@
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
+<<<<<<< HEAD
             this.label4.Location = new System.Drawing.Point(53, 270);
+=======
+            this.label4.Location = new System.Drawing.Point(53, 245);
+>>>>>>> origin/master
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 39;
@@ -198,9 +215,12 @@
             // 
             // stockNOTextBox
             // 
-            this.stockNOTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.stockNOTextBox.Enabled = false;
+<<<<<<< HEAD
             this.stockNOTextBox.Location = new System.Drawing.Point(134, 268);
+=======
+            this.stockNOTextBox.Location = new System.Drawing.Point(134, 243);
+>>>>>>> origin/master
             this.stockNOTextBox.Multiline = true;
             this.stockNOTextBox.Name = "stockNOTextBox";
             this.stockNOTextBox.ReadOnly = true;
@@ -209,7 +229,11 @@
             // 
             // orderCreatedAtDateTimePicker
             // 
+<<<<<<< HEAD
             this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(134, 98);
+=======
+            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(134, 91);
+>>>>>>> origin/master
             this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
             this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(164, 20);
             this.orderCreatedAtDateTimePicker.TabIndex = 44;
@@ -217,7 +241,6 @@
             // 
             // genreComboBox
             // 
-            this.genreComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.genreComboBox.FormattingEnabled = true;
             this.genreComboBox.Location = new System.Drawing.Point(134, 132);
@@ -228,18 +251,26 @@
             // 
             // warehouseComboBox
             // 
-            this.warehouseComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.warehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.warehouseComboBox.FormattingEnabled = true;
+<<<<<<< HEAD
             this.warehouseComboBox.Location = new System.Drawing.Point(134, 64);
+=======
+            this.warehouseComboBox.Location = new System.Drawing.Point(134, 61);
+>>>>>>> origin/master
             this.warehouseComboBox.Name = "warehouseComboBox";
             this.warehouseComboBox.Size = new System.Drawing.Size(164, 21);
             this.warehouseComboBox.TabIndex = 49;
             // 
             // numericUpDown1
             // 
+<<<<<<< HEAD
             this.numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.numericUpDown1.Location = new System.Drawing.Point(134, 378);
+=======
+            this.numericUpDown1.Enabled = false;
+            this.numericUpDown1.Location = new System.Drawing.Point(134, 349);
+>>>>>>> origin/master
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(164, 20);
             this.numericUpDown1.TabIndex = 50;
@@ -251,7 +282,6 @@
             // 
             // label6
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(53, 346);
             this.label6.Name = "label6";
@@ -262,9 +292,12 @@
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
+<<<<<<< HEAD
             this.label1.Location = new System.Drawing.Point(77, 68);
+=======
+            this.label1.Location = new System.Drawing.Point(77, 65);
+>>>>>>> origin/master
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 34;
@@ -272,9 +305,12 @@
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
+<<<<<<< HEAD
             this.label3.Location = new System.Drawing.Point(77, 169);
+=======
+            this.label3.Location = new System.Drawing.Point(77, 155);
+>>>>>>> origin/master
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 38;
@@ -284,14 +320,18 @@
             // 
             this.manufacturerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.manufacturerComboBox.FormattingEnabled = true;
+<<<<<<< HEAD
             this.manufacturerComboBox.Location = new System.Drawing.Point(134, 166);
+=======
+            this.manufacturerComboBox.Location = new System.Drawing.Point(134, 152);
+>>>>>>> origin/master
             this.manufacturerComboBox.Name = "manufacturerComboBox";
             this.manufacturerComboBox.Size = new System.Drawing.Size(164, 21);
             this.manufacturerComboBox.TabIndex = 46;
             // 
             // codeComboBox
             // 
-            this.codeComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.codeComboBox.Enabled = false;
             this.codeComboBox.FormattingEnabled = true;
             this.codeComboBox.Location = new System.Drawing.Point(134, 345);
             this.codeComboBox.Name = "codeComboBox";
@@ -301,7 +341,12 @@
             // 
             // addButton
             // 
+<<<<<<< HEAD
             this.addButton.Location = new System.Drawing.Point(234, 431);
+=======
+            this.addButton.Enabled = false;
+            this.addButton.Location = new System.Drawing.Point(234, 398);
+>>>>>>> origin/master
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(63, 25);
             this.addButton.TabIndex = 52;
@@ -315,7 +360,11 @@
             this.stockStatusComboBox.Items.AddRange(new object[] {
             "完了",
             "仮"});
+<<<<<<< HEAD
             this.stockStatusComboBox.Location = new System.Drawing.Point(134, 234);
+=======
+            this.stockStatusComboBox.Location = new System.Drawing.Point(134, 213);
+>>>>>>> origin/master
             this.stockStatusComboBox.Name = "stockStatusComboBox";
             this.stockStatusComboBox.Size = new System.Drawing.Size(164, 21);
             this.stockStatusComboBox.TabIndex = 53;
@@ -323,7 +372,11 @@
             // label8
             // 
             this.label8.AutoSize = true;
+<<<<<<< HEAD
             this.label8.Location = new System.Drawing.Point(77, 236);
+=======
+            this.label8.Location = new System.Drawing.Point(77, 215);
+>>>>>>> origin/master
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(31, 13);
             this.label8.TabIndex = 54;
@@ -332,7 +385,11 @@
             // label9
             // 
             this.label9.AutoSize = true;
+<<<<<<< HEAD
             this.label9.Location = new System.Drawing.Point(53, 203);
+=======
+            this.label9.Location = new System.Drawing.Point(53, 185);
+>>>>>>> origin/master
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(55, 13);
             this.label9.TabIndex = 55;
@@ -340,7 +397,11 @@
             // 
             // remarkTextBox1
             // 
+<<<<<<< HEAD
             this.remarkTextBox1.Location = new System.Drawing.Point(134, 199);
+=======
+            this.remarkTextBox1.Location = new System.Drawing.Point(134, 182);
+>>>>>>> origin/master
             this.remarkTextBox1.Name = "remarkTextBox1";
             this.remarkTextBox1.Size = new System.Drawing.Size(164, 20);
             this.remarkTextBox1.TabIndex = 56;
@@ -349,7 +410,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
+<<<<<<< HEAD
             this.label10.Location = new System.Drawing.Point(79, 34);
+=======
+            this.label10.Location = new System.Drawing.Point(79, 35);
+>>>>>>> origin/master
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(31, 13);
             this.label10.TabIndex = 57;
@@ -396,9 +461,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.manufacturerComboBox);
             this.Controls.Add(this.codeComboBox);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "InputStock";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InputStock";
+            this.Text = "入库输入界面";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
@@ -428,11 +495,6 @@
         private System.Windows.Forms.ComboBox manufacturerComboBox;
         private System.Windows.Forms.ComboBox codeComboBox;
         private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 商品名;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 規格;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
         private System.Windows.Forms.ComboBox stockStatusComboBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.BindingSource bindingSource1;
@@ -440,6 +502,11 @@
         private System.Windows.Forms.TextBox remarkTextBox1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox clientComboBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 商品名;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 規格;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
 
     }
 }

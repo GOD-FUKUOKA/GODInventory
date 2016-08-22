@@ -71,13 +71,13 @@ namespace GODInventoryWinForm.Controls
                         var order = new t_stockrec();
 
                         order.日付 = orderCreatedAtDateTimePicker.Value;
-                        order.先 = manufacturerComboBox.Text;
+                        order.先 = this.warehouseComboBox.Text;
 
-                        order.元 = this.warehouseComboBox.Text;
+                        order.元 = this.manufacturerComboBox.Text;
                         order.納品書番号 = stockNOTextBox.Text;
 
                         order.数量 = item.qty;
-                        order.区分 = "入庫";
+                        order.区分 = StockIoEnum.入庫.ToString();
                         order.事由 = this.remarkTextBox1.Text;
                         //order.仓库 = storeComboBox.Text;
                         order.自社コード = Convert.ToInt32(item.自社コード);

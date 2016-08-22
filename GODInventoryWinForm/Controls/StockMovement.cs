@@ -92,7 +92,7 @@ namespace GODInventoryWinForm.Controls
                             order.納品書番号 = stockOutNumTextBox.Text;
                             order.事由 = this.toWarehouseComboBox1.Text+"へ移動";
                             //order.仓库 = comboBox1.Text;
-                            order.区分 = "出庫";
+                            order.区分 = StockIoEnum.出庫.ToString();
                             order.数量 = item.qty;
                             order.自社コード = item.自社コード;
                             order.状態 = this.fromStatusComboBox4.Text;
@@ -109,8 +109,8 @@ namespace GODInventoryWinForm.Controls
                             order.先 = this.toWarehouseComboBox1.Text;
                             order.納品書番号 = stockInNumTextBox.Text;
                             order.事由 = this.fromWarehouseComboBox.Text + "から";
-                            order.区分 = "入庫";
-                            var to_item = item.自社コード;
+                            order.区分 = StockIoEnum.入庫.ToString();
+                            order.自社コード = item.自社コード;
                            
 
                             order.数量 = item.qty;
@@ -216,16 +216,18 @@ namespace GODInventoryWinForm.Controls
             {
                 
                 int count = 0;
-              
+                var startAt = selected_date.Date;
+                var endAt = startAt.AddDays(1).Date;              
                 using (var ctx = new GODDbContext())
                 {
                     var results = from s in ctx.t_stockrec
-                                  where s.日付 == selected_date.Date
-                                  select s;
+                                  where s.日付 >= startAt && s.日付 < endAt
+                                  group s by s.納品書番号 into g
+                                  select g;
                     count = results.Count();
                 }
 
-                stock_no =  String.Format("GOD-{0:yyyyMMdd}-{1:D2}-{2:D2}", selected_date, genre_id, count + 1);
+                stock_no = String.Format("GOD-{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
                
             }
             return stock_no;

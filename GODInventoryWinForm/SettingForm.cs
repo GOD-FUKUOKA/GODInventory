@@ -21,12 +21,13 @@ namespace GODInventoryWinForm
         {
             
             this.installDirTextBox.Text = Properties.Settings.Default.NFWEInstallDir;
-
+            this.inventoryStartAtDateTimePicker1.Value = Properties.Settings.Default.InventoryStartAt;
         }
 
         private void saveButton3_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.NFWEInstallDir = this.installDirTextBox.Text;
+            Properties.Settings.Default.InventoryStartAt = this.inventoryStartAtDateTimePicker1.Value;
         }
 
         private void folderBrowserButton1_Click(object sender, EventArgs e)

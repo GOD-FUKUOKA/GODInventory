@@ -1,6 +1,6 @@
 ﻿namespace GODInventoryWinForm.Controls
 {
-    partial class Search_Strock
+    partial class SearchStock
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.warehouseComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.ioComboBox = new System.Windows.Forms.ComboBox();
@@ -58,6 +58,11 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qtyDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockIoDataGridView)).BeginInit();
@@ -121,7 +126,6 @@
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(128, 20);
             this.genreComboBox.TabIndex = 80;
-            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -188,14 +192,14 @@
             this.productCodeColumn,
             this.productNameColumn,
             this.productSpecColumn});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.productDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.productDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.productDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.productDataGridView.Location = new System.Drawing.Point(18, 196);
             this.productDataGridView.MultiSelect = false;
@@ -239,6 +243,7 @@
             this.productSpecColumn.Name = "productSpecColumn";
             this.productSpecColumn.ReadOnly = true;
             this.productSpecColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.productSpecColumn.Width = 105;
             // 
             // loadItemListButton
             // 
@@ -262,14 +267,14 @@
             this.qtyDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.qtyDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.qtyDataGridView.ColumnHeadersVisible = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.qtyDataGridView.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.qtyDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.qtyDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.qtyDataGridView.Location = new System.Drawing.Point(483, 196);
             this.qtyDataGridView.MultiSelect = false;
@@ -315,14 +320,14 @@
             this.stockIoDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.stockIoDataGridView.ColumnHeadersVisible = false;
             this.stockIoDataGridView.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.stockIoDataGridView.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.stockIoDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.stockIoDataGridView.Location = new System.Drawing.Point(483, 58);
             this.stockIoDataGridView.MultiSelect = false;
             this.stockIoDataGridView.Name = "stockIoDataGridView";
@@ -337,14 +342,15 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.editToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteToolStripMenuItem.Text = "清除记录";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -354,6 +360,7 @@
             this.vScrollBar1.Name = "vScrollBar1";
             this.vScrollBar1.Size = new System.Drawing.Size(17, 224);
             this.vScrollBar1.TabIndex = 93;
+            this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             // 
             // hScrollBar1
             // 
@@ -363,11 +370,66 @@
             this.hScrollBar1.TabIndex = 94;
             this.hScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
             // 
-            // Search_Strock
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label7.Location = new System.Drawing.Point(18, 150);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(61, 47);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "序号";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label8.Location = new System.Drawing.Point(78, 150);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(101, 47);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "自社コード";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label9.Location = new System.Drawing.Point(178, 150);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(201, 47);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "商品名";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label10
+            // 
+            this.label10.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label10.Location = new System.Drawing.Point(378, 150);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(106, 47);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "規格";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem.Text = "修改状态";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // SearchStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1129, 477);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.stockIoDataGridView);
@@ -388,9 +450,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.warehouseComboBox);
             this.Controls.Add(this.label1);
-            this.Name = "Search_Strock";
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "SearchStock";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Search_Strock";
+            this.Text = "入库出库记录查询";
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.qtyDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockIoDataGridView)).EndInit();
@@ -420,14 +484,19 @@
         private System.Windows.Forms.Button btSave;
         private System.Windows.Forms.Button btcanel;
         private System.Windows.Forms.DataGridView stockIoDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productSpecColumn;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.HScrollBar hScrollBar1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productSpecColumn;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
 
 
 
