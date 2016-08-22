@@ -78,6 +78,7 @@ namespace GODInventoryWinForm.Controls
                         order.先 = this.warehouseComboBox.Text;
 
                         order.元 = this.manufacturerComboBox.Text;
+                        order.工厂 = this.manufacturerComboBox.Text;
                         order.納品書番号 = stockNOTextBox.Text;
 
                         order.数量 = item.qty;

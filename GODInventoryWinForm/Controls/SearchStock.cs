@@ -16,7 +16,8 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class SearchStock : Form
     {
-        private List<MockEntity> manufacturerList;
+        private List<t_manufacturers> manufacturerList;
+        //private List<MockEntity> manufacturerList;
         private BindingList<v_stockios> stockiosList;
         private List<t_genre> genreList;
         private List<t_warehouses> warehouseList;
@@ -49,13 +50,14 @@ namespace GODInventoryWinForm.Controls
             {
                 genreList = ctx.t_genre.ToList();
                 warehouseList = ctx.t_warehouses.ToList();
+                manufacturerList = ctx.t_manufacturers.ToList();
             }
             this.genreComboBox.DisplayMember = "ジャンル名";
             this.genreComboBox.ValueMember = "idジャンル";
             this.genreComboBox.DataSource = genreList;
 
 
-            this.manufacturerList = ManufactureRespository.ToList();
+            //this.manufacturerList = ManufactureRespository.ToList();
             this.manufacturerComboBox.DisplayMember = "FullName";
             this.manufacturerComboBox.ValueMember = "Id";
             this.manufacturerComboBox.DataSource = manufacturerList;
@@ -65,7 +67,7 @@ namespace GODInventoryWinForm.Controls
             this.warehouseComboBox.ValueMember = "Id";
             this.warehouseComboBox.DataSource = warehouseList;
 
-
+            this.manufacturerComboBox.SelectedIndex = 0;
             this.ioComboBox.SelectedIndex = 0;
         }
 
@@ -438,6 +440,20 @@ WHERE ({0});";
                 }
 
             
+            }
+        }
+
+        private void genreComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            var filtered = manufacturerList.FindAll(s => s.genreId == (int)this.genreComboBox.SelectedValue);
+            if (filtered.Count > 0)
+            {
+                this.manufacturerComboBox.DataSource = filtered;
+            }
+            else
+            {
+                this.manufacturerComboBox.DataSource = manufacturerList;
+
             }
         }
 
