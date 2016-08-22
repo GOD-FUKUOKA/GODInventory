@@ -19,11 +19,7 @@ namespace GODInventoryWinForm.Controls
         public OrdersControl()
         {
             InitializeComponent();
-            this.newOrdersForm = new NewOrdersForm();
-            this.pendingOrderForm = new PendingOrderForm();
-            this.waitToShipOrderForm = new WaitToShipForm();
-            this.shippingOrderForm = new ShippingOrderForm();
-            
+           
             this.Disposed += new EventHandler(OrdersControl_Disposed);
             
         }
@@ -31,6 +27,9 @@ namespace GODInventoryWinForm.Controls
 
         private void pendingButton_Click(object sender, EventArgs e)
         {
+            if (pendingOrderForm == null) {
+                pendingOrderForm = new PendingOrderForm();
+            }
             AdjustSubformSize(pendingOrderForm);
             pendingOrderForm.InitializePager();
             pendingOrderForm.ShowDialog(  );
@@ -43,6 +42,10 @@ namespace GODInventoryWinForm.Controls
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (waitToShipOrderForm == null)
+            {
+                waitToShipOrderForm = new WaitToShipForm();
+            }
             AdjustSubformSize(waitToShipOrderForm);
             // 显示之前重新加载数据，订单数据可能已更新。
             waitToShipOrderForm.RefreshPager();
@@ -52,6 +55,10 @@ namespace GODInventoryWinForm.Controls
 
         private void shippedOrderButton_Click(object sender, EventArgs e)
         {
+            if (shippingOrderForm == null)
+            {
+                shippingOrderForm = new ShippingOrderForm();
+            } 
             AdjustSubformSize(shippingOrderForm);
             shippingOrderForm.RefreshPager();
             shippingOrderForm.ShowDialog();
@@ -107,6 +114,10 @@ namespace GODInventoryWinForm.Controls
 
         private void newButton_Click(object sender, EventArgs e)
         {
+            if (newOrdersForm == null)
+            {
+                newOrdersForm = new NewOrdersForm();
+            }
             AdjustSubformSize(newOrdersForm);
             // 显示之前重新加载数据，订单数据可能已更新。
             //newOrdersForm.RefreshPager();

@@ -119,9 +119,7 @@ namespace GODInventoryWinForm.Controls
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-<<<<<<< HEAD
 
-=======
             //this.bindingSource1.Filter = String.Format( "genreId={0}", this.genreComboBox.SelectedValue);
 
             var filtered = manufacturerList.FindAll( s=> s.genreId == (int)this.genreComboBox.SelectedValue);
@@ -133,7 +131,6 @@ namespace GODInventoryWinForm.Controls
                 this.manufacturerComboBox.DataSource = manufacturerList;
             
             }
->>>>>>> origin/master
             BuildStockNO();
 
         }
