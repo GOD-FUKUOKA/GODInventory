@@ -79,11 +79,7 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
-<<<<<<< HEAD
-            this.label4.Location = new System.Drawing.Point(675, 36);
-=======
             this.label4.Location = new System.Drawing.Point(653, 33);
->>>>>>> origin/master
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 40;
@@ -93,11 +89,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-<<<<<<< HEAD
-            this.label3.Location = new System.Drawing.Point(457, 36);
-=======
             this.label3.Location = new System.Drawing.Point(452, 33);
->>>>>>> origin/master
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 39;
@@ -117,11 +109,7 @@
             // btfind
             // 
             this.btfind.Anchor = System.Windows.Forms.AnchorStyles.None;
-<<<<<<< HEAD
-            this.btfind.Location = new System.Drawing.Point(776, 79);
-=======
             this.btfind.Location = new System.Drawing.Point(855, 25);
->>>>>>> origin/master
             this.btfind.Name = "btfind";
             this.btfind.Size = new System.Drawing.Size(75, 30);
             this.btfind.TabIndex = 35;
@@ -144,15 +132,11 @@
             this.manufacturerComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.manufacturerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.manufacturerComboBox.FormattingEnabled = true;
-<<<<<<< HEAD
-            this.manufacturerComboBox.Location = new System.Drawing.Point(492, 31);
-=======
+
             this.manufacturerComboBox.Location = new System.Drawing.Point(487, 29);
->>>>>>> origin/master
             this.manufacturerComboBox.Name = "manufacturerComboBox";
             this.manufacturerComboBox.Size = new System.Drawing.Size(141, 21);
             this.manufacturerComboBox.TabIndex = 43;
-            this.manufacturerComboBox.SelectedIndexChanged += new System.EventHandler(this.manufacturerComboBox_SelectedIndexChanged);
             // 
             // dataGridView1
             // 
@@ -172,18 +156,12 @@
             this.jiHuaRuCunShuColumn,
             this.qingDianColumn,
             this.chaZhiColumn});
-<<<<<<< HEAD
-            this.dataGridView1.Location = new System.Drawing.Point(12, 120);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(918, 399);
-=======
+
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(12, 73);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(918, 406);
->>>>>>> origin/master
             this.dataGridView1.TabIndex = 38;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
@@ -281,11 +259,7 @@
             this.genreComboBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.genreComboBox.FormattingEnabled = true;
-<<<<<<< HEAD
-            this.genreComboBox.Location = new System.Drawing.Point(284, 31);
-=======
             this.genreComboBox.Location = new System.Drawing.Point(281, 29);
->>>>>>> origin/master
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(141, 21);
             this.genreComboBox.TabIndex = 44;
@@ -293,29 +267,21 @@
             // btprint
             // 
             this.btprint.Anchor = System.Windows.Forms.AnchorStyles.Left;
-<<<<<<< HEAD
-            this.btprint.Location = new System.Drawing.Point(12, 543);
-=======
             this.btprint.Enabled = false;
             this.btprint.Location = new System.Drawing.Point(12, 501);
->>>>>>> origin/master
             this.btprint.Name = "btprint";
             this.btprint.Size = new System.Drawing.Size(139, 28);
             this.btprint.TabIndex = 33;
             this.btprint.Text = "打印清点用表格";
             this.btprint.UseVisualStyleBackColor = true;
             this.btprint.Visible = false;
-            this.btprint.Click += new System.EventHandler(this.btprint_Click_1);
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-<<<<<<< HEAD
-            this.label2.Location = new System.Drawing.Point(225, 36);
-=======
+
             this.label2.Location = new System.Drawing.Point(222, 33);
->>>>>>> origin/master
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 37;
@@ -324,39 +290,18 @@
             // endDateTimePicker1
             // 
             this.endDateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-<<<<<<< HEAD
-            this.endDateTimePicker1.Location = new System.Drawing.Point(710, 31);
-=======
+
             this.endDateTimePicker1.Location = new System.Drawing.Point(688, 29);
->>>>>>> origin/master
             this.endDateTimePicker1.Name = "endDateTimePicker1";
             this.endDateTimePicker1.Size = new System.Drawing.Size(141, 20);
             this.endDateTimePicker1.TabIndex = 41;
             // 
-<<<<<<< HEAD
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(311, 535);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(139, 28);
-            this.button1.TabIndex = 45;
-            this.button1.Text = "Test Copy";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-=======
->>>>>>> origin/master
             // InventoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
-            this.ClientSize = new System.Drawing.Size(942, 583);
-            this.Controls.Add(this.button1);
-=======
+
             this.ClientSize = new System.Drawing.Size(942, 538);
->>>>>>> origin/master
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btconfirm);
             this.Controls.Add(this.label4);

@@ -179,10 +179,7 @@ namespace GODInventoryWinForm.Controls
 
         private void genreComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
             BuildStockNO();
         }
 

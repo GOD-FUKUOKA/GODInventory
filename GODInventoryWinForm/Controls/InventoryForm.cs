@@ -220,16 +220,7 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
-<<<<<<< HEAD
-        private void btprint_Click_1(object sender, EventArgs e)
-        {
 
-        }
-
-        private void manufacturerComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-=======
         private string BuildStockNum(GODDbContext ctx, int genre_id, DateTime selectedDate)
         {
 
@@ -247,7 +238,6 @@ namespace GODInventoryWinForm.Controls
 
            
             return stock_no;
->>>>>>> origin/master
         }
     }
 }
