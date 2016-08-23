@@ -59,7 +59,7 @@ namespace GODInventoryWinForm.Controls
             this.stockStatusComboBox.SelectedIndex = 0;
             this.clientComboBox.SelectedIndex = 0;
             this.remarkTextBox1.SelectedIndex = 0;
-    
+
             //BuildStockNO();
         }
 
@@ -123,14 +123,15 @@ namespace GODInventoryWinForm.Controls
 
             //this.bindingSource1.Filter = String.Format( "genreId={0}", this.genreComboBox.SelectedValue);
 
-            var filtered = manufacturerList.FindAll( s=> s.genreId == (int)this.genreComboBox.SelectedValue);
+            var filtered = manufacturerList.FindAll(s => s.genreId == (int)this.genreComboBox.SelectedValue);
             if (filtered.Count > 0)
             {
                 this.manufacturerComboBox.DataSource = filtered;
             }
-            else {
+            else
+            {
                 this.manufacturerComboBox.DataSource = manufacturerList;
-            
+
             }
             BuildStockNO();
 
@@ -169,7 +170,7 @@ namespace GODInventoryWinForm.Controls
                     }
                 }
 
-                var stock_no = String.Format("GOD-" + sn + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
+                var stock_no = String.Format(sn + "-" + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
                 this.stockNOTextBox.Text = stock_no;
             }
             else

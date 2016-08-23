@@ -242,7 +242,7 @@ namespace GODInventoryWinForm.Controls
                 if (shorname != null)
                     sn = shorname.ShortName;
             }
-            string stock_no = String.Format("GOD-" + sn + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
+            string stock_no = String.Format(sn + "-" + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
 
            
             return stock_no;
