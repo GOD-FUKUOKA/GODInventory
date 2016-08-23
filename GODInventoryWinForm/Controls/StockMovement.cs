@@ -93,7 +93,7 @@ namespace GODInventoryWinForm.Controls
                             order.事由 = this.toWarehouseComboBox1.Text+"へ移動";
                             //order.仓库 = comboBox1.Text;
                             order.区分 = StockIoEnum.出庫.ToString();
-                            order.数量 = item.qty;
+                            order.数量 = -item.qty;
                             order.自社コード = item.自社コード;
                             order.状態 = this.fromStatusComboBox4.Text;
                             //order.客户 = item.客户;
@@ -101,8 +101,6 @@ namespace GODInventoryWinForm.Controls
                             changeList.Add(order);
 
                             #endregion
-
-
                             #region stockin 信息
                             order = new t_stockrec();
                             order.日付 = this.stockInDateTimePicker1.Value;
