@@ -139,7 +139,7 @@ namespace GODInventoryWinForm.Controls
 
                 foreach (var item in stockcheckList)
                 {
-                    if( Convert.ToInt32( item.chaZhi ) > 0 ){
+                    if( Convert.ToInt32( item.chaZhi ) != 0 ){
 
                         var s = new t_stockrec();
                         s.元 = warehouse;
