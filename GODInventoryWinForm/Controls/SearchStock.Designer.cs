@@ -63,6 +63,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.EditQTYStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qtyDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockIoDataGridView)).BeginInit();
@@ -278,15 +279,15 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.qtyDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            this.qtyDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.qtyDataGridView.Location = new System.Drawing.Point(483, 212);
             this.qtyDataGridView.MultiSelect = false;
             this.qtyDataGridView.Name = "qtyDataGridView";
-            this.qtyDataGridView.ReadOnly = true;
             this.qtyDataGridView.RowHeadersVisible = false;
             this.qtyDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.qtyDataGridView.Size = new System.Drawing.Size(617, 243);
             this.qtyDataGridView.TabIndex = 89;
+            this.qtyDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.qtyDataGridView_CellClick);
+            this.qtyDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.qtyDataGridView_CellMouseDown);
             this.qtyDataGridView.Scroll += new System.Windows.Forms.ScrollEventHandler(this.qtyDataGridView_Scroll);
             // 
             // btSave
@@ -334,11 +335,10 @@
             this.stockIoDataGridView.Location = new System.Drawing.Point(483, 63);
             this.stockIoDataGridView.MultiSelect = false;
             this.stockIoDataGridView.Name = "stockIoDataGridView";
-            this.stockIoDataGridView.ReadOnly = true;
             this.stockIoDataGridView.RowHeadersVisible = false;
             this.stockIoDataGridView.RowTemplate.Height = 23;
             this.stockIoDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.stockIoDataGridView.Size = new System.Drawing.Size(617, 150);
+            this.stockIoDataGridView.Size = new System.Drawing.Size(617, 151);
             this.stockIoDataGridView.TabIndex = 92;
             this.stockIoDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.stockIoDataGridView_CellMouseDown);
             // 
@@ -346,9 +346,10 @@
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
-            this.editToolStripMenuItem});
+            this.editToolStripMenuItem,
+            this.EditQTYStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 70);
             // 
             // deleteToolStripMenuItem
             // 
@@ -423,6 +424,13 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "規格";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // EditQTYStripMenuItem1
+            // 
+            this.EditQTYStripMenuItem1.Name = "EditQTYStripMenuItem1";
+            this.EditQTYStripMenuItem1.Size = new System.Drawing.Size(122, 22);
+            this.EditQTYStripMenuItem1.Text = "修改数量";
+            this.EditQTYStripMenuItem1.Click += new System.EventHandler(this.EditQTYStripMenuItem1_Click);
             // 
             // SearchStock
             // 
@@ -500,6 +508,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn productNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productSpecColumn;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EditQTYStripMenuItem1;
 
 
 

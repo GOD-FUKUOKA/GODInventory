@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.btconfirm = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -67,7 +67,7 @@
             // 
             // btconfirm
             // 
-            this.btconfirm.Location = new System.Drawing.Point(646, 543);
+            this.btconfirm.Location = new System.Drawing.Point(644, 498);
             this.btconfirm.Name = "btconfirm";
             this.btconfirm.Size = new System.Drawing.Size(139, 28);
             this.btconfirm.TabIndex = 34;
@@ -98,7 +98,7 @@
             // btclear_zero
             // 
             this.btclear_zero.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btclear_zero.Location = new System.Drawing.Point(791, 543);
+            this.btclear_zero.Location = new System.Drawing.Point(791, 498);
             this.btclear_zero.Name = "btclear_zero";
             this.btclear_zero.Size = new System.Drawing.Size(139, 28);
             this.btclear_zero.TabIndex = 36;
@@ -166,8 +166,8 @@
             // idColumn
             // 
             this.idColumn.DataPropertyName = "Id";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.idColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.idColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.idColumn.HeaderText = "序号";
             this.idColumn.Name = "idColumn";
             this.idColumn.ReadOnly = true;

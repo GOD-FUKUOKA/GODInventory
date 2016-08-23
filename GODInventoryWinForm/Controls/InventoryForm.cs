@@ -232,15 +232,25 @@ namespace GODInventoryWinForm.Controls
                           where s.日付 >= startAt && s.日付 < endAt
                           group s by s.納品書番号 into g
                           select g;
-
+            string sn = "";
             int    count = results.Count();
-
-            string stock_no = String.Format("GOD-{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
+            var warehouse = warehouseComboBox1();
+            if (warehouse > 0)
+            {
+                var shorname = warehouseList.Find(o => o.Id == Convert.ToInt32(warehouse));
+                if (shorname != null)
+                    sn = shorname.ShortName;
+            }
+            string stock_no = String.Format("GOD-" + sn + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
 
            
             return stock_no;
         }
+        private int warehouseComboBox1()
+        {
 
+            return ((this.warehouseComboBox.SelectedIndex >= 0) ? (int)this.warehouseComboBox.SelectedValue : 0);
+        }
         private void btprint_Click_1(object sender, EventArgs e)
         {
 
