@@ -48,6 +48,7 @@ namespace GODInventoryWinForm.Controls
             {
                 genreList = ctx.t_genre.ToList();
                 warehouseList = ctx.t_warehouses.ToList();
+                manufacturerList = ctx.t_manufacturers.ToList();
 
             }
 
