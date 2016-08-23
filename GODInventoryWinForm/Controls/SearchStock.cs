@@ -24,6 +24,7 @@ namespace GODInventoryWinForm.Controls
 
         private List<v_stockcheck> productList = null;
         private List<t_stockrec> stockList = null;
+        private List<t_stockrec> changedStockList = null;
         private List<t_stockrec> SavestockList = null;
         private List<t_stockrec> davStockSavestockList = null;
         private List<t_stockrec> davSHiRuStockSavestockList = null;
@@ -50,6 +51,7 @@ namespace GODInventoryWinForm.Controls
             davStockSavestockList = new List<t_stockrec>();
             davSHiRuStockSavestockList = new List<t_stockrec>();
             SavestockList = new List<t_stockrec>();
+            changedStockList = new List<t_stockrec>();
 
         }
         private void InitializeDataSource()
@@ -135,60 +137,38 @@ namespace GODInventoryWinForm.Controls
             {
                 conditions += " AND (s.`区分` = @ioState)";
             }
+            if (!isAllManufacturerSelected)
+            {
+                // 所有仓库的某一生产商的出入库记录
+                conditions += " AND (s.`工厂` = @manufacturer)";                 
+            }
+            
 
             if (warehouse != WarehouseRespository.OptionTextAll)
             {
 
-                conditions += "";
-
+               
                 if (ioState == StockIoEnum.全部.ToString())
                 {
-                    if (isAllManufacturerSelected)
-                    {
-                        // 某一个仓库的所有生产商的出入库记录                      
-                    }
-                    else
-                    {
-                        // 某一个仓库的某一生产商的出入库记录
-                        conditions += " AND (s.`工厂` = @manufacturer)";
-                    }
+                    
+                     // 某一个仓库的出入库记录
+                     conditions += " AND ( s.先 = @warehouse OR s.元 = @warehouse )";
+                   
                 }
                 else if (ioState == StockIoEnum.入庫.ToString())
-                {
-                    if (isAllManufacturerSelected)
-                    {
-                        // 某一个仓库的所有生产商的入库记录
-                        conditions += " AND ( s.先 = @warehouse )";
-                    }
-                    else
-                    {
-                        // 某一个仓库的某一生产商的入库记录
-                        conditions += " AND ( s.`工厂` = @manufacturer AND  s.`先` = @warehouse )";
-                    }
+                {                    
+                    // 某一个仓库的入库记录
+                    conditions += " AND ( s.先 = @warehouse )";                   
                 }
                 else if (ioState == StockIoEnum.出庫.ToString())
                 {
-                    if (isAllManufacturerSelected)
-                    {
-                        // 某一个仓库的所有生产商的出库记录, 即出库记录
-                        conditions += " AND ( s.元 = @warehouse )";
-                    }
-                    else
-                    {
-                        // 某一个仓库的某一生产商的出库记录
-                        conditions += " AND ( s.`元` = @warehouse AND s.`工厂` = @manufacturer )";
-                    }
+                    
+                    // 某一个仓库的所有生产商的出库记录, 即出库记录
+                    conditions += " AND ( s.元 = @warehouse )";                   
                 }
             }
-            else
-            {
-                if (!isAllManufacturerSelected)
-                {
-                    // 所有仓库的某一生产商的出入库记录
-                    conditions += " AND (s.`元` = @manufacturer OR  s.先 = @manufacturer )";
-                }
-            }
-
+            
+             
 
             condition_params.Add(new MySqlParameter("@genreId", genreId));
             condition_params.Add(new MySqlParameter("@ioState", ioState));
@@ -223,11 +203,7 @@ WHERE ({0});";
 
         private void btcanel_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < stockIoDataGridView.ColumnCount; i++)
-            {
-                stockIoDataGridView.Columns[i].Visible = true;
-                qtyDataGridView.Columns[i].Visible = true;
-            }
+            this.BuildDataSources();
         }
 
 
@@ -236,6 +212,29 @@ WHERE ({0});";
             var deletedStockNumList = new List<string>();
             DataGridViewColumn col;
             string stockNum = null;
+
+            //Save qty
+            using (var ctx = new GODDbContext())
+            {
+                
+                var ids = this.changedStockList.Select( s => s.id ).ToArray();
+                var list =  (from s in ctx.t_stockrec
+                                    where ids.Contains( s.id)
+                                    select s).ToList();
+
+                t_stockrec changed;
+                foreach (var item in list)
+                {
+                    changed = changedStockList.Find(s => s.id == item.id);
+                    item.事由 = changed.事由;
+                    item.数量 = changed.数量;
+                    item.状態 = changed.状態;
+                }
+                
+                ctx.SaveChanges();
+               
+            }
+
             for (int i = 0; i < stockIoDataGridView.ColumnCount; i++)
             {
                 col = stockIoDataGridView.Columns[i];
@@ -260,67 +259,10 @@ WHERE ({0});";
                     this.stockList.RemoveAll(s => deletedStockNumList.Contains(s.納品書番号));
 
                 }
-                MessageBox.Show(String.Format("Congratulations, You have {0} items removed successfully!", deletedCount));
             }
-            else
-            {
-                MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            //Save qty
-            using (var ctx = new GODDbContext())
-            {
-                int i = 0;
-                foreach (t_stockrec item in SavestockList)
-                {
-                    var stockrecs = (from s in ctx.t_stockrec
-                                     where s.自社コード == item.自社コード && s.納品書番号 == item.納品書番号
-                                     select s).FirstOrDefault();
-                    stockrecs.数量 = SavestockList[i].数量;
-                    ctx.SaveChanges();
-                    i++;
-                }
+            MessageBox.Show(String.Format("Congratulations, You have {0} items changed successfully!", changedStockList.Count));
 
-                //状態
-                foreach (t_stockrec item1 in davStockSavestockList)
-                {
-                    var changeList = this.stockList.FindAll(s => s.納品書番号 == item1.納品書番号);
-                    {
-                        var list = (from s in ctx.t_stockrec
-                                    where s.納品書番号 == item1.納品書番号
-                                    select s).ToList();
-
-                        foreach (var item in list)
-                        {
-                            item.状態 = item1.状態.ToString();
-                        }
-                    }
-                    ctx.SaveChanges();
-
-                }
-
-                //save 事由                
-                foreach (t_stockrec item1 in davSHiRuStockSavestockList)
-                {
-                    var changeList = this.stockList.FindAll(s => s.納品書番号 == item1.納品書番号);
-                    {
-                        var list = (from s in ctx.t_stockrec
-                                    where s.納品書番号 == item1.納品書番号
-                                    select s).ToList();
-
-                        foreach (var item in list)
-                        {
-                            item.事由 = item1.事由.ToString();
-                        }
-                    }
-                    ctx.SaveChanges();
-                }
-
-
-            }
-            davStockSavestockList = new List<t_stockrec>();
-            davSHiRuStockSavestockList = new List<t_stockrec>();
-            SavestockList = new List<t_stockrec>();
+            changedStockList.Clear();
         }
 
         private void BuildDataSources()
@@ -436,7 +378,7 @@ WHERE ({0});";
                 {
                     this.deleteToolStripMenuItem.Visible = true;
                     this.editToolStripMenuItem.Visible = true;
-                    this.EditQTYStripMenuItem1.Visible = false;
+
                     stockIoDataGridView.ClearSelection();
                     stockIoDataGridView.Columns[e.ColumnIndex].Selected = true;
                     stockIoDataGridView.CurrentCell = stockIoDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
@@ -502,49 +444,46 @@ WHERE ({0});";
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 选择 修改状态，由“仮”改为“完了”，或者相反。
-            if (stockIoDataGridView.CurrentCell.RowIndex == 3)
-            {
-                int j = stockIoDataGridView.CurrentCell.ColumnIndex;
-                string stockNum = Convert.ToString(stockIoDataGridView.Rows[4].Cells[j].Value);
-                string progress = (string)stockIoDataGridView.CurrentCell.Value;
-                using (var ctx = new GODDbContext())
-                {
-                    var changeList = this.stockList.FindAll(s => s.納品書番号 == stockNum);
-                    if (progress == StockIoProgressEnum.完了.ToString())
-                    {
-                        var list = (from s in ctx.t_stockrec
-                                    where s.納品書番号 == stockNum
-                                    select s).ToList();
-                        foreach (var item in list)
-                        {
-                            item.状態 = StockIoProgressEnum.仮.ToString();
-                        }
-                        stockIoDataGridView.CurrentCell.Value = StockIoProgressEnum.仮.ToString();
+            //if (stockIoDataGridView.CurrentCell.RowIndex == 3)
+            //{
+            //    int j = stockIoDataGridView.CurrentCell.ColumnIndex;
+            //    string stockNum = Convert.ToString(stockIoDataGridView.Rows[4].Cells[j].Value);
+            //    string progress = (string)stockIoDataGridView.CurrentCell.Value;
+            //    using (var ctx = new GODDbContext())
+            //    {
+            //        var changeList = this.stockList.FindAll(s => s.納品書番号 == stockNum);
+            //        if (progress == StockIoProgressEnum.完了.ToString())
+            //        {
+            //            var list = (from s in ctx.t_stockrec
+            //                        where s.納品書番号 == stockNum
+            //                        select s).ToList();
+            //            foreach (var item in list)
+            //            {
+            //                item.状態 = StockIoProgressEnum.仮.ToString();
+            //            }
+            //            stockIoDataGridView.CurrentCell.Value = StockIoProgressEnum.仮.ToString();
 
-                    }
-                    else if (progress == StockIoProgressEnum.仮.ToString())
-                    {
-                        var list = (from s in ctx.t_stockrec
-                                    where s.納品書番号 == stockNum
-                                    select s).ToList();
-                        foreach (var item in list)
-                        {
-                            item.状態 = StockIoProgressEnum.完了.ToString();
-                            davStockSavestockList.Add(item);
+            //        }
+            //        else if (progress == StockIoProgressEnum.仮.ToString())
+            //        {
+            //            var list = (from s in ctx.t_stockrec
+            //                        where s.納品書番号 == stockNum
+            //                        select s).ToList();
+            //            foreach (var item in list)
+            //            {
+            //                item.状態 = StockIoProgressEnum.完了.ToString();
+            //                davStockSavestockList.Add(item);
 
-                        }
-                        stockIoDataGridView.CurrentCell.Value = StockIoProgressEnum.完了.ToString();
-                    }
-                    //   ctx.SaveChanges();
-                }
-            }
-            else if (stockIoDataGridView.CurrentCell.RowIndex == 2)
-            {
+            //            }
+            //            stockIoDataGridView.CurrentCell.Value = StockIoProgressEnum.完了.ToString();
+            //        }
+            //        //   ctx.SaveChanges();
+            //    }
+            //}
+            //else if (stockIoDataGridView.CurrentCell.RowIndex == 2)
+            //{
 
-
-
-
-            }
+            //}
 
         }
 
@@ -569,70 +508,55 @@ WHERE ({0});";
             }
         }
 
-        private void qtyDataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                if (e.RowIndex >= 0)
-                {
-                    this.deleteToolStripMenuItem.Visible = false;
-                    this.editToolStripMenuItem.Visible = false;
-                    this.EditQTYStripMenuItem1.Visible = true;
-                    qtyDataGridView.ClearSelection();
-                    qtyDataGridView.Columns[e.ColumnIndex].Selected = true;
-                    qtyDataGridView.CurrentCell = qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    //contextMenuStrip_ListViewItemRightClick.Show（MousePosition.X， MousePosition.Y）; 
-                    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
-                    qtyDataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
 
-                }
-            }
-        }
-
-        private void EditQTYStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            qtyDataGridView.Rows[davx].Cells[davy].ReadOnly = false;
-            int v = Convert.ToInt32(this.productList[davx].自社コード);
-            t_stockrec qw = stockList.Find(o => o.自社コード == v);
-            qw.数量 = Convert.ToInt32(qtyDataGridView.Rows[davx].Cells[davy].EditedFormattedValue.ToString());
-            if (qw.数量 > 0)
-                SavestockList.Add(qw);
-        }
-
-        private void qtyDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            davx = e.RowIndex;
-            davy = e.ColumnIndex;
-        }
-
-        private void qtyDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            qtyDataGridView.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
-
-        }
 
         private void stockIoDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 
             // 选择 修改状态，由“仮”改为“完了”，或者相反。
-            if (stockIoDataGridView.CurrentCell.RowIndex == 2)
-            {
-                int j = stockIoDataGridView.CurrentCell.ColumnIndex;
-                string stockNum = Convert.ToString(stockIoDataGridView.Rows[4].Cells[j].Value);
-                string progress = (string)stockIoDataGridView.CurrentCell.Value;
-                {
-                    t_stockrec item = new t_stockrec();
-                    item.納品書番号 = stockNum;
-                    item.事由 = progress;
-                    davSHiRuStockSavestockList.Add(item);
+            
+                string stockNum = GetStockNumByColumnIndex(e.ColumnIndex);
+                
 
-                }
+                    var changeList = this.stockList.FindAll(s => s.納品書番号 == stockNum);
 
-            }
+                    foreach (var item in changeList)
+                    {
+                        if (e.RowIndex == 2)//事由
+                        {
+                            item.事由 = stockIoDataGridView.CurrentCell.Value.ToString();
+                        }
+                        else if (e.RowIndex == 3)//状態
+                        {
+                            item.状態 = stockIoDataGridView.CurrentCell.Value.ToString();
+                        }
+                       
+                    }
+                    this.changedStockList.AddRange(changeList);            
 
         }
 
+        private void qtyDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            string stockNum = GetStockNumByColumnIndex(e.ColumnIndex);
 
+            int productNum = GetProductNumByRowIndex(e.RowIndex);
 
+            t_stockrec stock = this.stockList.Find(o => (o.自社コード == productNum && o.納品書番号 == stockNum));
+
+            stock.数量 =  Convert.ToInt32( qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value );
+            this.changedStockList.Add(stock);
+        }
+
+        private string GetStockNumByColumnIndex(int j) {
+
+            return  Convert.ToString(this.stockIoDataGridView.Rows[4].Cells[j].Value);
+
+        }
+        private int GetProductNumByRowIndex(int i)
+        {
+            return Convert.ToInt32(this.productList[i].自社コード);
+
+        }
     }
 }
