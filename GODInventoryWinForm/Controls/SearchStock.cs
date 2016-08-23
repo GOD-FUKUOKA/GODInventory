@@ -260,7 +260,7 @@ WHERE ({0});";
 
                 }
             }
-            MessageBox.Show(String.Format("Congratulations, You have {0} items changed successfully!", changedStockList.Count));
+            MessageBox.Show(String.Format("Congratulations, Items changed successfully!"));
 
             changedStockList.Clear();
         }
