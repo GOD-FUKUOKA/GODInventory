@@ -29,6 +29,8 @@ namespace GODInventory.ViewModel
             var a = entityDataSource1.EntitySets["t_orderdatas"];
             var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
                     where o.Status == OrderStatus.New
+                    orderby o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
+
                     select o;
             return q;
         }

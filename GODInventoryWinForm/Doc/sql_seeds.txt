@@ -174,3 +174,6 @@ INSERT INTO `god_inventory`.`t_manufacturers` (`Id`, `ShortName`, `FullName`, `g
 INSERT INTO `god_inventory`.`t_manufacturers` (`Id`, `ShortName`, `FullName`, `genreId`) VALUES ('2', '自社工場', '自社工場', '1001');
 INSERT INTO `god_inventory`.`t_manufacturers` (`Id`, `ShortName`, `FullName`, `genreId`) VALUES ('3', '興和日東', '興和日東', '6');
 INSERT INTO `god_inventory`.`t_manufacturers` (`Id`, `ShortName`, `FullName`, `genreId`) VALUES ('4', 'ランデス', 'ランデス', '6');
+
+-- V2.2-----------------------------------------------------------------------
+INSERT INTO `god_inventory`.`t_customers` (`Id`, `ShortName`, `FullName`) VALUES ('4', 'ナフコ', 'ナフコ' );

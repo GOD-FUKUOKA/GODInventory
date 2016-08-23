@@ -95,6 +95,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\EditOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\EditOrderForm.Designer.cs">
+      <DependentUpon>EditOrderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\InputStock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,6 +304,9 @@
       <DependentUpon>testingCC.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkerArgument.cs" />
+    <EmbeddedResource Include="Controls\EditOrderForm.resx">
+      <DependentUpon>EditOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\InputStock.resx">
       <DependentUpon>InputStock.cs</DependentUpon>
       <SubType>Designer</SubType>

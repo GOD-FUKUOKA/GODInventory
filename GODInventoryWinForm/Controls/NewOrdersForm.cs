@@ -28,9 +28,21 @@ namespace GODInventoryWinForm.Controls
             this.dataGridView1.DataSource = null;
             this.dataGridView1.AutoGenerateColumns = false;
 
-            this.dataGridView1.DataSource = orderList;
+            InitializePager();
+            //this.dataGridView1.DataSource = orderList;
         }
 
+        public void InitializePager()
+        {
+            this.pager1.PageCurrent = 1; //当前页为第一页   
+            this.pager1.PageSize = 5000; //页数   
+            this.pager1.Bind();
+        }
+
+        public void RefreshPager()
+        {
+            this.pager1.Bind();
+        }
 
         private void detailButton_Click_1(object sender, EventArgs e)
         {
@@ -208,7 +220,21 @@ namespace GODInventoryWinForm.Controls
             return count;
         }
 
+        private void newOrderbutton_Click(object sender, EventArgs e)
+        {
+            var form = new CreateOrderForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                pager1.Bind();
+            }
+        }
 
+        private int pager1_EventPaging(EventPagingArg e)
+        {
+            int order_count = InitializeOrderData();
+
+            return order_count;
+        }
 
     }
 }

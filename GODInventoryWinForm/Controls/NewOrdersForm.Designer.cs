@@ -39,11 +39,6 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.sendToShipperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancelOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uncancleOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ダブリ = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreCodeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,16 +60,19 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id受注データ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.sendToShipperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uncancleOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newOrderbutton = new System.Windows.Forms.Button();
             this.pager1 = new GODInventoryWinForm.Controls.Pager();
-            this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            this.pager1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.SuspendLayout();
             // 
             // entityDataSource1
@@ -93,7 +91,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(981, 473);
+            this.tabControl1.Size = new System.Drawing.Size(981, 437);
             this.tabControl1.TabIndex = 2;
             // 
             // ordersTabPage
@@ -104,13 +102,14 @@
             this.ordersTabPage.Location = new System.Drawing.Point(4, 22);
             this.ordersTabPage.Name = "ordersTabPage";
             this.ordersTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ordersTabPage.Size = new System.Drawing.Size(973, 447);
+            this.ordersTabPage.Size = new System.Drawing.Size(973, 411);
             this.ordersTabPage.TabIndex = 0;
             this.ordersTabPage.Text = "Orders";
             this.ordersTabPage.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.newOrderbutton);
             this.panel1.Controls.Add(this.detailButton);
             this.panel1.Controls.Add(this.editButton);
             this.panel1.Controls.Add(this.saveButton);
@@ -118,14 +117,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(967, 82);
+            this.panel1.Size = new System.Drawing.Size(967, 76);
             this.panel1.TabIndex = 26;
             // 
             // detailButton
             // 
-            this.detailButton.Location = new System.Drawing.Point(3, 15);
+            this.detailButton.Location = new System.Drawing.Point(3, 14);
             this.detailButton.Name = "detailButton";
-            this.detailButton.Size = new System.Drawing.Size(97, 25);
+            this.detailButton.Size = new System.Drawing.Size(97, 23);
             this.detailButton.TabIndex = 27;
             this.detailButton.Text = "重複受注判断";
             this.detailButton.UseVisualStyleBackColor = true;
@@ -133,9 +132,9 @@
             // 
             // editButton
             // 
-            this.editButton.Location = new System.Drawing.Point(102, 17);
+            this.editButton.Location = new System.Drawing.Point(102, 16);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(97, 24);
+            this.editButton.Size = new System.Drawing.Size(97, 22);
             this.editButton.TabIndex = 15;
             this.editButton.Text = "Approve All";
             this.editButton.UseVisualStyleBackColor = true;
@@ -143,9 +142,9 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(0, 48);
+            this.saveButton.Location = new System.Drawing.Point(0, 44);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(97, 25);
+            this.saveButton.Size = new System.Drawing.Size(97, 23);
             this.saveButton.TabIndex = 16;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -153,9 +152,9 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(103, 48);
+            this.cancelButton.Location = new System.Drawing.Point(103, 44);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(97, 24);
+            this.cancelButton.Size = new System.Drawing.Size(97, 22);
             this.cancelButton.TabIndex = 19;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -193,47 +192,14 @@
             this.Column4,
             this.id受注データ});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 95);
+            this.dataGridView1.Location = new System.Drawing.Point(6, 88);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(961, 315);
+            this.dataGridView1.Size = new System.Drawing.Size(961, 291);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sendToShipperToolStripMenuItem,
-            this.cancelOrderToolStripMenuItem,
-            this.uncancleOrderToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(155, 70);
-            // 
-            // sendToShipperToolStripMenuItem
-            // 
-            this.sendToShipperToolStripMenuItem.Name = "sendToShipperToolStripMenuItem";
-            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.sendToShipperToolStripMenuItem.Text = "SendToShipper";
-            // 
-            // cancelOrderToolStripMenuItem
-            // 
-            this.cancelOrderToolStripMenuItem.Name = "cancelOrderToolStripMenuItem";
-            this.cancelOrderToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.cancelOrderToolStripMenuItem.Text = "CancelOrder";
-            // 
-            // uncancleOrderToolStripMenuItem
-            // 
-            this.uncancleOrderToolStripMenuItem.Name = "uncancleOrderToolStripMenuItem";
-            this.uncancleOrderToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.uncancleOrderToolStripMenuItem.Text = "UncancelOrder";
-            // 
-            // id受注データDataGridViewTextBoxColumn
-            // 
-            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
             // 
             // ダブリ
             // 
@@ -367,46 +333,71 @@
             this.id受注データ.HeaderText = "id受注データ";
             this.id受注データ.Name = "id受注データ";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sendToShipperToolStripMenuItem,
+            this.cancelOrderToolStripMenuItem,
+            this.uncancleOrderToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(166, 70);
+            // 
+            // sendToShipperToolStripMenuItem
+            // 
+            this.sendToShipperToolStripMenuItem.Name = "sendToShipperToolStripMenuItem";
+            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.sendToShipperToolStripMenuItem.Text = "SendToShipper";
+            // 
+            // cancelOrderToolStripMenuItem
+            // 
+            this.cancelOrderToolStripMenuItem.Name = "cancelOrderToolStripMenuItem";
+            this.cancelOrderToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.cancelOrderToolStripMenuItem.Text = "CancelOrder";
+            // 
+            // uncancleOrderToolStripMenuItem
+            // 
+            this.uncancleOrderToolStripMenuItem.Name = "uncancleOrderToolStripMenuItem";
+            this.uncancleOrderToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.uncancleOrderToolStripMenuItem.Text = "UncancelOrder";
+            // 
+            // id受注データDataGridViewTextBoxColumn
+            // 
+            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
+            // 
+            // newOrderbutton
+            // 
+            this.newOrderbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.newOrderbutton.Location = new System.Drawing.Point(856, 14);
+            this.newOrderbutton.Name = "newOrderbutton";
+            this.newOrderbutton.Size = new System.Drawing.Size(108, 52);
+            this.newOrderbutton.TabIndex = 28;
+            this.newOrderbutton.Text = "New orders";
+            this.newOrderbutton.UseVisualStyleBackColor = true;
+            this.newOrderbutton.Click += new System.EventHandler(this.newOrderbutton_Click);
+            // 
             // pager1
             // 
             this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pager1.AutoSize = true;
-            this.pager1.Controls.Add(this.bindingNavigator1);
-            this.pager1.Location = new System.Drawing.Point(6, 377);
+            this.pager1.BackColor = System.Drawing.SystemColors.Control;
+            this.pager1.Location = new System.Drawing.Point(6, 380);
             this.pager1.Name = "pager1";
             this.pager1.NMax = 0;
             this.pager1.PageCount = 0;
             this.pager1.PageCurrent = 0;
             this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(961, 68);
+            this.pager1.Size = new System.Drawing.Size(961, 26);
             this.pager1.TabIndex = 25;
-            // 
-            // bindingNavigator1
-            // 
-            this.bindingNavigator1.AddNewItem = null;
-            this.bindingNavigator1.AutoSize = false;
-            this.bindingNavigator1.CountItem = null;
-            this.bindingNavigator1.DeleteItem = null;
-            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bindingNavigator1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.bindingNavigator1.Location = new System.Drawing.Point(0, 34);
-            this.bindingNavigator1.MoveFirstItem = null;
-            this.bindingNavigator1.MoveLastItem = null;
-            this.bindingNavigator1.MoveNextItem = null;
-            this.bindingNavigator1.MovePreviousItem = null;
-            this.bindingNavigator1.Name = "bindingNavigator1";
-            this.bindingNavigator1.PositionItem = null;
-            this.bindingNavigator1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.bindingNavigator1.Size = new System.Drawing.Size(961, 34);
-            this.bindingNavigator1.TabIndex = 0;
-            this.bindingNavigator1.Text = "bindingNavigator1";
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // NewOrdersForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(981, 473);
+            this.ClientSize = new System.Drawing.Size(981, 437);
             this.Controls.Add(this.tabControl1);
             this.Name = "NewOrdersForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -418,8 +409,6 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.pager1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -429,7 +418,6 @@
         private GODInventory.ViewModel.EntityDataSource entityDataSource1;
         private System.Windows.Forms.BindingSource bindingSource1;
         private Pager pager1;
-        private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage ordersTabPage;
         private System.Windows.Forms.Panel panel1;
@@ -464,5 +452,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn id受注データ;
+        private System.Windows.Forms.Button newOrderbutton;
     }
 }

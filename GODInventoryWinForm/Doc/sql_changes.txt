@@ -96,9 +96,20 @@ CHANGE COLUMN `日付` `日付` DATETIME NOT NULL ;
 
 -- V2.1-----------------------------------------------------------------
 
--- t_stockrec new Add two cloumn
 ALTER TABLE `god_inventory`.`t_stockrec` 
 ADD COLUMN `工厂`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL;
 
 ALTER TABLE `god_inventory`.`t_manufacturers` 
 ADD COLUMN `genreId` INT(11) UNSIGNED NOT NULL;
+
+-- V2.2-----------------------------------------------------------------
+CREATE TABLE `god_inventory`.`t_customers` (
+  `Id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ShortName` VARCHAR(45) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  `FullName` VARCHAR(45) CHARACTER SET 'utf8' NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`));
+
+ALTER TABLE `god_inventory`.`t_shoplist` 
+ADD COLUMN `customerId` INT(11) UNSIGNED NOT NULL;
+
+UPDATE `god_inventory`.`t_shoplist` SET `customerId` = 4 where `customerId`=0;

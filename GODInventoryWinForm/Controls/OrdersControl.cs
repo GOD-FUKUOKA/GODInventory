@@ -107,9 +107,9 @@ namespace GODInventoryWinForm.Controls
         //Fix error 卸载 Appdomain 时出错
         void OrdersControl_Disposed(object sender, EventArgs e)
         {
-            this.pendingOrderForm.Dispose();
-            this.waitToShipOrderForm.Dispose();
-            this.shippingOrderForm.Dispose();
+            //this.pendingOrderForm.Dispose();
+            //this.waitToShipOrderForm.Dispose();
+            //this.shippingOrderForm.Dispose();
         }
 
         private void newButton_Click(object sender, EventArgs e)
@@ -120,7 +120,7 @@ namespace GODInventoryWinForm.Controls
             }
             AdjustSubformSize(newOrdersForm);
             // 显示之前重新加载数据，订单数据可能已更新。
-            //newOrdersForm.RefreshPager();
+            newOrdersForm.RefreshPager();
             newOrdersForm.ShowDialog();
 
         }

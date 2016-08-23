@@ -819,59 +819,59 @@ namespace GODInventoryWinForm.Controls
             if (s == 0 && RowRemark >= 0)
             {
 
-                string id = dataGridView1.Rows[RowRemark].Cells["StoreCodeColumn1"].EditedFormattedValue.ToString() + "a" + dataGridView1.Rows[RowRemark].Cells["InvoiceNOColumn1"].EditedFormattedValue.ToString();
+            //    string id = dataGridView1.Rows[RowRemark].Cells["StoreCodeColumn1"].EditedFormattedValue.ToString() + "a" + dataGridView1.Rows[RowRemark].Cells["InvoiceNOColumn1"].EditedFormattedValue.ToString();
 
-                CheckUserInfo_ID(id, "1", invoiceNoFilterTextBox.Text);
+            //    CheckUserInfo_ID(id, "1", invoiceNoFilterTextBox.Text);
 
-                foreach (t_orderdata item in Findorderdataresults)
-                {
-                    if (item.受注日 != null)
-                        textBox2.Text = item.受注日.ToString();
-                    if (item.店舗コード != null)
-                        textBox3.Text = item.店舗コード.ToString();
-                    if (item.店舗名漢字 != null)
-                        textBox4.Text = item.店舗名漢字.ToString();
-                    if (item.伝票番号 != null)
-                        textBox5.Text = item.伝票番号.ToString();
-                    if (item.キャンセル != null)
-                        textBox6.Text = item.キャンセル.ToString();
-                    if (item.キャンセル時刻 != null)
-                        textBox7.Text = item.キャンセル時刻.ToString();
-                    //textBox8.Text = item.品名漢字.ToString();
-                    if (item.ジャンル != null)
-                        textBox9.Text = item.ジャンル.ToString();
-                    if (item.品名漢字 != null)
-                        textBox10.Text = item.品名漢字.ToString();
-                    if (item.規格名漢字 != null)
-                        textBox11.Text = item.規格名漢字.ToString();
-                    if (item.発注数量 != null)
-                        //textBox12.Text = item.重量.ToString();
-                        textBox13.Text = item.発注数量.ToString();
-                    if (item.口数 != null)
-                        textBox14.Text = item.口数.ToString();
-                    if (item.重量 != null)
-                        textBox15.Text = item.重量.ToString();
-                    if (item.単位 != null)
-                        textBox16.Text = item.単位.ToString();
-                    if (item.実際配送担当 != null)
-                        textBox17.Text = item.実際配送担当.ToString();
-                    if (item.県別 != null)
-                        textBox18.Text = item.県別.ToString();
-                    if (item.配送担当受信 != null)
-                        textBox19.Text = item.配送担当受信.ToString();
-                    if (item.配送担当受信時刻 != null)
-                        textBox20.Text = item.配送担当受信時刻.ToString();
-                    if (item.専務受信 != null)
-                        textBox21.Text = item.専務受信.ToString();
-                    if (item.専務受信時刻 != null)
-                        textBox22.Text = item.専務受信時刻.ToString();
-                    if (item.受注日 != null)
-                        textBox23.Text = item.受注日.ToString();
-                    if (item.納品指示 != null)
-                        textBox24.Text = item.納品指示.ToString();
-                    if (item.備考 != null)
-                        textBox25.Text = item.備考.ToString();
-                }
+            //    foreach (t_orderdata item in Findorderdataresults)
+            //    {
+            //        if (item.受注日 != null)
+            //            textBox2.Text = item.受注日.ToString();
+            //        if (item.店舗コード != null)
+            //            textBox3.Text = item.店舗コード.ToString();
+            //        if (item.店舗名漢字 != null)
+            //            textBox4.Text = item.店舗名漢字.ToString();
+            //        if (item.伝票番号 != null)
+            //            textBox5.Text = item.伝票番号.ToString();
+            //        if (item.キャンセル != null)
+            //            textBox6.Text = item.キャンセル.ToString();
+            //        if (item.キャンセル時刻 != null)
+            //            textBox7.Text = item.キャンセル時刻.ToString();
+            //        //textBox8.Text = item.品名漢字.ToString();
+            //        if (item.ジャンル != null)
+            //            textBox9.Text = item.ジャンル.ToString();
+            //        if (item.品名漢字 != null)
+            //            textBox10.Text = item.品名漢字.ToString();
+            //        if (item.規格名漢字 != null)
+            //            textBox11.Text = item.規格名漢字.ToString();
+            //        if (item.発注数量 != null)
+            //            //textBox12.Text = item.重量.ToString();
+            //            textBox13.Text = item.発注数量.ToString();
+            //        if (item.口数 != null)
+            //            textBox14.Text = item.口数.ToString();
+            //        if (item.重量 != null)
+            //            textBox15.Text = item.重量.ToString();
+            //        if (item.単位 != null)
+            //            textBox16.Text = item.単位.ToString();
+            //        if (item.実際配送担当 != null)
+            //            textBox17.Text = item.実際配送担当.ToString();
+            //        if (item.県別 != null)
+            //            textBox18.Text = item.県別.ToString();
+            //        if (item.配送担当受信 != null)
+            //            textBox19.Text = item.配送担当受信.ToString();
+            //        if (item.配送担当受信時刻 != null)
+            //            textBox20.Text = item.配送担当受信時刻.ToString();
+            //        if (item.専務受信 != null)
+            //            textBox21.Text = item.専務受信.ToString();
+            //        if (item.専務受信時刻 != null)
+            //            textBox22.Text = item.専務受信時刻.ToString();
+            //        if (item.受注日 != null)
+            //            textBox23.Text = item.受注日.ToString();
+            //        if (item.納品指示 != null)
+            //            textBox24.Text = item.納品指示.ToString();
+            //        if (item.備考 != null)
+            //            textBox25.Text = item.備考.ToString();
+            //    }
             }
 
 
