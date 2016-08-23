@@ -66,9 +66,10 @@ namespace GODInventoryWinForm.Controls
             this.genreComboBox.DataSource = genreList;
             t_manufacturers item = new t_manufacturers();
             item.Id = 0;
+            item.genreId = 0;
             item.ShortName = "全部";
             item.FullName = "全部";
-            manufacturerList.Add(item);
+            manufacturerList.Insert(0,item);
 
             //this.manufacturerList = ManufactureRespository.ToList();
             this.manufacturerComboBox.DisplayMember = "FullName";
@@ -548,15 +549,16 @@ WHERE ({0});";
 
         private void genreComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            var filtered = manufacturerList.FindAll(s => s.genreId == (int)this.genreComboBox.SelectedValue);
-            //t_manufacturers item = new t_manufacturers();
-            //item.Id = 0;
-            //item.ShortName = "全部";
-            //item.FullName = "全部";
-            //filtered.Add(item);
+            var filtered = manufacturerList.FindAll(s => s.genreId == (int)this.genreComboBox.SelectedValue ||s.Id==0);
 
             if (filtered.Count > 0)
             {
+                //t_manufacturers item = new t_manufacturers();
+                //item.Id = 0;
+                //item.genreId = 0;
+                //item.ShortName = "全部";
+                //item.FullName = "全部";
+                //filtered.Add(item);
                 this.manufacturerComboBox.DataSource = filtered;
             }
             else
