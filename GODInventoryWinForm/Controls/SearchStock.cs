@@ -139,19 +139,18 @@ namespace GODInventoryWinForm.Controls
             if (warehouse != WarehouseRespository.OptionTextAll)
             {
 
-                conditions += " AND ";
+                conditions += "";
 
                 if (ioState == StockIoEnum.全部.ToString())
                 {
                     if (isAllManufacturerSelected)
                     {
-                        // 某一个仓库的所有生产商的出入库记录
-                        conditions += "( s.元 = @warehouse OR s.先 = @warehouse )";
+                        // 某一个仓库的所有生产商的出入库记录                      
                     }
                     else
                     {
                         // 某一个仓库的某一生产商的出入库记录
-                        conditions += "((s.`元` = @manufacturer AND  s.先 = @warehouse ) OR (s.`元` = @warehouse AND  s.先 = @manufacturer ))";
+                        conditions += " AND (s.`工厂` = @manufacturer)";
                     }
                 }
                 else if (ioState == StockIoEnum.入庫.ToString())
@@ -159,12 +158,12 @@ namespace GODInventoryWinForm.Controls
                     if (isAllManufacturerSelected)
                     {
                         // 某一个仓库的所有生产商的入库记录
-                        conditions += "( s.先 = @warehouse )";
+                        conditions += " AND ( s.先 = @warehouse )";
                     }
                     else
                     {
                         // 某一个仓库的某一生产商的入库记录
-                        conditions += "( s.`元` = @manufacturer AND  s.先 = @warehouse )";
+                        conditions += " AND ( s.`工厂` = @manufacturer AND  s.`先` = @warehouse )";
                     }
                 }
                 else if (ioState == StockIoEnum.出庫.ToString())
@@ -172,12 +171,12 @@ namespace GODInventoryWinForm.Controls
                     if (isAllManufacturerSelected)
                     {
                         // 某一个仓库的所有生产商的出库记录, 即出库记录
-                        conditions += "( s.元 = @warehouse )";
+                        conditions += " AND ( s.元 = @warehouse )";
                     }
                     else
                     {
                         // 某一个仓库的某一生产商的出库记录
-                        conditions += "( s.元 = @warehouse AND s.`先` = @manufacturer )";
+                        conditions += " AND ( s.`元` = @warehouse AND s.`工厂` = @manufacturer )";
                     }
                 }
             }
