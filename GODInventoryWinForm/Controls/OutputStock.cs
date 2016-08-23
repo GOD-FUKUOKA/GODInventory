@@ -20,6 +20,7 @@ namespace GODInventoryWinForm.Controls
         private BindingList<v_stockios> stockiosList;
         private List<t_genre> genreList;
         private List<t_warehouses> warehouseList;
+        private List<t_customers> customersList;
         public OutputStock()
         {
             InitializeComponent();
@@ -41,6 +42,7 @@ namespace GODInventoryWinForm.Controls
                 genreList = ctx.t_genre.ToList();
                 warehouseList = ctx.t_warehouses.ToList();
                 manufacturerList = ctx.t_manufacturers.ToList();
+                customersList = ctx.t_customers.ToList();
             }
             this.genreComboBox.DisplayMember = "ジャンル名";
             this.genreComboBox.ValueMember = "idジャンル";
@@ -61,6 +63,12 @@ namespace GODInventoryWinForm.Controls
             if (this.clientComboBox.Items.Count > 0) {
                 this.clientComboBox.SelectedIndex = 0;              
             }
+            this.clientComboBox.DisplayMember = "FullName";
+            this.clientComboBox.ValueMember = "Id";
+            this.clientComboBox.DataSource = customersList;
+
+
+
             //BuildStockNO();
         }
 
@@ -118,7 +126,8 @@ namespace GODInventoryWinForm.Controls
                         order.自社コード = Convert.ToInt32(item.自社コード);
                         order.状態 = this.stockStatusComboBox.Text;
                         order.工厂 = this.manufacturerComboBox.Text;
-                        
+                        order.客户 = this.clientComboBox.Text;
+
                         receivedList.Add(order);
                     }
                 }
