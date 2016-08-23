@@ -31,9 +31,6 @@ namespace GODInventoryWinForm
 
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
 
-
-
-
             Database.SetInitializer<GODDbContext>(null);
             if (DbConnectable())
             {

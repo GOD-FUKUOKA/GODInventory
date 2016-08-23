@@ -25,6 +25,9 @@ namespace GODInventoryWinForm.Controls
         private List<v_stockcheck> productList = null;
         private List<t_stockrec> stockList = null;
         private List<t_stockrec> SavestockList = null;
+        private List<t_stockrec> davStockSavestockList = null;
+        private List<t_stockrec> davSHiRuStockSavestockList = null;
+
         int davx = 0;
         int davy = 0;
 
@@ -44,6 +47,8 @@ namespace GODInventoryWinForm.Controls
 
             this.vScrollBar1.Visible = false;
             this.hScrollBar1.Visible = false;
+            davStockSavestockList = new List<t_stockrec>();
+            davSHiRuStockSavestockList = new List<t_stockrec>();
             SavestockList = new List<t_stockrec>();
 
         }
@@ -232,20 +237,15 @@ WHERE ({0});";
                 col = stockIoDataGridView.Columns[i];
                 if (!col.Visible)
                 {
-
                     stockNum = Convert.ToString(stockIoDataGridView.Rows[4].Cells[i].Value);
                     deletedStockNumList.Add(stockNum);
                 }
-
             }
-
-
             if (deletedStockNumList.Count > 0)
             {
                 int deletedCount = 0;
                 using (var ctx = new GODDbContext())
                 {
-
                     var stockrecs = (from s in ctx.t_stockrec
                                      where deletedStockNumList.Contains(s.納品書番号)
                                      select s).ToList();
@@ -257,7 +257,6 @@ WHERE ({0});";
 
                 }
                 MessageBox.Show(String.Format("Congratulations, You have {0} items removed successfully!", deletedCount));
-
             }
             else
             {
@@ -265,8 +264,6 @@ WHERE ({0});";
                 return;
             }
             //Save qty
-
-
             using (var ctx = new GODDbContext())
             {
                 int i = 0;
@@ -279,6 +276,44 @@ WHERE ({0});";
                     ctx.SaveChanges();
                     i++;
                 }
+
+                //状態
+                foreach (t_stockrec item1 in davStockSavestockList)
+                {
+                    var changeList = this.stockList.FindAll(s => s.納品書番号 == item1.納品書番号);
+                    {
+                        var list = (from s in ctx.t_stockrec
+                                    where s.納品書番号 == item1.納品書番号
+                                    select s).ToList();
+
+                        foreach (var item in list)
+                        {
+                            item.状態 = item1.状態.ToString();
+                        }
+                    }
+                    ctx.SaveChanges();
+
+                }
+
+                //save 事由                
+                foreach (t_stockrec item1 in davSHiRuStockSavestockList)
+                {
+                    var changeList = this.stockList.FindAll(s => s.納品書番号 == item1.納品書番号);
+                    {
+                        var list = (from s in ctx.t_stockrec
+                                    where s.納品書番号 == item1.納品書番号
+                                    select s).ToList();
+
+                        foreach (var item in list)
+                        {
+                            item.事由 = item1.事由.ToString();
+                        }
+                    }
+                    ctx.SaveChanges();
+
+                }
+
+
             }
         }
 
@@ -489,15 +524,22 @@ WHERE ({0});";
                         foreach (var item in list)
                         {
                             item.状態 = StockIoProgressEnum.完了.ToString();
+                            davStockSavestockList.Add(item);
+
                         }
                         stockIoDataGridView.CurrentCell.Value = StockIoProgressEnum.完了.ToString();
                     }
-                    ctx.SaveChanges();
-
+                    //   ctx.SaveChanges();
                 }
+            }
+            else if (stockIoDataGridView.CurrentCell.RowIndex == 2)
+            {
+
+
 
 
             }
+
         }
 
         private void genreComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -528,6 +570,7 @@ WHERE ({0});";
                     qtyDataGridView.CurrentCell = qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     //contextMenuStrip_ListViewItemRightClick.Show（MousePosition.X， MousePosition.Y）; 
                     contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+                    qtyDataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
 
                 }
             }
@@ -547,6 +590,33 @@ WHERE ({0});";
         {
             davx = e.RowIndex;
             davy = e.ColumnIndex;
+        }
+
+        private void qtyDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            qtyDataGridView.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
+
+        }
+
+        private void stockIoDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+
+            // 选择 修改状态，由“仮”改为“完了”，或者相反。
+            if (stockIoDataGridView.CurrentCell.RowIndex == 2)
+            {
+                int j = stockIoDataGridView.CurrentCell.ColumnIndex;
+                string stockNum = Convert.ToString(stockIoDataGridView.Rows[4].Cells[j].Value);
+                string progress = (string)stockIoDataGridView.CurrentCell.Value;
+                {
+                    t_stockrec item = new t_stockrec();
+                    item.納品書番号 = stockNum;
+                    item.事由 = progress;
+                    davSHiRuStockSavestockList.Add(item);
+
+                }
+
+            }
+
         }
 
 

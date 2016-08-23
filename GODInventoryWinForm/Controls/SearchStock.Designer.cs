@@ -57,13 +57,13 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditQTYStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.EditQTYStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qtyDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockIoDataGridView)).BeginInit();
@@ -287,6 +287,7 @@
             this.qtyDataGridView.Size = new System.Drawing.Size(617, 243);
             this.qtyDataGridView.TabIndex = 89;
             this.qtyDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.qtyDataGridView_CellClick);
+            this.qtyDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.qtyDataGridView_CellDoubleClick);
             this.qtyDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.qtyDataGridView_CellMouseDown);
             this.qtyDataGridView.Scroll += new System.Windows.Forms.ScrollEventHandler(this.qtyDataGridView_Scroll);
             // 
@@ -341,6 +342,7 @@
             this.stockIoDataGridView.Size = new System.Drawing.Size(617, 151);
             this.stockIoDataGridView.TabIndex = 92;
             this.stockIoDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.stockIoDataGridView_CellMouseDown);
+            this.stockIoDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.stockIoDataGridView_CellValueChanged);
             // 
             // contextMenuStrip1
             // 
@@ -364,6 +366,13 @@
             this.editToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.editToolStripMenuItem.Text = "修改状态";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // EditQTYStripMenuItem1
+            // 
+            this.EditQTYStripMenuItem1.Name = "EditQTYStripMenuItem1";
+            this.EditQTYStripMenuItem1.Size = new System.Drawing.Size(122, 22);
+            this.EditQTYStripMenuItem1.Text = "修改数量";
+            this.EditQTYStripMenuItem1.Click += new System.EventHandler(this.EditQTYStripMenuItem1_Click);
             // 
             // vScrollBar1
             // 
@@ -424,13 +433,6 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "規格";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // EditQTYStripMenuItem1
-            // 
-            this.EditQTYStripMenuItem1.Name = "EditQTYStripMenuItem1";
-            this.EditQTYStripMenuItem1.Size = new System.Drawing.Size(122, 22);
-            this.EditQTYStripMenuItem1.Text = "修改数量";
-            this.EditQTYStripMenuItem1.Click += new System.EventHandler(this.EditQTYStripMenuItem1_Click);
             // 
             // SearchStock
             // 
