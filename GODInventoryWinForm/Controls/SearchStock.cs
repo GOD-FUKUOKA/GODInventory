@@ -376,8 +376,6 @@ WHERE ({0});";
             {
                 if (e.RowIndex >= 0)
                 {
-                    this.deleteToolStripMenuItem.Visible = true;
-                    this.editToolStripMenuItem.Visible = true;
 
                     stockIoDataGridView.ClearSelection();
                     stockIoDataGridView.Columns[e.ColumnIndex].Selected = true;
