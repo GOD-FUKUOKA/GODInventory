@@ -277,7 +277,10 @@ WHERE ({0});";
                     var stockrecs = (from s in ctx.t_stockrec
                                      where s.自社コード == item.自社コード && s.納品書番号 == item.納品書番号
                                      select s).FirstOrDefault();
-                    stockrecs.数量 = SavestockList[i].数量;
+                    if (item.区分 != null && item.区分 == "出庫")
+                        stockrecs.数量 = -SavestockList[i].数量;
+                    else
+                        stockrecs.数量 = SavestockList[i].数量;
                     ctx.SaveChanges();
                     i++;
                 }

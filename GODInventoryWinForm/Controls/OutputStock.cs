@@ -120,7 +120,7 @@ namespace GODInventoryWinForm.Controls
                         order.元 = this.warehouseComboBox.Text;
                         order.先 = this.clientComboBox.Text;
                         order.納品書番号 = stockNOTextBox.Text;
-                        order.数量 = item.qty;
+                        order.数量 =- item.qty;
                         order.区分 = StockIoEnum.出庫.ToString();
                         order.事由 = this.remarkTextBox1.Text;                   
                         order.自社コード = Convert.ToInt32(item.自社コード);
@@ -142,6 +142,14 @@ namespace GODInventoryWinForm.Controls
                     MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", receivedList.Count));
                     // rebuild stock no, new stockrec created.
                     BuildStockNO();
+                    //save volume
+                    string sql = @"SELECT i.`規格`,i.`商品名`, SUM(s.`数量`) as `数量`, s.`自社コード` FROM t_stockrec s
+    INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = {0}
+    WHERE (s.`先` = {1} and s.`状態`={2} and s.`日付`< {3} and s.`日付`> {4} )
+    GROUP by s.`自社コード`;";
+                    //var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.完了.ToString(), endDate, startDate).ToList();
+
+
                 }
                 else
                 {
