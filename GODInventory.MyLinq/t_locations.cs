@@ -15,8 +15,7 @@
 
         public int 店舗コード { get; set; }
 
-        [StringLength(64)]
-        public string 納品場所コード { get; set; }
+        public short 納品場所コード { get; set; }
 
         [StringLength(64)]
         public string 納品場所名カナ { get; set; }

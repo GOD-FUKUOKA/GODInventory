@@ -113,3 +113,7 @@ ALTER TABLE `god_inventory`.`t_shoplist`
 ADD COLUMN `customerId` INT(11) UNSIGNED NOT NULL;
 
 UPDATE `god_inventory`.`t_shoplist` SET `customerId` = 4 where `customerId`=0;
+
+-- V3.0-----------------------------------------------------------------
+ALTER TABLE `god_inventory`.`t_locations` 
+CHANGE COLUMN `納品場所コード` `納品場所コード` INT(4) NOT NULL DEFAULT 0;

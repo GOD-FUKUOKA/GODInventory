@@ -27,11 +27,10 @@ namespace GODInventoryWinForm.Controls
         private List<t_orderdata> orders1;
         private List<t_shoplist> shopList;
         private List<v_itemprice> itemPriceList;
-        private List<t_rcvdata> t_rcvdataR;
         private List<t_locations> locationList;
         private BindingList<t_orderdata> orderList;
         private List<t_pricelist> t_pricelistR;
-       
+        private ComboBox specialColumn; 
 
         private SelectProductForm selectProductForm;
         int davX = 0;
@@ -44,14 +43,12 @@ namespace GODInventoryWinForm.Controls
             orderList = new BindingList<t_orderdata>();
 
             shopList = new List<t_shoplist>();
-            t_rcvdataR = new List<t_rcvdata>();
             locationList = new List<t_locations>();
 
             using (var ctx = new GODDbContext())
             {
 
                 shopList = ctx.t_shoplist.ToList();
-                t_rcvdataR = ctx.t_rcvdata.ToList();
 
                 locationList = ctx.t_locations.ToList();
                 t_pricelistR = ctx.t_pricelist.ToList();
@@ -283,49 +280,20 @@ namespace GODInventoryWinForm.Controls
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
 
-
-            try
-            {
-                if (customerIdTextBox.Text != "")
-                {
-
-                    var locations = this.t_rcvdataR.Where(l => l.法人コード == Convert.ToInt32(customerIdTextBox.Text)).Distinct().ToList();
-                    var value = (from v in locations select v.法人名漢字).Distinct().ToList();
-                    this.customerComboBox.DisplayMember = "法人名漢字";
-                    this.customerComboBox.ValueMember = "id受領データ";
-                    this.customerComboBox.DataSource = value;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                return;
-
-                throw;
-            }
-
+           
         }
 
-        private void textBox6_TextChanged(object sender, EventArgs e)
+        private void locationTextBox_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (locationTextBox.Text != "")
-                {
-                    foreach (t_locations item in locationList)
-                    {
-                        if (item.Id == Convert.ToInt32(locationTextBox.Text))
-                            this.locationComboBox.Text = item.納品場所名漢字;
-
-                    }
+            var locationId = Convert.ToInt16( locationTextBox.Text );
+            var locations = this.locationComboBox.DataSource as List<t_locations>;
+            if (locations != null) {
+                if( locations.Exists( i=> i.納品場所コード == locationId)) {
+                    this.locationComboBox.SelectedValue = locationId;     
                 }
+                
             }
-            catch (Exception ex)
-            {
-                return;
-
-                throw;
-            }
+                   
 
         }
 
@@ -441,7 +409,8 @@ namespace GODInventoryWinForm.Controls
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             // fix 発注形態 combobox when user change it
-
+            int i = e.RowIndex;
+            var order = this.orderList[i];
             var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
             #region 基于商品コード查找商品
@@ -449,12 +418,17 @@ namespace GODInventoryWinForm.Controls
             if (cell.OwningColumn == this.productCodeColumn)
             {
                 int productCode = Convert.ToInt32( cell.Value);
-                var item = this.itemPriceList.Find(i => i.商品コード == productCode);
+                var item = this.itemPriceList.Find( o => o.商品コード == productCode);
                 if (item != null) {
-                    dataGridView1.Rows[e.RowIndex].Cells["productNameColumn"].Value = item.商品名;
-                    dataGridView1.Rows[e.RowIndex].Cells["productSpecColumn"].Value = item.規格;
-                    dataGridView1.Rows[e.RowIndex].Cells["原単価"].Value = item.原単価;
-                    dataGridView1.Rows[e.RowIndex].Cells["売単価"].Value = item.原単価;
+                    order.ジャンル = item.ジャンル;
+                    order.品名漢字 = item.商品名;
+                    order.規格名漢字 = item.規格;
+                    order.ＪＡＮコード = item.JANコード;
+                    order.原単価_税抜_ = Convert.ToInt32( item.原単価 );
+                    order.売単価_税抜_ = Convert.ToInt32( item.原単価 );
+                    order.口数 = item.PT入数;
+                    order.納品口数 = 0;
+                    cell.OwningRow.Cells["genreNameColumn"].Value = item.ジャンル名;
                 }
             }  
 
@@ -462,59 +436,43 @@ namespace GODInventoryWinForm.Controls
 
             #region MyRegion
             
-      
 
-            if (cell.OwningColumn == specialCodeColumn)
-            {
-                var row = cell.OwningRow;
-                if (cell.Value.ToString() == "No")
-                {                                                         
-                    //row.Cells["ジャンル"].ReadOnly = true;
-                    row.Cells["productNameColumn"].ReadOnly = true;
-                    row.Cells["productSpecColumn"].ReadOnly = true;
-                    row.Cells["ＪＡＮコード"].ReadOnly = true;
-                    row.Cells["原単価"].ReadOnly = true;
-                    row.Cells["売単価"].ReadOnly = true;
-                    row.Cells["ロット"].ReadOnly = true;
-
-                }
-                else if (cell.Value.ToString() == "Yes")
-                {                                                
-                    //row.Cells["ジャンル"].ReadOnly = false;
-                    row.Cells["productNameColumn"].ReadOnly = false;
-                    row.Cells["productSpecColumn"].ReadOnly = false;
-                    row.Cells["ＪＡＮコード"].ReadOnly = false;
-                    row.Cells["原単価"].ReadOnly = false;
-                    row.Cells["売単価"].ReadOnly = false;
-                    row.Cells["ロット"].ReadOnly = false;
-
-                }
-
-            }
-            else if (cell.OwningColumn == 受注数)
+            if (cell.OwningColumn == 受注数)
             {
 
-                orderList[davX].受注日 = DateTime.Now;
-                orderList[davX].発注日 = orderCreatedAtDateTimePicker.Value;
-                orderList[davX].店舗コード = Convert.ToInt16(storeCodeTextBox.Text);
-                    
-                orderList[davX].仕入先コード = Convert.ToInt32(selfCodeTextBox1.Text);
-                orderList[davX].出荷業務仕入先コード = Convert.ToInt32(this.shipperTextBox.Text);
-                orderList[davX].仕入先名カナ = this.selfNameTextBox.Text;
-                orderList[davX].店舗名漢字 = this.storeComboBox.Text;
-                if (this.customerIdTextBox.Text != null)
-                    orderList[davX].法人コード = Convert.ToInt16(this.customerIdTextBox.Text);
-                orderList[davX].法人名漢字 = this.customerComboBox.Text;
-                orderList[davX].部門コード = Convert.ToInt16(this.textBox5.Text);
-                orderList[davX].納品予定日 = this.dateTimePicker1.Value;
-                orderList[davX].納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
-                orderList[davX].納品先店舗名漢字 = this.locationComboBox.Text;
+                if (order.商品コード > 0)
+                {
+                    var amount = Convert.ToDouble(cell.Value);
+                    var moq = Convert.ToDouble(order.口数);
+                    if( moq>0 && amount>0){
+                        order.納品口数 = (int)Math.Round(amount / moq);
+                    }
+                }
+                
+                //orderList[i].受注日 = DateTime.Now;
+                //orderList[i].発注日 = orderCreatedAtDateTimePicker.Value;
+                //orderList[i].店舗コード = Convert.ToInt16(storeCodeTextBox.Text);                    
+                //orderList[i].仕入先コード = Convert.ToInt32(selfCodeTextBox1.Text);
+                //orderList[i].出荷業務仕入先コード = Convert.ToInt32(this.shipperTextBox.Text);
+                //orderList[i].仕入先名カナ = this.selfNameTextBox.Text;
+                //orderList[i].店舗名漢字 = this.storeComboBox.Text;
+                //orderList[i].法人コード = Convert.ToInt16(this.customerIdTextBox.Text);
+                //orderList[i].法人名漢字 = this.customerComboBox.Text;
+                //orderList[i].部門コード = Convert.ToInt16(this.textBox5.Text);
+                //orderList[i].納品予定日 = this.dateTimePicker1.Value;
+                //orderList[i].納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
+                //orderList[i].納品先店舗名漢字 = this.locationComboBox.Text;
             }
+            else if (cell.OwningColumn == 納品口数)
+            { 
+                var amount = Convert.ToInt32(cell.Value);
 
-
+                order.発注数量 = Convert.ToInt32(order.口数) * amount;
+            }
            
 
             #endregion
+            this.dataGridView1.Refresh();
 
         }
 
@@ -567,8 +525,9 @@ namespace GODInventoryWinForm.Controls
                   {
                       this.itemPriceList = (from i in ctx.t_itemlist
                                             join p in ctx.t_pricelist on i.自社コード equals p.自社コード
+                                            join g in ctx.t_genre on i.ジャンル equals g.idジャンル
                                             where p.店番 == storeId
-                                            select new v_itemprice { 自社コード = i.自社コード, 商品コード = i.商品コード, JANコード = i.JANコード, 商品名 = i.商品名, 原単価 = p.通常売価, 規格 = i.規格 }).ToList();
+                                            select new v_itemprice { 自社コード = i.自社コード, ジャンル名 = g.ジャンル名, 商品コード = i.商品コード, JANコード = i.JANコード, 商品名 = i.商品名, 原単価 = p.通常売価, 規格 = i.規格, PT入数 = i.PT入数 }).ToList();
                   }
 
                   for (int i = 0; i < 10; i++)
@@ -611,6 +570,15 @@ namespace GODInventoryWinForm.Controls
             var order = orderList[i];
             order.商品コード = 0;
             order.発注数量 = 0;
+            order.規格名漢字 = "";
+            order.品名漢字 = "";
+            order.ＪＡＮコード = 0;
+            order.口数 = 0;
+            order.納品口数 = 0;
+            order.発注数量 = 0;
+            order.ジャンル = 0;
+            order.原単価_税抜_=0;
+            order.売単価_税抜_ = 0;
             this.dataGridView1.Refresh();
         }
 
@@ -620,6 +588,8 @@ namespace GODInventoryWinForm.Controls
             {
                 ResetOrderByIndex(e.RowIndex);
             }
+
+            
         }
 
         private void productToolStripMenuItem_Click(object sender, EventArgs e)
@@ -645,10 +615,11 @@ namespace GODInventoryWinForm.Controls
             if (sender is SelectProductForm)
             {
                 int selectedRowIndex = this.dataGridView1.CurrentRow.Index;
+                var row = dataGridView1.Rows[selectedRowIndex];
 
                 if (selectProductForm.ischeckmunal == false)
                 {
-                    v_itemprice selectedItem = selectProductForm.selectedItemPrice;
+                    v_itemprice selectedItem = itemPriceList.Find( o=> o.自社コード==selectProductForm.selectedItemCode);
                     if (selectedItem != null)
                     {
                         orderList[selectedRowIndex].商品コード = Convert.ToInt32(selectedItem.商品コード);
@@ -660,18 +631,16 @@ namespace GODInventoryWinForm.Controls
 
                         #region 从 t_pricelist 表中读取的价格
 
-
                         orderList[selectedRowIndex].原単価_税抜_ = Convert.ToInt32(selectedItem.原単価);
                         orderList[selectedRowIndex].売単価_税抜_ = Convert.ToInt32(selectedItem.原単価);
                         
                         #endregion
-                        
+                        row.Cells["genreNameColumn"].Value = selectedItem.ジャンル名;
                     }
                     
                 }
                 else
                 {
-                    var row = dataGridView1.Rows[selectedRowIndex];
 
                     row.Cells["productNameColumn"].ReadOnly = false;
                     orderList[selectedRowIndex].規格名漢字 = "";
@@ -685,6 +654,70 @@ namespace GODInventoryWinForm.Controls
 
                 selectProductForm = null;
             }
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0) { 
+            
+                var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (cell.OwningColumn == specialCodeColumn)
+                {
+                    var row = cell.OwningRow;
+                    if (cell.Value != null && cell.Value.ToString() == "YES")
+                    {
+                        //row.Cells["ジャンル"].ReadOnly = false;
+                        row.Cells["productNameColumn"].ReadOnly = false;
+                        row.Cells["productSpecColumn"].ReadOnly = false;
+                        row.Cells["ＪＡＮコード"].ReadOnly = false;
+                        row.Cells["原単価"].ReadOnly = false;
+                        row.Cells["売単価"].ReadOnly = false;
+                        row.Cells["ロット"].ReadOnly = false;
+
+                    }else // cell.Value is null
+                    {
+                        //row.Cells["ジャンル"].ReadOnly = true;
+                        row.Cells["productNameColumn"].ReadOnly = true;
+                        row.Cells["productSpecColumn"].ReadOnly = true;
+                        row.Cells["ＪＡＮコード"].ReadOnly = true;
+                        row.Cells["原単価"].ReadOnly = true;
+                        row.Cells["売単価"].ReadOnly = true;
+                        row.Cells["ロット"].ReadOnly = true;
+
+                    }
+                     
+
+                }
+            }
+
+        }
+
+        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            //handle datagridview combo box event
+            //http://blog.csdn.net/suncherrydream/article/details/19153163
+
+            var dgv = sender as DataGridView;
+
+            if (dgv.CurrentCell.OwningColumn == specialCodeColumn)
+
+            {
+
+                specialColumn = e.Control as ComboBox;
+
+                //每次注册事件的时候先移除事件，避免不断被递归调用
+
+                specialColumn.SelectedIndexChanged -= new EventHandler(specialCodeColumn_SelectedIndexChanged);
+
+                specialColumn.SelectedIndexChanged += new EventHandler(specialCodeColumn_SelectedIndexChanged);
+
+            }
+        }
+        private void specialCodeColumn_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+
         }
     }
 }
