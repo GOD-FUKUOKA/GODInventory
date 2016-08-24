@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="t_customers.cs" />
-    <Compile Include="v_itemlist.cs" />
+    <Compile Include="v_itemprice.cs" />
     <Compile Include="t_pricelist.cs" />
     <Compile Include="v_stockrec.cs" />
     <Compile Include="StockRelatedStatus.cs" />

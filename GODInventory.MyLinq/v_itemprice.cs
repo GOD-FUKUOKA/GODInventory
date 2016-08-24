@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GODInventory.MyLinq
 {
-    public class v_itemlist
+    public class v_itemprice
     {
         public int Id { get; set; }
         public int 自社コード { get; set; }
@@ -16,6 +16,8 @@ namespace GODInventory.MyLinq
         public long JANコード { get; set; }
         public int? ロット { get; set; }
         public int? 商品コード { get; set; }
-   
+
+        public decimal? 原単価 { get; set; }
+
     }
 }

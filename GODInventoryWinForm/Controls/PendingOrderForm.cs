@@ -994,5 +994,148 @@ namespace GODInventoryWinForm.Controls
 
         }
 
+
+        private void 二次製品ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            #region VB 逻辑
+            //         'SQL?
+            //sqlStr = "SELECT t_orderdata.`id受注データ`,t_orderdata.`id`,t_orderdata.`受注日`,t_orderdata.`店舗コード`," _
+            //    & " t_shoplist.`店名`,t_orderdata.`伝票番号`,t_orderdata.`品名漢字`,t_orderdata.`規格名漢字`," _
+            //    & " t_orderdata.`口数`, t_orderdata.`発注数量`, t_orderdata.`重量`, t_orderdata.`実際配送担当`,t_shoplist.`県別`," _
+            //    & " t_orderdata.`発注形態名称漢字`" _
+            //    & " FROM t_orderdata" _
+            //    & " INNER JOIN t_shoplist ON t_orderdata.`店舗コード` = t_shoplist.`店番`" _
+            //    & " WHERE t_orderdata.`キャンセル` = 'no' AND t_orderdata.`一旦保留`=0 AND t_orderdata.`社内伝番` IS NULL AND t_orderdata.`ジャンル` = '6'" _
+            //    & " ORDER BY t_orderdata.`実際配送担当` ASC,t_shoplist.`県別` ASC,t_orderdata.`店舗コード` ASC," _
+            //    & " t_orderdata.`ＪＡＮコード` ASC,t_orderdata.`受注日` ASC,t_orderdata.`伝票番号` ASC"
+
+
+            //            For i = 4 To n
+            //    sqlStr = "UPDATE t_orderdata" _
+            //        & " SET `社内伝番`=" & Cells(i, 15).Value & ", `行数`=" & Cells(i, 16).Value & ", `最大行数`=" & Cells(i, 17).Value _
+            //        & " WHERE t_orderdata.`id受注データ` =" & Cells(i, 1).Value
+            //    Set rs = con.Execute(sqlStr)
+            //Next 
+            #endregion
+            /*
+            using (var ctx = new GODDbContext())
+            {
+                var results = from s in ctx.t_orderdata
+                              where s.社内伝番 > 0
+                              select s;
+
+                newfaxno = new List<int>();
+
+                List<t_orderdata> newlis1 = new List<t_orderdata>();
+
+                foreach (var emp in results)
+                {
+
+                    t_orderdata item = new t_orderdata();
+                    item.社内伝番 = emp.社内伝番;
+
+                    newfaxno.Add(Convert.ToInt32(item.社内伝番));
+                    newlis1.Add(emp);
+
+
+                }
+                newfaxno.Sort();
+
+                //IQueryable<t_shoplist> pages = from p in ctx.t_shoplist
+                //                               where p.店番 > 0
+                //                               select p;
+
+                var resultsshoplist = from p in ctx.t_shoplist
+                                      where p.店番 > 0
+                                      select p;
+                //var query1 = Query<t_orderdata>.Matches(c => c.TIAOXINGMA, new BsonRegularExpression(new Regex(findtext)));
+
+
+                List<t_orderdata> newlis = new List<t_orderdata>();
+
+                foreach (var emp in resultsshoplist)
+                {
+                    foreach (var temp in newlis1)
+                    {
+                        if (emp.店番 == temp.店舗コード)
+                        {
+                            if (temp.キャンセル == "no" && temp.一旦保留 == false && temp.社内伝番 == null && temp.ジャンル == 6)
+                            {
+                                newlis.Add(temp);
+                            }
+                        }
+                    }
+                }
+
+                if (newlis.Count != 0)
+                {
+                    MessageBox.Show("未処理内容ありません！");
+                    return;
+                }
+                //社内伝番
+            }
+
+            var orders1 = new List<t_orderdata>();
+            //打开
+            int 社内伝番index = 0;
+            short index = 0;
+
+            if (dataGridView1.RowCount != 0)
+            {
+                List<string> aaa = new List<string>();
+
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    if (dataGridView1.Rows[i].Cells["発注日"].EditedFormattedValue.ToString() == null || dataGridView1.Rows[i].Cells["発注日"].EditedFormattedValue.ToString() == "")
+                        break;
+                    t_orderdata item = new t_orderdata();
+                    item.発注日 = Convert.ToDateTime(dataGridView1.Rows[i].Cells["発注日"].EditedFormattedValue.ToString());
+                    item.伝票番号 = Convert.ToInt32(dataGridView1.Rows[i].Cells["伝票番号"].EditedFormattedValue.ToString());
+                    item.店舗コード = Convert.ToInt16(dataGridView1.Rows[i].Cells["店舗コード"].EditedFormattedValue.ToString());
+                    item.商品コード = Convert.ToInt32(dataGridView1.Rows[i].Cells["商品コード"].EditedFormattedValue.ToString());
+                    item.発注数量 = Convert.ToInt32(dataGridView1.Rows[i].Cells["発注数量"].EditedFormattedValue.ToString());
+                    System.Globalization.DateTimeFormatInfo dtFormat = new System.Globalization.DateTimeFormatInfo();
+                    dtFormat.ShortDatePattern = "yyyy-MM-dd";
+                    item.受注日 = Convert.ToDateTime(item.発注日.ToString("yyyy-MM-dd", dtFormat));
+
+                    #region 社内伝番  定义字符串的规则长度
+                    if (社内伝番index != 0)
+                    {
+                        item.社内伝番 = 社内伝番index + 1;
+                        社内伝番index = 社内伝番index + 1;
+                    }
+                    if (newfaxno == null || newfaxno.Count == 0)
+                    {
+                        //
+                        item.社内伝番 = 1000000;
+                        社内伝番index = Convert.ToInt32(item.社内伝番);
+                    }
+                    #endregion
+                    index++;
+                    //社内伝番最大値を調べ取り込み完了
+                    item.社内伝番 = newfaxno[newfaxno.Count - 1] + 1;
+                    item.行数 = index;
+                    item.最大行数 = index;
+                    orders1.Add(item);
+                }
+                #region 插入数据  二次製品データ処理後登録
+                using (var ctx = new GODDbContext())
+                {
+                    foreach (t_orderdata item in orders1)
+                    {
+                        ctx.t_orderdata.Add(item);
+                        ctx.SaveChanges();
+                    }
+                }
+                #endregion
+            }
+            else
+            {
+                MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+             */
+        }
+
     }
 }

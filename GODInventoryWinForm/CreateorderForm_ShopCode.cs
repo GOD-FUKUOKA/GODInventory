@@ -13,10 +13,10 @@ namespace GODInventoryWinForm
 {
     public partial class CreateorderForm_ShopCode : Form
     {
-        private BindingList<v_itemlist> stockiosList;
+        private BindingList<v_itemprice> stockiosList;
         private List<t_genre> genreList;
         private List<t_warehouses> warehouseList;
-        public v_itemlist v_stockiositem;
+        public v_itemprice v_stockiositem;
         public bool ischeckmunal;
 
 
@@ -31,7 +31,7 @@ namespace GODInventoryWinForm
         }
         private void InitializeDataSource()
         {
-            stockiosList = new BindingList<v_itemlist>();
+            stockiosList = new BindingList<v_itemprice>();
 
             using (var ctx = new GODDbContext())
             {
@@ -52,7 +52,7 @@ namespace GODInventoryWinForm
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            stockiosList = new BindingList<v_itemlist>();
+            stockiosList = new BindingList<v_itemprice>();
 
             //  stockiosList.Clear();
             var genre_id = GetGenreId();
@@ -62,7 +62,7 @@ namespace GODInventoryWinForm
                 {
                     var results = (from s in ctx.t_itemlist
                                    where s.ジャンル == (short)genre_id
-                                   select new v_itemlist { 商品コード = s.商品コード, 規格 = s.規格, 商品名 = s.商品名, ジャンル = s.ジャンル, JANコード = s.JANコード, ロット = s.PT入数, 自社コード = s.自社コード }).ToList();
+                                   select new v_itemprice { 商品コード = s.商品コード, 規格 = s.規格, 商品名 = s.商品名, ジャンル = s.ジャンル, JANコード = s.JANコード, ロット = s.PT入数, 自社コード = s.自社コード }).ToList();
                     for (int i = 0; i < results.Count; i++)
                     {
                         results[i].Id = i + 1;
@@ -73,7 +73,7 @@ namespace GODInventoryWinForm
             this.listView1.Items.Clear();
             //this.listView1.BeginUpdate();
 
-            foreach (v_itemlist item in stockiosList)
+            foreach (v_itemprice item in stockiosList)
             {
                 ListViewItem lvi = new ListViewItem();
                 lvi.Text = item.商品名;
@@ -94,14 +94,14 @@ namespace GODInventoryWinForm
 
         private void listView1_Click(object sender, EventArgs e)
         {
-            v_stockiositem = new v_itemlist();
+            v_stockiositem = new v_itemprice();
 
             int selectCount = this.listView1.SelectedItems.Count; //SelectedItems.Count就是：取得值，表示SelectedItems集合的物件数目。 
             if (selectCount > 0)//若selectCount大於0，说明用户有选中某列。
             {
                 string textShopname = this.listView1.SelectedItems[0].SubItems[0].Text;
 
-                foreach (v_itemlist item in stockiosList)
+                foreach (v_itemprice item in stockiosList)
                 {
                     if (item.商品名 == textShopname)
                         v_stockiositem = item;
