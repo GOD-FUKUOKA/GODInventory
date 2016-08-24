@@ -328,17 +328,6 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // remove proper row when click delete.
-            cloumn = e.ColumnIndex;
-
-            if (cloumn == dataGridView1.ColumnCount - 1)
-            {
-                this.orderList.RemoveAt(e.RowIndex);
-            }
-
-        }
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -504,7 +493,7 @@ namespace GODInventoryWinForm.Controls
             {
                 var cell1 = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
-                if (cell1.OwningColumn == 雑コード)
+                if (cell1.OwningColumn == specialCodeColumn)
                 {
                     if (cell1.Value != null && cell1.Value.ToString() == "No")
                     {
@@ -731,8 +720,21 @@ namespace GODInventoryWinForm.Controls
 
                       this.orderList.Add(order);
                   }
-             
+        }
 
+        private void ResetOrderByIndex(int i) {
+            var order = orderList[i];
+            order.商品コード = 0;
+            order.発注数量 = 0;
+            this.dataGridView1.Refresh();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridView1.ColumnCount - 1)
+            {
+                ResetOrderByIndex(e.RowIndex);
+            }
         }
     }
 }

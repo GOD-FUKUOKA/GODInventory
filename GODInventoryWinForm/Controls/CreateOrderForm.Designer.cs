@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,8 +59,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.orderReasonComboBox = new System.Windows.Forms.ComboBox();
             this.invoiceNODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.雑コード = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.商品コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.specialCodeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.ジャンル = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.品名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.規格名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,7 +70,7 @@
             this.ロット = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.口数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.受注数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteDataGridViewButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.deleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -127,8 +128,8 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.invoiceNODataGridViewTextBoxColumn,
-            this.雑コード,
             this.商品コード,
+            this.specialCodeColumn,
             this.ジャンル,
             this.品名漢字,
             this.規格名漢字,
@@ -138,13 +139,14 @@
             this.ロット,
             this.口数,
             this.受注数,
-            this.deleteDataGridViewButtonColumn});
-            this.dataGridView1.Location = new System.Drawing.Point(5, 143);
+            this.deleteButtonColumn});
+            this.dataGridView1.Location = new System.Drawing.Point(5, 115);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(960, 282);
+            this.dataGridView1.Size = new System.Drawing.Size(997, 310);
             this.dataGridView1.TabIndex = 4;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // label2
             // 
@@ -358,22 +360,12 @@
             dataGridViewCellStyle1.Format = "D8";
             dataGridViewCellStyle1.NullValue = null;
             this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.invoiceNODataGridViewTextBoxColumn.Frozen = true;
             this.invoiceNODataGridViewTextBoxColumn.HeaderText = "伝票番号";
             this.invoiceNODataGridViewTextBoxColumn.Name = "invoiceNODataGridViewTextBoxColumn";
             this.invoiceNODataGridViewTextBoxColumn.ReadOnly = true;
             this.invoiceNODataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.invoiceNODataGridViewTextBoxColumn.Width = 80;
-            // 
-            // 雑コード
-            // 
-            this.雑コード.HeaderText = "雑コード";
-            this.雑コード.Items.AddRange(new object[] {
-            "Yes",
-            "No"});
-            this.雑コード.Name = "雑コード";
-            this.雑コード.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.雑コード.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.雑コード.Width = 40;
             // 
             // 商品コード
             // 
@@ -381,6 +373,18 @@
             this.商品コード.HeaderText = "商品コード";
             this.商品コード.Name = "商品コード";
             this.商品コード.Width = 80;
+            // 
+            // specialCodeColumn
+            // 
+            dataGridViewCellStyle2.NullValue = "No";
+            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.specialCodeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.specialCodeColumn.HeaderText = "雑コード";
+            this.specialCodeColumn.Items.AddRange(new object[] {
+            "YES",
+            "NO"});
+            this.specialCodeColumn.Name = "specialCodeColumn";
+            this.specialCodeColumn.Width = 80;
             // 
             // ジャンル
             // 
@@ -444,22 +448,22 @@
             this.受注数.Name = "受注数";
             this.受注数.Width = 60;
             // 
-            // deleteDataGridViewButtonColumn
+            // deleteButtonColumn
             // 
-            this.deleteDataGridViewButtonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.deleteDataGridViewButtonColumn.FillWeight = 30F;
-            this.deleteDataGridViewButtonColumn.HeaderText = "";
-            this.deleteDataGridViewButtonColumn.Name = "deleteDataGridViewButtonColumn";
-            this.deleteDataGridViewButtonColumn.Text = "クリア";
-            this.deleteDataGridViewButtonColumn.ToolTipText = "クリア";
-            this.deleteDataGridViewButtonColumn.UseColumnTextForButtonValue = true;
-            this.deleteDataGridViewButtonColumn.Width = 40;
+            this.deleteButtonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.deleteButtonColumn.FillWeight = 30F;
+            this.deleteButtonColumn.HeaderText = "";
+            this.deleteButtonColumn.Name = "deleteButtonColumn";
+            this.deleteButtonColumn.Text = "クリア";
+            this.deleteButtonColumn.ToolTipText = "クリア";
+            this.deleteButtonColumn.UseColumnTextForButtonValue = true;
+            this.deleteButtonColumn.Width = 40;
             // 
             // CreateOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(971, 475);
+            this.ClientSize = new System.Drawing.Size(1008, 475);
             this.Controls.Add(this.orderReasonComboBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.locationComboBox);
@@ -531,8 +535,8 @@
         private System.Windows.Forms.ComboBox orderReasonComboBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoiceNODataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn 雑コード;
         private System.Windows.Forms.DataGridViewTextBoxColumn 商品コード;
+        private System.Windows.Forms.DataGridViewComboBoxColumn specialCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ジャンル;
         private System.Windows.Forms.DataGridViewTextBoxColumn 品名漢字;
         private System.Windows.Forms.DataGridViewTextBoxColumn 規格名漢字;
@@ -542,6 +546,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ロット;
         private System.Windows.Forms.DataGridViewTextBoxColumn 口数;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受注数;
-        private System.Windows.Forms.DataGridViewButtonColumn deleteDataGridViewButtonColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn deleteButtonColumn;
     }
 }

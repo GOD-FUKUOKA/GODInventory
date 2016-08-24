@@ -28,7 +28,7 @@ namespace GODInventoryWinForm.Controls
             this.dataGridView1.DataSource = null;
             this.dataGridView1.AutoGenerateColumns = false;
 
-            InitializePager();
+            //InitializePager();
             //this.dataGridView1.DataSource = orderList;
         }
 
