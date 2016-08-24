@@ -32,7 +32,7 @@ namespace GODInventoryWinForm.Controls
         private BindingList<t_orderdata> orderList;
         private List<t_pricelist> t_pricelistR;
         int cloumn = 0;
-        private CreateorderForm_ShopCode CreateorderForm_ShopCode;
+        private SelectProductForm selectProductForm;
         int davX = 0;
         int davY = 0;
 
@@ -567,19 +567,6 @@ namespace GODInventoryWinForm.Controls
                     davX = e.RowIndex;
                     davY = e.ColumnIndex;
 
-                    #region MyRegion
-                    if (CreateorderForm_ShopCode == null)
-                    {
-                        CreateorderForm_ShopCode = new CreateorderForm_ShopCode();
-                        CreateorderForm_ShopCode.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
-                    }
-                    if (CreateorderForm_ShopCode == null)
-                    {
-                        CreateorderForm_ShopCode = new CreateorderForm_ShopCode();
-                    }
-                    CreateorderForm_ShopCode.ShowDialog();
-
-                    #endregion
 
 
                     //若行已是选中状态就不再进行设置
@@ -599,74 +586,7 @@ namespace GODInventoryWinForm.Controls
                 }
             }
         }
-        void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (sender is CreateorderForm_ShopCode)
-            {
-                if (CreateorderForm_ShopCode.ischeckmunal == false)
-                {
-                    v_itemprice v_stockiositem = CreateorderForm_ShopCode.v_stockiositem;
-                    int inr = 0;
-                    if (v_stockiositem != null)
-                    {
-                        orderList[davX].商品コード = Convert.ToInt32(v_stockiositem.商品コード);
-                        orderList[davX].ジャンル = v_stockiositem.ジャンル;
-                        orderList[davX].品名漢字 = v_stockiositem.商品名;
-                        orderList[davX].規格名漢字 = v_stockiositem.規格;
-                        orderList[davX].ＪＡＮコード = v_stockiositem.JANコード;
-                        orderList[davX].発注数量 = Convert.ToInt32(v_stockiositem.ロット);
 
-                        #region 从 t_pricelist 表中读取的价格
-                        //var pricelist = this.t_pricelistR.Where(s => s.自社コード == v_stockiositem.自社コード && s.店番 == Convert.ToInt32(orderList[davX].ジャンル)).ToList();
-
-                        //if (pricelist.Count > 0)
-                        //{
-                        //    orderList[davX].原単価_税抜_ = Convert.ToInt32(pricelist[0].通常売価);
-                        //    orderList[davX].売単価_税抜_ = Convert.ToInt32(pricelist[0].特売売価);
-                        //}
-                        #endregion
-                        #region 从t_rcvdata 中读取的价格
-
-                        var pricelist1 = this.t_rcvdataR.Where(s => s.商品コード == v_stockiositem.商品コード).ToList();
-                        if (pricelist1.Count > 0)
-                        {
-                            orderList[davX].原単価_税抜_ = Convert.ToInt32(pricelist1[0].原単価_税抜_);
-                            orderList[davX].売単価_税抜_ = Convert.ToInt32(pricelist1[0].売単価_税抜_);
-                        }
-                        #endregion
-                    }
-                    #region 联动
-                    //foreach (t_rcvdata item in t_rcvdataR)
-                    //{
-
-                    //    if (item.商品コード == Convert.ToDouble(v_stockiositem.商品コード))
-                    //    {
-
-
-                    //        orderList[davX].原単価_税抜_ = Convert.ToInt32(item.原単価_税抜_.ToString());
-                    //        orderList[davX].売単価_税抜_ = Convert.ToInt32(item.売単価_税抜_.ToString());                        
-                    //        break;
-                    //    }
-                    //}
-                    #endregion
-                }
-                else
-                {
-                    var row = dataGridView1.Rows[davX];
-
-                    row.Cells["品名漢字"].ReadOnly = true;
-                    orderList[davX].規格名漢字 = "";
-                    orderList[davX].ＪＡＮコード = 0;
-                    orderList[davX].発注数量 = 0;
-                    orderList[davX].原単価_税抜_ = 0;
-                    orderList[davX].売単価_税抜_ = 0;
-                    orderList[davX].口数 = 0;
-                }
-                this.dataGridView1.Refresh();
-
-                CreateorderForm_ShopCode = null;
-            }
-        }
 
         private void storeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -734,6 +654,83 @@ namespace GODInventoryWinForm.Controls
             if (e.ColumnIndex == dataGridView1.ColumnCount - 1)
             {
                 ResetOrderByIndex(e.RowIndex);
+            }
+        }
+
+        private void productToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            #region MyRegion
+            if (selectProductForm == null)
+            {
+                selectProductForm = new SelectProductForm();
+                selectProductForm.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
+            }
+            if (selectProductForm == null)
+            {
+                selectProductForm = new SelectProductForm();
+            }
+            selectProductForm.ShowDialog();
+
+            #endregion
+
+        }
+
+        void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (sender is SelectProductForm)
+            {
+                if (selectProductForm.ischeckmunal == false)
+                {
+                    v_itemprice selectedItem = selectProductForm.selectedItemPrice;
+                    int inr = 0;
+                    if (selectedItem != null)
+                    {
+                        orderList[davX].商品コード = Convert.ToInt32(selectedItem.商品コード);
+                        orderList[davX].ジャンル = selectedItem.ジャンル;
+                        orderList[davX].品名漢字 = selectedItem.商品名;
+                        orderList[davX].規格名漢字 = selectedItem.規格;
+                        orderList[davX].ＪＡＮコード = selectedItem.JANコード;
+                        orderList[davX].発注数量 = Convert.ToInt32(selectedItem.ロット);
+
+                        #region 从 t_pricelist 表中读取的价格
+
+
+                        orderList[davX].原単価_税抜_ = Convert.ToInt32(selectedItem.原単価);
+                        orderList[davX].売単価_税抜_ = Convert.ToInt32(selectedItem.原単価);
+                        
+                        #endregion
+                        
+                    }
+                    #region 联动
+                    //foreach (t_rcvdata item in t_rcvdataR)
+                    //{
+
+                    //    if (item.商品コード == Convert.ToDouble(selectedItem.商品コード))
+                    //    {
+
+
+                    //        orderList[davX].原単価_税抜_ = Convert.ToInt32(item.原単価_税抜_.ToString());
+                    //        orderList[davX].売単価_税抜_ = Convert.ToInt32(item.売単価_税抜_.ToString());                        
+                    //        break;
+                    //    }
+                    //}
+                    #endregion
+                }
+                else
+                {
+                    var row = dataGridView1.Rows[davX];
+
+                    row.Cells["品名漢字"].ReadOnly = true;
+                    orderList[davX].規格名漢字 = "";
+                    orderList[davX].ＪＡＮコード = 0;
+                    orderList[davX].発注数量 = 0;
+                    orderList[davX].原単価_税抜_ = 0;
+                    orderList[davX].売単価_税抜_ = 0;
+                    orderList[davX].口数 = 0;
+                }
+                this.dataGridView1.Refresh();
+
+                selectProductForm = null;
             }
         }
     }

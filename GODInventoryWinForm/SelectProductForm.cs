@@ -11,16 +11,16 @@ using GODInventory.MyLinq;
 
 namespace GODInventoryWinForm
 {
-    public partial class CreateorderForm_ShopCode : Form
+    public partial class SelectProductForm : Form
     {
         private BindingList<v_itemprice> stockiosList;
         private List<t_genre> genreList;
         private List<t_warehouses> warehouseList;
-        public v_itemprice v_stockiositem;
+        public v_itemprice selectedItemPrice;
         public bool ischeckmunal;
 
 
-        public CreateorderForm_ShopCode()
+        public SelectProductForm()
         {
             InitializeComponent();
 
@@ -94,7 +94,7 @@ namespace GODInventoryWinForm
 
         private void listView1_Click(object sender, EventArgs e)
         {
-            v_stockiositem = new v_itemprice();
+            selectedItemPrice = new v_itemprice();
 
             int selectCount = this.listView1.SelectedItems.Count; //SelectedItems.Count就是：取得值，表示SelectedItems集合的物件数目。 
             if (selectCount > 0)//若selectCount大於0，说明用户有选中某列。
@@ -104,18 +104,21 @@ namespace GODInventoryWinForm
                 foreach (v_itemprice item in stockiosList)
                 {
                     if (item.商品名 == textShopname)
-                        v_stockiositem = item;
+                        selectedItemPrice = item;
 
                 }
             }
-            this.Close();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             ischeckmunal = true;
             this.Close();
+
+        }
+
+        private void SelectProductForm_Load(object sender, EventArgs e)
+        {
 
         }
 

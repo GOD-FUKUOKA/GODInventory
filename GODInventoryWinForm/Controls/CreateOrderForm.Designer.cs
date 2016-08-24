@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,8 +59,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.orderReasonComboBox = new System.Windows.Forms.ComboBox();
             this.invoiceNODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.商品コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.specialCodeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.商品コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ジャンル = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.品名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.規格名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,8 +71,11 @@
             this.口数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.受注数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.productToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // submitButton
@@ -128,8 +131,8 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.invoiceNODataGridViewTextBoxColumn,
-            this.商品コード,
             this.specialCodeColumn,
+            this.商品コード,
             this.ジャンル,
             this.品名漢字,
             this.規格名漢字,
@@ -140,11 +143,12 @@
             this.口数,
             this.受注数,
             this.deleteButtonColumn});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Location = new System.Drawing.Point(5, 115);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(997, 310);
+            this.dataGridView1.Size = new System.Drawing.Size(1049, 310);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -357,9 +361,9 @@
             // invoiceNODataGridViewTextBoxColumn
             // 
             this.invoiceNODataGridViewTextBoxColumn.DataPropertyName = "伝票番号";
-            dataGridViewCellStyle1.Format = "D8";
-            dataGridViewCellStyle1.NullValue = null;
-            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "D8";
+            dataGridViewCellStyle3.NullValue = null;
+            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.invoiceNODataGridViewTextBoxColumn.Frozen = true;
             this.invoiceNODataGridViewTextBoxColumn.HeaderText = "伝票番号";
             this.invoiceNODataGridViewTextBoxColumn.Name = "invoiceNODataGridViewTextBoxColumn";
@@ -367,17 +371,10 @@
             this.invoiceNODataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.invoiceNODataGridViewTextBoxColumn.Width = 80;
             // 
-            // 商品コード
-            // 
-            this.商品コード.DataPropertyName = "商品コード";
-            this.商品コード.HeaderText = "商品コード";
-            this.商品コード.Name = "商品コード";
-            this.商品コード.Width = 80;
-            // 
             // specialCodeColumn
             // 
-            dataGridViewCellStyle2.NullValue = "No";
-            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.NullValue = "No";
+            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.specialCodeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.specialCodeColumn.HeaderText = "雑コード";
             this.specialCodeColumn.Items.AddRange(new object[] {
@@ -385,6 +382,13 @@
             "NO"});
             this.specialCodeColumn.Name = "specialCodeColumn";
             this.specialCodeColumn.Width = 80;
+            // 
+            // 商品コード
+            // 
+            this.商品コード.DataPropertyName = "商品コード";
+            this.商品コード.HeaderText = "商品コード";
+            this.商品コード.Name = "商品コード";
+            this.商品コード.Width = 80;
             // 
             // ジャンル
             // 
@@ -459,11 +463,25 @@
             this.deleteButtonColumn.UseColumnTextForButtonValue = true;
             this.deleteButtonColumn.Width = 40;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.productToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            // 
+            // productToolStripMenuItem
+            // 
+            this.productToolStripMenuItem.Name = "productToolStripMenuItem";
+            this.productToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.productToolStripMenuItem.Text = "选择商品";
+            this.productToolStripMenuItem.Click += new System.EventHandler(this.productToolStripMenuItem_Click);
+            // 
             // CreateOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 475);
+            this.ClientSize = new System.Drawing.Size(1060, 475);
             this.Controls.Add(this.orderReasonComboBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.locationComboBox);
@@ -496,10 +514,11 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "CreateOrderForm";
+            this.Text = "传真订单输入界面";
             this.Load += new System.EventHandler(this.NewOrdersForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -535,8 +554,8 @@
         private System.Windows.Forms.ComboBox orderReasonComboBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoiceNODataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 商品コード;
         private System.Windows.Forms.DataGridViewComboBoxColumn specialCodeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 商品コード;
         private System.Windows.Forms.DataGridViewTextBoxColumn ジャンル;
         private System.Windows.Forms.DataGridViewTextBoxColumn 品名漢字;
         private System.Windows.Forms.DataGridViewTextBoxColumn 規格名漢字;
@@ -547,5 +566,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 口数;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受注数;
         private System.Windows.Forms.DataGridViewButtonColumn deleteButtonColumn;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem productToolStripMenuItem;
     }
 }
