@@ -18,7 +18,7 @@ namespace GODInventoryWinForm
         private List<t_warehouses> warehouseList;
         public v_itemprice selectedItemPrice;
         public bool ischeckmunal;
-
+        public int selectedItemCode;
 
         public SelectProductForm()
         {
@@ -104,7 +104,10 @@ namespace GODInventoryWinForm
                 foreach (v_itemprice item in stockiosList)
                 {
                     if (item.商品名 == textShopname)
-                        selectedItemPrice = item;
+                    {
+                        this.selectedItemPrice = item;
+                        this.selectedItemCode = item.自社コード;
+                    }
 
                 }
             }

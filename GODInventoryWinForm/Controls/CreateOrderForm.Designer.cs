@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.orderCreatedAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.productToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.storeCodeTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -60,10 +62,10 @@
             this.orderReasonComboBox = new System.Windows.Forms.ComboBox();
             this.invoiceNODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.specialCodeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.商品コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ジャンル = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.品名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格名漢字 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productSpecColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ＪＡＮコード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.原単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.売単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -71,11 +73,9 @@
             this.口数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.受注数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.productToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // submitButton
@@ -132,10 +132,10 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.invoiceNODataGridViewTextBoxColumn,
             this.specialCodeColumn,
-            this.商品コード,
+            this.productCodeColumn,
             this.ジャンル,
-            this.品名漢字,
-            this.規格名漢字,
+            this.productNameColumn,
+            this.productSpecColumn,
             this.ＪＡＮコード,
             this.原単価,
             this.売単価,
@@ -144,6 +144,7 @@
             this.受注数,
             this.deleteButtonColumn});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(5, 115);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -151,6 +152,20 @@
             this.dataGridView1.Size = new System.Drawing.Size(1049, 310);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.productToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 26);
+            // 
+            // productToolStripMenuItem
+            // 
+            this.productToolStripMenuItem.Name = "productToolStripMenuItem";
+            this.productToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.productToolStripMenuItem.Text = "选择商品";
+            this.productToolStripMenuItem.Click += new System.EventHandler(this.productToolStripMenuItem_Click);
             // 
             // label2
             // 
@@ -361,9 +376,9 @@
             // invoiceNODataGridViewTextBoxColumn
             // 
             this.invoiceNODataGridViewTextBoxColumn.DataPropertyName = "伝票番号";
-            dataGridViewCellStyle3.Format = "D8";
-            dataGridViewCellStyle3.NullValue = null;
-            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "D8";
+            dataGridViewCellStyle1.NullValue = null;
+            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.invoiceNODataGridViewTextBoxColumn.Frozen = true;
             this.invoiceNODataGridViewTextBoxColumn.HeaderText = "伝票番号";
             this.invoiceNODataGridViewTextBoxColumn.Name = "invoiceNODataGridViewTextBoxColumn";
@@ -373,42 +388,42 @@
             // 
             // specialCodeColumn
             // 
-            dataGridViewCellStyle4.NullValue = "No";
-            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.NullValue = "No";
+            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.specialCodeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.specialCodeColumn.HeaderText = "雑コード";
             this.specialCodeColumn.Items.AddRange(new object[] {
-            "YES",
-            "NO"});
+            "NO",
+            "YES"});
             this.specialCodeColumn.Name = "specialCodeColumn";
             this.specialCodeColumn.Width = 80;
             // 
-            // 商品コード
+            // productCodeColumn
             // 
-            this.商品コード.DataPropertyName = "商品コード";
-            this.商品コード.HeaderText = "商品コード";
-            this.商品コード.Name = "商品コード";
-            this.商品コード.Width = 80;
+            this.productCodeColumn.DataPropertyName = "商品コード";
+            this.productCodeColumn.HeaderText = "商品コード";
+            this.productCodeColumn.Name = "productCodeColumn";
+            this.productCodeColumn.Width = 80;
             // 
             // ジャンル
             // 
             this.ジャンル.DataPropertyName = "ジャンル";
             this.ジャンル.HeaderText = "ジャンル";
             this.ジャンル.Name = "ジャンル";
-            this.ジャンル.Width = 80;
+            this.ジャンル.ReadOnly = true;
             // 
-            // 品名漢字
+            // productNameColumn
             // 
-            this.品名漢字.DataPropertyName = "品名漢字";
-            this.品名漢字.HeaderText = "品名漢字";
-            this.品名漢字.Name = "品名漢字";
-            this.品名漢字.Width = 120;
+            this.productNameColumn.DataPropertyName = "品名漢字";
+            this.productNameColumn.HeaderText = "商品名";
+            this.productNameColumn.Name = "productNameColumn";
+            this.productNameColumn.Width = 120;
             // 
-            // 規格名漢字
+            // productSpecColumn
             // 
-            this.規格名漢字.DataPropertyName = "規格名漢字";
-            this.規格名漢字.HeaderText = "規格名漢字";
-            this.規格名漢字.Name = "規格名漢字";
+            this.productSpecColumn.DataPropertyName = "規格名漢字";
+            this.productSpecColumn.HeaderText = "規格";
+            this.productSpecColumn.Name = "productSpecColumn";
             // 
             // ＪＡＮコード
             // 
@@ -463,20 +478,6 @@
             this.deleteButtonColumn.UseColumnTextForButtonValue = true;
             this.deleteButtonColumn.Width = 40;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.productToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
-            // 
-            // productToolStripMenuItem
-            // 
-            this.productToolStripMenuItem.Name = "productToolStripMenuItem";
-            this.productToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.productToolStripMenuItem.Text = "选择商品";
-            this.productToolStripMenuItem.Click += new System.EventHandler(this.productToolStripMenuItem_Click);
-            // 
             // CreateOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -517,8 +518,8 @@
             this.Text = "传真订单输入界面";
             this.Load += new System.EventHandler(this.NewOrdersForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -553,12 +554,14 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ComboBox orderReasonComboBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem productToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoiceNODataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn specialCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 商品コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ジャンル;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 品名漢字;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 規格名漢字;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productSpecColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ＪＡＮコード;
         private System.Windows.Forms.DataGridViewTextBoxColumn 原単価;
         private System.Windows.Forms.DataGridViewTextBoxColumn 売単価;
@@ -566,7 +569,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 口数;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受注数;
         private System.Windows.Forms.DataGridViewButtonColumn deleteButtonColumn;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem productToolStripMenuItem;
     }
 }
