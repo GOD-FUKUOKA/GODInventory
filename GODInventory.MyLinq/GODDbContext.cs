@@ -382,16 +382,16 @@
             modelBuilder.Entity<t_stockrec>()
                         .Property(e => e.事由)
                         .IsUnicode(false);
-            
+
             modelBuilder.Entity<t_stockrec>()
                         .Property(e => e.工厂)
                         .IsUnicode(false);
-            
+
             modelBuilder.Entity<t_stockstate>()
                 .Property(e => e.在庫状態)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<t_pricelist>()
+                 modelBuilder.Entity<t_pricelist>()
                 .Property(e => e.店名)
                 .IsUnicode(false);
             modelBuilder.Entity<t_pricelist>()

@@ -105,6 +105,14 @@ namespace GODInventoryWinForm.Controls
                     using (var ctx = new GODDbContext())
                     {
                         ctx.t_stockrec.AddRange(receivedList);
+                        List<int> pids = new List<int>();
+                        foreach (var item in receivedList)
+                        {
+                            pids.Add(item.自社コード);
+                        }
+                        OrderSqlHelper.UpdateStockState(ctx, pids);
+
+
                         ctx.SaveChanges();
                         this.stockiosList.Clear();
                     }

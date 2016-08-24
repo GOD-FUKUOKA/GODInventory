@@ -230,7 +230,12 @@ WHERE ({0});";
                     item.数量 = changed.数量;
                     item.状態 = changed.状態;
                 }
-                
+                List<int> pids = new List<int>();
+                foreach (var item in list)
+                {
+                    pids.Add(item.自社コード);
+                }
+                OrderSqlHelper.UpdateStockState(ctx, pids);
                 ctx.SaveChanges();
                
             }

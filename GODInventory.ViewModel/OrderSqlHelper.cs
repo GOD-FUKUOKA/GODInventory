@@ -467,7 +467,7 @@ namespace GODInventory.ViewModel
                    // income/outcome may be null
                    income = Convert.ToInt32(income);
                    outcome = Convert.ToInt32(outcome);
-                   string sql = String.Format("UPDATE t_stockstate SET `在庫数`={1}  WHERE `自社コード` ={0} ", pid, income - outcome );
+                   string sql = String.Format("UPDATE t_stockstate SET `在庫数`={1}  WHERE `自社コード` ={0} ", pid, income + outcome );
                    count = ctx.Database.ExecuteSqlCommand(sql);
                    
                 }
