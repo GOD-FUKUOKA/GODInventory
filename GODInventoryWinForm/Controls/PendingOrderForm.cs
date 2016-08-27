@@ -27,8 +27,12 @@ namespace GODInventoryWinForm.Controls
         int RowRemark = 0;
         int cloumn = 0;
         private string id受注データdemo;
-
-
+        private List<t_orderdata> orders1;
+        private List<t_shoplist> shopList;
+        private BindingList<v_pendingorder> orderList;
+        private List<t_warehouses> warehouseList;
+        private List<v_pendingorder> orders11 = null;
+        private List<v_pendingorder> WanJianorders11 = null;
         public PendingOrderForm()
         {
             InitializeComponent();
@@ -36,8 +40,140 @@ namespace GODInventoryWinForm.Controls
 
             var ctx = entityDataSource1.DbContext as GODDbContext;
             this.stockstates = ctx.t_stockstate.Select(s => s).ToList();
+            warehouseList = ctx.t_warehouses.ToList();
+            warehouseList.Insert(0, new t_warehouses() { Id = 0, FullName = WarehouseRespository.OptionTextAll });
+            this.storeComboBox.DisplayMember = "FullName";
+            this.storeComboBox.ValueMember = "Id";
+            this.storeComboBox.DataSource = warehouseList;
+
 
             InitializePager();
+
+            ECRead(ctx);
+            this.dataGridView2.AutoGenerateColumns = false;
+            this.dataGridView2.DataSource = orderList;
+
+            //丸健
+            丸健Read(ctx);
+            this.dataGridView3.AutoGenerateColumns = false;
+            this.dataGridView3.DataSource = WanJianorders11;
+
+
+
+        }
+
+        private void ECRead(GODDbContext ctx)
+        {
+            orders1 = new List<t_orderdata>();
+            shopList = new List<t_shoplist>();
+            orderList = new BindingList<v_pendingorder>();
+            orders11 = new List<v_pendingorder>();
+
+            #region 二次製品
+            //            string qtyFormat = @"SELECT s.* FROM t_orderdata s
+            //left JOIN t_shoplist i on i.`店番` = s.`店舗コード`
+            //WHERE (s.キャンセル = 'no');";
+
+            string qtyFormat = @"SELECT s.* FROM t_orderdata s
+left JOIN t_shoplist i on i.`店番` = s.`店舗コード`
+WHERE (s.キャンセル = 'no'&& s.一旦保留 = false && s.ジャンル = '6' && s.社内伝番 is null );";
+
+            orders11 = ctx.Database.SqlQuery<v_pendingorder>(qtyFormat).ToList();
+
+            //计算最后的ID
+            int num = 1;
+
+            var last_order = (from s in ctx.t_orderdata
+                              orderby s.発注日 descending, s.社内伝番 descending
+                              select s).FirstOrDefault();
+            if (last_order != null)
+            {
+                if (last_order.社内伝番 != null && last_order.社内伝番 != 0)
+                    num = Convert.ToInt32(last_order.社内伝番) + 1;
+                else
+                    num = 1000000 + 1;
+
+            }
+            //获取店铺的名称
+            BindingList<t_orderdata> orderListname = new BindingList<t_orderdata>();
+
+            //var Shopname = ctx.t_orderdata.Select(s => s.店舗コード).Distinct().ToList();
+
+            var Shopname = orders11.Select(s => s.店舗コード).Distinct().ToList();
+            int hangshu = 0;
+
+            for (int i = 0; i < Shopname.Count; i++)
+            {
+                hangshu++;
+                int amou = hangshu + num;
+
+                foreach (v_pendingorder item in orders11)
+                {
+                    if (Shopname[i] == item.店舗コード)
+                    {
+                        item.社内伝番 = num;
+                        item.行数 = (short)amou;
+                        item.最大行数 = (short)amou;
+                    }
+                }
+            }
+
+
+            foreach (v_pendingorder item in orders11)
+            {
+                orderList.Add(item);
+            }
+
+            #region 读取集合整体
+
+
+            //orders1 = ctx.t_orderdata.ToList();
+            //shopList = ctx.t_shoplist.ToList();
+
+            //foreach (t_orderdata item in orders1)
+            //{
+            //    foreach (t_shoplist temp in shopList)
+            //    {
+            //        if (item.店舗コード == temp.店番 && item.キャンセル == "no" && item.一旦保留 == false && item.社内伝番 == null && item.ジャンル == 6)
+            //        {
+
+
+            //            orderList.Add(item);
+            //        }
+            //    }
+            //} 
+            #endregion
+            #endregion
+        }
+        private void 丸健Read(GODDbContext ctx)
+        {
+            WanJianorders11 = new List<v_pendingorder>();
+
+            //            string qtyFormat = @"SELECT s.* FROM t_orderdata s
+            //left JOIN t_shoplist i on i.`店番` = s.`店舗コード`
+            //WHERE (s.キャンセル = 'no' && s.実際配送担当 ='丸健' && s.配送担当受信 = false && s.ジャンル = '6' && s.社内伝番 is null )
+            //UNION ALL SELECT CONCAT(s.`店舗コード`,'a',s.`社内伝番`) AS id , CURDATE() as `受注日`,s.`店舗コード`,  s.`店舗名漢字`,s.`社内伝番`,s.`ジャンル`, '二次製品' , s.`最大行数`, sum(t_orderdata.`重量`), sum(s.`重量`), s.`実際配送担当`,  s.`納品指示`, s.`備考` FROM s s left JOIN t_shoplist i on i.`店番` = s.`店舗コード` WHERE (s.キャンセル = 'no' && s.実際配送担当 ='丸健' && s.配送担当受信 = false && s.ジャンル = '6' && s.社内伝番 is null )GROUP by s.`社内伝番`  ;";
+
+            string qtyFormat = @"SELECT s.* FROM t_orderdata s
+left JOIN t_shoplist i on i.`店番` = s.`店舗コード`
+WHERE (s.キャンセル = 'no' && s.実際配送担当 ='丸健' && s.配送担当受信 = false  && s.社内伝番 is null )
+   ;";///&& s.ジャンル = '6'
+
+
+            WanJianorders11 = ctx.Database.SqlQuery<v_pendingorder>(qtyFormat).ToList();
+
+
+            foreach (v_pendingorder item in WanJianorders11)
+            {
+                if (item.ジャンル == 6)
+                {
+                    item.品名漢字 = "二次製品";
+                    item.id受注データ = Convert.ToInt32(item.社内伝番);
+
+                }
+            }
+
+
 
         }
 
@@ -368,8 +504,6 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-
-
         #endregion
 
         private int GetSelectedOrderID()
@@ -515,7 +649,6 @@ namespace GODInventoryWinForm.Controls
         {
 
         }
-
 
         private IEnumerable<DataGridViewRow> GetSelectedRowsBySelectedCells()
         {
@@ -819,59 +952,59 @@ namespace GODInventoryWinForm.Controls
             if (s == 0 && RowRemark >= 0)
             {
 
-            //    string id = dataGridView1.Rows[RowRemark].Cells["StoreCodeColumn1"].EditedFormattedValue.ToString() + "a" + dataGridView1.Rows[RowRemark].Cells["InvoiceNOColumn1"].EditedFormattedValue.ToString();
+                //    string id = dataGridView1.Rows[RowRemark].Cells["StoreCodeColumn1"].EditedFormattedValue.ToString() + "a" + dataGridView1.Rows[RowRemark].Cells["InvoiceNOColumn1"].EditedFormattedValue.ToString();
 
-            //    CheckUserInfo_ID(id, "1", invoiceNoFilterTextBox.Text);
+                //    CheckUserInfo_ID(id, "1", invoiceNoFilterTextBox.Text);
 
-            //    foreach (t_orderdata item in Findorderdataresults)
-            //    {
-            //        if (item.受注日 != null)
-            //            textBox2.Text = item.受注日.ToString();
-            //        if (item.店舗コード != null)
-            //            textBox3.Text = item.店舗コード.ToString();
-            //        if (item.店舗名漢字 != null)
-            //            textBox4.Text = item.店舗名漢字.ToString();
-            //        if (item.伝票番号 != null)
-            //            textBox5.Text = item.伝票番号.ToString();
-            //        if (item.キャンセル != null)
-            //            textBox6.Text = item.キャンセル.ToString();
-            //        if (item.キャンセル時刻 != null)
-            //            textBox7.Text = item.キャンセル時刻.ToString();
-            //        //textBox8.Text = item.品名漢字.ToString();
-            //        if (item.ジャンル != null)
-            //            textBox9.Text = item.ジャンル.ToString();
-            //        if (item.品名漢字 != null)
-            //            textBox10.Text = item.品名漢字.ToString();
-            //        if (item.規格名漢字 != null)
-            //            textBox11.Text = item.規格名漢字.ToString();
-            //        if (item.発注数量 != null)
-            //            //textBox12.Text = item.重量.ToString();
-            //            textBox13.Text = item.発注数量.ToString();
-            //        if (item.口数 != null)
-            //            textBox14.Text = item.口数.ToString();
-            //        if (item.重量 != null)
-            //            textBox15.Text = item.重量.ToString();
-            //        if (item.単位 != null)
-            //            textBox16.Text = item.単位.ToString();
-            //        if (item.実際配送担当 != null)
-            //            textBox17.Text = item.実際配送担当.ToString();
-            //        if (item.県別 != null)
-            //            textBox18.Text = item.県別.ToString();
-            //        if (item.配送担当受信 != null)
-            //            textBox19.Text = item.配送担当受信.ToString();
-            //        if (item.配送担当受信時刻 != null)
-            //            textBox20.Text = item.配送担当受信時刻.ToString();
-            //        if (item.専務受信 != null)
-            //            textBox21.Text = item.専務受信.ToString();
-            //        if (item.専務受信時刻 != null)
-            //            textBox22.Text = item.専務受信時刻.ToString();
-            //        if (item.受注日 != null)
-            //            textBox23.Text = item.受注日.ToString();
-            //        if (item.納品指示 != null)
-            //            textBox24.Text = item.納品指示.ToString();
-            //        if (item.備考 != null)
-            //            textBox25.Text = item.備考.ToString();
-            //    }
+                //    foreach (t_orderdata item in Findorderdataresults)
+                //    {
+                //        if (item.受注日 != null)
+                //            textBox2.Text = item.受注日.ToString();
+                //        if (item.店舗コード != null)
+                //            textBox3.Text = item.店舗コード.ToString();
+                //        if (item.店舗名漢字 != null)
+                //            textBox4.Text = item.店舗名漢字.ToString();
+                //        if (item.伝票番号 != null)
+                //            textBox5.Text = item.伝票番号.ToString();
+                //        if (item.キャンセル != null)
+                //            textBox6.Text = item.キャンセル.ToString();
+                //        if (item.キャンセル時刻 != null)
+                //            textBox7.Text = item.キャンセル時刻.ToString();
+                //        //textBox8.Text = item.品名漢字.ToString();
+                //        if (item.ジャンル != null)
+                //            textBox9.Text = item.ジャンル.ToString();
+                //        if (item.品名漢字 != null)
+                //            textBox10.Text = item.品名漢字.ToString();
+                //        if (item.規格名漢字 != null)
+                //            textBox11.Text = item.規格名漢字.ToString();
+                //        if (item.発注数量 != null)
+                //            //textBox12.Text = item.重量.ToString();
+                //            textBox13.Text = item.発注数量.ToString();
+                //        if (item.口数 != null)
+                //            textBox14.Text = item.口数.ToString();
+                //        if (item.重量 != null)
+                //            textBox15.Text = item.重量.ToString();
+                //        if (item.単位 != null)
+                //            textBox16.Text = item.単位.ToString();
+                //        if (item.実際配送担当 != null)
+                //            textBox17.Text = item.実際配送担当.ToString();
+                //        if (item.県別 != null)
+                //            textBox18.Text = item.県別.ToString();
+                //        if (item.配送担当受信 != null)
+                //            textBox19.Text = item.配送担当受信.ToString();
+                //        if (item.配送担当受信時刻 != null)
+                //            textBox20.Text = item.配送担当受信時刻.ToString();
+                //        if (item.専務受信 != null)
+                //            textBox21.Text = item.専務受信.ToString();
+                //        if (item.専務受信時刻 != null)
+                //            textBox22.Text = item.専務受信時刻.ToString();
+                //        if (item.受注日 != null)
+                //            textBox23.Text = item.受注日.ToString();
+                //        if (item.納品指示 != null)
+                //            textBox24.Text = item.納品指示.ToString();
+                //        if (item.備考 != null)
+                //            textBox25.Text = item.備考.ToString();
+                //    }
             }
 
 
@@ -1016,6 +1149,7 @@ namespace GODInventoryWinForm.Controls
             //        & " WHERE t_orderdata.`id受注データ` =" & Cells(i, 1).Value
             //    Set rs = con.Execute(sqlStr)
             //Next 
+
             #endregion
             /*
             using (var ctx = new GODDbContext())
@@ -1135,6 +1269,148 @@ namespace GODInventoryWinForm.Controls
                 return;
             }
              */
+        }
+
+        private void saveCodeButton_Click(object sender, EventArgs e)
+        {
+            orders1 = new List<t_orderdata>();
+
+            foreach (v_pendingorder item in orderList)
+            {
+                t_orderdata temp = new t_orderdata();
+
+                #region MyRegion
+                temp.ASN管理連番 = item.ASN管理連番;
+                //temp.EDI発注区分 = item.EDI発注区分;
+                //temp.id = item.id;
+                temp.id受注データ = item.id受注データ;
+                temp.ＪＡＮコード = item.ＪＡＮコード;
+                //temp.PB区分 = item.PB区分;
+                temp.Status = item.Status;
+                //temp.オプション使用欄 = item.オプション使用欄;
+                temp.キャンセル = item.キャンセル;
+                temp.キャンセル時刻 = item.キャンセル時刻;
+                //temp.クラスコード = item.クラスコード;
+                //temp.サイズ名カナ = item.サイズ名カナ;
+                temp.ジャンル = item.ジャンル;
+                //temp.センターコード = item.センターコード;
+                //temp.センター名カナ = item.センター名カナ;
+                //temp.センター名漢字 = item.センター名漢字;
+                //temp.センター経由区分 = item.センター経由区分;
+                temp.ダブリ = item.ダブリ;
+                // temp.ラインコード = item.ラインコード;
+                //temp.ロケーションコード = item.ロケーションコード;
+                temp.一旦保留 = item.一旦保留;
+                //temp.予備_数値_ = item.予備_数値_;
+                //temp.仕入先コード = item.仕入先コード;
+                //temp.仕入先名カナ = item.仕入先名カナ;
+                //temp.仕入先名漢字 = item.仕入先名漢字;
+                //temp.伝票出力単位 = item.伝票出力単位;
+                //temp.伝票区分 = item.伝票区分;
+                //temp.伝票番号 = item.伝票番号;
+                //temp.便区分 = item.便区分;
+                //temp.備考 = item.備考;
+                temp.出荷No = item.出荷No;
+                temp.出荷日 = item.出荷日;
+                temp.出荷業務仕入先コード = item.出荷業務仕入先コード;
+                temp.単位 = item.単位;
+                //temp.原価区分 = item.原価区分;
+                temp.原価金額_税抜_ = item.原価金額_税抜_;
+                //temp.原価金額_税込_ = item.原価金額_税込_;
+                //temp.原単価_税抜_ = item.原単価_税抜_;
+                //temp.原単価_税込_ = item.原単価_税込_;
+                temp.受注日 = item.受注日;
+                //temp.受注時刻 = item.受注時刻;
+                temp.受領 = item.受領;
+                //temp.受領差異数量 = item.受領差異数量;
+                //temp.受領差異金額 = item.受領差異金額;
+                //temp.受領数量 = item.受領数量;
+                //temp.受領確認 = item.受領確認;
+                //temp.受領金額 = item.受領金額;
+                temp.口数 = item.口数;
+                //temp.品名カナ = item.品名カナ;
+                temp.品名漢字 = item.品名漢字;
+                temp.商品コード = item.商品コード;
+                //temp.商品コード区分 = item.商品コード区分;
+                //temp.回答納期 = item.回答納期;
+                temp.在庫状態 = item.在庫状態;
+                //temp.売単価_税抜_ = item.売単価_税抜_;
+                //temp.売単価_税込_ = item.売単価_税込_;
+                temp.実際出荷数量 = item.実際出荷数量;
+                temp.実際配送担当 = item.実際配送担当;
+                //temp.専務受信 = item.専務受信;
+                //temp.専務受信時刻 = item.専務受信時刻;
+                //temp.広告コード = item.広告コード;
+                temp.店舗コード = item.店舗コード;
+                temp.店舗名カナ = item.店舗名カナ;
+                temp.店舗名漢字 = item.店舗名漢字;
+                temp.最大行数 = item.最大行数;
+                //temp.最小発注単位数量 = item.最小発注単位数量;
+                //temp.本部発注区分 = item.本部発注区分;
+                //temp.柄名カナ = item.柄名カナ;
+                //temp.法人コード = item.法人コード;
+                //temp.法人名カナ = item.法人名カナ;
+                //temp.法人名漢字 = item.法人名漢字;
+                //temp.特価区分 = item.特価区分;
+                //temp.用度品区分 = item.用度品区分;
+                //temp.発注データ有効期限 = item.発注データ有効期限;
+                //temp.発注単位名称カナ = item.発注単位名称カナ;
+                //temp.発注単位名称漢字 = item.発注単位名称漢字;
+                temp.発注形態区分 = item.発注形態区分;
+                temp.発注形態名称漢字 = item.発注形態名称漢字;
+                temp.発注数量 = item.発注数量;
+                //temp.発注日 = item.発注日;
+                temp.県別 = item.県別;
+                temp.社内伝番 = item.社内伝番;
+                //temp.税区分 = item.税区分;
+                //temp.税率 = item.税率;
+                //temp.税額 = item.税額;
+                //temp.納品予定日 = item.納品予定日;
+                //temp.納品先店舗コード = item.納品先店舗コード;
+                //temp.納品先店舗名カナ = item.納品先店舗名カナ;
+                //temp.納品先店舗名漢字 = item.納品先店舗名漢字;
+                temp.納品原価金額 = item.納品原価金額;
+                temp.納品口数 = item.納品口数;
+                //temp.納品場所コード = item.納品場所コード;
+                temp.納品場所名カナ = item.納品場所名カナ;
+                temp.納品場所名漢字 = item.納品場所名漢字;
+                //temp.納品指示 = item.納品指示;
+                temp.納品日 = item.納品日;
+                //temp.納期回答区分 = item.納期回答区分;
+                //temp.総額取引区分 = item.総額取引区分;
+                temp.自社コード = item.自社コード;
+                //temp.色名カナ = item.色名カナ;
+                temp.行数 = item.行数;
+                //temp.行番号 = item.行番号;
+                //temp.規格名カナ = item.規格名カナ;
+                temp.規格名漢字 = item.規格名漢字;
+                //temp.週目 = item.週目;
+                //temp.部門コード = item.部門コード;
+                //temp.部門名カナ = item.部門名カナ;
+                //temp.部門名漢字 = item.部門名漢字;
+                //temp.配送担当受信 = item.配送担当受信;
+                temp.配送担当受信時刻 = item.配送担当受信時刻;
+                temp.重量 = item.重量;
+                #endregion
+
+
+            }
+            using (var ctx = new GODDbContext())
+            {
+                ctx.t_orderdata.AddRange(orders1);
+                ctx.SaveChanges();
+                this.orderList.Clear();
+            }
+
+            MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", orderList.Count));
+
+
+        }
+
+        private void storeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
         }
 
     }
