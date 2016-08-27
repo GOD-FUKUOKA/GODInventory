@@ -33,6 +33,7 @@ namespace GODInventoryWinForm.Controls
         private List<t_warehouses> warehouseList;
         private List<v_pendingorder> orders11 = null;
         private List<v_pendingorder> WanJianorders11 = null;
+        private List<v_pendingorder> wuliuorders = null;
         public PendingOrderForm()
         {
             InitializeComponent();
@@ -57,7 +58,15 @@ namespace GODInventoryWinForm.Controls
             丸健Read(ctx);
             this.dataGridView3.AutoGenerateColumns = false;
             this.dataGridView3.DataSource = WanJianorders11;
+            //物流
 
+            物流Read(ctx);
+            this.dataGridView4.AutoGenerateColumns = false;
+            this.dataGridView4.DataSource = wuliuorders;
+
+            this.comboBox1.DisplayMember = "FullName";
+            this.comboBox1.ValueMember = "Id";
+            this.comboBox1.DataSource = warehouseList;
 
 
         }
@@ -155,23 +164,36 @@ WHERE (s.キャンセル = 'no'&& s.一旦保留 = false && s.ジャンル = '6'
             //UNION ALL SELECT CONCAT(s.`店舗コード`,'a',s.`社内伝番`) AS id , CURDATE() as `受注日`,s.`店舗コード`,  s.`店舗名漢字`,s.`社内伝番`,s.`ジャンル`, '二次製品' , s.`最大行数`, sum(t_orderdata.`重量`), sum(s.`重量`), s.`実際配送担当`,  s.`納品指示`, s.`備考` FROM s s left JOIN t_shoplist i on i.`店番` = s.`店舗コード` WHERE (s.キャンセル = 'no' && s.実際配送担当 ='丸健' && s.配送担当受信 = false && s.ジャンル = '6' && s.社内伝番 is null )GROUP by s.`社内伝番`  ;";
 
             string qtyFormat = @"SELECT s.* FROM t_orderdata s
-left JOIN t_shoplist i on i.`店番` = s.`店舗コード`
-WHERE (s.キャンセル = 'no' && s.実際配送担当 ='丸健' && s.配送担当受信 = false  && s.社内伝番 is null )
-   ;";///&& s.ジャンル = '6'
+            left JOIN t_shoplist i on i.`店番` = s.`店舗コード`
+            WHERE (s.キャンセル = 'no' && s.実際配送担当 ='丸健' && s.配送担当受信 = false)
+                 ;";
 
 
             WanJianorders11 = ctx.Database.SqlQuery<v_pendingorder>(qtyFormat).ToList();
-
 
             foreach (v_pendingorder item in WanJianorders11)
             {
                 if (item.ジャンル == 6)
                 {
                     item.品名漢字 = "二次製品";
-                    item.id受注データ = Convert.ToInt32(item.社内伝番);
-
+                    //item.id受注データ = Convert.ToInt32(item.社内伝番);
                 }
             }
+
+
+
+        }
+        private void 物流Read(GODDbContext ctx)
+        {
+            wuliuorders = new List<v_pendingorder>();
+
+            string qtyFormat = @"SELECT s.* FROM t_orderdata s
+            INNER  JOIN t_shoplist i on i.`店番` = s.`店舗コード`
+            WHERE (s.キャンセル = 'no' && s.実際配送担当 ='マツモト産業' && s.配送担当受信 = false)
+                 ;";
+
+            wuliuorders = ctx.Database.SqlQuery<v_pendingorder>(qtyFormat).ToList();
+
 
 
 
@@ -928,7 +950,32 @@ WHERE (s.キャンセル = 'no' && s.実際配送担当 ='丸健' && s.配送担
 
             return order_ids;
         }
+        private List<int> GetOrderIdsBySelectedGridCell3()
+        {
 
+            List<int> order_ids = new List<int>();
+            var rows = GetSelectedRowsBySelectedCells(dataGridView3);
+            foreach (DataGridViewRow row in rows)
+            {
+                var pendingorder = row.DataBoundItem as v_pendingorder;
+                order_ids.Add(pendingorder.id受注データ);
+            }
+
+            return order_ids;
+        }
+        private List<int> GetOrderIdsBySelectedGridCell4()
+        {
+
+            List<int> order_ids = new List<int>();
+            var rows = GetSelectedRowsBySelectedCells(dataGridView4);
+            foreach (DataGridViewRow row in rows)
+            {
+                var pendingorder = row.DataBoundItem as v_pendingorder;
+                order_ids.Add(pendingorder.id受注データ);
+            }
+
+            return order_ids;
+        }
         private void PendingOrderForm_SizeChanged(object sender, EventArgs e)
         {
 
@@ -1411,6 +1458,158 @@ WHERE (s.キャンセル = 'no' && s.実際配送担当 ='丸健' && s.配送担
         {
 
 
+        }
+
+        private void btRead_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btlogin_Click(object sender, EventArgs e)
+        {
+            var oids = GetOrderIdsBySelectedGridCell();
+
+            if (oids.Count() > 0)
+            {
+                List<t_maruken_trans> orders1 = new List<t_maruken_trans>();
+
+
+                for (int i = 0; i < oids.Count; i++)
+                {
+                    var item = this.WanJianorders11.Find(o => o.id受注データ == oids[i]);
+                    //foreach (v_pendingorder item in WanJianorders11)
+                    {
+                        //if (item.id受注データ == oids[0])
+                        {
+                            t_maruken_trans temp = new t_maruken_trans();
+
+                            #region MyRegion
+                            if (item.ジャンル == 6)
+                                temp.OrderId = Convert.ToInt32(item.社内伝番);
+                            else
+                                temp.OrderId = item.id受注データ;
+                            //temp.EDI発注区分 = item.EDI発注区分;
+                            //temp.id = item.id;
+                            temp.キャンセル = item.キャンセル;
+                            temp.キャンセル時刻 = item.キャンセル時刻;
+                            //temp.ジャンル = item.ジャンル;
+                            temp.伝票番号 = item.伝票番号;
+                            //temp.備考 = item.備考;
+                            temp.単位 = item.単位;
+                            temp.受注日 = item.受注日;
+                            temp.口数 = item.口数;
+                            temp.品名漢字 = item.品名漢字;
+                            temp.実際配送担当 = item.実際配送担当;
+                            //temp.専務受信 = item.専務受信;
+                            //temp.専務受信時刻 = item.専務受信時刻;
+                            //temp.店舗コード = item.店舗コード;
+                            temp.店舗名漢字 = item.店舗名漢字;
+                            temp.発注数量 = item.発注数量;
+                            temp.県別 = item.県別;
+                            //temp.納品指示 = item.納品指示;
+                            temp.規格名漢字 = item.規格名漢字;
+                            //temp.配送担当受信 = item.配送担当受信;
+                            temp.配送担当受信時刻 = item.配送担当受信時刻;
+                            temp.重量 = item.重量;
+                            orders1.Add(temp);
+
+                            #endregion
+                        }
+                    }
+                }
+                using (var ctx = new GODDbContext())
+                {
+                    ctx.t_maruken_trans.AddRange(orders1);
+                    ctx.SaveChanges();
+                    this.orders1.Clear();
+                }
+
+                MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", orderList.Count));
+            }
+            else
+            {
+                MessageBox.Show(" please select rows in the order list first.");
+
+
+            }
+
+        }
+
+        private void btSave_Click(object sender, EventArgs e)
+        {
+            var oids = GetOrderIdsBySelectedGridCell4();
+
+            if (oids.Count() > 0)
+            {
+                List<t_maruken_trans> orders1 = new List<t_maruken_trans>();
+                List<t_orderdata> ordersID = new List<t_orderdata>();
+
+                using (var ctx = new GODDbContext())
+                {
+                    for (int i = 0; i < oids.Count; i++)
+                    {
+                        var item = this.WanJianorders11.Find(o => o.id受注データ == oids[i]);
+                        {
+                            t_maruken_trans temp = new t_maruken_trans();
+
+                            #region MyRegion
+                            if (item.ジャンル == 6)
+                                temp.OrderId = Convert.ToInt32(item.社内伝番);
+                            else
+                                temp.OrderId = item.id受注データ;
+                            //temp.EDI発注区分 = item.EDI発注区分;
+                            //temp.id = item.id;
+                            temp.キャンセル = item.キャンセル;
+                            temp.キャンセル時刻 = item.キャンセル時刻;
+                            //temp.ジャンル = item.ジャンル;
+                            temp.伝票番号 = item.伝票番号;
+                            temp.備考 = "已传送";
+                            temp.単位 = item.単位;
+                            temp.受注日 = item.受注日;
+                            temp.口数 = item.口数;
+                            temp.品名漢字 = item.品名漢字;
+                            temp.実際配送担当 = item.実際配送担当;
+                            //temp.専務受信 = item.専務受信;
+                            //temp.専務受信時刻 = item.専務受信時刻;
+                            //temp.店舗コード = item.店舗コード;
+                            temp.店舗名漢字 = item.店舗名漢字;
+                            temp.発注数量 = item.発注数量;
+                            temp.県別 = item.県別;
+                            //temp.納品指示 = item.納品指示;
+                            temp.規格名漢字 = item.規格名漢字;
+                            //temp.配送担当受信 = item.配送担当受信;
+                            temp.配送担当受信時刻 = item.配送担当受信時刻;
+                            temp.重量 = item.重量;
+                            orders1.Add(temp);
+
+                            #endregion
+
+                        }
+                        var list = (from s in ctx.t_orderdata
+                                    where oids[i] == s.id受注データ
+                                    select s).ToList();
+                        foreach (var item1 in list)
+                        {
+                            item1.配送担当受信 = true;
+                            item1.配送担当受信時刻 = DateTime.Now;
+                        }
+                        ctx.SaveChanges();
+                    }
+
+                    ctx.t_maruken_trans.AddRange(orders1);
+                    //ctx.t_orderdata.AddRange(ordersID);
+                    ctx.SaveChanges();
+                    this.orders1.Clear();
+                }
+
+                MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", orderList.Count));
+            }
+            else
+            {
+                MessageBox.Show(" please select rows in the order list first.");
+
+
+            }
         }
 
     }
