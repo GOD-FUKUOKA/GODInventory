@@ -10,7 +10,7 @@ namespace GODInventory.MyLinq
     {
 
 
-        public string shipperNO { get; set; }
+        public string ShipNO { get; set; }
 
         public DateTime? 発注日 { get; set; }
 

@@ -57,7 +57,7 @@ namespace GODInventoryWinForm.Controls
 
             using (var ctx = new GODDbContext())
             {
-                string sql = @"SELECT o.* FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.shipperNO";
+                string sql = @"SELECT o.* FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
                 groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>( sql, OrderStatus.PendingShipment).ToList();
             
             }

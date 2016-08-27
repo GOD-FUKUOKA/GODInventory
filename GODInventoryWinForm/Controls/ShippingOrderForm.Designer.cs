@@ -83,7 +83,7 @@
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.shipperNOColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShipNOColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shipAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.arrivedAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.storeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -560,7 +560,7 @@
             this.dataGridView4.AllowUserToAddRows = false;
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.shipperNOColumn1,
+            this.ShipNOColumn1,
             this.shipAtColumn,
             this.arrivedAtColumn,
             this.storeNameColumn,
@@ -574,10 +574,10 @@
             this.dataGridView4.Size = new System.Drawing.Size(694, 280);
             this.dataGridView4.TabIndex = 5;
             // 
-            // shipperNOColumn1
+            // ShipNOColumn1
             // 
-            this.shipperNOColumn1.HeaderText = "配车单单号";
-            this.shipperNOColumn1.Name = "shipperNOColumn1";
+            this.ShipNOColumn1.HeaderText = "配车单单号";
+            this.ShipNOColumn1.Name = "ShipNOColumn1";
             // 
             // shipAtColumn
             // 
@@ -692,7 +692,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 受領差異金額Column1;
         private System.Windows.Forms.BindingSource bindingSource3;
         private System.Windows.Forms.DataGridView dataGridView4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn shipperNOColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ShipNOColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn shipAtColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn arrivedAtColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn storeNameColumn;

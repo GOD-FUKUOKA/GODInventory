@@ -284,7 +284,7 @@ namespace GODInventory.MyLinq
 
         public string 県別 { get; set; }
 
-        public string shipperNO { get; set; }
+        public string ShipNO { get; set; }
 
         public t_orderdata()
         {

@@ -119,7 +119,7 @@ ALTER TABLE `god_inventory`.`t_locations`
 CHANGE COLUMN `納品場所コード` `納品場所コード` INT(4) NOT NULL DEFAULT 0;
 
 ALTER TABLE `god_inventory`.`t_orderdata` 
-ADD COLUMN `shipperNO`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL;
+ADD COLUMN `ShipNO`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL;
 
 ALTER TABLE `god_inventory`.`t_maruken_trans` 
 CHANGE COLUMN `id` `id` VARCHAR(255) CHARACTER SET 'utf8' NULL ,
