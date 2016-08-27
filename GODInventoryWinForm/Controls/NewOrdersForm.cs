@@ -15,12 +15,18 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class NewOrdersForm : Form
     {
+        //SELECT o2.* FROM t_orderdata o1 inner join t_orderdata  o2 on o1.自社コード = o2.自社コード and o1.店舗コード=o2.店舗コード
+        //where o1.`Status`=0 OR o2.`Status`=1 OR o2.`Status`=3 OR (o2.`Status`=5 AND o2.`納品日`>NOW())
+        //order by o2.店舗コード, o2.自社コード , o2.createdAt desc
+        
+        //o1.`id受注データ`!= o2.`id受注データ`
         int RowRemark = 0;
         int cloumn = 0;
 
         private Hashtable datagrid_changes = null;
         private BindingList<t_orderdata> orderList;
         private List<t_orderdata> orders1;
+        List<v_duplicatedorder> duplicatedOrderList;
         
         public NewOrdersForm()
         {
@@ -28,21 +34,11 @@ namespace GODInventoryWinForm.Controls
             this.dataGridView1.DataSource = null;
             this.dataGridView1.AutoGenerateColumns = false;
 
-            //InitializePager();
-            //this.dataGridView1.DataSource = orderList;
+            this.InitializeOrderData();
         }
 
-        public void InitializePager()
-        {
-            this.pager1.PageCurrent = 1; //当前页为第一页   
-            this.pager1.PageSize = 5000; //页数   
-            this.pager1.Bind();
-        }
 
-        public void RefreshPager()
-        {
-            this.pager1.Bind();
-        }
+
 
         private void detailButton_Click_1(object sender, EventArgs e)
         {
@@ -171,8 +167,8 @@ namespace GODInventoryWinForm.Controls
         {
             if (e.ColumnIndex == 0)
             {
-                if (e.Value == "yes")
-                    this.dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.AliceBlue;
+                
+                //    this.dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.AliceBlue;
             
             }
         }
@@ -184,57 +180,94 @@ namespace GODInventoryWinForm.Controls
         }
 
 
-        private int InitializeOrderData()
+        public int InitializeOrderData()
         {
-            // 记录DataGridView改变数据
-            this.datagrid_changes = new Hashtable();
+            string sql = @"SELECT o1.id受注データ as duplicatedId, o2.id受注データ, o2.`出荷日`,o2.`納品日`,o2.`受注日`,o2.`店舗コード`, o2.`店舗名漢字`,
+          o2.`伝票番号`,o2.`口数`,o2.`ジャンル`,o2.`品名漢字`,o2.`規格名漢字`, 
+          o2.`発注数量`,o2.`実際配送担当`,o2.`県別`, 
+          o2.`発注形態名称漢字`,o2.`キャンセル`,o2.`ダブリ`, o2.Status
+            FROM t_orderdata o1 inner join t_orderdata  o2 on o1.自社コード = o2.自社コード and o1.店舗コード=o2.店舗コード
+    where o1.`Status`=22 AND (o1.id受注データ = o2.id受注データ or  o2.`Status`=0 OR o2.`Status`=3 OR (o2.`Status`=5 AND o2.`納品予定日`>NOW()) )
+    order by o2.店舗コード, o2.自社コード , o2.受注日, o1.id受注データ";
 
-            //var ctx = entityDataSource1.DbContext as GODDbContext;
-            //var stockstates = ctx.t_stockstate.Select(s => s).ToList();
-            var cq = OrderSqlHelper.NewOrderQuery(entityDataSource1);
-            var count = cq.Count();
-
-            if (count > 0)
+            using (var ctx = new GODDbContext())
             {
-                var q = OrderSqlHelper.NewOrderQuery(entityDataSource1);
-                // 分页
-
-                if (pager1.PageCurrent > 1)
-                {
-                    q = q.Skip(pager1.OffSet(pager1.PageCurrent - 1));
-                }
-                q = q.Take(pager1.OffSet(pager1.PageCurrent));
-
-                // create BindingList (sortable/filterable)
-                var bindinglist = entityDataSource1.CreateView(q) as EntityBindingList<t_orderdata>;
-
-                this.bindingSource1.DataSource = bindinglist;
-
+                duplicatedOrderList = ctx.Database.SqlQuery<v_duplicatedorder>(sql).ToList();
             }
-            else
-            {
-                this.bindingSource1.DataSource = null;
-            }
+
+               
+
+            this.bindingSource1.DataSource = duplicatedOrderList;
+
+         
+          
             dataGridView1.DataSource = this.bindingSource1;
 
-            return count;
+            return 0;
         }
 
         private void newOrderbutton_Click(object sender, EventArgs e)
         {
-            var form = new CreateOrderForm();
-            if (form.ShowDialog() == DialogResult.OK)
+           
+        }
+
+        private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+
+        }
+
+        private void cancelOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int rowIndex = this.dataGridView1.CurrentRow.Index;
+            var order = duplicatedOrderList[rowIndex];
+            order.Status = OrderStatus.Cancelled;
+            this.dataGridView1.Refresh();
+        }
+
+        private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            int i = e.RowIndex;
+            var order = duplicatedOrderList[i];
+            if (order.Status == OrderStatus.Duplicated)
             {
-                pager1.Bind();
+                this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+
+            }
+            else if (order.Status == OrderStatus.Cancelled)
+            {
+                this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Gray;
+            }
+            else
+            {
+                this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.White;
             }
         }
 
-        private int pager1_EventPaging(EventPagingArg e)
+        private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int order_count = InitializeOrderData();
-
-            return order_count;
+            int rowIndex = this.dataGridView1.CurrentRow.Index;
+            var order = duplicatedOrderList[rowIndex];
+            order.Status = OrderStatus.Duplicated;
+            this.dataGridView1.Refresh();
         }
+
+        private void uncancleOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int rowIndex = this.dataGridView1.CurrentRow.Index;
+            var order = duplicatedOrderList[rowIndex];
+            order.Status = OrderStatus.Pending;
+            this.dataGridView1.Refresh();
+        }
+
+        private void unduplicateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int rowIndex = this.dataGridView1.CurrentRow.Index;
+            var order = duplicatedOrderList[rowIndex];
+            order.Status = OrderStatus.Pending;
+            this.dataGridView1.Refresh();
+        }
+
+       
 
     }
 }

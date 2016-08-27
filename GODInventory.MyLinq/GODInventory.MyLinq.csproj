@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="v_groupedorder.cs" />
+    <Compile Include="v_duplicatedorder.cs" />
     <Compile Include="t_customers.cs" />
     <Compile Include="v_itemprice.cs" />
     <Compile Include="t_pricelist.cs" />

@@ -15,6 +15,7 @@ namespace GODInventory.ViewModel
     {
         public  enum OrderStatusEnum { New = 0, Pending = 9,  WaitToShip=1, PendingShipment=2, ASN=3, Received=4, Completed=5  };
 
+
         //sqlStr = "SELECT t_orderdata.`出荷日`,t_orderdata.`納品日`,t_orderdata.`受注日`,t_orderdata.`キャンセル`,t_orderdata.`一旦保留`," _
         //& " t_orderdata.`伝票番号`,t_orderdata.`社内伝番`,t_orderdata.`行数`,t_orderdata.`最大行数`,t_orderdata.`口数`,t_orderdata.`発注数量`," _
         //& " t_orderdata.`実際配送担当`,t_orderdata.`備考`,t_orderdata.`店舗コード`,t_orderdata.`店舗名漢字`,t_orderdata.`id受注データ`,`発注形態名称漢字`," _
@@ -24,16 +25,16 @@ namespace GODInventory.ViewModel
         //& " ORDER BY t_orderdata.`受注日` DESC,t_orderdata.`社内伝番` ASC,t_orderdata.`行数` ASC,t_orderdata.`伝票番号` ASC"
         //出荷日納品日受注日, 店舗コード,店名, 社内伝番, 伝票番号,品名漢字， 規格名漢字， 発注数量，実際配送担当， 県別，
         //原単価(税抜)，， 原価金額(税抜)， 発注形態名称漢字， キャンセル， 一旦保留， 受領， ダブリ
-        public static IQueryable<t_orderdata> NewOrderQuery(EntityDataSource entityDataSource1)
-        {
-            var a = entityDataSource1.EntitySets["t_orderdatas"];
-            var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                    where o.Status == OrderStatus.New
-                    orderby o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
+        //public static IQueryable<t_orderdata> NewOrderQuery(EntityDataSource entityDataSource1)
+        //{
+        //    var a = entityDataSource1.EntitySets["t_orderdatas"];
+        //    var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
+        //            where o.Status == OrderStatus.New
+        //            orderby o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
 
-                    select o;
-            return q;
-        }
+        //            select o;
+        //    return q;
+        //}
         
         // file 受注管理★受注作業用/m4
         // SELECT t_orderdata.`出荷日`,t_orderdata.`納品日`,t_orderdata.`受注日`,t_orderdata.`店舗コード`," _

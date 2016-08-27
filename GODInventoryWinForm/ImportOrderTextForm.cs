@@ -149,10 +149,11 @@ namespace GODInventoryWinForm
             {
                 var date = DateTime.Now.Date;
                 List<t_itemlist> items = ctx.t_itemlist.ToList();
-                List<v_storeorder> orders = ( from t_orderdata o  in ctx.t_orderdata
-                                             where o.Status == OrderStatus.New || o.Status == OrderStatus.Pending || o.Status == OrderStatus.WaitToShip || o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.ASN || o.Status == OrderStatus.Received
-                                             group o by new { o.店舗コード, o.商品コード} into g
-                                              select new v_storeorder { 店舗コード = g.Key.店舗コード, 商品コード = g.Key.商品コード }).ToList();
+                List<v_storeorder> orders = null; 
+                //= ( from t_orderdata o  in ctx.t_orderdata
+                //   where   o.Status == OrderStatus.Pending || o.Status == OrderStatus.WaitToShip || o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.ASN || o.Status == OrderStatus.Received
+                //   group o by new { o.店舗コード, o.商品コード} into g
+                //    select new v_storeorder { 店舗コード = g.Key.店舗コード, 商品コード = g.Key.商品コード }).ToList();
                     
                 List<t_shoplist> shops = ctx.t_shoplist.ToList();
 

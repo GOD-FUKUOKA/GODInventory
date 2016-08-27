@@ -280,10 +280,11 @@ namespace GODInventory.MyLinq
 
         public long 出荷No { get; set; }
 
-        // 0:pending order, 1: wait to ship, 2: pending shipment, 3: asn order, 4: received order, 5: completed 
         public OrderStatus Status { get; set; }
 
         public string 県別 { get; set; }
+
+        public string shipperNO { get; set; }
 
         public t_orderdata()
         {

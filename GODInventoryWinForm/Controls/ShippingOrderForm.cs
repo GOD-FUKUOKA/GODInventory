@@ -17,6 +17,8 @@ namespace GODInventoryWinForm.Controls
     public partial class ShippingOrderForm : Form
     {
         public ReceivedOrdersReportForm reportForm;
+        public List<v_groupedorder> groupedOrderList;
+
         public ShippingOrderForm()
         {
             InitializeComponent();
@@ -53,16 +55,21 @@ namespace GODInventoryWinForm.Controls
         private int InitializeOrderData()
         {
 
-            var q = OrderSqlHelper.ShippingOrderSql(entityDataSource1);
+            using (var ctx = new GODDbContext())
+            {
+                string sql = @"SELECT o.* FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.shipperNO";
+                groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>( sql, OrderStatus.PendingShipment).ToList();
             
-            var count = q.Count();
+            }
+            //var q = OrderSqlHelper.ShippingOrderSql(entityDataSource1);            
+            //var count = q.Count();
             // create BindingList (sortable/filterable)
-            this.bindingSource1.DataSource = entityDataSource1.CreateView(q);
+            //this.bindingSource1.DataSource = entityDataSource1.CreateView(q);
             // assign BindingList to grid
-            dataGridView1.DataSource = this.bindingSource1;
+            //dataGridView1.DataSource = this.bindingSource1;
 
 
-            return count;
+            return 0;
 
         }
 

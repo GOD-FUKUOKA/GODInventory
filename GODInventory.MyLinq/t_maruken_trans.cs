@@ -9,6 +9,9 @@ namespace GODInventory.MyLinq
     [Table("god_inventory.t_maruken_trans")]
     public partial class t_maruken_trans
     {
+        [Key]
+        public int OrderId { get; set; }
+        
         [StringLength(255)]
         public string id { get; set; }
 

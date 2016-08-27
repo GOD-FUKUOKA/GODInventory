@@ -82,5 +82,14 @@ namespace GODInventoryWinForm.Properties {
                 this["InventoryStartAt"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int InitialOrderStatus {
+            get {
+                return ((int)(this["InitialOrderStatus"]));
+            }
+        }
     }
 }

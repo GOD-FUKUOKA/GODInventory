@@ -465,8 +465,8 @@ namespace GODInventory.ViewModel.EDI
         {
             var orderdata = ConverToEntity();
             
-            bool exist = orders.Exists( o=> ( o.店舗コード == orderdata.店舗コード && o.商品コード == orderdata.商品コード ));
-            orderdata.ダブリ = exist ? "yes" : "no";
+            //bool exist = orders.Exists( o=> ( o.店舗コード == orderdata.店舗コード && o.商品コード == orderdata.商品コード ));
+            //orderdata.ダブリ = exist ? "yes" : "no";
             orderdata.口数 = item.PT入数;
             orderdata.重量 = (int)( item.単品重量 * orderdata.発注数量);
             orderdata.ジャンル = item.ジャンル;

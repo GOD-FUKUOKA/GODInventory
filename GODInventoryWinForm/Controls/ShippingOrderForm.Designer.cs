@@ -82,6 +82,14 @@
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.shipperNOColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shipAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.arrivedAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.storeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.districtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shipperColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -92,6 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -117,10 +126,10 @@
             this.原単価_税抜_Column1,
             this.原価金額_税抜_Column1,
             this.発注形態名称漢字Column1});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 55);
+            this.dataGridView1.Location = new System.Drawing.Point(703, 55);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(897, 251);
+            this.dataGridView1.Size = new System.Drawing.Size(200, 251);
             this.dataGridView1.TabIndex = 0;
             // 
             // 出荷日Column1
@@ -286,6 +295,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dataGridView4);
             this.tabPage1.Controls.Add(this.pager1);
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Controls.Add(this.generateASNButton);
@@ -302,13 +312,13 @@
             this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(6, 309);
+            this.pager1.Location = new System.Drawing.Point(827, 309);
             this.pager1.Name = "pager1";
             this.pager1.NMax = 0;
             this.pager1.PageCount = 0;
             this.pager1.PageCurrent = 0;
             this.pager1.PageSize = 5000;
-            this.pager1.Size = new System.Drawing.Size(897, 31);
+            this.pager1.Size = new System.Drawing.Size(76, 31);
             this.pager1.TabIndex = 4;
             this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
@@ -343,6 +353,7 @@
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView2.Size = new System.Drawing.Size(893, 274);
@@ -418,6 +429,7 @@
             // 
             // dataGridView3
             // 
+            this.dataGridView3.AllowUserToAddRows = false;
             this.dataGridView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -439,6 +451,7 @@
             this.受領差異金額Column1});
             this.dataGridView3.Location = new System.Drawing.Point(6, 56);
             this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.RowTemplate.Height = 23;
             this.dataGridView3.Size = new System.Drawing.Size(895, 254);
             this.dataGridView3.TabIndex = 0;
@@ -542,6 +555,60 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // dataGridView4
+            // 
+            this.dataGridView4.AllowUserToAddRows = false;
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.shipperNOColumn1,
+            this.shipAtColumn,
+            this.arrivedAtColumn,
+            this.storeNameColumn,
+            this.districtColumn,
+            this.shipperColumn,
+            this.totalPrice});
+            this.dataGridView4.Location = new System.Drawing.Point(3, 55);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.RowHeadersVisible = false;
+            this.dataGridView4.RowTemplate.Height = 23;
+            this.dataGridView4.Size = new System.Drawing.Size(694, 280);
+            this.dataGridView4.TabIndex = 5;
+            // 
+            // shipperNOColumn1
+            // 
+            this.shipperNOColumn1.HeaderText = "配车单单号";
+            this.shipperNOColumn1.Name = "shipperNOColumn1";
+            // 
+            // shipAtColumn
+            // 
+            this.shipAtColumn.HeaderText = "出荷日";
+            this.shipAtColumn.Name = "shipAtColumn";
+            // 
+            // arrivedAtColumn
+            // 
+            this.arrivedAtColumn.HeaderText = "納品日";
+            this.arrivedAtColumn.Name = "arrivedAtColumn";
+            // 
+            // storeNameColumn
+            // 
+            this.storeNameColumn.HeaderText = "店名";
+            this.storeNameColumn.Name = "storeNameColumn";
+            // 
+            // districtColumn
+            // 
+            this.districtColumn.HeaderText = "県別";
+            this.districtColumn.Name = "districtColumn";
+            // 
+            // shipperColumn
+            // 
+            this.shipperColumn.HeaderText = "担当";
+            this.shipperColumn.Name = "shipperColumn";
+            // 
+            // totalPrice
+            // 
+            this.totalPrice.HeaderText = "金額(税抜)";
+            this.totalPrice.Name = "totalPrice";
+            // 
             // ShippingOrderForm
             // 
             this.ClientSize = new System.Drawing.Size(917, 369);
@@ -564,6 +631,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -623,5 +691,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 受領差異数量Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受領差異金額Column1;
         private System.Windows.Forms.BindingSource bindingSource3;
+        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn shipperNOColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn shipAtColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn arrivedAtColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn storeNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn districtColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn shipperColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalPrice;
     }
 }

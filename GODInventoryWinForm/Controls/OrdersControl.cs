@@ -120,7 +120,7 @@ namespace GODInventoryWinForm.Controls
             }
             AdjustSubformSize(newOrdersForm);
             // 显示之前重新加载数据，订单数据可能已更新。
-            newOrdersForm.RefreshPager();
+            newOrdersForm.InitializeOrderData();
             newOrdersForm.ShowDialog();
 
         }

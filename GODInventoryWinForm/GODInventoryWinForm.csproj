@@ -107,6 +107,7 @@
     <Compile Include="Controls\InputStock.Designer.cs">
       <DependentUpon>InputStock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MySqlParameters.cs" />
     <Compile Include="Controls\OutputStock.cs">
       <SubType>Form</SubType>
     </Compile>
