@@ -16,16 +16,14 @@ namespace GODInventoryWinForm.Controls
     {
         private List<MockEntity> manufacturerList;
         private List<t_warehouses> warehouseList;
-
         private BindingList<t_stockrec> stocklist;
         private List<t_genre> genreList;
         private BindingList<v_stockios> stockiosList;
-
-
         private Strock_CompanyCode Strock_CompanyCode;
         private t_stockrec order;
         private t_itemlist itemlist;
         private BindingList<t_itemlist> Titemlist;
+
         public StockMovement()
         {
             InitializeComponent();
@@ -151,8 +149,7 @@ namespace GODInventoryWinForm.Controls
                 
             }
         }
-
-
+        
         private void btadd_Click(object sender, EventArgs e)
         {
             stockiosList.Clear();
@@ -174,9 +171,7 @@ namespace GODInventoryWinForm.Controls
             }
 
         }
-
-
-
+        
         private void btclearzero_Click(object sender, EventArgs e)
         {
             foreach (var item in stockiosList)
@@ -239,6 +234,7 @@ namespace GODInventoryWinForm.Controls
             }
             return stock_no;
         }
+
         private string outBuildStockNum(int genre_id, DateTime selected_date)
         {
             string stock_no = "";
@@ -275,11 +271,13 @@ namespace GODInventoryWinForm.Controls
 
             return ((this.toWarehouseComboBox1.SelectedIndex >= 0) ? (int)this.toWarehouseComboBox1.SelectedValue : 0);
         }
+
         private int warehouseComboBox2()
         {
 
             return ((this.fromWarehouseComboBox.SelectedIndex >= 0) ? (int)this.fromWarehouseComboBox.SelectedValue : 0);
         }
+
         private int GetGenreId()
         {
 

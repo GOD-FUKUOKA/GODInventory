@@ -1462,7 +1462,9 @@ WHERE (s.キャンセル = 'no'&& s.一旦保留 = false && s.ジャンル = '6'
 
         private void btRead_Click(object sender, EventArgs e)
         {
+            var ctx = entityDataSource1.DbContext as GODDbContext;
 
+            丸健Read(ctx);
         }
 
         private void btlogin_Click(object sender, EventArgs e)
@@ -1476,6 +1478,10 @@ WHERE (s.キャンセル = 'no'&& s.一旦保留 = false && s.ジャンル = '6'
 
                 for (int i = 0; i < oids.Count; i++)
                 {
+                    int koushu = 0;
+                    int fazhushuliang = 0;
+
+
                     var item = this.WanJianorders11.Find(o => o.id受注データ == oids[i]);
                     //foreach (v_pendingorder item in WanJianorders11)
                     {
@@ -1513,12 +1519,17 @@ WHERE (s.キャンセル = 'no'&& s.一旦保留 = false && s.ジャンル = '6'
                             temp.重量 = item.重量;
                             orders1.Add(temp);
 
+                            koushu = Convert.ToInt32(item.口数) + koushu;
+                            fazhushuliang = fazhushuliang + Convert.ToInt32(item.発注数量);
+
+
                             #endregion
                         }
                     }
                 }
                 using (var ctx = new GODDbContext())
                 {
+
                     ctx.t_maruken_trans.AddRange(orders1);
                     ctx.SaveChanges();
                     this.orders1.Clear();
@@ -1548,8 +1559,11 @@ WHERE (s.キャンセル = 'no'&& s.一旦保留 = false && s.ジャンル = '6'
                 {
                     for (int i = 0; i < oids.Count; i++)
                     {
-                        var item = this.WanJianorders11.Find(o => o.id受注データ == oids[i]);
+                        var item = this.wuliuorders.Find(o => o.id受注データ == oids[i]);
                         {
+                            if (item == null)
+                                continue;
+
                             t_maruken_trans temp = new t_maruken_trans();
 
                             #region MyRegion
@@ -1583,17 +1597,27 @@ WHERE (s.キャンセル = 'no'&& s.一旦保留 = false && s.ジャンル = '6'
                             orders1.Add(temp);
 
                             #endregion
+                            //Convert.ToInt32(oids[i]
+                            int ss = oids[i];
 
+
+                            //var list = (from s in ctx.t_orderdata
+                            //            where s.id受注データ ==oids[i]) 
+                            //            select s).ToList();
+
+                            var list = (from s in ctx.t_orderdata
+                                        where s.id受注データ == ss
+                                        select s).ToList();
+
+
+
+                            foreach (var item1 in list)
+                            {
+                                item1.配送担当受信 = true;
+                                item1.配送担当受信時刻 = DateTime.Now;
+                            }
+                            ctx.SaveChanges();
                         }
-                        var list = (from s in ctx.t_orderdata
-                                    where oids[i] == s.id受注データ
-                                    select s).ToList();
-                        foreach (var item1 in list)
-                        {
-                            item1.配送担当受信 = true;
-                            item1.配送担当受信時刻 = DateTime.Now;
-                        }
-                        ctx.SaveChanges();
                     }
 
                     ctx.t_maruken_trans.AddRange(orders1);
@@ -1610,6 +1634,13 @@ WHERE (s.キャンセル = 'no'&& s.一旦保留 = false && s.ジャンル = '6'
 
 
             }
+        }
+
+        private void btReadItem_Click(object sender, EventArgs e)
+        {
+            var ctx = entityDataSource1.DbContext as GODDbContext;
+
+            物流Read(ctx);
         }
 
     }

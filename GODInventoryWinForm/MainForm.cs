@@ -53,7 +53,6 @@ namespace GODInventoryWinForm
             }
             this.panel1.Controls.Clear();
             this.panel1.Controls.Add(orders_control );
-
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)

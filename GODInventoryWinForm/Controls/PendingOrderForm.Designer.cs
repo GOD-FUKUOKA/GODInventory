@@ -119,6 +119,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.storeComboBox = new System.Windows.Forms.ComboBox();
             this.toWanJianPage = new System.Windows.Forms.TabPage();
+            this.btRead = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -142,15 +143,9 @@
             this.dataGridViewTextBoxColumn37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btlogin = new System.Windows.Forms.Button();
             this.toOtherTabPage = new System.Windows.Forms.TabPage();
-            this.formTabPage = new System.Windows.Forms.TabPage();
-            this.orderIDTextBox = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.productReceivedAtTextBox3 = new System.Windows.Forms.TextBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.btRead = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btReadItem = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn39 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -173,8 +168,13 @@
             this.dataGridViewTextBoxColumn56 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn57 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btSave = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.formTabPage = new System.Windows.Forms.TabPage();
+            this.orderIDTextBox = new System.Windows.Forms.TextBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.productReceivedAtTextBox3 = new System.Windows.Forms.TextBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
@@ -186,9 +186,9 @@
             this.toWanJianPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.toOtherTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.formTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // id受注データDataGridViewTextBoxColumn
@@ -983,6 +983,16 @@
             this.toWanJianPage.Text = "订单转发给丸健";
             this.toWanJianPage.UseVisualStyleBackColor = true;
             // 
+            // btRead
+            // 
+            this.btRead.Location = new System.Drawing.Point(30, 25);
+            this.btRead.Name = "btRead";
+            this.btRead.Size = new System.Drawing.Size(84, 25);
+            this.btRead.TabIndex = 17;
+            this.btRead.Text = "Read";
+            this.btRead.UseVisualStyleBackColor = true;
+            this.btRead.Click += new System.EventHandler(this.btRead_Click);
+            // 
             // dataGridView3
             // 
             this.dataGridView3.AllowUserToAddRows = false;
@@ -1155,7 +1165,7 @@
             // 
             this.toOtherTabPage.Controls.Add(this.label17);
             this.toOtherTabPage.Controls.Add(this.comboBox1);
-            this.toOtherTabPage.Controls.Add(this.button1);
+            this.toOtherTabPage.Controls.Add(this.btReadItem);
             this.toOtherTabPage.Controls.Add(this.dataGridView4);
             this.toOtherTabPage.Controls.Add(this.btSave);
             this.toOtherTabPage.Location = new System.Drawing.Point(4, 22);
@@ -1165,95 +1175,32 @@
             this.toOtherTabPage.Text = "转发给其他物流部门";
             this.toOtherTabPage.UseVisualStyleBackColor = true;
             // 
-            // formTabPage
+            // label17
             // 
-            this.formTabPage.Controls.Add(this.orderIDTextBox);
-            this.formTabPage.Controls.Add(this.dateTimePicker1);
-            this.formTabPage.Controls.Add(this.productReceivedAtTextBox3);
-            this.formTabPage.Controls.Add(this.comboBox3);
-            this.formTabPage.Controls.Add(this.label12);
-            this.formTabPage.Controls.Add(this.orderQuantityTextBox11);
-            this.formTabPage.Controls.Add(this.label8);
-            this.formTabPage.Controls.Add(this.label5);
-            this.formTabPage.Controls.Add(this.groupBox1);
-            this.formTabPage.Controls.Add(this.textBox1);
-            this.formTabPage.Controls.Add(this.label1);
-            this.formTabPage.Controls.Add(this.submitFormButton);
-            this.formTabPage.Controls.Add(this.cancelFormButton);
-            this.formTabPage.Controls.Add(this.label7);
-            this.formTabPage.Location = new System.Drawing.Point(4, 22);
-            this.formTabPage.Name = "formTabPage";
-            this.formTabPage.Size = new System.Drawing.Size(989, 490);
-            this.formTabPage.TabIndex = 2;
-            this.formTabPage.Text = "Form";
-            this.formTabPage.UseVisualStyleBackColor = true;
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(31, 69);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(31, 13);
+            this.label17.TabIndex = 22;
+            this.label17.Text = "物流";
             // 
-            // orderIDTextBox
+            // comboBox1
             // 
-            this.orderIDTextBox.Location = new System.Drawing.Point(16, 350);
-            this.orderIDTextBox.Name = "orderIDTextBox";
-            this.orderIDTextBox.Size = new System.Drawing.Size(100, 20);
-            this.orderIDTextBox.TabIndex = 9999999;
-            this.orderIDTextBox.TabStop = false;
-            this.orderIDTextBox.Text = "orderid";
-            this.orderIDTextBox.Visible = false;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(81, 66);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(165, 21);
+            this.comboBox1.TabIndex = 21;
             // 
-            // dateTimePicker1
+            // btReadItem
             // 
-            this.dateTimePicker1.CustomFormat = "";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(127, 258);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(230, 20);
-            this.dateTimePicker1.TabIndex = 42;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
-            // productReceivedAtTextBox3
-            // 
-            this.productReceivedAtTextBox3.Location = new System.Drawing.Point(127, 291);
-            this.productReceivedAtTextBox3.Name = "productReceivedAtTextBox3";
-            this.productReceivedAtTextBox3.Size = new System.Drawing.Size(230, 20);
-            this.productReceivedAtTextBox3.TabIndex = 41;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "丸健",
-            "マツモト産業",
-            "MKL"});
-            this.comboBox3.Location = new System.Drawing.Point(550, 254);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(230, 21);
-            this.comboBox3.TabIndex = 38;
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // btRead
-            // 
-            this.btRead.Location = new System.Drawing.Point(30, 25);
-            this.btRead.Name = "btRead";
-            this.btRead.Size = new System.Drawing.Size(84, 25);
-            this.btRead.TabIndex = 17;
-            this.btRead.Text = "Read";
-            this.btRead.UseVisualStyleBackColor = true;
-            this.btRead.Click += new System.EventHandler(this.btRead_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(30, 24);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(84, 25);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Read";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btReadItem.Location = new System.Drawing.Point(30, 24);
+            this.btReadItem.Name = "btReadItem";
+            this.btReadItem.Size = new System.Drawing.Size(84, 25);
+            this.btReadItem.TabIndex = 20;
+            this.btReadItem.Text = "Read";
+            this.btReadItem.UseVisualStyleBackColor = true;
+            this.btReadItem.Click += new System.EventHandler(this.btReadItem_Click);
             // 
             // dataGridView4
             // 
@@ -1423,22 +1370,76 @@
             this.btSave.UseVisualStyleBackColor = true;
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
-            // label17
+            // formTabPage
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(31, 69);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(31, 13);
-            this.label17.TabIndex = 22;
-            this.label17.Text = "物流";
+            this.formTabPage.Controls.Add(this.orderIDTextBox);
+            this.formTabPage.Controls.Add(this.dateTimePicker1);
+            this.formTabPage.Controls.Add(this.productReceivedAtTextBox3);
+            this.formTabPage.Controls.Add(this.comboBox3);
+            this.formTabPage.Controls.Add(this.label12);
+            this.formTabPage.Controls.Add(this.orderQuantityTextBox11);
+            this.formTabPage.Controls.Add(this.label8);
+            this.formTabPage.Controls.Add(this.label5);
+            this.formTabPage.Controls.Add(this.groupBox1);
+            this.formTabPage.Controls.Add(this.textBox1);
+            this.formTabPage.Controls.Add(this.label1);
+            this.formTabPage.Controls.Add(this.submitFormButton);
+            this.formTabPage.Controls.Add(this.cancelFormButton);
+            this.formTabPage.Controls.Add(this.label7);
+            this.formTabPage.Location = new System.Drawing.Point(4, 22);
+            this.formTabPage.Name = "formTabPage";
+            this.formTabPage.Size = new System.Drawing.Size(989, 490);
+            this.formTabPage.TabIndex = 2;
+            this.formTabPage.Text = "Form";
+            this.formTabPage.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // orderIDTextBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(81, 66);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(165, 21);
-            this.comboBox1.TabIndex = 21;
+            this.orderIDTextBox.Location = new System.Drawing.Point(16, 350);
+            this.orderIDTextBox.Name = "orderIDTextBox";
+            this.orderIDTextBox.Size = new System.Drawing.Size(100, 20);
+            this.orderIDTextBox.TabIndex = 9999999;
+            this.orderIDTextBox.TabStop = false;
+            this.orderIDTextBox.Text = "orderid";
+            this.orderIDTextBox.Visible = false;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(127, 258);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(230, 20);
+            this.dateTimePicker1.TabIndex = 42;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // productReceivedAtTextBox3
+            // 
+            this.productReceivedAtTextBox3.Location = new System.Drawing.Point(127, 291);
+            this.productReceivedAtTextBox3.Name = "productReceivedAtTextBox3";
+            this.productReceivedAtTextBox3.Size = new System.Drawing.Size(230, 20);
+            this.productReceivedAtTextBox3.TabIndex = 41;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "丸健",
+            "マツモト産業",
+            "MKL"});
+            this.comboBox3.Location = new System.Drawing.Point(550, 254);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(230, 21);
+            this.comboBox3.TabIndex = 38;
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // PendingOrderForm
             // 
@@ -1467,10 +1468,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.toOtherTabPage.ResumeLayout(false);
             this.toOtherTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.formTabPage.ResumeLayout(false);
             this.formTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1597,7 +1598,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn37;
         private System.Windows.Forms.Button btlogin;
         private System.Windows.Forms.Button btRead;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btReadItem;
         private System.Windows.Forms.DataGridView dataGridView4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn38;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn39;
