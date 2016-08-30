@@ -48,6 +48,9 @@
             this.totalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.lockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unlockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.データIDColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,9 +77,6 @@
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.unlockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -93,9 +93,9 @@
             // printForEDIButton
             // 
             this.printForEDIButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.printForEDIButton.Location = new System.Drawing.Point(660, 18);
+            this.printForEDIButton.Location = new System.Drawing.Point(688, 14);
             this.printForEDIButton.Name = "printForEDIButton";
-            this.printForEDIButton.Size = new System.Drawing.Size(116, 23);
+            this.printForEDIButton.Size = new System.Drawing.Size(100, 32);
             this.printForEDIButton.TabIndex = 1;
             this.printForEDIButton.Text = "Print for EDI";
             this.printForEDIButton.UseVisualStyleBackColor = true;
@@ -104,9 +104,9 @@
             // uploadForEDIButton
             // 
             this.uploadForEDIButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.uploadForEDIButton.Location = new System.Drawing.Point(782, 18);
+            this.uploadForEDIButton.Location = new System.Drawing.Point(794, 14);
             this.uploadForEDIButton.Name = "uploadForEDIButton";
-            this.uploadForEDIButton.Size = new System.Drawing.Size(116, 23);
+            this.uploadForEDIButton.Size = new System.Drawing.Size(100, 32);
             this.uploadForEDIButton.TabIndex = 2;
             this.uploadForEDIButton.Text = "Upload for EDI";
             this.uploadForEDIButton.UseVisualStyleBackColor = true;
@@ -119,9 +119,9 @@
             // generateASNButton
             // 
             this.generateASNButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.generateASNButton.Location = new System.Drawing.Point(787, 15);
+            this.generateASNButton.Location = new System.Drawing.Point(796, 14);
             this.generateASNButton.Name = "generateASNButton";
-            this.generateASNButton.Size = new System.Drawing.Size(116, 23);
+            this.generateASNButton.Size = new System.Drawing.Size(100, 32);
             this.generateASNButton.TabIndex = 3;
             this.generateASNButton.Text = "GenerateASN";
             this.generateASNButton.UseVisualStyleBackColor = true;
@@ -171,14 +171,14 @@
             this.weightColumn,
             this.totalPrice});
             this.shipNODataGridView.ContextMenuStrip = this.contextMenuStrip1;
-            this.shipNODataGridView.Location = new System.Drawing.Point(3, 44);
+            this.shipNODataGridView.Location = new System.Drawing.Point(3, 60);
             this.shipNODataGridView.MultiSelect = false;
             this.shipNODataGridView.Name = "shipNODataGridView";
             this.shipNODataGridView.ReadOnly = true;
             this.shipNODataGridView.RowHeadersVisible = false;
             this.shipNODataGridView.RowTemplate.Height = 23;
             this.shipNODataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.shipNODataGridView.Size = new System.Drawing.Size(903, 296);
+            this.shipNODataGridView.Size = new System.Drawing.Size(903, 279);
             this.shipNODataGridView.TabIndex = 5;
             this.shipNODataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.shipNODataGridView_RowPrePaint);
             // 
@@ -246,14 +246,34 @@
             this.editToolStripMenuItem,
             this.printToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(117, 92);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.lockToolStripMenuItem.Text = "Lock";
             this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
+            // 
+            // unlockToolStripMenuItem
+            // 
+            this.unlockToolStripMenuItem.Name = "unlockToolStripMenuItem";
+            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.unlockToolStripMenuItem.Text = "Unlock";
+            this.unlockToolStripMenuItem.Click += new System.EventHandler(this.unlockToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // printToolStripMenuItem
+            // 
+            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.printToolStripMenuItem.Text = "Print";
             // 
             // tabPage2
             // 
@@ -282,14 +302,14 @@
             this.管理連番Column1,
             this.レコード件数Column1,
             this.createdAtColumn1});
-            this.dataGridView2.Location = new System.Drawing.Point(8, 61);
+            this.dataGridView2.Location = new System.Drawing.Point(3, 60);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(893, 274);
+            this.dataGridView2.Size = new System.Drawing.Size(903, 280);
             this.dataGridView2.TabIndex = 3;
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
@@ -336,9 +356,9 @@
             // finishOrderButton1
             // 
             this.finishOrderButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.finishOrderButton1.Location = new System.Drawing.Point(785, 15);
+            this.finishOrderButton1.Location = new System.Drawing.Point(796, 14);
             this.finishOrderButton1.Name = "finishOrderButton1";
-            this.finishOrderButton1.Size = new System.Drawing.Size(116, 23);
+            this.finishOrderButton1.Size = new System.Drawing.Size(100, 32);
             this.finishOrderButton1.TabIndex = 1;
             this.finishOrderButton1.Text = "FinishOrder";
             this.finishOrderButton1.UseVisualStyleBackColor = true;
@@ -366,11 +386,11 @@
             this.受領金額Column1,
             this.受領差異数量Column1,
             this.受領差異金額Column1});
-            this.dataGridView3.Location = new System.Drawing.Point(6, 56);
+            this.dataGridView3.Location = new System.Drawing.Point(3, 60);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.RowTemplate.Height = 23;
-            this.dataGridView3.Size = new System.Drawing.Size(895, 254);
+            this.dataGridView3.Size = new System.Drawing.Size(903, 280);
             this.dataGridView3.TabIndex = 0;
             // 
             // 納品日Column21
@@ -471,26 +491,6 @@
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // unlockToolStripMenuItem
-            // 
-            this.unlockToolStripMenuItem.Name = "unlockToolStripMenuItem";
-            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.unlockToolStripMenuItem.Text = "Unlock";
-            this.unlockToolStripMenuItem.Click += new System.EventHandler(this.unlockToolStripMenuItem_Click);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.editToolStripMenuItem.Text = "Edit";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-            // 
-            // printToolStripMenuItem
-            // 
-            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.printToolStripMenuItem.Text = "Print";
             // 
             // ShippingOrderForm
             // 

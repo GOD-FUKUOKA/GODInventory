@@ -34,6 +34,7 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.saveButton = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.moveUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +48,7 @@
             this.shipperComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.受注日Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名カナColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,8 +66,6 @@
             this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注区分Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品指示Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.一旦保留Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.受注日Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.伝番Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,7 +77,9 @@
             this.発注数Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.重量Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.担当Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.saveButton = new System.Windows.Forms.Button();
+            this.県別Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注区分Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品指示Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -140,7 +142,16 @@
             this.groupBox2.Size = new System.Drawing.Size(1022, 215);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(723, 13);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(100, 32);
+            this.saveButton.TabIndex = 9;
+            this.saveButton.Text = "登録";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // dataGridView2
             // 
@@ -163,14 +174,17 @@
             this.口数Column2,
             this.発注数Column2,
             this.重量Column2,
-            this.担当Column2});
+            this.担当Column2,
+            this.県別Column2,
+            this.発注区分Column2,
+            this.納品指示Column2});
             this.dataGridView2.ContextMenuStrip = this.contextMenuStrip2;
-            this.dataGridView2.Location = new System.Drawing.Point(6, 56);
+            this.dataGridView2.Location = new System.Drawing.Point(3, 58);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(1010, 153);
+            this.dataGridView2.Size = new System.Drawing.Size(1016, 153);
             this.dataGridView2.TabIndex = 8;
             // 
             // contextMenuStrip2
@@ -248,7 +262,6 @@
             this.groupBox1.Size = new System.Drawing.Size(1022, 215);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
             // 
             // shipperComboBox
             // 
@@ -256,8 +269,8 @@
             this.shipperComboBox.FormattingEnabled = true;
             this.shipperComboBox.Items.AddRange(new object[] {
             "All",
-            "マツモト産業",
             "丸健",
+            "マツモト産業",
             "MKL"});
             this.shipperComboBox.Location = new System.Drawing.Point(91, 20);
             this.shipperComboBox.Name = "shipperComboBox";
@@ -300,16 +313,19 @@
             this.原単価_税抜_Column1,
             this.原価金額_税抜_Column1,
             this.発注区分Column1,
-            this.納品指示Column1,
-            this.一旦保留Column});
+            this.納品指示Column1});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 54);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 50);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1010, 155);
+            this.dataGridView1.Size = new System.Drawing.Size(1016, 160);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // 受注日Column
             // 
@@ -421,15 +437,6 @@
             this.納品指示Column1.HeaderText = "納品指示";
             this.納品指示Column1.Name = "納品指示Column1";
             // 
-            // 一旦保留Column
-            // 
-            this.一旦保留Column.HeaderText = "一旦保留";
-            this.一旦保留Column.Name = "一旦保留Column";
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
             // 受注日Column2
             // 
             this.受注日Column2.DataPropertyName = "受注日";
@@ -496,15 +503,20 @@
             this.担当Column2.HeaderText = "担当";
             this.担当Column2.Name = "担当Column2";
             // 
-            // saveButton
+            // 県別Column2
             // 
-            this.saveButton.Location = new System.Drawing.Point(723, 19);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 9;
-            this.saveButton.Text = "登録";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            this.県別Column2.HeaderText = "県別";
+            this.県別Column2.Name = "県別Column2";
+            // 
+            // 発注区分Column2
+            // 
+            this.発注区分Column2.HeaderText = "発注区分";
+            this.発注区分Column2.Name = "発注区分Column2";
+            // 
+            // 納品指示Column2
+            // 
+            this.納品指示Column2.HeaderText = "納品指示";
+            this.納品指示Column2.Name = "納品指示Column2";
             // 
             // WaitToShipForm
             // 
@@ -549,6 +561,24 @@
         private System.Windows.Forms.ComboBox shipperComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem moveUpToolStripMenuItem;
+        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 伝番Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 社内伝番Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ジャンルColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 品名Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 規格Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 口数Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注数Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 担当Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注区分Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店名カナColumn1;
@@ -566,21 +596,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 原価金額_税抜_Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注区分Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 一旦保留Column;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem moveUpToolStripMenuItem;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 伝番Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 社内伝番Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ジャンルColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 品名Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 規格Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 口数Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 発注数Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 担当Column2;
-        private System.Windows.Forms.Button saveButton;
     }
 }

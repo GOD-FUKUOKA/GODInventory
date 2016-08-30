@@ -32,7 +32,6 @@
             this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ordersTabPage = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.newOrderbutton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -86,9 +85,6 @@
             this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.notifyButton = new System.Windows.Forms.Button();
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.id受注データ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreCodeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -106,9 +102,11 @@
             this.IsPendingColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.ecTabPage.SuspendLayout();
@@ -140,7 +138,9 @@
             // 
             // ordersTabPage
             // 
-            this.ordersTabPage.Controls.Add(this.panel1);
+            this.ordersTabPage.Controls.Add(this.newOrderbutton);
+            this.ordersTabPage.Controls.Add(this.saveButton);
+            this.ordersTabPage.Controls.Add(this.cancelButton);
             this.ordersTabPage.Controls.Add(this.pager1);
             this.ordersTabPage.Controls.Add(this.filterButton);
             this.ordersTabPage.Controls.Add(this.storeCodeFilterTextBox3);
@@ -156,20 +156,9 @@
             this.ordersTabPage.Text = "待处理订单";
             this.ordersTabPage.UseVisualStyleBackColor = true;
             // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.newOrderbutton);
-            this.panel1.Controls.Add(this.saveButton);
-            this.panel1.Controls.Add(this.cancelButton);
-            this.panel1.Location = new System.Drawing.Point(665, 6);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(328, 76);
-            this.panel1.TabIndex = 26;
-            // 
             // newOrderbutton
             // 
-            this.newOrderbutton.Location = new System.Drawing.Point(217, 34);
+            this.newOrderbutton.Location = new System.Drawing.Point(880, 14);
             this.newOrderbutton.Name = "newOrderbutton";
             this.newOrderbutton.Size = new System.Drawing.Size(100, 32);
             this.newOrderbutton.TabIndex = 20;
@@ -179,7 +168,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(0, 34);
+            this.saveButton.Location = new System.Drawing.Point(665, 14);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(100, 32);
             this.saveButton.TabIndex = 16;
@@ -189,7 +178,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(108, 34);
+            this.cancelButton.Location = new System.Drawing.Point(773, 14);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 19;
@@ -199,9 +188,9 @@
             // 
             // filterButton
             // 
-            this.filterButton.Location = new System.Drawing.Point(215, 19);
+            this.filterButton.Location = new System.Drawing.Point(380, 14);
             this.filterButton.Name = "filterButton";
-            this.filterButton.Size = new System.Drawing.Size(100, 51);
+            this.filterButton.Size = new System.Drawing.Size(100, 32);
             this.filterButton.TabIndex = 24;
             this.filterButton.Text = "Find";
             this.filterButton.UseVisualStyleBackColor = true;
@@ -209,14 +198,14 @@
             // 
             // storeCodeFilterTextBox3
             // 
-            this.storeCodeFilterTextBox3.Location = new System.Drawing.Point(94, 21);
+            this.storeCodeFilterTextBox3.Location = new System.Drawing.Point(81, 20);
             this.storeCodeFilterTextBox3.Name = "storeCodeFilterTextBox3";
             this.storeCodeFilterTextBox3.Size = new System.Drawing.Size(100, 21);
             this.storeCodeFilterTextBox3.TabIndex = 23;
             // 
             // invoiceNoFilterTextBox
             // 
-            this.invoiceNoFilterTextBox.Location = new System.Drawing.Point(94, 47);
+            this.invoiceNoFilterTextBox.Location = new System.Drawing.Point(260, 20);
             this.invoiceNoFilterTextBox.Name = "invoiceNoFilterTextBox";
             this.invoiceNoFilterTextBox.Size = new System.Drawing.Size(100, 21);
             this.invoiceNoFilterTextBox.TabIndex = 22;
@@ -224,7 +213,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(28, 52);
+            this.label15.Location = new System.Drawing.Point(201, 24);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(53, 12);
             this.label15.TabIndex = 18;
@@ -233,7 +222,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(16, 27);
+            this.label14.Location = new System.Drawing.Point(10, 24);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(65, 12);
             this.label14.TabIndex = 17;
@@ -267,11 +256,12 @@
             this.Column3,
             this.Column4});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 88);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 60);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(977, 330);
+            this.dataGridView1.Size = new System.Drawing.Size(983, 358);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -315,6 +305,7 @@
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AllowUserToResizeColumns = false;
             this.dataGridView2.AllowUserToResizeRows = false;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -341,11 +332,12 @@
             this.dataGridViewTextBoxColumn15,
             this.dataGridViewTextBoxColumn16,
             this.dataGridViewTextBoxColumn17});
-            this.dataGridView2.Location = new System.Drawing.Point(3, 67);
+            this.dataGridView2.Location = new System.Drawing.Point(3, 60);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(983, 380);
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView2.Size = new System.Drawing.Size(983, 384);
             this.dataGridView2.TabIndex = 12;
             // 
             // dataGridViewTextBoxColumn1
@@ -471,7 +463,7 @@
             // ecSaveButton
             // 
             this.ecSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ecSaveButton.Location = new System.Drawing.Point(881, 15);
+            this.ecSaveButton.Location = new System.Drawing.Point(880, 14);
             this.ecSaveButton.Name = "ecSaveButton";
             this.ecSaveButton.Size = new System.Drawing.Size(100, 32);
             this.ecSaveButton.TabIndex = 3;
@@ -535,13 +527,13 @@
             this.dataGridViewTextBoxColumn33,
             this.dataGridViewTextBoxColumn35,
             this.dataGridViewTextBoxColumn36});
-            this.dataGridView3.Location = new System.Drawing.Point(3, 67);
+            this.dataGridView3.Location = new System.Drawing.Point(3, 60);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
             this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.RowTemplate.Height = 23;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView3.Size = new System.Drawing.Size(983, 380);
+            this.dataGridView3.Size = new System.Drawing.Size(983, 383);
             this.dataGridView3.TabIndex = 16;
             // 
             // dataGridViewTextBoxColumn20
@@ -638,37 +630,13 @@
             // notifyButton
             // 
             this.notifyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.notifyButton.Location = new System.Drawing.Point(881, 11);
+            this.notifyButton.Location = new System.Drawing.Point(880, 14);
             this.notifyButton.Name = "notifyButton";
             this.notifyButton.Size = new System.Drawing.Size(100, 32);
             this.notifyButton.TabIndex = 15;
             this.notifyButton.Text = "転送処理";
             this.notifyButton.UseVisualStyleBackColor = true;
             this.notifyButton.Click += new System.EventHandler(this.btlogin_Click);
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(6, 416);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(977, 34);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // id受注データ
             // 
@@ -772,6 +740,30 @@
             this.Column4.HeaderText = "在庫数";
             this.Column4.Name = "Column4";
             // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(3, 416);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(983, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
+            // 
             // PendingOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -787,7 +779,6 @@
             this.tabControl1.ResumeLayout(false);
             this.ordersTabPage.ResumeLayout(false);
             this.ordersTabPage.PerformLayout();
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ecTabPage.ResumeLayout(false);
@@ -820,7 +811,6 @@
         private System.Windows.Forms.TextBox invoiceNoFilterTextBox;
         private System.Windows.Forms.Button filterButton;
         private Pager pager1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TabPage toShipperTabPage;
         private System.Windows.Forms.Button ecSaveButton;
         private System.Windows.Forms.DataGridView dataGridView2;

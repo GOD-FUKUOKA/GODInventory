@@ -114,11 +114,11 @@
       <DependentUpon>InputStock.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MySqlParameters.cs" />
-    <Compile Include="Controls\OrderListForm.cs">
+    <Compile Include="Controls\ShipOrderListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\OrderListForm.Designer.cs">
-      <DependentUpon>OrderListForm.cs</DependentUpon>
+    <Compile Include="Controls\ShipOrderListForm.Designer.cs">
+      <DependentUpon>ShipOrderListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\OutputStock.cs">
       <SubType>Form</SubType>
@@ -327,8 +327,8 @@
       <DependentUpon>InputStock.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\OrderListForm.resx">
-      <DependentUpon>OrderListForm.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\ShipOrderListForm.resx">
+      <DependentUpon>ShipOrderListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\OutputStock.resx">
       <DependentUpon>OutputStock.cs</DependentUpon>

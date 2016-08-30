@@ -263,7 +263,15 @@ namespace GODInventoryWinForm.Controls
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int i = shipNODataGridView.CurrentRow.Index;
+            if (!groupedOrderList[i].Locked) {
 
+                var form = new ShipOrderListForm();
+                
+                form.InitializeDataSource(groupedOrderList[i].ShipNO);
+
+                form.ShowDialog();
+            }
         }
 
     }
