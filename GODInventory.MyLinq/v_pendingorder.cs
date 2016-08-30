@@ -90,7 +90,6 @@ namespace GODInventory.MyLinq
 
         public string ダブリ { get; set; }
 
-
         public string キャンセル { get; set; }
 
         public DateTime? キャンセル時刻 { get; set; }
@@ -103,6 +102,9 @@ namespace GODInventory.MyLinq
         
         public string 納品場所名漢字 { get; set; }
 
+        public string 備考 { get; set; }
+
+        public string 納品指示 { get; set; }
         // shop
         public int 店番 { get; set; }
 

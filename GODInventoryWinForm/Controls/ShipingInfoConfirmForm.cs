@@ -41,7 +41,7 @@ namespace GODInventoryWinForm.Controls
         {
 
             
-           OrderSqlHelper.ShippingInfoConfirm(SelectedOrderIds, productShippedAtDateTimePicker1.Value, productReceivedAtDateTimePicker2.Value);
+           //OrderSqlHelper.ShippingInfoConfirm(SelectedOrderIds, productShippedAtDateTimePicker1.Value, productReceivedAtDateTimePicker2.Value);
             
            
 

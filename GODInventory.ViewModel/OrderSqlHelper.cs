@@ -13,8 +13,6 @@ namespace GODInventory.ViewModel
 {
     public class OrderSqlHelper
     {
-        public  enum OrderStatusEnum { New = 0, Pending = 9,  WaitToShip=1, PendingShipment=2, ASN=3, Received=4, Completed=5  };
-
 
         //sqlStr = "SELECT t_orderdata.`出荷日`,t_orderdata.`納品日`,t_orderdata.`受注日`,t_orderdata.`キャンセル`,t_orderdata.`一旦保留`," _
         //& " t_orderdata.`伝票番号`,t_orderdata.`社内伝番`,t_orderdata.`行数`,t_orderdata.`最大行数`,t_orderdata.`口数`,t_orderdata.`発注数量`," _
@@ -83,6 +81,14 @@ namespace GODInventory.ViewModel
             return q;
         }
 
+        public static IQueryable<t_orderdata> ECWithoutCodeOrderQuery(EntityDataSource entityDataSource1)
+        {
+            var a = entityDataSource1.EntitySets["t_orderdatas"];
+            var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
+                    where o.Status == OrderStatus.NotifyShipper && o.ジャンル == 6 && o.社内伝番 == null
+                    select o;
+            return q;
+        }
 
         public static IQueryable<v_pendingorder> PendingOrderQueryEx(EntityDataSource entityDataSource1)
         {
@@ -105,6 +111,7 @@ namespace GODInventory.ViewModel
                          自社コード = o.自社コード,
                          口数 = o.口数,
                          重量 = o.重量,
+                         ジャンル = o.ジャンル,
                          品名漢字 = o.品名漢字,
                          規格名漢字 = o.規格名漢字,
                          発注数量 = o.発注数量,
@@ -304,7 +311,7 @@ namespace GODInventory.ViewModel
             using (var ctx = new GODDbContext())
             {
 
-                MySqlParameter[] parameters = { new MySqlParameter("@p1", true), new MySqlParameter("@p2", DateTime.Now), new MySqlParameter("@p3", ((int)OrderStatusEnum.WaitToShip)) };
+                MySqlParameter[] parameters = { new MySqlParameter("@p1", true), new MySqlParameter("@p2", DateTime.Now), new MySqlParameter("@p3", ((int)OrderStatus.NotifyShipper)) };
                 string sql = String.Format("UPDATE t_orderdata SET `配送担当受信`=@p1, `配送担当受信時刻`=@p2 ,`Status`=@p3 WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()));
                 count = ctx.Database.ExecuteSqlCommand(sql, parameters);
                 ctx.SaveChanges();
@@ -312,12 +319,13 @@ namespace GODInventory.ViewModel
             return count;
         }
 
-        public static int ShippingInfoConfirm(List<int> orderIds, DateTime ShippedAtDate, DateTime ReceivedAtDate) {
+        public static int ShippingInfoConfirm(List<int> orderIds, DateTime ShippedAtDate, DateTime ReceivedAtDate, string shipNO)
+        {
             int count = 0;
             using (var ctx = new GODDbContext())
             {
-                MySqlParameter[] parameters = { new MySqlParameter("@p1", ShippedAtDate), new MySqlParameter("@p2", ReceivedAtDate), new MySqlParameter("@p3", ((int)OrderStatusEnum.PendingShipment)) };
-                string sql = String.Format("UPDATE t_orderdata SET `出荷日`=@p1, `納品日`=@p2,`Status`=@p3  WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()));
+                MySqlParameter[] parameters = { new MySqlParameter("@p1", ShippedAtDate), new MySqlParameter("@p2", ReceivedAtDate), new MySqlParameter("@p3", ((int)OrderStatus.PendingShipment)), new MySqlParameter("@p4",  shipNO) };
+                string sql = String.Format("UPDATE t_orderdata SET `出荷日`=@p1, `納品日`=@p2,`Status`=@p3, `ShipNO`=@p4  WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()));
                 count = ctx.Database.ExecuteSqlCommand(sql, parameters);                
                 ctx.SaveChanges();
             }
@@ -330,7 +338,7 @@ namespace GODInventory.ViewModel
             int count = 0;
             using (var ctx = new GODDbContext())
             {
-                MySqlParameter[] parameters = { new MySqlParameter("@p3", ((int)OrderStatusEnum.Completed)) };
+                MySqlParameter[] parameters = { new MySqlParameter("@p3", ((int)OrderStatus.Completed)) };
                 string sql = String.Format("UPDATE t_orderdata SET `Status`=@p3  WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()));
                 count = ctx.Database.ExecuteSqlCommand(sql, parameters);
                 ctx.SaveChanges();
@@ -340,14 +348,14 @@ namespace GODInventory.ViewModel
         }
 
 
-        public static int GenerateASN(List<int> orderIds) {
+        public static int GenerateASN(List<string> shipNOs) {
             var now = DateTime.Now;
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, EDITxtHandler.ASNFolder, "NYOTEI_" + now.ToString("yyyyMMddHHmmss") + ".txt");
 
             using (var ctx = new GODDbContext())
             {
                 var orders = (from t_orderdata o in ctx.t_orderdata
-                              where orderIds.Contains(o.id受注データ)
+                              where shipNOs.Contains(o.ShipNO)
                               orderby o.法人コード, o.店舗コード
                               select o).ToList();
                 // generate ASN管理連番, 出荷No
@@ -364,7 +372,6 @@ namespace GODInventory.ViewModel
                 }
 
 
-
                 ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(path, orders);
 
                 string sql = asnhead.ToRawSql();
@@ -375,13 +382,14 @@ namespace GODInventory.ViewModel
                 {
                     var oids = gos.Select(order => order.id受注データ);
                     var o = gos.First();
-                    sql = String.Format("UPDATE t_orderdata SET `出荷No`={1}, `ASN管理連番`={2}, `Status`={3} WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()), o.出荷No, o.ASN管理連番, ((int)OrderStatusEnum.ASN));
+                    sql = String.Format("UPDATE t_orderdata SET `出荷No`={1}, `ASN管理連番`={2}, `Status`={3} WHERE `id受注データ` in ({0})", String.Join(",", oids.ToArray()), o.出荷No, o.ASN管理連番, ((int)OrderStatus.ASN));
                     ctx.Database.ExecuteSqlCommand(sql);                  
                 }
                 //ctx.SaveChanges();
             }
             return 0;
         }
+
         public  string[]  StrockReback()
         {
 
@@ -477,6 +485,16 @@ namespace GODInventory.ViewModel
             return count;
 
         }
+        public static int NotifyShipper(GODDbContext ctx, string shipperName)
+        {
+            int count = 0;
 
+            string sql = @"UPDATE t_orderdata SET `Status`={2}, `配送担当受信`=TRUE, `配送担当受信時刻`= NOW() WHERE `Status`={0} AND `実際配送担当`={1}";
+            
+            count = ctx.Database.ExecuteSqlCommand(sql, OrderStatus.NotifyShipper, shipperName, OrderStatus.PendingShipment);
+
+            return count;
+
+        }
     }
 }

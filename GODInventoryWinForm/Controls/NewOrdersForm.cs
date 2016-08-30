@@ -24,8 +24,6 @@ namespace GODInventoryWinForm.Controls
         int cloumn = 0;
 
         private Hashtable datagrid_changes = null;
-        private BindingList<t_orderdata> orderList;
-        private List<t_orderdata> orders1;
         List<v_duplicatedorder> duplicatedOrderList;
         
         public NewOrdersForm()
@@ -39,43 +37,10 @@ namespace GODInventoryWinForm.Controls
 
 
 
-
-        private void detailButton_Click_1(object sender, EventArgs e)
-        {
-            orderList = new BindingList<t_orderdata>();
-
-
-            using (var ctx = new GODDbContext())
-            {
-
-                orders1 = ctx.t_orderdata.ToList();
-                foreach (t_orderdata item in orders1)
-                {
-                    int doubleie = 0;
-
-                    foreach (t_orderdata temp in orders1)
-                    {
-                        if (item.店舗コード == temp.店舗コード && item.商品コード == temp.商品コード)
-                            doubleie++;
-                    }
-                    if (doubleie > 1)
-                    {
-                        item.ダブリ = "yes";
-                        orderList.Add(item);
-                        ctx.SaveChanges();
-                    }
-                }
-            }
-            //this.dataGridView1.DataSource = null;
-            //this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.DataSource = orderList;
-        }
-
         private void saveButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (orderList.Count > 0)
+
+            if (duplicatedOrderList.Count > 0)
                 {
                     using (var ctx = new GODDbContext())
                     {
@@ -83,34 +48,33 @@ namespace GODInventoryWinForm.Controls
                         {
                             //  if ((int) != 0)
                             {
+                                var duplicated_order = duplicatedOrderList[i];
+                                t_orderdata order = ctx.t_orderdata.Find(duplicated_order.id受注データ);
 
-                                t_orderdata order = ctx.t_orderdata.Find(Convert.ToInt32(dataGridView1.Rows[i].Cells["id受注データ"].EditedFormattedValue));
-                                order.ダブリ = dataGridView1.Rows[i].Cells["ダブリ"].EditedFormattedValue.ToString();
-                                ctx.SaveChanges();
+                                if (order.キャンセル == "yes") {
+
+                                    order.Status = OrderStatus.Cancelled;
+                                    order.備考 = "キャンセル";
+                                }else if (order.ダブリ == "no") {
+                                    if (order.Status == OrderStatus.Duplicated) {
+                                        order.Status = OrderStatus.Pending;
+                                    }
+                                }
 
                             }
                         }
-                        MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", orderList.Count));
-                        orderList.Clear();
+                        ctx.SaveChanges();
                     }
 
-
+                    InitializeOrderData();
 
                 }
                 else
                 {
                     MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
 
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("" + ex);
-                return;
-
-                throw;
-            }
+            
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -119,49 +83,7 @@ namespace GODInventoryWinForm.Controls
             cloumn = e.ColumnIndex;
         }
 
-        private void editButton_Click(object sender, EventArgs e)
-        {
 
-            try
-            {
-                if (orderList.Count > 0)
-                {
-                    using (var ctx = new GODDbContext())
-                    {
-                        for (int i = 0; i < dataGridView1.RowCount; i++)
-                        {
-                            {
-
-                                t_orderdata order = ctx.t_orderdata.Find(Convert.ToInt32(dataGridView1.Rows[i].Cells["id受注データ"].EditedFormattedValue));
-                                order.ダブリ = "no";
-                                ctx.SaveChanges();
-
-                            }
-                        }
-                        MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", orderList.Count));
-                        orderList.Clear();
-                    }
-
-
-
-                }
-                else
-                {
-                    MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("" + ex);
-                return;
-
-                throw;
-            }
-
-
-        }
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -220,7 +142,9 @@ namespace GODInventoryWinForm.Controls
         {
             int rowIndex = this.dataGridView1.CurrentRow.Index;
             var order = duplicatedOrderList[rowIndex];
-            order.Status = OrderStatus.Cancelled;
+            order.キャンセル = "yes";
+            order.キャンセル時刻 = DateTime.Now;
+            
             this.dataGridView1.Refresh();
         }
 
@@ -228,14 +152,14 @@ namespace GODInventoryWinForm.Controls
         {
             int i = e.RowIndex;
             var order = duplicatedOrderList[i];
-            if (order.Status == OrderStatus.Duplicated)
-            {
-                this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Red;
-
-            }
-            else if (order.Status == OrderStatus.Cancelled)
+            if (order.キャンセル == "yes")
             {
                 this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Gray;
+
+            }
+            else if (order.ダブリ == "yes")
+            {
+                this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Red;
             }
             else
             {
@@ -247,7 +171,7 @@ namespace GODInventoryWinForm.Controls
         {
             int rowIndex = this.dataGridView1.CurrentRow.Index;
             var order = duplicatedOrderList[rowIndex];
-            order.Status = OrderStatus.Duplicated;
+            order.ダブリ = "yes";
             this.dataGridView1.Refresh();
         }
 
@@ -255,7 +179,7 @@ namespace GODInventoryWinForm.Controls
         {
             int rowIndex = this.dataGridView1.CurrentRow.Index;
             var order = duplicatedOrderList[rowIndex];
-            order.Status = OrderStatus.Pending;
+            order.キャンセル = "no";
             this.dataGridView1.Refresh();
         }
 
@@ -263,7 +187,7 @@ namespace GODInventoryWinForm.Controls
         {
             int rowIndex = this.dataGridView1.CurrentRow.Index;
             var order = duplicatedOrderList[rowIndex];
-            order.Status = OrderStatus.Pending;
+            order.ダブリ = "no";
             this.dataGridView1.Refresh();
         }
 
