@@ -10,6 +10,7 @@ namespace GODInventory.MyLinq
     public partial class t_maruken_trans
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int OrderId { get; set; }
         
         [StringLength(255)]
@@ -18,7 +19,7 @@ namespace GODInventory.MyLinq
         [Column(TypeName = "date")]
         public DateTime? 受注日 { get; set; }
 
-        public short 店舗コード { get; set; }
+        public int 店舗コード { get; set; }
 
         [StringLength(255)]
         public string 店舗名漢字 { get; set; }
@@ -30,7 +31,7 @@ namespace GODInventory.MyLinq
 
         public DateTime? キャンセル時刻 { get; set; }
 
-        public sbyte? ジャンル { get; set; }
+        public short ジャンル { get; set; }
 
         [StringLength(255)]
         public string 品名漢字 { get; set; }

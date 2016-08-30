@@ -111,6 +111,7 @@ namespace GODInventory.ViewModel
                          自社コード = o.自社コード,
                          口数 = o.口数,
                          重量 = o.重量,
+                         ジャンル = o.ジャンル,
                          品名漢字 = o.品名漢字,
                          規格名漢字 = o.規格名漢字,
                          発注数量 = o.発注数量,
@@ -484,6 +485,16 @@ namespace GODInventory.ViewModel
             return count;
 
         }
+        public static int NotifyShipper(GODDbContext ctx, string shipperName)
+        {
+            int count = 0;
 
+            string sql = @"UPDATE t_orderdata SET `Status`={2}, `配送担当受信`=TRUE, `配送担当受信時刻`= NOW() WHERE `Status`={0} AND `実際配送担当`={1}";
+            
+            count = ctx.Database.ExecuteSqlCommand(sql, OrderStatus.NotifyShipper, shipperName, OrderStatus.PendingShipment);
+
+            return count;
+
+        }
     }
 }

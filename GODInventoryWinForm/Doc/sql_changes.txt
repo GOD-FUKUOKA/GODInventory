@@ -127,3 +127,9 @@ ADD COLUMN `OrderId` INT UNSIGNED NOT NULL FIRST,
 DROP PRIMARY KEY,
 ADD PRIMARY KEY (`OrderId`),
 ADD UNIQUE INDEX `NewId_UNIQUE` (`OrderId` ASC);
+
+-- same as genre/t_shoplist
+ALTER TABLE `god_inventory`.`t_maruken_trans` 
+CHANGE COLUMN `ジャンル` `ジャンル` INT(3)  NOT NULL DEFAULT 0,
+CHANGE COLUMN `店舗コード` `店舗コード` INT(4) NOT NULL DEFAULT 0;
+
