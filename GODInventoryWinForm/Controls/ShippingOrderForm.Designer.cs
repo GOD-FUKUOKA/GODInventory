@@ -246,7 +246,7 @@
             this.editToolStripMenuItem,
             this.printToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(117, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
             // 
             // lockToolStripMenuItem
             // 
@@ -271,8 +271,9 @@
             // 
             // printToolStripMenuItem
             // 
+            this.printToolStripMenuItem.Enabled = false;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.printToolStripMenuItem.Text = "Print";
             // 
             // tabPage2
