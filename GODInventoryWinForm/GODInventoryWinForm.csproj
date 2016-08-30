@@ -101,6 +101,12 @@
     <Compile Include="Controls\EditOrderForm.Designer.cs">
       <DependentUpon>EditOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EditOrderForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\EditOrderForm2.Designer.cs">
+      <DependentUpon>EditOrderForm2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\InputStock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +114,12 @@
       <DependentUpon>InputStock.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MySqlParameters.cs" />
+    <Compile Include="Controls\OrderListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\OrderListForm.Designer.cs">
+      <DependentUpon>OrderListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\OutputStock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -308,9 +320,15 @@
     <EmbeddedResource Include="Controls\EditOrderForm.resx">
       <DependentUpon>EditOrderForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EditOrderForm2.resx">
+      <DependentUpon>EditOrderForm2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\InputStock.resx">
       <DependentUpon>InputStock.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OrderListForm.resx">
+      <DependentUpon>OrderListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\OutputStock.resx">
       <DependentUpon>OutputStock.cs</DependentUpon>

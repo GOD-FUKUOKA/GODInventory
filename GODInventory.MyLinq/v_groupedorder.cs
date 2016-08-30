@@ -115,6 +115,14 @@ namespace GODInventory.MyLinq
         public long ASN管理連番 { get; set; }
 
         public OrderStatus Status { get; set; }
+
+        public bool Locked { get; set; }
+
+        public int TotalPrice { get; set; }
+
+        public int TotalWeight { get; set; }
+
+
     }
 
 }

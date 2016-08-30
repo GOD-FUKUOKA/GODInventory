@@ -48,7 +48,7 @@ namespace GODInventoryWinForm.Controls
             }
             AdjustSubformSize(waitToShipOrderForm);
             // 显示之前重新加载数据，订单数据可能已更新。
-            waitToShipOrderForm.RefreshPager();
+            waitToShipOrderForm.InitializeDataSource();
             waitToShipOrderForm.ShowDialog();
 
         }
@@ -60,7 +60,7 @@ namespace GODInventoryWinForm.Controls
                 shippingOrderForm = new ShippingOrderForm();
             } 
             AdjustSubformSize(shippingOrderForm);
-            shippingOrderForm.RefreshPager();
+            shippingOrderForm.InitializeDataSource();
             shippingOrderForm.ShowDialog();
         }
 

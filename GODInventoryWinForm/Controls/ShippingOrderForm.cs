@@ -22,51 +22,37 @@ namespace GODInventoryWinForm.Controls
         public ShippingOrderForm()
         {
             InitializeComponent();
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView2.AutoGenerateColumns = false;
             this.dataGridView3.AutoGenerateColumns = false;
-
-           
-            InitializePager();
-            InitializeEdiData();
+            this.shipNODataGridView.AutoGenerateColumns = false;
+            
             reportForm = new ReceivedOrdersReportForm();
         }
 
-        #region Pager Methods
 
-        public void InitializePager()
-        {
-            this.pager1.PageCurrent = 1; //当前页为第一页              
-            this.pager1.PageSize = 5000; //页数   
-            this.pager1.Bind();
-            this.pager3.PageCurrent = 1; //当前页为第一页              
-            this.pager3.PageSize = 5000; //页数   
-            this.pager3.Bind();
+        public void InitializeDataSource() {
+
+            InitializeOrderData();
+
+            InitializeEdiData();
+
         }
-
-        public void RefreshPager()
-        {
-            this.pager1.Bind();
-            this.pager3.Bind();
-        }
-
-        #endregion
 
         private int InitializeOrderData()
         {
 
             using (var ctx = new GODDbContext())
             {
-                string sql = @"SELECT o.* FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
+                string sql = @"SELECT o.*, sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight, false as Locked  FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
                 groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>( sql, OrderStatus.PendingShipment).ToList();
-            
+                shipNODataGridView.DataSource = groupedOrderList;
             }
             //var q = OrderSqlHelper.ShippingOrderSql(entityDataSource1);            
             //var count = q.Count();
             // create BindingList (sortable/filterable)
             //this.bindingSource1.DataSource = entityDataSource1.CreateView(q);
             // assign BindingList to grid
-            //dataGridView1.DataSource = this.bindingSource1;
+            
 
 
             return 0;
@@ -134,15 +120,16 @@ namespace GODInventoryWinForm.Controls
 
         private void generateASNButton_Click(object sender, EventArgs e)
         {
+            var shipNOList = this.groupedOrderList.Where(o => o.Locked).Select(o1 => o1.ShipNO).ToList();
 
-            var orderIds = GetOrderIdsBySelectedGridCell();
-            if (orderIds.Count() > 0)
+
+            if (shipNOList.Count() > 0)
             {
-
-                OrderSqlHelper.GenerateASN(orderIds);
-                pager1.Bind();
+                // FIXME
+                OrderSqlHelper.GenerateASN(shipNOList);
+                InitializeOrderData();
                 InitializeEdiData();
-                pager3.Bind();
+                //pager3.Bind();
             }
             else
             {
@@ -161,18 +148,18 @@ namespace GODInventoryWinForm.Controls
             return rows.Distinct();
         }
 
-        private List<int> GetOrderIdsBySelectedGridCell( ) { 
+        //private List<int> GetOrderIdsBySelectedGridCell( ) { 
         
-            List<int> order_ids = new List<int>();
-            var rows = GetSelectedRowsBySelectedCells( dataGridView1 );
-            foreach(DataGridViewRow row in rows)
-            {
-                var pendingorder = row.DataBoundItem as v_pendingorder;
-                order_ids.Add(pendingorder.id受注データ);
-            }
+        //    List<int> order_ids = new List<int>();
+        //    var rows = GetSelectedRowsBySelectedCells( dataGridView1 );
+        //    foreach(DataGridViewRow row in rows)
+        //    {
+        //        var pendingorder = row.DataBoundItem as v_pendingorder;
+        //        order_ids.Add(pendingorder.id受注データ);
+        //    }
 
-            return order_ids;  
-        }
+        //    return order_ids;  
+        //}
 
         private List<int> GetEdiDataIdsBySelectedGridCell()
         {
@@ -229,7 +216,7 @@ namespace GODInventoryWinForm.Controls
 
                 OrderSqlHelper.FinishOrders(ids);
             }
-            pager3.Bind();
+            //pager3.Bind();
         }
 
         private List<int> GetRecievedOrderIdsBySelectedGridCell()
@@ -244,6 +231,39 @@ namespace GODInventoryWinForm.Controls
             }
 
             return ids;
+        }
+
+        private void shipNODataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            int i = e.RowIndex;
+            var order = groupedOrderList[i];
+            if (order.Locked )
+            {
+                this.shipNODataGridView.Rows[i].DefaultCellStyle.BackColor = Color.Green;
+
+            }  else
+            {
+                this.shipNODataGridView.Rows[i].DefaultCellStyle.BackColor = Color.White;
+            }
+        }
+
+        private void lockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int i = shipNODataGridView.CurrentRow.Index;
+            this.groupedOrderList[i].Locked = true;
+            this.shipNODataGridView.Refresh();
+        }
+
+        private void unlockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int i = shipNODataGridView.CurrentRow.Index;
+            this.groupedOrderList[i].Locked = false;
+            this.shipNODataGridView.Refresh();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

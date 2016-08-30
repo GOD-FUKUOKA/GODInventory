@@ -11,49 +11,32 @@ namespace GODInventoryWinForm.Controls
 {
     using GODInventory.MyLinq;
     using GODInventory.ViewModel;
+    using MySql.Data.MySqlClient;
 
     public partial class WaitToShipForm : Form
     {
+        IBindingList orderList = null;
+        BindingList<v_pendingorder> orderListForShip = null;
         public WaitToShipForm()
         {
             InitializeComponent();
             this.dataGridView1.AutoGenerateColumns = false;
-            InitializePager();
+            this.dataGridView2.AutoGenerateColumns = false;
+            InitializeDataSource();
         }
 
-        #region Pager Methods
 
-        public void InitializePager()
-        {
-            this.pager1.PageCurrent = 1; //当前页为第一页              
-            this.pager1.PageSize = 5000; //页数   
-            this.pager1.Bind();
-        }
 
-        public void RefreshPager() {
-            this.pager1.Bind();
-        }
+        public int  InitializeDataSource() {
+            this.orderListForShip = new BindingList<v_pendingorder>();
 
-        #endregion
-
-        public int  InitializeOrderRelated() {
-
-            var q = OrderSqlHelper.WaitToShipOrderSql(entityDataSource1);
-            var count = q.Count();
-
-            q = q.Take(pager1.OffSet(pager1.PageCurrent));
-            if (pager1.PageCurrent > 1)
-            {
-                q = q.Skip(pager1.OffSet(pager1.PageCurrent - 1));
-            }
-            // create BindingList (sortable/filterable)
-            bindingSource1.DataSource = entityDataSource1.CreateView(q);
-            
-            // assign BindingList to grid
-
-            dataGridView1.DataSource = this.bindingSource1;
-
-            return count;
+            var q = OrderSqlHelper.WaitToShipOrderSql(this.entityDataSource1);
+            this.orderList = this.entityDataSource1.CreateView( q );
+            this.bindingSource1.DataSource = this.orderList;
+            this.dataGridView1.DataSource = this.bindingSource1;
+            dataGridView2.DataSource = this.orderListForShip;
+           
+            return 0;
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -67,7 +50,7 @@ namespace GODInventoryWinForm.Controls
 
                 form.SelectedOrderIds = orderIds;
                 if (form.ShowDialog() == DialogResult.OK) {
-                    pager1.Bind();
+                    //pager1.Bind();
                 }
             }
             else {
@@ -131,12 +114,58 @@ namespace GODInventoryWinForm.Controls
             return order_ids;
         }
 
-        private int pager1_EventPaging(EventPagingArg e)
+        private void moveDownToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int order_count = InitializeOrderRelated();
+            if (dataGridView1.SelectedRows.Count > 0) {
+                DataGridViewRow row = null;
+                for (int i = 0 ; i < dataGridView1.SelectedRows.Count; i++) {
+                    row = dataGridView1.SelectedRows[i];
+                    this.orderListForShip.Add((v_pendingorder)orderList[row.Index]);
+                    this.orderList.RemoveAt( row.Index );
+                }            
+            }
             
-            return order_count;
         }
+
+        private void moveUpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = null;
+                for (int i = 0; i < dataGridView2.SelectedRows.Count; i++)
+                {
+                    row = dataGridView2.SelectedRows[i];
+                    this.orderList.Add(this.orderListForShip[row.Index]);
+                    this.orderListForShip.RemoveAt(row.Index);
+                }
+            }
+
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            string shipNO = this.shipNOTextBox.Text.Trim();
+
+            if (shipNO.Length > 0) {
+
+                List<int> orderIds = new List<int>();
+                foreach (var order in this.orderListForShip)
+                {
+
+                    orderIds.Add(order.id受注データ);
+                }
+
+                var ShippedAtDate = this.productShippedAtDateTimePicker1.Value;
+                var ReceivedAtDate = this.productReceivedAtDateTimePicker2.Value;
+                int count = OrderSqlHelper.ShippingInfoConfirm(orderIds, ShippedAtDate, ReceivedAtDate, shipNO);
+
+                //MessageBox.Show();
+
+                this.orderListForShip.Clear();
+            
+            }
+        }
+
 
     }
 }
