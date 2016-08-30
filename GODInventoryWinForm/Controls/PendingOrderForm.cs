@@ -1522,7 +1522,6 @@ WHERE (s.キャンセル = 'no'&& s.一旦保留 = false && s.ジャンル = '6'
                             koushu = Convert.ToInt32(item.口数) + koushu;
                             fazhushuliang = fazhushuliang + Convert.ToInt32(item.発注数量);
 
-
                             #endregion
                         }
                     }

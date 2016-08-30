@@ -376,6 +376,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\WaitToShipForm.resx">
       <DependentUpon>WaitToShipForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\WarehouseControl.resx">
       <DependentUpon>WarehouseControl.cs</DependentUpon>
