@@ -23,6 +23,19 @@ namespace GODInventoryWinForm.Controls
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView2.AutoGenerateColumns = false;
             InitializeDataSource();
+
+            var q = OrderSqlHelper.WaitToShipOrderSql(entityDataSource1).ToList();
+
+            var filtered = q.FindAll(s => s.県別 != null);
+
+            foreach (v_pendingorder item in filtered)
+                this.comboBox1.Items.Add(item.県別);
+            filtered = q.FindAll(s => s.店舗コード != null);
+            foreach (v_pendingorder item in filtered)
+                this.comboBox2.Items.Add(item.店舗コード);
+
+
+
         }
 
 
@@ -77,16 +90,38 @@ namespace GODInventoryWinForm.Controls
 
         private void ApplyBindSourceFilter(string text)
         {
-
-            if (shipperComboBox.Text == String.Empty || shipperComboBox.Text == "All")
+            string filter = "";
+            if (this.comboBox1.Text.Length > 0)
             {
-                bindingSource1.Filter = "";
+                filter += "(県別=" + "'" + this.comboBox1.Text + "'" + ")";
             }
-            else
+            if (this.comboBox2.Text.Length > 0)
             {
-                bindingSource1.Filter = "実際配送担当='" + shipperComboBox.Text + "'";
-                //bindingSource1.ResetBindings(true);
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(店舗名漢字=" + "'" + this.comboBox2.Text + "'" + ")";
             }
+            if (this.shipperComboBox.Text.Length > 0)
+            {
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(実際配送担当=" + "'" + this.shipperComboBox.Text + "'" + ")";
+            }
+            bindingSource1.Filter = filter;
+            //原先代码
+            //if (shipperComboBox.Text == String.Empty || shipperComboBox.Text == "All")
+            //{
+            //    bindingSource1.Filter = "";
+            //}
+            //else
+            //{
+            //    bindingSource1.Filter = "実際配送担当='" + shipperComboBox.Text + "'";
+            //    //bindingSource1.ResetBindings(true);
+            //}
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -172,6 +207,23 @@ namespace GODInventoryWinForm.Controls
 
             }
         }
+
+        private void shipperComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            ApplyBindSourceFilter(shipperComboBox.Text);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyBindSourceFilter(comboBox1.Text);
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyBindSourceFilter(comboBox2.Text);
+        }
+
+
 
 
     }
