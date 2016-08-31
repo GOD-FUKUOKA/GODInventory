@@ -1152,55 +1152,7 @@ namespace GODInventoryWinForm.Controls
 
                 foreach (var o in orders) 
                 {
-<<<<<<< HEAD
-                    int koushu = 0;
-                    int fazhushuliang = 0;
 
-
-                    var item = this.WanJianorders11.Find(o => o.id受注データ == oids[i]);
-                    //foreach (v_pendingorder item in WanJianorders11)
-                    {
-                        //if (item.id受注データ == oids[0])
-                        {
-                            t_maruken_trans temp = new t_maruken_trans();
-
-                            #region MyRegion
-                            if (item.ジャンル == 6)
-                                temp.OrderId = Convert.ToInt32(item.社内伝番);
-                            else
-                                temp.OrderId = item.id受注データ;
-                            //temp.EDI発注区分 = item.EDI発注区分;
-                            //temp.id = item.id;
-                            temp.キャンセル = item.キャンセル;
-                            temp.キャンセル時刻 = item.キャンセル時刻;
-                            //temp.ジャンル = item.ジャンル;
-                            temp.伝票番号 = item.伝票番号;
-                            //temp.備考 = item.備考;
-                            temp.単位 = item.単位;
-                            temp.受注日 = item.受注日;
-                            temp.口数 = item.口数;
-                            temp.品名漢字 = item.品名漢字;
-                            temp.実際配送担当 = item.実際配送担当;
-                            //temp.専務受信 = item.専務受信;
-                            //temp.専務受信時刻 = item.専務受信時刻;
-                            //temp.店舗コード = item.店舗コード;
-                            temp.店舗名漢字 = item.店舗名漢字;
-                            temp.発注数量 = item.発注数量;
-                            temp.県別 = item.県別;
-                            //temp.納品指示 = item.納品指示;
-                            temp.規格名漢字 = item.規格名漢字;
-                            //temp.配送担当受信 = item.配送担当受信;
-                            temp.配送担当受信時刻 = item.配送担当受信時刻;
-                            temp.重量 = item.重量;
-                            orders1.Add(temp);
-
-                            koushu = Convert.ToInt32(item.口数) + koushu;
-                            fazhushuliang = fazhushuliang + Convert.ToInt32(item.発注数量);
-
-                            #endregion
-                        }
-                    }
-=======
                     t_maruken_trans temp = new t_maruken_trans();
                     
                     temp.OrderId = o.id受注データ;
@@ -1221,7 +1173,6 @@ namespace GODInventoryWinForm.Controls
                     temp.備考 = o.備考;
                     trans.Add(temp);
                 
->>>>>>> origin/master
                 }
 
                 using (var ctx = new GODDbContext())

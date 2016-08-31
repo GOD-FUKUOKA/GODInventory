@@ -15,89 +15,28 @@ namespace GODInventoryWinForm.Controls
 
     public partial class WaitToShipForm : Form
     {
-<<<<<<< HEAD
-
-        private BindingList<v_pendingorder> orderList;
-        private List<v_pendingorder> orderListRE;
-
-=======
         IBindingList orderList = null;
         BindingList<v_pendingorder> orderListForShip = null;
->>>>>>> origin/master
         public WaitToShipForm()
         {
             InitializeComponent();
             this.dataGridView1.AutoGenerateColumns = false;
-<<<<<<< HEAD
-            InitializePager();
-            //
-            var q = OrderSqlHelper.WaitToShipOrderSql(entityDataSource1).ToList();
-
-            var filtered = q.FindAll(s => s.県別 != null);
-
-            foreach (v_pendingorder item in filtered)
-                this.comboBox1.Items.Add(item.県別);
-            filtered = q.FindAll(s => s.店舗コード != null);
-            foreach (v_pendingorder item in filtered)
-                this.comboBox2.Items.Add(item.店舗コード);
-
-            orderList = new BindingList<v_pendingorder>();
-            orderListRE = new List<v_pendingorder>();
-
-            this.dataGridView2.AutoGenerateColumns = false;
-
-            this.dataGridView2.DataSource = orderList;
-
-
-=======
             this.dataGridView2.AutoGenerateColumns = false;
             InitializeDataSource();
->>>>>>> origin/master
         }
 
 
-<<<<<<< HEAD
-        public void InitializePager()
+
+        public int InitializeDataSource()
         {
-            this.pager1.PageCurrent = 1; //当前页为第一页              
-            this.pager1.PageSize = 5000; //页数   
-            this.pager1.Bind();
-        }
-
-        public void RefreshPager()
-        {
-            this.pager1.Bind();
-        }
-
-        #endregion
-
-        public int InitializeOrderRelated()
-        {
-
-            var q = OrderSqlHelper.WaitToShipOrderSql(entityDataSource1);
-            var count = q.Count();
-
-            q = q.Take(pager1.OffSet(pager1.PageCurrent));
-            if (pager1.PageCurrent > 1)
-            {
-                q = q.Skip(pager1.OffSet(pager1.PageCurrent - 1));
-            }
-            // create BindingList (sortable/filterable)
-            bindingSource1.DataSource = entityDataSource1.CreateView(q);
-
-            // assign BindingList to grid
-=======
->>>>>>> origin/master
-
-        public int  InitializeDataSource() {
             this.orderListForShip = new BindingList<v_pendingorder>();
 
             var q = OrderSqlHelper.WaitToShipOrderSql(this.entityDataSource1);
-            this.orderList = this.entityDataSource1.CreateView( q );
+            this.orderList = this.entityDataSource1.CreateView(q);
             this.bindingSource1.DataSource = this.orderList;
             this.dataGridView1.DataSource = this.bindingSource1;
             dataGridView2.DataSource = this.orderListForShip;
-           
+
             return 0;
         }
 
@@ -111,14 +50,9 @@ namespace GODInventoryWinForm.Controls
 
 
                 form.SelectedOrderIds = orderIds;
-<<<<<<< HEAD
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    pager1.Bind();
-=======
-                if (form.ShowDialog() == DialogResult.OK) {
                     //pager1.Bind();
->>>>>>> origin/master
                 }
             }
             else
@@ -139,43 +73,20 @@ namespace GODInventoryWinForm.Controls
         {
             ApplyBindSourceFilter(shipperComboBox.Text);
         }
+
+
         private void ApplyBindSourceFilter(string text)
         {
 
-            string filter = "";
-            if (this.comboBox1.Text.Length > 0)
+            if (shipperComboBox.Text == String.Empty || shipperComboBox.Text == "All")
             {
-                filter += "(県別=" + "'" + this.comboBox1.Text + "'" + ")";
+                bindingSource1.Filter = "";
             }
-            if (this.comboBox2.Text.Length > 0)
+            else
             {
-                if (filter.Length > 0)
-                {
-                    filter += " AND ";
-                }
-                filter += "(店舗名漢字=" + this.comboBox2.Text + ")";
+                bindingSource1.Filter = "実際配送担当='" + shipperComboBox.Text + "'";
+                //bindingSource1.ResetBindings(true);
             }
-            if (this.shipperComboBox.Text.Length > 0)
-            {
-                if (filter.Length > 0)
-                {
-                    filter += " AND ";
-                }
-                filter += "(実際配送担当=" + "'" + this.shipperComboBox.Text + "'" + ")";
-            }
-            bindingSource1.Filter = filter;
-
-            //原先代码
-
-            //if (shipperComboBox.Text == String.Empty || shipperComboBox.Text == "All")
-            //{
-            //    bindingSource1.Filter = "";
-            //}
-            //else
-            //{
-            //    bindingSource1.Filter = "実際配送担当='" + shipperComboBox.Text + "'";
-            //    //bindingSource1.ResetBindings(true);
-            //}
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -209,86 +120,21 @@ namespace GODInventoryWinForm.Controls
 
         private void moveDownToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0) {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
                 DataGridViewRow row = null;
-                for (int i = 0 ; i < dataGridView1.SelectedRows.Count; i++) {
+                for (int i = 0; i < dataGridView1.SelectedRows.Count; i++)
+                {
                     row = dataGridView1.SelectedRows[i];
                     this.orderListForShip.Add((v_pendingorder)orderList[row.Index]);
-                    this.orderList.RemoveAt( row.Index );
-                }            
+                    this.orderList.RemoveAt(row.Index);
+                }
             }
-            
+
         }
 
         private void moveUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-            int order_count = InitializeOrderRelated();
-            return order_count;
-        }
-
-        private void btFindS_Click(object sender, EventArgs e)
-        {
-            ApplyBindSourceFilter(shipperComboBox.Text);
-        }
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ApplyBindSourceFilter(comboBox1.Text);
-        }
-
-        private void comboBox1_TextUpdate(object sender, EventArgs e)
-        {
-            ApplyBindSourceFilter(comboBox1.Text);
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ApplyBindSourceFilter(comboBox2.Text);
-        }
-
-        private void comboBox2_TextUpdate(object sender, EventArgs e)
-        {
-            ApplyBindSourceFilter(comboBox2.Text);
-
-        }
-
-        private void checkinToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (this.dataGridView1.SelectedCells.Count > 0)
-            {
-                List<int> orderIds = GetOrderIdsBySelectedGridCell();
-                var q = OrderSqlHelper.WaitToShipOrderSql(entityDataSource1).ToList();
-
-                var filtered = q.FindAll(s => s.県別 != null);
-                foreach (v_pendingorder iyte in filtered)
-                {
-                    orderList.Add(iyte);
-                    bindingSource1.Remove(iyte);
-
-
-                }
-                //  InitializePager();
-                //InitializeOrderRelated();
-                //dataGridView1.Refresh();
-                //this.dataGridView1.DataSource = null;
-
-                //this.dataGridView1.DataSource = this.bindingSource1;
-
-                //pager1.Bind();
-            }
-            else
-            {
-                MessageBox.Show("Please select orders first!");
-            }
-
-        }
-
-        private void WaitToShipForm_Load(object sender, EventArgs e)
-        {
-            InitializeOrderRelated();
-
-        }
-=======
             if (dataGridView2.SelectedRows.Count > 0)
             {
                 DataGridViewRow row = null;
@@ -306,7 +152,8 @@ namespace GODInventoryWinForm.Controls
         {
             string shipNO = this.shipNOTextBox.Text.Trim();
 
-            if (shipNO.Length > 0) {
+            if (shipNO.Length > 0)
+            {
 
                 List<int> orderIds = new List<int>();
                 foreach (var order in this.orderListForShip)
@@ -322,11 +169,10 @@ namespace GODInventoryWinForm.Controls
                 //MessageBox.Show();
 
                 this.orderListForShip.Clear();
-            
+
             }
         }
 
->>>>>>> origin/master
 
     }
 }
