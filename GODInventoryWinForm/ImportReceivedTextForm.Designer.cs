@@ -43,7 +43,8 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileName = "JURYOU";
+            this.openFileDialog1.Filter = "Text Files (.txt)|*.txt|All Files (*.*)|*.*";
             // 
             // cancelButton
             // 

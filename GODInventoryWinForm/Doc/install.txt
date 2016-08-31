@@ -7,3 +7,23 @@
 3. sql_t_itemlist_new.sql
 
 4. sql_t_pricelist
+
+#v3.0
+============================================-
+ALTER TABLE `god_inventory`.`t_locations` 
+CHANGE COLUMN `納品場所コード` `納品場所コード` INT(4) NOT NULL DEFAULT 0;
+
+ALTER TABLE `god_inventory`.`t_orderdata` 
+ADD COLUMN `ShipNO`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL;
+
+ALTER TABLE `god_inventory`.`t_maruken_trans` 
+CHANGE COLUMN `id` `id` VARCHAR(255) CHARACTER SET 'utf8' NULL ,
+ADD COLUMN `OrderId` INT UNSIGNED NOT NULL FIRST,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`OrderId`),
+ADD UNIQUE INDEX `NewId_UNIQUE` (`OrderId` ASC);
+
+-- same as genre/t_shoplist
+ALTER TABLE `god_inventory`.`t_maruken_trans` 
+CHANGE COLUMN `ジャンル` `ジャンル` INT(3)  NOT NULL DEFAULT 0,
+CHANGE COLUMN `店舗コード` `店舗コード` INT(4) NOT NULL DEFAULT 0;

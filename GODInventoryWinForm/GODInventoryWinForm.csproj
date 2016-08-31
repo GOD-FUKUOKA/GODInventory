@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GODInventoryWinForm</RootNamespace>
-    <AssemblyName>InventoryDemoV2</AssemblyName>
+    <AssemblyName>InventoryDemoV3</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
@@ -149,6 +149,12 @@
     </Compile>
     <Compile Include="Controls\Strock_CompanyCode.Designer.cs">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportOrderCSVForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportOrderCSVForm.Designer.cs">
+      <DependentUpon>ImportOrderCSVForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SelectProductForm.cs">
       <SubType>Form</SubType>
@@ -346,6 +352,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Strock_CompanyCode.resx">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportOrderCSVForm.resx">
+      <DependentUpon>ImportOrderCSVForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SelectProductForm.resx">
       <DependentUpon>SelectProductForm.cs</DependentUpon>

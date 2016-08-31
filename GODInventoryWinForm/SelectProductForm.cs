@@ -17,14 +17,12 @@ namespace GODInventoryWinForm
         private List<t_genre> genreList;
         private List<t_warehouses> warehouseList;
         public v_itemprice selectedItemPrice;
-        public bool ischeckmunal;
+
         public int selectedItemCode;
 
         public SelectProductForm()
         {
             InitializeComponent();
-
-            ischeckmunal = false;
 
             InitializeDataSource();
 
@@ -113,17 +111,13 @@ namespace GODInventoryWinForm
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ischeckmunal = true;
-            this.Close();
 
-        }
 
         private void SelectProductForm_Load(object sender, EventArgs e)
         {
 
         }
+
 
     }
 }

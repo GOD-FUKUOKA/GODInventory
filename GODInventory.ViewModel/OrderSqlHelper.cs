@@ -490,8 +490,8 @@ namespace GODInventory.ViewModel
             int count = 0;
 
             string sql = @"UPDATE t_orderdata SET `Status`={2}, `配送担当受信`=TRUE, `配送担当受信時刻`= NOW() WHERE `Status`={0} AND `実際配送担当`={1}";
-            
-            count = ctx.Database.ExecuteSqlCommand(sql, OrderStatus.NotifyShipper, shipperName, OrderStatus.PendingShipment);
+
+            count = ctx.Database.ExecuteSqlCommand(sql, OrderStatus.NotifyShipper, shipperName, OrderStatus.WaitToShip);
 
             return count;
 

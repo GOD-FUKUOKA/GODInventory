@@ -7,6 +7,22 @@ namespace GODInventory.ViewModel
 {
     public class EncodingUtility
     {
+        public static string ConvertShiftJisStringToUtf8(string text )
+        {
+            // Create two different encodings.
+            Encoding shift_jis = Encoding.GetEncoding("shift_jis");
+            Encoding utf8 = Encoding.UTF8;
+
+            byte[] utf8_bytes, shift_jis_bytes;
+            shift_jis_bytes = shift_jis.GetBytes(text);
+
+            // Perform the conversion from one encoding to the other.
+            utf8_bytes = Encoding.Convert(shift_jis, utf8, shift_jis_bytes);
+
+            return utf8.GetString(utf8_bytes);
+
+        }
+
         public static string ConvertShiftJisToUtf8(byte[] shift_jis_bytes)
         {
             // Create two different encodings.

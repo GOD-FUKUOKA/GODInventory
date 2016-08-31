@@ -29,13 +29,26 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.orderCreatedAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.invoiceNODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.specialCodeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.productCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.genreNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productSpecColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ＪＡＮコード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.原単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.売単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ロット = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品口数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.受注数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.productToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
@@ -60,19 +73,6 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.orderReasonComboBox = new System.Windows.Forms.ComboBox();
-            this.invoiceNODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.specialCodeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.productCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.genreNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productSpecColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ＪＡＮコード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.原単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.売単価 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ロット = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.納品口数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.受注数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -82,9 +82,9 @@
             // 
             this.submitButton.BackColor = System.Drawing.SystemColors.Control;
             this.submitButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.submitButton.Location = new System.Drawing.Point(779, 441);
+            this.submitButton.Location = new System.Drawing.Point(745, 445);
             this.submitButton.Name = "submitButton";
-            this.submitButton.Size = new System.Drawing.Size(75, 32);
+            this.submitButton.Size = new System.Drawing.Size(100, 32);
             this.submitButton.TabIndex = 0;
             this.submitButton.Text = "Submit";
             this.submitButton.UseVisualStyleBackColor = false;
@@ -93,9 +93,9 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(876, 441);
+            this.cancelButton.Location = new System.Drawing.Point(851, 445);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 32);
+            this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -149,12 +149,122 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1049, 310);
+            this.dataGridView1.Size = new System.Drawing.Size(1003, 317);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
+            // 
+            // invoiceNODataGridViewTextBoxColumn
+            // 
+            this.invoiceNODataGridViewTextBoxColumn.DataPropertyName = "伝票番号";
+            dataGridViewCellStyle3.Format = "D8";
+            dataGridViewCellStyle3.NullValue = null;
+            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.invoiceNODataGridViewTextBoxColumn.Frozen = true;
+            this.invoiceNODataGridViewTextBoxColumn.HeaderText = "伝票番号";
+            this.invoiceNODataGridViewTextBoxColumn.Name = "invoiceNODataGridViewTextBoxColumn";
+            this.invoiceNODataGridViewTextBoxColumn.ReadOnly = true;
+            this.invoiceNODataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.invoiceNODataGridViewTextBoxColumn.Width = 80;
+            // 
+            // specialCodeColumn
+            // 
+            dataGridViewCellStyle4.NullValue = "NO";
+            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.specialCodeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.specialCodeColumn.HeaderText = "雑コード";
+            this.specialCodeColumn.Items.AddRange(new object[] {
+            "NO",
+            "YES"});
+            this.specialCodeColumn.Name = "specialCodeColumn";
+            this.specialCodeColumn.Width = 80;
+            // 
+            // productCodeColumn
+            // 
+            this.productCodeColumn.DataPropertyName = "商品コード";
+            this.productCodeColumn.HeaderText = "商品コード";
+            this.productCodeColumn.Name = "productCodeColumn";
+            this.productCodeColumn.Width = 80;
+            // 
+            // genreNameColumn
+            // 
+            this.genreNameColumn.HeaderText = "ジャンル";
+            this.genreNameColumn.Name = "genreNameColumn";
+            this.genreNameColumn.ReadOnly = true;
+            // 
+            // productNameColumn
+            // 
+            this.productNameColumn.DataPropertyName = "品名漢字";
+            this.productNameColumn.HeaderText = "商品名";
+            this.productNameColumn.Name = "productNameColumn";
+            this.productNameColumn.ReadOnly = true;
+            this.productNameColumn.Width = 120;
+            // 
+            // productSpecColumn
+            // 
+            this.productSpecColumn.DataPropertyName = "規格名漢字";
+            this.productSpecColumn.HeaderText = "規格";
+            this.productSpecColumn.Name = "productSpecColumn";
+            this.productSpecColumn.ReadOnly = true;
+            // 
+            // ＪＡＮコード
+            // 
+            this.ＪＡＮコード.DataPropertyName = "ＪＡＮコード";
+            this.ＪＡＮコード.HeaderText = "ＪＡＮコード";
+            this.ＪＡＮコード.Name = "ＪＡＮコード";
+            this.ＪＡＮコード.ReadOnly = true;
+            this.ＪＡＮコード.Width = 80;
+            // 
+            // 原単価
+            // 
+            this.原単価.DataPropertyName = "原単価_税抜_";
+            this.原単価.HeaderText = "原単価";
+            this.原単価.Name = "原単価";
+            this.原単価.ReadOnly = true;
+            this.原単価.Width = 60;
+            // 
+            // 売単価
+            // 
+            this.売単価.DataPropertyName = "売単価_税抜_";
+            this.売単価.HeaderText = "売単価";
+            this.売単価.Name = "売単価";
+            this.売単価.ReadOnly = true;
+            this.売単価.Width = 60;
+            // 
+            // ロット
+            // 
+            this.ロット.DataPropertyName = "口数";
+            this.ロット.HeaderText = "ロット";
+            this.ロット.Name = "ロット";
+            this.ロット.ReadOnly = true;
+            this.ロット.Width = 80;
+            // 
+            // 納品口数
+            // 
+            this.納品口数.DataPropertyName = "納品口数";
+            this.納品口数.HeaderText = "口数";
+            this.納品口数.Name = "納品口数";
+            this.納品口数.Width = 60;
+            // 
+            // 受注数
+            // 
+            this.受注数.DataPropertyName = "発注数量";
+            this.受注数.HeaderText = "受注数";
+            this.受注数.Name = "受注数";
+            this.受注数.Width = 60;
+            // 
+            // deleteButtonColumn
+            // 
+            this.deleteButtonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.deleteButtonColumn.FillWeight = 30F;
+            this.deleteButtonColumn.HeaderText = "";
+            this.deleteButtonColumn.Name = "deleteButtonColumn";
+            this.deleteButtonColumn.Text = "クリア";
+            this.deleteButtonColumn.ToolTipText = "クリア";
+            this.deleteButtonColumn.UseColumnTextForButtonValue = true;
+            this.deleteButtonColumn.Width = 40;
             // 
             // contextMenuStrip1
             // 
@@ -376,121 +486,11 @@
             this.orderReasonComboBox.Size = new System.Drawing.Size(159, 20);
             this.orderReasonComboBox.TabIndex = 40;
             // 
-            // invoiceNODataGridViewTextBoxColumn
-            // 
-            this.invoiceNODataGridViewTextBoxColumn.DataPropertyName = "伝票番号";
-            dataGridViewCellStyle1.Format = "D8";
-            dataGridViewCellStyle1.NullValue = null;
-            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.invoiceNODataGridViewTextBoxColumn.Frozen = true;
-            this.invoiceNODataGridViewTextBoxColumn.HeaderText = "伝票番号";
-            this.invoiceNODataGridViewTextBoxColumn.Name = "invoiceNODataGridViewTextBoxColumn";
-            this.invoiceNODataGridViewTextBoxColumn.ReadOnly = true;
-            this.invoiceNODataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.invoiceNODataGridViewTextBoxColumn.Width = 80;
-            // 
-            // specialCodeColumn
-            // 
-            dataGridViewCellStyle2.NullValue = "NO";
-            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.specialCodeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.specialCodeColumn.HeaderText = "雑コード";
-            this.specialCodeColumn.Items.AddRange(new object[] {
-            "NO",
-            "YES"});
-            this.specialCodeColumn.Name = "specialCodeColumn";
-            this.specialCodeColumn.Width = 80;
-            // 
-            // productCodeColumn
-            // 
-            this.productCodeColumn.DataPropertyName = "商品コード";
-            this.productCodeColumn.HeaderText = "商品コード";
-            this.productCodeColumn.Name = "productCodeColumn";
-            this.productCodeColumn.Width = 80;
-            // 
-            // genreNameColumn
-            // 
-            this.genreNameColumn.HeaderText = "ジャンル";
-            this.genreNameColumn.Name = "genreNameColumn";
-            this.genreNameColumn.ReadOnly = true;
-            // 
-            // productNameColumn
-            // 
-            this.productNameColumn.DataPropertyName = "品名漢字";
-            this.productNameColumn.HeaderText = "商品名";
-            this.productNameColumn.Name = "productNameColumn";
-            this.productNameColumn.ReadOnly = true;
-            this.productNameColumn.Width = 120;
-            // 
-            // productSpecColumn
-            // 
-            this.productSpecColumn.DataPropertyName = "規格名漢字";
-            this.productSpecColumn.HeaderText = "規格";
-            this.productSpecColumn.Name = "productSpecColumn";
-            this.productSpecColumn.ReadOnly = true;
-            // 
-            // ＪＡＮコード
-            // 
-            this.ＪＡＮコード.DataPropertyName = "ＪＡＮコード";
-            this.ＪＡＮコード.HeaderText = "ＪＡＮコード";
-            this.ＪＡＮコード.Name = "ＪＡＮコード";
-            this.ＪＡＮコード.ReadOnly = true;
-            this.ＪＡＮコード.Width = 80;
-            // 
-            // 原単価
-            // 
-            this.原単価.DataPropertyName = "原単価_税抜_";
-            this.原単価.HeaderText = "原単価";
-            this.原単価.Name = "原単価";
-            this.原単価.ReadOnly = true;
-            this.原単価.Width = 60;
-            // 
-            // 売単価
-            // 
-            this.売単価.DataPropertyName = "売単価_税抜_";
-            this.売単価.HeaderText = "売単価";
-            this.売単価.Name = "売単価";
-            this.売単価.ReadOnly = true;
-            this.売単価.Width = 60;
-            // 
-            // ロット
-            // 
-            this.ロット.DataPropertyName = "口数";
-            this.ロット.HeaderText = "ロット";
-            this.ロット.Name = "ロット";
-            this.ロット.ReadOnly = true;
-            this.ロット.Width = 80;
-            // 
-            // 納品口数
-            // 
-            this.納品口数.DataPropertyName = "納品口数";
-            this.納品口数.HeaderText = "口数";
-            this.納品口数.Name = "納品口数";
-            this.納品口数.Width = 60;
-            // 
-            // 受注数
-            // 
-            this.受注数.DataPropertyName = "発注数量";
-            this.受注数.HeaderText = "受注数";
-            this.受注数.Name = "受注数";
-            this.受注数.Width = 60;
-            // 
-            // deleteButtonColumn
-            // 
-            this.deleteButtonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.deleteButtonColumn.FillWeight = 30F;
-            this.deleteButtonColumn.HeaderText = "";
-            this.deleteButtonColumn.Name = "deleteButtonColumn";
-            this.deleteButtonColumn.Text = "クリア";
-            this.deleteButtonColumn.ToolTipText = "クリア";
-            this.deleteButtonColumn.UseColumnTextForButtonValue = true;
-            this.deleteButtonColumn.Width = 40;
-            // 
             // CreateOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1060, 475);
+            this.ClientSize = new System.Drawing.Size(1014, 489);
             this.Controls.Add(this.orderReasonComboBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.locationComboBox);

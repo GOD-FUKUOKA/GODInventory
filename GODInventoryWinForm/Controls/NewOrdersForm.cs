@@ -51,12 +51,16 @@ namespace GODInventoryWinForm.Controls
                                 var duplicated_order = duplicatedOrderList[i];
                                 t_orderdata order = ctx.t_orderdata.Find(duplicated_order.id受注データ);
 
-                                if (order.キャンセル == "yes") {
-
+                                if (duplicated_order.キャンセル == "yes")
+                                {
+                                    order.キャンセル = "yes";
                                     order.Status = OrderStatus.Cancelled;
                                     order.備考 = "キャンセル";
-                                }else if (order.ダブリ == "no") {
+                                }
+                                else if (duplicated_order.ダブリ == "no")
+                                {
                                     if (order.Status == OrderStatus.Duplicated) {
+                                        order.ダブリ = "no";
                                         order.Status = OrderStatus.Pending;
                                     }
                                 }

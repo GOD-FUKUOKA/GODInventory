@@ -161,40 +161,22 @@ namespace GODInventoryWinForm.Controls
         private void submitButton_Click(object sender, EventArgs e)
         {
 
+            
+                //BindingList<t_orderdata> newOrderList = new BindingList<t_orderdata>();
+                var newOrderList = this.orderList.Where(o => o.発注数量 > 0).ToList();
 
-            try
-            {
-                //BindingList<t_orderdata> NeworderList = new BindingList<t_orderdata>();
-                var NeworderList = this.orderList.Where(l => l.発注数量 > 0).ToList();
-
-
-                if (orderList.Count > 0)
+                if (newOrderList.Count > 0)
                 {
                     using (var ctx = new GODDbContext())
                     {
-                        ctx.t_orderdata.AddRange(NeworderList);
+                        ctx.t_orderdata.AddRange(newOrderList);
                         ctx.SaveChanges();
-                        MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", orderList.Count));
+                        MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", newOrderList.Count));
                         orderList.Clear();
                     }
 
-
-
                 }
-                else
-                {
-                    MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("" + ex);
-                return;
-
-                throw;
-            }
+                     
         }
 
 
@@ -566,21 +548,6 @@ namespace GODInventoryWinForm.Controls
                   }
         }
 
-        private void ResetOrderByIndex(int i) {
-            var order = orderList[i];
-            order.商品コード = 0;
-            order.発注数量 = 0;
-            order.規格名漢字 = "";
-            order.品名漢字 = "";
-            order.ＪＡＮコード = 0;
-            order.口数 = 0;
-            order.納品口数 = 0;
-            order.発注数量 = 0;
-            order.ジャンル = 0;
-            order.原単価_税抜_=0;
-            order.売単価_税抜_ = 0;
-            this.dataGridView1.Refresh();
-        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -598,63 +565,74 @@ namespace GODInventoryWinForm.Controls
             if (selectProductForm == null)
             {
                 selectProductForm = new SelectProductForm();
-                selectProductForm.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
             }
-            if (selectProductForm == null)
+            
+
+            var result = selectProductForm.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                selectProductForm = new SelectProductForm();
+                int code = selectProductForm.selectedItemCode;
+                AddAutoOrder(code);
             }
-            selectProductForm.ShowDialog();
+            else if (result == System.Windows.Forms.DialogResult.Ignore) {
+                AddManualOrder();
+            }
+           
 
             #endregion
 
         }
 
-        void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (sender is SelectProductForm)
-            {
-                int selectedRowIndex = this.dataGridView1.CurrentRow.Index;
-                var row = dataGridView1.Rows[selectedRowIndex];
+        //void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+            
+        //    if (sender is SelectProductForm)
+        //    {
+        //        int selectedRowIndex = this.dataGridView1.CurrentRow.Index;
+        //        var row = dataGridView1.Rows[selectedRowIndex];
 
-                if (selectProductForm.ischeckmunal == false)
-                {
-                    v_itemprice selectedItem = itemPriceList.Find( o=> o.自社コード==selectProductForm.selectedItemCode);
-                    if (selectedItem != null)
-                    {
-                        orderList[selectedRowIndex].商品コード = Convert.ToInt32(selectedItem.商品コード);
-                        orderList[selectedRowIndex].ジャンル = selectedItem.ジャンル;
-                        orderList[selectedRowIndex].品名漢字 = selectedItem.商品名;
-                        orderList[selectedRowIndex].規格名漢字 = selectedItem.規格;
-                        orderList[selectedRowIndex].ＪＡＮコード = selectedItem.JANコード;
-                        orderList[selectedRowIndex].発注数量 = Convert.ToInt32(selectedItem.ロット);
+        //        if (selectProductForm.ischeckmunal == false)
+        //        {
+        //            v_itemprice selectedItem = itemPriceList.Find( o=> o.自社コード==selectProductForm.selectedItemCode);
+        //            if (selectedItem != null)
+        //            {
+        //                orderList[selectedRowIndex].商品コード = Convert.ToInt32(selectedItem.商品コード);
+        //                orderList[selectedRowIndex].ジャンル = selectedItem.ジャンル;
+        //                orderList[selectedRowIndex].品名漢字 = selectedItem.商品名;
+        //                orderList[selectedRowIndex].規格名漢字 = selectedItem.規格;
+        //                orderList[selectedRowIndex].ＪＡＮコード = selectedItem.JANコード;
+        //                orderList[selectedRowIndex].発注数量 = Convert.ToInt32(selectedItem.ロット);
 
-                        #region 从 t_pricelist 表中读取的价格
+        //                #region 从 t_pricelist 表中读取的价格
 
-                        orderList[selectedRowIndex].原単価_税抜_ = Convert.ToInt32(selectedItem.原単価);
-                        orderList[selectedRowIndex].売単価_税抜_ = Convert.ToInt32(selectedItem.原単価);
-                        
-                        #endregion
-                        row.Cells["genreNameColumn"].Value = selectedItem.ジャンル名;
-                    }
+        //                orderList[selectedRowIndex].原単価_税抜_ = Convert.ToInt32(selectedItem.原単価);
+        //                orderList[selectedRowIndex].売単価_税抜_ = Convert.ToInt32(selectedItem.原単価);
+
+        //                #endregion
+        //                row.Cells["genreNameColumn"].Value = selectedItem.ジャンル名;
+        //            }
+        //            else { 
                     
-                }
-                else
-                {
+        //               MessageBox.Show( String.Format( "Sorry, can not find item price by code {0}, please add it into t_pricelist.", selectProductForm.selectedItemCode ));
+        //            }
+                    
+        //        }
+        //        else
+        //        {
 
-                    row.Cells["productNameColumn"].ReadOnly = false;
-                    orderList[selectedRowIndex].規格名漢字 = "";
-                    orderList[selectedRowIndex].ＪＡＮコード = 0;
-                    orderList[selectedRowIndex].発注数量 = 0;
-                    orderList[selectedRowIndex].原単価_税抜_ = 0;
-                    orderList[selectedRowIndex].売単価_税抜_ = 0;
-                    orderList[selectedRowIndex].口数 = 0;
-                }
-                this.dataGridView1.Refresh();
+        //            row.Cells["productNameColumn"].ReadOnly = false;
+        //            orderList[selectedRowIndex].規格名漢字 = "";
+        //            orderList[selectedRowIndex].ＪＡＮコード = 0;
+        //            orderList[selectedRowIndex].発注数量 = 0;
+        //            orderList[selectedRowIndex].原単価_税抜_ = 0;
+        //            orderList[selectedRowIndex].売単価_税抜_ = 0;
+        //            orderList[selectedRowIndex].口数 = 0;
+        //        }
+        //        this.dataGridView1.Refresh();
 
-                selectProductForm = null;
-            }
-        }
+        //        selectProductForm = null;
+        //    }
+        //}
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -718,6 +696,72 @@ namespace GODInventoryWinForm.Controls
         {
            
 
+        }
+
+
+        private void ResetOrderByIndex(int i)
+        {
+            var order = orderList[i];
+            order.商品コード = 0;
+            order.発注数量 = 0;
+            order.規格名漢字 = "";
+            order.品名漢字 = "";
+            order.ＪＡＮコード = 0;
+            order.口数 = 0;
+            order.納品口数 = 0;
+            order.発注数量 = 0;
+            order.ジャンル = 0;
+            order.原単価_税抜_ = 0;
+            order.売単価_税抜_ = 0;
+
+            var row = dataGridView1.Rows[i];
+            row.Cells["genreNameColumn"].Value = null;
+
+            this.dataGridView1.Refresh();
+        }
+
+        private void AddManualOrder() {
+            int selectedRowIndex = this.dataGridView1.CurrentRow.Index;
+            var row = dataGridView1.Rows[selectedRowIndex];
+
+            row.Cells["productNameColumn"].ReadOnly = false;
+            orderList[selectedRowIndex].規格名漢字 = "";
+            orderList[selectedRowIndex].ＪＡＮコード = 0;
+            orderList[selectedRowIndex].発注数量 = 0;
+            orderList[selectedRowIndex].原単価_税抜_ = 0;
+            orderList[selectedRowIndex].売単価_税抜_ = 0;
+            orderList[selectedRowIndex].口数 = 0;
+            this.dataGridView1.Refresh();
+        }
+
+        private void AddAutoOrder( int itemCode) { 
+            int selectedRowIndex = this.dataGridView1.CurrentRow.Index;
+            var row = dataGridView1.Rows[selectedRowIndex];
+
+
+            v_itemprice selectedItem = itemPriceList.Find(o => o.自社コード == itemCode);
+            if (selectedItem != null)
+            {
+                orderList[selectedRowIndex].商品コード = Convert.ToInt32(selectedItem.商品コード);
+                orderList[selectedRowIndex].ジャンル = selectedItem.ジャンル;
+                orderList[selectedRowIndex].品名漢字 = selectedItem.商品名;
+                orderList[selectedRowIndex].規格名漢字 = selectedItem.規格;
+                orderList[selectedRowIndex].ＪＡＮコード = selectedItem.JANコード;
+                orderList[selectedRowIndex].発注数量 = Convert.ToInt32(selectedItem.ロット);
+
+                #region 从 t_pricelist 表中读取的价格
+
+                orderList[selectedRowIndex].原単価_税抜_ = Convert.ToInt32(selectedItem.原単価);
+                orderList[selectedRowIndex].売単価_税抜_ = Convert.ToInt32(selectedItem.原単価);
+
+                #endregion
+                row.Cells["genreNameColumn"].Value = selectedItem.ジャンル名;
+                this.dataGridView1.Refresh();
+            }
+            else { 
+                    
+                MessageBox.Show( String.Format( "Sorry, can not find item price by code {0}, please add it into t_pricelist.", itemCode ));
+            }
         }
     }
 }

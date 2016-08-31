@@ -40,7 +40,7 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(23, 55);
+            this.listBox1.Location = new System.Drawing.Point(14, 56);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(208, 304);
             this.listBox1.TabIndex = 0;
@@ -49,7 +49,7 @@
             // listView1
             // 
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView1.Location = new System.Drawing.Point(237, 53);
+            this.listView1.Location = new System.Drawing.Point(228, 54);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(462, 309);
             this.listView1.TabIndex = 1;
@@ -58,18 +58,18 @@
             // 
             // manualButton1
             // 
-            this.manualButton1.Location = new System.Drawing.Point(406, 383);
+            this.manualButton1.DialogResult = System.Windows.Forms.DialogResult.Ignore;
+            this.manualButton1.Location = new System.Drawing.Point(378, 381);
             this.manualButton1.Name = "manualButton1";
-            this.manualButton1.Size = new System.Drawing.Size(75, 21);
+            this.manualButton1.Size = new System.Drawing.Size(100, 32);
             this.manualButton1.TabIndex = 2;
             this.manualButton1.Text = "入力";
             this.manualButton1.UseVisualStyleBackColor = true;
-            this.manualButton1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 32);
+            this.label1.Location = new System.Drawing.Point(15, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 3;
@@ -78,9 +78,9 @@
             // submitButton2
             // 
             this.submitButton2.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.submitButton2.Location = new System.Drawing.Point(499, 382);
+            this.submitButton2.Location = new System.Drawing.Point(484, 381);
             this.submitButton2.Name = "submitButton2";
-            this.submitButton2.Size = new System.Drawing.Size(75, 23);
+            this.submitButton2.Size = new System.Drawing.Size(100, 32);
             this.submitButton2.TabIndex = 5;
             this.submitButton2.Text = "确定";
             this.submitButton2.UseVisualStyleBackColor = true;
@@ -88,9 +88,9 @@
             // cancelButton3
             // 
             this.cancelButton3.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton3.Location = new System.Drawing.Point(589, 382);
+            this.cancelButton3.Location = new System.Drawing.Point(590, 381);
             this.cancelButton3.Name = "cancelButton3";
-            this.cancelButton3.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton3.Size = new System.Drawing.Size(100, 32);
             this.cancelButton3.TabIndex = 6;
             this.cancelButton3.Text = "取消";
             this.cancelButton3.UseVisualStyleBackColor = true;
@@ -99,7 +99,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 437);
+            this.ClientSize = new System.Drawing.Size(704, 430);
             this.Controls.Add(this.cancelButton3);
             this.Controls.Add(this.submitButton2);
             this.Controls.Add(this.label1);

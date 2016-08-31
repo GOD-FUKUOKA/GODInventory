@@ -1,6 +1,6 @@
 ﻿namespace GODInventoryWinForm
 {
-    partial class ImportOrderTextForm
+    partial class ImportOrderCSVForm
     {
         /// <summary>
         /// Required designer variable.
@@ -44,7 +44,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "HACCYU";
-            this.openFileDialog1.Filter = "Text Files (.txt)|*.txt|All Files (*.*)|*.*";
+            this.openFileDialog1.Filter = "Text Files (.csv)|*.csv|All Files (*.*)|*.*";
             // 
             // openFileBtton
             // 
@@ -124,7 +124,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(458, 23);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Import HACCYU.txt";
+            this.label2.Text = "Import HACCYU.csv";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // closeButton
@@ -137,7 +137,7 @@
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
             // 
-            // ImportOrderTextForm
+            // ImportOrderCSVForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -153,7 +153,7 @@
             this.Controls.Add(this.openFileBtton);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ImportOrderTextForm";
+            this.Name = "ImportOrderCSVForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
