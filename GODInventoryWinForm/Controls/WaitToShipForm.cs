@@ -24,16 +24,15 @@ namespace GODInventoryWinForm.Controls
             this.dataGridView2.AutoGenerateColumns = false;
             InitializeDataSource();
 
-            var q = OrderSqlHelper.WaitToShipOrderSql(entityDataSource1).ToList();
+            //var q = OrderSqlHelper.WaitToShipOrderSql(entityDataSource1).ToList();
 
-            var filtered = q.FindAll(s => s.県別 != null);
+            //var filtered = q.FindAll(s => s.県別 != null);
 
-            foreach (v_pendingorder item in filtered)
-                this.comboBox1.Items.Add(item.県別);
-            filtered = q.FindAll(s => s.店舗コード != null);
-            foreach (v_pendingorder item in filtered)
-                this.comboBox2.Items.Add(item.店舗コード);
-
+            //foreach (v_pendingorder item in filtered)
+            //    this.comboBox1.Items.Add(item.県別);
+            //filtered = q.FindAll(s => s.店舗コード != null);
+            //foreach (v_pendingorder item in filtered)
+            //    this.comboBox2.Items.Add(item.店舗コード);
 
 
         }

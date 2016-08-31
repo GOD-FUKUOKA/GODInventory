@@ -53,7 +53,7 @@ namespace GODInventory.MyLinq
 
         public DateTime? キャンセル時刻 { get; set; }
 
-        public short? ジャンル { get; set; }
+        public short ジャンル { get; set; }
 
         public long ＪＡＮコード { get; set; }
 

@@ -30,7 +30,9 @@ namespace GODInventory.MyLinq
 
         public short? 最大行数 { get; set; }
 
-        public short? ジャンル { get; set; }
+        public int ジャンル { get; set; }
+
+        public string GenreName { get; set; }
 
         public int 伝票番号 { get; set; }
 

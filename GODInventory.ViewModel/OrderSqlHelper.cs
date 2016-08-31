@@ -93,10 +93,10 @@ namespace GODInventory.ViewModel
         public static IQueryable<v_pendingorder> PendingOrderQueryEx(EntityDataSource entityDataSource1)
         {
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                     join t_shoplist s in entityDataSource1.EntitySets["t_shoplist"] on o.店舗コード equals s.店番
+                     join t_genre g in entityDataSource1.EntitySets["t_genre"] on o.ジャンル equals g.idジャンル
                      //join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on new { jid = o.ＪＡＮコード, sid = o.実際配送担当 } equals new { jid = i.JANコード, sid = i.配送担当 }
                      //join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on o.自社コード equals  i.自社コード
-                     join t_stockstate k in entityDataSource1.EntitySets["t_stockstate"] on o.自社コード equals k.自社コード
+                     //join t_stockstate k in entityDataSource1.EntitySets["t_stockstate"] on o.自社コード equals k.自社コード
                      where o.Status == OrderStatus.Pending
                      orderby o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                      select new v_pendingorder
@@ -105,8 +105,9 @@ namespace GODInventory.ViewModel
                          出荷日 = o.出荷日,
                          納品日 = o.納品日,
                          受注日 = o.受注日,
-                         店名 = s.店名,
+                         店名 = o.店舗名漢字,
                          店舗コード = o.店舗コード,
+                         納品場所名漢字 = o.納品場所名漢字,
                          伝票番号 = o.伝票番号,
                          自社コード = o.自社コード,
                          口数 = o.口数,
@@ -116,13 +117,15 @@ namespace GODInventory.ViewModel
                          規格名漢字 = o.規格名漢字,
                          発注数量 = o.発注数量,
                          実際配送担当 = o.実際配送担当,
-                         県別 = s.県別,
+                         県別 = o.県別,
                          発注形態名称漢字 = o.発注形態名称漢字,
                          キャンセル = o.キャンセル,
                          ダブリ = o.ダブリ,
                          一旦保留 = o.一旦保留,
                          在庫状態 = o.在庫状態,
-                         在庫数 = k.在庫数
+                         納品指示 = o.納品指示,
+                         在庫数 = 0,
+                         GenreName = g.ジャンル名
                      });
             return q;
 
@@ -150,7 +153,8 @@ namespace GODInventory.ViewModel
             //& " t_orderdata.`ＪＡＮコード` ASC,t_orderdata.`受注日` ASC,t_orderdata.`伝票番号` ASC"
 
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                     join t_shoplist s in entityDataSource1.EntitySets["t_shoplist"] on o.店舗コード equals s.店番
+                     //join t_shoplist s in entityDataSource1.EntitySets["t_shoplist"] on o.店舗コード equals s.店番
+                     join t_genre g in entityDataSource1.EntitySets["t_genre"] on o.ジャンル equals g.idジャンル
                      //where o.配送担当受信  && o.出荷日 == null
                      where o.Status == OrderStatus.WaitToShip
                      orderby o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
@@ -161,9 +165,8 @@ namespace GODInventory.ViewModel
                          納品日 = o.納品日,
                          受注日 = o.受注日,
                          店舗コード = o.店舗コード,
-                         店名 = s.店名,
-                         店舗名カナ = o.店舗名カナ,
-                         店番 = s.店番,
+                         店名 = o.店舗名漢字,
+                         納品場所名漢字 = o.納品場所名漢字,
                          伝票番号 = o.伝票番号,
                          社内伝番 = o.社内伝番,
                          口数 = o.口数,
@@ -173,7 +176,7 @@ namespace GODInventory.ViewModel
                          規格名漢字 = o.規格名漢字,
                          発注数量 = o.発注数量,
                          実際配送担当 = o.実際配送担当,
-                         県別 = s.県別,
+                         県別 = o.県別,
                          原単価_税抜_ = o.原単価_税抜_,
                          原価金額_税抜_ = o.原価金額_税抜_,
                          発注形態名称漢字 = o.発注形態名称漢字,
@@ -181,7 +184,10 @@ namespace GODInventory.ViewModel
                          ダブリ = o.ダブリ,
                          行数 = o.行数,
                          最大行数 = o.最大行数,
-                         一旦保留 = o.一旦保留
+                         一旦保留 = o.一旦保留,
+                         納品指示 = o.納品指示,
+                         GenreName = g.ジャンル名
+
                      });
             return q;
 
