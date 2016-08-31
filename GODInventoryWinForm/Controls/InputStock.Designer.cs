@@ -236,7 +236,6 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Enabled = false;
             this.numericUpDown1.Location = new System.Drawing.Point(134, 373);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(164, 20);
@@ -286,7 +285,6 @@
             // 
             // codeComboBox
             // 
-            this.codeComboBox.Enabled = false;
             this.codeComboBox.FormattingEnabled = true;
             this.codeComboBox.Location = new System.Drawing.Point(134, 345);
             this.codeComboBox.Name = "codeComboBox";
@@ -295,13 +293,13 @@
             // 
             // addButton
             // 
-            this.addButton.Enabled = false;
             this.addButton.Location = new System.Drawing.Point(234, 398);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(63, 25);
             this.addButton.TabIndex = 52;
             this.addButton.Text = "添加";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // stockStatusComboBox
             // 

@@ -46,12 +46,14 @@ namespace GODInventoryWinForm.Controls
             }
             this.genreComboBox.DisplayMember = "ジャンル名";
             this.genreComboBox.ValueMember = "idジャンル";
+            this.genreComboBox.ValueMember = "Position";
             this.genreComboBox.DataSource = genreList;
 
 
             //this.manufacturerList = ManufactureRespository.ToList();
             this.manufacturerComboBox.DisplayMember = "FullName";
-            this.manufacturerComboBox.ValueMember = "Id";
+            //this.manufacturerComboBox.ValueMember = "Id";
+            this.manufacturerComboBox.ValueMember = "Position";
             this.manufacturerComboBox.DataSource = manufacturerList;
 
 
@@ -69,6 +71,15 @@ namespace GODInventoryWinForm.Controls
             this.clientComboBox.DataSource = customersList;
 
 
+
+            var last_order = (from s in genreList
+                              where s.idジャンル >= 0
+                              orderby s.Position ascending
+                              select s).FirstOrDefault();
+
+            this.genreComboBox.SelectedIndex = last_order.Position;
+            this.manufacturerComboBox.SelectedIndex = last_order.Position;
+            
 
             //BuildStockNO();
         }

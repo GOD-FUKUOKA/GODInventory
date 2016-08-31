@@ -18,7 +18,7 @@ namespace GODInventoryWinForm.Controls
         private BindingList<v_stockios> stockiosList;
         private List<t_genre> genreList;
         private List<t_warehouses> warehouseList;
-        private List<t_customers>  customersList;
+        private List<t_customers> customersList;
 
         public InputStock()
         {
@@ -44,12 +44,13 @@ namespace GODInventoryWinForm.Controls
                 customersList = ctx.t_customers.ToList();
             }
             this.genreComboBox.DisplayMember = "ジャンル名";
-            this.genreComboBox.ValueMember = "idジャンル";
+            //this.genreComboBox.ValueMember = "idジャンル";
+            this.genreComboBox.ValueMember = "Position";
             this.genreComboBox.DataSource = genreList;
 
             //this.manufacturerList = ManufactureRespository.ToList();
             this.manufacturerComboBox.DisplayMember = "FullName";
-            this.manufacturerComboBox.ValueMember = "Id";
+            this.manufacturerComboBox.ValueMember = "Position";//  Position  Id
             this.manufacturerComboBox.DataSource = manufacturerList;
 
 
@@ -60,6 +61,16 @@ namespace GODInventoryWinForm.Controls
             this.stockStatusComboBox.SelectedIndex = 0;
             this.clientComboBox.SelectedIndex = 0;
             this.remarkTextBox1.SelectedIndex = 0;
+
+
+            var last_order = (from s in genreList
+                              where s.idジャンル >= 0
+                              orderby s.Position ascending
+                              select s).FirstOrDefault();
+
+
+            this.genreComboBox.SelectedIndex = last_order.Position;
+            this.manufacturerComboBox.SelectedIndex = last_order.Position;
 
             this.clientComboBox.DisplayMember = "FullName";
             this.clientComboBox.ValueMember = "Id";
@@ -252,6 +263,37 @@ namespace GODInventoryWinForm.Controls
 
         private void remarkTextBox1_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+
+            var dd = ManufactureRespository.CodeDict.ToList();
+
+            var shorname = dd.Find(o => o.Key == Convert.ToInt32(codeComboBox.Text));
+
+            stockiosList.Clear();
+
+            if (shorname.Value > 0)
+            {
+                using (var ctx = new GODDbContext())
+                {
+                    var results = (from s in ctx.t_itemlist
+                                   where s.自社コード == (Int32)shorname.Value
+                                   select new v_stockios { 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
+                    for (int i = 0; i < results.Count; i++)
+                    {
+                        results[i].Id = i + 1;
+
+                        results[i].qty = (Int32)numericUpDown1.Value;
+                        stockiosList.Add(results[i]);
+                    }
+                }
+            }
+
+            //  var isAllManufacturerSelected = (Convert.ToInt32(codeComboBox.Text) == ManufactureRespository.CodeDict);
+
 
         }
     }
