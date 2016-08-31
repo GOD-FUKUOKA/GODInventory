@@ -16,5 +16,8 @@ namespace GODInventory.MyLinq
         [Required]
         [StringLength(255)]
         public string ジャンル名 { get; set; }
+
+        public int Position { get; set; }
+
     }
 }

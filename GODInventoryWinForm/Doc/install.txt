@@ -27,3 +27,6 @@ ADD UNIQUE INDEX `NewId_UNIQUE` (`OrderId` ASC);
 ALTER TABLE `god_inventory`.`t_maruken_trans` 
 CHANGE COLUMN `ジャンル` `ジャンル` INT(3)  NOT NULL DEFAULT 0,
 CHANGE COLUMN `店舗コード` `店舗コード` INT(4) NOT NULL DEFAULT 0;
+
+#v3.1
+============================================-
