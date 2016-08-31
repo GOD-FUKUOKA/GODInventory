@@ -52,7 +52,6 @@
             this.shipperComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.受注日Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.場所Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,6 +84,7 @@
             this.県別Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注区分Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品指示Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -276,8 +276,9 @@
             // comboBox2
             // 
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.Enabled = false;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(567, 20);
+            this.comboBox2.Location = new System.Drawing.Point(535, 19);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 20);
             this.comboBox2.TabIndex = 6;
@@ -286,7 +287,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(484, 23);
+            this.label6.Location = new System.Drawing.Point(464, 23);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 12);
             this.label6.TabIndex = 7;
@@ -295,17 +296,18 @@
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Enabled = false;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(327, 20);
+            this.comboBox1.Location = new System.Drawing.Point(295, 19);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(133, 20);
+            this.comboBox1.Size = new System.Drawing.Size(121, 20);
             this.comboBox1.TabIndex = 4;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(242, 23);
+            this.label5.Location = new System.Drawing.Point(260, 23);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 5;
@@ -320,7 +322,7 @@
             "丸健",
             "マツモト産業",
             "MKL"});
-            this.shipperComboBox.Location = new System.Drawing.Point(91, 20);
+            this.shipperComboBox.Location = new System.Drawing.Point(91, 19);
             this.shipperComboBox.Name = "shipperComboBox";
             this.shipperComboBox.Size = new System.Drawing.Size(121, 20);
             this.shipperComboBox.TabIndex = 2;
@@ -371,10 +373,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1016, 160);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // 受注日Column
             // 
@@ -572,6 +570,10 @@
             this.納品指示Column2.DataPropertyName = "納品指示";
             this.納品指示Column2.HeaderText = "納品指示";
             this.納品指示Column2.Name = "納品指示Column2";
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // WaitToShipForm
             // 
