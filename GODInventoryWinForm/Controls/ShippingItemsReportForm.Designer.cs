@@ -1,6 +1,6 @@
 ﻿namespace GODInventoryWinForm.Controls
 {
-    partial class ReceivedOrdersReportForm
+    partial class ShippingItemsReportForm
     {
         /// <summary>
         /// Required designer variable.
@@ -48,7 +48,7 @@
             reportDataSource1.Name = "DataSet2";
             reportDataSource1.Value = this.t_orderdataBindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "GODInventoryWinForm.Reports.ReceivedOrderCollectionReport.rdlc";
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "GODInventoryWinForm.Reports.ShippingItemsReport.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.Size = new System.Drawing.Size(732, 279);
@@ -59,7 +59,7 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
-            // ReceivedOrdersReportForm
+            // ShippingItemsReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -67,7 +67,7 @@
             this.Controls.Add(this.reportViewer1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ReceivedOrdersReportForm";
+            this.Name = "ShippingItemsReportForm";
             this.Text = "ReceivedOrdersReportForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ReceivedOrdersReportForm_FormClosing);

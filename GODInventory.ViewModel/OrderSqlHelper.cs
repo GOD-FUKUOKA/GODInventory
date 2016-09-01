@@ -521,5 +521,14 @@ namespace GODInventory.ViewModel
             return count;
 
         }
+
+        public static List<t_orderdata> OrderListByShipNO(EntityDataSource entityDataSource1, string shipNO)
+        {
+
+            var orders = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
+                          where o.ShipNO == shipNO
+                          select o ).ToList();
+            return orders;
+        }
     }
 }

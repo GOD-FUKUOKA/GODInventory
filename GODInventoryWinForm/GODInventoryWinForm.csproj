@@ -95,6 +95,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ShippingItemsReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\ShippingItemsReportForm.Designer.cs">
+      <DependentUpon>ShippingItemsReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EditOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -329,6 +335,9 @@
       <DependentUpon>testingCC.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkerArgument.cs" />
+    <EmbeddedResource Include="Controls\ShippingItemsReportForm.resx">
+      <DependentUpon>ShippingItemsReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\EditOrderForm.resx">
       <DependentUpon>EditOrderForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -365,6 +374,7 @@
     <EmbeddedResource Include="ImportOrderCSVForm.resx">
       <DependentUpon>ImportOrderCSVForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ShippingItemsReport.rdlc" />
     <EmbeddedResource Include="SelectProductForm.resx">
       <DependentUpon>SelectProductForm.cs</DependentUpon>
     </EmbeddedResource>

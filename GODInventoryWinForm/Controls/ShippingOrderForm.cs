@@ -17,6 +17,7 @@ namespace GODInventoryWinForm.Controls
     public partial class ShippingOrderForm : Form
     {
         public ReceivedOrdersReportForm reportForm;
+        public ShippingItemsReportForm shippingItemsReportForm;
         public List<v_groupedorder> groupedOrderList;
 
         public ShippingOrderForm()
@@ -27,6 +28,7 @@ namespace GODInventoryWinForm.Controls
             this.shipNODataGridView.AutoGenerateColumns = false;
             
             reportForm = new ReceivedOrdersReportForm();
+            shippingItemsReportForm = new ShippingItemsReportForm();
         }
 
 
@@ -283,6 +285,16 @@ namespace GODInventoryWinForm.Controls
             reportForm.InitializeDataSource(orders);
             reportForm.ShowDialog();
             InitializeEdiData();
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var row = shipNODataGridView.CurrentRow;
+            var gorder = row.DataBoundItem as v_groupedorder;
+            var orders = OrderSqlHelper.OrderListByShipNO(entityDataSource1, gorder.ShipNO);
+
+            shippingItemsReportForm.InitializeDataSource(orders);
+            shippingItemsReportForm.ShowDialog();
         }
         
     }
