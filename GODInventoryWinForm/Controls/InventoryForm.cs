@@ -17,8 +17,8 @@ namespace GODInventoryWinForm.Controls
         //private List<MockEntity> manufacturerList;
         private List<t_warehouses> warehouseList;
         private List<t_manufacturers> manufacturerList;
-      
-       
+
+
         private List<t_genre> genreList;
 
 
@@ -28,6 +28,7 @@ namespace GODInventoryWinForm.Controls
 
         public t_itemlist item;
         public ReceivedOrdersReportForm reportForm;
+        private List<v_stockcheck> NewstockcheckList = null;
 
         private BindingList<v_stockcheck> stockcheckList;
 
@@ -38,11 +39,12 @@ namespace GODInventoryWinForm.Controls
             this.stockcheckList = new BindingList<v_stockcheck>();
 
             dataGridView1.AutoGenerateColumns = false;
-        
+
             InitializeDataSource();
         }
 
-        private void InitializeDataSource() {
+        private void InitializeDataSource()
+        {
 
             using (var ctx = new GODDbContext())
             {
@@ -72,49 +74,119 @@ namespace GODInventoryWinForm.Controls
         {
             this.stockcheckList.Clear();
             var warehouse = this.warehouseComboBox.Text;
-            var genreId = Convert.ToInt16( this.genreComboBox.SelectedValue );
+            var genreId = Convert.ToInt16(this.genreComboBox.SelectedValue);
             var startDate = Properties.Settings.Default.InventoryStartAt.Date;
             var endDate = this.endDateTimePicker1.Value.AddDays(1).Date;
             using (var ctx = new GODDbContext())
             {
                 int i = 0;
+                #region old
                 string sql = @"SELECT i.`規格`,i.`商品名`, SUM(s.`数量`) as `数量`, s.`自社コード` FROM t_stockrec s
-    INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = {0}
-    WHERE (s.`先` = {1} and s.`状態`={2} and s.`日付`< {3} and s.`日付`> {4} )
-    GROUP by s.`自社コード`;";
+                    INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = {0}
+                    WHERE (s.`先` = {1} and s.`状態`={2} and s.`日付`< {3} and s.`日付`> {4} )
+                    GROUP by s.`自社コード`;";
+
+
+
                 var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.完了.ToString(), endDate, startDate).ToList();
 
                 var summaries4plan = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.仮.ToString(), endDate, startDate).ToList();
 
-                //stockcheckList = (from a in ctx.t_stockrec
-                //                 where a.先 == warehouse && a.状態== StockIoEnum.完了.ToString()
-                //                 group a by a.自社コード into b
-                //                 select new v_stockcheck
-                //         {
-                //             自社コード = b.Key,
-                //            数量 = b.Sum(c => c.数量),                           
-                //        }).ToList();
+                #endregion
 
-                foreach (var item in summaries)
+                #region MyRegion
+                //                string sql = @"SELECT  SUM(i.`数量`) as `数量`, i.日付 ,i.自社コード ,s.商品名,s.規格  FROM t_itemlist  s
+                //    left JOIN t_stockrec i on i.`自社コード` =   s.`自社コード` and i.`状態`={2} and i.`日付`< {3} and i.`日付`> {4} and i.`先` = {1}   
+                //    WHERE (s.`ジャンル` =   {0} )
+                //    GROUP by s.`自社コード`;";
+
+                //                var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.完了.ToString(), endDate, startDate).ToList();
+
+                //                var summaries4plan = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.仮.ToString(), endDate, startDate).ToList();
+
+
+                #endregion
+
+                itemlist = ctx.t_itemlist.ToList();
+                NewstockcheckList = (from a in ctx.t_itemlist
+                                     select new v_stockcheck
+                             {
+                                 規格 = a.規格,
+                                 自社コード = a.自社コード,
+                                 商品名 = a.商品名,
+                             }).ToList();
+
+                foreach (var item1 in NewstockcheckList)
                 {
-                    i++;
-
-                    item.Id = i;
-                    item.yingYouKuCunShu = Convert.ToInt32( item.数量 ); 
-                    // TODO daiFaHuoShu
-                    item.daiFaHuoShu = 0;
-                    item.shiJiKuCunShu = item.yingYouKuCunShu + item.daiFaHuoShu;
-
-                    var item4plan = summaries4plan.Find(s => s.自社コード == item.自社コード);
-                    if (item4plan != null)
+                    foreach (var item in summaries)
                     {
-                        item.jiHuaRuCunShu = Convert.ToInt32(item4plan.数量);
+                        if (item1.自社コード == item.自社コード)
+                        {
+                            i++;
+
+                            //item.Id = i;
+                            //item.yingYouKuCunShu = Convert.ToInt32(item.数量);
+                            //// TODO daiFaHuoShu
+                            //item.daiFaHuoShu = 0;
+                            //item.shiJiKuCunShu = item.yingYouKuCunShu + item.daiFaHuoShu;
+
+                            //var item4plan = summaries4plan.Find(s => s.自社コード == item.自社コード);
+                            //if (item4plan != null)
+                            //{
+                            //    item.jiHuaRuCunShu = Convert.ToInt32(item4plan.数量);
+                            //}
+                            //stockcheckList.Add(item);
+                            ///
+                            item1.Id = i;
+                            item1.yingYouKuCunShu = Convert.ToInt32(item.数量);
+                            // TODO daiFaHuoShu
+                            item1.daiFaHuoShu = 0;
+                            item1.shiJiKuCunShu = item.yingYouKuCunShu + item.daiFaHuoShu;
+
+                            var item4plan1 = summaries4plan.Find(s => s.自社コード == item.自社コード);
+                            if (item4plan1 != null)
+                            {
+                                item1.jiHuaRuCunShu = Convert.ToInt32(item4plan1.数量);
+                            }
+
+                        }
                     }
-                    stockcheckList.Add(item);
+                    stockcheckList.Add(item1);
                 }
-               
+                #region old
+
+                ////stockcheckList = (from a in ctx.t_stockrec
+                ////                 where a.先 == warehouse && a.状態== StockIoEnum.完了.ToString()
+                ////                 group a by a.自社コード into b
+                ////                 select new v_stockcheck
+                ////         {
+                ////             自社コード = b.Key,
+                ////            数量 = b.Sum(c => c.数量),                           
+                ////        }).ToList();
+
+
+
+                //foreach (var item in summaries)
+                //{
+                //    i++;
+
+                //    item.Id = i;
+                //    item.yingYouKuCunShu = Convert.ToInt32(item.数量);
+                //    // TODO daiFaHuoShu
+                //    item.daiFaHuoShu = 0;
+                //    item.shiJiKuCunShu = item.yingYouKuCunShu + item.daiFaHuoShu;
+
+                //    var item4plan = summaries4plan.Find(s => s.自社コード == item.自社コード);
+                //    if (item4plan != null)
+                //    {
+                //        item.jiHuaRuCunShu = Convert.ToInt32(item4plan.数量);
+                //    }
+                //    stockcheckList.Add(item);
+                //} 
+                #endregion
+
             }
-           
+
         }
         private void ApplyFilter()
         {
@@ -131,15 +203,16 @@ namespace GODInventoryWinForm.Controls
             var warehouse = this.warehouseComboBox.Text;
 
             using (var ctx = new GODDbContext())
-            {   
+            {
                 List<t_stockrec> changes = new List<t_stockrec>();
-                var genreId = Convert.ToInt16( this.genreComboBox.SelectedValue );
+                var genreId = Convert.ToInt16(this.genreComboBox.SelectedValue);
                 var date = DateTime.Now;
                 string stockNum = BuildStockNum(ctx, genreId, date);
 
                 foreach (var item in stockcheckList)
                 {
-                    if( Convert.ToInt32( item.chaZhi ) != 0 ){
+                    if (Convert.ToInt32(item.chaZhi) != 0)
+                    {
 
                         var s = new t_stockrec();
                         s.元 = warehouse;
@@ -153,7 +226,7 @@ namespace GODInventoryWinForm.Controls
                         s.納品書番号 = stockNum;
                         changes.Add(s);
                     }
-                   
+
                 }
 
                 ctx.t_stockrec.AddRange(changes);
@@ -178,11 +251,11 @@ namespace GODInventoryWinForm.Controls
             {
                 int v = Convert.ToInt32(cell.Value);
                 this.stockcheckList[e.RowIndex].qingDianShu = v;
-                this.stockcheckList[e.RowIndex].chaZhi = v - this.stockcheckList[e.RowIndex].shiJiKuCunShu ;
+                this.stockcheckList[e.RowIndex].chaZhi = v - this.stockcheckList[e.RowIndex].shiJiKuCunShu;
                 //this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = this.stockcheckList[e.RowIndex].chaZhi;
 
             }
-            
+
 
             this.dataGridView1.Refresh();
 
@@ -190,7 +263,8 @@ namespace GODInventoryWinForm.Controls
 
         private void btclear_zero_Click(object sender, EventArgs e)
         {
-            for (var i = 0; i < stockcheckList.Count; i++) {
+            for (var i = 0; i < stockcheckList.Count; i++)
+            {
 
                 this.stockcheckList[i].qingDianShu = null;
                 this.stockcheckList[i].chaZhi = null;
@@ -227,14 +301,14 @@ namespace GODInventoryWinForm.Controls
         {
 
             var startAt = selectedDate.Date;
-            var endAt = startAt.AddDays(1).Date;  
+            var endAt = startAt.AddDays(1).Date;
 
             var results = from s in ctx.t_stockrec
                           where s.日付 >= startAt && s.日付 < endAt
                           group s by s.納品書番号 into g
                           select g;
             string sn = "";
-            int    count = results.Count();
+            int count = results.Count();
             var warehouse = warehouseComboBox1();
             if (warehouse > 0)
             {
@@ -244,7 +318,7 @@ namespace GODInventoryWinForm.Controls
             }
             string stock_no = String.Format(sn + "-" + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
 
-           
+
             return stock_no;
         }
         private int warehouseComboBox1()

@@ -133,67 +133,90 @@ namespace GODInventoryWinForm.Controls
             #region 构建查询条件
 
 
-            if (!isAllStockIoSelected)
-            {
-                conditions += " AND (s.`区分` = @ioState)";
-            }
-            if (!isAllManufacturerSelected)
-            {
-                // 所有仓库的某一生产商的出入库记录
-                conditions += " AND (s.`工厂` = @manufacturer)";
-            }
+            //            if (!isAllStockIoSelected)
+            //            {
+            //                conditions += " AND (s.`区分` = @ioState)";
+            //            }
+            //            if (!isAllManufacturerSelected)
+            //            {
+            //                // 所有仓库的某一生产商的出入库记录
+            //                conditions += " AND (s.`工厂` = @manufacturer)";
+            //            }
 
 
-            if (warehouse != WarehouseRespository.OptionTextAll)
-            {
+            //            if (warehouse != WarehouseRespository.OptionTextAll)
+            //            {
 
 
-                if (ioState == StockIoEnum.全部.ToString())
-                {
+            //                if (ioState == StockIoEnum.全部.ToString())
+            //                {
 
-                    // 某一个仓库的出入库记录
-                    conditions += " AND ( s.先 = @warehouse OR s.元 = @warehouse )";
+            //                    // 某一个仓库的出入库记录
+            //                    conditions += " AND ( s.先 = @warehouse OR s.元 = @warehouse )";
 
-                }
-                else if (ioState == StockIoEnum.入庫.ToString())
-                {
-                    // 某一个仓库的入库记录
-                    conditions += " AND ( s.先 = @warehouse )";
-                }
-                else if (ioState == StockIoEnum.出庫.ToString())
-                {
+            //                }
+            //                else if (ioState == StockIoEnum.入庫.ToString())
+            //                {
+            //                    // 某一个仓库的入库记录
+            //                    conditions += " AND ( s.先 = @warehouse )";
+            //                }
+            //                else if (ioState == StockIoEnum.出庫.ToString())
+            //                {
 
-                    // 某一个仓库的所有生产商的出库记录, 即出库记录
-                    conditions += " AND ( s.元 = @warehouse )";
-                }
-            }
+            //                    // 某一个仓库的所有生产商的出库记录, 即出库记录
+            //                    conditions += " AND ( s.元 = @warehouse )";
+            //                }
+            //            }
 
 
 
+            //condition_params.Add(new MySqlParameter("@genreId", genreId));
+            //condition_params.Add(new MySqlParameter("@ioState", ioState));
+            //condition_params.Add(new MySqlParameter("@warehouse", warehouse));
+            //condition_params.Add(new MySqlParameter("@manufacturer", manufacturer));
+            //condition_params.Add(new MySqlParameter("@startAt", startAt));
+            //condition_params.Add(new MySqlParameter("@endAt", endAt));
+
+            //            using (var ctx = new GODDbContext())
+            //            {
+            //                string productFormat = @"SELECT s.`自社コード`, i.`規格`,i.`商品名`  FROM t_stockrec s
+            //INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = @genreId 
+            //WHERE (s.日付 > @startAt AND @endAt > s.日付)
+            //GROUP by s.`自社コード`;";
+            //                string qtyFormat = @"SELECT s.* FROM t_stockrec s
+            //INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = @genreId 
+            //WHERE ({0});";
+
+            //                productList = ctx.Database.SqlQuery<v_stockcheck>(productFormat, condition_params.ToArray()).ToList();
+            //                string sql = String.Format(qtyFormat, conditions);
+            //  stockList = ctx.Database.SqlQuery<t_stockrec>(sql, condition_params.ToArray()).ToList();
+
+            //            }
+            #endregion
+            
+            #region  new
             condition_params.Add(new MySqlParameter("@genreId", genreId));
             condition_params.Add(new MySqlParameter("@ioState", ioState));
             condition_params.Add(new MySqlParameter("@warehouse", warehouse));
             condition_params.Add(new MySqlParameter("@manufacturer", manufacturer));
             condition_params.Add(new MySqlParameter("@startAt", startAt));
             condition_params.Add(new MySqlParameter("@endAt", endAt));
-
             using (var ctx = new GODDbContext())
             {
-                string productFormat = @"SELECT s.`自社コード`, i.`規格`,i.`商品名`  FROM t_stockrec s
-INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = @genreId 
-WHERE (s.日付 > @startAt AND @endAt > s.日付)
-GROUP by s.`自社コード`;";
+                productList = (from s in ctx.t_itemlist
+                               where s.ジャンル == (short)genreId
+                               select new v_stockcheck { 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
                 string qtyFormat = @"SELECT s.* FROM t_stockrec s
-INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = @genreId 
-WHERE ({0});";
-
-                productList = ctx.Database.SqlQuery<v_stockcheck>(productFormat, condition_params.ToArray()).ToList();
+            INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = @genreId 
+             WHERE ({0});";
                 string sql = String.Format(qtyFormat, conditions);
                 stockList = ctx.Database.SqlQuery<t_stockrec>(sql, condition_params.ToArray()).ToList();
 
             }
-            #endregion
 
+
+
+            #endregion
 
             this.BuildDataSources();
 
@@ -514,8 +537,6 @@ WHERE ({0});";
             }
         }
 
-
-
         private void stockIoDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -560,9 +581,15 @@ WHERE ({0});";
             return Convert.ToString(this.stockIoDataGridView.Rows[4].Cells[j].Value);
 
         }
+
         private int GetProductNumByRowIndex(int i)
         {
             return Convert.ToInt32(this.productList[i].自社コード);
+
+        }
+
+        private void qtyDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
