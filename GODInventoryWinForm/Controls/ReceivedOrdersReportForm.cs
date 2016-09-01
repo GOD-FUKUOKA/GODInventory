@@ -32,16 +32,18 @@ namespace GODInventoryWinForm.Controls
                 this.reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
         }
 
-        public void InitializeDataSource() 
+        public void InitializeDataSource(List<v_pendingorder> orders) 
         {
+            OrderEnities = orders;
+
             if (OrderEnities != null) {
                 this.reportViewer1.LocalReport.DataSources.Clear();
                 
                 using (var ctx = new GODDbContext())
                 {
-                    var orders = OrderEnities.GroupBy(x => x.出荷No).Select(y => y.First());
-                                       
-                    this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", orders));
+                    var gos = OrderEnities.GroupBy(x => x.出荷No).Select(y => y.First());
+
+                    this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", gos));
                 }            
             }
 

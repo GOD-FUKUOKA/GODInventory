@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.printForEDIButton = new System.Windows.Forms.Button();
             this.uploadForEDIButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.generateASNButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pendingTabPage = new System.Windows.Forms.TabPage();
             this.shipNODataGridView = new System.Windows.Forms.DataGridView();
             this.ShipNOColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shipAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,15 +51,11 @@
             this.unlockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.asnTabPage = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.データIDColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.管理連番Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.レコード件数Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createdAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deliveryTabPage3 = new System.Windows.Forms.TabPage();
+            this.receivedTabPage = new System.Windows.Forms.TabPage();
             this.finishOrderButton1 = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.receivedDataGridView = new System.Windows.Forms.DataGridView();
             this.納品日Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.受注日Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,31 +71,48 @@
             this.受領差異数量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.受領差異金額Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource4 = new System.Windows.Forms.BindingSource(this.components);
+            this.データIDColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.管理連番Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.レコード件数Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createdAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shippedTabPage = new System.Windows.Forms.TabPage();
+            this.shippedDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.printForEDIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.pendingTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shipNODataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.asnTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.deliveryTabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.receivedTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.receivedDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource4)).BeginInit();
+            this.shippedTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.shippedDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // printForEDIButton
-            // 
-            this.printForEDIButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.printForEDIButton.Location = new System.Drawing.Point(688, 14);
-            this.printForEDIButton.Name = "printForEDIButton";
-            this.printForEDIButton.Size = new System.Drawing.Size(100, 32);
-            this.printForEDIButton.TabIndex = 1;
-            this.printForEDIButton.Text = "Print for EDI";
-            this.printForEDIButton.UseVisualStyleBackColor = true;
-            this.printForEDIButton.Click += new System.EventHandler(this.printForEDIButton_Click);
             // 
             // uploadForEDIButton
             // 
@@ -129,9 +142,10 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.deliveryTabPage3);
+            this.tabControl1.Controls.Add(this.pendingTabPage);
+            this.tabControl1.Controls.Add(this.asnTabPage);
+            this.tabControl1.Controls.Add(this.shippedTabPage);
+            this.tabControl1.Controls.Add(this.receivedTabPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -139,17 +153,17 @@
             this.tabControl1.Size = new System.Drawing.Size(917, 369);
             this.tabControl1.TabIndex = 5;
             // 
-            // tabPage1
+            // pendingTabPage
             // 
-            this.tabPage1.Controls.Add(this.shipNODataGridView);
-            this.tabPage1.Controls.Add(this.generateASNButton);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(909, 343);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Pending Shipment";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.pendingTabPage.Controls.Add(this.shipNODataGridView);
+            this.pendingTabPage.Controls.Add(this.generateASNButton);
+            this.pendingTabPage.Location = new System.Drawing.Point(4, 22);
+            this.pendingTabPage.Name = "pendingTabPage";
+            this.pendingTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.pendingTabPage.Size = new System.Drawing.Size(909, 343);
+            this.pendingTabPage.TabIndex = 0;
+            this.pendingTabPage.Text = "Pending Shipment";
+            this.pendingTabPage.UseVisualStyleBackColor = true;
             // 
             // shipNODataGridView
             // 
@@ -246,7 +260,7 @@
             this.editToolStripMenuItem,
             this.printToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(117, 92);
             // 
             // lockToolStripMenuItem
             // 
@@ -273,21 +287,20 @@
             // 
             this.printToolStripMenuItem.Enabled = false;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.printToolStripMenuItem.Text = "Print";
             // 
-            // tabPage2
+            // asnTabPage
             // 
-            this.tabPage2.Controls.Add(this.dataGridView2);
-            this.tabPage2.Controls.Add(this.uploadForEDIButton);
-            this.tabPage2.Controls.Add(this.printForEDIButton);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(909, 343);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "ASN";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.asnTabPage.Controls.Add(this.dataGridView2);
+            this.asnTabPage.Controls.Add(this.uploadForEDIButton);
+            this.asnTabPage.Location = new System.Drawing.Point(4, 22);
+            this.asnTabPage.Name = "asnTabPage";
+            this.asnTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.asnTabPage.Size = new System.Drawing.Size(909, 343);
+            this.asnTabPage.TabIndex = 1;
+            this.asnTabPage.Text = "ASN";
+            this.asnTabPage.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
             // 
@@ -303,6 +316,7 @@
             this.管理連番Column1,
             this.レコード件数Column1,
             this.createdAtColumn1});
+            this.dataGridView2.ContextMenuStrip = this.contextMenuStrip2;
             this.dataGridView2.Location = new System.Drawing.Point(3, 60);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
@@ -314,45 +328,17 @@
             this.dataGridView2.TabIndex = 3;
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
-            // データIDColumn1
+            // receivedTabPage
             // 
-            this.データIDColumn1.DataPropertyName = "データID";
-            this.データIDColumn1.HeaderText = "データID";
-            this.データIDColumn1.Name = "データIDColumn1";
-            this.データIDColumn1.ReadOnly = true;
-            // 
-            // 管理連番Column1
-            // 
-            this.管理連番Column1.DataPropertyName = "管理連番";
-            this.管理連番Column1.HeaderText = "管理連番";
-            this.管理連番Column1.Name = "管理連番Column1";
-            this.管理連番Column1.ReadOnly = true;
-            // 
-            // レコード件数Column1
-            // 
-            this.レコード件数Column1.DataPropertyName = "レコード件数";
-            this.レコード件数Column1.HeaderText = "レコード件数";
-            this.レコード件数Column1.Name = "レコード件数Column1";
-            this.レコード件数Column1.ReadOnly = true;
-            // 
-            // createdAtColumn1
-            // 
-            this.createdAtColumn1.DataPropertyName = "created_at";
-            this.createdAtColumn1.HeaderText = "created_at";
-            this.createdAtColumn1.Name = "createdAtColumn1";
-            this.createdAtColumn1.ReadOnly = true;
-            // 
-            // deliveryTabPage3
-            // 
-            this.deliveryTabPage3.Controls.Add(this.finishOrderButton1);
-            this.deliveryTabPage3.Controls.Add(this.dataGridView3);
-            this.deliveryTabPage3.Location = new System.Drawing.Point(4, 22);
-            this.deliveryTabPage3.Name = "deliveryTabPage3";
-            this.deliveryTabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.deliveryTabPage3.Size = new System.Drawing.Size(909, 343);
-            this.deliveryTabPage3.TabIndex = 2;
-            this.deliveryTabPage3.Text = "Receiving confirm";
-            this.deliveryTabPage3.UseVisualStyleBackColor = true;
+            this.receivedTabPage.Controls.Add(this.finishOrderButton1);
+            this.receivedTabPage.Controls.Add(this.receivedDataGridView);
+            this.receivedTabPage.Location = new System.Drawing.Point(4, 22);
+            this.receivedTabPage.Name = "receivedTabPage";
+            this.receivedTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.receivedTabPage.Size = new System.Drawing.Size(909, 343);
+            this.receivedTabPage.TabIndex = 2;
+            this.receivedTabPage.Text = "Received confirm";
+            this.receivedTabPage.UseVisualStyleBackColor = true;
             // 
             // finishOrderButton1
             // 
@@ -365,14 +351,14 @@
             this.finishOrderButton1.UseVisualStyleBackColor = true;
             this.finishOrderButton1.Click += new System.EventHandler(this.finishOrderButton1_Click);
             // 
-            // dataGridView3
+            // receivedDataGridView
             // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.receivedDataGridView.AllowUserToAddRows = false;
+            this.receivedDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.receivedDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.receivedDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.納品日Column21,
             this.受注日Column21,
             this.出荷日Column21,
@@ -387,12 +373,12 @@
             this.受領金額Column1,
             this.受領差異数量Column1,
             this.受領差異金額Column1});
-            this.dataGridView3.Location = new System.Drawing.Point(3, 60);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.RowTemplate.Height = 23;
-            this.dataGridView3.Size = new System.Drawing.Size(903, 280);
-            this.dataGridView3.TabIndex = 0;
+            this.receivedDataGridView.Location = new System.Drawing.Point(3, 60);
+            this.receivedDataGridView.Name = "receivedDataGridView";
+            this.receivedDataGridView.RowHeadersVisible = false;
+            this.receivedDataGridView.RowTemplate.Height = 23;
+            this.receivedDataGridView.Size = new System.Drawing.Size(903, 280);
+            this.receivedDataGridView.TabIndex = 0;
             // 
             // 納品日Column21
             // 
@@ -489,9 +475,213 @@
             this.受領差異金額Column1.Name = "受領差異金額Column1";
             this.受領差異金額Column1.ReadOnly = true;
             // 
+            // データIDColumn1
+            // 
+            this.データIDColumn1.DataPropertyName = "データID";
+            this.データIDColumn1.HeaderText = "データID";
+            this.データIDColumn1.Name = "データIDColumn1";
+            this.データIDColumn1.ReadOnly = true;
+            // 
+            // 管理連番Column1
+            // 
+            this.管理連番Column1.DataPropertyName = "管理連番";
+            this.管理連番Column1.HeaderText = "管理連番";
+            this.管理連番Column1.Name = "管理連番Column1";
+            this.管理連番Column1.ReadOnly = true;
+            // 
+            // レコード件数Column1
+            // 
+            this.レコード件数Column1.DataPropertyName = "レコード件数";
+            this.レコード件数Column1.HeaderText = "レコード件数";
+            this.レコード件数Column1.Name = "レコード件数Column1";
+            this.レコード件数Column1.ReadOnly = true;
+            this.レコード件数Column1.Width = 120;
+            // 
+            // createdAtColumn1
+            // 
+            this.createdAtColumn1.DataPropertyName = "created_at";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.createdAtColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.createdAtColumn1.HeaderText = "作成時間";
+            this.createdAtColumn1.Name = "createdAtColumn1";
+            this.createdAtColumn1.ReadOnly = true;
+            this.createdAtColumn1.Width = 120;
+            // 
+            // shippedTabPage
+            // 
+            this.shippedTabPage.Controls.Add(this.pager3);
+            this.shippedTabPage.Controls.Add(this.shippedDataGridView);
+            this.shippedTabPage.Location = new System.Drawing.Point(4, 22);
+            this.shippedTabPage.Name = "shippedTabPage";
+            this.shippedTabPage.Size = new System.Drawing.Size(909, 343);
+            this.shippedTabPage.TabIndex = 3;
+            this.shippedTabPage.Text = "Shipped";
+            this.shippedTabPage.UseVisualStyleBackColor = true;
+            // 
+            // shippedDataGridView
+            // 
+            this.shippedDataGridView.AllowUserToAddRows = false;
+            this.shippedDataGridView.AllowUserToDeleteRows = false;
+            this.shippedDataGridView.AllowUserToResizeColumns = false;
+            this.shippedDataGridView.AllowUserToResizeRows = false;
+            this.shippedDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.shippedDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.shippedDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn9,
+            this.dataGridViewTextBoxColumn10,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14});
+            this.shippedDataGridView.Location = new System.Drawing.Point(3, 29);
+            this.shippedDataGridView.Name = "shippedDataGridView";
+            this.shippedDataGridView.ReadOnly = true;
+            this.shippedDataGridView.RowHeadersVisible = false;
+            this.shippedDataGridView.RowTemplate.Height = 23;
+            this.shippedDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.shippedDataGridView.Size = new System.Drawing.Size(903, 280);
+            this.shippedDataGridView.TabIndex = 1;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "納品日";
+            this.dataGridViewTextBoxColumn1.HeaderText = "納品日";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "受注日";
+            this.dataGridViewTextBoxColumn2.HeaderText = "受注日";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "出荷日";
+            this.dataGridViewTextBoxColumn3.HeaderText = "出荷日";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "店舗名漢字";
+            this.dataGridViewTextBoxColumn4.HeaderText = "店舗名漢字";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "伝票番号";
+            this.dataGridViewTextBoxColumn5.HeaderText = "伝票番号";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "品名漢字";
+            this.dataGridViewTextBoxColumn6.HeaderText = "品名漢字";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "規格名漢字";
+            this.dataGridViewTextBoxColumn7.HeaderText = "規格名漢字";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "実際出荷数量";
+            this.dataGridViewTextBoxColumn8.HeaderText = "実際出荷数量";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "実際配送担当";
+            this.dataGridViewTextBoxColumn9.HeaderText = "実際配送担当";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "受領";
+            this.dataGridViewTextBoxColumn10.HeaderText = "受領";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "受領数量";
+            this.dataGridViewTextBoxColumn11.HeaderText = "受領数量";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "受領金額";
+            this.dataGridViewTextBoxColumn12.HeaderText = "受領金額";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "受領差異数量";
+            this.dataGridViewTextBoxColumn13.HeaderText = "受領差異数量";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "受領差異金額";
+            this.dataGridViewTextBoxColumn14.HeaderText = "受領差異金額";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.printForEDIToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
+            // 
+            // printForEDIToolStripMenuItem
+            // 
+            this.printForEDIToolStripMenuItem.Name = "printForEDIToolStripMenuItem";
+            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.printForEDIToolStripMenuItem.Text = "印刷";
+            this.printForEDIToolStripMenuItem.Click += new System.EventHandler(this.printForEDIToolStripMenuItem_Click);
+            // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // pager3
+            // 
+            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager3.AutoSize = true;
+            this.pager3.Location = new System.Drawing.Point(3, 310);
+            this.pager3.Name = "pager3";
+            this.pager3.NMax = 0;
+            this.pager3.PageCount = 0;
+            this.pager3.PageCurrent = 1;
+            this.pager3.PageSize = 5000;
+            this.pager3.Size = new System.Drawing.Size(903, 31);
+            this.pager3.TabIndex = 2;
+            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
             // 
             // ShippingOrderForm
             // 
@@ -505,15 +695,20 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ShippingOrderForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.pendingTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.shipNODataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.asnTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.deliveryTabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            this.receivedTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.receivedDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource4)).EndInit();
+            this.shippedTabPage.ResumeLayout(false);
+            this.shippedTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.shippedDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -522,22 +717,17 @@
 
         private GODInventory.ViewModel.EntityDataSource entityDataSource1;
         private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.Button printForEDIButton;
         private System.Windows.Forms.Button uploadForEDIButton;
         private System.Drawing.Printing.PrintDocument printDocument;
         private System.Windows.Forms.PrintDialog printDialog1;
         private System.Windows.Forms.Button generateASNButton;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage pendingTabPage;
+        private System.Windows.Forms.TabPage asnTabPage;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.BindingSource bindingSource2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn データIDColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 管理連番Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn レコード件数Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn createdAtColumn1;
-        private System.Windows.Forms.TabPage deliveryTabPage3;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.TabPage receivedTabPage;
+        private System.Windows.Forms.DataGridView receivedDataGridView;
         private System.Windows.Forms.Button finishOrderButton1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品日Column21;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column21;
@@ -553,7 +743,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 受領金額Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受領差異数量Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受領差異金額Column1;
-        private System.Windows.Forms.BindingSource bindingSource3;
+        private System.Windows.Forms.BindingSource bindingSource4;
         private System.Windows.Forms.DataGridView shipNODataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn ShipNOColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn shipAtColumn;
@@ -568,5 +758,29 @@
         private System.Windows.Forms.ToolStripMenuItem unlockToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn データIDColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 管理連番Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn レコード件数Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn createdAtColumn1;
+        private System.Windows.Forms.TabPage shippedTabPage;
+        private Pager pager3;
+        private System.Windows.Forms.DataGridView shippedDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.BindingSource bindingSource3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem printForEDIToolStripMenuItem;
     }
 }

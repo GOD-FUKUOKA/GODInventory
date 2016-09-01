@@ -23,7 +23,7 @@ namespace GODInventoryWinForm.Controls
         {
             InitializeComponent();
             this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView3.AutoGenerateColumns = false;
+            this.receivedDataGridView.AutoGenerateColumns = false;
             this.shipNODataGridView.AutoGenerateColumns = false;
             
             reportForm = new ReceivedOrdersReportForm();
@@ -36,6 +36,7 @@ namespace GODInventoryWinForm.Controls
 
             InitializeEdiData();
 
+            InitializeShippedOrders();
         }
 
         private int InitializeOrderData()
@@ -52,9 +53,6 @@ namespace GODInventoryWinForm.Controls
             // create BindingList (sortable/filterable)
             //this.bindingSource1.DataSource = entityDataSource1.CreateView(q);
             // assign BindingList to grid
-            
-
-
             return 0;
 
         }
@@ -66,32 +64,47 @@ namespace GODInventoryWinForm.Controls
         
         }
 
-        private int InitializeReceivingOrder()
+        private int InitializeShippedOrders()
         {
 
-            var q = OrderSqlHelper.ASNOrderSql(entityDataSource1);
-            
-            var count = q.Count();
-            
-            this.bindingSource3.DataSource = entityDataSource1.CreateView(q);
-            // assign BindingList to grid
-            dataGridView3.DataSource = this.bindingSource3;
+            var q = OrderSqlHelper.ShippedOrderSql(entityDataSource1);            
+            var count = q.Count();  
+            if( count >0 ){
 
+                if (pager3.PageCurrent > 1)
+                {
+                    q = q.Skip(pager3.OffSet(pager3.PageCurrent - 1));
+                }
+                q = q.Take(pager3.OffSet(pager3.PageCurrent));
+
+                this.bindingSource3.DataSource = entityDataSource1.CreateView(q);
+                // assign BindingList to grid
+                shippedDataGridView.AutoGenerateColumns = false;
+                shippedDataGridView.DataSource = this.bindingSource3;
+            
+            }
             return count;
-
         }
-        
+        private int InitializeReceivedOrder()
+        {
+            var q = OrderSqlHelper.ReceivedOrderSql(entityDataSource1);
+            this.bindingSource4.DataSource = entityDataSource1.CreateView(q);
+            // assign BindingList to grid
+            receivedDataGridView.DataSource = this.bindingSource4;
+            return 0;
+        }        
 
         private void uploadForEDIButton_Click(object sender, EventArgs e)
         {
             var ids = GetEdiDataIdsBySelectedGridCell();
-            if (ids.Count > 0) { 
-            // 上传相应ASN数据
+            if (ids.Count > 0) {
+                // TODO 数据上传
+                // 上传相应ASN数据
                 using (var ctx = new GODDbContext())
                 {
-
                     var edidata = ctx.t_edidata.Find(ids.First());
-
+                    string sql = String.Format("UPDATE t_orderdata SET `Status`= {1}  WHERE `ASN管理連番` = ({0})", edidata.管理連番, (int)OrderStatus.Shipped);
+                    ctx.Database.ExecuteSqlCommand(sql);
                     edidata.is_sent = true;
                     edidata.sent_at = DateTime.Now;
                     ctx.SaveChanges();
@@ -104,17 +117,7 @@ namespace GODInventoryWinForm.Controls
         private void printForEDIButton_Click(object sender, EventArgs e)
         {
            
-            var rows = dataGridView2.SelectedRows;
-            if (rows.Count > 0) {
 
-                var edidata = rows[0].DataBoundItem as t_edidata;
-                var orders = OrderSqlHelper.ASNOrderDataListByMid(entityDataSource1, edidata.管理連番);
-                
-                reportForm.OrderEnities = orders;
-                reportForm.InitializeDataSource();
-                reportForm.ShowDialog();
-                InitializeEdiData();
-            }
             
         }
 
@@ -148,18 +151,6 @@ namespace GODInventoryWinForm.Controls
             return rows.Distinct();
         }
 
-        //private List<int> GetOrderIdsBySelectedGridCell( ) { 
-        
-        //    List<int> order_ids = new List<int>();
-        //    var rows = GetSelectedRowsBySelectedCells( dataGridView1 );
-        //    foreach(DataGridViewRow row in rows)
-        //    {
-        //        var pendingorder = row.DataBoundItem as v_pendingorder;
-        //        order_ids.Add(pendingorder.id受注データ);
-        //    }
-
-        //    return order_ids;  
-        //}
 
         private List<int> GetEdiDataIdsBySelectedGridCell()
         {
@@ -179,7 +170,7 @@ namespace GODInventoryWinForm.Controls
         private void ShippingOrderForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             // trigger rdlc.dispose
-            reportForm.Close();
+            //reportForm.Close();
         }
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
@@ -196,17 +187,11 @@ namespace GODInventoryWinForm.Controls
 
         private int pager3_EventPaging(EventPagingArg e)
         {
-            int order_count = InitializeReceivingOrder();
+            int order_count = InitializeShippedOrders();
 
             return order_count;
         }
 
-        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
-        {
-            //if (e.TabPage == deliveryTabPage3) {
-            //    this.pager3.Bind();
-            //}
-        }
 
         private void finishOrderButton1_Click(object sender, EventArgs e)
         {
@@ -223,7 +208,7 @@ namespace GODInventoryWinForm.Controls
         {
 
             List<int> ids = new List<int>();
-            var rows = GetSelectedRowsBySelectedCells(dataGridView3);
+            var rows = GetSelectedRowsBySelectedCells(receivedDataGridView);
             foreach (DataGridViewRow row in rows)
             {
                 var t_orderdata = row.DataBoundItem as t_orderdata;
@@ -274,5 +259,31 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            //if (e.TabPage == shippedTabPage) {
+            //    pager3.Bind();                        
+            //}else if (e.TabPage == asnTabPage) { 
+            //}
+        }
+
+        private void printForEDIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintReportForEDI();
+        }
+
+
+        private void PrintReportForEDI()
+        {
+
+            var row = dataGridView2.CurrentRow;
+            var edidata = row.DataBoundItem as t_edidata;
+            var orders = OrderSqlHelper.ASNOrderDataListByMid(entityDataSource1, edidata.管理連番);
+
+            reportForm.InitializeDataSource(orders);
+            reportForm.ShowDialog();
+            InitializeEdiData();
+        }
+        
     }
 }

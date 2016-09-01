@@ -231,12 +231,31 @@ namespace GODInventory.ViewModel
         public static IQueryable<t_orderdata> ASNOrderSql(EntityDataSource entityDataSource1)
         {
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                     where o.Status == OrderStatus.ASN || o.Status == OrderStatus.Received
+                     where o.Status == OrderStatus.ASN 
                      orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                      select o
                      );
             return q;
         }
+        public static IQueryable<t_orderdata> ShippedOrderSql(EntityDataSource entityDataSource1)
+        {
+            var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
+                     where o.Status == OrderStatus.Shipped
+                     orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
+                     select o
+                     );
+            return q;
+        }
+        public static IQueryable<t_orderdata> ReceivedOrderSql(EntityDataSource entityDataSource1)
+        {
+            var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
+                     where o.Status == OrderStatus.Received
+                     orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
+                     select o
+                     );
+            return q;
+        }
+
         public static List<v_pendingorder> ASNOrderDataListByMid(EntityDataSource entityDataSource1, long mid)
         {
 
@@ -272,7 +291,7 @@ namespace GODInventory.ViewModel
         public static IBindingList ASNEdiDataList(EntityDataSource entityDataSource1)
         {
             var q = (from t_edidata o in entityDataSource1.EntitySets["t_edidata"]
-                     where !o.is_sent || !o.is_printed
+                     where !o.is_sent
                      orderby o.Id descending
                      select o);
             return entityDataSource1.CreateView(q); ;

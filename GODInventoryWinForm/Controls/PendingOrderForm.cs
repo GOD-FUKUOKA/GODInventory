@@ -26,7 +26,6 @@ namespace GODInventoryWinForm.Controls
         List<t_orderdata> Findorderdataresults;
         int RowRemark = 0;
         int cloumn = 0;
-        private string id受注データdemo;
 
         private List<t_orderdata> ecOrderList;
         private List<v_pendingorder> shipperOrderList;
@@ -962,7 +961,6 @@ namespace GODInventoryWinForm.Controls
         {
             RowRemark = e.RowIndex;
             cloumn = e.ColumnIndex;
-            id受注データdemo = dataGridView1.Rows[RowRemark].Cells["id受注データ"].EditedFormattedValue.ToString();
 
         }
 

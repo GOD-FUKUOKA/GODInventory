@@ -74,6 +74,8 @@
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="Design\ContextTypeTypeConverter.cs" />
     <Compile Include="Design\EntitySetTypeDescriptor.cs" />
+    <Compile Include="EDI\ReceivedCSVOrderHeadModel.cs" />
+    <Compile Include="EDI\ReceivedCSVOrderModel.cs" />
     <Compile Include="EDI\CSVOrderModel.cs" />
     <Compile Include="EDI\CSVOrderHeadModel.cs" />
     <Compile Include="EDI\EDITxtHandler.cs" />

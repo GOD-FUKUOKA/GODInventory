@@ -138,3 +138,7 @@ ALTER TABLE `god_inventory`.`t_genre`
 ADD COLUMN `Position` INT(11) UNSIGNED NOT NULL;
 ALTER TABLE `god_inventory`.`t_manufacturers` 
 ADD COLUMN `Position` INT(11) UNSIGNED NOT NULL;
+
+-- V3.4-----------------------------------------------------------------
+ALTER TABLE `god_inventory`.`t_orderdata` 
+ADD COLUMN `受注管理連番` BIGINT(20) NOT NULL DEFAULT 0 AFTER `ASN管理連番`;
