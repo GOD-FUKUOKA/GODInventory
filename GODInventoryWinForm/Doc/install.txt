@@ -30,3 +30,7 @@ CHANGE COLUMN `店舗コード` `店舗コード` INT(4) NOT NULL DEFAULT 0;
 
 #v3.1
 ============================================-
+ALTER TABLE `god_inventory`.`t_genre` 
+ADD COLUMN `Position` INT(11) UNSIGNED NOT NULL;
+ALTER TABLE `god_inventory`.`t_manufacturers` 
+ADD COLUMN `Position` INT(11) UNSIGNED NOT NULL;

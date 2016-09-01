@@ -333,7 +333,7 @@ namespace GODInventory.ViewModel.EDI
             orderdata.総額取引区分 = Convert.ToInt16(this.総額取引区分);
             // tbd...
             orderdata.原単価_税抜_ = Convert.ToInt32(this.原単価_税抜_)/100;
-            orderdata.原単価_税込_ = Convert.ToInt32(this.原単価_税込_)/100.0; //48 原単価(税込 )   9 436
+            orderdata.原単価_税込_ = Convert.ToDouble(this.原単価_税込_)/100.0; //48 原単価(税込 )   9 436
             orderdata.原価金額_税抜_ = Convert.ToInt32(this.原価金額_税抜_);
             orderdata.原価金額_税込_ = Convert.ToInt32(this.原価金額_税込_);
 
@@ -362,7 +362,7 @@ namespace GODInventory.ViewModel.EDI
             orderdata.納品先店舗コード = Convert.ToInt16(this.納品先店舗コード);
             orderdata.納品先店舗名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.納品先店舗名漢字).Trim();
             orderdata.納品先店舗名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.納品先店舗名カナ).Trim();
-            orderdata.納品場所コード = Convert.ToInt16(this.納品場所コード);
+            orderdata.納品場所コード = (this.納品場所コード.Trim().Length > 0 ? Convert.ToInt16(this.納品場所コード) : (short)0);
             orderdata.納品場所名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.納品場所名漢字).Trim();
             orderdata.納品場所名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.納品場所名カナ).Trim();
             orderdata.便区分 = Convert.ToInt16(this.便区分);
@@ -381,7 +381,9 @@ namespace GODInventory.ViewModel.EDI
             //bool exist = orders.Exists( o=> ( o.店舗コード == orderdata.店舗コード && o.商品コード == orderdata.商品コード ));
             //orderdata.ダブリ = exist ? "yes" : "no";
             orderdata.口数 = item.PT入数;
-            orderdata.重量 = (int)( item.単品重量 * orderdata.発注数量);
+
+            //有些为空的，订单重量 设置为0
+            orderdata.重量 = (int)((item.単品重量 != null ? item.単品重量 : 0) * orderdata.発注数量);
             orderdata.ジャンル = item.ジャンル;
             orderdata.単位 = item.単位;
             orderdata.自社コード = item.自社コード;
