@@ -39,21 +39,19 @@ namespace GODInventoryWinForm.Controls
 
             using (var ctx = new GODDbContext())
             {
-                genreList = ctx.t_genre.ToList();
+                genreList = ctx.t_genre.OrderBy(o => o.Position).ToList();
                 warehouseList = ctx.t_warehouses.ToList();
-                manufacturerList = ctx.t_manufacturers.ToList();
+                manufacturerList = ctx.t_manufacturers.OrderBy(o => o.Position).ToList();
                 customersList = ctx.t_customers.ToList();
             }
             this.genreComboBox.DisplayMember = "ジャンル名";
             this.genreComboBox.ValueMember = "idジャンル";
-            this.genreComboBox.ValueMember = "Position";
             this.genreComboBox.DataSource = genreList;
 
 
             //this.manufacturerList = ManufactureRespository.ToList();
             this.manufacturerComboBox.DisplayMember = "FullName";
-            //this.manufacturerComboBox.ValueMember = "Id";
-            this.manufacturerComboBox.ValueMember = "Position";
+            this.manufacturerComboBox.ValueMember = "Id";
             this.manufacturerComboBox.DataSource = manufacturerList;
 
 
@@ -69,17 +67,7 @@ namespace GODInventoryWinForm.Controls
             this.clientComboBox.DisplayMember = "FullName";
             this.clientComboBox.ValueMember = "Id";
             this.clientComboBox.DataSource = customersList;
-
-
-
-            var last_order = (from s in genreList
-                              where s.idジャンル >= 0
-                              orderby s.Position ascending
-                              select s).FirstOrDefault();
-
-            this.genreComboBox.SelectedIndex = last_order.Position;
-            this.manufacturerComboBox.SelectedIndex = last_order.Position;
-            
+         
 
             //BuildStockNO();
         }
@@ -122,8 +110,7 @@ namespace GODInventoryWinForm.Controls
         {
             try
             {
-                List<t_stockrec> receivedList = new List<t_stockrec>();
-                List<t_stockstate> Savev_stockcheck = new List<t_stockstate>();
+                List<t_stockrec> changeList = new List<t_stockrec>();
                 foreach (var item in stockiosList)
                 {
                     if (item.qty > 0)
@@ -141,45 +128,45 @@ namespace GODInventoryWinForm.Controls
                         order.工厂 = this.manufacturerComboBox.Text;
                         order.客户 = this.clientComboBox.Text;
 
-                        receivedList.Add(order);
+                        changeList.Add(order);
                     }
                 }
-                if (receivedList.Count > 0)
+                if (changeList.Count > 0)
                 {
 
                     using (var ctx = new GODDbContext())
                     {
 
-                        ctx.t_stockrec.AddRange(receivedList);
+                        ctx.t_stockrec.AddRange(changeList);
                         List<int> pids = new List<int>();
-                        foreach (var item in receivedList)
+                        foreach (var item in changeList)
                         {
                             pids.Add(item.自社コード);
                         }
-                        OrderSqlHelper.UpdateStockState(ctx, pids);
                         ctx.SaveChanges();
+                        OrderSqlHelper.UpdateStockState(ctx, changeList);
                         this.stockiosList.Clear();
                     }
-                    MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", receivedList.Count));
+                    MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", changeList.Count));
                     // rebuild stock no, new stockrec created.
                     BuildStockNO();
                     //save volume
 
                     #region MyRegion
-                    //if (receivedList.Count > 0)
+                    //if (changeList.Count > 0)
                     //{
                     //    Savev_stockcheck = new List<t_stockstate>();
 
                     //    using (var ctx = new GODDbContext())
                     //    {
 
-                    //        foreach (t_stockrec oitem in receivedList)
+                    //        foreach (t_stockrec oitem in changeList)
                     //        {
                     //            string sql = @"SELECT SUM( 数量 )as `数量`,  `自社コード` FROM t_stockrec  WHERE   自社コード ='" + oitem.自社コード + "';";//s  WHERE (s.`先` = {1})GROUP by s.`自社コード`;
                     //            //读取StockRec的数量集合
                     //            var list1 = ctx.Database.SqlQuery<v_stockcheck>(sql).ToList();
                     //            //将数量写入到t_stockstate
-                    //            var ids = receivedList.Select(s => s.自社コード).ToArray();
+                    //            var ids = changeList.Select(s => s.自社コード).ToArray();
                     //            var list = (from s in ctx.t_stockstate
                     //                        where ids.Contains(s.自社コード)
                     //                        select s).ToList();
@@ -217,7 +204,7 @@ namespace GODInventoryWinForm.Controls
                     //        //ctx.t_stockrec.AddRange(Savev_stockcheck);
 
                     //        List<int> pids = new List<int>();
-                    //        foreach (var item in receivedList)
+                    //        foreach (var item in changeList)
                     //        {
                     //            pids.Add(item.自社コード);
                     //        }

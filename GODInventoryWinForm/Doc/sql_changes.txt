@@ -142,3 +142,18 @@ ADD COLUMN `Position` INT(11) UNSIGNED NOT NULL;
 -- V3.4-----------------------------------------------------------------
 ALTER TABLE `god_inventory`.`t_orderdata` 
 ADD COLUMN `受注管理連番` BIGINT(20) NOT NULL DEFAULT 0 AFTER `ASN管理連番`;
+
+-- V3.6-----------------------------------------------------------------
+ALTER TABLE `god_inventory`.`t_warehouses` 
+ADD COLUMN `ShipperName`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL;
+
+UPDATE `god_inventory`.`t_warehouses` SET `ShipperName`='MKL' WHERE `Id`='2';
+UPDATE `god_inventory`.`t_warehouses` SET `ShipperName`='マツモト産業' WHERE `Id`='3';
+UPDATE `god_inventory`.`t_warehouses` SET `ShipperName`='丸健' WHERE `Id`='1';
+
+
+ALTER TABLE `god_inventory`.`t_stockstate` 
+ADD COLUMN  `WarehouseId` INT(4) NOT NULL DEFAULT 0 AFTER `自社コード`,
+ADD COLUMN `ShipperName`  varchar(255) CHARACTER SET 'utf8' COLLATE utf8_unicode_ci DEFAULT NULL,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`自社コード`, `WarehouseId`);

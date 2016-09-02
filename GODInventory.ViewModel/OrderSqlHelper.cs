@@ -93,10 +93,11 @@ namespace GODInventory.ViewModel
         public static IQueryable<v_pendingorder> PendingOrderQueryEx(EntityDataSource entityDataSource1)
         {
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                     join t_genre g in entityDataSource1.EntitySets["t_genre"] on o.ジャンル equals g.idジャンル
                      //join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on new { jid = o.ＪＡＮコード, sid = o.実際配送担当 } equals new { jid = i.JANコード, sid = i.配送担当 }
                      //join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on o.自社コード equals  i.自社コード
-                     //join t_stockstate k in entityDataSource1.EntitySets["t_stockstate"] on o.自社コード equals k.自社コード
+                     join t_stockstate k in entityDataSource1.EntitySets["t_stockstate"] on new { pid = o.自社コード, sid = o.実際配送担当 } equals new { pid = k.自社コード, sid = k.ShipperName } into t_join
+                     from x in t_join.DefaultIfEmpty()
+                     join t_genre g in entityDataSource1.EntitySets["t_genre"] on o.ジャンル equals g.idジャンル
                      where o.Status == OrderStatus.Pending
                      orderby o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                      select new v_pendingorder
@@ -124,7 +125,7 @@ namespace GODInventory.ViewModel
                          一旦保留 = o.一旦保留,
                          在庫状態 = o.在庫状態,
                          納品指示 = o.納品指示,
-                         在庫数 = 0,
+                         在庫数 = x.在庫数,
                          GenreName = g.ジャンル名
                      });
             return q;
@@ -485,26 +486,71 @@ namespace GODInventory.ViewModel
         }
 
 
-        public static int UpdateStockState(GODDbContext ctx, List<int> productCodes)
+        public static int UpdateStockState(GODDbContext ctx, List<t_stockrec> stockrecs)
         {
             int count = 0;
 
-                foreach( var pid in productCodes){
+            var warehouseList = ctx.t_warehouses.ToList();
+            t_warehouses warehouse;
+
+            foreach (var rec in stockrecs)
+            {
+                var pid = rec.自社コード;
+                if (rec.区分 == StockIoEnum.出庫.ToString())
+                {
+                    warehouse = warehouseList.First(o => o.FullName == rec.元);
+                }
+                else {
+                    warehouse = warehouseList.First(o => o.FullName == rec.先);                                
+                }
+                
+
                     //SELECT sum() FROM god_inventory.t_stockrec where `区分`='入庫' and `自社コード`=100234 and `状態`="完了";
                     //SELECT * FROM god_inventory.t_stockrec where `区分`='出庫' and `自社コード`=100234 and `状態`="完了";
-                   var income = (from s in ctx.t_stockrec
-                     where s.区分 == "入庫" && s.自社コード == pid && s.状態 == "完了"
-                     select s.数量).Sum();
-                   var outcome = (from s in ctx.t_stockrec
-                                  where s.区分 == "出庫" && s.自社コード == pid && s.状態 == "完了"
-                                  select s.数量).Sum();
+                   //var income = (from s in ctx.t_stockrec
+                   //  where s.区分 == "入庫" && s.自社コード == pid && s.状態 == "完了"
+                   //  select s.数量).Sum();
+                   //var outcome = (from s in ctx.t_stockrec
+                   //               where s.区分 == "出庫" && s.自社コード == pid && s.状態 == "完了"
+                   //               select s.数量).Sum();
                    // income/outcome may be null
-                   income = Convert.ToInt32(income);
-                   outcome = Convert.ToInt32(outcome);
-                   string sql = String.Format("UPDATE t_stockstate SET `在庫数`={1}  WHERE `自社コード` ={0} ", pid, income + outcome );
-                   count = ctx.Database.ExecuteSqlCommand(sql);
+                   //income = Convert.ToInt32(income);
+                   //outcome = Convert.ToInt32(outcome);
+                   var nullableQty = (from s in ctx.t_stockrec
+                              where s.自社コード == pid && s.状態 == "完了" && (s.先==warehouse.FullName || s.元 == warehouse.FullName)
+                                  select s.数量).Sum();
+                   var qty = Convert.ToInt32(nullableQty);
+
+                  
+
+                   var stockstate = ctx.t_stockstate.Find(pid, warehouse.Id);
+
+                   if (stockstate != null)
+                   {
+                       stockstate.在庫数 = qty;
+                       stockstate.ShipperName = warehouse.ShipperName;
+                   }
+                   else {
+                       stockstate = new t_stockstate();
+                       stockstate.自社コード = pid;
+                       stockstate.WarehouseID = warehouse.Id;
+                       stockstate.ShipperName = warehouse.ShipperName;
+                       stockstate.在庫数 = qty;
+
+                       ctx.t_stockstate.Add(stockstate);
+                   }
+                   if (qty > 0)
+                   {
+                       stockstate.在庫状態 = "あり";
+                   }
+                   else
+                   {
+
+                       stockstate.在庫状態 = "なし";
+                   } 
+                ctx.SaveChanges();
                    
-                }
+            }
             
             
             return count;

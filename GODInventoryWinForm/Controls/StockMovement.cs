@@ -14,7 +14,7 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class StockMovement : Form
     {
-        private List<MockEntity> manufacturerList;
+        private List<t_manufacturers> manufacturerList;
         private List<t_warehouses> warehouseList;
         private BindingList<t_stockrec> stocklist;
         private List<t_genre> genreList;
@@ -42,14 +42,14 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {                
                 warehouseList = ctx.t_warehouses.ToList();
-                genreList = ctx.t_genre.ToList();
+                genreList = ctx.t_genre.OrderBy(o => o.Position).ToList();
+                manufacturerList = ctx.t_manufacturers.OrderBy(o => o.Position).ToList();
             }
 
             this.genreComboBox.DisplayMember = "ジャンル名";
             this.genreComboBox.ValueMember = "idジャンル";
             this.genreComboBox.DataSource = genreList;
 
-            this.manufacturerList = ManufactureRespository.ToList();
             this.manufacturerComboBox.DisplayMember = "FullName";
             this.manufacturerComboBox.ValueMember = "Id";
             this.manufacturerComboBox.DataSource = manufacturerList;
@@ -130,9 +130,10 @@ namespace GODInventoryWinForm.Controls
                             pids.Add(item.自社コード);
                         }
 
-                        OrderSqlHelper.UpdateStockState(ctx, pids);
 
                         ctx.SaveChanges();
+
+                        OrderSqlHelper.UpdateStockState(ctx, changeList);
                         this.stockiosList.Clear();
                        
 

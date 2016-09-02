@@ -34,3 +34,22 @@ ALTER TABLE `god_inventory`.`t_genre`
 ADD COLUMN `Position` INT(11) UNSIGNED NOT NULL;
 ALTER TABLE `god_inventory`.`t_manufacturers` 
 ADD COLUMN `Position` INT(11) UNSIGNED NOT NULL;
+
+UPDATE `god_inventory`.`t_genre` SET `Position` = `Position`+1 WHERE `ジャンル名` != '砂バラス' and idジャンル<10000;
+UPDATE `god_inventory`.`t_manufacturers` SET `Position` = `Position`+1 WHERE `ShortName` != '自社工場' and Id<10000;
+
+
+#v3.6
+============================================-
+ALTER TABLE `god_inventory`.`t_warehouses` 
+ADD COLUMN `ShipperName`  varchar(255) CHARACTER SET 'utf8' DEFAULT NULL;
+
+UPDATE `god_inventory`.`t_warehouses` SET `ShipperName`='MKL' WHERE `Id`='2';
+UPDATE `god_inventory`.`t_warehouses` SET `ShipperName`='マツモト産業' WHERE `Id`='3';
+UPDATE `god_inventory`.`t_warehouses` SET `ShipperName`='丸健' WHERE `Id`='1';
+
+ALTER TABLE `god_inventory`.`t_stockstate` 
+ADD COLUMN  `WarehouseId` INT(4) NOT NULL DEFAULT 0 AFTER `自社コード`,
+ADD COLUMN `ShipperName`  varchar(255) CHARACTER SET 'utf8' COLLATE utf8_unicode_ci DEFAULT NULL,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`自社コード`, `WarehouseId`);

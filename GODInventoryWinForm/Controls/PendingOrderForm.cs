@@ -28,6 +28,8 @@ namespace GODInventoryWinForm.Controls
         int RowRemark = 0;
         int cloumn = 0;
 
+        private List<v_pendingorder> pendingOrderList;
+        private SortableBindingList<v_pendingorder> sortablePendingOrderList;
         private List<t_orderdata> ecOrderList;
         private List<v_pendingorder> shipperOrderList;
 
@@ -127,42 +129,13 @@ namespace GODInventoryWinForm.Controls
             this.pager1.Bind();
         }
 
-
         #endregion
 
         private void redundantButton_Click(object sender, EventArgs e)
         {
 
 
-        }
-
-        private void submitButton_Click(object sender, EventArgs e)
-        {
-            /*
-                        entityDataSource1.SaveChanges();
-                        List<object> canceled_data = new List<object>();
-                        foreach (t_orderdata data in bindingSource1.List)
-                        {
-                            if (data.キャンセル == "yes")
-                            {
-                                canceled_data.Add(data);
-                            }
-                        }
-                        foreach (var data in canceled_data)
-                        {
-                            bindingSource1.Remove(data);
-                        }
-                        */
-        }
-
-        private void OrderCheckForm_Load(object sender, EventArgs e)
-        {
-
-
-            //this.Location = new Point(50, 25);
-
-        }
-      
+        }    
 
         private void saveButton_Click(object sender, EventArgs e)
         {
@@ -316,28 +289,28 @@ namespace GODInventoryWinForm.Controls
 
             if (count > 0)
             {
-                var q = OrderSqlHelper.PendingOrderQueryEx(entityDataSource1);
-                // 分页
+                string sql = @" SELECT o.*, g.`ジャンル名` as `GenreName`, K.`在庫数` as `在庫数`  from t_orderdata o
+INNER JOIN t_genre g  on o.ジャンル = g.idジャンル
+LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.実際配送担当 = k.ShipperName 
+WHERE o.Status ={0}
+ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号 LIMIT {1} OFFSET {2};";
 
-                if (pager1.PageCurrent > 1)
-                {
-                    q = q.Skip(pager1.OffSet(pager1.PageCurrent - 1));
-                }
-                q = q.Take(pager1.OffSet(pager1.PageCurrent));
+                //var q = OrderSqlHelper.PendingOrderQueryEx(entityDataSource1);
+                //// 分页
+                //if (pager1.PageCurrent > 1)
+                //{
+                //    q = q.Skip(pager1.OffSet(pager1.PageCurrent - 1));
+                //}
+                //q = q.Take(pager1.OffSet(pager1.PageCurrent));
 
                 // create BindingList (sortable/filterable)
-                var bindinglist = entityDataSource1.CreateView(q) as EntityBindingList<v_pendingorder>;
+                int offset = ( pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0 );
+                this.pendingOrderList = entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.Pending, pager1.PageSize, offset).ToList();
 
                 // count 计算t_orderdata 表， list 是 orderdata join itemlist join stockstate
                 // 所以有可能 bindinglist is null 
-                var list = new List<v_pendingorder>();
-                if (bindinglist != null)
-                {
-                    list = bindinglist.ToList();
-                }
 
-
-                IEnumerable<IGrouping<int, v_pendingorder>> grouped_orders = list.GroupBy(o => o.自社コード, o => o);
+                IEnumerable<IGrouping<int, v_pendingorder>> grouped_orders = pendingOrderList.GroupBy(o => o.自社コード, o => o);
                 foreach (var gos in grouped_orders)
                 {
                     int total = 0;
@@ -360,9 +333,8 @@ namespace GODInventoryWinForm.Controls
                         }
                     }
                 }
-                this.bindingSource1.DataSource = bindinglist;
-                // assign BindingList to grid
-               
+                sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
+                this.bindingSource1.DataSource = sortablePendingOrderList;               
             }
             else
             {
@@ -739,69 +711,6 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int s = this.tabControl1.SelectedIndex;
-            if (s == 0 && RowRemark >= 0)
-            {
-
-                //    string id = dataGridView1.Rows[RowRemark].Cells["StoreCodeColumn1"].EditedFormattedValue.ToString() + "a" + dataGridView1.Rows[RowRemark].Cells["InvoiceNOColumn1"].EditedFormattedValue.ToString();
-
-                //    CheckUserInfo_ID(id, "1", invoiceNoFilterTextBox.Text);
-
-                //    foreach (t_orderdata item in Findorderdataresults)
-                //    {
-                //        if (item.受注日 != null)
-                //            textBox2.Text = item.受注日.ToString();
-                //        if (item.店舗コード != null)
-                //            textBox3.Text = item.店舗コード.ToString();
-                //        if (item.店舗名漢字 != null)
-                //            textBox4.Text = item.店舗名漢字.ToString();
-                //        if (item.伝票番号 != null)
-                //            textBox5.Text = item.伝票番号.ToString();
-                //        if (item.キャンセル != null)
-                //            textBox6.Text = item.キャンセル.ToString();
-                //        if (item.キャンセル時刻 != null)
-                //            textBox7.Text = item.キャンセル時刻.ToString();
-                //        //textBox8.Text = item.品名漢字.ToString();
-                //        if (item.ジャンル != null)
-                //            textBox9.Text = item.ジャンル.ToString();
-                //        if (item.品名漢字 != null)
-                //            textBox10.Text = item.品名漢字.ToString();
-                //        if (item.規格名漢字 != null)
-                //            textBox11.Text = item.規格名漢字.ToString();
-                //        if (item.発注数量 != null)
-                //            //textBox12.Text = item.重量.ToString();
-                //            textBox13.Text = item.発注数量.ToString();
-                //        if (item.口数 != null)
-                //            textBox14.Text = item.口数.ToString();
-                //        if (item.重量 != null)
-                //            textBox15.Text = item.重量.ToString();
-                //        if (item.単位 != null)
-                //            textBox16.Text = item.単位.ToString();
-                //        if (item.実際配送担当 != null)
-                //            textBox17.Text = item.実際配送担当.ToString();
-                //        if (item.県別 != null)
-                //            textBox18.Text = item.県別.ToString();
-                //        if (item.配送担当受信 != null)
-                //            textBox19.Text = item.配送担当受信.ToString();
-                //        if (item.配送担当受信時刻 != null)
-                //            textBox20.Text = item.配送担当受信時刻.ToString();
-                //        if (item.専務受信 != null)
-                //            textBox21.Text = item.専務受信.ToString();
-                //        if (item.専務受信時刻 != null)
-                //            textBox22.Text = item.専務受信時刻.ToString();
-                //        if (item.受注日 != null)
-                //            textBox23.Text = item.受注日.ToString();
-                //        if (item.納品指示 != null)
-                //            textBox24.Text = item.納品指示.ToString();
-                //        if (item.備考 != null)
-                //            textBox25.Text = item.備考.ToString();
-                //    }
-            }
-
-
-        }
         public void CheckUserInfo_ID(string username, string tyoe, string conditon2)
         {
             string SQLStr = "";
@@ -919,149 +828,6 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-
-        private void 二次製品ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            #region VB 逻辑
-            //         'SQL?
-            //sqlStr = "SELECT t_orderdata.`id受注データ`,t_orderdata.`id`,t_orderdata.`受注日`,t_orderdata.`店舗コード`," _
-            //    & " t_shoplist.`店名`,t_orderdata.`伝票番号`,t_orderdata.`品名漢字`,t_orderdata.`規格名漢字`," _
-            //    & " t_orderdata.`口数`, t_orderdata.`発注数量`, t_orderdata.`重量`, t_orderdata.`実際配送担当`,t_shoplist.`県別`," _
-            //    & " t_orderdata.`発注形態名称漢字`" _
-            //    & " FROM t_orderdata" _
-            //    & " INNER JOIN t_shoplist ON t_orderdata.`店舗コード` = t_shoplist.`店番`" _
-            //    & " WHERE t_orderdata.`キャンセル` = 'no' AND t_orderdata.`一旦保留`=0 AND t_orderdata.`社内伝番` IS NULL AND t_orderdata.`ジャンル` = '6'" _
-            //    & " ORDER BY t_orderdata.`実際配送担当` ASC,t_shoplist.`県別` ASC,t_orderdata.`店舗コード` ASC," _
-            //    & " t_orderdata.`ＪＡＮコード` ASC,t_orderdata.`受注日` ASC,t_orderdata.`伝票番号` ASC"
-
-
-            //            For i = 4 To n
-            //    sqlStr = "UPDATE t_orderdata" _
-            //        & " SET `社内伝番`=" & Cells(i, 15).Value & ", `行数`=" & Cells(i, 16).Value & ", `最大行数`=" & Cells(i, 17).Value _
-            //        & " WHERE t_orderdata.`id受注データ` =" & Cells(i, 1).Value
-            //    Set rs = con.Execute(sqlStr)
-            //Next 
-
-            #endregion
-            /*
-            using (var ctx = new GODDbContext())
-            {
-                var results = from s in ctx.t_orderdata
-                              where s.社内伝番 > 0
-                              select s;
-
-                newfaxno = new List<int>();
-
-                List<t_orderdata> newlis1 = new List<t_orderdata>();
-
-                foreach (var emp in results)
-                {
-
-                    t_orderdata item = new t_orderdata();
-                    item.社内伝番 = emp.社内伝番;
-
-                    newfaxno.Add(Convert.ToInt32(item.社内伝番));
-                    newlis1.Add(emp);
-
-
-                }
-                newfaxno.Sort();
-
-                //IQueryable<t_shoplist> pages = from p in ctx.t_shoplist
-                //                               where p.店番 > 0
-                //                               select p;
-
-                var resultsshoplist = from p in ctx.t_shoplist
-                                      where p.店番 > 0
-                                      select p;
-                //var query1 = Query<t_orderdata>.Matches(c => c.TIAOXINGMA, new BsonRegularExpression(new Regex(findtext)));
-
-
-                List<t_orderdata> newlis = new List<t_orderdata>();
-
-                foreach (var emp in resultsshoplist)
-                {
-                    foreach (var temp in newlis1)
-                    {
-                        if (emp.店番 == temp.店舗コード)
-                        {
-                            if (temp.キャンセル == "no" && temp.一旦保留 == false && temp.社内伝番 == null && temp.ジャンル == 6)
-                            {
-                                newlis.Add(temp);
-                            }
-                        }
-                    }
-                }
-
-                if (newlis.Count != 0)
-                {
-                    MessageBox.Show("未処理内容ありません！");
-                    return;
-                }
-                //社内伝番
-            }
-
-            var orders1 = new List<t_orderdata>();
-            //打开
-            int 社内伝番index = 0;
-            short index = 0;
-
-            if (dataGridView1.RowCount != 0)
-            {
-                List<string> aaa = new List<string>();
-
-                for (int i = 0; i < dataGridView1.RowCount; i++)
-                {
-                    if (dataGridView1.Rows[i].Cells["発注日"].EditedFormattedValue.ToString() == null || dataGridView1.Rows[i].Cells["発注日"].EditedFormattedValue.ToString() == "")
-                        break;
-                    t_orderdata item = new t_orderdata();
-                    item.発注日 = Convert.ToDateTime(dataGridView1.Rows[i].Cells["発注日"].EditedFormattedValue.ToString());
-                    item.伝票番号 = Convert.ToInt32(dataGridView1.Rows[i].Cells["伝票番号"].EditedFormattedValue.ToString());
-                    item.店舗コード = Convert.ToInt16(dataGridView1.Rows[i].Cells["店舗コード"].EditedFormattedValue.ToString());
-                    item.商品コード = Convert.ToInt32(dataGridView1.Rows[i].Cells["商品コード"].EditedFormattedValue.ToString());
-                    item.発注数量 = Convert.ToInt32(dataGridView1.Rows[i].Cells["発注数量"].EditedFormattedValue.ToString());
-                    System.Globalization.DateTimeFormatInfo dtFormat = new System.Globalization.DateTimeFormatInfo();
-                    dtFormat.ShortDatePattern = "yyyy-MM-dd";
-                    item.受注日 = Convert.ToDateTime(item.発注日.ToString("yyyy-MM-dd", dtFormat));
-
-                    #region 社内伝番  定义字符串的规则长度
-                    if (社内伝番index != 0)
-                    {
-                        item.社内伝番 = 社内伝番index + 1;
-                        社内伝番index = 社内伝番index + 1;
-                    }
-                    if (newfaxno == null || newfaxno.Count == 0)
-                    {
-                        //
-                        item.社内伝番 = 1000000;
-                        社内伝番index = Convert.ToInt32(item.社内伝番);
-                    }
-                    #endregion
-                    index++;
-                    //社内伝番最大値を調べ取り込み完了
-                    item.社内伝番 = newfaxno[newfaxno.Count - 1] + 1;
-                    item.行数 = index;
-                    item.最大行数 = index;
-                    orders1.Add(item);
-                }
-                #region 插入数据  二次製品データ処理後登録
-                using (var ctx = new GODDbContext())
-                {
-                    foreach (t_orderdata item in orders1)
-                    {
-                        ctx.t_orderdata.Add(item);
-                        ctx.SaveChanges();
-                    }
-                }
-                #endregion
-            }
-            else
-            {
-                MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-             */
-        }
 
         private void ecSaveButton_Click(object sender, EventArgs e)
         {

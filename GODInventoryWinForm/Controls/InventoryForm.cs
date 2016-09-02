@@ -48,9 +48,9 @@ namespace GODInventoryWinForm.Controls
 
             using (var ctx = new GODDbContext())
             {
-                genreList = ctx.t_genre.ToList();
+                genreList = ctx.t_genre.OrderBy(o => o.Position).ToList();
+                manufacturerList = ctx.t_manufacturers.OrderBy(o => o.Position).ToList();
                 warehouseList = ctx.t_warehouses.ToList();
-                manufacturerList = ctx.t_manufacturers.ToList();
 
             }
 
@@ -83,7 +83,7 @@ namespace GODInventoryWinForm.Controls
                 #region old
                 string sql = @"SELECT i.`規格`,i.`商品名`, SUM(s.`数量`) as `数量`, s.`自社コード` FROM t_stockrec s
                     INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = {0}
-                    WHERE (s.`先` = {1} and s.`状態`={2} and s.`日付`< {3} and s.`日付`> {4} )
+                    WHERE ((s.`先` = {1} OR s.`元` = {1} ) AND s.`状態`={2} AND s.`日付`< {3} AND s.`日付`> {4} )
                     GROUP by s.`自社コード`;";
 
 

@@ -59,9 +59,9 @@ namespace GODInventoryWinForm.Controls
 
             using (var ctx = new GODDbContext())
             {
-                genreList = ctx.t_genre.ToList();
+                genreList = ctx.t_genre.OrderBy(o => o.Position).ToList();
+                manufacturerList = ctx.t_manufacturers.OrderBy(o => o.Position).ToList();
                 warehouseList = ctx.t_warehouses.ToList();
-                manufacturerList = ctx.t_manufacturers.ToList();
             }
             this.genreComboBox.DisplayMember = "ジャンル名";
             this.genreComboBox.ValueMember = "idジャンル";
@@ -253,12 +253,9 @@ namespace GODInventoryWinForm.Controls
                     item.数量 = changed.数量;
                     item.状態 = changed.状態;
                 }
-                List<int> pids = new List<int>();
-                foreach (var item in list)
-                {
-                    pids.Add(item.自社コード);
-                }
-                OrderSqlHelper.UpdateStockState(ctx, pids);
+                
+
+                OrderSqlHelper.UpdateStockState(ctx, list);
                 ctx.SaveChanges();
 
             }
