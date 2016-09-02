@@ -15,6 +15,7 @@ namespace GODInventoryWinForm.Controls
         private PendingOrderForm pendingOrderForm;
         private WaitToShipForm waitToShipOrderForm;
         private ShippingOrderForm shippingOrderForm;
+        private OrderHistoryForm OrderHistoryForm;
 
         public OrdersControl()
         {
@@ -122,6 +123,19 @@ namespace GODInventoryWinForm.Controls
             // 显示之前重新加载数据，订单数据可能已更新。
             newOrdersForm.InitializeOrderData();
             newOrdersForm.ShowDialog();
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (OrderHistoryForm == null)
+            {
+                OrderHistoryForm = new OrderHistoryForm();
+            }
+            AdjustSubformSize(OrderHistoryForm);
+            // 显示之前重新加载数据，订单数据可能已更新。
+           // OrderHistoryForm.InitializeOrderData();
+            OrderHistoryForm.ShowDialog();
 
         }
     }
