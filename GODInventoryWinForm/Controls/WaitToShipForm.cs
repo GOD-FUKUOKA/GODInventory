@@ -41,11 +41,17 @@ namespace GODInventoryWinForm.Controls
 
         public int InitializeDataSource()
         {
+            shipperComboBox.SelectedIndex = 0;
+
             this.orderListForShip = new BindingList<v_pendingorder>();
 
             var q = OrderSqlHelper.WaitToShipOrderSql(this.entityDataSource1);
             this.orderList = this.entityDataSource1.CreateView(q);
             this.bindingSource1.DataSource = this.orderList;
+            if (this.orderList.Count > 0)
+            {
+                this.bindingSource1.Filter = String.Format("実際配送担当='{0}'", shipperComboBox.Text);
+            }
             this.dataGridView1.DataSource = this.bindingSource1;
             dataGridView2.DataSource = this.orderListForShip;
 

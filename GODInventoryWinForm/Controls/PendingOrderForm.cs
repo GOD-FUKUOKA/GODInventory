@@ -92,6 +92,7 @@ namespace GODInventoryWinForm.Controls
         }
 
         private void InitializeShipperOrderList() {
+            this.shipperComboBox.SelectedIndex = 0;
             //this.shipperComboBox.DisplayMember = "ShortName";
             //this.shipperComboBox.ValueMember = "ShortName";
             //this.shipperComboBox.DataSource = shipperList;
