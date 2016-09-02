@@ -25,7 +25,7 @@ namespace GODInventoryWinForm.Controls
 
         private Hashtable datagrid_changes = null;
         List<v_duplicatedorder> duplicatedOrderList;
-        
+        SortableBindingList<v_duplicatedorder> duplicatedBindingList;
         public NewOrdersForm()
         {
             InitializeComponent();
@@ -118,16 +118,13 @@ namespace GODInventoryWinForm.Controls
 
             using (var ctx = new GODDbContext())
             {
+
                 duplicatedOrderList = ctx.Database.SqlQuery<v_duplicatedorder>(sql).ToList();
             }
 
-               
 
-            this.bindingSource1.DataSource = duplicatedOrderList;
-
-         
-          
-            dataGridView1.DataSource = this.bindingSource1;
+            duplicatedBindingList = new SortableBindingList<v_duplicatedorder>(duplicatedOrderList);
+            dataGridView1.DataSource = duplicatedBindingList;
 
             return 0;
         }
@@ -140,16 +137,6 @@ namespace GODInventoryWinForm.Controls
         private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
 
-        }
-
-        private void cancelOrderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            int rowIndex = this.dataGridView1.CurrentRow.Index;
-            var order = duplicatedOrderList[rowIndex];
-            order.キャンセル = "yes";
-            order.キャンセル時刻 = DateTime.Now;
-            
-            this.dataGridView1.Refresh();
         }
 
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -171,11 +158,22 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
+        private void cancelOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int rowIndex = this.dataGridView1.CurrentRow.Index;
+            var order = duplicatedOrderList[rowIndex];
+            order.キャンセル = "yes";
+            order.キャンセル時刻 = DateTime.Now;
+            dataGridView1.ClearSelection();
+            this.dataGridView1.Refresh();
+        }
+
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int rowIndex = this.dataGridView1.CurrentRow.Index;
             var order = duplicatedOrderList[rowIndex];
             order.ダブリ = "yes";
+            dataGridView1.ClearSelection(); 
             this.dataGridView1.Refresh();
         }
 
@@ -184,6 +182,7 @@ namespace GODInventoryWinForm.Controls
             int rowIndex = this.dataGridView1.CurrentRow.Index;
             var order = duplicatedOrderList[rowIndex];
             order.キャンセル = "no";
+            dataGridView1.ClearSelection(); 
             this.dataGridView1.Refresh();
         }
 
@@ -192,7 +191,22 @@ namespace GODInventoryWinForm.Controls
             int rowIndex = this.dataGridView1.CurrentRow.Index;
             var order = duplicatedOrderList[rowIndex];
             order.ダブリ = "no";
+            dataGridView1.ClearSelection(); 
             this.dataGridView1.Refresh();
+        }
+
+        private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Rows[e.RowIndex].Selected = true;
+                    dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+                }
+            } 
         }
 
        

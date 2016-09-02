@@ -39,11 +39,10 @@
             this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unduplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店番Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreNameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InvoiceNOColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ダブリColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +55,8 @@
             this.ShipperColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreDistrictColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -100,6 +101,7 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -110,6 +112,7 @@
             this.OrderReceivedAtColumn1,
             this.出荷日,
             this.納品日,
+            this.店番Column1,
             this.StoreNameColumn1,
             this.InvoiceNOColumn1,
             this.ダブリColumn1,
@@ -122,9 +125,7 @@
             this.ShipperColumn1,
             this.StoreDistrictColumn1,
             this.Column2});
-            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Location = new System.Drawing.Point(3, 60);
-            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
@@ -133,6 +134,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(967, 348);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
+            this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
             // 
             // contextMenuStrip1
@@ -179,15 +181,6 @@
             this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
             this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
             // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
             // OrderReceivedAtColumn1
             // 
             this.OrderReceivedAtColumn1.DataPropertyName = "受注日";
@@ -212,9 +205,17 @@
             this.納品日.ReadOnly = true;
             this.納品日.Width = 90;
             // 
+            // 店番Column1
+            // 
+            this.店番Column1.DataPropertyName = "店舗コード";
+            this.店番Column1.HeaderText = "店番";
+            this.店番Column1.Name = "店番Column1";
+            this.店番Column1.ReadOnly = true;
+            this.店番Column1.Width = 80;
+            // 
             // StoreNameColumn1
             // 
-            this.StoreNameColumn1.DataPropertyName = "店名";
+            this.StoreNameColumn1.DataPropertyName = "店舗名漢字";
             this.StoreNameColumn1.HeaderText = "店名";
             this.StoreNameColumn1.Name = "StoreNameColumn1";
             this.StoreNameColumn1.ReadOnly = true;
@@ -305,6 +306,15 @@
             this.Column2.ReadOnly = true;
             this.Column2.Width = 80;
             // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
             // NewOrdersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -342,6 +352,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderReceivedAtColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品日;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 店番Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn StoreNameColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn InvoiceNOColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ダブリColumn1;

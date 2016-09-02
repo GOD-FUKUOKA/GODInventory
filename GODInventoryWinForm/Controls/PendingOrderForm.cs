@@ -18,6 +18,7 @@ namespace GODInventoryWinForm.Controls
     public partial class PendingOrderForm : Form
     {
         public Size ParentContainerSize { get; set; }
+        int ErCiZhiPinId { get; set; }
 
         //  [c1_r1_changed=> new_value,c1_r1=> original_value] ]
         private Hashtable datagrid_changes = null;
@@ -30,7 +31,6 @@ namespace GODInventoryWinForm.Controls
         private List<t_orderdata> ecOrderList;
         private List<v_pendingorder> shipperOrderList;
 
-        private List<v_pendingorder> wuliuorders = null;
 
         public PendingOrderForm()
         {
@@ -40,11 +40,15 @@ namespace GODInventoryWinForm.Controls
             var ctx = entityDataSource1.DbContext as GODDbContext;
             this.stockstates = ctx.t_stockstate.Select(s => s).ToList();
 
-            shipperList = (from s in ctx.t_shoplist
-                     group s by s.配送担当 into g
-                           select new v_shipper { ShortName = g.Key }).ToList();
+            //shipperList = (from s in ctx.t_shoplist
+            //         group s by s.配送担当 into g
+            //               select new v_shipper { ShortName = g.Key }).ToList();
 
-                      
+            var genre = ( from g in ctx.t_genre
+                          where g.ジャンル名 == "二次製品" 
+                              select g).FirstOrDefault();
+            ErCiZhiPinId = ( genre != null ? genre.idジャンル : 0 );
+
             InitializePager();
 
             InitializeRCList();
@@ -59,7 +63,7 @@ namespace GODInventoryWinForm.Controls
         private void InitializeRCList()
         {
 
-            var q = OrderSqlHelper.ECWithoutCodeOrderQuery(this.entityDataSource1);
+            var q = OrderSqlHelper.ECWithoutCodeOrderQuery(this.entityDataSource1, ErCiZhiPinId);
             string sql = "SELECT MAX(t_orderdata.`社内伝番`) FROM t_orderdata";
             var max = this.entityDataSource1.DbContext.Database.SqlQuery<int?>(sql).FirstOrDefault();
             max = Convert.ToInt32(max);
@@ -88,9 +92,9 @@ namespace GODInventoryWinForm.Controls
         }
 
         private void InitializeShipperOrderList() {
-            this.shipperComboBox.DisplayMember = "ShortName";
-            this.shipperComboBox.ValueMember = "ShortName";
-            this.shipperComboBox.DataSource = shipperList;
+            //this.shipperComboBox.DisplayMember = "ShortName";
+            //this.shipperComboBox.ValueMember = "ShortName";
+            //this.shipperComboBox.DataSource = shipperList;
             
             string sql = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
        `店舗名漢字`,`伝票番号`,`ジャンル`,`品名漢字`,`規格名漢字`, `口数`, `発注数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
@@ -404,57 +408,7 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
-        //private void cancelOrderToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    var rows = GetSelectedRowsBySelectedCells();
-        //    if (rows.Count() > 0)
-        //    {
-        //        using (var ctx = new GODDbContext())
-        //        {
-        //            foreach (DataGridViewRow row in rows)
-        //            {
-        //                var pendingorder = row.DataBoundItem as v_pendingorder;
-        //                t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
-        //                order.キャンセル = "yes";
-        //                order.キャンセル時刻 = DateTime.Now;
-        //                order.備考 = "キャンセル";
-        //            }
-        //            ctx.SaveChanges();
-        //        }
-        //        pager1.Bind();
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show(" please select rows in the order list first.");
-        //    }
-        //}
-
-        //private void uncancleOrderToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    var rows = GetSelectedRowsBySelectedCells();
-        //    if (rows.Count() > 0)
-        //    {
-        //        using (var ctx = new GODDbContext())
-        //        {
-        //            foreach (DataGridViewRow row in rows)
-        //            {
-        //                var pendingorder = row.DataBoundItem as v_pendingorder;
-        //                t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
-        //                order.キャンセル = "no";
-        //                order.キャンセル時刻 = null;
-        //                order.備考 = "キャンセル解除";
-        //            }
-        //            ctx.SaveChanges();
-        //        }
-        //        pager1.Bind();
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show(" please select rows in the order list first.");
-        //    }
-
-        //}
-
+      
 
         private void newOrderbutton_Click(object sender, EventArgs e)
         {
@@ -1186,8 +1140,6 @@ namespace GODInventoryWinForm.Controls
                 MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", trans.Count));
             }
 
-          
-
         }
 
       
@@ -1211,6 +1163,11 @@ namespace GODInventoryWinForm.Controls
             {
                 this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
             }
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
 

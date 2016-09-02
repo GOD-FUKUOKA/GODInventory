@@ -24,7 +24,6 @@ namespace GODInventory.MyLinq
         public string 店舗名カナ { get; set; }
 
 
-
         public short? ジャンル { get; set; }
 
         public int 伝票番号 { get; set; }
@@ -59,24 +58,17 @@ namespace GODInventory.MyLinq
 
         public int 原単価_税抜_ { get; set; }
 
-
         public int 原価金額_税抜_ { get; set; }
-
 
         public int 納品原価金額 { get; set; }
 
-
         public int? 売単価_税抜_ { get; set; }
 
-
-
         public bool 一旦保留 { get; set; }
-
        
-
         public string 店舗名漢字 { get; set; }
 
-      
+        public string 実際配送担当 { get; set; }      
 
         public string ダブリ { get; set; }
 
@@ -85,23 +77,7 @@ namespace GODInventory.MyLinq
 
         public DateTime? キャンセル時刻 { get; set; }
 
-      
-
-      
-
-        // shop
-        public int 店番 { get; set; }
-
-        public string 店名 { get; set; }
-
         public string 県別 { get; set; }
-
-        public string 住所 { get; set; }
-
-        public string 電話番号 { get; set; }
-
-        public long 出荷No { get; set; }
-       
 
         public OrderStatus Status { get; set; }
     }

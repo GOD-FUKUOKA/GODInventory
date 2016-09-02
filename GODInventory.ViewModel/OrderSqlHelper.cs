@@ -81,11 +81,11 @@ namespace GODInventory.ViewModel
             return q;
         }
 
-        public static IQueryable<t_orderdata> ECWithoutCodeOrderQuery(EntityDataSource entityDataSource1)
+        public static IQueryable<t_orderdata> ECWithoutCodeOrderQuery(EntityDataSource entityDataSource1, int genreId)
         {
             var a = entityDataSource1.EntitySets["t_orderdatas"];
             var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                    where o.Status == OrderStatus.NotifyShipper && o.ジャンル == 6 && o.社内伝番 == null
+                    where o.Status == OrderStatus.NotifyShipper && o.ジャンル == genreId && o.社内伝番 == null
                     select o;
             return q;
         }
