@@ -40,14 +40,14 @@ namespace GODInventoryWinForm.Controls
                     sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}   )
     order by o1.`発注日` ";
                 else if (radioButton4.Checked == true)
-                    sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}  AND o1.`発注日`> {2})
+                    sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}  AND o1.`県別`> {2})
     order by o1.`発注日` ";
             if (radioButton1.Checked == true)//发货日
                 if (radioButton3.Checked == true)
                     sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`出荷日`< {0} AND o1.`出荷日`> {1}  )
     order by o1.`発注日` ";
                 else if (radioButton4.Checked == true)
-                    sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}  AND o1.`発注日`> {2})
+                    sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}  AND o1.`県別`={2})
     order by o1.`発注日` ";
 
 
@@ -59,7 +59,7 @@ namespace GODInventoryWinForm.Controls
                 else if (radioButton4.Checked == true)
                     OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, endAt, startAt, comboBox1.Text).ToList();
             }
-            ApplyFilter();
+            //ApplyFilter();
 
 
             OrderListBindingList = new SortableBindingList<v_groupedorder>(OrderList);
@@ -79,25 +79,22 @@ namespace GODInventoryWinForm.Controls
     order by o1.発注日 ";
             sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`発注日`> {0} )
     order by o1.`発注日` ";
+            
             using (var ctx = new GODDbContext())
             {
 
                 //OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, endAt, startAt).ToList();
                 OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, startAt).ToList();
                 shopList = ctx.t_shoplist.ToList();
-
+               
             }
             this.storeComboBox.DisplayMember = "店名";
             this.storeComboBox.ValueMember = "店番";
             this.storeComboBox.DataSource = shopList;
 
-
-            var filtered = shopList.FindAll(s => s.県別 != null).Distinct().ToList();
-            //  this.comboBox1.DataSource = filtered.;
-
-
-
-
+            this.comboBox1.DisplayMember = "県別";
+            this.comboBox1.ValueMember = "店番";
+            this.comboBox1.DataSource = shopList;
 
             OrderListBindingList = new SortableBindingList<v_groupedorder>(OrderList);
             dataGridView1.DataSource = OrderListBindingList;
@@ -138,8 +135,7 @@ namespace GODInventoryWinForm.Controls
                     if (shops.Count > 0)
                     {
                         var store = shops.First();
-
-
+                        
                         #region new
 
                         this.storeComboBox.SelectedValue = store.店番;
@@ -150,7 +146,6 @@ namespace GODInventoryWinForm.Controls
                     {
                         errorProvider1.SetError(storeComboBox, String.Format("Can not find store by ID {0}", storeId));
                     }
-
                 }
                 else
                 {
