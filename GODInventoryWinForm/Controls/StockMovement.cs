@@ -132,7 +132,7 @@ namespace GODInventoryWinForm.Controls
 
 
                         ctx.SaveChanges();
-
+                     
                         OrderSqlHelper.UpdateStockState(ctx, changeList);
                         this.stockiosList.Clear();
                        

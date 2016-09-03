@@ -47,9 +47,11 @@ namespace GODInventoryWinForm.Controls
 
         private void ChangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.entityDataSource1.DbContext.SaveChanges();
-            MessageBox.Show(String.Format("Congratulations, items changed successfully!"));
+            #region 直接保存
+            //this.entityDataSource1.DbContext.SaveChanges();
+            //MessageBox.Show(String.Format("Congratulations, items changed successfully!"));
 
+            #endregion
             //using (var ctx = new GODDbContext())
             //{
             //    ctx.t_orderdata.AddRange(newOrderList);
@@ -59,19 +61,27 @@ namespace GODInventoryWinForm.Controls
             //}
 
 
-            //int i = dataGridView1.CurrentCell.OwningColumn.Index;
-            //int iRow = dataGridView1.CurrentCell.OwningRow.Index;
-            //var oids = GetOrderIdsBySelectedGridCell();
+            int i = dataGridView1.CurrentCell.OwningColumn.Index;
+            int iRow = dataGridView1.CurrentCell.OwningRow.Index;
+            var oids = GetOrderIdsBySelectedGridCell();
+          
+            if (oids.Count() > 0)
+            {
+                var form = new ProductsManagement(oids,"Update");
+            
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                 
+                    this.dataGridView1.Refresh();
 
-            //if (oids.Count() > 0)
-            //{
-            //    OrderSqlHelper.SendOrderToShipper(oids);
-            //    //pager1.Bind();
-            //}
-            //else
-            //{
-            //    MessageBox.Show(" please select rows in the order list first.");
-            //}
+                }
+                //OrderSqlHelper.SendOrderToShipper(oids);
+                ////pager1.Bind();
+            }
+            else
+            {
+                MessageBox.Show(" please select rows in the order list first.");
+            }
         }
         private List<int> GetOrderIdsBySelectedGridCell()
         {
@@ -98,8 +108,16 @@ namespace GODInventoryWinForm.Controls
 
         private void addItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var form = new ProductsManagement(null, "Add");
 
-            this.dataGridView1.CurrentCell = this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Cells[0]; 
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+
+                this.dataGridView1.Refresh();
+
+            }
+
+            //this.dataGridView1.CurrentCell = this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Cells[0]; 
 
         }
     }

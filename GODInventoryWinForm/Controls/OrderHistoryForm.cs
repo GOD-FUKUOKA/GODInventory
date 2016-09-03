@@ -34,27 +34,28 @@ namespace GODInventoryWinForm.Controls
             string xian = comboBox1.Text;
 
             string sql = "";
+            //
 
-            if (radioButton2.Checked == true)
-                if (radioButton3.Checked == true)//交货日
+            if (this.comboBox2.Text == "交货日")//交货日
+                if (this.comboBox1.Text == "全国")//全国
                     sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}   )
     order by o1.`発注日` ";
-                else if (radioButton4.Checked == true)
+                else if (this.comboBox1.Text != "全国")//县
                     sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}  AND o1.`県別`> {2})
     order by o1.`発注日` ";
-            if (radioButton1.Checked == true)//发货日
-                if (radioButton3.Checked == true)
+            if (this.comboBox2.Text == "发货日")//发货日
+                if (this.comboBox1.Text == "全国")
                     sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`出荷日`< {0} AND o1.`出荷日`> {1}  )
     order by o1.`発注日` ";
-                else if (radioButton4.Checked == true)
+                else if (this.comboBox1.Text != "全国")
                     sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}  AND o1.`県別`={2})
     order by o1.`発注日` ";
 
             using (var ctx = new GODDbContext())
             {
-                if (radioButton3.Checked == true)
+                if (this.comboBox1.Text == "全国")
                     OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, endAt, startAt).ToList();
-                else if (radioButton4.Checked == true)
+                else if (this.comboBox1.Text != "全国")
                     OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, endAt, startAt, comboBox1.Text).ToList();
             }
             //ApplyFilter();
@@ -86,9 +87,16 @@ namespace GODInventoryWinForm.Controls
                 shopList = ctx.t_shoplist.ToList();
 
             }
+
+
             this.storeComboBox.DisplayMember = "店名";
             this.storeComboBox.ValueMember = "店番";
             this.storeComboBox.DataSource = shopList;
+
+            t_shoplist item = new t_shoplist();
+            item.店番 = 0;
+            item.県別 = "全部";
+            shopList.Insert(0, item);
 
             this.comboBox1.DisplayMember = "県別";
             this.comboBox1.ValueMember = "店番";
@@ -195,10 +203,7 @@ namespace GODInventoryWinForm.Controls
 
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton4.Checked == true)
-                comboBox1.Visible = true;
-            else
-                comboBox1.Visible = false;
+         
 
         }
 
