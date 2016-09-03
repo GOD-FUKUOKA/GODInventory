@@ -16,5 +16,10 @@ namespace GODInventoryWinForm.Controls
         {
             InitializeComponent();
         }
+
+        private void submitFormButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

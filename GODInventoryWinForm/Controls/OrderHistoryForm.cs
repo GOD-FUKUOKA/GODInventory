@@ -49,9 +49,7 @@ namespace GODInventoryWinForm.Controls
                 else if (radioButton4.Checked == true)
                     sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}  AND o1.`県別`={2})
     order by o1.`発注日` ";
-
-
-
+            
             using (var ctx = new GODDbContext())
             {
                 if (radioButton3.Checked == true)

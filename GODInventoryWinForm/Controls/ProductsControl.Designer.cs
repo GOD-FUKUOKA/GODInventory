@@ -30,25 +30,28 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
             this.自社コードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.得意先DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ジャンルDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品名DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.規格DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.価格発動日DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pT入数DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.仕入原価DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.単価DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品コードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.jANコードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.インストアコードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.単品重量DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.単位DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pT単位かDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ChangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.sendToShipperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -61,10 +64,7 @@
             this.ジャンルDataGridViewTextBoxColumn,
             this.商品名DataGridViewTextBoxColumn,
             this.規格DataGridViewTextBoxColumn,
-            this.価格発動日DataGridViewTextBoxColumn,
             this.pT入数DataGridViewTextBoxColumn,
-            this.仕入原価DataGridViewTextBoxColumn,
-            this.単価DataGridViewTextBoxColumn,
             this.商品コードDataGridViewTextBoxColumn,
             this.jANコードDataGridViewTextBoxColumn,
             this.インストアコードDataGridViewTextBoxColumn,
@@ -77,24 +77,9 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(754, 389);
+            this.dataGridView1.Size = new System.Drawing.Size(754, 421);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Location = new System.Drawing.Point(0, 46);
-            this.panel1.Margin = new System.Windows.Forms.Padding(8);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(754, 389);
-            this.panel1.TabIndex = 2;
+            this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
             // 
             // 自社コードDataGridViewTextBoxColumn
             // 
@@ -126,29 +111,11 @@
             this.規格DataGridViewTextBoxColumn.HeaderText = "規格";
             this.規格DataGridViewTextBoxColumn.Name = "規格DataGridViewTextBoxColumn";
             // 
-            // 価格発動日DataGridViewTextBoxColumn
-            // 
-            this.価格発動日DataGridViewTextBoxColumn.DataPropertyName = "価格発動日";
-            this.価格発動日DataGridViewTextBoxColumn.HeaderText = "価格発動日";
-            this.価格発動日DataGridViewTextBoxColumn.Name = "価格発動日DataGridViewTextBoxColumn";
-            // 
             // pT入数DataGridViewTextBoxColumn
             // 
             this.pT入数DataGridViewTextBoxColumn.DataPropertyName = "PT入数";
             this.pT入数DataGridViewTextBoxColumn.HeaderText = "PT入数";
             this.pT入数DataGridViewTextBoxColumn.Name = "pT入数DataGridViewTextBoxColumn";
-            // 
-            // 仕入原価DataGridViewTextBoxColumn
-            // 
-            this.仕入原価DataGridViewTextBoxColumn.DataPropertyName = "仕入原価";
-            this.仕入原価DataGridViewTextBoxColumn.HeaderText = "仕入原価";
-            this.仕入原価DataGridViewTextBoxColumn.Name = "仕入原価DataGridViewTextBoxColumn";
-            // 
-            // 単価DataGridViewTextBoxColumn
-            // 
-            this.単価DataGridViewTextBoxColumn.DataPropertyName = "単価";
-            this.単価DataGridViewTextBoxColumn.HeaderText = "単価";
-            this.単価DataGridViewTextBoxColumn.Name = "単価DataGridViewTextBoxColumn";
             // 
             // 商品コードDataGridViewTextBoxColumn
             // 
@@ -186,16 +153,61 @@
             this.pT単位かDataGridViewTextBoxColumn.HeaderText = "PT単位か";
             this.pT単位かDataGridViewTextBoxColumn.Name = "pT単位かDataGridViewTextBoxColumn";
             // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.dataGridView1);
+            this.panel1.Location = new System.Drawing.Point(0, 50);
+            this.panel1.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(754, 421);
+            this.panel1.TabIndex = 2;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ChangeToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(143, 26);
+            // 
+            // ChangeToolStripMenuItem
+            // 
+            this.ChangeToolStripMenuItem.Name = "ChangeToolStripMenuItem";
+            this.ChangeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.ChangeToolStripMenuItem.Text = "Change Item";
+            this.ChangeToolStripMenuItem.Click += new System.EventHandler(this.ChangeToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sendToShipperToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip1";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(155, 48);
+            // 
+            // sendToShipperToolStripMenuItem
+            // 
+            this.sendToShipperToolStripMenuItem.Name = "sendToShipperToolStripMenuItem";
+            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.sendToShipperToolStripMenuItem.Text = "SendToShipper";
+            // 
             // ProductsControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.Controls.Add(this.panel1);
             this.Name = "ProductsControl";
-            this.Size = new System.Drawing.Size(754, 438);
+            this.Size = new System.Drawing.Size(754, 475);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -222,5 +234,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 単品重量DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 単位DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pT単位かDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ChangeToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem sendToShipperToolStripMenuItem;
     }
 }

@@ -357,7 +357,7 @@ namespace GODInventory.ViewModel
             }
             return count;
         
-        }
+        }   
 
         public static int FinishOrders(List<int> orderIds)
         {
