@@ -49,7 +49,7 @@ namespace GODInventoryWinForm.Controls
                 else if (radioButton4.Checked == true)
                     sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}  AND o1.`県別`={2})
     order by o1.`発注日` ";
-            
+
             using (var ctx = new GODDbContext())
             {
                 if (radioButton3.Checked == true)
@@ -77,14 +77,14 @@ namespace GODInventoryWinForm.Controls
     order by o1.発注日 ";
             sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`発注日`> {0} )
     order by o1.`発注日` ";
-            
+
             using (var ctx = new GODDbContext())
             {
 
                 //OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, endAt, startAt).ToList();
                 OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, startAt).ToList();
                 shopList = ctx.t_shoplist.ToList();
-               
+
             }
             this.storeComboBox.DisplayMember = "店名";
             this.storeComboBox.ValueMember = "店番";
@@ -133,7 +133,7 @@ namespace GODInventoryWinForm.Controls
                     if (shops.Count > 0)
                     {
                         var store = shops.First();
-                        
+
                         #region new
 
                         this.storeComboBox.SelectedValue = store.店番;
@@ -157,7 +157,7 @@ namespace GODInventoryWinForm.Controls
             if (this.storeComboBox.SelectedValue != null)
             {
                 this.storeCodeTextBox.Text = this.storeComboBox.SelectedValue.ToString();
-                InitializeOrderDataDF(this.storeCodeTextBox.Text);
+                //  InitializeOrderDataDF(this.storeCodeTextBox.Text);
             }
         }
 
@@ -200,6 +200,11 @@ namespace GODInventoryWinForm.Controls
             else
                 comboBox1.Visible = false;
 
+        }
+
+        private void btFindShop_Click(object sender, EventArgs e)
+        {
+            InitializeOrderDataDF(this.storeCodeTextBox.Text);
         }
 
     }

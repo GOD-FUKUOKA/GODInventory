@@ -44,6 +44,7 @@
             this.storeCodeTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -74,9 +75,11 @@
             this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btFindShop = new System.Windows.Forms.Button();
             this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             this.ordersTabPage.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -88,6 +91,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pager1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // entityDataSource1
@@ -136,7 +141,7 @@
             // 
             // storeCodeFilterTextBox3
             // 
-            this.storeCodeFilterTextBox3.Location = new System.Drawing.Point(143, 22);
+            this.storeCodeFilterTextBox3.Location = new System.Drawing.Point(139, 27);
             this.storeCodeFilterTextBox3.Name = "storeCodeFilterTextBox3";
             this.storeCodeFilterTextBox3.Size = new System.Drawing.Size(100, 20);
             this.storeCodeFilterTextBox3.TabIndex = 23;
@@ -144,7 +149,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(10, 26);
+            this.label14.Location = new System.Drawing.Point(6, 31);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(127, 13);
             this.label14.TabIndex = 17;
@@ -152,10 +157,8 @@
             // 
             // ordersTabPage
             // 
-            this.ordersTabPage.Controls.Add(this.button1);
-            this.ordersTabPage.Controls.Add(this.storeComboBox);
-            this.ordersTabPage.Controls.Add(this.storeCodeTextBox);
-            this.ordersTabPage.Controls.Add(this.label2);
+            this.ordersTabPage.Controls.Add(this.groupBox2);
+            this.ordersTabPage.Controls.Add(this.groupBox1);
             this.ordersTabPage.Controls.Add(this.panel2);
             this.ordersTabPage.Controls.Add(this.panel1);
             this.ordersTabPage.Controls.Add(this.label6);
@@ -164,8 +167,6 @@
             this.ordersTabPage.Controls.Add(this.startDateTimePicker);
             this.ordersTabPage.Controls.Add(this.pager1);
             this.ordersTabPage.Controls.Add(this.filterButton);
-            this.ordersTabPage.Controls.Add(this.storeCodeFilterTextBox3);
-            this.ordersTabPage.Controls.Add(this.label14);
             this.ordersTabPage.Controls.Add(this.dataGridView1);
             this.ordersTabPage.Location = new System.Drawing.Point(4, 22);
             this.ordersTabPage.Name = "ordersTabPage";
@@ -176,7 +177,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(262, 22);
+            this.button1.Location = new System.Drawing.Point(258, 27);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(58, 20);
             this.button1.TabIndex = 96;
@@ -188,7 +189,7 @@
             // 
             this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.storeComboBox.FormattingEnabled = true;
-            this.storeComboBox.Location = new System.Drawing.Point(819, 16);
+            this.storeComboBox.Location = new System.Drawing.Point(150, 19);
             this.storeComboBox.Name = "storeComboBox";
             this.storeComboBox.Size = new System.Drawing.Size(95, 21);
             this.storeComboBox.TabIndex = 95;
@@ -197,7 +198,7 @@
             // 
             // storeCodeTextBox
             // 
-            this.storeCodeTextBox.Location = new System.Drawing.Point(755, 16);
+            this.storeCodeTextBox.Location = new System.Drawing.Point(86, 19);
             this.storeCodeTextBox.MaxLength = 8;
             this.storeCodeTextBox.Name = "storeCodeTextBox";
             this.storeCodeTextBox.Size = new System.Drawing.Size(58, 20);
@@ -209,7 +210,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Control;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(680, 19);
+            this.label2.Location = new System.Drawing.Point(11, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 15);
             this.label2.TabIndex = 93;
@@ -220,10 +221,20 @@
             this.panel2.Controls.Add(this.comboBox1);
             this.panel2.Controls.Add(this.radioButton3);
             this.panel2.Controls.Add(this.radioButton4);
-            this.panel2.Location = new System.Drawing.Point(262, 58);
+            this.panel2.Location = new System.Drawing.Point(262, 104);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(230, 45);
             this.panel2.TabIndex = 92;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(65, 13);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(95, 21);
+            this.comboBox1.TabIndex = 96;
+            this.comboBox1.Visible = false;
             // 
             // radioButton3
             // 
@@ -252,7 +263,7 @@
             // 
             this.panel1.Controls.Add(this.radioButton2);
             this.panel1.Controls.Add(this.radioButton1);
-            this.panel1.Location = new System.Drawing.Point(13, 58);
+            this.panel1.Location = new System.Drawing.Point(13, 104);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(230, 45);
             this.panel1.TabIndex = 91;
@@ -282,7 +293,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(515, 21);
+            this.label6.Location = new System.Drawing.Point(177, 67);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(19, 13);
             this.label6.TabIndex = 89;
@@ -290,7 +301,7 @@
             // 
             // endDateTimePicker
             // 
-            this.endDateTimePicker.Location = new System.Drawing.Point(540, 19);
+            this.endDateTimePicker.Location = new System.Drawing.Point(202, 65);
             this.endDateTimePicker.Name = "endDateTimePicker";
             this.endDateTimePicker.Size = new System.Drawing.Size(120, 20);
             this.endDateTimePicker.TabIndex = 90;
@@ -298,7 +309,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(352, 26);
+            this.label4.Location = new System.Drawing.Point(14, 72);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 87;
@@ -306,7 +317,7 @@
             // 
             // startDateTimePicker
             // 
-            this.startDateTimePicker.Location = new System.Drawing.Point(389, 21);
+            this.startDateTimePicker.Location = new System.Drawing.Point(51, 67);
             this.startDateTimePicker.Name = "startDateTimePicker";
             this.startDateTimePicker.Size = new System.Drawing.Size(120, 20);
             this.startDateTimePicker.TabIndex = 88;
@@ -485,15 +496,15 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // comboBox1
+            // btFindShop
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(65, 13);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(95, 21);
-            this.comboBox1.TabIndex = 96;
-            this.comboBox1.Visible = false;
+            this.btFindShop.Location = new System.Drawing.Point(265, 19);
+            this.btFindShop.Name = "btFindShop";
+            this.btFindShop.Size = new System.Drawing.Size(58, 21);
+            this.btFindShop.TabIndex = 97;
+            this.btFindShop.Text = "Find";
+            this.btFindShop.UseVisualStyleBackColor = true;
+            this.btFindShop.Click += new System.EventHandler(this.btFindShop_Click);
             // 
             // pager1
             // 
@@ -530,6 +541,29 @@
             this.bindingNavigator1.TabIndex = 0;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.storeCodeFilterTextBox3);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Location = new System.Drawing.Point(566, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(328, 66);
+            this.groupBox1.TabIndex = 98;
+            this.groupBox1.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.storeComboBox);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.btFindShop);
+            this.groupBox2.Controls.Add(this.storeCodeTextBox);
+            this.groupBox2.Location = new System.Drawing.Point(17, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(344, 58);
+            this.groupBox2.TabIndex = 99;
+            this.groupBox2.TabStop = false;
+            // 
             // OrderHistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -552,6 +586,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.pager1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -606,5 +644,8 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button btFindShop;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
