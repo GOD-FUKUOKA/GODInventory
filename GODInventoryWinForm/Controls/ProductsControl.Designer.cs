@@ -48,6 +48,7 @@
             this.ChangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sendToShipperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -172,9 +173,10 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ChangeToolStripMenuItem});
+            this.ChangeToolStripMenuItem,
+            this.addItemToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(143, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
             // 
             // ChangeToolStripMenuItem
             // 
@@ -188,13 +190,20 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sendToShipperToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip1";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(155, 48);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(155, 26);
             // 
             // sendToShipperToolStripMenuItem
             // 
             this.sendToShipperToolStripMenuItem.Name = "sendToShipperToolStripMenuItem";
             this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.sendToShipperToolStripMenuItem.Text = "SendToShipper";
+            // 
+            // addItemToolStripMenuItem
+            // 
+            this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addItemToolStripMenuItem.Text = "Add Item";
+            this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
             // 
             // ProductsControl
             // 
@@ -238,5 +247,6 @@
         private System.Windows.Forms.ToolStripMenuItem ChangeToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem sendToShipperToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addItemToolStripMenuItem;
     }
 }

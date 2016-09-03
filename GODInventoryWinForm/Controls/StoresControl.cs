@@ -20,6 +20,9 @@ namespace GODInventoryWinForm.Controls
         {
             this.entityDataSource1.DbContext.SaveChanges();
 
+            MessageBox.Show(String.Format("Congratulations, items changed successfully!" ));
+
+         
         }
 
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -34,6 +37,11 @@ namespace GODInventoryWinForm.Controls
                     contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
                 }
             }
+        }
+
+        private void addItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.dataGridView1.CurrentCell = this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Cells[0]; 
         }
     }
 }

@@ -48,6 +48,7 @@ namespace GODInventoryWinForm.Controls
         private void ChangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.entityDataSource1.DbContext.SaveChanges();
+            MessageBox.Show(String.Format("Congratulations, items changed successfully!"));
 
             //using (var ctx = new GODDbContext())
             //{
@@ -93,6 +94,13 @@ namespace GODInventoryWinForm.Controls
                 rows.Add(cell.OwningRow);
             }
             return rows.Distinct();
+        }
+
+        private void addItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            this.dataGridView1.CurrentCell = this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Cells[0]; 
+
         }
     }
 }
