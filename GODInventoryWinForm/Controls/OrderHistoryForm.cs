@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using GODInventory.MyLinq;
 using GODInventory.ViewModel;
+using MySql.Data.MySqlClient;
 
 namespace GODInventoryWinForm.Controls
 {
@@ -17,7 +18,7 @@ namespace GODInventoryWinForm.Controls
         List<v_groupedorder> OrderList;
         SortableBindingList<v_groupedorder> OrderListBindingList;
         private List<t_shoplist> shopList;
-
+        private List<t_shoplist> shopList2;
         public OrderHistoryForm()
         {
             InitializeComponent();
@@ -50,6 +51,14 @@ namespace GODInventoryWinForm.Controls
                 else if (this.comboBox1.Text != "全国")
                     sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}  AND o1.`県別`={2})
     order by o1.`発注日` ";
+            if (this.comboBox2.Text == "全部")//发货日交货日
+                if (this.comboBox1.Text == "全国")
+                    sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`出荷日`< {0} AND o1.`出荷日`> {1} AND o1.`納品日`< {0} AND o1.`納品日`> {1}  )
+    order by o1.`発注日` ";
+                else if (this.comboBox1.Text != "全国")
+                    sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1} AND o1.`出荷日`< {0} AND o1.`出荷日`> {1}  AND o1.`県別`={2})
+    order by o1.`発注日` ";
+
 
             using (var ctx = new GODDbContext())
             {
@@ -84,26 +93,32 @@ namespace GODInventoryWinForm.Controls
 
                 //OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, endAt, startAt).ToList();
                 OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, startAt).ToList();
-                shopList = ctx.t_shoplist.ToList();
+                //shopList = ctx.t_shoplist.ToList();
 
+                string sql1 = @"SELECT * FROM  t_shoplist o  GROUP BY o.`店名`";
+                shopList = ctx.Database.SqlQuery<t_shoplist>(sql1).ToList();
+                string sql2 = @"SELECT * FROM  t_shoplist o  GROUP BY o.`県別`";
+                shopList2 = ctx.Database.SqlQuery<t_shoplist>(sql2).ToList();
             }
 
-
+            var dian = shopList.GroupBy(o => o.店名);
             this.storeComboBox.DisplayMember = "店名";
             this.storeComboBox.ValueMember = "店番";
             this.storeComboBox.DataSource = shopList;
 
             t_shoplist item = new t_shoplist();
             item.店番 = 0;
-            item.県別 = "全部";
-            shopList.Insert(0, item);
+            item.県別 = "全国";
+            shopList2.Insert(0, item);
 
             this.comboBox1.DisplayMember = "県別";
             this.comboBox1.ValueMember = "店番";
-            this.comboBox1.DataSource = shopList;
+            this.comboBox1.DataSource = shopList2;
 
             OrderListBindingList = new SortableBindingList<v_groupedorder>(OrderList);
             dataGridView1.DataSource = OrderListBindingList;
+
+            this.comboBox2.SelectedIndex = 0;
 
             return 0;
         }
@@ -164,7 +179,7 @@ namespace GODInventoryWinForm.Controls
         {
             if (this.storeComboBox.SelectedValue != null)
             {
-                this.storeCodeTextBox.Text = this.storeComboBox.SelectedValue.ToString();
+              this.storeCodeTextBox.Text = this.storeComboBox.SelectedValue.ToString();
                 //  InitializeOrderDataDF(this.storeCodeTextBox.Text);
             }
         }
@@ -203,7 +218,7 @@ namespace GODInventoryWinForm.Controls
 
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
         {
-         
+
 
         }
 
