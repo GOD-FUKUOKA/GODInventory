@@ -120,5 +120,17 @@ namespace GODInventoryWinForm.Controls
             //this.dataGridView1.CurrentCell = this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Cells[0]; 
 
         }
+
+        private void btAddItem_Click(object sender, EventArgs e)
+        {
+            var form = new ProductsManagement(null, "Add");
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+
+                this.dataGridView1.Refresh();
+
+            }
+        }
     }
 }

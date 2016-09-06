@@ -15,7 +15,8 @@ namespace GODInventoryWinForm.Controls
         private OutputStock OutputStock;
         private StockMovement StockTransfer;
         private InventoryForm StockCheckForm;
-
+        private CopyofInputStock CopyofInputStock;
+        
 
         private SearchStock Search_Strock;
 
@@ -34,22 +35,36 @@ namespace GODInventoryWinForm.Controls
         private void button2_Click(object sender, EventArgs e)
         {
             #region MyRegion
-            if (InputStock == null)
-            {
-                InputStock = new InputStock();
-                InputStock.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
-            }
-            if (InputStock == null)
-            {
-                InputStock = new InputStock();
-            }
-            AdjustSubformSize(InputStock);
+            //if (InputStock == null)
+            //{
+            //    InputStock = new InputStock();
+            //    InputStock.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
+            //}
+            //if (InputStock == null)
+            //{
+            //    InputStock = new InputStock();
+            //}
+            //AdjustSubformSize(InputStock);
 
-            InputStock.ShowDialog();
+            //InputStock.ShowDialog();
 
             #endregion
+              #region MyRegion
+            if (CopyofInputStock == null)
+            {
+                CopyofInputStock = new CopyofInputStock();
+                CopyofInputStock.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
+            }
+            if (CopyofInputStock == null)
+            {
+                CopyofInputStock = new CopyofInputStock();
+            }
+            AdjustSubformSize(CopyofInputStock);
 
+            CopyofInputStock.ShowDialog();
 
+            #endregion
+            
 
         }
         void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
@@ -75,8 +90,11 @@ namespace GODInventoryWinForm.Controls
             {
                 StockCheckForm = null;
             }
-
-
+            if (sender is CopyofInputStock)
+            {
+                CopyofInputStock = null;
+            }
+            
         }
 
         private void button5_Click(object sender, EventArgs e)

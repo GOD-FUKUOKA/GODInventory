@@ -28,7 +28,7 @@ namespace GODInventoryWinForm.Controls
         private List<t_stockrec> SavestockList = null;
         private List<t_stockrec> davStockSavestockList = null;
         private List<t_stockrec> davSHiRuStockSavestockList = null;
-
+        private Hashtable datagrid_changes = null;
         int davx = 0;
         int davy = 0;
 
@@ -85,6 +85,11 @@ namespace GODInventoryWinForm.Controls
 
             this.manufacturerComboBox.SelectedIndex = 0;
             this.ioComboBox.SelectedIndex = 0;
+
+            this.datagrid_changes = new Hashtable();
+
+
+
         }
 
         private void genreComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -151,7 +156,8 @@ namespace GODInventoryWinForm.Controls
                         item.数量 = changed.数量;
                         item.状態 = changed.状態;
                     }
-                    else {
+                    else
+                    {
                         if (changed.数量 != 0)
                         {
                             ctx.t_stockrec.Add(changed);
@@ -199,7 +205,8 @@ namespace GODInventoryWinForm.Controls
             this.BindDataGridView();
         }
 
-        private void FindDataSources() {
+        private void FindDataSources()
+        {
 
             var startAt = this.startDateTimePicker.Value.AddDays(-1).Date;
             var endAt = this.endDateTimePicker.Value.AddDays(1).Date;
@@ -365,7 +372,7 @@ namespace GODInventoryWinForm.Controls
                 var i = productList.FindIndex(o => o.自社コード == igrouping.Key);
                 foreach (var stock in igrouping.ToList())
                 {
-                    qtyTable.Rows[i][stock.納品書番号] = Math.Abs( (int)stock.数量 );
+                    qtyTable.Rows[i][stock.納品書番号] = Math.Abs((int)stock.数量);
                 }
             }
 
@@ -580,8 +587,9 @@ namespace GODInventoryWinForm.Controls
             int productNum = GetProductNumByRowIndex(e.RowIndex);
 
             t_stockrec stock = this.stockList.Find(o => (o.自社コード == productNum && o.納品書番号 == stockNum));
-            if (stock == null) {
-                var originalStock = this.stockList.Find(o => ( o.納品書番号 == stockNum));
+            if (stock == null)
+            {
+                var originalStock = this.stockList.Find(o => (o.納品書番号 == stockNum));
                 stock = new t_stockrec();
                 stock.納品書番号 = originalStock.納品書番号;
                 stock.工厂 = originalStock.工厂;
@@ -595,7 +603,7 @@ namespace GODInventoryWinForm.Controls
                 stock.自社コード = productNum;
             }
             int qty = Convert.ToInt32(qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
-            stock.数量 =  (stock.区分 == StockIoEnum.入庫.ToString() ? qty : -qty) ;
+            stock.数量 = (stock.区分 == StockIoEnum.入庫.ToString() ? qty : -qty);
             this.changedStockList.Add(stock);
         }
 
@@ -615,6 +623,108 @@ namespace GODInventoryWinForm.Controls
         private void qtyDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void qtyDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //首先判断是否是数据行
+            //if (e.Row.RowType == DataControlRowType)
+            {
+
+                ////当鼠标停留时更改背景色
+                //e.Row.Attributes.Add("onmouseover", "c=this.style.backgroundColor;this.style.backgroundColor='#00A9FF'");
+                ////当鼠标移开时还原背景色
+                //e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=c");
+            }
+
+
+        }
+
+        private void qtyDataGridView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex < 0 || e.RowIndex < 0)
+                return;
+            if (this.qtyDataGridView[e.ColumnIndex, e.RowIndex].Value == null)
+                return;
+
+            string value = this.qtyDataGridView[e.ColumnIndex, e.RowIndex].Value.ToString();
+            foreach (DataGridViewRow dgr in this.qtyDataGridView.Rows)
+            {
+
+                foreach (DataGridViewCell cell in dgr.Cells)
+                {
+                    if (cell.Value == null)
+                        continue;
+                    if (cell.Value.ToString() == value)
+                        cell.Style.BackColor = Color.Yellow;
+                    else
+                        cell.Style.BackColor = Color.Gray;
+                }
+            }
+
+        }
+
+        private void qtyDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex < qtyDataGridView.Rows.Count - 1)
+            {
+                DataGridViewRow dgrSingle = qtyDataGridView.Rows[e.RowIndex];
+                try
+                {
+                    if (datagrid_changes.ContainsKey(e.RowIndex))//if (dgrSingle.Cells["列名"].Value.ToString().Contains("比较值"))
+                    {
+                        dgrSingle.DefaultCellStyle.ForeColor = Color.Red;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void qtyDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString() + "_changed";
+
+            if (datagrid_changes.ContainsKey(cell_key))
+            {
+                e.CellStyle.BackColor = Color.Red;
+                e.CellStyle.SelectionBackColor = Color.DarkRed;
+            }
+        }
+
+        private void qtyDataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            DataGridViewRow dgrSingle = qtyDataGridView.Rows[e.RowIndex];
+            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
+
+            if (!datagrid_changes.ContainsKey(cell_key))
+            {
+                datagrid_changes[cell_key] = dgrSingle.Cells[e.ColumnIndex].Value;
+            }
+        }
+
+        private void qtyDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = qtyDataGridView.Rows[e.RowIndex];
+            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
+            var new_cell_value = row.Cells[e.ColumnIndex].Value;
+            var original_cell_value = datagrid_changes[cell_key];
+            // original_cell_value could null
+            //Console.WriteLine(" original = {0} {3}, new ={1} {4}, compare = {2}, {5}", original_cell_value, new_cell_value, original_cell_value == new_cell_value, original_cell_value.GetType(), new_cell_value.GetType(), new_cell_value.Equals(original_cell_value));
+            if (new_cell_value == null && original_cell_value == null)
+            {
+                datagrid_changes.Remove(cell_key + "_changed");
+            }
+            else if ((new_cell_value == null && original_cell_value != null) || (new_cell_value != null && original_cell_value == null) || !new_cell_value.Equals(original_cell_value))
+            {
+                datagrid_changes[cell_key + "_changed"] = new_cell_value;
+            }
+            else
+            {
+                datagrid_changes.Remove(cell_key + "_changed");
+            }
         }
     }
 }

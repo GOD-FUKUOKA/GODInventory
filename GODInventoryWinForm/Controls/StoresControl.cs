@@ -96,6 +96,18 @@ namespace GODInventoryWinForm.Controls
             return rows.Distinct();
         }
 
+        private void btAddItem_Click(object sender, EventArgs e)
+        {
+            var form = new StoresManagement(null, "Add");
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+
+                this.dataGridView1.Refresh();
+
+            }
+        }
+
 
     }
 }
