@@ -54,6 +54,11 @@ namespace GODInventoryWinForm.Controls
                 this.countyComboBox1.DisplayMember = "FullName";
                 this.countyComboBox1.ValueMember = "ShortName";
                 this.countyComboBox1.DataSource = counties;
+
+                var dateEnums = (new OrderDateEnum[] { OrderDateEnum.不限, OrderDateEnum.出荷日, OrderDateEnum.発注日, OrderDateEnum.納品日 }).Select(o => new { FullName = o.ToString(), ShortName = o.ToString() }).ToList();
+                this.dateEnumComboBox.DisplayMember = "FullName";
+                this.dateEnumComboBox.ValueMember = "ShortName";
+                this.dateEnumComboBox.DataSource = dateEnums;
             }
 
             this.dateEnumComboBox.SelectedIndex = 0;

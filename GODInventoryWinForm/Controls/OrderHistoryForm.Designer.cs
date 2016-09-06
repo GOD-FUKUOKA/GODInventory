@@ -50,7 +50,6 @@
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,6 +85,7 @@
             this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             this.ordersTabPage.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -120,6 +120,7 @@
             this.ordersTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.ordersTabPage.Size = new System.Drawing.Size(1063, 484);
             this.ordersTabPage.TabIndex = 0;
+            this.ordersTabPage.Text = "订单查询";
             this.ordersTabPage.UseVisualStyleBackColor = true;
             // 
             // groupBox3
@@ -238,10 +239,6 @@
             // 
             this.dateEnumComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dateEnumComboBox.FormattingEnabled = true;
-            this.dateEnumComboBox.Items.AddRange(new object[] {
-            "全部",
-            "发货日",
-            "交货日"});
             this.dateEnumComboBox.Location = new System.Drawing.Point(392, 18);
             this.dateEnumComboBox.Name = "dateEnumComboBox";
             this.dateEnumComboBox.Size = new System.Drawing.Size(110, 20);
@@ -287,21 +284,6 @@
             this.label6.Size = new System.Drawing.Size(17, 12);
             this.label6.TabIndex = 89;
             this.label6.Text = "～";
-            // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(3, 450);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 1;
-            this.pager1.PageSize = 5000;
-            this.pager1.Size = new System.Drawing.Size(1057, 31);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // dataGridView1
             // 
@@ -575,6 +557,21 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(3, 450);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 1;
+            this.pager1.PageSize = 5000;
+            this.pager1.Size = new System.Drawing.Size(1057, 31);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // OrderHistoryForm
             // 
