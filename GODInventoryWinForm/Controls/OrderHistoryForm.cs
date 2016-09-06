@@ -14,129 +14,172 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class OrderHistoryForm : Form
     {
-
-        List<v_groupedorder> OrderList;
-        SortableBindingList<v_groupedorder> OrderListBindingList;
+        private static string NoOptionSelected = "不限";
+        List<v_pendingorder> orderList;
+        SortableBindingList<v_pendingorder> orderListBindingList;
         private List<t_shoplist> shopList;
-        private List<t_shoplist> shopList2;
+
         public OrderHistoryForm()
         {
             InitializeComponent();
-            InitializeOrderData();
-
-
+            InitializeDataSource();
+            pager1.Bind();
         }
+
 
         private void filterButton_Click(object sender, EventArgs e)
         {
-            var startAt = this.startDateTimePicker.Value.AddDays(-1).Date;
-            var endAt = this.endDateTimePicker.Value.AddDays(1).Date;
-
-            string xian = comboBox1.Text;
-
-            string sql = "";
-            //
-
-            if (this.comboBox2.Text == "交货日")//交货日
-                if (this.comboBox1.Text == "全国")//全国
-                    sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}   )
-    order by o1.`発注日` ";
-                else if (this.comboBox1.Text != "全国")//县
-                    sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}  AND o1.`県別`> {2})
-    order by o1.`発注日` ";
-            if (this.comboBox2.Text == "发货日")//发货日
-                if (this.comboBox1.Text == "全国")
-                    sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`出荷日`< {0} AND o1.`出荷日`> {1}  )
-    order by o1.`発注日` ";
-                else if (this.comboBox1.Text != "全国")
-                    sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1}  AND o1.`県別`={2})
-    order by o1.`発注日` ";
-            if (this.comboBox2.Text == "全部")//发货日交货日
-                if (this.comboBox1.Text == "全国")
-                    sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`出荷日`< {0} AND o1.`出荷日`> {1} AND o1.`納品日`< {0} AND o1.`納品日`> {1}  )
-    order by o1.`発注日` ";
-                else if (this.comboBox1.Text != "全国")
-                    sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`納品日`< {0} AND o1.`納品日`> {1} AND o1.`出荷日`< {0} AND o1.`出荷日`> {1}  AND o1.`県別`={2})
-    order by o1.`発注日` ";
-
-
-            using (var ctx = new GODDbContext())
-            {
-                if (this.comboBox1.Text == "全国")
-                    OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, endAt, startAt).ToList();
-                else if (this.comboBox1.Text != "全国")
-                    OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, endAt, startAt, comboBox1.Text).ToList();
-            }
-            //ApplyFilter();
-
-
-            OrderListBindingList = new SortableBindingList<v_groupedorder>(OrderList);
-            dataGridView1.DataSource = OrderListBindingList;
-
-
+            InitializeOrderData();
         }
 
-        public int InitializeOrderData()
+        public int InitializeDataSource()
         {
-
-            var startAt = this.startDateTimePicker.Value.AddDays(-1).Date;
-            var endAt = this.endDateTimePicker.Value.AddDays(1).Date;
-            startAt = DateTime.Now.AddDays(-30).Date;
-
-            string sql = @"SELECT * FROM t_orderdata o1 WHERE ((  o1.`発注日`< {0} AND s.`発注日`> {1} )
-    order by o1.発注日 ";
-            sql = @"SELECT * FROM t_orderdata o1 WHERE ( o1.`発注日`> {0} )
-    order by o1.`発注日` ";
+            this.pager1.PageCurrent = 1;
 
             using (var ctx = new GODDbContext())
             {
-
-                //OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, endAt, startAt).ToList();
-                OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, startAt).ToList();
-                //shopList = ctx.t_shoplist.ToList();
-
-                string sql1 = @"SELECT * FROM  t_shoplist o  GROUP BY o.`店名`";
-                shopList = ctx.Database.SqlQuery<t_shoplist>(sql1).ToList();
-                string sql2 = @"SELECT * FROM  t_shoplist o  GROUP BY o.`県別`";
-                shopList2 = ctx.Database.SqlQuery<t_shoplist>(sql2).ToList();
+                shopList = ctx.t_shoplist.ToList();
             }
 
-            var dian = shopList.GroupBy(o => o.店名);
-            this.storeComboBox.DisplayMember = "店名";
-            this.storeComboBox.ValueMember = "店番";
-            this.storeComboBox.DataSource = shopList;
+            if( shopList.Count> 0)
+            {
+                var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+                shops.Insert(0, new MockEntity { Id=0,FullName="不限"});
+                this.storeComboBox.DisplayMember = "FullName";
+                this.storeComboBox.ValueMember = "Id";
+                this.storeComboBox.DataSource = shops;
+                // 県別
+                var counties = shopList.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
+                counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                this.countyComboBox1.DisplayMember = "FullName";
+                this.countyComboBox1.ValueMember = "ShortName";
+                this.countyComboBox1.DataSource = counties;
+            }
 
-            t_shoplist item = new t_shoplist();
-            item.店番 = 0;
-            item.県別 = "全国";
-            shopList2.Insert(0, item);
-
-            this.comboBox1.DisplayMember = "県別";
-            this.comboBox1.ValueMember = "店番";
-            this.comboBox1.DataSource = shopList2;
-
-            OrderListBindingList = new SortableBindingList<v_groupedorder>(OrderList);
-            dataGridView1.DataSource = OrderListBindingList;
-
-            this.comboBox2.SelectedIndex = 0;
+            this.dateEnumComboBox.SelectedIndex = 0;
 
             return 0;
         }
 
+        private int InitializeOrderData()
+        {
+            var startAt = this.startDateTimePicker.Value.AddDays(-1).Date;
+            var endAt = this.endDateTimePicker.Value.AddDays(1).Date;
+            int storeCode = 0;
+            int orderCode = 0;
+            int innerCode = 0;
+            string orderDateEnum  = dateEnumComboBox.Text;
+            string county = countyComboBox1.Text;
+            string conditions = "";
+
+            #region  构造查询条件
+
+            if (orderCodeTextBox3.Text.Length > 0)
+            {
+                orderCode = Convert.ToInt32(orderCodeTextBox3.Text);
+            }
+
+            if (innerCodeTextBox.Text.Length > 0)
+            {
+                innerCode = Convert.ToInt32(innerCodeTextBox.Text);
+            }
+
+            if (storeCodeTextBox.Text.Length > 0)
+            {
+                storeCode = Convert.ToInt32(storeCodeTextBox.Text);
+            }
+
+            if (orderDateEnum == OrderDateEnum.出荷日.ToString())
+            {
+                conditions += "(  `出荷日`< @startAt AND `出荷日`> @endAt )";
+            }
+            else if (orderDateEnum == OrderDateEnum.納品日.ToString())
+            {
+                conditions += "(  `納品日`< @startAt AND `納品日`> @endAt )";
+            } 
+            
+            List<MySqlParameter> condition_params = new List<MySqlParameter>();
+
+            if (storeCode > 0)
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions += " AND ";
+                }
+                conditions += "(`店舗コード`= @storeCode)";
+            }
+            if (county != NoOptionSelected)
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions += " AND ";
+                }
+                conditions += "(`県別`= @county)";
+            }
+
+            if (orderCode > 0) 
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions += " AND ";
+                }
+                conditions += "(`伝票番号`= @orderCode)";
+            } 
+            if (innerCode > 0) 
+            {
+                if (conditions.Length > 0)
+                {
+                    conditions += " AND ";
+                }
+                conditions += "(`社内伝番`= @innerCode)";
+            } 
+
+            condition_params.Add(new MySqlParameter("@startAt", startAt));
+            condition_params.Add(new MySqlParameter("@endAt", endAt));
+            condition_params.Add(new MySqlParameter("@innerCode", innerCode));
+            condition_params.Add(new MySqlParameter("@orderCode", orderCode));
+            condition_params.Add(new MySqlParameter("@county", county));
+            condition_params.Add(new MySqlParameter("@storeCode", storeCode));
+            
+            #endregion
+
+            int limit = pager1.PageSize;
+            int offset = ( pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0 );
+            int count = 0;
+            using (var ctx = new GODDbContext())
+            {
+                if (conditions.Length > 0) {
+                    conditions = " WHERE " + conditions;
+                }
+                string sqlCount = string.Format(" SELECT count(*) FROM t_orderdata {0}", conditions);
+                count = ctx.Database.SqlQuery<int>(sqlCount, condition_params.ToArray()).First();
+                string sql = string.Format( " SELECT * FROM t_orderdata {0} LIMIT {1} OFFSET {2}", conditions, limit, offset );
+                orderList = ctx.Database.SqlQuery<v_pendingorder>(sql, condition_params.ToArray()).ToList();
+            }
+            orderListBindingList = new SortableBindingList<v_pendingorder>(orderList);
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = orderListBindingList;
+
+            return count;
+            
+        }
+
+
+
         private void ApplyFilter()
         {
             string filter = "";
-            if (this.storeCodeFilterTextBox3.Text.Length > 0)
+            if (this.orderCodeTextBox3.Text.Length > 0)
             {
-                filter += "(社内伝番=" + this.storeCodeFilterTextBox3.Text + ")";
+                filter += "(社内伝番=" + this.orderCodeTextBox3.Text + ")";
             }
-            if (this.storeCodeFilterTextBox3.Text.Length > 0)
+            if (this.orderCodeTextBox3.Text.Length > 0)
             {
                 if (filter.Length > 0)
                 {
                     filter += " or ";
                 }
-                filter += "(伝票番号=" + this.storeCodeFilterTextBox3.Text + ")";
+                filter += "(伝票番号=" + this.orderCodeTextBox3.Text + ")";
             }
 
 
@@ -197,10 +240,10 @@ namespace GODInventoryWinForm.Controls
     order by o1.`発注日`";
             using (var ctx = new GODDbContext())
             {
-                OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, startAt, dianfan).ToList();
+                orderList = ctx.Database.SqlQuery<v_pendingorder>(sql, startAt, dianfan).ToList();
             }
-            OrderListBindingList = new SortableBindingList<v_groupedorder>(OrderList);
-            dataGridView1.DataSource = OrderListBindingList;
+            orderListBindingList = new SortableBindingList<v_pendingorder>(orderList);
+            dataGridView1.DataSource = orderListBindingList;
             return 0;
         }
 
@@ -210,10 +253,10 @@ namespace GODInventoryWinForm.Controls
     order by o1.`発注日`";
             using (var ctx = new GODDbContext())
             {
-                OrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, storeCodeFilterTextBox3.Text).ToList();
+                orderList = ctx.Database.SqlQuery<v_pendingorder>(sql, orderCodeTextBox3.Text).ToList();
             }
-            OrderListBindingList = new SortableBindingList<v_groupedorder>(OrderList);
-            dataGridView1.DataSource = OrderListBindingList;
+            orderListBindingList = new SortableBindingList<v_pendingorder>(orderList);
+            dataGridView1.DataSource = orderListBindingList;
         }
 
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
@@ -222,9 +265,11 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private void btFindShop_Click(object sender, EventArgs e)
+
+        private int pager1_EventPaging(EventPagingArg e)
         {
-            InitializeOrderDataDF(this.storeCodeTextBox.Text);
+            int  count = InitializeOrderData();
+            return count;
         }
 
     }

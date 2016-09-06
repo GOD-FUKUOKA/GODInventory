@@ -149,13 +149,14 @@ namespace GODInventoryWinForm.Controls
                     {
                         var pendingorder = bindingSource1.List[row] as v_pendingorder;
                         t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
+                        //需要修改的字段为: “口数” “发注数量” “担当” “形态”
                         order.発注数量 = pendingorder.発注数量;
                         order.口数 = pendingorder.口数;
                         order.重量 = pendingorder.重量;
-                        order.原価金額_税抜_ = pendingorder.原価金額_税抜_;
                         order.発注形態名称漢字 = pendingorder.発注形態名称漢字;
                         order.実際配送担当 = pendingorder.実際配送担当;
-                        order.備考 = "発注形態配送担当数量変更";
+                        order.備考 = pendingorder.備考;
+                        order.納品指示 = pendingorder.納品指示;
                     }
 
                     ctx.SaveChanges();

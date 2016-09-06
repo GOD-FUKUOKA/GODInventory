@@ -163,7 +163,6 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Enabled = false;
             this.label7.Location = new System.Drawing.Point(79, 350);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(29, 12);
@@ -250,7 +249,6 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Enabled = false;
             this.label6.Location = new System.Drawing.Point(55, 321);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 12);

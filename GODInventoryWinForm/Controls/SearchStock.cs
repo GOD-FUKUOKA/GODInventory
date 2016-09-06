@@ -115,6 +115,91 @@ namespace GODInventoryWinForm.Controls
 
         private void loadItemListButton_Click(object sender, EventArgs e)
         {
+            this.FindDataSources();
+
+            this.BindDataGridView();
+        }
+
+        private void btcanel_Click(object sender, EventArgs e)
+        {
+            this.BindDataGridView();
+        }
+
+
+        private void btSave_Click(object sender, EventArgs e)
+        {
+            var deletedStockNumList = new List<string>();
+            DataGridViewColumn col;
+            string stockNum = null;
+
+            //Save qty
+            using (var ctx = new GODDbContext())
+            {
+
+                var ids = this.changedStockList.Select(s => s.id).ToArray();
+                var list = (from s in ctx.t_stockrec
+                            where ids.Contains(s.id)
+                            select s).ToList();
+
+                t_stockrec item;
+                foreach (var changed in changedStockList)
+                {
+                    if (changed.id > 0)
+                    {
+                        item = list.Find(s => s.id == changed.id);
+                        item.事由 = changed.事由;
+                        item.数量 = changed.数量;
+                        item.状態 = changed.状態;
+                    }
+                    else {
+                        if (changed.数量 != 0)
+                        {
+                            ctx.t_stockrec.Add(changed);
+                        }
+                    }
+                }
+
+                ctx.SaveChanges();
+
+                OrderSqlHelper.UpdateStockState(ctx, list);
+
+            }
+
+            for (int i = 0; i < stockIoDataGridView.ColumnCount; i++)
+            {
+                col = stockIoDataGridView.Columns[i];
+                //if (!col.Visible)
+                if (col.DefaultCellStyle.BackColor == System.Drawing.Color.Gray)
+                {
+                    stockNum = Convert.ToString(stockIoDataGridView.Rows[4].Cells[i].Value);
+                    deletedStockNumList.Add(stockNum);
+                }
+            }
+            if (deletedStockNumList.Count > 0)
+            {
+                int deletedCount = 0;
+                using (var ctx = new GODDbContext())
+                {
+                    var stockrecs = (from s in ctx.t_stockrec
+                                     where deletedStockNumList.Contains(s.納品書番号)
+                                     select s).ToList();
+                    ctx.t_stockrec.RemoveRange(stockrecs);
+                    ctx.SaveChanges();
+
+                    deletedCount = stockrecs.Count;
+                    this.stockList.RemoveAll(s => deletedStockNumList.Contains(s.納品書番号));
+
+                }
+            }
+            MessageBox.Show(String.Format("Congratulations, Items changed successfully!"));
+
+            changedStockList.Clear();
+
+            this.FindDataSources();
+            this.BindDataGridView();
+        }
+
+        private void FindDataSources() {
 
             var startAt = this.startDateTimePicker.Value.AddDays(-1).Date;
             var endAt = this.endDateTimePicker.Value.AddDays(1).Date;
@@ -193,7 +278,7 @@ namespace GODInventoryWinForm.Controls
 
             //            }
             #endregion
-            
+
             #region  new
             condition_params.Add(new MySqlParameter("@genreId", genreId));
             condition_params.Add(new MySqlParameter("@ioState", ioState));
@@ -217,81 +302,9 @@ namespace GODInventoryWinForm.Controls
 
 
             #endregion
-
-            this.BuildDataSources();
-
-
-
         }
 
-        private void btcanel_Click(object sender, EventArgs e)
-        {
-            this.BuildDataSources();
-        }
-
-
-        private void btSave_Click(object sender, EventArgs e)
-        {
-            var deletedStockNumList = new List<string>();
-            DataGridViewColumn col;
-            string stockNum = null;
-
-            //Save qty
-            using (var ctx = new GODDbContext())
-            {
-
-                var ids = this.changedStockList.Select(s => s.id).ToArray();
-                var list = (from s in ctx.t_stockrec
-                            where ids.Contains(s.id)
-                            select s).ToList();
-
-                t_stockrec changed;
-                foreach (var item in list)
-                {
-                    changed = changedStockList.Find(s => s.id == item.id);
-                    item.事由 = changed.事由;
-                    item.数量 = changed.数量;
-                    item.状態 = changed.状態;
-                }
-                
-
-                OrderSqlHelper.UpdateStockState(ctx, list);
-                ctx.SaveChanges();
-
-            }
-
-            for (int i = 0; i < stockIoDataGridView.ColumnCount; i++)
-            {
-                col = stockIoDataGridView.Columns[i];
-                //if (!col.Visible)
-                if (this.stockIoDataGridView.Rows[i].DefaultCellStyle.BackColor == System.Drawing.Color.Gray)
-                {
-                    stockNum = Convert.ToString(stockIoDataGridView.Rows[4].Cells[i].Value);
-                    deletedStockNumList.Add(stockNum);
-                }
-            }
-            if (deletedStockNumList.Count > 0)
-            {
-                int deletedCount = 0;
-                using (var ctx = new GODDbContext())
-                {
-                    var stockrecs = (from s in ctx.t_stockrec
-                                     where deletedStockNumList.Contains(s.納品書番号)
-                                     select s).ToList();
-                    ctx.t_stockrec.RemoveRange(stockrecs);
-                    ctx.SaveChanges();
-
-                    deletedCount = stockrecs.Count;
-                    this.stockList.RemoveAll(s => deletedStockNumList.Contains(s.納品書番号));
-
-                }
-            }
-            MessageBox.Show(String.Format("Congratulations, Items changed successfully!"));
-
-            changedStockList.Clear();
-        }
-
-        private void BuildDataSources()
+        private void BindDataGridView()
         {
 
             for (int i = 0; i < this.productList.Count; i++)
@@ -338,7 +351,7 @@ namespace GODInventoryWinForm.Controls
             {
                 var item = igrouping.First();
                 //igrouping.Key cause add new column
-                ioTable.Rows[0][j] = string.Format("{0:HH:mm:ss}", item.日付);
+                ioTable.Rows[0][j] = string.Format("{0:yyyyMMdd}", item.日付);
                 ioTable.Rows[1][j] = item.区分;
                 ioTable.Rows[2][j] = item.事由;
                 ioTable.Rows[3][j] = item.状態;
@@ -352,7 +365,7 @@ namespace GODInventoryWinForm.Controls
                 var i = productList.FindIndex(o => o.自社コード == igrouping.Key);
                 foreach (var stock in igrouping.ToList())
                 {
-                    qtyTable.Rows[i][stock.納品書番号] = stock.数量;
+                    qtyTable.Rows[i][stock.納品書番号] = Math.Abs( (int)stock.数量 );
                 }
             }
 
@@ -393,8 +406,8 @@ namespace GODInventoryWinForm.Controls
         {
             int i = stockIoDataGridView.CurrentCell.OwningColumn.Index;
             //stockIoDataGridView.Columns[i].Visible = false;
-            this.stockIoDataGridView.Rows[i].DefaultCellStyle.BackColor = System.Drawing.Color.Gray;
-            this.qtyDataGridView.Rows[i].DefaultCellStyle.BackColor = System.Drawing.Color.Gray;
+            this.stockIoDataGridView.Columns[i].DefaultCellStyle.BackColor = System.Drawing.Color.Gray;
+            this.qtyDataGridView.Columns[i].DefaultCellStyle.BackColor = System.Drawing.Color.Gray;
             //qtyDataGridView.Columns[i].Visible = false;
         }
 
@@ -567,8 +580,22 @@ namespace GODInventoryWinForm.Controls
             int productNum = GetProductNumByRowIndex(e.RowIndex);
 
             t_stockrec stock = this.stockList.Find(o => (o.自社コード == productNum && o.納品書番号 == stockNum));
-
-            stock.数量 = Convert.ToInt32(qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+            if (stock == null) {
+                var originalStock = this.stockList.Find(o => ( o.納品書番号 == stockNum));
+                stock = new t_stockrec();
+                stock.納品書番号 = originalStock.納品書番号;
+                stock.工厂 = originalStock.工厂;
+                stock.客户 = originalStock.客户;
+                stock.区分 = originalStock.区分;
+                stock.事由 = originalStock.事由;
+                stock.元 = originalStock.元;
+                stock.先 = originalStock.先;
+                stock.状態 = originalStock.状態;
+                stock.日付 = originalStock.日付;
+                stock.自社コード = productNum;
+            }
+            int qty = Convert.ToInt32(qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+            stock.数量 =  (stock.区分 == StockIoEnum.入庫.ToString() ? qty : -qty) ;
             this.changedStockList.Add(stock);
         }
 

@@ -14,7 +14,7 @@ namespace GODInventoryWinForm.Controls
         private InputStock InputStock;
         private OutputStock OutputStock;
         private StockMovement StockTransfer;
-        private InventoryForm Strock_Check;
+        private InventoryForm StockCheckForm;
 
 
         private SearchStock Search_Strock;
@@ -43,6 +43,8 @@ namespace GODInventoryWinForm.Controls
             {
                 InputStock = new InputStock();
             }
+            AdjustSubformSize(InputStock);
+
             InputStock.ShowDialog();
 
             #endregion
@@ -71,7 +73,7 @@ namespace GODInventoryWinForm.Controls
             }
             if (sender is InventoryForm)
             {
-                Strock_Check = null;
+                StockCheckForm = null;
             }
 
 
@@ -89,6 +91,7 @@ namespace GODInventoryWinForm.Controls
             {
                 OutputStock = new OutputStock();
             }
+            AdjustSubformSize(OutputStock);
             OutputStock.ShowDialog();
 
             #endregion
@@ -106,6 +109,8 @@ namespace GODInventoryWinForm.Controls
             {
                 Search_Strock = new SearchStock();
             }
+            AdjustSubformSize(Search_Strock);
+
             Search_Strock.ShowDialog();
 
             #endregion
@@ -125,6 +130,7 @@ namespace GODInventoryWinForm.Controls
             {
                 StockTransfer = new StockMovement();
             }
+            AdjustSubformSize(StockTransfer);
             StockTransfer.ShowDialog();
 
 
@@ -135,19 +141,27 @@ namespace GODInventoryWinForm.Controls
         private void button3_Click(object sender, EventArgs e)
         {
             #region MyRegion
-            if (Strock_Check == null)
+            if (StockCheckForm == null)
             {
-                Strock_Check = new InventoryForm();
-                Strock_Check.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
+                StockCheckForm = new InventoryForm();
+                StockCheckForm.FormClosed += new FormClosedEventHandler(FrmOMS_FormClosed);
             }
-            if (Strock_Check == null)
+            if (StockCheckForm == null)
             {
-                Strock_Check = new InventoryForm();
+                StockCheckForm = new InventoryForm();
             }
-            Strock_Check.ShowDialog();
+            AdjustSubformSize(StockCheckForm);
+            StockCheckForm.ShowDialog();
 
             #endregion
         }
 
+        private void AdjustSubformSize(Form form)
+        {
+            var size = this.Parent.Size;
+            size.Height = size.Height - 100;
+            size.Width = size.Width - 50;
+            form.Size = size;
+        }
     }
 }

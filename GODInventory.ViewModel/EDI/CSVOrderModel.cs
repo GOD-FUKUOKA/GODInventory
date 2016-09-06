@@ -325,21 +325,21 @@ namespace GODInventory.ViewModel.EDI
             orderdata.規格名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.規格名カナ).Trim();
 
 
-            orderdata.発注数量 = Convert.ToInt32(this.発注数量)/10;
+            orderdata.発注数量 = Convert.ToInt32(this.発注数量);
 
             orderdata.最小発注単位数量 = Convert.ToInt32(this.最小発注単位数量);
             orderdata.発注単位名称漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.発注単位名称漢字).Trim();
             orderdata.発注単位名称カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.発注単位名称カナ).Trim();
             orderdata.総額取引区分 = Convert.ToInt16(this.総額取引区分);
             // tbd...
-            orderdata.原単価_税抜_ = Convert.ToInt32(this.原単価_税抜_)/100;
-            orderdata.原単価_税込_ = Convert.ToDouble(this.原単価_税込_)/100.0; //48 原単価(税込 )   9 436
+            orderdata.原単価_税抜_ = Convert.ToInt32(this.原単価_税抜_);
+            orderdata.原単価_税込_ = Convert.ToDouble(this.原単価_税込_); //48 原単価(税込 )   9 436
             orderdata.原価金額_税抜_ = Convert.ToInt32(this.原価金額_税抜_);
             orderdata.原価金額_税込_ = Convert.ToInt32(this.原価金額_税込_);
 
             orderdata.税額 = Convert.ToDouble(this.税額);
             orderdata.税区分 = Convert.ToInt16(this.税区分); 
-            orderdata.税率 = Convert.ToDouble(this.税率)/1000;
+            orderdata.税率 = Convert.ToDouble(this.税率);
 
             orderdata.売単価_税抜_ = Convert.ToInt32(this.売単価_税抜_);
             orderdata.売単価_税込_ = Convert.ToInt32(this.売単価_税込_);

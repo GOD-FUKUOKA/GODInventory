@@ -47,6 +47,7 @@ namespace GODInventoryWinForm.Controls
 
             var q = OrderSqlHelper.WaitToShipOrderSql(this.entityDataSource1);
             this.orderList = this.entityDataSource1.CreateView(q);
+            this.bindingSource1.Filter = null;
             this.bindingSource1.DataSource = this.orderList;
             if (this.orderList.Count > 0)
             {
@@ -95,38 +96,31 @@ namespace GODInventoryWinForm.Controls
 
         private void ApplyBindSourceFilter(string text)
         {
-            string filter = "";
-            if (this.comboBox1.Text.Length > 0)
+            if (bindingSource1.Count > 0)
             {
-                filter += "(県別=" + "'" + this.comboBox1.Text + "'" + ")";
-            }
-            if (this.comboBox2.Text.Length > 0)
-            {
-                if (filter.Length > 0)
+                string filter = "";
+                if (this.comboBox1.Text.Length > 0)
                 {
-                    filter += " AND ";
+                    filter += "(県別=" + "'" + this.comboBox1.Text + "'" + ")";
                 }
-                filter += "(店舗名漢字=" + "'" + this.comboBox2.Text + "'" + ")";
-            }
-            if (this.shipperComboBox.Text.Length > 0)
-            {
-                if (filter.Length > 0)
+                if (this.comboBox2.Text.Length > 0)
                 {
-                    filter += " AND ";
+                    if (filter.Length > 0)
+                    {
+                        filter += " AND ";
+                    }
+                    filter += "(店舗名漢字=" + "'" + this.comboBox2.Text + "'" + ")";
                 }
-                filter += "(実際配送担当=" + "'" + this.shipperComboBox.Text + "'" + ")";
+                if (this.shipperComboBox.Text.Length > 0)
+                {
+                    if (filter.Length > 0)
+                    {
+                        filter += " AND ";
+                    }
+                    filter += "(実際配送担当=" + "'" + this.shipperComboBox.Text + "'" + ")";
+                }
+                bindingSource1.Filter = filter;
             }
-            bindingSource1.Filter = filter;
-            //原先代码
-            //if (shipperComboBox.Text == String.Empty || shipperComboBox.Text == "All")
-            //{
-            //    bindingSource1.Filter = "";
-            //}
-            //else
-            //{
-            //    bindingSource1.Filter = "実際配送担当='" + shipperComboBox.Text + "'";
-            //    //bindingSource1.ResetBindings(true);
-            //}
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
