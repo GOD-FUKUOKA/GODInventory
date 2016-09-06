@@ -176,6 +176,7 @@
             this.storeComboBox.Name = "storeComboBox";
             this.storeComboBox.Size = new System.Drawing.Size(110, 20);
             this.storeComboBox.TabIndex = 105;
+            this.storeComboBox.TextChanged += new System.EventHandler(this.storeComboBox_TextChanged);
             // 
             // storeCodeTextBox
             // 

@@ -277,5 +277,18 @@ namespace GODInventoryWinForm.Controls
             return count;
         }
 
+        private void storeComboBox_TextChanged(object sender, EventArgs e)
+        {
+            int code = (int)storeComboBox.SelectedValue;
+            if (code > 0)
+            {
+                this.storeCodeTextBox.Text = code.ToString();
+            }
+            else {
+                this.storeCodeTextBox.Text = "";
+            }
+            
+        }
+
     }
 }
