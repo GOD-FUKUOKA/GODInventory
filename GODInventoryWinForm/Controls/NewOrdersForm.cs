@@ -44,7 +44,7 @@ namespace GODInventoryWinForm.Controls
                 {
                     using (var ctx = new GODDbContext())
                     {
-                        for (int i = 0; i < dataGridView1.RowCount; i++)
+                        for (int i = 0; i < duplicatedOrderList.Count; i++)
                         {
                             //  if ((int) != 0)
                             {
@@ -60,6 +60,7 @@ namespace GODInventoryWinForm.Controls
                                 else if (duplicated_order.ダブリ == "no")
                                 {
                                     if (order.Status == OrderStatus.Duplicated) {
+                                        order.発注数量 = duplicated_order.発注数量;
                                         order.ダブリ = "no";
                                         order.Status = OrderStatus.Pending;
                                     }

@@ -939,5 +939,15 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         }
 
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            //if (e.ColumnIndex == 11) // 担当， 取值不是 丸健，MKL，'マツモト産業'
+            //{                
+            //}
+            //else {
+            //    e.ThrowException = true;
+            //}
+        }
+
     }
 }

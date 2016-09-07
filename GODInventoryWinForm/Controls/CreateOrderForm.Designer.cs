@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -159,9 +159,9 @@
             // invoiceNODataGridViewTextBoxColumn
             // 
             this.invoiceNODataGridViewTextBoxColumn.DataPropertyName = "伝票番号";
-            dataGridViewCellStyle1.Format = "D8";
-            dataGridViewCellStyle1.NullValue = null;
-            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "D8";
+            dataGridViewCellStyle3.NullValue = null;
+            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.invoiceNODataGridViewTextBoxColumn.Frozen = true;
             this.invoiceNODataGridViewTextBoxColumn.HeaderText = "伝票番号";
             this.invoiceNODataGridViewTextBoxColumn.Name = "invoiceNODataGridViewTextBoxColumn";
@@ -171,8 +171,8 @@
             // 
             // specialCodeColumn
             // 
-            dataGridViewCellStyle2.NullValue = "NO";
-            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.NullValue = "NO";
+            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.specialCodeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.specialCodeColumn.HeaderText = "雑コード";
             this.specialCodeColumn.Items.AddRange(new object[] {
@@ -474,9 +474,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(357, 82);
+            this.label3.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(357, 78);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.Size = new System.Drawing.Size(57, 12);
             this.label3.TabIndex = 39;
             this.label3.Text = "発注形態";
             // 
