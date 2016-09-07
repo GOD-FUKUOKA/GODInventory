@@ -37,10 +37,11 @@ namespace GODInventoryWinForm.Controls
             InitializeDataSource();
         }
 
-        private void InitializeDataSource() {
+        private void InitializeDataSource()
+        {
 
             using (var ctx = new GODDbContext())
-            {                
+            {
                 warehouseList = ctx.t_warehouses.ToList();
                 genreList = ctx.t_genre.OrderBy(o => o.Position).ToList();
                 manufacturerList = ctx.t_manufacturers.OrderBy(o => o.Position).ToList();
@@ -80,7 +81,8 @@ namespace GODInventoryWinForm.Controls
                     foreach (var item in stockiosList)
                     {
                         stocklist = new BindingList<t_stockrec>();
-                        if (item.qty > 0) { 
+                        if (item.qty > 0)
+                        {
                             #region stockout 信息
                             var order = new t_stockrec();
 
@@ -88,7 +90,7 @@ namespace GODInventoryWinForm.Controls
                             order.元 = this.fromWarehouseComboBox.Text;
                             order.先 = this.toWarehouseComboBox1.Text;
                             order.納品書番号 = stockOutNumTextBox.Text;
-                            order.事由 = this.toWarehouseComboBox1.Text+"へ移動";
+                            order.事由 = this.toWarehouseComboBox1.Text + "へ移動";
                             //order.仓库 = comboBox1.Text;
                             order.区分 = StockIoEnum.出庫.ToString();
                             order.数量 = -item.qty;
@@ -108,7 +110,7 @@ namespace GODInventoryWinForm.Controls
                             order.事由 = this.fromWarehouseComboBox.Text + "から";
                             order.区分 = StockIoEnum.入庫.ToString();
                             order.自社コード = item.自社コード;
-                           
+
 
                             order.数量 = item.qty;
                             order.状態 = this.toStatusComboBox.Text;
@@ -118,24 +120,25 @@ namespace GODInventoryWinForm.Controls
 
                             #endregion
 
-                        }    
+                        }
                     }
                     if (changeList.Count > 0)
                     {
 
                         ctx.t_stockrec.AddRange(changeList);
-                        
-                        List<int> pids = new  List<int>();
-                        foreach( var item in changeList){
+
+                        List<int> pids = new List<int>();
+                        foreach (var item in changeList)
+                        {
                             pids.Add(item.自社コード);
                         }
 
 
                         ctx.SaveChanges();
-                     
+
                         OrderSqlHelper.UpdateStockState(ctx, changeList);
                         this.stockiosList.Clear();
-                       
+
 
 
                         MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", changeList.Count));
@@ -147,10 +150,10 @@ namespace GODInventoryWinForm.Controls
             catch (Exception ex)
             {
                 MessageBox.Show("" + ex);
-                
+
             }
         }
-        
+
         private void btadd_Click(object sender, EventArgs e)
         {
             stockiosList.Clear();
@@ -161,8 +164,8 @@ namespace GODInventoryWinForm.Controls
                 using (var ctx = new GODDbContext())
                 {
                     var results = (from s in ctx.t_itemlist
-                                   where s.ジャンル == (short)genre_id 
-                                   select new v_stockios {商品コード=s.商品コード, 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
+                                   where s.ジャンル == (short)genre_id
+                                   select new v_stockios { 商品コード = s.商品コード, 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
                     for (int i = 0; i < results.Count; i++)
                     {
                         results[i].Id = i + 1;
@@ -172,7 +175,7 @@ namespace GODInventoryWinForm.Controls
             }
 
         }
-        
+
         private void btclearzero_Click(object sender, EventArgs e)
         {
             foreach (var item in stockiosList)
@@ -196,7 +199,7 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private void BuildStockInNum() 
+        private void BuildStockInNum()
         {
             var selected_date = this.stockInDateTimePicker1.Value;
             var genre_id = GetGenreId();
@@ -205,7 +208,7 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private string BuildStockNum( int genre_id, DateTime selected_date)
+        private string BuildStockNum(int genre_id, DateTime selected_date)
         {
             string stock_no = "";
             if (genre_id > 0)
@@ -213,7 +216,7 @@ namespace GODInventoryWinForm.Controls
                 string sn = "";
                 int count = 0;
                 var startAt = selected_date.Date;
-                var endAt = startAt.AddDays(1).Date;              
+                var endAt = startAt.AddDays(1).Date;
                 using (var ctx = new GODDbContext())
                 {
                     var results = from s in ctx.t_stockrec
@@ -231,7 +234,7 @@ namespace GODInventoryWinForm.Controls
                 }
 
                 stock_no = String.Format(sn + "-" + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
-               
+
             }
             return stock_no;
         }
@@ -315,7 +318,22 @@ namespace GODInventoryWinForm.Controls
         private void fromWarehouseComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             BuildStockOutNum();
-            
+
+        }
+
+        private void genreComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var filtered = manufacturerList.FindAll(s => s.genreId == Convert.ToInt32(this.genreComboBox.SelectedValue) || s.Id == 0);
+
+            if (filtered.Count > 0)
+            {
+                this.manufacturerComboBox.DataSource = filtered;
+            }
+            else
+            {
+                this.manufacturerComboBox.DataSource = manufacturerList;
+
+            }
         }
 
     }
