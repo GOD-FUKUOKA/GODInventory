@@ -286,6 +286,8 @@ namespace GODInventory.MyLinq
 
         public string ShipNO { get; set; }
 
+        public short 入力区分 { get; set; }
+
         public t_orderdata()
         {
             this.キャンセル = "no";

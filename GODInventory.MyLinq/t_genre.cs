@@ -11,7 +11,7 @@ namespace GODInventory.MyLinq
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int idジャンル { get; set; }
+        public short idジャンル { get; set; }
 
         [Required]
         [StringLength(255)]

@@ -157,3 +157,6 @@ ADD COLUMN  `WarehouseId` INT(4) NOT NULL DEFAULT 0 AFTER `自社コード`,
 ADD COLUMN `ShipperName`  varchar(255) CHARACTER SET 'utf8' COLLATE utf8_unicode_ci DEFAULT NULL,
 DROP PRIMARY KEY,
 ADD PRIMARY KEY (`自社コード`, `WarehouseId`);
+
+ALTER TABLE `god_inventory`.`t_orderdata` 
+ADD COLUMN `入力区分` SMALLINT(6) NOT NULL DEFAULT 0;

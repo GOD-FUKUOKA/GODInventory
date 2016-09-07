@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -65,7 +65,7 @@
             this.customerIdTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.deliveredAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label11 = new System.Windows.Forms.Label();
             this.locationComboBox = new System.Windows.Forms.ComboBox();
             this.locationTextBox = new System.Windows.Forms.TextBox();
@@ -159,9 +159,9 @@
             // invoiceNODataGridViewTextBoxColumn
             // 
             this.invoiceNODataGridViewTextBoxColumn.DataPropertyName = "伝票番号";
-            dataGridViewCellStyle3.Format = "D8";
-            dataGridViewCellStyle3.NullValue = null;
-            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "D8";
+            dataGridViewCellStyle1.NullValue = null;
+            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.invoiceNODataGridViewTextBoxColumn.Frozen = true;
             this.invoiceNODataGridViewTextBoxColumn.HeaderText = "伝票番号";
             this.invoiceNODataGridViewTextBoxColumn.Name = "invoiceNODataGridViewTextBoxColumn";
@@ -171,8 +171,8 @@
             // 
             // specialCodeColumn
             // 
-            dataGridViewCellStyle4.NullValue = "NO";
-            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.NullValue = "NO";
+            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.specialCodeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.specialCodeColumn.HeaderText = "雑コード";
             this.specialCodeColumn.Items.AddRange(new object[] {
@@ -385,6 +385,8 @@
             // 
             this.customerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.customerComboBox.FormattingEnabled = true;
+            this.customerComboBox.Items.AddRange(new object[] {
+            "ナフコ"});
             this.customerComboBox.Location = new System.Drawing.Point(490, 42);
             this.customerComboBox.Name = "customerComboBox";
             this.customerComboBox.Size = new System.Drawing.Size(101, 20);
@@ -418,12 +420,12 @@
             this.textBox5.TabIndex = 32;
             this.textBox5.Text = "9";
             // 
-            // dateTimePicker1
+            // deliveredAtDateTimePicker
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(828, 74);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(123, 21);
-            this.dateTimePicker1.TabIndex = 34;
+            this.deliveredAtDateTimePicker.Location = new System.Drawing.Point(828, 74);
+            this.deliveredAtDateTimePicker.Name = "deliveredAtDateTimePicker";
+            this.deliveredAtDateTimePicker.Size = new System.Drawing.Size(123, 21);
+            this.deliveredAtDateTimePicker.TabIndex = 34;
             // 
             // label11
             // 
@@ -444,6 +446,7 @@
             this.locationComboBox.Name = "locationComboBox";
             this.locationComboBox.Size = new System.Drawing.Size(95, 20);
             this.locationComboBox.TabIndex = 37;
+            this.locationComboBox.SelectedIndexChanged += new System.EventHandler(this.locationComboBox_SelectedIndexChanged);
             // 
             // locationTextBox
             // 
@@ -496,7 +499,7 @@
             this.Controls.Add(this.locationComboBox);
             this.Controls.Add(this.locationTextBox);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.deliveredAtDateTimePicker);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.label10);
@@ -554,7 +557,7 @@
         private System.Windows.Forms.TextBox customerIdTextBox;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker deliveredAtDateTimePicker;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox locationComboBox;
         private System.Windows.Forms.TextBox locationTextBox;

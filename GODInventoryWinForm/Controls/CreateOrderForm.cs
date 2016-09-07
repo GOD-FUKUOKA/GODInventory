@@ -24,7 +24,6 @@ namespace GODInventoryWinForm.Controls
     {
 
         List<int> newfaxno = new List<int>();
-        private List<t_orderdata> orders1;
         private List<t_shoplist> shopList;
         private List<v_itemprice> itemPriceList;
         private List<t_locations> locationList;
@@ -76,6 +75,9 @@ namespace GODInventoryWinForm.Controls
 
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.DataSource = orderList;
+
+            this.customerComboBox.SelectedIndex = 0;
+            this.deliveredAtDateTimePicker.Value = DateTime.Now.AddDays(2);
         }
 
         private void NewOrdersForm_Load(object sender, EventArgs e)
@@ -159,23 +161,39 @@ namespace GODInventoryWinForm.Controls
         }
 
         private void submitButton_Click(object sender, EventArgs e)
-        {
+        {            
+            //BindingList<t_orderdata> newOrderList = new BindingList<t_orderdata>();
+            var newOrderList = this.orderList.Where(o => o.発注数量 > 0).ToList();
 
-            
-                //BindingList<t_orderdata> newOrderList = new BindingList<t_orderdata>();
-                var newOrderList = this.orderList.Where(o => o.発注数量 > 0).ToList();
-
-                if (newOrderList.Count > 0)
+            if (newOrderList.Count > 0)
+            {
+                int storeCode = (int)this.storeComboBox.SelectedValue;
+                var store = shopList.Find(s => s.店番 == storeCode);
+                using (var ctx = new GODDbContext())
                 {
-                    using (var ctx = new GODDbContext())
-                    {
-                        ctx.t_orderdata.AddRange(newOrderList);
-                        ctx.SaveChanges();
-                        MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", newOrderList.Count));
-                        orderList.Clear();
-                    }
 
+                    foreach (var o in newOrderList) 
+                    {
+                        v_itemprice selectedItem = itemPriceList.Find(i => i.自社コード == o.自社コード);
+                        o.税率 = 0.08;
+                        o.特価区分 = 0;
+                        o.PB区分 = 0;
+                        o.原価区分 = 0;
+                        o.納期回答区分 = 0;
+                        o.回答納期 = "00000000";
+                        o.入力区分 = 1;
+                        o.実際出荷数量 = o.発注数量;
+                        o.重量 = (int)( Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
+                        o.県別 = store.県別;
+
+                    }
+                    ctx.t_orderdata.AddRange(newOrderList);
+                    ctx.SaveChanges();
+                    MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", newOrderList.Count));
+                    orderList.Clear();
                 }
+
+            }
                      
         }
 
@@ -509,7 +527,7 @@ namespace GODInventoryWinForm.Controls
                                             join p in ctx.t_pricelist on i.自社コード equals p.自社コード
                                             join g in ctx.t_genre on i.ジャンル equals g.idジャンル
                                             where p.店番 == storeId
-                                            select new v_itemprice { 自社コード = i.自社コード, ジャンル名 = g.ジャンル名, 商品コード = i.商品コード, JANコード = i.JANコード, 商品名 = i.商品名, 原単価 = p.通常売価, 規格 = i.規格, PT入数 = i.PT入数 }).ToList();
+                                            select new v_itemprice { 自社コード = i.自社コード,ジャンル = g.idジャンル, ジャンル名 = g.ジャンル名, 商品コード = i.商品コード, JANコード = i.JANコード, 商品名 = i.商品名, 原単価 = p.通常売価, 規格 = i.規格, PT入数 = i.PT入数, 単品重量 = i.単品重量, 単位 = i.単位 }).ToList();
                   }
 
                   for (int i = 0; i < 10; i++)
@@ -517,6 +535,7 @@ namespace GODInventoryWinForm.Controls
                       t_orderdata order = new t_orderdata();
                       order.受注日 = DateTime.Now;
                       order.発注日 = orderCreatedAtDateTimePicker.Value.Date;
+                      order.納品予定日 = deliveredAtDateTimePicker.Value.Date;
 
                       order.店舗コード = Convert.ToInt16(storeCodeTextBox.Text);
                       //order.商品コード = Convert.ToInt32(productCodeTextBox.Text);
@@ -524,12 +543,12 @@ namespace GODInventoryWinForm.Controls
 
                       order.仕入先コード = Convert.ToInt32(selfCodeTextBox1.Text);
                       order.出荷業務仕入先コード = Convert.ToInt32(this.shipperTextBox.Text);
-                      order.仕入先名カナ = this.selfNameTextBox.Text;
+                      order.仕入先名漢字 = this.selfNameTextBox.Text;
                       order.店舗名漢字 = this.storeComboBox.Text;
                       order.法人コード = Convert.ToInt16(this.customerIdTextBox.Text);
                       order.法人名漢字 = this.customerComboBox.Text;
                       order.部門コード = Convert.ToInt16(this.textBox5.Text);
-                      order.納品予定日 = this.dateTimePicker1.Value.Date;
+                      order.納品予定日 = this.deliveredAtDateTimePicker.Value.Date;
                       order.納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
                       //order.納品先店舗名漢字 = this.locationComboBox.Text;
                       order.発注形態区分 = (short)this.orderReasonComboBox.SelectedValue;
@@ -742,6 +761,7 @@ namespace GODInventoryWinForm.Controls
             v_itemprice selectedItem = itemPriceList.Find(o => o.自社コード == itemCode);
             if (selectedItem != null)
             {
+                orderList[selectedRowIndex].自社コード = itemCode;
                 orderList[selectedRowIndex].商品コード = Convert.ToInt32(selectedItem.商品コード);
                 orderList[selectedRowIndex].ジャンル = selectedItem.ジャンル;
                 orderList[selectedRowIndex].品名漢字 = selectedItem.商品名;
@@ -762,6 +782,11 @@ namespace GODInventoryWinForm.Controls
                     
                 MessageBox.Show( String.Format( "Sorry, can not find item price by code {0}, please add it into t_pricelist.", itemCode ));
             }
+        }
+
+        private void locationComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            locationTextBox.Text = locationComboBox.SelectedValue.ToString();
         }
     }
 }
