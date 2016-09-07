@@ -157,74 +157,73 @@ namespace GODInventory.ViewModel.EDI
         {           
             var untrimFields = line.Split(',');
             var fields = untrimFields.Select(s => s.Trim('"')).ToList();
-            Debug.Assert( fields.Count() == 74);
+            Debug.Assert( fields.Count() == 60);
 
-            this.管理連番 = fields[0];
-            this.システム管理日付 = fields[0];
+
             this.データ作成日 = fields[0];
-            this.データ作成時刻 = fields[0];//
-            this.法人コード = fields[0];//  2 39
-            this.法人名漢字 = fields[0];//   20 41
-            this.法人名カナ = fields[0];//  15 61
-            this.店舗コード = fields[0];//  3 76
+            this.データ作成時刻 = fields[1];//
+            this.法人コード = fields[2];//  2 39
+            this.法人名漢字 = fields[3];//   20 41
+            this.法人名カナ = fields[4];//  15 61
+            this.店舗コード = fields[5];//  3 76
 
-            this.店舗名漢字 = fields[0];//  20 79
-            this.店舗名カナ = fields[0];//  15  99
-            this.部門コード = fields[0];// 2   114
-            this.部門名漢字 = fields[0];//  20  116
-            this.部門名カナ = fields[0];//  15  136
-            this.仕入先コード = fields[0];// 6   151
-            this.仕入先名漢字 = fields[0];// 20  157
-            this.仕入先名カナ = fields[0];// 15  177
-            this.支払仕入先コード = fields[0];//   6   192
-            this.支払仕入先名漢字 = fields[0];//   20  198
-            this.支払仕入先名カナ = fields[0];//   15  218
-            this.出荷業務仕入先コード = fields[0];// 6   233
-            this.伝票区分 = fields[0];//   2   239
-            this.赤黒区分 = fields[0];//   1   241
+            this.店舗名漢字 = fields[6];//  20 79
+            this.店舗名カナ = fields[7];//  15  99
+            this.部門コード = fields[8];// 2   114
+            this.部門名漢字 = fields[9];//  20  116
+            this.部門名カナ = fields[10];//  15  136
+            this.仕入先コード = fields[11];// 6   151
+            this.仕入先名漢字 = fields[12];// 20  157
+            this.仕入先名カナ = fields[13];// 15  177
+            this.支払仕入先コード = fields[14];//   6   192
+            this.支払仕入先名漢字 = fields[15];//   20  198
+            this.支払仕入先名カナ = fields[16];//   15  218
+            this.出荷業務仕入先コード = fields[17];// 6   233
+            this.伝票区分 = fields[18];//   2   239
+            this.赤黒区分 = fields[19];//   1   241
 
-            this.伝票番号 = fields[0];//   8   242
-            this.行番号 = fields[0];//   2   250
-            this.元伝票番号 = fields[0];//  8   252
-            this.発生日 = fields[0];//        8   260
-            this.仕入計上日 = fields[0];//  8   268
-            this.商品コード区分 = fields[0];//   1   276
-            this.ＪＡＮコード = fields[0];//     13  277
-            this.商品コード = fields[0];//    8   290
-            this.オプション使用欄 = fields[0];//   20  298
-            this.ＧＴＩＮ = fields[0];//       14  318
-            this.品名漢字 = fields[0];//       20  332
-            this.品名カナ = fields[0];//      25  352
-            this.規格名漢字 = fields[0];//      20  377
-            this.規格名カナ = fields[0];//      25  397
-            this.数量 = fields[0];//            6   422
-            this.総額取引区分 = fields[0];//    1   428
+            this.伝票番号 = fields[20];//   8   242
+            this.行番号 = fields[21];//   2   250
+            this.元伝票番号 = fields[22];//  8   252
+            this.発生日 = fields[23];//        8   260
+            this.仕入計上日 = fields[24];//  8   268
+            this.商品コード区分 = fields[25];//   1   276
+            this.ＪＡＮコード = fields[26];//     13  277
+            this.商品コード = fields[27];//    8   290
+            this.オプション使用欄 = fields[28];//   20  298
+            this.ＧＴＩＮ = fields[29];//       14  318
+            this.品名漢字 = fields[30];//       20  332
+            this.品名カナ = fields[31];//      25  352
+            this.規格名漢字 = fields[32];//      20  377
+            this.規格名カナ = fields[33];//      25  397
+            this.数量 = fields[34];//            6   422
+            this.総額取引区分 = fields[35];//    1   428
 
-            this.原単価_税抜_ = fields[0];//   9   429
-            this.原単価_税込_ = fields[0];//   9   438
-            this.原価金額_税抜_ = fields[0];//  9   447
-            this.原価金額_税込_ = fields[0];//  9   456
-            this.税区分 = fields[0];//      1   465
-            this.税率 = fields[0];//         4   466
-            this.税額 = fields[0];//        9   470
-            this.売単価_税抜_ = fields[0];//  7   479
-            this.売単価_税込_ = fields[0];//  7   486
-            this.特価区分 = fields[0];//        1   493
-            this.PB区分 = fields[0];//       1 494
-            this.原価区分 = fields[0];//       1   495
-            this.受領区分 = fields[0];//       2   496
-            this.理由区分 = fields[0];//       2   498
-            this.理由コード = fields[0];//      2   500
-            this.理由漢字 = fields[0];//       20  502
-            this.連絡事項１ = fields[0];//      30  522
-            this.連絡事項２ = fields[0];//      30  552
-            this.納品先店舗コード = fields[0];//   3   582
+            this.原単価_税抜_ = fields[36];//   9   429
+            this.原単価_税込_ = fields[37];//   9   438
+            this.原価金額_税抜_ = fields[38];//  9   447
+            this.原価金額_税込_ = fields[39];//  9   456
+            this.税区分 = fields[40];//      1   465
+            this.税率 = fields[41];//         4   466
+            this.税額 = fields[42];//        9   470
+            this.売単価_税抜_ = fields[43];//  7   479
+            this.売単価_税込_ = fields[44];//  7   486
+            this.特価区分 = fields[45];//        1   493
+            this.PB区分 = fields[46];//       1 494
+            this.原価区分 = fields[47];//       1   495
+            this.受領区分 = fields[48];//       2   496
+            this.理由区分 = fields[49];//       2   498
+            this.理由コード = fields[50];//      2   500
+            this.理由漢字 = fields[51];//       20  502
+            this.連絡事項１ = fields[52];//      30  522
+            this.連絡事項２ = fields[53];//      30  552
+            this.納品先店舗コード = fields[54];//   3   582
 
-            this.納品先店舗名漢字 = fields[0];//   20  585
-            this.納品先店舗名カナ = fields[0];//   15  605
-            this.センター経由区分 = fields[0];//   1   620
-            this.センターコード = fields[0];//   5   621
-            this.センター名漢字 = fields[0];//    20  626
+            this.納品先店舗名漢字 = fields[55];//   20  585
+            this.納品先店舗名カナ = fields[56];//   15  605
+            this.センター経由区分 = fields[57];//   1   620
+            this.センターコード = fields[58];//   5   621
+            this.センター名漢字 = fields[59];//    20  626
 
         }
 
@@ -279,7 +278,7 @@ WHERE id受注データ= @P0;";
         }
 
         public int ReceivedQuantity {
-            get { return Convert.ToInt32(this.数量)/10; }
+            get { return Convert.ToInt32(this.数量); }
         }
 
 

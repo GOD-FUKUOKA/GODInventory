@@ -44,7 +44,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "JURYOU";
-            this.openFileDialog1.Filter = "Text Files (.txt)|*.txt|All Files (*.*)|*.*";
+            this.openFileDialog1.Filter = "Text Files (.csv)|*.csv|All Files (*.*)|*.*";
             // 
             // cancelButton
             // 
@@ -123,7 +123,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(458, 23);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Import JURYOU.txt";
+            this.label2.Text = "Import JURYOU.csv";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // closeButton
@@ -136,7 +136,7 @@
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
             // 
-            // ImportReceivedTextForm
+            // ImportReceivedCSVForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -152,7 +152,7 @@
             this.Controls.Add(this.progressBar1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ImportReceivedTextForm";
+            this.Name = "ImportReceivedCSVForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ImportJuryouForm";

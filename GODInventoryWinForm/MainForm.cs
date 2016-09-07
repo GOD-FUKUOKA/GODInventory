@@ -118,5 +118,11 @@ namespace GODInventoryWinForm
         {
 
         }
+
+        private void importReceivedCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ImportReceivedCSVForm().ShowDialog();
+
+        }
     }
 }

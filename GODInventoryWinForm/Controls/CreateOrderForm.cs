@@ -185,7 +185,8 @@ namespace GODInventoryWinForm.Controls
                         o.実際出荷数量 = o.発注数量;
                         o.重量 = (int)( Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
                         o.県別 = store.県別;
-
+                        o.発注形態区分 =  Convert.ToInt16( this.orderReasonComboBox.SelectedValue );
+                        o.発注形態名称漢字 = this.orderReasonComboBox.Text;
                     }
                     ctx.t_orderdata.AddRange(newOrderList);
                     ctx.SaveChanges();
@@ -420,7 +421,7 @@ namespace GODInventoryWinForm.Controls
                 int productCode = Convert.ToInt32( cell.Value);
                 var item = this.itemPriceList.Find( o => o.商品コード == productCode);
                 if (item != null) {
-                    order.ジャンル = item.ジャンル;
+                    order.ジャンル = Convert.ToInt16(item.ジャンル);
                     order.品名漢字 = item.商品名;
                     order.規格名漢字 = item.規格;
                     order.ＪＡＮコード = item.JANコード;
@@ -763,7 +764,7 @@ namespace GODInventoryWinForm.Controls
             {
                 orderList[selectedRowIndex].自社コード = itemCode;
                 orderList[selectedRowIndex].商品コード = Convert.ToInt32(selectedItem.商品コード);
-                orderList[selectedRowIndex].ジャンル = selectedItem.ジャンル;
+                orderList[selectedRowIndex].ジャンル = Convert.ToInt16( selectedItem.ジャンル );
                 orderList[selectedRowIndex].品名漢字 = selectedItem.商品名;
                 orderList[selectedRowIndex].規格名漢字 = selectedItem.規格;
                 orderList[selectedRowIndex].ＪＡＮコード = selectedItem.JANコード;

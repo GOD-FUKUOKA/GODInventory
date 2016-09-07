@@ -29,12 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cancelButton = new System.Windows.Forms.Button();
             this.submitButton = new System.Windows.Forms.Button();
             this.loadItemListButton = new System.Windows.Forms.Button();
@@ -61,6 +58,11 @@
             this.clientComboBox = new System.Windows.Forms.ComboBox();
             this.remarkTextBox1 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -74,6 +76,14 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdDataGridViewTextBoxColumn,
@@ -81,14 +91,290 @@
             this.商品名,
             this.規格,
             this.数量});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(344, 25);
+            this.dataGridView1.Location = new System.Drawing.Point(364, 23);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(573, 416);
+            this.dataGridView1.Size = new System.Drawing.Size(539, 447);
             this.dataGridView1.TabIndex = 45;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelButton.Location = new System.Drawing.Point(930, 66);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(100, 32);
+            this.cancelButton.TabIndex = 36;
+            this.cancelButton.Text = "清零";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click_1);
+            // 
+            // submitButton
+            // 
+            this.submitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.submitButton.BackColor = System.Drawing.SystemColors.Control;
+            this.submitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.submitButton.Location = new System.Drawing.Point(930, 21);
+            this.submitButton.Name = "submitButton";
+            this.submitButton.Size = new System.Drawing.Size(100, 32);
+            this.submitButton.TabIndex = 35;
+            this.submitButton.Text = "登录";
+            this.submitButton.UseVisualStyleBackColor = false;
+            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
+            // 
+            // loadItemListButton
+            // 
+            this.loadItemListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadItemListButton.Location = new System.Drawing.Point(238, 315);
+            this.loadItemListButton.Name = "loadItemListButton";
+            this.loadItemListButton.Size = new System.Drawing.Size(100, 32);
+            this.loadItemListButton.TabIndex = 51;
+            this.loadItemListButton.Text = "调出商品列表";
+            this.loadItemListButton.UseVisualStyleBackColor = true;
+            this.loadItemListButton.Click += new System.EventHandler(this.loadItemListButton_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(62, 409);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(48, 24);
+            this.label7.TabIndex = 43;
+            this.label7.Text = "数量";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(42, 132);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(86, 24);
+            this.label5.TabIndex = 41;
+            this.label5.Text = "商品分类";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(80, 96);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 24);
+            this.label2.TabIndex = 37;
+            this.label2.Text = "期日";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(42, 276);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(86, 24);
+            this.label4.TabIndex = 39;
+            this.label4.Text = "入库编号";
+            // 
+            // stockNOTextBox
+            // 
+            this.stockNOTextBox.Enabled = false;
+            this.stockNOTextBox.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.stockNOTextBox.Location = new System.Drawing.Point(133, 277);
+            this.stockNOTextBox.Multiline = true;
+            this.stockNOTextBox.Name = "stockNOTextBox";
+            this.stockNOTextBox.ReadOnly = true;
+            this.stockNOTextBox.Size = new System.Drawing.Size(204, 32);
+            this.stockNOTextBox.TabIndex = 40;
+            // 
+            // orderCreatedAtDateTimePicker
+            // 
+            this.orderCreatedAtDateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(134, 95);
+            this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
+            this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(204, 29);
+            this.orderCreatedAtDateTimePicker.TabIndex = 44;
+            this.orderCreatedAtDateTimePicker.ValueChanged += new System.EventHandler(this.orderCreatedAtDateTimePicker_ValueChanged);
+            // 
+            // genreComboBox
+            // 
+            this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.genreComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.genreComboBox.FormattingEnabled = true;
+            this.genreComboBox.Location = new System.Drawing.Point(134, 129);
+            this.genreComboBox.Name = "genreComboBox";
+            this.genreComboBox.Size = new System.Drawing.Size(204, 32);
+            this.genreComboBox.TabIndex = 47;
+            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // warehouseComboBox
+            // 
+            this.warehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.warehouseComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.warehouseComboBox.FormattingEnabled = true;
+            this.warehouseComboBox.Location = new System.Drawing.Point(134, 58);
+            this.warehouseComboBox.Name = "warehouseComboBox";
+            this.warehouseComboBox.Size = new System.Drawing.Size(204, 32);
+            this.warehouseComboBox.TabIndex = 49;
+            this.warehouseComboBox.SelectedIndexChanged += new System.EventHandler(this.warehouseComboBox_SelectedIndexChanged);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown1.Location = new System.Drawing.Point(134, 403);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(202, 29);
+            this.numericUpDown1.TabIndex = 50;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(38, 369);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(86, 24);
+            this.label6.TabIndex = 42;
+            this.label6.Text = "工厂编码";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(80, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 24);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "仓库";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(80, 168);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 24);
+            this.label3.TabIndex = 38;
+            this.label3.Text = "工厂";
+            // 
+            // manufacturerComboBox
+            // 
+            this.manufacturerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.manufacturerComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.manufacturerComboBox.FormattingEnabled = true;
+            this.manufacturerComboBox.Location = new System.Drawing.Point(134, 166);
+            this.manufacturerComboBox.Name = "manufacturerComboBox";
+            this.manufacturerComboBox.Size = new System.Drawing.Size(204, 32);
+            this.manufacturerComboBox.TabIndex = 46;
+            // 
+            // codeComboBox
+            // 
+            this.codeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.codeComboBox.FormattingEnabled = true;
+            this.codeComboBox.Location = new System.Drawing.Point(134, 366);
+            this.codeComboBox.Name = "codeComboBox";
+            this.codeComboBox.Size = new System.Drawing.Size(202, 32);
+            this.codeComboBox.TabIndex = 48;
+            // 
+            // addButton
+            // 
+            this.addButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addButton.Location = new System.Drawing.Point(236, 438);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(100, 32);
+            this.addButton.TabIndex = 52;
+            this.addButton.Text = "添加";
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            // 
+            // stockStatusComboBox
+            // 
+            this.stockStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.stockStatusComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockStatusComboBox.FormattingEnabled = true;
+            this.stockStatusComboBox.Items.AddRange(new object[] {
+            "完了",
+            "仮"});
+            this.stockStatusComboBox.Location = new System.Drawing.Point(134, 240);
+            this.stockStatusComboBox.Name = "stockStatusComboBox";
+            this.stockStatusComboBox.Size = new System.Drawing.Size(204, 32);
+            this.stockStatusComboBox.TabIndex = 53;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(80, 240);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(48, 24);
+            this.label8.TabIndex = 54;
+            this.label8.Text = "状態";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(42, 204);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(86, 24);
+            this.label9.TabIndex = 55;
+            this.label9.Text = "入库事由";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(80, 24);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(48, 24);
+            this.label10.TabIndex = 57;
+            this.label10.Text = "客户";
+            // 
+            // clientComboBox
+            // 
+            this.clientComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.clientComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clientComboBox.FormattingEnabled = true;
+            this.clientComboBox.Items.AddRange(new object[] {
+            "ナフコ"});
+            this.clientComboBox.Location = new System.Drawing.Point(133, 21);
+            this.clientComboBox.Name = "clientComboBox";
+            this.clientComboBox.Size = new System.Drawing.Size(204, 32);
+            this.clientComboBox.TabIndex = 58;
+            // 
+            // remarkTextBox1
+            // 
+            this.remarkTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.remarkTextBox1.FormattingEnabled = true;
+            this.remarkTextBox1.Items.AddRange(new object[] {
+            "仕入",
+            "返品",
+            "調整",
+            "自由入力"});
+            this.remarkTextBox1.Location = new System.Drawing.Point(134, 203);
+            this.remarkTextBox1.Name = "remarkTextBox1";
+            this.remarkTextBox1.Size = new System.Drawing.Size(204, 32);
+            this.remarkTextBox1.TabIndex = 59;
+            // 
+            // label11
+            // 
+            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label11.Location = new System.Drawing.Point(46, 355);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(290, 1);
+            this.label11.TabIndex = 60;
             // 
             // IdDataGridViewTextBoxColumn
             // 
@@ -96,7 +382,7 @@
             this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
             this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
             this.IdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.IdDataGridViewTextBoxColumn.Width = 60;
+            this.IdDataGridViewTextBoxColumn.Width = 80;
             // 
             // 自社コード
             // 
@@ -104,6 +390,7 @@
             this.自社コード.HeaderText = "自社コード";
             this.自社コード.Name = "自社コード";
             this.自社コード.ReadOnly = true;
+            this.自社コード.Width = 130;
             // 
             // 商品名
             // 
@@ -111,7 +398,7 @@
             this.商品名.HeaderText = "商品名";
             this.商品名.Name = "商品名";
             this.商品名.ReadOnly = true;
-            this.商品名.Width = 200;
+            this.商品名.Width = 240;
             // 
             // 規格
             // 
@@ -127,278 +414,11 @@
             this.数量.HeaderText = "数量";
             this.数量.Name = "数量";
             // 
-            // cancelButton
-            // 
-            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.Location = new System.Drawing.Point(938, 72);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(74, 40);
-            this.cancelButton.TabIndex = 36;
-            this.cancelButton.Text = "清零";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click_1);
-            // 
-            // submitButton
-            // 
-            this.submitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.submitButton.BackColor = System.Drawing.SystemColors.Control;
-            this.submitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.submitButton.Location = new System.Drawing.Point(938, 23);
-            this.submitButton.Name = "submitButton";
-            this.submitButton.Size = new System.Drawing.Size(74, 43);
-            this.submitButton.TabIndex = 35;
-            this.submitButton.Text = "登录";
-            this.submitButton.UseVisualStyleBackColor = false;
-            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
-            // 
-            // loadItemListButton
-            // 
-            this.loadItemListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loadItemListButton.Location = new System.Drawing.Point(234, 280);
-            this.loadItemListButton.Name = "loadItemListButton";
-            this.loadItemListButton.Size = new System.Drawing.Size(63, 33);
-            this.loadItemListButton.TabIndex = 51;
-            this.loadItemListButton.Text = "调出商品列表";
-            this.loadItemListButton.UseVisualStyleBackColor = true;
-            this.loadItemListButton.Click += new System.EventHandler(this.loadItemListButton_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(62, 379);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(48, 24);
-            this.label7.TabIndex = 43;
-            this.label7.Text = "数量";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(38, 129);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 24);
-            this.label5.TabIndex = 41;
-            this.label5.Text = "商品分类";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(62, 89);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 24);
-            this.label2.TabIndex = 37;
-            this.label2.Text = "期日";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(38, 238);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 24);
-            this.label4.TabIndex = 39;
-            this.label4.Text = "入库编号";
-            // 
-            // stockNOTextBox
-            // 
-            this.stockNOTextBox.Enabled = false;
-            this.stockNOTextBox.Location = new System.Drawing.Point(134, 241);
-            this.stockNOTextBox.Multiline = true;
-            this.stockNOTextBox.Name = "stockNOTextBox";
-            this.stockNOTextBox.ReadOnly = true;
-            this.stockNOTextBox.Size = new System.Drawing.Size(164, 22);
-            this.stockNOTextBox.TabIndex = 40;
-            // 
-            // orderCreatedAtDateTimePicker
-            // 
-            this.orderCreatedAtDateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(134, 92);
-            this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
-            this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(164, 29);
-            this.orderCreatedAtDateTimePicker.TabIndex = 44;
-            this.orderCreatedAtDateTimePicker.ValueChanged += new System.EventHandler(this.orderCreatedAtDateTimePicker_ValueChanged);
-            // 
-            // genreComboBox
-            // 
-            this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.genreComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(134, 122);
-            this.genreComboBox.Name = "genreComboBox";
-            this.genreComboBox.Size = new System.Drawing.Size(164, 32);
-            this.genreComboBox.TabIndex = 47;
-            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // warehouseComboBox
-            // 
-            this.warehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.warehouseComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.warehouseComboBox.FormattingEnabled = true;
-            this.warehouseComboBox.Location = new System.Drawing.Point(134, 63);
-            this.warehouseComboBox.Name = "warehouseComboBox";
-            this.warehouseComboBox.Size = new System.Drawing.Size(164, 32);
-            this.warehouseComboBox.TabIndex = 49;
-            this.warehouseComboBox.SelectedIndexChanged += new System.EventHandler(this.warehouseComboBox_SelectedIndexChanged);
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(134, 373);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(164, 29);
-            this.numericUpDown1.TabIndex = 50;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(38, 348);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(86, 24);
-            this.label6.TabIndex = 42;
-            this.label6.Text = "工厂编码";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(62, 62);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 24);
-            this.label1.TabIndex = 34;
-            this.label1.Text = "仓库";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(62, 156);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 24);
-            this.label3.TabIndex = 38;
-            this.label3.Text = "工厂";
-            // 
-            // manufacturerComboBox
-            // 
-            this.manufacturerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.manufacturerComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.manufacturerComboBox.FormattingEnabled = true;
-            this.manufacturerComboBox.Location = new System.Drawing.Point(134, 152);
-            this.manufacturerComboBox.Name = "manufacturerComboBox";
-            this.manufacturerComboBox.Size = new System.Drawing.Size(164, 32);
-            this.manufacturerComboBox.TabIndex = 46;
-            // 
-            // codeComboBox
-            // 
-            this.codeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.codeComboBox.FormattingEnabled = true;
-            this.codeComboBox.Location = new System.Drawing.Point(134, 345);
-            this.codeComboBox.Name = "codeComboBox";
-            this.codeComboBox.Size = new System.Drawing.Size(164, 32);
-            this.codeComboBox.TabIndex = 48;
-            // 
-            // addButton
-            // 
-            this.addButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addButton.Location = new System.Drawing.Point(234, 416);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(63, 34);
-            this.addButton.TabIndex = 52;
-            this.addButton.Text = "添加";
-            this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
-            // 
-            // stockStatusComboBox
-            // 
-            this.stockStatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.stockStatusComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stockStatusComboBox.FormattingEnabled = true;
-            this.stockStatusComboBox.Items.AddRange(new object[] {
-            "完了",
-            "仮"});
-            this.stockStatusComboBox.Location = new System.Drawing.Point(134, 211);
-            this.stockStatusComboBox.Name = "stockStatusComboBox";
-            this.stockStatusComboBox.Size = new System.Drawing.Size(164, 32);
-            this.stockStatusComboBox.TabIndex = 53;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(62, 211);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(48, 24);
-            this.label8.TabIndex = 54;
-            this.label8.Text = "状態";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(38, 184);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(86, 24);
-            this.label9.TabIndex = 55;
-            this.label9.Text = "入库事由";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(62, 38);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(48, 24);
-            this.label10.TabIndex = 57;
-            this.label10.Text = "客户";
-            // 
-            // clientComboBox
-            // 
-            this.clientComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.clientComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clientComboBox.FormattingEnabled = true;
-            this.clientComboBox.Items.AddRange(new object[] {
-            "ナフコ"});
-            this.clientComboBox.Location = new System.Drawing.Point(134, 34);
-            this.clientComboBox.Name = "clientComboBox";
-            this.clientComboBox.Size = new System.Drawing.Size(163, 32);
-            this.clientComboBox.TabIndex = 58;
-            // 
-            // remarkTextBox1
-            // 
-            this.remarkTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remarkTextBox1.FormattingEnabled = true;
-            this.remarkTextBox1.Items.AddRange(new object[] {
-            "仕入",
-            "返品",
-            "調整",
-            "自由入力"});
-            this.remarkTextBox1.Location = new System.Drawing.Point(134, 181);
-            this.remarkTextBox1.Name = "remarkTextBox1";
-            this.remarkTextBox1.Size = new System.Drawing.Size(164, 32);
-            this.remarkTextBox1.TabIndex = 59;
-            // 
-            // label11
-            // 
-            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label11.Location = new System.Drawing.Point(41, 324);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(240, 1);
-            this.label11.TabIndex = 60;
-            // 
             // CopyofInputStock
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 473);
+            this.ClientSize = new System.Drawing.Size(1053, 495);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.remarkTextBox1);
             this.Controls.Add(this.clientComboBox);
@@ -465,13 +485,13 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox clientComboBox;
+        private System.Windows.Forms.ComboBox remarkTextBox1;
+        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;
         private System.Windows.Forms.DataGridViewTextBoxColumn 商品名;
         private System.Windows.Forms.DataGridViewTextBoxColumn 規格;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
-        private System.Windows.Forms.ComboBox remarkTextBox1;
-        private System.Windows.Forms.Label label11;
 
     }
 }

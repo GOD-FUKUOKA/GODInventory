@@ -28,7 +28,7 @@ namespace GODInventoryWinForm.Controls
         private List<t_stockrec> SavestockList = null;
         private List<t_stockrec> davStockSavestockList = null;
         private List<t_stockrec> davSHiRuStockSavestockList = null;
-        private Hashtable datagrid_changes = null;
+        private Hashtable datagridChanges = null;
         int davx = 0;
         int davy = 0;
 
@@ -37,6 +37,7 @@ namespace GODInventoryWinForm.Controls
             InitializeComponent();
 
             stockiosList = new BindingList<v_stockios>();
+            this.datagridChanges = new Hashtable();
 
             this.productDataGridView.AutoGenerateColumns = false;
             this.stockIoDataGridView.AutoGenerateColumns = false;
@@ -85,9 +86,6 @@ namespace GODInventoryWinForm.Controls
 
             this.manufacturerComboBox.SelectedIndex = 0;
             this.ioComboBox.SelectedIndex = 0;
-
-            this.datagrid_changes = new Hashtable();
-
 
 
         }
@@ -200,7 +198,7 @@ namespace GODInventoryWinForm.Controls
             MessageBox.Show(String.Format("Congratulations, Items changed successfully!"));
 
             changedStockList.Clear();
-
+            datagridChanges.Clear();
             this.FindDataSources();
             this.BindDataGridView();
         }
@@ -450,10 +448,10 @@ namespace GODInventoryWinForm.Controls
 
         private void InitializeScrollBar()
         {
-
+            //https://msdn.microsoft.com/zh-cn/library/system.windows.forms.scrollbar.largechange(v=vs.80).aspx
             int voverflow = (23 + 1) * this.productDataGridView.RowCount - this.productDataGridView.Height;
             int hoverflow = (80 + 1) * this.qtyDataGridView.Columns.Count - this.qtyDataGridView.Width;
-
+            
             if (hoverflow > 0)
             {
                 hScrollBar1.SmallChange = 20;
@@ -535,7 +533,7 @@ namespace GODInventoryWinForm.Controls
 
         private void genreComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            var filtered = manufacturerList.FindAll(s => s.genreId == (int)this.genreComboBox.SelectedValue || s.Id == 0);
+            var filtered = manufacturerList.FindAll(s => s.genreId == Convert.ToInt32(this.genreComboBox.SelectedValue) || s.Id == 0);
 
             if (filtered.Count > 0)
             {
@@ -602,8 +600,14 @@ namespace GODInventoryWinForm.Controls
                 stock.日付 = originalStock.日付;
                 stock.自社コード = productNum;
             }
-            int qty = Convert.ToInt32(qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+            int qty = 0;
+            var cell = qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if(  cell.Value != System.DBNull.Value ) //Convert.ToInt32(qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex]
+            { 
+               qty = Convert.ToInt32(cell.Value);
+            }
             stock.数量 = (stock.区分 == StockIoEnum.入庫.ToString() ? qty : -qty);
+            //qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.Red;
             this.changedStockList.Add(stock);
         }
 
@@ -640,29 +644,7 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private void qtyDataGridView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex < 0 || e.RowIndex < 0)
-                return;
-            if (this.qtyDataGridView[e.ColumnIndex, e.RowIndex].Value == null)
-                return;
 
-            string value = this.qtyDataGridView[e.ColumnIndex, e.RowIndex].Value.ToString();
-            foreach (DataGridViewRow dgr in this.qtyDataGridView.Rows)
-            {
-
-                foreach (DataGridViewCell cell in dgr.Cells)
-                {
-                    if (cell.Value == null)
-                        continue;
-                    if (cell.Value.ToString() == value)
-                        cell.Style.BackColor = Color.Yellow;
-                    else
-                        cell.Style.BackColor = Color.Gray;
-                }
-            }
-
-        }
 
         private void qtyDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
@@ -671,7 +653,7 @@ namespace GODInventoryWinForm.Controls
                 DataGridViewRow dgrSingle = qtyDataGridView.Rows[e.RowIndex];
                 try
                 {
-                    if (datagrid_changes.ContainsKey(e.RowIndex))//if (dgrSingle.Cells["列名"].Value.ToString().Contains("比较值"))
+                    if (datagridChanges.ContainsKey(e.RowIndex))//if (dgrSingle.Cells["列名"].Value.ToString().Contains("比较值"))
                     {
                         dgrSingle.DefaultCellStyle.ForeColor = Color.Red;
                     }
@@ -687,7 +669,7 @@ namespace GODInventoryWinForm.Controls
         {
             string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString() + "_changed";
 
-            if (datagrid_changes.ContainsKey(cell_key))
+            if (datagridChanges.ContainsKey(cell_key))
             {
                 e.CellStyle.BackColor = Color.Red;
                 e.CellStyle.SelectionBackColor = Color.DarkRed;
@@ -699,9 +681,9 @@ namespace GODInventoryWinForm.Controls
             DataGridViewRow dgrSingle = qtyDataGridView.Rows[e.RowIndex];
             string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
 
-            if (!datagrid_changes.ContainsKey(cell_key))
+            if (!datagridChanges.ContainsKey(cell_key))
             {
-                datagrid_changes[cell_key] = dgrSingle.Cells[e.ColumnIndex].Value;
+                datagridChanges[cell_key] = dgrSingle.Cells[e.ColumnIndex].Value;
             }
         }
 
@@ -710,20 +692,20 @@ namespace GODInventoryWinForm.Controls
             DataGridViewRow row = qtyDataGridView.Rows[e.RowIndex];
             string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
             var new_cell_value = row.Cells[e.ColumnIndex].Value;
-            var original_cell_value = datagrid_changes[cell_key];
+            var original_cell_value = datagridChanges[cell_key];
             // original_cell_value could null
             //Console.WriteLine(" original = {0} {3}, new ={1} {4}, compare = {2}, {5}", original_cell_value, new_cell_value, original_cell_value == new_cell_value, original_cell_value.GetType(), new_cell_value.GetType(), new_cell_value.Equals(original_cell_value));
             if (new_cell_value == null && original_cell_value == null)
             {
-                datagrid_changes.Remove(cell_key + "_changed");
+                datagridChanges.Remove(cell_key + "_changed");
             }
             else if ((new_cell_value == null && original_cell_value != null) || (new_cell_value != null && original_cell_value == null) || !new_cell_value.Equals(original_cell_value))
             {
-                datagrid_changes[cell_key + "_changed"] = new_cell_value;
+                datagridChanges[cell_key + "_changed"] = new_cell_value;
             }
             else
             {
-                datagrid_changes.Remove(cell_key + "_changed");
+                datagridChanges.Remove(cell_key + "_changed");
             }
         }
     }

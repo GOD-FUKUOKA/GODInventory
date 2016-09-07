@@ -20,27 +20,18 @@ namespace GODInventory.ViewModel.EDI
         Byte[] 予備; //9 予備              644 57
         byte[] nr;
 
-        public List<ReceivedOrderModel> models;
+        public List<ReceivedCSVOrderModel> models;
 
-        public ReceivedCSVOrderHeadModel(BinaryReader br)
+        public ReceivedCSVOrderHeadModel(StreamReader sr)
         {
-            this.データID = br.ReadBytes(3);
-            this.管理連番 = br.ReadBytes(13);
-            this.システム管理日付 = br.ReadBytes(8);
-            this.データ作成日 = br.ReadBytes(8);
-            this.データ作成時刻 = br.ReadBytes(6);
-            this.出荷業務仕入先コード = br.ReadBytes(6);
-            this.レコード件数 = br.ReadBytes(8);
-            this.レコード長 = br.ReadBytes(4);
-            this.予備 = br.ReadBytes(644);
-            this.nr = br.ReadBytes(2); // \n\r
-            Debug.Assert(this.nr[0] == 0x0D && this.nr[1] == 0x0A);
+            var columns = sr.ReadLine();
+            string line;
 
-            this.models = new List<ReceivedOrderModel>( DetailCount );
+            this.models = new List<ReceivedCSVOrderModel>(  );
 
-            for (var i = 0; i < DetailCount; i++)
+            while ((line = sr.ReadLine()) != null && line != String.Empty)
             {
-                models.Add(new ReceivedOrderModel(br));                
+                models.Add(new ReceivedCSVOrderModel(line));                
             }
         }
 
@@ -48,12 +39,11 @@ namespace GODInventory.ViewModel.EDI
         {
             get
             {
-                string s = Encoding.ASCII.GetString(this.レコード件数);
-                return Convert.ToInt32(s);
+                return models.Count;
             }
         }
 
-        public List<ReceivedOrderModel> Models
+        public List<ReceivedCSVOrderModel> Models
         {
             get { return this.models;  }
         }

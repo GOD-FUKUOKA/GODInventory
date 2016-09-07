@@ -94,15 +94,15 @@ namespace GODInventoryWinForm
         {
             bool success = true;
             WorkerArgument arg = e.Argument as WorkerArgument;
-            ReceivedOrderHeadModel order_head = null;
-            List<ReceivedOrderModel> models;
+            ReceivedCSVOrderHeadModel orderHead = null;
+            List<ReceivedCSVOrderModel> models;
             try
             {
                 //byte[] first_line = null;
                 //byte[] line = null;
-                using (BinaryReader br = new BinaryReader(new FileStream(path, FileMode.Open, FileAccess.Read)))
+                using (var br = new StreamReader(path, Encoding.GetEncoding("shift_jis")))
                 {
-                    order_head = new ReceivedOrderHeadModel(br);
+                    orderHead = new ReceivedCSVOrderHeadModel(br);
                     //Console.WriteLine(" write head ={0}", order_head.DetailCount);
                     
                 }
@@ -126,8 +126,8 @@ namespace GODInventoryWinForm
                     {
                         List<string> sqls = new List<string>(100);
                         
-                        arg.OrderCount = order_head.DetailCount;
-                        models = order_head.Models;
+                        arg.OrderCount = orderHead.DetailCount;
+                        models = orderHead.Models;
                         for (var i = 0; i < models.Count; i++)
                         {
                             if (worker.CancellationPending == true)

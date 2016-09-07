@@ -135,7 +135,7 @@ namespace GODInventoryWinForm.Controls
 
             //this.bindingSource1.Filter = String.Format( "genreId={0}", this.genreComboBox.SelectedValue);
 
-            var filtered = manufacturerList.FindAll(s => s.genreId == (int)this.genreComboBox.SelectedValue);
+            var filtered = manufacturerList.FindAll(s => s.genreId ==  Convert.ToInt32( this.genreComboBox.SelectedValue));
             if (filtered.Count > 0)
             {
                 this.manufacturerComboBox.DataSource = filtered;
@@ -220,7 +220,7 @@ namespace GODInventoryWinForm.Controls
         private int GetGenreId()
         {
 
-            return ((this.genreComboBox.SelectedIndex >= 0) ? (int)this.genreComboBox.SelectedValue : 0);
+            return ((this.genreComboBox.SelectedIndex >= 0) ? Convert.ToInt32(this.genreComboBox.SelectedValue) : 0);
         }
         private int warehouseComboBox1()
         {

@@ -46,6 +46,7 @@
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sendToShipperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importReceivedCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -145,7 +146,8 @@
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importOrderTextToolStripMenuItem,
             this.importReceivedOrderTextToolStripMenuItem,
-            this.importCSVToolStripMenuItem});
+            this.importCSVToolStripMenuItem,
+            this.importReceivedCSVToolStripMenuItem});
             this.toolStripDropDownButton1.Image = global::GODInventoryWinForm.Properties.Resources.tool;
             this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -156,21 +158,21 @@
             // importOrderTextToolStripMenuItem
             // 
             this.importOrderTextToolStripMenuItem.Name = "importOrderTextToolStripMenuItem";
-            this.importOrderTextToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.importOrderTextToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.importOrderTextToolStripMenuItem.Text = "Import受注";
             this.importOrderTextToolStripMenuItem.Click += new System.EventHandler(this.importOrderTextToolStripMenuItem_Click);
             // 
             // importReceivedOrderTextToolStripMenuItem
             // 
             this.importReceivedOrderTextToolStripMenuItem.Name = "importReceivedOrderTextToolStripMenuItem";
-            this.importReceivedOrderTextToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.importReceivedOrderTextToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.importReceivedOrderTextToolStripMenuItem.Text = "Import受領";
             this.importReceivedOrderTextToolStripMenuItem.Click += new System.EventHandler(this.importReceivedOrderTextToolStripMenuItem_Click);
             // 
             // importCSVToolStripMenuItem
             // 
             this.importCSVToolStripMenuItem.Name = "importCSVToolStripMenuItem";
-            this.importCSVToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.importCSVToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.importCSVToolStripMenuItem.Text = "Import受注CSV";
             this.importCSVToolStripMenuItem.Click += new System.EventHandler(this.importCSVToolStripMenuItem_Click);
             // 
@@ -179,9 +181,9 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(12, 69);
+            this.panel1.Location = new System.Drawing.Point(12, 64);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(820, 403);
+            this.panel1.Size = new System.Drawing.Size(820, 372);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -194,19 +196,26 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sendToShipperToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(155, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(166, 26);
             // 
             // sendToShipperToolStripMenuItem
             // 
             this.sendToShipperToolStripMenuItem.Name = "sendToShipperToolStripMenuItem";
-            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.sendToShipperToolStripMenuItem.Text = "SendToShipper";
+            // 
+            // importReceivedCSVToolStripMenuItem
+            // 
+            this.importReceivedCSVToolStripMenuItem.Name = "importReceivedCSVToolStripMenuItem";
+            this.importReceivedCSVToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.importReceivedCSVToolStripMenuItem.Text = "Import受領CSV";
+            this.importReceivedCSVToolStripMenuItem.Click += new System.EventHandler(this.importReceivedCSVToolStripMenuItem_Click);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 486);
+            this.ClientSize = new System.Drawing.Size(844, 449);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "MainForm";
@@ -238,6 +247,7 @@
         private System.Windows.Forms.ToolStripMenuItem importCSVToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem sendToShipperToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importReceivedCSVToolStripMenuItem;
     }
 }
 

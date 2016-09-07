@@ -84,10 +84,10 @@ namespace GODInventoryWinForm
             }
 
         }
-        private short GetGenreId()
+        private int GetGenreId()
         {
 
-            return (short)((this.listBox1.SelectedIndex >= 0) ? this.listBox1.SelectedValue : 0);
+            return (int)((this.listBox1.SelectedIndex >= 0) ? this.listBox1.SelectedValue : 0);
         }
 
         private void listView1_Click(object sender, EventArgs e)
