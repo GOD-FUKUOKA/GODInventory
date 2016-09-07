@@ -29,7 +29,8 @@ namespace GODInventoryWinForm.Controls
 
         private void filterButton_Click(object sender, EventArgs e)
         {
-            InitializeOrderData();
+            this.pager1.PageCurrent = 1;
+            pager1.Bind();
         }
 
         public int InitializeDataSource()
