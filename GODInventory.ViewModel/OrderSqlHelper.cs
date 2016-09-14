@@ -125,6 +125,7 @@ namespace GODInventory.ViewModel
                          一旦保留 = o.一旦保留,
                          在庫状態 = o.在庫状態,
                          納品指示 = o.納品指示,
+                         法人名漢字 = o.法人名漢字,
                          在庫数 = x.在庫数,
                          GenreName = g.ジャンル名
                      });
@@ -331,16 +332,42 @@ namespace GODInventory.ViewModel
             return 0;
 
         }
-        public static int SendOrderToShipper(List<int> orderIds)
+        public static int SendOrderToShipper(List<v_pendingorder> orders)
         {
             int count = 0;
             using (var ctx = new GODDbContext())
             {
-
+                var customer = ctx.t_customers.First();
+                var orderIds = orders.Select(o => o.id受注データ).ToList();
+                var warehouseList = ctx.t_warehouses.ToList();
                 MySqlParameter[] parameters = { new MySqlParameter("@p1", true), new MySqlParameter("@p2", DateTime.Now), new MySqlParameter("@p3", ((int)OrderStatus.NotifyShipper)) };
-                string sql = String.Format("UPDATE t_orderdata SET `配送担当受信`=@p1, `配送担当受信時刻`=@p2 ,`Status`=@p3 WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()));
+                string sql = String.Format("UPDATE t_orderdata SET `一旦保留`=0,`配送担当受信`=@p1, `配送担当受信時刻`=@p2 ,`Status`=@p3 WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()));
                 count = ctx.Database.ExecuteSqlCommand(sql, parameters);
+
+                List<t_stockrec> changes = new List<t_stockrec>();
+                foreach (var order in orders)
+                {
+                    var warehouse = warehouseList.Find(o => o.ShipperName == order.実際配送担当);
+                    // add stockrec
+                    var genreId = order.ジャンル;
+                    var date = DateTime.Now;
+                    string stockNum = BuildStockNum(ctx, genreId, warehouse.ShortName, date);
+                    var s = new t_stockrec();
+                    s.元 = warehouse.FullName;
+                    s.先 = customer.FullName;
+                    s.数量 = -order.実際出荷数量;
+                    s.自社コード = order.自社コード;
+                    s.日付 = date;
+                    s.区分 = StockIoEnum.出庫.ToString();
+                    s.状態 = StockIoProgressEnum.完了.ToString();
+                    s.事由 = StockIoClueEnum.订单调整.ToString();
+                    s.納品書番号 = stockNum;
+                    s.客户 = customer.FullName;
+                    changes.Add(s);                      
+                }
+                ctx.t_stockrec.AddRange(changes);
                 ctx.SaveChanges();
+                UpdateStockState(ctx, changes);
             }
             return count;
         }
@@ -416,32 +443,23 @@ namespace GODInventory.ViewModel
             return 0;
         }
 
-        public  string[]  StrockReback()
+        private static string BuildStockNum(GODDbContext ctx, int genre_id, string warehouseName, DateTime selectedDate)
         {
 
-            //string[] names = new string[5,4];
-            string[] names = { "GOD", "MKL", "マツモト産業" };
+            var startAt = selectedDate.Date;
+            var endAt = startAt.AddDays(1).Date;
 
-            return names;
-        
+            var results = from s in ctx.t_stockrec
+                          where s.日付 >= startAt && s.日付 < endAt
+                          group s by s.納品書番号 into g
+                          select g;
+            int count = results.Count();
+
+            string stock_no = String.Format(warehouseName + "-" + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
+
+            return stock_no;
         }
-        public string[] Strock_out()
-        {
-            //事由
-            //string[] names = new string[5,4];
-            string[] names = { "零售"  };
 
-            return names;
-
-        }
-        public string[] Strock_QuFenout()
-        {
-            //事由
-            string[] names = { "出庫", "入庫" };
-
-            return names;
-
-        }
 
         public static IQueryable<t_stockrec> stockQuery(EntityDataSource entityDataSource1)
         {

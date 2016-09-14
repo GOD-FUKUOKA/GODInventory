@@ -96,6 +96,8 @@ namespace GODInventory.MyLinq
 
         public DateTime? キャンセル時刻 { get; set; }
 
+        // for stockrec
+        public string 法人名漢字 { get; set; }
         // 
         public int? 在庫数 { get; set; }
 

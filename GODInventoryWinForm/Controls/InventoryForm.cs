@@ -206,8 +206,9 @@ namespace GODInventoryWinForm.Controls
             {
                 List<t_stockrec> changes = new List<t_stockrec>();
                 var genreId = Convert.ToInt16(this.genreComboBox.SelectedValue);
+                var warehouseName = GetWarehouseShortName();
                 var date = DateTime.Now;
-                string stockNum = BuildStockNum(ctx, genreId, date);
+                string stockNum = BuildStockNum(ctx, genreId, warehouseName, date);
 
                 foreach (var item in stockcheckList)
                 {
@@ -297,7 +298,7 @@ namespace GODInventoryWinForm.Controls
         }
 
 
-        private string BuildStockNum(GODDbContext ctx, int genre_id, DateTime selectedDate)
+        private string BuildStockNum(GODDbContext ctx, int genre_id, string warehouseName, DateTime selectedDate)
         {
 
             var startAt = selectedDate.Date;
@@ -307,25 +308,26 @@ namespace GODInventoryWinForm.Controls
                           where s.日付 >= startAt && s.日付 < endAt
                           group s by s.納品書番号 into g
                           select g;
-            string sn = "";
             int count = results.Count();
-            var warehouse = warehouseComboBox1();
-            if (warehouse > 0)
-            {
-                var shorname = warehouseList.Find(o => o.Id == Convert.ToInt32(warehouse));
-                if (shorname != null)
-                    sn = shorname.ShortName;
-            }
-            string stock_no = String.Format(sn + "-" + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
 
+            string stock_no = String.Format(warehouseName + "-" + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
 
             return stock_no;
         }
-        private int warehouseComboBox1()
-        {
 
-            return ((this.warehouseComboBox.SelectedIndex >= 0) ? (int)this.warehouseComboBox.SelectedValue : 0);
+        private string GetWarehouseShortName()
+        {
+            string shortName = "GOD";
+            int warehouseId = ((this.warehouseComboBox.SelectedIndex >= 0) ? (int)this.warehouseComboBox.SelectedValue : 0);
+
+            if (warehouseId > 0)
+            {
+                var wharehouse = warehouseList.Find(o => o.Id == warehouseId);                
+                shortName = wharehouse.ShortName;
+            }
+            return shortName;
         }
+
         private void btprint_Click_1(object sender, EventArgs e)
         {
 

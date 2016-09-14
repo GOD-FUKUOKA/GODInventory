@@ -369,11 +369,11 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         private void sendToShipperToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var oids = GetOrderIdsBySelectedGridCell();
+            var orders = GetPendingOrdersBySelectedGridCell();
 
-            if (oids.Count() > 0)
+            if (orders.Count() > 0)
             {
-                OrderSqlHelper.SendOrderToShipper(oids);
+                OrderSqlHelper.SendOrderToShipper(orders);
                 pager1.Bind();
             }
             else
@@ -681,18 +681,18 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
             return order_ids;
         }
-        private List<int> GetOrderIdsBySelectedGridCell3()
+        private List<v_pendingorder> GetPendingOrdersBySelectedGridCell()
         {
 
-            List<int> order_ids = new List<int>();
-            var rows = GetSelectedRowsBySelectedCells(dataGridView3);
+            List<v_pendingorder> orders = new List<v_pendingorder>();
+            var rows = GetSelectedRowsBySelectedCells(dataGridView1);
             foreach (DataGridViewRow row in rows)
             {
                 var pendingorder = row.DataBoundItem as v_pendingorder;
-                order_ids.Add(pendingorder.id受注データ);
+                orders.Add( pendingorder );
             }
 
-            return order_ids;
+            return orders;
         }
 
         private void PendingOrderForm_SizeChanged(object sender, EventArgs e)
