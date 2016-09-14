@@ -21,7 +21,6 @@ namespace GODInventoryWinForm.Controls
         private BindingList<v_stockios> stockiosList;
         private List<t_genre> genreList;
         private List<t_warehouses> warehouseList;
-
         private List<v_stockcheck> productList = null;
         private List<t_stockrec> stockList = null;
         private List<t_stockrec> changedStockList = null;
@@ -127,7 +126,6 @@ namespace GODInventoryWinForm.Controls
         {
             this.BindDataGridView();
         }
-
 
         private void btSave_Click(object sender, EventArgs e)
         {
@@ -451,7 +449,7 @@ namespace GODInventoryWinForm.Controls
             //https://msdn.microsoft.com/zh-cn/library/system.windows.forms.scrollbar.largechange(v=vs.80).aspx
             int voverflow = (23 + 1) * this.productDataGridView.RowCount - this.productDataGridView.Height;
             int hoverflow = (80 + 1) * this.qtyDataGridView.Columns.Count - this.qtyDataGridView.Width;
-            
+
             if (hoverflow > 0)
             {
                 hScrollBar1.SmallChange = 20;
@@ -543,7 +541,12 @@ namespace GODInventoryWinForm.Controls
                 //item.ShortName = "全部";
                 //item.FullName = "全部";
                 //filtered.Add(item);
+                if (filtered[0].ShortName == "全部" && filtered.Count == 2)
+                    filtered = manufacturerList.FindAll(s => s.genreId == Convert.ToInt32(this.genreComboBox.SelectedValue));
+
                 this.manufacturerComboBox.DataSource = filtered;
+
+
             }
             else
             {
@@ -602,9 +605,9 @@ namespace GODInventoryWinForm.Controls
             }
             int qty = 0;
             var cell = qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            if(  cell.Value != System.DBNull.Value ) //Convert.ToInt32(qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex]
-            { 
-               qty = Convert.ToInt32(cell.Value);
+            if (cell.Value != System.DBNull.Value) //Convert.ToInt32(qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex]
+            {
+                qty = Convert.ToInt32(cell.Value);
             }
             stock.数量 = (stock.区分 == StockIoEnum.入庫.ToString() ? qty : -qty);
             //qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.Red;
@@ -707,6 +710,79 @@ namespace GODInventoryWinForm.Controls
             {
                 datagridChanges.Remove(cell_key + "_changed");
             }
+        }
+
+        private void stockIoDataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            DataGridViewRow dgrSingle = stockIoDataGridView.Rows[e.RowIndex];
+            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
+
+            if (!datagridChanges.ContainsKey(cell_key))
+            {
+                datagridChanges[cell_key] = dgrSingle.Cells[e.ColumnIndex].Value;
+            }
+        }
+
+        private void stockIoDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = stockIoDataGridView.Rows[e.RowIndex];
+            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
+            var new_cell_value = row.Cells[e.ColumnIndex].Value;
+            var original_cell_value = datagridChanges[cell_key];
+            // original_cell_value could null
+            //Console.WriteLine(" original = {0} {3}, new ={1} {4}, compare = {2}, {5}", original_cell_value, new_cell_value, original_cell_value == new_cell_value, original_cell_value.GetType(), new_cell_value.GetType(), new_cell_value.Equals(original_cell_value));
+            if (new_cell_value == null && original_cell_value == null)
+            {
+                datagridChanges.Remove(cell_key + "_changed");
+            }
+            else if ((new_cell_value == null && original_cell_value != null) || (new_cell_value != null && original_cell_value == null) || !new_cell_value.Equals(original_cell_value))
+            {
+                datagridChanges[cell_key + "_changed"] = new_cell_value;
+            }
+            else
+            {
+                datagridChanges.Remove(cell_key + "_changed");
+            }
+        }
+
+        private void stockIoDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString() + "_changed";
+
+            if (datagridChanges.ContainsKey(cell_key))
+            {
+                e.CellStyle.BackColor = Color.Red;
+                e.CellStyle.SelectionBackColor = Color.DarkRed;
+            }
+        }
+
+        private void stockIoDataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+
+        }
+
+        private void stockIoDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex < stockIoDataGridView.Rows.Count - 1)
+            {
+                DataGridViewRow dgrSingle = stockIoDataGridView.Rows[e.RowIndex];
+                try
+                {
+                    if (datagridChanges.ContainsKey(e.RowIndex))//if (dgrSingle.Cells["列名"].Value.ToString().Contains("比较值"))
+                    {
+                        dgrSingle.DefaultCellStyle.ForeColor = Color.Red;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void stockIoDataGridView_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

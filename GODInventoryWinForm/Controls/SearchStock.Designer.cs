@@ -346,8 +346,14 @@
             this.stockIoDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.stockIoDataGridView.Size = new System.Drawing.Size(617, 139);
             this.stockIoDataGridView.TabIndex = 92;
+            this.stockIoDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.stockIoDataGridView_CellBeginEdit);
+            this.stockIoDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.stockIoDataGridView_CellEndEdit);
+            this.stockIoDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.stockIoDataGridView_CellFormatting);
             this.stockIoDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.stockIoDataGridView_CellMouseDown);
+            this.stockIoDataGridView.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.stockIoDataGridView_CellMouseEnter);
             this.stockIoDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.stockIoDataGridView_CellValueChanged);
+            this.stockIoDataGridView.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.stockIoDataGridView_RowPostPaint);
+            this.stockIoDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.stockIoDataGridView_RowPrePaint);
             // 
             // contextMenuStrip1
             // 
