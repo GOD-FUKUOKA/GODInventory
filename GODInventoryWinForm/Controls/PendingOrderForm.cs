@@ -108,7 +108,7 @@ namespace GODInventoryWinForm.Controls
      FROM t_orderdata
      WHERE  `Status`={0} AND `ジャンル`<> 6
      UNION ALL
-     SELECT  ANY_VALUE(`id受注データ`), ANY_VALUE(`受注日`), ANY_VALUE(`店舗コード`), ANY_VALUE(`店舗名漢字`),`社内伝番` as `伝票番号`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, ANY_VALUE(`最大行数`) as `口数`, sum(`重量`) as `発注数量`, sum(`重量`) as `重量`, ANY_VALUE(`実際配送担当`),ANY_VALUE(`県別`), ANY_VALUE(`納品指示`), ANY_VALUE(`備考`)
+     SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `口数`, sum(`重量`) as `発注数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
      FROM t_orderdata
      WHERE `Status`={0} AND `ジャンル`= 6 AND `社内伝番` IS NOT NULL
      GROUP BY `社内伝番`
