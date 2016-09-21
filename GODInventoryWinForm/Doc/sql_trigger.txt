@@ -1,0 +1,19 @@
+﻿DELIMITER //
+CREATE TRIGGER `追加後整理_copy` BEFORE INSERT ON `t_orderdata` FOR EACH ROW
+BEGIN
+set new.`id`= concat(new.`店舗コード`,'a',new.`伝票番号`);
+set new.`ジャンル` = (select `ジャンル` from t_itemlist where new.`ＪＡＮコード` = `JANコード` limit 1 );
+set new.`品名漢字` = (case when new.`ＪＡＮコード`='2100509000087' then new.`品名漢字` else (select `商品名` from t_itemlist where new.`ＪＡＮコード` = `JANコード`  limit 1) end);
+set new.`規格名漢字` = (case when new.`ＪＡＮコード`='2100509000087' then new.`規格名漢字` else (select `規格` from t_itemlist where new.`ＪＡＮコード` = `JANコード`  limit 1) end);
+set new.`口数` = round(new.`発注数量` / (select `PT入数` from t_itemlist where new.`ＪＡＮコード` = `JANコード` limit 1));
+set new.`重量` = round(new.`発注数量` * (select `単品重量` from t_itemlist where new.`ＪＡＮコード` = `JANコード` limit 1));
+set new.`単位` = (select `単位` from t_itemlist where new.`ＪＡＮコード` = `JANコード` and new.`ＪＡＮコード` <> '2100509000087' limit 1);
+set new.`実際配送担当` = (select `配送担当` from t_shoplist where new.`店舗コード` = `店番` );
+set new.`実際配送担当` = (case when new.`実際配送担当`='MKL' and new.`ジャンル`=1 or new.`実際配送担当`='MKL' and new.`ジャンル`=6 then '丸健' else new.`実際配送担当` end);
+set new.`週目` = yearweek(date_add(new.`受注日`,interval 2 day));
+set new.`実際出荷数量` = new.`発注数量`,new.`納品原価金額`=new.`原価金額(税抜)`,new.`納品口数`=new.`口数`;
+set new.`ダブリ`=(case when not exists(select `id` from t_orderdata where new.`店舗コード`=`店舗コード` and new.`品名漢字`=`品名漢字` and `キャンセル`='no' and `納品日` is null union select `id` from t_orderdata where new.`店舗コード`=`店舗コード` and new.`品名漢字`=`品名漢字` and `キャンセル`='no' and `納品日` >= DATE(NOW())) then 'no' else 'yes' end);
+set new.`発注形態名称漢字`=(case when new.`発注形態名称漢字` is null then 'FAX' else new.`発注形態名称漢字` end);
+set new.`Status` = (case when new.`ダブリ` ='yes' then 22 else new.`Status` end);
+END //
+DELIMITER ;

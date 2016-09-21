@@ -101,11 +101,11 @@
     <Compile Include="Controls\AddProductForm.Designer.cs">
       <DependentUpon>AddProductForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Copy of InputStock.cs">
+    <Compile Include="Controls\InputStockBig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\Copy of InputStock.Designer.cs">
-      <DependentUpon>Copy of InputStock.cs</DependentUpon>
+    <Compile Include="Controls\InputStockBig.Designer.cs">
+      <DependentUpon>InputStockBig.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ProductsManagement.cs">
       <SubType>Form</SubType>
@@ -362,8 +362,8 @@
     <EmbeddedResource Include="Controls\AddProductForm.resx">
       <DependentUpon>AddProductForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Copy of InputStock.resx">
-      <DependentUpon>Copy of InputStock.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\InputStockBig.resx">
+      <DependentUpon>InputStockBig.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ProductsManagement.resx">
@@ -560,6 +560,7 @@
     <None Include="Resources\16-on-black.gif" />
     <Content Include="Doc\install.txt" />
     <Content Include="Doc\sql_seeds.txt" />
+    <Content Include="Doc\sql_trigger.txt" />
     <Content Include="Doc\sql_t_itemlist_new.txt" />
     <Content Include="Doc\sql_t_pricelist.txt" />
     <Content Include="Resources\order.png" />

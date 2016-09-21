@@ -56,3 +56,7 @@ ADD PRIMARY KEY (`自社コード`, `WarehouseId`);
 
 ALTER TABLE `god_inventory`.`t_orderdata` 
 ADD COLUMN `入力区分` SMALLINT(6) NOT NULL DEFAULT 0;
+
+-- MySQL 5.7.5: GROUP BY respects functional dependencies!
+-- http://stackoverflow.com/questions/23921117/disable-only-full-group-by
+-- SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));

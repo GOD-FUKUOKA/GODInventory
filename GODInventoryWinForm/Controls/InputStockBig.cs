@@ -31,6 +31,9 @@ namespace GODInventoryWinForm.Controls
             this.dataGridView1.DataSource = stockiosList;
 
             InitializeDataSource();
+            
+            //http://stackoverflow.com/questions/2653153/c-sharp-winforms-vertical-alignment-for-textbox-etc
+
         }
 
         private void InitializeDataSource()

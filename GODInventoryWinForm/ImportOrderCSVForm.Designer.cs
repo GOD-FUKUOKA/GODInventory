@@ -37,7 +37,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.progressMsgLabel = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.titleLabel = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -117,15 +117,15 @@
             this.progressMsgLabel.TabIndex = 6;
             this.progressMsgLabel.Text = "0/0";
             // 
-            // label2
+            // titleLabel
             // 
-            this.label2.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(12, 29);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(458, 23);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Import HACCYU.csv";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.titleLabel.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titleLabel.Location = new System.Drawing.Point(12, 29);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(458, 23);
+            this.titleLabel.TabIndex = 7;
+            this.titleLabel.Text = "Import HACCYU.csv";
+            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // closeButton
             // 
@@ -143,7 +143,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 242);
             this.Controls.Add(this.closeButton);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.progressMsgLabel);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.cancelButton);
@@ -174,7 +174,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label progressMsgLabel;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.Button closeButton;
     }
 }

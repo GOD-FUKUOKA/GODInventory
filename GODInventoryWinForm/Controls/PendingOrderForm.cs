@@ -98,20 +98,24 @@ namespace GODInventoryWinForm.Controls
             //this.shipperComboBox.DisplayMember = "ShortName";
             //this.shipperComboBox.ValueMember = "ShortName";
             //this.shipperComboBox.DataSource = shipperList;
-            
+
+            //https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html
+            //http://stackoverflow.com/questions/23921117/disable-only-full-group-by
+            //handle SET SESSION sql_mode='ANSI';
+
             string sql = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
        `店舗名漢字`,`伝票番号`,`ジャンル`,`品名漢字`,`規格名漢字`, `口数`, `発注数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
      FROM t_orderdata
      WHERE  `Status`={0} AND `ジャンル`<> 6
      UNION ALL
-     SELECT  `id受注データ`, `受注日`,`店舗コード`,`店舗名漢字`,`社内伝番` as `伝票番号`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, `最大行数` as `口数`, sum(`重量`) as `発注数量`, sum(`重量`) as `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
+     SELECT  ANY_VALUE(`id受注データ`), ANY_VALUE(`受注日`), ANY_VALUE(`店舗コード`), ANY_VALUE(`店舗名漢字`),`社内伝番` as `伝票番号`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, ANY_VALUE(`最大行数`) as `口数`, sum(`重量`) as `発注数量`, sum(`重量`) as `重量`, ANY_VALUE(`実際配送担当`),ANY_VALUE(`県別`), ANY_VALUE(`納品指示`), ANY_VALUE(`備考`)
      FROM t_orderdata
      WHERE `Status`={0} AND `ジャンル`= 6 AND `社内伝番` IS NOT NULL
      GROUP BY `社内伝番`
-     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC";
-
+     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
+            
             this.shipperOrderList = this.entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.NotifyShipper).ToList();
-
+            
             string shipper = this.shipperComboBox.Text;
 
             this.dataGridView3.AutoGenerateColumns = false;

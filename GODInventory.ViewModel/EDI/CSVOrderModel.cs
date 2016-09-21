@@ -177,20 +177,35 @@ namespace GODInventory.ViewModel.EDI
         string センター名漢字; //76 センター名漢字    20 590
         string センター名カナ; //77 センター名カナ    15 610
         string 予備; //78 予備             76 625
-
+        
         string nr;
 
         public short StoreCode { get; set; }
         public long JanCode { get; set; }
+        public short 入力区分 { get; set; }
+        public string StoreName {
+            get { return this.店舗名漢字; }
+        }
+        public string LocationName
+        {
+            get { return this.納品場所名漢字; }
+        }
 
-        public CSVOrderModel(string line) {
-            var untrimFields = line.Split(',');
+        
+        public CSVOrderHeadModel Head { get; set; }
+        public CSVOrderModel(CSVOrderHeadModel head, string line)
+        {
+            Head = head;
+            string utf8Line = EncodingUtility.ConvertShiftJisStringToUtf8(line);
+
+            var untrimFields = utf8Line.Split(',');
             var fields = untrimFields.Select(s => s.Trim('"')).ToList();
-            Debug.Assert( fields.Count() == 74);
-
+            Debug.Assert( fields.Count() == 17 || fields.Count() == 74); // fax/normal
+            if (!Head.IsByFax())
+            {
                 this.受注日 = fields[0]; //1 受注日 
                 this.受注時刻 = fields[1]; //
-               
+
                 this.法人コード = fields[2]; //6 法人コード  2 39
                 this.法人名漢字 = fields[3]; //7 法人名漢字   20 41
                 this.法人名カナ = fields[4]; //8 法人名カナ  15 61
@@ -267,8 +282,23 @@ namespace GODInventory.ViewModel.EDI
                 this.センターコード = fields[71]; //75 センターコード    5 585
                 this.センター名漢字 = fields[72]; //76 センター名漢字    20 590
                 this.センター名カナ = fields[73]; //77 センター名カナ    15 610
+                this.入力区分 = 0; //EDI
                 //this.予備 = fields[74]; //78 予備             76 625
-            
+            }  else 
+            { 
+                //店舗,納品場所,伝票番号,JANコード,商品コード,商品名,規格,発注原単価,発注売単価,発注数量,ASN出荷NO,ASN数量,受領原単価,受領売単価,受領数量,受領受信日,受領計上日
+                this.店舗名漢字 = fields[0];
+                this.納品場所名漢字 = fields[1];
+                this.伝票番号 = fields[2];
+                this.ＪＡＮコード = fields[3];
+                this.商品コード = fields[4];
+                this.品名漢字 = fields[5];
+                this.規格名漢字 = fields[6];
+                this.原単価_税抜_ = fields[7];
+                this.売単価_税抜_ = fields[8];
+                this.発注数量 = fields[9];
+                this.入力区分 = 1; //FAX
+            }
             
             this.StoreCode = Convert.ToInt16(this.店舗コード);
             this.JanCode = Convert.ToInt64(this.ＪＡＮコード);
@@ -283,99 +313,153 @@ namespace GODInventory.ViewModel.EDI
             int i = Convert.ToInt32(this.受注時刻);
             orderdata.受注時刻 = new TimeSpan( i/10000, (i%10000)/100, i%100);
 
-            orderdata.法人コード = Convert.ToInt16(this.法人コード);
-            orderdata.法人名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.法人名漢字).Trim();
-            orderdata.法人名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.法人名カナ).Trim();
+            if ( false )
+            {
+            }
+            else { 
 
-            orderdata.店舗コード = Convert.ToInt16(this.店舗コード);
-            orderdata.店舗名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.店舗名漢字).Trim();
-            orderdata.店舗名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.店舗名カナ).Trim();
+                orderdata.法人コード = Convert.ToInt16(this.法人コード);
+                orderdata.法人名漢字 = this.法人名漢字.Trim();
+                orderdata.法人名カナ = this.法人名カナ.Trim();
 
-            orderdata.仕入先コード = Convert.ToInt32(this.仕入先コード);
-            orderdata.仕入先名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.仕入先名漢字).Trim();
-            orderdata.仕入先名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.仕入先名カナ).Trim();
-            orderdata.出荷業務仕入先コード = Convert.ToInt32(this.出荷業務仕入先コード);
-            orderdata.伝票区分 = Convert.ToInt16(this.伝票区分);
+                orderdata.店舗コード = Convert.ToInt16(this.店舗コード);
+                orderdata.店舗名漢字 = this.店舗名漢字.Trim();
+                orderdata.店舗名カナ = this.店舗名カナ.Trim();
 
-            orderdata.伝票番号 = Convert.ToInt32( this.伝票番号);
-            orderdata.行番号 = Convert.ToInt16(this.行番号);
-            orderdata.発注日 = DateTime.ParseExact( this.発注日, "yyyyMMdd", CultureInfo.InvariantCulture);
-            orderdata.納品予定日 = DateTime.ParseExact(this.納品予定日, "yyyyMMdd", CultureInfo.InvariantCulture);
-            orderdata.発注データ有効期限 = DateTime.ParseExact(this.発注データ有効期限, "yyyyMMdd", CultureInfo.InvariantCulture);
-            orderdata.EDI発注区分 = Convert.ToInt16(this.EDI発注区分);
-            orderdata.発注形態区分 = Convert.ToInt16(this.発注形態区分);
+                orderdata.仕入先コード = Convert.ToInt32(this.仕入先コード);
+                orderdata.仕入先名漢字 = this.仕入先名漢字.Trim();
+                orderdata.仕入先名カナ = this.仕入先名カナ.Trim();
+                orderdata.出荷業務仕入先コード = Convert.ToInt32(this.出荷業務仕入先コード);
+                orderdata.伝票区分 = Convert.ToInt16(this.伝票区分);
 
-            orderdata.発注形態名称漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.発注形態名称漢字).Trim();
-            orderdata.予備_数値_ = Convert.ToInt32(this.予備_数値_);
-            orderdata.本部発注区分 = Convert.ToInt16(this.本部発注区分);
-            orderdata.部門コード = Convert.ToInt16(this.部門コード);
-            orderdata.部門名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.部門名漢字).Trim();
-            orderdata.部門名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.部門名カナ).Trim();
-            orderdata.ラインコード = Convert.ToInt32(this.ラインコード);
-            orderdata.クラスコード = Convert.ToInt32(this.クラスコード);
-            orderdata.ロケーションコード = Convert.ToInt32(this.ロケーションコード);
-            orderdata.商品コード区分 = Convert.ToInt32(this.商品コード区分);
-            orderdata.ＪＡＮコード = Convert.ToInt64(this.ＪＡＮコード);
-            orderdata.商品コード = Convert.ToInt32(this.商品コード);
-            orderdata.オプション使用欄 = EncodingUtility.ConvertShiftJisStringToUtf8(this.オプション使用欄).Trim(); //36 オプション使用欄   20 278
-            orderdata.ＧＴＩＮ = ""; //37 ＧＴＩＮ       14 298
-            orderdata.品名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.品名漢字).Trim();
-            orderdata.品名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.品名カナ).Trim();
-            orderdata.規格名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.規格名漢字).Trim();
-            orderdata.規格名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.規格名カナ).Trim();
+                orderdata.伝票番号 = Convert.ToInt32( this.伝票番号);
+                orderdata.行番号 = Convert.ToInt16(this.行番号);
+                orderdata.発注日 = DateTime.ParseExact( this.発注日, "yyyyMMdd", CultureInfo.InvariantCulture);
+                orderdata.納品予定日 = DateTime.ParseExact(this.納品予定日, "yyyyMMdd", CultureInfo.InvariantCulture);
+                orderdata.発注データ有効期限 = DateTime.ParseExact(this.発注データ有効期限, "yyyyMMdd", CultureInfo.InvariantCulture);
+                orderdata.EDI発注区分 = Convert.ToInt16(this.EDI発注区分);
+                orderdata.発注形態区分 = Convert.ToInt16(this.発注形態区分);
+
+                orderdata.発注形態名称漢字 = this.発注形態名称漢字.Trim();
+                orderdata.予備_数値_ = Convert.ToInt32(this.予備_数値_);
+                orderdata.本部発注区分 = Convert.ToInt16(this.本部発注区分);
+                orderdata.部門コード = Convert.ToInt16(this.部門コード);
+                orderdata.部門名漢字 = this.部門名漢字.Trim();
+                orderdata.部門名カナ = this.部門名カナ.Trim();
+                orderdata.ラインコード = Convert.ToInt32(this.ラインコード);
+                orderdata.クラスコード = Convert.ToInt32(this.クラスコード);
+                orderdata.ロケーションコード = Convert.ToInt32(this.ロケーションコード);
+                orderdata.商品コード区分 = Convert.ToInt32(this.商品コード区分);
+                orderdata.ＪＡＮコード = Convert.ToInt64(this.ＪＡＮコード);
+                orderdata.商品コード = Convert.ToInt32(this.商品コード);
+                orderdata.オプション使用欄 = this.オプション使用欄.Trim(); //36 オプション使用欄   20 278
+                orderdata.ＧＴＩＮ = ""; //37 ＧＴＩＮ       14 298
+                orderdata.品名漢字 = this.品名漢字.Trim();
+                orderdata.品名カナ = this.品名カナ.Trim();
+                orderdata.規格名漢字 = this.規格名漢字.Trim();
+                orderdata.規格名カナ = this.規格名カナ.Trim();
 
 
-            orderdata.発注数量 = Convert.ToInt32(this.発注数量);
+                orderdata.発注数量 = Convert.ToInt32(this.発注数量);
 
-            orderdata.最小発注単位数量 = Convert.ToInt32(this.最小発注単位数量);
-            orderdata.発注単位名称漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.発注単位名称漢字).Trim();
-            orderdata.発注単位名称カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.発注単位名称カナ).Trim();
-            orderdata.総額取引区分 = Convert.ToInt16(this.総額取引区分);
-            // tbd...
-            orderdata.原単価_税抜_ = Convert.ToInt32(this.原単価_税抜_);
-            orderdata.原単価_税込_ = Convert.ToDouble(this.原単価_税込_); //48 原単価(税込 )   9 436
-            orderdata.原価金額_税抜_ = Convert.ToInt32(this.原価金額_税抜_);
-            orderdata.原価金額_税込_ = Convert.ToInt32(this.原価金額_税込_);
+                orderdata.最小発注単位数量 = Convert.ToInt32(this.最小発注単位数量);
+                orderdata.発注単位名称漢字 = this.発注単位名称漢字.Trim();
+                orderdata.発注単位名称カナ = this.発注単位名称カナ.Trim();
+                orderdata.総額取引区分 = Convert.ToInt16(this.総額取引区分);
+                // tbd...
+                orderdata.原単価_税抜_ = Convert.ToInt32(this.原単価_税抜_);
+                orderdata.原単価_税込_ = Convert.ToDouble(this.原単価_税込_); //48 原単価(税込 )   9 436
+                orderdata.原価金額_税抜_ = orderdata.原単価_税抜_ * orderdata.発注数量; // 兼容 FAX订单，FAX订单没有 原価金額_税抜_  
+                //Convert.ToInt32(this.原価金額_税抜_);
+                orderdata.原価金額_税込_ = Convert.ToInt32(this.原価金額_税込_);
 
-            orderdata.税額 = Convert.ToDouble(this.税額);
-            orderdata.税区分 = Convert.ToInt16(this.税区分); 
-            orderdata.税率 = Convert.ToDouble(this.税率);
+                orderdata.税額 = Convert.ToDouble(this.税額);
+                orderdata.税区分 = Convert.ToInt16(this.税区分); 
+                orderdata.税率 = Convert.ToDouble(this.税率);
 
-            orderdata.売単価_税抜_ = Convert.ToInt32(this.売単価_税抜_);
-            orderdata.売単価_税込_ = Convert.ToInt32(this.売単価_税込_);
-            orderdata.特価区分 = Convert.ToInt16(this.特価区分);
-            orderdata.PB区分 = Convert.ToInt16(this.PB区分);
-            orderdata.原価区分 = Convert.ToInt16(this.原価区分);
-            orderdata.用度品区分 = Convert.ToInt16(this.用度品区分);
-            orderdata.納期回答区分 = Convert.ToInt16(this.納期回答区分);
-            orderdata.回答納期 = "00000000";
+                orderdata.売単価_税抜_ = Convert.ToInt32(this.売単価_税抜_);
+                orderdata.売単価_税込_ = Convert.ToInt32(this.売単価_税込_);
+                orderdata.特価区分 = Convert.ToInt16(this.特価区分);
+                orderdata.PB区分 = Convert.ToInt16(this.PB区分);
+                orderdata.原価区分 = Convert.ToInt16(this.原価区分);
+                orderdata.用度品区分 = Convert.ToInt16(this.用度品区分);
+                orderdata.納期回答区分 = Convert.ToInt16(this.納期回答区分);
+                orderdata.回答納期 = "00000000";
 
-            orderdata.納品先店舗コード = Convert.ToInt16(this.納品先店舗コード) ;
-            orderdata.納品先店舗名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.納品先店舗名漢字).Trim();
-            orderdata.納品場所名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.納品場所名漢字).Trim();
-
-            orderdata.色名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.色名カナ).Trim();
-            orderdata.柄名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.柄名カナ).Trim();
-            orderdata.サイズ名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.サイズ名カナ).Trim();
-            orderdata.広告コード = Convert.ToInt32(this.広告コード);
-            orderdata.伝票出力単位 = Convert.ToInt16(this.伝票出力単位);
-            orderdata.納品先店舗コード = Convert.ToInt16(this.納品先店舗コード);
-            orderdata.納品先店舗名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.納品先店舗名漢字).Trim();
-            orderdata.納品先店舗名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.納品先店舗名カナ).Trim();
-            orderdata.納品場所コード = (this.納品場所コード.Trim().Length > 0 ? Convert.ToInt16(this.納品場所コード) : (short)0);
-            orderdata.納品場所名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.納品場所名漢字).Trim();
-            orderdata.納品場所名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.納品場所名カナ).Trim();
-            orderdata.便区分 = Convert.ToInt16(this.便区分);
-            orderdata.センター経由区分 = Convert.ToInt16(this.センター経由区分);
-            orderdata.センターコード = Convert.ToInt32(this.センターコード);
-            orderdata.センター名漢字 = EncodingUtility.ConvertShiftJisStringToUtf8(this.センター名漢字).Trim();
-            orderdata.センター名カナ = EncodingUtility.ConvertShiftJisStringToUtf8(this.センター名カナ).Trim();
+                orderdata.色名カナ = this.色名カナ.Trim();
+                orderdata.柄名カナ = this.柄名カナ.Trim();
+                orderdata.サイズ名カナ = this.サイズ名カナ.Trim();
+                orderdata.広告コード = Convert.ToInt32(this.広告コード);
+                orderdata.伝票出力単位 = Convert.ToInt16(this.伝票出力単位);
+                orderdata.納品先店舗コード = Convert.ToInt16(this.納品先店舗コード);
+                orderdata.納品先店舗名漢字 = this.納品先店舗名漢字.Trim();
+                orderdata.納品先店舗名カナ = this.納品先店舗名カナ.Trim();
+                orderdata.納品場所コード = (this.納品場所コード.Trim().Length > 0 ? Convert.ToInt16(this.納品場所コード) : (short)0);
+                orderdata.納品場所名漢字 = this.納品場所名漢字.Trim();
+                orderdata.納品場所名カナ = this.納品場所名カナ.Trim();
+                orderdata.便区分 = Convert.ToInt16(this.便区分);
+                orderdata.センター経由区分 = Convert.ToInt16(this.センター経由区分);
+                orderdata.センターコード = Convert.ToInt32(this.センターコード);
+                orderdata.センター名漢字 = this.センター名漢字.Trim();
+                orderdata.センター名カナ = this.センター名カナ.Trim();
+            }
 
             return orderdata;
 
         }
-        public t_orderdata ConverToEntity(t_shoplist shop, t_itemlist item, List<v_storeorder> orders)
+        public t_orderdata ConverToEntity(t_shoplist shop, t_itemlist item, t_locations location, List<v_storeorder> orders)
         {
+            if (Head.IsByFax())
+            {
+                this.受注日 = DateTime.Now.ToString("yyyyMMdd");
+                this.受注日 = DateTime.Now.ToString("yyyyMMdd");
+                this.店舗コード = shop.店番.ToString();
+                this.店舗名カナ = shop.店名カナ;
+                this.発注日 = DateTime.Now.ToString("yyyyMMdd");
+
+                this.納品予定日 =  DateTime.Now.ToString("yyyyMMdd");
+                this.発注データ有効期限 = DateTime.Now.ToString("yyyyMMdd");
+
+                if (location != null)
+                {
+                    this.納品場所コード = location.納品場所コード.ToString();
+                    this.納品場所名カナ = location.納品場所名カナ.ToString();
+                }
+                else {
+                    this.納品場所コード = "0";
+                    this.納品場所名カナ = "";
+                }
+
+                this.法人コード = "4";
+                this.法人名漢字 = "Ｋナフコ";
+                this.法人名カナ = "ｶ) ﾅﾌｺ";
+
+                this.仕入先コード = "249706";
+                this.仕入先名漢字 = "㈱ジー・オー・ディ";
+                this.仕入先名カナ = "K.K.ｼﾞｰ･ｵｰ･ﾃﾞｨ";
+                this.発注形態名称漢字 = "FAX";
+                this.出荷業務仕入先コード = "249706";
+
+                this.部門コード = "9";
+                this.部門名漢字 = "エクステリア";
+                this.部門名カナ = "ｴｸｽﾃﾘｱ";
+
+                this.品名カナ = "";
+                this.規格名カナ = "";
+                this.オプション使用欄 = "";
+                this.色名カナ = "";
+                this.柄名カナ = "";
+
+                this.センター名漢字 = "";
+                this.センター名カナ = "";
+
+                this.発注単位名称漢字 = "";
+                this.発注単位名称カナ = "";
+				this.サイズ名カナ = "";
+                this.納品先店舗名漢字 = "";
+                this.納品先店舗名カナ = "";
+            }
+
             var orderdata = ConverToEntity();
             
             //bool exist = orders.Exists( o=> ( o.店舗コード == orderdata.店舗コード && o.商品コード == orderdata.商品コード ));
@@ -399,7 +483,7 @@ namespace GODInventory.ViewModel.EDI
             return orderdata;
         }
 
-        public CustomMySqlParameters ToSqlArguments(t_shoplist shop, t_itemlist item, List<v_storeorder> orders)
+        public CustomMySqlParameters ToSqlArguments(t_shoplist shop, t_itemlist item, t_locations location, List<v_storeorder> orders)
         {
             //`発注日`, `受注日`, `出荷日`, `納品日`, `店舗コード`, `店舗名漢字`, `社内伝番`, `行数`, `最大行数`, `伝票番号`, `ダブリ`, 
             //`在庫状態`, `キャンセル`, `キャンセル時刻`, `ジャンル`, `ＪＡＮコード`, `商品コード`, `品名漢字`, `規格名漢字`, `発注数量`, 
@@ -492,7 +576,7 @@ namespace GODInventory.ViewModel.EDI
                     !センター名漢字 = Cells(i, 73).Value
                     !センター名カナ = Cells(i, 74).Value
                     */
-            t_orderdata o = ConverToEntity(shop, item, orders);
+            t_orderdata o = ConverToEntity(shop, item, location, orders);
             string sql = @"INSERT INTO `t_orderdata`(
 `発注日`, `受注日`, `受注時刻`,  `店舗コード`, `店舗名漢字`, 
 `伝票番号`, `ＪＡＮコード`, `商品コード`, `品名漢字`, `規格名漢字`, 
@@ -545,10 +629,10 @@ VALUES (
 
         }
 
-        public string ToRawSql(t_shoplist shop, t_itemlist item, List<v_storeorder> orders)
+        public string ToRawSql(t_shoplist shop, t_itemlist item, t_locations location, List<v_storeorder> orders)
         {
             var isoDateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
-            t_orderdata o = ConverToEntity(shop, item, orders);
+            t_orderdata o = ConverToEntity(shop, item, location, orders);
             string format = @"INSERT INTO `t_orderdata`(
 `発注日`, `受注日`, `受注時刻`,  `店舗コード`, `店舗名漢字`, 
 `伝票番号`, `ＪＡＮコード`, `商品コード`, `品名漢字`, `規格名漢字`, 

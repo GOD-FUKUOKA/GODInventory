@@ -58,6 +58,10 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -79,9 +83,10 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(754, 421);
+            this.dataGridView1.Size = new System.Drawing.Size(754, 389);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
             // 
@@ -167,10 +172,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Location = new System.Drawing.Point(0, 50);
-            this.panel1.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
+            this.panel1.Location = new System.Drawing.Point(0, 46);
+            this.panel1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(754, 421);
+            this.panel1.Size = new System.Drawing.Size(754, 389);
             this.panel1.TabIndex = 2;
             // 
             // contextMenuStrip1
@@ -179,19 +184,19 @@
             this.ChangeToolStripMenuItem,
             this.addItemToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(143, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(151, 48);
             // 
             // ChangeToolStripMenuItem
             // 
             this.ChangeToolStripMenuItem.Name = "ChangeToolStripMenuItem";
-            this.ChangeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.ChangeToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.ChangeToolStripMenuItem.Text = "Change Item";
             this.ChangeToolStripMenuItem.Click += new System.EventHandler(this.ChangeToolStripMenuItem_Click);
             // 
             // addItemToolStripMenuItem
             // 
             this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
-            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.addItemToolStripMenuItem.Text = "Add Item";
             this.addItemToolStripMenuItem.Visible = false;
             this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
@@ -201,20 +206,20 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sendToShipperToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip1";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(155, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(166, 26);
             // 
             // sendToShipperToolStripMenuItem
             // 
             this.sendToShipperToolStripMenuItem.Name = "sendToShipperToolStripMenuItem";
-            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.sendToShipperToolStripMenuItem.Text = "SendToShipper";
             // 
             // btAddItem
             // 
             this.btAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAddItem.Location = new System.Drawing.Point(676, 13);
+            this.btAddItem.Location = new System.Drawing.Point(671, 8);
             this.btAddItem.Name = "btAddItem";
-            this.btAddItem.Size = new System.Drawing.Size(75, 31);
+            this.btAddItem.Size = new System.Drawing.Size(80, 32);
             this.btAddItem.TabIndex = 3;
             this.btAddItem.Text = "Add";
             this.btAddItem.UseVisualStyleBackColor = true;
@@ -222,13 +227,13 @@
             // 
             // ProductsControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.Controls.Add(this.btAddItem);
             this.Controls.Add(this.panel1);
             this.Name = "ProductsControl";
-            this.Size = new System.Drawing.Size(754, 475);
+            this.Size = new System.Drawing.Size(754, 438);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);

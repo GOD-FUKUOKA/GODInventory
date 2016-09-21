@@ -124,5 +124,12 @@ namespace GODInventoryWinForm
             new ImportReceivedCSVForm().ShowDialog();
 
         }
+
+        private void importFaxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new ImportOrderCSVForm();
+            form.FormTitle = "Import FAX HACCYU.csv";
+            form.ShowDialog();
+        }
     }
 }

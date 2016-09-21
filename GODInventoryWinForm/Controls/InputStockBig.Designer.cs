@@ -29,9 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cancelButton = new System.Windows.Forms.Button();
             this.submitButton = new System.Windows.Forms.Button();
             this.loadItemListButton = new System.Windows.Forms.Button();
@@ -58,11 +63,6 @@
             this.clientComboBox = new System.Windows.Forms.ComboBox();
             this.remarkTextBox1 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -76,14 +76,14 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdDataGridViewTextBoxColumn,
@@ -91,14 +91,14 @@
             this.商品名,
             this.規格,
             this.数量});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(364, 23);
             this.dataGridView1.MultiSelect = false;
@@ -107,6 +107,44 @@
             this.dataGridView1.Size = new System.Drawing.Size(539, 447);
             this.dataGridView1.TabIndex = 45;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            // 
+            // IdDataGridViewTextBoxColumn
+            // 
+            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
+            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
+            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.IdDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // 自社コード
+            // 
+            this.自社コード.DataPropertyName = "自社コード";
+            this.自社コード.HeaderText = "自社コード";
+            this.自社コード.Name = "自社コード";
+            this.自社コード.ReadOnly = true;
+            this.自社コード.Width = 130;
+            // 
+            // 商品名
+            // 
+            this.商品名.DataPropertyName = "商品名";
+            this.商品名.HeaderText = "商品名";
+            this.商品名.Name = "商品名";
+            this.商品名.ReadOnly = true;
+            this.商品名.Width = 240;
+            // 
+            // 規格
+            // 
+            this.規格.DataPropertyName = "規格";
+            this.規格.HeaderText = "規格";
+            this.規格.Name = "規格";
+            this.規格.ReadOnly = true;
+            this.規格.Width = 110;
+            // 
+            // 数量
+            // 
+            this.数量.DataPropertyName = "qty";
+            this.数量.HeaderText = "数量";
+            this.数量.Name = "数量";
             // 
             // cancelButton
             // 
@@ -148,7 +186,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(62, 409);
+            this.label7.Location = new System.Drawing.Point(80, 405);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 24);
             this.label7.TabIndex = 43;
@@ -178,7 +216,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(42, 276);
+            this.label4.Location = new System.Drawing.Point(42, 281);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(86, 24);
             this.label4.TabIndex = 39;
@@ -189,10 +227,9 @@
             this.stockNOTextBox.Enabled = false;
             this.stockNOTextBox.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.stockNOTextBox.Location = new System.Drawing.Point(133, 277);
-            this.stockNOTextBox.Multiline = true;
             this.stockNOTextBox.Name = "stockNOTextBox";
             this.stockNOTextBox.ReadOnly = true;
-            this.stockNOTextBox.Size = new System.Drawing.Size(204, 32);
+            this.stockNOTextBox.Size = new System.Drawing.Size(204, 26);
             this.stockNOTextBox.TabIndex = 40;
             // 
             // orderCreatedAtDateTimePicker
@@ -243,7 +280,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(38, 369);
+            this.label6.Location = new System.Drawing.Point(42, 369);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(86, 24);
             this.label6.TabIndex = 42;
@@ -263,7 +300,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(80, 168);
+            this.label3.Location = new System.Drawing.Point(80, 170);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 24);
             this.label3.TabIndex = 38;
@@ -316,7 +353,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(80, 240);
+            this.label8.Location = new System.Drawing.Point(80, 244);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(48, 24);
             this.label8.TabIndex = 54;
@@ -326,7 +363,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(42, 204);
+            this.label9.Location = new System.Drawing.Point(42, 207);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(86, 24);
             this.label9.TabIndex = 55;
@@ -375,44 +412,6 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(290, 1);
             this.label11.TabIndex = 60;
-            // 
-            // IdDataGridViewTextBoxColumn
-            // 
-            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
-            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
-            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.IdDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // 自社コード
-            // 
-            this.自社コード.DataPropertyName = "自社コード";
-            this.自社コード.HeaderText = "自社コード";
-            this.自社コード.Name = "自社コード";
-            this.自社コード.ReadOnly = true;
-            this.自社コード.Width = 130;
-            // 
-            // 商品名
-            // 
-            this.商品名.DataPropertyName = "商品名";
-            this.商品名.HeaderText = "商品名";
-            this.商品名.Name = "商品名";
-            this.商品名.ReadOnly = true;
-            this.商品名.Width = 240;
-            // 
-            // 規格
-            // 
-            this.規格.DataPropertyName = "規格";
-            this.規格.HeaderText = "規格";
-            this.規格.Name = "規格";
-            this.規格.ReadOnly = true;
-            this.規格.Width = 110;
-            // 
-            // 数量
-            // 
-            this.数量.DataPropertyName = "qty";
-            this.数量.HeaderText = "数量";
-            this.数量.Name = "数量";
             // 
             // CopyofInputStock
             // 

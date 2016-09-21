@@ -18,11 +18,19 @@ namespace GODInventoryWinForm
 
     public partial class ImportOrderCSVForm : Form
     {
+
+        public string formTitle = "Import HACCYU.csv";
+
         public ImportOrderCSVForm()
         {
             InitializeComponent();
             this.ControlBox = false;   // 设置不出现关闭按钮
+        }
 
+        public string FormTitle 
+        {
+            get { return this.titleLabel.Text; }
+            set { this.titleLabel.Text = value;  }
         }
 
         public int ProgressValue 
@@ -117,7 +125,7 @@ namespace GODInventoryWinForm
                 
                 using (var br = new StreamReader(path, Encoding.GetEncoding("shift_jis")))
                 {
-                    CSVOrderHeadModel order_head = new CSVOrderHeadModel(br);
+                    CSVOrderHeadModel orderHead = new CSVOrderHeadModel(br);
                     //Console.WriteLine(" write head ={0}", order_head.DetailCount);
 
                     string line;
@@ -128,8 +136,8 @@ namespace GODInventoryWinForm
                             e.Cancel = true;
                             throw new Exception("It is Cancelled successfully!");
                         }
-                        
-                        models.Add(new CSVOrderModel(line));
+
+                        models.Add(new CSVOrderModel(orderHead, line));
                         //if (progress != last)
                         //
                         //    backgroundWorker1.ReportProgress(progress);
@@ -159,7 +167,8 @@ namespace GODInventoryWinForm
                 //   group o by new { o.店舗コード, o.商品コード} into g
                 //    select new v_storeorder { 店舗コード = g.Key.店舗コード, 商品コード = g.Key.商品コード }).ToList();
                     
-                List<t_shoplist> shops = ctx.t_shoplist.ToList();
+                var shops = ctx.t_shoplist.ToList();
+                var locations = ctx.t_locations.ToList();
 
                 CSVOrderModel model = null;
                 int progress = 0;
@@ -190,14 +199,15 @@ namespace GODInventoryWinForm
                             {
                                 throw new Exception(String.Format("Can not find product by jancode {0}", model.JanCode));
                             }
-                            var shop = shops.FirstOrDefault(s => s.店番 == model.StoreCode);
+                            var shop = shops.FirstOrDefault(s => (s.店番 == model.StoreCode || s.店名 == model.StoreName));
                             if (shop == null)
                             {
                                 throw new Exception(String.Format("Can not find shop by shopcode {0}", model.StoreCode));
                             }
 
+                            var location = locations.FirstOrDefault(s => s.納品場所名漢字 == model.LocationName);
                             //sql_parameters = model.ToSqlArguments(shop, item);
-                            var sql = model.ToRawSql(shop, item, orders);
+                            var sql = model.ToRawSql(shop, item, location, orders);
                             //Console.WriteLine("sql = #{0}", sql);
                             sqls.Add(sql);
                             if ((i == models.Count - 1) || (arg.CurrentIndex % 25 ==0))
