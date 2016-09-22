@@ -301,39 +301,6 @@ namespace GODInventoryWinForm.Controls
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            
-            var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
-            if (cell.OwningColumn == 受注数)
-            {
-
-                //orderList[davX].受注日 = DateTime.Now;
-                //orderList[davX].発注日 = orderCreatedAtDateTimePicker.Value;
-                //if (storeCodeTextBox.Text != "")
-                //    orderList[davX].店舗コード = Convert.ToInt16(storeCodeTextBox.Text);
-                ////if (productCodeTextBox.Text != "")
-                ////    orderList[davX].商品コード = Convert.ToInt32(productCodeTextBox.Text);
-                ////if (orderQuantityTextBox.Text != "")
-                ////    orderList[davX].発注数量 = Convert.ToInt32(orderQuantityTextBox.Text);
-                //if (selfCodeTextBox1.Text != "")
-                //    orderList[davX].仕入先コード = Convert.ToInt32(selfCodeTextBox1.Text);
-                //if (shipperTextBox.Text != "")
-                //    orderList[davX].出荷業務仕入先コード = Convert.ToInt32(this.shipperTextBox.Text);
-                //orderList[davX].仕入先名カナ = this.selfNameTextBox.Text;
-                //orderList[davX].店舗名漢字 = this.storeComboBox.Text;
-                //if (customerIdTextBox.Text != "")
-                //    orderList[davX].法人コード = Convert.ToInt16(this.customerIdTextBox.Text);
-                //orderList[davX].法人名漢字 = this.customerComboBox.Text;
-                //if (textBox5.Text != "")
-                //    orderList[davX].部門コード = Convert.ToInt16(this.textBox5.Text);
-                //orderList[davX].納品予定日 = this.dateTimePicker1.Value;
-                //if (locationTextBox.Text != "")
-                //    orderList[davX].納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
-                //orderList[davX].納品先店舗名漢字 = this.locationComboBox.Text;
-
-
-            }
-
         }
 
         private int GenerateInvoiceNumber(int store_id)
@@ -768,7 +735,7 @@ namespace GODInventoryWinForm.Controls
                 orderList[selectedRowIndex].品名漢字 = selectedItem.商品名;
                 orderList[selectedRowIndex].規格名漢字 = selectedItem.規格;
                 orderList[selectedRowIndex].ＪＡＮコード = selectedItem.JANコード;
-                orderList[selectedRowIndex].発注数量 = Convert.ToInt32(selectedItem.ロット);
+                orderList[selectedRowIndex].口数 = Convert.ToInt32(selectedItem.PT入数);
 
                 #region 从 t_pricelist 表中读取的价格
 

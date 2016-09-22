@@ -43,7 +43,7 @@ namespace GODInventoryWinForm
 
          
             this.listView1.View = View.Details;
-            this.listView1.Columns.Add("商品名", 200, HorizontalAlignment.Left); //一步添加
+            //this.listView1.Columns.Add("品名", 200, HorizontalAlignment.Left); //一步添加
 
 
         }
@@ -60,7 +60,7 @@ namespace GODInventoryWinForm
                 {
                     var results = (from s in ctx.t_itemlist
                                    where s.ジャンル == (short)genre_id
-                                   select new v_itemprice { 商品コード = s.商品コード, 規格 = s.規格, 商品名 = s.商品名, ジャンル = s.ジャンル, JANコード = s.JANコード, ロット = s.PT入数, 自社コード = s.自社コード }).ToList();
+                                   select new v_itemprice { 商品コード = s.商品コード, 規格 = s.規格, 商品名 = s.商品名, ジャンル = s.ジャンル, JANコード = s.JANコード, PT入数 = s.PT入数, 自社コード = s.自社コード }).ToList();
                     for (int i = 0; i < results.Count; i++)
                     {
                         results[i].Id = i + 1;
@@ -73,10 +73,8 @@ namespace GODInventoryWinForm
 
             foreach (v_itemprice item in stockiosList)
             {
-                ListViewItem lvi = new ListViewItem();
-                lvi.Text = item.商品名;
-
-                //lvi.SubItems.Add("第2列,第" + i + "行");
+                string[] subItems = { item.商品名, item.規格 };
+                ListViewItem lvi = new ListViewItem(subItems);
 
                 this.listView1.Items.Add(lvi);
                 //this.listView1.Items.Add(item.商品名);

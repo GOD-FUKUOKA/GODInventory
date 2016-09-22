@@ -34,6 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.submitButton2 = new System.Windows.Forms.Button();
             this.cancelButton3 = new System.Windows.Forms.Button();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listBox1
@@ -48,6 +50,10 @@
             // 
             // listView1
             // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.listView1.FullRowSelect = true;
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.Location = new System.Drawing.Point(228, 54);
             this.listView1.Name = "listView1";
@@ -95,6 +101,16 @@
             this.cancelButton3.Text = "取消";
             this.cancelButton3.UseVisualStyleBackColor = true;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "商品名";
+            this.columnHeader1.Width = 200;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "規格";
+            this.columnHeader2.Width = 200;
+            // 
             // SelectProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -127,5 +143,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button submitButton2;
         private System.Windows.Forms.Button cancelButton3;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

@@ -15,7 +15,7 @@ namespace GODInventory.MyLinq
         public string 商品名 { get; set; }
         public string 規格 { get; set; }
         public long JANコード { get; set; }
-        public int? ロット { get; set; }
+        //public int? ロット { get; set; }
         public int? 商品コード { get; set; }
 
         public int PT入数 { get; set; }
