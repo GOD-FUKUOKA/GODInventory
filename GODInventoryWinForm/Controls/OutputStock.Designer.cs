@@ -105,11 +105,11 @@
             this.規格,
             this.数量});
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(314, 29);
+            this.dataGridView1.Location = new System.Drawing.Point(304, 29);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(573, 384);
+            this.dataGridView1.Size = new System.Drawing.Size(540, 384);
             this.dataGridView1.TabIndex = 70;
             // 
             // IdDataGridViewTextBoxColumn
@@ -152,9 +152,9 @@
             // 
             this.submitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.submitButton.BackColor = System.Drawing.SystemColors.Control;
-            this.submitButton.Location = new System.Drawing.Point(908, 27);
+            this.submitButton.Location = new System.Drawing.Point(870, 29);
             this.submitButton.Name = "submitButton";
-            this.submitButton.Size = new System.Drawing.Size(63, 23);
+            this.submitButton.Size = new System.Drawing.Size(100, 30);
             this.submitButton.TabIndex = 60;
             this.submitButton.Text = "登录";
             this.submitButton.UseVisualStyleBackColor = false;
@@ -207,9 +207,9 @@
             // 
             // loadItemListButton
             // 
-            this.loadItemListButton.Location = new System.Drawing.Point(209, 279);
+            this.loadItemListButton.Location = new System.Drawing.Point(174, 275);
             this.loadItemListButton.Name = "loadItemListButton";
-            this.loadItemListButton.Size = new System.Drawing.Size(63, 23);
+            this.loadItemListButton.Size = new System.Drawing.Size(100, 30);
             this.loadItemListButton.TabIndex = 76;
             this.loadItemListButton.Text = "调出商品列表";
             this.loadItemListButton.UseVisualStyleBackColor = true;
@@ -218,9 +218,9 @@
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Location = new System.Drawing.Point(908, 65);
+            this.cancelButton.Location = new System.Drawing.Point(870, 67);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(63, 23);
+            this.cancelButton.Size = new System.Drawing.Size(100, 30);
             this.cancelButton.TabIndex = 61;
             this.cancelButton.Text = "清零";
             this.cancelButton.UseVisualStyleBackColor = true;

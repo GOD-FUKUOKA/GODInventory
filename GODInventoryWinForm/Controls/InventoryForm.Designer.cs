@@ -68,11 +68,11 @@
             // btconfirm
             // 
             this.btconfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btconfirm.Location = new System.Drawing.Point(644, 460);
+            this.btconfirm.Location = new System.Drawing.Point(735, 455);
             this.btconfirm.Name = "btconfirm";
-            this.btconfirm.Size = new System.Drawing.Size(139, 26);
+            this.btconfirm.Size = new System.Drawing.Size(100, 30);
             this.btconfirm.TabIndex = 34;
-            this.btconfirm.Text = "确定并调整库存";
+            this.btconfirm.Text = "确定调整库存";
             this.btconfirm.UseVisualStyleBackColor = true;
             this.btconfirm.Click += new System.EventHandler(this.btconfirm_Click);
             // 
@@ -99,9 +99,9 @@
             // btclear_zero
             // 
             this.btclear_zero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btclear_zero.Location = new System.Drawing.Point(791, 460);
+            this.btclear_zero.Location = new System.Drawing.Point(851, 455);
             this.btclear_zero.Name = "btclear_zero";
-            this.btclear_zero.Size = new System.Drawing.Size(139, 26);
+            this.btclear_zero.Size = new System.Drawing.Size(100, 30);
             this.btclear_zero.TabIndex = 36;
             this.btclear_zero.Text = "清点数量清零";
             this.btclear_zero.UseVisualStyleBackColor = true;
@@ -109,9 +109,9 @@
             // 
             // btfind
             // 
-            this.btfind.Location = new System.Drawing.Point(855, 23);
+            this.btfind.Location = new System.Drawing.Point(851, 24);
             this.btfind.Name = "btfind";
-            this.btfind.Size = new System.Drawing.Size(75, 28);
+            this.btfind.Size = new System.Drawing.Size(100, 30);
             this.btfind.TabIndex = 35;
             this.btfind.Text = "查询";
             this.btfind.UseVisualStyleBackColor = true;
@@ -163,7 +163,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(918, 375);
+            this.dataGridView1.Size = new System.Drawing.Size(939, 375);
             this.dataGridView1.TabIndex = 38;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
@@ -271,11 +271,11 @@
             // 
             this.btprint.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btprint.Enabled = false;
-            this.btprint.Location = new System.Drawing.Point(12, 462);
+            this.btprint.Location = new System.Drawing.Point(13, 457);
             this.btprint.Name = "btprint";
-            this.btprint.Size = new System.Drawing.Size(139, 26);
+            this.btprint.Size = new System.Drawing.Size(100, 30);
             this.btprint.TabIndex = 33;
-            this.btprint.Text = "打印清点用表格";
+            this.btprint.Text = "打印清点表格";
             this.btprint.UseVisualStyleBackColor = true;
             this.btprint.Visible = false;
             this.btprint.Click += new System.EventHandler(this.btprint_Click_1);
@@ -302,7 +302,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(942, 497);
+            this.ClientSize = new System.Drawing.Size(963, 497);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btconfirm);
             this.Controls.Add(this.label4);

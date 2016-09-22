@@ -210,7 +210,7 @@
             this.productDataGridView.ReadOnly = true;
             this.productDataGridView.RowHeadersVisible = false;
             this.productDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.productDataGridView.Size = new System.Drawing.Size(465, 224);
+            this.productDataGridView.Size = new System.Drawing.Size(465, 214);
             this.productDataGridView.TabIndex = 87;
             // 
             // IdDataGridViewTextBoxColumn
@@ -252,7 +252,7 @@
             // 
             this.loadItemListButton.Location = new System.Drawing.Point(1022, 23);
             this.loadItemListButton.Name = "loadItemListButton";
-            this.loadItemListButton.Size = new System.Drawing.Size(78, 23);
+            this.loadItemListButton.Size = new System.Drawing.Size(100, 30);
             this.loadItemListButton.TabIndex = 88;
             this.loadItemListButton.Text = "查询";
             this.loadItemListButton.UseVisualStyleBackColor = true;
@@ -284,7 +284,7 @@
             this.qtyDataGridView.Name = "qtyDataGridView";
             this.qtyDataGridView.RowHeadersVisible = false;
             this.qtyDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.qtyDataGridView.Size = new System.Drawing.Size(617, 224);
+            this.qtyDataGridView.Size = new System.Drawing.Size(617, 214);
             this.qtyDataGridView.TabIndex = 89;
             this.qtyDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.qtyDataGridView_CellBeginEdit);
             this.qtyDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.qtyDataGridView_CellClick);
@@ -298,20 +298,20 @@
             // btSave
             // 
             this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSave.Location = new System.Drawing.Point(872, 443);
+            this.btSave.Location = new System.Drawing.Point(874, 441);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(105, 23);
+            this.btSave.Size = new System.Drawing.Size(100, 30);
             this.btSave.TabIndex = 90;
-            this.btSave.Text = "保存修改内容";
+            this.btSave.Text = "保存修改";
             this.btSave.UseVisualStyleBackColor = true;
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // btcanel
             // 
             this.btcanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btcanel.Location = new System.Drawing.Point(983, 443);
+            this.btcanel.Location = new System.Drawing.Point(995, 441);
             this.btcanel.Name = "btcanel";
-            this.btcanel.Size = new System.Drawing.Size(87, 23);
+            this.btcanel.Size = new System.Drawing.Size(100, 30);
             this.btcanel.TabIndex = 91;
             this.btcanel.Text = "取消修改";
             this.btcanel.UseVisualStyleBackColor = true;
@@ -375,7 +375,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.vScrollBar1.Location = new System.Drawing.Point(1101, 196);
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 224);
+            this.vScrollBar1.Size = new System.Drawing.Size(17, 214);
             this.vScrollBar1.TabIndex = 93;
             this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             // 
@@ -383,7 +383,7 @@
             // 
             this.hScrollBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.hScrollBar1.Location = new System.Drawing.Point(483, 420);
+            this.hScrollBar1.Location = new System.Drawing.Point(483, 412);
             this.hScrollBar1.Name = "hScrollBar1";
             this.hScrollBar1.Size = new System.Drawing.Size(617, 17);
             this.hScrollBar1.TabIndex = 94;
@@ -437,7 +437,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1129, 477);
+            this.ClientSize = new System.Drawing.Size(1129, 483);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
