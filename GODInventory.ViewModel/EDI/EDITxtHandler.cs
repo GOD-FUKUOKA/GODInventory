@@ -174,7 +174,7 @@ namespace GODInventory.ViewModel.EDI
         }
 
         // get ship no for order  
-        public static long GenerateShipNo(GODDbContext ctx, t_orderdata order )
+        public static long GenerateEDIShipNO(GODDbContext ctx, t_orderdata order )
         {
            //一般六个月不能重复。
                 var date = DateTime.Now.AddMonths(-6);

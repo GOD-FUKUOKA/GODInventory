@@ -146,6 +146,25 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
         }
 
+        private void moveToASNButton_Click(object sender, EventArgs e)
+        {
+            var shipNOList = this.groupedOrderList.Where(o => o.Locked).Select(o1 => o1.ShipNO).ToList();
+
+
+            if (shipNOList.Count() > 0)
+            {
+                // FIXME
+                OrderSqlHelper.GenerateASN(shipNOList);
+                InitializeOrderData();
+                InitializeEdiData();
+                //pager3.Bind();
+            }
+            else
+            {
+                MessageBox.Show(" please select rows in the order list first.");
+            }
+        }
+
         private IEnumerable<DataGridViewRow> GetSelectedRowsBySelectedCells(DataGridView dgv)
         {
             List<DataGridViewRow> rows = new List<DataGridViewRow>();

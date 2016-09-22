@@ -386,7 +386,7 @@ namespace GODInventory.ViewModel.EDI
         }
 
         /*
-        public string GenerateShipNo() {
+        public string GenerateEDIShipNO() {
             int count = 0;
             using (var ctx = new GODDbContext())
             {

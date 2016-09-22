@@ -412,23 +412,29 @@ namespace GODInventory.ViewModel
 
             using (var ctx = new GODDbContext())
             {
-                var orders = (from t_orderdata o in ctx.t_orderdata
+                // get 受注管理連番 by shipNos
+                var ediNOs = (from t_orderdata o in ctx.t_orderdata
                               where shipNOs.Contains(o.ShipNO)
-                              orderby o.法人コード, o.店舗コード
+                              select new { 受注管理連番 = o.受注管理連番 }).Select( o=> o.受注管理連番 ).Distinct().ToList();
+
+                var orders = (from t_orderdata o in ctx.t_orderdata
+                              where ediNOs.Contains(o.受注管理連番)                             
                               select o).ToList();
+
+
+
                 // generate ASN管理連番, 出荷No
                 var mid = EDITxtHandler.GenerateMID(ctx);
                 var grouped_orders = orders.GroupBy(o => new { o.法人コード, o.店舗コード }, o => o);
                 foreach (var gos in grouped_orders)
                 {
-                    long ship_no = EDITxtHandler.GenerateShipNo(ctx, gos.First());
+                    long ship_no = EDITxtHandler.GenerateEDIShipNO(ctx, gos.First());
                     foreach (var o in gos)
                     {
                         o.出荷No = ship_no;
                         o.ASN管理連番 = mid;
                     }
                 }
-
 
                 ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(path, orders);
 

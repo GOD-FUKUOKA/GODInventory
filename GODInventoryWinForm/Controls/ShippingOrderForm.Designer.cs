@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.uploadForEDIButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.generateASNButton = new System.Windows.Forms.Button();
+            this.GenerateASNButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pendingTabPage = new System.Windows.Forms.TabPage();
             this.shipNODataGridView = new System.Windows.Forms.DataGridView();
@@ -129,16 +129,16 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
-            // generateASNButton
+            // GenerateASNButton
             // 
-            this.generateASNButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.generateASNButton.Location = new System.Drawing.Point(796, 14);
-            this.generateASNButton.Name = "generateASNButton";
-            this.generateASNButton.Size = new System.Drawing.Size(100, 32);
-            this.generateASNButton.TabIndex = 3;
-            this.generateASNButton.Text = "GenerateASN";
-            this.generateASNButton.UseVisualStyleBackColor = true;
-            this.generateASNButton.Click += new System.EventHandler(this.generateASNButton_Click);
+            this.GenerateASNButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.GenerateASNButton.Location = new System.Drawing.Point(796, 14);
+            this.GenerateASNButton.Name = "GenerateASNButton";
+            this.GenerateASNButton.Size = new System.Drawing.Size(100, 32);
+            this.GenerateASNButton.TabIndex = 3;
+            this.GenerateASNButton.Text = "GenerateASN";
+            this.GenerateASNButton.UseVisualStyleBackColor = true;
+            this.GenerateASNButton.Click += new System.EventHandler(this.generateASNButton_Click);
             // 
             // tabControl1
             // 
@@ -156,7 +156,7 @@
             // pendingTabPage
             // 
             this.pendingTabPage.Controls.Add(this.shipNODataGridView);
-            this.pendingTabPage.Controls.Add(this.generateASNButton);
+            this.pendingTabPage.Controls.Add(this.GenerateASNButton);
             this.pendingTabPage.Location = new System.Drawing.Point(4, 22);
             this.pendingTabPage.Name = "pendingTabPage";
             this.pendingTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -260,33 +260,33 @@
             this.editToolStripMenuItem,
             this.printToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(117, 92);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.lockToolStripMenuItem.Text = "Lock";
             this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
             // 
             // unlockToolStripMenuItem
             // 
             this.unlockToolStripMenuItem.Name = "unlockToolStripMenuItem";
-            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.unlockToolStripMenuItem.Text = "Unlock";
             this.unlockToolStripMenuItem.Click += new System.EventHandler(this.unlockToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.printToolStripMenuItem.Text = "Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
@@ -353,8 +353,8 @@
             // createdAtColumn1
             // 
             this.createdAtColumn1.DataPropertyName = "created_at";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.createdAtColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.createdAtColumn1.DefaultCellStyle = dataGridViewCellStyle2;
             this.createdAtColumn1.HeaderText = "作成時間";
             this.createdAtColumn1.Name = "createdAtColumn1";
             this.createdAtColumn1.ReadOnly = true;
@@ -720,7 +720,7 @@
         private System.Windows.Forms.Button uploadForEDIButton;
         private System.Drawing.Printing.PrintDocument printDocument;
         private System.Windows.Forms.PrintDialog printDialog1;
-        private System.Windows.Forms.Button generateASNButton;
+        private System.Windows.Forms.Button GenerateASNButton;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage pendingTabPage;
         private System.Windows.Forms.TabPage asnTabPage;
