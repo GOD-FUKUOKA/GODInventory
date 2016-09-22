@@ -135,7 +135,7 @@
             // 
             this.btadd.Location = new System.Drawing.Point(561, 27);
             this.btadd.Name = "btadd";
-            this.btadd.Size = new System.Drawing.Size(100, 30);
+            this.btadd.Size = new System.Drawing.Size(100, 32);
             this.btadd.TabIndex = 61;
             this.btadd.Text = "调出商品列表";
             this.btadd.UseVisualStyleBackColor = true;
@@ -166,7 +166,7 @@
             this.btclearzero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btclearzero.Location = new System.Drawing.Point(730, 235);
             this.btclearzero.Name = "btclearzero";
-            this.btclearzero.Size = new System.Drawing.Size(100, 30);
+            this.btclearzero.Size = new System.Drawing.Size(100, 32);
             this.btclearzero.TabIndex = 58;
             this.btclearzero.Text = "清零";
             this.btclearzero.UseVisualStyleBackColor = true;
@@ -177,7 +177,7 @@
             this.btlogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btlogin.Location = new System.Drawing.Point(730, 199);
             this.btlogin.Name = "btlogin";
-            this.btlogin.Size = new System.Drawing.Size(100, 30);
+            this.btlogin.Size = new System.Drawing.Size(100, 32);
             this.btlogin.TabIndex = 57;
             this.btlogin.Text = "登录";
             this.btlogin.UseVisualStyleBackColor = true;

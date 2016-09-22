@@ -154,7 +154,7 @@
             this.submitButton.BackColor = System.Drawing.SystemColors.Control;
             this.submitButton.Location = new System.Drawing.Point(870, 29);
             this.submitButton.Name = "submitButton";
-            this.submitButton.Size = new System.Drawing.Size(100, 30);
+            this.submitButton.Size = new System.Drawing.Size(100, 32);
             this.submitButton.TabIndex = 60;
             this.submitButton.Text = "登录";
             this.submitButton.UseVisualStyleBackColor = false;
@@ -209,7 +209,7 @@
             // 
             this.loadItemListButton.Location = new System.Drawing.Point(174, 275);
             this.loadItemListButton.Name = "loadItemListButton";
-            this.loadItemListButton.Size = new System.Drawing.Size(100, 30);
+            this.loadItemListButton.Size = new System.Drawing.Size(100, 32);
             this.loadItemListButton.TabIndex = 76;
             this.loadItemListButton.Text = "调出商品列表";
             this.loadItemListButton.UseVisualStyleBackColor = true;
@@ -220,7 +220,7 @@
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.Location = new System.Drawing.Point(870, 67);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 30);
+            this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 61;
             this.cancelButton.Text = "清零";
             this.cancelButton.UseVisualStyleBackColor = true;

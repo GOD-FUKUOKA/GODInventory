@@ -70,7 +70,7 @@
             this.btconfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btconfirm.Location = new System.Drawing.Point(735, 455);
             this.btconfirm.Name = "btconfirm";
-            this.btconfirm.Size = new System.Drawing.Size(100, 30);
+            this.btconfirm.Size = new System.Drawing.Size(100, 32);
             this.btconfirm.TabIndex = 34;
             this.btconfirm.Text = "确定调整库存";
             this.btconfirm.UseVisualStyleBackColor = true;
@@ -101,7 +101,7 @@
             this.btclear_zero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btclear_zero.Location = new System.Drawing.Point(851, 455);
             this.btclear_zero.Name = "btclear_zero";
-            this.btclear_zero.Size = new System.Drawing.Size(100, 30);
+            this.btclear_zero.Size = new System.Drawing.Size(100, 32);
             this.btclear_zero.TabIndex = 36;
             this.btclear_zero.Text = "清点数量清零";
             this.btclear_zero.UseVisualStyleBackColor = true;
@@ -111,7 +111,7 @@
             // 
             this.btfind.Location = new System.Drawing.Point(851, 24);
             this.btfind.Name = "btfind";
-            this.btfind.Size = new System.Drawing.Size(100, 30);
+            this.btfind.Size = new System.Drawing.Size(100, 32);
             this.btfind.TabIndex = 35;
             this.btfind.Text = "查询";
             this.btfind.UseVisualStyleBackColor = true;
@@ -273,7 +273,7 @@
             this.btprint.Enabled = false;
             this.btprint.Location = new System.Drawing.Point(13, 457);
             this.btprint.Name = "btprint";
-            this.btprint.Size = new System.Drawing.Size(100, 30);
+            this.btprint.Size = new System.Drawing.Size(100, 32);
             this.btprint.TabIndex = 33;
             this.btprint.Text = "打印清点表格";
             this.btprint.UseVisualStyleBackColor = true;

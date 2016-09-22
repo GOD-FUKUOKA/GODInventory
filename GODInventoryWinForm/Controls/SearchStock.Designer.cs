@@ -252,7 +252,7 @@
             // 
             this.loadItemListButton.Location = new System.Drawing.Point(1022, 23);
             this.loadItemListButton.Name = "loadItemListButton";
-            this.loadItemListButton.Size = new System.Drawing.Size(100, 30);
+            this.loadItemListButton.Size = new System.Drawing.Size(100, 32);
             this.loadItemListButton.TabIndex = 88;
             this.loadItemListButton.Text = "查询";
             this.loadItemListButton.UseVisualStyleBackColor = true;
@@ -298,9 +298,9 @@
             // btSave
             // 
             this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSave.Location = new System.Drawing.Point(874, 441);
+            this.btSave.Location = new System.Drawing.Point(874, 439);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(100, 30);
+            this.btSave.Size = new System.Drawing.Size(100, 32);
             this.btSave.TabIndex = 90;
             this.btSave.Text = "保存修改";
             this.btSave.UseVisualStyleBackColor = true;
@@ -309,9 +309,9 @@
             // btcanel
             // 
             this.btcanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btcanel.Location = new System.Drawing.Point(995, 441);
+            this.btcanel.Location = new System.Drawing.Point(995, 439);
             this.btcanel.Name = "btcanel";
-            this.btcanel.Size = new System.Drawing.Size(100, 30);
+            this.btcanel.Size = new System.Drawing.Size(100, 32);
             this.btcanel.TabIndex = 91;
             this.btcanel.Text = "取消修改";
             this.btcanel.UseVisualStyleBackColor = true;
