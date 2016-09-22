@@ -57,6 +57,16 @@ ADD PRIMARY KEY (`自社コード`, `WarehouseId`);
 ALTER TABLE `god_inventory`.`t_orderdata` 
 ADD COLUMN `入力区分` SMALLINT(6) NOT NULL DEFAULT 0;
 
--- MySQL 5.7.5: GROUP BY respects functional dependencies!
--- http://stackoverflow.com/questions/23921117/disable-only-full-group-by
--- SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+ALTER TABLE `god_inventory`.`t_stockrec` 
+ADD COLUMN `OrderId` INT(4) UNSIGNED NOT NULL DEFAULT 0;
+
+ALTER TABLE `god_inventory`.`t_itemlist` 
+CHANGE COLUMN `PT入数` `PT入数` int(11) NOT NULL DEFAULT 0,
+CHANGE COLUMN `単品重量` `単品重量` double NOT NULL DEFAULT 0;
+
+ALTER TABLE `god_inventory`.`t_orderdata` 
+CHANGE COLUMN `発注数量` `発注数量` int(11) NOT NULL DEFAULT 0,
+CHANGE COLUMN `口数` `口数` int(11) NOT NULL DEFAULT 0,
+CHANGE COLUMN `実際出荷数量` `実際出荷数量` int(11) NOT NULL DEFAULT 0,
+CHANGE COLUMN `納品口数` `納品口数` int(11) NOT NULL DEFAULT 0,
+CHANGE COLUMN `重量` `重量` int(11) NOT NULL DEFAULT 0;

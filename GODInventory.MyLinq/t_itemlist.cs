@@ -29,7 +29,7 @@ namespace GODInventory.MyLinq
 
         //public DateTime? 価格発動日 { get; set; }
 
-        public int? PT入数 { get; set; }
+        public int PT入数 { get; set; }
 
         //public decimal? 仕入原価 { get; set; }
 
@@ -43,7 +43,7 @@ namespace GODInventory.MyLinq
 
         public double? インストアコード { get; set; }
 
-        public double? 単品重量 { get; set; }
+        public double 単品重量 { get; set; }
 
         [StringLength(255)]
         public string 単位 { get; set; }

@@ -56,13 +56,13 @@ namespace GODInventory.MyLinq
 
         public string 品名漢字 { get; set; }
 
-        public int? 口数 { get; set; }
+        public int 口数 { get; set; }
 
-        public int? 納品口数 { get; set; }
+        public int 納品口数 { get; set; }
 
         public string 単位 { get; set; }
 
-        public int? 重量 { get; set; }
+        public int 重量 { get; set; }
 
         public int 原単価_税抜_ { get; set; }
 

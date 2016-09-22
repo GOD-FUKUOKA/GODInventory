@@ -112,11 +112,13 @@ namespace GODInventory.ViewModel
                          伝票番号 = o.伝票番号,
                          自社コード = o.自社コード,
                          口数 = o.口数,
+                         納品口数 = o.納品口数,
                          重量 = o.重量,
                          ジャンル = o.ジャンル,
                          品名漢字 = o.品名漢字,
                          規格名漢字 = o.規格名漢字,
                          発注数量 = o.発注数量,
+                         実際出荷数量 = o.実際出荷数量,
                          実際配送担当 = o.実際配送担当,
                          県別 = o.県別,
                          発注形態名称漢字 = o.発注形態名称漢字,
@@ -171,12 +173,14 @@ namespace GODInventory.ViewModel
                          納品場所名漢字 = o.納品場所名漢字,
                          伝票番号 = o.伝票番号,
                          社内伝番 = o.社内伝番,
+                         納品口数 = o.納品口数,
                          口数 = o.口数,
                          重量 = o.重量,
                          ジャンル = o.ジャンル,
                          品名漢字 = o.品名漢字,
                          規格名漢字 = o.規格名漢字,
                          発注数量 = o.発注数量,
+                         実際出荷数量 = o.実際出荷数量,
                          実際配送担当 = o.実際配送担当,
                          県別 = o.県別,
                          原単価_税抜_ = o.原単価_税抜_,
@@ -363,6 +367,7 @@ namespace GODInventory.ViewModel
                     s.事由 = StockIoClueEnum.订单调整.ToString();
                     s.納品書番号 = stockNum;
                     s.客户 = customer.FullName;
+                    s.OrderId = order.id受注データ;
                     changes.Add(s);                      
                 }
                 ctx.t_stockrec.AddRange(changes);

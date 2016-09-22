@@ -71,11 +71,11 @@ namespace GODInventory.MyLinq
 
         public int 実際出荷数量 { get; set; }
 
-        public int? 口数 { get; set; }
+        public int 口数 { get; set; }
 
-        public int? 納品口数 { get; set; }
+        public int 納品口数 { get; set; }
 
-        public int? 重量 { get; set; }
+        public int 重量 { get; set; }
 
         [StringLength(255)]
         public string 単位 { get; set; }

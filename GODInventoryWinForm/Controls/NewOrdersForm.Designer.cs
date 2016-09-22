@@ -278,7 +278,7 @@
             // 
             // MOQColumn1
             // 
-            this.MOQColumn1.DataPropertyName = "口数";
+            this.MOQColumn1.DataPropertyName = "納品口数";
             this.MOQColumn1.HeaderText = "口数";
             this.MOQColumn1.Name = "MOQColumn1";
             this.MOQColumn1.ReadOnly = true;
@@ -286,7 +286,7 @@
             // 
             // OrderQuantityColumn1
             // 
-            this.OrderQuantityColumn1.DataPropertyName = "発注数量";
+            this.OrderQuantityColumn1.DataPropertyName = "実際出荷数量";
             this.OrderQuantityColumn1.HeaderText = "発注数量";
             this.OrderQuantityColumn1.Name = "OrderQuantityColumn1";
             this.OrderQuantityColumn1.Width = 80;

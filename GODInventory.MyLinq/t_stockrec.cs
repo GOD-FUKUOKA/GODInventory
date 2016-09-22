@@ -43,6 +43,7 @@ namespace GODInventory.MyLinq
         [StringLength(255)]
         public string 工厂 { get; set; }
 
+        public int OrderId { get; set; }
 
     }
 }

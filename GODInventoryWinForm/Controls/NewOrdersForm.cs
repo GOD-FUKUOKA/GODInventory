@@ -60,7 +60,8 @@ namespace GODInventoryWinForm.Controls
                                 else if (duplicated_order.ダブリ == "no")
                                 {
                                     if (order.Status == OrderStatus.Duplicated) {
-                                        order.発注数量 = duplicated_order.発注数量;
+                                        order.実際出荷数量 = duplicated_order.実際出荷数量;
+                                        order.納品口数 = duplicated_order.納品口数;
                                         order.ダブリ = "no";
                                         order.Status = OrderStatus.Pending;
                                     }
@@ -110,8 +111,8 @@ namespace GODInventoryWinForm.Controls
         public int InitializeOrderData()
         {
             string sql = @"SELECT o1.id受注データ as duplicatedId, o2.id受注データ, o2.`出荷日`,o2.`納品日`,o2.`受注日`,o2.`店舗コード`, o2.`店舗名漢字`,
-          o2.`伝票番号`,o2.`口数`,o2.`ジャンル`,o2.`品名漢字`,o2.`規格名漢字`, 
-          o2.`発注数量`,o2.`実際配送担当`,o2.`県別`, 
+          o2.`伝票番号`,o2.`納品口数`,o2.`ジャンル`,o2.`品名漢字`,o2.`規格名漢字`, 
+          o2.`実際出荷数量`,o2.`実際配送担当`,o2.`県別`, 
           o2.`発注形態名称漢字`,o2.`キャンセル`,o2.`ダブリ`, o2.Status
             FROM t_orderdata o1 inner join t_orderdata  o2 on o1.自社コード = o2.自社コード and o1.店舗コード=o2.店舗コード
     where o1.`Status`=22 AND (o1.id受注データ = o2.id受注データ or  o2.`Status`=0 OR o2.`Status`=3 OR (o2.`Status`=5 AND o2.`納品予定日`>NOW()) )

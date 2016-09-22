@@ -103,12 +103,26 @@ namespace GODInventoryWinForm.Controls
             //http://stackoverflow.com/questions/23921117/disable-only-full-group-by
             //handle SET SESSION sql_mode='ANSI';
 
+            //using( var ctx =  new GODDbContext()){
+                string sql1 = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
+       `店舗名漢字`,`伝票番号`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
+     FROM t_orderdata
+     WHERE  `Status`={0} AND `ジャンル`<> 6";
+                string sql2 = @"SELECT   min(`id受注データ`) as `id受注データ`, min(`受注日`) as `受注日`, min(`店舗コード`) as `店舗コード`, min(`店舗名漢字`) as `店舗名漢字`,`社内伝番` as `伝票番号`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `納品口数`, sum(`重量`) as `実際出荷数量`, sum(`重量`) as `重量`, min(`実際配送担当`) as `実際配送担当`, min(`県別`) as `県別`, min(`納品指示`) as `納品指示`, min(`備考`) as `備考`
+     FROM t_orderdata
+     WHERE `Status`={0} AND `ジャンル`= 6 AND `社内伝番` IS NOT NULL
+     GROUP BY `社内伝番`";
+
+                //var list1 = ctx.Database.SqlQuery<v_pendingorder>(sql1, OrderStatus.NotifyShipper).ToList();
+                //var list2 = ctx.Database.SqlQuery<v_pendingorder>(sql2, OrderStatus.NotifyShipper).ToList();
+                //this.shipperOrderList = list1.Union(list2).ToList();
+            //}
             string sql = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
-       `店舗名漢字`,`伝票番号`,`ジャンル`,`品名漢字`,`規格名漢字`, `口数`, `発注数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
+       `店舗名漢字`,`伝票番号`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
      FROM t_orderdata
      WHERE  `Status`={0} AND `ジャンル`<> 6
      UNION ALL
-     SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `口数`, sum(`重量`) as `発注数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
+     SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `納品口数`, sum(`重量`) as `実際出荷数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
      FROM t_orderdata
      WHERE `Status`={0} AND `ジャンル`= 6 AND `社内伝番` IS NOT NULL
      GROUP BY `社内伝番`
@@ -154,8 +168,8 @@ namespace GODInventoryWinForm.Controls
                         var pendingorder = bindingSource1.List[row] as v_pendingorder;
                         t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
                         //需要修改的字段为: “口数” “发注数量” “担当” “形态”
-                        order.発注数量 = pendingorder.発注数量;
-                        order.口数 = pendingorder.口数;
+                        order.実際出荷数量 = pendingorder.実際出荷数量;
+                        order.納品口数 = pendingorder.納品口数;
                         order.重量 = pendingorder.重量;
                         order.発注形態名称漢字 = pendingorder.発注形態名称漢字;
                         order.実際配送担当 = pendingorder.実際配送担当;
@@ -284,6 +298,7 @@ namespace GODInventoryWinForm.Controls
 
         private int InitializeOrderData()
         {
+            this.bindingSource1.DataSource = null;
             // 记录DataGridView改变数据
             this.datagrid_changes = new Hashtable();
 
@@ -340,10 +355,6 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 }
                 sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
                 this.bindingSource1.DataSource = sortablePendingOrderList;               
-            }
-            else
-            {
-                this.bindingSource1.DataSource = null;
             }
             dataGridView1.DataSource = this.bindingSource1;
 

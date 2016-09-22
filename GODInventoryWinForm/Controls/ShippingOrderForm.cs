@@ -47,7 +47,7 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {
                 string sql = @"SELECT o.ShipNO, min(o.`出荷日`) as `出荷日`, min(o.`納品日`) as `納品日`,
-min(o.`店舗名漢字`) as `店舗名漢字`, min(o.`県別`) as `県別`, min(o.`実際配送担当`) as `実際配送担当`, 
+min(o.`店舗名漢字`) as `店名`, min(o.`県別`) as `県別`, min(o.`実際配送担当`) as `実際配送担当`, 
 sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight, false as Locked  
 FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
                 groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>( sql, OrderStatus.PendingShipment).ToList();

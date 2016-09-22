@@ -15,19 +15,20 @@ namespace GODInventoryWinForm.Controls
 
     public partial class WaitToShipForm : Form
     {
-        private List<t_shoplist> shopList;
-        IBindingList orderList = null;
+        //private List<t_shoplist> shopList;
+        EditOrderForm2 editOrderForm;
+        IBindingList orderBindingList = null;
         BindingList<v_pendingorder> orderListForShip = null;
         int first = 0;
         public List<v_groupedorder> groupedOrderList;
 
+        
         public WaitToShipForm()
         {
             InitializeComponent();
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView2.AutoGenerateColumns = false;
             InitializeDataSource();
-            InitializeOrderData();
 
             //var q = OrderSqlHelper.WaitToShipOrderSql(entityDataSource1).ToList();
 
@@ -39,33 +40,9 @@ namespace GODInventoryWinForm.Controls
             //foreach (v_pendingorder item in filtered)
             //    this.comboBox2.Items.Add(item.店舗コード);
 
-
+            editOrderForm = new EditOrderForm2();
         }
 
-        private int InitializeOrderData()
-        {
-
-            using (var ctx = new GODDbContext())
-            {
-                string sql = @"SELECT o.*, sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight, false as Locked  FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
-                groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.PendingShipment).ToList();
-           
-                var ShipNOLIST = groupedOrderList.Select(s => new MockEntity { Id = s.伝票番号, FullName = s.ShipNO }).ToList();
-                ShipNOLIST.Insert(0, new MockEntity { Id = 0, FullName = "" });
-                this.shipNOTextBox.DisplayMember = "FullName";
-                this.shipNOTextBox.ValueMember = "Id";
-                this.shipNOTextBox.DataSource = ShipNOLIST;
-
-
-            }
-            //var q = OrderSqlHelper.ShippingOrderSql(entityDataSource1);            
-            //var count = q.Count();
-            // create BindingList (sortable/filterable)
-            //this.bindingSource1.DataSource = entityDataSource1.CreateView(q);
-            // assign BindingList to grid
-            return 0;
-
-        }
 
         public int InitializeDataSource()
         {
@@ -74,35 +51,46 @@ namespace GODInventoryWinForm.Controls
             this.orderListForShip = new BindingList<v_pendingorder>();
 
             var q = OrderSqlHelper.WaitToShipOrderSql(this.entityDataSource1);
-            this.orderList = this.entityDataSource1.CreateView(q);
+            this.orderBindingList = this.entityDataSource1.CreateView(q);
             this.bindingSource1.Filter = null;
-            this.bindingSource1.DataSource = this.orderList;
-            if (this.orderList.Count > 0)
+            this.bindingSource1.DataSource = this.orderBindingList;
+            if (this.orderBindingList.Count > 0)
             {
                 this.bindingSource1.Filter = String.Format("実際配送担当='{0}'", shipperComboBox.Text);
-            }
-            this.dataGridView1.DataSource = this.bindingSource1;
-            dataGridView2.DataSource = this.orderListForShip;
 
+                var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
 
-            using (var ctx = new GODDbContext())
-            {
-                shopList = ctx.t_shoplist.ToList();
-            }
-            if (shopList.Count > 0)
-            {
-                var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                var shops = orders.Select(o => new MockEntity { Id = o.店舗コード, FullName = o.店名 }).Distinct().ToList();
+               
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" } );
+
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
-                // 県別
-                var counties = shopList.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-                counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+
+
+                var counties = orders.Select(o => new MockEntity { Id = o.店舗コード, FullName = o.県別 }).Distinct().ToList();
+                counties.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
                 this.countyComboBox1.DisplayMember = "FullName";
-                this.countyComboBox1.ValueMember = "ShortName";
+                this.countyComboBox1.ValueMember = "Id";
                 this.countyComboBox1.DataSource = counties;
+
             }
+
+            var shipNOs = (from o in (entityDataSource1.DbContext as GODDbContext).t_orderdata
+                           where o.Status == OrderStatus.PendingShipment
+                           group o by o.ShipNO into g
+                           select new MockEntity { ShortName = g.Key, FullName = g.Key }).ToList();
+
+            this.shipNOTextBox.DisplayMember = "FullName";
+            this.shipNOTextBox.ValueMember = "ShortName";
+            this.shipNOTextBox.DataSource = shipNOs;
+            this.shipNOTextBox.SelectedItem = null;
+            
+
+            this.dataGridView1.DataSource = this.bindingSource1;
+            dataGridView2.DataSource = this.orderListForShip;
+
             return 0;
         }
 
@@ -144,7 +132,7 @@ namespace GODInventoryWinForm.Controls
         private void ApplyBindSourceFilter(string text)
         {
             this.bindingSource1.Filter = null;
-            this.bindingSource1.DataSource = this.orderList;
+            this.bindingSource1.DataSource = this.orderBindingList;
             if (bindingSource1.Count > 0)
             {
                 string filter = "";
@@ -217,8 +205,8 @@ namespace GODInventoryWinForm.Controls
                 for (int i = 0; i < first; i++)
                 {
                     row = dataGridView1.SelectedRows[0];
-                    this.orderListForShip.Add((v_pendingorder)orderList[row.Index]);
-                    this.orderList.RemoveAt(row.Index);
+                    this.orderListForShip.Add((v_pendingorder)orderBindingList[row.Index]);
+                    this.orderBindingList.RemoveAt(row.Index);
                 }
             }
 
@@ -254,7 +242,7 @@ namespace GODInventoryWinForm.Controls
                 for (int i = 0; i < first; i++)
                 {
                     row = dataGridView2.SelectedRows[0];
-                    this.orderList.Add(this.orderListForShip[row.Index]);
+                    this.orderBindingList.Add(this.orderListForShip[row.Index]);
                     this.orderListForShip.RemoveAt(row.Index);
                 }
             }
@@ -333,6 +321,23 @@ namespace GODInventoryWinForm.Controls
         {
             first = e.RowIndex;
 
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var row = dataGridView1.CurrentRow;
+            if( row != null ){
+                var order = row.DataBoundItem as v_pendingorder;
+                editOrderForm.OrderId = order.id受注データ;
+                if (editOrderForm.ShowDialog() == DialogResult.OK) 
+                {
+                    order.実際出荷数量 = editOrderForm.Order.実際出荷数量;
+                    order.納品口数 = editOrderForm.Order.納品口数;
+                    order.重量 = editOrderForm.Order.重量;
+                    dataGridView1.Refresh();
+                }
+            }
+            
         }
 
 
