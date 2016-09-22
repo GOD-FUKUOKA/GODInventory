@@ -11,35 +11,47 @@ using GODInventory.MyLinq;
 using GODInventory.ViewModel;
 using Microsoft.Reporting.WinForms;
 using GODInventory.ViewModel.EDI;
-
+using System.Drawing.Printing;
 
 namespace GODInventoryWinForm.Controls
 {
     public partial class ShippingItemsReportForm : Form
     {
-        public List<t_orderdata> OrderEnities{ get; set;}
+        public List<t_orderdata> OrderEnities { get; set; }
         public List<t_itemlist> ItemEnities { get; set; }
 
         public ShippingItemsReportForm()
         {
             InitializeComponent();
-            InitializeReportEvent();           
+            InitializeReportEvent();
         }
 
         private void InitializeReportEvent()
         {
                 //this.reportViewer1.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(LocalReport_SubreportProcessing);
                 this.reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
+
+                this.reportViewer1.ZoomMode = Microsoft.Reporting.WinForms.ZoomMode.Percent;
+                this.reportViewer1.ZoomPercent = 100;
+                //this.reportViewer1.Width = 29;
+                //this.reportViewer1.Height = 21;
+                PageSettings pageset = new PageSettings();
+                pageset.Landscape = true;
+                reportViewer1.SetPageSettings(pageset);
+
+
+
         }
 
-        public void InitializeDataSource(List<t_orderdata> orders) 
+        public void InitializeDataSource(List<t_orderdata> orders)
         {
             OrderEnities = orders;
 
-            if (OrderEnities != null) {
+            if (OrderEnities != null)
+            {
                 this.reportViewer1.LocalReport.DataSources.Clear();
                 this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("ShippingItems", OrderEnities));
-                            
+
             }
 
         }
@@ -63,10 +75,10 @@ namespace GODInventoryWinForm.Controls
 
 
         private void ReceivedOrdersReportForm_Load(object sender, EventArgs e)
-        {   
-             ReportParameter[] parameters = new ReportParameter[1];
-             //parameters[0] = new ReportParameter( "orders", this.orders, false);
- 
+        {
+            ReportParameter[] parameters = new ReportParameter[1];
+            //parameters[0] = new ReportParameter( "orders", this.orders, false);
+
             //this.reportViewer1.LocalReport.DataSources.Add( this.orders);
             this.reportViewer1.RefreshReport();
         }

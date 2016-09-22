@@ -49,7 +49,7 @@ namespace GODInventoryWinForm.Controls
             {
                 string sql = @"SELECT o.*, sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight, false as Locked  FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
                 groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.PendingShipment).ToList();
-           
+
                 var ShipNOLIST = groupedOrderList.Select(s => new MockEntity { Id = s.伝票番号, FullName = s.ShipNO }).ToList();
                 ShipNOLIST.Insert(0, new MockEntity { Id = 0, FullName = "" });
                 this.shipNOTextBox.DisplayMember = "FullName";
@@ -79,30 +79,57 @@ namespace GODInventoryWinForm.Controls
             this.bindingSource1.DataSource = this.orderList;
             if (this.orderList.Count > 0)
             {
+                #region 填充信息
+                List<v_pendingorder> orderListNew = new List<v_pendingorder>();
+                {
+                    for (int i = 0; i < orderList.Count; i++)
+                    {
+                        var aa = orderList[1] as v_pendingorder;
+
+                        orderListNew.Add(aa);
+
+                    }
+                    var shops = orderListNew.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).Distinct().ToList();
+                    shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                    this.storeComboBox.DisplayMember = "FullName";
+                    this.storeComboBox.ValueMember = "Id";
+                    this.storeComboBox.DataSource = shops;
+                    // 県別
+                    var counties = orderListNew.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
+                    counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                    this.countyComboBox1.DisplayMember = "FullName";
+                    this.countyComboBox1.ValueMember = "ShortName";
+                    this.countyComboBox1.DataSource = counties;
+                }
+
+                #endregion
                 this.bindingSource1.Filter = String.Format("実際配送担当='{0}'", shipperComboBox.Text);
             }
             this.dataGridView1.DataSource = this.bindingSource1;
             dataGridView2.DataSource = this.orderListForShip;
 
 
-            using (var ctx = new GODDbContext())
-            {
-                shopList = ctx.t_shoplist.ToList();
-            }
-            if (shopList.Count > 0)
-            {
-                var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
-                this.storeComboBox.DisplayMember = "FullName";
-                this.storeComboBox.ValueMember = "Id";
-                this.storeComboBox.DataSource = shops;
-                // 県別
-                var counties = shopList.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-                counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                this.countyComboBox1.DisplayMember = "FullName";
-                this.countyComboBox1.ValueMember = "ShortName";
-                this.countyComboBox1.DataSource = counties;
-            }
+            #region MyRegion
+            //using (var ctx = new GODDbContext())
+            //{
+            //    shopList = ctx.t_shoplist.ToList();
+            //}
+            //if (shopList.Count > 0)
+            //{
+            //    var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+            //    shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+            //    this.storeComboBox.DisplayMember = "FullName";
+            //    this.storeComboBox.ValueMember = "Id";
+            //    this.storeComboBox.DataSource = shops;
+            //    // 県別
+            //    var counties = shopList.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
+            //    counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            //    this.countyComboBox1.DisplayMember = "FullName";
+            //    this.countyComboBox1.ValueMember = "ShortName";
+            //    this.countyComboBox1.DataSource = counties;
+            //} 
+            #endregion
+
             return 0;
         }
 
@@ -208,7 +235,7 @@ namespace GODInventoryWinForm.Controls
         {
 
             #region 将数据集放入集合
-       
+
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 first = dataGridView1.SelectedRows.Count;
@@ -286,7 +313,7 @@ namespace GODInventoryWinForm.Controls
                 MessageBox.Show("请维护 *配车单单号*");
                 return;
 
-            
+
             }
             string shipNO = this.shipNOTextBox.Text.Trim();
 
