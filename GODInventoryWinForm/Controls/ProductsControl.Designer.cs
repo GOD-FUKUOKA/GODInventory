@@ -173,7 +173,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.dataGridView1);
             this.panel1.Location = new System.Drawing.Point(0, 46);
-            this.panel1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.panel1.Margin = new System.Windows.Forms.Padding(8);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(754, 389);
             this.panel1.TabIndex = 2;
@@ -217,11 +217,11 @@
             // btAddItem
             // 
             this.btAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAddItem.Location = new System.Drawing.Point(671, 8);
+            this.btAddItem.Location = new System.Drawing.Point(654, 8);
             this.btAddItem.Name = "btAddItem";
-            this.btAddItem.Size = new System.Drawing.Size(80, 32);
+            this.btAddItem.Size = new System.Drawing.Size(100, 32);
             this.btAddItem.TabIndex = 3;
-            this.btAddItem.Text = "Add";
+            this.btAddItem.Text = "New";
             this.btAddItem.UseVisualStyleBackColor = true;
             this.btAddItem.Click += new System.EventHandler(this.btAddItem_Click);
             // 

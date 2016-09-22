@@ -192,11 +192,11 @@
             // btAddItem
             // 
             this.btAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAddItem.Location = new System.Drawing.Point(552, 10);
+            this.btAddItem.Location = new System.Drawing.Point(532, 10);
             this.btAddItem.Name = "btAddItem";
-            this.btAddItem.Size = new System.Drawing.Size(80, 32);
+            this.btAddItem.Size = new System.Drawing.Size(100, 32);
             this.btAddItem.TabIndex = 2;
-            this.btAddItem.Text = "Add";
+            this.btAddItem.Text = "New";
             this.btAddItem.UseVisualStyleBackColor = true;
             this.btAddItem.Click += new System.EventHandler(this.btAddItem_Click);
             // 
