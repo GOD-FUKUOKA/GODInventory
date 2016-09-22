@@ -44,6 +44,7 @@ namespace GODInventoryWinForm.Controls
         }
 
 
+
         public int InitializeDataSource()
         {
             shipperComboBox.SelectedIndex = 0;
@@ -56,6 +57,7 @@ namespace GODInventoryWinForm.Controls
             this.bindingSource1.DataSource = this.orderBindingList;
             if (this.orderBindingList.Count > 0)
             {
+                
                 this.bindingSource1.Filter = String.Format("実際配送担当='{0}'", shipperComboBox.Text);
 
                 var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
@@ -196,7 +198,7 @@ namespace GODInventoryWinForm.Controls
         {
 
             #region 将数据集放入集合
-       
+
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 first = dataGridView1.SelectedRows.Count;
@@ -274,7 +276,7 @@ namespace GODInventoryWinForm.Controls
                 MessageBox.Show("请维护 *配车单单号*");
                 return;
 
-            
+
             }
             string shipNO = this.shipNOTextBox.Text.Trim();
 
