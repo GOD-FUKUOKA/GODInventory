@@ -43,21 +43,23 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(261, 63);
+            this.button1.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.Location = new System.Drawing.Point(317, 63);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 58);
+            this.button1.Size = new System.Drawing.Size(144, 64);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Warehouse";
+            this.button1.Text = "商品入库出库查询";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(80, 63);
+            this.button2.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.Location = new System.Drawing.Point(76, 63);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(144, 58);
+            this.button2.Size = new System.Drawing.Size(144, 64);
             this.button2.TabIndex = 1;
-            this.button2.Text = "Stock in";
+            this.button2.Text = "入库处理";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -65,58 +67,64 @@
             // 
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
+            this.panel1.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.panel1.Location = new System.Drawing.Point(3, 234);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(657, 100);
+            this.panel1.Size = new System.Drawing.Size(763, 100);
             this.panel1.TabIndex = 2;
             // 
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button4.Location = new System.Drawing.Point(344, 25);
+            this.button4.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button4.Location = new System.Drawing.Point(425, 19);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(144, 58);
+            this.button4.Size = new System.Drawing.Size(144, 64);
             this.button4.TabIndex = 1;
-            this.button4.Text = "StockMovment";
+            this.button4.Text = "库间转移";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(153, 25);
+            this.button3.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.Location = new System.Drawing.Point(187, 19);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(144, 58);
+            this.button3.Size = new System.Drawing.Size(144, 64);
             this.button3.TabIndex = 0;
-            this.button3.Text = "Inventory Ajustment";
+            this.button3.Text = "库存清点";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(442, 63);
+            this.button5.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button5.Location = new System.Drawing.Point(558, 63);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(144, 58);
+            this.button5.Size = new System.Drawing.Size(144, 64);
             this.button5.TabIndex = 3;
-            this.button5.Text = "Stock out";
+            this.button5.Text = "出库处理";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(234, 86);
+            this.label1.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(254, 86);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 12);
+            this.label1.Size = new System.Drawing.Size(29, 19);
             this.label1.TabIndex = 4;
             this.label1.Text = "->";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(415, 86);
+            this.label2.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(495, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 12);
+            this.label2.Size = new System.Drawing.Size(29, 19);
             this.label2.TabIndex = 4;
             this.label2.Text = "->";
             // 
@@ -128,9 +136,10 @@
             this.contentPanel.Controls.Add(this.button1);
             this.contentPanel.Controls.Add(this.button5);
             this.contentPanel.Controls.Add(this.button2);
-            this.contentPanel.Location = new System.Drawing.Point(63, 56);
+            this.contentPanel.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.contentPanel.Location = new System.Drawing.Point(3, 56);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(663, 337);
+            this.contentPanel.Size = new System.Drawing.Size(769, 337);
             this.contentPanel.TabIndex = 5;
             // 
             // WarehouseControl
