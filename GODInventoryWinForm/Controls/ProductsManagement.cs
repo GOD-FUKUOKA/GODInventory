@@ -32,7 +32,7 @@ namespace GODInventoryWinForm.Controls
                     textBox8.Text = order.PT入数.ToString();
                     productKanjiSpecificationTextBox.Text = order.JANコード.ToString();
                     productReceivedAtTextBox3.Text = order.インストアコード.ToString();
-                    orderQuantityTextBox11.Text = order.単品重量.ToString();
+                    unitWeightTextBox11.Text = order.単品重量.ToString();
                     textBox1.Text = order.単位;
                     textBox2.Text = order.PT単位か.ToString();
 
@@ -61,7 +61,7 @@ namespace GODInventoryWinForm.Controls
                     order.PT入数 = Convert.ToInt32(textBox8.Text);
                     order.JANコード = Convert.ToInt64(productKanjiSpecificationTextBox.Text);
                     order.インストアコード = Convert.ToDouble(productReceivedAtTextBox3.Text);
-                    order.単品重量 = Convert.ToDouble(orderQuantityTextBox11.Text);
+                    order.単品重量 = Convert.ToDouble(unitWeightTextBox11.Text);
                     order.単位 = textBox1.Text;
                     order.PT単位か = Convert.ToSByte(textBox2.Text);
                     order.商品コード = Convert.ToInt32(this.productKanjiNameTextBox.Text);
@@ -85,8 +85,8 @@ namespace GODInventoryWinForm.Controls
                         order.JANコード = Convert.ToInt64(productKanjiSpecificationTextBox.Text);
                     if (productReceivedAtTextBox3.Text != "")
                         order.インストアコード = Convert.ToDouble(productReceivedAtTextBox3.Text);
-                    if (orderQuantityTextBox11.Text != "")
-                        order.単品重量 = Convert.ToDouble(orderQuantityTextBox11.Text);
+                    if (unitWeightTextBox11.Text != "")
+                        order.単品重量 = Convert.ToDouble(unitWeightTextBox11.Text);
                     order.単位 = textBox1.Text;
                     if (textBox2.Text != "")
                         order.PT単位か = Convert.ToSByte(textBox2.Text);
