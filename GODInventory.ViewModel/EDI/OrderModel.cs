@@ -476,8 +476,11 @@ namespace GODInventory.ViewModel.EDI
             orderdata.実際出荷数量 = orderdata.発注数量;
             orderdata.県別 = shop.県別;
             orderdata.納品口数 = orderdata.実際出荷数量 / orderdata.口数;
-
-            if (orderdata.実際配送担当=="MKL" && (orderdata.ジャンル == 1 || orderdata.ジャンル == 6))
+            if (orderdata.実際出荷数量 % orderdata.口数 != 0)
+            {
+                orderdata.納品口数++;
+            }
+            if (orderdata.実際配送担当=="MKL" && (orderdata.ジャンル == 1001 || orderdata.ジャンル == 1003))
             {
                 orderdata.実際配送担当 = "丸健";
             }

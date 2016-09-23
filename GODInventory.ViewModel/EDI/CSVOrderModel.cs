@@ -464,15 +464,21 @@ namespace GODInventory.ViewModel.EDI
             
             //bool exist = orders.Exists( o=> ( o.店舗コード == orderdata.店舗コード && o.商品コード == orderdata.商品コード ));
             //orderdata.ダブリ = exist ? "yes" : "no";
-            orderdata.口数 = item.PT入数;
 
             //有些为空的，订单重量 设置为0
             orderdata.重量 = (int)((item.単品重量 != null ? item.単品重量 : 0) * orderdata.発注数量);
             orderdata.ジャンル = item.ジャンル;
             orderdata.単位 = item.単位;
             orderdata.自社コード = item.自社コード;
+            orderdata.口数 = item.PT入数;
             orderdata.実際配送担当 = shop.配送担当;
             orderdata.実際出荷数量 = orderdata.発注数量;
+            orderdata.納品口数 = orderdata.実際出荷数量 / orderdata.口数;
+            if (orderdata.実際出荷数量 % orderdata.口数 != 0) 
+            {
+                orderdata.納品口数++;
+            }
+
             orderdata.県別 = shop.県別;
 
             if (orderdata.実際配送担当=="MKL" && (orderdata.ジャンル == 1 || orderdata.ジャンル == 6))
