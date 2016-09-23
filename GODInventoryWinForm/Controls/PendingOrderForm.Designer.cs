@@ -35,6 +35,7 @@
             this.newOrderbutton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.filterButton = new System.Windows.Forms.Button();
             this.storeCodeFilterTextBox3 = new System.Windows.Forms.TextBox();
             this.invoiceNoFilterTextBox = new System.Windows.Forms.TextBox();
@@ -136,6 +137,16 @@
             // 
             // ordersTabPage
             // 
+            this.ordersTabPage.Controls.Add(this.newOrderbutton);
+            this.ordersTabPage.Controls.Add(this.saveButton);
+            this.ordersTabPage.Controls.Add(this.cancelButton);
+            this.ordersTabPage.Controls.Add(this.pager1);
+            this.ordersTabPage.Controls.Add(this.filterButton);
+            this.ordersTabPage.Controls.Add(this.storeCodeFilterTextBox3);
+            this.ordersTabPage.Controls.Add(this.invoiceNoFilterTextBox);
+            this.ordersTabPage.Controls.Add(this.label15);
+            this.ordersTabPage.Controls.Add(this.label14);
+            this.ordersTabPage.Controls.Add(this.dataGridView1);
             this.ordersTabPage.Location = new System.Drawing.Point(4, 22);
             this.ordersTabPage.Name = "ordersTabPage";
             this.ordersTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -176,6 +187,21 @@
             this.cancelButton.Text = "取消す";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(3, 418);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(983, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // filterButton
             // 
