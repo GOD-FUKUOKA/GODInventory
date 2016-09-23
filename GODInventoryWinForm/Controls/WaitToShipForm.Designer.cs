@@ -35,7 +35,7 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.shipNOTextBox = new System.Windows.Forms.ComboBox();
+            this.shipNOComboBox = new System.Windows.Forms.ComboBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.受注日Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -143,7 +143,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.shipNOTextBox);
+            this.groupBox2.Controls.Add(this.shipNOComboBox);
             this.groupBox2.Controls.Add(this.saveButton);
             this.groupBox2.Controls.Add(this.dataGridView2);
             this.groupBox2.Controls.Add(this.label2);
@@ -157,13 +157,13 @@
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             // 
-            // shipNOTextBox
+            // shipNOComboBox
             // 
-            this.shipNOTextBox.FormattingEnabled = true;
-            this.shipNOTextBox.Location = new System.Drawing.Point(81, 20);
-            this.shipNOTextBox.Name = "shipNOTextBox";
-            this.shipNOTextBox.Size = new System.Drawing.Size(143, 20);
-            this.shipNOTextBox.TabIndex = 10;
+            this.shipNOComboBox.FormattingEnabled = true;
+            this.shipNOComboBox.Location = new System.Drawing.Point(81, 20);
+            this.shipNOComboBox.Name = "shipNOComboBox";
+            this.shipNOComboBox.Size = new System.Drawing.Size(143, 20);
+            this.shipNOComboBox.TabIndex = 10;
             // 
             // saveButton
             // 
@@ -663,7 +663,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox countyComboBox1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox shipNOTextBox;
+        private System.Windows.Forms.ComboBox shipNOComboBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;

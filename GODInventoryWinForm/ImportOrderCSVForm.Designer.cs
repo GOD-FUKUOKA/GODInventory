@@ -74,9 +74,9 @@
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(193, 192);
+            this.importButton.Location = new System.Drawing.Point(132, 185);
             this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(75, 23);
+            this.importButton.Size = new System.Drawing.Size(100, 32);
             this.importButton.TabIndex = 3;
             this.importButton.Text = "Import";
             this.importButton.UseVisualStyleBackColor = true;
@@ -85,9 +85,9 @@
             // cancelButton
             // 
             this.cancelButton.Enabled = false;
-            this.cancelButton.Location = new System.Drawing.Point(281, 192);
+            this.cancelButton.Location = new System.Drawing.Point(238, 185);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 4;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -130,9 +130,9 @@
             // closeButton
             // 
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.closeButton.Location = new System.Drawing.Point(369, 192);
+            this.closeButton.Location = new System.Drawing.Point(344, 185);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 23);
+            this.closeButton.Size = new System.Drawing.Size(100, 32);
             this.closeButton.TabIndex = 8;
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;

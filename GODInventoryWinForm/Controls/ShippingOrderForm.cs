@@ -112,7 +112,7 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
                 using (var ctx = new GODDbContext())
                 {
                     var edidata = ctx.t_edidata.Find(ids.First());
-                    string sql = String.Format("UPDATE t_orderdata SET `Status`= {1}  WHERE `ASN管理連番` = ({0})", edidata.管理連番, (int)OrderStatus.Shipped);
+                    string sql = String.Format("UPDATE t_orderdata SET `Status`= {2}  WHERE `ASN管理連番` = ({0}) AND `Status`= {1} ", edidata.管理連番, (int)OrderStatus.ASN, (int)OrderStatus.Shipped);
                     ctx.Database.ExecuteSqlCommand(sql);
                     edidata.is_sent = true;
                     edidata.sent_at = DateTime.Now;
@@ -120,7 +120,7 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
                 }
             }
             InitializeEdiData();
-
+            pager3.Bind();
         }
 
         private void printForEDIButton_Click(object sender, EventArgs e)
@@ -265,41 +265,25 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
         private void lockToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            object a = shipNODataGridView.DefaultCellStyle.SelectionBackColor;
-            string RemarkColor = a.ToString();
+           
 
             int i = shipNODataGridView.CurrentRow.Index;
             this.groupedOrderList[i].Locked = true;
+
+            shipNODataGridView.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.Green;
+
             this.shipNODataGridView.Refresh();
-            for (int i1 = 0; i1 < groupedOrderList.Count; i1++)
-                if (this.groupedOrderList[i1].Locked == true)
-                {
-                    if (i == i1)
-                        shipNODataGridView.DefaultCellStyle.SelectionBackColor = Color.Green;
-                }
-                else
-                {
-                    if (i == i1)
-                        shipNODataGridView.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
-                }
+           
         }
 
         private void unlockToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int i = shipNODataGridView.CurrentRow.Index;
             this.groupedOrderList[i].Locked = false;
+            shipNODataGridView.CurrentRow.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
+
             this.shipNODataGridView.Refresh();
-            for (int i1 = 0; i1 < groupedOrderList.Count; i1++)
-                if (this.groupedOrderList[i1].Locked == true)
-                {
-                    if (i == i1)
-                        shipNODataGridView.DefaultCellStyle.SelectionBackColor = Color.Green;
-                }
-                else
-                {
-                    if (i == i1)
-                        shipNODataGridView.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
-                }
+            
         }
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -84,10 +84,10 @@ namespace GODInventoryWinForm.Controls
                            group o by o.ShipNO into g
                            select new MockEntity { ShortName = g.Key, FullName = g.Key }).ToList();
 
-            this.shipNOTextBox.DisplayMember = "FullName";
-            this.shipNOTextBox.ValueMember = "ShortName";
-            this.shipNOTextBox.DataSource = shipNOs;
-            this.shipNOTextBox.SelectedItem = null;
+            this.shipNOComboBox.DisplayMember = "FullName";
+            this.shipNOComboBox.ValueMember = "ShortName";
+            this.shipNOComboBox.DataSource = shipNOs;
+            this.shipNOComboBox.SelectedItem = null;
             
 
             this.dataGridView1.DataSource = this.bindingSource1;
@@ -271,14 +271,14 @@ namespace GODInventoryWinForm.Controls
         private void saveButton_Click(object sender, EventArgs e)
         {
 
-            if (shipNOTextBox.Text == null || shipNOTextBox.Text == "")
+            if (shipNOComboBox.Text == null || shipNOComboBox.Text == "")
             {
                 MessageBox.Show("请维护 *配车单单号*");
                 return;
 
 
             }
-            string shipNO = this.shipNOTextBox.Text.Trim();
+            string shipNO = this.shipNOComboBox.Text.Trim();
 
             if (shipNO.Length > 0)
             {
@@ -297,7 +297,7 @@ namespace GODInventoryWinForm.Controls
                 //MessageBox.Show();
 
                 this.orderListForShip.Clear();
-                this.shipNOTextBox.SelectedIndex = 0;
+                this.shipNOComboBox.SelectedItem = null;
 
             }
         }
