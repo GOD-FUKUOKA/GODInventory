@@ -223,7 +223,7 @@
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(100, 32);
             this.submitFormButton.TabIndex = 10000034;
-            this.submitFormButton.Text = "Submit";
+            this.submitFormButton.Text = "保存";
             this.submitFormButton.UseVisualStyleBackColor = true;
             this.submitFormButton.Click += new System.EventHandler(this.submitFormButton_Click);
             // 
@@ -233,7 +233,7 @@
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(100, 32);
             this.cancelFormButton.TabIndex = 10000035;
-            this.cancelFormButton.Text = "Cancel";
+            this.cancelFormButton.Text = "取消す";
             this.cancelFormButton.UseVisualStyleBackColor = true;
             this.cancelFormButton.Click += new System.EventHandler(this.cancelFormButton_Click);
             // 

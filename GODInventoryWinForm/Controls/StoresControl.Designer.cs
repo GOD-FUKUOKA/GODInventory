@@ -172,20 +172,20 @@
             this.ChangeItem,
             this.addItemToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(151, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
             // 
             // ChangeItem
             // 
             this.ChangeItem.Name = "ChangeItem";
-            this.ChangeItem.Size = new System.Drawing.Size(150, 22);
-            this.ChangeItem.Text = "Change Item";
+            this.ChangeItem.Size = new System.Drawing.Size(152, 22);
+            this.ChangeItem.Text = "編集";
             this.ChangeItem.Click += new System.EventHandler(this.SaveItem_Click);
             // 
             // addItemToolStripMenuItem
             // 
             this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
-            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.addItemToolStripMenuItem.Text = "Add Item";
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addItemToolStripMenuItem.Text = "新規";
             this.addItemToolStripMenuItem.Visible = false;
             this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
             // 
@@ -196,7 +196,7 @@
             this.btAddItem.Name = "btAddItem";
             this.btAddItem.Size = new System.Drawing.Size(100, 32);
             this.btAddItem.TabIndex = 2;
-            this.btAddItem.Text = "New";
+            this.btAddItem.Text = "新規";
             this.btAddItem.UseVisualStyleBackColor = true;
             this.btAddItem.Click += new System.EventHandler(this.btAddItem_Click);
             // 

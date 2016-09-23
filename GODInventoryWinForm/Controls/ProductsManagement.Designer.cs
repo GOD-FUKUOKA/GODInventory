@@ -41,6 +41,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.unitWeightTextBox11 = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
@@ -54,8 +56,6 @@
             this.invoiceNOTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.unitWeightTextBox11 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,7 +65,7 @@
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(100, 32);
             this.submitFormButton.TabIndex = 10000020;
-            this.submitFormButton.Text = "Submit";
+            this.submitFormButton.Text = "保存";
             this.submitFormButton.UseVisualStyleBackColor = true;
             this.submitFormButton.Click += new System.EventHandler(this.submitFormButton_Click);
             // 
@@ -75,7 +75,7 @@
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(100, 32);
             this.cancelFormButton.TabIndex = 10000021;
-            this.cancelFormButton.Text = "Cancel";
+            this.cancelFormButton.Text = "取消す";
             this.cancelFormButton.UseVisualStyleBackColor = true;
             this.cancelFormButton.Click += new System.EventHandler(this.cancelFormButton_Click);
             // 
@@ -192,6 +192,22 @@
             this.label1.TabIndex = 10000026;
             this.label1.Text = "単位";
             // 
+            // unitWeightTextBox11
+            // 
+            this.unitWeightTextBox11.Location = new System.Drawing.Point(458, 179);
+            this.unitWeightTextBox11.Name = "unitWeightTextBox11";
+            this.unitWeightTextBox11.Size = new System.Drawing.Size(222, 21);
+            this.unitWeightTextBox11.TabIndex = 10000029;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(395, 183);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.TabIndex = 10000028;
+            this.label8.Text = "単品重量";
+            // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(458, 215);
@@ -296,22 +312,6 @@
             this.label12.Size = new System.Drawing.Size(53, 12);
             this.label12.TabIndex = 10000016;
             this.label12.Text = "単品重量";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(395, 183);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 12);
-            this.label8.TabIndex = 10000028;
-            this.label8.Text = "単品重量";
-            // 
-            // unitWeightTextBox11
-            // 
-            this.unitWeightTextBox11.Location = new System.Drawing.Point(458, 179);
-            this.unitWeightTextBox11.Name = "unitWeightTextBox11";
-            this.unitWeightTextBox11.Size = new System.Drawing.Size(222, 21);
-            this.unitWeightTextBox11.TabIndex = 10000029;
             // 
             // ProductsManagement
             // 

@@ -35,7 +35,6 @@
             this.newOrderbutton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.filterButton = new System.Windows.Forms.Button();
             this.storeCodeFilterTextBox3 = new System.Windows.Forms.TextBox();
             this.invoiceNoFilterTextBox = new System.Windows.Forms.TextBox();
@@ -105,6 +104,7 @@
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -154,7 +154,7 @@
             this.ordersTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.ordersTabPage.Size = new System.Drawing.Size(989, 450);
             this.ordersTabPage.TabIndex = 0;
-            this.ordersTabPage.Text = "待处理订单";
+            this.ordersTabPage.Text = "伝票訂正";
             this.ordersTabPage.UseVisualStyleBackColor = true;
             // 
             // newOrderbutton
@@ -164,7 +164,7 @@
             this.newOrderbutton.Name = "newOrderbutton";
             this.newOrderbutton.Size = new System.Drawing.Size(100, 32);
             this.newOrderbutton.TabIndex = 20;
-            this.newOrderbutton.Text = "New orders";
+            this.newOrderbutton.Text = "新規";
             this.newOrderbutton.UseVisualStyleBackColor = true;
             this.newOrderbutton.Click += new System.EventHandler(this.newOrderbutton_Click);
             // 
@@ -175,7 +175,7 @@
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(100, 32);
             this.saveButton.TabIndex = 16;
-            this.saveButton.Text = "登録";
+            this.saveButton.Text = "保存";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
@@ -186,24 +186,9 @@
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 19;
-            this.cancelButton.Text = "Cancel";
+            this.cancelButton.Text = "取消す";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(3, 416);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(983, 34);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // filterButton
             // 
@@ -429,13 +414,13 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sendToShipperToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(166, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
             // 
             // sendToShipperToolStripMenuItem
             // 
             this.sendToShipperToolStripMenuItem.Name = "sendToShipperToolStripMenuItem";
-            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.sendToShipperToolStripMenuItem.Text = "SendToShipper";
+            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.sendToShipperToolStripMenuItem.Text = "転送";
             this.sendToShipperToolStripMenuItem.Click += new System.EventHandler(this.sendToShipperToolStripMenuItem_Click);
             // 
             // ecTabPage
@@ -447,7 +432,7 @@
             this.ecTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.ecTabPage.Size = new System.Drawing.Size(989, 450);
             this.ecTabPage.TabIndex = 1;
-            this.ecTabPage.Text = "二次製品订单";
+            this.ecTabPage.Text = "二次製品処理";
             this.ecTabPage.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
@@ -623,7 +608,7 @@
             this.toShipperTabPage.Name = "toShipperTabPage";
             this.toShipperTabPage.Size = new System.Drawing.Size(989, 450);
             this.toShipperTabPage.TabIndex = 3;
-            this.toShipperTabPage.Text = "订单转发给物流部门";
+            this.toShipperTabPage.Text = "転送確認";
             this.toShipperTabPage.UseVisualStyleBackColor = true;
             // 
             // label17
@@ -792,6 +777,21 @@
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(3, 416);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(983, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // PendingOrderForm
             // 

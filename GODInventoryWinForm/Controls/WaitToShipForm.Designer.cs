@@ -102,20 +102,20 @@
             this.moveDownToolStripMenuItem,
             this.editToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(146, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 48);
             // 
             // moveDownToolStripMenuItem
             // 
             this.moveDownToolStripMenuItem.Name = "moveDownToolStripMenuItem";
-            this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
-            this.moveDownToolStripMenuItem.Text = "Move down";
+            this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.moveDownToolStripMenuItem.Text = "配車表入れ";
             this.moveDownToolStripMenuItem.Click += new System.EventHandler(this.moveDownToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
-            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.editToolStripMenuItem.Text = "編集";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // bindingSource1
@@ -320,13 +320,13 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveUpToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(129, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(137, 26);
             // 
             // moveUpToolStripMenuItem
             // 
             this.moveUpToolStripMenuItem.Name = "moveUpToolStripMenuItem";
-            this.moveUpToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.moveUpToolStripMenuItem.Text = "Move up";
+            this.moveUpToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.moveUpToolStripMenuItem.Text = "配車表除き";
             this.moveUpToolStripMenuItem.Click += new System.EventHandler(this.moveUpToolStripMenuItem_Click);
             // 
             // label2

@@ -60,6 +60,7 @@
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.printForEDIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shippedTabPage = new System.Windows.Forms.TabPage();
+            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             this.shippedDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,7 +97,6 @@
             this.bindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.pendingTabPage.SuspendLayout();
@@ -121,7 +121,7 @@
             this.uploadForEDIButton.Name = "uploadForEDIButton";
             this.uploadForEDIButton.Size = new System.Drawing.Size(100, 32);
             this.uploadForEDIButton.TabIndex = 2;
-            this.uploadForEDIButton.Text = "Upload for EDI";
+            this.uploadForEDIButton.Text = "ASNｱｯﾌﾟﾛｰﾄﾞ";
             this.uploadForEDIButton.UseVisualStyleBackColor = true;
             this.uploadForEDIButton.Click += new System.EventHandler(this.uploadForEDIButton_Click);
             // 
@@ -136,7 +136,7 @@
             this.GenerateASNButton.Name = "GenerateASNButton";
             this.GenerateASNButton.Size = new System.Drawing.Size(100, 32);
             this.GenerateASNButton.TabIndex = 3;
-            this.GenerateASNButton.Text = "GenerateASN";
+            this.GenerateASNButton.Text = "ASN生成";
             this.GenerateASNButton.UseVisualStyleBackColor = true;
             this.GenerateASNButton.Click += new System.EventHandler(this.generateASNButton_Click);
             // 
@@ -262,34 +262,34 @@
             this.editToolStripMenuItem,
             this.printToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(112, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 92);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
-            this.lockToolStripMenuItem.Text = "Lock";
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.lockToolStripMenuItem.Text = "配車表ﾛｯｸ";
             this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
             // 
             // unlockToolStripMenuItem
             // 
             this.unlockToolStripMenuItem.Name = "unlockToolStripMenuItem";
-            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
-            this.unlockToolStripMenuItem.Text = "Unlock";
+            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.unlockToolStripMenuItem.Text = "ﾛｯｸ解消";
             this.unlockToolStripMenuItem.Click += new System.EventHandler(this.unlockToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
-            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.editToolStripMenuItem.Text = "編集";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
-            this.printToolStripMenuItem.Text = "Print";
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.printToolStripMenuItem.Text = "配車表印刷";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // asnTabPage
@@ -367,12 +367,12 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.printForEDIToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(99, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
             // 
             // printForEDIToolStripMenuItem
             // 
             this.printForEDIToolStripMenuItem.Name = "printForEDIToolStripMenuItem";
-            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.printForEDIToolStripMenuItem.Text = "印刷";
             this.printForEDIToolStripMenuItem.Click += new System.EventHandler(this.printForEDIToolStripMenuItem_Click);
             // 
@@ -386,6 +386,21 @@
             this.shippedTabPage.TabIndex = 3;
             this.shippedTabPage.Text = "Shipped";
             this.shippedTabPage.UseVisualStyleBackColor = true;
+            // 
+            // pager3
+            // 
+            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager3.AutoSize = true;
+            this.pager3.Location = new System.Drawing.Point(3, 307);
+            this.pager3.Name = "pager3";
+            this.pager3.NMax = 0;
+            this.pager3.PageCount = 0;
+            this.pager3.PageCurrent = 1;
+            this.pager3.PageSize = 5000;
+            this.pager3.Size = new System.Drawing.Size(903, 34);
+            this.pager3.TabIndex = 2;
+            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
             // 
             // shippedDataGridView
             // 
@@ -538,7 +553,7 @@
             this.finishOrderButton1.Name = "finishOrderButton1";
             this.finishOrderButton1.Size = new System.Drawing.Size(100, 32);
             this.finishOrderButton1.TabIndex = 1;
-            this.finishOrderButton1.Text = "FinishOrder";
+            this.finishOrderButton1.Text = "ｵｰﾀﾞｰ確認済み";
             this.finishOrderButton1.UseVisualStyleBackColor = true;
             this.finishOrderButton1.Click += new System.EventHandler(this.finishOrderButton1_Click);
             // 
@@ -669,21 +684,6 @@
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // pager3
-            // 
-            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager3.AutoSize = true;
-            this.pager3.Location = new System.Drawing.Point(3, 307);
-            this.pager3.Name = "pager3";
-            this.pager3.NMax = 0;
-            this.pager3.PageCount = 0;
-            this.pager3.PageCurrent = 1;
-            this.pager3.PageSize = 5000;
-            this.pager3.Size = new System.Drawing.Size(903, 34);
-            this.pager3.TabIndex = 2;
-            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
             // 
             // ShippingOrderForm
             // 

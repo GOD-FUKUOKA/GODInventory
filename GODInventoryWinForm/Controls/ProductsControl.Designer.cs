@@ -47,13 +47,10 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ChangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.sendToShipperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btAddItem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -184,35 +181,22 @@
             this.ChangeToolStripMenuItem,
             this.addItemToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(151, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
             // 
             // ChangeToolStripMenuItem
             // 
             this.ChangeToolStripMenuItem.Name = "ChangeToolStripMenuItem";
-            this.ChangeToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.ChangeToolStripMenuItem.Text = "Change Item";
+            this.ChangeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ChangeToolStripMenuItem.Text = "編集";
             this.ChangeToolStripMenuItem.Click += new System.EventHandler(this.ChangeToolStripMenuItem_Click);
             // 
             // addItemToolStripMenuItem
             // 
             this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
-            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.addItemToolStripMenuItem.Text = "Add Item";
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addItemToolStripMenuItem.Text = "新規";
             this.addItemToolStripMenuItem.Visible = false;
             this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sendToShipperToolStripMenuItem});
-            this.contextMenuStrip2.Name = "contextMenuStrip1";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(166, 26);
-            // 
-            // sendToShipperToolStripMenuItem
-            // 
-            this.sendToShipperToolStripMenuItem.Name = "sendToShipperToolStripMenuItem";
-            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.sendToShipperToolStripMenuItem.Text = "SendToShipper";
             // 
             // btAddItem
             // 
@@ -221,7 +205,7 @@
             this.btAddItem.Name = "btAddItem";
             this.btAddItem.Size = new System.Drawing.Size(100, 32);
             this.btAddItem.TabIndex = 3;
-            this.btAddItem.Text = "New";
+            this.btAddItem.Text = "新規";
             this.btAddItem.UseVisualStyleBackColor = true;
             this.btAddItem.Click += new System.EventHandler(this.btAddItem_Click);
             // 
@@ -237,7 +221,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
-            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -266,8 +249,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn pT単位かDataGridViewTextBoxColumn;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ChangeToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem sendToShipperToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addItemToolStripMenuItem;
         private System.Windows.Forms.Button btAddItem;
     }
