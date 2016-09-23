@@ -70,7 +70,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Path";
+            this.label1.Text = "路径";
             // 
             // importButton
             // 
@@ -78,7 +78,7 @@
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(100, 32);
             this.importButton.TabIndex = 3;
-            this.importButton.Text = "Import";
+            this.importButton.Text = "导入";
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
@@ -89,7 +89,7 @@
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 4;
-            this.cancelButton.Text = "Cancel";
+            this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
@@ -124,7 +124,7 @@
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(458, 23);
             this.titleLabel.TabIndex = 7;
-            this.titleLabel.Text = "Import HACCYU.csv";
+            this.titleLabel.Text = "导入 HACCYU.csv";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // closeButton
@@ -134,7 +134,7 @@
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(100, 32);
             this.closeButton.TabIndex = 8;
-            this.closeButton.Text = "Close";
+            this.closeButton.Text = "閉じる";
             this.closeButton.UseVisualStyleBackColor = true;
             // 
             // ImportOrderCSVForm

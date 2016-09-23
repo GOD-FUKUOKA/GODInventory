@@ -52,12 +52,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.sendToShipperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,11 +80,14 @@
             this.ジャンル = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.備考 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             this.ordersTabPage.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -339,7 +336,6 @@
             this.ジャンル,
             this.備考,
             this.StatusColumn1});
-            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(3, 118);
             this.dataGridView1.Name = "dataGridView1";
@@ -348,44 +344,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1057, 334);
             this.dataGridView1.TabIndex = 11;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sendToShipperToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(166, 26);
-            // 
-            // sendToShipperToolStripMenuItem
-            // 
-            this.sendToShipperToolStripMenuItem.Name = "sendToShipperToolStripMenuItem";
-            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.sendToShipperToolStripMenuItem.Text = "SendToShipper";
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.ordersTabPage);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1071, 510);
-            this.tabControl1.TabIndex = 2;
-            // 
-            // id受注データDataGridViewTextBoxColumn
-            // 
-            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
             // 
             // OrderReceivedAtColumn1
             // 
@@ -576,6 +534,31 @@
             this.StatusColumn1.HeaderText = "Status";
             this.StatusColumn1.Name = "StatusColumn1";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.ordersTabPage);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1071, 510);
+            this.tabControl1.TabIndex = 2;
+            // 
+            // id受注データDataGridViewTextBoxColumn
+            // 
+            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // OrderHistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -593,7 +576,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -609,8 +591,6 @@
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.TabPage ordersTabPage;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem sendToShipperToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.DataGridViewTextBoxColumn id受注データDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource bindingSource1;

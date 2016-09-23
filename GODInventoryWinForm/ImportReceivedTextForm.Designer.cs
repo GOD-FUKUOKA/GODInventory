@@ -53,7 +53,7 @@
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 11;
-            this.cancelButton.Text = "Cancel";
+            this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
@@ -63,7 +63,7 @@
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(100, 32);
             this.importButton.TabIndex = 10;
-            this.importButton.Text = "Import";
+            this.importButton.Text = "导入";
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
@@ -74,7 +74,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Path";
+            this.label1.Text = "路径";
             // 
             // pathTextBox
             // 
@@ -123,7 +123,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(458, 23);
             this.label2.TabIndex = 14;
-            this.label2.Text = "Import JURYOU.txt";
+            this.label2.Text = "导入 JURYOU.txt";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // closeButton
@@ -133,7 +133,7 @@
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(100, 32);
             this.closeButton.TabIndex = 15;
-            this.closeButton.Text = "Close";
+            this.closeButton.Text = "閉じる";
             this.closeButton.UseVisualStyleBackColor = true;
             // 
             // ImportReceivedTextForm

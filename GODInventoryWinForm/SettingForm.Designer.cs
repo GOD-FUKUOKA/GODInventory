@@ -41,15 +41,15 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 57);
+            this.label1.Location = new System.Drawing.Point(36, 57);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 12);
+            this.label1.Size = new System.Drawing.Size(83, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "NFWE Install Dir";
+            this.label1.Text = "NFWE 安装目录";
             // 
             // folderBrowserButton1
             // 
-            this.folderBrowserButton1.Location = new System.Drawing.Point(425, 52);
+            this.folderBrowserButton1.Location = new System.Drawing.Point(417, 52);
             this.folderBrowserButton1.Name = "folderBrowserButton1";
             this.folderBrowserButton1.Size = new System.Drawing.Size(32, 23);
             this.folderBrowserButton1.TabIndex = 2;
@@ -59,7 +59,7 @@
             // 
             // installDirTextBox
             // 
-            this.installDirTextBox.Location = new System.Drawing.Point(133, 54);
+            this.installDirTextBox.Location = new System.Drawing.Point(125, 54);
             this.installDirTextBox.Name = "installDirTextBox";
             this.installDirTextBox.ReadOnly = true;
             this.installDirTextBox.Size = new System.Drawing.Size(286, 21);
@@ -68,36 +68,36 @@
             // cancleButton2
             // 
             this.cancleButton2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancleButton2.Location = new System.Drawing.Point(335, 148);
+            this.cancleButton2.Location = new System.Drawing.Point(311, 147);
             this.cancleButton2.Name = "cancleButton2";
-            this.cancleButton2.Size = new System.Drawing.Size(84, 30);
+            this.cancleButton2.Size = new System.Drawing.Size(100, 32);
             this.cancleButton2.TabIndex = 4;
-            this.cancleButton2.Text = "Cancel";
+            this.cancleButton2.Text = "取消";
             this.cancleButton2.UseVisualStyleBackColor = true;
             // 
             // saveButton3
             // 
             this.saveButton3.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.saveButton3.Location = new System.Drawing.Point(222, 148);
+            this.saveButton3.Location = new System.Drawing.Point(198, 147);
             this.saveButton3.Name = "saveButton3";
-            this.saveButton3.Size = new System.Drawing.Size(84, 30);
+            this.saveButton3.Size = new System.Drawing.Size(100, 32);
             this.saveButton3.TabIndex = 5;
-            this.saveButton3.Text = "Save";
+            this.saveButton3.Text = "保存";
             this.saveButton3.UseVisualStyleBackColor = true;
             this.saveButton3.Click += new System.EventHandler(this.saveButton3_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 99);
+            this.label2.Location = new System.Drawing.Point(42, 99);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 12);
+            this.label2.Size = new System.Drawing.Size(77, 12);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Inventory Start At";
+            this.label2.Text = "库存初始时间";
             // 
             // inventoryStartAtDateTimePicker1
             // 
-            this.inventoryStartAtDateTimePicker1.Location = new System.Drawing.Point(133, 93);
+            this.inventoryStartAtDateTimePicker1.Location = new System.Drawing.Point(125, 93);
             this.inventoryStartAtDateTimePicker1.Name = "inventoryStartAtDateTimePicker1";
             this.inventoryStartAtDateTimePicker1.Size = new System.Drawing.Size(286, 21);
             this.inventoryStartAtDateTimePicker1.TabIndex = 8;
