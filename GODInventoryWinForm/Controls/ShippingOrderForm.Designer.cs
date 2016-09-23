@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.uploadForEDIButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -60,7 +60,6 @@
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.printForEDIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shippedTabPage = new System.Windows.Forms.TabPage();
-            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             this.shippedDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,6 +96,7 @@
             this.bindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.pendingTabPage.SuspendLayout();
@@ -194,6 +194,8 @@
             this.shipNODataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.shipNODataGridView.Size = new System.Drawing.Size(903, 279);
             this.shipNODataGridView.TabIndex = 5;
+            this.shipNODataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.shipNODataGridView_CellFormatting);
+            this.shipNODataGridView.CurrentCellChanged += new System.EventHandler(this.shipNODataGridView_CurrentCellChanged);
             this.shipNODataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.shipNODataGridView_RowPrePaint);
             // 
             // ShipNOColumn1
@@ -260,33 +262,33 @@
             this.editToolStripMenuItem,
             this.printToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(117, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(112, 92);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.lockToolStripMenuItem.Text = "Lock";
             this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
             // 
             // unlockToolStripMenuItem
             // 
             this.unlockToolStripMenuItem.Name = "unlockToolStripMenuItem";
-            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.unlockToolStripMenuItem.Text = "Unlock";
             this.unlockToolStripMenuItem.Click += new System.EventHandler(this.unlockToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.printToolStripMenuItem.Text = "Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
@@ -353,8 +355,8 @@
             // createdAtColumn1
             // 
             this.createdAtColumn1.DataPropertyName = "created_at";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.createdAtColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.createdAtColumn1.DefaultCellStyle = dataGridViewCellStyle1;
             this.createdAtColumn1.HeaderText = "作成時間";
             this.createdAtColumn1.Name = "createdAtColumn1";
             this.createdAtColumn1.ReadOnly = true;
@@ -365,12 +367,12 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.printForEDIToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(99, 26);
             // 
             // printForEDIToolStripMenuItem
             // 
             this.printForEDIToolStripMenuItem.Name = "printForEDIToolStripMenuItem";
-            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.printForEDIToolStripMenuItem.Text = "印刷";
             this.printForEDIToolStripMenuItem.Click += new System.EventHandler(this.printForEDIToolStripMenuItem_Click);
             // 
@@ -384,21 +386,6 @@
             this.shippedTabPage.TabIndex = 3;
             this.shippedTabPage.Text = "Shipped";
             this.shippedTabPage.UseVisualStyleBackColor = true;
-            // 
-            // pager3
-            // 
-            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager3.AutoSize = true;
-            this.pager3.Location = new System.Drawing.Point(3, 310);
-            this.pager3.Name = "pager3";
-            this.pager3.NMax = 0;
-            this.pager3.PageCount = 0;
-            this.pager3.PageCurrent = 1;
-            this.pager3.PageSize = 5000;
-            this.pager3.Size = new System.Drawing.Size(903, 31);
-            this.pager3.TabIndex = 2;
-            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
             // 
             // shippedDataGridView
             // 
@@ -682,6 +669,21 @@
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // pager3
+            // 
+            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager3.AutoSize = true;
+            this.pager3.Location = new System.Drawing.Point(3, 307);
+            this.pager3.Name = "pager3";
+            this.pager3.NMax = 0;
+            this.pager3.PageCount = 0;
+            this.pager3.PageCurrent = 1;
+            this.pager3.PageSize = 5000;
+            this.pager3.Size = new System.Drawing.Size(903, 34);
+            this.pager3.TabIndex = 2;
+            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
             // 
             // ShippingOrderForm
             // 

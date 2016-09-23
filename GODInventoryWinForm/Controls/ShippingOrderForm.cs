@@ -26,13 +26,14 @@ namespace GODInventoryWinForm.Controls
             this.dataGridView2.AutoGenerateColumns = false;
             this.receivedDataGridView.AutoGenerateColumns = false;
             this.shipNODataGridView.AutoGenerateColumns = false;
-            
+
             reportForm = new ReceivedOrdersReportForm();
             shippingItemsReportForm = new ShippingItemsReportForm();
         }
 
 
-        public void InitializeDataSource() {
+        public void InitializeDataSource()
+        {
 
             InitializeOrderData();
 
@@ -50,7 +51,7 @@ namespace GODInventoryWinForm.Controls
 min(o.`店舗名漢字`) as `店名`, min(o.`県別`) as `県別`, min(o.`実際配送担当`) as `実際配送担当`, 
 sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight, false as Locked  
 FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
-                groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>( sql, OrderStatus.PendingShipment).ToList();
+                groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.PendingShipment).ToList();
                 shipNODataGridView.DataSource = groupedOrderList;
             }
             //var q = OrderSqlHelper.ShippingOrderSql(entityDataSource1);            
@@ -62,19 +63,21 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
         }
 
-        private void InitializeEdiData() {
+        private void InitializeEdiData()
+        {
 
             this.bindingSource2.DataSource = OrderSqlHelper.ASNEdiDataList(entityDataSource1);
             dataGridView2.DataSource = this.bindingSource2;
-        
+
         }
 
         private int InitializeShippedOrders()
         {
 
-            var q = OrderSqlHelper.ShippedOrderSql(entityDataSource1);            
-            var count = q.Count();  
-            if( count >0 ){
+            var q = OrderSqlHelper.ShippedOrderSql(entityDataSource1);
+            var count = q.Count();
+            if (count > 0)
+            {
 
                 if (pager3.PageCurrent > 1)
                 {
@@ -86,7 +89,7 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
                 // assign BindingList to grid
                 shippedDataGridView.AutoGenerateColumns = false;
                 shippedDataGridView.DataSource = this.bindingSource3;
-            
+
             }
             return count;
         }
@@ -97,12 +100,13 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
             // assign BindingList to grid
             receivedDataGridView.DataSource = this.bindingSource4;
             return 0;
-        }        
+        }
 
         private void uploadForEDIButton_Click(object sender, EventArgs e)
         {
             var ids = GetEdiDataIdsBySelectedGridCell();
-            if (ids.Count > 0) {
+            if (ids.Count > 0)
+            {
                 // TODO 数据上传
                 // 上传相应ASN数据
                 using (var ctx = new GODDbContext())
@@ -121,9 +125,9 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
         private void printForEDIButton_Click(object sender, EventArgs e)
         {
-           
 
-            
+
+
         }
 
         private void generateASNButton_Click(object sender, EventArgs e)
@@ -189,7 +193,7 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
             return ids;
         }
-      
+
 
         private void ShippingOrderForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -199,7 +203,7 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private int pager1_EventPaging(EventPagingArg e)
@@ -219,9 +223,10 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
         private void finishOrderButton1_Click(object sender, EventArgs e)
         {
-            
+
             var ids = GetRecievedOrderIdsBySelectedGridCell();
-            if (ids.Count > 0) {
+            if (ids.Count > 0)
+            {
 
                 OrderSqlHelper.FinishOrders(ids);
             }
@@ -244,13 +249,15 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
         private void shipNODataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
+
             int i = e.RowIndex;
             var order = groupedOrderList[i];
-            if (order.Locked )
+            if (order.Locked)
             {
                 this.shipNODataGridView.Rows[i].DefaultCellStyle.BackColor = Color.Green;
 
-            }  else
+            }
+            else
             {
                 this.shipNODataGridView.Rows[i].DefaultCellStyle.BackColor = Color.White;
             }
@@ -258,9 +265,23 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
         private void lockToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            object a = shipNODataGridView.DefaultCellStyle.SelectionBackColor;
+            string RemarkColor = a.ToString();
+
             int i = shipNODataGridView.CurrentRow.Index;
             this.groupedOrderList[i].Locked = true;
             this.shipNODataGridView.Refresh();
+            for (int i1 = 0; i1 < groupedOrderList.Count; i1++)
+                if (this.groupedOrderList[i1].Locked == true)
+                {
+                    if (i == i1)
+                        shipNODataGridView.DefaultCellStyle.SelectionBackColor = Color.Green;
+                }
+                else
+                {
+                    if (i == i1)
+                        shipNODataGridView.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
+                }
         }
 
         private void unlockToolStripMenuItem_Click(object sender, EventArgs e)
@@ -268,15 +289,26 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
             int i = shipNODataGridView.CurrentRow.Index;
             this.groupedOrderList[i].Locked = false;
             this.shipNODataGridView.Refresh();
+            for (int i1 = 0; i1 < groupedOrderList.Count; i1++)
+                if (this.groupedOrderList[i1].Locked == true)
+                {
+                    if (i == i1)
+                        shipNODataGridView.DefaultCellStyle.SelectionBackColor = Color.Green;
+                }
+                else
+                {
+                    if (i == i1)
+                        shipNODataGridView.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
+                }
         }
-
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int i = shipNODataGridView.CurrentRow.Index;
-            if (!groupedOrderList[i].Locked) {
+            if (!groupedOrderList[i].Locked)
+            {
 
                 var form = new ShipOrderListForm();
-                
+
                 form.InitializeDataSource(groupedOrderList[i].ShipNO);
 
                 form.ShowDialog();
@@ -318,6 +350,19 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
             shippingItemsReportForm.InitializeDataSource(orders);
             shippingItemsReportForm.ShowDialog();
         }
-        
+
+        private void shipNODataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+
+            }
+        }
+
+        private void shipNODataGridView_CurrentCellChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
