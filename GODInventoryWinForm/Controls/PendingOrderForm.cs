@@ -295,19 +295,12 @@ namespace GODInventoryWinForm.Controls
 
             if (count > 0)
             {
-                string sql = @" SELECT o.*, g.`ジャンル名` as `GenreName`, K.`在庫数` as `在庫数`  from t_orderdata o
+                string sql = @" SELECT o.*, g.`ジャンル名` as `GenreName`, k.`在庫数` as `在庫数`  from t_orderdata o
 INNER JOIN t_genre g  on o.ジャンル = g.idジャンル
 LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.実際配送担当 = k.ShipperName 
 WHERE o.Status ={0}
 ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号 LIMIT {1} OFFSET {2};";
 
-                //var q = OrderSqlHelper.PendingOrderQueryEx(entityDataSource1);
-                //// 分页
-                //if (pager1.PageCurrent > 1)
-                //{
-                //    q = q.Skip(pager1.OffSet(pager1.PageCurrent - 1));
-                //}
-                //q = q.Take(pager1.OffSet(pager1.PageCurrent));
 
                 // create BindingList (sortable/filterable)
                 int offset = ( pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0 );
@@ -319,17 +312,17 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 IEnumerable<IGrouping<int, v_pendingorder>> grouped_orders = pendingOrderList.GroupBy(o => o.自社コード, o => o);
                 foreach (var gos in grouped_orders)
                 {
-                    int total = 0;
-
+                    int total = gos.Sum(o => o.実際出荷数量);
+                    int min = gos.Min(o => o.実際出荷数量);
+                    
                     foreach (var o in gos)
                     {
-                        total += o.発注数量;
 
                         if (o.在庫数 >= total)
                         {
                             o.在庫状態 = "あり";
                         }
-                        else if (o.在庫数 > o.口数)
+                        else if (o.在庫数 > min )
                         {
                             o.在庫状態 = "一部不足";
                         }
