@@ -86,7 +86,11 @@ namespace GODInventoryWinForm.Controls
                     WHERE ((s.`先` = {1} OR s.`元` = {1} ) AND s.`状態`={2} AND s.`日付`< {3} AND s.`日付`> {4} )
                     GROUP by s.`自社コード`;";
 
-
+                //string sql2 = String.Format( "SELECT `自社コード`, SUM(o.`実際出荷数量`) FROM t_orderdata o WHERE o.`Status`={0} GROUP by o.`自社コード`;", (int)OrderStatus.Pending);
+                var pendingOrders = ( from o in ctx.t_orderdata 
+                                      where o.Status == OrderStatus.Pending
+                                      group o by o.自社コード into g
+                                      select new { 自社コード = g.Key, 数量 = g.Sum( o => o.実際出荷数量) }).ToList();
 
                 var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.完了.ToString(), endDate, startDate).ToList();
 
@@ -94,18 +98,6 @@ namespace GODInventoryWinForm.Controls
 
                 #endregion
 
-                #region MyRegion
-                //                string sql = @"SELECT  SUM(i.`数量`) as `数量`, i.日付 ,i.自社コード ,s.商品名,s.規格  FROM t_itemlist  s
-                //    left JOIN t_stockrec i on i.`自社コード` =   s.`自社コード` and i.`状態`={2} and i.`日付`< {3} and i.`日付`> {4} and i.`先` = {1}   
-                //    WHERE (s.`ジャンル` =   {0} )
-                //    GROUP by s.`自社コード`;";
-
-                //                var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.完了.ToString(), endDate, startDate).ToList();
-
-                //                var summaries4plan = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.仮.ToString(), endDate, startDate).ToList();
-
-
-                #endregion
 
                 itemlist = ctx.t_itemlist.ToList();
                 NewstockcheckList = (from a in ctx.t_itemlist
@@ -116,74 +108,32 @@ namespace GODInventoryWinForm.Controls
                                  商品名 = a.商品名,
                              }).ToList();
 
-                foreach (var item1 in NewstockcheckList)
+                foreach (var stockcheck in NewstockcheckList)
                 {
-                    foreach (var item in summaries)
+
+                    stockcheck.Id = ++i;
+
+                    var summary = summaries.Find(s => s.自社コード == stockcheck.自社コード);
+                    if (summary != null)
                     {
-                        if (item1.自社コード == item.自社コード)
-                        {
-                            i++;
-
-                            //item.Id = i;
-                            //item.yingYouKuCunShu = Convert.ToInt32(item.数量);
-                            //// TODO daiFaHuoShu
-                            //item.daiFaHuoShu = 0;
-                            //item.shiJiKuCunShu = item.yingYouKuCunShu + item.daiFaHuoShu;
-
-                            //var item4plan = summaries4plan.Find(s => s.自社コード == item.自社コード);
-                            //if (item4plan != null)
-                            //{
-                            //    item.jiHuaRuCunShu = Convert.ToInt32(item4plan.数量);
-                            //}
-                            //stockcheckList.Add(item);
-                            ///
-                            item1.Id = i;
-                            item1.yingYouKuCunShu = Convert.ToInt32(item.数量);
-                            // TODO daiFaHuoShu
-                            item1.daiFaHuoShu = 0;
-                            item1.shiJiKuCunShu = item.yingYouKuCunShu + item.daiFaHuoShu;
-
-                            var item4plan1 = summaries4plan.Find(s => s.自社コード == item.自社コード);
-                            if (item4plan1 != null)
-                            {
-                                item1.jiHuaRuCunShu = Convert.ToInt32(item4plan1.数量);
-                            }
-
-                        }
+                        stockcheck.yingYouKuCunShu = Convert.ToInt32(summary.数量);
                     }
-                    stockcheckList.Add(item1);
+
+                    var item4plan1 = summaries4plan.Find(s => s.自社コード == stockcheck.自社コード);
+                    if (item4plan1 != null)
+                    {
+                        stockcheck.jiHuaRuCunShu = Convert.ToInt32(item4plan1.数量);
+                    }
+
+                    var order = pendingOrders.Find(s => s.自社コード == stockcheck.自社コード);
+                    if (order != null) 
+                    {
+                        stockcheck.daiFaHuoShu = order.数量;                    
+                    }
+                    stockcheck.shiJiKuCunShu = stockcheck.yingYouKuCunShu - stockcheck.daiFaHuoShu;
+
+                    stockcheckList.Add(stockcheck);
                 }
-                #region old
-
-                ////stockcheckList = (from a in ctx.t_stockrec
-                ////                 where a.先 == warehouse && a.状態== StockIoEnum.完了.ToString()
-                ////                 group a by a.自社コード into b
-                ////                 select new v_stockcheck
-                ////         {
-                ////             自社コード = b.Key,
-                ////            数量 = b.Sum(c => c.数量),                           
-                ////        }).ToList();
-
-
-
-                //foreach (var item in summaries)
-                //{
-                //    i++;
-
-                //    item.Id = i;
-                //    item.yingYouKuCunShu = Convert.ToInt32(item.数量);
-                //    // TODO daiFaHuoShu
-                //    item.daiFaHuoShu = 0;
-                //    item.shiJiKuCunShu = item.yingYouKuCunShu + item.daiFaHuoShu;
-
-                //    var item4plan = summaries4plan.Find(s => s.自社コード == item.自社コード);
-                //    if (item4plan != null)
-                //    {
-                //        item.jiHuaRuCunShu = Convert.ToInt32(item4plan.数量);
-                //    }
-                //    stockcheckList.Add(item);
-                //} 
-                #endregion
 
             }
 

@@ -124,6 +124,8 @@ namespace GODInventoryWinForm.Controls
 
         private void btcanel_Click(object sender, EventArgs e)
         {
+            this.FindDataSources();
+            
             this.BindDataGridView();
         }
 
@@ -196,7 +198,6 @@ namespace GODInventoryWinForm.Controls
             MessageBox.Show(String.Format("Congratulations, Items changed successfully!"));
 
             changedStockList.Clear();
-            datagridChanges.Clear();
             this.FindDataSources();
             this.BindDataGridView();
         }
@@ -309,6 +310,7 @@ namespace GODInventoryWinForm.Controls
 
         private void BindDataGridView()
         {
+            datagridChanges.Clear();
 
             for (int i = 0; i < this.productList.Count; i++)
             {
@@ -586,8 +588,12 @@ namespace GODInventoryWinForm.Controls
             string stockNum = GetStockNumByColumnIndex(e.ColumnIndex);
 
             int productNum = GetProductNumByRowIndex(e.RowIndex);
-
-            t_stockrec stock = this.stockList.Find(o => (o.自社コード == productNum && o.納品書番号 == stockNum));
+            t_stockrec stock = this.changedStockList.Find(o => (o.自社コード == productNum && o.納品書番号 == stockNum));
+            if (stock == null)
+            {
+                stock = this.stockList.Find(o => (o.自社コード == productNum && o.納品書番号 == stockNum));
+            }
+            
             if (stock == null)
             {
                 var originalStock = this.stockList.Find(o => (o.納品書番号 == stockNum));
@@ -611,7 +617,10 @@ namespace GODInventoryWinForm.Controls
             }
             stock.数量 = (stock.区分 == StockIoEnum.入庫.ToString() ? qty : -qty);
             //qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.Red;
-            this.changedStockList.Add(stock);
+            if (!changedStockList.Contains(stock))
+            {
+                changedStockList.Add(stock);
+            }
         }
 
         private string GetStockNumByColumnIndex(int j)

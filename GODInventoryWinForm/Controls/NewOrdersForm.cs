@@ -148,15 +148,18 @@ namespace GODInventoryWinForm.Controls
             if (order.キャンセル == "yes")
             {
                 this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Gray;
+                this.dataGridView1.Rows[i].DefaultCellStyle.SelectionBackColor = Color.Gray;
 
             }
             else if (order.ダブリ == "yes")
             {
                 this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Red;
+                this.dataGridView1.Rows[i].DefaultCellStyle.SelectionBackColor = Color.Red;
             }
             else
             {
                 this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                this.dataGridView1.Rows[i].DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
             }
         }
 

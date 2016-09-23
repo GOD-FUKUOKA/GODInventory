@@ -79,6 +79,16 @@ namespace GODInventoryWinForm.Controls
 
             }
 
+            InitializeShipNOComboBox();
+
+            this.dataGridView1.DataSource = this.bindingSource1;
+            dataGridView2.DataSource = this.orderListForShip;
+
+            return 0;
+        }
+
+        private void InitializeShipNOComboBox() 
+        {
             var shipNOs = (from o in (entityDataSource1.DbContext as GODDbContext).t_orderdata
                            where o.Status == OrderStatus.PendingShipment
                            group o by o.ShipNO into g
@@ -88,12 +98,6 @@ namespace GODInventoryWinForm.Controls
             this.shipNOComboBox.ValueMember = "ShortName";
             this.shipNOComboBox.DataSource = shipNOs;
             this.shipNOComboBox.SelectedItem = null;
-            
-
-            this.dataGridView1.DataSource = this.bindingSource1;
-            dataGridView2.DataSource = this.orderListForShip;
-
-            return 0;
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -271,9 +275,9 @@ namespace GODInventoryWinForm.Controls
         private void saveButton_Click(object sender, EventArgs e)
         {
 
-            if (shipNOComboBox.Text == null || shipNOComboBox.Text == "")
+            if (shipNOComboBox.Text == null || shipNOComboBox.Text.Trim().Length == 0)
             {
-                MessageBox.Show("请维护 *配车单单号*");
+                MessageBox.Show("请输入 *配车单单号*");
                 return;
 
 
@@ -297,7 +301,8 @@ namespace GODInventoryWinForm.Controls
                 //MessageBox.Show();
 
                 this.orderListForShip.Clear();
-                this.shipNOComboBox.SelectedItem = null;
+
+                InitializeShipNOComboBox();
 
             }
         }
