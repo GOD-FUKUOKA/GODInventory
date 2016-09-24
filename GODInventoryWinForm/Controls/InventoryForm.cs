@@ -296,5 +296,10 @@ namespace GODInventoryWinForm.Controls
 
             }
         }
+
+        private void manufacturerComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
