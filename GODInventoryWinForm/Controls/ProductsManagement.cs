@@ -14,15 +14,14 @@ namespace GODInventoryWinForm.Controls
     public partial class ProductsManagement : Form
     {
         private string showtype;
-
+        private List<t_genre> genreList;
         public ProductsManagement(List<int> itemlist, string type)
         {
             InitializeComponent();
-            if (type == "Update")
+            using (var ctx = new GODDbContext())
             {
-                using (var ctx = new GODDbContext())
+                if (type == "Update")
                 {
-
                     t_itemlist order = ctx.t_itemlist.Find(itemlist[0]);
                     storeNamTextBox.Text = order.自社コード.ToString();
                     storeCodeTextBox.Text = order.得意先;
@@ -37,12 +36,25 @@ namespace GODInventoryWinForm.Controls
                     textBox2.Text = order.PT単位か.ToString();
 
                     this.productKanjiNameTextBox.Text = order.商品コード.ToString();
-                }
-            }
-            else
-                this.storeNamTextBox.Enabled = true;
 
+                }
+                else
+                    this.storeNamTextBox.Enabled = true;
+                genreList = ctx.t_genre.OrderBy(o => o.Position).ToList();
+            }
             showtype = type;
+ 
+            t_genre item = new t_genre();         
+            item.Position = 0;
+            item.idジャンル = 0;
+            item.ジャンル名 = "";
+            genreList.Insert(0, item);
+
+           // genreList.Insert(0, new MockEntity { idジャンル = "不限", ジャンル名 = "不限" });
+            this.invoiceNOTextBox.DisplayMember = "ジャンル名";
+            this.invoiceNOTextBox.ValueMember = "idジャンル";
+            this.invoiceNOTextBox.DataSource = genreList;
+
 
         }
 
@@ -53,7 +65,7 @@ namespace GODInventoryWinForm.Controls
                 if (showtype == "Update")
                 {
                     t_itemlist order = ctx.t_itemlist.Find(Convert.ToInt32(storeNamTextBox.Text));
-        
+
                     order.得意先 = storeCodeTextBox.Text;
                     order.ジャンル = Convert.ToInt16(invoiceNOTextBox.Text);
                     order.商品名 = textBox12.Text;
@@ -105,6 +117,28 @@ namespace GODInventoryWinForm.Controls
         private void cancelFormButton_Click(object sender, EventArgs e)
         {
             this.Close();
+
+        }
+
+        private void storeNamTextBox_MouseLeave(object sender, EventArgs e)
+        {
+            if (storeNamTextBox.Text == "")
+                return;
+
+            int zisheID = Convert.ToInt32(storeNamTextBox.Text);
+
+            using (var ctx = new GODDbContext())
+            {
+                var List = (from i in ctx.t_itemlist
+                            where i.自社コード == zisheID
+                            select new v_itemprice { 自社コード = i.自社コード }).ToList();
+
+                if (List.Count > 0)
+                {
+                    errorProvider1.SetError(storeNamTextBox, String.Format("自社コード 已存在"));
+                    return;
+                }
+            }
 
         }
     }

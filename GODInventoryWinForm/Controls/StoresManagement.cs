@@ -114,5 +114,26 @@ namespace GODInventoryWinForm.Controls
         {
 
         }
+
+        private void storeNamTextBox_MouseLeave(object sender, EventArgs e)
+        {
+            if (storeNamTextBox.Text == "")
+                return;
+
+            int zisheID = Convert.ToInt32(storeNamTextBox.Text);
+
+            using (var ctx = new GODDbContext())
+            {
+                var List = (from i in ctx.t_shoplist
+                            where i.店番 == zisheID
+                            select i).FirstOrDefault();
+
+                if (List !=null)
+                {
+                    errorProvider1.SetError(storeNamTextBox, String.Format("店番 已存在"));
+                    return;
+                }
+            }
+        }
     }
 }
