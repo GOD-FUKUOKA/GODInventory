@@ -104,6 +104,15 @@
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.DanDangComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.PMHZCombox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.GenreNamecomboBox = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ZKZTcomboBox3 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ClearSelect = new System.Windows.Forms.Button();
             this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
@@ -140,6 +149,15 @@
             // 
             // ordersTabPage
             // 
+            this.ordersTabPage.Controls.Add(this.ClearSelect);
+            this.ordersTabPage.Controls.Add(this.ZKZTcomboBox3);
+            this.ordersTabPage.Controls.Add(this.label4);
+            this.ordersTabPage.Controls.Add(this.GenreNamecomboBox);
+            this.ordersTabPage.Controls.Add(this.label3);
+            this.ordersTabPage.Controls.Add(this.PMHZCombox);
+            this.ordersTabPage.Controls.Add(this.label2);
+            this.ordersTabPage.Controls.Add(this.DanDangComboBox);
+            this.ordersTabPage.Controls.Add(this.label1);
             this.ordersTabPage.Controls.Add(this.newOrderbutton);
             this.ordersTabPage.Controls.Add(this.saveButton);
             this.ordersTabPage.Controls.Add(this.cancelButton);
@@ -263,12 +281,12 @@
             this.Column4});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 65);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 104);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(983, 388);
+            this.dataGridView1.Size = new System.Drawing.Size(983, 349);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -773,14 +791,101 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1});
             this.contextMenuStrip2.Name = "contextMenuStrip1";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(99, 26);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
             this.toolStripMenuItem1.Text = "退单";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // DanDangComboBox
+            // 
+            this.DanDangComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DanDangComboBox.FormattingEnabled = true;
+            this.DanDangComboBox.Location = new System.Drawing.Point(53, 60);
+            this.DanDangComboBox.Name = "DanDangComboBox";
+            this.DanDangComboBox.Size = new System.Drawing.Size(128, 21);
+            this.DanDangComboBox.TabIndex = 78;
+            this.DanDangComboBox.SelectedIndexChanged += new System.EventHandler(this.DanDangComboBox_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 64);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 77;
+            this.label1.Text = "担当";
+            // 
+            // PMHZCombox
+            // 
+            this.PMHZCombox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.PMHZCombox.FormattingEnabled = true;
+            this.PMHZCombox.Location = new System.Drawing.Point(258, 60);
+            this.PMHZCombox.Name = "PMHZCombox";
+            this.PMHZCombox.Size = new System.Drawing.Size(102, 21);
+            this.PMHZCombox.TabIndex = 80;
+            this.PMHZCombox.SelectedIndexChanged += new System.EventHandler(this.PMHZCombox_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(197, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 79;
+            this.label2.Text = "品名汉字";
+            // 
+            // GenreNamecomboBox
+            // 
+            this.GenreNamecomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GenreNamecomboBox.FormattingEnabled = true;
+            this.GenreNamecomboBox.Location = new System.Drawing.Point(423, 60);
+            this.GenreNamecomboBox.Name = "GenreNamecomboBox";
+            this.GenreNamecomboBox.Size = new System.Drawing.Size(120, 21);
+            this.GenreNamecomboBox.TabIndex = 82;
+            this.GenreNamecomboBox.SelectedIndexChanged += new System.EventHandler(this.GenreNamecomboBox_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(380, 64);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(37, 13);
+            this.label3.TabIndex = 81;
+            this.label3.Text = "ｼﾞｬﾝﾙ";
+            // 
+            // ZKZTcomboBox3
+            // 
+            this.ZKZTcomboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ZKZTcomboBox3.FormattingEnabled = true;
+            this.ZKZTcomboBox3.Location = new System.Drawing.Point(615, 60);
+            this.ZKZTcomboBox3.Name = "ZKZTcomboBox3";
+            this.ZKZTcomboBox3.Size = new System.Drawing.Size(104, 21);
+            this.ZKZTcomboBox3.TabIndex = 84;
+            this.ZKZTcomboBox3.SelectedIndexChanged += new System.EventHandler(this.ZKZTcomboBox3_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(554, 64);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.TabIndex = 83;
+            this.label4.Text = "在库状态";
+            // 
+            // ClearSelect
+            // 
+            this.ClearSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ClearSelect.Location = new System.Drawing.Point(737, 60);
+            this.ClearSelect.Name = "ClearSelect";
+            this.ClearSelect.Size = new System.Drawing.Size(100, 35);
+            this.ClearSelect.TabIndex = 85;
+            this.ClearSelect.Text = "清空筛选条件";
+            this.ClearSelect.UseVisualStyleBackColor = true;
+            this.ClearSelect.Click += new System.EventHandler(this.ClearSelect_Click);
             // 
             // pager1
             // 
@@ -902,5 +1007,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ComboBox ZKZTcomboBox3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox GenreNamecomboBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox PMHZCombox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox DanDangComboBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button ClearSelect;
     }
 }

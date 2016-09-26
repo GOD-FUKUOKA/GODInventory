@@ -170,9 +170,7 @@ namespace GODInventoryWinForm.Controls
             return count;
 
         }
-
-
-
+        
         private void ApplyFilter()
         {
             string filter = "";

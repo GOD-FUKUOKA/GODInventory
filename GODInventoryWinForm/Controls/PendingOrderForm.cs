@@ -25,6 +25,7 @@ namespace GODInventoryWinForm.Controls
         private List<t_stockstate> stockstates;
         private List<v_shipper> shipperList;
         List<t_orderdata> Findorderdataresults;
+        private BindingList<v_stockios> stockiosList;
         int RowRemark = 0;
         int cloumn = 0;
 
@@ -335,6 +336,50 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 }
                 sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
                 this.bindingSource1.DataSource = sortablePendingOrderList;
+                //new 
+
+                if (sortablePendingOrderList.Count > 0)
+                {
+                    //var shops = sortablePendingOrderList.Select(s => new MockEntity { Id = s.id受注データ, FullName = s.実際配送担当 }).Distinct().ToList();
+                    //shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                    //this.DanDangComboBox.DisplayMember = "FullName";
+                    //this.DanDangComboBox.ValueMember = "Id";
+                    //this.DanDangComboBox.DataSource = shops;
+
+                    // 担当
+                    var counties = sortablePendingOrderList.Select(s => new MockEntity { ShortName = s.実際配送担当, FullName = s.実際配送担当 }).Distinct().ToList();
+                    counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                    this.DanDangComboBox.DisplayMember = "FullName";
+                    this.DanDangComboBox.ValueMember = "ShortName";
+                    this.DanDangComboBox.DataSource = counties;
+
+                    // 品名漢字
+                    var PMHZ = sortablePendingOrderList.Select(s => new MockEntity { ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().ToList();
+                    PMHZ.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                    this.PMHZCombox.DisplayMember = "FullName";
+                    this.PMHZCombox.ValueMember = "ShortName";
+                    this.PMHZCombox.DataSource = PMHZ;
+
+
+                    // GenreName
+                    var GenreName = sortablePendingOrderList.Select(s => new MockEntity { ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
+                    GenreName.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                    this.GenreNamecomboBox.DisplayMember = "FullName";
+                    this.GenreNamecomboBox.ValueMember = "ShortName";
+                    this.GenreNamecomboBox.DataSource = GenreName;
+
+
+                    // 在庫状態
+                    var ZKZT = sortablePendingOrderList.Select(s => new MockEntity { ShortName = s.在庫状態, FullName = s.在庫状態 }).Distinct().ToList();
+                    ZKZT.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                    this.ZKZTcomboBox3.DisplayMember = "FullName";
+                    this.ZKZTcomboBox3.ValueMember = "ShortName";
+                    this.ZKZTcomboBox3.DataSource = ZKZT;
+
+
+
+
+                }
             }
             dataGridView1.DataSource = this.bindingSource1;
 
@@ -472,16 +517,51 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 }
                 filter += "(伝票番号=" + this.invoiceNoFilterTextBox.Text + ")";
             }
+            if (this.DanDangComboBox.Text.Length > 0 && this.DanDangComboBox.Text!="不限")
             {
                 if (filter.Length > 0)
                 {
                     filter += " AND ";
                 }
-                filter += "(社内伝番>" + 0 + ")";
+                filter += "(実際配送担当=" + this.DanDangComboBox.Text + ")";
             }
-            //不读取 canel 的订单
+            if (this.PMHZCombox.Text.Length > 0 && this.PMHZCombox.Text != "不限")
+            {
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(品名漢字=" + this.PMHZCombox.Text + ")";
+            }
+            if (this.GenreNamecomboBox.Text.Length > 0 && this.GenreNamecomboBox.Text != "不限")
+            {
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(GenreName=" + this.GenreNamecomboBox.Text + ")";
+            }
+            if (this.ZKZTcomboBox3.Text.Length > 0 && this.ZKZTcomboBox3.Text != "不限")
+            {
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(在庫状態=" + "'" + this.ZKZTcomboBox3.Text + "'" + ")";
+            }
+            //if (this.invoiceNoFilterTextBox.Text.Length > 0)
+            //{
+            //    if (filter.Length > 0)
+            //    {
+            //        filter += " AND ";
+            //    }
+            //       filter += "(社内伝番>" + 0 + ")";
+            //    //filter += "(社内伝番=" + this.invoiceNoFilterTextBox.Text + ")";
 
-            filter += "(キャンセル<>" + "no" + ")";
+            //}
+            ////不读取 canel 的订单
+            //filter += " AND ";
+            //filter += "(キャンセル<>" + "no" + ")";
 
             this.bindingSource1.Filter = filter;
 
@@ -966,35 +1046,126 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         {
             int i = dataGridView1.CurrentCell.OwningColumn.Index;
             int iRow = dataGridView1.CurrentCell.OwningRow.Index;
-            var oids = GetOrderIdsBySelectedGridCell();
+            var oids = Sec_GetOrderIdsBySelectedGridCell();
+            int 自社コード = 0;
+
             using (var ctx = new GODDbContext())
             {
-                IEnumerable<int> rows = GetChangedRowIndexes();
 
-                if (rows.Count() > 0)
+                //  var pendingorder = bindingSource1.List[row] as v_pendingorder;
+                var filtered = ecOrderList.FindAll(s => s.id受注データ == oids[0]);
+                t_orderdata order = this.ecOrderList.Find(o => (o.id受注データ == oids[0]));
+                if (order != null)
                 {
-                    foreach (var row in rows.Distinct())
-                    {
-                        //  var pendingorder = bindingSource1.List[row] as v_pendingorder;
-                        var filtered = ecOrderList.FindAll(s => s.id受注データ == oids[0]);
-                        t_orderdata order = this.ecOrderList.Find(o => (o.id受注データ == oids[0]));
+                    //   t_orderdata order = ecOrderList.Find(pendingorder.id受注データ);
+                    //需要修改的字段为: “口数” “发注数量” “担当” “形态”
+                    order.一旦保留 = true;
+                    order.配送担当受信 = false;
+                    order.配送担当受信時刻 = null;
+                    自社コード = order.自社コード;
+                    order.社内伝番 = 0;
 
-                        //   t_orderdata order = ecOrderList.Find(pendingorder.id受注データ);
-                        //需要修改的字段为: “口数” “发注数量” “担当” “形态”
-                        order.受注日 = order.受注日;
-                        order.店舗コード = order.店舗コード;
-                        order.重量 = order.重量;
-                        order.発注形態名称漢字 = order.発注形態名称漢字;
-                        order.実際配送担当 = order.実際配送担当;
-                        order.備考 = order.備考;
-                        order.納品指示 = order.納品指示;
-                        
+                    var results = from s in ctx.t_stockrec
+                                  where s.自社コード >= 自社コード
+                                  group s by s.納品書番号 into g
+                                  select g;
+                    //删除Rec 
+                    var stockrecs = (from s in ctx.t_stockrec
+                                     where s.自社コード == 自社コード && s.状態 != "完了"
+                                     select s).ToList();
+                    ctx.t_stockrec.RemoveRange(stockrecs);
+                    //更新t_stockstate
+
+                    List<t_stockrec> receivedList = new List<t_stockrec>();
+                    foreach (var item in filtered)
+                    {
+                        if (item != null)
+                        {
+                            #region 集合
+                            var order1 = new t_stockrec();
+                            //order.日付 = orderCreatedAtDateTimePicker.Value;
+                            //order.先 = this.warehouseComboBox.Text;
+                            //order1.元 = order.;
+                            //order.工厂 = this.manufacturerComboBox.Text;
+                            //order.納品書番号 = stockNOTextBox.Text;
+
+                            order1.数量 = order.発注数量;
+                            //order.区分 = StockIoEnum.入庫.ToString();
+                            //order.事由 = this.remarkTextBox1.Text;
+                            ////order.仓库 = storeComboBox.Text;
+                            order1.自社コード = Convert.ToInt32(自社コード);
+                            order1.状態 = "あり";
+                            //order.客户 = this.clientComboBox.Text;
+                            receivedList.Add(order1);
+                            #endregion
+
+                        }
+                    }
+                    if (receivedList.Count > 0)
+                    {
+                        {
+                            OrderSqlHelper.UpdateStockState(ctx, receivedList);
+                            this.stockiosList.Clear();
+                            MessageBox.Show(String.Format("Congratulations, You have {0} items Return successfully!", receivedList.Count));
+
+                        }
                     }
 
                     ctx.SaveChanges();
-                    InitializeOrderData();
+
                 }
             }
+
+            InitializeOrderData();
+
+
+
+        }
+
+        private List<int> Sec_GetOrderIdsBySelectedGridCell()
+        {
+
+            List<int> order_ids = new List<int>();
+            var rows = GetSelectedRowsBySelectedCells(dataGridView2);
+            foreach (DataGridViewRow row in rows)
+            {
+                var pendingorder = row.DataBoundItem as t_orderdata;
+                order_ids.Add(pendingorder.id受注データ);
+            }
+
+            return order_ids;
+        }
+
+        private void DanDangComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            ApplyFilter2();
+
+
+        }
+
+        private void ClearSelect_Click(object sender, EventArgs e)
+        {
+            DanDangComboBox.SelectedIndex = 0;
+            PMHZCombox.SelectedIndex = 0;
+            GenreNamecomboBox.SelectedIndex = 0;
+            ZKZTcomboBox3.SelectedIndex = 0;
+
+        }
+
+        private void PMHZCombox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyFilter2();
+        }
+
+        private void GenreNamecomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyFilter2();
+        }
+
+        private void ZKZTcomboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyFilter2();
         }
 
     }
