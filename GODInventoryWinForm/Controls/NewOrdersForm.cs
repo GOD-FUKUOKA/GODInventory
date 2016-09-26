@@ -23,7 +23,7 @@ namespace GODInventoryWinForm.Controls
         int RowRemark = 0;
         int cloumn = 0;
 
-        private Hashtable datagrid_changes = null;
+        private Hashtable datagridChanges = null;
         List<v_duplicatedorder> duplicatedOrderList;
         SortableBindingList<v_duplicatedorder> duplicatedBindingList;
         public NewOrdersForm()
@@ -40,15 +40,15 @@ namespace GODInventoryWinForm.Controls
         private void saveButton_Click(object sender, EventArgs e)
         {
 
-            if (duplicatedOrderList.Count > 0)
+            if (duplicatedBindingList.Count > 0)
                 {
                     using (var ctx = new GODDbContext())
                     {
-                        for (int i = 0; i < duplicatedOrderList.Count; i++)
+                        for (int i = 0; i < duplicatedBindingList.Count; i++)
                         {
                             //  if ((int) != 0)
                             {
-                                var duplicated_order = duplicatedOrderList[i];
+                                var duplicated_order = duplicatedBindingList[i];
                                 t_orderdata order = ctx.t_orderdata.Find(duplicated_order.id受注データ);
 
                                 if (duplicated_order.キャンセル == "yes")
@@ -144,17 +144,17 @@ namespace GODInventoryWinForm.Controls
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             int i = e.RowIndex;
-            var order = duplicatedOrderList[i];
+            var order = duplicatedBindingList[i];
             if (order.キャンセル == "yes")
             {
                 this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Gray;
-                this.dataGridView1.Rows[i].DefaultCellStyle.SelectionBackColor = Color.Gray;
+                //this.dataGridView1.Rows[i].DefaultCellStyle.SelectionBackColor = Color.Gray;
 
             }
             else if (order.ダブリ == "yes")
             {
                 this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Red;
-                this.dataGridView1.Rows[i].DefaultCellStyle.SelectionBackColor = Color.Red;
+                //this.dataGridView1.Rows[i].DefaultCellStyle.SelectionBackColor = Color.Red;
             }
             else
             {
@@ -166,7 +166,7 @@ namespace GODInventoryWinForm.Controls
         private void cancelOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int rowIndex = this.dataGridView1.CurrentRow.Index;
-            var order = duplicatedOrderList[rowIndex];
+            var order = duplicatedBindingList[rowIndex];
             order.キャンセル = "yes";
             order.キャンセル時刻 = DateTime.Now;
             dataGridView1.ClearSelection();
@@ -176,7 +176,7 @@ namespace GODInventoryWinForm.Controls
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int rowIndex = this.dataGridView1.CurrentRow.Index;
-            var order = duplicatedOrderList[rowIndex];
+            var order = duplicatedBindingList[rowIndex];
             order.ダブリ = "yes";
             dataGridView1.ClearSelection(); 
             this.dataGridView1.Refresh();
@@ -185,7 +185,7 @@ namespace GODInventoryWinForm.Controls
         private void uncancleOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int rowIndex = this.dataGridView1.CurrentRow.Index;
-            var order = duplicatedOrderList[rowIndex];
+            var order = duplicatedBindingList[rowIndex];
             order.キャンセル = "no";
             dataGridView1.ClearSelection(); 
             this.dataGridView1.Refresh();
@@ -194,25 +194,25 @@ namespace GODInventoryWinForm.Controls
         private void unduplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int rowIndex = this.dataGridView1.CurrentRow.Index;
-            var order = duplicatedOrderList[rowIndex];
+            var order = duplicatedBindingList[rowIndex];
             order.ダブリ = "no";
             dataGridView1.ClearSelection(); 
             this.dataGridView1.Refresh();
         }
 
-        private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                if (e.RowIndex >= 0)
-                {
-                    dataGridView1.ClearSelection();
-                    dataGridView1.Rows[e.RowIndex].Selected = true;
-                    dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
-                }
-            } 
-        }
+        //private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        //{
+        //    if (e.Button == MouseButtons.Right)
+        //    {
+        //        if (e.RowIndex >= 0)
+        //        {
+        //            dataGridView1.ClearSelection();
+        //            dataGridView1.Rows[e.RowIndex].Selected = true;
+        //            dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+        //            contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+        //        }
+        //    } 
+        //}
 
        
 

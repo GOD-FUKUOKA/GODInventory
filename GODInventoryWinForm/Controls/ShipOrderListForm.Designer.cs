@@ -30,14 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.backToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.shipNOLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.受注日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,7 +43,15 @@
             this.実際配送担当Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.県別Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注形態名称漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.backToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.shipNOLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -94,66 +94,6 @@
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.backToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 26);
-            // 
-            // backToolStripMenuItem
-            // 
-            this.backToolStripMenuItem.Name = "backToolStripMenuItem";
-            this.backToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.backToolStripMenuItem.Text = "退回待发货状态";
-            this.backToolStripMenuItem.Click += new System.EventHandler(this.backToolStripMenuItem_Click);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Location = new System.Drawing.Point(802, 12);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 32);
-            this.cancelButton.TabIndex = 2;
-            this.cancelButton.Text = "取消";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // saveButton
-            // 
-            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveButton.Location = new System.Drawing.Point(695, 12);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(100, 32);
-            this.saveButton.TabIndex = 3;
-            this.saveButton.Text = "保存";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // shipNOLabel
-            // 
-            this.shipNOLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.shipNOLabel.Location = new System.Drawing.Point(59, 21);
-            this.shipNOLabel.Name = "shipNOLabel";
-            this.shipNOLabel.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.shipNOLabel.Size = new System.Drawing.Size(117, 23);
-            this.shipNOLabel.TabIndex = 4;
-            this.shipNOLabel.Text = "label1";
-            this.shipNOLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "配車表";
             // 
             // 出荷日Column1
             // 
@@ -236,6 +176,63 @@
             this.発注形態名称漢字Column1.Name = "発注形態名称漢字Column1";
             this.発注形態名称漢字Column1.ReadOnly = true;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 26);
+            // 
+            // backToolStripMenuItem
+            // 
+            this.backToolStripMenuItem.Name = "backToolStripMenuItem";
+            this.backToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.backToolStripMenuItem.Text = "退回待发货状态";
+            this.backToolStripMenuItem.Click += new System.EventHandler(this.backToolStripMenuItem_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.Location = new System.Drawing.Point(589, 12);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(100, 32);
+            this.cancelButton.TabIndex = 2;
+            this.cancelButton.Text = "取消";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Visible = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // saveButton
+            // 
+            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveButton.Location = new System.Drawing.Point(802, 12);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(100, 32);
+            this.saveButton.TabIndex = 3;
+            this.saveButton.Text = "保存";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // shipNOLabel
+            // 
+            this.shipNOLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.shipNOLabel.Location = new System.Drawing.Point(59, 21);
+            this.shipNOLabel.Name = "shipNOLabel";
+            this.shipNOLabel.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
+            this.shipNOLabel.Size = new System.Drawing.Size(117, 23);
+            this.shipNOLabel.TabIndex = 4;
+            this.shipNOLabel.Text = "label1";
+            this.shipNOLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "配車表";
+            // 
             // closeButton
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -246,7 +243,11 @@
             this.closeButton.TabIndex = 2;
             this.closeButton.Text = "閉じる";
             this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // ShipOrderListForm
             // 

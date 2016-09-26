@@ -125,6 +125,7 @@
             this.ShipperColumn1,
             this.StoreDistrictColumn1,
             this.Column2});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(3, 60);
             this.dataGridView1.Name = "dataGridView1";
@@ -134,7 +135,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(967, 348);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
-            this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
             // 
             // OrderReceivedAtColumn1

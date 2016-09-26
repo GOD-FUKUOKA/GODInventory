@@ -186,3 +186,6 @@ CHANGE COLUMN `重量` `重量` int(11) NOT NULL DEFAULT 0;
 ALTER TABLE `god_inventory`.`t_orderdata` 
 ADD COLUMN `発注品名漢字`  varchar(255) CHARACTER SET 'utf8' COLLATE utf8_unicode_ci DEFAULT NULL,
 ADD COLUMN `発注規格名漢字`  varchar(255) CHARACTER SET 'utf8' COLLATE utf8_unicode_ci DEFAULT NULL;
+
+ALTER TABLE `god_inventory`.`t_orderdata` 
+CHANGE COLUMN `最小発注単位数量` `最小発注単位数量` int(11) NOT NULL DEFAULT 0;

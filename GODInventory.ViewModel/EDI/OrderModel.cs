@@ -467,20 +467,21 @@ namespace GODInventory.ViewModel.EDI
             
             //bool exist = orders.Exists( o=> ( o.店舗コード == orderdata.店舗コード && o.商品コード == orderdata.商品コード ));
             //orderdata.ダブリ = exist ? "yes" : "no";
-            orderdata.口数 = item.PT入数;
-            orderdata.重量 = (int)( item.単品重量 * orderdata.発注数量);
             orderdata.ジャンル = item.ジャンル;
             orderdata.単位 = item.単位;
             orderdata.自社コード = item.自社コード;
             orderdata.実際配送担当 = shop.配送担当;
-            orderdata.実際出荷数量 = orderdata.発注数量;
             orderdata.県別 = shop.県別;
-            orderdata.納品口数 = orderdata.実際出荷数量 / orderdata.口数;
-            if (orderdata.実際出荷数量 % orderdata.口数 != 0)
+            orderdata.最小発注単位数量 = item.PT入数;
+            orderdata.重量 = (int)(item.単品重量 * orderdata.発注数量);
+            orderdata.口数 = orderdata.発注数量 / orderdata.最小発注単位数量;
+            if (orderdata.発注数量 % orderdata.最小発注単位数量 != 0)
             {
-                orderdata.納品口数++;
+                orderdata.口数++;
             }
-            if (orderdata.実際配送担当=="MKL" && (orderdata.ジャンル == 1001 || orderdata.ジャンル == 1003))
+            orderdata.納品口数 = orderdata.口数;
+            orderdata.実際出荷数量 = orderdata.発注数量;
+            if (orderdata.実際配送担当 == "MKL" && (orderdata.ジャンル == 1001 || orderdata.ジャンル == 1003))
             {
                 orderdata.実際配送担当 = "丸健";
             }

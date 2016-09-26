@@ -6,12 +6,12 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>27.96334cm</Width>
+              <Width>29.10105cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>2.42917cm</Height>
+              <Height>4.06958cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -21,49 +21,49 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>3.07116cm</Width>
+                                <Width>3.04999cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.64017cm</Width>
+                                <Width>1.619cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.31858cm</Width>
+                                <Width>1.29741cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.93941cm</Width>
+                                <Width>1.91824cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.95234cm</Width>
+                                <Width>1.93117cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.17212cm</Width>
+                                <Width>1.15095cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.05338cm</Width>
+                                <Width>1.03221cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>2.09816cm</Width>
+                                <Width>2.07699cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>3.474cm</Width>
+                                <Width>3.77033cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>2.49195cm</Width>
+                                <Width>3.60849cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.99233cm</Width>
+                                <Width>1.97116cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.10566cm</Width>
+                                <Width>1.08449cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.2515cm</Width>
+                                <Width>0.96575cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.38379cm</Width>
+                                <Width>1.36262cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>2.01879cm</Width>
+                                <Width>1.99762cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
@@ -82,6 +82,7 @@
                                                 <Value>受注日</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -95,30 +96,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -135,6 +113,7 @@
                                                 <Value>県別</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -148,30 +127,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -188,6 +144,7 @@
                                                 <Value>店番</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -201,30 +158,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -241,6 +175,7 @@
                                                 <Value>店名</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -254,30 +189,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -294,6 +206,7 @@
                                                 <Value>社内伝番</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -307,30 +220,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -347,6 +237,7 @@
                                                 <Value>最大行数</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -360,30 +251,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -400,6 +268,7 @@
                                                 <Value>行数</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -413,30 +282,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -453,6 +299,7 @@
                                                 <Value>商品コード</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -466,30 +313,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -506,6 +330,7 @@
                                                 <Value>品名</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -519,30 +344,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -559,6 +361,7 @@
                                                 <Value>規格</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -572,30 +375,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -612,6 +392,7 @@
                                                 <Value>伝票番号</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -625,30 +406,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -665,6 +423,7 @@
                                                 <Value>口数</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -678,30 +437,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -718,6 +454,7 @@
                                                 <Value>発単</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -731,30 +468,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -771,6 +485,7 @@
                                                 <Value>合計数量</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -784,30 +499,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -824,6 +516,7 @@
                                                 <Value>配送担当</Value>
                                                 <Style>
                                                   <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
                                             </TextRuns>
@@ -837,30 +530,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -896,10 +566,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -963,30 +630,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1016,30 +660,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1069,30 +690,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1122,30 +720,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1175,30 +750,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1228,30 +780,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1281,30 +810,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1334,30 +840,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1387,30 +870,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1440,30 +900,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1493,30 +930,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1546,30 +960,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1599,30 +990,7 @@
                                           <Border>
                                             <Style>Solid</Style>
                                           </Border>
-                                          <TopBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </TopBorder>
-                                          <BottomBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </BottomBorder>
-                                          <LeftBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </LeftBorder>
-                                          <RightBorder>
-                                            <Color>Black</Color>
-                                            <Style>Solid</Style>
-                                            <Width>1pt</Width>
-                                          </RightBorder>
-                                          <PaddingLeft>2pt</PaddingLeft>
-                                          <PaddingRight>2pt</PaddingRight>
-                                          <PaddingTop>2pt</PaddingTop>
-                                          <PaddingBottom>2pt</PaddingBottom>
+                                          <VerticalAlign>Middle</VerticalAlign>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -1661,9 +1029,9 @@
                             </TablixMembers>
                           </TablixRowHierarchy>
                           <DataSetName>ShippingItems</DataSetName>
-                          <Top>0.3175cm</Top>
+                          <Top>1.5875cm</Top>
                           <Height>1.84708cm</Height>
-                          <Width>27.96334cm</Width>
+                          <Width>28.83647cm</Width>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -1694,6 +1062,71 @@
                             <PaddingBottom>1pt</PaddingBottom>
                           </Style>
                         </Tablix>
+                        <Textbox Name="店舗名漢字1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=First(Fields!店舗名漢字.Value)</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>店舗名漢字1</rd:DefaultName>
+                          <Top>0.57891cm</Top>
+                          <Left>1.23155cm</Left>
+                          <Height>0.6cm</Height>
+                          <Width>2.5cm</Width>
+                          <ZIndex>1</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>店名</Value>
+                                  <Style>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Top>0.57891cm</Top>
+                          <Height>0.6cm</Height>
+                          <Width>1.19627cm</Width>
+                          <ZIndex>2</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
                       </ReportItems>
                       <KeepTogether>true</KeepTogether>
                       <Style>
@@ -1702,6 +1135,7 @@
                         </Border>
                       </Style>
                     </Rectangle>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -1718,16 +1152,15 @@
             <TablixMember>
               <Group Name="Details1">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!自社コード.Value</GroupExpression>
+                  <GroupExpression>=Fields!店舗コード.Value</GroupExpression>
                 </GroupExpressions>
               </Group>
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>ShippingItems</DataSetName>
-        <Top>0.3175cm</Top>
-        <Height>2.42917cm</Height>
-        <Width>27.96334cm</Width>
+        <Height>4.06958cm</Height>
+        <Width>29.10105cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1735,10 +1168,10 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.20015in</Height>
+    <Height>1.80011in</Height>
     <Style />
   </Body>
-  <Width>11.00919in</Width>
+  <Width>11.45711in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

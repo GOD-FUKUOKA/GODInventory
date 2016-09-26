@@ -217,24 +217,15 @@ namespace GODInventoryWinForm.Controls
 
             #endregion
 
-            #region old
-            //if (dataGridView1.SelectedRows.Count > 0)
-            //{
-
-            //    DataGridViewRow row = null;
-            //    for (int i = 0; i < dataGridView1.SelectedRows.Count; i++)
-            //    {
-            //        row = dataGridView1.SelectedRows[i];
-            //        this.orderListForShip.Add((v_pendingorder)orderList[row.Index]);
-            //        this.orderList.RemoveAt(row.Index);
-            //    }
-            //}
-            #endregion
-
         }
 
         private void moveUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!ValidateShipNo())
+            {
+                MessageBox.Show("请输入 *配车单单号*");
+                return;
+            }
 
             #region 将数据集放入集合
             if (dataGridView2.SelectedRows.Count > 0)
@@ -249,22 +240,6 @@ namespace GODInventoryWinForm.Controls
                     this.orderListForShip.RemoveAt(row.Index);
                 }
             }
-            #endregion
-
-
-            #region old
-            //if (dataGridView2.SelectedRows.Count > 0)
-            //{
-            //    DataGridViewRow row = null;
-            //    for (int i = 0; i < dataGridView2.SelectedRows.Count; i++)
-            //    {
-            //        row = dataGridView2.SelectedRows[i];
-            //        this.orderList.Add(this.orderListForShip[row.Index]);
-            //        this.orderListForShip.RemoveAt(row.Index);
-            //    }
-            //}
-
-
             #endregion
 
         }
@@ -412,7 +387,14 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-
+        private bool ValidateShipNo()
+        {
+            if (this.shipNOComboBox.Text.Length == 0)
+            {
+                return false;
+            }
+            return true;
+        }
 
 
     }

@@ -210,7 +210,7 @@ namespace GODInventory.MyLinq
         [StringLength(255)]
         public string 規格名カナ { get; set; }
 
-        public int? 最小発注単位数量 { get; set; }
+        public int 最小発注単位数量 { get; set; }
 
         [StringLength(255)]
         public string 発注単位名称漢字 { get; set; }

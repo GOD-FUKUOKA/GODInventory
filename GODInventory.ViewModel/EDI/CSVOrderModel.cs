@@ -480,9 +480,10 @@ namespace GODInventory.ViewModel.EDI
             orderdata.ジャンル = item.ジャンル;
             orderdata.単位 = item.単位;
             orderdata.自社コード = item.自社コード;
-            orderdata.口数 = item.PT入数;
+            orderdata.最小発注単位数量 = item.PT入数;
             orderdata.実際配送担当 = shop.配送担当;
             orderdata.実際出荷数量 = orderdata.発注数量;
+            orderdata.口数 = orderdata.発注数量 / orderdata.最小発注単位数量;
             orderdata.納品口数 = orderdata.実際出荷数量 / orderdata.口数;
             if (orderdata.実際出荷数量 % orderdata.口数 != 0) 
             {

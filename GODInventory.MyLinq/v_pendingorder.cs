@@ -42,8 +42,9 @@ namespace GODInventory.MyLinq
 
         public int 発注数量 { get; set; }
 
-
         public int 実際出荷数量 { get; set; }
+
+        public int 最小発注単位数量 { get; set; }
 
         public int 自社コード { get; set; }
 

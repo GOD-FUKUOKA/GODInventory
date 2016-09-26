@@ -111,13 +111,13 @@ namespace GODInventoryWinForm.Controls
 
             if (cell.OwningColumn == this.実際出荷数量Column1)
             {
-                order.納品口数 = Convert.ToInt32(new_cell_value) / order.口数;
+                order.納品口数 = Convert.ToInt32(new_cell_value) / order.最小発注単位数量;
                 order.重量 = (int) ( item.単品重量 * order.実際出荷数量 );
             }
             else
                 if (cell.OwningColumn == this.納品口数Column1)
                 {
-                    order.実際出荷数量 = Convert.ToInt32(new_cell_value) * order.口数;
+                    order.実際出荷数量 = Convert.ToInt32(new_cell_value) * order.最小発注単位数量;
                     order.重量 = (int)(item.単品重量 * order.実際出荷数量);
 
                 }
@@ -180,6 +180,14 @@ namespace GODInventoryWinForm.Controls
                 var order  = orderList[idx] as t_orderdata;
                 order.ShipNO = null;
                 order.Status = OrderStatus.WaitToShip;            
+            }
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridChanges.Count > 0) 
+            {
+                
             }
         }
 
