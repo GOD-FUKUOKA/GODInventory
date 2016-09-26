@@ -46,10 +46,10 @@ namespace GODInventoryWinForm.Controls
             //         group s by s.配送担当 into g
             //               select new v_shipper { ShortName = g.Key }).ToList();
 
-            var genre = ( from g in ctx.t_genre
-                          where g.ジャンル名 == "二次製品" 
-                              select g).FirstOrDefault();
-            ErCiZhiPinId = ( genre != null ? genre.idジャンル : 0 );
+            var genre = (from g in ctx.t_genre
+                         where g.ジャンル名 == "二次製品"
+                         select g).FirstOrDefault();
+            ErCiZhiPinId = (genre != null ? genre.idジャンル : 0);
 
             InitializePager();
 
@@ -90,10 +90,11 @@ namespace GODInventoryWinForm.Controls
             }
             this.dataGridView2.AutoGenerateColumns = false;
             this.dataGridView2.DataSource = this.ecOrderList;
-        
+
         }
 
-        private void InitializeShipperOrderList() {
+        private void InitializeShipperOrderList()
+        {
             this.shipperComboBox.SelectedIndex = 0;
             //this.shipperComboBox.DisplayMember = "ShortName";
             //this.shipperComboBox.ValueMember = "ShortName";
@@ -113,9 +114,9 @@ namespace GODInventoryWinForm.Controls
      WHERE `Status`={0} AND `ジャンル`= 1003 AND `社内伝番` IS NOT NULL
      GROUP BY `社内伝番`
      ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
-            
+
             this.shipperOrderList = this.entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.NotifyShipper).ToList();
-            
+
             string shipper = this.shipperComboBox.Text;
 
             this.dataGridView3.AutoGenerateColumns = false;
@@ -139,7 +140,7 @@ namespace GODInventoryWinForm.Controls
         {
 
 
-        }    
+        }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
@@ -303,7 +304,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
 
                 // create BindingList (sortable/filterable)
-                int offset = ( pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0 );
+                int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
                 this.pendingOrderList = entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.Pending, pager1.PageSize, offset).ToList();
 
                 // count 计算t_orderdata 表， list 是 orderdata join itemlist join stockstate
@@ -314,7 +315,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 {
                     int total = gos.Sum(o => o.実際出荷数量);
                     int min = gos.Min(o => o.実際出荷数量);
-                    
+
                     foreach (var o in gos)
                     {
 
@@ -322,7 +323,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                         {
                             o.在庫状態 = "あり";
                         }
-                        else if (o.在庫数 > min )
+                        else if (o.在庫数 > min)
                         {
                             o.在庫状態 = "一部不足";
                         }
@@ -333,7 +334,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                     }
                 }
                 sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
-                this.bindingSource1.DataSource = sortablePendingOrderList;               
+                this.bindingSource1.DataSource = sortablePendingOrderList;
             }
             dataGridView1.DataSource = this.bindingSource1;
 
@@ -376,7 +377,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             }
         }
 
-      
+
 
         private void newOrderbutton_Click(object sender, EventArgs e)
         {
@@ -488,7 +489,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         private void filterButton_Click(object sender, EventArgs e)
         {
 
-                ApplyFilter();
+            ApplyFilter();
 
 
             ///筛选调价
@@ -683,7 +684,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             foreach (DataGridViewRow row in rows)
             {
                 var pendingorder = row.DataBoundItem as v_pendingorder;
-                orders.Add( pendingorder );
+                orders.Add(pendingorder);
             }
 
             return orders;
@@ -826,7 +827,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         private void ecSaveButton_Click(object sender, EventArgs e)
         {
-           
+
             this.entityDataSource1.DbContext.SaveChanges();
 
             //List<int> oid = new List<int>();
@@ -835,7 +836,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             //{
             //    oid.Add(o.id受注データ);
             //}
-           
+
             //using (var ctx = new GODDbContext())
             //{
             //    t_orderdata temp = new t_orderdata();
@@ -860,22 +861,22 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         {
             var orders = this.dataGridView3.DataSource as List<v_pendingorder>;
             if (orders.Count() > 0)
-            { 
+            {
                 string shipperName = shipperComboBox.Text;
                 List<t_maruken_trans> trans = new List<t_maruken_trans>();
 
-                foreach (var o in orders) 
+                foreach (var o in orders)
                 {
 
                     t_maruken_trans temp = new t_maruken_trans();
-                    
+
                     temp.OrderId = o.id受注データ;
-                   
+
                     temp.受注日 = o.受注日;
                     temp.店舗コード = o.店舗コード;
                     temp.店舗名漢字 = o.店舗名漢字;
                     temp.伝票番号 = o.伝票番号;
-                    temp.ジャンル = Convert.ToInt16( o.ジャンル );
+                    temp.ジャンル = Convert.ToInt16(o.ジャンル);
                     temp.品名漢字 = o.品名漢字;
                     temp.規格名漢字 = o.規格名漢字;
                     temp.口数 = o.口数;
@@ -886,7 +887,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                     temp.納品指示 = o.納品指示;
                     temp.備考 = o.備考;
                     trans.Add(temp);
-                
+
                 }
 
                 using (var ctx = new GODDbContext())
@@ -904,7 +905,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         }
 
-      
+
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
             if (e.TabPage == ecTabPage)
@@ -912,7 +913,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 InitializeRCList();
             }
 
-            if (e.TabPage == toShipperTabPage) {
+            if (e.TabPage == toShipperTabPage)
+            {
 
                 InitializeShipperOrderList();
             }
@@ -941,6 +943,58 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             //else {
             //    e.ThrowException = true;
             //}
+        }
+
+        private void dataGridView2_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    dataGridView2.ClearSelection();
+                    dataGridView2.Columns[e.ColumnIndex].Selected = true;
+                    dataGridView2.CurrentCell = dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                    contextMenuStrip2.Show(MousePosition.X, MousePosition.Y);
+
+                }
+
+            }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            int i = dataGridView1.CurrentCell.OwningColumn.Index;
+            int iRow = dataGridView1.CurrentCell.OwningRow.Index;
+            var oids = GetOrderIdsBySelectedGridCell();
+            using (var ctx = new GODDbContext())
+            {
+                IEnumerable<int> rows = GetChangedRowIndexes();
+
+                if (rows.Count() > 0)
+                {
+                    foreach (var row in rows.Distinct())
+                    {
+                        //  var pendingorder = bindingSource1.List[row] as v_pendingorder;
+                        var filtered = ecOrderList.FindAll(s => s.id受注データ == oids[0]);
+                        t_orderdata order = this.ecOrderList.Find(o => (o.id受注データ == oids[0]));
+
+                        //   t_orderdata order = ecOrderList.Find(pendingorder.id受注データ);
+                        //需要修改的字段为: “口数” “发注数量” “担当” “形态”
+                        order.受注日 = order.受注日;
+                        order.店舗コード = order.店舗コード;
+                        order.重量 = order.重量;
+                        order.発注形態名称漢字 = order.発注形態名称漢字;
+                        order.実際配送担当 = order.実際配送担当;
+                        order.備考 = order.備考;
+                        order.納品指示 = order.納品指示;
+                        
+                    }
+
+                    ctx.SaveChanges();
+                    InitializeOrderData();
+                }
+            }
         }
 
     }
