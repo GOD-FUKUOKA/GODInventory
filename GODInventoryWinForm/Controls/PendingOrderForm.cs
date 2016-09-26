@@ -201,6 +201,9 @@ namespace GODInventoryWinForm.Controls
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+
+
+
         }
 
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -252,6 +255,11 @@ namespace GODInventoryWinForm.Controls
             {
                 datagrid_changes.Remove(cell_key + "_changed");
             }
+            //new
+
+            var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            this.sortablePendingOrderList[e.RowIndex].実際出荷数量 = (int)cell.Value;
+            //this.sortablePendingOrderList[e.RowIndex].納品口数= (int)cell.Value/ this.sortablePendingOrderList[e.RowIndex].
 
         }
 
@@ -517,7 +525,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 }
                 filter += "(伝票番号=" + this.invoiceNoFilterTextBox.Text + ")";
             }
-            if (this.DanDangComboBox.Text.Length > 0 && this.DanDangComboBox.Text!="不限")
+            if (this.DanDangComboBox.Text.Length > 0 && this.DanDangComboBox.Text != "不限")
             {
                 if (filter.Length > 0)
                 {
@@ -551,17 +559,17 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             }
             //if (this.invoiceNoFilterTextBox.Text.Length > 0)
             //{
-            //    if (filter.Length > 0)
-            //    {
-            //        filter += " AND ";
-            //    }
-            //       filter += "(社内伝番>" + 0 + ")";
+            //if (filter.Length > 0)
+            //{
+            //    filter += " AND ";
+            //}
+            //filter += "(社内伝番>" + 0 + ")";
             //    //filter += "(社内伝番=" + this.invoiceNoFilterTextBox.Text + ")";
 
             //}
             ////不读取 canel 的订单
             //filter += " AND ";
-            //filter += "(キャンセル<>" + "no" + ")";
+            //filter += "(キャンセル<>" + "'" + "no" + "'" + ")";
 
             this.bindingSource1.Filter = filter;
 
@@ -1044,79 +1052,91 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            int i = dataGridView1.CurrentCell.OwningColumn.Index;
-            int iRow = dataGridView1.CurrentCell.OwningRow.Index;
-            var oids = Sec_GetOrderIdsBySelectedGridCell();
-            int 自社コード = 0;
+            int s = this.tabControl1.SelectedIndex;
 
-            using (var ctx = new GODDbContext())
+            if (s == 1)
+            {
+                int i = dataGridView1.CurrentCell.OwningColumn.Index;
+                int iRow = dataGridView1.CurrentCell.OwningRow.Index;
+                var oids = Sec_GetOrderIdsBySelectedGridCell();
+                int 自社コード = 0;
+
+                using (var ctx = new GODDbContext())
+                {
+
+                    //  var pendingorder = bindingSource1.List[row] as v_pendingorder;
+                    var filtered = ecOrderList.FindAll(s => s.id受注データ == oids[0]);
+                    t_orderdata order = this.ecOrderList.Find(o => (o.id受注データ == oids[0]));
+                    if (order != null)
+                    {
+                        //   t_orderdata order = ecOrderList.Find(pendingorder.id受注データ);
+                        //需要修改的字段为: “口数” “发注数量” “担当” “形态”
+                        order.一旦保留 = true;
+                        order.配送担当受信 = false;
+                        order.配送担当受信時刻 = null;
+                        自社コード = order.自社コード;
+                        order.社内伝番 = 0;
+
+                        var results = from s in ctx.t_stockrec
+                                      where s.自社コード >= 自社コード
+                                      group s by s.納品書番号 into g
+                                      select g;
+                        //删除Rec 
+                        var stockrecs = (from s in ctx.t_stockrec
+                                         where s.自社コード == 自社コード && s.状態 != "完了"
+                                         select s).ToList();
+                        ctx.t_stockrec.RemoveRange(stockrecs);
+                        //更新t_stockstate
+
+                        List<t_stockrec> receivedList = new List<t_stockrec>();
+                        foreach (var item in filtered)
+                        {
+                            if (item != null)
+                            {
+                                #region 集合
+                                var order1 = new t_stockrec();
+                                //order.日付 = orderCreatedAtDateTimePicker.Value;
+                                //order.先 = this.warehouseComboBox.Text;
+                                //order1.元 = order.;
+                                //order.工厂 = this.manufacturerComboBox.Text;
+                                //order.納品書番号 = stockNOTextBox.Text;
+
+                                order1.数量 = order.発注数量;
+                                //order.区分 = StockIoEnum.入庫.ToString();
+                                //order.事由 = this.remarkTextBox1.Text;
+                                ////order.仓库 = storeComboBox.Text;
+                                order1.自社コード = Convert.ToInt32(自社コード);
+                                order1.状態 = "あり";
+                                //order.客户 = this.clientComboBox.Text;
+                                receivedList.Add(order1);
+                                #endregion
+
+                            }
+                        }
+                        if (receivedList.Count > 0)
+                        {
+                            {
+                                OrderSqlHelper.UpdateStockState(ctx, receivedList);
+                                this.stockiosList.Clear();
+                                MessageBox.Show(String.Format("Congratulations, You have {0} items Return successfully!", receivedList.Count));
+
+                            }
+                        }
+
+                        ctx.SaveChanges();
+
+                    }
+                }
+
+                InitializeOrderData();
+            }
+            else if (s == 1)
             {
 
-                //  var pendingorder = bindingSource1.List[row] as v_pendingorder;
-                var filtered = ecOrderList.FindAll(s => s.id受注データ == oids[0]);
-                t_orderdata order = this.ecOrderList.Find(o => (o.id受注データ == oids[0]));
-                if (order != null)
-                {
-                    //   t_orderdata order = ecOrderList.Find(pendingorder.id受注データ);
-                    //需要修改的字段为: “口数” “发注数量” “担当” “形态”
-                    order.一旦保留 = true;
-                    order.配送担当受信 = false;
-                    order.配送担当受信時刻 = null;
-                    自社コード = order.自社コード;
-                    order.社内伝番 = 0;
 
-                    var results = from s in ctx.t_stockrec
-                                  where s.自社コード >= 自社コード
-                                  group s by s.納品書番号 into g
-                                  select g;
-                    //删除Rec 
-                    var stockrecs = (from s in ctx.t_stockrec
-                                     where s.自社コード == 自社コード && s.状態 != "完了"
-                                     select s).ToList();
-                    ctx.t_stockrec.RemoveRange(stockrecs);
-                    //更新t_stockstate
 
-                    List<t_stockrec> receivedList = new List<t_stockrec>();
-                    foreach (var item in filtered)
-                    {
-                        if (item != null)
-                        {
-                            #region 集合
-                            var order1 = new t_stockrec();
-                            //order.日付 = orderCreatedAtDateTimePicker.Value;
-                            //order.先 = this.warehouseComboBox.Text;
-                            //order1.元 = order.;
-                            //order.工厂 = this.manufacturerComboBox.Text;
-                            //order.納品書番号 = stockNOTextBox.Text;
 
-                            order1.数量 = order.発注数量;
-                            //order.区分 = StockIoEnum.入庫.ToString();
-                            //order.事由 = this.remarkTextBox1.Text;
-                            ////order.仓库 = storeComboBox.Text;
-                            order1.自社コード = Convert.ToInt32(自社コード);
-                            order1.状態 = "あり";
-                            //order.客户 = this.clientComboBox.Text;
-                            receivedList.Add(order1);
-                            #endregion
-
-                        }
-                    }
-                    if (receivedList.Count > 0)
-                    {
-                        {
-                            OrderSqlHelper.UpdateStockState(ctx, receivedList);
-                            this.stockiosList.Clear();
-                            MessageBox.Show(String.Format("Congratulations, You have {0} items Return successfully!", receivedList.Count));
-
-                        }
-                    }
-
-                    ctx.SaveChanges();
-
-                }
             }
-
-            InitializeOrderData();
 
 
 
@@ -1165,8 +1185,49 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         private void ZKZTcomboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ApplyFilter2();
+            //ApplyFilter2();
+
+            ApplyBindSourceFilter(ZKZTcomboBox3.Text);
         }
+
+
+        private void ApplyBindSourceFilter(string text)
+        {
+            this.bindingSource1.Filter = null;
+            this.bindingSource1.DataSource = this.sortablePendingOrderList;
+            if (bindingSource1.Count > 0)
+            {
+                string filter = "";
+                //  filter += "(在庫状態=" + "'" + this.ZKZTcomboBox3.Text + "'" + ")";
+
+
+                if (this.ZKZTcomboBox3.Text.Length > 0 && this.ZKZTcomboBox3.Text != "不限")
+                {
+                    filter += "(在庫状態=" + "'" + this.ZKZTcomboBox3.Text + "'" + ")";
+                }
+                //if (this.storeComboBox.Text.Length > 0 && this.storeComboBox.Text != "不限")
+                //{
+                //    if (filter.Length > 0)
+                //    {
+                //        filter += " AND ";
+                //    }
+                //    // filter += "(店舗名漢字=" + "'" + this.storeComboBox.Text + "'" + ")";
+                //    int code = (int)this.storeComboBox.SelectedValue;
+
+                //    filter += "(店舗コード=" + "'" + code.ToString() + "'" + ")";
+                //}
+                //if (this.shipperComboBox.Text.Length > 0)
+                //{
+                //    if (filter.Length > 0)
+                //    {
+                //        filter += " AND ";
+                //    }
+                //    filter += "(実際配送担当=" + "'" + this.shipperComboBox.Text + "'" + ")";
+                //}
+                bindingSource1.Filter = filter;
+            }
+        }
+
 
     }
 }
