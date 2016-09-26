@@ -22,7 +22,7 @@ namespace GODInventoryWinForm.Controls
         int first = 0;
         public List<v_groupedorder> groupedOrderList;
 
-        
+
         public WaitToShipForm()
         {
             InitializeComponent();
@@ -57,14 +57,14 @@ namespace GODInventoryWinForm.Controls
             this.bindingSource1.DataSource = this.orderBindingList;
             if (this.orderBindingList.Count > 0)
             {
-                
+
                 this.bindingSource1.Filter = String.Format("実際配送担当='{0}'", shipperComboBox.Text);
 
                 var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
 
                 var shops = orders.Select(o => new MockEntity { Id = o.店舗コード, FullName = o.店名 }).Distinct().ToList();
-               
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" } );
+
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
 
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
@@ -87,7 +87,7 @@ namespace GODInventoryWinForm.Controls
             return 0;
         }
 
-        private void InitializeShipNOComboBox() 
+        private void InitializeShipNOComboBox()
         {
             var shipNOs = (from o in (entityDataSource1.DbContext as GODDbContext).t_orderdata
                            where o.Status == OrderStatus.PendingShipment
@@ -133,7 +133,6 @@ namespace GODInventoryWinForm.Controls
         {
             ApplyBindSourceFilter(shipperComboBox.Text);
         }
-
 
         private void ApplyBindSourceFilter(string text)
         {
@@ -234,8 +233,6 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-
-
         private void moveUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -277,7 +274,8 @@ namespace GODInventoryWinForm.Controls
 
             if (shipNOComboBox.Text == null || shipNOComboBox.Text.Trim().Length == 0)
             {
-                MessageBox.Show("请输入 *配车单单号*");
+                errorProvider1.SetError(shipNOComboBox, String.Format("配车单内容不能为空的"));
+                //MessageBox.Show("请输入 *配车单单号*");
                 return;
 
 
@@ -310,11 +308,77 @@ namespace GODInventoryWinForm.Controls
         private void shipperComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             ApplyBindSourceFilter(shipperComboBox.Text);
+            De_InitializeDataSource();
+
+        }
+        public int De_InitializeDataSource()
+        {
+ 
+            this.orderListForShip = new BindingList<v_pendingorder>();
+
+            var q = OrderSqlHelper.WaitToShipOrderSql(this.entityDataSource1);
+            this.orderBindingList = this.entityDataSource1.CreateView(q);
+            this.bindingSource1.Filter = null;
+            this.bindingSource1.DataSource = this.orderBindingList;
+            if (this.orderBindingList.Count > 0)
+            {
+
+                this.bindingSource1.Filter = String.Format("実際配送担当='{0}'", shipperComboBox.Text);
+
+                var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
+
+                var shops = orders.Select(o => new MockEntity { Id = o.店舗コード, FullName = o.店名 }).Distinct().ToList();
+
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+
+                this.storeComboBox.DisplayMember = "FullName";
+                this.storeComboBox.ValueMember = "Id";
+                this.storeComboBox.DataSource = shops;
+
+
+                var counties = orders.Select(o => new MockEntity { Id = o.店舗コード, FullName = o.県別 }).Distinct().ToList();
+                counties.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                this.countyComboBox1.DisplayMember = "FullName";
+                this.countyComboBox1.ValueMember = "Id";
+                this.countyComboBox1.DataSource = counties;
+
+            }
+
+            InitializeShipNOComboBox();
+            this.dataGridView1.DataSource = this.bindingSource1;
+            dataGridView2.DataSource = this.orderListForShip;
+
+            return 0;
+
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             ApplyBindSourceFilter(countyComboBox1.Text);
+            var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
+            var filtered = orders.FindAll(s => s.県別 == this.countyComboBox1.Text).Distinct().ToList();
+
+            if (filtered.Count > 0)
+            {
+                var shops1 = filtered.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).Distinct().ToList();
+                shops1.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                this.storeComboBox.DisplayMember = "FullName";
+                this.storeComboBox.ValueMember = "Id";
+                this.storeComboBox.DataSource = shops1;
+                this.storeComboBox.SelectedIndex = 1;
+
+            }
+            else
+            {
+                var shops = orders.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).Distinct().ToList();
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                this.storeComboBox.DisplayMember = "FullName";
+                this.storeComboBox.ValueMember = "Id";
+                this.storeComboBox.DataSource = shops;
+
+
+            }
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -333,10 +397,11 @@ namespace GODInventoryWinForm.Controls
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var row = dataGridView1.CurrentRow;
-            if( row != null ){
+            if (row != null)
+            {
                 var order = row.DataBoundItem as v_pendingorder;
                 editOrderForm.OrderId = order.id受注データ;
-                if (editOrderForm.ShowDialog() == DialogResult.OK) 
+                if (editOrderForm.ShowDialog() == DialogResult.OK)
                 {
                     order.実際出荷数量 = editOrderForm.Order.実際出荷数量;
                     order.納品口数 = editOrderForm.Order.納品口数;
@@ -344,7 +409,7 @@ namespace GODInventoryWinForm.Controls
                     dataGridView1.Refresh();
                 }
             }
-            
+
         }
 
 

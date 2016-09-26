@@ -42,10 +42,10 @@ namespace GODInventoryWinForm.Controls
                 shopList = ctx.t_shoplist.ToList();
             }
 
-            if( shopList.Count> 0)
+            if (shopList.Count > 0)
             {
                 var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id=0,FullName="不限"});
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
@@ -74,7 +74,7 @@ namespace GODInventoryWinForm.Controls
             int storeCode = 0;
             int orderCode = 0;
             int innerCode = 0;
-            string orderDateEnum  = dateEnumComboBox.Text;
+            string orderDateEnum = dateEnumComboBox.Text;
             string county = countyComboBox1.Text;
             string conditions = "";
 
@@ -102,8 +102,8 @@ namespace GODInventoryWinForm.Controls
             else if (orderDateEnum == OrderDateEnum.納品日.ToString())
             {
                 conditions += "(  `納品日`< @startAt AND `納品日`> @endAt )";
-            } 
-            
+            }
+
             List<MySqlParameter> condition_params = new List<MySqlParameter>();
 
             if (storeCode > 0)
@@ -123,22 +123,22 @@ namespace GODInventoryWinForm.Controls
                 conditions += "(`県別`= @county)";
             }
 
-            if (orderCode > 0) 
+            if (orderCode > 0)
             {
                 if (conditions.Length > 0)
                 {
                     conditions += " AND ";
                 }
                 conditions += "(`伝票番号`= @orderCode)";
-            } 
-            if (innerCode > 0) 
+            }
+            if (innerCode > 0)
             {
                 if (conditions.Length > 0)
                 {
                     conditions += " AND ";
                 }
                 conditions += "(`社内伝番`= @innerCode)";
-            } 
+            }
 
             condition_params.Add(new MySqlParameter("@startAt", startAt));
             condition_params.Add(new MySqlParameter("@endAt", endAt));
@@ -146,20 +146,21 @@ namespace GODInventoryWinForm.Controls
             condition_params.Add(new MySqlParameter("@orderCode", orderCode));
             condition_params.Add(new MySqlParameter("@county", county));
             condition_params.Add(new MySqlParameter("@storeCode", storeCode));
-            
+
             #endregion
 
             int limit = pager1.PageSize;
-            int offset = ( pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0 );
+            int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
             int count = 0;
             using (var ctx = new GODDbContext())
             {
-                if (conditions.Length > 0) {
+                if (conditions.Length > 0)
+                {
                     conditions = " WHERE " + conditions;
                 }
                 string sqlCount = string.Format(" SELECT count(*) FROM t_orderdata {0}", conditions);
                 count = ctx.Database.SqlQuery<int>(sqlCount, condition_params.ToArray()).First();
-                string sql = string.Format( " SELECT * FROM t_orderdata {0} LIMIT {1} OFFSET {2}", conditions, limit, offset );
+                string sql = string.Format(" SELECT * FROM t_orderdata {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
                 orderList = ctx.Database.SqlQuery<v_pendingorder>(sql, condition_params.ToArray()).ToList();
             }
             orderListBindingList = new SortableBindingList<v_pendingorder>(orderList);
@@ -167,7 +168,7 @@ namespace GODInventoryWinForm.Controls
             dataGridView1.DataSource = orderListBindingList;
 
             return count;
-            
+
         }
 
 
@@ -196,39 +197,39 @@ namespace GODInventoryWinForm.Controls
 
         private void storeCodeTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (storeCodeTextBox.Text.Trim().Length > 0)
-            {
-                int storeId = Convert.ToInt32(storeCodeTextBox.Text);
-                if (storeId > 0)
-                {
-                    var shops = this.shopList.Where(s => s.店番.ToString().StartsWith(storeId.ToString())).ToList();
-                    if (shops.Count > 0)
-                    {
-                        var store = shops.First();
+            //if (storeCodeTextBox.Text.Trim().Length > 0)
+            //{
+            //    int storeId = Convert.ToInt32(storeCodeTextBox.Text);
+            //    if (storeId > 0)
+            //    {
+            //        var shops = this.shopList.Where(s => s.店番.ToString().StartsWith(storeId.ToString())).ToList();
+            //        if (shops.Count > 0)
+            //        {
+            //            var store = shops.First();
 
-                        #region new
+            //            #region new
 
-                        this.storeComboBox.SelectedValue = store.店番;
+            //            this.storeComboBox.SelectedValue = store.店番;
 
-                        #endregion
-                    }
-                    else
-                    {
-                        errorProvider1.SetError(storeComboBox, String.Format("Can not find store by ID {0}", storeId));
-                    }
-                }
-                else
-                {
-                    errorProvider1.SetError(storeComboBox, String.Format("Can not find store by ID {0}", storeCodeTextBox.Text));
-                }
-            }
+            //            #endregion
+            //        }
+            //        else
+            //        {
+            //            errorProvider1.SetError(storeComboBox, String.Format("Can not find store by ID {0}", storeId));
+            //        }
+            //    }
+            //    else
+            //    {
+            //        errorProvider1.SetError(storeComboBox, String.Format("Can not find store by ID {0}", storeCodeTextBox.Text));
+            //    }
+            //}
         }
 
         private void storeComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
             if (this.storeComboBox.SelectedValue != null)
             {
-              this.storeCodeTextBox.Text = this.storeComboBox.SelectedValue.ToString();
+                this.storeCodeTextBox.Text = this.storeComboBox.SelectedValue.ToString();
                 //  InitializeOrderDataDF(this.storeCodeTextBox.Text);
             }
         }
@@ -274,7 +275,7 @@ namespace GODInventoryWinForm.Controls
 
         private int pager1_EventPaging(EventPagingArg e)
         {
-            int  count = InitializeOrderData();
+            int count = InitializeOrderData();
             return count;
         }
 
@@ -285,10 +286,111 @@ namespace GODInventoryWinForm.Controls
             {
                 this.storeCodeTextBox.Text = code.ToString();
             }
-            else {
+            else
+            {
                 this.storeCodeTextBox.Text = "";
             }
-            
+
+        }
+
+        private void storeCodeTextBox_MouseLeave(object sender, EventArgs e)
+        {
+            if (storeCodeTextBox.Text.Trim().Length > 0)
+            {
+                int storeId = Convert.ToInt32(storeCodeTextBox.Text);
+                if (storeId > 0)
+                {
+                    var shops = this.shopList.Where(s => s.店番.ToString().StartsWith(storeId.ToString())).ToList();
+                    if (shops.Count > 0)
+                    {
+                        var store = shops.First();
+
+                        #region new
+
+                        this.storeComboBox.SelectedValue = store.店番;
+
+                        #endregion
+                    }
+                    else
+                    {
+                        errorProvider1.SetError(storeComboBox, String.Format("Can not find store by ID {0}", storeId));
+                    }
+                }
+                else
+                {
+                    errorProvider1.SetError(storeComboBox, String.Format("Can not find store by ID {0}", storeCodeTextBox.Text));
+                }
+            }
+        }
+
+        private void btclear_Click(object sender, EventArgs e)
+        {
+            if (shopList.Count > 0)
+            {
+                var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                this.storeComboBox.DisplayMember = "FullName";
+                this.storeComboBox.ValueMember = "Id";
+                this.storeComboBox.DataSource = shops;
+                // 県別
+                var counties = shopList.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
+                counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                this.countyComboBox1.DisplayMember = "FullName";
+                this.countyComboBox1.ValueMember = "ShortName";
+                this.countyComboBox1.DataSource = counties;
+
+                var dateEnums = (new OrderDateEnum[] { OrderDateEnum.不限, OrderDateEnum.出荷日, OrderDateEnum.発注日, OrderDateEnum.納品日 }).Select(o => new { FullName = o.ToString(), ShortName = o.ToString() }).ToList();
+                this.dateEnumComboBox.DisplayMember = "FullName";
+                this.dateEnumComboBox.ValueMember = "ShortName";
+                this.dateEnumComboBox.DataSource = dateEnums;
+            }
+            this.dateEnumComboBox.SelectedIndex = 0;
+            storeCodeTextBox.Text = "";
+            orderCodeTextBox3.Text = "";
+            innerCodeTextBox.Text = "";
+            startDateTimePicker.Value = DateTime.Today;
+            endDateTimePicker.Value = DateTime.Today;
+
+
+        }
+
+        private void countyComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //int code = (int)countyComboBox1.SelectedValue;
+            //if (code > 0)
+            //{
+            //    this.storeCodeTextBox.Text = code.ToString();
+            //}
+            //else
+            //{
+            //    this.storeCodeTextBox.Text = "";
+            //}
+
+            var filtered = shopList.FindAll(s => s.県別 == this.countyComboBox1.SelectedValue);
+            if (filtered.Count > 0)
+            {
+                var shops = filtered.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                this.storeComboBox.DisplayMember = "FullName";
+                this.storeComboBox.ValueMember = "Id";
+                this.storeComboBox.DataSource = shops;
+                this.storeComboBox.SelectedIndex =1;
+                //  this.storeComboBox.DataSource = filtered;
+            }
+            else
+            {
+                var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                this.storeComboBox.DisplayMember = "FullName";
+                this.storeComboBox.ValueMember = "Id";
+                this.storeComboBox.DataSource = shops;
+
+                //this.storeComboBox.DataSource = shopList;
+
+            }
+
+
+
         }
 
     }
