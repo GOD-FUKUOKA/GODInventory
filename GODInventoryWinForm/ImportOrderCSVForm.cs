@@ -171,7 +171,8 @@ namespace GODInventoryWinForm
                 var locations = ctx.t_locations.ToList();
 
                 CSVOrderModel model = null;
-                int progress = 0;
+                int progress = 0;        
+
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {
                     try
@@ -182,9 +183,10 @@ namespace GODInventoryWinForm
                         //ctx.t_orderdata.AddRange(orders);                        
                         //ctx.SaveChanges();
                         arg.OrderCount = models.Count;
-
+                      
                         for (var i = 0; i < models.Count; i++)
                         {
+                         
                             if (worker.CancellationPending == true)
                             {
                                 e.Cancel = true;
@@ -225,6 +227,7 @@ namespace GODInventoryWinForm
                             {
                                 backgroundWorker1.ReportProgress(progress, arg);
                             }
+                          
 
                         }
                         backgroundWorker1.ReportProgress(100, arg);
