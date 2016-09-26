@@ -431,9 +431,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 MessageBox.Show(" please select rows in the order list first.");
             }
         }
-
-
-
+        
         private void newOrderbutton_Click(object sender, EventArgs e)
         {
             var form = new CreateOrderForm();
@@ -1056,10 +1054,11 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         {
             int page = this.tabControl1.SelectedIndex;
 
+            #region 二次制品退单‘
             if (page == 1)
             {
-                int i = dataGridView1.CurrentCell.OwningColumn.Index;
-                int iRow = dataGridView1.CurrentCell.OwningRow.Index;
+                int i = dataGridView2.CurrentCell.OwningColumn.Index;
+                int iRow = dataGridView2.CurrentCell.OwningRow.Index;
                 var oids = Sec_GetOrderIdsBySelectedGridCell();
                 int 自社コード = 0;
 
@@ -1131,14 +1130,83 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 }
 
                 InitializeOrderData();
-            }
-            else if (page == 1)
+            } 
+            #endregion
+            #region 传输订单 退单
+
+            else if (page == 2)
             {
+                var oids = THIED_GetOrderIdsBySelectedGridCell();
+                int 自社コード = 0;
 
+                using (var ctx = new GODDbContext())
+                {
 
+                    //  var pendingorder = bindingSource1.List[row] as v_pendingorder;
+                    var filtered = shipperOrderList.FindAll(s => s.id受注データ == oids[0]);
+                    t_orderdata order = this.ecOrderList.Find(o => (o.id受注データ == oids[0]));
+                    if (order != null)
+                    {
+                        //   t_orderdata order = ecOrderList.Find(pendingorder.id受注データ);
+                        //需要修改的字段为: “口数” “发注数量” “担当” “形态”
+                        order.一旦保留 = false;
+                        order.配送担当受信 = false;
+                        order.配送担当受信時刻 = null;
+                        自社コード = order.自社コード;
+                        order.社内伝番 = 0;
 
+                        var results = from s in ctx.t_stockrec
+                                      where s.自社コード >= 自社コード
+                                      group s by s.納品書番号 into g
+                                      select g;
+                        //删除Rec 
+                        var stockrecs = (from s in ctx.t_stockrec
+                                         where s.自社コード == 自社コード && s.状態 != "完了"
+                                         select s).ToList();
+                        ctx.t_stockrec.RemoveRange(stockrecs);
+                        //更新t_stockstate
 
-            }
+                        List<t_stockrec> receivedList = new List<t_stockrec>();
+                        foreach (var item in filtered)
+                        {
+                            if (item != null)
+                            {
+                                #region 集合
+                                var order1 = new t_stockrec();
+                                //order.日付 = orderCreatedAtDateTimePicker.Value;
+                                //order.先 = this.warehouseComboBox.Text;
+                                //order1.元 = order.;
+                                //order.工厂 = this.manufacturerComboBox.Text;
+                                //order.納品書番号 = stockNOTextBox.Text;
+
+                                order1.数量 = order.発注数量;
+                                //order.区分 = StockIoEnum.入庫.ToString();
+                                //order.事由 = this.remarkTextBox1.Text;
+                                ////order.仓库 = storeComboBox.Text;
+                                order1.自社コード = Convert.ToInt32(自社コード);
+                                order1.状態 = "あり";
+                                //order.客户 = this.clientComboBox.Text;
+                                receivedList.Add(order1);
+                                #endregion
+
+                            }
+                        }
+                        if (receivedList.Count > 0)
+                        {
+                            {
+                                OrderSqlHelper.UpdateStockState(ctx, receivedList);
+                                this.stockiosList.Clear();
+                                MessageBox.Show(String.Format("Congratulations, You have {0} items Return successfully!", receivedList.Count));
+
+                            }
+                        }
+
+                        ctx.SaveChanges();
+
+                    }
+                }
+            } 
+            #endregion
 
 
 
@@ -1158,6 +1226,19 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             return order_ids;
         }
 
+        private List<int> THIED_GetOrderIdsBySelectedGridCell()
+        {
+
+            List<int> order_ids = new List<int>();
+            var rows = GetSelectedRowsBySelectedCells(dataGridView3);
+            foreach (DataGridViewRow row in rows)
+            {
+                var pendingorder = row.DataBoundItem as t_orderdata;
+                order_ids.Add(pendingorder.id受注データ);
+            }
+
+            return order_ids;
+        }
         private void DanDangComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 

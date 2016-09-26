@@ -124,15 +124,15 @@ namespace GODInventoryWinForm.Controls
             //.ShowDialog();
         }
 
-        private void shipperComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ApplyBindSourceFilter(shipperComboBox.Text);
-        }
+        //private void shipperComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    ApplyBindSourceFilter(shipperComboBox.Text);
+        //}
 
-        private void shipperComboBox_TextUpdate(object sender, EventArgs e)
-        {
-            ApplyBindSourceFilter(shipperComboBox.Text);
-        }
+        //private void shipperComboBox_TextUpdate(object sender, EventArgs e)
+        //{
+        //    ApplyBindSourceFilter(shipperComboBox.Text);
+        //}
 
         private void ApplyBindSourceFilter(string text)
         {
@@ -152,7 +152,7 @@ namespace GODInventoryWinForm.Controls
                         filter += " AND ";
                     }
                     // filter += "(店舗名漢字=" + "'" + this.storeComboBox.Text + "'" + ")";
-                    int code = (int)this.storeComboBox.SelectedValue;
+                 //   int code = (int)this.storeComboBox.SelectedValue;
 
                    // filter += "(店舗コード=" + "'" + code.ToString() + "'" + ")";
 
@@ -357,32 +357,25 @@ namespace GODInventoryWinForm.Controls
 
                 var counties = filtered.Select(s => new MockEntity { ShortName = s.店名, FullName = s.店名 }).Distinct().ToList();
                 counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                this.countyComboBox1.DisplayMember = "FullName";
-                this.countyComboBox1.ValueMember = "ShortName";
-                this.countyComboBox1.DataSource = counties;
+                this.storeComboBox.DisplayMember = "FullName";
+                this.storeComboBox.ValueMember = "ShortName";
+                this.storeComboBox.DataSource = counties;
                 this.storeComboBox.SelectedIndex = 1;
             }
             else
             {
-                //var shops = orders.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).Distinct().ToList();
-                //shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
-                //this.storeComboBox.DisplayMember = "FullName";
-                //this.storeComboBox.ValueMember = "Id";
-                //this.storeComboBox.DataSource = shops;
-
                 var counties = orders.Select(s => new MockEntity { ShortName = s.店名, FullName = s.店名 }).Distinct().ToList();
                 counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                this.countyComboBox1.DisplayMember = "FullName";
-                this.countyComboBox1.ValueMember = "ShortName";
-                this.countyComboBox1.DataSource = counties;
+                this.storeComboBox.DisplayMember = "FullName";
+                this.storeComboBox.ValueMember = "ShortName";
+                this.storeComboBox.DataSource = counties;
                 //this.storeComboBox.SelectedIndex = 1;
             }
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int code = (int)storeComboBox.SelectedValue;
-
+         
             ApplyBindSourceFilter(storeComboBox.Text);
         }
 
