@@ -776,6 +776,7 @@
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView3.Size = new System.Drawing.Size(983, 415);
             this.dataGridView3.TabIndex = 16;
+            this.dataGridView3.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView3_CellMouseDown);
             // 
             // dataGridViewTextBoxColumn20
             // 
@@ -893,12 +894,12 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1});
             this.contextMenuStrip2.Name = "contextMenuStrip1";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(99, 26);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
             this.toolStripMenuItem1.Text = "退单";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
