@@ -447,8 +447,8 @@ namespace GODInventory.ViewModel
                 {
                     var oids = gos.Select(order => order.id受注データ);
                     var o = gos.First();
-                    sql = String.Format("UPDATE t_orderdata SET `出荷No`={1}, `ASN管理連番`={2}, `Status`={3} WHERE `id受注データ` in ({0})", String.Join(",", oids.ToArray()), o.出荷No, o.ASN管理連番, ((int)OrderStatus.ASN));
-                    ctx.Database.ExecuteSqlCommand(sql);                  
+                    var sql1 = String.Format("UPDATE t_orderdata SET  `出荷No`={3}, `Status`={4}, `ASN管理連番`={5}  WHERE  `id受注データ` in ({0}) AND `ShipNO` in ({1}) AND `Status`={2} ", String.Join(",", oids.ToArray()), String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray()), (int)OrderStatus.PendingShipment, o.出荷No, (int)OrderStatus.ASN, mid);
+                    ctx.Database.ExecuteSqlCommand(sql1);                  
                 }
                 //ctx.SaveChanges();
             }

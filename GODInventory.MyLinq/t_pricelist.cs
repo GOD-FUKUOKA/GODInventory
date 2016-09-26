@@ -22,11 +22,11 @@ namespace GODInventory.MyLinq
         [StringLength(255)]
         public string 県別 { get; set; }
 
-        public decimal? 通常売価 { get; set; }
+        public decimal? 売単価 { get; set; }
 
-        public decimal? 広告売価 { get; set; }
-
-        public decimal? 特売売価 { get; set; }
+        public decimal? 通常原単価 { get; set; }
+        public decimal? 広告原単価 { get; set; }
+        public decimal? 特売原単価 { get; set; }
 
 
     }

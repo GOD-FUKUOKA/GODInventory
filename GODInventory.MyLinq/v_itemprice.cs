@@ -24,6 +24,7 @@ namespace GODInventory.MyLinq
         public string 単位 { get; set; }
 
         public decimal? 原単価 { get; set; }
+        public decimal? 売単価 { get; set; }
         
     }
 }

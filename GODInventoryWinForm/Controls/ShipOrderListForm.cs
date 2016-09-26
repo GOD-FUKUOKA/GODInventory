@@ -68,6 +68,7 @@ namespace GODInventoryWinForm.Controls
         }
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
+            //保存原始值
             DataGridViewRow dgrSingle = dataGridView1.Rows[e.RowIndex];
             string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
 
@@ -81,7 +82,8 @@ namespace GODInventoryWinForm.Controls
         {
             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
             string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
-            var new_cell_value = row.Cells[e.ColumnIndex].Value;
+            DataGridViewCell cell = row.Cells[e.ColumnIndex];
+            var new_cell_value = cell.Value;
             var original_cell_value = dataGridChanges[cell_key];
             // original_cell_value could null
             //Console.WriteLine(" original = {0} {3}, new ={1} {4}, compare = {2}, {5}", original_cell_value, new_cell_value, original_cell_value == new_cell_value, original_cell_value.GetType(), new_cell_value.GetType(), new_cell_value.Equals(original_cell_value));
@@ -97,6 +99,17 @@ namespace GODInventoryWinForm.Controls
             {
                 dataGridChanges.Remove(cell_key + "_changed");
             }
+
+            var order = row.DataBoundItem as t_orderdata;
+            if (cell.OwningColumn == this.発注数量Column1)
+            {
+                order.納品口数 = Convert.ToInt32(new_cell_value) / order.口数;
+            }
+            else
+                if (cell.OwningColumn == this.口数Column1)
+                {
+                    order.発注数量 = Convert.ToInt32(new_cell_value) * order.口数;
+                }
 
         }
 

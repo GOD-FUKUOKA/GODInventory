@@ -484,6 +484,8 @@ namespace GODInventory.ViewModel.EDI
             {
                 orderdata.実際配送担当 = "丸健";
             }
+            orderdata.発注品名漢字 = orderdata.品名漢字;
+            orderdata.発注規格名漢字 = orderdata.規格名漢字;
 
             return orderdata;
         }

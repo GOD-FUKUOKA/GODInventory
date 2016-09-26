@@ -240,13 +240,13 @@ namespace GODInventory.ViewModel.EDI
             this.オプション使用欄 = EDITxtHandler.GetSpacedBytes(20);//33 オプション使用欄   20 195
             this.ＧＴＩＮ = EDITxtHandler.GetSpacedBytes(14); //34 ＧＴＩＮ           14 215
 
-            var jis = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.品名漢字);
+            var jis = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.発注品名漢字);
             this.品名漢字 = EDITxtHandler.PadLeftBytes(jis, 20); //35 品名漢字       20 229
 
             jis = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.品名カナ);
             this.品名カナ = EDITxtHandler.PadLeftBytes(jis, 25);//36 品名カナ      25 249
 
-            jis = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.規格名漢字);
+            jis = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.発注規格名漢字);
             this.規格名漢字 = EDITxtHandler.PadLeftBytes(jis, 20);//37 規格名漢字      20 274
 
             jis = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.規格名カナ);

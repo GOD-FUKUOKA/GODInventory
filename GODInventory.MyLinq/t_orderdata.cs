@@ -32,6 +32,7 @@ namespace GODInventory.MyLinq
         [StringLength(255)]
         public string 店舗名漢字 { get; set; }
 
+
         public int? 社内伝番 { get; set; }
 
         public short? 行数 { get; set; }
@@ -66,6 +67,13 @@ namespace GODInventory.MyLinq
 
         [StringLength(255)]
         public string 規格名漢字 { get; set; }
+
+        //导出时需要和発注的一样，字符长度<20
+        [StringLength(255)]
+        public string 発注品名漢字 { get; set; }
+
+        [StringLength(255)]
+        public string 発注規格名漢字 { get; set; }
 
         public int 発注数量 { get; set; }
 
