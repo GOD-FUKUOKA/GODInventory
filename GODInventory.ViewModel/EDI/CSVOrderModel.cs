@@ -190,6 +190,21 @@ namespace GODInventory.ViewModel.EDI
         {
             get { return this.納品場所名漢字; }
         }
+        public int OrderCode
+        {
+            get { return Convert.ToInt32(this.伝票番号);  }
+        }
+
+        public bool IsByFax
+        {
+            get { return Head.IsByFax(); }
+        }
+
+        //FAX订单都是5位或者6位的, 小于1000000的传票番号都是FAX订单
+        public bool IsValid 
+        {
+            get { return IsByFax ? OrderCode < 1000000 : true; } 
+        }
 
         
         public CSVOrderHeadModel Head { get; set; }
@@ -201,7 +216,7 @@ namespace GODInventory.ViewModel.EDI
             var untrimFields = utf8Line.Split(',');
             var fields = untrimFields.Select(s => s.Trim('"')).ToList();
             Debug.Assert( fields.Count() == 17 || fields.Count() == 74); // fax/normal
-            if (!Head.IsByFax())
+            if (!IsByFax)
             {
                 this.受注日 = fields[0]; //1 受注日 
                 this.受注時刻 = fields[1]; //
@@ -313,11 +328,6 @@ namespace GODInventory.ViewModel.EDI
             int i = Convert.ToInt32(this.受注時刻);
             orderdata.受注時刻 = new TimeSpan( i/10000, (i%10000)/100, i%100);
 
-            if ( false )
-            {
-            }
-            else { 
-
                 orderdata.法人コード = Convert.ToInt16(this.法人コード);
                 orderdata.法人名漢字 = this.法人名漢字.Trim();
                 orderdata.法人名カナ = this.法人名カナ.Trim();
@@ -402,14 +412,14 @@ namespace GODInventory.ViewModel.EDI
                 orderdata.センターコード = Convert.ToInt32(this.センターコード);
                 orderdata.センター名漢字 = this.センター名漢字.Trim();
                 orderdata.センター名カナ = this.センター名カナ.Trim();
-            }
+            
 
             return orderdata;
 
         }
         public t_orderdata ConverToEntity(t_shoplist shop, t_itemlist item, t_locations location, List<v_storeorder> orders)
         {
-            if (Head.IsByFax())
+            if (IsByFax)
             {
                 this.受注日 = DateTime.Now.ToString("yyyyMMdd");
                 this.受注日 = DateTime.Now.ToString("yyyyMMdd");

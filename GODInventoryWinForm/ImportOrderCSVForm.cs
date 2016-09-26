@@ -136,8 +136,11 @@ namespace GODInventoryWinForm
                             e.Cancel = true;
                             throw new Exception("It is Cancelled successfully!");
                         }
-
-                        models.Add(new CSVOrderModel(orderHead, line));
+                        var model = new CSVOrderModel(orderHead, line);
+                        if (model.IsValid) 
+                        {
+                            models.Add(model);
+                        }
                         //if (progress != last)
                         //
                         //    backgroundWorker1.ReportProgress(progress);
