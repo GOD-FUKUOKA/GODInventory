@@ -1052,9 +1052,9 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            int s = this.tabControl1.SelectedIndex;
+            int page = this.tabControl1.SelectedIndex;
 
-            if (s == 1)
+            if (page == 1)
             {
                 int i = dataGridView1.CurrentCell.OwningColumn.Index;
                 int iRow = dataGridView1.CurrentCell.OwningRow.Index;
@@ -1130,7 +1130,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
                 InitializeOrderData();
             }
-            else if (s == 1)
+            else if (page == 1)
             {
 
 
