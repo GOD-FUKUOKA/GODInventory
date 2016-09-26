@@ -259,7 +259,9 @@ namespace GODInventoryWinForm.Controls
 
             var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
             this.sortablePendingOrderList[e.RowIndex].実際出荷数量 = (int)cell.Value;
-            //this.sortablePendingOrderList[e.RowIndex].納品口数= (int)cell.Value/ this.sortablePendingOrderList[e.RowIndex].
+            this.sortablePendingOrderList[e.RowIndex].納品口数 = (int)cell.Value / this.sortablePendingOrderList[e.RowIndex].最小発注単位数量;
+            this.dataGridView1.Refresh();
+
 
         }
 
