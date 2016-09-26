@@ -295,7 +295,9 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
                 form.InitializeDataSource(groupedOrderList[i].ShipNO);
 
-                form.ShowDialog();
+                if (form.ShowDialog() != System.Windows.Forms.DialogResult.Cancel) { 
+                
+                }
             }
         }
 

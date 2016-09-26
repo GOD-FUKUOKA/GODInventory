@@ -414,12 +414,12 @@ namespace GODInventory.ViewModel
             using (var ctx = new GODDbContext())
             {
                 // get 受注管理連番 by shipNos
-                var ediNOs = (from t_orderdata o in ctx.t_orderdata
-                              where shipNOs.Contains(o.ShipNO)
-                              select new { 受注管理連番 = o.受注管理連番 }).Select( o=> o.受注管理連番 ).Distinct().ToList();
+                //var ediNOs = (from t_orderdata o in ctx.t_orderdata
+                //              where shipNOs.Contains(o.ShipNO)
+                //              select new { 受注管理連番 = o.受注管理連番 }).Select( o=> o.受注管理連番 ).Distinct().ToList();
 
                 var orders = (from t_orderdata o in ctx.t_orderdata
-                              where ediNOs.Contains(o.受注管理連番)                             
+                              where shipNOs.Contains(o.ShipNO)                             
                               select o).ToList();
 
 

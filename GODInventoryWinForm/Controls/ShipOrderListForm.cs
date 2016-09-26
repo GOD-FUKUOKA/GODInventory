@@ -20,15 +20,21 @@ namespace GODInventoryWinForm.Controls
         private Hashtable dataGridChanges = null;
 
         private IBindingList orderList;
+        private List<t_itemlist> itemList = null;
+
         public ShipOrderListForm()
         {
             InitializeComponent();
             // 记录DataGridView改变数据
             this.dataGridChanges = new Hashtable();
+            itemList = (from t_itemlist i in entityDataSource1.EntitySets["t_itemlist"]
+                            select i).ToList();
         }
 
 
         public void InitializeDataSource( string shipNO) {
+            dataGridChanges.Clear();
+            this.bindingSource1.DataSource = null;
             ShipNO = shipNO;
             if (ShipNO != null) {
                 this.shipNOLabel.Text = ShipNO;
@@ -101,14 +107,19 @@ namespace GODInventoryWinForm.Controls
             }
 
             var order = row.DataBoundItem as t_orderdata;
-            if (cell.OwningColumn == this.発注数量Column1)
+            var item = itemList.Find(i => i.自社コード == order.自社コード);
+
+            if (cell.OwningColumn == this.実際出荷数量Column1)
             {
                 order.納品口数 = Convert.ToInt32(new_cell_value) / order.口数;
+                order.重量 = (int) ( item.単品重量 * order.実際出荷数量 );
             }
             else
-                if (cell.OwningColumn == this.口数Column1)
+                if (cell.OwningColumn == this.納品口数Column1)
                 {
-                    order.発注数量 = Convert.ToInt32(new_cell_value) * order.口数;
+                    order.実際出荷数量 = Convert.ToInt32(new_cell_value) * order.口数;
+                    order.重量 = (int)(item.単品重量 * order.実際出荷数量);
+
                 }
 
         }
@@ -147,12 +158,18 @@ namespace GODInventoryWinForm.Controls
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            if (dataGridChanges.Count > 0)
+            var ctx = entityDataSource1.DbContext as GODDbContext;
+
+            // http://www.tuicool.com/articles/63uaaq7
+            // remove change cache in dbcontext
+            foreach(var  entry in ctx.ChangeTracker.Entries())
             {
-                entityDataSource1.CancelChanges();
+                entry.State = System.Data.Entity.EntityState.Unchanged;
             }
-            dataGridChanges.Clear();
-            dataGridView1.Refresh();
+            InitializeDataSource(ShipNO);
+            // 手动更新一下， this.dataGridView1， 没有刷新。
+
+
         }
 
         private void backToolStripMenuItem_Click(object sender, EventArgs e)
