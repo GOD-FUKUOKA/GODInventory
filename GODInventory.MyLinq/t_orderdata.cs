@@ -33,7 +33,7 @@ namespace GODInventory.MyLinq
         public string 店舗名漢字 { get; set; }
 
 
-        public int? 社内伝番 { get; set; }
+        public int 社内伝番 { get; set; }
 
         public short? 行数 { get; set; }
 

@@ -81,12 +81,43 @@ namespace GODInventory.ViewModel
             return q;
         }
 
-        public static IQueryable<t_orderdata> ECWithoutCodeOrderQuery(EntityDataSource entityDataSource1, int genreId)
+        public static IQueryable<v_pendingorder> ECWithoutCodeOrderQuery(EntityDataSource entityDataSource1, int genreId)
         {
             var a = entityDataSource1.EntitySets["t_orderdatas"];
-            var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                    where o.Status == OrderStatus.NotifyShipper && o.ジャンル == genreId && o.社内伝番 == null
-                    select o;
+            var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
+                     where o.Status == OrderStatus.NotifyShipper && o.ジャンル == genreId && o.社内伝番 == 0
+                     orderby o.実際配送担当, o.店舗コード
+                     select new v_pendingorder
+                      {
+                          id受注データ = o.id受注データ,
+                          出荷日 = o.出荷日,
+                          納品日 = o.納品日,
+                          受注日 = o.受注日,
+                          店舗名漢字 = o.店舗名漢字,
+                          店舗コード = o.店舗コード,
+                          納品場所名漢字 = o.納品場所名漢字,
+                          伝票番号 = o.伝票番号,
+                          自社コード = o.自社コード,
+                          口数 = o.口数,
+                          納品口数 = o.納品口数,
+                          重量 = o.重量,
+                          ジャンル = o.ジャンル,
+                          品名漢字 = o.品名漢字,
+                          規格名漢字 = o.規格名漢字,
+                          発注数量 = o.発注数量,
+                          最小発注単位数量 = o.最小発注単位数量,
+                          実際出荷数量 = o.実際出荷数量,
+                          実際配送担当 = o.実際配送担当,
+                          県別 = o.県別,
+                          発注形態名称漢字 = o.発注形態名称漢字,
+                          キャンセル = o.キャンセル,
+                          ダブリ = o.ダブリ,
+                          一旦保留 = o.一旦保留,
+                          法人名漢字 = o.法人名漢字,
+                          備考 = o.備考,
+                          納品指示 = o.納品指示,
+                          社内伝番UnSaved = 0
+                      });
             return q;
         }
 
@@ -106,7 +137,7 @@ namespace GODInventory.ViewModel
                          出荷日 = o.出荷日,
                          納品日 = o.納品日,
                          受注日 = o.受注日,
-                         店名 = o.店舗名漢字,
+                         店舗名漢字 = o.店舗名漢字,
                          店舗コード = o.店舗コード,
                          納品場所名漢字 = o.納品場所名漢字,
                          伝票番号 = o.伝票番号,
@@ -126,7 +157,7 @@ namespace GODInventory.ViewModel
                          キャンセル = o.キャンセル,
                          ダブリ = o.ダブリ,
                          一旦保留 = o.一旦保留,
-                         在庫状態 = o.在庫状態,
+                         在庫状態 = "unkown",
                          法人名漢字 = o.法人名漢字,
                          備考 = o.備考,
                          納品指示 = o.納品指示,
@@ -194,6 +225,7 @@ namespace GODInventory.ViewModel
                          最大行数 = o.最大行数,
                          一旦保留 = o.一旦保留,
                          納品指示 = o.納品指示,
+                         ShipNO = o.ShipNO,
                          GenreName = g.ジャンル名
 
                      });

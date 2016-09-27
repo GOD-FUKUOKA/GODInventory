@@ -28,7 +28,7 @@ namespace GODInventoryWinForm.Controls
             InitializeComponent();
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView2.AutoGenerateColumns = false;
-            InitializeDataSource();
+            //InitializeDataSource();
 
             //var q = OrderSqlHelper.WaitToShipOrderSql(entityDataSource1).ToList();
 
@@ -47,7 +47,6 @@ namespace GODInventoryWinForm.Controls
 
         public int InitializeDataSource()
         {
-            shipperComboBox.SelectedIndex = 0;
 
             this.orderListForShip = new BindingList<v_pendingorder>();
 
@@ -55,33 +54,18 @@ namespace GODInventoryWinForm.Controls
             this.orderBindingList = this.entityDataSource1.CreateView(q);
             this.bindingSource1.Filter = null;
             this.bindingSource1.DataSource = this.orderBindingList;
+            this.dataGridView1.DataSource = this.bindingSource1;
+            // 第二次 調用InitializeDataSource，顯示 WaitToShipForm shipperComboBox.SelectedIndex =0 不會觸發 change 事件,
+            // 所以需要每次都要初始化數據，觸發change事件。
             if (this.orderBindingList.Count > 0)
             {
-
-                this.bindingSource1.Filter = String.Format("実際配送担当='{0}'", shipperComboBox.Text);
-
-                var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
-
-                var shops = orders.Select(o => new MockEntity { Id = o.店舗コード, FullName = o.店名 }).Distinct().ToList();
-
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
-
-                this.storeComboBox.DisplayMember = "FullName";
-                this.storeComboBox.ValueMember = "Id";
-                this.storeComboBox.DataSource = shops;
-
-
-                var counties = orders.Select(o => new MockEntity { Id = o.店舗コード, FullName = o.県別 }).Distinct().ToList();
-                counties.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
-                this.countyComboBox1.DisplayMember = "FullName";
-                this.countyComboBox1.ValueMember = "Id";
-                this.countyComboBox1.DataSource = counties;
-
+                shipperComboBox.Items.Clear();
+                shipperComboBox.Items.AddRange(new object[] { "丸健", "MKL", "マツモト産業"});
+                shipperComboBox.SelectedIndex = 0;
             }
 
             InitializeShipNOComboBox();
 
-            this.dataGridView1.DataSource = this.bindingSource1;
             dataGridView2.DataSource = this.orderListForShip;
 
             return 0;
@@ -124,52 +108,7 @@ namespace GODInventoryWinForm.Controls
             //.ShowDialog();
         }
 
-        private void shipperComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ApplyBindSourceFilter(shipperComboBox.Text);
-        }
-
-        private void shipperComboBox_TextUpdate(object sender, EventArgs e)
-        {
-            ApplyBindSourceFilter(shipperComboBox.Text);
-        }
-
-        private void ApplyBindSourceFilter(string text)
-        {
-            this.bindingSource1.Filter = null;
-            this.bindingSource1.DataSource = this.orderBindingList;
-            if (bindingSource1.Count > 0)
-            {
-                string filter = "";
-                if (this.countyComboBox1.Text.Length > 0 && this.countyComboBox1.Text != "不限")
-                {
-                    filter += "(県別=" + "'" + this.countyComboBox1.Text + "'" + ")";
-                }
-                if (this.storeComboBox.Text.Length > 0 && this.storeComboBox.Text != "不限")
-                {
-                    if (filter.Length > 0)
-                    {
-                        filter += " AND ";
-                    }
-                    // filter += "(店舗名漢字=" + "'" + this.storeComboBox.Text + "'" + ")";
-                    int code = (int)this.storeComboBox.SelectedValue;
-
-                   // filter += "(店舗コード=" + "'" + code.ToString() + "'" + ")";
-
-
-                    filter += "(店名=" + "'" + this.storeComboBox.Text.ToString() + "'" + ")";
-                }
-                if (this.shipperComboBox.Text.Length > 0)
-                {
-                    if (filter.Length > 0)
-                    {
-                        filter += " AND ";
-                    }
-                    filter += "(実際配送担当=" + "'" + this.shipperComboBox.Text + "'" + ")";
-                }
-                bindingSource1.Filter = filter;
-            }
-        }
+ 
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -202,18 +141,25 @@ namespace GODInventoryWinForm.Controls
 
         private void moveDownToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!ValidateShipNo())
+            {
+                MessageBox.Show("请输入 *配车单单号*");
+                return;
+            }
 
             #region 将数据集放入集合
 
-            if (dataGridView1.SelectedRows.Count > 0)
+            string shipNo = shipNOComboBox.Text;
+            int count = dataGridView1.SelectedRows.Count;
+            if (count > 0)
             {
-                first = dataGridView1.SelectedRows.Count;
-
-                DataGridViewRow row = null;
-                for (int i = 0; i < first; i++)
+                for (int i = 0; i < count; i++)
                 {
-                    row = dataGridView1.SelectedRows[0];
-                    this.orderListForShip.Add((v_pendingorder)orderBindingList[row.Index]);
+                    var row = dataGridView1.SelectedRows[0];
+                    var order2 = orderBindingList[row.Index] as v_pendingorder;
+                    var order = row.DataBoundItem as v_pendingorder;
+                    order.ShipNO = shipNo;
+                    this.orderListForShip.Add(order);
                     this.orderBindingList.RemoveAt(row.Index);
                 }
             }
@@ -224,22 +170,18 @@ namespace GODInventoryWinForm.Controls
 
         private void moveUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!ValidateShipNo())
-            {
-                MessageBox.Show("请输入 *配车单单号*");
-                return;
-            }
 
             #region 将数据集放入集合
-            if (dataGridView2.SelectedRows.Count > 0)
+            int count = dataGridView2.SelectedRows.Count;
+            if (count > 0)
             {
-                first = dataGridView2.SelectedRows.Count;
 
-                DataGridViewRow row = null;
-                for (int i = 0; i < first; i++)
+                for (int i = 0; i < count; i++)
                 {
-                    row = dataGridView2.SelectedRows[0];
-                    this.orderBindingList.Add(this.orderListForShip[row.Index]);
+                    var row = dataGridView2.SelectedRows[0];
+                    var order = row.DataBoundItem as v_pendingorder;
+                    order.ShipNO = null;
+                    this.orderBindingList.Add(order);
                     this.orderListForShip.RemoveAt(row.Index);
                 }
             }
@@ -283,15 +225,130 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
-        private void shipperComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
+
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            ApplyBindSourceFilter(shipperComboBox.Text);
-            De_InitializeDataSource();
+            first = e.RowIndex;
 
         }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var row = dataGridView1.CurrentRow;
+            if (row != null)
+            {
+                var order = row.DataBoundItem as v_pendingorder;
+                editOrderForm.OrderId = order.id受注データ;
+                if (editOrderForm.ShowDialog() == DialogResult.OK)
+                {
+                    order.実際出荷数量 = editOrderForm.Order.実際出荷数量;
+                    order.納品口数 = editOrderForm.Order.納品口数;
+                    order.重量 = editOrderForm.Order.重量;
+                    dataGridView1.Refresh();
+                }
+            }
+
+        }
+
+        private bool ValidateShipNo()
+        {
+            if (this.shipNOComboBox.Text.Length == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        #region 條件過濾
+
+        private void shipperComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string shipper = shipperComboBox.Text;
+            ApplyBindSourceFilter(shipper);
+            var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
+            InitializeCountyComboBox(orders);
+            InitializeStoreComboBox(orders);
+        }
+
+        private void countyComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string shipper = shipperComboBox.Text;
+            string county = countyComboBox1.Text;
+            ApplyBindSourceFilter(shipper, county);
+            
+            var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
+
+            InitializeStoreComboBox(orders);
+        }
+
+        private void storeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string shipper = shipperComboBox.Text;
+            string county = countyComboBox1.Text;
+            string store = storeComboBox.Text;
+
+            ApplyBindSourceFilter(shipper, county, store);
+        }
+
+
+        private void ApplyBindSourceFilter(string shipper, string county ="", string store ="")
+        {
+            
+            //if (bindingSource1.Count > 0)
+            {
+                string filter = "(ShipNO is null)";
+                if (shipper.Length > 0)
+                {
+                    filter += " AND (実際配送担当='" + shipper + "')";
+                }
+
+                if (county.Length > 0 && county  != "不限")
+                {
+                    if (filter.Length > 0)
+                    {
+                        filter += " AND ";
+                    }
+                    filter += "(県別=" + "'" + county + "'" + ")";
+                }
+                if (store.Length > 0 && store != "不限")
+                {
+                    if (filter.Length > 0)
+                    {
+                        filter += " AND ";
+                    }
+
+                    filter += "(店名=" + "'" + store + "'" + ")";
+                }
+                Console.WriteLine("filter:" + filter);
+                bindingSource1.Filter = filter;
+            }
+        }
+
+        private void InitializeCountyComboBox( List<v_pendingorder> orders )
+        {
+            var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
+            counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            this.countyComboBox1.DisplayMember = "FullName";
+            this.countyComboBox1.ValueMember = "ShortName";
+            this.countyComboBox1.DataSource = counties;
+
+            this.countyComboBox1.SelectedIndex = 0;
+        }
+
+        private void InitializeStoreComboBox(List<v_pendingorder> orders)
+        {
+            var shops = orders.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).Distinct().ToList();
+            shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+            this.storeComboBox.DisplayMember = "FullName";
+            this.storeComboBox.ValueMember = "Id";
+            this.storeComboBox.DataSource = shops;
+            this.storeComboBox.SelectedIndex = 0;
+        }
+
         public int De_InitializeDataSource()
         {
- 
+
             this.orderListForShip = new BindingList<v_pendingorder>();
 
             var q = OrderSqlHelper.WaitToShipOrderSql(this.entityDataSource1);
@@ -340,85 +397,18 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ApplyBindSourceFilter(countyComboBox1.Text);
-            var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
-            var filtered = orders.FindAll(s => s.県別 == this.countyComboBox1.Text).Distinct().ToList();
 
-            if (filtered.Count > 0)
+        private List<v_pendingorder> GetDataGridViewBoundOrders()
+        {
+            List<v_pendingorder> orders = new List<v_pendingorder>();
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
-                //var shops1 = filtered.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).Distinct().ToList();
-                //shops1.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
-                //this.storeComboBox.DisplayMember = "FullName";
-                //this.storeComboBox.ValueMember = "Id";
-                //this.storeComboBox.DataSource = shops1;
-                //this.storeComboBox.SelectedIndex = 1;
-
-                var counties = filtered.Select(s => new MockEntity { ShortName = s.店名, FullName = s.店名 }).Distinct().ToList();
-                counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                this.countyComboBox1.DisplayMember = "FullName";
-                this.countyComboBox1.ValueMember = "ShortName";
-                this.countyComboBox1.DataSource = counties;
-                this.storeComboBox.SelectedIndex = 1;
-            }
-            else
-            {
-                //var shops = orders.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).Distinct().ToList();
-                //shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
-                //this.storeComboBox.DisplayMember = "FullName";
-                //this.storeComboBox.ValueMember = "Id";
-                //this.storeComboBox.DataSource = shops;
-
-                var counties = orders.Select(s => new MockEntity { ShortName = s.店名, FullName = s.店名 }).Distinct().ToList();
-                counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                this.countyComboBox1.DisplayMember = "FullName";
-                this.countyComboBox1.ValueMember = "ShortName";
-                this.countyComboBox1.DataSource = counties;
-                //this.storeComboBox.SelectedIndex = 1;
-            }
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int code = (int)storeComboBox.SelectedValue;
-
-            ApplyBindSourceFilter(storeComboBox.Text);
-        }
-
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            first = e.RowIndex;
-
-        }
-
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var row = dataGridView1.CurrentRow;
-            if (row != null)
-            {
-                var order = row.DataBoundItem as v_pendingorder;
-                editOrderForm.OrderId = order.id受注データ;
-                if (editOrderForm.ShowDialog() == DialogResult.OK)
-                {
-                    order.実際出荷数量 = editOrderForm.Order.実際出荷数量;
-                    order.納品口数 = editOrderForm.Order.納品口数;
-                    order.重量 = editOrderForm.Order.重量;
-                    dataGridView1.Refresh();
-                }
+                orders.Add(dataGridView1.Rows[i].DataBoundItem as v_pendingorder);
             }
 
+            return orders;
         }
 
-        private bool ValidateShipNo()
-        {
-            if (this.shipNOComboBox.Text.Length == 0)
-            {
-                return false;
-            }
-            return true;
-        }
-
-
+        #endregion
     }
 }

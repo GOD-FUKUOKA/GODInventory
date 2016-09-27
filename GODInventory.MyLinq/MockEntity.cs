@@ -9,6 +9,7 @@ namespace GODInventory.MyLinq
     public class MockEntity : IEquatable<MockEntity>
     {
         public int Id { get; set; }
+        public int TaxonId { get; set; } // genreId
         public string FullName { get; set; }
         public string ShortName { get; set; }
 

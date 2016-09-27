@@ -24,7 +24,10 @@ namespace GODInventory.MyLinq
 
         public string 店舗名カナ { get; set; }
 
-        public int? 社内伝番 { get; set; }
+        public int 社内伝番 { get; set; }
+
+        //RollbackOrder 檢查 社内伝番， 所以二次製品窗口使用 “社内伝番UnSaved”
+        public int 社内伝番UnSaved { get; set; }
 
         public short? 行数 { get; set; }
 
@@ -129,6 +132,9 @@ namespace GODInventory.MyLinq
         public long ASN管理連番 { get; set; }
 
         public OrderStatus Status { get; set; }
+
+        public string ShipNO { get; set; }
+
     }
 
 }

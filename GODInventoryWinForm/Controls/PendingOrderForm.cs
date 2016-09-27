@@ -29,9 +29,10 @@ namespace GODInventoryWinForm.Controls
         int RowRemark = 0;
         int cloumn = 0;
 
+        private IBindingList pendingOrderIBindList;
         private List<v_pendingorder> pendingOrderList;
         private SortableBindingList<v_pendingorder> sortablePendingOrderList;
-        private List<t_orderdata> ecOrderList;
+        private List<v_pendingorder> ecOrderList;
         private List<v_pendingorder> shipperOrderList;
 
 
@@ -39,6 +40,9 @@ namespace GODInventoryWinForm.Controls
         {
             InitializeComponent();
             dataGridView1.AutoGenerateColumns = false;
+
+            this.datagrid_changes = new Hashtable();
+
 
             var ctx = entityDataSource1.DbContext as GODDbContext;
             this.stockstates = ctx.t_stockstate.Select(s => s).ToList();
@@ -52,7 +56,7 @@ namespace GODInventoryWinForm.Controls
                          select g).FirstOrDefault();
             ErCiZhiPinId = (genre != null ? genre.idジャンル : 0);
 
-            InitializePager();
+            //InitializePager();
 
             InitializeRCList();
 
@@ -62,69 +66,7 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-
-        private void InitializeRCList()
-        {
-
-            var q = OrderSqlHelper.ECWithoutCodeOrderQuery(this.entityDataSource1, ErCiZhiPinId);
-            string sql = "SELECT MAX(t_orderdata.`社内伝番`) FROM t_orderdata";
-            var max = this.entityDataSource1.DbContext.Database.SqlQuery<int?>(sql).FirstOrDefault();
-            max = Convert.ToInt32(max);
-            this.ecOrderList = q.ToList();
-            var groupedOrders = ecOrderList.GroupBy(o => o.店舗コード);
-            int i = 0;
-            foreach (var gos in groupedOrders)
-            {
-                i++;
-
-                int j = 0;
-
-                foreach (var o in gos)
-                {
-
-                    j++;
-                    o.社内伝番 = max + i;
-                    o.行数 = Convert.ToInt16(j);
-                    o.最大行数 = Convert.ToInt16(gos.Count());
-
-                }
-            }
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.DataSource = this.ecOrderList;
-
-        }
-
-        private void InitializeShipperOrderList()
-        {
-            this.shipperComboBox.SelectedIndex = 0;
-            //this.shipperComboBox.DisplayMember = "ShortName";
-            //this.shipperComboBox.ValueMember = "ShortName";
-            //this.shipperComboBox.DataSource = shipperList;
-
-            //https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html
-            //http://stackoverflow.com/questions/23921117/disable-only-full-group-by
-            //handle SET SESSION sql_mode='ANSI';
-
-            string sql = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
-       `店舗名漢字`,`伝票番号`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
-     FROM t_orderdata
-     WHERE  `Status`={0} AND `ジャンル`<> 1003
-     UNION ALL
-     SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `納品口数`, sum(`重量`) as `実際出荷数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
-     FROM t_orderdata
-     WHERE `Status`={0} AND `ジャンル`= 1003 AND `社内伝番` IS NOT NULL
-     GROUP BY `社内伝番`
-     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
-
-            this.shipperOrderList = this.entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.NotifyShipper).ToList();
-
-            string shipper = this.shipperComboBox.Text;
-
-            this.dataGridView3.AutoGenerateColumns = false;
-            this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipper);
-
-        }
-
+ 
 
         #region Pager Methods
 
@@ -147,13 +89,13 @@ namespace GODInventoryWinForm.Controls
         {
             using (var ctx = new GODDbContext())
             {
-                IEnumerable<int> rows = GetChangedRowIndexes();
+                IEnumerable<int> orderIds = GetChangedOrderIds();
 
-                if (rows.Count() > 0)
+                if (orderIds.Count() > 0)
                 {
-                    foreach (var row in rows.Distinct())
+                    foreach (var id in orderIds.Distinct())
                     {
-                        var pendingorder = bindingSource1.List[row] as v_pendingorder;
+                        var pendingorder = pendingOrderList.Find( o=>o.id受注データ == id );
                         t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
                         //需要修改的字段为: “口数” “发注数量” “担当” “形态”
                         order.実際出荷数量 = pendingorder.実際出荷数量;
@@ -174,8 +116,8 @@ namespace GODInventoryWinForm.Controls
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            IEnumerable<int> rows = GetChangedRowIndexes();
-            if (rows.Count() > 0)
+            IEnumerable<int> ids = GetChangedOrderIds();
+            if (ids.Count() > 0)
             {
                 pager1.Bind();
             }
@@ -227,41 +169,50 @@ namespace GODInventoryWinForm.Controls
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             DataGridViewRow dgrSingle = dataGridView1.Rows[e.RowIndex];
-            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
+            string cellKey = GetCellKey( e.RowIndex, e.ColumnIndex);
 
-            if (!datagrid_changes.ContainsKey(cell_key))
+            if (!datagrid_changes.ContainsKey(cellKey))
             {
-                datagrid_changes[cell_key] = dgrSingle.Cells[e.ColumnIndex].Value;
+                datagrid_changes[cellKey] = dgrSingle.Cells[e.ColumnIndex].Value;
             }
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
-            var new_cell_value = row.Cells[e.ColumnIndex].Value;
-            var original_cell_value = datagrid_changes[cell_key];
+            var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            string cellKey = GetCellKey( e.RowIndex, e.ColumnIndex);
+            string cellChangedKey = GetCellKey(e.RowIndex, e.ColumnIndex, true);
+            var new_cell_value = cell.Value;
+            var original_cell_value = datagrid_changes[cellKey];
             // original_cell_value could null
             //Console.WriteLine(" original = {0} {3}, new ={1} {4}, compare = {2}, {5}", original_cell_value, new_cell_value, original_cell_value == new_cell_value, original_cell_value.GetType(), new_cell_value.GetType(), new_cell_value.Equals(original_cell_value));
             if (new_cell_value == null && original_cell_value == null)
             {
-                datagrid_changes.Remove(cell_key + "_changed");
+                datagrid_changes.Remove(cellChangedKey);
             }
             else if ((new_cell_value == null && original_cell_value != null) || (new_cell_value != null && original_cell_value == null) || !new_cell_value.Equals(original_cell_value))
             {
-                datagrid_changes[cell_key + "_changed"] = new_cell_value;
+                datagrid_changes[cellChangedKey] = new_cell_value;
             }
             else
             {
-                datagrid_changes.Remove(cell_key + "_changed");
+                datagrid_changes.Remove(cellChangedKey);
             }
-            //new
+            //実際出荷数量修改
+            if (実際出荷数量Column.Index == e.ColumnIndex)
+            {
+                var order = cell.OwningRow.DataBoundItem as v_pendingorder;
+                order.実際出荷数量 = (int)cell.Value;
+                order.納品口数 = (int)order.実際出荷数量 / order.最小発注単位数量;
+            }
 
-            var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            this.sortablePendingOrderList[e.RowIndex].実際出荷数量 = (int)cell.Value;
-            this.sortablePendingOrderList[e.RowIndex].納品口数 = (int)cell.Value / this.sortablePendingOrderList[e.RowIndex].最小発注単位数量;
-            this.dataGridView1.Refresh();
-
+            if (納品口数Column.Index == e.ColumnIndex)
+            {
+                var order = cell.OwningRow.DataBoundItem as v_pendingorder;
+                order.納品口数 = (int)cell.Value;
+                order.実際出荷数量 = (int)order.納品口数 * order.最小発注単位数量;
+            }
 
         }
 
@@ -277,9 +228,9 @@ namespace GODInventoryWinForm.Controls
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             //出荷日,納品日,受注日,店舗コード,店名,伝票番号,口数,品名漢字,規格名漢字,発注数量,実際配送担当,県別,キャンセル,ダブリ,一旦保留
-            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString() + "_changed";
+            string cellChangedKey = GetCellKey(e.RowIndex, e.ColumnIndex, true);
 
-            if (datagrid_changes.ContainsKey(cell_key))
+            if (datagrid_changes.ContainsKey(cellChangedKey))
             {
                 e.CellStyle.BackColor = Color.Red;
                 e.CellStyle.SelectionBackColor = Color.DarkRed;
@@ -294,19 +245,27 @@ namespace GODInventoryWinForm.Controls
 
         #region InitializeOrderData
 
-        private int InitializeOrderData()
-        {
-            this.bindingSource1.DataSource = null;
-            // 记录DataGridView改变数据
-            this.datagrid_changes = new Hashtable();
+        private int InitializeDataSource() {
+            this.datagrid_changes.Clear();
 
-            //var ctx = entityDataSource1.DbContext as GODDbContext;
-            //var stockstates = ctx.t_stockstate.Select(s => s).ToList();
             var cq = OrderSqlHelper.PendingOrderQuery(entityDataSource1);
             var count = cq.Count();
 
             if (count > 0)
             {
+
+                var q = OrderSqlHelper.PendingOrderQueryEx(entityDataSource1);
+                // 分页
+
+                if (pager1.PageCurrent > 1)
+                {
+                    q = q.Skip(pager1.OffSet(pager1.PageCurrent - 1));
+                }
+                q = q.Take(pager1.OffSet(pager1.PageCurrent));
+
+                // create BindingList (sortable/filterable)
+                pendingOrderIBindList = entityDataSource1.CreateView(q);
+
                 string sql = @" SELECT o.*, g.`ジャンル名` as `GenreName`, k.`在庫数` as `在庫数`  from t_orderdata o
 INNER JOIN t_genre g  on o.ジャンル = g.idジャンル
 LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.実際配送担当 = k.ShipperName 
@@ -316,91 +275,177 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
                 // create BindingList (sortable/filterable)
                 int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
-                this.pendingOrderList = entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.Pending, pager1.PageSize, offset).ToList();
-
-                // count 计算t_orderdata 表， list 是 orderdata join itemlist join stockstate
-                // 所以有可能 bindinglist is null 
-
-                IEnumerable<IGrouping<int, v_pendingorder>> grouped_orders = pendingOrderList.GroupBy(o => o.自社コード, o => o);
-                foreach (var gos in grouped_orders)
-                {
-                    int total = gos.Sum(o => o.実際出荷数量);
-                    int min = gos.Min(o => o.実際出荷数量);
-
-                    foreach (var o in gos)
-                    {
-
-                        if (o.在庫数 >= total)
-                        {
-                            o.在庫状態 = "あり";
-                        }
-                        else if (o.在庫数 > min)
-                        {
-                            o.在庫状態 = "一部不足";
-                        }
-                        else
-                        {
-                            o.在庫状態 = "なし";
-                        }
-                    }
-                }
-                sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
-                this.bindingSource1.DataSource = sortablePendingOrderList;
-                //new 
-
-                if (sortablePendingOrderList.Count > 0)
-                {
-                    //var shops = sortablePendingOrderList.Select(s => new MockEntity { Id = s.id受注データ, FullName = s.実際配送担当 }).Distinct().ToList();
-                    //shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
-                    //this.DanDangComboBox.DisplayMember = "FullName";
-                    //this.DanDangComboBox.ValueMember = "Id";
-                    //this.DanDangComboBox.DataSource = shops;
-
-                    // 担当
-                    var counties = sortablePendingOrderList.Select(s => new MockEntity { ShortName = s.実際配送担当, FullName = s.実際配送担当 }).Distinct().ToList();
-                    counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                    this.DanDangComboBox.DisplayMember = "FullName";
-                    this.DanDangComboBox.ValueMember = "ShortName";
-                    this.DanDangComboBox.DataSource = counties;
-
-                    // 品名漢字
-                    var PMHZ = sortablePendingOrderList.Select(s => new MockEntity { ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().ToList();
-                    PMHZ.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                    this.PMHZCombox.DisplayMember = "FullName";
-                    this.PMHZCombox.ValueMember = "ShortName";
-                    this.PMHZCombox.DataSource = PMHZ;
-
-
-                    // GenreName
-                    var GenreName = sortablePendingOrderList.Select(s => new MockEntity { ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
-                    GenreName.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                    this.GenreNamecomboBox.DisplayMember = "FullName";
-                    this.GenreNamecomboBox.ValueMember = "ShortName";
-                    this.GenreNamecomboBox.DataSource = GenreName;
-
-
-                    // 在庫状態
-                    var ZKZT = sortablePendingOrderList.Select(s => new MockEntity { ShortName = s.在庫状態, FullName = s.在庫状態 }).Distinct().ToList();
-                    ZKZT.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                    this.ZKZTcomboBox3.DisplayMember = "FullName";
-                    this.ZKZTcomboBox3.ValueMember = "ShortName";
-                    this.ZKZTcomboBox3.DataSource = ZKZT;
-
-
-
-
-                }
+                //this.pendingOrderList = entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.Pending, pager1.PageSize, offset).ToList();
+                //foreach( var o in pendingOrderIBindList)
+                //{
+                //    var order = o as v_pendingorder;
+                //    pendingOrderList.Add( o )
+                //}
+                pendingOrderList = pendingOrderIBindList.Cast<v_pendingorder>().ToList();
             }
-            dataGridView1.DataSource = this.bindingSource1;
+            else {
+
+                pendingOrderList = new List<v_pendingorder>();
+            }
+
+            InitializeOrderData();
 
             return count;
         }
 
+        private int InitializeOrderData()
+        {
+            this.bindingSource1.DataSource = null;
+            // 记录DataGridView改变数据
+
+            IEnumerable<IGrouping<int, v_pendingorder>> grouped_orders = pendingOrderList.GroupBy(o => o.自社コード, o => o);
+            foreach (var gos in grouped_orders)
+            {
+                int total = gos.Sum(o => o.実際出荷数量);
+                int min = gos.Min(o => o.実際出荷数量);
+
+                foreach (var o in gos)
+                {
+
+                    if (o.在庫数 >= total)
+                    {
+                        o.在庫状態 = "あり";
+                    }
+                    else if (o.在庫数 > min)
+                    {
+                        o.在庫状態 = "一部不足";
+                    }
+                    else
+                    {
+                        o.在庫状態 = "なし";
+                    }
+                }
+            }
+            
+            //sortablePendingOrderList = new SortableBindingList<v_pendingorder>( orders );
+
+            this.bindingSource1.DataSource = pendingOrderIBindList;
+            
+            if (pendingOrderList.Count > 0)
+            {
+                //var shops = pendingOrderList.Select(s => new MockEntity { Id = s.id受注データ, FullName = s.実際配送担当 }).Distinct().ToList();
+                //shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                //this.DanDangComboBox.DisplayMember = "FullName";
+                //this.DanDangComboBox.ValueMember = "Id";
+                //this.DanDangComboBox.DataSource = shops;
+
+                // 担当
+                var counties = pendingOrderList.Select(s => new MockEntity { ShortName = s.実際配送担当, FullName = s.実際配送担当 }).Distinct().ToList();
+                counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                this.DanDangComboBox.DisplayMember = "FullName";
+                this.DanDangComboBox.ValueMember = "ShortName";
+                this.DanDangComboBox.DataSource = counties;
+
+                // 品名漢字
+                var PMHZ = pendingOrderList.Select(s => new MockEntity {Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().ToList();
+                PMHZ.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                this.PMHZCombox.DisplayMember = "FullName";
+                this.PMHZCombox.ValueMember = "Id";
+                this.PMHZCombox.DataSource = PMHZ;
+
+                // GenreName
+                var GenreName = pendingOrderList.Select(s => new MockEntity { Id = s.ジャンル, ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
+                GenreName.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                this.GenreNamecomboBox.DisplayMember = "FullName";
+                this.GenreNamecomboBox.ValueMember = "Id";
+                this.GenreNamecomboBox.DataSource = GenreName;
+
+                // 在庫状態
+                var ZKZT = pendingOrderList.Select(s => new MockEntity { ShortName = s.在庫状態, FullName = s.在庫状態 }).Distinct().ToList();
+                ZKZT.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                this.ZKZTcomboBox3.DisplayMember = "FullName";
+                this.ZKZTcomboBox3.ValueMember = "ShortName";
+                this.ZKZTcomboBox3.DataSource = ZKZT;
+            }
+           
+            dataGridView1.DataSource = this.bindingSource1;
+
+            return 0;
+        }
+
+
+        private void InitializeRCList()
+        {
+            // 為了兼容 RollbackOrder， ecOrderList is v_penddingorder
+            var q = OrderSqlHelper.ECWithoutCodeOrderQuery(this.entityDataSource1, ErCiZhiPinId);
+            string sql = "SELECT MAX(t_orderdata.`社内伝番`) FROM t_orderdata";
+            int max = this.entityDataSource1.DbContext.Database.SqlQuery<int>(sql).FirstOrDefault();
+            max = Convert.ToInt32(max);
+
+            //社内传番应该为8位，我们现在排到了10009837
+            if (max < 10002000)
+            {
+                max += 10002000;
+            }
+
+            this.ecOrderList = q.ToList();
+            var groupedOrders = ecOrderList.GroupBy(o => o.店舗コード);
+            int i = 0;
+            foreach (var gos in groupedOrders)
+            {
+                i++;
+
+                int j = 0;
+
+                foreach (var o in gos)
+                {
+
+                    j++;
+                    o.社内伝番UnSaved = max + i;
+                    o.行数 = Convert.ToInt16(j);
+                    o.最大行数 = Convert.ToInt16(gos.Count());
+
+                }
+            }
+            this.dataGridView2.AutoGenerateColumns = false;
+            this.dataGridView2.DataSource = this.ecOrderList;
+
+        }
+
+        private void InitializeShipperOrderList( string shipperName = null)
+        {
+            this.shipperComboBox.SelectedIndex = 0;
+            if (shipperName != null)
+            {
+                shipperComboBox.SelectedText = shipperName;
+            }
+            //this.shipperComboBox.DisplayMember = "ShortName";
+            //this.shipperComboBox.ValueMember = "ShortName";
+            //this.shipperComboBox.DataSource = shipperList;
+
+            //https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html
+            //http://stackoverflow.com/questions/23921117/disable-only-full-group-by
+            //handle SET SESSION sql_mode='ANSI';
+
+            string sql = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
+       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
+     FROM t_orderdata
+     WHERE  `Status`={0} AND `ジャンル`<> 1003
+     UNION ALL
+     SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`社内伝番`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `納品口数`, sum(`重量`) as `実際出荷数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
+     FROM t_orderdata
+     WHERE `Status`={0} AND `ジャンル`= 1003 AND `社内伝番` >0
+     GROUP BY `社内伝番`
+     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
+
+            this.shipperOrderList = this.entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.NotifyShipper).ToList();
+
+            string shipper = this.shipperComboBox.Text;
+
+            this.dataGridView3.AutoGenerateColumns = false;
+            this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipper);
+
+        }
 
         #endregion
 
 
-        private IEnumerable<int> GetChangedRowIndexes()
+        private IEnumerable<int> GetChangedOrderIds()
         {
 
             List<int> rows = new List<int>();
@@ -489,51 +534,19 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             return rows.Distinct();
         }
 
-        private void invoiceNoFilterTextBox_Leave(object sender, EventArgs e)
-        {
-            ApplyFilter();
-        }
 
-        private void ApplyFilter()
-        {
-            string filter = "";
-            if (this.storeCodeFilterTextBox3.Text.Length > 0)
-            {
-                filter += "(店舗コード=" + this.storeCodeFilterTextBox3.Text + ")";
-            }
-            if (this.invoiceNoFilterTextBox.Text.Length > 0)
-            {
-                if (filter.Length > 0)
-                {
-                    filter += " AND ";
-                }
-                filter += "(伝票番号=" + this.invoiceNoFilterTextBox.Text + ")";
-            }
-            this.bindingSource1.Filter = filter;
 
-        }
         private void ApplyFilter2()
         {
             string filter = "";
-            if (this.storeCodeFilterTextBox3.Text.Length > 0)
-            {
-                filter += "(店舗コード=" + this.storeCodeFilterTextBox3.Text + ")";
-            }
-            if (this.invoiceNoFilterTextBox.Text.Length > 0)
-            {
-                if (filter.Length > 0)
-                {
-                    filter += " AND ";
-                }
-                filter += "(伝票番号=" + this.invoiceNoFilterTextBox.Text + ")";
-            }
+
             if (this.DanDangComboBox.Text.Length > 0 && this.DanDangComboBox.Text != "不限")
             {
                 if (filter.Length > 0)
                 {
                     filter += " AND ";
                 }
-                filter += "(実際配送担当=" + this.DanDangComboBox.Text + ")";
+                filter += "(実際配送担当='" + this.DanDangComboBox.Text + "')";
             }
             if (this.PMHZCombox.Text.Length > 0 && this.PMHZCombox.Text != "不限")
             {
@@ -541,7 +554,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 {
                     filter += " AND ";
                 }
-                filter += "(品名漢字=" + this.PMHZCombox.Text + ")";
+                filter += "(品名漢字='" + this.PMHZCombox.Text + "')";
             }
             if (this.GenreNamecomboBox.Text.Length > 0 && this.GenreNamecomboBox.Text != "不限")
             {
@@ -549,7 +562,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 {
                     filter += " AND ";
                 }
-                filter += "(GenreName=" + this.GenreNamecomboBox.Text + ")";
+                filter += "(GenreName='" + this.GenreNamecomboBox.Text + "')";
             }
             if (this.ZKZTcomboBox3.Text.Length > 0 && this.ZKZTcomboBox3.Text != "不限")
             {
@@ -557,167 +570,16 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 {
                     filter += " AND ";
                 }
-                filter += "(在庫状態=" + "'" + this.ZKZTcomboBox3.Text + "'" + ")";
+                filter += "(在庫状態='" + this.ZKZTcomboBox3.Text + "')";
             }
-            //if (this.invoiceNoFilterTextBox.Text.Length > 0)
-            //{
-            //if (filter.Length > 0)
-            //{
-            //    filter += " AND ";
-            //}
-            //filter += "(社内伝番>" + 0 + ")";
-            //    //filter += "(社内伝番=" + this.invoiceNoFilterTextBox.Text + ")";
-
-            //}
-            ////不读取 canel 的订单
-            //filter += " AND ";
-            //filter += "(キャンセル<>" + "'" + "no" + "'" + ")";
 
             this.bindingSource1.Filter = filter;
 
         }
-        private void filterButton_Click(object sender, EventArgs e)
-        {
-
-            ApplyFilter();
-
-
-            ///筛选调价
-            ///
-            //if (storeCodeFilterTextBox3.Text != "" && invoiceNoFilterTextBox.Text == "")
-            //{
-
-            //    CheckUserInfo(storeCodeFilterTextBox3.Text, "1", "");
-            //    this.dataGridView1.AutoGenerateColumns = false;
-            //    this.dataGridView1.DataSource = Findorderdataresults;
-            //}
-            //else if (storeCodeFilterTextBox3.Text != "" && invoiceNoFilterTextBox.Text != "")
-            //{
-            //    CheckUserInfo(storeCodeFilterTextBox3.Text, "2", invoiceNoFilterTextBox.Text);
-            //    this.dataGridView1.AutoGenerateColumns = false;
-            //    this.dataGridView1.DataSource = Findorderdataresults;
-            //}
-
-
-        }
-        public void CheckUserInfo(string username, string tyoe, string conditon2)
-        {
-            string SQLStr = "";
-
-            Findorderdataresults = new List<t_orderdata>();
-            if (tyoe == "1")
-                SQLStr = String.Format(" select * From t_orderdata where 店舗コード='{0}'", username);
-            else if (tyoe == "2")
-                SQLStr = String.Format(" select * From t_orderdata where 店舗コード='{0}',伝票番号='{1}'", username, conditon2);
-
-            try
-            {
-                string constr = "server=localhost;User Id=root ;Database=test";
-                CreateOrderForm SqlData = new CreateOrderForm();
-                MySqlConnection mycon = new MySqlConnection(constr);
-                mycon.Open();
-                //MySqlCommand mycmd = new MySqlCommand("select * from t_maruken_trans  where 店舗コード='87'", mycon);
-                MySqlCommand mycmd = new MySqlCommand(SQLStr, mycon);
-
-                //SqlDataReader DataReader = mycmd.ExSQLReader( );
-                MySqlDataReader DataReader = mycmd.ExecuteReader();
-                while (DataReader.Read())
-                {
-                    t_orderdata userinfo = new t_orderdata();
-
-                    #region 集合
-                    //if (DataReader.GetValue(0).ToString() != null && DataReader.GetValue(0).ToString() != "")
-                    //userinfo.id受注データ= Convert.ToInt32(DataReader.GetValue(0).ToString()); 
-
-
-                    //userinfo.id = DataReader.GetValue(0).ToString();
-                    //userinfo.受注日 = Convert.ToDateTime(DataReader.GetValue(1).ToString());
-                    //userinfo.店舗コード = Convert.ToInt16(DataReader.GetValue(2).ToString());
-                    //userinfo.店舗名漢字 = DataReader.GetValue(3).ToString();
-                    //userinfo.伝票番号 = Convert.ToInt32(DataReader.GetValue(4).ToString());
-                    //userinfo.キャンセル = DataReader.GetValue(5).ToString();
-                    //if (DataReader.GetValue(6).ToString() != null && DataReader.GetValue(6).ToString() != "")
-                    //    userinfo.キャンセル時刻 = Convert.ToDateTime(DataReader.GetValue(6).ToString());
-                    //userinfo.ジャンル = Convert.ToInt16(DataReader.GetValue(7).ToString());
-                    //userinfo.品名漢字 = DataReader.GetValue(8).ToString();
-                    //userinfo.規格名漢字 = DataReader.GetValue(9).ToString();
-                    //userinfo.発注数量 = Convert.ToInt32(DataReader.GetValue(10).ToString());
-                    //userinfo.口数 = Convert.ToInt32(DataReader.GetValue(11).ToString());
-                    //if (DataReader.GetValue(12).ToString() != null && DataReader.GetValue(12).ToString() != "")
-                    //    userinfo.重量 = Convert.ToInt32(DataReader.GetValue(12).ToString());
-                    //userinfo.単位 = DataReader.GetValue(13).ToString();
-                    //userinfo.実際配送担当 = DataReader.GetValue(14).ToString();
-
-                    //userinfo.県別 = DataReader.GetValue(15).ToString();
-                    //userinfo.配送担当受信 = Convert.ToBoolean(DataReader.GetValue(16).ToString());
-                    //if (DataReader.GetValue(17).ToString() != null && DataReader.GetValue(17).ToString() != "")
-                    //    userinfo.配送担当受信時刻 = Convert.ToDateTime(DataReader.GetValue(17).ToString());
-                    //userinfo.専務受信 = Convert.ToBoolean(DataReader.GetValue(18).ToString());
-                    //if (DataReader.GetValue(19).ToString() != null && DataReader.GetValue(19).ToString() != "")
-                    //    userinfo.専務受信時刻 = Convert.ToDateTime(DataReader.GetValue(19).ToString());
-                    //userinfo.納品指示 = DataReader.GetValue(20).ToString();
-                    //userinfo.備考 = DataReader.GetValue(21).ToString();
-
-                    ////MessageBox.Show("服务器查找成功");
-                    //Findorderdataresults.Add(userinfo);
-                    #endregion
-                    #region new
-
-                    if (DataReader.GetValue(0).ToString() != null && DataReader.GetValue(0).ToString() != "")
-                        userinfo.id受注データ = Convert.ToInt32(DataReader.GetValue(0).ToString());
-
-
-                    userinfo.id = DataReader.GetValue(1).ToString();
-                    userinfo.受注日 = Convert.ToDateTime(DataReader.GetValue(3).ToString());
-                    userinfo.店舗コード = Convert.ToInt16(DataReader.GetValue(6).ToString());
-                    userinfo.店舗名漢字 = DataReader.GetValue(7).ToString();
-                    userinfo.伝票番号 = Convert.ToInt32(DataReader.GetValue(11).ToString());
-                    userinfo.キャンセル = DataReader.GetValue(14).ToString();
-                    if (DataReader.GetValue(15).ToString() != null && DataReader.GetValue(15).ToString() != "")
-                        userinfo.キャンセル時刻 = Convert.ToDateTime(DataReader.GetValue(15).ToString());
-                    if (DataReader.GetValue(16).ToString() != null && DataReader.GetValue(16).ToString() != "")
-                        userinfo.ジャンル = Convert.ToInt16(DataReader.GetValue(16).ToString());
-                    userinfo.品名漢字 = DataReader.GetValue(19).ToString();
-                    userinfo.規格名漢字 = DataReader.GetValue(20).ToString();
-                    userinfo.発注数量 = Convert.ToInt32(DataReader.GetValue(21).ToString());
-                    if (DataReader.GetValue(23).ToString() != null && DataReader.GetValue(23).ToString() != "")
-                        userinfo.口数 = Convert.ToInt32(DataReader.GetValue(23).ToString());
-                    if (DataReader.GetValue(25).ToString() != null && DataReader.GetValue(25).ToString() != "")
-                        userinfo.重量 = Convert.ToInt32(DataReader.GetValue(25).ToString());
-                    userinfo.単位 = DataReader.GetValue(26).ToString();
-                    userinfo.実際配送担当 = DataReader.GetValue(32).ToString();
-                    if (DataReader.GetValue(111).ToString() != null && DataReader.GetValue(111).ToString() != "")
-
-                        userinfo.県別 = DataReader.GetValue(111).ToString();
-                    userinfo.配送担当受信 = Convert.ToBoolean(DataReader.GetValue(33).ToString());
-                    if (DataReader.GetValue(34).ToString() != null && DataReader.GetValue(34).ToString() != "")
-                        userinfo.配送担当受信時刻 = Convert.ToDateTime(DataReader.GetValue(34).ToString());
-                    userinfo.専務受信 = Convert.ToBoolean(DataReader.GetValue(35).ToString());
-                    if (DataReader.GetValue(36).ToString() != null && DataReader.GetValue(36).ToString() != "")
-                        userinfo.専務受信時刻 = Convert.ToDateTime(DataReader.GetValue(36).ToString());
-                    userinfo.納品指示 = DataReader.GetValue(37).ToString();
-                    userinfo.備考 = DataReader.GetValue(41).ToString();
-
-                    //MessageBox.Show("服务器查找成功");
-                    Findorderdataresults.Add(userinfo);
-
-
-                    #endregion
-                }
-                mycon.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-            }
-            finally
-            {
-
-            }
-        }
+       
         private int pager1_EventPaging(EventPagingArg e)
         {
-            int order_count = InitializeOrderData();
+            int order_count = InitializeDataSource();
 
             return order_count;
         }
@@ -793,118 +655,6 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         private void cancelFormButton_Click(object sender, EventArgs e)
         {
             this.Close();
-
-
-        }
-
-        public void CheckUserInfo_ID(string username, string tyoe, string conditon2)
-        {
-            string SQLStr = "";
-
-            Findorderdataresults = new List<t_orderdata>();
-            if (tyoe == "1")
-                SQLStr = String.Format(" select * From t_orderdata where id='{0}'", username);
-
-            try
-            {
-                string constr = "server=localhost;User Id=root ;Database=test";
-                CreateOrderForm SqlData = new CreateOrderForm();
-                MySqlConnection mycon = new MySqlConnection(constr);
-                mycon.Open();
-                //MySqlCommand mycmd = new MySqlCommand("select * from t_maruken_trans  where 店舗コード='87'", mycon);
-                MySqlCommand mycmd = new MySqlCommand(SQLStr, mycon);
-
-                //SqlDataReader DataReader = mycmd.ExSQLReader( );
-                MySqlDataReader DataReader = mycmd.ExecuteReader();
-                while (DataReader.Read())
-                {
-                    t_orderdata userinfo = new t_orderdata();
-
-                    #region 集合
-                    //userinfo.id = DataReader.GetValue(0).ToString();
-                    //userinfo.受注日 = Convert.ToDateTime(DataReader.GetValue(1).ToString());
-                    //userinfo.店舗コード = Convert.ToInt16(DataReader.GetValue(2).ToString());
-                    //userinfo.店舗名漢字 = DataReader.GetValue(3).ToString();
-                    //userinfo.伝票番号 = Convert.ToInt32(DataReader.GetValue(4).ToString());
-                    //userinfo.キャンセル = DataReader.GetValue(5).ToString();
-                    //if (DataReader.GetValue(6).ToString() != null && DataReader.GetValue(6).ToString() != "")
-                    //    userinfo.キャンセル時刻 = Convert.ToDateTime(DataReader.GetValue(6).ToString());
-                    //userinfo.ジャンル = Convert.ToInt16(DataReader.GetValue(7).ToString());
-                    //userinfo.品名漢字 = DataReader.GetValue(8).ToString();
-                    //userinfo.規格名漢字 = DataReader.GetValue(9).ToString();
-                    //userinfo.発注数量 = Convert.ToInt32(DataReader.GetValue(10).ToString());
-                    //userinfo.口数 = Convert.ToInt32(DataReader.GetValue(11).ToString());
-                    //if (DataReader.GetValue(12).ToString() != null && DataReader.GetValue(12).ToString() != "")
-                    //    userinfo.重量 = Convert.ToInt32(DataReader.GetValue(12).ToString());
-                    //userinfo.単位 = DataReader.GetValue(13).ToString();
-                    //userinfo.実際配送担当 = DataReader.GetValue(14).ToString();
-
-                    //userinfo.県別 = DataReader.GetValue(15).ToString();
-                    //userinfo.配送担当受信 = Convert.ToBoolean(DataReader.GetValue(16).ToString());
-                    //if (DataReader.GetValue(17).ToString() != null && DataReader.GetValue(17).ToString() != "")
-                    //    userinfo.配送担当受信時刻 = Convert.ToDateTime(DataReader.GetValue(17).ToString());
-                    //userinfo.専務受信 = Convert.ToBoolean(DataReader.GetValue(18).ToString());
-                    //if (DataReader.GetValue(19).ToString() != null && DataReader.GetValue(19).ToString() != "")
-                    //    userinfo.専務受信時刻 = Convert.ToDateTime(DataReader.GetValue(19).ToString());
-                    //userinfo.納品指示 = DataReader.GetValue(20).ToString();
-                    //userinfo.備考 = DataReader.GetValue(21).ToString();
-
-                    ////MessageBox.Show("服务器查找成功");
-                    //Findorderdataresults.Add(userinfo);
-                    #endregion
-                    #region new
-
-                    if (DataReader.GetValue(0).ToString() != null && DataReader.GetValue(0).ToString() != "")
-                        userinfo.id受注データ = Convert.ToInt32(DataReader.GetValue(0).ToString());
-
-
-                    userinfo.id = DataReader.GetValue(1).ToString();
-                    userinfo.受注日 = Convert.ToDateTime(DataReader.GetValue(3).ToString());
-                    userinfo.店舗コード = Convert.ToInt16(DataReader.GetValue(6).ToString());
-                    userinfo.店舗名漢字 = DataReader.GetValue(7).ToString();
-                    userinfo.伝票番号 = Convert.ToInt32(DataReader.GetValue(11).ToString());
-                    userinfo.キャンセル = DataReader.GetValue(14).ToString();
-                    if (DataReader.GetValue(15).ToString() != null && DataReader.GetValue(15).ToString() != "")
-                        userinfo.キャンセル時刻 = Convert.ToDateTime(DataReader.GetValue(15).ToString());
-                    if (DataReader.GetValue(16).ToString() != null && DataReader.GetValue(16).ToString() != "")
-                        userinfo.ジャンル = Convert.ToInt16(DataReader.GetValue(16).ToString());
-                    userinfo.品名漢字 = DataReader.GetValue(19).ToString();
-                    userinfo.規格名漢字 = DataReader.GetValue(20).ToString();
-                    userinfo.発注数量 = Convert.ToInt32(DataReader.GetValue(21).ToString());
-                    if (DataReader.GetValue(23).ToString() != null && DataReader.GetValue(23).ToString() != "")
-                        userinfo.口数 = Convert.ToInt32(DataReader.GetValue(23).ToString());
-                    if (DataReader.GetValue(25).ToString() != null && DataReader.GetValue(25).ToString() != "")
-                        userinfo.重量 = Convert.ToInt32(DataReader.GetValue(25).ToString());
-                    userinfo.単位 = DataReader.GetValue(26).ToString();
-                    userinfo.実際配送担当 = DataReader.GetValue(32).ToString();
-                    if (DataReader.GetValue(111).ToString() != null && DataReader.GetValue(111).ToString() != "")
-
-                        userinfo.県別 = DataReader.GetValue(111).ToString();
-                    userinfo.配送担当受信 = Convert.ToBoolean(DataReader.GetValue(33).ToString());
-                    if (DataReader.GetValue(34).ToString() != null && DataReader.GetValue(34).ToString() != "")
-                        userinfo.配送担当受信時刻 = Convert.ToDateTime(DataReader.GetValue(34).ToString());
-                    userinfo.専務受信 = Convert.ToBoolean(DataReader.GetValue(35).ToString());
-                    if (DataReader.GetValue(36).ToString() != null && DataReader.GetValue(36).ToString() != "")
-                        userinfo.専務受信時刻 = Convert.ToDateTime(DataReader.GetValue(36).ToString());
-                    userinfo.納品指示 = DataReader.GetValue(37).ToString();
-                    userinfo.備考 = DataReader.GetValue(41).ToString();
-
-                    //MessageBox.Show("服务器查找成功");
-                    Findorderdataresults.Add(userinfo);
-
-
-                    #endregion
-                }
-                mycon.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-            }
-            finally
-            {
-
-            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -918,22 +668,25 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         private void ecSaveButton_Click(object sender, EventArgs e)
         {
 
-            this.entityDataSource1.DbContext.SaveChanges();
+            //this.entityDataSource1.DbContext.SaveChanges();
 
-            //List<int> oid = new List<int>();
+            List<int> ids = ecOrderList.Select(o => o.id受注データ).ToList();
 
-            //foreach (var o in ecOrderList)
-            //{
-            //    oid.Add(o.id受注データ);
-            //}
-
-            //using (var ctx = new GODDbContext())
-            //{
-            //    t_orderdata temp = new t_orderdata();
-            //    ctx.t_orderdata.AddRange(orders1);
-            //    ctx.SaveChanges();
-            //    this.orderList.Clear();
-            //}
+            using (var ctx = new GODDbContext())
+            {
+                var orders = (from t_orderdata o in ctx.t_orderdata
+                              where ids.Contains(o.id受注データ)
+                              select o).ToList();
+                foreach (var order in orders)
+                {
+                    var pendingOrder = ecOrderList.Find(o => o.id受注データ == order.id受注データ);
+                    order.社内伝番 = pendingOrder.社内伝番UnSaved;
+                    order.行数 = pendingOrder.行数;
+                    order.最大行数 = pendingOrder.最大行数;
+                }
+                    
+                ctx.SaveChanges();
+            }
 
             MessageBox.Show(String.Format("Congratulations, {0} items changed successfully!", ecOrderList.Count));
 
@@ -1020,151 +773,26 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         }
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
+
+
+        #region 修改键生成
+        private string GetCellKey(int rowIndex, int columnIndex, bool forChanged)
+        {
+            return GetCellKey(rowIndex, columnIndex) + "_changed";
         }
 
-        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private string GetCellKey(int rowIndex, int columnIndex)
         {
-            //if (e.ColumnIndex == 11) // 担当， 取值不是 丸健，MKL，'マツモト産業'
-            //{                
-            //}
-            //else {
-            //    e.ThrowException = true;
-            //}
+            var row = dataGridView1.Rows[rowIndex];
+            var model = row.DataBoundItem as v_pendingorder;
+
+            return string.Format("{0}_{1}", model.id受注データ, columnIndex.ToString());
         }
-
-        private void dataGridView2_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                if (e.RowIndex >= 0)
-                {
-                    dataGridView2.ClearSelection();
-                    dataGridView2.Columns[e.ColumnIndex].Selected = true;
-                    dataGridView2.CurrentCell = dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
-                    contextMenuStrip2.Show(MousePosition.X, MousePosition.Y);
-
-                }
-
-            }
-        }
-
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            int page = this.tabControl1.SelectedIndex;
-
-            if (page == 1)
-            {
-                int i = dataGridView1.CurrentCell.OwningColumn.Index;
-                int iRow = dataGridView1.CurrentCell.OwningRow.Index;
-                var oids = Sec_GetOrderIdsBySelectedGridCell();
-                int 自社コード = 0;
-
-                using (var ctx = new GODDbContext())
-                {
-
-                    //  var pendingorder = bindingSource1.List[row] as v_pendingorder;
-                    var filtered = ecOrderList.FindAll(s => s.id受注データ == oids[0]);
-                    t_orderdata order = this.ecOrderList.Find(o => (o.id受注データ == oids[0]));
-                    if (order != null)
-                    {
-                        //   t_orderdata order = ecOrderList.Find(pendingorder.id受注データ);
-                        //需要修改的字段为: “口数” “发注数量” “担当” “形态”
-                        order.一旦保留 = true;
-                        order.配送担当受信 = false;
-                        order.配送担当受信時刻 = null;
-                        自社コード = order.自社コード;
-                        order.社内伝番 = 0;
-
-                        var results = from s in ctx.t_stockrec
-                                      where s.自社コード >= 自社コード
-                                      group s by s.納品書番号 into g
-                                      select g;
-                        //删除Rec 
-                        var stockrecs = (from s in ctx.t_stockrec
-                                         where s.自社コード == 自社コード && s.状態 != "完了"
-                                         select s).ToList();
-                        ctx.t_stockrec.RemoveRange(stockrecs);
-                        //更新t_stockstate
-
-                        List<t_stockrec> receivedList = new List<t_stockrec>();
-                        foreach (var item in filtered)
-                        {
-                            if (item != null)
-                            {
-                                #region 集合
-                                var order1 = new t_stockrec();
-                                //order.日付 = orderCreatedAtDateTimePicker.Value;
-                                //order.先 = this.warehouseComboBox.Text;
-                                //order1.元 = order.;
-                                //order.工厂 = this.manufacturerComboBox.Text;
-                                //order.納品書番号 = stockNOTextBox.Text;
-
-                                order1.数量 = order.発注数量;
-                                //order.区分 = StockIoEnum.入庫.ToString();
-                                //order.事由 = this.remarkTextBox1.Text;
-                                ////order.仓库 = storeComboBox.Text;
-                                order1.自社コード = Convert.ToInt32(自社コード);
-                                order1.状態 = "あり";
-                                //order.客户 = this.clientComboBox.Text;
-                                receivedList.Add(order1);
-                                #endregion
-
-                            }
-                        }
-                        if (receivedList.Count > 0)
-                        {
-                            {
-                                OrderSqlHelper.UpdateStockState(ctx, receivedList);
-                                this.stockiosList.Clear();
-                                MessageBox.Show(String.Format("Congratulations, You have {0} items Return successfully!", receivedList.Count));
-
-                            }
-                        }
-
-                        ctx.SaveChanges();
-
-                    }
-                }
-
-                InitializeOrderData();
-            }
-            else if (page == 1)
-            {
+        #endregion
 
 
-
-
-            }
-
-
-
-        }
-
-        private List<int> Sec_GetOrderIdsBySelectedGridCell()
-        {
-
-            List<int> order_ids = new List<int>();
-            var rows = GetSelectedRowsBySelectedCells(dataGridView2);
-            foreach (DataGridViewRow row in rows)
-            {
-                var pendingorder = row.DataBoundItem as t_orderdata;
-                order_ids.Add(pendingorder.id受注データ);
-            }
-
-            return order_ids;
-        }
-
-        private void DanDangComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            ApplyFilter2();
-
-
-        }
+        #region 订单过滤功能
 
         private void ClearSelect_Click(object sender, EventArgs e)
         {
@@ -1175,61 +803,159 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         }
 
-        private void PMHZCombox_SelectedIndexChanged(object sender, EventArgs e)
+        
+        private void filterButton_Click(object sender, EventArgs e)
         {
             ApplyFilter2();
         }
 
+        //分类名称
         private void GenreNamecomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ApplyFilter2();
-        }
+            List<v_pendingorder> orders = GetDataGridViewBoundOrders();
 
+            var combox = sender as ComboBox;
+            if (combox.Text != "不限")
+            {
+                orders = pendingOrderList.FindAll(o => o.GenreName == combox.Text);
+            }
+
+            // 品名漢字
+            InitializeProductComboBox(orders);
+        }
+        // 品名汉字
+        private void PMHZCombox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
+        }
+        //在库状态
         private void ZKZTcomboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //ApplyFilter2();
-
-            ApplyBindSourceFilter(ZKZTcomboBox3.Text);
+            ApplyFilter2();
         }
-
-
-        private void ApplyBindSourceFilter(string text)
+        // 配送担当
+        private void DanDangComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.bindingSource1.Filter = null;
-            this.bindingSource1.DataSource = this.sortablePendingOrderList;
-            if (bindingSource1.Count > 0)
+
+            List<v_pendingorder> orders = GetDataGridViewBoundOrders();
+            var combox = sender as ComboBox;
+            if (combox.Text != "不限")
             {
-                string filter = "";
-                //  filter += "(在庫状態=" + "'" + this.ZKZTcomboBox3.Text + "'" + ")";
-
-
-                if (this.ZKZTcomboBox3.Text.Length > 0 && this.ZKZTcomboBox3.Text != "不限")
-                {
-                    filter += "(在庫状態=" + "'" + this.ZKZTcomboBox3.Text + "'" + ")";
-                }
-                //if (this.storeComboBox.Text.Length > 0 && this.storeComboBox.Text != "不限")
-                //{
-                //    if (filter.Length > 0)
-                //    {
-                //        filter += " AND ";
-                //    }
-                //    // filter += "(店舗名漢字=" + "'" + this.storeComboBox.Text + "'" + ")";
-                //    int code = (int)this.storeComboBox.SelectedValue;
-
-                //    filter += "(店舗コード=" + "'" + code.ToString() + "'" + ")";
-                //}
-                //if (this.shipperComboBox.Text.Length > 0)
-                //{
-                //    if (filter.Length > 0)
-                //    {
-                //        filter += " AND ";
-                //    }
-                //    filter += "(実際配送担当=" + "'" + this.shipperComboBox.Text + "'" + ")";
-                //}
-                bindingSource1.Filter = filter;
+                orders = pendingOrderList.FindAll(o => o.実際配送担当 == combox.Text);              
             }
+
+            // GenreName
+            InitializeGenreComboBox(orders);
+
+            InitializeProductComboBox(orders);
+
+        }
+        private void InitializeGenreComboBox(List<v_pendingorder> orders)
+        {
+            // GenreName
+            var GenreName = orders.Select(s => new MockEntity { Id = s.ジャンル, ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
+            GenreName.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            this.GenreNamecomboBox.DisplayMember = "FullName";
+            this.GenreNamecomboBox.ValueMember = "Id";
+            this.GenreNamecomboBox.DataSource = GenreName;
         }
 
+        private void InitializeProductComboBox(List<v_pendingorder> orders)
+        {
+            // 品名漢字
+            var PMHZ = orders.Select(s => new MockEntity { Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().ToList();
+            PMHZ.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            this.PMHZCombox.DisplayMember = "FullName";
+            this.PMHZCombox.ValueMember = "Id";
+            this.PMHZCombox.DataSource = PMHZ;
+        }
 
+        private List<v_pendingorder> GetDataGridViewBoundOrders()
+        {
+            List<v_pendingorder> orders = new List<v_pendingorder>();
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                orders.Add(dataGridView1.Rows[i].DataBoundItem as v_pendingorder);
+            }
+
+            return orders;
+        }
+
+        #endregion
+
+
+        #region 退单功能
+        
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            string selectedShipperName = this.shipperComboBox.Text;
+            List<v_pendingorder> orders = new List<v_pendingorder>();
+            for (int i = 0; i < dataGridView3.SelectedRows.Count; i++)
+            {
+                var order = dataGridView3.SelectedRows[i].DataBoundItem as v_pendingorder;
+                orders.Add(order);
+            }
+
+            RollbackOrder(orders);
+
+            InitializeShipperOrderList(selectedShipperName);
+            // 更新待處理訂單列表
+            InitializeDataSource();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            List<v_pendingorder> orders = new List<v_pendingorder>();
+            for( int i =0; i< dataGridView2.SelectedRows.Count; i++)
+            {
+                var order = dataGridView2.SelectedRows[i].DataBoundItem as v_pendingorder;
+                orders.Add( order );
+            }
+
+            RollbackOrder(orders);
+            // 更新二次製品列表
+            InitializeRCList();
+            // 更新待處理訂單列表
+            InitializeDataSource();
+            
+        }
+
+        private void RollbackOrder( List<v_pendingorder> pendingOrders ) 
+        {
+            using (var ctx = new GODDbContext())
+            {
+                var orderIds = pendingOrders.FindAll(o => o.社内伝番 == 0).Select(o => o.id受注データ);
+
+                var innerIds = pendingOrders.FindAll(o => o.社内伝番 > 0).Select(o => o.社内伝番);
+
+                var orderList = (from t_orderdata o in ctx.t_orderdata
+                    where orderIds.Contains(o.id受注データ) || innerIds.Contains(o.社内伝番)
+                    select o).ToList();
+                orderIds = orderList.Select( o=> o.id受注データ);
+                var stockrecList = (from t_stockrec s in ctx.t_stockrec
+                                    where orderIds.Contains(s.OrderId)
+                                    select s).ToList();
+
+                foreach (var order in orderList) 
+                {
+                    //二次制品订单？
+                    order.社内伝番 = 0;
+                    order.一旦保留 = true;
+                    order.配送担当受信 = false;
+                    order.配送担当受信時刻 = null;
+                    order.Status = OrderStatus.Pending;
+                    //var stockrec = stockrecList.Find(s => s.OrderId = order.id受注データ);
+                
+                }
+                ctx.t_stockrec.RemoveRange(stockrecList);
+                ctx.SaveChanges();
+                OrderSqlHelper.UpdateStockState(ctx, stockrecList);
+            }
+
+
+        }
+
+        #endregion
     }
 }

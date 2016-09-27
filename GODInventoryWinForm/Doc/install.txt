@@ -79,3 +79,5 @@ ADD COLUMN `発注規格名漢字`  varchar(255) CHARACTER SET 'utf8' COLLATE ut
 
 ALTER TABLE `god_inventory`.`t_orderdata` 
 CHANGE COLUMN `最小発注単位数量` `最小発注単位数量` int(11) NOT NULL DEFAULT 0;
+ALTER TABLE `god_inventory`.`t_orderdata` 
+CHANGE COLUMN `社内伝番` `社内伝番` int(11) NOT NULL DEFAULT 0;
