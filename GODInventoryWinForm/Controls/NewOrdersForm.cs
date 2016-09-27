@@ -20,10 +20,9 @@ namespace GODInventoryWinForm.Controls
         //order by o2.店舗コード, o2.自社コード , o2.createdAt desc
         
         //o1.`id受注データ`!= o2.`id受注データ`
-        int RowRemark = 0;
-        int cloumn = 0;
 
-        private Hashtable datagridChanges = null;
+
+        private Hashtable datagrid_changes = null;
         List<v_duplicatedorder> duplicatedOrderList;
         SortableBindingList<v_duplicatedorder> duplicatedBindingList;
         public NewOrdersForm()
@@ -32,6 +31,7 @@ namespace GODInventoryWinForm.Controls
             this.dataGridView1.DataSource = null;
             this.dataGridView1.AutoGenerateColumns = false;
 
+            this.datagrid_changes = new Hashtable();
             this.InitializeOrderData();
         }
 
@@ -83,23 +83,15 @@ namespace GODInventoryWinForm.Controls
             
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            RowRemark = e.RowIndex;
-            cloumn = e.ColumnIndex;
-        }
+        //private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    RowRemark = e.RowIndex;
+        //    cloumn = e.ColumnIndex;
+        //}
 
 
 
-        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.ColumnIndex == 0)
-            {
-                
-                //    this.dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.AliceBlue;
-            
-            }
-        }
+
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
@@ -110,6 +102,8 @@ namespace GODInventoryWinForm.Controls
 
         public int InitializeOrderData()
         {
+            this.datagrid_changes.Clear();
+
             string sql = @"SELECT o1.id受注データ as duplicatedId, o2.id受注データ, o2.`出荷日`,o2.`納品日`,o2.`受注日`,o2.`店舗コード`, o2.`店舗名漢字`,
           o2.`伝票番号`,o2.`納品口数`,o2.`ジャンル`,o2.`品名漢字`,o2.`規格名漢字`, 
           o2.`実際出荷数量`,o2.`実際配送担当`,o2.`県別`, 
@@ -165,38 +159,62 @@ namespace GODInventoryWinForm.Controls
 
         private void cancelOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int rowIndex = this.dataGridView1.CurrentRow.Index;
-            var order = duplicatedBindingList[rowIndex];
-            order.キャンセル = "yes";
-            order.キャンセル時刻 = DateTime.Now;
-            dataGridView1.ClearSelection();
+            int columnIndex = キャンセルColumn.Index;
+            for (int i = 0; i < dataGridView1.SelectedRows.Count; i++) 
+            {
+                var rowIndex = dataGridView1.SelectedRows[i].Index;
+                var order = duplicatedBindingList[rowIndex];
+                var originalValue = order.キャンセル;
+                order.キャンセル = "yes";
+                UpdateChangesManually(rowIndex, columnIndex, originalValue, order.キャンセル);
+            }
+
             this.dataGridView1.Refresh();
         }
 
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int rowIndex = this.dataGridView1.CurrentRow.Index;
-            var order = duplicatedBindingList[rowIndex];
-            order.ダブリ = "yes";
-            dataGridView1.ClearSelection(); 
+            int columnIndex = ダブリColumn.Index;
+            for (int i = 0; i < dataGridView1.SelectedRows.Count; i++)
+            {               
+                var rowIndex = dataGridView1.SelectedRows[i].Index;
+                var order = duplicatedBindingList[rowIndex];
+                var originalValue = order.ダブリ;
+                order.ダブリ = "yes";
+                UpdateChangesManually(rowIndex, columnIndex, originalValue, order.ダブリ);
+            }
             this.dataGridView1.Refresh();
         }
 
         private void uncancleOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int rowIndex = this.dataGridView1.CurrentRow.Index;
-            var order = duplicatedBindingList[rowIndex];
-            order.キャンセル = "no";
-            dataGridView1.ClearSelection(); 
+            int columnIndex = キャンセルColumn.Index;
+            for (int i = 0; i < dataGridView1.SelectedRows.Count; i++)
+            {
+                var rowIndex = dataGridView1.SelectedRows[i].Index;
+                var order = duplicatedBindingList[rowIndex];
+                var originalValue = order.キャンセル;
+                order.キャンセル = "no";
+                UpdateChangesManually(rowIndex, columnIndex, originalValue, order.キャンセル);
+
+            }
             this.dataGridView1.Refresh();
         }
 
         private void unduplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int rowIndex = this.dataGridView1.CurrentRow.Index;
-            var order = duplicatedBindingList[rowIndex];
-            order.ダブリ = "no";
-            dataGridView1.ClearSelection(); 
+            int columnIndex = ダブリColumn.Index;
+
+            for (int i = 0; i < dataGridView1.SelectedRows.Count; i++)
+            {
+                var rowIndex = dataGridView1.SelectedRows[i].Index;
+                var order = duplicatedBindingList[rowIndex];
+                var originalValue = order.ダブリ;
+                order.ダブリ = "no";
+                UpdateChangesManually(rowIndex, columnIndex, originalValue, order.ダブリ);
+
+            }
+            //dataGridView1.ClearSelection(); 
             this.dataGridView1.Refresh();
         }
 
@@ -214,7 +232,112 @@ namespace GODInventoryWinForm.Controls
         //    } 
         //}
 
-       
+
+        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+            string cellKey = GetCellKey(e.RowIndex, e.ColumnIndex);
+
+            if (!datagrid_changes.ContainsKey(cellKey))
+            {
+                datagrid_changes[cellKey] = row.Cells[e.ColumnIndex].Value;
+            }
+        }
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = dataGridView1.Rows[e.RowIndex];
+            var col = dataGridView1.Columns[e.ColumnIndex];
+            string cellKey = GetCellKey(e.RowIndex, e.ColumnIndex);
+            string cellKeyForChanged = GetCellKey(e.RowIndex, e.ColumnIndex, true);
+
+            var new_cell_value = row.Cells[e.ColumnIndex].Value;
+            var original_cell_value = datagrid_changes[cellKey];
+            // original_cell_value could null
+            //Console.WriteLine(" original = {0} {3}, new ={1} {4}, compare = {2}, {5}", original_cell_value, new_cell_value, original_cell_value == new_cell_value, original_cell_value.GetType(), new_cell_value.GetType(), new_cell_value.Equals(original_cell_value));
+            if (new_cell_value == null && original_cell_value == null)
+            {
+                datagrid_changes.Remove(cellKeyForChanged);
+            }
+            else if ((new_cell_value == null && original_cell_value != null) || (new_cell_value != null && original_cell_value == null) || !new_cell_value.Equals(original_cell_value))
+            {
+                datagrid_changes[cellKeyForChanged] = new_cell_value;
+            }
+            else
+            {
+                datagrid_changes.Remove(cellKeyForChanged);
+            }
+
+            if (col == this.実際出荷数量Column) 
+            { 
+            
+            }
+            
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            string cellKey = GetCellKey( e.RowIndex, e.ColumnIndex, true);
+
+            if (datagrid_changes.ContainsKey(cellKey))
+            {
+                e.CellStyle.BackColor = Color.DarkRed;
+                //e.CellStyle.SelectionBackColor = Color.DarkRed;
+            }
+
+        }
+
+        private string GetCellKey(int rowIndex, int columnIndex, bool forChanged)
+        { 
+        
+          return  GetCellKey( rowIndex,  columnIndex) + "_changed";
+        }
+
+        private string GetCellKey(int rowIndex, int columnIndex)
+        {
+            var row = dataGridView1.Rows[rowIndex];
+            var model = row.DataBoundItem as v_duplicatedorder;
+
+            return string.Format( "{0}_{1}", model.id受注データ, columnIndex.ToString() );
+        }
+
+        private bool UpdateChangesManually(int rowIndex, int columnIndex, string originalValue, string newValue) 
+        {
+            string cellKey = GetCellKey(rowIndex, columnIndex);
+            string cellKeyForChanged = GetCellKey(rowIndex, columnIndex, true);
+
+            if (!datagrid_changes.ContainsKey(cellKey))
+            {
+                datagrid_changes[cellKey] = originalValue;
+            }
+
+            if( datagrid_changes[cellKey].ToString() != newValue )
+            {
+                datagrid_changes[cellKeyForChanged] = newValue;
+            }
+            else
+            {
+                datagrid_changes.Remove(cellKeyForChanged);
+            }
+            return true;
+        }
+
+        private IEnumerable<int> GetChangedRowIndexes()
+        {
+
+            List<int> rows = new List<int>();
+            foreach (DictionaryEntry entry in datagrid_changes)
+            {
+                var key = entry.Key as string;
+                if (key.EndsWith("_changed"))
+                {
+                    int row = Int32.Parse(key.Split('_')[0]);
+                    rows.Add(row);
+                }
+                //                    Console.WriteLine("Key -- {0}; Value --{1}.", entry.Key, entry.Value);
+            }
+            return rows.Distinct();
+        }
 
     }
 }
