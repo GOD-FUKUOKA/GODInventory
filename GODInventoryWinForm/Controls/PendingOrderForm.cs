@@ -207,6 +207,7 @@ namespace GODInventoryWinForm.Controls
                 order.納品口数 = (int)order.実際出荷数量 / order.最小発注単位数量;
             }
 
+
             if (納品口数Column.Index == e.ColumnIndex)
             {
                 var order = cell.OwningRow.DataBoundItem as v_pendingorder;
@@ -477,8 +478,6 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             }
         }
 
-
-
         private void newOrderbutton_Click(object sender, EventArgs e)
         {
             var form = new CreateOrderForm();
@@ -540,6 +539,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         {
             string filter = "";
 
+
             if (this.DanDangComboBox.Text.Length > 0 && this.DanDangComboBox.Text != "不限")
             {
                 if (filter.Length > 0)
@@ -547,6 +547,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                     filter += " AND ";
                 }
                 filter += "(実際配送担当='" + this.DanDangComboBox.Text + "')";
+
             }
             if (this.PMHZCombox.Text.Length > 0 && this.PMHZCombox.Text != "不限")
             {
@@ -555,6 +556,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                     filter += " AND ";
                 }
                 filter += "(品名漢字='" + this.PMHZCombox.Text + "')";
+
             }
             if (this.GenreNamecomboBox.Text.Length > 0 && this.GenreNamecomboBox.Text != "不限")
             {
@@ -563,6 +565,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                     filter += " AND ";
                 }
                 filter += "(GenreName='" + this.GenreNamecomboBox.Text + "')";
+
             }
             if (this.ZKZTcomboBox3.Text.Length > 0 && this.ZKZTcomboBox3.Text != "不限")
             {
@@ -573,10 +576,11 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 filter += "(在庫状態='" + this.ZKZTcomboBox3.Text + "')";
             }
 
+
             this.bindingSource1.Filter = filter;
 
         }
-       
+
         private int pager1_EventPaging(EventPagingArg e)
         {
             int order_count = InitializeDataSource();
@@ -801,6 +805,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             GenreNamecomboBox.SelectedIndex = 0;
             ZKZTcomboBox3.SelectedIndex = 0;
 
+
         }
 
         
@@ -808,6 +813,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         {
             ApplyFilter2();
         }
+
 
         //分类名称
         private void GenreNamecomboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -820,13 +826,14 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 orders = pendingOrderList.FindAll(o => o.GenreName == combox.Text);
             }
 
+
             // 品名漢字
             InitializeProductComboBox(orders);
         }
         // 品名汉字
         private void PMHZCombox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            ApplyFilter2();
 
         }
         //在库状态
@@ -843,6 +850,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             if (combox.Text != "不限")
             {
                 orders = pendingOrderList.FindAll(o => o.実際配送担当 == combox.Text);              
+
             }
 
             // GenreName
@@ -951,6 +959,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 ctx.t_stockrec.RemoveRange(stockrecList);
                 ctx.SaveChanges();
                 OrderSqlHelper.UpdateStockState(ctx, stockrecList);
+
             }
 
 

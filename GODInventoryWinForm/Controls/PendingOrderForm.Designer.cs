@@ -781,6 +781,7 @@
             this.dataGridViewTextBoxColumn2.DataPropertyName = "受注日";
             this.dataGridViewTextBoxColumn2.HeaderText = "受注日";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -877,6 +878,7 @@
             this.dataGridViewTextBoxColumn15.DataPropertyName = "一旦保留";
             this.dataGridViewTextBoxColumn15.HeaderText = "一旦保留";
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+
             // 
             // PendingOrderForm
             // 

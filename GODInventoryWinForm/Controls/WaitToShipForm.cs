@@ -132,6 +132,7 @@ namespace GODInventoryWinForm.Controls
 
  
 
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -356,16 +357,19 @@ namespace GODInventoryWinForm.Controls
             this.countyComboBox1.DataSource = counties;
 
             this.countyComboBox1.SelectedIndex = 0;
+
         }
 
         private void InitializeStoreComboBox(List<v_pendingorder> orders)
         {
+
             var shops = orders.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).Distinct().ToList();
             shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
             this.storeComboBox.DisplayMember = "FullName";
             this.storeComboBox.ValueMember = "Id";
             this.storeComboBox.DataSource = shops;
             this.storeComboBox.SelectedIndex = 0;
+
         }
 
        
