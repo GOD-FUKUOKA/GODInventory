@@ -18,7 +18,8 @@ namespace GODInventoryWinForm.Controls
         //private List<t_shoplist> shopList;
         EditOrderForm2 editOrderForm;
         IBindingList orderBindingList = null;
-        BindingList<v_pendingorder> orderListForShip = null;
+        List<v_pendingorder> orderListForShip = null;
+        List<v_pendingorder> shippingOrderList = null;
         int first = 0;
         public List<v_groupedorder> groupedOrderList;
 
@@ -45,10 +46,9 @@ namespace GODInventoryWinForm.Controls
 
 
 
-        public int InitializeDataSource()
+        public int InitializeDataSource(string shipper = "丸健", string county = "", string store = "", string shipNo = "")
         {
 
-            this.orderListForShip = new BindingList<v_pendingorder>();
 
             var q = OrderSqlHelper.WaitToShipOrderSql(this.entityDataSource1);
             this.orderBindingList = this.entityDataSource1.CreateView(q);
@@ -59,29 +59,51 @@ namespace GODInventoryWinForm.Controls
             // 所以需要每次都要初始化數據，觸發change事件。
             if (this.orderBindingList.Count > 0)
             {
-                shipperComboBox.Items.Clear();
-                shipperComboBox.Items.AddRange(new object[] { "丸健", "MKL", "マツモト産業"});
-                shipperComboBox.SelectedIndex = 0;
+                if (shipperComboBox.Text != shipper)
+                {
+                    // trigger change event;
+                    shipperComboBox.Text = shipper;
+                }
+                else
+                {
+                    // no change event, apply it manually
+                    ApplyBindSourceFilter(shipper, county, store);
+                }
             }
 
-            InitializeShipNOComboBox();
+            InitializeShipNOComboBox(shipNo );
 
-            dataGridView2.DataSource = this.orderListForShip;
+            
 
             return 0;
         }
 
-        private void InitializeShipNOComboBox()
+        private void InitializeShipNOComboBox(string shipNo)
         {
-            var shipNOs = (from o in (entityDataSource1.DbContext as GODDbContext).t_orderdata
-                           where o.Status == OrderStatus.PendingShipment
-                           group o by o.ShipNO into g
-                           select new MockEntity { ShortName = g.Key, FullName = g.Key }).ToList();
+            
+            var q = OrderSqlHelper.ShippingOrderSql(this.entityDataSource1);
+            shippingOrderList = q.ToList();
+
+            //var shipNOs = (from o in (entityDataSource1.DbContext as GODDbContext).t_orderdata
+            //               where o.Status == OrderStatus.PendingShipment
+            //               group o by o.ShipNO into g
+            //               select new MockEntity { ShortName = g.Key, FullName = g.Key }).ToList();
+
+            var shipNOs = shippingOrderList.GroupBy(o => o.ShipNO).Select(g => new MockEntity { ShortName = g.Key, FullName = g.Key }).ToList();
 
             this.shipNOComboBox.DisplayMember = "FullName";
             this.shipNOComboBox.ValueMember = "ShortName";
             this.shipNOComboBox.DataSource = shipNOs;
-            this.shipNOComboBox.SelectedItem = null;
+            if (shipNo.Length > 0)
+            {
+                this.shipNOComboBox.SelectedValue = shipNo;
+            }
+            else
+            {
+                this.shipNOComboBox.SelectedItem = null;
+            }
+
+            
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -153,15 +175,15 @@ namespace GODInventoryWinForm.Controls
             int count = dataGridView1.SelectedRows.Count;
             if (count > 0)
             {
+                List<int> orderIds = new List<int>();
                 for (int i = 0; i < count; i++)
                 {
-                    var row = dataGridView1.SelectedRows[0];
-                    var order2 = orderBindingList[row.Index] as v_pendingorder;
+                    var row = dataGridView1.SelectedRows[i];                    
                     var order = row.DataBoundItem as v_pendingorder;
-                    order.ShipNO = shipNo;
-                    this.orderListForShip.Add(order);
-                    this.orderBindingList.RemoveAt(row.Index);
+                    orderIds.Add(order.id受注データ);
                 }
+                SaveOrderForShip(orderIds);
+
             }
 
             #endregion
@@ -175,15 +197,15 @@ namespace GODInventoryWinForm.Controls
             int count = dataGridView2.SelectedRows.Count;
             if (count > 0)
             {
+                List<int> orderIds = new List<int>();
 
                 for (int i = 0; i < count; i++)
                 {
-                    var row = dataGridView2.SelectedRows[0];
+                    var row = dataGridView2.SelectedRows[i];
                     var order = row.DataBoundItem as v_pendingorder;
-                    order.ShipNO = null;
-                    this.orderBindingList.Add(order);
-                    this.orderListForShip.RemoveAt(row.Index);
+                    orderIds.Add(order.id受注データ);
                 }
+                SaveOrderForShip(orderIds, true);
             }
             #endregion
 
@@ -220,7 +242,7 @@ namespace GODInventoryWinForm.Controls
 
                 this.orderListForShip.Clear();
 
-                InitializeShipNOComboBox();
+                InitializeShipNOComboBox("");
 
             }
         }
@@ -268,7 +290,7 @@ namespace GODInventoryWinForm.Controls
             ApplyBindSourceFilter(shipper);
             var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
             InitializeCountyComboBox(orders);
-            InitializeStoreComboBox(orders);
+            //InitializeStoreComboBox(orders);
         }
 
         private void countyComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -297,10 +319,10 @@ namespace GODInventoryWinForm.Controls
             
             //if (bindingSource1.Count > 0)
             {
-                string filter = "(ShipNO is null)";
+                string filter = "";
                 if (shipper.Length > 0)
                 {
-                    filter += " AND (実際配送担当='" + shipper + "')";
+                    filter += " (実際配送担当='" + shipper + "')";
                 }
 
                 if (county.Length > 0 && county  != "不限")
@@ -346,58 +368,7 @@ namespace GODInventoryWinForm.Controls
             this.storeComboBox.SelectedIndex = 0;
         }
 
-        public int De_InitializeDataSource()
-        {
-
-            this.orderListForShip = new BindingList<v_pendingorder>();
-
-            var q = OrderSqlHelper.WaitToShipOrderSql(this.entityDataSource1);
-            this.orderBindingList = this.entityDataSource1.CreateView(q);
-            this.bindingSource1.Filter = null;
-            this.bindingSource1.DataSource = this.orderBindingList;
-            if (this.orderBindingList.Count > 0)
-            {
-
-                this.bindingSource1.Filter = String.Format("実際配送担当='{0}'", shipperComboBox.Text);
-
-                var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
-
-                var shops = orders.Select(o => new MockEntity { Id = o.店舗コード, FullName = o.店名 }).Distinct().ToList();
-
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
-
-                this.storeComboBox.DisplayMember = "FullName";
-                this.storeComboBox.ValueMember = "Id";
-                this.storeComboBox.DataSource = shops;
-
-
-                //var counties = orders.Select(o => new MockEntity { Id = o.店舗コード, FullName = o.県別 }).Distinct().ToList();
-                //counties.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
-                //this.countyComboBox1.DisplayMember = "FullName";
-                //this.countyComboBox1.ValueMember = "Id";
-                //this.countyComboBox1.DataSource = counties;
-
-
-                // GenreName
-                var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-                counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                this.countyComboBox1.DisplayMember = "FullName";
-                this.countyComboBox1.ValueMember = "ShortName";
-
-
-                this.countyComboBox1.DataSource = counties;
-            }
-
-            InitializeShipNOComboBox();
-            this.dataGridView1.DataSource = this.bindingSource1;
-            dataGridView2.DataSource = this.orderListForShip;
-
-            return 0;
-
-
-        }
-
-
+       
         private List<v_pendingorder> GetDataGridViewBoundOrders()
         {
             List<v_pendingorder> orders = new List<v_pendingorder>();
@@ -410,5 +381,44 @@ namespace GODInventoryWinForm.Controls
         }
 
         #endregion
+
+        private void shipNOComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string shipNO = shipNOComboBox.Text;
+            this.orderListForShip = shippingOrderList.FindAll(o => o.ShipNO == shipNO);
+
+            dataGridView2.DataSource = this.orderListForShip;
+        }
+
+
+        private void SaveOrderForShip(List<int> orderIds, bool undo = false )
+        {
+            
+            string shipNo = shipNOComboBox.Text;
+            var ShippedAtDate = this.productShippedAtDateTimePicker1.Value;
+            var ReceivedAtDate = this.productReceivedAtDateTimePicker2.Value;
+            if (undo)
+            {
+                OrderSqlHelper.UnShippingInfoConfirm(orderIds );
+            }
+            else {
+                OrderSqlHelper.ShippingInfoConfirm(orderIds, ShippedAtDate, ReceivedAtDate, shipNo);
+            }
+
+            string shipper = shipperComboBox.Text;
+            string county = countyComboBox1.Text;
+            string store = storeComboBox.Text;
+            InitializeDataSource(shipper, county, store, shipNo);
+
+        }
+
+
+        private void shipNOComboBox_TextChanged(object sender, EventArgs e)
+        {
+            string shipNO = shipNOComboBox.Text;
+            this.orderListForShip = shippingOrderList.FindAll(o => o.ShipNO == shipNO);
+
+            dataGridView2.DataSource = this.orderListForShip;
+        }
     }
 }

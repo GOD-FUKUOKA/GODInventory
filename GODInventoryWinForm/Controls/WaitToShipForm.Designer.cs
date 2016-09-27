@@ -85,8 +85,8 @@
             this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注区分Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品指示Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -166,6 +166,8 @@
             this.shipNOComboBox.Name = "shipNOComboBox";
             this.shipNOComboBox.Size = new System.Drawing.Size(143, 20);
             this.shipNOComboBox.TabIndex = 10;
+            this.shipNOComboBox.SelectedIndexChanged += new System.EventHandler(this.shipNOComboBox_SelectedIndexChanged);
+            this.shipNOComboBox.TextChanged += new System.EventHandler(this.shipNOComboBox_TextChanged);
             // 
             // saveButton
             // 
@@ -175,6 +177,7 @@
             this.saveButton.TabIndex = 9;
             this.saveButton.Text = "登録";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Visible = false;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // dataGridView2
@@ -611,13 +614,13 @@
             this.納品指示Column1.Name = "納品指示Column1";
             this.納品指示Column1.ReadOnly = true;
             // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // WaitToShipForm
             // 

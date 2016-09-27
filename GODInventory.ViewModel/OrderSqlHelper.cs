@@ -263,6 +263,7 @@ namespace GODInventory.ViewModel
                          発注形態名称漢字 = o.発注形態名称漢字,
                          キャンセル = o.キャンセル,
                          ダブリ = o.ダブリ,
+                         ShipNO = o.ShipNO,
                          一旦保留 = o.一旦保留
                      });
             return q;
@@ -411,6 +412,7 @@ namespace GODInventory.ViewModel
             return count;
         }
 
+        // 配车及日期确认
         public static int ShippingInfoConfirm(List<int> orderIds, DateTime ShippedAtDate, DateTime ReceivedAtDate, string shipNO)
         {
             int count = 0;
@@ -423,8 +425,22 @@ namespace GODInventory.ViewModel
             }
             return count;
         
-        }   
+        }
 
+        // 取消配车及日期确认
+        public static int UnShippingInfoConfirm(List<int> orderIds)
+        {
+            int count = 0;
+            using (var ctx = new GODDbContext())
+            {
+                MySqlParameter[] parameters = { };
+                string sql = String.Format("UPDATE t_orderdata SET `出荷日`=NULL, `納品日`=NULL,`Status`={1}, `ShipNO`=NULL  WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()), (int)OrderStatus.WaitToShip);
+                count = ctx.Database.ExecuteSqlCommand(sql, parameters);
+                ctx.SaveChanges();
+            }
+            return count;
+
+        }   
         public static int FinishOrders(List<int> orderIds)
         {
             int count = 0;
