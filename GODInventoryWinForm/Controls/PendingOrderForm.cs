@@ -257,7 +257,7 @@ namespace GODInventoryWinForm.Controls
             }
             //new
 
-            var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];            
             this.sortablePendingOrderList[e.RowIndex].実際出荷数量 = (int)cell.Value;
             this.sortablePendingOrderList[e.RowIndex].納品口数 = (int)cell.Value / this.sortablePendingOrderList[e.RowIndex].最小発注単位数量;
             this.dataGridView1.Refresh();
@@ -516,7 +516,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             string filter = "";
             if (this.storeCodeFilterTextBox3.Text.Length > 0)
             {
-                filter += "(店舗コード=" + this.storeCodeFilterTextBox3.Text + ")";
+                filter += "(店舗コード=" + "'" + this.storeCodeFilterTextBox3.Text + "'" + ")";
             }
             if (this.invoiceNoFilterTextBox.Text.Length > 0)
             {
@@ -524,7 +524,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 {
                     filter += " AND ";
                 }
-                filter += "(伝票番号=" + this.invoiceNoFilterTextBox.Text + ")";
+                filter += "(伝票番号=" + "'" + this.invoiceNoFilterTextBox.Text + "'" + ")";
             }
             if (this.DanDangComboBox.Text.Length > 0 && this.DanDangComboBox.Text != "不限")
             {
@@ -1139,7 +1139,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             else if (page == 2)
             {
                 var oids = THIED_GetOrderIdsBySelectedGridCell();
-                if (oids == null)
+                if (oids == null || oids.Count == 0)
                     return;
 
                 int 自社コード = 0;
@@ -1153,8 +1153,6 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                     {
                         if (order != null)
                         {
-                            //   t_orderdata order = ecOrderList.Find(pendingorder.id受注データ);
-                            //需要修改的字段为: “口数” “发注数量” “担当” “形态”
                             order.一旦保留 = true;
                             order.配送担当受信 = 0;
                             order.配送担当受信時刻 = null;
@@ -1169,7 +1167,6 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                             receivedList.Add(order1);
                             #endregion
                         }
-
                         //删除Rec 
                         var stockrecs = (from s in ctx.t_stockrec
                                          where s.自社コード == 自社コード && s.状態 != "完了"
@@ -1217,7 +1214,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             foreach (DataGridViewRow row in rows)
             {
                 var pendingorder = row.DataBoundItem as v_pendingorder;
-                if (pendingorder != null)
+                if (pendingorder.社内伝番 != null)
                     order_ids.Add((Int32)pendingorder.社内伝番);
             }
 
