@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -86,7 +86,7 @@
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(100, 32);
             this.submitButton.TabIndex = 0;
-            this.submitButton.Text = "Submit";
+            this.submitButton.Text = "保存";
             this.submitButton.UseVisualStyleBackColor = false;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
             // 
@@ -97,7 +97,7 @@
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 1;
-            this.cancelButton.Text = "Cancel";
+            this.cancelButton.Text = "取消す";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
@@ -159,9 +159,9 @@
             // invoiceNODataGridViewTextBoxColumn
             // 
             this.invoiceNODataGridViewTextBoxColumn.DataPropertyName = "伝票番号";
-            dataGridViewCellStyle3.Format = "D8";
-            dataGridViewCellStyle3.NullValue = null;
-            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "D8";
+            dataGridViewCellStyle1.NullValue = null;
+            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.invoiceNODataGridViewTextBoxColumn.Frozen = true;
             this.invoiceNODataGridViewTextBoxColumn.HeaderText = "伝票番号";
             this.invoiceNODataGridViewTextBoxColumn.Name = "invoiceNODataGridViewTextBoxColumn";
@@ -171,8 +171,8 @@
             // 
             // specialCodeColumn
             // 
-            dataGridViewCellStyle4.NullValue = "NO";
-            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.NullValue = "NO";
+            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.specialCodeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.specialCodeColumn.HeaderText = "雑コード";
             this.specialCodeColumn.Items.AddRange(new object[] {

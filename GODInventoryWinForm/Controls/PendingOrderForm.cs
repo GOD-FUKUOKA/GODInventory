@@ -547,8 +547,18 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             string genre = this.GenreNamecomboBox.Text;
             string product = this.PMHZCombox.Text;
             string stockState = this.ZKZTcomboBox3.Text;
+            var originalSortOrder = this.dataGridView1.SortOrder;
+            var originalSortedColumn = this.dataGridView1.SortedColumn;
             int orderCount = InitializeDataSource(shipper, genre, product, stockState);
-
+            var direction = ListSortDirection.Ascending;
+            if (originalSortOrder == System.Windows.Forms.SortOrder.Descending)
+            {
+                direction = ListSortDirection.Descending;
+            }
+            if (originalSortedColumn != null)
+            {
+                this.dataGridView1.Sort(originalSortedColumn, direction);
+            }
             return orderCount;
         }
 
@@ -768,7 +778,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             PMHZCombox.SelectedIndex = 0;
             GenreNamecomboBox.SelectedIndex = 0;
             ZKZTcomboBox3.SelectedIndex = 0;
-
+            dataGridView1.Sort = null;
         }
 
         

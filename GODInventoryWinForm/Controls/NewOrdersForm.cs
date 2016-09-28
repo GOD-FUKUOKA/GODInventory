@@ -72,9 +72,19 @@ namespace GODInventoryWinForm.Controls
                         }
                         ctx.SaveChanges();
                     }
-
+                    var originalSortOrder = this.dataGridView1.SortOrder;
+                    var originalSortedColumn = this.dataGridView1.SortedColumn;
                     InitializeOrderData();
-
+                    
+                    var direction = ListSortDirection.Ascending;
+                    if (originalSortOrder == System.Windows.Forms.SortOrder.Descending)
+                    {
+                        direction = ListSortDirection.Descending;
+                    }
+                    if (originalSortedColumn != null)
+                    {
+                        this.dataGridView1.Sort(originalSortedColumn, direction);
+                    }
                 }
                 else
                 {

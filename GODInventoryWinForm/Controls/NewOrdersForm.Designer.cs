@@ -33,14 +33,6 @@
             this.ordersTabPage = new System.Windows.Forms.TabPage();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cancelOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uncancleOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unduplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +49,14 @@
             this.ShipperColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreDistrictColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cancelOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uncancleOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unduplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -129,6 +129,7 @@
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(3, 60);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 28;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -138,59 +139,6 @@
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cancelOrderToolStripMenuItem,
-            this.uncancleOrderToolStripMenuItem,
-            this.duplicateToolStripMenuItem,
-            this.unduplicateToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
-            // 
-            // cancelOrderToolStripMenuItem
-            // 
-            this.cancelOrderToolStripMenuItem.Name = "cancelOrderToolStripMenuItem";
-            this.cancelOrderToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.cancelOrderToolStripMenuItem.Text = "キャンセル確認";
-            this.cancelOrderToolStripMenuItem.Click += new System.EventHandler(this.cancelOrderToolStripMenuItem_Click);
-            // 
-            // uncancleOrderToolStripMenuItem
-            // 
-            this.uncancleOrderToolStripMenuItem.Name = "uncancleOrderToolStripMenuItem";
-            this.uncancleOrderToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.uncancleOrderToolStripMenuItem.Text = "キャンセル解除";
-            this.uncancleOrderToolStripMenuItem.Click += new System.EventHandler(this.uncancleOrderToolStripMenuItem_Click);
-            // 
-            // duplicateToolStripMenuItem
-            // 
-            this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
-            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.duplicateToolStripMenuItem.Text = "ダブり確認";
-            this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
-            // 
-            // unduplicateToolStripMenuItem
-            // 
-            this.unduplicateToolStripMenuItem.Name = "unduplicateToolStripMenuItem";
-            this.unduplicateToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.unduplicateToolStripMenuItem.Text = "ダブリ解除";
-            this.unduplicateToolStripMenuItem.Click += new System.EventHandler(this.unduplicateToolStripMenuItem_Click);
-            // 
-            // id受注データDataGridViewTextBoxColumn
-            // 
-            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // OrderReceivedAtColumn1
             // 
@@ -291,6 +239,7 @@
             this.実際出荷数量Column.DataPropertyName = "実際出荷数量";
             this.実際出荷数量Column.HeaderText = "発注数量";
             this.実際出荷数量Column.Name = "実際出荷数量Column";
+            this.実際出荷数量Column.ReadOnly = true;
             this.実際出荷数量Column.Width = 80;
             // 
             // ShipperColumn1
@@ -298,6 +247,7 @@
             this.ShipperColumn1.DataPropertyName = "実際配送担当";
             this.ShipperColumn1.HeaderText = "担当";
             this.ShipperColumn1.Name = "ShipperColumn1";
+            this.ShipperColumn1.ReadOnly = true;
             this.ShipperColumn1.Width = 80;
             // 
             // StoreDistrictColumn1
@@ -314,6 +264,59 @@
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             this.Column2.Width = 80;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cancelOrderToolStripMenuItem,
+            this.uncancleOrderToolStripMenuItem,
+            this.duplicateToolStripMenuItem,
+            this.unduplicateToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
+            // 
+            // cancelOrderToolStripMenuItem
+            // 
+            this.cancelOrderToolStripMenuItem.Name = "cancelOrderToolStripMenuItem";
+            this.cancelOrderToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.cancelOrderToolStripMenuItem.Text = "キャンセル確認";
+            this.cancelOrderToolStripMenuItem.Click += new System.EventHandler(this.cancelOrderToolStripMenuItem_Click);
+            // 
+            // uncancleOrderToolStripMenuItem
+            // 
+            this.uncancleOrderToolStripMenuItem.Name = "uncancleOrderToolStripMenuItem";
+            this.uncancleOrderToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.uncancleOrderToolStripMenuItem.Text = "キャンセル解除";
+            this.uncancleOrderToolStripMenuItem.Click += new System.EventHandler(this.uncancleOrderToolStripMenuItem_Click);
+            // 
+            // duplicateToolStripMenuItem
+            // 
+            this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
+            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.duplicateToolStripMenuItem.Text = "ダブり確認";
+            this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
+            // 
+            // unduplicateToolStripMenuItem
+            // 
+            this.unduplicateToolStripMenuItem.Name = "unduplicateToolStripMenuItem";
+            this.unduplicateToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.unduplicateToolStripMenuItem.Text = "ダブリ解除";
+            this.unduplicateToolStripMenuItem.Click += new System.EventHandler(this.unduplicateToolStripMenuItem_Click);
+            // 
+            // id受注データDataGridViewTextBoxColumn
+            // 
+            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // NewOrdersForm
             // 
