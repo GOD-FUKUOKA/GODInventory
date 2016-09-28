@@ -774,11 +774,12 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         private void ClearSelect_Click(object sender, EventArgs e)
         {
+            bindingSource1.Sort = ""; 
             DanDangComboBox.SelectedIndex = 0;
             PMHZCombox.SelectedIndex = 0;
             GenreNamecomboBox.SelectedIndex = 0;
             ZKZTcomboBox3.SelectedIndex = 0;
-            dataGridView1.Sort = null;
+
         }
 
         
