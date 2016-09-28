@@ -54,6 +54,7 @@ namespace GODInventoryWinForm.Controls
                                 if (duplicated_order.キャンセル == "yes")
                                 {
                                     order.キャンセル = "yes";
+                                    order.キャンセル時刻 = DateTime.Now;
                                     order.Status = OrderStatus.Cancelled;
                                     order.備考 = "キャンセル";
                                 }

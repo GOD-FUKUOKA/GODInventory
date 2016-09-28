@@ -38,21 +38,6 @@
             this.shipNOComboBox = new System.Windows.Forms.ComboBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.受注日Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.店名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.伝番Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.社内伝番Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ジャンルColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.品名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.口数Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.発注数Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.重量Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.担当Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.県別Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.発注区分Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.納品指示Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.moveUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
@@ -87,6 +72,21 @@
             this.納品指示Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.受注日Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.伝番Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.社内伝番Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ジャンルColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.品名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.口数Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注数Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.重量Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.担当Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.県別Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注区分Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品指示Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -215,110 +215,6 @@
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView2.Size = new System.Drawing.Size(1016, 153);
             this.dataGridView2.TabIndex = 8;
-            // 
-            // 受注日Column2
-            // 
-            this.受注日Column2.DataPropertyName = "受注日";
-            this.受注日Column2.HeaderText = "受注日";
-            this.受注日Column2.Name = "受注日Column2";
-            this.受注日Column2.ReadOnly = true;
-            // 
-            // 店名Column2
-            // 
-            this.店名Column2.DataPropertyName = "店名";
-            this.店名Column2.HeaderText = "店名";
-            this.店名Column2.Name = "店名Column2";
-            this.店名Column2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "納品場所名漢字";
-            this.dataGridViewTextBoxColumn1.HeaderText = "場所";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // 伝番Column2
-            // 
-            this.伝番Column2.DataPropertyName = "伝票番号";
-            this.伝番Column2.HeaderText = "伝番";
-            this.伝番Column2.Name = "伝番Column2";
-            this.伝番Column2.ReadOnly = true;
-            // 
-            // 社内伝番Column2
-            // 
-            this.社内伝番Column2.DataPropertyName = "社内伝番";
-            this.社内伝番Column2.HeaderText = "社内伝番";
-            this.社内伝番Column2.Name = "社内伝番Column2";
-            this.社内伝番Column2.ReadOnly = true;
-            // 
-            // ジャンルColumn2
-            // 
-            this.ジャンルColumn2.DataPropertyName = "GenreName";
-            this.ジャンルColumn2.HeaderText = "ジャンル";
-            this.ジャンルColumn2.Name = "ジャンルColumn2";
-            this.ジャンルColumn2.ReadOnly = true;
-            // 
-            // 品名Column2
-            // 
-            this.品名Column2.DataPropertyName = "品名漢字";
-            this.品名Column2.HeaderText = "品名";
-            this.品名Column2.Name = "品名Column2";
-            this.品名Column2.ReadOnly = true;
-            // 
-            // 規格Column2
-            // 
-            this.規格Column2.DataPropertyName = "規格名漢字";
-            this.規格Column2.HeaderText = "規格";
-            this.規格Column2.Name = "規格Column2";
-            this.規格Column2.ReadOnly = true;
-            // 
-            // 口数Column2
-            // 
-            this.口数Column2.DataPropertyName = "納品口数";
-            this.口数Column2.HeaderText = "口数";
-            this.口数Column2.Name = "口数Column2";
-            this.口数Column2.ReadOnly = true;
-            // 
-            // 発注数Column2
-            // 
-            this.発注数Column2.DataPropertyName = "実際出荷数量";
-            this.発注数Column2.HeaderText = "発注数";
-            this.発注数Column2.Name = "発注数Column2";
-            this.発注数Column2.ReadOnly = true;
-            // 
-            // 重量Column2
-            // 
-            this.重量Column2.DataPropertyName = "重量";
-            this.重量Column2.HeaderText = "重量";
-            this.重量Column2.Name = "重量Column2";
-            this.重量Column2.ReadOnly = true;
-            // 
-            // 担当Column2
-            // 
-            this.担当Column2.DataPropertyName = "実際配送担当";
-            this.担当Column2.HeaderText = "担当";
-            this.担当Column2.Name = "担当Column2";
-            this.担当Column2.ReadOnly = true;
-            // 
-            // 県別Column2
-            // 
-            this.県別Column2.HeaderText = "県別";
-            this.県別Column2.Name = "県別Column2";
-            this.県別Column2.ReadOnly = true;
-            // 
-            // 発注区分Column2
-            // 
-            this.発注区分Column2.DataPropertyName = "発注形態名称漢字";
-            this.発注区分Column2.HeaderText = "発注区分";
-            this.発注区分Column2.Name = "発注区分Column2";
-            this.発注区分Column2.ReadOnly = true;
-            // 
-            // 納品指示Column2
-            // 
-            this.納品指示Column2.DataPropertyName = "納品指示";
-            this.納品指示Column2.HeaderText = "納品指示";
-            this.納品指示Column2.Name = "納品指示Column2";
-            this.納品指示Column2.ReadOnly = true;
             // 
             // contextMenuStrip2
             // 
@@ -622,6 +518,111 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // 受注日Column2
+            // 
+            this.受注日Column2.DataPropertyName = "受注日";
+            this.受注日Column2.HeaderText = "受注日";
+            this.受注日Column2.Name = "受注日Column2";
+            this.受注日Column2.ReadOnly = true;
+            // 
+            // 店名Column2
+            // 
+            this.店名Column2.DataPropertyName = "店名";
+            this.店名Column2.HeaderText = "店名";
+            this.店名Column2.Name = "店名Column2";
+            this.店名Column2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "納品場所名漢字";
+            this.dataGridViewTextBoxColumn1.HeaderText = "場所";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // 伝番Column2
+            // 
+            this.伝番Column2.DataPropertyName = "伝票番号";
+            this.伝番Column2.HeaderText = "伝番";
+            this.伝番Column2.Name = "伝番Column2";
+            this.伝番Column2.ReadOnly = true;
+            // 
+            // 社内伝番Column2
+            // 
+            this.社内伝番Column2.DataPropertyName = "社内伝番";
+            this.社内伝番Column2.HeaderText = "社内伝番";
+            this.社内伝番Column2.Name = "社内伝番Column2";
+            this.社内伝番Column2.ReadOnly = true;
+            // 
+            // ジャンルColumn2
+            // 
+            this.ジャンルColumn2.DataPropertyName = "GenreName";
+            this.ジャンルColumn2.HeaderText = "ジャンル";
+            this.ジャンルColumn2.Name = "ジャンルColumn2";
+            this.ジャンルColumn2.ReadOnly = true;
+            // 
+            // 品名Column2
+            // 
+            this.品名Column2.DataPropertyName = "品名漢字";
+            this.品名Column2.HeaderText = "品名";
+            this.品名Column2.Name = "品名Column2";
+            this.品名Column2.ReadOnly = true;
+            // 
+            // 規格Column2
+            // 
+            this.規格Column2.DataPropertyName = "規格名漢字";
+            this.規格Column2.HeaderText = "規格";
+            this.規格Column2.Name = "規格Column2";
+            this.規格Column2.ReadOnly = true;
+            // 
+            // 口数Column2
+            // 
+            this.口数Column2.DataPropertyName = "納品口数";
+            this.口数Column2.HeaderText = "口数";
+            this.口数Column2.Name = "口数Column2";
+            this.口数Column2.ReadOnly = true;
+            // 
+            // 発注数Column2
+            // 
+            this.発注数Column2.DataPropertyName = "実際出荷数量";
+            this.発注数Column2.HeaderText = "発注数";
+            this.発注数Column2.Name = "発注数Column2";
+            this.発注数Column2.ReadOnly = true;
+            // 
+            // 重量Column2
+            // 
+            this.重量Column2.DataPropertyName = "重量";
+            this.重量Column2.HeaderText = "重量";
+            this.重量Column2.Name = "重量Column2";
+            this.重量Column2.ReadOnly = true;
+            // 
+            // 担当Column2
+            // 
+            this.担当Column2.DataPropertyName = "実際配送担当";
+            this.担当Column2.HeaderText = "担当";
+            this.担当Column2.Name = "担当Column2";
+            this.担当Column2.ReadOnly = true;
+            // 
+            // 県別Column2
+            // 
+            this.県別Column2.DataPropertyName = "県別";
+            this.県別Column2.HeaderText = "県別";
+            this.県別Column2.Name = "県別Column2";
+            this.県別Column2.ReadOnly = true;
+            // 
+            // 発注区分Column2
+            // 
+            this.発注区分Column2.DataPropertyName = "発注形態名称漢字";
+            this.発注区分Column2.HeaderText = "発注区分";
+            this.発注区分Column2.Name = "発注区分Column2";
+            this.発注区分Column2.ReadOnly = true;
+            // 
+            // 納品指示Column2
+            // 
+            this.納品指示Column2.DataPropertyName = "納品指示";
+            this.納品指示Column2.HeaderText = "納品指示";
+            this.納品指示Column2.Name = "納品指示Column2";
+            this.納品指示Column2.ReadOnly = true;
+            // 
             // WaitToShipForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -674,21 +675,6 @@
         private System.Windows.Forms.ComboBox countyComboBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox shipNOComboBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 伝番Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 社内伝番Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ジャンルColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 品名Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 規格Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 口数Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 発注数Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 担当Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 発注区分Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 場所Column1;
@@ -708,5 +694,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column1;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 伝番Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 社内伝番Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ジャンルColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 品名Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 規格Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 口数Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注数Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 担当Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注区分Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column2;
     }
 }

@@ -235,7 +235,7 @@ namespace GODInventory.ViewModel
         public static IQueryable<v_pendingorder> ShippingOrderSql(EntityDataSource entityDataSource1)
         {
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                     join t_shoplist s in entityDataSource1.EntitySets["t_shoplist"] on o.店舗コード equals s.店番
+                     join t_genre g in entityDataSource1.EntitySets["t_genre"] on o.ジャンル equals g.idジャンル
                      where o.Status == OrderStatus.PendingShipment
                      //where o.出荷日 != null && o.ASN管理連番==0 && !o.受領確認 
                      orderby o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
@@ -246,9 +246,12 @@ namespace GODInventory.ViewModel
                          納品日 = o.納品日,
                          受注日 = o.受注日,
                          店舗コード = o.店舗コード,
-                         店名 = s.店名,
+                         店名 = o.店舗名漢字,
+                         納品場所名漢字 = o.納品場所名漢字,
                          伝票番号 = o.伝票番号,
+                         社内伝番 = o.社内伝番,
                          口数 = o.口数,
+                         納品口数 = o.納品口数,
                          ジャンル = o.ジャンル,
                          品名漢字 = o.品名漢字,
                          規格名漢字 = o.規格名漢字,
@@ -258,12 +261,13 @@ namespace GODInventory.ViewModel
                          実際出荷数量 = o.実際出荷数量,
                          原単価_税抜_ = o.原単価_税抜_,
                          実際配送担当 = o.実際配送担当,
-                         県別 = s.県別,
+                         県別 = o.県別,
                          受領 = o.受領,
                          発注形態名称漢字 = o.発注形態名称漢字,
                          キャンセル = o.キャンセル,
                          ダブリ = o.ダブリ,
                          ShipNO = o.ShipNO,
+                         GenreName = g.ジャンル名,
                          一旦保留 = o.一旦保留
                      });
             return q;
@@ -370,6 +374,23 @@ namespace GODInventory.ViewModel
             //         ).Count();
             return 0;
 
+        }
+        public static int CancelOrders(List<v_pendingorder> orders)
+        {
+            int count = 0;
+            using (var ctx = new GODDbContext())
+            {
+                //order.キャンセル = "yes";
+                //order.キャンセル時刻 = DateTime.Now;
+                //order.Status = OrderStatus.Cancelled;
+                //order.備考 = "キャンセル";
+                var orderIds = orders.Select(o => o.id受注データ).ToList();
+                MySqlParameter[] parameters = { new MySqlParameter("@p1", "yes"), new MySqlParameter("@p2", DateTime.Now), new MySqlParameter("@p3", ((int)OrderStatus.Cancelled)) };
+                string sql = String.Format("UPDATE t_orderdata SET `備考`='キャンセル',`キャンセル`=@p1, `キャンセル時刻`=@p2 ,`Status`=@p3 WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()));
+                count = ctx.Database.ExecuteSqlCommand(sql, parameters);
+
+            }
+            return count;
         }
         public static int SendOrderToShipper(List<v_pendingorder> orders)
         {

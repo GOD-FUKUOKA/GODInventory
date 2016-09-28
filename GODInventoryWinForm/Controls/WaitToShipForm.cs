@@ -18,6 +18,8 @@ namespace GODInventoryWinForm.Controls
         //private List<t_shoplist> shopList;
         EditOrderForm2 editOrderForm;
         IBindingList orderBindingList = null;
+
+        List<v_pendingorder> pendingOrderList = null;
         List<v_pendingorder> orderListForShip = null;
         List<v_pendingorder> shippingOrderList = null;
         int first = 0;
@@ -42,6 +44,7 @@ namespace GODInventoryWinForm.Controls
             //    this.comboBox2.Items.Add(item.店舗コード);
 
             editOrderForm = new EditOrderForm2();
+            pendingOrderList = new List<v_pendingorder>();
         }
 
 
@@ -49,12 +52,19 @@ namespace GODInventoryWinForm.Controls
         public int InitializeDataSource(string shipper = "丸健", string county = "", string store = "", string shipNo = "")
         {
 
-
+            pendingOrderList.Clear();
             var q = OrderSqlHelper.WaitToShipOrderSql(this.entityDataSource1);
             this.orderBindingList = this.entityDataSource1.CreateView(q);
             this.bindingSource1.Filter = null;
             this.bindingSource1.DataSource = this.orderBindingList;
             this.dataGridView1.DataSource = this.bindingSource1;
+            // 保存新查询到的结果，作为过滤条件用
+            foreach (var o in orderBindingList) 
+            {
+                var order = o as v_pendingorder;
+                pendingOrderList.Add(order);
+            }
+
             // 第二次 調用InitializeDataSource，顯示 WaitToShipForm shipperComboBox.SelectedIndex =0 不會觸發 change 事件,
             // 所以需要每次都要初始化數據，觸發change事件。
             if (this.orderBindingList.Count > 0)
@@ -288,8 +298,9 @@ namespace GODInventoryWinForm.Controls
         private void shipperComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string shipper = shipperComboBox.Text;
-            ApplyBindSourceFilter(shipper);
-            var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
+            //ApplyBindSourceFilter(shipper);
+            //var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
+            var orders = pendingOrderList.FindAll(o => o.実際配送担当 == shipper); 
             InitializeCountyComboBox(orders);
             //InitializeStoreComboBox(orders);
         }
@@ -298,9 +309,12 @@ namespace GODInventoryWinForm.Controls
         {
             string shipper = shipperComboBox.Text;
             string county = countyComboBox1.Text;
-            ApplyBindSourceFilter(shipper, county);
-            
-            var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
+
+            var orders = pendingOrderList.FindAll(o => o.実際配送担当 == shipper);
+            if (county != "不限")
+            {
+                orders = orders.FindAll(o => o.県別 == county);
+            }
 
             InitializeStoreComboBox(orders);
         }
@@ -343,7 +357,6 @@ namespace GODInventoryWinForm.Controls
 
                     filter += "(店名=" + "'" + store + "'" + ")";
                 }
-                Console.WriteLine("filter:" + filter);
                 bindingSource1.Filter = filter;
             }
         }
@@ -363,7 +376,7 @@ namespace GODInventoryWinForm.Controls
         private void InitializeStoreComboBox(List<v_pendingorder> orders)
         {
 
-            var shops = orders.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).Distinct().ToList();
+            var shops = orders.Select(s => new MockEntity { Id = s.店舗コード, FullName = s.店名 }).Distinct().ToList();
             shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
             this.storeComboBox.DisplayMember = "FullName";
             this.storeComboBox.ValueMember = "Id";

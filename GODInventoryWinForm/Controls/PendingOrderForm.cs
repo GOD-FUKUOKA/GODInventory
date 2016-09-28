@@ -42,6 +42,7 @@ namespace GODInventoryWinForm.Controls
             dataGridView1.AutoGenerateColumns = false;
 
             this.datagrid_changes = new Hashtable();
+            this.pendingOrderList = new List<v_pendingorder>();
 
 
             var ctx = entityDataSource1.DbContext as GODDbContext;
@@ -90,12 +91,13 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {
                 IEnumerable<int> orderIds = GetChangedOrderIds();
+                List<v_pendingorder> orders = GetDataGridViewBoundOrders();
 
                 if (orderIds.Count() > 0)
                 {
                     foreach (var id in orderIds.Distinct())
                     {
-                        var pendingorder = pendingOrderList.Find( o=>o.id受注データ == id );
+                        var pendingorder = orders.Find(o => o.id受注データ == id);
                         t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
                         //需要修改的字段为: “口数” “发注数量” “担当” “形态”
                         order.実際出荷数量 = pendingorder.実際出荷数量;
@@ -105,10 +107,10 @@ namespace GODInventoryWinForm.Controls
                         order.実際配送担当 = pendingorder.実際配送担当;
                         order.備考 = pendingorder.備考;
                         order.納品指示 = pendingorder.納品指示;
-                    }
 
+                    }
                     ctx.SaveChanges();
-                    InitializeOrderData();
+                    pager1.Bind();
                 }
             }
 
@@ -152,13 +154,14 @@ namespace GODInventoryWinForm.Controls
         {
             if (e.RowIndex < dataGridView1.Rows.Count - 1)
             {
-                DataGridViewRow dgrSingle = dataGridView1.Rows[e.RowIndex];
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
                 try
                 {
                     if (datagrid_changes.ContainsKey(e.RowIndex))//if (dgrSingle.Cells["列名"].Value.ToString().Contains("比较值"))
                     {
-                        dgrSingle.DefaultCellStyle.ForeColor = Color.Red;
+                        row.DefaultCellStyle.ForeColor = Color.Red;
                     }
+                    
                 }
                 catch (Exception ex)
                 {
@@ -244,10 +247,12 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        #region InitializeOrderData
+        #region 初始化数据
 
-        private int InitializeDataSource() {
+        private int InitializeDataSource(string shipper = "不限", string genre = "不限", string product = "不限", string stockState = "不限")
+        {
             this.datagrid_changes.Clear();
+            this.pendingOrderList.Clear();
 
             var cq = OrderSqlHelper.PendingOrderQuery(entityDataSource1);
             var count = cq.Count();
@@ -277,56 +282,30 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 // create BindingList (sortable/filterable)
                 int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
                 //this.pendingOrderList = entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.Pending, pager1.PageSize, offset).ToList();
-                //foreach( var o in pendingOrderIBindList)
-                //{
-                //    var order = o as v_pendingorder;
-                //    pendingOrderList.Add( o )
-                //}
-                pendingOrderList = pendingOrderIBindList.Cast<v_pendingorder>().ToList();
-            }
-            else {
-
-                pendingOrderList = new List<v_pendingorder>();
+                //拷贝 pendingOrderIBindList 中所有数据 到 pendingOrderList， pendingOrderIBindList 会因过滤条件不同，产生不同结果集
+                foreach( var o in pendingOrderIBindList)
+                {
+                    pendingOrderList.Add(o as v_pendingorder);
+                }
+                //pendingOrderList = pendingOrderIBindList.Cast<v_pendingorder>().ToList();
             }
 
-            InitializeOrderData();
+
+            InitializeOrderData(shipper, genre, product, stockState);
 
             return count;
         }
 
-        private int InitializeOrderData()
+        private int InitializeOrderData(string shipper, string genre, string product, string stockState)
         {
             this.bindingSource1.DataSource = null;
-            // 记录DataGridView改变数据
-
-            IEnumerable<IGrouping<int, v_pendingorder>> grouped_orders = pendingOrderList.GroupBy(o => o.自社コード, o => o);
-            foreach (var gos in grouped_orders)
-            {
-                int total = gos.Sum(o => o.実際出荷数量);
-                int min = gos.Min(o => o.実際出荷数量);
-
-                foreach (var o in gos)
-                {
-
-                    if (o.在庫数 >= total)
-                    {
-                        o.在庫状態 = "あり";
-                    }
-                    else if (o.在庫数 > min)
-                    {
-                        o.在庫状態 = "一部不足";
-                    }
-                    else
-                    {
-                        o.在庫状態 = "なし";
-                    }
-                }
-            }
-            
+            // 记录DataGridView改变数据          
             //sortablePendingOrderList = new SortableBindingList<v_pendingorder>( orders );
 
             this.bindingSource1.DataSource = pendingOrderIBindList;
-            
+
+            dataGridView1.DataSource = this.bindingSource1;
+
             if (pendingOrderList.Count > 0)
             {
                 //var shops = pendingOrderList.Select(s => new MockEntity { Id = s.id受注データ, FullName = s.実際配送担当 }).Distinct().ToList();
@@ -342,29 +321,33 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 this.DanDangComboBox.ValueMember = "ShortName";
                 this.DanDangComboBox.DataSource = counties;
 
-                // 品名漢字
-                var PMHZ = pendingOrderList.Select(s => new MockEntity {Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().ToList();
-                PMHZ.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                this.PMHZCombox.DisplayMember = "FullName";
-                this.PMHZCombox.ValueMember = "Id";
-                this.PMHZCombox.DataSource = PMHZ;
+                this.DanDangComboBox.Text = shipper;
+                this.GenreNamecomboBox.Text = genre;
+                this.PMHZCombox.Text = product;
+                // PageEvent 时, stockState 在初始化为 “”， 需设置为 “不限”
+                this.ZKZTcomboBox3.Text = (stockState.Length ==0 ? "不限" : stockState);
+                //// 品名漢字
+                //var PMHZ = pendingOrderList.Select(s => new MockEntity {Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().ToList();
+                //PMHZ.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                //this.PMHZCombox.DisplayMember = "FullName";
+                //this.PMHZCombox.ValueMember = "Id";
+                //this.PMHZCombox.DataSource = PMHZ;
 
-                // GenreName
-                var GenreName = pendingOrderList.Select(s => new MockEntity { Id = s.ジャンル, ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
-                GenreName.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                this.GenreNamecomboBox.DisplayMember = "FullName";
-                this.GenreNamecomboBox.ValueMember = "Id";
-                this.GenreNamecomboBox.DataSource = GenreName;
+                //// GenreName
+                //var GenreName = pendingOrderList.Select(s => new MockEntity { Id = s.ジャンル, ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
+                //GenreName.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                //this.GenreNamecomboBox.DisplayMember = "FullName";
+                //this.GenreNamecomboBox.ValueMember = "Id";
+                //this.GenreNamecomboBox.DataSource = GenreName;
 
                 // 在庫状態
-                var ZKZT = pendingOrderList.Select(s => new MockEntity { ShortName = s.在庫状態, FullName = s.在庫状態 }).Distinct().ToList();
-                ZKZT.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
-                this.ZKZTcomboBox3.DisplayMember = "FullName";
-                this.ZKZTcomboBox3.ValueMember = "ShortName";
-                this.ZKZTcomboBox3.DataSource = ZKZT;
+                //var ZKZT = pendingOrderList.Select(s => new MockEntity { ShortName = s.在庫状態, FullName = s.在庫状態 }).Distinct().ToList();
+                //ZKZT.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                //this.ZKZTcomboBox3.DisplayMember = "FullName";
+                //this.ZKZTcomboBox3.ValueMember = "ShortName";
+                //this.ZKZTcomboBox3.DataSource = ZKZT;
             }
            
-            dataGridView1.DataSource = this.bindingSource1;
 
             return 0;
         }
@@ -463,6 +446,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             return rows.Distinct();
         }
 
+        #region 订单修订上下文菜单事件
         private void sendToShipperToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var orders = GetPendingOrdersBySelectedGridCell();
@@ -477,6 +461,26 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 MessageBox.Show(" please select rows in the order list first.");
             }
         }
+
+        private void cancelOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var orders = GetPendingOrdersBySelectedGridCell();
+
+            if (orders.Count() > 0)
+            {
+                if (MessageBox.Show("Cancel these orders?", "Confirm Message", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    OrderSqlHelper.CancelOrders(orders);
+                    pager1.Bind();
+                }
+            }
+            else
+            {
+                MessageBox.Show(" please select rows in the order list first.");
+            }
+        }
+
+        #endregion
 
         private void newOrderbutton_Click(object sender, EventArgs e)
         {
@@ -535,57 +539,17 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
 
 
-        private void ApplyFilter2()
-        {
-            string filter = "";
 
-
-            if (this.DanDangComboBox.Text.Length > 0 && this.DanDangComboBox.Text != "不限")
-            {
-                if (filter.Length > 0)
-                {
-                    filter += " AND ";
-                }
-                filter += "(実際配送担当='" + this.DanDangComboBox.Text + "')";
-
-            }
-            if (this.PMHZCombox.Text.Length > 0 && this.PMHZCombox.Text != "不限")
-            {
-                if (filter.Length > 0)
-                {
-                    filter += " AND ";
-                }
-                filter += "(品名漢字='" + this.PMHZCombox.Text + "')";
-
-            }
-            if (this.GenreNamecomboBox.Text.Length > 0 && this.GenreNamecomboBox.Text != "不限")
-            {
-                if (filter.Length > 0)
-                {
-                    filter += " AND ";
-                }
-                filter += "(GenreName='" + this.GenreNamecomboBox.Text + "')";
-
-            }
-            if (this.ZKZTcomboBox3.Text.Length > 0 && this.ZKZTcomboBox3.Text != "不限")
-            {
-                if (filter.Length > 0)
-                {
-                    filter += " AND ";
-                }
-                filter += "(在庫状態='" + this.ZKZTcomboBox3.Text + "')";
-            }
-
-
-            this.bindingSource1.Filter = filter;
-
-        }
 
         private int pager1_EventPaging(EventPagingArg e)
         {
-            int order_count = InitializeDataSource();
+            string shipper = this.DanDangComboBox.Text;
+            string genre = this.GenreNamecomboBox.Text;
+            string product = this.PMHZCombox.Text;
+            string stockState = this.ZKZTcomboBox3.Text;
+            int orderCount = InitializeDataSource(shipper, genre, product, stockState);
 
-            return order_count;
+            return orderCount;
         }
 
         /// <summary>   
@@ -805,7 +769,6 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             GenreNamecomboBox.SelectedIndex = 0;
             ZKZTcomboBox3.SelectedIndex = 0;
 
-
         }
 
         
@@ -818,14 +781,14 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         //分类名称
         private void GenreNamecomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<v_pendingorder> orders = GetDataGridViewBoundOrders();
+            string shipper = DanDangComboBox.Text;
+            var orders = GetOrdersByShipper(shipper);
 
             var combox = sender as ComboBox;
             if (combox.Text != "不限")
             {
-                orders = pendingOrderList.FindAll(o => o.GenreName == combox.Text);
+                orders = orders.FindAll(o => o.GenreName == combox.Text);
             }
-
 
             // 品名漢字
             InitializeProductComboBox(orders);
@@ -838,21 +801,17 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         }
         //在库状态
         private void ZKZTcomboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {            
             ApplyFilter2();
         }
         // 配送担当
         private void DanDangComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            List<v_pendingorder> orders = GetDataGridViewBoundOrders();
             var combox = sender as ComboBox;
-            if (combox.Text != "不限")
-            {
-                orders = pendingOrderList.FindAll(o => o.実際配送担当 == combox.Text);              
-
-            }
-
+            string shipper = combox.Text;
+            var orders = GetOrdersByShipper(shipper);
+            
             // GenreName
             InitializeGenreComboBox(orders);
 
@@ -887,6 +846,106 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 orders.Add(dataGridView1.Rows[i].DataBoundItem as v_pendingorder);
             }
 
+            return orders;
+        }
+
+        private void ApplyFilter2()
+        {
+            datagrid_changes.Clear();
+            string filter = "";
+
+
+            if (this.DanDangComboBox.Text.Length > 0 && this.DanDangComboBox.Text != "不限")
+            {
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(実際配送担当='" + this.DanDangComboBox.Text + "')";
+
+            }
+            if (this.PMHZCombox.Text.Length > 0 && this.PMHZCombox.Text != "不限")
+            {
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(品名漢字='" + this.PMHZCombox.Text + "')";
+
+            }
+            if (this.GenreNamecomboBox.Text.Length > 0 && this.GenreNamecomboBox.Text != "不限")
+            {
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(GenreName='" + this.GenreNamecomboBox.Text + "')";
+
+            }
+            if (false && this.ZKZTcomboBox3.Text.Length > 0 && this.ZKZTcomboBox3.Text != "不限")
+            {
+                if (filter.Length > 0)
+                {
+                    filter += " AND ";
+                }
+                filter += "(在庫状態='" + this.ZKZTcomboBox3.Text + "')";
+            }
+
+
+            this.bindingSource1.Filter = filter;
+            // 每次应用过滤条件时，都会生成新的结果集，根据新的结果集更新“在庫状態”
+            var orders = this.bindingSource1.List.Cast<v_pendingorder>().ToList();
+            IEnumerable<IGrouping<int, v_pendingorder>> grouped_orders = orders.GroupBy(o => o.自社コード, o => o);
+            foreach (var gos in grouped_orders)
+            {
+                int total = gos.Sum(o => o.実際出荷数量);
+                int min = gos.Min(o => o.実際出荷数量);
+
+                foreach (var o in gos)
+                {
+
+                    if (o.在庫数 >= total)
+                    {
+                        o.在庫状態 = "あり";
+                    }
+                    else if (o.在庫数 > min)
+                    {
+                        o.在庫状態 = "一部不足";
+                    }
+                    else
+                    {
+                        o.在庫状態 = "なし";
+                    }
+                }
+            }
+
+            string zkzt = ZKZTcomboBox3.Text;
+
+            // 在库状态 过滤条件 检查, 因为在库状态是动态值，所以需要使用 visible 来过滤
+            
+            {
+                CurrencyManager cm = (CurrencyManager)BindingContext[dataGridView1.DataSource];
+                cm.SuspendBinding();
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    var row = dataGridView1.Rows[i];
+                    var order = row.DataBoundItem as v_pendingorder;
+
+                    row.Visible = (zkzt == "不限" ? true : order.在庫状態 == zkzt);
+                }
+                cm.ResumeBinding();
+            }
+
+        }
+        private List<v_pendingorder> GetOrdersByShipper(string shipper)
+        {
+
+            List<v_pendingorder> orders = pendingOrderList;
+
+            if (shipper != "不限")
+            {
+                orders = orders.FindAll(o => o.実際配送担当 == shipper);
+            }
             return orders;
         }
 
@@ -956,6 +1015,12 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                     //var stockrec = stockrecList.Find(s => s.OrderId = order.id受注データ);
                 
                 }
+
+                var marukenTransList = (from t_maruken_trans m in ctx.t_maruken_trans
+                                        where orderIds.Contains(m.OrderId)
+                                        select m).ToList();
+
+                ctx.t_maruken_trans.RemoveRange(marukenTransList);
                 ctx.t_stockrec.RemoveRange(stockrecList);
                 ctx.SaveChanges();
                 OrderSqlHelper.UpdateStockState(ctx, stockrecList);
@@ -966,5 +1031,9 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         }
 
         #endregion
+
+
+
+
     }
 }
