@@ -71,7 +71,7 @@ CHANGE COLUMN `実際出荷数量` `実際出荷数量` int(11) NOT NULL DEFAULT
 CHANGE COLUMN `納品口数` `納品口数` int(11) NOT NULL DEFAULT 0,
 CHANGE COLUMN `重量` `重量` int(11) NOT NULL DEFAULT 0;
 
-#v4.1
+#v4.2
 ============================================-
 ALTER TABLE `god_inventory`.`t_orderdata` 
 ADD COLUMN `発注品名漢字`  varchar(255) CHARACTER SET 'utf8' COLLATE utf8_unicode_ci DEFAULT NULL,

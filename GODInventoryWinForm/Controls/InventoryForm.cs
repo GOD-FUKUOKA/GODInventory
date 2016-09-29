@@ -22,8 +22,7 @@ namespace GODInventoryWinForm.Controls
         private List<t_genre> genreList;
 
 
-        //private t_itemlist itemlist;
-        private List<t_itemlist> itemlist;
+        private List<t_itemlist> itemList;
         private testingCC testingCC;
 
         public t_itemlist item;
@@ -99,13 +98,15 @@ namespace GODInventoryWinForm.Controls
                 #endregion
 
 
-                itemlist = ctx.t_itemlist.ToList();
-                NewstockcheckList = (from a in ctx.t_itemlist
+                //itemList = ctx.t_itemlist.ToList();
+                
+                NewstockcheckList = (from p in ctx.t_itemlist
+                                     where p.ジャンル == genreId
                                      select new v_stockcheck
                              {
-                                 規格 = a.規格,
-                                 自社コード = a.自社コード,
-                                 商品名 = a.商品名,
+                                 規格 = p.規格,
+                                 自社コード = p.自社コード,
+                                 商品名 = p.商品名,
                              }).ToList();
 
                 foreach (var stockcheck in NewstockcheckList)

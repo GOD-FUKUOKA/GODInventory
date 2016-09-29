@@ -283,11 +283,14 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
                 //this.pendingOrderList = entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.Pending, pager1.PageSize, offset).ToList();
                 //拷贝 pendingOrderIBindList 中所有数据 到 pendingOrderList， pendingOrderIBindList 会因过滤条件不同，产生不同结果集
-                foreach( var o in pendingOrderIBindList)
+                foreach (var o in pendingOrderIBindList)
                 {
                     pendingOrderList.Add(o as v_pendingorder);
                 }
                 //pendingOrderList = pendingOrderIBindList.Cast<v_pendingorder>().ToList();
+            }
+            else {
+                pendingOrderIBindList = null;
             }
 
 
@@ -358,8 +361,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             // 為了兼容 RollbackOrder， ecOrderList is v_penddingorder
             var q = OrderSqlHelper.ECWithoutCodeOrderQuery(this.entityDataSource1, ErCiZhiPinId);
             string sql = "SELECT MAX(t_orderdata.`社内伝番`) FROM t_orderdata";
-            int max = this.entityDataSource1.DbContext.Database.SqlQuery<int>(sql).FirstOrDefault();
-            max = Convert.ToInt32(max);
+            int max = Convert.ToInt32(this.entityDataSource1.DbContext.Database.SqlQuery<int?>(sql).FirstOrDefault());
+            //max = Convert.ToInt32(max);
 
             //社内传番应该为8位，我们现在排到了10009837
             if (max < 10002000)
@@ -530,11 +533,11 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         private IEnumerable<DataGridViewRow> GetSelectedRowsBySelectedCells()
         {
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
-            foreach (DataGridViewCell cell in this.dataGridView1.SelectedCells)
+            foreach (DataGridViewRow row in this.dataGridView1.SelectedRows)
             {
-                rows.Add(cell.OwningRow);
+                rows.Add(row);
             }
-            return rows.Distinct();
+            return rows ;
         }
 
 
@@ -613,8 +616,11 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             var rows = GetSelectedRowsBySelectedCells(dataGridView1);
             foreach (DataGridViewRow row in rows)
             {
-                var pendingorder = row.DataBoundItem as v_pendingorder;
-                orders.Add(pendingorder);
+                if (row.Visible)
+                {
+                    var pendingorder = row.DataBoundItem as v_pendingorder;
+                    orders.Add(pendingorder);
+                }
             }
 
             return orders;
