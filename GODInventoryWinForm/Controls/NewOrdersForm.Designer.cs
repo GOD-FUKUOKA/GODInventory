@@ -31,6 +31,15 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ordersTabPage = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.countyComboBox = new System.Windows.Forms.ComboBox();
+            this.clearSelectButton = new System.Windows.Forms.Button();
+            this.genreComboBox = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.productComboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.shipperComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,6 +85,15 @@
             // 
             // ordersTabPage
             // 
+            this.ordersTabPage.Controls.Add(this.label4);
+            this.ordersTabPage.Controls.Add(this.countyComboBox);
+            this.ordersTabPage.Controls.Add(this.clearSelectButton);
+            this.ordersTabPage.Controls.Add(this.genreComboBox);
+            this.ordersTabPage.Controls.Add(this.label3);
+            this.ordersTabPage.Controls.Add(this.productComboBox);
+            this.ordersTabPage.Controls.Add(this.label2);
+            this.ordersTabPage.Controls.Add(this.shipperComboBox);
+            this.ordersTabPage.Controls.Add(this.label1);
             this.ordersTabPage.Controls.Add(this.saveButton);
             this.ordersTabPage.Controls.Add(this.dataGridView1);
             this.ordersTabPage.Location = new System.Drawing.Point(4, 22);
@@ -85,6 +103,92 @@
             this.ordersTabPage.TabIndex = 0;
             this.ordersTabPage.Text = "ダブリ確認";
             this.ordersTabPage.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(226, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 100;
+            this.label4.Text = "县别";
+            // 
+            // countyComboBox
+            // 
+            this.countyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.countyComboBox.FormattingEnabled = true;
+            this.countyComboBox.Location = new System.Drawing.Point(261, 8);
+            this.countyComboBox.Name = "countyComboBox";
+            this.countyComboBox.Size = new System.Drawing.Size(120, 20);
+            this.countyComboBox.TabIndex = 99;
+            this.countyComboBox.SelectedIndexChanged += new System.EventHandler(this.countyComboBox1_SelectedIndexChanged);
+            // 
+            // clearSelectButton
+            // 
+            this.clearSelectButton.Location = new System.Drawing.Point(396, 8);
+            this.clearSelectButton.Name = "clearSelectButton";
+            this.clearSelectButton.Size = new System.Drawing.Size(100, 45);
+            this.clearSelectButton.TabIndex = 92;
+            this.clearSelectButton.Text = "フィルターをリセット";
+            this.clearSelectButton.UseVisualStyleBackColor = true;
+            this.clearSelectButton.Click += new System.EventHandler(this.clearSelectButton_Click);
+            // 
+            // genreComboBox
+            // 
+            this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.genreComboBox.FormattingEnabled = true;
+            this.genreComboBox.Location = new System.Drawing.Point(67, 33);
+            this.genreComboBox.Name = "genreComboBox";
+            this.genreComboBox.Size = new System.Drawing.Size(120, 20);
+            this.genreComboBox.TabIndex = 91;
+            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.GenreNamecomboBox_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(26, 37);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 12);
+            this.label3.TabIndex = 90;
+            this.label3.Text = "ｼﾞｬﾝﾙ";
+            // 
+            // productComboBox
+            // 
+            this.productComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.productComboBox.FormattingEnabled = true;
+            this.productComboBox.Location = new System.Drawing.Point(261, 33);
+            this.productComboBox.Name = "productComboBox";
+            this.productComboBox.Size = new System.Drawing.Size(120, 20);
+            this.productComboBox.TabIndex = 89;
+            this.productComboBox.SelectedIndexChanged += new System.EventHandler(this.productCombox_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(214, 37);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 88;
+            this.label2.Text = "商品名";
+            // 
+            // shipperComboBox
+            // 
+            this.shipperComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.shipperComboBox.FormattingEnabled = true;
+            this.shipperComboBox.Location = new System.Drawing.Point(67, 8);
+            this.shipperComboBox.Name = "shipperComboBox";
+            this.shipperComboBox.Size = new System.Drawing.Size(120, 20);
+            this.shipperComboBox.TabIndex = 87;
+            this.shipperComboBox.SelectedIndexChanged += new System.EventHandler(this.shipperComboBox_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 86;
+            this.label1.Text = "配送担当";
             // 
             // saveButton
             // 
@@ -331,6 +435,7 @@
             this.Text = "ダブリ確認";
             this.tabControl1.ResumeLayout(false);
             this.ordersTabPage.ResumeLayout(false);
+            this.ordersTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
@@ -368,5 +473,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ShipperColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn StoreDistrictColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.Button clearSelectButton;
+        private System.Windows.Forms.ComboBox genreComboBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox productComboBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox shipperComboBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox countyComboBox;
     }
 }

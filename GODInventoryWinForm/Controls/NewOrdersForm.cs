@@ -24,7 +24,7 @@ namespace GODInventoryWinForm.Controls
 
         private Hashtable datagrid_changes = null;
         List<v_duplicatedorder> duplicatedOrderList;
-        SortableBindingList<v_duplicatedorder> duplicatedBindingList;
+        SortableBindingList<v_duplicatedorder> duplicatedOrderBindingList;
         public NewOrdersForm()
         {
             InitializeComponent();
@@ -40,15 +40,15 @@ namespace GODInventoryWinForm.Controls
         private void saveButton_Click(object sender, EventArgs e)
         {
 
-            if (duplicatedBindingList.Count > 0)
+            if (duplicatedOrderBindingList.Count > 0)
                 {
                     using (var ctx = new GODDbContext())
                     {
-                        for (int i = 0; i < duplicatedBindingList.Count; i++)
+                        for (int i = 0; i < duplicatedOrderBindingList.Count; i++)
                         {
                             //  if ((int) != 0)
                             {
-                                var duplicated_order = duplicatedBindingList[i];
+                                var duplicated_order = duplicatedOrderBindingList[i];
                                 t_orderdata order = ctx.t_orderdata.Find(duplicated_order.id受注データ);
 
                                 if (duplicated_order.キャンセル == "yes")
@@ -90,24 +90,13 @@ namespace GODInventoryWinForm.Controls
                 {
                     MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                }
-            
+                }            
         }
-
-        //private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    RowRemark = e.RowIndex;
-        //    cloumn = e.ColumnIndex;
-        //}
-
-
-
 
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
-
         }
 
 
@@ -118,8 +107,11 @@ namespace GODInventoryWinForm.Controls
             string sql = @"SELECT o1.id受注データ as duplicatedId, o2.id受注データ, o2.`出荷日`,o2.`納品日`,o2.`受注日`,o2.`店舗コード`, o2.`店舗名漢字`,
           o2.`伝票番号`,o2.`納品口数`,o2.`ジャンル`,o2.`品名漢字`,o2.`規格名漢字`, 
           o2.`実際出荷数量`,o2.`実際配送担当`,o2.`県別`, 
-          o2.`発注形態名称漢字`,o2.`キャンセル`,o2.`ダブリ`, o2.Status
-            FROM t_orderdata o1 inner join t_orderdata  o2 on o1.自社コード = o2.自社コード and o1.店舗コード=o2.店舗コード
+          o2.`発注形態名称漢字`,o2.`キャンセル`,o2.`ダブリ`, o2.Status, o3.ジャンル名 as GenreName
+            FROM t_orderdata o1 
+            INNER JOIN t_orderdata  o2 on o1.自社コード = o2.自社コード and o1.店舗コード=o2.店舗コード
+            INNER JOIN t_genre  o3 on o1.ジャンル = o3.idジャンル 
+
     where o1.`Status`=22 AND (o1.id受注データ = o2.id受注データ or  o2.`Status`=0 OR o2.`Status`=3 OR (o2.`Status`=5 AND o2.`納品予定日`>NOW()) )
     order by o2.店舗コード, o2.自社コード , o2.受注日, o1.id受注データ";
 
@@ -130,8 +122,8 @@ namespace GODInventoryWinForm.Controls
             }
 
 
-            duplicatedBindingList = new SortableBindingList<v_duplicatedorder>(duplicatedOrderList);
-            dataGridView1.DataSource = duplicatedBindingList;
+            duplicatedOrderBindingList = new SortableBindingList<v_duplicatedorder>(duplicatedOrderList);
+            dataGridView1.DataSource = duplicatedOrderBindingList;
 
             return 0;
         }
@@ -149,7 +141,7 @@ namespace GODInventoryWinForm.Controls
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             int i = e.RowIndex;
-            var order = duplicatedBindingList[i];
+            var order = duplicatedOrderBindingList[i];
             if (order.キャンセル == "yes")
             {
                 this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Gray;
@@ -174,7 +166,7 @@ namespace GODInventoryWinForm.Controls
             for (int i = 0; i < dataGridView1.SelectedRows.Count; i++) 
             {
                 var rowIndex = dataGridView1.SelectedRows[i].Index;
-                var order = duplicatedBindingList[rowIndex];
+                var order = duplicatedOrderBindingList[rowIndex];
                 var originalValue = order.キャンセル;
                 order.キャンセル = "yes";
                 UpdateChangesManually(rowIndex, columnIndex, originalValue, order.キャンセル);
@@ -189,7 +181,7 @@ namespace GODInventoryWinForm.Controls
             for (int i = 0; i < dataGridView1.SelectedRows.Count; i++)
             {               
                 var rowIndex = dataGridView1.SelectedRows[i].Index;
-                var order = duplicatedBindingList[rowIndex];
+                var order = duplicatedOrderBindingList[rowIndex];
                 var originalValue = order.ダブリ;
                 order.ダブリ = "yes";
                 UpdateChangesManually(rowIndex, columnIndex, originalValue, order.ダブリ);
@@ -203,7 +195,7 @@ namespace GODInventoryWinForm.Controls
             for (int i = 0; i < dataGridView1.SelectedRows.Count; i++)
             {
                 var rowIndex = dataGridView1.SelectedRows[i].Index;
-                var order = duplicatedBindingList[rowIndex];
+                var order = duplicatedOrderBindingList[rowIndex];
                 var originalValue = order.キャンセル;
                 order.キャンセル = "no";
                 UpdateChangesManually(rowIndex, columnIndex, originalValue, order.キャンセル);
@@ -219,7 +211,7 @@ namespace GODInventoryWinForm.Controls
             for (int i = 0; i < dataGridView1.SelectedRows.Count; i++)
             {
                 var rowIndex = dataGridView1.SelectedRows[i].Index;
-                var order = duplicatedBindingList[rowIndex];
+                var order = duplicatedOrderBindingList[rowIndex];
                 var originalValue = order.ダブリ;
                 order.ダブリ = "no";
                 UpdateChangesManually(rowIndex, columnIndex, originalValue, order.ダブリ);
@@ -243,6 +235,7 @@ namespace GODInventoryWinForm.Controls
         //    } 
         //}
 
+        #region DataGridView 修改历史功能
 
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
@@ -349,6 +342,156 @@ namespace GODInventoryWinForm.Controls
             }
             return rows.Distinct();
         }
+
+        #endregion
+
+
+        #region 处理过滤条件
+
+        private void ApplyFilter4(string shipper = "", string genre = "", string product = "", string county = "")
+        {
+            var originalSortOrder = this.dataGridView1.SortOrder;
+            var originalSortedColumn = this.dataGridView1.SortedColumn;
+
+            bindingSource1.DataSource = null;
+            var filteredOrderList = duplicatedOrderList;
+            datagrid_changes.Clear();
+
+
+            if (shipper.Length > 0 && shipper != "不限")
+            {
+
+                filteredOrderList = filteredOrderList.FindAll(o => o.実際配送担当 == shipper);
+
+            }
+            if (product.Length > 0 && product != "不限")
+            {
+                filteredOrderList = filteredOrderList.FindAll(o => o.品名漢字 == product);
+            }
+            if (genre.Length > 0 && genre != "不限")
+            {
+
+                filteredOrderList = filteredOrderList.FindAll(o => o.GenreName == genre);
+
+            }
+            if (county.Length > 0 && county != "不限")
+            {
+                filteredOrderList = filteredOrderList.FindAll(o => o.県別 == county);
+            }
+
+            duplicatedOrderBindingList = new SortableBindingList<v_duplicatedorder>(filteredOrderList);
+
+            this.bindingSource1.DataSource = duplicatedOrderBindingList;
+
+            var direction = ListSortDirection.Ascending;
+            if (originalSortOrder == System.Windows.Forms.SortOrder.Descending)
+            {
+                direction = ListSortDirection.Descending;
+            }
+            if (originalSortedColumn != null)
+            {
+                this.dataGridView1.Sort(originalSortedColumn, direction);
+            }
+        }
+
+        private void InitializeCountyComboBox(List<v_duplicatedorder> orders)
+        {
+            // GenreName
+            var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
+            counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            this.countyComboBox.DisplayMember = "FullName";
+            this.countyComboBox.ValueMember = "ShortName";
+            this.countyComboBox.DataSource = counties;
+        }
+
+        private void InitializeGenreComboBox(List<v_duplicatedorder> orders)
+        {
+            // GenreName
+            var GenreName = orders.Select(s => new MockEntity { Id = s.ジャンル, ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
+            GenreName.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            this.genreComboBox.DisplayMember = "FullName";
+            this.genreComboBox.ValueMember = "Id";
+            this.genreComboBox.DataSource = GenreName;
+        }
+
+        private void InitializeProductComboBox(List<v_duplicatedorder> orders)
+        {
+            // 品名漢字
+            var PMHZ = orders.Select(s => new MockEntity { Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().ToList();
+            PMHZ.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            this.productComboBox.DisplayMember = "FullName";
+            this.productComboBox.ValueMember = "Id";
+            this.productComboBox.DataSource = PMHZ;
+        }
+
+        private void clearSelectButton_Click(object sender, EventArgs e)
+        {
+            bindingSource1.Sort = "";
+            shipperComboBox.SelectedIndex = 0;
+            productComboBox.SelectedIndex = 0;
+            genreComboBox.SelectedIndex = 0;
+            countyComboBox.SelectedIndex = 0;
+        }
+
+        private void shipperComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var combox = sender as ComboBox;
+            string shipper = combox.Text;
+            var orders = GetOrdersByShipper(shipper);
+            InitializeCountyComboBox(orders);
+        }
+
+        private void countyComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string shipper = shipperComboBox.Text;
+            var orders = GetOrdersByShipper(shipper);
+
+            var combox = sender as ComboBox;
+            if (combox.Text != "不限")
+            {
+                orders = orders.FindAll(o => o.県別 == combox.Text);
+            }
+            InitializeGenreComboBox(orders);
+        }
+
+        private void GenreNamecomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string shipper = shipperComboBox.Text;
+            var orders = GetOrdersByShipper(shipper);
+
+            var combox = sender as ComboBox;
+            if (combox.Text != "不限")
+            {
+                orders = orders.FindAll(o => o.GenreName == combox.Text);
+            }
+
+            // 品名漢字
+            InitializeProductComboBox(orders);
+        }
+
+        private void productCombox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string shipper = shipperComboBox.Text;
+            string genre = genreComboBox.Text;
+            string product = productComboBox.Text;
+            string county = countyComboBox.Text;
+            ApplyFilter4(shipper, genre, product, county);
+        }
+
+        private List<v_duplicatedorder> GetOrdersByShipper(string shipper)
+        {
+            List<v_duplicatedorder> orders = duplicatedOrderList;
+            if (shipper != "不限")
+            {
+                orders = orders.FindAll(o => o.実際配送担当 == shipper);
+            }
+            return orders;
+        }
+
+
+        #endregion
+
+
 
     }
 }

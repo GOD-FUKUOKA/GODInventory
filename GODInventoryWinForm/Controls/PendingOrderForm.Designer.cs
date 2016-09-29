@@ -35,16 +35,15 @@
             this.ClearSelect = new System.Windows.Forms.Button();
             this.ZKZTcomboBox3 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.GenreNamecomboBox = new System.Windows.Forms.ComboBox();
+            this.genreComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.PMHZCombox = new System.Windows.Forms.ComboBox();
+            this.productComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.DanDangComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.newOrderbutton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreCodeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -112,6 +111,7 @@
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -150,9 +150,9 @@
             this.ordersTabPage.Controls.Add(this.ClearSelect);
             this.ordersTabPage.Controls.Add(this.ZKZTcomboBox3);
             this.ordersTabPage.Controls.Add(this.label4);
-            this.ordersTabPage.Controls.Add(this.GenreNamecomboBox);
+            this.ordersTabPage.Controls.Add(this.genreComboBox);
             this.ordersTabPage.Controls.Add(this.label3);
-            this.ordersTabPage.Controls.Add(this.PMHZCombox);
+            this.ordersTabPage.Controls.Add(this.productComboBox);
             this.ordersTabPage.Controls.Add(this.label2);
             this.ordersTabPage.Controls.Add(this.DanDangComboBox);
             this.ordersTabPage.Controls.Add(this.label1);
@@ -171,9 +171,9 @@
             // 
             // ClearSelect
             // 
-            this.ClearSelect.Location = new System.Drawing.Point(394, 17);
+            this.ClearSelect.Location = new System.Drawing.Point(394, 13);
             this.ClearSelect.Name = "ClearSelect";
-            this.ClearSelect.Size = new System.Drawing.Size(100, 51);
+            this.ClearSelect.Size = new System.Drawing.Size(100, 45);
             this.ClearSelect.TabIndex = 85;
             this.ClearSelect.Text = "フィルターをリセット";
             this.ClearSelect.UseVisualStyleBackColor = true;
@@ -188,7 +188,7 @@
             "あり",
             "一部不足",
             "なし"});
-            this.ZKZTcomboBox3.Location = new System.Drawing.Point(259, 17);
+            this.ZKZTcomboBox3.Location = new System.Drawing.Point(259, 13);
             this.ZKZTcomboBox3.Name = "ZKZTcomboBox3";
             this.ZKZTcomboBox3.Size = new System.Drawing.Size(120, 20);
             this.ZKZTcomboBox3.TabIndex = 84;
@@ -197,45 +197,45 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(200, 21);
+            this.label4.Location = new System.Drawing.Point(200, 17);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 83;
             this.label4.Text = "在庫状況";
             // 
-            // GenreNamecomboBox
+            // genreComboBox
             // 
-            this.GenreNamecomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.GenreNamecomboBox.FormattingEnabled = true;
-            this.GenreNamecomboBox.Location = new System.Drawing.Point(65, 48);
-            this.GenreNamecomboBox.Name = "GenreNamecomboBox";
-            this.GenreNamecomboBox.Size = new System.Drawing.Size(120, 20);
-            this.GenreNamecomboBox.TabIndex = 82;
-            this.GenreNamecomboBox.SelectedIndexChanged += new System.EventHandler(this.GenreNamecomboBox_SelectedIndexChanged);
+            this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.genreComboBox.FormattingEnabled = true;
+            this.genreComboBox.Location = new System.Drawing.Point(65, 38);
+            this.genreComboBox.Name = "genreComboBox";
+            this.genreComboBox.Size = new System.Drawing.Size(120, 20);
+            this.genreComboBox.TabIndex = 82;
+            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.GenreNamecomboBox_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 52);
+            this.label3.Location = new System.Drawing.Point(24, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 12);
             this.label3.TabIndex = 81;
             this.label3.Text = "ｼﾞｬﾝﾙ";
             // 
-            // PMHZCombox
+            // productComboBox
             // 
-            this.PMHZCombox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.PMHZCombox.FormattingEnabled = true;
-            this.PMHZCombox.Location = new System.Drawing.Point(259, 48);
-            this.PMHZCombox.Name = "PMHZCombox";
-            this.PMHZCombox.Size = new System.Drawing.Size(120, 20);
-            this.PMHZCombox.TabIndex = 80;
-            this.PMHZCombox.SelectedIndexChanged += new System.EventHandler(this.PMHZCombox_SelectedIndexChanged);
+            this.productComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.productComboBox.FormattingEnabled = true;
+            this.productComboBox.Location = new System.Drawing.Point(259, 38);
+            this.productComboBox.Name = "productComboBox";
+            this.productComboBox.Size = new System.Drawing.Size(120, 20);
+            this.productComboBox.TabIndex = 80;
+            this.productComboBox.SelectedIndexChanged += new System.EventHandler(this.PMHZCombox_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(212, 52);
+            this.label2.Location = new System.Drawing.Point(212, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 79;
@@ -245,7 +245,7 @@
             // 
             this.DanDangComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DanDangComboBox.FormattingEnabled = true;
-            this.DanDangComboBox.Location = new System.Drawing.Point(65, 17);
+            this.DanDangComboBox.Location = new System.Drawing.Point(65, 13);
             this.DanDangComboBox.Name = "DanDangComboBox";
             this.DanDangComboBox.Size = new System.Drawing.Size(120, 20);
             this.DanDangComboBox.TabIndex = 78;
@@ -254,7 +254,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 20);
+            this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 77;
@@ -263,7 +263,7 @@
             // newOrderbutton
             // 
             this.newOrderbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newOrderbutton.Location = new System.Drawing.Point(880, 17);
+            this.newOrderbutton.Location = new System.Drawing.Point(880, 11);
             this.newOrderbutton.Name = "newOrderbutton";
             this.newOrderbutton.Size = new System.Drawing.Size(100, 32);
             this.newOrderbutton.TabIndex = 20;
@@ -274,7 +274,7 @@
             // saveButton
             // 
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveButton.Location = new System.Drawing.Point(665, 17);
+            this.saveButton.Location = new System.Drawing.Point(665, 11);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(100, 32);
             this.saveButton.TabIndex = 16;
@@ -285,28 +285,13 @@
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Location = new System.Drawing.Point(773, 17);
+            this.cancelButton.Location = new System.Drawing.Point(773, 11);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 19;
             this.cancelButton.Text = "変更を取消す";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(3, 418);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(983, 34);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // dataGridView1
             // 
@@ -338,12 +323,12 @@
             this.Column4});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 86);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 77);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(983, 332);
+            this.dataGridView1.Size = new System.Drawing.Size(983, 341);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -879,6 +864,21 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(3, 418);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(983, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
+            // 
             // PendingOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -947,9 +947,9 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ComboBox ZKZTcomboBox3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox GenreNamecomboBox;
+        private System.Windows.Forms.ComboBox genreComboBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox PMHZCombox;
+        private System.Windows.Forms.ComboBox productComboBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox DanDangComboBox;
         private System.Windows.Forms.Label label1;

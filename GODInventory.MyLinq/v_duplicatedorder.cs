@@ -24,7 +24,7 @@ namespace GODInventory.MyLinq
         public string 店舗名カナ { get; set; }
 
 
-        public short? ジャンル { get; set; }
+        public int ジャンル { get; set; }
 
         public int 伝票番号 { get; set; }
 
@@ -78,8 +78,9 @@ namespace GODInventory.MyLinq
         public DateTime? キャンセル時刻 { get; set; }
 
         public string 県別 { get; set; }
-
         public OrderStatus Status { get; set; }
+
+        public string GenreName { get; set; }
     }
 
 }
