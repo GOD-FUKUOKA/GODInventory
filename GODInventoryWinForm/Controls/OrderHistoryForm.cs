@@ -364,7 +364,8 @@ namespace GODInventoryWinForm.Controls
             //    this.storeCodeTextBox.Text = "";
             //}
 
-            var filtered = shopList.FindAll(s => s.県別 == this.countyComboBox1.SelectedValue);
+            string county = this.countyComboBox1.Text;
+            var filtered = shopList.FindAll(s => s.県別 == county);
             if (filtered.Count > 0)
             {
                 var shops = filtered.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
@@ -372,8 +373,7 @@ namespace GODInventoryWinForm.Controls
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
-                this.storeComboBox.SelectedIndex =1;
-                //  this.storeComboBox.DataSource = filtered;
+                this.storeComboBox.SelectedIndex =0;
             }
             else
             {
@@ -382,8 +382,6 @@ namespace GODInventoryWinForm.Controls
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
-
-                //this.storeComboBox.DataSource = shopList;
 
             }
 
