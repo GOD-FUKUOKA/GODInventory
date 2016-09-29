@@ -51,7 +51,7 @@
             this.pendingButton.Name = "pendingButton";
             this.pendingButton.Size = new System.Drawing.Size(144, 64);
             this.pendingButton.TabIndex = 1;
-            this.pendingButton.Text = "待处理订单";
+            this.pendingButton.Text = "受注処理";
             this.pendingButton.UseVisualStyleBackColor = true;
             this.pendingButton.Click += new System.EventHandler(this.pendingButton_Click);
             // 
@@ -74,7 +74,7 @@
             this.waitToShipButton.Name = "waitToShipButton";
             this.waitToShipButton.Size = new System.Drawing.Size(144, 64);
             this.waitToShipButton.TabIndex = 2;
-            this.waitToShipButton.Text = "订单配车处理";
+            this.waitToShipButton.Text = "配車処理";
             this.waitToShipButton.UseVisualStyleBackColor = true;
             this.waitToShipButton.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -85,7 +85,7 @@
             this.shippingOrderButton.Name = "shippingOrderButton";
             this.shippingOrderButton.Size = new System.Drawing.Size(144, 64);
             this.shippingOrderButton.TabIndex = 3;
-            this.shippingOrderButton.Text = "发货订单处理";
+            this.shippingOrderButton.Text = "出荷伝票処理";
             this.shippingOrderButton.UseVisualStyleBackColor = true;
             this.shippingOrderButton.Click += new System.EventHandler(this.shippedOrderButton_Click);
             // 
@@ -96,7 +96,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(144, 64);
             this.button6.TabIndex = 6;
-            this.button6.Text = "历史订单查询";
+            this.button6.Text = "伝票検索";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -190,7 +190,7 @@
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(144, 64);
             this.newButton.TabIndex = 0;
-            this.newButton.Text = "新订单重复处理";
+            this.newButton.Text = "ダブリ確認";
             this.newButton.UseVisualStyleBackColor = true;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
