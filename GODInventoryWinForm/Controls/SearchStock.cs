@@ -216,7 +216,7 @@ namespace GODInventoryWinForm.Controls
             var isAllStockIoSelected = (ioState == StockIoEnum.全部.ToString());
 
 
-            string conditions = "s.日付 > @startAt AND @endAt > s.日付";
+            string conditions = "OrderId=0 AND s.日付 > @startAt AND @endAt > s.日付";
             List<MySqlParameter> condition_params = new List<MySqlParameter>();
 
             #region 构建查询条件

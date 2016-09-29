@@ -120,7 +120,11 @@ namespace GODInventoryWinForm.Controls
 
                 duplicatedOrderList = ctx.Database.SqlQuery<v_duplicatedorder>(sql).ToList();
             }
-
+            var shippers = duplicatedOrderList.Select(s => new MockEntity { ShortName = s.実際配送担当, FullName = s.実際配送担当 }).Distinct().ToList();
+            shippers.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            this.shipperComboBox.DisplayMember = "FullName";
+            this.shipperComboBox.ValueMember = "ShortName";
+            this.shipperComboBox.DataSource = shippers;
 
             duplicatedOrderBindingList = new SortableBindingList<v_duplicatedorder>(duplicatedOrderList);
             dataGridView1.DataSource = duplicatedOrderBindingList;
@@ -140,8 +144,8 @@ namespace GODInventoryWinForm.Controls
 
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            int i = e.RowIndex;
-            var order = duplicatedOrderBindingList[i];
+            int i = e.RowIndex;            
+            var order = dataGridView1.Rows[i].DataBoundItem as v_duplicatedorder;
             if (order.キャンセル == "yes")
             {
                 this.dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Gray;
@@ -381,7 +385,7 @@ namespace GODInventoryWinForm.Controls
 
             duplicatedOrderBindingList = new SortableBindingList<v_duplicatedorder>(filteredOrderList);
 
-            this.bindingSource1.DataSource = duplicatedOrderBindingList;
+            this.dataGridView1.DataSource = duplicatedOrderBindingList;
 
             var direction = ListSortDirection.Ascending;
             if (originalSortOrder == System.Windows.Forms.SortOrder.Descending)
