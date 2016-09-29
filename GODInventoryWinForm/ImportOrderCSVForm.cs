@@ -134,7 +134,7 @@ namespace GODInventoryWinForm
                         if (worker.CancellationPending == true)
                         {
                             e.Cancel = true;
-                            throw new Exception("It is Cancelled successfully!");
+                            throw new Exception("キャンセルできました!");
                         }
                         var model = new CSVOrderModel(orderHead, line);
                         if (model.IsValid) 
@@ -202,7 +202,7 @@ namespace GODInventoryWinForm
                             var item = items.FirstOrDefault(s => s.JANコード == model.JanCode);
                             if(item == null)
                             {
-                                throw new Exception(String.Format("Can not find product by jancode {0}", model.JanCode));
+                                throw new Exception(String.Format("JANコード {0} の商品登録されていません", model.JanCode));
                             }
                             var shop = shops.FirstOrDefault(s => (s.店番 == model.StoreCode || s.店名 == model.StoreName));
                             if (shop == null)
@@ -237,7 +237,7 @@ namespace GODInventoryWinForm
 
                         ctxTransaction.Commit();
 
-                        e.Result = string.Format("{0}条受注订单正常导入成功", models.Count);
+                        e.Result = string.Format("{0}件の受注伝票が登録できました", models.Count);
                     }
                    
                     catch (Exception exception)
@@ -272,6 +272,12 @@ namespace GODInventoryWinForm
                 // Disable the Cancel button.
                 this.cancelButton.Enabled = false;
             }
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
         }
 
     }

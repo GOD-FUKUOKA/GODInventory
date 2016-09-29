@@ -141,7 +141,7 @@ namespace GODInventoryWinForm.Controls
 
 
 
-                        MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", changeList.Count));
+                        MessageBox.Show(String.Format("{0} 種類商品移動登録できました!", changeList.Count));
                         BuildStockOutNum();
                         BuildStockInNum();
                     }

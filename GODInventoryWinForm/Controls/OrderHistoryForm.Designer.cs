@@ -53,10 +53,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,6 +80,10 @@
             this.キャンセル時刻 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.備考 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             this.ordersTabPage.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -99,9 +99,9 @@
             // 
             // filterButton
             // 
-            this.filterButton.Location = new System.Drawing.Point(889, 18);
+            this.filterButton.Location = new System.Drawing.Point(889, 20);
             this.filterButton.Name = "filterButton";
-            this.filterButton.Size = new System.Drawing.Size(100, 51);
+            this.filterButton.Size = new System.Drawing.Size(100, 55);
             this.filterButton.TabIndex = 24;
             this.filterButton.Text = "検索";
             this.filterButton.UseVisualStyleBackColor = true;
@@ -115,7 +115,7 @@
             this.ordersTabPage.Location = new System.Drawing.Point(4, 22);
             this.ordersTabPage.Name = "ordersTabPage";
             this.ordersTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ordersTabPage.Size = new System.Drawing.Size(1141, 484);
+            this.ordersTabPage.Size = new System.Drawing.Size(1141, 527);
             this.ordersTabPage.TabIndex = 0;
             this.ordersTabPage.Text = "订单查询";
             this.ordersTabPage.UseVisualStyleBackColor = true;
@@ -142,37 +142,37 @@
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.filterButton);
-            this.groupBox3.Location = new System.Drawing.Point(3, 15);
+            this.groupBox3.Location = new System.Drawing.Point(3, 16);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1130, 84);
+            this.groupBox3.Size = new System.Drawing.Size(1130, 91);
             this.groupBox3.TabIndex = 100;
             this.groupBox3.TabStop = false;
             // 
             // btclear
             // 
-            this.btclear.Location = new System.Drawing.Point(995, 18);
+            this.btclear.Location = new System.Drawing.Point(995, 20);
             this.btclear.Name = "btclear";
-            this.btclear.Size = new System.Drawing.Size(100, 51);
+            this.btclear.Size = new System.Drawing.Size(100, 55);
             this.btclear.TabIndex = 108;
-            this.btclear.Text = "清空";
+            this.btclear.Text = "クリア";
             this.btclear.UseVisualStyleBackColor = true;
             this.btclear.Click += new System.EventHandler(this.btclear_Click);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 52);
+            this.label8.Location = new System.Drawing.Point(6, 56);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(29, 12);
+            this.label8.Size = new System.Drawing.Size(31, 13);
             this.label8.TabIndex = 107;
             this.label8.Text = "店番";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(158, 52);
+            this.label7.Location = new System.Drawing.Point(158, 56);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(29, 12);
+            this.label7.Size = new System.Drawing.Size(31, 13);
             this.label7.TabIndex = 106;
             this.label7.Text = "店名";
             // 
@@ -180,18 +180,18 @@
             // 
             this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.storeComboBox.FormattingEnabled = true;
-            this.storeComboBox.Location = new System.Drawing.Point(192, 48);
+            this.storeComboBox.Location = new System.Drawing.Point(192, 52);
             this.storeComboBox.Name = "storeComboBox";
-            this.storeComboBox.Size = new System.Drawing.Size(110, 20);
+            this.storeComboBox.Size = new System.Drawing.Size(110, 21);
             this.storeComboBox.TabIndex = 105;
             this.storeComboBox.TextChanged += new System.EventHandler(this.storeComboBox_TextChanged);
             // 
             // storeCodeTextBox
             // 
-            this.storeCodeTextBox.Location = new System.Drawing.Point(41, 47);
+            this.storeCodeTextBox.Location = new System.Drawing.Point(41, 51);
             this.storeCodeTextBox.MaxLength = 8;
             this.storeCodeTextBox.Name = "storeCodeTextBox";
-            this.storeCodeTextBox.Size = new System.Drawing.Size(110, 21);
+            this.storeCodeTextBox.Size = new System.Drawing.Size(110, 20);
             this.storeCodeTextBox.TabIndex = 104;
             this.storeCodeTextBox.TextChanged += new System.EventHandler(this.storeCodeTextBox_TextChanged);
             this.storeCodeTextBox.MouseLeave += new System.EventHandler(this.storeCodeTextBox_MouseLeave);
@@ -199,50 +199,50 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(714, 51);
+            this.label5.Location = new System.Drawing.Point(714, 55);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 103;
             this.label5.Text = "社内伝番";
             // 
             // innerCodeTextBox
             // 
-            this.innerCodeTextBox.Location = new System.Drawing.Point(773, 47);
+            this.innerCodeTextBox.Location = new System.Drawing.Point(773, 51);
             this.innerCodeTextBox.Name = "innerCodeTextBox";
-            this.innerCodeTextBox.Size = new System.Drawing.Size(110, 21);
+            this.innerCodeTextBox.Size = new System.Drawing.Size(110, 20);
             this.innerCodeTextBox.TabIndex = 102;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(516, 51);
+            this.label14.Location = new System.Drawing.Point(516, 55);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(53, 12);
+            this.label14.Size = new System.Drawing.Size(55, 13);
             this.label14.TabIndex = 100;
-            this.label14.Text = "订单编号";
+            this.label14.Text = "伝票番号";
             // 
             // orderCodeTextBox3
             // 
-            this.orderCodeTextBox3.Location = new System.Drawing.Point(575, 47);
+            this.orderCodeTextBox3.Location = new System.Drawing.Point(575, 51);
             this.orderCodeTextBox3.Name = "orderCodeTextBox3";
-            this.orderCodeTextBox3.Size = new System.Drawing.Size(110, 21);
+            this.orderCodeTextBox3.Size = new System.Drawing.Size(110, 20);
             this.orderCodeTextBox3.TabIndex = 101;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(323, 22);
+            this.label3.Location = new System.Drawing.Point(323, 24);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 99;
             this.label3.Text = "期限区分";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(347, 52);
+            this.label1.Location = new System.Drawing.Point(347, 56);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.Size = new System.Drawing.Size(31, 13);
             this.label1.TabIndex = 98;
             this.label1.Text = "县别";
             // 
@@ -250,50 +250,50 @@
             // 
             this.dateEnumComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.dateEnumComboBox.FormattingEnabled = true;
-            this.dateEnumComboBox.Location = new System.Drawing.Point(382, 18);
+            this.dateEnumComboBox.Location = new System.Drawing.Point(382, 20);
             this.dateEnumComboBox.Name = "dateEnumComboBox";
-            this.dateEnumComboBox.Size = new System.Drawing.Size(110, 20);
+            this.dateEnumComboBox.Size = new System.Drawing.Size(110, 21);
             this.dateEnumComboBox.TabIndex = 97;
             // 
             // countyComboBox1
             // 
             this.countyComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.countyComboBox1.FormattingEnabled = true;
-            this.countyComboBox1.Location = new System.Drawing.Point(382, 48);
+            this.countyComboBox1.Location = new System.Drawing.Point(382, 52);
             this.countyComboBox1.Name = "countyComboBox1";
-            this.countyComboBox1.Size = new System.Drawing.Size(110, 20);
+            this.countyComboBox1.Size = new System.Drawing.Size(110, 21);
             this.countyComboBox1.TabIndex = 96;
             this.countyComboBox1.SelectedIndexChanged += new System.EventHandler(this.countyComboBox1_SelectedIndexChanged);
             // 
             // endDateTimePicker
             // 
-            this.endDateTimePicker.Location = new System.Drawing.Point(192, 18);
+            this.endDateTimePicker.Location = new System.Drawing.Point(192, 20);
             this.endDateTimePicker.Name = "endDateTimePicker";
-            this.endDateTimePicker.Size = new System.Drawing.Size(110, 21);
+            this.endDateTimePicker.Size = new System.Drawing.Size(110, 20);
             this.endDateTimePicker.TabIndex = 90;
             // 
             // startDateTimePicker
             // 
-            this.startDateTimePicker.Location = new System.Drawing.Point(41, 18);
+            this.startDateTimePicker.Location = new System.Drawing.Point(41, 20);
             this.startDateTimePicker.Name = "startDateTimePicker";
-            this.startDateTimePicker.Size = new System.Drawing.Size(110, 21);
+            this.startDateTimePicker.Size = new System.Drawing.Size(110, 20);
             this.startDateTimePicker.TabIndex = 88;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 22);
+            this.label4.Location = new System.Drawing.Point(6, 24);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 87;
-            this.label4.Text = "期日";
+            this.label4.Text = "日付";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(163, 21);
+            this.label6.Location = new System.Drawing.Point(163, 23);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 12);
+            this.label6.Size = new System.Drawing.Size(19, 13);
             this.label6.TabIndex = 89;
             this.label6.Text = "～";
             // 
@@ -302,13 +302,13 @@
             this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(3, 452);
+            this.pager1.Location = new System.Drawing.Point(3, 490);
             this.pager1.Name = "pager1";
             this.pager1.NMax = 0;
             this.pager1.PageCount = 0;
             this.pager1.PageCurrent = 1;
             this.pager1.PageSize = 5000;
-            this.pager1.Size = new System.Drawing.Size(1135, 34);
+            this.pager1.Size = new System.Drawing.Size(1135, 37);
             this.pager1.TabIndex = 25;
             this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
@@ -350,38 +350,13 @@
             this.備考,
             this.StatusColumn1});
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 118);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 128);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1135, 334);
+            this.dataGridView1.Size = new System.Drawing.Size(1135, 362);
             this.dataGridView1.TabIndex = 11;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.ordersTabPage);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1149, 510);
-            this.tabControl1.TabIndex = 2;
-            // 
-            // id受注データDataGridViewTextBoxColumn
-            // 
-            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
             // 
             // OrderReceivedAtColumn1
             // 
@@ -566,17 +541,42 @@
             this.StatusColumn1.HeaderText = "Status";
             this.StatusColumn1.Name = "StatusColumn1";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.ordersTabPage);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1149, 553);
+            this.tabControl1.TabIndex = 2;
+            // 
+            // id受注データDataGridViewTextBoxColumn
+            // 
+            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // OrderHistoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1149, 510);
+            this.ClientSize = new System.Drawing.Size(1149, 553);
             this.Controls.Add(this.tabControl1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OrderHistoryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "OrderHistoryForm";
+            this.Text = "伝票検索";
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
             this.ordersTabPage.ResumeLayout(false);
             this.ordersTabPage.PerformLayout();

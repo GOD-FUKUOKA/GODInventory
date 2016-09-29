@@ -265,13 +265,13 @@ namespace GODInventoryWinForm.Controls
                     }
                     else
                     {
-                        errorProvider1.SetError(storeComboBox, String.Format("Can not find store by ID {0}", storeId));
+                        errorProvider1.SetError(storeComboBox, String.Format("店番  {0}の店舗は登録されていません", storeId));
                     }
 
                 }
                 else
                 {
-                    errorProvider1.SetError(storeComboBox, String.Format("Can not find store by ID {0}", storeCodeTextBox.Text));
+                    errorProvider1.SetError(storeComboBox, String.Format("店番  {0}の店舗は登録されていません", storeCodeTextBox.Text));
                 }
             }
 
@@ -290,7 +290,7 @@ namespace GODInventoryWinForm.Controls
                 return;
             if (locationTextBox.Text.Length > 5)
             {
-                MessageBox.Show("超出长度");
+                MessageBox.Show("超えた長さ");
 
                 return;
             }
@@ -768,7 +768,7 @@ namespace GODInventoryWinForm.Controls
             else
             {
 
-                MessageBox.Show(String.Format("Sorry, can not find item price by code {0}, please add it into t_pricelist.", itemCode));
+                MessageBox.Show(String.Format("商品コード {0}, の商品単価は登録されていません。単価リストに登録してください.", itemCode));
             }
         }
 

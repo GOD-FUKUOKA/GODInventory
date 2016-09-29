@@ -183,7 +183,7 @@ namespace GODInventoryWinForm.Controls
 
                 ctx.t_stockrec.AddRange(changes);
                 ctx.SaveChanges();
-                MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", changes.Count));
+                MessageBox.Show(String.Format("{0} 件在庫合わせしました!", changes.Count));
                 stockcheckList.Clear();
 
             }

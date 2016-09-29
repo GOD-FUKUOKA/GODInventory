@@ -133,7 +133,7 @@ namespace GODInventoryWinForm.Controls
             }
             else
             {
-                MessageBox.Show("Please select orders first!");
+                MessageBox.Show("先に伝票を選択してください!");
             }
 
 
@@ -176,7 +176,7 @@ namespace GODInventoryWinForm.Controls
         {
             if (!ValidateShipNo())
             {
-                MessageBox.Show("请输入 *配车单单号*");
+                MessageBox.Show("*出荷指示書番号*を入力してください");
                 return;
             }
 
@@ -227,7 +227,7 @@ namespace GODInventoryWinForm.Controls
 
             if (shipNOComboBox.Text == null || shipNOComboBox.Text.Trim().Length == 0)
             {
-                errorProvider1.SetError(shipNOComboBox, String.Format("配车单内容不能为空的"));
+                errorProvider1.SetError(shipNOComboBox, String.Format("出荷内容がありません！"));
                 //MessageBox.Show("请输入 *配车单单号*");
                 return;
 

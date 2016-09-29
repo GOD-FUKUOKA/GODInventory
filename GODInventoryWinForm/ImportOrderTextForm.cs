@@ -122,7 +122,7 @@ namespace GODInventoryWinForm
                         if (worker.CancellationPending == true)
                         {
                             e.Cancel = true;
-                            throw new Exception("It is Cancelled successfully!");
+                            throw new Exception("キャンセルできました!");
                         }
                         int progress = Convert.ToInt16((i + 1) * 0.5 / order_head.DetailCount * 100);
                         models.Add(new OrderModel(br));
@@ -175,7 +175,7 @@ namespace GODInventoryWinForm
                             if (worker.CancellationPending == true)
                             {
                                 e.Cancel = true;
-                                throw new Exception( "It is Cancelled successfully!");
+                                throw new Exception("キャンセルできました!");
                             }
                             arg.CurrentIndex = i + 1;
 
@@ -184,7 +184,7 @@ namespace GODInventoryWinForm
                             var item = items.FirstOrDefault(s => s.JANコード == model.JanCode);
                             if(item == null)
                             {
-                                throw new Exception(String.Format("Can not find product by jancode {0}", model.JanCode));
+                                throw new Exception(String.Format("JANコード {0} の商品登録されていません", model.JanCode));
                             }
                             var shop = shops.FirstOrDefault(s => s.店番 == model.StoreCode);
                             if (shop == null)
@@ -217,7 +217,7 @@ namespace GODInventoryWinForm
 
                         ctxTransaction.Commit();
 
-                        e.Result = string.Format("{0}条受注订单正常导入成功", models.Count);
+                        e.Result = string.Format("{0}件の受注伝票が登録できました", models.Count);
                     }
                    
                     catch (Exception exception)

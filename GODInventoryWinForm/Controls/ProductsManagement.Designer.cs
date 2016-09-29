@@ -40,6 +40,7 @@
             this.productKanjiSpecificationTextBox = new System.Windows.Forms.TextBox();
             this.productReceivedAtTextBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.invoiceNOTextBox = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.unitWeightTextBox11 = new System.Windows.Forms.TextBox();
@@ -57,7 +58,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.invoiceNOTextBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -78,7 +78,7 @@
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(100, 35);
             this.cancelFormButton.TabIndex = 10000021;
-            this.cancelFormButton.Text = "取消す";
+            this.cancelFormButton.Text = "キャンセル";
             this.cancelFormButton.UseVisualStyleBackColor = true;
             this.cancelFormButton.Click += new System.EventHandler(this.cancelFormButton_Click);
             // 
@@ -179,6 +179,14 @@
             this.groupBox1.Size = new System.Drawing.Size(728, 286);
             this.groupBox1.TabIndex = 10000019;
             this.groupBox1.TabStop = false;
+            // 
+            // invoiceNOTextBox
+            // 
+            this.invoiceNOTextBox.FormattingEnabled = true;
+            this.invoiceNOTextBox.Location = new System.Drawing.Point(120, 76);
+            this.invoiceNOTextBox.Name = "invoiceNOTextBox";
+            this.invoiceNOTextBox.Size = new System.Drawing.Size(222, 21);
+            this.invoiceNOTextBox.TabIndex = 10000030;
             // 
             // textBox1
             // 
@@ -313,14 +321,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // invoiceNOTextBox
-            // 
-            this.invoiceNOTextBox.FormattingEnabled = true;
-            this.invoiceNOTextBox.Location = new System.Drawing.Point(120, 76);
-            this.invoiceNOTextBox.Name = "invoiceNOTextBox";
-            this.invoiceNOTextBox.Size = new System.Drawing.Size(222, 21);
-            this.invoiceNOTextBox.TabIndex = 10000030;
             // 
             // ProductsManagement
             // 
