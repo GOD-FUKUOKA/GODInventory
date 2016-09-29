@@ -44,6 +44,7 @@
             this.newOrderbutton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreCodeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -111,7 +112,6 @@
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -171,11 +171,11 @@
             // 
             // ClearSelect
             // 
-            this.ClearSelect.Location = new System.Drawing.Point(382, 17);
+            this.ClearSelect.Location = new System.Drawing.Point(394, 17);
             this.ClearSelect.Name = "ClearSelect";
             this.ClearSelect.Size = new System.Drawing.Size(100, 51);
             this.ClearSelect.TabIndex = 85;
-            this.ClearSelect.Text = "清空筛选条件";
+            this.ClearSelect.Text = "フィルターをリセット";
             this.ClearSelect.UseVisualStyleBackColor = true;
             this.ClearSelect.Click += new System.EventHandler(this.ClearSelect_Click);
             // 
@@ -188,7 +188,7 @@
             "あり",
             "一部不足",
             "なし"});
-            this.ZKZTcomboBox3.Location = new System.Drawing.Point(247, 17);
+            this.ZKZTcomboBox3.Location = new System.Drawing.Point(259, 17);
             this.ZKZTcomboBox3.Name = "ZKZTcomboBox3";
             this.ZKZTcomboBox3.Size = new System.Drawing.Size(120, 20);
             this.ZKZTcomboBox3.TabIndex = 84;
@@ -197,17 +197,17 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(188, 21);
+            this.label4.Location = new System.Drawing.Point(200, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 83;
-            this.label4.Text = "在库状态";
+            this.label4.Text = "在庫状況";
             // 
             // GenreNamecomboBox
             // 
             this.GenreNamecomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GenreNamecomboBox.FormattingEnabled = true;
-            this.GenreNamecomboBox.Location = new System.Drawing.Point(53, 48);
+            this.GenreNamecomboBox.Location = new System.Drawing.Point(65, 48);
             this.GenreNamecomboBox.Name = "GenreNamecomboBox";
             this.GenreNamecomboBox.Size = new System.Drawing.Size(120, 20);
             this.GenreNamecomboBox.TabIndex = 82;
@@ -216,7 +216,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 52);
+            this.label3.Location = new System.Drawing.Point(24, 52);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 12);
             this.label3.TabIndex = 81;
@@ -226,7 +226,7 @@
             // 
             this.PMHZCombox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PMHZCombox.FormattingEnabled = true;
-            this.PMHZCombox.Location = new System.Drawing.Point(247, 48);
+            this.PMHZCombox.Location = new System.Drawing.Point(259, 48);
             this.PMHZCombox.Name = "PMHZCombox";
             this.PMHZCombox.Size = new System.Drawing.Size(120, 20);
             this.PMHZCombox.TabIndex = 80;
@@ -235,17 +235,17 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(188, 52);
+            this.label2.Location = new System.Drawing.Point(212, 52);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 79;
-            this.label2.Text = "品名汉字";
+            this.label2.Text = "商品名";
             // 
             // DanDangComboBox
             // 
             this.DanDangComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DanDangComboBox.FormattingEnabled = true;
-            this.DanDangComboBox.Location = new System.Drawing.Point(53, 17);
+            this.DanDangComboBox.Location = new System.Drawing.Point(65, 17);
             this.DanDangComboBox.Name = "DanDangComboBox";
             this.DanDangComboBox.Size = new System.Drawing.Size(120, 20);
             this.DanDangComboBox.TabIndex = 78;
@@ -254,11 +254,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 21);
+            this.label1.Location = new System.Drawing.Point(6, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 77;
-            this.label1.Text = "担当";
+            this.label1.Text = "配送担当";
             // 
             // newOrderbutton
             // 
@@ -267,7 +267,7 @@
             this.newOrderbutton.Name = "newOrderbutton";
             this.newOrderbutton.Size = new System.Drawing.Size(100, 32);
             this.newOrderbutton.TabIndex = 20;
-            this.newOrderbutton.Text = "新規";
+            this.newOrderbutton.Text = "FAX注文入力";
             this.newOrderbutton.UseVisualStyleBackColor = true;
             this.newOrderbutton.Click += new System.EventHandler(this.newOrderbutton_Click);
             // 
@@ -278,7 +278,7 @@
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(100, 32);
             this.saveButton.TabIndex = 16;
-            this.saveButton.Text = "保存";
+            this.saveButton.Text = "変更を保存";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
@@ -289,9 +289,24 @@
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 19;
-            this.cancelButton.Text = "取消す";
+            this.cancelButton.Text = "変更を取消す";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(3, 418);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(983, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // dataGridView1
             // 
@@ -687,9 +702,9 @@
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(9, 21);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(29, 12);
+            this.label17.Size = new System.Drawing.Size(53, 12);
             this.label17.TabIndex = 24;
-            this.label17.Text = "物流";
+            this.label17.Text = "配送担当";
             // 
             // shipperComboBox
             // 
@@ -699,9 +714,9 @@
             "丸健",
             "MKL",
             "マツモト産業"});
-            this.shipperComboBox.Location = new System.Drawing.Point(44, 17);
+            this.shipperComboBox.Location = new System.Drawing.Point(68, 18);
             this.shipperComboBox.Name = "shipperComboBox";
-            this.shipperComboBox.Size = new System.Drawing.Size(165, 20);
+            this.shipperComboBox.Size = new System.Drawing.Size(120, 20);
             this.shipperComboBox.TabIndex = 23;
             this.shipperComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -864,21 +879,6 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(3, 418);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(983, 34);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
-            // 
             // PendingOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -889,7 +889,7 @@
             this.MinimizeBox = false;
             this.Name = "PendingOrderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "PendingOrderForm";
+            this.Text = "受注処理";
             this.tabControl1.ResumeLayout(false);
             this.ordersTabPage.ResumeLayout(false);
             this.ordersTabPage.PerformLayout();

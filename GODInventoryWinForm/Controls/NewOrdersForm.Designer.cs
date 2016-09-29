@@ -328,7 +328,7 @@
             this.MinimizeBox = false;
             this.Name = "NewOrdersForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "重复订单判断界面";
+            this.Text = "ダブリ確認";
             this.tabControl1.ResumeLayout(false);
             this.ordersTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

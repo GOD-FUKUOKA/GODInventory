@@ -222,40 +222,40 @@ namespace GODInventoryWinForm.Controls
             #region 构建查询条件
 
 
-            //            if (!isAllStockIoSelected)
-            //            {
-            //                conditions += " AND (s.`区分` = @ioState)";
-            //            }
-            //            if (!isAllManufacturerSelected)
-            //            {
-            //                // 所有仓库的某一生产商的出入库记录
-            //                conditions += " AND (s.`工厂` = @manufacturer)";
-            //            }
+            if (!isAllStockIoSelected)
+            {
+                conditions += " AND (s.`区分` = @ioState)";
+            }
+            if (!isAllManufacturerSelected)
+            {
+                // 所有仓库的某一生产商的出入库记录
+                conditions += " AND (s.`工厂` = @manufacturer)";
+            }
 
 
-            //            if (warehouse != WarehouseRespository.OptionTextAll)
-            //            {
+            if (warehouse != WarehouseRespository.OptionTextAll)
+            {
 
 
-            //                if (ioState == StockIoEnum.全部.ToString())
-            //                {
+                if (ioState == StockIoEnum.全部.ToString())
+                {
 
-            //                    // 某一个仓库的出入库记录
-            //                    conditions += " AND ( s.先 = @warehouse OR s.元 = @warehouse )";
+                    // 某一个仓库的出入库记录
+                    conditions += " AND ( s.先 = @warehouse OR s.元 = @warehouse )";
 
-            //                }
-            //                else if (ioState == StockIoEnum.入庫.ToString())
-            //                {
-            //                    // 某一个仓库的入库记录
-            //                    conditions += " AND ( s.先 = @warehouse )";
-            //                }
-            //                else if (ioState == StockIoEnum.出庫.ToString())
-            //                {
+                }
+                else if (ioState == StockIoEnum.入庫.ToString())
+                {
+                    // 某一个仓库的入库记录
+                    conditions += " AND ( s.先 = @warehouse )";
+                }
+                else if (ioState == StockIoEnum.出庫.ToString())
+                {
 
-            //                    // 某一个仓库的所有生产商的出库记录, 即出库记录
-            //                    conditions += " AND ( s.元 = @warehouse )";
-            //                }
-            //            }
+                    // 某一个仓库的所有生产商的出库记录, 即出库记录
+                    conditions += " AND ( s.元 = @warehouse )";
+                }
+            }
 
 
 
@@ -281,9 +281,7 @@ namespace GODInventoryWinForm.Controls
             //  stockList = ctx.Database.SqlQuery<t_stockrec>(sql, condition_params.ToArray()).ToList();
 
             //            }
-            #endregion
 
-            #region  new
             condition_params.Add(new MySqlParameter("@genreId", genreId));
             condition_params.Add(new MySqlParameter("@ioState", ioState));
             condition_params.Add(new MySqlParameter("@warehouse", warehouse));
