@@ -232,7 +232,7 @@
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(100, 35);
             this.cancelFormButton.TabIndex = 10000035;
-            this.cancelFormButton.Text = "取消す";
+            this.cancelFormButton.Text = "キャンセル";
             this.cancelFormButton.UseVisualStyleBackColor = true;
             this.cancelFormButton.Click += new System.EventHandler(this.cancelFormButton_Click);
             // 

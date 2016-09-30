@@ -75,7 +75,7 @@
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(54, 54);
-            this.toolStripButton3.Text = "Dashboard";
+            this.toolStripButton3.Text = "メイン画面";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // orderToolStripButton
@@ -86,7 +86,7 @@
             this.orderToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.orderToolStripButton.Name = "orderToolStripButton";
             this.orderToolStripButton.Size = new System.Drawing.Size(54, 54);
-            this.orderToolStripButton.Text = "Orders";
+            this.orderToolStripButton.Text = "受注管理";
             this.orderToolStripButton.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // warehouseToolStripButton
@@ -97,7 +97,7 @@
             this.warehouseToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.warehouseToolStripButton.Name = "warehouseToolStripButton";
             this.warehouseToolStripButton.Size = new System.Drawing.Size(54, 54);
-            this.warehouseToolStripButton.Text = "Warehouse";
+            this.warehouseToolStripButton.Text = "在庫管理";
             this.warehouseToolStripButton.Click += new System.EventHandler(this.warehouseToolStripButton_Click);
             // 
             // productToolStripButton
@@ -108,7 +108,7 @@
             this.productToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.productToolStripButton.Name = "productToolStripButton";
             this.productToolStripButton.Size = new System.Drawing.Size(54, 54);
-            this.productToolStripButton.Text = "Products";
+            this.productToolStripButton.Text = "商品リスト";
             this.productToolStripButton.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // storesToolStripButton
@@ -119,7 +119,7 @@
             this.storesToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.storesToolStripButton.Name = "storesToolStripButton";
             this.storesToolStripButton.Size = new System.Drawing.Size(54, 54);
-            this.storesToolStripButton.Text = "Stores";
+            this.storesToolStripButton.Text = "店舗リスト";
             this.storesToolStripButton.Click += new System.EventHandler(this.customerToolStripButton_Click);
             // 
             // toolStripSeparator1
@@ -135,7 +135,7 @@
             this.settingToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.settingToolStripButton.Name = "settingToolStripButton";
             this.settingToolStripButton.Size = new System.Drawing.Size(54, 54);
-            this.settingToolStripButton.Text = "Setting";
+            this.settingToolStripButton.Text = "設定";
             this.settingToolStripButton.Click += new System.EventHandler(this.settingToolStripButton_Click);
             // 
             // toolStripDropDownButton1
@@ -157,36 +157,36 @@
             // importOrderTextToolStripMenuItem
             // 
             this.importOrderTextToolStripMenuItem.Name = "importOrderTextToolStripMenuItem";
-            this.importOrderTextToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.importOrderTextToolStripMenuItem.Text = "导入受注数据";
+            this.importOrderTextToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.importOrderTextToolStripMenuItem.Text = "受注データ導入";
             this.importOrderTextToolStripMenuItem.Click += new System.EventHandler(this.importOrderTextToolStripMenuItem_Click);
             // 
             // importReceivedOrderTextToolStripMenuItem
             // 
             this.importReceivedOrderTextToolStripMenuItem.Name = "importReceivedOrderTextToolStripMenuItem";
-            this.importReceivedOrderTextToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.importReceivedOrderTextToolStripMenuItem.Text = "导入受領数据";
+            this.importReceivedOrderTextToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.importReceivedOrderTextToolStripMenuItem.Text = "受領データ導入";
             this.importReceivedOrderTextToolStripMenuItem.Click += new System.EventHandler(this.importReceivedOrderTextToolStripMenuItem_Click);
             // 
             // importCSVToolStripMenuItem
             // 
             this.importCSVToolStripMenuItem.Name = "importCSVToolStripMenuItem";
-            this.importCSVToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.importCSVToolStripMenuItem.Text = "导入受注CSV";
+            this.importCSVToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.importCSVToolStripMenuItem.Text = "SNAP受注ＣＳＶデータ導入";
             this.importCSVToolStripMenuItem.Click += new System.EventHandler(this.importCSVToolStripMenuItem_Click);
             // 
             // importReceivedCSVToolStripMenuItem
             // 
             this.importReceivedCSVToolStripMenuItem.Name = "importReceivedCSVToolStripMenuItem";
-            this.importReceivedCSVToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.importReceivedCSVToolStripMenuItem.Text = "导入受領CSV";
+            this.importReceivedCSVToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.importReceivedCSVToolStripMenuItem.Text = "SNAP受領ＣＳＶデータ導入";
             this.importReceivedCSVToolStripMenuItem.Click += new System.EventHandler(this.importReceivedCSVToolStripMenuItem_Click);
             // 
             // importFaxToolStripMenuItem
             // 
             this.importFaxToolStripMenuItem.Name = "importFaxToolStripMenuItem";
-            this.importFaxToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.importFaxToolStripMenuItem.Text = "导入FaxCSV";
+            this.importFaxToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.importFaxToolStripMenuItem.Text = "ＦＲＩＭＯ受注ＣＳＶデータ導入";
             this.importFaxToolStripMenuItem.Click += new System.EventHandler(this.importFaxToolStripMenuItem_Click);
             // 
             // panel1
@@ -194,9 +194,9 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Location = new System.Drawing.Point(12, 64);
+            this.panel1.Location = new System.Drawing.Point(12, 69);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(820, 372);
+            this.panel1.Size = new System.Drawing.Size(820, 403);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -206,9 +206,9 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 449);
+            this.ClientSize = new System.Drawing.Size(844, 486);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "MainForm";

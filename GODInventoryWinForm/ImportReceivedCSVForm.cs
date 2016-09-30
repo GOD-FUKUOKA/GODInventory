@@ -133,7 +133,7 @@ namespace GODInventoryWinForm
                             if (worker.CancellationPending == true)
                             {
                                 e.Cancel = true;
-                                throw new Exception("It is Cancelled successfully!");
+                                throw new Exception("キャンセルできました!");
                             }
                             var model = models.ElementAt(i);
                             progress = Convert.ToInt16(((i + 1) * 1.0 / models.Count) * 100);
@@ -146,7 +146,7 @@ namespace GODInventoryWinForm
                                 //Console.WriteLine("sql = #{0}", sql);
                                 
                                 if( ctx.Database.ExecuteSqlCommand(sql) ==0 ){
-                                   throw new Exception(String.Format("Can not find any order by 店舗コード {0} and 伝票番号 {1} in 3 months.", model.StoreCode, model.InvoiceCode));
+                                    throw new Exception(String.Format("過去3か月の記録に店番 {0} で伝票番号  {1} in  の伝票は見つかりません.", model.StoreCode, model.InvoiceCode));
                                 }
                                 
                                 arg.CurrentIndex = i + 1;
@@ -159,7 +159,7 @@ namespace GODInventoryWinForm
                         }
                         backgroundWorker1.ReportProgress(100, arg);
                         ctxTransaction.Commit();
-                        e.Result = string.Format("{0}条受領订单正常导入成功", models.Count);
+                        e.Result = string.Format("{0}件の受注伝票が登録できました", models.Count);
 
                     }
                     catch (Exception exception)

@@ -109,6 +109,7 @@ namespace GODInventoryWinForm.Controls
                     Order.Status = OrderStatus.Pending;
                     Order.キャンセル時刻 = null;
                     Order.実際出荷数量 = Order.発注数量;
+                    Order.一旦保留 = true;
                     entityDataSource1.SaveChanges();
                 }
             }

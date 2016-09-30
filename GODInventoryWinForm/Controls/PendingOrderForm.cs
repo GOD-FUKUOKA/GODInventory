@@ -685,7 +685,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 ctx.SaveChanges();
             }
 
-            MessageBox.Show(String.Format("Congratulations, {0} items changed successfully!", ecOrderList.Count));
+            MessageBox.Show(String.Format("{0} 件転送処理しました!", ecOrderList.Count));
 
             this.dataGridView2.DataSource = null;
         }
@@ -740,7 +740,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 }
                 this.shipperOrderList.RemoveAll(o => orders.Contains(o));
                 this.dataGridView3.DataSource = null;
-                MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", trans.Count));
+                MessageBox.Show(String.Format(" {0} 件転送処理しました!", trans.Count));
             }
 
         }

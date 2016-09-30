@@ -121,7 +121,7 @@ namespace GODInventoryWinForm.Controls
 
                         this.stockiosList.Clear();
                     }
-                    MessageBox.Show(String.Format("Congratulations, You have {0} items added successfully!", receivedList.Count));
+                    MessageBox.Show(String.Format(" {0}種類商品入庫登録できました", receivedList.Count));
                     // rebuild stock no, new stockrec created.
                     BuildStockNO();
                 }

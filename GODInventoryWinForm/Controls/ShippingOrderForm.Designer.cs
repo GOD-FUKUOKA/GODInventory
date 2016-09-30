@@ -136,7 +136,7 @@
             this.GenerateASNButton.Name = "GenerateASNButton";
             this.GenerateASNButton.Size = new System.Drawing.Size(100, 32);
             this.GenerateASNButton.TabIndex = 3;
-            this.GenerateASNButton.Text = "ASN生成";
+            this.GenerateASNButton.Text = "ASNデータ作成";
             this.GenerateASNButton.UseVisualStyleBackColor = true;
             this.GenerateASNButton.Click += new System.EventHandler(this.generateASNButton_Click);
             // 
@@ -162,7 +162,7 @@
             this.pendingTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.pendingTabPage.Size = new System.Drawing.Size(909, 343);
             this.pendingTabPage.TabIndex = 0;
-            this.pendingTabPage.Text = "Pending Shipment";
+            this.pendingTabPage.Text = "出荷内容確認";
             this.pendingTabPage.UseVisualStyleBackColor = true;
             // 
             // shipNODataGridView
@@ -263,33 +263,33 @@
             this.editToolStripMenuItem,
             this.printToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 92);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.lockToolStripMenuItem.Text = "配車表ﾛｯｸ";
             this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
             // 
             // unlockToolStripMenuItem
             // 
             this.unlockToolStripMenuItem.Name = "unlockToolStripMenuItem";
-            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.unlockToolStripMenuItem.Text = "ﾛｯｸ解消";
             this.unlockToolStripMenuItem.Click += new System.EventHandler(this.unlockToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.editToolStripMenuItem.Text = "編集";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.printToolStripMenuItem.Text = "配車表印刷";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
@@ -302,7 +302,7 @@
             this.asnTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.asnTabPage.Size = new System.Drawing.Size(909, 343);
             this.asnTabPage.TabIndex = 1;
-            this.asnTabPage.Text = "ASN";
+            this.asnTabPage.Text = "納品書印刷";
             this.asnTabPage.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
@@ -368,12 +368,12 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.printForEDIToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(99, 26);
             // 
             // printForEDIToolStripMenuItem
             // 
             this.printForEDIToolStripMenuItem.Name = "printForEDIToolStripMenuItem";
-            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.printForEDIToolStripMenuItem.Text = "印刷";
             this.printForEDIToolStripMenuItem.Click += new System.EventHandler(this.printForEDIToolStripMenuItem_Click);
             // 
@@ -385,7 +385,7 @@
             this.shippedTabPage.Name = "shippedTabPage";
             this.shippedTabPage.Size = new System.Drawing.Size(909, 343);
             this.shippedTabPage.TabIndex = 3;
-            this.shippedTabPage.Text = "Shipped";
+            this.shippedTabPage.Text = "出荷済み伝票";
             this.shippedTabPage.UseVisualStyleBackColor = true;
             // 
             // pager3
@@ -544,7 +544,7 @@
             this.receivedTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.receivedTabPage.Size = new System.Drawing.Size(909, 343);
             this.receivedTabPage.TabIndex = 2;
-            this.receivedTabPage.Text = "Received confirm";
+            this.receivedTabPage.Text = "受領確認";
             this.receivedTabPage.UseVisualStyleBackColor = true;
             // 
             // finishOrderButton1
@@ -694,7 +694,7 @@
             this.MinimizeBox = false;
             this.Name = "ShippingOrderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ShippingOrdersForm";
+            this.Text = "出荷伝票処理";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ShippingOrderForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.tabControl1.ResumeLayout(false);

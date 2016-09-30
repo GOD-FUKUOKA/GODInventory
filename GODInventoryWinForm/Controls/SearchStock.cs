@@ -195,7 +195,7 @@ namespace GODInventoryWinForm.Controls
 
                 }
             }
-            MessageBox.Show(String.Format("Congratulations, Items changed successfully!"));
+            MessageBox.Show(String.Format("訂正内容保存できました！"));
 
             changedStockList.Clear();
             this.FindDataSources();
