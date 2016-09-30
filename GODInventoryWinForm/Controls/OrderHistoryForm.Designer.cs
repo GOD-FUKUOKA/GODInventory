@@ -53,10 +53,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,6 +80,12 @@
             this.キャンセル時刻 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.備考 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             this.ordersTabPage.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -91,6 +93,7 @@
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // entityDataSource1
@@ -349,39 +352,16 @@
             this.キャンセル時刻,
             this.備考,
             this.StatusColumn1});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(3, 118);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1135, 334);
             this.dataGridView1.TabIndex = 11;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.ordersTabPage);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1149, 510);
-            this.tabControl1.TabIndex = 2;
-            // 
-            // id受注データDataGridViewTextBoxColumn
-            // 
-            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
             // 
             // OrderReceivedAtColumn1
             // 
@@ -566,6 +546,45 @@
             this.StatusColumn1.HeaderText = "Status";
             this.StatusColumn1.Name = "StatusColumn1";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.ordersTabPage);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1149, 510);
+            this.tabControl1.TabIndex = 2;
+            // 
+            // id受注データDataGridViewTextBoxColumn
+            // 
+            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem.Text = "編集";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
             // OrderHistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -586,6 +605,7 @@
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -647,5 +667,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn キャンセル時刻;
         private System.Windows.Forms.DataGridViewTextBoxColumn 備考;
         private System.Windows.Forms.DataGridViewTextBoxColumn StatusColumn1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
     }
 }

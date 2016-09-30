@@ -55,6 +55,10 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.cancelComboBox = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.qtyChangeReasonTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,6 +121,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.qtyChangeReasonTextBox);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.cancelComboBox);
             this.groupBox1.Controls.Add(this.shipperComboBox3);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label12);
@@ -139,7 +147,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(23, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(634, 241);
+            this.groupBox1.Size = new System.Drawing.Size(634, 257);
             this.groupBox1.TabIndex = 10000006;
             this.groupBox1.TabStop = false;
             // 
@@ -285,7 +293,7 @@
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(100, 32);
             this.submitFormButton.TabIndex = 10000007;
-            this.submitFormButton.Text = "Submit";
+            this.submitFormButton.Text = "保存";
             this.submitFormButton.UseVisualStyleBackColor = true;
             this.submitFormButton.Click += new System.EventHandler(this.submitFormButton_Click);
             // 
@@ -296,12 +304,49 @@
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(100, 32);
             this.cancelFormButton.TabIndex = 10000008;
-            this.cancelFormButton.Text = "Cancel";
+            this.cancelFormButton.Text = "閉じる";
             this.cancelFormButton.UseVisualStyleBackColor = true;
             // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(27, 223);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 10000014;
+            this.label1.Text = "キャンセル";
+            // 
+            // cancelComboBox
+            // 
+            this.cancelComboBox.FormattingEnabled = true;
+            this.cancelComboBox.Items.AddRange(new object[] {
+            "no",
+            "yes"});
+            this.cancelComboBox.Location = new System.Drawing.Point(111, 220);
+            this.cancelComboBox.Name = "cancelComboBox";
+            this.cancelComboBox.Size = new System.Drawing.Size(166, 20);
+            this.cancelComboBox.TabIndex = 10000009;
+            this.cancelComboBox.SelectedIndexChanged += new System.EventHandler(this.cancelComboBox_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(340, 224);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 12);
+            this.label7.TabIndex = 10000015;
+            this.label7.Text = "数量变更理由";
+            // 
+            // qtyChangeReasonTextBox
+            // 
+            this.qtyChangeReasonTextBox.Location = new System.Drawing.Point(433, 220);
+            this.qtyChangeReasonTextBox.Name = "qtyChangeReasonTextBox";
+            this.qtyChangeReasonTextBox.Size = new System.Drawing.Size(166, 21);
+            this.qtyChangeReasonTextBox.TabIndex = 10000016;
             // 
             // EditOrderForm2
             // 
@@ -352,5 +397,9 @@
         private System.Windows.Forms.Button cancelFormButton;
         private System.Windows.Forms.TextBox shipAtTextBox;
         private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cancelComboBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox qtyChangeReasonTextBox;
     }
 }

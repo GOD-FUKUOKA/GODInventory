@@ -58,6 +58,7 @@ namespace GODInventoryWinForm.Controls
             this.bindingSource1.Filter = null;
             this.bindingSource1.DataSource = this.orderBindingList;
             this.dataGridView1.DataSource = this.bindingSource1;
+                        
             // 保存新查询到的结果，作为过滤条件用
             foreach (var o in orderBindingList) 
             {
@@ -275,10 +276,22 @@ namespace GODInventoryWinForm.Controls
                 editOrderForm.OrderId = order.id受注データ;
                 if (editOrderForm.ShowDialog() == DialogResult.OK)
                 {
-                    order.実際出荷数量 = editOrderForm.Order.実際出荷数量;
-                    order.納品口数 = editOrderForm.Order.納品口数;
-                    order.重量 = editOrderForm.Order.重量;
-                    dataGridView1.Refresh();
+                    if (editOrderForm.Order.Status != OrderStatus.Cancelled)
+                    {
+                        order.実際出荷数量 = editOrderForm.Order.実際出荷数量;
+                        order.納品口数 = editOrderForm.Order.納品口数;
+                        order.重量 = editOrderForm.Order.重量;
+                        dataGridView1.Refresh();
+                    }
+                    else
+                    {
+                        string shipNo = shipNOComboBox.Text;
+                        string shipper = shipperComboBox.Text;
+                        string county = countyComboBox1.Text;
+                        string store = storeComboBox.Text;
+                        InitializeDataSource(shipper, county, store, shipNo);
+
+                    }
                 }
             }
 
@@ -357,7 +370,11 @@ namespace GODInventoryWinForm.Controls
 
                     filter += "(店名=" + "'" + store + "'" + ")";
                 }
-                bindingSource1.Filter = filter;
+                // 检查查询结果是否为空
+                if (pendingOrderList.Count > 0)
+                {
+                    bindingSource1.Filter = filter;
+                }
             }
         }
 

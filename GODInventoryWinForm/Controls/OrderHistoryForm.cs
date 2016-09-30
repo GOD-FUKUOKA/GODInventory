@@ -14,6 +14,7 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class OrderHistoryForm : Form
     {
+        EditOrderForm2 editOrderForm;
         private static string NoOptionSelected = "不限";
         List<v_pendingorder> orderList;
         SortableBindingList<v_pendingorder> orderListBindingList;
@@ -23,6 +24,8 @@ namespace GODInventoryWinForm.Controls
         {
             InitializeComponent();
             InitializeDataSource();
+            editOrderForm = new EditOrderForm2();
+
             pager1.Bind();
         }
 
@@ -387,6 +390,26 @@ namespace GODInventoryWinForm.Controls
 
 
 
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var row = dataGridView1.CurrentRow;
+            if (row != null)
+            {
+                var order = row.DataBoundItem as v_pendingorder;
+                editOrderForm.OrderId = order.id受注データ;
+                if (editOrderForm.ShowDialog() == DialogResult.OK)
+                {
+                    order.実際出荷数量 = editOrderForm.Order.実際出荷数量;
+                    order.納品口数 = editOrderForm.Order.納品口数;
+                    order.重量 = editOrderForm.Order.重量;
+                    order.キャンセル = editOrderForm.Order.キャンセル;
+                    order.キャンセル時刻 = editOrderForm.Order.キャンセル時刻;
+                    order.Status = editOrderForm.Order.Status;
+                    dataGridView1.Refresh();
+                }
+            }
         }
 
     }

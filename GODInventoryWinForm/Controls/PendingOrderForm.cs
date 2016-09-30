@@ -287,29 +287,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
                 pendingOrderList = entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.Pending, pager1.PageSize, offset).ToList();
 
-                IEnumerable<IGrouping<int, v_pendingorder>> grouped_orders = pendingOrderList.GroupBy(o => o.自社コード, o => o);
-                foreach (var gos in grouped_orders)
-                {
-                    int total = gos.Sum(o => o.実際出荷数量);
-                    int min = gos.Min(o => o.実際出荷数量);
+                UpdateStockState(pendingOrderList);
 
-                    foreach (var o in gos)
-                    {
-
-                        if (o.在庫数 >= total)
-                        {
-                            o.在庫状態 = "あり";
-                        }
-                        else if (o.在庫数 > min)
-                        {
-                            o.在庫状態 = "一部不足";
-                        }
-                        else
-                        {
-                            o.在庫状態 = "なし";
-                        }
-                    }
-                }
                 sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
             }
             else {
@@ -420,11 +399,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         private void InitializeShipperOrderList( string shipperName = null)
         {
-            this.shipperComboBox.SelectedIndex = 0;
-            if (shipperName != null)
-            {
-                shipperComboBox.SelectedText = shipperName;
-            }
+
             //this.shipperComboBox.DisplayMember = "ShortName";
             //this.shipperComboBox.ValueMember = "ShortName";
             //this.shipperComboBox.DataSource = shipperList;
@@ -436,21 +411,31 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             string sql = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
        `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
      FROM t_orderdata
-     WHERE  `Status`={0} AND `ジャンル`<> 1003
+     WHERE  `Status`={0} AND ( (`ジャンル`<> 1003) OR ( `ジャンル`= 1003 AND `実際配送担当` != '丸健'))
      UNION ALL
      SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`社内伝番`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `納品口数`, sum(`重量`) as `実際出荷数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
      FROM t_orderdata
-     WHERE `Status`={0} AND `ジャンル`= 1003 AND `社内伝番` >0
+     WHERE `Status`={0} AND `ジャンル`= 1003 AND `社内伝番` >0 AND `実際配送担当` = '丸健'
      GROUP BY `社内伝番`
      ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
 
             this.shipperOrderList = this.entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.NotifyShipper).ToList();
 
-            string shipper = this.shipperComboBox.Text;
+           
 
-            this.dataGridView3.AutoGenerateColumns = false;
-            this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipper);
-
+            // 第一次初始化情况
+            if (shipperName == null)
+            {
+                // 触发 change 事件
+                shipperComboBox.SelectedIndex = 0;
+            }
+            else
+            {
+                // 用户退单后刷新
+                this.shipperComboBox.Text = shipperName;
+                this.dataGridView3.AutoGenerateColumns = false;
+                this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName);
+            }
         }
 
         #endregion
@@ -780,6 +765,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             // skip first time initialization
             if (shipperOrderList != null)
             {
+                this.dataGridView3.AutoGenerateColumns = false;
                 this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
             }
 
@@ -808,11 +794,32 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         private void ClearSelect_Click(object sender, EventArgs e)
         {
-            bindingSource1.Sort = ""; 
-            DanDangComboBox.SelectedIndex = 0;
-            productComboBox.SelectedIndex = 0;
-            genreComboBox.SelectedIndex = 0;
-            ZKZTcomboBox3.SelectedIndex = 0;
+            var originalSortedColumn = this.dataGridView1.SortedColumn;
+
+            if (originalSortedColumn != null)
+            {
+                originalSortedColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+                originalSortedColumn.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
+
+            if (DanDangComboBox.SelectedIndex != 0)
+            {
+                DanDangComboBox.SelectedIndex = 0;
+            }
+            else if (genreComboBox.SelectedIndex != 0)
+            {
+                genreComboBox.SelectedIndex = 0;
+            }
+            else if (productComboBox.SelectedIndex != 0)
+            {
+                productComboBox.SelectedIndex = 0;
+            }
+            
+            if (ZKZTcomboBox3.SelectedIndex != 0)
+            {
+                ZKZTcomboBox3.SelectedIndex = 0;
+            }
+
 
         }
 
@@ -936,6 +943,35 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             {
                 this.dataGridView1.Sort(originalSortedColumn, direction);
             }
+        }
+
+        private void UpdateStockState(List<v_pendingorder> orders)
+        {
+            // 每次应用过滤条件时，都会生成新的结果集，根据新的结果集更新“在庫状態”
+            var grouped_orders = orders.GroupBy(o => new {自社コード=o.自社コード, 実際配送担当=o.実際配送担当}, o => o);
+            foreach (var gos in grouped_orders)
+            {
+                int total = gos.Sum(o => o.実際出荷数量);
+                int min = gos.Min(o => o.実際出荷数量);
+
+                foreach (var o in gos)
+                {
+
+                    if (o.在庫数 >= total)
+                    {
+                        o.在庫状態 = "あり";
+                    }
+                    else if (o.在庫数 > min)
+                    {
+                        o.在庫状態 = "一部不足";
+                    }
+                    else
+                    {
+                        o.在庫状態 = "なし";
+                    }
+                }
+            }
+        
         }
 
         private void ApplyFilter2()

@@ -406,7 +406,7 @@ namespace GODInventoryWinForm.Controls
                     order.ＪＡＮコード = item.JANコード;
                     order.原単価_税抜_ = Convert.ToInt32(item.原単価);
                     order.売単価_税抜_ = Convert.ToInt32(item.原単価);
-                    order.口数 = item.PT入数;
+                    order.最小発注単位数量 = item.PT入数;
                     order.納品口数 = 0;
                     cell.OwningRow.Cells["genreNameColumn"].Value = item.ジャンル名;
                 }
@@ -423,7 +423,7 @@ namespace GODInventoryWinForm.Controls
                 if (order.商品コード > 0)
                 {
                     var amount = Convert.ToDouble(cell.Value);
-                    var moq = Convert.ToDouble(order.口数);
+                    var moq = Convert.ToDouble(order.最小発注単位数量);
                     if (moq > 0 && amount > 0)
                     {
                         order.納品口数 = (int)Math.Round(amount / moq);
@@ -448,7 +448,7 @@ namespace GODInventoryWinForm.Controls
             {
                 var amount = Convert.ToInt32(cell.Value);
 
-                order.発注数量 = Convert.ToInt32(order.口数) * amount;
+                order.発注数量 = Convert.ToInt32(order.最小発注単位数量) * amount;
             }
 
 
@@ -711,7 +711,7 @@ namespace GODInventoryWinForm.Controls
             order.規格名漢字 = "";
             order.品名漢字 = "";
             order.ＪＡＮコード = 0;
-            order.口数 = 0;
+            order.最小発注単位数量 = 0;
             order.納品口数 = 0;
             order.発注数量 = 0;
             order.ジャンル = 0;
@@ -735,7 +735,7 @@ namespace GODInventoryWinForm.Controls
             orderList[selectedRowIndex].発注数量 = 0;
             orderList[selectedRowIndex].原単価_税抜_ = 0;
             orderList[selectedRowIndex].売単価_税抜_ = 0;
-            orderList[selectedRowIndex].口数 = 0;
+            orderList[selectedRowIndex].最小発注単位数量 = 0;
             this.dataGridView1.Refresh();
         }
 
@@ -754,7 +754,7 @@ namespace GODInventoryWinForm.Controls
                 orderList[selectedRowIndex].品名漢字 = selectedItem.商品名;
                 orderList[selectedRowIndex].規格名漢字 = selectedItem.規格;
                 orderList[selectedRowIndex].ＪＡＮコード = selectedItem.JANコード;
-                orderList[selectedRowIndex].口数 = Convert.ToInt32(selectedItem.PT入数);
+                orderList[selectedRowIndex].最小発注単位数量 = Convert.ToInt32(selectedItem.PT入数);
 
                 #region 从 t_pricelist 表中读取的价格
 

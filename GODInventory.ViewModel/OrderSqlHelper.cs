@@ -85,8 +85,8 @@ namespace GODInventory.ViewModel
         {
             var a = entityDataSource1.EntitySets["t_orderdatas"];
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                     where o.Status == OrderStatus.NotifyShipper && o.ジャンル == genreId && o.社内伝番 == 0
-                     orderby o.実際配送担当, o.店舗コード
+                     where o.Status == OrderStatus.NotifyShipper && o.ジャンル == genreId && o.社内伝番 == 0 && o.実際配送担当 == "丸健"
+                     orderby o.店舗コード
                      select new v_pendingorder
                       {
                           id受注データ = o.id受注データ,
