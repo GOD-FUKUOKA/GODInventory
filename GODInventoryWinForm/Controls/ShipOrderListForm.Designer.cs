@@ -216,7 +216,7 @@
             // shipNOLabel
             // 
             this.shipNOLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.shipNOLabel.Location = new System.Drawing.Point(59, 21);
+            this.shipNOLabel.Location = new System.Drawing.Point(107, 21);
             this.shipNOLabel.Name = "shipNOLabel";
             this.shipNOLabel.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
             this.shipNOLabel.Size = new System.Drawing.Size(117, 23);
@@ -229,9 +229,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 5;
-            this.label1.Text = "配車表";
+            this.label1.Text = "出荷指示書番号";
             // 
             // closeButton
             // 

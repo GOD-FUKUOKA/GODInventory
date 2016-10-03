@@ -125,9 +125,11 @@ namespace GODInventoryWinForm.Controls
 
             if (OrderEnities != null)
             {
+                var orders1 = OrderEnities.Where(o => o.ジャンル != 1003).ToList();
+                var orders2 = OrderEnities.Where(o => o.ジャンル == 1003).ToList();
                 this.reportViewer1.LocalReport.DataSources.Clear();
-                this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("ShippingItems", OrderEnities));
-
+                this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("ShippingItems", orders1));
+                this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("ShippingRCItems", orders2));
             }
 
         }

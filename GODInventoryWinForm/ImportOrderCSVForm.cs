@@ -30,7 +30,10 @@ namespace GODInventoryWinForm
         public string FormTitle 
         {
             get { return this.titleLabel.Text; }
-            set { this.titleLabel.Text = value;  }
+            set {
+                this.Text = value;
+                this.titleLabel.Text = value;  
+            }
         }
 
         public int ProgressValue 

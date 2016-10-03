@@ -32,6 +32,7 @@ namespace GODInventoryWinForm.Controls
         private IBindingList pendingOrderIBindList;
         private List<v_pendingorder> pendingOrderList;
         private SortableBindingList<v_pendingorder> sortablePendingOrderList;
+        private List<v_pendingorder> sortablePendingOrderList2;
         private List<v_pendingorder> ecOrderList;
         private List<v_pendingorder> shipperOrderList;
 
@@ -306,7 +307,6 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         {
             this.bindingSource1.DataSource = null;
             // 记录DataGridView改变数据          
-            //sortablePendingOrderList = new SortableBindingList<v_pendingorder>( orders );
 
             this.bindingSource1.DataSource = sortablePendingOrderList;
 

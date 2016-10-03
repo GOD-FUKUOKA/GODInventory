@@ -128,7 +128,7 @@ namespace GODInventoryWinForm
         private void importFaxToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new ImportOrderCSVForm();
-            form.FormTitle = "导入 FAX HACCYU.csv";
+            form.FormTitle = "ＦＲＩＭＯ受注ＣＳＶデータ導入";
             form.ShowDialog();
         }
     }

@@ -36,6 +36,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.qtyChangeReasonTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cancelComboBox = new System.Windows.Forms.ComboBox();
             this.shipAtTextBox = new System.Windows.Forms.TextBox();
             this.storeNamTextBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -55,18 +59,14 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.cancelComboBox = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.qtyChangeReasonTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // orderIDTextBox
             // 
-            this.orderIDTextBox.Location = new System.Drawing.Point(23, 306);
+            this.orderIDTextBox.Location = new System.Drawing.Point(23, 282);
             this.orderIDTextBox.Name = "orderIDTextBox";
-            this.orderIDTextBox.Size = new System.Drawing.Size(100, 20);
+            this.orderIDTextBox.Size = new System.Drawing.Size(100, 21);
             this.orderIDTextBox.TabIndex = 10000012;
             this.orderIDTextBox.TabStop = false;
             this.orderIDTextBox.Text = "orderid";
@@ -79,43 +79,43 @@
             "丸健",
             "MKL",
             "マツモト産業"});
-            this.shipperComboBox3.Location = new System.Drawing.Point(111, 206);
+            this.shipperComboBox3.Location = new System.Drawing.Point(111, 162);
             this.shipperComboBox3.Name = "shipperComboBox3";
-            this.shipperComboBox3.Size = new System.Drawing.Size(166, 21);
+            this.shipperComboBox3.Size = new System.Drawing.Size(166, 20);
             this.shipperComboBox3.TabIndex = 10000009;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(340, 210);
+            this.label12.Location = new System.Drawing.Point(340, 166);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(79, 13);
+            this.label12.Size = new System.Drawing.Size(77, 12);
             this.label12.TabIndex = 10000003;
             this.label12.Text = "実際出荷数量";
             // 
             // orderQuantityTextBox11
             // 
-            this.orderQuantityTextBox11.Location = new System.Drawing.Point(433, 206);
+            this.orderQuantityTextBox11.Location = new System.Drawing.Point(433, 162);
             this.orderQuantityTextBox11.Name = "orderQuantityTextBox11";
-            this.orderQuantityTextBox11.Size = new System.Drawing.Size(166, 20);
+            this.orderQuantityTextBox11.Size = new System.Drawing.Size(166, 21);
             this.orderQuantityTextBox11.TabIndex = 10000005;
             this.orderQuantityTextBox11.TextChanged += new System.EventHandler(this.orderQuantityTextBox11_TextChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 210);
+            this.label8.Location = new System.Drawing.Point(15, 166);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(79, 13);
+            this.label8.Size = new System.Drawing.Size(77, 12);
             this.label8.TabIndex = 10000004;
             this.label8.Text = "実際配送担当";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(376, 46);
+            this.label5.Location = new System.Drawing.Point(376, 34);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 10000002;
             this.label5.Text = "出荷日";
             // 
@@ -145,177 +145,32 @@
             this.groupBox1.Controls.Add(this.storeCodeTextBox);
             this.groupBox1.Controls.Add(this.invoiceNOTextBox);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(23, 13);
+            this.groupBox1.Location = new System.Drawing.Point(23, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(634, 257);
+            this.groupBox1.Size = new System.Drawing.Size(634, 237);
             this.groupBox1.TabIndex = 10000006;
             this.groupBox1.TabStop = false;
             // 
-            // shipAtTextBox
+            // label7
             // 
-            this.shipAtTextBox.Location = new System.Drawing.Point(433, 41);
-            this.shipAtTextBox.Name = "shipAtTextBox";
-            this.shipAtTextBox.ReadOnly = true;
-            this.shipAtTextBox.Size = new System.Drawing.Size(166, 20);
-            this.shipAtTextBox.TabIndex = 10000013;
-            this.shipAtTextBox.TextChanged += new System.EventHandler(this.shipAtTextBox_TextChanged);
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(340, 199);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 12);
+            this.label7.TabIndex = 10000015;
+            this.label7.Text = "数量变更理由";
             // 
-            // storeNamTextBox
+            // qtyChangeReasonTextBox
             // 
-            this.storeNamTextBox.Location = new System.Drawing.Point(111, 82);
-            this.storeNamTextBox.Name = "storeNamTextBox";
-            this.storeNamTextBox.ReadOnly = true;
-            this.storeNamTextBox.Size = new System.Drawing.Size(166, 20);
-            this.storeNamTextBox.TabIndex = 31;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(352, 166);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(67, 13);
-            this.label11.TabIndex = 27;
-            this.label11.Text = "規格名漢字";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(39, 128);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 13);
-            this.label3.TabIndex = 24;
-            this.label3.Text = "伝票番号";
-            // 
-            // orderAtTextBox
-            // 
-            this.orderAtTextBox.Location = new System.Drawing.Point(111, 41);
-            this.orderAtTextBox.Name = "orderAtTextBox";
-            this.orderAtTextBox.ReadOnly = true;
-            this.orderAtTextBox.Size = new System.Drawing.Size(166, 20);
-            this.orderAtTextBox.TabIndex = 28;
-            // 
-            // productKanjiSpecificationTextBox
-            // 
-            this.productKanjiSpecificationTextBox.Location = new System.Drawing.Point(433, 161);
-            this.productKanjiSpecificationTextBox.Name = "productKanjiSpecificationTextBox";
-            this.productKanjiSpecificationTextBox.ReadOnly = true;
-            this.productKanjiSpecificationTextBox.Size = new System.Drawing.Size(166, 20);
-            this.productKanjiSpecificationTextBox.TabIndex = 28;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(39, 166);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(55, 13);
-            this.label10.TabIndex = 25;
-            this.label10.Text = "品名漢字";
-            // 
-            // productKanjiNameTextBox
-            // 
-            this.productKanjiNameTextBox.Location = new System.Drawing.Point(111, 161);
-            this.productKanjiNameTextBox.Name = "productKanjiNameTextBox";
-            this.productKanjiNameTextBox.ReadOnly = true;
-            this.productKanjiNameTextBox.Size = new System.Drawing.Size(166, 20);
-            this.productKanjiNameTextBox.TabIndex = 26;
-            // 
-            // countyTextBox1
-            // 
-            this.countyTextBox1.Location = new System.Drawing.Point(433, 124);
-            this.countyTextBox1.Name = "countyTextBox1";
-            this.countyTextBox1.ReadOnly = true;
-            this.countyTextBox1.Size = new System.Drawing.Size(166, 20);
-            this.countyTextBox1.TabIndex = 20;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(388, 128);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(31, 13);
-            this.label13.TabIndex = 19;
-            this.label13.Text = "県別";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(51, 46);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 13);
-            this.label4.TabIndex = 27;
-            this.label4.Text = "受注日";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(352, 87);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "店舗コード";
-            // 
-            // storeCodeTextBox
-            // 
-            this.storeCodeTextBox.Location = new System.Drawing.Point(433, 82);
-            this.storeCodeTextBox.Name = "storeCodeTextBox";
-            this.storeCodeTextBox.ReadOnly = true;
-            this.storeCodeTextBox.Size = new System.Drawing.Size(166, 20);
-            this.storeCodeTextBox.TabIndex = 12;
-            // 
-            // invoiceNOTextBox
-            // 
-            this.invoiceNOTextBox.Location = new System.Drawing.Point(111, 124);
-            this.invoiceNOTextBox.Name = "invoiceNOTextBox";
-            this.invoiceNOTextBox.ReadOnly = true;
-            this.invoiceNOTextBox.Size = new System.Drawing.Size(166, 20);
-            this.invoiceNOTextBox.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(63, 87);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "店名";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(134, 104);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(184, 20);
-            this.textBox1.TabIndex = 10000001;
-            // 
-            // submitFormButton
-            // 
-            this.submitFormButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.submitFormButton.Location = new System.Drawing.Point(451, 298);
-            this.submitFormButton.Name = "submitFormButton";
-            this.submitFormButton.Size = new System.Drawing.Size(100, 35);
-            this.submitFormButton.TabIndex = 10000007;
-            this.submitFormButton.Text = "保存";
-
-            this.submitFormButton.UseVisualStyleBackColor = true;
-            this.submitFormButton.Click += new System.EventHandler(this.submitFormButton_Click);
-            // 
-            // cancelFormButton
-            // 
-            this.cancelFormButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelFormButton.Location = new System.Drawing.Point(557, 298);
-            this.cancelFormButton.Name = "cancelFormButton";
-            this.cancelFormButton.Size = new System.Drawing.Size(100, 35);
-            this.cancelFormButton.TabIndex = 10000008;
-            this.cancelFormButton.Text = "閉じる";
-            this.cancelFormButton.UseVisualStyleBackColor = true;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            this.qtyChangeReasonTextBox.Location = new System.Drawing.Point(433, 195);
+            this.qtyChangeReasonTextBox.Name = "qtyChangeReasonTextBox";
+            this.qtyChangeReasonTextBox.Size = new System.Drawing.Size(166, 21);
+            this.qtyChangeReasonTextBox.TabIndex = 10000016;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 223);
+            this.label1.Location = new System.Drawing.Point(27, 198);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 10000014;
@@ -327,33 +182,177 @@
             this.cancelComboBox.Items.AddRange(new object[] {
             "no",
             "yes"});
-            this.cancelComboBox.Location = new System.Drawing.Point(111, 220);
+            this.cancelComboBox.Location = new System.Drawing.Point(111, 194);
             this.cancelComboBox.Name = "cancelComboBox";
             this.cancelComboBox.Size = new System.Drawing.Size(166, 20);
             this.cancelComboBox.TabIndex = 10000009;
             this.cancelComboBox.SelectedIndexChanged += new System.EventHandler(this.cancelComboBox_SelectedIndexChanged);
             // 
-            // label7
+            // shipAtTextBox
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(340, 224);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 12);
-            this.label7.TabIndex = 10000015;
-            this.label7.Text = "数量变更理由";
+            this.shipAtTextBox.Location = new System.Drawing.Point(433, 30);
+            this.shipAtTextBox.Name = "shipAtTextBox";
+            this.shipAtTextBox.ReadOnly = true;
+            this.shipAtTextBox.Size = new System.Drawing.Size(166, 21);
+            this.shipAtTextBox.TabIndex = 10000013;
+            this.shipAtTextBox.TextChanged += new System.EventHandler(this.shipAtTextBox_TextChanged);
             // 
-            // qtyChangeReasonTextBox
+            // storeNamTextBox
             // 
-            this.qtyChangeReasonTextBox.Location = new System.Drawing.Point(433, 220);
-            this.qtyChangeReasonTextBox.Name = "qtyChangeReasonTextBox";
-            this.qtyChangeReasonTextBox.Size = new System.Drawing.Size(166, 21);
-            this.qtyChangeReasonTextBox.TabIndex = 10000016;
+            this.storeNamTextBox.Location = new System.Drawing.Point(111, 63);
+            this.storeNamTextBox.Name = "storeNamTextBox";
+            this.storeNamTextBox.ReadOnly = true;
+            this.storeNamTextBox.Size = new System.Drawing.Size(166, 21);
+            this.storeNamTextBox.TabIndex = 31;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(352, 133);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(65, 12);
+            this.label11.TabIndex = 27;
+            this.label11.Text = "規格名漢字";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(39, 100);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 24;
+            this.label3.Text = "伝票番号";
+            // 
+            // orderAtTextBox
+            // 
+            this.orderAtTextBox.Location = new System.Drawing.Point(111, 30);
+            this.orderAtTextBox.Name = "orderAtTextBox";
+            this.orderAtTextBox.ReadOnly = true;
+            this.orderAtTextBox.Size = new System.Drawing.Size(166, 21);
+            this.orderAtTextBox.TabIndex = 28;
+            // 
+            // productKanjiSpecificationTextBox
+            // 
+            this.productKanjiSpecificationTextBox.Location = new System.Drawing.Point(433, 129);
+            this.productKanjiSpecificationTextBox.Name = "productKanjiSpecificationTextBox";
+            this.productKanjiSpecificationTextBox.ReadOnly = true;
+            this.productKanjiSpecificationTextBox.Size = new System.Drawing.Size(166, 21);
+            this.productKanjiSpecificationTextBox.TabIndex = 28;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(39, 133);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(53, 12);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "品名漢字";
+            // 
+            // productKanjiNameTextBox
+            // 
+            this.productKanjiNameTextBox.Location = new System.Drawing.Point(111, 129);
+            this.productKanjiNameTextBox.Name = "productKanjiNameTextBox";
+            this.productKanjiNameTextBox.ReadOnly = true;
+            this.productKanjiNameTextBox.Size = new System.Drawing.Size(166, 21);
+            this.productKanjiNameTextBox.TabIndex = 26;
+            // 
+            // countyTextBox1
+            // 
+            this.countyTextBox1.Location = new System.Drawing.Point(433, 96);
+            this.countyTextBox1.Name = "countyTextBox1";
+            this.countyTextBox1.ReadOnly = true;
+            this.countyTextBox1.Size = new System.Drawing.Size(166, 21);
+            this.countyTextBox1.TabIndex = 20;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(388, 100);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(29, 12);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "県別";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(51, 34);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.TabIndex = 27;
+            this.label4.Text = "受注日";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(352, 67);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "店舗コード";
+            // 
+            // storeCodeTextBox
+            // 
+            this.storeCodeTextBox.Location = new System.Drawing.Point(433, 63);
+            this.storeCodeTextBox.Name = "storeCodeTextBox";
+            this.storeCodeTextBox.ReadOnly = true;
+            this.storeCodeTextBox.Size = new System.Drawing.Size(166, 21);
+            this.storeCodeTextBox.TabIndex = 12;
+            // 
+            // invoiceNOTextBox
+            // 
+            this.invoiceNOTextBox.Location = new System.Drawing.Point(111, 96);
+            this.invoiceNOTextBox.Name = "invoiceNOTextBox";
+            this.invoiceNOTextBox.ReadOnly = true;
+            this.invoiceNOTextBox.Size = new System.Drawing.Size(166, 21);
+            this.invoiceNOTextBox.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(63, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "店名";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(134, 96);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(184, 21);
+            this.textBox1.TabIndex = 10000001;
+            // 
+            // submitFormButton
+            // 
+            this.submitFormButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.submitFormButton.Location = new System.Drawing.Point(451, 275);
+            this.submitFormButton.Name = "submitFormButton";
+            this.submitFormButton.Size = new System.Drawing.Size(100, 32);
+            this.submitFormButton.TabIndex = 10000007;
+            this.submitFormButton.Text = "保存";
+            this.submitFormButton.UseVisualStyleBackColor = true;
+            this.submitFormButton.Click += new System.EventHandler(this.submitFormButton_Click);
+            // 
+            // cancelFormButton
+            // 
+            this.cancelFormButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelFormButton.Location = new System.Drawing.Point(557, 275);
+            this.cancelFormButton.Name = "cancelFormButton";
+            this.cancelFormButton.Size = new System.Drawing.Size(100, 32);
+            this.cancelFormButton.TabIndex = 10000008;
+            this.cancelFormButton.Text = "閉じる";
+            this.cancelFormButton.UseVisualStyleBackColor = true;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // EditOrderForm2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 365);
+            this.ClientSize = new System.Drawing.Size(682, 337);
             this.Controls.Add(this.orderIDTextBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBox1);
@@ -362,7 +361,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditOrderForm2";
-            this.Text = "EditOrderForm2";
+            this.Text = "伝票編集";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

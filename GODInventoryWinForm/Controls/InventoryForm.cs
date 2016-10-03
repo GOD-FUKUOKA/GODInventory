@@ -72,7 +72,8 @@ namespace GODInventoryWinForm.Controls
         private void btfind_Click(object sender, EventArgs e)
         {
             this.stockcheckList.Clear();
-            var warehouse = this.warehouseComboBox.Text;
+            string warehouseName = this.warehouseComboBox.Text;
+            var warehouse = warehouseList.Find( w=> w.FullName == warehouseName );
             var genreId = Convert.ToInt16(this.genreComboBox.SelectedValue);
             var startDate = Properties.Settings.Default.InventoryStartAt.Date;
             var endDate = this.endDateTimePicker1.Value.AddDays(1).Date;
@@ -82,18 +83,18 @@ namespace GODInventoryWinForm.Controls
                 #region old
                 string sql = @"SELECT i.`規格`,i.`商品名`, SUM(s.`数量`) as `数量`, s.`自社コード` FROM t_stockrec s
                     INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = {0}
-                    WHERE ((s.`先` = {1} OR s.`元` = {1} ) AND s.`状態`={2} AND s.`日付`< {3} AND s.`日付`> {4} )
+                    WHERE (((s.`元` = {1} AND s.`区分` = '出庫') OR (s.`先` = {1} AND s.`区分` = '入庫')  ) AND s.`状態`={2} AND s.`日付`< {3} AND s.`日付`> {4} )
                     GROUP by s.`自社コード`;";
 
                 //string sql2 = String.Format( "SELECT `自社コード`, SUM(o.`実際出荷数量`) FROM t_orderdata o WHERE o.`Status`={0} GROUP by o.`自社コード`;", (int)OrderStatus.Pending);
-                var pendingOrders = ( from o in ctx.t_orderdata 
-                                      where o.Status == OrderStatus.Pending
-                                      group o by o.自社コード into g
-                                      select new { 自社コード = g.Key, 数量 = g.Sum( o => o.実際出荷数量) }).ToList();
+                var pendingOrders = (from o in ctx.t_orderdata
+                                     where o.Status == OrderStatus.Pending
+                                     group o by new { 自社コード = o.自社コード, 実際配送担当 = o.実際配送担当 } into g
+                                     select new { 自社コード = g.Key.自社コード, 実際配送担当 = g.Key.実際配送担当, 数量 = g.Sum(o => o.実際出荷数量) }).ToList();
 
-                var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.完了.ToString(), endDate, startDate).ToList();
+                var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouseName, StockIoProgressEnum.完了.ToString(), endDate, startDate).ToList();
 
-                var summaries4plan = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouse, StockIoProgressEnum.仮.ToString(), endDate, startDate).ToList();
+                var summaries4plan = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouseName, StockIoProgressEnum.仮.ToString(), endDate, startDate).ToList();
 
                 #endregion
 
@@ -126,7 +127,7 @@ namespace GODInventoryWinForm.Controls
                         stockcheck.jiHuaRuCunShu = Convert.ToInt32(item4plan1.数量);
                     }
 
-                    var order = pendingOrders.Find(s => s.自社コード == stockcheck.自社コード);
+                    var order = pendingOrders.Find(s => s.自社コード == stockcheck.自社コード && s.実際配送担当 == warehouse.ShipperName);
                     if (order != null) 
                     {
                         stockcheck.daiFaHuoShu = order.数量;                    

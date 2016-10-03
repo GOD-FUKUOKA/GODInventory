@@ -205,7 +205,7 @@ namespace GODInventoryWinForm.Controls
         private void FindDataSources()
         {
 
-            var startAt = this.startDateTimePicker.Value.AddDays(-1).Date;
+            var startAt = this.startDateTimePicker.Value.Date;
             var endAt = this.endDateTimePicker.Value.AddDays(1).Date;
             var ioState = this.ioComboBox.Text;
             var genreId = Convert.ToInt16(this.genreComboBox.SelectedValue);
@@ -216,7 +216,7 @@ namespace GODInventoryWinForm.Controls
             var isAllStockIoSelected = (ioState == StockIoEnum.全部.ToString());
 
 
-            string conditions = "OrderId=0 AND s.日付 > @startAt AND @endAt > s.日付";
+            string conditions = "OrderId=0 AND s.日付 >= @startAt AND @endAt > s.日付";
             List<MySqlParameter> condition_params = new List<MySqlParameter>();
 
             #region 构建查询条件
@@ -237,23 +237,24 @@ namespace GODInventoryWinForm.Controls
             {
 
 
-                if (ioState == StockIoEnum.全部.ToString())
+                if (isAllStockIoSelected)
                 {
 
                     // 某一个仓库的出入库记录
-                    conditions += " AND ( s.先 = @warehouse OR s.元 = @warehouse )";
+                    // 添加 区分 条件， 过滤掉多余的仓库间移动的记录
+                    conditions += " AND ( (s.先 = @warehouse AND s.`区分` = '入庫') OR (s.元 = @warehouse AND s.`区分` = '出庫'))";
 
                 }
                 else if (ioState == StockIoEnum.入庫.ToString())
                 {
                     // 某一个仓库的入库记录
-                    conditions += " AND ( s.先 = @warehouse )";
+                    conditions += " AND ( s.先 = @warehouse AND s.`区分` = '入庫' )";
                 }
                 else if (ioState == StockIoEnum.出庫.ToString())
                 {
 
                     // 某一个仓库的所有生产商的出库记录, 即出库记录
-                    conditions += " AND ( s.元 = @warehouse )";
+                    conditions += " AND ( s.元 = @warehouse AND s.`区分` = '出庫')";
                 }
             }
 

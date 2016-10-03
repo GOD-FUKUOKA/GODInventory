@@ -49,7 +49,7 @@ namespace GODInventoryWinForm.Controls
 
 
 
-        public int InitializeDataSource(string shipper = "丸健", string county = "", string store = "", string shipNo = "")
+        public int InitializeDataSource(string shipper = "丸健", string county = "", string store = "", string shipNO = "")
         {
 
             pendingOrderList.Clear();
@@ -82,14 +82,14 @@ namespace GODInventoryWinForm.Controls
                 }
             }
 
-            InitializeShipNOComboBox(shipNo );
+            InitializeShipNOComboBox(shipNO );
 
             
 
             return 0;
         }
 
-        private void InitializeShipNOComboBox(string shipNo)
+        private void InitializeShipNOComboBox(string shipNO)
         {
             
             var q = OrderSqlHelper.ShippingOrderSql(this.entityDataSource1);
@@ -105,9 +105,9 @@ namespace GODInventoryWinForm.Controls
             this.shipNOComboBox.DisplayMember = "FullName";
             this.shipNOComboBox.ValueMember = "ShortName";
             this.shipNOComboBox.DataSource = shipNOs;
-            if (shipNo.Length > 0)
+            if (shipNO.Length > 0)
             {
-                this.shipNOComboBox.SelectedValue = shipNo;
+                this.shipNOComboBox.SelectedValue = shipNO;
             }
             else
             {
@@ -181,9 +181,9 @@ namespace GODInventoryWinForm.Controls
                 return;
             }
 
-            #region 将数据集放入集合
+            #region 将订单移入配车表
 
-            string shipNo = shipNOComboBox.Text;
+            string shipNO = shipNOComboBox.Text;
             int count = dataGridView1.SelectedRows.Count;
             if (count > 0)
             {
@@ -205,7 +205,7 @@ namespace GODInventoryWinForm.Controls
         private void moveUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            #region 将数据集放入集合
+            #region 将订单移出配车表
             int count = dataGridView2.SelectedRows.Count;
             if (count > 0)
             {
@@ -246,8 +246,8 @@ namespace GODInventoryWinForm.Controls
                     orderIds.Add(order.id受注データ);
                 }
 
-                var ShippedAtDate = this.productShippedAtDateTimePicker1.Value;
-                var ReceivedAtDate = this.productReceivedAtDateTimePicker2.Value;
+                var ShippedAtDate = this.shippedAtDateTimePicker1.Value;
+                var ReceivedAtDate = this.deliveredAtDateTimePicker2.Value;
                 int count = OrderSqlHelper.ShippingInfoConfirm(orderIds, ShippedAtDate, ReceivedAtDate, shipNO);
 
                 //MessageBox.Show();
@@ -285,11 +285,11 @@ namespace GODInventoryWinForm.Controls
                     }
                     else
                     {
-                        string shipNo = shipNOComboBox.Text;
+                        string shipNO = shipNOComboBox.Text;
                         string shipper = shipperComboBox.Text;
                         string county = countyComboBox1.Text;
                         string store = storeComboBox.Text;
-                        InitializeDataSource(shipper, county, store, shipNo);
+                        InitializeDataSource(shipper, county, store, shipNO);
 
                     }
                 }
@@ -419,30 +419,35 @@ namespace GODInventoryWinForm.Controls
         private void shipNOComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string shipNO = shipNOComboBox.Text;
-            this.orderListForShip = shippingOrderList.FindAll(o => o.ShipNO == shipNO);
-
-            dataGridView2.DataSource = this.orderListForShip;
+            orderListForShip = shippingOrderList.FindAll(o => o.ShipNO == shipNO);
+            if (orderListForShip.Count > 0)
+            {
+                var order = orderListForShip.First();
+                shippedAtDateTimePicker1.Value =  Convert.ToDateTime( order.出荷日 );
+                deliveredAtDateTimePicker2.Value = Convert.ToDateTime( order.納品日 );
+            }
+            dataGridView2.DataSource = orderListForShip;
         }
 
 
         private void SaveOrderForShip(List<int> orderIds, bool undo = false )
         {
             
-            string shipNo = shipNOComboBox.Text;
-            var ShippedAtDate = this.productShippedAtDateTimePicker1.Value;
-            var ReceivedAtDate = this.productReceivedAtDateTimePicker2.Value;
+            string shipNO = shipNOComboBox.Text;
+            var ShippedAtDate = this.shippedAtDateTimePicker1.Value;
+            var ReceivedAtDate = this.deliveredAtDateTimePicker2.Value;
             if (undo)
             {
                 OrderSqlHelper.UnShippingInfoConfirm(orderIds );
             }
             else {
-                OrderSqlHelper.ShippingInfoConfirm(orderIds, ShippedAtDate, ReceivedAtDate, shipNo);
+                OrderSqlHelper.ShippingInfoConfirm(orderIds, ShippedAtDate, ReceivedAtDate, shipNO);
             }
 
             string shipper = shipperComboBox.Text;
             string county = countyComboBox1.Text;
             string store = storeComboBox.Text;
-            InitializeDataSource(shipper, county, store, shipNo);
+            InitializeDataSource(shipper, county, store, shipNO);
 
         }
 
@@ -453,6 +458,59 @@ namespace GODInventoryWinForm.Controls
             this.orderListForShip = shippingOrderList.FindAll(o => o.ShipNO == shipNO);
 
             dataGridView2.DataSource = this.orderListForShip;
+        }
+
+        private void shippedAtDateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            string shipNO = shipNOComboBox.Text;
+            var ShippedAtDate = this.shippedAtDateTimePicker1.Value;
+            var ReceivedAtDate = this.deliveredAtDateTimePicker2.Value;
+            int count = dataGridView2.RowCount;
+            if (count > 0)
+            {
+                var rowItem = dataGridView2.Rows[0].DataBoundItem as v_pendingorder;
+                // skip initialize trigger by shipNOComboBox_SelectedIndexChanged
+                if (rowItem.出荷日 != ShippedAtDate)
+                {
+                    List<int> orderIds = new List<int>();
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        var row = dataGridView2.Rows[i];
+                        var order = row.DataBoundItem as v_pendingorder;
+                        orderIds.Add(order.id受注データ);
+                    }
+                    OrderSqlHelper.ShippingInfoConfirm(orderIds, ShippedAtDate, ReceivedAtDate, shipNO);
+                    InitializeShipNOComboBox(shipNO);
+                }
+            }
+
+        }
+
+        private void deliveredAtDateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            string shipNO = shipNOComboBox.Text;
+            var ShippedAtDate = this.shippedAtDateTimePicker1.Value;
+            var ReceivedAtDate = this.deliveredAtDateTimePicker2.Value;
+            int count = dataGridView2.RowCount;
+            if (count > 0)
+            {
+                var rowItem = dataGridView2.Rows[0].DataBoundItem as v_pendingorder;
+                // skip initialize trigger by shipNOComboBox_SelectedIndexChanged
+                if (rowItem.納品日 != ReceivedAtDate)
+                {
+                    List<int> orderIds = new List<int>();
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        var row = dataGridView2.Rows[i];
+                        var order = row.DataBoundItem as v_pendingorder;
+                        orderIds.Add(order.id受注データ);
+                    }
+                    OrderSqlHelper.ShippingInfoConfirm(orderIds, ShippedAtDate, ReceivedAtDate, shipNO);
+                    InitializeShipNOComboBox(shipNO);
+                }
+            }
         }
     }
 }

@@ -8,6 +8,8 @@ using System.Data.Entity;
 using GODInventory.MyLinq;
 using System.IO;
 using System.Diagnostics;
+using System.Globalization;
+using System.Threading;
 
 namespace GODInventoryWinForm
 {
@@ -49,6 +51,14 @@ namespace GODInventoryWinForm
 
         static void StartMainForm()
         {
+            //https://msdn.microsoft.com/en-us/library/dd318661(vs.85).aspx
+            //https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.aspx
+            if (Thread.CurrentThread.CurrentCulture.Name != "ja-JP") //zh-CN
+            {
+                // If current culture is not fr-FR, set culture to fr-FR.
+                CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("ja-JP");
+                CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.CreateSpecificCulture("ja-JP");
+            }   
 #if DEBUG   
             DbInterception.Add(new EFIntercepterLogging());
 #endif

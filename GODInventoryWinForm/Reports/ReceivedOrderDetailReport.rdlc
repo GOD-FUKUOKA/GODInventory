@@ -320,6 +320,7 @@
                             <TextRun>
                               <Value>=RowNumber(nothing )</Value>
                               <Style>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
@@ -352,6 +353,7 @@
                             <TextRun>
                               <Value>=Format(Fields!伝票番号.Value,"0000000")</Value>
                               <Style>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
@@ -384,6 +386,7 @@
                             <TextRun>
                               <Value>=Fields!ＪＡＮコード.Value</Value>
                               <Style>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
@@ -416,6 +419,7 @@
                             <TextRun>
                               <Value>=Format(Fields!商品コード.Value,"00000000")</Value>
                               <Style>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
@@ -448,6 +452,7 @@
                             <TextRun>
                               <Value>= Fields!品名漢字.Value + "\n\r" + Fields!規格名漢字.Value</Value>
                               <Style>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
@@ -480,6 +485,7 @@
                             <TextRun>
                               <Value>=Fields!実際出荷数量.Value</Value>
                               <Style>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
@@ -514,6 +520,7 @@
                             <TextRun>
                               <Value>=Fields!原単価_税抜_.Value</Value>
                               <Style>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <Format>f2</Format>
                               </Style>
@@ -588,7 +595,7 @@
                               <Value>合計</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontFamily>Times New Roman</FontFamily>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
@@ -726,6 +733,7 @@
                             <TextRun>
                               <Value>=Sum(Fields!実際出荷数量.Value)</Value>
                               <Style>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
@@ -741,6 +749,7 @@
                           <Style>Solid</Style>
                         </Border>
                         <BackgroundColor>LightGrey</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -979,7 +988,7 @@
                               <Value>納品日:</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontFamily>Times New Roman</FontFamily>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
@@ -1016,7 +1025,7 @@
                               <Value>=Fields!納品日.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontFamily>Microsoft Sans Serif</FontFamily>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <Format>yyyy'年'M'月'd'日'</Format>
@@ -1054,7 +1063,7 @@
                               <Value>納品時間:</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontFamily>Times New Roman</FontFamily>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
@@ -1128,7 +1137,7 @@
                               <Value>納品店舗:</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontFamily>Times New Roman</FontFamily>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
@@ -1164,6 +1173,7 @@
                             <TextRun>
                               <Value>=Fields!店舗名漢字.Value</Value>
                               <Style>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
@@ -1197,7 +1207,7 @@
                               <Value>納品場所:</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontFamily>Times New Roman</FontFamily>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
@@ -1234,7 +1244,7 @@
                               <Value>=Fields!納品場所名漢字.Value</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontFamily>Times New Roman</FontFamily>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
@@ -1276,7 +1286,7 @@
                               <Value>直送区分:</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontFamily>Times New Roman</FontFamily>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
@@ -1312,6 +1322,7 @@
                             <TextRun>
                               <Value>=Fields!直送区分.Value</Value>
                               <Style>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
@@ -1345,7 +1356,7 @@
                               <Value>個口数:</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontFamily>Times New Roman</FontFamily>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
@@ -1419,7 +1430,7 @@
                               <Value>出荷No:</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontFamily>Microsoft Sans Serif</FontFamily>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
@@ -1456,7 +1467,7 @@
                               <Value>=Format(Fields!出荷No.Value,"000000000000000000")</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontFamily>Times New Roman</FontFamily>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
@@ -1493,7 +1504,7 @@
                               <Value>仕入先名:</Value>
                               <Style>
                                 <FontStyle>Normal</FontStyle>
-                                <FontFamily>Times New Roman</FontFamily>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
                                 <TextDecoration>None</TextDecoration>
@@ -1530,6 +1541,7 @@
                               <Value>株式会社ジー・オー・ディ
 </Value>
                               <Style>
+                                <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
                               </Style>
                             </TextRun>
@@ -1585,7 +1597,7 @@
         <Top>2.42948cm</Top>
         <Left>0.06614cm</Left>
         <Height>1.2cm</Height>
-        <Width>16.84332cm</Width>
+        <Width>16.84331cm</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>

@@ -49,9 +49,9 @@
             // cancelButton
             // 
             this.cancelButton.Enabled = false;
-            this.cancelButton.Location = new System.Drawing.Point(235, 195);
+            this.cancelButton.Location = new System.Drawing.Point(235, 180);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 35);
+            this.cancelButton.Size = new System.Drawing.Size(100, 32);
             this.cancelButton.TabIndex = 11;
             this.cancelButton.Text = "キャンセル";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -59,9 +59,9 @@
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(129, 195);
+            this.importButton.Location = new System.Drawing.Point(129, 180);
             this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(100, 35);
+            this.importButton.Size = new System.Drawing.Size(100, 32);
             this.importButton.TabIndex = 10;
             this.importButton.Text = "導入";
             this.importButton.UseVisualStyleBackColor = true;
@@ -70,24 +70,24 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 93);
+            this.label1.Location = new System.Drawing.Point(33, 86);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 13);
+            this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 9;
             this.label1.Text = "ファイルを指定";
             // 
             // pathTextBox
             // 
-            this.pathTextBox.Location = new System.Drawing.Point(129, 90);
+            this.pathTextBox.Location = new System.Drawing.Point(129, 83);
             this.pathTextBox.Name = "pathTextBox";
-            this.pathTextBox.Size = new System.Drawing.Size(278, 20);
+            this.pathTextBox.Size = new System.Drawing.Size(278, 21);
             this.pathTextBox.TabIndex = 8;
             // 
             // openFileBtton
             // 
-            this.openFileBtton.Location = new System.Drawing.Point(413, 88);
+            this.openFileBtton.Location = new System.Drawing.Point(413, 81);
             this.openFileBtton.Name = "openFileBtton";
-            this.openFileBtton.Size = new System.Drawing.Size(31, 25);
+            this.openFileBtton.Size = new System.Drawing.Size(31, 23);
             this.openFileBtton.TabIndex = 7;
             this.openFileBtton.Text = "...";
             this.openFileBtton.UseVisualStyleBackColor = true;
@@ -103,44 +103,44 @@
             // progressMsgLabel
             // 
             this.progressMsgLabel.AutoSize = true;
-            this.progressMsgLabel.Location = new System.Drawing.Point(35, 121);
+            this.progressMsgLabel.Location = new System.Drawing.Point(35, 112);
             this.progressMsgLabel.Name = "progressMsgLabel";
-            this.progressMsgLabel.Size = new System.Drawing.Size(24, 13);
+            this.progressMsgLabel.Size = new System.Drawing.Size(23, 12);
             this.progressMsgLabel.TabIndex = 13;
             this.progressMsgLabel.Text = "0/0";
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(35, 141);
+            this.progressBar1.Location = new System.Drawing.Point(35, 130);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(409, 25);
+            this.progressBar1.Size = new System.Drawing.Size(409, 23);
             this.progressBar1.TabIndex = 12;
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(14, 31);
+            this.label2.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(14, 29);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(458, 25);
+            this.label2.Size = new System.Drawing.Size(458, 23);
             this.label2.TabIndex = 14;
-            this.label2.Text = "SNAP受注ＣＳＶデータ導入";
+            this.label2.Text = "SNAP受領ＣＳＶデータ導入";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // closeButton
             // 
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.closeButton.Location = new System.Drawing.Point(341, 195);
+            this.closeButton.Location = new System.Drawing.Point(341, 180);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(100, 35);
+            this.closeButton.Size = new System.Drawing.Size(100, 32);
             this.closeButton.TabIndex = 15;
             this.closeButton.Text = "閉じる";
             this.closeButton.UseVisualStyleBackColor = true;
             // 
             // ImportReceivedCSVForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 262);
+            this.ClientSize = new System.Drawing.Size(484, 242);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cancelButton);
@@ -155,7 +155,7 @@
             this.Name = "ImportReceivedCSVForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ファイルを指定";
+            this.Text = "SNAP受領ＣＳＶデータ導入";
             this.ResumeLayout(false);
             this.PerformLayout();
 
