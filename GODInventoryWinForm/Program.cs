@@ -10,11 +10,16 @@ using System.IO;
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
+using System.Drawing.Text;
+using System.Drawing;
+using GODInventoryWinForm.Controls;
 
 namespace GODInventoryWinForm
 {
     static class Program
     {
+        static string Fontitem;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -36,6 +41,7 @@ namespace GODInventoryWinForm
             Database.SetInitializer<GODDbContext>(null);
             if (DbConnectable())
             {
+
                 LogHelper.WriteLog("Start application GodInventory");
                 StartMainForm();
             }
@@ -68,7 +74,7 @@ namespace GODInventoryWinForm
             // https://msdn.microsoft.com/en-us/library/system.windows.forms.application.threadexception.aspx
             // Add the event handler for handling UI thread exceptions to the event.
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
-         
+
             // Set the unhandled exception mode to force all Windows Forms errors to go through
             // our handler.
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
@@ -77,7 +83,19 @@ namespace GODInventoryWinForm
             AppDomain.CurrentDomain.UnhandledException +=
                 new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
+            #region 字体设置
+      
 
+            List<string> list = Fontlist();
+            Fontitem = list.Find(s => s.ToString() == "microsoft P Gothic");
+            if (Fontitem == null)
+                Fontitem = System.Drawing.SystemFonts.DefaultFont.Name;
+
+          //  PendingOrderForm frm = new PendingOrderForm();
+          //  frm.Font = new Font(Fontitem, 12);
+          //  IterateControlsSetTextBox(frm.Controls, Fontitem);
+
+            #endregion
             Application.Run(new MainForm());
 
         }
@@ -156,7 +174,7 @@ namespace GODInventoryWinForm
                 Application.Exit();
         }
 
-      
+
 
 
         static bool IsAlreadyRunning()
@@ -176,7 +194,7 @@ namespace GODInventoryWinForm
             return false;
         }
 
-   
+
         // Handle the UI exceptions by showing a dialog box, and asking the user whether
         // or not they wish to abort execution.
         // NOTE: This exception cannot be kept from terminating the application - it can only 
@@ -224,5 +242,98 @@ namespace GODInventoryWinForm
             return MessageBox.Show(errorMsg, title, MessageBoxButtons.AbortRetryIgnore,
                 MessageBoxIcon.Stop);
         }
+
+
+
+        //窗体字体设置 
+        static void IterateControlsSetTextBox(Control.ControlCollection ctls, string Fontitem)
+        {
+            foreach (Control control in ctls)
+            {
+                if (control is TextBox)
+                {
+                    (control as TextBox).Enter += new EventHandler(SetTextBoxOnEnterStyle);
+                    (control as TextBox).Leave += new EventHandler(SetTextBoxOnLeaveStyle);
+                }
+                if (control is Label)
+                {
+                    (control as Label).Enter += new EventHandler(SetTextBoxOnEnterStyle);
+                    (control as Label).Leave += new EventHandler(SetTextBoxOnLeaveStyle);
+                    control.Font = new Font(Fontitem, 60);
+                }
+
+                if (control.Controls.Count > 0)
+                {
+                    IterateControlsSetTextBox(control.Controls, Fontitem);
+                }
+            }
+        }
+        static void SetTextBoxOnEnterStyle(object sender, EventArgs e)
+        {
+            if (sender is TextBox)
+            {
+               TextBox tbox = sender as TextBox;
+                //if (!tbox.ReadOnly)
+                //{
+                //    tbox.BackColor = Color.Yellow;
+                //}
+
+                tbox.Font = new Font(Fontitem, 12);
+            }
+            if (sender is Label)
+            {
+                Label tbox = sender as Label;
+                //if (!tbox.ReadOnly)
+                //{
+                //    tbox.BackColor = Color.Yellow;
+                //}
+                tbox.Font = new Font(Fontitem, 12);
+            }
+
+
+        }
+        static void SetTextBoxOnLeaveStyle(object sender, EventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                TextBox tbox = sender as TextBox;
+                if (!tbox.ReadOnly)
+                {
+                    //tbox.BackColor = Color.White;
+                    tbox.Font = new Font(Fontitem, 12);
+                }
+            }
+        }
+
+
+        static List<string> Fontlist()
+        {
+            List<string> list = new List<string>();
+            List<object> colorlist = new List<object>();
+
+            InstalledFontCollection MyFont = new InstalledFontCollection();
+            FontFamily[] MyFontFamilies = MyFont.Families;
+
+            InstalledFontCollection fc = new InstalledFontCollection();
+            foreach (FontFamily font in fc.Families)
+            {
+                //ListItem tmp = new ListItem(font.Name, font.Name);
+                //this.styleFont.Items.Add(tmp);
+                list.Add(font.Name);
+            }
+
+            Array colors = System.Enum.GetValues(typeof(KnownColor));
+            foreach (object colorName in colors)
+            {
+                //ListItem tmp = new ListItem(colorName.ToString(), colorName.ToString());
+                //this.styleColor.Items.Add(tmp);
+                colorlist.Add(colorName);
+            }
+            //System.Drawing.SystemFonts.DefaultFont.Name
+
+            return list;
+        }
+
+
     }
 }
