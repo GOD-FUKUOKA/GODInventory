@@ -157,10 +157,10 @@
             // 
             this.pendingTabPage.Controls.Add(this.shipNODataGridView);
             this.pendingTabPage.Controls.Add(this.GenerateASNButton);
-            this.pendingTabPage.Location = new System.Drawing.Point(4, 22);
+            this.pendingTabPage.Location = new System.Drawing.Point(4, 21);
             this.pendingTabPage.Name = "pendingTabPage";
             this.pendingTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.pendingTabPage.Size = new System.Drawing.Size(909, 343);
+            this.pendingTabPage.Size = new System.Drawing.Size(909, 344);
             this.pendingTabPage.TabIndex = 0;
             this.pendingTabPage.Text = "出荷内容確認";
             this.pendingTabPage.UseVisualStyleBackColor = true;
@@ -192,7 +192,7 @@
             this.shipNODataGridView.RowHeadersWidth = 28;
             this.shipNODataGridView.RowTemplate.Height = 23;
             this.shipNODataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.shipNODataGridView.Size = new System.Drawing.Size(903, 279);
+            this.shipNODataGridView.Size = new System.Drawing.Size(903, 280);
             this.shipNODataGridView.TabIndex = 5;
             this.shipNODataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.shipNODataGridView_CellFormatting);
             this.shipNODataGridView.CurrentCellChanged += new System.EventHandler(this.shipNODataGridView_CurrentCellChanged);
@@ -690,6 +690,7 @@
             // 
             this.ClientSize = new System.Drawing.Size(917, 369);
             this.Controls.Add(this.tabControl1);
+            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ShippingOrderForm";

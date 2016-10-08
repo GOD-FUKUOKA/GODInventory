@@ -42,15 +42,15 @@
             this.単品重量DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.単位DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pT単位かDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ChangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
             this.btAddItem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -85,7 +85,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(754, 389);
+            this.dataGridView1.Size = new System.Drawing.Size(754, 356);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
             // 
@@ -94,72 +94,107 @@
             this.自社コードDataGridViewTextBoxColumn.DataPropertyName = "自社コード";
             this.自社コードDataGridViewTextBoxColumn.HeaderText = "自社コード";
             this.自社コードDataGridViewTextBoxColumn.Name = "自社コードDataGridViewTextBoxColumn";
+            this.自社コードDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // 得意先DataGridViewTextBoxColumn
             // 
             this.得意先DataGridViewTextBoxColumn.DataPropertyName = "得意先";
             this.得意先DataGridViewTextBoxColumn.HeaderText = "得意先";
             this.得意先DataGridViewTextBoxColumn.Name = "得意先DataGridViewTextBoxColumn";
+            this.得意先DataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // ジャンルDataGridViewTextBoxColumn
             // 
             this.ジャンルDataGridViewTextBoxColumn.DataPropertyName = "ジャンル";
             this.ジャンルDataGridViewTextBoxColumn.HeaderText = "ジャンル";
             this.ジャンルDataGridViewTextBoxColumn.Name = "ジャンルDataGridViewTextBoxColumn";
+            this.ジャンルDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // 商品名DataGridViewTextBoxColumn
             // 
             this.商品名DataGridViewTextBoxColumn.DataPropertyName = "商品名";
             this.商品名DataGridViewTextBoxColumn.HeaderText = "商品名";
             this.商品名DataGridViewTextBoxColumn.Name = "商品名DataGridViewTextBoxColumn";
+            this.商品名DataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // 規格DataGridViewTextBoxColumn
             // 
             this.規格DataGridViewTextBoxColumn.DataPropertyName = "規格";
             this.規格DataGridViewTextBoxColumn.HeaderText = "規格";
             this.規格DataGridViewTextBoxColumn.Name = "規格DataGridViewTextBoxColumn";
+            this.規格DataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // pT入数DataGridViewTextBoxColumn
             // 
             this.pT入数DataGridViewTextBoxColumn.DataPropertyName = "PT入数";
             this.pT入数DataGridViewTextBoxColumn.HeaderText = "PT入数";
             this.pT入数DataGridViewTextBoxColumn.Name = "pT入数DataGridViewTextBoxColumn";
+            this.pT入数DataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // 商品コードDataGridViewTextBoxColumn
             // 
             this.商品コードDataGridViewTextBoxColumn.DataPropertyName = "商品コード";
             this.商品コードDataGridViewTextBoxColumn.HeaderText = "商品コード";
             this.商品コードDataGridViewTextBoxColumn.Name = "商品コードDataGridViewTextBoxColumn";
+            this.商品コードDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // jANコードDataGridViewTextBoxColumn
             // 
             this.jANコードDataGridViewTextBoxColumn.DataPropertyName = "JANコード";
             this.jANコードDataGridViewTextBoxColumn.HeaderText = "JANコード";
             this.jANコードDataGridViewTextBoxColumn.Name = "jANコードDataGridViewTextBoxColumn";
+            this.jANコードDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // インストアコードDataGridViewTextBoxColumn
             // 
             this.インストアコードDataGridViewTextBoxColumn.DataPropertyName = "インストアコード";
             this.インストアコードDataGridViewTextBoxColumn.HeaderText = "インストアコード";
             this.インストアコードDataGridViewTextBoxColumn.Name = "インストアコードDataGridViewTextBoxColumn";
+            this.インストアコードDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // 単品重量DataGridViewTextBoxColumn
             // 
             this.単品重量DataGridViewTextBoxColumn.DataPropertyName = "単品重量";
             this.単品重量DataGridViewTextBoxColumn.HeaderText = "単品重量";
             this.単品重量DataGridViewTextBoxColumn.Name = "単品重量DataGridViewTextBoxColumn";
+            this.単品重量DataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // 単位DataGridViewTextBoxColumn
             // 
             this.単位DataGridViewTextBoxColumn.DataPropertyName = "単位";
             this.単位DataGridViewTextBoxColumn.HeaderText = "単位";
             this.単位DataGridViewTextBoxColumn.Name = "単位DataGridViewTextBoxColumn";
+            this.単位DataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // pT単位かDataGridViewTextBoxColumn
             // 
             this.pT単位かDataGridViewTextBoxColumn.DataPropertyName = "PT単位か";
             this.pT単位かDataGridViewTextBoxColumn.HeaderText = "PT単位か";
             this.pT単位かDataGridViewTextBoxColumn.Name = "pT単位かDataGridViewTextBoxColumn";
+            this.pT単位かDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ChangeToolStripMenuItem,
+            this.addItemToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(99, 48);
+            // 
+            // ChangeToolStripMenuItem
+            // 
+            this.ChangeToolStripMenuItem.Name = "ChangeToolStripMenuItem";
+            this.ChangeToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.ChangeToolStripMenuItem.Text = "編集";
+            this.ChangeToolStripMenuItem.Click += new System.EventHandler(this.ChangeToolStripMenuItem_Click);
+            // 
+            // addItemToolStripMenuItem
+            // 
+            this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.addItemToolStripMenuItem.Text = "新規";
+            this.addItemToolStripMenuItem.Visible = false;
+            this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
             // 
             // entityDataSource1
             // 
@@ -171,41 +206,18 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Location = new System.Drawing.Point(0, 46);
-            this.panel1.Margin = new System.Windows.Forms.Padding(8);
+            this.panel1.Location = new System.Drawing.Point(0, 42);
+            this.panel1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(754, 389);
+            this.panel1.Size = new System.Drawing.Size(754, 356);
             this.panel1.TabIndex = 2;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ChangeToolStripMenuItem,
-            this.addItemToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 48);
-            // 
-            // ChangeToolStripMenuItem
-            // 
-            this.ChangeToolStripMenuItem.Name = "ChangeToolStripMenuItem";
-            this.ChangeToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.ChangeToolStripMenuItem.Text = "編集";
-            this.ChangeToolStripMenuItem.Click += new System.EventHandler(this.ChangeToolStripMenuItem_Click);
-            // 
-            // addItemToolStripMenuItem
-            // 
-            this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
-            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.addItemToolStripMenuItem.Text = "新規";
-            this.addItemToolStripMenuItem.Visible = false;
-            this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
             // 
             // btAddItem
             // 
             this.btAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btAddItem.Location = new System.Drawing.Point(654, 8);
             this.btAddItem.Name = "btAddItem";
-            this.btAddItem.Size = new System.Drawing.Size(100, 32);
+            this.btAddItem.Size = new System.Drawing.Size(100, 30);
             this.btAddItem.TabIndex = 3;
             this.btAddItem.Text = "新規";
             this.btAddItem.UseVisualStyleBackColor = true;
@@ -213,16 +225,17 @@
             // 
             // ProductsControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.Controls.Add(this.btAddItem);
             this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "ProductsControl";
-            this.Size = new System.Drawing.Size(754, 438);
+            this.Size = new System.Drawing.Size(754, 402);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

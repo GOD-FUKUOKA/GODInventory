@@ -61,167 +61,167 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(425, 187);
+            this.textBox2.Location = new System.Drawing.Point(425, 172);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(230, 21);
+            this.textBox2.Size = new System.Drawing.Size(230, 18);
             this.textBox2.TabIndex = 10000040;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(55, 191);
+            this.label1.Location = new System.Drawing.Point(55, 175);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.Size = new System.Drawing.Size(27, 11);
             this.label1.TabIndex = 10000037;
             this.label1.Text = "住所";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(90, 187);
+            this.textBox1.Location = new System.Drawing.Point(90, 172);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(230, 21);
+            this.textBox1.Size = new System.Drawing.Size(230, 18);
             this.textBox1.TabIndex = 10000038;
             // 
             // storeCodeTextBox
             // 
             this.storeCodeTextBox.Enabled = false;
-            this.storeCodeTextBox.Location = new System.Drawing.Point(90, 35);
+            this.storeCodeTextBox.Location = new System.Drawing.Point(90, 32);
             this.storeCodeTextBox.Name = "storeCodeTextBox";
-            this.storeCodeTextBox.Size = new System.Drawing.Size(230, 21);
+            this.storeCodeTextBox.Size = new System.Drawing.Size(230, 18);
             this.storeCodeTextBox.TabIndex = 31;
             this.storeCodeTextBox.MouseLeave += new System.EventHandler(this.storeNamTextBox_MouseLeave);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(355, 153);
+            this.label11.Location = new System.Drawing.Point(355, 140);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(65, 12);
+            this.label11.Size = new System.Drawing.Size(55, 11);
             this.label11.TabIndex = 27;
             this.label11.Text = "県内エリア";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(367, 115);
+            this.label9.Location = new System.Drawing.Point(367, 106);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.Size = new System.Drawing.Size(49, 11);
             this.label9.TabIndex = 23;
             this.label9.Text = "郵便番号";
             // 
             // productKanjiSpecificationTextBox
             // 
-            this.productKanjiSpecificationTextBox.Location = new System.Drawing.Point(425, 149);
+            this.productKanjiSpecificationTextBox.Location = new System.Drawing.Point(425, 136);
             this.productKanjiSpecificationTextBox.Name = "productKanjiSpecificationTextBox";
-            this.productKanjiSpecificationTextBox.Size = new System.Drawing.Size(230, 21);
+            this.productKanjiSpecificationTextBox.Size = new System.Drawing.Size(230, 18);
             this.productKanjiSpecificationTextBox.TabIndex = 28;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(355, 233);
+            this.label12.Location = new System.Drawing.Point(355, 213);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 12);
+            this.label12.Size = new System.Drawing.Size(58, 11);
             this.label12.TabIndex = 10000031;
             this.label12.Text = "customerId";
             this.label12.Visible = false;
             // 
             // orderQuantityTextBox11
             // 
-            this.orderQuantityTextBox11.Location = new System.Drawing.Point(425, 229);
+            this.orderQuantityTextBox11.Location = new System.Drawing.Point(425, 210);
             this.orderQuantityTextBox11.Name = "orderQuantityTextBox11";
-            this.orderQuantityTextBox11.Size = new System.Drawing.Size(230, 21);
+            this.orderQuantityTextBox11.Size = new System.Drawing.Size(230, 18);
             this.orderQuantityTextBox11.TabIndex = 10000032;
             this.orderQuantityTextBox11.Visible = false;
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(425, 111);
+            this.textBox8.Location = new System.Drawing.Point(425, 102);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(230, 21);
+            this.textBox8.Size = new System.Drawing.Size(230, 18);
             this.textBox8.TabIndex = 24;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(55, 153);
+            this.label10.Location = new System.Drawing.Point(55, 140);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.Size = new System.Drawing.Size(27, 11);
             this.label10.TabIndex = 25;
             this.label10.Text = "県別";
             // 
             // productKanjiNameTextBox
             // 
-            this.productKanjiNameTextBox.Location = new System.Drawing.Point(90, 149);
+            this.productKanjiNameTextBox.Location = new System.Drawing.Point(90, 136);
             this.productKanjiNameTextBox.Name = "productKanjiNameTextBox";
-            this.productKanjiNameTextBox.Size = new System.Drawing.Size(230, 21);
+            this.productKanjiNameTextBox.Size = new System.Drawing.Size(230, 18);
             this.productKanjiNameTextBox.TabIndex = 26;
             // 
             // textBox12
             // 
-            this.textBox12.Location = new System.Drawing.Point(90, 73);
+            this.textBox12.Location = new System.Drawing.Point(90, 67);
             this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(230, 21);
+            this.textBox12.Size = new System.Drawing.Size(230, 18);
             this.textBox12.TabIndex = 20;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(31, 77);
+            this.label13.Location = new System.Drawing.Point(31, 70);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(53, 12);
+            this.label13.Size = new System.Drawing.Size(46, 11);
             this.label13.TabIndex = 19;
             this.label13.Text = "店名カナ";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(31, 115);
+            this.label4.Location = new System.Drawing.Point(31, 106);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.Size = new System.Drawing.Size(49, 11);
             this.label4.TabIndex = 27;
             this.label4.Text = "配送担当";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(391, 39);
+            this.label6.Location = new System.Drawing.Point(391, 36);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.Size = new System.Drawing.Size(27, 11);
             this.label6.TabIndex = 11;
             this.label6.Text = "店名";
             // 
             // storeNameTextBox
             // 
-            this.storeNameTextBox.Location = new System.Drawing.Point(425, 35);
+            this.storeNameTextBox.Location = new System.Drawing.Point(425, 32);
             this.storeNameTextBox.Name = "storeNameTextBox";
-            this.storeNameTextBox.Size = new System.Drawing.Size(230, 21);
+            this.storeNameTextBox.Size = new System.Drawing.Size(230, 18);
             this.storeNameTextBox.TabIndex = 12;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(55, 39);
+            this.label2.Location = new System.Drawing.Point(55, 36);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.Size = new System.Drawing.Size(27, 11);
             this.label2.TabIndex = 1;
             this.label2.Text = "店番";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(367, 191);
+            this.label5.Location = new System.Drawing.Point(367, 175);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
+            this.label5.Size = new System.Drawing.Size(49, 11);
             this.label5.TabIndex = 10000039;
             this.label5.Text = "電話番号";
             // 
             // submitFormButton
             // 
             this.submitFormButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.submitFormButton.Location = new System.Drawing.Point(461, 307);
+            this.submitFormButton.Location = new System.Drawing.Point(461, 282);
             this.submitFormButton.Name = "submitFormButton";
-            this.submitFormButton.Size = new System.Drawing.Size(100, 32);
+            this.submitFormButton.Size = new System.Drawing.Size(100, 30);
             this.submitFormButton.TabIndex = 10000034;
             this.submitFormButton.Text = "保存";
             this.submitFormButton.UseVisualStyleBackColor = true;
@@ -229,9 +229,9 @@
             // 
             // cancelFormButton
             // 
-            this.cancelFormButton.Location = new System.Drawing.Point(567, 307);
+            this.cancelFormButton.Location = new System.Drawing.Point(567, 282);
             this.cancelFormButton.Name = "cancelFormButton";
-            this.cancelFormButton.Size = new System.Drawing.Size(100, 32);
+            this.cancelFormButton.Size = new System.Drawing.Size(100, 30);
             this.cancelFormButton.TabIndex = 10000035;
             this.cancelFormButton.Text = "キャンセル";
             this.cancelFormButton.UseVisualStyleBackColor = true;
@@ -240,17 +240,17 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(372, 78);
+            this.label7.Location = new System.Drawing.Point(372, 72);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 12);
+            this.label7.Size = new System.Drawing.Size(47, 11);
             this.label7.TabIndex = 10000030;
             this.label7.Text = "FAX番号";
             // 
             // productReceivedAtTextBox3
             // 
-            this.productReceivedAtTextBox3.Location = new System.Drawing.Point(425, 73);
+            this.productReceivedAtTextBox3.Location = new System.Drawing.Point(425, 67);
             this.productReceivedAtTextBox3.Name = "productReceivedAtTextBox3";
-            this.productReceivedAtTextBox3.Size = new System.Drawing.Size(230, 21);
+            this.productReceivedAtTextBox3.Size = new System.Drawing.Size(230, 18);
             this.productReceivedAtTextBox3.TabIndex = 10000036;
             // 
             // groupBox1
@@ -277,9 +277,9 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.storeNameTextBox);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 11);
+            this.groupBox1.Location = new System.Drawing.Point(12, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(683, 274);
+            this.groupBox1.Size = new System.Drawing.Size(683, 251);
             this.groupBox1.TabIndex = 10000033;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
@@ -291,9 +291,9 @@
             "丸健",
             "MKL",
             "マツモト産業"});
-            this.orderReceivedAtTextBox.Location = new System.Drawing.Point(90, 111);
+            this.orderReceivedAtTextBox.Location = new System.Drawing.Point(90, 102);
             this.orderReceivedAtTextBox.Name = "orderReceivedAtTextBox";
-            this.orderReceivedAtTextBox.Size = new System.Drawing.Size(230, 20);
+            this.orderReceivedAtTextBox.Size = new System.Drawing.Size(230, 19);
             this.orderReceivedAtTextBox.TabIndex = 10000041;
             // 
             // errorProvider1
@@ -302,12 +302,13 @@
             // 
             // StoresManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(710, 361);
+            this.ClientSize = new System.Drawing.Size(710, 331);
             this.Controls.Add(this.submitFormButton);
             this.Controls.Add(this.cancelFormButton);
             this.Controls.Add(this.groupBox1);
+            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "StoresManagement";

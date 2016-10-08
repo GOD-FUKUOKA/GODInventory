@@ -41,42 +41,42 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(43, 59);
+            this.label1.Location = new System.Drawing.Point(43, 54);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 12);
+            this.label1.Size = new System.Drawing.Size(66, 11);
             this.label1.TabIndex = 0;
             this.label1.Text = "NYOTEI Path";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pathTextBox1
             // 
-            this.pathTextBox1.Location = new System.Drawing.Point(125, 59);
+            this.pathTextBox1.Location = new System.Drawing.Point(125, 54);
             this.pathTextBox1.Name = "pathTextBox1";
             this.pathTextBox1.ReadOnly = true;
-            this.pathTextBox1.Size = new System.Drawing.Size(428, 21);
+            this.pathTextBox1.Size = new System.Drawing.Size(428, 18);
             this.pathTextBox1.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(42, 122);
+            this.label2.Location = new System.Drawing.Point(42, 112);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 12);
+            this.label2.Size = new System.Drawing.Size(64, 11);
             this.label2.TabIndex = 3;
             this.label2.Text = "Order Count";
             // 
             // orderCountTextBox
             // 
-            this.orderCountTextBox.Location = new System.Drawing.Point(125, 122);
+            this.orderCountTextBox.Location = new System.Drawing.Point(125, 112);
             this.orderCountTextBox.Name = "orderCountTextBox";
-            this.orderCountTextBox.Size = new System.Drawing.Size(428, 21);
+            this.orderCountTextBox.Size = new System.Drawing.Size(428, 18);
             this.orderCountTextBox.TabIndex = 4;
             // 
             // submitButton
             // 
-            this.submitButton.Location = new System.Drawing.Point(373, 195);
+            this.submitButton.Location = new System.Drawing.Point(373, 179);
             this.submitButton.Name = "submitButton";
-            this.submitButton.Size = new System.Drawing.Size(75, 23);
+            this.submitButton.Size = new System.Drawing.Size(75, 21);
             this.submitButton.TabIndex = 5;
             this.submitButton.Text = "Submit";
             this.submitButton.UseVisualStyleBackColor = true;
@@ -85,9 +85,9 @@
             // cancleButton
             // 
             this.cancleButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancleButton.Location = new System.Drawing.Point(478, 194);
+            this.cancleButton.Location = new System.Drawing.Point(478, 178);
             this.cancleButton.Name = "cancleButton";
-            this.cancleButton.Size = new System.Drawing.Size(75, 23);
+            this.cancleButton.Size = new System.Drawing.Size(75, 21);
             this.cancleButton.TabIndex = 6;
             this.cancleButton.Text = "Cancel";
             this.cancleButton.UseVisualStyleBackColor = true;
@@ -98,15 +98,16 @@
             // 
             // GenerateASNTextForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(631, 262);
+            this.ClientSize = new System.Drawing.Size(631, 240);
             this.Controls.Add(this.cancleButton);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.orderCountTextBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pathTextBox1);
             this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GenerateASNTextForm";

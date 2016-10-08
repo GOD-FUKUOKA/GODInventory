@@ -48,9 +48,9 @@
             // 
             // openFileBtton
             // 
-            this.openFileBtton.Location = new System.Drawing.Point(413, 83);
+            this.openFileBtton.Location = new System.Drawing.Point(413, 76);
             this.openFileBtton.Name = "openFileBtton";
-            this.openFileBtton.Size = new System.Drawing.Size(31, 23);
+            this.openFileBtton.Size = new System.Drawing.Size(31, 21);
             this.openFileBtton.TabIndex = 0;
             this.openFileBtton.Text = "...";
             this.openFileBtton.UseVisualStyleBackColor = true;
@@ -58,25 +58,25 @@
             // 
             // pathTextBox
             // 
-            this.pathTextBox.Location = new System.Drawing.Point(130, 84);
+            this.pathTextBox.Location = new System.Drawing.Point(130, 77);
             this.pathTextBox.Name = "pathTextBox";
-            this.pathTextBox.Size = new System.Drawing.Size(277, 21);
+            this.pathTextBox.Size = new System.Drawing.Size(277, 18);
             this.pathTextBox.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 88);
+            this.label1.Location = new System.Drawing.Point(33, 80);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 12);
+            this.label1.Size = new System.Drawing.Size(73, 11);
             this.label1.TabIndex = 2;
             this.label1.Text = "ファイルを指定";
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(132, 185);
+            this.importButton.Location = new System.Drawing.Point(132, 169);
             this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(100, 32);
+            this.importButton.Size = new System.Drawing.Size(100, 30);
             this.importButton.TabIndex = 3;
             this.importButton.Text = "導入";
             this.importButton.UseVisualStyleBackColor = true;
@@ -85,9 +85,9 @@
             // cancelButton
             // 
             this.cancelButton.Enabled = false;
-            this.cancelButton.Location = new System.Drawing.Point(238, 185);
+            this.cancelButton.Location = new System.Drawing.Point(238, 169);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 32);
+            this.cancelButton.Size = new System.Drawing.Size(100, 30);
             this.cancelButton.TabIndex = 4;
             this.cancelButton.Text = "キャンセル";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -103,26 +103,26 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(35, 137);
+            this.progressBar1.Location = new System.Drawing.Point(35, 125);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(409, 23);
+            this.progressBar1.Size = new System.Drawing.Size(409, 21);
             this.progressBar1.TabIndex = 5;
             // 
             // progressMsgLabel
             // 
             this.progressMsgLabel.AutoSize = true;
-            this.progressMsgLabel.Location = new System.Drawing.Point(35, 119);
+            this.progressMsgLabel.Location = new System.Drawing.Point(35, 109);
             this.progressMsgLabel.Name = "progressMsgLabel";
-            this.progressMsgLabel.Size = new System.Drawing.Size(23, 12);
+            this.progressMsgLabel.Size = new System.Drawing.Size(23, 11);
             this.progressMsgLabel.TabIndex = 6;
             this.progressMsgLabel.Text = "0/0";
             // 
             // titleLabel
             // 
-            this.titleLabel.Font = new System.Drawing.Font("SimSun", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.titleLabel.Location = new System.Drawing.Point(12, 29);
+            this.titleLabel.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.titleLabel.Location = new System.Drawing.Point(12, 26);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(458, 23);
+            this.titleLabel.Size = new System.Drawing.Size(458, 21);
             this.titleLabel.TabIndex = 7;
             this.titleLabel.Text = "SNAP受注ＣＳＶデータ導入";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -130,9 +130,9 @@
             // closeButton
             // 
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.closeButton.Location = new System.Drawing.Point(344, 185);
+            this.closeButton.Location = new System.Drawing.Point(344, 169);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(100, 32);
+            this.closeButton.Size = new System.Drawing.Size(100, 30);
             this.closeButton.TabIndex = 8;
             this.closeButton.Text = "閉じる";
             this.closeButton.UseVisualStyleBackColor = true;
@@ -140,9 +140,9 @@
             // 
             // ImportOrderCSVForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 242);
+            this.ClientSize = new System.Drawing.Size(484, 222);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.progressMsgLabel);
@@ -152,6 +152,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pathTextBox);
             this.Controls.Add(this.openFileBtton);
+            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ImportOrderCSVForm";

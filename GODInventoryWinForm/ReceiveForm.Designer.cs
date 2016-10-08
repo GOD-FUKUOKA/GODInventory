@@ -37,9 +37,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 38);
+            this.label1.Location = new System.Drawing.Point(28, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 12);
+            this.label1.Size = new System.Drawing.Size(93, 11);
             this.label1.TabIndex = 0;
             this.label1.Text = "ナフコEDI受信処理";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -49,18 +49,18 @@
             this.okButton1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton1.Location = new System.Drawing.Point(185, 155);
+            this.okButton1.Location = new System.Drawing.Point(185, 142);
             this.okButton1.Name = "okButton1";
-            this.okButton1.Size = new System.Drawing.Size(75, 23);
+            this.okButton1.Size = new System.Drawing.Size(75, 21);
             this.okButton1.TabIndex = 1;
             this.okButton1.Text = "OK";
             this.okButton1.UseVisualStyleBackColor = true;
             // 
             // processMsgLabel2
             // 
-            this.processMsgLabel2.Location = new System.Drawing.Point(3, 69);
+            this.processMsgLabel2.Location = new System.Drawing.Point(3, 63);
             this.processMsgLabel2.Name = "processMsgLabel2";
-            this.processMsgLabel2.Size = new System.Drawing.Size(441, 21);
+            this.processMsgLabel2.Size = new System.Drawing.Size(441, 19);
             this.processMsgLabel2.TabIndex = 2;
             this.processMsgLabel2.Text = "起動中";
             this.processMsgLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -68,22 +68,23 @@
             // msgLabel
             // 
             this.msgLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.msgLabel.Location = new System.Drawing.Point(5, 98);
+            this.msgLabel.Location = new System.Drawing.Point(5, 90);
             this.msgLabel.Name = "msgLabel";
-            this.msgLabel.Size = new System.Drawing.Size(441, 38);
+            this.msgLabel.Size = new System.Drawing.Size(441, 35);
             this.msgLabel.TabIndex = 3;
             this.msgLabel.Text = "Message";
             this.msgLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ReceiveForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 205);
+            this.ClientSize = new System.Drawing.Size(458, 188);
             this.Controls.Add(this.msgLabel);
             this.Controls.Add(this.processMsgLabel2);
             this.Controls.Add(this.okButton1);
             this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReceiveForm";

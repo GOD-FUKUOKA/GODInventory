@@ -51,7 +51,7 @@
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "GODInventoryWinForm.Reports.ShippingItemsReport.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(732, 279);
+            this.reportViewer1.Size = new System.Drawing.Size(732, 256);
             this.reportViewer1.TabIndex = 0;
             this.reportViewer1.Print += new Microsoft.Reporting.WinForms.ReportPrintEventHandler(this.reportViewer1_Print);
             // 
@@ -61,10 +61,11 @@
             // 
             // ShippingItemsReportForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 279);
+            this.ClientSize = new System.Drawing.Size(732, 256);
             this.Controls.Add(this.reportViewer1);
+            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ShippingItemsReportForm";

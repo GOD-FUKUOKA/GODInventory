@@ -43,10 +43,10 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(317, 63);
+            this.button1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.Location = new System.Drawing.Point(317, 58);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 64);
+            this.button1.Size = new System.Drawing.Size(144, 58);
             this.button1.TabIndex = 0;
             this.button1.Text = "在庫管理";
             this.button1.UseVisualStyleBackColor = true;
@@ -54,10 +54,10 @@
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(76, 63);
+            this.button2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.Location = new System.Drawing.Point(76, 58);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(144, 64);
+            this.button2.Size = new System.Drawing.Size(144, 58);
             this.button2.TabIndex = 1;
             this.button2.Text = "入庫";
             this.button2.UseVisualStyleBackColor = true;
@@ -67,19 +67,19 @@
             // 
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
-            this.panel1.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel1.Location = new System.Drawing.Point(3, 234);
+            this.panel1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panel1.Location = new System.Drawing.Point(3, 215);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(763, 100);
+            this.panel1.Size = new System.Drawing.Size(763, 91);
             this.panel1.TabIndex = 2;
             // 
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button4.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button4.Location = new System.Drawing.Point(425, 19);
+            this.button4.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button4.Location = new System.Drawing.Point(425, 18);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(144, 64);
+            this.button4.Size = new System.Drawing.Size(144, 58);
             this.button4.TabIndex = 1;
             this.button4.Text = "倉庫間移動";
             this.button4.UseVisualStyleBackColor = true;
@@ -88,10 +88,10 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button3.Location = new System.Drawing.Point(187, 19);
+            this.button3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.Location = new System.Drawing.Point(187, 18);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(144, 64);
+            this.button3.Size = new System.Drawing.Size(144, 58);
             this.button3.TabIndex = 0;
             this.button3.Text = "棚卸";
             this.button3.UseVisualStyleBackColor = true;
@@ -99,10 +99,10 @@
             // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button5.Location = new System.Drawing.Point(558, 63);
+            this.button5.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button5.Location = new System.Drawing.Point(558, 58);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(144, 64);
+            this.button5.Size = new System.Drawing.Size(144, 58);
             this.button5.TabIndex = 3;
             this.button5.Text = "出庫";
             this.button5.UseVisualStyleBackColor = true;
@@ -111,8 +111,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(254, 86);
+            this.label1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(254, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 19);
             this.label1.TabIndex = 4;
@@ -121,8 +121,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(495, 86);
+            this.label2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(495, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 19);
             this.label2.TabIndex = 4;
@@ -136,19 +136,20 @@
             this.contentPanel.Controls.Add(this.button1);
             this.contentPanel.Controls.Add(this.button5);
             this.contentPanel.Controls.Add(this.button2);
-            this.contentPanel.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.contentPanel.Location = new System.Drawing.Point(3, 56);
+            this.contentPanel.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.contentPanel.Location = new System.Drawing.Point(3, 52);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(769, 337);
+            this.contentPanel.Size = new System.Drawing.Size(769, 309);
             this.contentPanel.TabIndex = 5;
             // 
             // WarehouseControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.contentPanel);
+            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "WarehouseControl";
-            this.Size = new System.Drawing.Size(775, 427);
+            this.Size = new System.Drawing.Size(775, 392);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.WarehouseControl_Paint);
             this.panel1.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);

@@ -68,8 +68,6 @@
             this.shipperComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.受注日Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.場所Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,6 +85,8 @@
             this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注区分Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品指示Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -104,19 +104,19 @@
             this.moveDownToolStripMenuItem,
             this.editToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 48);
             // 
             // moveDownToolStripMenuItem
             // 
             this.moveDownToolStripMenuItem.Name = "moveDownToolStripMenuItem";
-            this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.moveDownToolStripMenuItem.Text = "配車表入れ";
             this.moveDownToolStripMenuItem.Click += new System.EventHandler(this.moveDownToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.editToolStripMenuItem.Text = "編集";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
@@ -137,7 +137,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1028, 442);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1028, 405);
             this.tableLayoutPanel1.TabIndex = 11;
             // 
             // groupBox2
@@ -153,27 +153,27 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.shippedAtDateTimePicker1);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(3, 224);
+            this.groupBox2.Location = new System.Drawing.Point(3, 205);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1022, 215);
+            this.groupBox2.Size = new System.Drawing.Size(1022, 197);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             // 
             // shipNOComboBox
             // 
             this.shipNOComboBox.FormattingEnabled = true;
-            this.shipNOComboBox.Location = new System.Drawing.Point(105, 20);
+            this.shipNOComboBox.Location = new System.Drawing.Point(105, 19);
             this.shipNOComboBox.Name = "shipNOComboBox";
-            this.shipNOComboBox.Size = new System.Drawing.Size(119, 20);
+            this.shipNOComboBox.Size = new System.Drawing.Size(119, 19);
             this.shipNOComboBox.TabIndex = 10;
             this.shipNOComboBox.SelectedIndexChanged += new System.EventHandler(this.shipNOComboBox_SelectedIndexChanged);
             this.shipNOComboBox.TextChanged += new System.EventHandler(this.shipNOComboBox_TextChanged);
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(723, 13);
+            this.saveButton.Location = new System.Drawing.Point(723, 12);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(100, 32);
+            this.saveButton.Size = new System.Drawing.Size(100, 30);
             this.saveButton.TabIndex = 9;
             this.saveButton.Text = "登録";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -206,13 +206,13 @@
             this.発注区分Column2,
             this.納品指示Column2});
             this.dataGridView2.ContextMenuStrip = this.contextMenuStrip2;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 58);
+            this.dataGridView2.Location = new System.Drawing.Point(3, 53);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(1016, 153);
+            this.dataGridView2.Size = new System.Drawing.Size(1016, 140);
             this.dataGridView2.TabIndex = 8;
             // 
             // 受注日Column2
@@ -325,55 +325,55 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveUpToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(137, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(135, 26);
             // 
             // moveUpToolStripMenuItem
             // 
             this.moveUpToolStripMenuItem.Name = "moveUpToolStripMenuItem";
-            this.moveUpToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.moveUpToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.moveUpToolStripMenuItem.Text = "配車表除き";
             this.moveUpToolStripMenuItem.Click += new System.EventHandler(this.moveUpToolStripMenuItem_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 24);
+            this.label2.Location = new System.Drawing.Point(8, 22);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 12);
+            this.label2.Size = new System.Drawing.Size(82, 11);
             this.label2.TabIndex = 5;
             this.label2.Text = "出荷指示書番号";
             // 
             // deliveredAtDateTimePicker2
             // 
-            this.deliveredAtDateTimePicker2.Location = new System.Drawing.Point(535, 20);
+            this.deliveredAtDateTimePicker2.Location = new System.Drawing.Point(535, 19);
             this.deliveredAtDateTimePicker2.Name = "deliveredAtDateTimePicker2";
-            this.deliveredAtDateTimePicker2.Size = new System.Drawing.Size(153, 21);
+            this.deliveredAtDateTimePicker2.Size = new System.Drawing.Size(153, 18);
             this.deliveredAtDateTimePicker2.TabIndex = 7;
             this.deliveredAtDateTimePicker2.ValueChanged += new System.EventHandler(this.deliveredAtDateTimePicker2_ValueChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(488, 24);
+            this.label4.Location = new System.Drawing.Point(488, 22);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.Size = new System.Drawing.Size(38, 11);
             this.label4.TabIndex = 5;
             this.label4.Text = "納品日";
             // 
             // shippedAtDateTimePicker1
             // 
-            this.shippedAtDateTimePicker1.Location = new System.Drawing.Point(307, 20);
+            this.shippedAtDateTimePicker1.Location = new System.Drawing.Point(307, 19);
             this.shippedAtDateTimePicker1.Name = "shippedAtDateTimePicker1";
-            this.shippedAtDateTimePicker1.Size = new System.Drawing.Size(153, 21);
+            this.shippedAtDateTimePicker1.Size = new System.Drawing.Size(153, 18);
             this.shippedAtDateTimePicker1.TabIndex = 7;
             this.shippedAtDateTimePicker1.ValueChanged += new System.EventHandler(this.shippedAtDateTimePicker1_ValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(260, 24);
+            this.label3.Location = new System.Drawing.Point(260, 22);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 12);
+            this.label3.Size = new System.Drawing.Size(38, 11);
             this.label3.TabIndex = 5;
             this.label3.Text = "出荷日";
             // 
@@ -391,7 +391,7 @@
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1022, 215);
+            this.groupBox1.Size = new System.Drawing.Size(1022, 196);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             // 
@@ -399,18 +399,18 @@
             // 
             this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.storeComboBox.FormattingEnabled = true;
-            this.storeComboBox.Location = new System.Drawing.Point(535, 19);
+            this.storeComboBox.Location = new System.Drawing.Point(535, 18);
             this.storeComboBox.Name = "storeComboBox";
-            this.storeComboBox.Size = new System.Drawing.Size(121, 20);
+            this.storeComboBox.Size = new System.Drawing.Size(121, 19);
             this.storeComboBox.TabIndex = 6;
             this.storeComboBox.SelectedIndexChanged += new System.EventHandler(this.storeComboBox_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(464, 23);
+            this.label6.Location = new System.Drawing.Point(464, 21);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.Size = new System.Drawing.Size(60, 11);
             this.label6.TabIndex = 7;
             this.label6.Text = "店舗名漢字";
             // 
@@ -418,18 +418,18 @@
             // 
             this.countyComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.countyComboBox1.FormattingEnabled = true;
-            this.countyComboBox1.Location = new System.Drawing.Point(295, 19);
+            this.countyComboBox1.Location = new System.Drawing.Point(295, 18);
             this.countyComboBox1.Name = "countyComboBox1";
-            this.countyComboBox1.Size = new System.Drawing.Size(121, 20);
+            this.countyComboBox1.Size = new System.Drawing.Size(121, 19);
             this.countyComboBox1.TabIndex = 4;
             this.countyComboBox1.SelectedIndexChanged += new System.EventHandler(this.countyComboBox_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(260, 23);
+            this.label5.Location = new System.Drawing.Point(260, 21);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.Size = new System.Drawing.Size(27, 11);
             this.label5.TabIndex = 5;
             this.label5.Text = "県別";
             // 
@@ -441,18 +441,18 @@
             "丸健",
             "MKL",
             "マツモト産業"});
-            this.shipperComboBox.Location = new System.Drawing.Point(91, 19);
+            this.shipperComboBox.Location = new System.Drawing.Point(91, 18);
             this.shipperComboBox.Name = "shipperComboBox";
-            this.shipperComboBox.Size = new System.Drawing.Size(121, 20);
+            this.shipperComboBox.Size = new System.Drawing.Size(121, 19);
             this.shipperComboBox.TabIndex = 2;
             this.shipperComboBox.SelectedIndexChanged += new System.EventHandler(this.shipperComboBox_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 23);
+            this.label1.Location = new System.Drawing.Point(8, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 12);
+            this.label1.Size = new System.Drawing.Size(71, 11);
             this.label1.TabIndex = 3;
             this.label1.Text = "実際配送担当";
             // 
@@ -484,23 +484,15 @@
             this.発注区分Column1,
             this.納品指示Column1});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 50);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 46);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1016, 160);
+            this.dataGridView1.Size = new System.Drawing.Size(1016, 145);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // 受注日Column
             // 
@@ -623,12 +615,21 @@
             this.納品指示Column1.Name = "納品指示Column1";
             this.納品指示Column1.ReadOnly = true;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
             // WaitToShipForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1028, 442);
+            this.ClientSize = new System.Drawing.Size(1028, 405);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "WaitToShipForm";

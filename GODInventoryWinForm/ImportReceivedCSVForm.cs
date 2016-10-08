@@ -81,7 +81,7 @@ namespace GODInventoryWinForm
             }
             else if (e.Cancelled)
             {
-                MessageBox.Show(string.Format("It is cancelled!"));
+                MessageBox.Show(string.Format("キャンセルできました!"));
             }
             else
             {

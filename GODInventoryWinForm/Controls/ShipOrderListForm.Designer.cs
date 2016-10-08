@@ -83,12 +83,12 @@
             this.発注形態名称漢字Column1});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 58);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 53);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1005, 428);
+            this.dataGridView1.Size = new System.Drawing.Size(1005, 393);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
@@ -181,21 +181,21 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.backToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(159, 26);
             // 
             // backToolStripMenuItem
             // 
             this.backToolStripMenuItem.Name = "backToolStripMenuItem";
-            this.backToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.backToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.backToolStripMenuItem.Text = "退回待发货状态";
             this.backToolStripMenuItem.Click += new System.EventHandler(this.backToolStripMenuItem_Click);
             // 
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Location = new System.Drawing.Point(589, 12);
+            this.cancelButton.Location = new System.Drawing.Point(589, 11);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 32);
+            this.cancelButton.Size = new System.Drawing.Size(100, 30);
             this.cancelButton.TabIndex = 2;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -205,9 +205,9 @@
             // saveButton
             // 
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveButton.Location = new System.Drawing.Point(802, 12);
+            this.saveButton.Location = new System.Drawing.Point(802, 11);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(100, 32);
+            this.saveButton.Size = new System.Drawing.Size(100, 30);
             this.saveButton.TabIndex = 3;
             this.saveButton.Text = "保存";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -216,10 +216,10 @@
             // shipNOLabel
             // 
             this.shipNOLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.shipNOLabel.Location = new System.Drawing.Point(107, 21);
+            this.shipNOLabel.Location = new System.Drawing.Point(107, 19);
             this.shipNOLabel.Name = "shipNOLabel";
             this.shipNOLabel.Padding = new System.Windows.Forms.Padding(6, 0, 0, 0);
-            this.shipNOLabel.Size = new System.Drawing.Size(117, 23);
+            this.shipNOLabel.Size = new System.Drawing.Size(117, 21);
             this.shipNOLabel.TabIndex = 4;
             this.shipNOLabel.Text = "label1";
             this.shipNOLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -227,9 +227,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 26);
+            this.label1.Location = new System.Drawing.Point(12, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 12);
+            this.label1.Size = new System.Drawing.Size(82, 11);
             this.label1.TabIndex = 5;
             this.label1.Text = "出荷指示書番号";
             // 
@@ -237,9 +237,9 @@
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Abort;
-            this.closeButton.Location = new System.Drawing.Point(908, 12);
+            this.closeButton.Location = new System.Drawing.Point(908, 11);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(100, 32);
+            this.closeButton.Size = new System.Drawing.Size(100, 30);
             this.closeButton.TabIndex = 2;
             this.closeButton.Text = "閉じる";
             this.closeButton.UseVisualStyleBackColor = true;
@@ -251,15 +251,16 @@
             // 
             // ShipOrderListForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1010, 489);
+            this.ClientSize = new System.Drawing.Size(1010, 448);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.shipNOLabel);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.dataGridView1);
+            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ShipOrderListForm";

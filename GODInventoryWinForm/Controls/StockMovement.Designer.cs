@@ -82,10 +82,10 @@
             this.規格,
             this.数量});
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(32, 199);
+            this.dataGridView1.Location = new System.Drawing.Point(32, 183);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(678, 272);
+            this.dataGridView1.Size = new System.Drawing.Size(678, 250);
             this.dataGridView1.TabIndex = 43;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
@@ -133,9 +133,9 @@
             // 
             // btadd
             // 
-            this.btadd.Location = new System.Drawing.Point(582, 27);
+            this.btadd.Location = new System.Drawing.Point(582, 25);
             this.btadd.Name = "btadd";
-            this.btadd.Size = new System.Drawing.Size(100, 32);
+            this.btadd.Size = new System.Drawing.Size(100, 30);
             this.btadd.TabIndex = 61;
             this.btadd.Text = "商品リスト表示";
             this.btadd.UseVisualStyleBackColor = true;
@@ -145,9 +145,9 @@
             // 
             this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(114, 27);
+            this.genreComboBox.Location = new System.Drawing.Point(114, 25);
             this.genreComboBox.Name = "genreComboBox";
-            this.genreComboBox.Size = new System.Drawing.Size(179, 20);
+            this.genreComboBox.Size = new System.Drawing.Size(179, 19);
             this.genreComboBox.TabIndex = 60;
             this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged);
             this.genreComboBox.SelectedValueChanged += new System.EventHandler(this.genreComboBox_SelectedValueChanged);
@@ -156,17 +156,17 @@
             // 
             this.manufacturerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.manufacturerComboBox.FormattingEnabled = true;
-            this.manufacturerComboBox.Location = new System.Drawing.Point(387, 27);
+            this.manufacturerComboBox.Location = new System.Drawing.Point(387, 25);
             this.manufacturerComboBox.Name = "manufacturerComboBox";
-            this.manufacturerComboBox.Size = new System.Drawing.Size(179, 20);
+            this.manufacturerComboBox.Size = new System.Drawing.Size(179, 19);
             this.manufacturerComboBox.TabIndex = 59;
             // 
             // btclearzero
             // 
             this.btclearzero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btclearzero.Location = new System.Drawing.Point(730, 235);
+            this.btclearzero.Location = new System.Drawing.Point(730, 216);
             this.btclearzero.Name = "btclearzero";
-            this.btclearzero.Size = new System.Drawing.Size(100, 32);
+            this.btclearzero.Size = new System.Drawing.Size(100, 30);
             this.btclearzero.TabIndex = 58;
             this.btclearzero.Text = "クリア";
             this.btclearzero.UseVisualStyleBackColor = true;
@@ -175,9 +175,9 @@
             // btlogin
             // 
             this.btlogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btlogin.Location = new System.Drawing.Point(730, 199);
+            this.btlogin.Location = new System.Drawing.Point(730, 183);
             this.btlogin.Name = "btlogin";
-            this.btlogin.Size = new System.Drawing.Size(100, 32);
+            this.btlogin.Size = new System.Drawing.Size(100, 30);
             this.btlogin.TabIndex = 57;
             this.btlogin.Text = "登録";
             this.btlogin.UseVisualStyleBackColor = true;
@@ -186,47 +186,47 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(304, 155);
+            this.label8.Location = new System.Drawing.Point(304, 142);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 12);
+            this.label8.Size = new System.Drawing.Size(71, 11);
             this.label8.TabIndex = 55;
             this.label8.Text = "入庫記録番号";
             // 
             // stockInNumTextBox
             // 
             this.stockInNumTextBox.Enabled = false;
-            this.stockInNumTextBox.Location = new System.Drawing.Point(387, 151);
+            this.stockInNumTextBox.Location = new System.Drawing.Point(387, 139);
             this.stockInNumTextBox.Multiline = true;
             this.stockInNumTextBox.Name = "stockInNumTextBox";
             this.stockInNumTextBox.ReadOnly = true;
-            this.stockInNumTextBox.Size = new System.Drawing.Size(179, 20);
+            this.stockInNumTextBox.Size = new System.Drawing.Size(179, 18);
             this.stockInNumTextBox.TabIndex = 56;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(33, 155);
+            this.label7.Location = new System.Drawing.Point(33, 142);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 12);
+            this.label7.Size = new System.Drawing.Size(71, 11);
             this.label7.TabIndex = 53;
             this.label7.Text = "出庫記録番号";
             // 
             // stockOutNumTextBox
             // 
             this.stockOutNumTextBox.Enabled = false;
-            this.stockOutNumTextBox.Location = new System.Drawing.Point(114, 151);
+            this.stockOutNumTextBox.Location = new System.Drawing.Point(114, 139);
             this.stockOutNumTextBox.Multiline = true;
             this.stockOutNumTextBox.Name = "stockOutNumTextBox";
             this.stockOutNumTextBox.ReadOnly = true;
-            this.stockOutNumTextBox.Size = new System.Drawing.Size(179, 21);
+            this.stockOutNumTextBox.Size = new System.Drawing.Size(179, 19);
             this.stockOutNumTextBox.TabIndex = 54;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(364, 93);
+            this.label6.Location = new System.Drawing.Point(364, 85);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 12);
+            this.label6.Size = new System.Drawing.Size(16, 11);
             this.label6.TabIndex = 51;
             this.label6.Text = "へ";
             // 
@@ -234,18 +234,18 @@
             // 
             this.toWarehouseComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toWarehouseComboBox1.FormattingEnabled = true;
-            this.toWarehouseComboBox1.Location = new System.Drawing.Point(387, 89);
+            this.toWarehouseComboBox1.Location = new System.Drawing.Point(387, 81);
             this.toWarehouseComboBox1.Name = "toWarehouseComboBox1";
-            this.toWarehouseComboBox1.Size = new System.Drawing.Size(179, 20);
+            this.toWarehouseComboBox1.Size = new System.Drawing.Size(179, 19);
             this.toWarehouseComboBox1.TabIndex = 52;
             this.toWarehouseComboBox1.SelectedIndexChanged += new System.EventHandler(this.toWarehouseComboBox1_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(93, 93);
+            this.label5.Location = new System.Drawing.Point(93, 85);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 12);
+            this.label5.Size = new System.Drawing.Size(16, 11);
             this.label5.TabIndex = 49;
             this.label5.Text = "由";
             this.label5.Visible = false;
@@ -254,70 +254,70 @@
             // 
             this.fromWarehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.fromWarehouseComboBox.FormattingEnabled = true;
-            this.fromWarehouseComboBox.Location = new System.Drawing.Point(116, 89);
+            this.fromWarehouseComboBox.Location = new System.Drawing.Point(116, 81);
             this.fromWarehouseComboBox.Name = "fromWarehouseComboBox";
-            this.fromWarehouseComboBox.Size = new System.Drawing.Size(179, 20);
+            this.fromWarehouseComboBox.Size = new System.Drawing.Size(179, 19);
             this.fromWarehouseComboBox.TabIndex = 50;
             this.fromWarehouseComboBox.SelectedIndexChanged += new System.EventHandler(this.fromWarehouseComboBox_SelectedIndexChanged);
             // 
             // stockInDateTimePicker1
             // 
-            this.stockInDateTimePicker1.Location = new System.Drawing.Point(387, 57);
+            this.stockInDateTimePicker1.Location = new System.Drawing.Point(387, 52);
             this.stockInDateTimePicker1.Name = "stockInDateTimePicker1";
-            this.stockInDateTimePicker1.Size = new System.Drawing.Size(179, 21);
+            this.stockInDateTimePicker1.Size = new System.Drawing.Size(179, 18);
             this.stockInDateTimePicker1.TabIndex = 48;
             this.stockInDateTimePicker1.ValueChanged += new System.EventHandler(this.stockInDateTimePicker1_ValueChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(328, 61);
+            this.label4.Location = new System.Drawing.Point(328, 56);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.Size = new System.Drawing.Size(49, 11);
             this.label4.TabIndex = 47;
             this.label4.Text = "入库日期";
             // 
             // stockOutDateTimePicker
             // 
-            this.stockOutDateTimePicker.Location = new System.Drawing.Point(116, 57);
+            this.stockOutDateTimePicker.Location = new System.Drawing.Point(116, 52);
             this.stockOutDateTimePicker.Name = "stockOutDateTimePicker";
-            this.stockOutDateTimePicker.Size = new System.Drawing.Size(179, 21);
+            this.stockOutDateTimePicker.Size = new System.Drawing.Size(179, 18);
             this.stockOutDateTimePicker.TabIndex = 46;
             this.stockOutDateTimePicker.ValueChanged += new System.EventHandler(this.stockOutDateTimePicker_ValueChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(69, 61);
+            this.label3.Location = new System.Drawing.Point(69, 56);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 12);
+            this.label3.Size = new System.Drawing.Size(38, 11);
             this.label3.TabIndex = 45;
             this.label3.Text = "出庫日";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(352, 31);
+            this.label2.Location = new System.Drawing.Point(352, 29);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.Size = new System.Drawing.Size(27, 11);
             this.label2.TabIndex = 44;
             this.label2.Text = "工厂";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 31);
+            this.label1.Location = new System.Drawing.Point(57, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(45, 11);
             this.label1.TabIndex = 42;
             this.label1.Text = "ジャンル";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(81, 124);
+            this.label9.Location = new System.Drawing.Point(81, 113);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(29, 12);
+            this.label9.Size = new System.Drawing.Size(27, 11);
             this.label9.TabIndex = 62;
             this.label9.Text = "状態";
             // 
@@ -328,9 +328,9 @@
             this.fromStatusComboBox4.Items.AddRange(new object[] {
             "完了",
             "仮"});
-            this.fromStatusComboBox4.Location = new System.Drawing.Point(114, 120);
+            this.fromStatusComboBox4.Location = new System.Drawing.Point(114, 110);
             this.fromStatusComboBox4.Name = "fromStatusComboBox4";
-            this.fromStatusComboBox4.Size = new System.Drawing.Size(179, 20);
+            this.fromStatusComboBox4.Size = new System.Drawing.Size(179, 19);
             this.fromStatusComboBox4.TabIndex = 63;
             // 
             // toStatusComboBox
@@ -340,25 +340,25 @@
             this.toStatusComboBox.Items.AddRange(new object[] {
             "完了",
             "仮"});
-            this.toStatusComboBox.Location = new System.Drawing.Point(387, 120);
+            this.toStatusComboBox.Location = new System.Drawing.Point(387, 110);
             this.toStatusComboBox.Name = "toStatusComboBox";
-            this.toStatusComboBox.Size = new System.Drawing.Size(179, 20);
+            this.toStatusComboBox.Size = new System.Drawing.Size(179, 19);
             this.toStatusComboBox.TabIndex = 65;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(352, 124);
+            this.label10.Location = new System.Drawing.Point(352, 113);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.Size = new System.Drawing.Size(27, 11);
             this.label10.TabIndex = 64;
             this.label10.Text = "状態";
             // 
             // StockMovement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(856, 490);
+            this.ClientSize = new System.Drawing.Size(856, 449);
             this.Controls.Add(this.toStatusComboBox);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.fromStatusComboBox4);
@@ -383,6 +383,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "StockMovement";

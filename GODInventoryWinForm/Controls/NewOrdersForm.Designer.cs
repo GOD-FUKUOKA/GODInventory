@@ -80,7 +80,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(981, 437);
+            this.tabControl1.Size = new System.Drawing.Size(981, 400);
             this.tabControl1.TabIndex = 2;
             // 
             // ordersTabPage
@@ -96,10 +96,10 @@
             this.ordersTabPage.Controls.Add(this.label1);
             this.ordersTabPage.Controls.Add(this.saveButton);
             this.ordersTabPage.Controls.Add(this.dataGridView1);
-            this.ordersTabPage.Location = new System.Drawing.Point(4, 22);
+            this.ordersTabPage.Location = new System.Drawing.Point(4, 21);
             this.ordersTabPage.Name = "ordersTabPage";
             this.ordersTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ordersTabPage.Size = new System.Drawing.Size(973, 411);
+            this.ordersTabPage.Size = new System.Drawing.Size(973, 375);
             this.ordersTabPage.TabIndex = 0;
             this.ordersTabPage.Text = "ダブリ確認";
             this.ordersTabPage.UseVisualStyleBackColor = true;
@@ -107,9 +107,9 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(226, 12);
+            this.label4.Location = new System.Drawing.Point(226, 11);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.Size = new System.Drawing.Size(27, 11);
             this.label4.TabIndex = 100;
             this.label4.Text = "县别";
             // 
@@ -119,7 +119,7 @@
             this.countyComboBox.FormattingEnabled = true;
             this.countyComboBox.Location = new System.Drawing.Point(261, 8);
             this.countyComboBox.Name = "countyComboBox";
-            this.countyComboBox.Size = new System.Drawing.Size(120, 20);
+            this.countyComboBox.Size = new System.Drawing.Size(120, 19);
             this.countyComboBox.TabIndex = 99;
             this.countyComboBox.SelectedIndexChanged += new System.EventHandler(this.countyComboBox1_SelectedIndexChanged);
             // 
@@ -127,7 +127,7 @@
             // 
             this.clearSelectButton.Location = new System.Drawing.Point(396, 8);
             this.clearSelectButton.Name = "clearSelectButton";
-            this.clearSelectButton.Size = new System.Drawing.Size(100, 45);
+            this.clearSelectButton.Size = new System.Drawing.Size(100, 41);
             this.clearSelectButton.TabIndex = 92;
             this.clearSelectButton.Text = "フィルターをリセット";
             this.clearSelectButton.UseVisualStyleBackColor = true;
@@ -137,18 +137,18 @@
             // 
             this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(67, 33);
+            this.genreComboBox.Location = new System.Drawing.Point(67, 30);
             this.genreComboBox.Name = "genreComboBox";
-            this.genreComboBox.Size = new System.Drawing.Size(120, 20);
+            this.genreComboBox.Size = new System.Drawing.Size(120, 19);
             this.genreComboBox.TabIndex = 91;
             this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.GenreNamecomboBox_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 37);
+            this.label3.Location = new System.Drawing.Point(26, 34);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 12);
+            this.label3.Size = new System.Drawing.Size(33, 11);
             this.label3.TabIndex = 90;
             this.label3.Text = "ｼﾞｬﾝﾙ";
             // 
@@ -156,18 +156,18 @@
             // 
             this.productComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.productComboBox.FormattingEnabled = true;
-            this.productComboBox.Location = new System.Drawing.Point(261, 33);
+            this.productComboBox.Location = new System.Drawing.Point(261, 30);
             this.productComboBox.Name = "productComboBox";
-            this.productComboBox.Size = new System.Drawing.Size(120, 20);
+            this.productComboBox.Size = new System.Drawing.Size(120, 19);
             this.productComboBox.TabIndex = 89;
             this.productComboBox.SelectedIndexChanged += new System.EventHandler(this.productCombox_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(214, 37);
+            this.label2.Location = new System.Drawing.Point(214, 34);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.Size = new System.Drawing.Size(38, 11);
             this.label2.TabIndex = 88;
             this.label2.Text = "商品名";
             // 
@@ -177,25 +177,25 @@
             this.shipperComboBox.FormattingEnabled = true;
             this.shipperComboBox.Location = new System.Drawing.Point(67, 8);
             this.shipperComboBox.Name = "shipperComboBox";
-            this.shipperComboBox.Size = new System.Drawing.Size(120, 20);
+            this.shipperComboBox.Size = new System.Drawing.Size(120, 19);
             this.shipperComboBox.TabIndex = 87;
             this.shipperComboBox.SelectedIndexChanged += new System.EventHandler(this.shipperComboBox_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 11);
+            this.label1.Location = new System.Drawing.Point(8, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(49, 11);
             this.label1.TabIndex = 86;
             this.label1.Text = "配送担当";
             // 
             // saveButton
             // 
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveButton.Location = new System.Drawing.Point(860, 14);
+            this.saveButton.Location = new System.Drawing.Point(860, 13);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(100, 32);
+            this.saveButton.Size = new System.Drawing.Size(100, 30);
             this.saveButton.TabIndex = 16;
             this.saveButton.Text = "登録";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -230,13 +230,13 @@
             this.Column2});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 60);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 55);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 28;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(967, 348);
+            this.dataGridView1.Size = new System.Drawing.Size(967, 320);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
@@ -376,33 +376,33 @@
             this.duplicateToolStripMenuItem,
             this.unduplicateToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(159, 92);
             // 
             // cancelOrderToolStripMenuItem
             // 
             this.cancelOrderToolStripMenuItem.Name = "cancelOrderToolStripMenuItem";
-            this.cancelOrderToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.cancelOrderToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.cancelOrderToolStripMenuItem.Text = "キャンセル確認";
             this.cancelOrderToolStripMenuItem.Click += new System.EventHandler(this.cancelOrderToolStripMenuItem_Click);
             // 
             // uncancleOrderToolStripMenuItem
             // 
             this.uncancleOrderToolStripMenuItem.Name = "uncancleOrderToolStripMenuItem";
-            this.uncancleOrderToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.uncancleOrderToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.uncancleOrderToolStripMenuItem.Text = "キャンセル解除";
             this.uncancleOrderToolStripMenuItem.Click += new System.EventHandler(this.uncancleOrderToolStripMenuItem_Click);
             // 
             // duplicateToolStripMenuItem
             // 
             this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
-            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.duplicateToolStripMenuItem.Text = "ダブり確認";
             this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
             // 
             // unduplicateToolStripMenuItem
             // 
             this.unduplicateToolStripMenuItem.Name = "unduplicateToolStripMenuItem";
-            this.unduplicateToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.unduplicateToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.unduplicateToolStripMenuItem.Text = "ダブリ解除";
             this.unduplicateToolStripMenuItem.Click += new System.EventHandler(this.unduplicateToolStripMenuItem_Click);
             // 
@@ -423,10 +423,11 @@
             // 
             // NewOrdersForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(981, 437);
+            this.ClientSize = new System.Drawing.Size(981, 400);
             this.Controls.Add(this.tabControl1);
+            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewOrdersForm";

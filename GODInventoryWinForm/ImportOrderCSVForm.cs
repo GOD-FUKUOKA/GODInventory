@@ -98,7 +98,7 @@ namespace GODInventoryWinForm
             }
             else if (e.Cancelled)
             {
-                MessageBox.Show(string.Format("It is cancelled!"));
+                MessageBox.Show(string.Format("キャンセルできました!"));
             }
             else
             {
@@ -196,7 +196,7 @@ namespace GODInventoryWinForm
                             if (worker.CancellationPending == true)
                             {
                                 e.Cancel = true;
-                                throw new Exception( "It is Cancelled successfully!");
+                                throw new Exception("キャンセルできました!");
                             }
                             arg.CurrentIndex = i + 1;
 
