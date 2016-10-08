@@ -517,7 +517,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\GODInventory.MyLinq.t_itemlist.datasource" />
     <None Include="Properties\DataSources\GODInventory.MyLinq.t_orderdata.datasource" />
     <None Include="Properties\DataSources\GODInventory.MyLinq.t_shoplist.datasource" />
     <None Include="Properties\DataSources\GODInventory.MyLinq.v_pendingorder.datasource" />
