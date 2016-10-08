@@ -34,7 +34,7 @@ namespace GODInventoryWinForm.Controls
                 if (form.ShowDialog() == DialogResult.OK)
                 {
 
-                    this.dataGridView1.Refresh();
+                    this.entityDataSource1.Refresh();
 
                 }
                 
@@ -48,16 +48,16 @@ namespace GODInventoryWinForm.Controls
 
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                if (e.RowIndex >= 0)
-                {
-                    dataGridView1.ClearSelection();
-                    dataGridView1.Columns[e.ColumnIndex].Selected = true;
-                    dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
-                }
-            }
+            //if (e.Button == MouseButtons.Right)
+            //{
+            //    if (e.RowIndex >= 0)
+            //    {
+            //        dataGridView1.ClearSelection();
+            //        dataGridView1.Columns[e.ColumnIndex].Selected = true;
+            //        dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            //        contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);
+            //    }
+            //}
         }
 
         private void addItemToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace GODInventoryWinForm.Controls
             if (form.ShowDialog() == DialogResult.OK)
             {
 
-                this.dataGridView1.Refresh();
+                this.entityDataSource1.Refresh();
 
             }
             //this.dataGridView1.CurrentCell = this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Cells[0]; 
@@ -103,7 +103,7 @@ namespace GODInventoryWinForm.Controls
             if (form.ShowDialog() == DialogResult.OK)
             {
 
-                this.dataGridView1.Refresh();
+                this.entityDataSource1.Refresh();
 
             }
         }

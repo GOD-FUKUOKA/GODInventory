@@ -72,11 +72,13 @@
             this.住所DataGridViewTextBoxColumn,
             this.電話番号DataGridViewTextBoxColumn,
             this.fAX番号DataGridViewTextBoxColumn});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.DataSource = this.bindingSource1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -172,19 +174,19 @@
             this.ChangeItem,
             this.addItemToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 48);
             // 
             // ChangeItem
             // 
             this.ChangeItem.Name = "ChangeItem";
-            this.ChangeItem.Size = new System.Drawing.Size(152, 22);
+            this.ChangeItem.Size = new System.Drawing.Size(100, 22);
             this.ChangeItem.Text = "編集";
             this.ChangeItem.Click += new System.EventHandler(this.SaveItem_Click);
             // 
             // addItemToolStripMenuItem
             // 
             this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
-            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.addItemToolStripMenuItem.Text = "新規";
             this.addItemToolStripMenuItem.Visible = false;
             this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);

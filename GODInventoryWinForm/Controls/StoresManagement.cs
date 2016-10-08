@@ -25,8 +25,8 @@ namespace GODInventoryWinForm.Controls
                 {
 
                     t_shoplist order = ctx.t_shoplist.Find(itemlist[0]);
-                    storeNamTextBox.Text = order.店番.ToString();
-                    storeCodeTextBox.Text = order.店名;
+                    storeCodeTextBox.Text = order.店番.ToString();
+                    storeNameTextBox.Text = order.店名;
                     textBox12.Text = order.店名カナ;
                     orderReceivedAtTextBox.Text = order.配送担当;
                     textBox8.Text = order.郵便番号.ToString();
@@ -40,7 +40,7 @@ namespace GODInventoryWinForm.Controls
                 }
             }
             else
-                this.storeNamTextBox.Enabled = true;
+                this.storeCodeTextBox.Enabled = true;
 
             showtype = type;
 
@@ -53,10 +53,10 @@ namespace GODInventoryWinForm.Controls
             {
                 if (showtype == "Update")
                 {
-                    t_shoplist order = ctx.t_shoplist.Find(Convert.ToInt32(storeNamTextBox.Text));
+                    t_shoplist order = ctx.t_shoplist.Find(Convert.ToInt32(storeCodeTextBox.Text));
 
                     order.店番 = Convert.ToInt32(storeCodeTextBox.Text);
-                    order.店名 = storeCodeTextBox.Text;
+                    order.店名 = storeNameTextBox.Text;
                     order.店名カナ = textBox12.Text;
                     order.配送担当 = orderReceivedAtTextBox.Text;
                     order.郵便番号 = textBox8.Text;
@@ -73,9 +73,9 @@ namespace GODInventoryWinForm.Controls
                 {
 
                     t_shoplist order = new t_shoplist();
-                    order.店番 = Convert.ToInt32(storeNamTextBox.Text);
+                    order.店番 = Convert.ToInt32(storeCodeTextBox.Text);
 
-                    order.店名 = storeCodeTextBox.Text;
+                    order.店名 = storeNameTextBox.Text;
 
                     order.店名カナ = textBox12.Text;
 
@@ -97,10 +97,11 @@ namespace GODInventoryWinForm.Controls
                     ctx.t_shoplist.Add(order);
                     ctx.SaveChanges();
                     MessageBox.Show(String.Format("Congratulations, You have   order added successfully!"));
-                    this.Close();
 
                 }
             }
+            this.Close();
+
         }
 
         private void cancelFormButton_Click(object sender, EventArgs e)
@@ -117,10 +118,10 @@ namespace GODInventoryWinForm.Controls
 
         private void storeNamTextBox_MouseLeave(object sender, EventArgs e)
         {
-            if (storeNamTextBox.Text == "")
+            if (storeCodeTextBox.Text == "")
                 return;
 
-            int zisheID = Convert.ToInt32(storeNamTextBox.Text);
+            int zisheID = Convert.ToInt32(storeCodeTextBox.Text);
 
             using (var ctx = new GODDbContext())
             {
@@ -130,7 +131,7 @@ namespace GODInventoryWinForm.Controls
 
                 if (List !=null)
                 {
-                    errorProvider1.SetError(storeNamTextBox, String.Format("店番 已存在"));
+                    errorProvider1.SetError(storeCodeTextBox, String.Format("店番 已存在"));
                     return;
                 }
             }

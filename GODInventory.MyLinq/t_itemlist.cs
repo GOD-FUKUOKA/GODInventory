@@ -41,7 +41,7 @@ namespace GODInventory.MyLinq
 
         public long JANコード { get; set; }
 
-        public double? インストアコード { get; set; }
+        public long? インストアコード { get; set; }
 
         public double 単品重量 { get; set; }
 

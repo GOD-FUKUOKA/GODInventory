@@ -134,7 +134,8 @@ namespace GODInventoryWinForm.Controls
             }
             AdjustSubformSize(OrderHistoryForm);
             // 显示之前重新加载数据，订单数据可能已更新。
-           // OrderHistoryForm.InitializeOrderData();
+            // OrderHistoryForm.InitializeOrderData();
+            OrderHistoryForm.pager1.Bind();
             OrderHistoryForm.ShowDialog();
 
         }

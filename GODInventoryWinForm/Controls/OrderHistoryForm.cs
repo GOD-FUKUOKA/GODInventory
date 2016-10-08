@@ -23,10 +23,10 @@ namespace GODInventoryWinForm.Controls
         public OrderHistoryForm()
         {
             InitializeComponent();
-            InitializeDataSource();
+           
             editOrderForm = new EditOrderForm2();
 
-            pager1.Bind();
+            InitializeDataSource();
         }
 
 

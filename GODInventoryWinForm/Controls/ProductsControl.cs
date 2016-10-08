@@ -33,16 +33,16 @@ namespace GODInventoryWinForm.Controls
 
         private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                if (e.RowIndex >= 0)
-                {
-                    dataGridView1.ClearSelection();
-                    dataGridView1.Columns[e.ColumnIndex].Selected = true;
-                    dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                    contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);                
-                }
-            }
+            //if (e.Button == MouseButtons.Right)
+            //{
+            //    if (e.RowIndex >= 0)
+            //    {
+            //        dataGridView1.ClearSelection();
+            //        dataGridView1.Columns[e.ColumnIndex].Selected = true;
+            //        dataGridView1.CurrentCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            //        contextMenuStrip1.Show(MousePosition.X, MousePosition.Y);                
+            //    }
+            //}
         }
 
         private void ChangeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -65,14 +65,14 @@ namespace GODInventoryWinForm.Controls
             int iRow = dataGridView1.CurrentCell.OwningRow.Index;
             var oids = GetOrderIdsBySelectedGridCell();
           
-            if (oids.Count() > 0)
+            if (oids.Count() == 1)
             {
                 var form = new ProductsManagement(oids,"Update");
             
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                  
-                    this.dataGridView1.Refresh();
+                    this.entityDataSource1.Refresh();
 
                 }
                 //OrderSqlHelper.SendOrderToShipper(oids);
@@ -113,7 +113,7 @@ namespace GODInventoryWinForm.Controls
             if (form.ShowDialog() == DialogResult.OK)
             {
 
-                this.dataGridView1.Refresh();
+                this.entityDataSource1.Refresh();
 
             }
 
@@ -128,7 +128,7 @@ namespace GODInventoryWinForm.Controls
             if (form.ShowDialog() == DialogResult.OK)
             {
 
-                this.dataGridView1.Refresh();
+                this.entityDataSource1.Refresh();
 
             }
         }
