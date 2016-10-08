@@ -462,6 +462,7 @@ namespace GODInventory.ViewModel
             return count;
 
         }   
+
         public static int FinishOrders(List<int> orderIds)
         {
             int count = 0;
@@ -476,6 +477,28 @@ namespace GODInventory.ViewModel
 
         }
 
+        public static int LockOrdersByShipNO(string shipNO)
+        {
+            int count = 0;
+            using (var ctx = new GODDbContext())
+            {
+                string sql = "UPDATE t_orderdata SET `Status`={2}  WHERE `ShipNO` = ({0}) && `Status`={1}";
+                count = ctx.Database.ExecuteSqlCommand(sql, shipNO, OrderStatus.PendingShipment, OrderStatus.Locked);
+                ctx.SaveChanges();
+            }
+            return count;
+        }
+        public static int UnlockOrdersByShipNO(string shipNO)
+        {
+            int count = 0;
+            using (var ctx = new GODDbContext())
+            {
+                string sql = "UPDATE t_orderdata SET `Status`={2}  WHERE `ShipNO` = ({0}) && `Status`={1}";
+                count = ctx.Database.ExecuteSqlCommand(sql, shipNO, OrderStatus.Locked, OrderStatus.PendingShipment);
+                ctx.SaveChanges();
+            }
+            return count;
+        }
 
         public static int GenerateASN(List<string> shipNOs) {
             var now = DateTime.Now;
@@ -517,7 +540,7 @@ namespace GODInventory.ViewModel
                 {
                     var oids = gos.Select(order => order.id受注データ);
                     var o = gos.First();
-                    var sql1 = String.Format("UPDATE t_orderdata SET  `出荷No`={3}, `Status`={4}, `ASN管理連番`={5}  WHERE  `id受注データ` in ({0}) AND `ShipNO` in ({1}) AND `Status`={2} ", String.Join(",", oids.ToArray()), String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray()), (int)OrderStatus.PendingShipment, o.出荷No, (int)OrderStatus.ASN, mid);
+                    var sql1 = String.Format("UPDATE t_orderdata SET  `出荷No`={3}, `Status`={4}, `ASN管理連番`={5}  WHERE  `id受注データ` in ({0}) AND `ShipNO` in ({1}) AND `Status`={2} ", String.Join(",", oids.ToArray()), String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray()), (int)OrderStatus.Locked, o.出荷No, (int)OrderStatus.ASN, mid);
                     ctx.Database.ExecuteSqlCommand(sql1);                  
                 }
                 //ctx.SaveChanges();

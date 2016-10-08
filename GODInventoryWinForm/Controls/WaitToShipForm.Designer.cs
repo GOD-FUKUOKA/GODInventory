@@ -68,6 +68,8 @@
             this.shipperComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.受注日Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.場所Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,8 +87,6 @@
             this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注区分Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品指示Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -184,7 +184,6 @@
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToResizeColumns = false;
             this.dataGridView2.AllowUserToResizeRows = false;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -461,7 +460,6 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -495,6 +493,14 @@
             this.dataGridView1.Size = new System.Drawing.Size(1016, 160);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // 受注日Column
             // 
@@ -562,7 +568,7 @@
             // 発注数量Column1
             // 
             this.発注数量Column1.DataPropertyName = "実際出荷数量";
-            this.発注数量Column1.HeaderText = "発注数量";
+            this.発注数量Column1.HeaderText = "発注数";
             this.発注数量Column1.Name = "発注数量Column1";
             this.発注数量Column1.ReadOnly = true;
             // 
@@ -617,14 +623,6 @@
             this.納品指示Column1.Name = "納品指示Column1";
             this.納品指示Column1.ReadOnly = true;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
             // WaitToShipForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -677,23 +675,6 @@
         private System.Windows.Forms.ComboBox countyComboBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox shipNOComboBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 場所Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 社内伝番Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ジャンルColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 品名Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 規格Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 口数Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 発注数量Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 配送担当Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 原単価_税抜_Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 原価金額_税抜_Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 発注区分Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column1;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column2;
@@ -711,5 +692,22 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注区分Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 場所Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 社内伝番Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ジャンルColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 品名Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 規格Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 口数Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注数量Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 配送担当Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 原単価_税抜_Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 原価金額_税抜_Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注区分Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column1;
     }
 }

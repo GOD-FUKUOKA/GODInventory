@@ -18,11 +18,10 @@ namespace GODInventoryWinForm.Controls
         //private List<t_shoplist> shopList;
         EditOrderForm2 editOrderForm;
         IBindingList orderBindingList = null;
-
+        List<t_shoplist> shopList = null;
         List<v_pendingorder> pendingOrderList = null;
         List<v_pendingorder> orderListForShip = null;
         List<v_pendingorder> shippingOrderList = null;
-        int first = 0;
         public List<v_groupedorder> groupedOrderList;
 
 
@@ -42,7 +41,7 @@ namespace GODInventoryWinForm.Controls
             //filtered = q.FindAll(s => s.店舗コード != null);
             //foreach (v_pendingorder item in filtered)
             //    this.comboBox2.Items.Add(item.店舗コード);
-
+            shopList = (entityDataSource1.DbContext as GODDbContext).t_shoplist.OrderBy(s => s.店名カナ).ToList();
             editOrderForm = new EditOrderForm2();
             pendingOrderList = new List<v_pendingorder>();
         }
@@ -263,7 +262,6 @@ namespace GODInventoryWinForm.Controls
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            first = e.RowIndex;
 
         }
 
@@ -392,12 +390,14 @@ namespace GODInventoryWinForm.Controls
 
         private void InitializeStoreComboBox(List<v_pendingorder> orders)
         {
+            var shopIds = orders.Select(o => o.店舗コード);
+            var shops = shopList.FindAll(s => shopIds.Contains(s.店番));
 
-            var shops = orders.Select(s => new MockEntity { Id = s.店舗コード, FullName = s.店名 }).Distinct().ToList();
-            shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+            var shopMockEntities = shops.Select(s => new MockEntity { Id = s.店番, ShortName = s.店名カナ, FullName = s.店名 }).ToList();
+            shopMockEntities.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
             this.storeComboBox.DisplayMember = "FullName";
             this.storeComboBox.ValueMember = "Id";
-            this.storeComboBox.DataSource = shops;
+            this.storeComboBox.DataSource = shopMockEntities;
             this.storeComboBox.SelectedIndex = 0;
 
         }

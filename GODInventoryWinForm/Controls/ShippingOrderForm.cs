@@ -19,6 +19,7 @@ namespace GODInventoryWinForm.Controls
         public ReceivedOrdersReportForm reportForm;
         public ShippingItemsReportForm shippingItemsReportForm;
         public List<v_groupedorder> groupedOrderList;
+        public List<t_orderdata> orderList;
 
         public ShippingOrderForm()
         {
@@ -44,14 +45,36 @@ namespace GODInventoryWinForm.Controls
 
         private int InitializeOrderData()
         {
-
+            groupedOrderList = new List<v_groupedorder>();
             using (var ctx = new GODDbContext())
             {
-                string sql = @"SELECT o.ShipNO, min(o.`出荷日`) as `出荷日`, min(o.`納品日`) as `納品日`,
-min(o.`店舗名漢字`) as `店名`, min(o.`県別`) as `県別`, min(o.`実際配送担当`) as `実際配送担当`, 
-sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight, false as Locked  
-FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
-                groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.PendingShipment).ToList();
+//                string sql = @"SELECT o.`ShipNO`, o.`Status`, o.`出荷日`, o.`納品日`,
+//min(o.`店舗名漢字`) as `店名`, min(o.`県別`) as `県別`, o.`実際配送担当`, 
+//sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight, false as Locked  
+//FROM  t_orderdata o WHERE o.Status = {0} OR o.Status = {1} GROUP BY o.`Status`, o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`";
+//                groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.PendingShipment, OrderStatus.Locked).ToList();
+
+                orderList = (from t_orderdata o in ctx.t_orderdata
+                     where o.Status ==OrderStatus.PendingShipment || o.Status ==OrderStatus.Locked 
+                     select o).ToList();
+                var groupedOrders = orderList.GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 });
+
+                foreach( var gos in groupedOrders)
+                {
+                    var v_groupedorder = new v_groupedorder
+                    {
+                        Status = gos.Key.Status,
+                        ShipNO = gos.Key.ShipNO,
+                        出荷日 = gos.Key.出荷日,
+                        納品日 = gos.Key.納品日,
+                        実際配送担当 = gos.Key.実際配送担当,
+                        店名 = gos.First().店舗名漢字,
+                        県別 = gos.First().県別,
+                        TotalPrice = gos.Sum(o => o.原価金額_税抜_),
+                        TotalWeight = gos.Sum(o => o.重量)
+                    };
+                    groupedOrderList.Add(v_groupedorder);
+                }
                 shipNODataGridView.DataSource = groupedOrderList;
             }
             //var q = OrderSqlHelper.ShippingOrderSql(entityDataSource1);            
@@ -132,7 +155,7 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
         private void generateASNButton_Click(object sender, EventArgs e)
         {
-            var shipNOList = this.groupedOrderList.Where(o => o.Locked).Select(o1 => o1.ShipNO).ToList();
+            var shipNOList = this.groupedOrderList.Where(o => o.Status== OrderStatus.Locked).Select(o1 => o1.ShipNO).ToList();
 
 
             if (shipNOList.Count() > 0)
@@ -152,7 +175,7 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
         private void moveToASNButton_Click(object sender, EventArgs e)
         {
-            var shipNOList = this.groupedOrderList.Where(o => o.Locked).Select(o1 => o1.ShipNO).ToList();
+            var shipNOList = this.groupedOrderList.Where(o => o.Status == OrderStatus.Locked).Select(o1 => o1.ShipNO).ToList();
 
 
             if (shipNOList.Count() > 0)
@@ -252,7 +275,7 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
 
             int i = e.RowIndex;
             var order = groupedOrderList[i];
-            if (order.Locked)
+            if (order.Status== OrderStatus.Locked)
             {
                 this.shipNODataGridView.Rows[i].DefaultCellStyle.BackColor = Color.Green;
 
@@ -267,28 +290,31 @@ FROM  t_orderdata o WHERE o.Status = {0} GROUP BY o.ShipNO";
         {
            
 
-            int i = shipNODataGridView.CurrentRow.Index;
-            this.groupedOrderList[i].Locked = true;
-
-            shipNODataGridView.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.Green;
-
-            this.shipNODataGridView.Refresh();
+            //int i = shipNODataGridView.CurrentRow.Index;
+            //this.groupedOrderList[i].Locked = true;
            
+            //shipNODataGridView.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.Green;
+            //this.shipNODataGridView.Refresh();
+            var groupedOrder = shipNODataGridView.CurrentRow.DataBoundItem as v_groupedorder;
+            OrderSqlHelper.LockOrdersByShipNO(groupedOrder.ShipNO);
+            InitializeOrderData();
         }
 
         private void unlockToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int i = shipNODataGridView.CurrentRow.Index;
-            this.groupedOrderList[i].Locked = false;
-            shipNODataGridView.CurrentRow.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
-
-            this.shipNODataGridView.Refresh();
+            //int i = shipNODataGridView.CurrentRow.Index;
+            //this.groupedOrderList[i].Locked = false;
+            //shipNODataGridView.CurrentRow.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
+            //this.shipNODataGridView.Refresh();
+            var groupedOrder = shipNODataGridView.CurrentRow.DataBoundItem as v_groupedorder;
+            OrderSqlHelper.UnlockOrdersByShipNO(groupedOrder.ShipNO);
+            InitializeOrderData();
             
         }
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int i = shipNODataGridView.CurrentRow.Index;
-            if (!groupedOrderList[i].Locked)
+            if (groupedOrderList[i].Status == OrderStatus.PendingShipment)
             {
 
                 var form = new ShipOrderListForm();

@@ -179,6 +179,8 @@ namespace GODInventoryWinForm.Controls
             
                 var order  = orderList[idx] as t_orderdata;
                 order.ShipNO = null;
+                order.納品日 = null;
+                order.出荷日 = null;
                 order.Status = OrderStatus.WaitToShip;            
             }
         }
