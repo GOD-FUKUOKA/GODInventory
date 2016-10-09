@@ -41,17 +41,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 52);
+            this.label1.Location = new System.Drawing.Point(38, 66);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 11);
+            this.label1.Size = new System.Drawing.Size(102, 14);
             this.label1.TabIndex = 0;
             this.label1.Text = "NFWE 安装目录";
             // 
             // folderBrowserButton1
             // 
-            this.folderBrowserButton1.Location = new System.Drawing.Point(417, 47);
+            this.folderBrowserButton1.Location = new System.Drawing.Point(442, 60);
+            this.folderBrowserButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.folderBrowserButton1.Name = "folderBrowserButton1";
-            this.folderBrowserButton1.Size = new System.Drawing.Size(32, 21);
+            this.folderBrowserButton1.Size = new System.Drawing.Size(37, 27);
             this.folderBrowserButton1.TabIndex = 2;
             this.folderBrowserButton1.Text = "...";
             this.folderBrowserButton1.UseVisualStyleBackColor = true;
@@ -59,18 +60,20 @@
             // 
             // installDirTextBox
             // 
-            this.installDirTextBox.Location = new System.Drawing.Point(125, 50);
+            this.installDirTextBox.Location = new System.Drawing.Point(146, 64);
+            this.installDirTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.installDirTextBox.Name = "installDirTextBox";
             this.installDirTextBox.ReadOnly = true;
-            this.installDirTextBox.Size = new System.Drawing.Size(286, 18);
+            this.installDirTextBox.Size = new System.Drawing.Size(290, 21);
             this.installDirTextBox.TabIndex = 3;
             // 
             // cancleButton2
             // 
             this.cancleButton2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancleButton2.Location = new System.Drawing.Point(311, 135);
+            this.cancleButton2.Location = new System.Drawing.Point(373, 152);
+            this.cancleButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cancleButton2.Name = "cancleButton2";
-            this.cancleButton2.Size = new System.Drawing.Size(100, 30);
+            this.cancleButton2.Size = new System.Drawing.Size(106, 32);
             this.cancleButton2.TabIndex = 4;
             this.cancleButton2.Text = "取消";
             this.cancleButton2.UseVisualStyleBackColor = true;
@@ -78,9 +81,10 @@
             // saveButton3
             // 
             this.saveButton3.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.saveButton3.Location = new System.Drawing.Point(198, 135);
+            this.saveButton3.Location = new System.Drawing.Point(241, 152);
+            this.saveButton3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.saveButton3.Name = "saveButton3";
-            this.saveButton3.Size = new System.Drawing.Size(100, 30);
+            this.saveButton3.Size = new System.Drawing.Size(106, 32);
             this.saveButton3.TabIndex = 5;
             this.saveButton3.Text = "保存";
             this.saveButton3.UseVisualStyleBackColor = true;
@@ -89,24 +93,25 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(42, 91);
+            this.label2.Location = new System.Drawing.Point(49, 111);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 11);
+            this.label2.Size = new System.Drawing.Size(91, 14);
             this.label2.TabIndex = 6;
             this.label2.Text = "库存初始时间";
             // 
             // inventoryStartAtDateTimePicker1
             // 
-            this.inventoryStartAtDateTimePicker1.Location = new System.Drawing.Point(125, 85);
+            this.inventoryStartAtDateTimePicker1.Location = new System.Drawing.Point(146, 108);
+            this.inventoryStartAtDateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.inventoryStartAtDateTimePicker1.Name = "inventoryStartAtDateTimePicker1";
-            this.inventoryStartAtDateTimePicker1.Size = new System.Drawing.Size(286, 18);
+            this.inventoryStartAtDateTimePicker1.Size = new System.Drawing.Size(333, 21);
             this.inventoryStartAtDateTimePicker1.TabIndex = 8;
             // 
             // SettingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 190);
+            this.ClientSize = new System.Drawing.Size(532, 209);
             this.Controls.Add(this.inventoryStartAtDateTimePicker1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.saveButton3);
@@ -114,7 +119,8 @@
             this.Controls.Add(this.installDirTextBox);
             this.Controls.Add(this.folderBrowserButton1);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingForm";

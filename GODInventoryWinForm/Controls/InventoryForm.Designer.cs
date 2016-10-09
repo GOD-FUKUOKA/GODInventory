@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,7 +60,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(19, 25);
+            this.label1.Location = new System.Drawing.Point(19, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 14);
             this.label1.TabIndex = 32;
@@ -71,9 +70,9 @@
             // 
             this.btconfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btconfirm.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btconfirm.Location = new System.Drawing.Point(910, 459);
+            this.btconfirm.Location = new System.Drawing.Point(910, 501);
             this.btconfirm.Name = "btconfirm";
-            this.btconfirm.Size = new System.Drawing.Size(100, 30);
+            this.btconfirm.Size = new System.Drawing.Size(100, 33);
             this.btconfirm.TabIndex = 34;
             this.btconfirm.Text = "在庫調整確定";
             this.btconfirm.UseVisualStyleBackColor = true;
@@ -83,7 +82,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(652, 25);
+            this.label4.Location = new System.Drawing.Point(652, 27);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 14);
             this.label4.TabIndex = 40;
@@ -93,7 +92,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(451, 25);
+            this.label3.Location = new System.Drawing.Point(451, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 14);
             this.label3.TabIndex = 39;
@@ -103,9 +102,9 @@
             // 
             this.btclear_zero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btclear_zero.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btclear_zero.Location = new System.Drawing.Point(1026, 459);
+            this.btclear_zero.Location = new System.Drawing.Point(1026, 501);
             this.btclear_zero.Name = "btclear_zero";
-            this.btclear_zero.Size = new System.Drawing.Size(100, 30);
+            this.btclear_zero.Size = new System.Drawing.Size(100, 33);
             this.btclear_zero.TabIndex = 36;
             this.btclear_zero.Text = "クリア";
             this.btclear_zero.UseVisualStyleBackColor = true;
@@ -114,9 +113,9 @@
             // btfind
             // 
             this.btfind.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btfind.Location = new System.Drawing.Point(861, 17);
+            this.btfind.Location = new System.Drawing.Point(861, 19);
             this.btfind.Name = "btfind";
-            this.btfind.Size = new System.Drawing.Size(100, 30);
+            this.btfind.Size = new System.Drawing.Size(100, 33);
             this.btfind.TabIndex = 35;
             this.btfind.Text = "検索";
             this.btfind.UseVisualStyleBackColor = true;
@@ -127,7 +126,7 @@
             this.warehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.warehouseComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.warehouseComboBox.FormattingEnabled = true;
-            this.warehouseComboBox.Location = new System.Drawing.Point(56, 21);
+            this.warehouseComboBox.Location = new System.Drawing.Point(56, 23);
             this.warehouseComboBox.Name = "warehouseComboBox";
             this.warehouseComboBox.Size = new System.Drawing.Size(141, 22);
             this.warehouseComboBox.TabIndex = 42;
@@ -137,7 +136,7 @@
             this.manufacturerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.manufacturerComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.manufacturerComboBox.FormattingEnabled = true;
-            this.manufacturerComboBox.Location = new System.Drawing.Point(488, 21);
+            this.manufacturerComboBox.Location = new System.Drawing.Point(488, 23);
             this.manufacturerComboBox.Name = "manufacturerComboBox";
             this.manufacturerComboBox.Size = new System.Drawing.Size(141, 22);
             this.manufacturerComboBox.TabIndex = 43;
@@ -152,14 +151,6 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idColumn,
@@ -181,11 +172,11 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 62);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 68);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1114, 386);
+            this.dataGridView1.Size = new System.Drawing.Size(1114, 421);
             this.dataGridView1.TabIndex = 38;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
@@ -283,7 +274,7 @@
             this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.genreComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(280, 21);
+            this.genreComboBox.Location = new System.Drawing.Point(280, 23);
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(141, 22);
             this.genreComboBox.TabIndex = 44;
@@ -294,9 +285,9 @@
             this.btprint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btprint.Enabled = false;
             this.btprint.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btprint.Location = new System.Drawing.Point(12, 453);
+            this.btprint.Location = new System.Drawing.Point(12, 494);
             this.btprint.Name = "btprint";
-            this.btprint.Size = new System.Drawing.Size(100, 30);
+            this.btprint.Size = new System.Drawing.Size(100, 33);
             this.btprint.TabIndex = 33;
             this.btprint.Text = "棚卸用紙印刷";
             this.btprint.UseVisualStyleBackColor = true;
@@ -307,7 +298,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(219, 25);
+            this.label2.Location = new System.Drawing.Point(219, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 14);
             this.label2.TabIndex = 37;
@@ -316,16 +307,16 @@
             // endDateTimePicker1
             // 
             this.endDateTimePicker1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.endDateTimePicker1.Location = new System.Drawing.Point(687, 21);
+            this.endDateTimePicker1.Location = new System.Drawing.Point(687, 23);
             this.endDateTimePicker1.Name = "endDateTimePicker1";
             this.endDateTimePicker1.Size = new System.Drawing.Size(159, 21);
             this.endDateTimePicker1.TabIndex = 41;
             // 
             // InventoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1138, 498);
+            this.ClientSize = new System.Drawing.Size(1138, 543);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btconfirm);
             this.Controls.Add(this.label4);
@@ -339,7 +330,7 @@
             this.Controls.Add(this.btprint);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.endDateTimePicker1);
-            this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "InventoryForm";

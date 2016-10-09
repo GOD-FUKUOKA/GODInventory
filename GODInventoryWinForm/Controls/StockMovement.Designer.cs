@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,14 +74,6 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdDataGridViewTextBoxColumn,
@@ -91,14 +81,6 @@
             this.商品名,
             this.規格,
             this.数量});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(37, 207);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -260,7 +242,7 @@
             // 
             this.toWarehouseComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toWarehouseComboBox1.FormattingEnabled = true;
-            this.toWarehouseComboBox1.Location = new System.Drawing.Point(451, 95);
+            this.toWarehouseComboBox1.Location = new System.Drawing.Point(451, 96);
             this.toWarehouseComboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.toWarehouseComboBox1.Name = "toWarehouseComboBox1";
             this.toWarehouseComboBox1.Size = new System.Drawing.Size(208, 22);
@@ -281,7 +263,7 @@
             // 
             this.fromWarehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.fromWarehouseComboBox.FormattingEnabled = true;
-            this.fromWarehouseComboBox.Location = new System.Drawing.Point(135, 95);
+            this.fromWarehouseComboBox.Location = new System.Drawing.Point(133, 96);
             this.fromWarehouseComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.fromWarehouseComboBox.Name = "fromWarehouseComboBox";
             this.fromWarehouseComboBox.Size = new System.Drawing.Size(208, 22);
@@ -300,7 +282,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(383, 63);
+            this.label4.Location = new System.Drawing.Point(383, 61);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 14);
             this.label4.TabIndex = 47;
@@ -308,7 +290,7 @@
             // 
             // stockOutDateTimePicker
             // 
-            this.stockOutDateTimePicker.Location = new System.Drawing.Point(135, 58);
+            this.stockOutDateTimePicker.Location = new System.Drawing.Point(133, 58);
             this.stockOutDateTimePicker.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.stockOutDateTimePicker.Name = "stockOutDateTimePicker";
             this.stockOutDateTimePicker.Size = new System.Drawing.Size(208, 21);
@@ -318,7 +300,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(80, 63);
+            this.label3.Location = new System.Drawing.Point(80, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 14);
             this.label3.TabIndex = 45;
@@ -327,7 +309,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(411, 29);
+            this.label2.Location = new System.Drawing.Point(411, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 14);
             this.label2.TabIndex = 44;
@@ -336,7 +318,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(72, 29);
+            this.label1.Location = new System.Drawing.Point(72, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 14);
             this.label1.TabIndex = 42;

@@ -41,10 +41,10 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 11;
-            this.listBox1.Location = new System.Drawing.Point(14, 52);
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(14, 57);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(208, 279);
+            this.listBox1.Size = new System.Drawing.Size(208, 304);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -55,9 +55,9 @@
             this.columnHeader2});
             this.listView1.FullRowSelect = true;
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView1.Location = new System.Drawing.Point(228, 50);
+            this.listView1.Location = new System.Drawing.Point(228, 55);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(462, 283);
+            this.listView1.Size = new System.Drawing.Size(462, 308);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.Click += new System.EventHandler(this.listView1_Click);
@@ -75,28 +75,29 @@
             // manualButton1
             // 
             this.manualButton1.DialogResult = System.Windows.Forms.DialogResult.Ignore;
-            this.manualButton1.Location = new System.Drawing.Point(378, 349);
+            this.manualButton1.Location = new System.Drawing.Point(366, 381);
             this.manualButton1.Name = "manualButton1";
-            this.manualButton1.Size = new System.Drawing.Size(100, 30);
+            this.manualButton1.Size = new System.Drawing.Size(106, 32);
             this.manualButton1.TabIndex = 2;
             this.manualButton1.Text = "入力";
             this.manualButton1.UseVisualStyleBackColor = true;
+            this.manualButton1.Visible = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 30);
+            this.label1.Location = new System.Drawing.Point(15, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 11);
+            this.label1.Size = new System.Drawing.Size(60, 12);
             this.label1.TabIndex = 3;
             this.label1.Text = "ジャンル名";
             // 
             // submitButton2
             // 
             this.submitButton2.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.submitButton2.Location = new System.Drawing.Point(484, 349);
+            this.submitButton2.Location = new System.Drawing.Point(478, 381);
             this.submitButton2.Name = "submitButton2";
-            this.submitButton2.Size = new System.Drawing.Size(100, 30);
+            this.submitButton2.Size = new System.Drawing.Size(106, 32);
             this.submitButton2.TabIndex = 5;
             this.submitButton2.Text = "确定";
             this.submitButton2.UseVisualStyleBackColor = true;
@@ -104,25 +105,25 @@
             // cancelButton3
             // 
             this.cancelButton3.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton3.Location = new System.Drawing.Point(590, 349);
+            this.cancelButton3.Location = new System.Drawing.Point(590, 381);
             this.cancelButton3.Name = "cancelButton3";
-            this.cancelButton3.Size = new System.Drawing.Size(100, 30);
+            this.cancelButton3.Size = new System.Drawing.Size(106, 32);
             this.cancelButton3.TabIndex = 6;
             this.cancelButton3.Text = "取消";
             this.cancelButton3.UseVisualStyleBackColor = true;
             // 
             // SelectProductForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 394);
+            this.ClientSize = new System.Drawing.Size(704, 430);
             this.Controls.Add(this.cancelButton3);
             this.Controls.Add(this.submitButton2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.manualButton1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.listBox1);
-            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SelectProductForm";

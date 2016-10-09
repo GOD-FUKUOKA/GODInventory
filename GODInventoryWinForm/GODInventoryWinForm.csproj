@@ -331,12 +331,6 @@
     <Compile Include="SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="testingCC.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="testingCC.Designer.cs">
-      <DependentUpon>testingCC.cs</DependentUpon>
-    </Compile>
     <Compile Include="WorkerArgument.cs" />
     <EmbeddedResource Include="Controls\InputStockBig.resx">
       <DependentUpon>InputStockBig.cs</DependentUpon>
@@ -478,9 +472,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="testingCC.resx">
-      <DependentUpon>testingCC.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
