@@ -46,7 +46,7 @@
             // 
             // pendingButton
             // 
-            this.pendingButton.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pendingButton.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pendingButton.Location = new System.Drawing.Point(222, 195);
             this.pendingButton.Name = "pendingButton";
             this.pendingButton.Size = new System.Drawing.Size(144, 58);
@@ -58,8 +58,8 @@
             // receiveOrderButton
             // 
             this.receiveOrderButton.Enabled = false;
-            this.receiveOrderButton.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.receiveOrderButton.Location = new System.Drawing.Point(21, 72);
+            this.receiveOrderButton.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.receiveOrderButton.Location = new System.Drawing.Point(21, 68);
             this.receiveOrderButton.Name = "receiveOrderButton";
             this.receiveOrderButton.Size = new System.Drawing.Size(180, 58);
             this.receiveOrderButton.TabIndex = 4;
@@ -69,7 +69,7 @@
             // 
             // waitToShipButton
             // 
-            this.waitToShipButton.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.waitToShipButton.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.waitToShipButton.Location = new System.Drawing.Point(423, 195);
             this.waitToShipButton.Name = "waitToShipButton";
             this.waitToShipButton.Size = new System.Drawing.Size(144, 58);
@@ -80,7 +80,7 @@
             // 
             // shippingOrderButton
             // 
-            this.shippingOrderButton.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.shippingOrderButton.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.shippingOrderButton.Location = new System.Drawing.Point(624, 195);
             this.shippingOrderButton.Name = "shippingOrderButton";
             this.shippingOrderButton.Size = new System.Drawing.Size(144, 58);
@@ -91,7 +91,7 @@
             // 
             // button6
             // 
-            this.button6.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button6.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button6.Location = new System.Drawing.Point(322, 316);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(144, 58);
@@ -103,7 +103,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(380, 216);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 19);
@@ -113,7 +113,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(581, 216);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 19);
@@ -123,8 +123,8 @@
             // orderConfirmButton
             // 
             this.orderConfirmButton.Enabled = false;
-            this.orderConfirmButton.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.orderConfirmButton.Location = new System.Drawing.Point(588, 72);
+            this.orderConfirmButton.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.orderConfirmButton.Location = new System.Drawing.Point(588, 68);
             this.orderConfirmButton.Name = "orderConfirmButton";
             this.orderConfirmButton.Size = new System.Drawing.Size(180, 58);
             this.orderConfirmButton.TabIndex = 5;
@@ -134,8 +134,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(84, 140);
+            this.label1.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(84, 136);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(19, 57);
             this.label1.TabIndex = 11;
@@ -145,8 +145,8 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(687, 140);
+            this.label4.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(687, 136);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(19, 57);
             this.label4.TabIndex = 12;
@@ -167,7 +167,7 @@
             this.contentPanel.Controls.Add(this.label3);
             this.contentPanel.Controls.Add(this.shippingOrderButton);
             this.contentPanel.Controls.Add(this.label2);
-            this.contentPanel.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.contentPanel.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.contentPanel.Location = new System.Drawing.Point(3, 20);
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Size = new System.Drawing.Size(789, 377);
@@ -176,7 +176,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.Location = new System.Drawing.Point(179, 216);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 19);
@@ -185,7 +185,7 @@
             // 
             // newButton
             // 
-            this.newButton.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.newButton.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.newButton.Location = new System.Drawing.Point(21, 195);
             this.newButton.Name = "newButton";
             this.newButton.Size = new System.Drawing.Size(144, 58);
@@ -200,7 +200,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.Controls.Add(this.contentPanel);
-            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "OrdersControl";
             this.Size = new System.Drawing.Size(795, 413);
             this.Load += new System.EventHandler(this.OrdersControl_Load);

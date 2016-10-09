@@ -70,12 +70,13 @@ namespace GODInventoryWinForm.Controls
             var chuhe_no = Convert.ToInt64(e.Parameters["OrderChuHeNo"].Values.First());
             var s = e.ReportPath;
             e.DataSources.Clear();
-            if (s == "ReceivedOrderReport")
+            if (s == "ReceivedOrderReport" || s == "ReceivedOrderReport2")
             {
                 var orders = new List<v_pendingorder>(){ OrderEnities.Where(o => o.出荷No == chuhe_no).First()};
                 e.DataSources.Add(new ReportDataSource("DataSet1", orders));
             }
-            else if (s == "ReceivedOrderDetailReport") {
+            else if (s == "ReceivedOrderDetailReport")
+            {
                 var orders = OrderEnities.Where(o => o.出荷No == chuhe_no);
                 var order = new List<v_pendingorder>() { orders.First() };
                 e.DataSources.Add(new ReportDataSource("DataSet1", orders));

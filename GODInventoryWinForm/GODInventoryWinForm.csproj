@@ -408,6 +408,7 @@
     <EmbeddedResource Include="ImportOrderCSVForm.resx">
       <DependentUpon>ImportOrderCSVForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReceivedOrderReport2.rdlc" />
     <EmbeddedResource Include="Reports\ShippingItemsReport.rdlc" />
     <EmbeddedResource Include="SelectProductForm.resx">
       <DependentUpon>SelectProductForm.cs</DependentUpon>

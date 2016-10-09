@@ -20,7 +20,6 @@ namespace GODInventoryWinForm.Controls
     {
         public List<t_orderdata> OrderEnities { get; set; }
         public List<t_itemlist> ItemEnities { get; set; }
-        float currentSize;
 
         public ShippingItemsReportForm()
         {
