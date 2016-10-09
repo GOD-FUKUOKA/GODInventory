@@ -51,6 +51,7 @@
             this.bindingNavigator1.CountItem = null;
             this.bindingNavigator1.DeleteItem = null;
             this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bindingNavigator1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.bindingNavigator1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnLast,
@@ -107,7 +108,7 @@
             // 
             this.lblPageCount.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.lblPageCount.Name = "lblPageCount";
-            this.lblPageCount.Size = new System.Drawing.Size(36, 28);
+            this.lblPageCount.Size = new System.Drawing.Size(31, 28);
             this.lblPageCount.Text = "/{ 0 }";
             // 
             // lblcurentpage
@@ -148,13 +149,13 @@
             // lblPageCount1
             // 
             this.lblPageCount1.Name = "lblPageCount1";
-            this.lblPageCount1.Size = new System.Drawing.Size(85, 28);
+            this.lblPageCount1.Size = new System.Drawing.Size(72, 28);
             this.lblPageCount1.Text = "total 0 pages";
             // 
             // lblRecordCount
             // 
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(94, 28);
+            this.lblRecordCount.Size = new System.Drawing.Size(80, 28);
             this.lblRecordCount.Text = "total 0 records";
             // 
             // Pager

@@ -163,7 +163,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(79, 321);
+            this.label7.Location = new System.Drawing.Point(91, 321);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(27, 11);
             this.label7.TabIndex = 43;
@@ -172,7 +172,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(67, 109);
+            this.label5.Location = new System.Drawing.Point(73, 109);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 11);
             this.label5.TabIndex = 41;
@@ -190,7 +190,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(43, 201);
+            this.label4.Location = new System.Drawing.Point(47, 201);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 11);
             this.label4.TabIndex = 39;
@@ -249,7 +249,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(55, 294);
+            this.label6.Location = new System.Drawing.Point(63, 294);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 11);
             this.label6.TabIndex = 42;
@@ -324,7 +324,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(67, 156);
+            this.label9.Location = new System.Drawing.Point(69, 156);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(49, 11);
             this.label9.TabIndex = 55;
@@ -333,7 +333,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(79, 32);
+            this.label10.Location = new System.Drawing.Point(80, 32);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(38, 11);
             this.label10.TabIndex = 57;
@@ -402,7 +402,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.manufacturerComboBox);
             this.Controls.Add(this.codeComboBox);
-            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "InputStock";

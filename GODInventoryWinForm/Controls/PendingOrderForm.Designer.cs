@@ -30,7 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ordersTabPage = new System.Windows.Forms.TabPage();
@@ -145,6 +150,7 @@
             this.tabControl1.Controls.Add(this.ecTabPage);
             this.tabControl1.Controls.Add(this.toShipperTabPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -170,10 +176,10 @@
             this.ordersTabPage.Controls.Add(this.saveButton);
             this.ordersTabPage.Controls.Add(this.cancelButton);
             this.ordersTabPage.Controls.Add(this.dataGridView1);
-            this.ordersTabPage.Location = new System.Drawing.Point(4, 21);
+            this.ordersTabPage.Location = new System.Drawing.Point(4, 22);
             this.ordersTabPage.Name = "ordersTabPage";
             this.ordersTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ordersTabPage.Size = new System.Drawing.Size(1051, 412);
+            this.ordersTabPage.Size = new System.Drawing.Size(1051, 411);
             this.ordersTabPage.TabIndex = 0;
             this.ordersTabPage.Text = "伝票訂正";
             this.ordersTabPage.UseVisualStyleBackColor = true;
@@ -181,19 +187,21 @@
             // countyComboBox1
             // 
             this.countyComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.countyComboBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countyComboBox1.FormattingEnabled = true;
-            this.countyComboBox1.Location = new System.Drawing.Point(247, 11);
+            this.countyComboBox1.Location = new System.Drawing.Point(259, 11);
             this.countyComboBox1.Name = "countyComboBox1";
-            this.countyComboBox1.Size = new System.Drawing.Size(121, 19);
+            this.countyComboBox1.Size = new System.Drawing.Size(121, 22);
             this.countyComboBox1.TabIndex = 87;
             this.countyComboBox1.SelectedIndexChanged += new System.EventHandler(this.countyComboBox1_SelectedIndexChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(212, 14);
+            this.label5.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label5.Location = new System.Drawing.Point(219, 11);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(27, 11);
+            this.label5.Size = new System.Drawing.Size(35, 14);
             this.label5.TabIndex = 88;
             this.label5.Text = "県別";
             // 
@@ -204,7 +212,7 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panel1.Controls.Add(this.selectedRowsLabel);
             this.panel1.Controls.Add(this.pager1);
-            this.panel1.Location = new System.Drawing.Point(3, 379);
+            this.panel1.Location = new System.Drawing.Point(3, 378);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1045, 32);
             this.panel1.TabIndex = 86;
@@ -237,9 +245,10 @@
             // 
             // ClearSelect
             // 
-            this.ClearSelect.Location = new System.Drawing.Point(569, 12);
+            this.ClearSelect.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.ClearSelect.Location = new System.Drawing.Point(588, 11);
             this.ClearSelect.Name = "ClearSelect";
-            this.ClearSelect.Size = new System.Drawing.Size(100, 41);
+            this.ClearSelect.Size = new System.Drawing.Size(100, 48);
             this.ClearSelect.TabIndex = 85;
             this.ClearSelect.Text = "フィルターをリセット";
             this.ClearSelect.UseVisualStyleBackColor = true;
@@ -248,90 +257,99 @@
             // ZKZTcomboBox3
             // 
             this.ZKZTcomboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ZKZTcomboBox3.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ZKZTcomboBox3.FormattingEnabled = true;
             this.ZKZTcomboBox3.Items.AddRange(new object[] {
             "不限",
             "あり",
             "一部不足",
             "なし"});
-            this.ZKZTcomboBox3.Location = new System.Drawing.Point(443, 11);
+            this.ZKZTcomboBox3.Location = new System.Drawing.Point(462, 11);
             this.ZKZTcomboBox3.Name = "ZKZTcomboBox3";
-            this.ZKZTcomboBox3.Size = new System.Drawing.Size(120, 19);
+            this.ZKZTcomboBox3.Size = new System.Drawing.Size(120, 22);
             this.ZKZTcomboBox3.TabIndex = 84;
             this.ZKZTcomboBox3.SelectedIndexChanged += new System.EventHandler(this.ZKZTcomboBox3_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(384, 14);
+            this.label4.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label4.Location = new System.Drawing.Point(396, 11);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 11);
+            this.label4.Size = new System.Drawing.Size(63, 14);
             this.label4.TabIndex = 83;
             this.label4.Text = "在庫状況";
             // 
             // genreComboBox
             // 
             this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.genreComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(65, 35);
+            this.genreComboBox.Location = new System.Drawing.Point(72, 37);
             this.genreComboBox.Name = "genreComboBox";
-            this.genreComboBox.Size = new System.Drawing.Size(120, 19);
+            this.genreComboBox.Size = new System.Drawing.Size(120, 22);
             this.genreComboBox.TabIndex = 82;
             this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.GenreNamecomboBox_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 39);
+            this.label3.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label3.Location = new System.Drawing.Point(24, 41);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 11);
+            this.label3.Size = new System.Drawing.Size(43, 14);
             this.label3.TabIndex = 81;
             this.label3.Text = "ｼﾞｬﾝﾙ";
             // 
             // productComboBox
             // 
             this.productComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.productComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.productComboBox.FormattingEnabled = true;
-            this.productComboBox.Location = new System.Drawing.Point(247, 35);
+            this.productComboBox.Location = new System.Drawing.Point(259, 37);
             this.productComboBox.Name = "productComboBox";
-            this.productComboBox.Size = new System.Drawing.Size(120, 19);
+            this.productComboBox.Size = new System.Drawing.Size(120, 22);
             this.productComboBox.TabIndex = 80;
             this.productComboBox.SelectedIndexChanged += new System.EventHandler(this.PMHZCombox_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(200, 39);
+            this.label2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label2.Location = new System.Drawing.Point(205, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 11);
+            this.label2.Size = new System.Drawing.Size(49, 14);
             this.label2.TabIndex = 79;
             this.label2.Text = "商品名";
             // 
             // DanDangComboBox
             // 
             this.DanDangComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DanDangComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.DanDangComboBox.FormattingEnabled = true;
-            this.DanDangComboBox.Location = new System.Drawing.Point(65, 11);
+            this.DanDangComboBox.Location = new System.Drawing.Point(72, 11);
             this.DanDangComboBox.Name = "DanDangComboBox";
-            this.DanDangComboBox.Size = new System.Drawing.Size(120, 19);
+            this.DanDangComboBox.Size = new System.Drawing.Size(120, 22);
             this.DanDangComboBox.TabIndex = 78;
             this.DanDangComboBox.SelectedIndexChanged += new System.EventHandler(this.DanDangComboBox_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 14);
+            this.label1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(4, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 11);
+            this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.TabIndex = 77;
             this.label1.Text = "配送担当";
             // 
             // newOrderbutton
             // 
             this.newOrderbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newOrderbutton.Location = new System.Drawing.Point(942, 10);
+            this.newOrderbutton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.newOrderbutton.Location = new System.Drawing.Point(942, 11);
             this.newOrderbutton.Name = "newOrderbutton";
-            this.newOrderbutton.Size = new System.Drawing.Size(100, 30);
+            this.newOrderbutton.Size = new System.Drawing.Size(106, 32);
             this.newOrderbutton.TabIndex = 20;
             this.newOrderbutton.Text = "FAX注文入力";
             this.newOrderbutton.UseVisualStyleBackColor = true;
@@ -340,9 +358,10 @@
             // saveButton
             // 
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveButton.Location = new System.Drawing.Point(727, 10);
+            this.saveButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.saveButton.Location = new System.Drawing.Point(727, 11);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(100, 30);
+            this.saveButton.Size = new System.Drawing.Size(106, 32);
             this.saveButton.TabIndex = 16;
             this.saveButton.Text = "変更を保存";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -351,9 +370,10 @@
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Location = new System.Drawing.Point(835, 10);
+            this.cancelButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cancelButton.Location = new System.Drawing.Point(835, 11);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 30);
+            this.cancelButton.Size = new System.Drawing.Size(106, 32);
             this.cancelButton.TabIndex = 19;
             this.cancelButton.Text = "変更を取消す";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -370,7 +390,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -397,13 +417,21 @@
             this.在庫状態Column,
             this.Column4});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(3, 70);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1045, 306);
+            this.dataGridView1.Size = new System.Drawing.Size(1045, 305);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -571,19 +599,19 @@
             this.sendToShipperToolStripMenuItem,
             this.cancelOrderToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 48);
             // 
             // sendToShipperToolStripMenuItem
             // 
             this.sendToShipperToolStripMenuItem.Name = "sendToShipperToolStripMenuItem";
-            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.sendToShipperToolStripMenuItem.Text = "転送";
             this.sendToShipperToolStripMenuItem.Click += new System.EventHandler(this.sendToShipperToolStripMenuItem_Click);
             // 
             // cancelOrderToolStripMenuItem
             // 
             this.cancelOrderToolStripMenuItem.Name = "cancelOrderToolStripMenuItem";
-            this.cancelOrderToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.cancelOrderToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.cancelOrderToolStripMenuItem.Text = "キャンセル";
             this.cancelOrderToolStripMenuItem.Click += new System.EventHandler(this.cancelOrderToolStripMenuItem_Click);
             // 
@@ -607,6 +635,14 @@
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2,
@@ -627,12 +663,20 @@
             this.dataGridViewTextBoxColumn14,
             this.dataGridViewTextBoxColumn15});
             this.dataGridView2.ContextMenuStrip = this.contextMenuStrip2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView2.Location = new System.Drawing.Point(3, 55);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(1045, 352);
+            this.dataGridView2.Size = new System.Drawing.Size(1045, 351);
             this.dataGridView2.TabIndex = 12;
             // 
             // dataGridViewTextBoxColumn2
@@ -742,21 +786,22 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1});
             this.contextMenuStrip2.Name = "contextMenuStrip1";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(99, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.toolStripMenuItem1.Text = "退单";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // ecSaveButton
             // 
             this.ecSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ecSaveButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ecSaveButton.Location = new System.Drawing.Point(942, 13);
             this.ecSaveButton.Name = "ecSaveButton";
-            this.ecSaveButton.Size = new System.Drawing.Size(100, 30);
+            this.ecSaveButton.Size = new System.Drawing.Size(106, 32);
             this.ecSaveButton.TabIndex = 3;
             this.ecSaveButton.Text = "登録";
             this.ecSaveButton.UseVisualStyleBackColor = true;
@@ -778,23 +823,25 @@
             // label17
             // 
             this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label17.Location = new System.Drawing.Point(9, 19);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(49, 11);
+            this.label17.Size = new System.Drawing.Size(63, 14);
             this.label17.TabIndex = 24;
             this.label17.Text = "配送担当";
             // 
             // shipperComboBox
             // 
             this.shipperComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.shipperComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.shipperComboBox.FormattingEnabled = true;
             this.shipperComboBox.Items.AddRange(new object[] {
             "丸健",
             "MKL",
             "マツモト産業"});
-            this.shipperComboBox.Location = new System.Drawing.Point(68, 17);
+            this.shipperComboBox.Location = new System.Drawing.Point(78, 15);
             this.shipperComboBox.Name = "shipperComboBox";
-            this.shipperComboBox.Size = new System.Drawing.Size(120, 19);
+            this.shipperComboBox.Size = new System.Drawing.Size(120, 22);
             this.shipperComboBox.TabIndex = 23;
             this.shipperComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -806,6 +853,14 @@
             this.dataGridView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn20,
@@ -822,13 +877,21 @@
             this.dataGridViewTextBoxColumn35,
             this.dataGridViewTextBoxColumn36});
             this.dataGridView3.ContextMenuStrip = this.contextMenuStrip3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView3.Location = new System.Drawing.Point(3, 55);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
             this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.RowTemplate.Height = 23;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView3.Size = new System.Drawing.Size(1045, 351);
+            this.dataGridView3.Size = new System.Drawing.Size(1045, 350);
             this.dataGridView3.TabIndex = 16;
             // 
             // dataGridViewTextBoxColumn20
@@ -927,19 +990,20 @@
             this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2});
             this.contextMenuStrip3.Name = "contextMenuStrip1";
-            this.contextMenuStrip3.Size = new System.Drawing.Size(99, 26);
+            this.contextMenuStrip3.Size = new System.Drawing.Size(101, 26);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(98, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
             this.toolStripMenuItem2.Text = "退单";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // notifyButton
             // 
             this.notifyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.notifyButton.Location = new System.Drawing.Point(942, 13);
+            this.notifyButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.notifyButton.Location = new System.Drawing.Point(942, 11);
             this.notifyButton.Name = "notifyButton";
             this.notifyButton.Size = new System.Drawing.Size(100, 30);
             this.notifyButton.TabIndex = 15;
@@ -962,7 +1026,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 437);
             this.Controls.Add(this.tabControl1);
-            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PendingOrderForm";

@@ -119,25 +119,22 @@ namespace GODInventoryWinForm.Controls
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
-            if (this.dataGridView1.SelectedCells.Count > 0)
-            {
-                var form = new ShipingInfoConfirmForm();
-                List<int> orderIds = GetOrderIdsBySelectedGridCell();
+            //if (this.dataGridView1.SelectedCells.Count > 0)
+            //{
+            //    var form = new ShipingInfoConfirmForm();
+            //    List<int> orderIds = GetOrderIdsBySelectedGridCell();
 
+            //    form.SelectedOrderIds = orderIds;
+            //    if (form.ShowDialog() == DialogResult.OK)
+            //    {
+            //        //pager1.Bind();
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("先に伝票を選択してください!");
+            //}
 
-                form.SelectedOrderIds = orderIds;
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    //pager1.Bind();
-                }
-            }
-            else
-            {
-                MessageBox.Show("先に伝票を選択してください!");
-            }
-
-
-            //.ShowDialog();
         }
 
  

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.uploadForEDIButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -119,7 +119,7 @@
             this.uploadForEDIButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.uploadForEDIButton.Location = new System.Drawing.Point(794, 14);
             this.uploadForEDIButton.Name = "uploadForEDIButton";
-            this.uploadForEDIButton.Size = new System.Drawing.Size(100, 32);
+            this.uploadForEDIButton.Size = new System.Drawing.Size(106, 32);
             this.uploadForEDIButton.TabIndex = 2;
             this.uploadForEDIButton.Text = "ASNｱｯﾌﾟﾛｰﾄﾞ";
             this.uploadForEDIButton.UseVisualStyleBackColor = true;
@@ -132,9 +132,10 @@
             // GenerateASNButton
             // 
             this.GenerateASNButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.GenerateASNButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.GenerateASNButton.Location = new System.Drawing.Point(796, 14);
             this.GenerateASNButton.Name = "GenerateASNButton";
-            this.GenerateASNButton.Size = new System.Drawing.Size(100, 32);
+            this.GenerateASNButton.Size = new System.Drawing.Size(106, 32);
             this.GenerateASNButton.TabIndex = 3;
             this.GenerateASNButton.Text = "ASNデータ作成";
             this.GenerateASNButton.UseVisualStyleBackColor = true;
@@ -147,6 +148,7 @@
             this.tabControl1.Controls.Add(this.shippedTabPage);
             this.tabControl1.Controls.Add(this.receivedTabPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -157,10 +159,10 @@
             // 
             this.pendingTabPage.Controls.Add(this.shipNODataGridView);
             this.pendingTabPage.Controls.Add(this.GenerateASNButton);
-            this.pendingTabPage.Location = new System.Drawing.Point(4, 21);
+            this.pendingTabPage.Location = new System.Drawing.Point(4, 22);
             this.pendingTabPage.Name = "pendingTabPage";
             this.pendingTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.pendingTabPage.Size = new System.Drawing.Size(909, 344);
+            this.pendingTabPage.Size = new System.Drawing.Size(909, 343);
             this.pendingTabPage.TabIndex = 0;
             this.pendingTabPage.Text = "出荷内容確認";
             this.pendingTabPage.UseVisualStyleBackColor = true;
@@ -263,33 +265,33 @@
             this.editToolStripMenuItem,
             this.printToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 92);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.lockToolStripMenuItem.Text = "配車表ﾛｯｸ";
             this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
             // 
             // unlockToolStripMenuItem
             // 
             this.unlockToolStripMenuItem.Name = "unlockToolStripMenuItem";
-            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.unlockToolStripMenuItem.Text = "ﾛｯｸ解消";
             this.unlockToolStripMenuItem.Click += new System.EventHandler(this.unlockToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.editToolStripMenuItem.Text = "編集";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.printToolStripMenuItem.Text = "配車表印刷";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
@@ -356,8 +358,8 @@
             // createdAtColumn1
             // 
             this.createdAtColumn1.DataPropertyName = "created_at";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.createdAtColumn1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.createdAtColumn1.DefaultCellStyle = dataGridViewCellStyle4;
             this.createdAtColumn1.HeaderText = "作成時間";
             this.createdAtColumn1.Name = "createdAtColumn1";
             this.createdAtColumn1.ReadOnly = true;
@@ -368,12 +370,12 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.printForEDIToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(99, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
             // 
             // printForEDIToolStripMenuItem
             // 
             this.printForEDIToolStripMenuItem.Name = "printForEDIToolStripMenuItem";
-            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.printForEDIToolStripMenuItem.Text = "印刷";
             this.printForEDIToolStripMenuItem.Click += new System.EventHandler(this.printForEDIToolStripMenuItem_Click);
             // 
@@ -552,7 +554,7 @@
             this.finishOrderButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.finishOrderButton1.Location = new System.Drawing.Point(796, 14);
             this.finishOrderButton1.Name = "finishOrderButton1";
-            this.finishOrderButton1.Size = new System.Drawing.Size(100, 32);
+            this.finishOrderButton1.Size = new System.Drawing.Size(106, 32);
             this.finishOrderButton1.TabIndex = 1;
             this.finishOrderButton1.Text = "ｵｰﾀﾞｰ確認済み";
             this.finishOrderButton1.UseVisualStyleBackColor = true;
@@ -690,7 +692,7 @@
             // 
             this.ClientSize = new System.Drawing.Size(917, 369);
             this.Controls.Add(this.tabControl1);
-            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ShippingOrderForm";

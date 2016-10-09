@@ -152,40 +152,40 @@
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(63, 54);
-            this.toolStripDropDownButton1.Text = "ImportTxt";
+            this.toolStripDropDownButton1.Text = "データ導入";
             // 
             // importOrderTextToolStripMenuItem
             // 
             this.importOrderTextToolStripMenuItem.Name = "importOrderTextToolStripMenuItem";
-            this.importOrderTextToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.importOrderTextToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.importOrderTextToolStripMenuItem.Text = "受注データ導入";
             this.importOrderTextToolStripMenuItem.Click += new System.EventHandler(this.importOrderTextToolStripMenuItem_Click);
             // 
             // importReceivedOrderTextToolStripMenuItem
             // 
             this.importReceivedOrderTextToolStripMenuItem.Name = "importReceivedOrderTextToolStripMenuItem";
-            this.importReceivedOrderTextToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.importReceivedOrderTextToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.importReceivedOrderTextToolStripMenuItem.Text = "受領データ導入";
             this.importReceivedOrderTextToolStripMenuItem.Click += new System.EventHandler(this.importReceivedOrderTextToolStripMenuItem_Click);
             // 
             // importCSVToolStripMenuItem
             // 
             this.importCSVToolStripMenuItem.Name = "importCSVToolStripMenuItem";
-            this.importCSVToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.importCSVToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.importCSVToolStripMenuItem.Text = "SNAP受注ＣＳＶデータ導入";
             this.importCSVToolStripMenuItem.Click += new System.EventHandler(this.importCSVToolStripMenuItem_Click);
             // 
             // importReceivedCSVToolStripMenuItem
             // 
             this.importReceivedCSVToolStripMenuItem.Name = "importReceivedCSVToolStripMenuItem";
-            this.importReceivedCSVToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.importReceivedCSVToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.importReceivedCSVToolStripMenuItem.Text = "SNAP受領ＣＳＶデータ導入";
             this.importReceivedCSVToolStripMenuItem.Click += new System.EventHandler(this.importReceivedCSVToolStripMenuItem_Click);
             // 
             // importFaxToolStripMenuItem
             // 
             this.importFaxToolStripMenuItem.Name = "importFaxToolStripMenuItem";
-            this.importFaxToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.importFaxToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.importFaxToolStripMenuItem.Text = "ＦＲＩＭＯ受注ＣＳＶデータ導入";
             this.importFaxToolStripMenuItem.Click += new System.EventHandler(this.importFaxToolStripMenuItem_Click);
             // 
@@ -211,7 +211,7 @@
             this.ClientSize = new System.Drawing.Size(844, 411);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
-            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "MainForm";
             this.Text = "G.O.D在庫管理";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
