@@ -40,7 +40,7 @@ namespace GODInventoryWinForm.Controls
             Order = ctx.t_orderdata.Find(OrderId);            
             Stockrec = ( from s in ctx.t_stockrec
                          where s.OrderId == OrderId
-                         select s).First();
+                         select s).FirstOrDefault();
             Product = (from p in ctx.t_itemlist
                        where p.自社コード == Order.自社コード
                        select p).First();
