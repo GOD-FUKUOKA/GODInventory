@@ -47,19 +47,6 @@ namespace GODInventoryWinForm.Controls
 
         private void ChangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            #region 直接保存
-            //this.entityDataSource1.DbContext.SaveChanges();
-            //MessageBox.Show(String.Format("Congratulations, items changed successfully!"));
-
-            #endregion
-            //using (var ctx = new GODDbContext())
-            //{
-            //    ctx.t_orderdata.AddRange(newOrderList);
-            //    ctx.SaveChanges();
-            //    MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", newOrderList.Count));
-            //    orderList.Clear();
-            //}
-
 
             int i = dataGridView1.CurrentCell.OwningColumn.Index;
             int iRow = dataGridView1.CurrentCell.OwningRow.Index;
@@ -80,7 +67,7 @@ namespace GODInventoryWinForm.Controls
             }
             else
             {
-                MessageBox.Show(" please select rows in the order list first.");
+                MessageBox.Show("Please select a product first.");
             }
         }
         private List<int> GetOrderIdsBySelectedGridCell()

@@ -276,7 +276,10 @@ WHERE id受注データ= @P0;";
         {
             get { return Convert.ToInt32(this.店舗コード); }
         }
-
+        public string StoreName
+        {
+            get { return this.店舗名漢字; }
+        }
         public int ReceivedQuantity {
             get { return Convert.ToInt32(this.数量); }
         }

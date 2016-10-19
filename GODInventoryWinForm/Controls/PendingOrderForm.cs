@@ -470,7 +470,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             }
             else
             {
-                MessageBox.Show(" please select rows in the order list first.");
+                MessageBox.Show("先ずは、注文リストには行を選択してください。");
             }
         }
 
@@ -488,7 +488,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             }
             else
             {
-                MessageBox.Show(" please select rows in the order list first.");
+                MessageBox.Show("先ずは、注文リストには行を選択してください。");
             }
         }
 

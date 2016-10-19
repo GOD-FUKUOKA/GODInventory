@@ -53,6 +53,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,12 +86,6 @@
             this.キャンセル時刻 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.備考 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             this.ordersTabPage.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -364,6 +364,46 @@
             this.dataGridView1.Size = new System.Drawing.Size(1135, 307);
             this.dataGridView1.TabIndex = 11;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.editToolStripMenuItem.Text = "編集";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.ordersTabPage);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1149, 468);
+            this.tabControl1.TabIndex = 2;
+            // 
+            // id受注データDataGridViewTextBoxColumn
+            // 
+            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // OrderReceivedAtColumn1
             // 
             this.OrderReceivedAtColumn1.DataPropertyName = "受注日";
@@ -399,6 +439,7 @@
             this.StoreNameColumn1.HeaderText = "店名";
             this.StoreNameColumn1.Name = "StoreNameColumn1";
             this.StoreNameColumn1.ReadOnly = true;
+            this.StoreNameColumn1.Width = 150;
             // 
             // StoreDistrictColumn1
             // 
@@ -406,6 +447,7 @@
             this.StoreDistrictColumn1.HeaderText = "県別";
             this.StoreDistrictColumn1.Name = "StoreDistrictColumn1";
             this.StoreDistrictColumn1.ReadOnly = true;
+            this.StoreDistrictColumn1.Width = 80;
             // 
             // 場所
             // 
@@ -427,7 +469,7 @@
             this.ジャンルColumn.HeaderText = "ジャンル";
             this.ジャンルColumn.Name = "ジャンルColumn";
             this.ジャンルColumn.ReadOnly = true;
-            this.ジャンルColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ジャンルColumn.Width = 80;
             // 
             // 商品コード
             // 
@@ -435,6 +477,7 @@
             this.商品コード.HeaderText = "商品コード";
             this.商品コード.Name = "商品コード";
             this.商品コード.ReadOnly = true;
+            this.商品コード.Width = 110;
             // 
             // ProductKanjiNameColumn1
             // 
@@ -442,6 +485,7 @@
             this.ProductKanjiNameColumn1.HeaderText = "品名漢字";
             this.ProductKanjiNameColumn1.Name = "ProductKanjiNameColumn1";
             this.ProductKanjiNameColumn1.ReadOnly = true;
+            this.ProductKanjiNameColumn1.Width = 280;
             // 
             // ProductKanjiSpecificationColumn1
             // 
@@ -449,6 +493,7 @@
             this.ProductKanjiSpecificationColumn1.HeaderText = "規格名漢字";
             this.ProductKanjiSpecificationColumn1.Name = "ProductKanjiSpecificationColumn1";
             this.ProductKanjiSpecificationColumn1.ReadOnly = true;
+            this.ProductKanjiSpecificationColumn1.Width = 140;
             // 
             // Column2
             // 
@@ -456,6 +501,7 @@
             this.Column2.HeaderText = "形態";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
+            this.Column2.Width = 140;
             // 
             // MOQColumn1
             // 
@@ -501,6 +547,7 @@
             this.重量.HeaderText = "重量";
             this.重量.Name = "重量";
             this.重量.ReadOnly = true;
+            this.重量.Width = 80;
             // 
             // 受領
             // 
@@ -508,6 +555,7 @@
             this.受領.HeaderText = "受領";
             this.受領.Name = "受領";
             this.受領.ReadOnly = true;
+            this.受領.Width = 80;
             // 
             // 社内伝番
             // 
@@ -565,46 +613,6 @@
             this.StatusColumn1.Name = "StatusColumn1";
             this.StatusColumn1.ReadOnly = true;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.editToolStripMenuItem.Text = "編集";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.ordersTabPage);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1149, 468);
-            this.tabControl1.TabIndex = 2;
-            // 
-            // id受注データDataGridViewTextBoxColumn
-            // 
-            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // OrderHistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -660,6 +668,9 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox orderCodeTextBox3;
         private System.Windows.Forms.Button btclear;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        public Pager pager1;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderReceivedAtColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品日;
@@ -687,8 +698,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn キャンセル時刻;
         private System.Windows.Forms.DataGridViewTextBoxColumn 備考;
         private System.Windows.Forms.DataGridViewTextBoxColumn StatusColumn1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        public Pager pager1;
     }
 }

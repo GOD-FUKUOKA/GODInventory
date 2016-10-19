@@ -146,7 +146,7 @@ namespace GODInventoryWinForm
                                 //Console.WriteLine("sql = #{0}", sql);
                                 
                                 if( ctx.Database.ExecuteSqlCommand(sql) ==0 ){
-                                    throw new Exception(String.Format("過去3か月の記録に店番 {0} で伝票番号  {1} の伝票は見つかりません.", model.StoreCode, model.InvoiceCode));
+                                    throw new Exception(String.Format("過去3か月の記録に店番 {0}({1}) で伝票番号  {2} in  の伝票は見つかりません.", model.StoreName, model.StoreCode, model.InvoiceCode));
                                 }
                                 
                                 arg.CurrentIndex = i + 1;

@@ -232,11 +232,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(425, 100);
+            this.label6.Location = new System.Drawing.Point(382, 99);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(21, 14);
+            this.label6.Size = new System.Drawing.Size(63, 14);
             this.label6.TabIndex = 51;
-            this.label6.Text = "へ";
+            this.label6.Text = "------->";
             // 
             // toWarehouseComboBox1
             // 
@@ -254,9 +254,8 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(108, 100);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(21, 14);
+            this.label5.Size = new System.Drawing.Size(0, 14);
             this.label5.TabIndex = 49;
-            this.label5.Text = "由";
             this.label5.Visible = false;
             // 
             // fromWarehouseComboBox

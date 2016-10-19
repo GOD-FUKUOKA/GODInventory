@@ -139,9 +139,7 @@ namespace GODInventoryWinForm.Controls
                         OrderSqlHelper.UpdateStockState(ctx, changeList);
                         this.stockiosList.Clear();
 
-
-
-                        MessageBox.Show(String.Format("{0} 種類商品移動登録できました!", changeList.Count));
+                        MessageBox.Show(String.Format("{0} 種類商品移動登録できました!", changeList.Count/2));
                         BuildStockOutNum();
                         BuildStockInNum();
                     }

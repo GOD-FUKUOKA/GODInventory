@@ -168,7 +168,7 @@ namespace GODInventoryWinForm.Controls
             }
             else
             {
-                MessageBox.Show(" please select rows in the order list first.");
+                MessageBox.Show("先ずは、注文リストには行を選択してください。");
             }
 
         }
@@ -188,7 +188,7 @@ namespace GODInventoryWinForm.Controls
             }
             else
             {
-                MessageBox.Show(" please select rows in the order list first.");
+                MessageBox.Show("先ずは、注文リストには行を選択してください。");
             }
         }
 

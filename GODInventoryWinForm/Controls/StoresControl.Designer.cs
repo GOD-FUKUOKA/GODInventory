@@ -30,6 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ChangeItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btAddItem = new System.Windows.Forms.Button();
             this.店番DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名カナDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,13 +47,6 @@
             this.住所DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.電話番号DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fAX番号DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ChangeItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btAddItem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -57,7 +57,6 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -85,76 +84,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(632, 309);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseClick);
-            // 
-            // 店番DataGridViewTextBoxColumn
-            // 
-            this.店番DataGridViewTextBoxColumn.DataPropertyName = "店番";
-            this.店番DataGridViewTextBoxColumn.HeaderText = "店番";
-            this.店番DataGridViewTextBoxColumn.Name = "店番DataGridViewTextBoxColumn";
-            this.店番DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // 店名DataGridViewTextBoxColumn
-            // 
-            this.店名DataGridViewTextBoxColumn.DataPropertyName = "店名";
-            this.店名DataGridViewTextBoxColumn.HeaderText = "店名";
-            this.店名DataGridViewTextBoxColumn.Name = "店名DataGridViewTextBoxColumn";
-            this.店名DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // 店名カナDataGridViewTextBoxColumn
-            // 
-            this.店名カナDataGridViewTextBoxColumn.DataPropertyName = "店名カナ";
-            this.店名カナDataGridViewTextBoxColumn.HeaderText = "店名カナ";
-            this.店名カナDataGridViewTextBoxColumn.Name = "店名カナDataGridViewTextBoxColumn";
-            this.店名カナDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // 配送担当DataGridViewTextBoxColumn
-            // 
-            this.配送担当DataGridViewTextBoxColumn.DataPropertyName = "配送担当";
-            this.配送担当DataGridViewTextBoxColumn.HeaderText = "配送担当";
-            this.配送担当DataGridViewTextBoxColumn.Name = "配送担当DataGridViewTextBoxColumn";
-            this.配送担当DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // 郵便番号DataGridViewTextBoxColumn
-            // 
-            this.郵便番号DataGridViewTextBoxColumn.DataPropertyName = "郵便番号";
-            this.郵便番号DataGridViewTextBoxColumn.HeaderText = "郵便番号";
-            this.郵便番号DataGridViewTextBoxColumn.Name = "郵便番号DataGridViewTextBoxColumn";
-            this.郵便番号DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // 県別DataGridViewTextBoxColumn
-            // 
-            this.県別DataGridViewTextBoxColumn.DataPropertyName = "県別";
-            this.県別DataGridViewTextBoxColumn.HeaderText = "県別";
-            this.県別DataGridViewTextBoxColumn.Name = "県別DataGridViewTextBoxColumn";
-            this.県別DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // 県内エリアDataGridViewTextBoxColumn
-            // 
-            this.県内エリアDataGridViewTextBoxColumn.DataPropertyName = "県内エリア";
-            this.県内エリアDataGridViewTextBoxColumn.HeaderText = "県内エリア";
-            this.県内エリアDataGridViewTextBoxColumn.Name = "県内エリアDataGridViewTextBoxColumn";
-            this.県内エリアDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // 住所DataGridViewTextBoxColumn
-            // 
-            this.住所DataGridViewTextBoxColumn.DataPropertyName = "住所";
-            this.住所DataGridViewTextBoxColumn.HeaderText = "住所";
-            this.住所DataGridViewTextBoxColumn.Name = "住所DataGridViewTextBoxColumn";
-            this.住所DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // 電話番号DataGridViewTextBoxColumn
-            // 
-            this.電話番号DataGridViewTextBoxColumn.DataPropertyName = "電話番号";
-            this.電話番号DataGridViewTextBoxColumn.HeaderText = "電話番号";
-            this.電話番号DataGridViewTextBoxColumn.Name = "電話番号DataGridViewTextBoxColumn";
-            this.電話番号DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // fAX番号DataGridViewTextBoxColumn
-            // 
-            this.fAX番号DataGridViewTextBoxColumn.DataPropertyName = "FAX番号";
-            this.fAX番号DataGridViewTextBoxColumn.HeaderText = "FAX番号";
-            this.fAX番号DataGridViewTextBoxColumn.Name = "fAX番号DataGridViewTextBoxColumn";
-            this.fAX番号DataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // contextMenuStrip1
             // 
@@ -213,6 +142,80 @@
             this.btAddItem.UseVisualStyleBackColor = true;
             this.btAddItem.Click += new System.EventHandler(this.btAddItem_Click);
             // 
+            // 店番DataGridViewTextBoxColumn
+            // 
+            this.店番DataGridViewTextBoxColumn.DataPropertyName = "店番";
+            this.店番DataGridViewTextBoxColumn.HeaderText = "店番";
+            this.店番DataGridViewTextBoxColumn.Name = "店番DataGridViewTextBoxColumn";
+            this.店番DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 店名DataGridViewTextBoxColumn
+            // 
+            this.店名DataGridViewTextBoxColumn.DataPropertyName = "店名";
+            this.店名DataGridViewTextBoxColumn.HeaderText = "店名";
+            this.店名DataGridViewTextBoxColumn.Name = "店名DataGridViewTextBoxColumn";
+            this.店名DataGridViewTextBoxColumn.ReadOnly = true;
+            this.店名DataGridViewTextBoxColumn.Width = 180;
+            // 
+            // 店名カナDataGridViewTextBoxColumn
+            // 
+            this.店名カナDataGridViewTextBoxColumn.DataPropertyName = "店名カナ";
+            this.店名カナDataGridViewTextBoxColumn.HeaderText = "店名カナ";
+            this.店名カナDataGridViewTextBoxColumn.Name = "店名カナDataGridViewTextBoxColumn";
+            this.店名カナDataGridViewTextBoxColumn.ReadOnly = true;
+            this.店名カナDataGridViewTextBoxColumn.Width = 180;
+            // 
+            // 配送担当DataGridViewTextBoxColumn
+            // 
+            this.配送担当DataGridViewTextBoxColumn.DataPropertyName = "配送担当";
+            this.配送担当DataGridViewTextBoxColumn.HeaderText = "配送担当";
+            this.配送担当DataGridViewTextBoxColumn.Name = "配送担当DataGridViewTextBoxColumn";
+            this.配送担当DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 郵便番号DataGridViewTextBoxColumn
+            // 
+            this.郵便番号DataGridViewTextBoxColumn.DataPropertyName = "郵便番号";
+            this.郵便番号DataGridViewTextBoxColumn.HeaderText = "郵便番号";
+            this.郵便番号DataGridViewTextBoxColumn.Name = "郵便番号DataGridViewTextBoxColumn";
+            this.郵便番号DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 県別DataGridViewTextBoxColumn
+            // 
+            this.県別DataGridViewTextBoxColumn.DataPropertyName = "県別";
+            this.県別DataGridViewTextBoxColumn.HeaderText = "県別";
+            this.県別DataGridViewTextBoxColumn.Name = "県別DataGridViewTextBoxColumn";
+            this.県別DataGridViewTextBoxColumn.ReadOnly = true;
+            this.県別DataGridViewTextBoxColumn.Width = 80;
+            // 
+            // 県内エリアDataGridViewTextBoxColumn
+            // 
+            this.県内エリアDataGridViewTextBoxColumn.DataPropertyName = "県内エリア";
+            this.県内エリアDataGridViewTextBoxColumn.HeaderText = "県内エリア";
+            this.県内エリアDataGridViewTextBoxColumn.Name = "県内エリアDataGridViewTextBoxColumn";
+            this.県内エリアDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 住所DataGridViewTextBoxColumn
+            // 
+            this.住所DataGridViewTextBoxColumn.DataPropertyName = "住所";
+            this.住所DataGridViewTextBoxColumn.HeaderText = "住所";
+            this.住所DataGridViewTextBoxColumn.Name = "住所DataGridViewTextBoxColumn";
+            this.住所DataGridViewTextBoxColumn.ReadOnly = true;
+            this.住所DataGridViewTextBoxColumn.Width = 200;
+            // 
+            // 電話番号DataGridViewTextBoxColumn
+            // 
+            this.電話番号DataGridViewTextBoxColumn.DataPropertyName = "電話番号";
+            this.電話番号DataGridViewTextBoxColumn.HeaderText = "電話番号";
+            this.電話番号DataGridViewTextBoxColumn.Name = "電話番号DataGridViewTextBoxColumn";
+            this.電話番号DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // fAX番号DataGridViewTextBoxColumn
+            // 
+            this.fAX番号DataGridViewTextBoxColumn.DataPropertyName = "FAX番号";
+            this.fAX番号DataGridViewTextBoxColumn.HeaderText = "FAX番号";
+            this.fAX番号DataGridViewTextBoxColumn.Name = "fAX番号DataGridViewTextBoxColumn";
+            this.fAX番号DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // StoresControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -236,6 +239,10 @@
         private System.Windows.Forms.Panel panel1;
         private GODInventory.ViewModel.EntityDataSource entityDataSource1;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ChangeItem;
+        private System.Windows.Forms.ToolStripMenuItem addItemToolStripMenuItem;
+        private System.Windows.Forms.Button btAddItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店番DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店名DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店名カナDataGridViewTextBoxColumn;
@@ -246,9 +253,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 住所DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 電話番号DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fAX番号DataGridViewTextBoxColumn;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem ChangeItem;
-        private System.Windows.Forms.ToolStripMenuItem addItemToolStripMenuItem;
-        private System.Windows.Forms.Button btAddItem;
     }
 }

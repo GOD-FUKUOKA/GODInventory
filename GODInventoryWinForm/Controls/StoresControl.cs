@@ -41,7 +41,7 @@ namespace GODInventoryWinForm.Controls
             }
             else
             {
-                MessageBox.Show(" please select rows in the order list first.");
+                MessageBox.Show("Please select a store first.");
             }
          
         }

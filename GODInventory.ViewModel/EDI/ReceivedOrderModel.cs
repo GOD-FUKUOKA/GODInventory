@@ -278,6 +278,11 @@ WHERE id受注データ= @P0;";
             get { return Convert.ToInt32(Encoding.ASCII.GetString(this.店舗コード)); }
         }
 
+        public string StoreName
+        {
+            get { return EncodingUtility.ConvertShiftJisToUtf8(this.店舗名漢字).Trim();  }
+        }
+
         public string DataID
         {
             get { return Encoding.ASCII.GetString(this.データID); }
