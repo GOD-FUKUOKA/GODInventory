@@ -22,7 +22,7 @@ namespace GODInventory.MyLinq
     public enum StockIoClueEnum
     {
         清点库存 = 0,
-        订单调整 = 1
+        EDI出荷 = 1
     }
 
     public enum StockInClueEnum {

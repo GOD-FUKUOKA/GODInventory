@@ -183,6 +183,9 @@ namespace GODInventory.ViewModel.EDI
         public short StoreCode { get; set; }
         public long JanCode { get; set; }
         public short 入力区分 { get; set; }
+        // 订单是否存在，检测导入重复订单
+        public bool IsExist { get; set; }
+
         public string StoreName {
             get { return this.店舗名漢字; }
         }
@@ -317,7 +320,7 @@ namespace GODInventory.ViewModel.EDI
             
             this.StoreCode = Convert.ToInt16(this.店舗コード);
             this.JanCode = Convert.ToInt64(this.ＪＡＮコード);
-           
+            IsExist = false;
         }
 
         public t_orderdata ConverToEntity() {
@@ -417,7 +420,7 @@ namespace GODInventory.ViewModel.EDI
             return orderdata;
 
         }
-        public t_orderdata ConverToEntity(t_shoplist shop, t_itemlist item, t_locations location, List<v_storeorder> orders)
+        public t_orderdata ConverToEntity(t_shoplist shop, t_itemlist item, t_locations location, List<t_orderdata> orders)
         {
             if (IsByFax)
             {
@@ -472,7 +475,6 @@ namespace GODInventory.ViewModel.EDI
 
             var orderdata = ConverToEntity();
             
-            //bool exist = orders.Exists( o=> ( o.店舗コード == orderdata.店舗コード && o.商品コード == orderdata.商品コード ));
             //orderdata.ダブリ = exist ? "yes" : "no";
 
             //有些为空的，订单重量 设置为0
@@ -499,11 +501,18 @@ namespace GODInventory.ViewModel.EDI
 
             orderdata.発注品名漢字 = orderdata.品名漢字;
             orderdata.発注規格名漢字 = orderdata.規格名漢字;
-
+            if (orders != null)
+            {
+                bool existed = orders.Exists(o => (o.伝票番号 == orderdata.伝票番号));
+                if (existed)
+                {
+                    orderdata.Status = OrderStatus.Existed;
+                }
+            }
             return orderdata;
         }
 
-        public CustomMySqlParameters ToSqlArguments(t_shoplist shop, t_itemlist item, t_locations location, List<v_storeorder> orders)
+        public CustomMySqlParameters ToSqlArguments(t_shoplist shop, t_itemlist item, t_locations location, List<t_orderdata> orders)
         {
             //`発注日`, `受注日`, `出荷日`, `納品日`, `店舗コード`, `店舗名漢字`, `社内伝番`, `行数`, `最大行数`, `伝票番号`, `ダブリ`, 
             //`在庫状態`, `キャンセル`, `キャンセル時刻`, `ジャンル`, `ＪＡＮコード`, `商品コード`, `品名漢字`, `規格名漢字`, `発注数量`, 
@@ -649,10 +658,14 @@ VALUES (
 
         }
 
-        public string ToRawSql(t_shoplist shop, t_itemlist item, t_locations location, List<v_storeorder> orders)
+        public string ToRawSql(t_shoplist shop, t_itemlist item, t_locations location, List<t_orderdata> orders)
         {
             var isoDateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
             t_orderdata o = ConverToEntity(shop, item, location, orders);
+            if (o.Status == OrderStatus.Existed) 
+            {
+                return null;
+            }
             string format = @"INSERT INTO `t_orderdata`(
 `発注日`, `受注日`, `受注時刻`,  `店舗コード`, `店舗名漢字`, 
 `伝票番号`, `ＪＡＮコード`, `商品コード`, `品名漢字`, `規格名漢字`, 
@@ -687,7 +700,7 @@ VALUES ({0}
             var fazhuri = o.発注日.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
             var souzhuri = now.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
             var shouzhushike = now.ToString( "HH:mm:ss");
-            var napinyudingri = o.納品予定日.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
+            var napinyudingri = ((DateTime)o.納品予定日).ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
             
 
             var qixian = DateTime.ParseExact(this.発注データ有効期限, "yyyyMMdd", CultureInfo.InvariantCulture).ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);

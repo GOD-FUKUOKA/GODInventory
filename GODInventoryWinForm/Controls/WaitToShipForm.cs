@@ -319,7 +319,7 @@ namespace GODInventoryWinForm.Controls
             string county = countyComboBox1.Text;
 
             var orders = pendingOrderList.FindAll(o => o.実際配送担当 == shipper);
-            if (county != "不限")
+            if (county != "すべて")
             {
                 orders = orders.FindAll(o => o.県別 == county);
             }
@@ -348,7 +348,7 @@ namespace GODInventoryWinForm.Controls
                     filter += " (実際配送担当='" + shipper + "')";
                 }
 
-                if (county.Length > 0 && county  != "不限")
+                if (county.Length > 0 && county  != "すべて")
                 {
                     if (filter.Length > 0)
                     {
@@ -356,7 +356,7 @@ namespace GODInventoryWinForm.Controls
                     }
                     filter += "(県別=" + "'" + county + "'" + ")";
                 }
-                if (store.Length > 0 && store != "不限")
+                if (store.Length > 0 && store != "すべて")
                 {
                     if (filter.Length > 0)
                     {
@@ -376,7 +376,7 @@ namespace GODInventoryWinForm.Controls
         private void InitializeCountyComboBox( List<v_pendingorder> orders )
         {
             var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-            counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
             this.countyComboBox1.DisplayMember = "FullName";
             this.countyComboBox1.ValueMember = "ShortName";
             this.countyComboBox1.DataSource = counties;
@@ -391,7 +391,7 @@ namespace GODInventoryWinForm.Controls
             var shops = shopList.FindAll(s => shopIds.Contains(s.店番));
 
             var shopMockEntities = shops.Select(s => new MockEntity { Id = s.店番, ShortName = s.店名カナ, FullName = s.店名 }).ToList();
-            shopMockEntities.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+            shopMockEntities.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
             this.storeComboBox.DisplayMember = "FullName";
             this.storeComboBox.ValueMember = "Id";
             this.storeComboBox.DataSource = shopMockEntities;

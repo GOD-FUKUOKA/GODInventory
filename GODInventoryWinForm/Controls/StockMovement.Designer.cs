@@ -30,11 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btadd = new System.Windows.Forms.Button();
             this.genreComboBox = new System.Windows.Forms.ComboBox();
             this.manufacturerComboBox = new System.Windows.Forms.ComboBox();
@@ -60,6 +55,11 @@
             this.label10 = new System.Windows.Forms.Label();
             this.fromBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fromBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toBindingSource)).BeginInit();
@@ -89,48 +89,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(776, 301);
             this.dataGridView1.TabIndex = 43;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
-            // 
-            // IdDataGridViewTextBoxColumn
-            // 
-            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
-            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
-            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.IdDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.IdDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // 自社コード
-            // 
-            this.自社コード.DataPropertyName = "自社コード";
-            this.自社コード.HeaderText = "自社コード";
-            this.自社コード.Name = "自社コード";
-            this.自社コード.ReadOnly = true;
-            this.自社コード.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // 商品名
-            // 
-            this.商品名.DataPropertyName = "商品名";
-            this.商品名.HeaderText = "商品名";
-            this.商品名.Name = "商品名";
-            this.商品名.ReadOnly = true;
-            this.商品名.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.商品名.Width = 200;
-            // 
-            // 規格
-            // 
-            this.規格.DataPropertyName = "規格";
-            this.規格.HeaderText = "規格";
-            this.規格.Name = "規格";
-            this.規格.ReadOnly = true;
-            this.規格.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.規格.Width = 140;
-            // 
-            // 数量
-            // 
-            this.数量.DataPropertyName = "qty";
-            this.数量.HeaderText = "数量";
-            this.数量.Name = "数量";
-            this.数量.Width = 70;
             // 
             // btadd
             // 
@@ -252,7 +210,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(108, 100);
+            this.label5.Location = new System.Drawing.Point(129, 100);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(0, 14);
             this.label5.TabIndex = 49;
@@ -271,7 +229,7 @@
             // 
             // stockInDateTimePicker1
             // 
-            this.stockInDateTimePicker1.Location = new System.Drawing.Point(451, 58);
+            this.stockInDateTimePicker1.Location = new System.Drawing.Point(451, 61);
             this.stockInDateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.stockInDateTimePicker1.Name = "stockInDateTimePicker1";
             this.stockInDateTimePicker1.Size = new System.Drawing.Size(208, 21);
@@ -281,7 +239,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(383, 61);
+            this.label4.Location = new System.Drawing.Point(383, 64);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 14);
             this.label4.TabIndex = 47;
@@ -289,7 +247,7 @@
             // 
             // stockOutDateTimePicker
             // 
-            this.stockOutDateTimePicker.Location = new System.Drawing.Point(133, 58);
+            this.stockOutDateTimePicker.Location = new System.Drawing.Point(133, 61);
             this.stockOutDateTimePicker.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.stockOutDateTimePicker.Name = "stockOutDateTimePicker";
             this.stockOutDateTimePicker.Size = new System.Drawing.Size(208, 21);
@@ -299,11 +257,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(80, 61);
+            this.label3.Location = new System.Drawing.Point(66, 64);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 14);
+            this.label3.Size = new System.Drawing.Size(63, 14);
             this.label3.TabIndex = 45;
-            this.label3.Text = "出庫日";
+            this.label3.Text = "出庫日期";
             // 
             // label2
             // 
@@ -366,6 +324,48 @@
             this.label10.Size = new System.Drawing.Size(35, 14);
             this.label10.TabIndex = 64;
             this.label10.Text = "状態";
+            // 
+            // IdDataGridViewTextBoxColumn
+            // 
+            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
+            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
+            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.IdDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.IdDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // 自社コード
+            // 
+            this.自社コード.DataPropertyName = "自社コード";
+            this.自社コード.HeaderText = "自社コード";
+            this.自社コード.Name = "自社コード";
+            this.自社コード.ReadOnly = true;
+            this.自社コード.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // 商品名
+            // 
+            this.商品名.DataPropertyName = "商品名";
+            this.商品名.HeaderText = "商品名";
+            this.商品名.Name = "商品名";
+            this.商品名.ReadOnly = true;
+            this.商品名.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.商品名.Width = 280;
+            // 
+            // 規格
+            // 
+            this.規格.DataPropertyName = "規格";
+            this.規格.HeaderText = "規格";
+            this.規格.Name = "規格";
+            this.規格.ReadOnly = true;
+            this.規格.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.規格.Width = 180;
+            // 
+            // 数量
+            // 
+            this.数量.DataPropertyName = "qty";
+            this.数量.HeaderText = "数量";
+            this.数量.Name = "数量";
+            this.数量.Width = 70;
             // 
             // StockMovement
             // 

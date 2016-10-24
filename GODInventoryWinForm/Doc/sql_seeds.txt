@@ -1,7 +1,7 @@
-﻿INSERT INTO `god_inventory`.`t_manufacturers` (`Id`, `ShortName`, `FullName`) VALUES ('1', '青島華天', '青島華天');
-INSERT INTO `god_inventory`.`t_warehouses` (`Id`, `ShortName`, `FullName`) VALUES ('1', 'GOD', 'GOD');
-INSERT INTO `god_inventory`.`t_warehouses` (`Id`, `ShortName`, `FullName`) VALUES ('2', 'MKL', 'MKL');
-INSERT INTO `god_inventory`.`t_warehouses` (`Id`, `ShortName`, `FullName`) VALUES ('3', 'XYZ', 'マツモト産業');
+﻿INSERT INTO `god_inventory`.`t_manufacturers` (`Id`, `ShortName`, `FullName`,`ShipperName`) VALUES ('1', '青島華天', '青島華天');
+INSERT INTO `god_inventory`.`t_warehouses` (`Id`, `ShortName`, `FullName`,`ShipperName`) VALUES ('1', 'GOD', 'GOD','丸健');
+INSERT INTO `god_inventory`.`t_warehouses` (`Id`, `ShortName`, `FullName`,`ShipperName`) VALUES ('2', 'MKL', 'MKL','MKL');
+INSERT INTO `god_inventory`.`t_warehouses` (`Id`, `ShortName`, `FullName`,`ShipperName`) VALUES ('3', 'XYZ', 'マツモト産業','マツモト産業');
 
 -- ----------------------------
 -- Records of t_locations

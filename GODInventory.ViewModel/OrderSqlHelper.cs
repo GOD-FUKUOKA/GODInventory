@@ -420,7 +420,7 @@ namespace GODInventory.ViewModel
                     s.日付 = date;
                     s.区分 = StockIoEnum.出庫.ToString();
                     s.状態 = StockIoProgressEnum.完了.ToString();
-                    s.事由 = StockIoClueEnum.订单调整.ToString();
+                    s.事由 = StockIoClueEnum.EDI出荷.ToString();
                     s.納品書番号 = stockNum;
                     s.客户 = customer.FullName;
                     s.OrderId = order.id受注データ;

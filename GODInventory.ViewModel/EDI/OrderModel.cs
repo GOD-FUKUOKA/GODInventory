@@ -675,7 +675,8 @@ VALUES ({0}
             var fazhuri = o.発注日.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
             var souzhuri = now.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
             var shouzhushike = now.ToString( "HH:mm:ss");
-            var napinyudingri = o.納品予定日.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
+            
+            var napinyudingri =  ((DateTime) o.納品予定日).ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
             
 
             var qixian = DateTime.ParseExact(Encoding.Default.GetString(this.発注データ有効期限), "yyyyMMdd", CultureInfo.InvariantCulture).ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);

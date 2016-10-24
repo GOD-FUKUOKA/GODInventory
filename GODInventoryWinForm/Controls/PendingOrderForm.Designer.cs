@@ -239,7 +239,7 @@
             this.ZKZTcomboBox3.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ZKZTcomboBox3.FormattingEnabled = true;
             this.ZKZTcomboBox3.Items.AddRange(new object[] {
-            "不限",
+            "すべて",
             "あり",
             "一部不足",
             "なし"});

@@ -166,7 +166,7 @@ namespace GODInventory.MyLinq
         public short 行番号 { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime 納品予定日 { get; set; }
+        public DateTime? 納品予定日 { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? 発注データ有効期限 { get; set; }

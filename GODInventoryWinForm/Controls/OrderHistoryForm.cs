@@ -15,7 +15,7 @@ namespace GODInventoryWinForm.Controls
     public partial class OrderHistoryForm : Form
     {
         EditOrderForm2 editOrderForm;
-        private static string NoOptionSelected = "不限";
+        private static string NoOptionSelected = "すべて";
         List<v_pendingorder> orderList;
         SortableBindingList<v_pendingorder> orderListBindingList;
         private List<t_shoplist> shopList;
@@ -48,18 +48,18 @@ namespace GODInventoryWinForm.Controls
             if (shopList.Count > 0)
             {
                 var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
                 // 県別
                 var counties = shopList.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-                counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
                 this.countyComboBox1.DisplayMember = "FullName";
                 this.countyComboBox1.ValueMember = "ShortName";
                 this.countyComboBox1.DataSource = counties;
 
-                var dateEnums = (new OrderDateEnum[] { OrderDateEnum.不限, OrderDateEnum.出荷日, OrderDateEnum.発注日, OrderDateEnum.納品日 }).Select(o => new { FullName = o.ToString(), ShortName = o.ToString() }).ToList();
+                var dateEnums = (new OrderDateEnum[] { OrderDateEnum.すべて, OrderDateEnum.出荷日, OrderDateEnum.発注日, OrderDateEnum.納品日 }).Select(o => new { FullName = o.ToString(), ShortName = o.ToString() }).ToList();
                 this.dateEnumComboBox.DisplayMember = "FullName";
                 this.dateEnumComboBox.ValueMember = "ShortName";
                 this.dateEnumComboBox.DataSource = dateEnums;
@@ -72,8 +72,8 @@ namespace GODInventoryWinForm.Controls
 
         private int InitializeOrderData()
         {
-            var startAt = this.startDateTimePicker.Value.AddDays(-1).Date;
-            var endAt = this.endDateTimePicker.Value.AddDays(1).Date;
+            var startAt = this.startDateTimePicker.Value.Date;
+            var endAt = this.endDateTimePicker.Value.Date;
             int storeCode = 0;
             int orderCode = 0;
             int innerCode = 0;
@@ -100,11 +100,14 @@ namespace GODInventoryWinForm.Controls
 
             if (orderDateEnum == OrderDateEnum.出荷日.ToString())
             {
-                conditions += "(  `出荷日`< @startAt AND `出荷日`> @endAt )";
+                conditions += "(  `出荷日`>= @startAt AND `出荷日`<= @endAt )";
             }
             else if (orderDateEnum == OrderDateEnum.納品日.ToString())
             {
-                conditions += "(  `納品日`< @startAt AND `納品日`> @endAt )";
+                conditions += "(  `納品日`>= @startAt AND `納品日`<= @endAt )";
+            }else if (orderDateEnum == OrderDateEnum.発注日.ToString())
+            {
+                conditions += "(  `発注日`>= @startAt AND `発注日`<= @endAt )";
             }
 
             List<MySqlParameter> condition_params = new List<MySqlParameter>();
@@ -329,18 +332,18 @@ namespace GODInventoryWinForm.Controls
             if (shopList.Count > 0)
             {
                 var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
                 // 県別
                 var counties = shopList.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-                counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+                counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
                 this.countyComboBox1.DisplayMember = "FullName";
                 this.countyComboBox1.ValueMember = "ShortName";
                 this.countyComboBox1.DataSource = counties;
 
-                var dateEnums = (new OrderDateEnum[] { OrderDateEnum.不限, OrderDateEnum.出荷日, OrderDateEnum.発注日, OrderDateEnum.納品日 }).Select(o => new { FullName = o.ToString(), ShortName = o.ToString() }).ToList();
+                var dateEnums = (new OrderDateEnum[] { OrderDateEnum.すべて, OrderDateEnum.出荷日, OrderDateEnum.発注日, OrderDateEnum.納品日 }).Select(o => new { FullName = o.ToString(), ShortName = o.ToString() }).ToList();
                 this.dateEnumComboBox.DisplayMember = "FullName";
                 this.dateEnumComboBox.ValueMember = "ShortName";
                 this.dateEnumComboBox.DataSource = dateEnums;
@@ -372,7 +375,7 @@ namespace GODInventoryWinForm.Controls
             if (filtered.Count > 0)
             {
                 var shops = filtered.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
@@ -381,7 +384,7 @@ namespace GODInventoryWinForm.Controls
             else
             {
                 var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "不限" });
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;

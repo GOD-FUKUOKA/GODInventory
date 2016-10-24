@@ -121,7 +121,7 @@ namespace GODInventoryWinForm.Controls
                 duplicatedOrderList = ctx.Database.SqlQuery<v_duplicatedorder>(sql).ToList();
             }
             var shippers = duplicatedOrderList.Select(s => new MockEntity { ShortName = s.実際配送担当, FullName = s.実際配送担当 }).Distinct().ToList();
-            shippers.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            shippers.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
             this.shipperComboBox.DisplayMember = "FullName";
             this.shipperComboBox.ValueMember = "ShortName";
             this.shipperComboBox.DataSource = shippers;
@@ -362,23 +362,23 @@ namespace GODInventoryWinForm.Controls
             datagrid_changes.Clear();
 
 
-            if (shipper.Length > 0 && shipper != "不限")
+            if (shipper.Length > 0 && shipper != "すべて")
             {
 
                 filteredOrderList = filteredOrderList.FindAll(o => o.実際配送担当 == shipper);
 
             }
-            if (product.Length > 0 && product != "不限")
+            if (product.Length > 0 && product != "すべて")
             {
                 filteredOrderList = filteredOrderList.FindAll(o => o.品名漢字 == product);
             }
-            if (genre.Length > 0 && genre != "不限")
+            if (genre.Length > 0 && genre != "すべて")
             {
 
                 filteredOrderList = filteredOrderList.FindAll(o => o.GenreName == genre);
 
             }
-            if (county.Length > 0 && county != "不限")
+            if (county.Length > 0 && county != "すべて")
             {
                 filteredOrderList = filteredOrderList.FindAll(o => o.県別 == county);
             }
@@ -402,7 +402,7 @@ namespace GODInventoryWinForm.Controls
         {
             // GenreName
             var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-            counties.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
             this.countyComboBox.DisplayMember = "FullName";
             this.countyComboBox.ValueMember = "ShortName";
             this.countyComboBox.DataSource = counties;
@@ -412,7 +412,7 @@ namespace GODInventoryWinForm.Controls
         {
             // GenreName
             var GenreName = orders.Select(s => new MockEntity { Id = s.ジャンル, ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
-            GenreName.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            GenreName.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
             this.genreComboBox.DisplayMember = "FullName";
             this.genreComboBox.ValueMember = "Id";
             this.genreComboBox.DataSource = GenreName;
@@ -422,7 +422,7 @@ namespace GODInventoryWinForm.Controls
         {
             // 品名漢字
             var PMHZ = orders.Select(s => new MockEntity { Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().ToList();
-            PMHZ.Insert(0, new MockEntity { ShortName = "不限", FullName = "不限" });
+            PMHZ.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
             this.productComboBox.DisplayMember = "FullName";
             this.productComboBox.ValueMember = "Id";
             this.productComboBox.DataSource = PMHZ;
@@ -451,7 +451,7 @@ namespace GODInventoryWinForm.Controls
             var orders = GetOrdersByShipper(shipper);
 
             var combox = sender as ComboBox;
-            if (combox.Text != "不限")
+            if (combox.Text != "すべて")
             {
                 orders = orders.FindAll(o => o.県別 == combox.Text);
             }
@@ -464,7 +464,7 @@ namespace GODInventoryWinForm.Controls
             var orders = GetOrdersByShipper(shipper);
 
             var combox = sender as ComboBox;
-            if (combox.Text != "不限")
+            if (combox.Text != "すべて")
             {
                 orders = orders.FindAll(o => o.GenreName == combox.Text);
             }
@@ -485,7 +485,7 @@ namespace GODInventoryWinForm.Controls
         private List<v_duplicatedorder> GetOrdersByShipper(string shipper)
         {
             List<v_duplicatedorder> orders = duplicatedOrderList;
-            if (shipper != "不限")
+            if (shipper != "すべて")
             {
                 orders = orders.FindAll(o => o.実際配送担当 == shipper);
             }

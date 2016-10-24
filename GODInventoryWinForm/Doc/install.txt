@@ -73,7 +73,7 @@ CHANGE COLUMN `重量` `重量` int(11) NOT NULL DEFAULT 0;
 
 #v4.2
 ============================================-
-ALTER TABLE `god_inventory`.`t_orderdata` 
+ALTER TABLE `t_orderdata` 
 ADD COLUMN `発注品名漢字`  varchar(255) CHARACTER SET 'utf8' COLLATE utf8_unicode_ci DEFAULT NULL,
 ADD COLUMN `発注規格名漢字`  varchar(255) CHARACTER SET 'utf8' COLLATE utf8_unicode_ci DEFAULT NULL;
 
@@ -81,3 +81,28 @@ ALTER TABLE `god_inventory`.`t_orderdata`
 CHANGE COLUMN `最小発注単位数量` `最小発注単位数量` int(11) NOT NULL DEFAULT 0;
 ALTER TABLE `god_inventory`.`t_orderdata` 
 CHANGE COLUMN `社内伝番` `社内伝番` int(11) NOT NULL DEFAULT 0;
+
+#v4.12
+============================================
+ALTER TABLE  `t_orderdata` 
+CHANGE COLUMN `ジャンル` `ジャンル` INT(3) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `原単価(税込)` `原単価(税込)` DOUBLE NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `原価金額(税込)` `原価金額(税込)` DOUBLE NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `税額` `税額` DOUBLE NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `税率` `税率` DOUBLE NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `売単価（税込）` `売単価（税込）` DOUBLE NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `売単価（税抜）` `売単価（税抜）` DOUBLE NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `出荷業務仕入先コード` `出荷業務仕入先コード` INT(11) NOT NULL DEFAULT '0' ,
+CHANGE COLUMN `発注形態区分` `発注形態区分` SMALLINT(6) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `納品場所コード` `納品場所コード` SMALLINT(255) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `法人コード` `法人コード` SMALLINT(6) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `仕入先コード` `仕入先コード` INT(11) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `伝票区分` `伝票区分` SMALLINT(6) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `行番号` `行番号` SMALLINT(6) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `部門コード` `部門コード` SMALLINT(6) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `商品コード区分` `商品コード区分` INT(11) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `総額取引区分` `総額取引区分` SMALLINT(6) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `税区分` `税区分` SMALLINT(6) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `センター経由区分` `センター経由区分` SMALLINT(6) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `センターコード` `センターコード` INT(11) NOT NULL DEFAULT 0 ;
+

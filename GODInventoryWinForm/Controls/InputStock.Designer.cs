@@ -30,11 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cancelButton = new System.Windows.Forms.Button();
             this.submitButton = new System.Windows.Forms.Button();
             this.loadItemListButton = new System.Windows.Forms.Button();
@@ -61,6 +56,11 @@
             this.clientComboBox = new System.Windows.Forms.ComboBox();
             this.remarkTextBox1 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -89,43 +89,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(573, 352);
             this.dataGridView1.TabIndex = 45;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
-            // 
-            // IdDataGridViewTextBoxColumn
-            // 
-            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
-            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
-            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.IdDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // 自社コード
-            // 
-            this.自社コード.DataPropertyName = "自社コード";
-            this.自社コード.HeaderText = "自社コード";
-            this.自社コード.Name = "自社コード";
-            this.自社コード.ReadOnly = true;
-            // 
-            // 商品名
-            // 
-            this.商品名.DataPropertyName = "商品名";
-            this.商品名.HeaderText = "商品名";
-            this.商品名.Name = "商品名";
-            this.商品名.ReadOnly = true;
-            this.商品名.Width = 200;
-            // 
-            // 規格
-            // 
-            this.規格.DataPropertyName = "規格";
-            this.規格.HeaderText = "規格";
-            this.規格.Name = "規格";
-            this.規格.ReadOnly = true;
-            this.規格.Width = 110;
-            // 
-            // 数量
-            // 
-            this.数量.DataPropertyName = "qty";
-            this.数量.HeaderText = "数量";
-            this.数量.Name = "数量";
             // 
             // cancelButton
             // 
@@ -371,6 +334,43 @@
             this.label11.Size = new System.Drawing.Size(240, 1);
             this.label11.TabIndex = 60;
             // 
+            // IdDataGridViewTextBoxColumn
+            // 
+            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
+            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
+            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.IdDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // 自社コード
+            // 
+            this.自社コード.DataPropertyName = "自社コード";
+            this.自社コード.HeaderText = "自社コード";
+            this.自社コード.Name = "自社コード";
+            this.自社コード.ReadOnly = true;
+            // 
+            // 商品名
+            // 
+            this.商品名.DataPropertyName = "商品名";
+            this.商品名.HeaderText = "商品名";
+            this.商品名.Name = "商品名";
+            this.商品名.ReadOnly = true;
+            this.商品名.Width = 260;
+            // 
+            // 規格
+            // 
+            this.規格.DataPropertyName = "規格";
+            this.規格.HeaderText = "規格";
+            this.規格.Name = "規格";
+            this.規格.ReadOnly = true;
+            this.規格.Width = 110;
+            // 
+            // 数量
+            // 
+            this.数量.DataPropertyName = "qty";
+            this.数量.HeaderText = "数量";
+            this.数量.Name = "数量";
+            // 
             // InputStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -443,13 +443,13 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox clientComboBox;
+        private System.Windows.Forms.ComboBox remarkTextBox1;
+        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;
         private System.Windows.Forms.DataGridViewTextBoxColumn 商品名;
         private System.Windows.Forms.DataGridViewTextBoxColumn 規格;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
-        private System.Windows.Forms.ComboBox remarkTextBox1;
-        private System.Windows.Forms.Label label11;
 
     }
 }

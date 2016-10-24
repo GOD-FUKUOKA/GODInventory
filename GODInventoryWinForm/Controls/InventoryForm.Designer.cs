@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.btconfirm = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -39,6 +38,10 @@
             this.warehouseComboBox = new System.Windows.Forms.ComboBox();
             this.manufacturerComboBox = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.genreComboBox = new System.Windows.Forms.ComboBox();
+            this.btprint = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.endDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,10 +52,6 @@
             this.jiHuaRuCunShuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qingDianColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chaZhiColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.genreComboBox = new System.Windows.Forms.ComboBox();
-            this.btprint = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.endDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,14 +162,6 @@
             this.jiHuaRuCunShuColumn,
             this.qingDianColumn,
             this.chaZhiColumn});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(12, 68);
             this.dataGridView1.Name = "dataGridView1";
@@ -180,11 +171,54 @@
             this.dataGridView1.TabIndex = 38;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
+            // genreComboBox
+            // 
+            this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.genreComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.genreComboBox.FormattingEnabled = true;
+            this.genreComboBox.Location = new System.Drawing.Point(280, 23);
+            this.genreComboBox.Name = "genreComboBox";
+            this.genreComboBox.Size = new System.Drawing.Size(141, 22);
+            this.genreComboBox.TabIndex = 44;
+            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged);
+            // 
+            // btprint
+            // 
+            this.btprint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btprint.Enabled = false;
+            this.btprint.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btprint.Location = new System.Drawing.Point(12, 494);
+            this.btprint.Name = "btprint";
+            this.btprint.Size = new System.Drawing.Size(100, 33);
+            this.btprint.TabIndex = 33;
+            this.btprint.Text = "棚卸用紙印刷";
+            this.btprint.UseVisualStyleBackColor = true;
+            this.btprint.Visible = false;
+            this.btprint.Click += new System.EventHandler(this.btprint_Click_1);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label2.Location = new System.Drawing.Point(219, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 14);
+            this.label2.TabIndex = 37;
+            this.label2.Text = "ジャンル";
+            // 
+            // endDateTimePicker1
+            // 
+            this.endDateTimePicker1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.endDateTimePicker1.Location = new System.Drawing.Point(687, 23);
+            this.endDateTimePicker1.Name = "endDateTimePicker1";
+            this.endDateTimePicker1.Size = new System.Drawing.Size(159, 21);
+            this.endDateTimePicker1.TabIndex = 41;
+            // 
             // idColumn
             // 
             this.idColumn.DataPropertyName = "Id";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.idColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.idColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.idColumn.HeaderText = "序号";
             this.idColumn.Name = "idColumn";
             this.idColumn.ReadOnly = true;
@@ -206,7 +240,7 @@
             this.商品名.Name = "商品名";
             this.商品名.ReadOnly = true;
             this.商品名.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.商品名.Width = 200;
+            this.商品名.Width = 260;
             // 
             // 規格
             // 
@@ -215,7 +249,7 @@
             this.規格.Name = "規格";
             this.規格.ReadOnly = true;
             this.規格.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.規格.Width = 120;
+            this.規格.Width = 160;
             // 
             // yingYouKuCunShuColumn
             // 
@@ -268,49 +302,6 @@
             this.chaZhiColumn.ReadOnly = true;
             this.chaZhiColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.chaZhiColumn.Width = 70;
-            // 
-            // genreComboBox
-            // 
-            this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.genreComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(280, 23);
-            this.genreComboBox.Name = "genreComboBox";
-            this.genreComboBox.Size = new System.Drawing.Size(141, 22);
-            this.genreComboBox.TabIndex = 44;
-            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged);
-            // 
-            // btprint
-            // 
-            this.btprint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btprint.Enabled = false;
-            this.btprint.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btprint.Location = new System.Drawing.Point(12, 494);
-            this.btprint.Name = "btprint";
-            this.btprint.Size = new System.Drawing.Size(100, 33);
-            this.btprint.TabIndex = 33;
-            this.btprint.Text = "棚卸用紙印刷";
-            this.btprint.UseVisualStyleBackColor = true;
-            this.btprint.Visible = false;
-            this.btprint.Click += new System.EventHandler(this.btprint_Click_1);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(219, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 14);
-            this.label2.TabIndex = 37;
-            this.label2.Text = "ジャンル";
-            // 
-            // endDateTimePicker1
-            // 
-            this.endDateTimePicker1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.endDateTimePicker1.Location = new System.Drawing.Point(687, 23);
-            this.endDateTimePicker1.Name = "endDateTimePicker1";
-            this.endDateTimePicker1.Size = new System.Drawing.Size(159, 21);
-            this.endDateTimePicker1.TabIndex = 41;
             // 
             // InventoryForm
             // 

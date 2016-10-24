@@ -200,7 +200,7 @@
             this.住所DataGridViewTextBoxColumn.HeaderText = "住所";
             this.住所DataGridViewTextBoxColumn.Name = "住所DataGridViewTextBoxColumn";
             this.住所DataGridViewTextBoxColumn.ReadOnly = true;
-            this.住所DataGridViewTextBoxColumn.Width = 200;
+            this.住所DataGridViewTextBoxColumn.Width = 260;
             // 
             // 電話番号DataGridViewTextBoxColumn
             // 
