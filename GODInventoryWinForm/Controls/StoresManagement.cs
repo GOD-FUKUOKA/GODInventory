@@ -67,7 +67,7 @@ namespace GODInventoryWinForm.Controls
                     order.電話番号 = textBox2.Text;
                     order.FAX番号 = this.productReceivedAtTextBox3.Text;
                     ctx.SaveChanges();
-                    MessageBox.Show(String.Format("Congratulations, You have item  update successfully!"));
+                    MessageBox.Show(String.Format("店舗情報更新完了!"));
                 }
                 else if (showtype == "Add")
                 {
@@ -96,7 +96,7 @@ namespace GODInventoryWinForm.Controls
 
                     ctx.t_shoplist.Add(order);
                     ctx.SaveChanges();
-                    MessageBox.Show(String.Format("Congratulations, You have   order added successfully!"));
+                    MessageBox.Show(String.Format("店舗登録完了!"));
 
                 }
             }
@@ -131,7 +131,7 @@ namespace GODInventoryWinForm.Controls
 
                 if (List !=null)
                 {
-                    errorProvider1.SetError(storeCodeTextBox, String.Format("店番 已存在"));
+                    errorProvider1.SetError(storeCodeTextBox, String.Format("店番がすでに存在しています"));
                     return;
                 }
             }

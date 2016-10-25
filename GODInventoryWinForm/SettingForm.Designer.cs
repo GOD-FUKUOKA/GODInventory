@@ -43,9 +43,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(38, 66);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 14);
+            this.label1.Size = new System.Drawing.Size(157, 14);
             this.label1.TabIndex = 0;
-            this.label1.Text = "NFWE 安装目录";
+            this.label1.Text = "NFWEのインストール場所";
             // 
             // folderBrowserButton1
             // 
@@ -60,11 +60,11 @@
             // 
             // installDirTextBox
             // 
-            this.installDirTextBox.Location = new System.Drawing.Point(146, 64);
+            this.installDirTextBox.Location = new System.Drawing.Point(201, 64);
             this.installDirTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.installDirTextBox.Name = "installDirTextBox";
             this.installDirTextBox.ReadOnly = true;
-            this.installDirTextBox.Size = new System.Drawing.Size(290, 21);
+            this.installDirTextBox.Size = new System.Drawing.Size(235, 21);
             this.installDirTextBox.TabIndex = 3;
             // 
             // cancleButton2
@@ -95,16 +95,16 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(49, 111);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 14);
+            this.label2.Size = new System.Drawing.Size(105, 14);
             this.label2.TabIndex = 6;
-            this.label2.Text = "库存初始时间";
+            this.label2.Text = "在庫計上開始日";
             // 
             // inventoryStartAtDateTimePicker1
             // 
-            this.inventoryStartAtDateTimePicker1.Location = new System.Drawing.Point(146, 108);
+            this.inventoryStartAtDateTimePicker1.Location = new System.Drawing.Point(201, 108);
             this.inventoryStartAtDateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.inventoryStartAtDateTimePicker1.Name = "inventoryStartAtDateTimePicker1";
-            this.inventoryStartAtDateTimePicker1.Size = new System.Drawing.Size(333, 21);
+            this.inventoryStartAtDateTimePicker1.Size = new System.Drawing.Size(278, 21);
             this.inventoryStartAtDateTimePicker1.TabIndex = 8;
             // 
             // SettingForm
@@ -127,7 +127,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "SettingForm";
+            this.Text = "設定";
             this.Load += new System.EventHandler(this.SettingForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

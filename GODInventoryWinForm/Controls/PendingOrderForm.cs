@@ -470,7 +470,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             }
             else
             {
-                MessageBox.Show(" please select rows in the order list first.");
+                MessageBox.Show(" まず伝票を選択してください.");
             }
         }
 
@@ -480,7 +480,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
             if (orders.Count() > 0)
             {
-                if (MessageBox.Show("Cancel these orders?", "Confirm Message", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (MessageBox.Show("選択された伝票をキャンセル?", "確認メッセージ", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     OrderSqlHelper.CancelOrders(orders);
                     pager1.Bind();

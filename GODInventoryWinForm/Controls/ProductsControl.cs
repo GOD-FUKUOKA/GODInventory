@@ -80,7 +80,7 @@ namespace GODInventoryWinForm.Controls
             }
             else
             {
-                MessageBox.Show(" please select rows in the order list first.");
+                MessageBox.Show(" まず伝票を選択してください.");
             }
         }
         private List<int> GetOrderIdsBySelectedGridCell()
