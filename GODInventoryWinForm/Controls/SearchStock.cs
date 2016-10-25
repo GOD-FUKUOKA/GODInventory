@@ -229,7 +229,7 @@ namespace GODInventoryWinForm.Controls
             if (!isAllManufacturerSelected)
             {
                 // 所有仓库的某一生产商的出入库记录
-                conditions += " AND (s.`工厂` = @manufacturer)";
+                conditions += " AND (s.`工場` = @manufacturer)";
             }
 
 
@@ -598,8 +598,8 @@ namespace GODInventoryWinForm.Controls
                 var originalStock = this.stockList.Find(o => (o.納品書番号 == stockNum));
                 stock = new t_stockrec();
                 stock.納品書番号 = originalStock.納品書番号;
-                stock.工厂 = originalStock.工厂;
-                stock.客户 = originalStock.客户;
+                stock.工場 = originalStock.工場;
+                stock.客 = originalStock.客;
                 stock.区分 = originalStock.区分;
                 stock.事由 = originalStock.事由;
                 stock.元 = originalStock.元;

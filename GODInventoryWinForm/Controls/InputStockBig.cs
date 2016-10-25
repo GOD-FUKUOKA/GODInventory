@@ -86,7 +86,7 @@ namespace GODInventoryWinForm.Controls
                         order.先 = this.warehouseComboBox.Text;
 
                         order.元 = this.manufacturerComboBox.Text;
-                        order.工厂 = this.manufacturerComboBox.Text;
+                        order.工場 = this.manufacturerComboBox.Text;
                         order.納品書番号 = stockNOTextBox.Text;
 
                         order.数量 = item.qty;
@@ -95,7 +95,7 @@ namespace GODInventoryWinForm.Controls
                         //order.仓库 = storeComboBox.Text;
                         order.自社コード = Convert.ToInt32(item.自社コード);
                         order.状態 = this.stockStatusComboBox.Text;
-                        order.客户 = this.clientComboBox.Text;
+                        order.客 = this.clientComboBox.Text;
 
                         receivedList.Add(order);
 

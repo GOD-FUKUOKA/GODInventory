@@ -16,7 +16,7 @@ namespace GODInventory.MyLinq
         public string 元 { get; set; }
         public string 先 { get; set; }
         public string 納品書番号 { get; set; }
-        public string 客户 { get; set; }
+        public string 客 { get; set; }
         public string 事由 { get; set; }
     }
 }

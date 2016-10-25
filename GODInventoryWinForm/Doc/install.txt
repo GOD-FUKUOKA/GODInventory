@@ -106,3 +106,8 @@ CHANGE COLUMN `税区分` `税区分` SMALLINT(6) NOT NULL DEFAULT 0 ,
 CHANGE COLUMN `センター経由区分` `センター経由区分` SMALLINT(6) NOT NULL DEFAULT 0 ,
 CHANGE COLUMN `センターコード` `センターコード` INT(11) NOT NULL DEFAULT 0 ;
 
+#v4.13
+==============================================
+ALTER TABLE `t_stockrec` 
+CHANGE COLUMN `客户` `客` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL ,
+CHANGE COLUMN `工厂` `工場` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL ;

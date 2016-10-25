@@ -59,7 +59,7 @@ namespace GODInventoryWinForm.Controls
                 this.countyComboBox1.ValueMember = "ShortName";
                 this.countyComboBox1.DataSource = counties;
 
-                var dateEnums = (new OrderDateEnum[] { OrderDateEnum.すべて, OrderDateEnum.出荷日, OrderDateEnum.発注日, OrderDateEnum.納品日 }).Select(o => new { FullName = o.ToString(), ShortName = o.ToString() }).ToList();
+                var dateEnums = (new OrderDateEnum[] { OrderDateEnum.すべて, OrderDateEnum.出荷日, OrderDateEnum.受注日, OrderDateEnum.納品日 }).Select(o => new { FullName = o.ToString(), ShortName = o.ToString() }).ToList();
                 this.dateEnumComboBox.DisplayMember = "FullName";
                 this.dateEnumComboBox.ValueMember = "ShortName";
                 this.dateEnumComboBox.DataSource = dateEnums;
@@ -105,9 +105,10 @@ namespace GODInventoryWinForm.Controls
             else if (orderDateEnum == OrderDateEnum.納品日.ToString())
             {
                 conditions += "(  `納品日`>= @startAt AND `納品日`<= @endAt )";
-            }else if (orderDateEnum == OrderDateEnum.発注日.ToString())
+            }
+            else if (orderDateEnum == OrderDateEnum.受注日.ToString())
             {
-                conditions += "(  `発注日`>= @startAt AND `発注日`<= @endAt )";
+                conditions += "(  `受注日`>= @startAt AND `受注日`<= @endAt )";
             }
 
             List<MySqlParameter> condition_params = new List<MySqlParameter>();
@@ -343,7 +344,7 @@ namespace GODInventoryWinForm.Controls
                 this.countyComboBox1.ValueMember = "ShortName";
                 this.countyComboBox1.DataSource = counties;
 
-                var dateEnums = (new OrderDateEnum[] { OrderDateEnum.すべて, OrderDateEnum.出荷日, OrderDateEnum.発注日, OrderDateEnum.納品日 }).Select(o => new { FullName = o.ToString(), ShortName = o.ToString() }).ToList();
+                var dateEnums = (new OrderDateEnum[] { OrderDateEnum.すべて, OrderDateEnum.出荷日, OrderDateEnum.受注日, OrderDateEnum.納品日 }).Select(o => new { FullName = o.ToString(), ShortName = o.ToString() }).ToList();
                 this.dateEnumComboBox.DisplayMember = "FullName";
                 this.dateEnumComboBox.ValueMember = "ShortName";
                 this.dateEnumComboBox.DataSource = dateEnums;

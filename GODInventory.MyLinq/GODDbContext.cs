@@ -376,7 +376,7 @@
                 .IsUnicode(false);
 
             modelBuilder.Entity<t_stockrec>()
-                 .Property(e => e.客户)
+                 .Property(e => e.客)
                   .IsUnicode(false);
 
             modelBuilder.Entity<t_stockrec>()
@@ -384,7 +384,7 @@
                         .IsUnicode(false);
 
             modelBuilder.Entity<t_stockrec>()
-                        .Property(e => e.工厂)
+                        .Property(e => e.工場)
                         .IsUnicode(false);
 
             modelBuilder.Entity<t_stockstate>()

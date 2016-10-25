@@ -664,6 +664,7 @@ VALUES (
             t_orderdata o = ConverToEntity(shop, item, location, orders);
             if (o.Status == OrderStatus.Existed) 
             {
+                //o.Status = OrderStatus.Pending;
                 return null;
             }
             string format = @"INSERT INTO `t_orderdata`(

@@ -166,7 +166,7 @@ namespace GODInventoryWinForm
             using (var ctx = new GODDbContext())
             {
                 var date = DateTime.Now.Date;
-                var three_month_ago = date.AddMonths(-3);
+                var three_month_ago = date.AddMonths(-1);
                 List<t_itemlist> items = ctx.t_itemlist.ToList();
                 List<t_orderdata> orders = (from t_orderdata o in ctx.t_orderdata
                                             where o.発注日 <= date && o.発注日 > three_month_ago
@@ -224,12 +224,12 @@ namespace GODInventoryWinForm
                             {
                                 sqls.Add(sql);
                                 count++;
-                            }
-                            if ((i == models.Count - 1) || (sqls.Count % 25 == 0))
-                            {
-                                var multisql = String.Join("", sqls.ToArray());
-                                ctx.Database.ExecuteSqlCommand(multisql);
-                                sqls.Clear();
+                                if ((i == models.Count - 1) || (sqls.Count % 25 == 0))
+                                {
+                                    var multisql = String.Join("", sqls.ToArray());
+                                    ctx.Database.ExecuteSqlCommand(multisql);
+                                    sqls.Clear();
+                                }
                             }
                             //ctx.Database.ExecuteSqlCommand(sql_parameters.SqlString, sql_parameters.Parameters);
                             // use sql instead of orm

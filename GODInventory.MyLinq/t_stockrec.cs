@@ -35,13 +35,13 @@ namespace GODInventory.MyLinq
         public string 納品書番号 { get; set; }
 
         [StringLength(255)]
-        public string 客户 { get; set; }
+        public string 客 { get; set; }
 
 
         [StringLength(255)]
         public string 事由 { get; set; }
         [StringLength(255)]
-        public string 工厂 { get; set; }
+        public string 工場 { get; set; }
 
         public int OrderId { get; set; }
 

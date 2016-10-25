@@ -125,8 +125,8 @@ namespace GODInventoryWinForm.Controls
                         order.事由 = this.remarkTextBox1.Text;
                         order.自社コード = Convert.ToInt32(item.自社コード);
                         order.状態 = this.stockStatusComboBox.Text;
-                        order.工厂 = this.manufacturerComboBox.Text;
-                        order.客户 = this.clientComboBox.Text;
+                        order.工場 = this.manufacturerComboBox.Text;
+                        order.客 = this.clientComboBox.Text;
 
                         changeList.Add(order);
                     }
