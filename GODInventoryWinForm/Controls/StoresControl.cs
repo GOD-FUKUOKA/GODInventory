@@ -41,7 +41,8 @@ namespace GODInventoryWinForm.Controls
             }
             else
             {
-                MessageBox.Show("Please select a store first.");
+
+                MessageBox.Show(" まず伝票を選択してください.");
             }
          
         }

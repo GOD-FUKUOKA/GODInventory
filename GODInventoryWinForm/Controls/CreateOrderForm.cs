@@ -190,7 +190,7 @@ namespace GODInventoryWinForm.Controls
                     }
                     ctx.t_orderdata.AddRange(newOrderList);
                     ctx.SaveChanges();
-                    MessageBox.Show(String.Format("Congratulations, You have {0} fax order added successfully!", newOrderList.Count));
+                    MessageBox.Show(String.Format("{0} 枚のFAX注文登録完了!", newOrderList.Count));
                     orderList.Clear();
                 }
 

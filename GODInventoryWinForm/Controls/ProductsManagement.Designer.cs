@@ -329,7 +329,7 @@
             this.MinimizeBox = false;
             this.Name = "ProductsManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ProductsManagement";
+            this.Text = "商品管理";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

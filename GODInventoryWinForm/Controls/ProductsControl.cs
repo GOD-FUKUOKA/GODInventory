@@ -67,7 +67,7 @@ namespace GODInventoryWinForm.Controls
             }
             else
             {
-                MessageBox.Show("Please select a product first.");
+                MessageBox.Show(" まず伝票を選択してください.");
             }
         }
         private List<int> GetOrderIdsBySelectedGridCell()

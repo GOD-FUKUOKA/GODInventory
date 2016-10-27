@@ -486,7 +486,7 @@
             this.MinimizeBox = false;
             this.Name = "SearchStock";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "入库出库记录查询";
+            this.Text = "入出庫記録検索";
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.qtyDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockIoDataGridView)).EndInit();

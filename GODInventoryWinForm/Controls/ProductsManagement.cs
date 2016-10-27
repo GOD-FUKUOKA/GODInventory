@@ -88,7 +88,7 @@ namespace GODInventoryWinForm.Controls
                     }
                     order.商品コード = Convert.ToInt32(this.productCodeTextBox.Text);
                     ctx.SaveChanges();
-                    MessageBox.Show(String.Format("Congratulations, You have item  update successfully!"));
+                    MessageBox.Show(String.Format("商品情報更新完了!"));
                 }
                 else if (showtype == "Add")
                 {
@@ -117,7 +117,7 @@ namespace GODInventoryWinForm.Controls
 
                     ctx.t_itemlist.Add(order);
                     ctx.SaveChanges();
-                    MessageBox.Show(String.Format("Congratulations, You have   order added successfully!"));
+                    MessageBox.Show(String.Format("商品登録完了!"));
 
                 }                                    
             }
@@ -145,7 +145,7 @@ namespace GODInventoryWinForm.Controls
 
                 if (List.Count > 0)
                 {
-                    errorProvider1.SetError(InnerCodeTextBox, String.Format("自社コード 已存在"));
+                    errorProvider1.SetError(InnerCodeTextBox, String.Format("自社コードがすでに存在しています"));
                     return;
                 }
             }

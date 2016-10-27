@@ -63,7 +63,7 @@
             this.receiveOrderButton.Name = "receiveOrderButton";
             this.receiveOrderButton.Size = new System.Drawing.Size(180, 58);
             this.receiveOrderButton.TabIndex = 4;
-            this.receiveOrderButton.Text = "连接服务器\r\n下载新订单数据";
+            this.receiveOrderButton.Text = "サーバーに接続し、新しい受注データをダウンロードします";
             this.receiveOrderButton.UseVisualStyleBackColor = true;
             this.receiveOrderButton.Click += new System.EventHandler(this.receiveOrderButton_Click);
             // 
@@ -128,7 +128,7 @@
             this.orderConfirmButton.Name = "orderConfirmButton";
             this.orderConfirmButton.Size = new System.Drawing.Size(180, 58);
             this.orderConfirmButton.TabIndex = 5;
-            this.orderConfirmButton.Text = "连接服务器\r\n下载收货订单数据";
+            this.orderConfirmButton.Text = "サーバーに接続し、新しい受領データをダウンロードします";
             this.orderConfirmButton.UseVisualStyleBackColor = true;
             // 
             // label1
