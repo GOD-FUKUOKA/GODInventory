@@ -427,6 +427,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             if (shipperName == null)
             {
                 // 触发 change 事件
+                // 第二次回到转发物流界面，如果以前选择的是SelectedIndex =0， 需要先设置-1，才能触发 change 事件。
+                shipperComboBox.SelectedIndex = -1;
                 shipperComboBox.SelectedIndex = 0;
             }
             else
@@ -699,49 +701,6 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         private void btlogin_Click(object sender, EventArgs e)
         {
-            var orders = this.dataGridView3.DataSource as List<v_pendingorder>;
-            if (orders.Count() > 0)
-            {
-                string shipperName = shipperComboBox.Text;
-                List<t_maruken_trans> trans = new List<t_maruken_trans>();
-
-                foreach (var o in orders)
-                {
-
-                    t_maruken_trans temp = new t_maruken_trans();
-
-                    temp.OrderId = o.id受注データ;
-
-                    temp.受注日 = o.受注日;
-                    temp.店舗コード = o.店舗コード;
-                    temp.店舗名漢字 = o.店舗名漢字;
-                    temp.伝票番号 = o.伝票番号;
-                    temp.ジャンル = Convert.ToInt16(o.ジャンル);
-                    temp.品名漢字 = o.品名漢字;
-                    temp.規格名漢字 = o.規格名漢字;
-                    temp.口数 = o.口数;
-                    temp.発注数量 = o.発注数量;
-                    temp.重量 = o.重量;
-                    temp.実際配送担当 = o.実際配送担当;
-                    temp.県別 = o.県別;
-                    temp.納品指示 = o.納品指示;
-                    temp.備考 = o.備考;
-                    trans.Add(temp);
-
-                }
-
-                using (var ctx = new GODDbContext())
-                {
-
-                    ctx.t_maruken_trans.AddRange(trans);
-
-                    OrderSqlHelper.NotifyShipper(ctx, shipperName);
-                    ctx.SaveChanges();
-                }
-                this.shipperOrderList.RemoveAll(o => orders.Contains(o));
-                this.dataGridView3.DataSource = null;
-                MessageBox.Show(String.Format(" {0} 件転送処理しました!", trans.Count));
-            }
 
         }
 
@@ -1199,6 +1158,60 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 total += order.実際出荷数量;
             }
             selectedRowsLabel.Text = String.Format("選択中の数量合計: {0}", total);
+        }
+
+        private void notifyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<v_pendingorder> orders = new List<v_pendingorder>();
+            string shipperName = shipperComboBox.Text;
+            for (int i = 0; i < dataGridView3.SelectedRows.Count; i++)
+            {
+                var order = dataGridView3.SelectedRows[i].DataBoundItem as v_pendingorder;
+                orders.Add(order);
+            }
+
+            if (orders.Count() > 0)
+            {
+                List<t_maruken_trans> trans = new List<t_maruken_trans>();
+
+                foreach (var o in orders)
+                {
+
+                    t_maruken_trans temp = new t_maruken_trans();
+
+                    temp.OrderId = o.id受注データ;
+
+                    temp.受注日 = o.受注日;
+                    temp.店舗コード = o.店舗コード;
+                    temp.店舗名漢字 = o.店舗名漢字;
+                    temp.伝票番号 = o.伝票番号;
+                    temp.ジャンル = Convert.ToInt16(o.ジャンル);
+                    temp.品名漢字 = o.品名漢字;
+                    temp.規格名漢字 = o.規格名漢字;
+                    temp.口数 = o.口数;
+                    temp.発注数量 = o.発注数量;
+                    temp.重量 = o.重量;
+                    temp.実際配送担当 = o.実際配送担当;
+                    temp.県別 = o.県別;
+                    temp.納品指示 = o.納品指示;
+                    temp.備考 = o.備考;
+                    trans.Add(temp);
+
+                }
+
+                using (var ctx = new GODDbContext())
+                {
+
+                    ctx.t_maruken_trans.AddRange(trans);
+
+                    OrderSqlHelper.NotifyShipper(ctx, shipperName);
+                    ctx.SaveChanges();
+                }
+                this.shipperOrderList.RemoveAll(o => orders.Contains(o));
+                this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName); ;
+                MessageBox.Show(String.Format(" {0} 件転送処理しました!", trans.Count));
+            }
+
         }
 
 
