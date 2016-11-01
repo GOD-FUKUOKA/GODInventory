@@ -70,14 +70,14 @@
             this.orderCountTextBox.Location = new System.Drawing.Point(125, 112);
             this.orderCountTextBox.Name = "orderCountTextBox";
             this.orderCountTextBox.Size = new System.Drawing.Size(428, 18);
-            this.orderCountTextBox.TabIndex = 4;
+            this.orderCountTextBox.TabIndex = 0;
             // 
             // submitButton
             // 
             this.submitButton.Location = new System.Drawing.Point(373, 179);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(75, 21);
-            this.submitButton.TabIndex = 5;
+            this.submitButton.TabIndex = 1;
             this.submitButton.Text = "Submit";
             this.submitButton.UseVisualStyleBackColor = true;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
@@ -88,7 +88,7 @@
             this.cancleButton.Location = new System.Drawing.Point(478, 178);
             this.cancleButton.Name = "cancleButton";
             this.cancleButton.Size = new System.Drawing.Size(75, 21);
-            this.cancleButton.TabIndex = 6;
+            this.cancleButton.TabIndex = 2;
             this.cancleButton.Text = "Cancel";
             this.cancleButton.UseVisualStyleBackColor = true;
             // 
@@ -107,7 +107,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pathTextBox1);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GenerateASNTextForm";

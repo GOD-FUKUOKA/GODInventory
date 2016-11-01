@@ -159,10 +159,10 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 21);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(707, 405);
+            this.tabPage2.Size = new System.Drawing.Size(707, 406);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "OrderDetail";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -183,9 +183,9 @@
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.textBox4);
             this.tabPage3.Controls.Add(this.label4);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 21);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(707, 405);
+            this.tabPage3.Size = new System.Drawing.Size(707, 406);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Form";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -195,7 +195,7 @@
             this.textBox7.Location = new System.Drawing.Point(405, 293);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(166, 18);
-            this.textBox7.TabIndex = 30;
+            this.textBox7.TabIndex = 3;
             // 
             // label8
             // 
@@ -245,7 +245,7 @@
             this.groupBox1.Location = new System.Drawing.Point(3, 15);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(577, 217);
-            this.groupBox1.TabIndex = 31;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
@@ -263,7 +263,7 @@
             this.textBox11.Location = new System.Drawing.Point(121, 180);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(166, 18);
-            this.textBox11.TabIndex = 30;
+            this.textBox11.TabIndex = 7;
             // 
             // label11
             // 
@@ -288,14 +288,14 @@
             this.textBox10.Location = new System.Drawing.Point(402, 140);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(166, 18);
-            this.textBox10.TabIndex = 28;
+            this.textBox10.TabIndex = 6;
             // 
             // textBox8
             // 
             this.textBox8.Location = new System.Drawing.Point(121, 120);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(166, 18);
-            this.textBox8.TabIndex = 24;
+            this.textBox8.TabIndex = 4;
             // 
             // label10
             // 
@@ -311,14 +311,14 @@
             this.textBox9.Location = new System.Drawing.Point(121, 140);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(166, 18);
-            this.textBox9.TabIndex = 26;
+            this.textBox9.TabIndex = 5;
             // 
             // textBox12
             // 
             this.textBox12.Location = new System.Drawing.Point(387, 45);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(184, 18);
-            this.textBox12.TabIndex = 20;
+            this.textBox12.TabIndex = 3;
             // 
             // label13
             // 
@@ -343,14 +343,14 @@
             this.textBox6.Location = new System.Drawing.Point(124, 80);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(184, 18);
-            this.textBox6.TabIndex = 10;
+            this.textBox6.TabIndex = 2;
             // 
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(387, 19);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(184, 18);
-            this.textBox5.TabIndex = 12;
+            this.textBox5.TabIndex = 1;
             // 
             // label7
             // 
@@ -366,7 +366,7 @@
             this.textBox2.Location = new System.Drawing.Point(124, 61);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(184, 18);
-            this.textBox2.TabIndex = 4;
+            this.textBox2.TabIndex = 0;
             // 
             // label2
             // 
@@ -389,7 +389,7 @@
             this.textBox3.Location = new System.Drawing.Point(70, 297);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(166, 18);
-            this.textBox3.TabIndex = 28;
+            this.textBox3.TabIndex = 1;
             // 
             // label1
             // 
@@ -397,7 +397,7 @@
             this.label1.Location = new System.Drawing.Point(14, -13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 11);
-            this.label1.TabIndex = 22;
+            this.label1.TabIndex = 2;
             this.label1.Text = "Order Detail";
             // 
             // button4
@@ -405,7 +405,7 @@
             this.button4.Location = new System.Drawing.Point(421, 366);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 21);
-            this.button4.TabIndex = 34;
+            this.button4.TabIndex = 4;
             this.button4.Text = "Submit";
             this.button4.UseVisualStyleBackColor = true;
             // 
@@ -414,7 +414,7 @@
             this.button5.Location = new System.Drawing.Point(502, 364);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 21);
-            this.button5.TabIndex = 35;
+            this.button5.TabIndex = 5;
             this.button5.Text = "Cancel";
             this.button5.UseVisualStyleBackColor = true;
             // 
@@ -423,7 +423,7 @@
             this.textBox13.Location = new System.Drawing.Point(127, 333);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(166, 18);
-            this.textBox13.TabIndex = 33;
+            this.textBox13.TabIndex = 2;
             // 
             // label14
             // 
@@ -439,7 +439,7 @@
             this.textBox4.Location = new System.Drawing.Point(70, 272);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(166, 18);
-            this.textBox4.TabIndex = 26;
+            this.textBox4.TabIndex = 0;
             // 
             // label4
             // 
@@ -455,7 +455,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
-            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "OrdersWithFormControl";
             this.Size = new System.Drawing.Size(746, 464);
             this.tabControl1.ResumeLayout(false);

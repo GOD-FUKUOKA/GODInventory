@@ -29,10 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -88,7 +86,7 @@
             this.submitButton.Location = new System.Drawing.Point(745, 408);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(100, 30);
-            this.submitButton.TabIndex = 0;
+            this.submitButton.TabIndex = 13;
             this.submitButton.Text = "保存";
             this.submitButton.UseVisualStyleBackColor = false;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
@@ -100,7 +98,7 @@
             this.cancelButton.Location = new System.Drawing.Point(851, 408);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(100, 30);
-            this.cancelButton.TabIndex = 1;
+            this.cancelButton.TabIndex = 14;
             this.cancelButton.Text = "取消す";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -113,7 +111,7 @@
             this.label1.Location = new System.Drawing.Point(784, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 14);
-            this.label1.TabIndex = 2;
+            this.label1.TabIndex = 20;
             this.label1.Text = "発注日";
             // 
             // orderCreatedAtDateTimePicker
@@ -122,7 +120,7 @@
             this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(836, 39);
             this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
             this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(123, 21);
-            this.orderCreatedAtDateTimePicker.TabIndex = 3;
+            this.orderCreatedAtDateTimePicker.TabIndex = 11;
             // 
             // dataGridView1
             // 
@@ -133,14 +131,6 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.invoiceNODataGridViewTextBoxColumn,
@@ -157,21 +147,13 @@
             this.受注数,
             this.deleteButtonColumn});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(5, 106);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(1044, 290);
-            this.dataGridView1.TabIndex = 4;
+            this.dataGridView1.TabIndex = 23;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
@@ -180,9 +162,9 @@
             // invoiceNODataGridViewTextBoxColumn
             // 
             this.invoiceNODataGridViewTextBoxColumn.DataPropertyName = "伝票番号";
-            dataGridViewCellStyle2.Format = "D8";
-            dataGridViewCellStyle2.NullValue = null;
-            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Format = "D8";
+            dataGridViewCellStyle3.NullValue = null;
+            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
             this.invoiceNODataGridViewTextBoxColumn.Frozen = true;
             this.invoiceNODataGridViewTextBoxColumn.HeaderText = "伝票番号";
             this.invoiceNODataGridViewTextBoxColumn.Name = "invoiceNODataGridViewTextBoxColumn";
@@ -192,8 +174,8 @@
             // 
             // specialCodeColumn
             // 
-            dataGridViewCellStyle3.NullValue = "NO";
-            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.NullValue = "NO";
+            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle4;
             this.specialCodeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.specialCodeColumn.HeaderText = "雑コード";
             this.specialCodeColumn.Items.AddRange(new object[] {
@@ -319,7 +301,7 @@
             this.storeCodeTextBox.MaxLength = 8;
             this.storeCodeTextBox.Name = "storeCodeTextBox";
             this.storeCodeTextBox.Size = new System.Drawing.Size(58, 21);
-            this.storeCodeTextBox.TabIndex = 18;
+            this.storeCodeTextBox.TabIndex = 2;
             this.storeCodeTextBox.TextChanged += new System.EventHandler(this.storeCodeTextBox_TextChanged);
             // 
             // label5
@@ -393,7 +375,7 @@
             this.storeComboBox.Location = new System.Drawing.Point(184, 38);
             this.storeComboBox.Name = "storeComboBox";
             this.storeComboBox.Size = new System.Drawing.Size(95, 22);
-            this.storeComboBox.TabIndex = 27;
+            this.storeComboBox.TabIndex = 3;
             this.storeComboBox.SelectedIndexChanged += new System.EventHandler(this.storeComboBox_SelectedIndexChanged);
             // 
             // label9
@@ -417,7 +399,7 @@
             this.customerComboBox.Location = new System.Drawing.Point(496, 38);
             this.customerComboBox.Name = "customerComboBox";
             this.customerComboBox.Size = new System.Drawing.Size(101, 22);
-            this.customerComboBox.TabIndex = 30;
+            this.customerComboBox.TabIndex = 5;
             // 
             // customerIdTextBox
             // 
@@ -425,7 +407,7 @@
             this.customerIdTextBox.Location = new System.Drawing.Point(438, 39);
             this.customerIdTextBox.Name = "customerIdTextBox";
             this.customerIdTextBox.Size = new System.Drawing.Size(52, 21);
-            this.customerIdTextBox.TabIndex = 29;
+            this.customerIdTextBox.TabIndex = 4;
             this.customerIdTextBox.Text = "4";
             this.customerIdTextBox.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
@@ -446,7 +428,7 @@
             this.textBox5.Location = new System.Drawing.Point(695, 39);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(52, 21);
-            this.textBox5.TabIndex = 32;
+            this.textBox5.TabIndex = 6;
             this.textBox5.Text = "9";
             // 
             // deliveredAtDateTimePicker
@@ -455,7 +437,7 @@
             this.deliveredAtDateTimePicker.Location = new System.Drawing.Point(836, 69);
             this.deliveredAtDateTimePicker.Name = "deliveredAtDateTimePicker";
             this.deliveredAtDateTimePicker.Size = new System.Drawing.Size(123, 21);
-            this.deliveredAtDateTimePicker.TabIndex = 34;
+            this.deliveredAtDateTimePicker.TabIndex = 12;
             // 
             // label11
             // 
@@ -476,7 +458,7 @@
             this.locationComboBox.Location = new System.Drawing.Point(184, 68);
             this.locationComboBox.Name = "locationComboBox";
             this.locationComboBox.Size = new System.Drawing.Size(95, 22);
-            this.locationComboBox.TabIndex = 37;
+            this.locationComboBox.TabIndex = 8;
             this.locationComboBox.SelectedIndexChanged += new System.EventHandler(this.locationComboBox_SelectedIndexChanged);
             // 
             // locationTextBox
@@ -485,7 +467,7 @@
             this.locationTextBox.Location = new System.Drawing.Point(120, 69);
             this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.Size = new System.Drawing.Size(58, 21);
-            this.locationTextBox.TabIndex = 36;
+            this.locationTextBox.TabIndex = 7;
             this.locationTextBox.TextChanged += new System.EventHandler(this.locationTextBox_TextChanged);
             // 
             // label12
@@ -521,7 +503,7 @@
             this.orderReasonComboBox.Location = new System.Drawing.Point(438, 68);
             this.orderReasonComboBox.Name = "orderReasonComboBox";
             this.orderReasonComboBox.Size = new System.Drawing.Size(159, 22);
-            this.orderReasonComboBox.TabIndex = 40;
+            this.orderReasonComboBox.TabIndex = 10;
             // 
             // CreateOrderForm
             // 

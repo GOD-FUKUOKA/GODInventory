@@ -68,7 +68,7 @@
             this.submitFormButton.Location = new System.Drawing.Point(480, 275);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(106, 32);
-            this.submitFormButton.TabIndex = 10000020;
+            this.submitFormButton.TabIndex = 1;
             this.submitFormButton.Text = "保存";
             this.submitFormButton.UseVisualStyleBackColor = true;
             this.submitFormButton.Click += new System.EventHandler(this.submitFormButton_Click);
@@ -79,7 +79,7 @@
             this.cancelFormButton.Location = new System.Drawing.Point(592, 275);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(106, 32);
-            this.cancelFormButton.TabIndex = 10000021;
+            this.cancelFormButton.TabIndex = 2;
             this.cancelFormButton.Text = "キャンセル";
             this.cancelFormButton.UseVisualStyleBackColor = true;
             this.cancelFormButton.Click += new System.EventHandler(this.cancelFormButton_Click);
@@ -99,7 +99,7 @@
             this.InnerCodeTextBox.Location = new System.Drawing.Point(120, 31);
             this.InnerCodeTextBox.Name = "InnerCodeTextBox";
             this.InnerCodeTextBox.Size = new System.Drawing.Size(222, 21);
-            this.InnerCodeTextBox.TabIndex = 31;
+            this.InnerCodeTextBox.TabIndex = 0;
             this.InnerCodeTextBox.MouseLeave += new System.EventHandler(this.storeNamTextBox_MouseLeave);
             // 
             // label11
@@ -125,7 +125,7 @@
             this.specTextBox.Location = new System.Drawing.Point(120, 97);
             this.specTextBox.Name = "specTextBox";
             this.specTextBox.Size = new System.Drawing.Size(222, 21);
-            this.specTextBox.TabIndex = 28;
+            this.specTextBox.TabIndex = 4;
             // 
             // label9
             // 
@@ -141,14 +141,14 @@
             this.janCodeTextBox.Location = new System.Drawing.Point(458, 130);
             this.janCodeTextBox.Name = "janCodeTextBox";
             this.janCodeTextBox.Size = new System.Drawing.Size(222, 21);
-            this.janCodeTextBox.TabIndex = 28;
+            this.janCodeTextBox.TabIndex = 7;
             // 
             // instoreCodeTextBox3
             // 
             this.instoreCodeTextBox3.Location = new System.Drawing.Point(120, 197);
             this.instoreCodeTextBox3.Name = "instoreCodeTextBox3";
             this.instoreCodeTextBox3.Size = new System.Drawing.Size(222, 21);
-            this.instoreCodeTextBox3.TabIndex = 10000023;
+            this.instoreCodeTextBox3.TabIndex = 10;
             // 
             // groupBox1
             // 
@@ -180,7 +180,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 14);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(728, 242);
-            this.groupBox1.TabIndex = 10000019;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // genreComboBox
@@ -189,14 +189,14 @@
             this.genreComboBox.Location = new System.Drawing.Point(120, 64);
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(222, 22);
-            this.genreComboBox.TabIndex = 10000030;
+            this.genreComboBox.TabIndex = 2;
             // 
             // unitTextBox1
             // 
             this.unitTextBox1.Location = new System.Drawing.Point(120, 163);
             this.unitTextBox1.Name = "unitTextBox1";
             this.unitTextBox1.Size = new System.Drawing.Size(222, 21);
-            this.unitTextBox1.TabIndex = 10000027;
+            this.unitTextBox1.TabIndex = 8;
             // 
             // label1
             // 
@@ -212,7 +212,7 @@
             this.unitWeightTextBox11.Location = new System.Drawing.Point(458, 164);
             this.unitWeightTextBox11.Name = "unitWeightTextBox11";
             this.unitWeightTextBox11.Size = new System.Drawing.Size(222, 21);
-            this.unitWeightTextBox11.TabIndex = 10000029;
+            this.unitWeightTextBox11.TabIndex = 9;
             // 
             // label8
             // 
@@ -228,7 +228,7 @@
             this.textBox2.Location = new System.Drawing.Point(458, 197);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(222, 21);
-            this.textBox2.TabIndex = 10000029;
+            this.textBox2.TabIndex = 11;
             // 
             // label5
             // 
@@ -244,7 +244,7 @@
             this.moqTextBox8.Location = new System.Drawing.Point(458, 97);
             this.moqTextBox8.Name = "moqTextBox8";
             this.moqTextBox8.Size = new System.Drawing.Size(222, 21);
-            this.moqTextBox8.TabIndex = 24;
+            this.moqTextBox8.TabIndex = 5;
             // 
             // label10
             // 
@@ -260,14 +260,14 @@
             this.productCodeTextBox.Location = new System.Drawing.Point(120, 130);
             this.productCodeTextBox.Name = "productCodeTextBox";
             this.productCodeTextBox.Size = new System.Drawing.Size(222, 21);
-            this.productCodeTextBox.TabIndex = 26;
+            this.productCodeTextBox.TabIndex = 6;
             // 
             // productNameTextBox12
             // 
             this.productNameTextBox12.Location = new System.Drawing.Point(458, 64);
             this.productNameTextBox12.Name = "productNameTextBox12";
             this.productNameTextBox12.Size = new System.Drawing.Size(222, 21);
-            this.productNameTextBox12.TabIndex = 20;
+            this.productNameTextBox12.TabIndex = 3;
             // 
             // label13
             // 
@@ -301,7 +301,7 @@
             this.customerTextBox.Location = new System.Drawing.Point(458, 31);
             this.customerTextBox.Name = "customerTextBox";
             this.customerTextBox.Size = new System.Drawing.Size(222, 21);
-            this.customerTextBox.TabIndex = 12;
+            this.customerTextBox.TabIndex = 1;
             // 
             // label2
             // 

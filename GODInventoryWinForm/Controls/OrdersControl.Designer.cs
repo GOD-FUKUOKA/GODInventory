@@ -95,7 +95,7 @@
             this.button6.Location = new System.Drawing.Point(322, 316);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(144, 58);
-            this.button6.TabIndex = 6;
+            this.button6.TabIndex = 4;
             this.button6.Text = "伝票検索";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
@@ -171,7 +171,7 @@
             this.contentPanel.Location = new System.Drawing.Point(3, 20);
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Size = new System.Drawing.Size(789, 377);
-            this.contentPanel.TabIndex = 13;
+            this.contentPanel.TabIndex = 0;
             // 
             // label5
             // 

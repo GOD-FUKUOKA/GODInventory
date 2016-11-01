@@ -53,7 +53,7 @@
             this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(106, 32);
-            this.cancelButton.TabIndex = 11;
+            this.cancelButton.TabIndex = 2;
             this.cancelButton.Text = "キャンセル";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -64,7 +64,7 @@
             this.importButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(106, 32);
-            this.importButton.TabIndex = 10;
+            this.importButton.TabIndex = 1;
             this.importButton.Text = "導入";
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.importButton_Click);
@@ -92,7 +92,7 @@
             this.openFileBtton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.openFileBtton.Name = "openFileBtton";
             this.openFileBtton.Size = new System.Drawing.Size(36, 27);
-            this.openFileBtton.TabIndex = 7;
+            this.openFileBtton.TabIndex = 0;
             this.openFileBtton.Text = "...";
             this.openFileBtton.UseVisualStyleBackColor = true;
             this.openFileBtton.Click += new System.EventHandler(this.openFileBtton_Click);
@@ -138,7 +138,7 @@
             this.closeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(106, 32);
-            this.closeButton.TabIndex = 15;
+            this.closeButton.TabIndex = 3;
             this.closeButton.Text = "閉じる";
             this.closeButton.UseVisualStyleBackColor = true;
             // 

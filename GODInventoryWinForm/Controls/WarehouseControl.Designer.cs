@@ -47,7 +47,7 @@
             this.button1.Location = new System.Drawing.Point(317, 58);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(144, 58);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 1;
             this.button1.Text = "在庫管理";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -58,7 +58,7 @@
             this.button2.Location = new System.Drawing.Point(76, 58);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(144, 58);
-            this.button2.TabIndex = 1;
+            this.button2.TabIndex = 0;
             this.button2.Text = "入庫";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -103,7 +103,7 @@
             this.button5.Location = new System.Drawing.Point(558, 58);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(144, 58);
-            this.button5.TabIndex = 3;
+            this.button5.TabIndex = 2;
             this.button5.Text = "出庫";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);

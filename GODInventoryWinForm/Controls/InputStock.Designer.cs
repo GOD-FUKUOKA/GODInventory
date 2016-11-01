@@ -30,6 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cancelButton = new System.Windows.Forms.Button();
             this.submitButton = new System.Windows.Forms.Button();
             this.loadItemListButton = new System.Windows.Forms.Button();
@@ -56,11 +61,6 @@
             this.clientComboBox = new System.Windows.Forms.ComboBox();
             this.remarkTextBox1 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -90,13 +90,50 @@
             this.dataGridView1.TabIndex = 45;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
+            // IdDataGridViewTextBoxColumn
+            // 
+            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
+            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
+            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.IdDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // 自社コード
+            // 
+            this.自社コード.DataPropertyName = "自社コード";
+            this.自社コード.HeaderText = "自社コード";
+            this.自社コード.Name = "自社コード";
+            this.自社コード.ReadOnly = true;
+            // 
+            // 商品名
+            // 
+            this.商品名.DataPropertyName = "商品名";
+            this.商品名.HeaderText = "商品名";
+            this.商品名.Name = "商品名";
+            this.商品名.ReadOnly = true;
+            this.商品名.Width = 260;
+            // 
+            // 規格
+            // 
+            this.規格.DataPropertyName = "規格";
+            this.規格.HeaderText = "規格";
+            this.規格.Name = "規格";
+            this.規格.ReadOnly = true;
+            this.規格.Width = 110;
+            // 
+            // 数量
+            // 
+            this.数量.DataPropertyName = "qty";
+            this.数量.HeaderText = "数量";
+            this.数量.Name = "数量";
+            // 
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.Location = new System.Drawing.Point(938, 50);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(63, 21);
-            this.cancelButton.TabIndex = 36;
+            this.cancelButton.TabIndex = 12;
             this.cancelButton.Text = "クリア";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click_1);
@@ -108,7 +145,7 @@
             this.submitButton.Location = new System.Drawing.Point(938, 19);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(63, 21);
-            this.submitButton.TabIndex = 35;
+            this.submitButton.TabIndex = 11;
             this.submitButton.Text = "登録";
             this.submitButton.UseVisualStyleBackColor = false;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
@@ -118,7 +155,7 @@
             this.loadItemListButton.Location = new System.Drawing.Point(234, 237);
             this.loadItemListButton.Name = "loadItemListButton";
             this.loadItemListButton.Size = new System.Drawing.Size(63, 21);
-            this.loadItemListButton.TabIndex = 51;
+            this.loadItemListButton.TabIndex = 7;
             this.loadItemListButton.Text = "商品リスト表示";
             this.loadItemListButton.UseVisualStyleBackColor = true;
             this.loadItemListButton.Click += new System.EventHandler(this.loadItemListButton_Click);
@@ -174,7 +211,7 @@
             this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(134, 78);
             this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
             this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(164, 18);
-            this.orderCreatedAtDateTimePicker.TabIndex = 44;
+            this.orderCreatedAtDateTimePicker.TabIndex = 2;
             this.orderCreatedAtDateTimePicker.ValueChanged += new System.EventHandler(this.orderCreatedAtDateTimePicker_ValueChanged);
             // 
             // genreComboBox
@@ -184,7 +221,7 @@
             this.genreComboBox.Location = new System.Drawing.Point(134, 103);
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(164, 19);
-            this.genreComboBox.TabIndex = 47;
+            this.genreComboBox.TabIndex = 3;
             this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // warehouseComboBox
@@ -194,7 +231,7 @@
             this.warehouseComboBox.Location = new System.Drawing.Point(134, 53);
             this.warehouseComboBox.Name = "warehouseComboBox";
             this.warehouseComboBox.Size = new System.Drawing.Size(164, 19);
-            this.warehouseComboBox.TabIndex = 49;
+            this.warehouseComboBox.TabIndex = 1;
             this.warehouseComboBox.SelectedIndexChanged += new System.EventHandler(this.warehouseComboBox_SelectedIndexChanged);
             // 
             // numericUpDown1
@@ -202,7 +239,7 @@
             this.numericUpDown1.Location = new System.Drawing.Point(134, 316);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(164, 18);
-            this.numericUpDown1.TabIndex = 50;
+            this.numericUpDown1.TabIndex = 9;
             this.numericUpDown1.Value = new decimal(new int[] {
             1,
             0,
@@ -243,7 +280,7 @@
             this.manufacturerComboBox.Location = new System.Drawing.Point(134, 129);
             this.manufacturerComboBox.Name = "manufacturerComboBox";
             this.manufacturerComboBox.Size = new System.Drawing.Size(164, 19);
-            this.manufacturerComboBox.TabIndex = 46;
+            this.manufacturerComboBox.TabIndex = 4;
             // 
             // codeComboBox
             // 
@@ -251,14 +288,14 @@
             this.codeComboBox.Location = new System.Drawing.Point(134, 292);
             this.codeComboBox.Name = "codeComboBox";
             this.codeComboBox.Size = new System.Drawing.Size(164, 19);
-            this.codeComboBox.TabIndex = 48;
+            this.codeComboBox.TabIndex = 8;
             // 
             // addButton
             // 
             this.addButton.Location = new System.Drawing.Point(234, 352);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(63, 21);
-            this.addButton.TabIndex = 52;
+            this.addButton.TabIndex = 10;
             this.addButton.Text = "追加";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
@@ -273,7 +310,7 @@
             this.stockStatusComboBox.Location = new System.Drawing.Point(134, 179);
             this.stockStatusComboBox.Name = "stockStatusComboBox";
             this.stockStatusComboBox.Size = new System.Drawing.Size(164, 19);
-            this.stockStatusComboBox.TabIndex = 53;
+            this.stockStatusComboBox.TabIndex = 6;
             // 
             // label8
             // 
@@ -311,7 +348,7 @@
             this.clientComboBox.Location = new System.Drawing.Point(134, 29);
             this.clientComboBox.Name = "clientComboBox";
             this.clientComboBox.Size = new System.Drawing.Size(163, 19);
-            this.clientComboBox.TabIndex = 58;
+            this.clientComboBox.TabIndex = 0;
             // 
             // remarkTextBox1
             // 
@@ -324,7 +361,7 @@
             this.remarkTextBox1.Location = new System.Drawing.Point(134, 153);
             this.remarkTextBox1.Name = "remarkTextBox1";
             this.remarkTextBox1.Size = new System.Drawing.Size(164, 19);
-            this.remarkTextBox1.TabIndex = 59;
+            this.remarkTextBox1.TabIndex = 5;
             // 
             // label11
             // 
@@ -333,43 +370,6 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(240, 1);
             this.label11.TabIndex = 60;
-            // 
-            // IdDataGridViewTextBoxColumn
-            // 
-            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
-            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
-            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.IdDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // 自社コード
-            // 
-            this.自社コード.DataPropertyName = "自社コード";
-            this.自社コード.HeaderText = "自社コード";
-            this.自社コード.Name = "自社コード";
-            this.自社コード.ReadOnly = true;
-            // 
-            // 商品名
-            // 
-            this.商品名.DataPropertyName = "商品名";
-            this.商品名.HeaderText = "商品名";
-            this.商品名.Name = "商品名";
-            this.商品名.ReadOnly = true;
-            this.商品名.Width = 260;
-            // 
-            // 規格
-            // 
-            this.規格.DataPropertyName = "規格";
-            this.規格.HeaderText = "規格";
-            this.規格.Name = "規格";
-            this.規格.ReadOnly = true;
-            this.規格.Width = 110;
-            // 
-            // 数量
-            // 
-            this.数量.DataPropertyName = "qty";
-            this.数量.HeaderText = "数量";
-            this.数量.Name = "数量";
             // 
             // InputStock
             // 
