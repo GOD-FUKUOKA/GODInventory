@@ -23,6 +23,7 @@ namespace GODInventory.MyLinq
 
         public string 店舗名カナ { get; set; }
 
+        public string 納品場所名漢字 { get; set; }
 
         public int ジャンル { get; set; }
 
@@ -33,7 +34,6 @@ namespace GODInventory.MyLinq
         public string 発注形態名称漢字 { get; set; }
 
         public int 発注数量 { get; set; }
-
 
         public int 実際出荷数量 { get; set; }
 

@@ -679,13 +679,45 @@ namespace GODInventory.ViewModel
             return count;
 
         }
-        public static int NotifyShipper(GODDbContext ctx, string shipperName)
+        public static int NotifyShipper(GODDbContext ctx, List<int> orderIds, string shipperName)
         {
+            string sql = "SELECT MAX(t_orderdata.`社内伝番`) FROM t_orderdata";
+            int max = Convert.ToInt32(ctx.Database.SqlQuery<int?>(sql).FirstOrDefault());
+            //max = Convert.ToInt32(max);
+            //社内传番应该为8位，我们现在排到了10009837
+            if (max < 10002000)
+            {
+                max += 10002000;
+            }
+
             int count = 0;
 
-            string sql = @"UPDATE t_orderdata SET `Status`={2}, `配送担当受信`=TRUE, `配送担当受信時刻`= NOW() WHERE `Status`={0} AND `実際配送担当`={1}";
+            var orders = (from t_orderdata o in ctx.t_orderdata
+                where orderIds.Contains( o.id受注データ )
+                              select o).ToList();
+            //二次制品订单
+            //where o.Status == OrderStatus.NotifyShipper && o.ジャンル == genreId && o.社内伝番 == 0 && o.実際配送担当 == "丸健"
 
-            count = ctx.Database.ExecuteSqlCommand(sql, OrderStatus.NotifyShipper, shipperName, OrderStatus.WaitToShip);
+            var groupedOrders = orders.Where(o => (o.実際配送担当 == "丸健" && o.ジャンル ==1003) ).GroupBy(o => o.店舗コード);
+
+            int i = 0;
+            foreach (var gos in groupedOrders)
+            {
+                i++;
+                int j = 0;
+                foreach (var o in gos)
+                {
+                    j++;
+                    o.社内伝番 = max + i;
+                    o.行数 = Convert.ToInt16(j);
+                    o.最大行数 = Convert.ToInt16(gos.Count());
+                }
+            }
+            ctx.SaveChanges();
+
+            sql = String.Format( "UPDATE t_orderdata SET `Status`={3}, `配送担当受信`=TRUE, `配送担当受信時刻`= NOW() WHERE `Status`={0} AND `実際配送担当`='{1}' AND `id受注データ` in ({2});", (int)OrderStatus.NotifyShipper, shipperName, String.Join(",", orderIds.ToArray()), (int)OrderStatus.WaitToShip);
+
+            count = ctx.Database.ExecuteSqlCommand(sql);
 
             return count;
 

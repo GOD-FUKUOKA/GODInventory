@@ -183,6 +183,8 @@ namespace GODInventoryWinForm.Controls
 
                 ctx.t_stockrec.AddRange(changes);
                 ctx.SaveChanges();
+                OrderSqlHelper.UpdateStockState(ctx, changes);
+
                 MessageBox.Show(String.Format("{0} 件在庫合わせしました!", changes.Count));
                 stockcheckList.Clear();
 

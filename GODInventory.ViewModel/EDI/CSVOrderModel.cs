@@ -503,7 +503,7 @@ namespace GODInventory.ViewModel.EDI
             orderdata.発注規格名漢字 = orderdata.規格名漢字;
             if (orders != null)
             {
-                bool existed = orders.Exists(o => (o.伝票番号 == orderdata.伝票番号));
+                bool existed = orders.Exists(o => (o.伝票番号 == orderdata.伝票番号 && o.店舗コード == orderdata.店舗コード));
                 if (existed)
                 {
                     orderdata.Status = OrderStatus.Existed;

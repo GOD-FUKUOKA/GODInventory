@@ -132,6 +132,7 @@ namespace GODInventoryWinForm
                     //Console.WriteLine(" write head ={0}", order_head.DetailCount);
 
                     string line;
+                    int i = 0;
                     while( (line = br.ReadLine()) != null && line != String.Empty)
                     {
                         if (worker.CancellationPending == true)
@@ -144,6 +145,8 @@ namespace GODInventoryWinForm
                         {
                             models.Add(model);
                         }
+
+                        i++;
                         //if (progress != last)
                         //
                         //    backgroundWorker1.ReportProgress(progress);
@@ -224,12 +227,13 @@ namespace GODInventoryWinForm
                             {
                                 sqls.Add(sql);
                                 count++;
-                                if ((i == models.Count - 1) || (sqls.Count % 25 == 0))
-                                {
-                                    var multisql = String.Join("", sqls.ToArray());
-                                    ctx.Database.ExecuteSqlCommand(multisql);
-                                    sqls.Clear();
-                                }
+                            }
+                            if ( (sqls.Count >0 ) && ( (i == models.Count - 1) || (sqls.Count % 25 == 0)) )
+                            {
+                                
+                                var multisql = String.Join("", sqls.ToArray());
+                                ctx.Database.ExecuteSqlCommand(multisql);
+                                sqls.Clear();
                             }
                             //ctx.Database.ExecuteSqlCommand(sql_parameters.SqlString, sql_parameters.Parameters);
                             // use sql instead of orm

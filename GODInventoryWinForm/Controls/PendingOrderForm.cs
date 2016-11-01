@@ -60,8 +60,6 @@ namespace GODInventoryWinForm.Controls
 
             //InitializePager();
 
-            InitializeRCList();
-
             //丸健
 
             //物流
@@ -358,45 +356,6 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             return 0;
         }
 
-
-        private void InitializeRCList()
-        {
-            // 為了兼容 RollbackOrder， ecOrderList is v_penddingorder
-            var q = OrderSqlHelper.ECWithoutCodeOrderQuery(this.entityDataSource1, ErCiZhiPinId);
-            string sql = "SELECT MAX(t_orderdata.`社内伝番`) FROM t_orderdata";
-            int max = Convert.ToInt32(this.entityDataSource1.DbContext.Database.SqlQuery<int?>(sql).FirstOrDefault());
-            //max = Convert.ToInt32(max);
-
-            //社内传番应该为8位，我们现在排到了10009837
-            if (max < 10002000)
-            {
-                max += 10002000;
-            }
-
-            this.ecOrderList = q.ToList();
-            var groupedOrders = ecOrderList.GroupBy(o => o.店舗コード);
-            int i = 0;
-            foreach (var gos in groupedOrders)
-            {
-                i++;
-
-                int j = 0;
-
-                foreach (var o in gos)
-                {
-
-                    j++;
-                    o.社内伝番UnSaved = max + i;
-                    o.行数 = Convert.ToInt16(j);
-                    o.最大行数 = Convert.ToInt16(gos.Count());
-
-                }
-            }
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.DataSource = this.ecOrderList;
-
-        }
-
         private void InitializeShipperOrderList( string shipperName = null)
         {
 
@@ -419,9 +378,13 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
      GROUP BY `社内伝番`
      ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
 
-            this.shipperOrderList = this.entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.NotifyShipper).ToList();
+            string sql2 = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
+       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
+     FROM t_orderdata
+     WHERE  `Status`={0}
+     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
 
-           
+            this.shipperOrderList = this.entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql2, OrderStatus.NotifyShipper).ToList();
 
             // 第一次初始化情况
             if (shipperName == null)
@@ -664,34 +627,6 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         }
 
 
-        private void ecSaveButton_Click(object sender, EventArgs e)
-        {
-
-            //this.entityDataSource1.DbContext.SaveChanges();
-
-            List<int> ids = ecOrderList.Select(o => o.id受注データ).ToList();
-
-            using (var ctx = new GODDbContext())
-            {
-                var orders = (from t_orderdata o in ctx.t_orderdata
-                              where ids.Contains(o.id受注データ)
-                              select o).ToList();
-                foreach (var order in orders)
-                {
-                    var pendingOrder = ecOrderList.Find(o => o.id受注データ == order.id受注データ);
-                    order.社内伝番 = pendingOrder.社内伝番UnSaved;
-                    order.行数 = pendingOrder.行数;
-                    order.最大行数 = pendingOrder.最大行数;
-                }
-                    
-                ctx.SaveChanges();
-            }
-
-            MessageBox.Show(String.Format("{0} 件転送処理しました!", ecOrderList.Count));
-
-            this.dataGridView2.DataSource = null;
-        }
-
         private void storeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -707,10 +642,6 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            if (e.TabPage == ecTabPage)
-            {
-                InitializeRCList();
-            }
 
             if (e.TabPage == toShipperTabPage)
             {
@@ -1087,35 +1018,16 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             pager1.Bind();
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            List<v_pendingorder> orders = new List<v_pendingorder>();
-            for( int i =0; i< dataGridView2.SelectedRows.Count; i++)
-            {
-                var order = dataGridView2.SelectedRows[i].DataBoundItem as v_pendingorder;
-                orders.Add( order );
-            }
-
-            RollbackOrder(orders);
-            // 更新二次製品列表
-            InitializeRCList();
-            // 更新待處理訂單列表
-            pager1.Bind();
-
-        }
 
         private void RollbackOrder( List<v_pendingorder> pendingOrders ) 
         {
             using (var ctx = new GODDbContext())
             {
-                var orderIds = pendingOrders.FindAll(o => o.社内伝番 == 0).Select(o => o.id受注データ);
-
-                var innerIds = pendingOrders.FindAll(o => o.社内伝番 > 0).Select(o => o.社内伝番);
-
+                var orderIds = pendingOrders.Select(o => o.id受注データ);
+                
                 var orderList = (from t_orderdata o in ctx.t_orderdata
-                    where orderIds.Contains(o.id受注データ) || innerIds.Contains(o.社内伝番)
+                    where orderIds.Contains(o.id受注データ)
                     select o).ToList();
-                orderIds = orderList.Select( o=> o.id受注データ);
                 var stockrecList = (from t_stockrec s in ctx.t_stockrec
                                     where orderIds.Contains(s.OrderId)
                                     select s).ToList();
@@ -1127,16 +1039,9 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                     order.一旦保留 = true;
                     order.配送担当受信 = false;
                     order.配送担当受信時刻 = null;
-                    order.Status = OrderStatus.Pending;
-                    //var stockrec = stockrecList.Find(s => s.OrderId = order.id受注データ);
-                
+                    order.Status = OrderStatus.Pending;               
                 }
 
-                var marukenTransList = (from t_maruken_trans m in ctx.t_maruken_trans
-                                        where orderIds.Contains(m.OrderId)
-                                        select m).ToList();
-
-                ctx.t_maruken_trans.RemoveRange(marukenTransList);
                 ctx.t_stockrec.RemoveRange(stockrecList);
                 ctx.SaveChanges();
                 OrderSqlHelper.UpdateStockState(ctx, stockrecList);
@@ -1201,10 +1106,10 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
                 using (var ctx = new GODDbContext())
                 {
-
+                    var ids = orders.Select(order => order.id受注データ).ToList();
                     ctx.t_maruken_trans.AddRange(trans);
 
-                    OrderSqlHelper.NotifyShipper(ctx, shipperName);
+                    OrderSqlHelper.NotifyShipper(ctx, ids, shipperName);
                     ctx.SaveChanges();
                 }
                 this.shipperOrderList.RemoveAll(o => orders.Contains(o));
