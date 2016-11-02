@@ -56,14 +56,14 @@
             this.serverTextBox1.Location = new System.Drawing.Point(144, 46);
             this.serverTextBox1.Name = "serverTextBox1";
             this.serverTextBox1.Size = new System.Drawing.Size(204, 18);
-            this.serverTextBox1.TabIndex = 1;
+            this.serverTextBox1.TabIndex = 0;
             // 
             // databaseTextBox2
             // 
             this.databaseTextBox2.Location = new System.Drawing.Point(144, 70);
             this.databaseTextBox2.Name = "databaseTextBox2";
             this.databaseTextBox2.Size = new System.Drawing.Size(204, 18);
-            this.databaseTextBox2.TabIndex = 3;
+            this.databaseTextBox2.TabIndex = 1;
             // 
             // label2
             // 
@@ -79,7 +79,7 @@
             this.userNameTextBox3.Location = new System.Drawing.Point(144, 96);
             this.userNameTextBox3.Name = "userNameTextBox3";
             this.userNameTextBox3.Size = new System.Drawing.Size(204, 18);
-            this.userNameTextBox3.TabIndex = 5;
+            this.userNameTextBox3.TabIndex = 2;
             // 
             // label3
             // 
@@ -95,7 +95,7 @@
             this.userPasswordTextBox4.Location = new System.Drawing.Point(144, 120);
             this.userPasswordTextBox4.Name = "userPasswordTextBox4";
             this.userPasswordTextBox4.Size = new System.Drawing.Size(204, 18);
-            this.userPasswordTextBox4.TabIndex = 7;
+            this.userPasswordTextBox4.TabIndex = 3;
             // 
             // label4
             // 
@@ -120,7 +120,7 @@
             this.testButton1.Location = new System.Drawing.Point(90, 150);
             this.testButton1.Name = "testButton1";
             this.testButton1.Size = new System.Drawing.Size(75, 21);
-            this.testButton1.TabIndex = 9;
+            this.testButton1.TabIndex = 6;
             this.testButton1.Text = "Test";
             this.testButton1.UseVisualStyleBackColor = true;
             this.testButton1.Click += new System.EventHandler(this.testButton1_Click);
@@ -131,7 +131,7 @@
             this.cancelButton2.Location = new System.Drawing.Point(272, 150);
             this.cancelButton2.Name = "cancelButton2";
             this.cancelButton2.Size = new System.Drawing.Size(75, 21);
-            this.cancelButton2.TabIndex = 10;
+            this.cancelButton2.TabIndex = 5;
             this.cancelButton2.Text = "Cancel";
             this.cancelButton2.UseVisualStyleBackColor = true;
             this.cancelButton2.Click += new System.EventHandler(this.cancelButton2_Click);
@@ -141,7 +141,7 @@
             this.SaveButton3.Location = new System.Drawing.Point(182, 150);
             this.SaveButton3.Name = "SaveButton3";
             this.SaveButton3.Size = new System.Drawing.Size(75, 21);
-            this.SaveButton3.TabIndex = 11;
+            this.SaveButton3.TabIndex = 4;
             this.SaveButton3.Text = "Save";
             this.SaveButton3.UseVisualStyleBackColor = true;
             this.SaveButton3.Click += new System.EventHandler(this.SaveButton3_Click);
@@ -163,7 +163,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.serverTextBox1);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DBConfigurationForm";

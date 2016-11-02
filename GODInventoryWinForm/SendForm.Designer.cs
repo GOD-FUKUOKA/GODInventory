@@ -59,7 +59,7 @@
             this.okButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.okButton1.Name = "okButton1";
             this.okButton1.Size = new System.Drawing.Size(87, 27);
-            this.okButton1.TabIndex = 5;
+            this.okButton1.TabIndex = 0;
             this.okButton1.Text = "OK";
             this.okButton1.UseVisualStyleBackColor = true;
             // 

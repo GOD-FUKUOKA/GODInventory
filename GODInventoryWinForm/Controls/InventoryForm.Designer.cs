@@ -38,10 +38,6 @@
             this.warehouseComboBox = new System.Windows.Forms.ComboBox();
             this.manufacturerComboBox = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.genreComboBox = new System.Windows.Forms.ComboBox();
-            this.btprint = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.endDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,6 +48,10 @@
             this.jiHuaRuCunShuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qingDianColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chaZhiColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.genreComboBox = new System.Windows.Forms.ComboBox();
+            this.btprint = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.endDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,7 +72,7 @@
             this.btconfirm.Location = new System.Drawing.Point(910, 501);
             this.btconfirm.Name = "btconfirm";
             this.btconfirm.Size = new System.Drawing.Size(100, 33);
-            this.btconfirm.TabIndex = 34;
+            this.btconfirm.TabIndex = 5;
             this.btconfirm.Text = "在庫調整確定";
             this.btconfirm.UseVisualStyleBackColor = true;
             this.btconfirm.Click += new System.EventHandler(this.btconfirm_Click);
@@ -104,7 +104,7 @@
             this.btclear_zero.Location = new System.Drawing.Point(1026, 501);
             this.btclear_zero.Name = "btclear_zero";
             this.btclear_zero.Size = new System.Drawing.Size(100, 33);
-            this.btclear_zero.TabIndex = 36;
+            this.btclear_zero.TabIndex = 6;
             this.btclear_zero.Text = "クリア";
             this.btclear_zero.UseVisualStyleBackColor = true;
             this.btclear_zero.Click += new System.EventHandler(this.btclear_zero_Click);
@@ -115,7 +115,7 @@
             this.btfind.Location = new System.Drawing.Point(861, 19);
             this.btfind.Name = "btfind";
             this.btfind.Size = new System.Drawing.Size(100, 33);
-            this.btfind.TabIndex = 35;
+            this.btfind.TabIndex = 4;
             this.btfind.Text = "検索";
             this.btfind.UseVisualStyleBackColor = true;
             this.btfind.Click += new System.EventHandler(this.btfind_Click);
@@ -128,7 +128,7 @@
             this.warehouseComboBox.Location = new System.Drawing.Point(56, 23);
             this.warehouseComboBox.Name = "warehouseComboBox";
             this.warehouseComboBox.Size = new System.Drawing.Size(141, 22);
-            this.warehouseComboBox.TabIndex = 42;
+            this.warehouseComboBox.TabIndex = 0;
             // 
             // manufacturerComboBox
             // 
@@ -138,7 +138,7 @@
             this.manufacturerComboBox.Location = new System.Drawing.Point(488, 23);
             this.manufacturerComboBox.Name = "manufacturerComboBox";
             this.manufacturerComboBox.Size = new System.Drawing.Size(141, 22);
-            this.manufacturerComboBox.TabIndex = 43;
+            this.manufacturerComboBox.TabIndex = 2;
             this.manufacturerComboBox.SelectedIndexChanged += new System.EventHandler(this.manufacturerComboBox_SelectedIndexChanged);
             // 
             // dataGridView1
@@ -170,49 +170,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(1114, 421);
             this.dataGridView1.TabIndex = 38;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
-            // 
-            // genreComboBox
-            // 
-            this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.genreComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(280, 23);
-            this.genreComboBox.Name = "genreComboBox";
-            this.genreComboBox.Size = new System.Drawing.Size(141, 22);
-            this.genreComboBox.TabIndex = 44;
-            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged);
-            // 
-            // btprint
-            // 
-            this.btprint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btprint.Enabled = false;
-            this.btprint.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btprint.Location = new System.Drawing.Point(12, 494);
-            this.btprint.Name = "btprint";
-            this.btprint.Size = new System.Drawing.Size(100, 33);
-            this.btprint.TabIndex = 33;
-            this.btprint.Text = "棚卸用紙印刷";
-            this.btprint.UseVisualStyleBackColor = true;
-            this.btprint.Visible = false;
-            this.btprint.Click += new System.EventHandler(this.btprint_Click_1);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(219, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 14);
-            this.label2.TabIndex = 37;
-            this.label2.Text = "ジャンル";
-            // 
-            // endDateTimePicker1
-            // 
-            this.endDateTimePicker1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.endDateTimePicker1.Location = new System.Drawing.Point(687, 23);
-            this.endDateTimePicker1.Name = "endDateTimePicker1";
-            this.endDateTimePicker1.Size = new System.Drawing.Size(159, 21);
-            this.endDateTimePicker1.TabIndex = 41;
             // 
             // idColumn
             // 
@@ -302,6 +259,49 @@
             this.chaZhiColumn.ReadOnly = true;
             this.chaZhiColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.chaZhiColumn.Width = 70;
+            // 
+            // genreComboBox
+            // 
+            this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.genreComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.genreComboBox.FormattingEnabled = true;
+            this.genreComboBox.Location = new System.Drawing.Point(280, 23);
+            this.genreComboBox.Name = "genreComboBox";
+            this.genreComboBox.Size = new System.Drawing.Size(141, 22);
+            this.genreComboBox.TabIndex = 1;
+            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged);
+            // 
+            // btprint
+            // 
+            this.btprint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btprint.Enabled = false;
+            this.btprint.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btprint.Location = new System.Drawing.Point(12, 494);
+            this.btprint.Name = "btprint";
+            this.btprint.Size = new System.Drawing.Size(100, 33);
+            this.btprint.TabIndex = 7;
+            this.btprint.Text = "棚卸用紙印刷";
+            this.btprint.UseVisualStyleBackColor = true;
+            this.btprint.Visible = false;
+            this.btprint.Click += new System.EventHandler(this.btprint_Click_1);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label2.Location = new System.Drawing.Point(219, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 14);
+            this.label2.TabIndex = 37;
+            this.label2.Text = "ジャンル";
+            // 
+            // endDateTimePicker1
+            // 
+            this.endDateTimePicker1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.endDateTimePicker1.Location = new System.Drawing.Point(687, 23);
+            this.endDateTimePicker1.Name = "endDateTimePicker1";
+            this.endDateTimePicker1.Size = new System.Drawing.Size(159, 21);
+            this.endDateTimePicker1.TabIndex = 3;
             // 
             // InventoryForm
             // 

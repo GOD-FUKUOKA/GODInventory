@@ -34,6 +34,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.stockStatusComboBox = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.submitButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,11 +55,6 @@
             this.clientComboBox = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.remarkTextBox1 = new System.Windows.Forms.ComboBox();
-            this.IdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -90,7 +90,7 @@
             this.stockStatusComboBox.Location = new System.Drawing.Point(120, 204);
             this.stockStatusComboBox.Name = "stockStatusComboBox";
             this.stockStatusComboBox.Size = new System.Drawing.Size(164, 22);
-            this.stockStatusComboBox.TabIndex = 78;
+            this.stockStatusComboBox.TabIndex = 6;
             // 
             // dataGridView1
             // 
@@ -115,6 +115,42 @@
             this.dataGridView1.Size = new System.Drawing.Size(513, 297);
             this.dataGridView1.TabIndex = 70;
             // 
+            // IdDataGridViewTextBoxColumn
+            // 
+            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
+            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
+            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.IdDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // 自社コード
+            // 
+            this.自社コード.DataPropertyName = "自社コード";
+            this.自社コード.HeaderText = "自社コード";
+            this.自社コード.Name = "自社コード";
+            this.自社コード.ReadOnly = true;
+            // 
+            // 商品名
+            // 
+            this.商品名.DataPropertyName = "商品名";
+            this.商品名.HeaderText = "商品名";
+            this.商品名.Name = "商品名";
+            this.商品名.ReadOnly = true;
+            this.商品名.Width = 260;
+            // 
+            // 規格
+            // 
+            this.規格.DataPropertyName = "規格";
+            this.規格.HeaderText = "規格";
+            this.規格.Name = "規格";
+            this.規格.ReadOnly = true;
+            // 
+            // 数量
+            // 
+            this.数量.DataPropertyName = "qty";
+            this.数量.HeaderText = "数量";
+            this.数量.Name = "数量";
+            // 
             // submitButton
             // 
             this.submitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -123,7 +159,7 @@
             this.submitButton.Location = new System.Drawing.Point(830, 19);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(91, 27);
-            this.submitButton.TabIndex = 60;
+            this.submitButton.TabIndex = 8;
             this.submitButton.Text = "登録";
             this.submitButton.UseVisualStyleBackColor = false;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
@@ -175,7 +211,7 @@
             this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(120, 81);
             this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
             this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(164, 21);
-            this.orderCreatedAtDateTimePicker.TabIndex = 69;
+            this.orderCreatedAtDateTimePicker.TabIndex = 2;
             this.orderCreatedAtDateTimePicker.ValueChanged += new System.EventHandler(this.orderCreatedAtDateTimePicker_ValueChanged);
             // 
             // loadItemListButton
@@ -184,7 +220,7 @@
             this.loadItemListButton.Location = new System.Drawing.Point(191, 265);
             this.loadItemListButton.Name = "loadItemListButton";
             this.loadItemListButton.Size = new System.Drawing.Size(91, 27);
-            this.loadItemListButton.TabIndex = 76;
+            this.loadItemListButton.TabIndex = 7;
             this.loadItemListButton.Text = "商品リスト表示";
             this.loadItemListButton.UseVisualStyleBackColor = true;
             this.loadItemListButton.Click += new System.EventHandler(this.loadItemListButton_Click);
@@ -196,7 +232,7 @@
             this.cancelButton.Location = new System.Drawing.Point(830, 58);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(91, 27);
-            this.cancelButton.TabIndex = 61;
+            this.cancelButton.TabIndex = 9;
             this.cancelButton.Text = "クリア";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -209,7 +245,7 @@
             this.genreComboBox.Location = new System.Drawing.Point(120, 111);
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(164, 22);
-            this.genreComboBox.TabIndex = 72;
+            this.genreComboBox.TabIndex = 3;
             this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged);
             // 
             // warehouseComboBox
@@ -220,7 +256,7 @@
             this.warehouseComboBox.Location = new System.Drawing.Point(120, 49);
             this.warehouseComboBox.Name = "warehouseComboBox";
             this.warehouseComboBox.Size = new System.Drawing.Size(164, 22);
-            this.warehouseComboBox.TabIndex = 74;
+            this.warehouseComboBox.TabIndex = 1;
             this.warehouseComboBox.SelectedIndexChanged += new System.EventHandler(this.warehouseComboBox_SelectedIndexChanged);
             // 
             // label1
@@ -251,7 +287,7 @@
             this.manufacturerComboBox.Location = new System.Drawing.Point(120, 142);
             this.manufacturerComboBox.Name = "manufacturerComboBox";
             this.manufacturerComboBox.Size = new System.Drawing.Size(164, 22);
-            this.manufacturerComboBox.TabIndex = 71;
+            this.manufacturerComboBox.TabIndex = 4;
             // 
             // clientComboBox
             // 
@@ -263,7 +299,7 @@
             this.clientComboBox.Location = new System.Drawing.Point(120, 18);
             this.clientComboBox.Name = "clientComboBox";
             this.clientComboBox.Size = new System.Drawing.Size(163, 22);
-            this.clientComboBox.TabIndex = 83;
+            this.clientComboBox.TabIndex = 0;
             // 
             // label10
             // 
@@ -288,43 +324,7 @@
             this.remarkTextBox1.Location = new System.Drawing.Point(120, 173);
             this.remarkTextBox1.Name = "remarkTextBox1";
             this.remarkTextBox1.Size = new System.Drawing.Size(164, 22);
-            this.remarkTextBox1.TabIndex = 84;
-            // 
-            // IdDataGridViewTextBoxColumn
-            // 
-            this.IdDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.IdDataGridViewTextBoxColumn.HeaderText = "序号";
-            this.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn";
-            this.IdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.IdDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // 自社コード
-            // 
-            this.自社コード.DataPropertyName = "自社コード";
-            this.自社コード.HeaderText = "自社コード";
-            this.自社コード.Name = "自社コード";
-            this.自社コード.ReadOnly = true;
-            // 
-            // 商品名
-            // 
-            this.商品名.DataPropertyName = "商品名";
-            this.商品名.HeaderText = "商品名";
-            this.商品名.Name = "商品名";
-            this.商品名.ReadOnly = true;
-            this.商品名.Width = 260;
-            // 
-            // 規格
-            // 
-            this.規格.DataPropertyName = "規格";
-            this.規格.HeaderText = "規格";
-            this.規格.Name = "規格";
-            this.規格.ReadOnly = true;
-            // 
-            // 数量
-            // 
-            this.数量.DataPropertyName = "qty";
-            this.数量.HeaderText = "数量";
-            this.数量.Name = "数量";
+            this.remarkTextBox1.TabIndex = 5;
             // 
             // OutputStock
             // 

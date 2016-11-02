@@ -279,7 +279,11 @@ namespace GODInventoryWinForm.Controls
             }
 
             //  var isAllManufacturerSelected = (Convert.ToInt32(codeComboBox.Text) == ManufactureRespository.CodeDict);
-
+            codeComboBox.Focus();
+            codeComboBox.SelectAll();
+            codeComboBox.SelectionStart = 0;
+            codeComboBox.Select();
+            this.ActiveControl = codeComboBox;
 
         }
     }

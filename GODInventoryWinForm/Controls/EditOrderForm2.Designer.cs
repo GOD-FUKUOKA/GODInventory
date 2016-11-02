@@ -83,7 +83,7 @@
             this.shipperComboBox3.Location = new System.Drawing.Point(111, 149);
             this.shipperComboBox3.Name = "shipperComboBox3";
             this.shipperComboBox3.Size = new System.Drawing.Size(190, 22);
-            this.shipperComboBox3.TabIndex = 10000009;
+            this.shipperComboBox3.TabIndex = 0;
             // 
             // label12
             // 
@@ -99,7 +99,7 @@
             this.orderQuantityTextBox11.Location = new System.Drawing.Point(433, 149);
             this.orderQuantityTextBox11.Name = "orderQuantityTextBox11";
             this.orderQuantityTextBox11.Size = new System.Drawing.Size(190, 21);
-            this.orderQuantityTextBox11.TabIndex = 10000005;
+            this.orderQuantityTextBox11.TabIndex = 1;
             this.orderQuantityTextBox11.TextChanged += new System.EventHandler(this.orderQuantityTextBox11_TextChanged);
             // 
             // label8
@@ -167,7 +167,7 @@
             this.qtyChangeReasonTextBox.Location = new System.Drawing.Point(433, 179);
             this.qtyChangeReasonTextBox.Name = "qtyChangeReasonTextBox";
             this.qtyChangeReasonTextBox.Size = new System.Drawing.Size(190, 21);
-            this.qtyChangeReasonTextBox.TabIndex = 10000016;
+            this.qtyChangeReasonTextBox.TabIndex = 3;
             // 
             // label1
             // 
@@ -187,7 +187,7 @@
             this.cancelComboBox.Location = new System.Drawing.Point(111, 178);
             this.cancelComboBox.Name = "cancelComboBox";
             this.cancelComboBox.Size = new System.Drawing.Size(190, 22);
-            this.cancelComboBox.TabIndex = 10000009;
+            this.cancelComboBox.TabIndex = 2;
             this.cancelComboBox.SelectedIndexChanged += new System.EventHandler(this.cancelComboBox_SelectedIndexChanged);
             // 
             // shipAtTextBox
@@ -333,7 +333,7 @@
             this.submitFormButton.Location = new System.Drawing.Point(451, 259);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(100, 30);
-            this.submitFormButton.TabIndex = 10000007;
+            this.submitFormButton.TabIndex = 0;
             this.submitFormButton.Text = "保存";
             this.submitFormButton.UseVisualStyleBackColor = true;
             this.submitFormButton.Click += new System.EventHandler(this.submitFormButton_Click);
@@ -345,7 +345,7 @@
             this.cancelFormButton.Location = new System.Drawing.Point(557, 259);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(100, 30);
-            this.cancelFormButton.TabIndex = 10000008;
+            this.cancelFormButton.TabIndex = 1;
             this.cancelFormButton.Text = "閉じる";
             this.cancelFormButton.UseVisualStyleBackColor = true;
             // 

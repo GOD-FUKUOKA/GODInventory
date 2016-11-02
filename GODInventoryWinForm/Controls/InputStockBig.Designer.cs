@@ -135,7 +135,7 @@
             this.cancelButton.Location = new System.Drawing.Point(889, 69);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(106, 32);
-            this.cancelButton.TabIndex = 36;
+            this.cancelButton.TabIndex = 12;
             this.cancelButton.Text = "クリア";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click_1);
@@ -148,7 +148,7 @@
             this.submitButton.Location = new System.Drawing.Point(889, 23);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(106, 32);
-            this.submitButton.TabIndex = 35;
+            this.submitButton.TabIndex = 11;
             this.submitButton.Text = "登録";
             this.submitButton.UseVisualStyleBackColor = false;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
@@ -159,7 +159,7 @@
             this.loadItemListButton.Location = new System.Drawing.Point(216, 307);
             this.loadItemListButton.Name = "loadItemListButton";
             this.loadItemListButton.Size = new System.Drawing.Size(106, 32);
-            this.loadItemListButton.TabIndex = 51;
+            this.loadItemListButton.TabIndex = 7;
             this.loadItemListButton.Text = "商品リスト表示";
             this.loadItemListButton.UseVisualStyleBackColor = true;
             this.loadItemListButton.Click += new System.EventHandler(this.loadItemListButton_Click);
@@ -212,7 +212,7 @@
             this.stockNOTextBox.Name = "stockNOTextBox";
             this.stockNOTextBox.ReadOnly = true;
             this.stockNOTextBox.Size = new System.Drawing.Size(189, 21);
-            this.stockNOTextBox.TabIndex = 40;
+            this.stockNOTextBox.TabIndex = 7;
             // 
             // orderCreatedAtDateTimePicker
             // 
@@ -220,7 +220,7 @@
             this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(134, 95);
             this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
             this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(189, 21);
-            this.orderCreatedAtDateTimePicker.TabIndex = 44;
+            this.orderCreatedAtDateTimePicker.TabIndex = 2;
             this.orderCreatedAtDateTimePicker.ValueChanged += new System.EventHandler(this.orderCreatedAtDateTimePicker_ValueChanged);
             // 
             // genreComboBox
@@ -231,7 +231,7 @@
             this.genreComboBox.Location = new System.Drawing.Point(134, 129);
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(189, 22);
-            this.genreComboBox.TabIndex = 47;
+            this.genreComboBox.TabIndex = 3;
             this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // warehouseComboBox
@@ -242,7 +242,7 @@
             this.warehouseComboBox.Location = new System.Drawing.Point(134, 58);
             this.warehouseComboBox.Name = "warehouseComboBox";
             this.warehouseComboBox.Size = new System.Drawing.Size(189, 22);
-            this.warehouseComboBox.TabIndex = 49;
+            this.warehouseComboBox.TabIndex = 1;
             this.warehouseComboBox.SelectedIndexChanged += new System.EventHandler(this.warehouseComboBox_SelectedIndexChanged);
             // 
             // numericUpDown1
@@ -251,7 +251,7 @@
             this.numericUpDown1.Location = new System.Drawing.Point(134, 404);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(189, 21);
-            this.numericUpDown1.TabIndex = 50;
+            this.numericUpDown1.TabIndex = 9;
             this.numericUpDown1.Value = new decimal(new int[] {
             1,
             0,
@@ -296,7 +296,7 @@
             this.manufacturerComboBox.Location = new System.Drawing.Point(134, 166);
             this.manufacturerComboBox.Name = "manufacturerComboBox";
             this.manufacturerComboBox.Size = new System.Drawing.Size(189, 22);
-            this.manufacturerComboBox.TabIndex = 46;
+            this.manufacturerComboBox.TabIndex = 4;
             // 
             // codeComboBox
             // 
@@ -305,7 +305,7 @@
             this.codeComboBox.Location = new System.Drawing.Point(134, 367);
             this.codeComboBox.Name = "codeComboBox";
             this.codeComboBox.Size = new System.Drawing.Size(189, 22);
-            this.codeComboBox.TabIndex = 48;
+            this.codeComboBox.TabIndex = 8;
             // 
             // addButton
             // 
@@ -313,7 +313,7 @@
             this.addButton.Location = new System.Drawing.Point(216, 437);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(106, 32);
-            this.addButton.TabIndex = 52;
+            this.addButton.TabIndex = 10;
             this.addButton.Text = "追加";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
@@ -329,7 +329,7 @@
             this.stockStatusComboBox.Location = new System.Drawing.Point(134, 240);
             this.stockStatusComboBox.Name = "stockStatusComboBox";
             this.stockStatusComboBox.Size = new System.Drawing.Size(189, 22);
-            this.stockStatusComboBox.TabIndex = 53;
+            this.stockStatusComboBox.TabIndex = 6;
             // 
             // label8
             // 
@@ -371,7 +371,7 @@
             this.clientComboBox.Location = new System.Drawing.Point(133, 21);
             this.clientComboBox.Name = "clientComboBox";
             this.clientComboBox.Size = new System.Drawing.Size(189, 22);
-            this.clientComboBox.TabIndex = 58;
+            this.clientComboBox.TabIndex = 0;
             // 
             // remarkTextBox1
             // 
@@ -385,7 +385,7 @@
             this.remarkTextBox1.Location = new System.Drawing.Point(134, 203);
             this.remarkTextBox1.Name = "remarkTextBox1";
             this.remarkTextBox1.Size = new System.Drawing.Size(189, 22);
-            this.remarkTextBox1.TabIndex = 59;
+            this.remarkTextBox1.TabIndex = 5;
             // 
             // label11
             // 

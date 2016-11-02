@@ -27,6 +27,9 @@ namespace GODInventoryWinForm.Controls
             editOrderForm = new EditOrderForm2();
 
             InitializeDataSource();
+            startDateTimePicker.Select();
+            this.ActiveControl = startDateTimePicker;
+
         }
 
 

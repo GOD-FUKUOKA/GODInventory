@@ -44,7 +44,7 @@
             this.label1.Location = new System.Drawing.Point(38, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 14);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 4;
             this.label1.Text = "NFWEのインストール場所";
             // 
             // folderBrowserButton1
@@ -53,7 +53,7 @@
             this.folderBrowserButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.folderBrowserButton1.Name = "folderBrowserButton1";
             this.folderBrowserButton1.Size = new System.Drawing.Size(37, 27);
-            this.folderBrowserButton1.TabIndex = 2;
+            this.folderBrowserButton1.TabIndex = 0;
             this.folderBrowserButton1.Text = "...";
             this.folderBrowserButton1.UseVisualStyleBackColor = true;
             this.folderBrowserButton1.Click += new System.EventHandler(this.folderBrowserButton1_Click);
@@ -65,7 +65,7 @@
             this.installDirTextBox.Name = "installDirTextBox";
             this.installDirTextBox.ReadOnly = true;
             this.installDirTextBox.Size = new System.Drawing.Size(235, 21);
-            this.installDirTextBox.TabIndex = 3;
+            this.installDirTextBox.TabIndex = 5;
             // 
             // cancleButton2
             // 
@@ -74,7 +74,7 @@
             this.cancleButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cancleButton2.Name = "cancleButton2";
             this.cancleButton2.Size = new System.Drawing.Size(106, 32);
-            this.cancleButton2.TabIndex = 4;
+            this.cancleButton2.TabIndex = 3;
             this.cancleButton2.Text = "取消";
             this.cancleButton2.UseVisualStyleBackColor = true;
             // 
@@ -85,7 +85,7 @@
             this.saveButton3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.saveButton3.Name = "saveButton3";
             this.saveButton3.Size = new System.Drawing.Size(106, 32);
-            this.saveButton3.TabIndex = 5;
+            this.saveButton3.TabIndex = 2;
             this.saveButton3.Text = "保存";
             this.saveButton3.UseVisualStyleBackColor = true;
             this.saveButton3.Click += new System.EventHandler(this.saveButton3_Click);
@@ -105,7 +105,7 @@
             this.inventoryStartAtDateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.inventoryStartAtDateTimePicker1.Name = "inventoryStartAtDateTimePicker1";
             this.inventoryStartAtDateTimePicker1.Size = new System.Drawing.Size(278, 21);
-            this.inventoryStartAtDateTimePicker1.TabIndex = 8;
+            this.inventoryStartAtDateTimePicker1.TabIndex = 1;
             // 
             // SettingForm
             // 

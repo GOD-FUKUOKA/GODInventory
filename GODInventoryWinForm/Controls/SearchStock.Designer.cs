@@ -76,7 +76,7 @@
             this.warehouseComboBox.Location = new System.Drawing.Point(178, 23);
             this.warehouseComboBox.Name = "warehouseComboBox";
             this.warehouseComboBox.Size = new System.Drawing.Size(128, 22);
-            this.warehouseComboBox.TabIndex = 76;
+            this.warehouseComboBox.TabIndex = 1;
             // 
             // label1
             // 
@@ -100,7 +100,7 @@
             this.ioComboBox.Location = new System.Drawing.Point(49, 23);
             this.ioComboBox.Name = "ioComboBox";
             this.ioComboBox.Size = new System.Drawing.Size(75, 22);
-            this.ioComboBox.TabIndex = 78;
+            this.ioComboBox.TabIndex = 0;
             // 
             // label2
             // 
@@ -130,7 +130,7 @@
             this.genreComboBox.Location = new System.Drawing.Point(384, 23);
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(128, 22);
-            this.genreComboBox.TabIndex = 80;
+            this.genreComboBox.TabIndex = 2;
             this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged_1);
             // 
             // label3
@@ -153,7 +153,7 @@
             this.manufacturerComboBox.Location = new System.Drawing.Point(575, 23);
             this.manufacturerComboBox.Name = "manufacturerComboBox";
             this.manufacturerComboBox.Size = new System.Drawing.Size(128, 22);
-            this.manufacturerComboBox.TabIndex = 82;
+            this.manufacturerComboBox.TabIndex = 3;
             // 
             // label4
             // 
@@ -171,7 +171,7 @@
             this.startDateTimePicker.Location = new System.Drawing.Point(755, 24);
             this.startDateTimePicker.Name = "startDateTimePicker";
             this.startDateTimePicker.Size = new System.Drawing.Size(112, 21);
-            this.startDateTimePicker.TabIndex = 84;
+            this.startDateTimePicker.TabIndex = 4;
             // 
             // label6
             // 
@@ -189,7 +189,7 @@
             this.endDateTimePicker.Location = new System.Drawing.Point(892, 24);
             this.endDateTimePicker.Name = "endDateTimePicker";
             this.endDateTimePicker.Size = new System.Drawing.Size(112, 21);
-            this.endDateTimePicker.TabIndex = 86;
+            this.endDateTimePicker.TabIndex = 5;
             // 
             // productDataGridView
             // 
@@ -266,7 +266,7 @@
             this.loadItemListButton.Location = new System.Drawing.Point(1017, 21);
             this.loadItemListButton.Name = "loadItemListButton";
             this.loadItemListButton.Size = new System.Drawing.Size(106, 35);
-            this.loadItemListButton.TabIndex = 88;
+            this.loadItemListButton.TabIndex = 6;
             this.loadItemListButton.Text = "検索";
             this.loadItemListButton.UseVisualStyleBackColor = true;
             this.loadItemListButton.Click += new System.EventHandler(this.loadItemListButton_Click);
@@ -315,7 +315,7 @@
             this.btSave.Location = new System.Drawing.Point(864, 435);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(116, 35);
-            this.btSave.TabIndex = 90;
+            this.btSave.TabIndex = 7;
             this.btSave.Text = "訂正内容保存";
             this.btSave.UseVisualStyleBackColor = true;
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
@@ -327,7 +327,7 @@
             this.btcanel.Location = new System.Drawing.Point(986, 435);
             this.btcanel.Name = "btcanel";
             this.btcanel.Size = new System.Drawing.Size(116, 35);
-            this.btcanel.TabIndex = 91;
+            this.btcanel.TabIndex = 8;
             this.btcanel.Text = "訂正内容取消す";
             this.btcanel.UseVisualStyleBackColor = true;
             this.btcanel.Click += new System.EventHandler(this.btcanel_Click);
@@ -412,7 +412,7 @@
             this.label7.Location = new System.Drawing.Point(18, 151);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(61, 47);
-            this.label7.TabIndex = 0;
+            this.label7.TabIndex = 11;
             this.label7.Text = "序号";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -424,7 +424,7 @@
             this.label8.Location = new System.Drawing.Point(78, 151);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(101, 47);
-            this.label8.TabIndex = 0;
+            this.label8.TabIndex = 13;
             this.label8.Text = "自社コード";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -436,7 +436,7 @@
             this.label9.Location = new System.Drawing.Point(178, 151);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(201, 47);
-            this.label9.TabIndex = 0;
+            this.label9.TabIndex = 15;
             this.label9.Text = "商品名";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -448,7 +448,7 @@
             this.label10.Location = new System.Drawing.Point(378, 151);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(106, 47);
-            this.label10.TabIndex = 0;
+            this.label10.TabIndex = 17;
             this.label10.Text = "規格";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 

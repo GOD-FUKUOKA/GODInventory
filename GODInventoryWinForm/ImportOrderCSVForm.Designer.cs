@@ -63,7 +63,7 @@
             this.pathTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pathTextBox.Name = "pathTextBox";
             this.pathTextBox.Size = new System.Drawing.Size(322, 21);
-            this.pathTextBox.TabIndex = 1;
+            this.pathTextBox.TabIndex = 0;
             // 
             // label1
             // 
@@ -71,7 +71,7 @@
             this.label1.Location = new System.Drawing.Point(38, 102);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 14);
-            this.label1.TabIndex = 2;
+            this.label1.TabIndex = 5;
             this.label1.Text = "ファイルを指定";
             // 
             // importButton
@@ -80,7 +80,7 @@
             this.importButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(106, 32);
-            this.importButton.TabIndex = 3;
+            this.importButton.TabIndex = 1;
             this.importButton.Text = "導入";
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.importButton_Click);
@@ -92,7 +92,7 @@
             this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(106, 32);
-            this.cancelButton.TabIndex = 4;
+            this.cancelButton.TabIndex = 2;
             this.cancelButton.Text = "キャンセル";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
@@ -139,7 +139,7 @@
             this.closeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(106, 32);
-            this.closeButton.TabIndex = 8;
+            this.closeButton.TabIndex = 3;
             this.closeButton.Text = "閉じる";
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);

@@ -53,12 +53,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,6 +80,12 @@
             this.キャンセル時刻 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.備考 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             this.ordersTabPage.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -105,7 +105,7 @@
             this.filterButton.Location = new System.Drawing.Point(905, 15);
             this.filterButton.Name = "filterButton";
             this.filterButton.Size = new System.Drawing.Size(100, 50);
-            this.filterButton.TabIndex = 24;
+            this.filterButton.TabIndex = 8;
             this.filterButton.Text = "検索";
             this.filterButton.UseVisualStyleBackColor = true;
             this.filterButton.Click += new System.EventHandler(this.filterButton_Click);
@@ -149,7 +149,7 @@
             this.groupBox3.Location = new System.Drawing.Point(3, 14);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1130, 77);
-            this.groupBox3.TabIndex = 100;
+            this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             // 
             // btclear
@@ -157,7 +157,7 @@
             this.btclear.Location = new System.Drawing.Point(1011, 15);
             this.btclear.Name = "btclear";
             this.btclear.Size = new System.Drawing.Size(100, 50);
-            this.btclear.TabIndex = 108;
+            this.btclear.TabIndex = 9;
             this.btclear.Text = "クリア";
             this.btclear.UseVisualStyleBackColor = true;
             this.btclear.Click += new System.EventHandler(this.btclear_Click);
@@ -187,7 +187,7 @@
             this.storeComboBox.Location = new System.Drawing.Point(200, 43);
             this.storeComboBox.Name = "storeComboBox";
             this.storeComboBox.Size = new System.Drawing.Size(110, 22);
-            this.storeComboBox.TabIndex = 105;
+            this.storeComboBox.TabIndex = 4;
             this.storeComboBox.TextChanged += new System.EventHandler(this.storeComboBox_TextChanged);
             // 
             // storeCodeTextBox
@@ -196,7 +196,7 @@
             this.storeCodeTextBox.MaxLength = 8;
             this.storeCodeTextBox.Name = "storeCodeTextBox";
             this.storeCodeTextBox.Size = new System.Drawing.Size(110, 21);
-            this.storeCodeTextBox.TabIndex = 104;
+            this.storeCodeTextBox.TabIndex = 3;
             this.storeCodeTextBox.TextChanged += new System.EventHandler(this.storeCodeTextBox_TextChanged);
             this.storeCodeTextBox.MouseLeave += new System.EventHandler(this.storeCodeTextBox_MouseLeave);
             // 
@@ -214,7 +214,7 @@
             this.innerCodeTextBox.Location = new System.Drawing.Point(790, 44);
             this.innerCodeTextBox.Name = "innerCodeTextBox";
             this.innerCodeTextBox.Size = new System.Drawing.Size(110, 21);
-            this.innerCodeTextBox.TabIndex = 102;
+            this.innerCodeTextBox.TabIndex = 7;
             // 
             // label14
             // 
@@ -230,7 +230,7 @@
             this.orderCodeTextBox3.Location = new System.Drawing.Point(589, 44);
             this.orderCodeTextBox3.Name = "orderCodeTextBox3";
             this.orderCodeTextBox3.Size = new System.Drawing.Size(110, 21);
-            this.orderCodeTextBox3.TabIndex = 101;
+            this.orderCodeTextBox3.TabIndex = 6;
             // 
             // label3
             // 
@@ -257,7 +257,7 @@
             this.dateEnumComboBox.Location = new System.Drawing.Point(394, 15);
             this.dateEnumComboBox.Name = "dateEnumComboBox";
             this.dateEnumComboBox.Size = new System.Drawing.Size(110, 22);
-            this.dateEnumComboBox.TabIndex = 97;
+            this.dateEnumComboBox.TabIndex = 2;
             // 
             // countyComboBox1
             // 
@@ -266,7 +266,7 @@
             this.countyComboBox1.Location = new System.Drawing.Point(394, 43);
             this.countyComboBox1.Name = "countyComboBox1";
             this.countyComboBox1.Size = new System.Drawing.Size(110, 22);
-            this.countyComboBox1.TabIndex = 96;
+            this.countyComboBox1.TabIndex = 5;
             this.countyComboBox1.SelectedIndexChanged += new System.EventHandler(this.countyComboBox1_SelectedIndexChanged);
             // 
             // endDateTimePicker
@@ -274,14 +274,14 @@
             this.endDateTimePicker.Location = new System.Drawing.Point(200, 16);
             this.endDateTimePicker.Name = "endDateTimePicker";
             this.endDateTimePicker.Size = new System.Drawing.Size(110, 21);
-            this.endDateTimePicker.TabIndex = 90;
+            this.endDateTimePicker.TabIndex = 1;
             // 
             // startDateTimePicker
             // 
             this.startDateTimePicker.Location = new System.Drawing.Point(45, 16);
             this.startDateTimePicker.Name = "startDateTimePicker";
             this.startDateTimePicker.Size = new System.Drawing.Size(110, 21);
-            this.startDateTimePicker.TabIndex = 88;
+            this.startDateTimePicker.TabIndex = 0;
             // 
             // label4
             // 
@@ -362,47 +362,7 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1135, 307);
-            this.dataGridView1.TabIndex = 11;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.editToolStripMenuItem.Text = "編集";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.ordersTabPage);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1149, 468);
-            this.tabControl1.TabIndex = 2;
-            // 
-            // id受注データDataGridViewTextBoxColumn
-            // 
-            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
+            this.dataGridView1.TabIndex = 2;
             // 
             // OrderReceivedAtColumn1
             // 
@@ -612,6 +572,46 @@
             this.StatusColumn1.HeaderText = "Status";
             this.StatusColumn1.Name = "StatusColumn1";
             this.StatusColumn1.ReadOnly = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.editToolStripMenuItem.Text = "編集";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.ordersTabPage);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1149, 468);
+            this.tabControl1.TabIndex = 0;
+            // 
+            // id受注データDataGridViewTextBoxColumn
+            // 
+            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // OrderHistoryForm
             // 

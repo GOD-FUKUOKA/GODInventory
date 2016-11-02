@@ -65,7 +65,7 @@
             this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(268, 21);
-            this.textBox2.TabIndex = 10000040;
+            this.textBox2.TabIndex = 9;
             // 
             // label1
             // 
@@ -82,7 +82,7 @@
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(268, 21);
-            this.textBox1.TabIndex = 10000038;
+            this.textBox1.TabIndex = 8;
             // 
             // storeCodeTextBox
             // 
@@ -91,7 +91,7 @@
             this.storeCodeTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.storeCodeTextBox.Name = "storeCodeTextBox";
             this.storeCodeTextBox.Size = new System.Drawing.Size(268, 21);
-            this.storeCodeTextBox.TabIndex = 31;
+            this.storeCodeTextBox.TabIndex = 0;
             this.storeCodeTextBox.MouseLeave += new System.EventHandler(this.storeNamTextBox_MouseLeave);
             // 
             // label11
@@ -118,7 +118,7 @@
             this.productKanjiSpecificationTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.productKanjiSpecificationTextBox.Name = "productKanjiSpecificationTextBox";
             this.productKanjiSpecificationTextBox.Size = new System.Drawing.Size(268, 21);
-            this.productKanjiSpecificationTextBox.TabIndex = 28;
+            this.productKanjiSpecificationTextBox.TabIndex = 7;
             // 
             // label12
             // 
@@ -136,7 +136,7 @@
             this.orderQuantityTextBox11.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.orderQuantityTextBox11.Name = "orderQuantityTextBox11";
             this.orderQuantityTextBox11.Size = new System.Drawing.Size(268, 21);
-            this.orderQuantityTextBox11.TabIndex = 10000032;
+            this.orderQuantityTextBox11.TabIndex = 10;
             this.orderQuantityTextBox11.Visible = false;
             // 
             // textBox8
@@ -145,7 +145,7 @@
             this.textBox8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(268, 21);
-            this.textBox8.TabIndex = 24;
+            this.textBox8.TabIndex = 5;
             // 
             // label10
             // 
@@ -162,7 +162,7 @@
             this.productKanjiNameTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.productKanjiNameTextBox.Name = "productKanjiNameTextBox";
             this.productKanjiNameTextBox.Size = new System.Drawing.Size(268, 21);
-            this.productKanjiNameTextBox.TabIndex = 26;
+            this.productKanjiNameTextBox.TabIndex = 6;
             // 
             // textBox12
             // 
@@ -170,7 +170,7 @@
             this.textBox12.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(268, 21);
-            this.textBox12.TabIndex = 20;
+            this.textBox12.TabIndex = 2;
             // 
             // label13
             // 
@@ -205,7 +205,7 @@
             this.storeNameTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.storeNameTextBox.Name = "storeNameTextBox";
             this.storeNameTextBox.Size = new System.Drawing.Size(268, 21);
-            this.storeNameTextBox.TabIndex = 12;
+            this.storeNameTextBox.TabIndex = 1;
             // 
             // label2
             // 
@@ -232,7 +232,7 @@
             this.submitFormButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(106, 32);
-            this.submitFormButton.TabIndex = 10000034;
+            this.submitFormButton.TabIndex = 1;
             this.submitFormButton.Text = "保存";
             this.submitFormButton.UseVisualStyleBackColor = true;
             this.submitFormButton.Click += new System.EventHandler(this.submitFormButton_Click);
@@ -243,7 +243,7 @@
             this.cancelFormButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(106, 32);
-            this.cancelFormButton.TabIndex = 10000035;
+            this.cancelFormButton.TabIndex = 2;
             this.cancelFormButton.Text = "キャンセル";
             this.cancelFormButton.UseVisualStyleBackColor = true;
             this.cancelFormButton.Click += new System.EventHandler(this.cancelFormButton_Click);
@@ -263,7 +263,7 @@
             this.productReceivedAtTextBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.productReceivedAtTextBox3.Name = "productReceivedAtTextBox3";
             this.productReceivedAtTextBox3.Size = new System.Drawing.Size(268, 21);
-            this.productReceivedAtTextBox3.TabIndex = 10000036;
+            this.productReceivedAtTextBox3.TabIndex = 3;
             // 
             // groupBox1
             // 
@@ -294,7 +294,7 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Size = new System.Drawing.Size(797, 319);
-            this.groupBox1.TabIndex = 10000033;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
@@ -309,7 +309,7 @@
             this.orderReceivedAtTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.orderReceivedAtTextBox.Name = "orderReceivedAtTextBox";
             this.orderReceivedAtTextBox.Size = new System.Drawing.Size(268, 22);
-            this.orderReceivedAtTextBox.TabIndex = 10000041;
+            this.orderReceivedAtTextBox.TabIndex = 4;
             // 
             // errorProvider1
             // 

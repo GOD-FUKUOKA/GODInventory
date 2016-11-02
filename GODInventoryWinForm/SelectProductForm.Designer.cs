@@ -78,7 +78,7 @@
             this.manualButton1.Location = new System.Drawing.Point(366, 381);
             this.manualButton1.Name = "manualButton1";
             this.manualButton1.Size = new System.Drawing.Size(106, 32);
-            this.manualButton1.TabIndex = 2;
+            this.manualButton1.TabIndex = 1;
             this.manualButton1.Text = "入力";
             this.manualButton1.UseVisualStyleBackColor = true;
             this.manualButton1.Visible = false;
@@ -98,7 +98,7 @@
             this.submitButton2.Location = new System.Drawing.Point(478, 381);
             this.submitButton2.Name = "submitButton2";
             this.submitButton2.Size = new System.Drawing.Size(106, 32);
-            this.submitButton2.TabIndex = 5;
+            this.submitButton2.TabIndex = 2;
             this.submitButton2.Text = "确定";
             this.submitButton2.UseVisualStyleBackColor = true;
             // 
@@ -108,7 +108,7 @@
             this.cancelButton3.Location = new System.Drawing.Point(590, 381);
             this.cancelButton3.Name = "cancelButton3";
             this.cancelButton3.Size = new System.Drawing.Size(106, 32);
-            this.cancelButton3.TabIndex = 6;
+            this.cancelButton3.TabIndex = 3;
             this.cancelButton3.Text = "取消";
             this.cancelButton3.UseVisualStyleBackColor = true;
             // 

@@ -52,7 +52,7 @@
             this.okButton1.Location = new System.Drawing.Point(185, 142);
             this.okButton1.Name = "okButton1";
             this.okButton1.Size = new System.Drawing.Size(75, 21);
-            this.okButton1.TabIndex = 1;
+            this.okButton1.TabIndex = 0;
             this.okButton1.Text = "OK";
             this.okButton1.UseVisualStyleBackColor = true;
             // 
@@ -84,7 +84,7 @@
             this.Controls.Add(this.processMsgLabel2);
             this.Controls.Add(this.okButton1);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("ＭＳ Ｐゴシック", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReceiveForm";
