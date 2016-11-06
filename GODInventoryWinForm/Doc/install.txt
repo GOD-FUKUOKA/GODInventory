@@ -111,3 +111,12 @@ CHANGE COLUMN `センターコード` `センターコード` INT(11) NOT NULL D
 ALTER TABLE `t_stockrec` 
 CHANGE COLUMN `客户` `客` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL ,
 CHANGE COLUMN `工厂` `工場` VARCHAR(255) CHARACTER SET 'utf8' NULL DEFAULT NULL ;
+
+
+ALTER TABLE `t_shoplist` 
+ADD COLUMN `営業担当`  varchar(255) CHARACTER SET 'utf8' COLLATE utf8_unicode_ci DEFAULT NULL;
+
+#v4.21
+==============================================
+ALTER TABLE  `t_orderdata` 
+ADD COLUMN `訂正理由区分` INT(4) UNSIGNED NOT NULL DEFAULT 0;

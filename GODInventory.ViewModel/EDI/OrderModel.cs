@@ -461,7 +461,7 @@ namespace GODInventory.ViewModel.EDI
             return orderdata;
 
         }
-        public t_orderdata ConverToEntity(t_shoplist shop, t_itemlist item, List<v_storeorder> orders)
+        public t_orderdata ConverToEntity(t_shoplist shop, t_itemlist item, List<t_orderdata> orders)
         {
             var orderdata = ConverToEntity();
             
@@ -488,10 +488,19 @@ namespace GODInventory.ViewModel.EDI
             orderdata.発注品名漢字 = orderdata.品名漢字;
             orderdata.発注規格名漢字 = orderdata.規格名漢字;
 
+            if (orders != null)
+            {
+                bool existed = orders.Exists(o => (o.伝票番号 == orderdata.伝票番号 && o.店舗コード == orderdata.店舗コード));
+                if (existed)
+                {
+                    orderdata.Status = OrderStatus.Existed;
+                }
+            }
+
             return orderdata;
         }
 
-        public CustomMySqlParameters ToSqlArguments(t_shoplist shop, t_itemlist item, List<v_storeorder> orders)
+        public CustomMySqlParameters ToSqlArguments(t_shoplist shop, t_itemlist item, List<t_orderdata> orders)
         {
             //`発注日`, `受注日`, `出荷日`, `納品日`, `店舗コード`, `店舗名漢字`, `社内伝番`, `行数`, `最大行数`, `伝票番号`, `ダブリ`, 
             //`在庫状態`, `キャンセル`, `キャンセル時刻`, `ジャンル`, `ＪＡＮコード`, `商品コード`, `品名漢字`, `規格名漢字`, `発注数量`, 
@@ -637,10 +646,14 @@ VALUES (
 
         }
 
-        public string ToRawSql(t_shoplist shop, t_itemlist item, List<v_storeorder> orders)
+        public string ToRawSql(t_shoplist shop, t_itemlist item, List<t_orderdata> orders)
         {
             var isoDateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
             t_orderdata o = ConverToEntity(shop, item, orders);
+            if (o.Status == OrderStatus.Existed)
+            {
+                return null;
+            }
             string format = @"INSERT INTO `t_orderdata`(
 `発注日`, `受注日`, `受注時刻`,  `店舗コード`, `店舗名漢字`, 
 `伝票番号`, `ＪＡＮコード`, `商品コード`, `品名漢字`, `規格名漢字`, 

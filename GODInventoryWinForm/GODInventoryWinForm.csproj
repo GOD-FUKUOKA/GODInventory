@@ -183,6 +183,11 @@
     <Compile Include="ImportOrderCSVForm.Designer.cs">
       <DependentUpon>ImportOrderCSVForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SelectProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -452,14 +457,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="ReceiveForm.resx">
       <DependentUpon>ReceiveForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -507,12 +507,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\warehouse.png" />
     <None Include="Resources\FirstRecord_small.png" />
     <None Include="Resources\LastRecord_small.png" />
     <None Include="Resources\NextRecord_small.png" />
     <None Include="Resources\PreviousRecord_small.png" />
-    <None Include="Resources\dashboard.png" />
-    <None Include="Resources\dashboard1.png" />
     <None Include="Resources\add - 副本.gif" />
     <None Include="Resources\16-on-black.gif" />
     <Content Include="Doc\install.txt" />
@@ -520,18 +519,12 @@
     <Content Include="Doc\sql_trigger.txt" />
     <Content Include="Doc\sql_t_itemlist_new.txt" />
     <Content Include="Doc\sql_t_pricelist.txt" />
-    <Content Include="Resources\order.png" />
-    <None Include="Resources\order1.png" />
-    <Content Include="Resources\product.png" />
-    <None Include="Resources\product1.png" />
-    <Content Include="Resources\setting.png" />
-    <None Include="Resources\setting1.png" />
-    <Content Include="Resources\store.png" />
-    <None Include="Resources\store1.png" />
-    <None Include="Resources\tool1.png" />
-    <Content Include="Resources\tools.png" />
-    <Content Include="Resources\warehouse.png" />
-    <None Include="Resources\warehouse1.png" />
+    <None Include="Resources\dashboard.png" />
+    <None Include="Resources\order.png" />
+    <None Include="Resources\product.png" />
+    <None Include="Resources\setting.png" />
+    <None Include="Resources\store.png" />
+    <None Include="Resources\tool.png" />
     <Content Include="Doc\sql_changes.txt" />
   </ItemGroup>
   <ItemGroup>

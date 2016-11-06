@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GODInventory.MyLinq;
+using System.Data.Entity.Validation;
 
 namespace GODInventoryWinForm.Controls
 {
@@ -28,15 +29,15 @@ namespace GODInventoryWinForm.Controls
                     storeCodeTextBox.Text = order.店番.ToString();
                     storeNameTextBox.Text = order.店名;
                     textBox12.Text = order.店名カナ;
-                    orderReceivedAtTextBox.Text = order.配送担当;
-                    textBox8.Text = order.郵便番号.ToString();
-                    productKanjiNameTextBox.Text = order.県別.ToString();
-                    productKanjiSpecificationTextBox.Text = order.県内エリア.ToString();
-                    orderQuantityTextBox11.Text = order.customerId.ToString();
-                    textBox1.Text = order.住所;
-                    textBox2.Text = order.電話番号.ToString();
-
-                    this.productReceivedAtTextBox3.Text = order.FAX番号.ToString();
+                    shipperTextBox.Text = order.配送担当;
+                    postalTextBox8.Text = order.郵便番号.ToString();
+                    countyTextBox.Text = order.県別.ToString();
+                    districtTextBox.Text = order.県内エリア.ToString();
+                    customerTextBox11.Text = order.customerId.ToString();
+                    addressTextBox1.Text = order.住所;
+                    phoneTextBox2.Text = order.電話番号.ToString();
+                    officerTextBox3.Text = order.営業担当.ToString();
+                    faxTextBox3.Text = order.FAX番号.ToString();
                 }
             }
             else
@@ -47,58 +48,82 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private void submitFormButton_Click(object sender, EventArgs e)
+        private void submitFormButton_Click(object sender, EventArgs eventArgs)
         {
-            using (var ctx = new GODDbContext())
+            try
             {
-                if (showtype == "Update")
+                using (var ctx = new GODDbContext())
                 {
-                    t_shoplist order = ctx.t_shoplist.Find(Convert.ToInt32(storeCodeTextBox.Text));
+                    if (showtype == "Update")
+                    {
+                        t_shoplist order = ctx.t_shoplist.Find(Convert.ToInt32(storeCodeTextBox.Text));
 
-                    order.店番 = Convert.ToInt32(storeCodeTextBox.Text);
-                    order.店名 = storeNameTextBox.Text;
-                    order.店名カナ = textBox12.Text;
-                    order.配送担当 = orderReceivedAtTextBox.Text;
-                    order.郵便番号 = textBox8.Text;
-                    order.県別 = productKanjiNameTextBox.Text;
-                    order.県内エリア = productKanjiSpecificationTextBox.Text;
-                    order.customerId = Convert.ToInt32(orderQuantityTextBox11.Text);
-                    order.住所 = textBox1.Text;
-                    order.電話番号 = textBox2.Text;
-                    order.FAX番号 = this.productReceivedAtTextBox3.Text;
-                    ctx.SaveChanges();
-                    MessageBox.Show(String.Format("店舗情報更新完了!"));
+                        order.店番 = Convert.ToInt32(storeCodeTextBox.Text);
+                        order.店名 = storeNameTextBox.Text;
+                        order.店名カナ = textBox12.Text;
+                        order.配送担当 = shipperTextBox.Text;
+                        order.郵便番号 = postalTextBox8.Text;
+                        order.県別 = countyTextBox.Text;
+                        order.県内エリア = districtTextBox.Text;
+                        order.customerId = Convert.ToInt32(customerTextBox11.Text);
+                        order.住所 = addressTextBox1.Text;
+                        order.電話番号 = phoneTextBox2.Text;
+                        order.FAX番号 = this.faxTextBox3.Text;
+                        order.営業担当 = this.officerTextBox3.Text;
+                        ctx.SaveChanges();
+                        MessageBox.Show(String.Format("店舗情報更新完了!"));
+                    }
+                    else if (showtype == "Add")
+                    {
+
+                        t_shoplist order = new t_shoplist();
+                        order.店番 = Convert.ToInt32(storeCodeTextBox.Text);
+
+                        order.店名 = storeNameTextBox.Text;
+
+                        order.店名カナ = textBox12.Text;
+
+                        order.配送担当 = shipperTextBox.Text;
+
+                        order.郵便番号 = postalTextBox8.Text;
+
+                        order.県別 = countyTextBox.Text;
+
+                        order.県内エリア = districtTextBox.Text;
+                        if (customerTextBox11.Text != "")
+                        {
+                            order.customerId = Convert.ToInt32(customerTextBox11.Text);
+                        }
+                        order.住所 = addressTextBox1.Text;
+
+                        order.電話番号 = phoneTextBox2.Text;
+
+                        order.FAX番号 = this.faxTextBox3.Text;
+
+                        order.営業担当 = this.officerTextBox3.Text;
+
+                        ctx.t_shoplist.Add(order);
+                        ctx.SaveChanges();
+                        MessageBox.Show(String.Format("店舗登録完了!"));
+
+                    }
                 }
-                else if (showtype == "Add")
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
                 {
-
-                    t_shoplist order = new t_shoplist();
-                    order.店番 = Convert.ToInt32(storeCodeTextBox.Text);
-
-                    order.店名 = storeNameTextBox.Text;
-
-                    order.店名カナ = textBox12.Text;
-
-                    order.配送担当 = orderReceivedAtTextBox.Text;
-
-                    order.郵便番号 = textBox8.Text;
-
-                    order.県別 = productKanjiSpecificationTextBox.Text;
-
-                    order.県内エリア = productReceivedAtTextBox3.Text;
-                    if (orderQuantityTextBox11.Text != "")
-                        order.customerId = Convert.ToInt32(orderQuantityTextBox11.Text);
-                    order.住所 = textBox1.Text;
-
-                    order.電話番号 = textBox2.Text;
-
-                    order.FAX番号 = this.productReceivedAtTextBox3.Text;
-
-                    ctx.t_shoplist.Add(order);
-                    ctx.SaveChanges();
-                    MessageBox.Show(String.Format("店舗登録完了!"));
-
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                            ve.PropertyName,
+                            eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                            ve.ErrorMessage);
+                    }
                 }
+                throw;
             }
             this.Close();
 

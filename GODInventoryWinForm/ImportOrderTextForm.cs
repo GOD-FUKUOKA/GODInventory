@@ -148,17 +148,20 @@ namespace GODInventoryWinForm
             using (var ctx = new GODDbContext())
             {
                 var date = DateTime.Now.Date;
+                var three_month_ago = date.AddMonths(-2);
                 List<t_itemlist> items = ctx.t_itemlist.ToList();
-                List<v_storeorder> orders = null; 
                 //= ( from t_orderdata o  in ctx.t_orderdata
                 //   where   o.Status == OrderStatus.Pending || o.Status == OrderStatus.WaitToShip || o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.ASN || o.Status == OrderStatus.Received
                 //   group o by new { o.店舗コード, o.商品コード} into g
                 //    select new v_storeorder { 店舗コード = g.Key.店舗コード, 商品コード = g.Key.商品コード }).ToList();
-                    
+                List<t_orderdata> orders = (from t_orderdata o in ctx.t_orderdata
+                                            where o.発注日 <= date && o.発注日 > three_month_ago
+                                            select o).ToList();    
                 List<t_shoplist> shops = ctx.t_shoplist.ToList();
 
                 OrderModel model = null;
                 int progress = 0;
+                int count = 0;
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {
                     try
@@ -195,9 +198,15 @@ namespace GODInventoryWinForm
                             //sql_parameters = model.ToSqlArguments(shop, item);
                             var sql = model.ToRawSql(shop, item, orders);
                             //Console.WriteLine("sql = #{0}", sql);
-                            sqls.Add(sql);
-                            if ((i == models.Count - 1) || (arg.CurrentIndex % 25 ==0))
+                           
+                            if (sql != null)
                             {
+                                sqls.Add(sql);
+                                count++;
+                            }
+                            if ((sqls.Count > 0) && ((i == models.Count - 1) || (sqls.Count % 25 == 0)))
+                            {
+
                                 var multisql = String.Join("", sqls.ToArray());
                                 ctx.Database.ExecuteSqlCommand(multisql);
                                 sqls.Clear();
@@ -217,7 +226,7 @@ namespace GODInventoryWinForm
 
                         ctxTransaction.Commit();
 
-                        e.Result = string.Format("{0}件の受注伝票が登録できました", models.Count);
+                        e.Result = string.Format("{0}件の受注伝票が登録できました",count);
                     }
                    
                     catch (Exception exception)

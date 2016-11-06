@@ -46,12 +46,10 @@
             this.orderCreatedAtDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.genreComboBox = new System.Windows.Forms.ComboBox();
             this.warehouseComboBox = new System.Windows.Forms.ComboBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.manufacturerComboBox = new System.Windows.Forms.ComboBox();
-            this.codeComboBox = new System.Windows.Forms.ComboBox();
             this.addButton = new System.Windows.Forms.Button();
             this.stockStatusComboBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -61,8 +59,9 @@
             this.clientComboBox = new System.Windows.Forms.ComboBox();
             this.remarkTextBox1 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.codeTextBox = new System.Windows.Forms.TextBox();
+            this.qtyTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -135,7 +134,7 @@
             this.cancelButton.Location = new System.Drawing.Point(889, 69);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(106, 32);
-            this.cancelButton.TabIndex = 12;
+            this.cancelButton.TabIndex = 13;
             this.cancelButton.Text = "クリア";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click_1);
@@ -148,7 +147,7 @@
             this.submitButton.Location = new System.Drawing.Point(889, 23);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(106, 32);
-            this.submitButton.TabIndex = 11;
+            this.submitButton.TabIndex = 12;
             this.submitButton.Text = "登録";
             this.submitButton.UseVisualStyleBackColor = false;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
@@ -159,7 +158,7 @@
             this.loadItemListButton.Location = new System.Drawing.Point(216, 307);
             this.loadItemListButton.Name = "loadItemListButton";
             this.loadItemListButton.Size = new System.Drawing.Size(106, 32);
-            this.loadItemListButton.TabIndex = 7;
+            this.loadItemListButton.TabIndex = 8;
             this.loadItemListButton.Text = "商品リスト表示";
             this.loadItemListButton.UseVisualStyleBackColor = true;
             this.loadItemListButton.Click += new System.EventHandler(this.loadItemListButton_Click);
@@ -245,24 +244,11 @@
             this.warehouseComboBox.TabIndex = 1;
             this.warehouseComboBox.SelectedIndexChanged += new System.EventHandler(this.warehouseComboBox_SelectedIndexChanged);
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.numericUpDown1.Location = new System.Drawing.Point(134, 404);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(189, 21);
-            this.numericUpDown1.TabIndex = 9;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(58, 371);
+            this.label6.Location = new System.Drawing.Point(58, 372);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 14);
             this.label6.TabIndex = 42;
@@ -298,22 +284,13 @@
             this.manufacturerComboBox.Size = new System.Drawing.Size(189, 22);
             this.manufacturerComboBox.TabIndex = 4;
             // 
-            // codeComboBox
-            // 
-            this.codeComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.codeComboBox.FormattingEnabled = true;
-            this.codeComboBox.Location = new System.Drawing.Point(134, 367);
-            this.codeComboBox.Name = "codeComboBox";
-            this.codeComboBox.Size = new System.Drawing.Size(189, 22);
-            this.codeComboBox.TabIndex = 8;
-            // 
             // addButton
             // 
             this.addButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.addButton.Location = new System.Drawing.Point(216, 437);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(106, 32);
-            this.addButton.TabIndex = 10;
+            this.addButton.TabIndex = 11;
             this.addButton.Text = "追加";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
@@ -396,11 +373,27 @@
             this.label11.Size = new System.Drawing.Size(290, 1);
             this.label11.TabIndex = 60;
             // 
+            // codeTextBox
+            // 
+            this.codeTextBox.Location = new System.Drawing.Point(134, 370);
+            this.codeTextBox.Name = "codeTextBox";
+            this.codeTextBox.Size = new System.Drawing.Size(189, 19);
+            this.codeTextBox.TabIndex = 9;
+            // 
+            // qtyTextBox
+            // 
+            this.qtyTextBox.Location = new System.Drawing.Point(134, 406);
+            this.qtyTextBox.Name = "qtyTextBox";
+            this.qtyTextBox.Size = new System.Drawing.Size(189, 19);
+            this.qtyTextBox.TabIndex = 10;
+            // 
             // CopyofInputStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1011, 500);
+            this.Controls.Add(this.qtyTextBox);
+            this.Controls.Add(this.codeTextBox);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.remarkTextBox1);
             this.Controls.Add(this.clientComboBox);
@@ -421,12 +414,10 @@
             this.Controls.Add(this.orderCreatedAtDateTimePicker);
             this.Controls.Add(this.genreComboBox);
             this.Controls.Add(this.warehouseComboBox);
-            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.manufacturerComboBox);
-            this.Controls.Add(this.codeComboBox);
             this.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -434,7 +425,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "入庫登録";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -455,12 +445,10 @@
         private System.Windows.Forms.DateTimePicker orderCreatedAtDateTimePicker;
         private System.Windows.Forms.ComboBox genreComboBox;
         private System.Windows.Forms.ComboBox warehouseComboBox;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox manufacturerComboBox;
-        private System.Windows.Forms.ComboBox codeComboBox;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.ComboBox stockStatusComboBox;
         private System.Windows.Forms.Label label8;
@@ -475,6 +463,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 商品名;
         private System.Windows.Forms.DataGridViewTextBoxColumn 規格;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
+        private System.Windows.Forms.TextBox codeTextBox;
+        private System.Windows.Forms.TextBox qtyTextBox;
 
     }
 }

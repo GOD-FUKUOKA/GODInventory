@@ -19,6 +19,7 @@ namespace GODInventoryWinForm.Controls
         private List<t_genre> genreList;
         private List<t_warehouses> warehouseList;
         private List<t_customers> customersList;
+        private List<t_itemlist> itemList;
 
         public CopyofInputStock()
         {
@@ -45,6 +46,7 @@ namespace GODInventoryWinForm.Controls
                 warehouseList = ctx.t_warehouses.ToList();
                 manufacturerList = ctx.t_manufacturers.OrderBy(o => o.Position).ToList();
                 customersList = ctx.t_customers.ToList();
+                itemList = ctx.t_itemlist.ToList();
             }
             this.genreComboBox.DisplayMember = "ジャンル名";
             this.genreComboBox.ValueMember = "idジャンル";
@@ -257,37 +259,33 @@ namespace GODInventoryWinForm.Controls
 
         private void addButton_Click(object sender, EventArgs e)
         {
-
+            int qty = Convert.ToInt32(qtyTextBox.Text);
+            int code  = Convert.ToInt32(codeTextBox.Text);
             var dd = ManufactureRespository.CodeDict.ToList();
+            // factory_code : product_code
+            KeyValuePair<int, int> pair = dd.FirstOrDefault(o => o.Key == code);
 
-            var shorname = dd.Find(o => o.Key == Convert.ToInt32(codeComboBox.Text));
-
-            stockiosList.Clear();
-
-            if (shorname.Value > 0)
+            if (pair.Value > 0)
             {
-                using (var ctx = new GODDbContext())
+                for (int i = 0; i < stockiosList.Count; i++)
                 {
-                    var results = (from s in ctx.t_itemlist
-                                   where s.自社コード == (Int32)shorname.Value
-                                   select new v_stockios { 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
-                    for (int i = 0; i < results.Count; i++)
+                    if (stockiosList[i].自社コード == pair.Value)
                     {
-                        results[i].Id = i + 1;
-
-                        results[i].qty = (Int32)numericUpDown1.Value;
-                        stockiosList.Add(results[i]);
+                        stockiosList[i].qty += qty;
+                        break;
                     }
                 }
+                codeTextBox.Text = "";
+                qtyTextBox.Text = "";
+                this.ActiveControl = codeTextBox;                
+                this.dataGridView1.Refresh();
+            }
+            else {
+                MessageBox.Show(String.Format("工場コード{0}の該当商品は見つかりません。", code));
             }
 
             //  var isAllManufacturerSelected = (Convert.ToInt32(codeComboBox.Text) == ManufactureRespository.CodeDict);
 
-            //codeComboBox.Focus();
-            //codeComboBox.SelectAll();
-            //codeComboBox.SelectionStart = 0;
-            codeComboBox.Select();
-            this.ActiveControl = codeComboBox;
         }
     }
 }

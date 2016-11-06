@@ -169,7 +169,7 @@ namespace GODInventoryWinForm
             using (var ctx = new GODDbContext())
             {
                 var date = DateTime.Now.Date;
-                var three_month_ago = date.AddMonths(-1);
+                var three_month_ago = date.AddMonths(-2);
                 List<t_itemlist> items = ctx.t_itemlist.ToList();
                 List<t_orderdata> orders = (from t_orderdata o in ctx.t_orderdata
                                             where o.発注日 <= date && o.発注日 > three_month_ago
