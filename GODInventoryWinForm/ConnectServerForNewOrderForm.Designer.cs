@@ -1,6 +1,6 @@
 ﻿namespace GODInventoryWinForm
 {
-    partial class ReceiveForm
+    partial class ConnectServerForNewOrderForm
     {
         /// <summary>
         /// Required designer variable.

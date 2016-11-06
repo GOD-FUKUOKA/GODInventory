@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace GODInventoryWinForm
 {
-    public partial class ReceiveForm : Form
+    public partial class ConnectServerForNewOrderForm : Form
     {
-        public ReceiveForm()
+        public ConnectServerForNewOrderForm()
         {
             InitializeComponent();
             this.msgLabel.Text = "";

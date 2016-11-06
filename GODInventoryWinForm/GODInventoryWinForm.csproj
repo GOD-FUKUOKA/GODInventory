@@ -318,11 +318,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReceiveForm.cs">
+    <Compile Include="ConnectServerForNewOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReceiveForm.Designer.cs">
-      <DependentUpon>ReceiveForm.cs</DependentUpon>
+    <Compile Include="ConnectServerForNewOrderForm.Designer.cs">
+      <DependentUpon>ConnectServerForNewOrderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SendForm.cs">
       <SubType>Form</SubType>
@@ -460,8 +460,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReceiveForm.resx">
-      <DependentUpon>ReceiveForm.cs</DependentUpon>
+    <EmbeddedResource Include="ConnectServerForNewOrderForm.resx">
+      <DependentUpon>ConnectServerForNewOrderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\OrderTemplateReport.rdlc" />
     <EmbeddedResource Include="Reports\ReceivedOrderDetailReport.rdlc" />

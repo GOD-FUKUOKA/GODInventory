@@ -88,7 +88,7 @@ namespace GODInventoryWinForm.Controls
 
         private void receiveOrderButton_Click(object sender, EventArgs e)
         {
-            new ReceiveForm().ShowDialog();
+            new ConnectServerForNewOrderForm().ShowDialog();
         }
 
 
