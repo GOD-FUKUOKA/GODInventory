@@ -171,6 +171,12 @@
     <Compile Include="Controls\Strock_CompanyCode.Designer.cs">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="DownloadNewOrdersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DownloadNewOrdersForm.Designer.cs">
+      <DependentUpon>DownloadNewOrdersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImportReceivedCSVForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -376,6 +382,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Strock_CompanyCode.resx">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DownloadNewOrdersForm.resx">
+      <DependentUpon>DownloadNewOrdersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportReceivedCSVForm.resx">
       <DependentUpon>ImportReceivedCSVForm.cs</DependentUpon>
