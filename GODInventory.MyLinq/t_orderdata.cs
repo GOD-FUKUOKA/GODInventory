@@ -297,6 +297,8 @@ namespace GODInventory.MyLinq
 
         public short 入力区分 { get; set; }
 
+        public int 訂正理由区分 { get; set; }
+
         public t_orderdata()
         {
             this.キャンセル = "no";

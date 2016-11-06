@@ -161,6 +161,7 @@ namespace GODInventory.ViewModel
                          法人名漢字 = o.法人名漢字,
                          備考 = o.備考,
                          納品指示 = o.納品指示,
+                         訂正理由区分 = o.訂正理由区分,
                          在庫数 = x.在庫数,
                          GenreName = g.ジャンル名
                      });

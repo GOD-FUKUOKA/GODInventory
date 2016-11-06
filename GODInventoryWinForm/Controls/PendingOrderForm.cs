@@ -60,8 +60,9 @@ namespace GODInventoryWinForm.Controls
 
             //InitializePager();
 
-            //丸健
-
+            this.訂正理由区分Column.ValueMember = "ID";
+            this.訂正理由区分Column.DisplayMember = "FullName";
+            this.訂正理由区分Column.DataSource = OrderQuantityChangeReasonRespository.ToList();
             //物流
 
         }
@@ -100,6 +101,7 @@ namespace GODInventoryWinForm.Controls
                         t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
                         //需要修改的字段为: “口数” “发注数量” “担当” “形态”
                         order.実際出荷数量 = pendingorder.実際出荷数量;
+                        order.訂正理由区分 = pendingorder.訂正理由区分;
                         order.納品口数 = pendingorder.納品口数;
                         order.重量 = pendingorder.重量;
                         order.発注形態名称漢字 = pendingorder.発注形態名称漢字;

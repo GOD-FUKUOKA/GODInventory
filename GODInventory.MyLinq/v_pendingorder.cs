@@ -129,6 +129,8 @@ namespace GODInventory.MyLinq
         // fixed
         public string 直送区分 { get; set; }
 
+        public int 訂正理由区分 { get; set; }
+
         public long ASN管理連番 { get; set; }
 
         public OrderStatus Status { get; set; }
