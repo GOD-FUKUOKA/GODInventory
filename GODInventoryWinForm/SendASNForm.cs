@@ -7,15 +7,17 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GODInventoryWinForm
 {
-    public partial class ConnectServerForNewOrderForm : Form
+    public partial class SendASNForm : Form
     {
-        public ConnectServerForNewOrderForm()
+        public SendASNForm()
         {
             InitializeComponent();
+
             this.msgLabel.Text = "";
         }
 
@@ -23,9 +25,9 @@ namespace GODInventoryWinForm
         {
             long ecode;
             Process proc = null;
-            string receive_bat_path = Properties.Settings.Default.NFWEInstallDir + @"\install\receive.bat";
+            string Send_bat_path = Properties.Settings.Default.NFWEInstallDir + @"\install\send.bat";
             string receive_log_path = Properties.Settings.Default.NFWEInstallDir + @"\status\status_receive_last.txt";
-            if (File.Exists(receive_bat_path))
+            if (File.Exists(Send_bat_path))
             {
 
                 try
@@ -34,8 +36,8 @@ namespace GODInventoryWinForm
                     proc = new Process();
                     proc.StartInfo.WorkingDirectory = Properties.Settings.Default.NFWEInstallDir + @"\install";
 
-                    proc.StartInfo.FileName = receive_bat_path;
-                    proc.StartInfo.Arguments = string.Format("A01");//this is argument
+                    proc.StartInfo.FileName = Send_bat_path;
+                    proc.StartInfo.Arguments = string.Format("C01");//this is argument
                     proc.StartInfo.UseShellExecute = false;
                     proc.StartInfo.CreateNoWindow = false;
                     proc.Start();
@@ -66,11 +68,13 @@ namespace GODInventoryWinForm
                     Console.WriteLine("Exception Occurred :{0},{1}", ex.Message, ex.StackTrace.ToString());
                 }
             }
-            else {
-                msgLabel.Text = String.Format("Can not file {0}.", receive_bat_path);
+            else
+            {
+                msgLabel.Text = String.Format("Can not file {0}.", Send_bat_path);
             }
         }
-        public string  ConvertShiftJisToUtf8(byte[] shift_jis_bytes) {
+        public string ConvertShiftJisToUtf8(byte[] shift_jis_bytes)
+        {
             // Create two different encodings.
             Encoding shift_jis = Encoding.GetEncoding("shift_jis");
             Encoding utf8 = Encoding.UTF8;
@@ -82,7 +86,7 @@ namespace GODInventoryWinForm
             return utf8.GetString(utf8_bytes);
 
         }
-        public string ConvertUtf8ToShiftJis(string  text )
+        public string ConvertUtf8ToShiftJis(string text)
         {
             // Create two different encodings.
             Encoding shift_jis = Encoding.GetEncoding("shift_jis");
@@ -96,9 +100,7 @@ namespace GODInventoryWinForm
 
         }
 
-        private void okButton1_Click(object sender, EventArgs e)
-        {
 
-        }
+
     }
 }

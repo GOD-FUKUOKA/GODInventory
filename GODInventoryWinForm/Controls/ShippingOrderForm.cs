@@ -142,6 +142,9 @@ namespace GODInventoryWinForm.Controls
                     ctx.SaveChanges();
                 }
             }
+            // 送信
+ 
+            new SendASNForm().ShowDialog();
             InitializeEdiData();
             pager3.Bind();
         }

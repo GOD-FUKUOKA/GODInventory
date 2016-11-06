@@ -139,5 +139,10 @@ namespace GODInventoryWinForm.Controls
             OrderHistoryForm.ShowDialog();
 
         }
+
+        private void orderConfirmButton_Click(object sender, EventArgs e)
+        {
+            new ConnectServerForReceivedOrderForm().ShowDialog();
+        }
     }
 }

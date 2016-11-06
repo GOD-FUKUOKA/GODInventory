@@ -55,6 +55,7 @@
             this.okButton1.TabIndex = 0;
             this.okButton1.Text = "OK";
             this.okButton1.UseVisualStyleBackColor = true;
+            this.okButton1.Click += new System.EventHandler(this.okButton1_Click);
             // 
             // processMsgLabel2
             // 
@@ -75,7 +76,7 @@
             this.msgLabel.Text = "Message";
             this.msgLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ReceiveForm
+            // ConnectServerForNewOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -87,7 +88,7 @@
             this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ReceiveForm";
+            this.Name = "ConnectServerForNewOrderForm";
             this.Text = "ReceiveForm";
             this.Shown += new System.EventHandler(this.ReceiveForm_Shown);
             this.ResumeLayout(false);

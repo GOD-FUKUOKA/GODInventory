@@ -98,6 +98,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectServerForReceivedOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConnectServerForReceivedOrderForm.Designer.cs">
+      <DependentUpon>ConnectServerForReceivedOrderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\InputStockBig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -330,6 +336,12 @@
     <Compile Include="ConnectServerForNewOrderForm.Designer.cs">
       <DependentUpon>ConnectServerForNewOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SendASNForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SendASNForm.Designer.cs">
+      <DependentUpon>SendASNForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SendForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -343,6 +355,9 @@
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkerArgument.cs" />
+    <EmbeddedResource Include="ConnectServerForReceivedOrderForm.resx">
+      <DependentUpon>ConnectServerForReceivedOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\InputStockBig.resx">
       <DependentUpon>InputStockBig.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -476,6 +491,9 @@
     <EmbeddedResource Include="Reports\ReceivedOrderDetailReport.rdlc" />
     <EmbeddedResource Include="Reports\ReceivedOrderReport.rdlc" />
     <EmbeddedResource Include="Reports\ReceivedOrderCollectionReport.rdlc" />
+    <EmbeddedResource Include="SendASNForm.resx">
+      <DependentUpon>SendASNForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SendForm.resx">
       <DependentUpon>SendForm.cs</DependentUpon>
     </EmbeddedResource>

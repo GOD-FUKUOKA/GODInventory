@@ -129,6 +129,7 @@
             this.orderConfirmButton.TabIndex = 5;
             this.orderConfirmButton.Text = "サーバーに接続し、新しい受領データをダウンロードします";
             this.orderConfirmButton.UseVisualStyleBackColor = true;
+            this.orderConfirmButton.Click += new System.EventHandler(this.orderConfirmButton_Click);
             // 
             // label1
             // 
