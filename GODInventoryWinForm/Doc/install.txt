@@ -120,3 +120,6 @@ ADD COLUMN `営業担当`  varchar(255) CHARACTER SET 'utf8' COLLATE utf8_unicod
 ==============================================
 ALTER TABLE  `t_orderdata` 
 ADD COLUMN `訂正理由区分` INT(4) UNSIGNED NOT NULL DEFAULT 0;
+
+ALTER TABLE  `t_orderdata` 
+CHANGE COLUMN `納品先店舗コード` `納品先店舗コード` INT(4) NOT NULL DEFAULT 0;

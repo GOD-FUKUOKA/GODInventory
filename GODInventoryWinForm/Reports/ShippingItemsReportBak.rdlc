@@ -6,7 +6,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>28.50407cm</Width>
+              <Width>29.10105cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -21,16 +21,37 @@
                           <TablixBody>
                             <TablixColumns>
                               <TablixColumn>
-                                <Width>2.42916cm</Width>
+                                <Width>3.04999cm</Width>
                               </TablixColumn>
                               <TablixColumn>
                                 <Width>1.619cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>5.43694cm</Width>
+                                <Width>1.29741cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>4.81202cm</Width>
+                                <Width>1.91824cm</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>1.93117cm</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>1.15095cm</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>1.03221cm</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>2.07699cm</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>3.77033cm</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>3.60849cm</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>1.97116cm</Width>
                               </TablixColumn>
                               <TablixColumn>
                                 <Width>1.08449cm</Width>
@@ -39,19 +60,10 @@
                                 <Width>0.96575cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.6272cm</Width>
+                                <Width>1.36262cm</Width>
                               </TablixColumn>
                               <TablixColumn>
-                                <Width>1.99729cm</Width>
-                              </TablixColumn>
-                              <TablixColumn>
-                                <Width>1.865cm</Width>
-                              </TablixColumn>
-                              <TablixColumn>
-                                <Width>2.68554cm</Width>
-                              </TablixColumn>
-                              <TablixColumn>
-                                <Width>3.66417cm</Width>
+                                <Width>1.99762cm</Width>
                               </TablixColumn>
                             </TablixColumns>
                             <TablixRows>
@@ -70,6 +82,7 @@
                                                 <Value>受注日</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <FontWeight>Bold</FontWeight>
                                                   <Language>ja-JP</Language>
                                                 </Style>
@@ -102,6 +115,7 @@
                                                 <Value>県別</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <FontWeight>Bold</FontWeight>
                                                   <Language>ja-JP</Language>
                                                 </Style>
@@ -124,6 +138,204 @@
                                   </TablixCell>
                                   <TablixCell>
                                     <CellContents>
+                                      <Textbox Name="Textbox76">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>店番</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox76</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox80">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>店名</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox80</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox82">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>社内伝番</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox82</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox84">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>最大行数</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox84</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox86">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>行数</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox86</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox88">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>商品コード</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox88</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
                                       <Textbox Name="Textbox90">
                                         <CanGrow>true</CanGrow>
                                         <KeepTogether>true</KeepTogether>
@@ -134,6 +346,7 @@
                                                 <Value>品名</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <FontWeight>Bold</FontWeight>
                                                   <Language>ja-JP</Language>
                                                 </Style>
@@ -166,6 +379,7 @@
                                                 <Value>規格</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <FontWeight>Bold</FontWeight>
                                                   <Language>ja-JP</Language>
                                                 </Style>
@@ -188,6 +402,39 @@
                                   </TablixCell>
                                   <TablixCell>
                                     <CellContents>
+                                      <Textbox Name="Textbox94">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>伝票番号</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox94</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
                                       <Textbox Name="Textbox96">
                                         <CanGrow>true</CanGrow>
                                         <KeepTogether>true</KeepTogether>
@@ -198,6 +445,7 @@
                                                 <Value>口数</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <FontWeight>Bold</FontWeight>
                                                   <Language>ja-JP</Language>
                                                 </Style>
@@ -230,6 +478,7 @@
                                                 <Value>発単</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <FontWeight>Bold</FontWeight>
                                                   <Language>ja-JP</Language>
                                                 </Style>
@@ -262,6 +511,7 @@
                                                 <Value>合計数量</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <FontWeight>Bold</FontWeight>
                                                   <Language>ja-JP</Language>
                                                 </Style>
@@ -284,70 +534,6 @@
                                   </TablixCell>
                                   <TablixCell>
                                     <CellContents>
-                                      <Textbox Name="Textbox5">
-                                        <CanGrow>true</CanGrow>
-                                        <KeepTogether>true</KeepTogether>
-                                        <Paragraphs>
-                                          <Paragraph>
-                                            <TextRuns>
-                                              <TextRun>
-                                                <Value>社内伝番</Value>
-                                                <Style>
-                                                  <FontFamily>MS PGothic</FontFamily>
-                                                  <FontWeight>Bold</FontWeight>
-                                                  <Language>ja-JP</Language>
-                                                </Style>
-                                              </TextRun>
-                                            </TextRuns>
-                                            <Style>
-                                              <TextAlign>Center</TextAlign>
-                                            </Style>
-                                          </Paragraph>
-                                        </Paragraphs>
-                                        <rd:DefaultName>Textbox5</rd:DefaultName>
-                                        <Style>
-                                          <Border>
-                                            <Style>Solid</Style>
-                                          </Border>
-                                          <VerticalAlign>Middle</VerticalAlign>
-                                        </Style>
-                                      </Textbox>
-                                    </CellContents>
-                                  </TablixCell>
-                                  <TablixCell>
-                                    <CellContents>
-                                      <Textbox Name="Textbox1">
-                                        <CanGrow>true</CanGrow>
-                                        <KeepTogether>true</KeepTogether>
-                                        <Paragraphs>
-                                          <Paragraph>
-                                            <TextRuns>
-                                              <TextRun>
-                                                <Value>伝票番号</Value>
-                                                <Style>
-                                                  <FontFamily>MS PGothic</FontFamily>
-                                                  <FontWeight>Bold</FontWeight>
-                                                  <Language>ja-JP</Language>
-                                                </Style>
-                                              </TextRun>
-                                            </TextRuns>
-                                            <Style>
-                                              <TextAlign>Center</TextAlign>
-                                            </Style>
-                                          </Paragraph>
-                                        </Paragraphs>
-                                        <rd:DefaultName>Textbox1</rd:DefaultName>
-                                        <Style>
-                                          <Border>
-                                            <Style>Solid</Style>
-                                          </Border>
-                                          <VerticalAlign>Middle</VerticalAlign>
-                                        </Style>
-                                      </Textbox>
-                                    </CellContents>
-                                  </TablixCell>
-                                  <TablixCell>
-                                    <CellContents>
                                       <Textbox Name="Textbox102">
                                         <CanGrow>true</CanGrow>
                                         <KeepTogether>true</KeepTogether>
@@ -358,6 +544,7 @@
                                                 <Value>配送担当</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <FontWeight>Bold</FontWeight>
                                                   <Language>ja-JP</Language>
                                                 </Style>
@@ -378,42 +565,10 @@
                                       </Textbox>
                                     </CellContents>
                                   </TablixCell>
-                                  <TablixCell>
-                                    <CellContents>
-                                      <Textbox Name="Textbox3">
-                                        <CanGrow>true</CanGrow>
-                                        <KeepTogether>true</KeepTogether>
-                                        <Paragraphs>
-                                          <Paragraph>
-                                            <TextRuns>
-                                              <TextRun>
-                                                <Value>備考</Value>
-                                                <Style>
-                                                  <FontFamily>MS PGothic</FontFamily>
-                                                  <FontWeight>Bold</FontWeight>
-                                                  <Language>ja-JP</Language>
-                                                </Style>
-                                              </TextRun>
-                                            </TextRuns>
-                                            <Style>
-                                              <TextAlign>Center</TextAlign>
-                                            </Style>
-                                          </Paragraph>
-                                        </Paragraphs>
-                                        <rd:DefaultName>Textbox3</rd:DefaultName>
-                                        <Style>
-                                          <Border>
-                                            <Style>Solid</Style>
-                                          </Border>
-                                          <VerticalAlign>Middle</VerticalAlign>
-                                        </Style>
-                                      </Textbox>
-                                    </CellContents>
-                                  </TablixCell>
                                 </TablixCells>
                               </TablixRow>
                               <TablixRow>
-                                <Height>0.76479cm</Height>
+                                <Height>0.87062cm</Height>
                                 <TablixCells>
                                   <TablixCell>
                                     <CellContents>
@@ -427,6 +582,7 @@
                                                 <Value>=Fields!発注日.Value</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <Format>d</Format>
                                                   <Language>ja-JP</Language>
                                                 </Style>
@@ -459,6 +615,7 @@
                                                 <Value>=Fields!県別.Value</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <Language>ja-JP</Language>
                                                 </Style>
                                               </TextRun>
@@ -480,6 +637,198 @@
                                   </TablixCell>
                                   <TablixCell>
                                     <CellContents>
+                                      <Textbox Name="店舗コード">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!店舗コード.Value</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>店舗コード</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="店舗名漢字">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!店舗名漢字.Value</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>店舗名漢字</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="社内伝番">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!社内伝番.Value</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>社内伝番</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="最大行数">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!最大行数.Value</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>最大行数</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="行数">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!行数.Value</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>行数</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="商品コード">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!商品コード.Value</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>商品コード</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
                                       <Textbox Name="品名漢字">
                                         <CanGrow>true</CanGrow>
                                         <KeepTogether>true</KeepTogether>
@@ -490,6 +839,7 @@
                                                 <Value>=Fields!品名漢字.Value</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <Language>ja-JP</Language>
                                                 </Style>
                                               </TextRun>
@@ -521,6 +871,7 @@
                                                 <Value>=Fields!規格名漢字.Value</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <Language>ja-JP</Language>
                                                 </Style>
                                               </TextRun>
@@ -542,6 +893,38 @@
                                   </TablixCell>
                                   <TablixCell>
                                     <CellContents>
+                                      <Textbox Name="Textbox95">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!伝票番号.Value</Value>
+                                                <Style>
+                                                  <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
+                                                  <Language>ja-JP</Language>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox95</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
                                       <Textbox Name="納品口数">
                                         <CanGrow>true</CanGrow>
                                         <KeepTogether>true</KeepTogether>
@@ -552,6 +935,7 @@
                                                 <Value>=Fields!納品口数.Value</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <Language>ja-JP</Language>
                                                 </Style>
                                               </TextRun>
@@ -573,16 +957,17 @@
                                   </TablixCell>
                                   <TablixCell>
                                     <CellContents>
-                                      <Textbox Name="最小発注単位数量">
+                                      <Textbox Name="口数1">
                                         <CanGrow>true</CanGrow>
                                         <KeepTogether>true</KeepTogether>
                                         <Paragraphs>
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value>=Fields!最小発注単位数量.Value</Value>
+                                                <Value>=Fields!口数.Value</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <Language>ja-JP</Language>
                                                 </Style>
                                               </TextRun>
@@ -592,7 +977,7 @@
                                             </Style>
                                           </Paragraph>
                                         </Paragraphs>
-                                        <rd:DefaultName>最小発注単位数量</rd:DefaultName>
+                                        <rd:DefaultName>口数1</rd:DefaultName>
                                         <Style>
                                           <Border>
                                             <Style>Solid</Style>
@@ -614,6 +999,7 @@
                                                 <Value>=Fields!実際出荷数量.Value</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <Language>ja-JP</Language>
                                                 </Style>
                                               </TextRun>
@@ -635,68 +1021,6 @@
                                   </TablixCell>
                                   <TablixCell>
                                     <CellContents>
-                                      <Textbox Name="社内伝番">
-                                        <CanGrow>true</CanGrow>
-                                        <KeepTogether>true</KeepTogether>
-                                        <Paragraphs>
-                                          <Paragraph>
-                                            <TextRuns>
-                                              <TextRun>
-                                                <Value>=Fields!社内伝番.Value</Value>
-                                                <Style>
-                                                  <FontFamily>MS PGothic</FontFamily>
-                                                  <Language>ja-JP</Language>
-                                                </Style>
-                                              </TextRun>
-                                            </TextRuns>
-                                            <Style>
-                                              <TextAlign>Center</TextAlign>
-                                            </Style>
-                                          </Paragraph>
-                                        </Paragraphs>
-                                        <rd:DefaultName>社内伝番</rd:DefaultName>
-                                        <Style>
-                                          <Border>
-                                            <Style>Solid</Style>
-                                          </Border>
-                                          <VerticalAlign>Middle</VerticalAlign>
-                                        </Style>
-                                      </Textbox>
-                                    </CellContents>
-                                  </TablixCell>
-                                  <TablixCell>
-                                    <CellContents>
-                                      <Textbox Name="伝票番号">
-                                        <CanGrow>true</CanGrow>
-                                        <KeepTogether>true</KeepTogether>
-                                        <Paragraphs>
-                                          <Paragraph>
-                                            <TextRuns>
-                                              <TextRun>
-                                                <Value>=Fields!伝票番号.Value</Value>
-                                                <Style>
-                                                  <FontFamily>MS PGothic</FontFamily>
-                                                  <Language>ja-JP</Language>
-                                                </Style>
-                                              </TextRun>
-                                            </TextRuns>
-                                            <Style>
-                                              <TextAlign>Center</TextAlign>
-                                            </Style>
-                                          </Paragraph>
-                                        </Paragraphs>
-                                        <rd:DefaultName>伝票番号</rd:DefaultName>
-                                        <Style>
-                                          <Border>
-                                            <Style>Solid</Style>
-                                          </Border>
-                                          <VerticalAlign>Middle</VerticalAlign>
-                                        </Style>
-                                      </Textbox>
-                                    </CellContents>
-                                  </TablixCell>
-                                  <TablixCell>
-                                    <CellContents>
                                       <Textbox Name="実際配送担当">
                                         <CanGrow>true</CanGrow>
                                         <KeepTogether>true</KeepTogether>
@@ -707,6 +1031,7 @@
                                                 <Value>=Fields!実際配送担当.Value</Value>
                                                 <Style>
                                                   <FontFamily>MS PGothic</FontFamily>
+                                                  <FontSize>12pt</FontSize>
                                                   <Language>ja-JP</Language>
                                                 </Style>
                                               </TextRun>
@@ -717,37 +1042,6 @@
                                           </Paragraph>
                                         </Paragraphs>
                                         <rd:DefaultName>実際配送担当</rd:DefaultName>
-                                        <Style>
-                                          <Border>
-                                            <Style>Solid</Style>
-                                          </Border>
-                                          <VerticalAlign>Middle</VerticalAlign>
-                                        </Style>
-                                      </Textbox>
-                                    </CellContents>
-                                  </TablixCell>
-                                  <TablixCell>
-                                    <CellContents>
-                                      <Textbox Name="備考">
-                                        <CanGrow>true</CanGrow>
-                                        <KeepTogether>true</KeepTogether>
-                                        <Paragraphs>
-                                          <Paragraph>
-                                            <TextRuns>
-                                              <TextRun>
-                                                <Value>=Fields!備考.Value</Value>
-                                                <Style>
-                                                  <FontFamily>MS PGothic</FontFamily>
-                                                  <Language>ja-JP</Language>
-                                                </Style>
-                                              </TextRun>
-                                            </TextRuns>
-                                            <Style>
-                                              <TextAlign>Center</TextAlign>
-                                            </Style>
-                                          </Paragraph>
-                                        </Paragraphs>
-                                        <rd:DefaultName>備考</rd:DefaultName>
                                         <Style>
                                           <Border>
                                             <Style>Solid</Style>
@@ -774,6 +1068,10 @@
                               <TablixMember />
                               <TablixMember />
                               <TablixMember />
+                              <TablixMember />
+                              <TablixMember />
+                              <TablixMember />
+                              <TablixMember />
                             </TablixMembers>
                           </TablixColumnHierarchy>
                           <TablixRowHierarchy>
@@ -788,9 +1086,8 @@
                           </TablixRowHierarchy>
                           <DataSetName>ShippingItems</DataSetName>
                           <Top>1.5875cm</Top>
-                          <Left>0.3175cm</Left>
-                          <Height>1.74125cm</Height>
-                          <Width>28.18656cm</Width>
+                          <Height>1.84708cm</Height>
+                          <Width>28.83642cm</Width>
                           <Style>
                             <Border>
                               <Style>Solid</Style>
@@ -831,7 +1128,6 @@
                                   <Value>="(" &amp; First(Fields!店舗コード.Value) &amp; ")" &amp; " " &amp; First(Fields!店舗名漢字.Value) &amp; First(Fields!納品場所名漢字.Value)</Value>
                                   <Style>
                                     <FontFamily>MS PGothic</FontFamily>
-                                    <FontSize>14pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -840,9 +1136,9 @@
                           </Paragraphs>
                           <rd:DefaultName>店舗名漢字1</rd:DefaultName>
                           <Top>0.57891cm</Top>
-                          <Left>1.49614cm</Left>
+                          <Left>1.19627cm</Left>
                           <Height>0.6cm</Height>
-                          <Width>5.35221cm</Width>
+                          <Width>4.77013cm</Width>
                           <ZIndex>1</ZIndex>
                           <Style>
                             <Border>
@@ -858,7 +1154,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <Textbox Name="Textbox8">
+                        <Textbox Name="Textbox5">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -868,7 +1164,7 @@
                                   <Value>店名</Value>
                                   <Style>
                                     <FontFamily>MS PGothic</FontFamily>
-                                    <FontSize>14pt</FontSize>
+                                    <FontSize>12pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -878,15 +1174,17 @@
                           </Paragraphs>
                           <rd:DefaultName>Textbox5</rd:DefaultName>
                           <Top>0.57891cm</Top>
-                          <Left>0.3175cm</Left>
                           <Height>0.6cm</Height>
-                          <Width>1.10808cm</Width>
+                          <Width>1.19627cm</Width>
                           <ZIndex>2</ZIndex>
                           <Style>
                             <Border>
                               <Style>None</Style>
                             </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
                       </ReportItems>
@@ -921,10 +1219,7 @@
         </TablixRowHierarchy>
         <DataSetName>ShippingItems</DataSetName>
         <Height>4.06958cm</Height>
-        <Width>28.50407cm</Width>
-        <Visibility>
-          <Hidden>=CountRows("ShippingItems") =0</Hidden>
-        </Visibility>
+        <Width>29.10105cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -935,12 +1230,12 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>28.50407cm</Width>
+              <Width>29.10105cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>4.20188cm</Height>
+              <Height>3.99021cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -952,16 +1247,37 @@
                               <TablixBody>
                                 <TablixColumns>
                                   <TablixColumn>
-                                    <Width>2.42916cm</Width>
+                                    <Width>3.04999cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
                                     <Width>1.619cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>5.43695cm</Width>
+                                    <Width>1.29741cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>4.81202cm</Width>
+                                    <Width>1.91824cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>1.93117cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>1.15095cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>1.03221cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>2.07699cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>3.77033cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>3.60849cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>1.97116cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
                                     <Width>1.08449cm</Width>
@@ -970,19 +1286,10 @@
                                     <Width>0.96575cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>1.6272cm</Width>
+                                    <Width>1.36262cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>1.99729cm</Width>
-                                  </TablixColumn>
-                                  <TablixColumn>
-                                    <Width>1.865cm</Width>
-                                  </TablixColumn>
-                                  <TablixColumn>
-                                    <Width>2.68554cm</Width>
-                                  </TablixColumn>
-                                  <TablixColumn>
-                                    <Width>3.66417cm</Width>
+                                    <Width>1.99762cm</Width>
                                   </TablixColumn>
                                 </TablixColumns>
                                 <TablixRows>
@@ -1001,6 +1308,7 @@
                                                     <Value>受注日</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <FontWeight>Bold</FontWeight>
                                                       <Language>ja-JP</Language>
                                                     </Style>
@@ -1033,6 +1341,7 @@
                                                     <Value>県別</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <FontWeight>Bold</FontWeight>
                                                       <Language>ja-JP</Language>
                                                     </Style>
@@ -1055,6 +1364,204 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
+                                          <Textbox Name="Textbox77">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>店番</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox76</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox81">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>店名</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox80</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox83">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>社内伝番</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox82</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox85">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>最大行数</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox84</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox87">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>行数</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox86</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Textbox89">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>商品コード</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox88</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
                                           <Textbox Name="Textbox91">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
@@ -1065,6 +1572,7 @@
                                                     <Value>品名</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <FontWeight>Bold</FontWeight>
                                                       <Language>ja-JP</Language>
                                                     </Style>
@@ -1097,6 +1605,7 @@
                                                     <Value>規格</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <FontWeight>Bold</FontWeight>
                                                       <Language>ja-JP</Language>
                                                     </Style>
@@ -1119,6 +1628,39 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
+                                          <Textbox Name="Textbox97">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>伝票番号</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox94</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
                                           <Textbox Name="Textbox99">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
@@ -1129,6 +1671,7 @@
                                                     <Value>口数</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <FontWeight>Bold</FontWeight>
                                                       <Language>ja-JP</Language>
                                                     </Style>
@@ -1161,6 +1704,7 @@
                                                     <Value>発単</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <FontWeight>Bold</FontWeight>
                                                       <Language>ja-JP</Language>
                                                     </Style>
@@ -1193,6 +1737,7 @@
                                                     <Value>合計数量</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <FontWeight>Bold</FontWeight>
                                                       <Language>ja-JP</Language>
                                                     </Style>
@@ -1215,70 +1760,6 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="Textbox11">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>社内伝番</Value>
-                                                    <Style>
-                                                      <FontFamily>MS PGothic</FontFamily>
-                                                      <FontWeight>Bold</FontWeight>
-                                                      <Language>ja-JP</Language>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Center</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox11</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <VerticalAlign>Middle</VerticalAlign>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox7">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>伝票番号</Value>
-                                                    <Style>
-                                                      <FontFamily>MS PGothic</FontFamily>
-                                                      <FontWeight>Bold</FontWeight>
-                                                      <Language>ja-JP</Language>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Center</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox7</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <VerticalAlign>Middle</VerticalAlign>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
                                           <Textbox Name="Textbox105">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
@@ -1289,6 +1770,7 @@
                                                     <Value>配送担当</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <FontWeight>Bold</FontWeight>
                                                       <Language>ja-JP</Language>
                                                     </Style>
@@ -1309,42 +1791,10 @@
                                           </Textbox>
                                         </CellContents>
                                       </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="Textbox9">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>備考</Value>
-                                                    <Style>
-                                                      <FontFamily>MS PGothic</FontFamily>
-                                                      <FontWeight>Bold</FontWeight>
-                                                      <Language>ja-JP</Language>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Center</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>Textbox9</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <VerticalAlign>Middle</VerticalAlign>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
                                     </TablixCells>
                                   </TablixRow>
                                   <TablixRow>
-                                    <Height>0.76479cm</Height>
+                                    <Height>0.87062cm</Height>
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
@@ -1358,6 +1808,7 @@
                                                     <Value>=Fields!発注日.Value</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <Format>d</Format>
                                                       <Language>ja-JP</Language>
                                                     </Style>
@@ -1390,6 +1841,7 @@
                                                     <Value>=Fields!県別.Value</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <Language>ja-JP</Language>
                                                     </Style>
                                                   </TextRun>
@@ -1415,6 +1867,198 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
+                                          <Textbox Name="店舗コード2">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!店舗コード.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>店舗コード</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="店舗名漢字2">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!店舗名漢字.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>店舗名漢字</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="社内伝番2">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!社内伝番.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>社内伝番</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="最大行数2">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!最大行数.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>最大行数</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="行数2">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!行数.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>行数</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="商品コード2">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!商品コード.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>商品コード</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
                                           <Textbox Name="品名漢字2">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
@@ -1425,6 +2069,7 @@
                                                     <Value>=Fields!品名漢字.Value</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <Language>ja-JP</Language>
                                                     </Style>
                                                   </TextRun>
@@ -1456,6 +2101,7 @@
                                                     <Value>=Fields!規格名漢字.Value</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <Language>ja-JP</Language>
                                                     </Style>
                                                   </TextRun>
@@ -1478,6 +2124,38 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
+                                          <Textbox Name="Textbox106">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!伝票番号.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
+                                                      <Language>ja-JP</Language>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Center</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox95</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <VerticalAlign>Middle</VerticalAlign>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
                                           <Textbox Name="納品口数2">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
@@ -1488,6 +2166,7 @@
                                                     <Value>=Fields!納品口数.Value</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <Language>ja-JP</Language>
                                                     </Style>
                                                   </TextRun>
@@ -1516,9 +2195,10 @@
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!最小発注単位数量.Value</Value>
+                                                    <Value>=Fields!口数.Value</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <Language>ja-JP</Language>
                                                     </Style>
                                                   </TextRun>
@@ -1536,7 +2216,6 @@
                                               <VerticalAlign>Middle</VerticalAlign>
                                             </Style>
                                           </Textbox>
-                                          <rd:Selected>true</rd:Selected>
                                         </CellContents>
                                       </TablixCell>
                                       <TablixCell>
@@ -1551,6 +2230,7 @@
                                                     <Value>=Fields!実際出荷数量.Value</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <Language>ja-JP</Language>
                                                     </Style>
                                                   </TextRun>
@@ -1572,68 +2252,6 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="社内伝番1">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!社内伝番.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>MS PGothic</FontFamily>
-                                                      <Language>ja-JP</Language>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Center</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>社内伝番1</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <VerticalAlign>Middle</VerticalAlign>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="伝票番号1">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!伝票番号.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>MS PGothic</FontFamily>
-                                                      <Language>ja-JP</Language>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Center</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>伝票番号1</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <VerticalAlign>Middle</VerticalAlign>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
                                           <Textbox Name="実際配送担当2">
                                             <CanGrow>true</CanGrow>
                                             <KeepTogether>true</KeepTogether>
@@ -1644,6 +2262,7 @@
                                                     <Value>=Fields!実際配送担当.Value</Value>
                                                     <Style>
                                                       <FontFamily>MS PGothic</FontFamily>
+                                                      <FontSize>12pt</FontSize>
                                                       <Language>ja-JP</Language>
                                                     </Style>
                                                   </TextRun>
@@ -1654,37 +2273,6 @@
                                               </Paragraph>
                                             </Paragraphs>
                                             <rd:DefaultName>実際配送担当</rd:DefaultName>
-                                            <Style>
-                                              <Border>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <VerticalAlign>Middle</VerticalAlign>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="備考1">
-                                            <CanGrow>true</CanGrow>
-                                            <KeepTogether>true</KeepTogether>
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>=Fields!備考.Value</Value>
-                                                    <Style>
-                                                      <FontFamily>MS PGothic</FontFamily>
-                                                      <Language>ja-JP</Language>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style>
-                                                  <TextAlign>Center</TextAlign>
-                                                </Style>
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <rd:DefaultName>備考1</rd:DefaultName>
                                             <Style>
                                               <Border>
                                                 <Style>Solid</Style>
@@ -1711,6 +2299,10 @@
                                   <TablixMember />
                                   <TablixMember />
                                   <TablixMember />
+                                  <TablixMember />
+                                  <TablixMember />
+                                  <TablixMember />
+                                  <TablixMember />
                                 </TablixMembers>
                               </TablixColumnHierarchy>
                               <TablixRowHierarchy>
@@ -1723,11 +2315,10 @@
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
-                              <DataSetName>ShippingRCItems</DataSetName>
+                              <DataSetName>ShippingItems</DataSetName>
                               <Top>1.19062cm</Top>
-                              <Left>0.3175cm</Left>
-                              <Height>1.74125cm</Height>
-                              <Width>28.18657cm</Width>
+                              <Height>1.84708cm</Height>
+                              <Width>28.83642cm</Width>
                               <Style>
                                 <Border>
                                   <Style>Solid</Style>
@@ -1768,7 +2359,6 @@
                                       <Value>="(" &amp; First(Fields!店舗コード.Value) &amp; ")" &amp; " " &amp; First(Fields!店舗名漢字.Value) &amp; First(Fields!納品場所名漢字.Value)</Value>
                                       <Style>
                                         <FontFamily>MS Gothic</FontFamily>
-                                        <FontSize>14pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -1777,9 +2367,9 @@
                               </Paragraphs>
                               <rd:DefaultName>店舗名漢字1</rd:DefaultName>
                               <Top>0.18204cm</Top>
-                              <Left>1.54905cm</Left>
+                              <Left>1.23155cm</Left>
                               <Height>0.6cm</Height>
-                              <Width>5.31693cm</Width>
+                              <Width>4.73485cm</Width>
                               <ZIndex>1</ZIndex>
                               <Style>
                                 <Border>
@@ -1795,7 +2385,7 @@
                                 <PaddingBottom>2pt</PaddingBottom>
                               </Style>
                             </Textbox>
-                            <Textbox Name="Textbox10">
+                            <Textbox Name="Textbox6">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
                               <Paragraphs>
@@ -1805,7 +2395,7 @@
                                       <Value>店名</Value>
                                       <Style>
                                         <FontFamily>MS PGothic</FontFamily>
-                                        <FontSize>14pt</FontSize>
+                                        <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -1815,22 +2405,24 @@
                               </Paragraphs>
                               <rd:DefaultName>Textbox5</rd:DefaultName>
                               <Top>0.18204cm</Top>
-                              <Left>0.3175cm</Left>
                               <Height>0.6cm</Height>
-                              <Width>1.16099cm</Width>
+                              <Width>1.19627cm</Width>
                               <ZIndex>2</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>None</Style>
                                 </Border>
-                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>2pt</PaddingLeft>
+                                <PaddingRight>2pt</PaddingRight>
+                                <PaddingTop>2pt</PaddingTop>
+                                <PaddingBottom>2pt</PaddingBottom>
                               </Style>
                             </Textbox>
                           </ReportItems>
                           <KeepTogether>true</KeepTogether>
                           <Top>0.3175cm</Top>
-                          <Height>3.56688cm</Height>
-                          <Width>28.50407cm</Width>
+                          <Height>3.67271cm</Height>
+                          <Width>29.10105cm</Width>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -1871,13 +2463,10 @@
         <PageBreak>
           <BreakLocation>Start</BreakLocation>
         </PageBreak>
-        <Top>4.15578cm</Top>
-        <Height>4.20188cm</Height>
-        <Width>28.50407cm</Width>
+        <Top>4.79079cm</Top>
+        <Height>3.99021cm</Height>
+        <Width>29.10105cm</Width>
         <ZIndex>1</ZIndex>
-        <Visibility>
-          <Hidden>=CountRows("ShippingRCItems")=0</Hidden>
-        </Visibility>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1885,10 +2474,10 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>3.29042in</Height>
+    <Height>3.45709in</Height>
     <Style />
   </Body>
-  <Width>11.32624in</Width>
+  <Width>11.45711in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

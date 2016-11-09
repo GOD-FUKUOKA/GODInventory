@@ -680,8 +680,11 @@ namespace GODInventory.ViewModel
             return count;
 
         }
-        public static int NotifyShipper(GODDbContext ctx, List<int> orderIds, string shipperName)
+        public static int NotifyShipper(GODDbContext ctx, List<v_pendingorder> pendingOrders, string shipperName)
         {
+            var orderIds = pendingOrders.Select(order => order.id受注データ).ToList();
+            List<t_maruken_trans> trans = new List<t_maruken_trans>();
+
             string sql = "SELECT MAX(t_orderdata.`社内伝番`) FROM t_orderdata";
             int max = Convert.ToInt32(ctx.Database.SqlQuery<int?>(sql).FirstOrDefault());
             //max = Convert.ToInt32(max);
@@ -713,12 +716,62 @@ namespace GODInventory.ViewModel
                     o.行数 = Convert.ToInt16(j);
                     o.最大行数 = Convert.ToInt16(gos.Count());
                 }
+                //SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`社内伝番`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `納品口数`, sum(`重量`) as `実際出荷数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
+                //FROM t_orderdata
+                //WHERE `Status`={0} AND `ジャンル`= 1003 AND `社内伝番` >0 AND `実際配送担当` = '丸健'
+                //GROUP BY `社内伝番`
+                t_maruken_trans temp = new t_maruken_trans();
+                var order = gos.First();
+                temp.OrderId = order.id受注データ;
+                temp.受注日 = order.受注日;
+                temp.店舗コード = order.店舗コード;
+                temp.店舗名漢字 = order.店舗名漢字;
+                temp.伝票番号 = order.社内伝番;
+                temp.ジャンル = Convert.ToInt16(order.ジャンル);
+                temp.品名漢字 = "二次製品";
+                temp.規格名漢字 = "";
+                temp.口数 = gos.Count();
+                temp.発注数量 = gos.Sum(o => o.重量);
+                temp.重量 = gos.Sum(o => o.重量);
+                temp.実際配送担当 = order.実際配送担当;
+                temp.県別 = order.県別;
+                temp.納品指示 = order.納品指示;
+                temp.備考 = order.備考;
+                trans.Add(temp);
             }
+
+            var normalOrders = orders.Where(o => !(o.実際配送担当 == "丸健" && o.ジャンル == 1003));
+
+            foreach (var o in normalOrders)
+            {
+
+                t_maruken_trans temp = new t_maruken_trans();
+
+                temp.OrderId = o.id受注データ;
+                temp.受注日 = o.受注日;
+                temp.店舗コード = o.店舗コード;
+                temp.店舗名漢字 = o.店舗名漢字;
+                temp.伝票番号 = o.伝票番号;
+                temp.ジャンル = Convert.ToInt16(o.ジャンル);
+                temp.品名漢字 = o.品名漢字;
+                temp.規格名漢字 = o.規格名漢字;
+                temp.口数 = o.納品口数;
+                temp.発注数量 = o.実際出荷数量;
+                temp.重量 = o.重量;
+                temp.実際配送担当 = o.実際配送担当;
+                temp.県別 = o.県別;
+                temp.納品指示 = o.納品指示;
+                temp.備考 = o.備考;
+                trans.Add(temp);
+            }
+
+            ctx.t_maruken_trans.AddRange(trans);
+
+            sql = String.Format("UPDATE t_orderdata SET `Status`={3}, `配送担当受信`=TRUE, `配送担当受信時刻`= NOW() WHERE `Status`={0} AND `実際配送担当`='{1}' AND `id受注データ` in ({2});", (int)OrderStatus.NotifyShipper, shipperName, String.Join(",", orderIds.ToArray()), (int)OrderStatus.WaitToShip);
+
+            count = ctx.Database.ExecuteSqlCommand(sql); 
+            
             ctx.SaveChanges();
-
-            sql = String.Format( "UPDATE t_orderdata SET `Status`={3}, `配送担当受信`=TRUE, `配送担当受信時刻`= NOW() WHERE `Status`={0} AND `実際配送担当`='{1}' AND `id受注データ` in ({2});", (int)OrderStatus.NotifyShipper, shipperName, String.Join(",", orderIds.ToArray()), (int)OrderStatus.WaitToShip);
-
-            count = ctx.Database.ExecuteSqlCommand(sql);
 
             return count;
 
@@ -732,5 +785,77 @@ namespace GODInventory.ViewModel
                           select o ).ToList();
             return orders;
         }
+
+        public static void ChangeOrderQuantity(int orderId, int quantity)
+        {
+            using (var ctx = new GODDbContext())
+            {
+            }
+        }
+
+        public static void CancelOrder(List<v_pendingorder> pendingOrders)
+        {
+            using (var ctx = new GODDbContext())
+            {
+                var orderIds = pendingOrders.Select(o => o.id受注データ);
+
+                var orderList = (from t_orderdata o in ctx.t_orderdata
+                                 where orderIds.Contains(o.id受注データ)
+                                 select o).ToList();
+                var stockrecList = (from t_stockrec s in ctx.t_stockrec
+                                    where orderIds.Contains(s.OrderId)
+                                    select s).ToList();
+                var marukenTransList = (from t_maruken_trans s in ctx.t_maruken_trans
+                                        where orderIds.Contains(s.OrderId)
+                                        select s).ToList();
+
+                foreach (var order in orderList)
+                {
+                    //二次制品订单？
+                    order.キャンセル = "yes";
+                    order.キャンセル時刻 = DateTime.Now;
+                    order.Status = OrderStatus.Cancelled;
+                }
+
+                ctx.t_stockrec.RemoveRange(stockrecList);
+                ctx.t_maruken_trans.RemoveRange(marukenTransList);
+                ctx.SaveChanges();
+                OrderSqlHelper.UpdateStockState(ctx, stockrecList);
+            }
+        }
+
+        public static void RollbackOrder(List<v_pendingorder> pendingOrders) 
+        {
+            using (var ctx = new GODDbContext())
+            {
+                var orderIds = pendingOrders.Select(o => o.id受注データ);
+
+                var orderList = (from t_orderdata o in ctx.t_orderdata
+                                 where orderIds.Contains(o.id受注データ)
+                                 select o).ToList();
+                var stockrecList = (from t_stockrec s in ctx.t_stockrec
+                                    where orderIds.Contains(s.OrderId)
+                                    select s).ToList();
+                var marukenTransList = (from t_maruken_trans s in ctx.t_maruken_trans
+                                        where orderIds.Contains(s.OrderId)
+                                        select s).ToList();
+
+                foreach (var order in orderList)
+                {
+                    //二次制品订单？
+                    order.社内伝番 = 0;
+                    order.一旦保留 = true;
+                    order.配送担当受信 = false;
+                    order.配送担当受信時刻 = null;
+                    order.Status = OrderStatus.Pending;
+                }
+
+                ctx.t_stockrec.RemoveRange(stockrecList);
+                ctx.t_maruken_trans.RemoveRange(marukenTransList);
+                ctx.SaveChanges();
+                OrderSqlHelper.UpdateStockState(ctx, stockrecList);
+            }
+        }
+
     }
 }

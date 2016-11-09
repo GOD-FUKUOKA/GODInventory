@@ -48,7 +48,11 @@ namespace GODInventory.ViewModel
         }
 
         public static byte[] ConvertUtf8ToShiftJisBytes(string text) {
-
+            // generate asn, some filed may be null
+            if (text == null)
+            {
+                text = "";
+            }
             // Create two different encodings.
             Encoding shift_jis = Encoding.GetEncoding("shift_jis");
             Encoding utf8 = Encoding.UTF8;

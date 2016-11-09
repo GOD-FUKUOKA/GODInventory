@@ -32,6 +32,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.moveDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rollbackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -103,23 +104,31 @@
             this.contextMenuStrip1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.moveDownToolStripMenuItem,
-            this.editToolStripMenuItem});
+            this.editToolStripMenuItem,
+            this.rollbackToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
             // 
             // moveDownToolStripMenuItem
             // 
             this.moveDownToolStripMenuItem.Name = "moveDownToolStripMenuItem";
-            this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.moveDownToolStripMenuItem.Text = "配車表入れ";
             this.moveDownToolStripMenuItem.Click += new System.EventHandler(this.moveDownToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.editToolStripMenuItem.Text = "編集";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // rollbackToolStripMenuItem
+            // 
+            this.rollbackToolStripMenuItem.Name = "rollbackToolStripMenuItem";
+            this.rollbackToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.rollbackToolStripMenuItem.Text = "前の画面へ戻す";
+            this.rollbackToolStripMenuItem.Click += new System.EventHandler(this.rollbackToolStripMenuItem_Click);
             // 
             // bindingSource1
             // 
@@ -765,5 +774,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 原価金額_税抜_Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注区分Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column1;
+        private System.Windows.Forms.ToolStripMenuItem rollbackToolStripMenuItem;
     }
 }

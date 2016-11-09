@@ -208,7 +208,10 @@ namespace GODInventoryWinForm.Controls
             {
                 var order = cell.OwningRow.DataBoundItem as v_pendingorder;
                 order.実際出荷数量 = (int)cell.Value;
-                order.納品口数 = (int)order.実際出荷数量 / order.最小発注単位数量;
+                if (order.最小発注単位数量 > 0)
+                {
+                    order.納品口数 = (int)order.実際出荷数量 / order.最小発注単位数量;
+                }
             }
 
 
@@ -1047,10 +1050,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 ctx.t_stockrec.RemoveRange(stockrecList);
                 ctx.SaveChanges();
                 OrderSqlHelper.UpdateStockState(ctx, stockrecList);
-
             }
-
-
         }
 
         #endregion
@@ -1073,50 +1073,20 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             string shipperName = shipperComboBox.Text;
             for (int i = 0; i < dataGridView3.SelectedRows.Count; i++)
             {
-                var order = dataGridView3.SelectedRows[i].DataBoundItem as v_pendingorder;
-                orders.Add(order);
+                var order = dataGridView3.SelectedRows[i].DataBoundItem as v_pendingorder;               
+                orders.Add(order);                
             }
 
             if (orders.Count() > 0)
             {
-                List<t_maruken_trans> trans = new List<t_maruken_trans>();
-
-                foreach (var o in orders)
-                {
-
-                    t_maruken_trans temp = new t_maruken_trans();
-
-                    temp.OrderId = o.id受注データ;
-
-                    temp.受注日 = o.受注日;
-                    temp.店舗コード = o.店舗コード;
-                    temp.店舗名漢字 = o.店舗名漢字;
-                    temp.伝票番号 = o.伝票番号;
-                    temp.ジャンル = Convert.ToInt16(o.ジャンル);
-                    temp.品名漢字 = o.品名漢字;
-                    temp.規格名漢字 = o.規格名漢字;
-                    temp.口数 = o.口数;
-                    temp.発注数量 = o.発注数量;
-                    temp.重量 = o.重量;
-                    temp.実際配送担当 = o.実際配送担当;
-                    temp.県別 = o.県別;
-                    temp.納品指示 = o.納品指示;
-                    temp.備考 = o.備考;
-                    trans.Add(temp);
-
-                }
 
                 using (var ctx = new GODDbContext())
                 {
-                    var ids = orders.Select(order => order.id受注データ).ToList();
-                    ctx.t_maruken_trans.AddRange(trans);
-
-                    OrderSqlHelper.NotifyShipper(ctx, ids, shipperName);
-                    ctx.SaveChanges();
+                    OrderSqlHelper.NotifyShipper(ctx, orders, shipperName);
                 }
                 this.shipperOrderList.RemoveAll(o => orders.Contains(o));
                 this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName); ;
-                MessageBox.Show(String.Format(" {0} 件転送処理しました!", trans.Count));
+                MessageBox.Show(String.Format(" {0} 件転送処理しました!", orders.Count));
             }
 
         }

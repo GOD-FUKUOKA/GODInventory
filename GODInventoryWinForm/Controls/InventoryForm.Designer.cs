@@ -38,6 +38,10 @@
             this.warehouseComboBox = new System.Windows.Forms.ComboBox();
             this.manufacturerComboBox = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.genreComboBox = new System.Windows.Forms.ComboBox();
+            this.btprint = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.endDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,10 +52,6 @@
             this.jiHuaRuCunShuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qingDianColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chaZhiColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.genreComboBox = new System.Windows.Forms.ComboBox();
-            this.btprint = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.endDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,95 +171,6 @@
             this.dataGridView1.TabIndex = 38;
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             // 
-            // idColumn
-            // 
-            this.idColumn.DataPropertyName = "Id";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.idColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.idColumn.HeaderText = "序号";
-            this.idColumn.Name = "idColumn";
-            this.idColumn.ReadOnly = true;
-            this.idColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.idColumn.Width = 60;
-            // 
-            // 自社コード
-            // 
-            this.自社コード.DataPropertyName = "自社コード";
-            this.自社コード.HeaderText = "自社コード";
-            this.自社コード.Name = "自社コード";
-            this.自社コード.ReadOnly = true;
-            this.自社コード.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // 商品名
-            // 
-            this.商品名.DataPropertyName = "商品名";
-            this.商品名.HeaderText = "商品名";
-            this.商品名.Name = "商品名";
-            this.商品名.ReadOnly = true;
-            this.商品名.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.商品名.Width = 260;
-            // 
-            // 規格
-            // 
-            this.規格.DataPropertyName = "規格";
-            this.規格.HeaderText = "規格";
-            this.規格.Name = "規格";
-            this.規格.ReadOnly = true;
-            this.規格.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.規格.Width = 160;
-            // 
-            // yingYouKuCunShuColumn
-            // 
-            this.yingYouKuCunShuColumn.DataPropertyName = "yingYouKuCunShu";
-            this.yingYouKuCunShuColumn.HeaderText = "应有库存数量";
-            this.yingYouKuCunShuColumn.Name = "yingYouKuCunShuColumn";
-            this.yingYouKuCunShuColumn.ReadOnly = true;
-            this.yingYouKuCunShuColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.yingYouKuCunShuColumn.Width = 70;
-            // 
-            // daiFaHuoShuColumn
-            // 
-            this.daiFaHuoShuColumn.DataPropertyName = "daiFaHuoShu";
-            this.daiFaHuoShuColumn.HeaderText = "待发货数量";
-            this.daiFaHuoShuColumn.Name = "daiFaHuoShuColumn";
-            this.daiFaHuoShuColumn.ReadOnly = true;
-            this.daiFaHuoShuColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.daiFaHuoShuColumn.Width = 70;
-            // 
-            // shiJiKuCunShuColumn
-            // 
-            this.shiJiKuCunShuColumn.DataPropertyName = "shiJiKuCunShu";
-            this.shiJiKuCunShuColumn.HeaderText = "实际应有数量";
-            this.shiJiKuCunShuColumn.Name = "shiJiKuCunShuColumn";
-            this.shiJiKuCunShuColumn.ReadOnly = true;
-            this.shiJiKuCunShuColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.shiJiKuCunShuColumn.Width = 70;
-            // 
-            // jiHuaRuCunShuColumn
-            // 
-            this.jiHuaRuCunShuColumn.DataPropertyName = "jiHuaRuCunShu";
-            this.jiHuaRuCunShuColumn.HeaderText = "计划入库数量";
-            this.jiHuaRuCunShuColumn.Name = "jiHuaRuCunShuColumn";
-            this.jiHuaRuCunShuColumn.ReadOnly = true;
-            this.jiHuaRuCunShuColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.jiHuaRuCunShuColumn.Width = 70;
-            // 
-            // qingDianColumn
-            // 
-            this.qingDianColumn.DataPropertyName = "qingDianShu";
-            this.qingDianColumn.HeaderText = "清点数量";
-            this.qingDianColumn.Name = "qingDianColumn";
-            this.qingDianColumn.Width = 85;
-            // 
-            // chaZhiColumn
-            // 
-            this.chaZhiColumn.DataPropertyName = "chaZhi";
-            this.chaZhiColumn.HeaderText = "差値";
-            this.chaZhiColumn.Name = "chaZhiColumn";
-            this.chaZhiColumn.ReadOnly = true;
-            this.chaZhiColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.chaZhiColumn.Width = 70;
-            // 
             // genreComboBox
             // 
             this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -302,6 +213,95 @@
             this.endDateTimePicker1.Name = "endDateTimePicker1";
             this.endDateTimePicker1.Size = new System.Drawing.Size(159, 21);
             this.endDateTimePicker1.TabIndex = 3;
+            // 
+            // idColumn
+            // 
+            this.idColumn.DataPropertyName = "Id";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.idColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.idColumn.HeaderText = "序号";
+            this.idColumn.Name = "idColumn";
+            this.idColumn.ReadOnly = true;
+            this.idColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.idColumn.Width = 60;
+            // 
+            // 自社コード
+            // 
+            this.自社コード.DataPropertyName = "自社コード";
+            this.自社コード.HeaderText = "自社コード";
+            this.自社コード.Name = "自社コード";
+            this.自社コード.ReadOnly = true;
+            this.自社コード.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // 商品名
+            // 
+            this.商品名.DataPropertyName = "商品名";
+            this.商品名.HeaderText = "商品名";
+            this.商品名.Name = "商品名";
+            this.商品名.ReadOnly = true;
+            this.商品名.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.商品名.Width = 260;
+            // 
+            // 規格
+            // 
+            this.規格.DataPropertyName = "規格";
+            this.規格.HeaderText = "規格";
+            this.規格.Name = "規格";
+            this.規格.ReadOnly = true;
+            this.規格.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.規格.Width = 160;
+            // 
+            // yingYouKuCunShuColumn
+            // 
+            this.yingYouKuCunShuColumn.DataPropertyName = "yingYouKuCunShu";
+            this.yingYouKuCunShuColumn.HeaderText = "計画在庫数";
+            this.yingYouKuCunShuColumn.Name = "yingYouKuCunShuColumn";
+            this.yingYouKuCunShuColumn.ReadOnly = true;
+            this.yingYouKuCunShuColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.yingYouKuCunShuColumn.Width = 70;
+            // 
+            // daiFaHuoShuColumn
+            // 
+            this.daiFaHuoShuColumn.DataPropertyName = "daiFaHuoShu";
+            this.daiFaHuoShuColumn.HeaderText = "出荷待ち";
+            this.daiFaHuoShuColumn.Name = "daiFaHuoShuColumn";
+            this.daiFaHuoShuColumn.ReadOnly = true;
+            this.daiFaHuoShuColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.daiFaHuoShuColumn.Width = 70;
+            // 
+            // shiJiKuCunShuColumn
+            // 
+            this.shiJiKuCunShuColumn.DataPropertyName = "shiJiKuCunShu";
+            this.shiJiKuCunShuColumn.HeaderText = "現在在庫数";
+            this.shiJiKuCunShuColumn.Name = "shiJiKuCunShuColumn";
+            this.shiJiKuCunShuColumn.ReadOnly = true;
+            this.shiJiKuCunShuColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.shiJiKuCunShuColumn.Width = 70;
+            // 
+            // jiHuaRuCunShuColumn
+            // 
+            this.jiHuaRuCunShuColumn.DataPropertyName = "jiHuaRuCunShu";
+            this.jiHuaRuCunShuColumn.HeaderText = "入荷予定";
+            this.jiHuaRuCunShuColumn.Name = "jiHuaRuCunShuColumn";
+            this.jiHuaRuCunShuColumn.ReadOnly = true;
+            this.jiHuaRuCunShuColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.jiHuaRuCunShuColumn.Width = 70;
+            // 
+            // qingDianColumn
+            // 
+            this.qingDianColumn.DataPropertyName = "qingDianShu";
+            this.qingDianColumn.HeaderText = "実在庫";
+            this.qingDianColumn.Name = "qingDianColumn";
+            this.qingDianColumn.Width = 85;
+            // 
+            // chaZhiColumn
+            // 
+            this.chaZhiColumn.DataPropertyName = "chaZhi";
+            this.chaZhiColumn.HeaderText = "調整数量";
+            this.chaZhiColumn.Name = "chaZhiColumn";
+            this.chaZhiColumn.ReadOnly = true;
+            this.chaZhiColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.chaZhiColumn.Width = 70;
             // 
             // InventoryForm
             // 

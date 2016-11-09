@@ -276,6 +276,7 @@ namespace GODInventoryWinForm.Controls
                         order.実際出荷数量 = editOrderForm.Order.実際出荷数量;
                         order.納品口数 = editOrderForm.Order.納品口数;
                         order.重量 = editOrderForm.Order.重量;
+                        // 修正库存
                         dataGridView1.Refresh();
                     }
                     else
@@ -508,6 +509,68 @@ namespace GODInventoryWinForm.Controls
                     InitializeShipNOComboBox(shipNO);
                 }
             }
+        }
+
+
+        private void rollbackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int count = dataGridView1.SelectedRows.Count;
+            List<v_pendingorder> pendingOrders = new List<v_pendingorder>();
+            for (int i = 0; i < count; i++)
+            {
+                var row = dataGridView1.SelectedRows[i];
+                var order = row.DataBoundItem as v_pendingorder;
+                pendingOrders.Add(order);
+            }
+
+            if (pendingOrders.Count > 0)
+            {
+                RollbackOrder(pendingOrders);
+                RefreshWaitingOrderDataGridView();
+            }
+
+        }
+
+        private void RollbackOrder(List<v_pendingorder> pendingOrders)
+        {
+            using (var ctx = new GODDbContext())
+            {
+                var orderIds = pendingOrders.Select(o => o.id受注データ);
+
+                var orderList = (from t_orderdata o in ctx.t_orderdata
+                                 where orderIds.Contains(o.id受注データ)
+                                 select o).ToList();
+                var stockrecList = (from t_stockrec s in ctx.t_stockrec
+                                    where orderIds.Contains(s.OrderId)
+                                    select s).ToList();
+                var marukenTransList = (from t_maruken_trans s in ctx.t_maruken_trans
+                                        where orderIds.Contains(s.OrderId)
+                                        select s).ToList();
+
+                foreach (var order in orderList)
+                {
+                    //二次制品订单？
+                    order.社内伝番 = 0;
+                    order.一旦保留 = true;
+                    order.配送担当受信 = false;
+                    order.配送担当受信時刻 = null;
+                    order.Status = OrderStatus.Pending;
+                }
+
+                ctx.t_stockrec.RemoveRange(stockrecList);
+                ctx.t_maruken_trans.RemoveRange(marukenTransList);
+                ctx.SaveChanges();
+                OrderSqlHelper.UpdateStockState(ctx, stockrecList);
+            }
+        }
+
+        private void RefreshWaitingOrderDataGridView()
+        {
+            string shipNO = shipNOComboBox.Text;
+            string shipper = shipperComboBox.Text;
+            string county = countyComboBox1.Text;
+            string store = storeComboBox.Text;
+            InitializeDataSource(shipper, county, store, shipNO);
         }
     }
 }

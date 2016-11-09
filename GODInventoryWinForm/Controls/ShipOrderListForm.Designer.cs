@@ -30,19 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.納品日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.受注日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.店名Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.伝票番号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.品名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.納品口数Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.実際出荷数量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.重量Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.実際配送担当Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.県別Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.発注形態名称漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.backToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -52,6 +39,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.受注日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店名Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.伝票番号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.品名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品口数Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.実際出荷数量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.訂正理由区分Column = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.重量Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.実際配送担当Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.県別Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注形態名称漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -77,6 +78,7 @@
             this.規格名漢字Column1,
             this.納品口数Column1,
             this.実際出荷数量Column1,
+            this.訂正理由区分Column,
             this.重量Column2,
             this.実際配送担当Column1,
             this.県別Column1,
@@ -95,87 +97,6 @@
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
             // 
-            // 出荷日Column1
-            // 
-            this.出荷日Column1.DataPropertyName = "出荷日";
-            this.出荷日Column1.HeaderText = "出荷日";
-            this.出荷日Column1.Name = "出荷日Column1";
-            // 
-            // 納品日Column1
-            // 
-            this.納品日Column1.DataPropertyName = "納品日";
-            this.納品日Column1.HeaderText = "納品日";
-            this.納品日Column1.Name = "納品日Column1";
-            // 
-            // 受注日Column1
-            // 
-            this.受注日Column1.DataPropertyName = "受注日";
-            this.受注日Column1.HeaderText = "受注日";
-            this.受注日Column1.Name = "受注日Column1";
-            // 
-            // 店名Column1
-            // 
-            this.店名Column1.DataPropertyName = "店舗名漢字";
-            this.店名Column1.HeaderText = "店名";
-            this.店名Column1.Name = "店名Column1";
-            // 
-            // 伝票番号Column1
-            // 
-            this.伝票番号Column1.DataPropertyName = "伝票番号";
-            this.伝票番号Column1.HeaderText = "伝票番号";
-            this.伝票番号Column1.Name = "伝票番号Column1";
-            this.伝票番号Column1.ReadOnly = true;
-            // 
-            // 品名漢字Column1
-            // 
-            this.品名漢字Column1.DataPropertyName = "品名漢字";
-            this.品名漢字Column1.HeaderText = "品名";
-            this.品名漢字Column1.Name = "品名漢字Column1";
-            // 
-            // 規格名漢字Column1
-            // 
-            this.規格名漢字Column1.DataPropertyName = "規格名漢字";
-            this.規格名漢字Column1.HeaderText = "規格名";
-            this.規格名漢字Column1.Name = "規格名漢字Column1";
-            // 
-            // 納品口数Column1
-            // 
-            this.納品口数Column1.DataPropertyName = "納品口数";
-            this.納品口数Column1.HeaderText = "口数";
-            this.納品口数Column1.Name = "納品口数Column1";
-            // 
-            // 実際出荷数量Column1
-            // 
-            this.実際出荷数量Column1.DataPropertyName = "実際出荷数量";
-            this.実際出荷数量Column1.HeaderText = "発注数量";
-            this.実際出荷数量Column1.Name = "実際出荷数量Column1";
-            // 
-            // 重量Column2
-            // 
-            this.重量Column2.DataPropertyName = "重量";
-            this.重量Column2.HeaderText = "重量";
-            this.重量Column2.Name = "重量Column2";
-            // 
-            // 実際配送担当Column1
-            // 
-            this.実際配送担当Column1.DataPropertyName = "実際配送担当";
-            this.実際配送担当Column1.HeaderText = "実際配送担当";
-            this.実際配送担当Column1.Name = "実際配送担当Column1";
-            // 
-            // 県別Column1
-            // 
-            this.県別Column1.DataPropertyName = "県別";
-            this.県別Column1.HeaderText = "県別";
-            this.県別Column1.Name = "県別Column1";
-            this.県別Column1.ReadOnly = true;
-            // 
-            // 発注形態名称漢字Column1
-            // 
-            this.発注形態名称漢字Column1.DataPropertyName = "発注形態名称漢字";
-            this.発注形態名称漢字Column1.HeaderText = "発注形態名称漢字";
-            this.発注形態名称漢字Column1.Name = "発注形態名称漢字Column1";
-            this.発注形態名称漢字Column1.ReadOnly = true;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -187,14 +108,14 @@
             // 
             this.backToolStripMenuItem.Name = "backToolStripMenuItem";
             this.backToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.backToolStripMenuItem.Text = "退回待发货状态";
+            this.backToolStripMenuItem.Text = "出荷待ちへ戻す";
             this.backToolStripMenuItem.Click += new System.EventHandler(this.backToolStripMenuItem_Click);
             // 
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelButton.Location = new System.Drawing.Point(589, 20);
+            this.cancelButton.Location = new System.Drawing.Point(668, 20);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(106, 32);
             this.cancelButton.TabIndex = 0;
@@ -254,6 +175,94 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // 出荷日Column1
+            // 
+            this.出荷日Column1.DataPropertyName = "出荷日";
+            this.出荷日Column1.HeaderText = "出荷日";
+            this.出荷日Column1.Name = "出荷日Column1";
+            // 
+            // 納品日Column1
+            // 
+            this.納品日Column1.DataPropertyName = "納品日";
+            this.納品日Column1.HeaderText = "納品日";
+            this.納品日Column1.Name = "納品日Column1";
+            // 
+            // 受注日Column1
+            // 
+            this.受注日Column1.DataPropertyName = "受注日";
+            this.受注日Column1.HeaderText = "受注日";
+            this.受注日Column1.Name = "受注日Column1";
+            // 
+            // 店名Column1
+            // 
+            this.店名Column1.DataPropertyName = "店舗名漢字";
+            this.店名Column1.HeaderText = "店名";
+            this.店名Column1.Name = "店名Column1";
+            // 
+            // 伝票番号Column1
+            // 
+            this.伝票番号Column1.DataPropertyName = "伝票番号";
+            this.伝票番号Column1.HeaderText = "伝票番号";
+            this.伝票番号Column1.Name = "伝票番号Column1";
+            this.伝票番号Column1.ReadOnly = true;
+            // 
+            // 品名漢字Column1
+            // 
+            this.品名漢字Column1.DataPropertyName = "品名漢字";
+            this.品名漢字Column1.HeaderText = "品名";
+            this.品名漢字Column1.Name = "品名漢字Column1";
+            // 
+            // 規格名漢字Column1
+            // 
+            this.規格名漢字Column1.DataPropertyName = "規格名漢字";
+            this.規格名漢字Column1.HeaderText = "規格名";
+            this.規格名漢字Column1.Name = "規格名漢字Column1";
+            // 
+            // 納品口数Column1
+            // 
+            this.納品口数Column1.DataPropertyName = "納品口数";
+            this.納品口数Column1.HeaderText = "口数";
+            this.納品口数Column1.Name = "納品口数Column1";
+            // 
+            // 実際出荷数量Column1
+            // 
+            this.実際出荷数量Column1.DataPropertyName = "実際出荷数量";
+            this.実際出荷数量Column1.HeaderText = "発注数量";
+            this.実際出荷数量Column1.Name = "実際出荷数量Column1";
+            // 
+            // 訂正理由区分Column
+            // 
+            this.訂正理由区分Column.DataPropertyName = "訂正理由区分";
+            this.訂正理由区分Column.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.訂正理由区分Column.HeaderText = "訂正理由区分";
+            this.訂正理由区分Column.Name = "訂正理由区分Column";
+            // 
+            // 重量Column2
+            // 
+            this.重量Column2.DataPropertyName = "重量";
+            this.重量Column2.HeaderText = "重量";
+            this.重量Column2.Name = "重量Column2";
+            // 
+            // 実際配送担当Column1
+            // 
+            this.実際配送担当Column1.DataPropertyName = "実際配送担当";
+            this.実際配送担当Column1.HeaderText = "実際配送担当";
+            this.実際配送担当Column1.Name = "実際配送担当Column1";
+            // 
+            // 県別Column1
+            // 
+            this.県別Column1.DataPropertyName = "県別";
+            this.県別Column1.HeaderText = "県別";
+            this.県別Column1.Name = "県別Column1";
+            this.県別Column1.ReadOnly = true;
+            // 
+            // 発注形態名称漢字Column1
+            // 
+            this.発注形態名称漢字Column1.DataPropertyName = "発注形態名称漢字";
+            this.発注形態名称漢字Column1.HeaderText = "発注形態名称漢字";
+            this.発注形態名称漢字Column1.Name = "発注形態名称漢字Column1";
+            this.発注形態名称漢字Column1.ReadOnly = true;
+            // 
             // ShipOrderListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -290,6 +299,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem backToolStripMenuItem;
+        private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品日Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column1;
@@ -299,10 +309,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 規格名漢字Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品口数Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際出荷数量Column1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn 訂正理由区分Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注形態名称漢字Column1;
-        private System.Windows.Forms.Button closeButton;
     }
 }

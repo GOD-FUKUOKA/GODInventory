@@ -51,33 +51,10 @@ namespace GODInventoryWinForm.Controls
             pageset.Margins = new Margins() { Left = 10, Top = 10, Bottom = 10, Right = 10 };
             reportViewer1.SetPageSettings(pageset);
 
-            PageSetupDialog page = new PageSetupDialog();
-            //page.AllowOrientation = true;
-            //reportViewer1.RefreshReport();
-
-
-
-            //pageset.Graphics.DrawString(" 编号", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 9, 35);  
-            //reportViewer1.Font.Name = "Verdana";
-            //currentSize = reportViewer1.Font.Size;
-            //currentSize += 6.0F;
-            //reportViewer1.Font = new Font(reportViewer1.Font.Name, currentSize,
-            //reportViewer1.Font.Style, reportViewer1.Font.Unit);
-
-            //  reportViewer1.Font = reportViewer1.Graphics.DrawString("入库单编号", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 9, 35);
-            // this.reportViewer1.ShowParameterPrompts = true; 
-            // Print("CutePDF Writer");
-
-
-
         }
         private void Print(string printerName)
         {
-            //string printerName = this.TextBox1.Text.Trim();// "傳送至 OneNote 2007";
-            //if (m_streams == null || m_streams.Count == 0)
-            //    return;
             PrintDocument printDoc = new PrintDocument();
-            // string aa = printDoc.PrinterSettings.PrinterName;
             if (printerName.Length > 0)
             {
                 printDoc.PrinterSettings.PrinterName = printerName;
@@ -126,6 +103,14 @@ namespace GODInventoryWinForm.Controls
             {
                 var orders1 = OrderEnities.Where(o => o.ジャンル != 1003).ToList();
                 var orders2 = OrderEnities.Where(o => o.ジャンル == 1003).ToList();
+                // 分别使用不同报表解决出现空白页问题
+                if (orders1.Count == 0 && orders2.Count > 0)
+                {
+                    this.reportViewer1.LocalReport.ReportEmbeddedResource = "GODInventoryWinForm.Reports.ShippingRCItemsReport.rdlc";
+                }
+                else {
+                    this.reportViewer1.LocalReport.ReportEmbeddedResource = "GODInventoryWinForm.Reports.ShippingItemsReport.rdlc";
+                }
                 this.reportViewer1.LocalReport.DataSources.Clear();
                 this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("ShippingItems", orders1));
                 this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("ShippingRCItems", orders2));

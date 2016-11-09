@@ -94,6 +94,7 @@ namespace GODInventoryWinForm.Controls
                     Order.実際出荷数量 = 0;
                     Order.Status = OrderStatus.Cancelled;
                 }
+
                 Stockrec.数量 = -Order.実際出荷数量;
                 entityDataSource1.SaveChanges();
 

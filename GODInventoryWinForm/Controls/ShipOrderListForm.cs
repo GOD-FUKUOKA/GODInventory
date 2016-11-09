@@ -25,6 +25,10 @@ namespace GODInventoryWinForm.Controls
         public ShipOrderListForm()
         {
             InitializeComponent();
+            this.訂正理由区分Column.ValueMember = "ID";
+            this.訂正理由区分Column.DisplayMember = "FullName";
+            this.訂正理由区分Column.DataSource = OrderQuantityChangeReasonRespository.ToList();
+
             // 记录DataGridView改变数据
             this.dataGridChanges = new Hashtable();
             itemList = (from t_itemlist i in entityDataSource1.EntitySets["t_itemlist"]
@@ -54,7 +58,7 @@ namespace GODInventoryWinForm.Controls
 
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            if (e.RowIndex < dataGridView1.Rows.Count - 1)
+            if (e.RowIndex < dataGridView1.Rows.Count )
             {
                 DataGridViewRow dgrSingle = dataGridView1.Rows[e.RowIndex];
                 try
@@ -76,7 +80,7 @@ namespace GODInventoryWinForm.Controls
         {
             //保存原始值
             DataGridViewRow dgrSingle = dataGridView1.Rows[e.RowIndex];
-            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
+            string cell_key = GetCellKey(e.RowIndex, e.ColumnIndex);
 
             if (!dataGridChanges.ContainsKey(cell_key))
             {
@@ -87,7 +91,8 @@ namespace GODInventoryWinForm.Controls
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString();
+            string cell_key = GetCellKey(e.RowIndex, e.ColumnIndex);
+            string cellChangedKey = GetCellKey(e.RowIndex, e.ColumnIndex, true);
             DataGridViewCell cell = row.Cells[e.ColumnIndex];
             var new_cell_value = cell.Value;
             var original_cell_value = dataGridChanges[cell_key];
@@ -95,15 +100,15 @@ namespace GODInventoryWinForm.Controls
             //Console.WriteLine(" original = {0} {3}, new ={1} {4}, compare = {2}, {5}", original_cell_value, new_cell_value, original_cell_value == new_cell_value, original_cell_value.GetType(), new_cell_value.GetType(), new_cell_value.Equals(original_cell_value));
             if (new_cell_value == null && original_cell_value == null)
             {
-                dataGridChanges.Remove(cell_key + "_changed");
+                dataGridChanges.Remove(cellChangedKey);
             }
             else if ((new_cell_value == null && original_cell_value != null) || (new_cell_value != null && original_cell_value == null) || !new_cell_value.Equals(original_cell_value))
             {
-                dataGridChanges[cell_key + "_changed"] = new_cell_value;
+                dataGridChanges[cellChangedKey] = new_cell_value;
             }
             else
             {
-                dataGridChanges.Remove(cell_key + "_changed");
+                dataGridChanges.Remove(cellChangedKey);
             }
 
             var order = row.DataBoundItem as t_orderdata;
@@ -136,9 +141,9 @@ namespace GODInventoryWinForm.Controls
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             //出荷日,納品日,受注日,店舗コード,店名,伝票番号,口数,品名漢字,規格名漢字,発注数量,実際配送担当,県別,キャンセル,ダブリ,一旦保留
-            string cell_key = e.RowIndex.ToString() + "_" + e.ColumnIndex.ToString() + "_changed";
+            string cellChangedKey = GetCellKey(e.RowIndex, e.ColumnIndex, true);
 
-            if (dataGridChanges.ContainsKey(cell_key))
+            if (dataGridChanges.ContainsKey(cellChangedKey))
             {
                 e.CellStyle.BackColor = Color.Red;
                 e.CellStyle.SelectionBackColor = Color.DarkRed;
@@ -148,11 +153,13 @@ namespace GODInventoryWinForm.Controls
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            // 可能有订单被退回了。status = WaitToShip
+            entityDataSource1.SaveChanges();
             if (dataGridChanges.Count > 0)
             {
-                entityDataSource1.SaveChanges();
+                dataGridChanges.Clear();
             }
-            dataGridChanges.Clear();
+            
             InitializeDataSource(ShipNO);
         }
 
@@ -174,15 +181,16 @@ namespace GODInventoryWinForm.Controls
 
         private void backToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int idx = dataGridView1.CurrentRow.Index;
-            if ( idx >= 0) { 
-            
-                var order  = orderList[idx] as t_orderdata;
+            int count = dataGridView1.SelectedRows.Count;
+            for (int i = 0; i < count; i++)
+            {
+                var order = dataGridView1.SelectedRows[i].DataBoundItem as t_orderdata;
                 order.ShipNO = null;
                 order.納品日 = null;
                 order.出荷日 = null;
-                order.Status = OrderStatus.WaitToShip;            
+                order.Status = OrderStatus.WaitToShip;         
             }
+           
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -193,5 +201,19 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
+        #region 修改键生成
+        private string GetCellKey(int rowIndex, int columnIndex, bool forChanged)
+        {
+            return GetCellKey(rowIndex, columnIndex) + "_changed";
+        }
+
+        private string GetCellKey(int rowIndex, int columnIndex)
+        {
+            var row = dataGridView1.Rows[rowIndex];
+            var model = row.DataBoundItem as t_orderdata;
+
+            return string.Format("{0}_{1}", model.id受注データ, columnIndex.ToString());
+        }
+        #endregion
     }
 }
