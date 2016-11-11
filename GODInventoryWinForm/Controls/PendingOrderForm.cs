@@ -383,7 +383,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
      GROUP BY `社内伝番`
      ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
 
-            string sql2 = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
+            string sql2 = @"SELECT `id受注データ`,`受注日`,`店舗コード`, `納品場所コード`,
        `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
      FROM t_orderdata
      WHERE  `Status`={0}

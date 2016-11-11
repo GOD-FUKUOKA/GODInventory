@@ -325,6 +325,7 @@ namespace GODInventory.ViewModel
                               実際出荷数量 = o.実際出荷数量,
                               原単価_税抜_ = o.原単価_税抜_,
                               口数 = o.口数,
+                              オプション使用欄 = o.オプション使用欄,
                               店舗名漢字 = o.店舗名漢字,
                               直送区分 = "通常",
                               店名 = s.店名,
@@ -702,7 +703,7 @@ namespace GODInventory.ViewModel
             //二次制品订单
             //where o.Status == OrderStatus.NotifyShipper && o.ジャンル == genreId && o.社内伝番 == 0 && o.実際配送担当 == "丸健"
 
-            var groupedOrders = orders.Where(o => (o.実際配送担当 == "丸健" && o.ジャンル ==1003) ).GroupBy(o => o.店舗コード);
+            var groupedOrders = orders.Where(o => (o.実際配送担当 == "丸健" && o.ジャンル == 1003)).GroupBy(o => new { o.店舗コード, o.納品場所コード });
 
             int i = 0;
             foreach (var gos in groupedOrders)

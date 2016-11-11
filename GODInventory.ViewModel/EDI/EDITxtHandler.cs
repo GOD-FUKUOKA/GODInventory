@@ -20,7 +20,7 @@ namespace GODInventory.ViewModel.EDI
         }
 
         public static string NYOTEL_ID {
-            get { return "CH1"; }
+            get { return "C01"; }
         }
 
         public static int 出荷業務仕入先コード {

@@ -9,22 +9,25 @@
               <Width>1.65054cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.9065cm</Width>
+              <Width>1.65302cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.82743cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>2.96535cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.18293cm</Width>
+              <Width>2.02418cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>4.42803cm</Width>
+              <Width>3.89886cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.72931cm</Width>
+              <Width>1.51764cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.9145cm</Width>
+              <Width>1.30628cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -54,6 +57,43 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox8">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>売伝№</Value>
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontFamily>MS PGothic</FontFamily>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                                <Language>ja-JP</Language>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox8</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>Solid</Style>
@@ -332,6 +372,43 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="maichuanfanhao">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!maichuanfanhao.Value</Value>
+                              <Style>
+                                <FontFamily>MS PGothic</FontFamily>
+                                <FontSize>9pt</FontSize>
+                                <Language>ja-JP</Language>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>maichuanfanhao</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                    <rd:Selected>true</rd:Selected>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="伝票番号">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -586,6 +663,47 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox15">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontStyle>Normal</FontStyle>
+                                <FontFamily>MS PGothic</FontFamily>
+                                <FontSize>9pt</FontSize>
+                                <FontWeight>Normal</FontWeight>
+                                <TextDecoration>None</TextDecoration>
+                                <Color>#000000</Color>
+                                <Language>ja-JP</Language>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox15</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>LightGrey</BackgroundColor>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox46">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -812,6 +930,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -831,7 +950,7 @@
         <Top>4.2684cm</Top>
         <Left>0.06615cm</Left>
         <Height>2.51437cm</Height>
-        <Width>16.77716cm</Width>
+        <Width>16.8433cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1636,7 +1755,7 @@
     <Height>2.71875in</Height>
     <Style />
   </Body>
-  <Width>6.65727in</Width>
+  <Width>6.68839in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
@@ -1664,6 +1783,14 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="ASN管理連番">
+          <DataField>ASN管理連番</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="GenreName">
+          <DataField>GenreName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="id受注データ">
           <DataField>id受注データ</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -1671,6 +1798,22 @@
         <Field Name="ＪＡＮコード">
           <DataField>ＪＡＮコード</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="maichuanfanhao">
+          <DataField>maichuanfanhao</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ShipNO">
+          <DataField>ShipNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+          <rd:TypeName>GODInventory.MyLinq.OrderStatus</rd:TypeName>
+        </Field>
+        <Field Name="オプション使用欄">
+          <DataField>オプション使用欄</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="キャンセル">
           <DataField>キャンセル</DataField>
@@ -1682,10 +1825,14 @@
         </Field>
         <Field Name="ジャンル">
           <DataField>ジャンル</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="ダブリ">
           <DataField>ダブリ</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="備考">
+          <DataField>備考</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="出荷No">
@@ -1716,6 +1863,10 @@
           <DataField>店舗コード</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="店舗名カナ">
+          <DataField>店舗名カナ</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="店舗名漢字">
           <DataField>店舗名漢字</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -1723,6 +1874,10 @@
         <Field Name="電話番号">
           <DataField>電話番号</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="訂正理由区分">
+          <DataField>訂正理由区分</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="発注日">
           <DataField>発注日</DataField>
@@ -1740,6 +1895,10 @@
           <DataField>発注形態区分</DataField>
           <rd:TypeName>System.Int16</rd:TypeName>
         </Field>
+        <Field Name="法人名漢字">
+          <DataField>法人名漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="規格名漢字">
           <DataField>規格名漢字</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -1750,7 +1909,7 @@
         </Field>
         <Field Name="口数">
           <DataField>口数</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="売単価_税抜_">
           <DataField>売単価_税抜_</DataField>
@@ -1766,7 +1925,7 @@
         </Field>
         <Field Name="納品口数">
           <DataField>納品口数</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="納品日">
           <DataField>納品日</DataField>
@@ -1775,6 +1934,10 @@
         <Field Name="納品原価金額">
           <DataField>納品原価金額</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="納品指示">
+          <DataField>納品指示</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="配送担当受信">
           <DataField>配送担当受信</DataField>
@@ -1794,7 +1957,11 @@
         </Field>
         <Field Name="社内伝番">
           <DataField>社内伝番</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="社内伝番UnSaved">
+          <DataField>社内伝番UnSaved</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="実際出荷数量">
           <DataField>実際出荷数量</DataField>
@@ -1834,7 +2001,7 @@
         </Field>
         <Field Name="在庫数">
           <DataField>在庫数</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
         <Field Name="在庫状態">
           <DataField>在庫状態</DataField>
@@ -1846,7 +2013,7 @@
         </Field>
         <Field Name="重量">
           <DataField>重量</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="住所">
           <DataField>住所</DataField>
@@ -1859,6 +2026,10 @@
         <Field Name="最大行数">
           <DataField>最大行数</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="最小発注単位数量">
+          <DataField>最小発注単位数量</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

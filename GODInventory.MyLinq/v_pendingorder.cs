@@ -114,6 +114,23 @@ namespace GODInventory.MyLinq
         public string 備考 { get; set; }
 
         public string 納品指示 { get; set; }
+
+        //売传番号生成
+        public string オプション使用欄 { get; set; }
+
+        public string maichuanfanhao { 
+            get{
+                if (this.オプション使用欄 != String.Empty && this.オプション使用欄.Length >= 13)
+                {
+                    return this.オプション使用欄.Substring(5, 8);
+                }
+                else {
+                    return String.Empty;
+                }
+            }
+        }
+
+
         // shop
         public int 店番 { get; set; }
 

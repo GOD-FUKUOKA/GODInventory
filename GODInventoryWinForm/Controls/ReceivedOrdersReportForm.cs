@@ -72,8 +72,15 @@ namespace GODInventoryWinForm.Controls
             e.DataSources.Clear();
             if (s == "ReceivedOrderReport" || s == "ReceivedOrderReport2")
             {
-                var orders = new List<v_pendingorder>(){ OrderEnities.Where(o => o.出荷No == chuhe_no).First()};
-                e.DataSources.Add(new ReportDataSource("DataSet1", orders));
+                var orders =  OrderEnities.Where(o => o.出荷No == chuhe_no).ToList();
+                var orderFirst = new List<v_pendingorder>() { orders.First() };
+                var orderKeZhuCount = orders.Count(o => o.発注形態区分 == (int)OrderReasonEnum.客注);
+                var orderADCount = orders.Count(o => o.発注形態区分 == (int)OrderReasonEnum.広告);
+                var orderYongDuCount = orders.Count(o => o.発注形態区分 == (int)OrderReasonEnum.用度品);
+
+                var orderreason = new List<v_orderreason>() { new v_orderreason() { hasOrderAD = orderADCount, hasOrderKeZhu = orderKeZhuCount, hasOrderYongDu = orderYongDuCount } };
+                e.DataSources.Add(new ReportDataSource("DataSet1", orderFirst));                
+                e.DataSources.Add(new ReportDataSource("DataSet2", orderreason));                
             }
             else if (s == "ReceivedOrderDetailReport")
             {

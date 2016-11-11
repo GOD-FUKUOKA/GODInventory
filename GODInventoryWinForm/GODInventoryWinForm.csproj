@@ -513,6 +513,7 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\GODInventory.MyLinq.t_orderdata.datasource" />
     <None Include="Properties\DataSources\GODInventory.MyLinq.t_shoplist.datasource" />
+    <None Include="Properties\DataSources\GODInventory.MyLinq.v_orderreason.datasource" />
     <None Include="Properties\DataSources\GODInventory.MyLinq.v_pendingorder.datasource" />
     <None Include="Properties\DataSources\GODInventory.ViewModel.EDI.ReceivedOrderReportModel1.datasource" />
     <None Include="Properties\Settings.settings">
