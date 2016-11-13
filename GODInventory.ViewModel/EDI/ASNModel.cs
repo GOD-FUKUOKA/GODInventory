@@ -256,7 +256,7 @@ namespace GODInventory.ViewModel.EDI
             this.納品数 = Encoding.ASCII.GetBytes(order.実際出荷数量.ToString("D6")); //40 納品数        6 325
 
             //tbd..
-            this.訂正理由区分= Encoding.ASCII.GetBytes( 99.ToString("D2"));;//41 訂正理由区分     2 331
+            this.訂正理由区分 = Encoding.ASCII.GetBytes(order.訂正理由区分.ToString("D2")); ;//41 訂正理由区分     2 331
 
             this.総額取引区分 = Encoding.ASCII.GetBytes(order.総額取引区分.ToString("D1"));//42 総額取引区分     1 333
             // v99
@@ -285,7 +285,7 @@ namespace GODInventory.ViewModel.EDI
             this.センター経由区分 = Encoding.ASCII.GetBytes(order.センター経由区分.ToString("D1")); //56 センター経由区分   1 414
             this.センターコード = Encoding.ASCII.GetBytes(order.センターコード.ToString("D5")); //57 センターコード    5 415
             this.便区分 = new Byte[1] { 0x30 };//58 便区分            1 420
-            this.カゴ車No = EDITxtHandler.GetZeroedBytes(20); //59 カゴ車No          20 421
+            this.カゴ車No = EDITxtHandler.GetSpacedBytes(20); //59 カゴ車No          20 421
             this.梱包サイズ_縦_ = EDITxtHandler.GetZeroedBytes(5); //60 梱包サイズ(縦)      5 441
             this.梱包サイズ_高さ_ = EDITxtHandler.GetZeroedBytes(5); //61 梱包サイズ(高さ)     5 446
             this.梱包サイズ_横_ = EDITxtHandler.GetZeroedBytes(5); //62 梱包サイズ(横)      5 451
