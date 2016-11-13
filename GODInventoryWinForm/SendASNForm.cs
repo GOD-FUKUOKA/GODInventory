@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -57,6 +58,10 @@ namespace GODInventoryWinForm
 
                             }
                         }
+                        string _path = Properties.Settings.Default.NFWEInstallDir + @"\nyotei";
+                        List<string> Blist = GetFileName(_path);
+                        if (Blist.Count > 1)
+                            new GenerateASNTextForm_Auto(Blist[0]).ShowDialog();
                     }
 
 
@@ -99,7 +104,25 @@ namespace GODInventoryWinForm
             return shift_jis.GetString(utf8_bytes);
 
         }
+        private List<string> GetFileName(string dirPath)
+        {
+            List<string> FileNameList = new List<string>();
+            ArrayList list = new ArrayList();
 
+            if (Directory.Exists(dirPath))
+            {
+                list.AddRange(Directory.GetFiles(dirPath));
+            }
+            if (list.Count > 0)
+            {
+                foreach (object item in list)
+                {
+                    FileNameList.Add(item.ToString().Replace(dirPath + "\\", ""));
+                }
+            }
+
+            return FileNameList;
+        }
 
 
     }

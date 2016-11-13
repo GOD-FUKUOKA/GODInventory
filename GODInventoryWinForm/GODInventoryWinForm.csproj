@@ -177,6 +177,24 @@
     <Compile Include="Controls\Strock_CompanyCode.Designer.cs">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="GenerateASNTextForm_Auto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerateASNTextForm_Auto.Designer.cs">
+      <DependentUpon>GenerateASNTextForm_Auto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportReceivedTextForm_Auto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportReceivedTextForm_Auto.Designer.cs">
+      <DependentUpon>ImportReceivedTextForm_Auto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportOrderTextForm_Auto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportOrderTextForm_Auto.Designer.cs">
+      <DependentUpon>ImportOrderTextForm_Auto.cs</DependentUpon>
+    </Compile>
     <Compile Include="DownloadNewOrdersForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -397,6 +415,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Strock_CompanyCode.resx">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerateASNTextForm_Auto.resx">
+      <DependentUpon>GenerateASNTextForm_Auto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportReceivedTextForm_Auto.resx">
+      <DependentUpon>ImportReceivedTextForm_Auto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportOrderTextForm_Auto.resx">
+      <DependentUpon>ImportOrderTextForm_Auto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DownloadNewOrdersForm.resx">
       <DependentUpon>DownloadNewOrdersForm.cs</DependentUpon>
