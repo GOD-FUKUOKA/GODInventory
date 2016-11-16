@@ -32,8 +32,6 @@ namespace GODInventoryWinForm.Controls
         private ComboBox specialColumn;
 
         private SelectProductForm selectProductForm;
-        int davX = 0;
-        int davY = 0;
 
         public CreateOrderForm()
         {
@@ -249,12 +247,14 @@ namespace GODInventoryWinForm.Controls
                         this.locationComboBox.DataSource = locations;
                         if (locations.Count > 0)
                         {
+                            this.locationTextBox.Enabled = true;
                             this.locationComboBox.SelectedIndex = 0;
                             this.locationTextBox.Text = this.locationComboBox.SelectedValue.ToString();
                         }
                         else
                         {
-                            this.locationTextBox.Text = "0";
+                            this.locationTextBox.Enabled = false;
+                            this.locationTextBox.Text = "";
                         }
 
                         if (shops.Count == 1)
@@ -302,10 +302,7 @@ namespace GODInventoryWinForm.Controls
                 {
                     this.locationComboBox.SelectedValue = locationId;
                 }
-
             }
-
-
         }
 
 
@@ -506,7 +503,13 @@ namespace GODInventoryWinForm.Controls
                 order.法人名漢字 = this.customerComboBox.Text;
                 order.部門コード = Convert.ToInt16(this.textBox5.Text);
                 order.納品予定日 = this.deliveredAtDateTimePicker.Value.Date;
-                order.納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
+                if (this.locationTextBox.Enabled)
+                {
+                    order.納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
+                }
+                else {
+                    order.納品場所コード = -1;
+                }
                 //order.納品先店舗名漢字 = this.locationComboBox.Text;
                 order.発注形態区分 = (short)this.orderReasonComboBox.SelectedValue;
                 order.発注形態名称漢字 = this.orderReasonComboBox.Text;

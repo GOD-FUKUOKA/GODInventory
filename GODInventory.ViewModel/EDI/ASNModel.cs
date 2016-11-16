@@ -276,7 +276,13 @@ namespace GODInventory.ViewModel.EDI
 
             this.納品先店舗コード = Encoding.ASCII.GetBytes(order.納品先店舗コード.ToString("D3")); //52 納品先店舗コード   3 398
             // it is char 
-            this.納品場所コード = Encoding.ASCII.GetBytes(order.納品場所コード.ToString("D1")); ;//53 納品場所コード    1 401
+            if (order.納品場所コード >= 0)
+            {
+                this.納品場所コード = Encoding.ASCII.GetBytes(order.納品場所コード.ToString("D1")); ;//53 納品場所コード    1 401
+            }
+            else {
+                this.納品場所コード = Encoding.ASCII.GetBytes(" ");
+            }
 
             var jis1 = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.納品場所名漢字);
             this.納品場所名漢字 = EDITxtHandler.PadLeftBytes(jis1, 6); //54 納品場所名漢字    6 402
