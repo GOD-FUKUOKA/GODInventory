@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.uploadForEDIButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -38,19 +38,44 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pendingTabPage = new System.Windows.Forms.TabPage();
             this.shipNODataGridView = new System.Windows.Forms.DataGridView();
+            this.ShipNOColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shipAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.arrivedAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.districtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shipperColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.weightColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.lockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unlockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asnTabPage = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.データIDColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.管理連番Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.レコード件数Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createdAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ediDataGridView = new System.Windows.Forms.DataGridView();
+            this.配车单单号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.県別Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.実際配送担当Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.重量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.printForShipperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printForEDIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.canceledTabPage = new System.Windows.Forms.TabPage();
+            this.uploadAsnButton = new System.Windows.Forms.Button();
+            this.canceledDataGridView = new System.Windows.Forms.DataGridView();
+            this.キャンセルColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.キャンセル時刻Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.受注日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店舗名漢字Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.県別Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.伝票番号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.品名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注数量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.実際配送担当Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.備考Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shippedTabPage = new System.Windows.Forms.TabPage();
             this.pager3 = new GODInventoryWinForm.Controls.Pager();
             this.shippedDataGridView = new System.Windows.Forms.DataGridView();
@@ -89,22 +114,18 @@
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.canceledBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.ShipNOColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.shipAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.arrivedAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.districtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.shipperColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.weightColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.pendingTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shipNODataGridView)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.asnTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ediDataGridView)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
+            this.canceledTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.canceledDataGridView)).BeginInit();
             this.shippedTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shippedDataGridView)).BeginInit();
             this.receivedTabPage.SuspendLayout();
@@ -112,6 +133,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.canceledBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // uploadForEDIButton
@@ -145,6 +167,7 @@
             // 
             this.tabControl1.Controls.Add(this.pendingTabPage);
             this.tabControl1.Controls.Add(this.asnTabPage);
+            this.tabControl1.Controls.Add(this.canceledTabPage);
             this.tabControl1.Controls.Add(this.shippedTabPage);
             this.tabControl1.Controls.Add(this.receivedTabPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -198,47 +221,89 @@
             this.shipNODataGridView.CurrentCellChanged += new System.EventHandler(this.shipNODataGridView_CurrentCellChanged);
             this.shipNODataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.shipNODataGridView_RowPrePaint);
             // 
+            // ShipNOColumn1
+            // 
+            this.ShipNOColumn1.DataPropertyName = "ShipNO";
+            this.ShipNOColumn1.HeaderText = "配车单单号";
+            this.ShipNOColumn1.Name = "ShipNOColumn1";
+            this.ShipNOColumn1.ReadOnly = true;
+            // 
+            // shipAtColumn
+            // 
+            this.shipAtColumn.DataPropertyName = "出荷日";
+            this.shipAtColumn.HeaderText = "出荷日";
+            this.shipAtColumn.Name = "shipAtColumn";
+            this.shipAtColumn.ReadOnly = true;
+            // 
+            // arrivedAtColumn
+            // 
+            this.arrivedAtColumn.DataPropertyName = "納品日";
+            this.arrivedAtColumn.HeaderText = "納品日";
+            this.arrivedAtColumn.Name = "arrivedAtColumn";
+            this.arrivedAtColumn.ReadOnly = true;
+            // 
+            // districtColumn
+            // 
+            this.districtColumn.DataPropertyName = "県別";
+            this.districtColumn.HeaderText = "県別";
+            this.districtColumn.Name = "districtColumn";
+            this.districtColumn.ReadOnly = true;
+            // 
+            // shipperColumn
+            // 
+            this.shipperColumn.DataPropertyName = "実際配送担当";
+            this.shipperColumn.HeaderText = "担当";
+            this.shipperColumn.Name = "shipperColumn";
+            this.shipperColumn.ReadOnly = true;
+            // 
+            // weightColumn
+            // 
+            this.weightColumn.DataPropertyName = "TotalWeight";
+            this.weightColumn.HeaderText = "重量";
+            this.weightColumn.Name = "weightColumn";
+            this.weightColumn.ReadOnly = true;
+            // 
+            // totalPrice
+            // 
+            this.totalPrice.DataPropertyName = "TotalPrice";
+            this.totalPrice.HeaderText = "原価金額(税抜)";
+            this.totalPrice.Name = "totalPrice";
+            this.totalPrice.ReadOnly = true;
+            this.totalPrice.Width = 120;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lockToolStripMenuItem,
             this.unlockToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.printToolStripMenuItem});
+            this.editToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(131, 70);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.lockToolStripMenuItem.Text = "配車表ﾛｯｸ";
             this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
             // 
             // unlockToolStripMenuItem
             // 
             this.unlockToolStripMenuItem.Name = "unlockToolStripMenuItem";
-            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.unlockToolStripMenuItem.Text = "ﾛｯｸ解消";
             this.unlockToolStripMenuItem.Click += new System.EventHandler(this.unlockToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.editToolStripMenuItem.Text = "編集";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
-            // printToolStripMenuItem
-            // 
-            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.printToolStripMenuItem.Text = "配車表印刷";
-            this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
-            // 
             // asnTabPage
             // 
-            this.asnTabPage.Controls.Add(this.dataGridView2);
+            this.asnTabPage.Controls.Add(this.ediDataGridView);
             this.asnTabPage.Controls.Add(this.uploadForEDIButton);
             this.asnTabPage.Location = new System.Drawing.Point(4, 22);
             this.asnTabPage.Name = "asnTabPage";
@@ -248,77 +313,240 @@
             this.asnTabPage.Text = "納品書印刷";
             this.asnTabPage.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // ediDataGridView
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ediDataGridView.AllowUserToAddRows = false;
+            this.ediDataGridView.AllowUserToDeleteRows = false;
+            this.ediDataGridView.AllowUserToResizeRows = false;
+            this.ediDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.データIDColumn1,
-            this.管理連番Column1,
-            this.レコード件数Column1,
-            this.createdAtColumn1});
-            this.dataGridView2.ContextMenuStrip = this.contextMenuStrip2;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 60);
-            this.dataGridView2.MultiSelect = false;
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(903, 280);
-            this.dataGridView2.TabIndex = 3;
-            this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
+            this.ediDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ediDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.配车单单号Column1,
+            this.出荷日Column1,
+            this.納品日Column1,
+            this.県別Column1,
+            this.実際配送担当Column1,
+            this.重量Column1,
+            this.原価金額_税抜_Column1});
+            this.ediDataGridView.ContextMenuStrip = this.contextMenuStrip2;
+            this.ediDataGridView.Location = new System.Drawing.Point(3, 60);
+            this.ediDataGridView.Name = "ediDataGridView";
+            this.ediDataGridView.ReadOnly = true;
+            this.ediDataGridView.RowHeadersVisible = false;
+            this.ediDataGridView.RowTemplate.Height = 23;
+            this.ediDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ediDataGridView.Size = new System.Drawing.Size(903, 280);
+            this.ediDataGridView.TabIndex = 3;
+            this.ediDataGridView.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
-            // データIDColumn1
+            // 配车单单号Column1
             // 
-            this.データIDColumn1.DataPropertyName = "データID";
-            this.データIDColumn1.HeaderText = "データID";
-            this.データIDColumn1.Name = "データIDColumn1";
-            this.データIDColumn1.ReadOnly = true;
+            this.配车单单号Column1.DataPropertyName = "ShipNO";
+            this.配车单单号Column1.HeaderText = "配车单单号";
+            this.配车单单号Column1.Name = "配车单单号Column1";
+            this.配车单单号Column1.ReadOnly = true;
             // 
-            // 管理連番Column1
+            // 出荷日Column1
             // 
-            this.管理連番Column1.DataPropertyName = "管理連番";
-            this.管理連番Column1.HeaderText = "管理連番";
-            this.管理連番Column1.Name = "管理連番Column1";
-            this.管理連番Column1.ReadOnly = true;
+            this.出荷日Column1.DataPropertyName = "出荷日";
+            this.出荷日Column1.HeaderText = "出荷日";
+            this.出荷日Column1.Name = "出荷日Column1";
+            this.出荷日Column1.ReadOnly = true;
             // 
-            // レコード件数Column1
+            // 納品日Column1
             // 
-            this.レコード件数Column1.DataPropertyName = "レコード件数";
-            this.レコード件数Column1.HeaderText = "レコード件数";
-            this.レコード件数Column1.Name = "レコード件数Column1";
-            this.レコード件数Column1.ReadOnly = true;
-            this.レコード件数Column1.Width = 120;
+            this.納品日Column1.DataPropertyName = "納品日";
+            this.納品日Column1.HeaderText = "納品日";
+            this.納品日Column1.Name = "納品日Column1";
+            this.納品日Column1.ReadOnly = true;
+            this.納品日Column1.Width = 120;
             // 
-            // createdAtColumn1
+            // 県別Column1
             // 
-            this.createdAtColumn1.DataPropertyName = "created_at";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.createdAtColumn1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.createdAtColumn1.HeaderText = "作成時間";
-            this.createdAtColumn1.Name = "createdAtColumn1";
-            this.createdAtColumn1.ReadOnly = true;
-            this.createdAtColumn1.Width = 120;
+            this.県別Column1.DataPropertyName = "県別";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.県別Column1.HeaderText = "県別";
+            this.県別Column1.Name = "県別Column1";
+            this.県別Column1.ReadOnly = true;
+            this.県別Column1.Width = 120;
+            // 
+            // 実際配送担当Column1
+            // 
+            this.実際配送担当Column1.DataPropertyName = "実際配送担当";
+            this.実際配送担当Column1.HeaderText = "実際配送担当";
+            this.実際配送担当Column1.Name = "実際配送担当Column1";
+            this.実際配送担当Column1.ReadOnly = true;
+            this.実際配送担当Column1.Width = 120;
+            // 
+            // 重量Column1
+            // 
+            this.重量Column1.DataPropertyName = "TotalWeight";
+            this.重量Column1.HeaderText = "重量";
+            this.重量Column1.Name = "重量Column1";
+            this.重量Column1.ReadOnly = true;
+            // 
+            // 原価金額_税抜_Column1
+            // 
+            this.原価金額_税抜_Column1.DataPropertyName = "TotalPrice";
+            this.原価金額_税抜_Column1.HeaderText = "原価金額(税抜)";
+            this.原価金額_税抜_Column1.Name = "原価金額_税抜_Column1";
+            this.原価金額_税抜_Column1.ReadOnly = true;
+            this.原価金額_税抜_Column1.Width = 120;
             // 
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.printForShipperToolStripMenuItem,
             this.printForEDIToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(197, 48);
+            // 
+            // printForShipperToolStripMenuItem
+            // 
+            this.printForShipperToolStripMenuItem.Name = "printForShipperToolStripMenuItem";
+            this.printForShipperToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.printForShipperToolStripMenuItem.Text = "ピッキングリスト印刷";
+            this.printForShipperToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // printForEDIToolStripMenuItem
             // 
             this.printForEDIToolStripMenuItem.Name = "printForEDIToolStripMenuItem";
-            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.printForEDIToolStripMenuItem.Text = "印刷";
+            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.printForEDIToolStripMenuItem.Text = "納品書印刷";
             this.printForEDIToolStripMenuItem.Click += new System.EventHandler(this.printForEDIToolStripMenuItem_Click);
+            // 
+            // canceledTabPage
+            // 
+            this.canceledTabPage.Controls.Add(this.uploadAsnButton);
+            this.canceledTabPage.Controls.Add(this.canceledDataGridView);
+            this.canceledTabPage.Location = new System.Drawing.Point(4, 22);
+            this.canceledTabPage.Name = "canceledTabPage";
+            this.canceledTabPage.Size = new System.Drawing.Size(909, 343);
+            this.canceledTabPage.TabIndex = 4;
+            this.canceledTabPage.Text = "Canceled";
+            this.canceledTabPage.UseVisualStyleBackColor = true;
+            // 
+            // uploadAsnButton
+            // 
+            this.uploadAsnButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.uploadAsnButton.Location = new System.Drawing.Point(795, 13);
+            this.uploadAsnButton.Name = "uploadAsnButton";
+            this.uploadAsnButton.Size = new System.Drawing.Size(106, 32);
+            this.uploadAsnButton.TabIndex = 1;
+            this.uploadAsnButton.Text = "ASNｱｯﾌﾟﾛｰﾄﾞ";
+            this.uploadAsnButton.UseVisualStyleBackColor = true;
+            this.uploadAsnButton.Click += new System.EventHandler(this.canceledButton1_Click);
+            // 
+            // canceledDataGridView
+            // 
+            this.canceledDataGridView.AllowUserToAddRows = false;
+            this.canceledDataGridView.AllowUserToDeleteRows = false;
+            this.canceledDataGridView.AllowUserToResizeColumns = false;
+            this.canceledDataGridView.AllowUserToResizeRows = false;
+            this.canceledDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.canceledDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.canceledDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.キャンセルColumn1,
+            this.キャンセル時刻Column1,
+            this.受注日Column1,
+            this.店舗名漢字Column2,
+            this.県別Column2,
+            this.伝票番号Column1,
+            this.品名漢字Column1,
+            this.規格名漢字Column1,
+            this.発注数量Column1,
+            this.実際配送担当Column2,
+            this.発注日Column1,
+            this.備考Column1});
+            this.canceledDataGridView.Location = new System.Drawing.Point(3, 61);
+            this.canceledDataGridView.Name = "canceledDataGridView";
+            this.canceledDataGridView.RowHeadersVisible = false;
+            this.canceledDataGridView.RowTemplate.Height = 23;
+            this.canceledDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.canceledDataGridView.Size = new System.Drawing.Size(903, 279);
+            this.canceledDataGridView.TabIndex = 0;
+            // 
+            // キャンセルColumn1
+            // 
+            this.キャンセルColumn1.DataPropertyName = "キャンセル";
+            this.キャンセルColumn1.HeaderText = "キャンセル";
+            this.キャンセルColumn1.Name = "キャンセルColumn1";
+            // 
+            // キャンセル時刻Column1
+            // 
+            this.キャンセル時刻Column1.DataPropertyName = "キャンセル時刻";
+            this.キャンセル時刻Column1.HeaderText = "キャンセル時刻";
+            this.キャンセル時刻Column1.Name = "キャンセル時刻Column1";
+            this.キャンセル時刻Column1.Width = 120;
+            // 
+            // 受注日Column1
+            // 
+            this.受注日Column1.DataPropertyName = "受注日";
+            this.受注日Column1.HeaderText = "受注日";
+            this.受注日Column1.Name = "受注日Column1";
+            // 
+            // 店舗名漢字Column2
+            // 
+            this.店舗名漢字Column2.DataPropertyName = "店舗名漢字";
+            this.店舗名漢字Column2.HeaderText = "店名";
+            this.店舗名漢字Column2.Name = "店舗名漢字Column2";
+            // 
+            // 県別Column2
+            // 
+            this.県別Column2.DataPropertyName = "県別";
+            this.県別Column2.HeaderText = "県別";
+            this.県別Column2.Name = "県別Column2";
+            // 
+            // 伝票番号Column1
+            // 
+            this.伝票番号Column1.DataPropertyName = "伝票番号";
+            this.伝票番号Column1.HeaderText = "伝票番号";
+            this.伝票番号Column1.Name = "伝票番号Column1";
+            // 
+            // 品名漢字Column1
+            // 
+            this.品名漢字Column1.DataPropertyName = "品名漢字";
+            this.品名漢字Column1.HeaderText = "品名";
+            this.品名漢字Column1.Name = "品名漢字Column1";
+            this.品名漢字Column1.Width = 200;
+            // 
+            // 規格名漢字Column1
+            // 
+            this.規格名漢字Column1.DataPropertyName = "規格名漢字";
+            this.規格名漢字Column1.HeaderText = "規格名";
+            this.規格名漢字Column1.Name = "規格名漢字Column1";
+            this.規格名漢字Column1.Width = 200;
+            // 
+            // 発注数量Column1
+            // 
+            this.発注数量Column1.DataPropertyName = "発注数量";
+            this.発注数量Column1.HeaderText = "発注数量";
+            this.発注数量Column1.Name = "発注数量Column1";
+            // 
+            // 実際配送担当Column2
+            // 
+            this.実際配送担当Column2.DataPropertyName = "実際配送担当";
+            this.実際配送担当Column2.HeaderText = "実際配送担当";
+            this.実際配送担当Column2.Name = "実際配送担当Column2";
+            this.実際配送担当Column2.Width = 120;
+            // 
+            // 発注日Column1
+            // 
+            this.発注日Column1.DataPropertyName = "発注日";
+            this.発注日Column1.HeaderText = "発注日";
+            this.発注日Column1.Name = "発注日Column1";
+            // 
+            // 備考Column1
+            // 
+            this.備考Column1.DataPropertyName = "備考";
+            this.備考Column1.HeaderText = "備考";
+            this.備考Column1.Name = "備考Column1";
+            this.備考Column1.Width = 180;
             // 
             // shippedTabPage
             // 
@@ -639,56 +867,6 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
-            // ShipNOColumn1
-            // 
-            this.ShipNOColumn1.DataPropertyName = "ShipNO";
-            this.ShipNOColumn1.HeaderText = "配车单单号";
-            this.ShipNOColumn1.Name = "ShipNOColumn1";
-            this.ShipNOColumn1.ReadOnly = true;
-            // 
-            // shipAtColumn
-            // 
-            this.shipAtColumn.DataPropertyName = "出荷日";
-            this.shipAtColumn.HeaderText = "出荷日";
-            this.shipAtColumn.Name = "shipAtColumn";
-            this.shipAtColumn.ReadOnly = true;
-            // 
-            // arrivedAtColumn
-            // 
-            this.arrivedAtColumn.DataPropertyName = "納品日";
-            this.arrivedAtColumn.HeaderText = "納品日";
-            this.arrivedAtColumn.Name = "arrivedAtColumn";
-            this.arrivedAtColumn.ReadOnly = true;
-            // 
-            // districtColumn
-            // 
-            this.districtColumn.DataPropertyName = "県別";
-            this.districtColumn.HeaderText = "県別";
-            this.districtColumn.Name = "districtColumn";
-            this.districtColumn.ReadOnly = true;
-            // 
-            // shipperColumn
-            // 
-            this.shipperColumn.DataPropertyName = "実際配送担当";
-            this.shipperColumn.HeaderText = "担当";
-            this.shipperColumn.Name = "shipperColumn";
-            this.shipperColumn.ReadOnly = true;
-            // 
-            // weightColumn
-            // 
-            this.weightColumn.DataPropertyName = "TotalWeight";
-            this.weightColumn.HeaderText = "重量";
-            this.weightColumn.Name = "weightColumn";
-            this.weightColumn.ReadOnly = true;
-            // 
-            // totalPrice
-            // 
-            this.totalPrice.DataPropertyName = "TotalPrice";
-            this.totalPrice.HeaderText = "原価金額(税抜)";
-            this.totalPrice.Name = "totalPrice";
-            this.totalPrice.ReadOnly = true;
-            this.totalPrice.Width = 120;
-            // 
             // ShippingOrderForm
             // 
             this.ClientSize = new System.Drawing.Size(917, 369);
@@ -706,8 +884,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.shipNODataGridView)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.asnTabPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ediDataGridView)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
+            this.canceledTabPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.canceledDataGridView)).EndInit();
             this.shippedTabPage.ResumeLayout(false);
             this.shippedTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.shippedDataGridView)).EndInit();
@@ -716,6 +896,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.canceledBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -731,7 +912,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage pendingTabPage;
         private System.Windows.Forms.TabPage asnTabPage;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView ediDataGridView;
         private System.Windows.Forms.BindingSource bindingSource2;
         private System.Windows.Forms.TabPage receivedTabPage;
         private System.Windows.Forms.DataGridView receivedDataGridView;
@@ -756,11 +937,6 @@
         private System.Windows.Forms.ToolStripMenuItem lockToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unlockToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn データIDColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 管理連番Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn レコード件数Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn createdAtColumn1;
         private System.Windows.Forms.TabPage shippedTabPage;
         private Pager pager3;
         private System.Windows.Forms.DataGridView shippedDataGridView;
@@ -789,5 +965,29 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn shipperColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn weightColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPrice;
+        private System.Windows.Forms.TabPage canceledTabPage;
+        private System.Windows.Forms.DataGridView canceledDataGridView;
+        private System.Windows.Forms.Button uploadAsnButton;
+        private System.Windows.Forms.BindingSource canceledBindingSource;
+        private System.Windows.Forms.ToolStripMenuItem printForShipperToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 配车单单号Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 納品日Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 原価金額_税抜_Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn キャンセルColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn キャンセル時刻Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 店舗名漢字Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 品名漢字Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 規格名漢字Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注数量Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注日Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 備考Column1;
     }
 }

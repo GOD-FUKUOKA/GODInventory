@@ -120,7 +120,7 @@ namespace GODInventory.MyLinq
 
         public string maichuanfanhao { 
             get{
-                if (this.オプション使用欄 != String.Empty && this.オプション使用欄.Length >= 13)
+                if (this.オプション使用欄 != null && this.オプション使用欄.Length >= 13)
                 {
                     return this.オプション使用欄.Substring(5, 8);
                 }

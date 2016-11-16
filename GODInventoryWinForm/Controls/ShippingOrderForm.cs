@@ -19,17 +19,22 @@ namespace GODInventoryWinForm.Controls
         public ReceivedOrdersReportForm reportForm;
         public ShippingItemsReportForm shippingItemsReportForm;
         public List<v_groupedorder> groupedOrderList;
+        public List<v_groupedorder> groupedAsnOrderList;
         public List<t_orderdata> orderList;
+        public List<t_orderdata> canceledOrderList;
+        public SendASNForm sendForm ;
 
         public ShippingOrderForm()
         {
             InitializeComponent();
-            this.dataGridView2.AutoGenerateColumns = false;
+            this.ediDataGridView.AutoGenerateColumns = false;
             this.receivedDataGridView.AutoGenerateColumns = false;
             this.shipNODataGridView.AutoGenerateColumns = false;
+            this.canceledDataGridView.AutoGenerateColumns = false;
 
             reportForm = new ReceivedOrdersReportForm();
             shippingItemsReportForm = new ShippingItemsReportForm();
+            sendForm = new SendASNForm();
         }
 
 
@@ -41,6 +46,8 @@ namespace GODInventoryWinForm.Controls
             InitializeEdiData();
 
             InitializeShippedOrders();
+
+            InitializeCanceledOrder();
         }
 
         private int InitializeOrderData()
@@ -88,10 +95,18 @@ namespace GODInventoryWinForm.Controls
 
         private void InitializeEdiData()
         {
+            using (var ctx = new GODDbContext())
+            {
 
-            this.bindingSource2.DataSource = OrderSqlHelper.ASNEdiDataList(entityDataSource1);
-            dataGridView2.DataSource = this.bindingSource2;
+                string sql = @"SELECT o.`ShipNO`, o.`出荷日`, o.`納品日`,
+ min(o.`県別`) as `県別`, o.`実際配送担当`, 
+sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight  
+FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`";
+                groupedAsnOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.ASN).ToList();
 
+                //this.bindingSource2.DataSource = OrderSqlHelper.ASNEdiDataList(entityDataSource1);
+                ediDataGridView.DataSource = groupedAsnOrderList;
+            }
         }
 
         private int InitializeShippedOrders()
@@ -116,6 +131,7 @@ namespace GODInventoryWinForm.Controls
             }
             return count;
         }
+        
         private int InitializeReceivedOrder()
         {
             var q = OrderSqlHelper.ReceivedOrderSql(entityDataSource1);
@@ -124,27 +140,53 @@ namespace GODInventoryWinForm.Controls
             receivedDataGridView.DataSource = this.bindingSource4;
             return 0;
         }
+        
+        private int InitializeCanceledOrder()
+        {
+            this.canceledOrderList = OrderSqlHelper.CanceledOrderSql(entityDataSource1).ToList();
+            // assign BindingList to grid
+            canceledDataGridView.DataSource = this.canceledOrderList;
+            return 0;
+        }
 
         private void uploadForEDIButton_Click(object sender, EventArgs e)
         {
-            var ids = GetEdiDataIdsBySelectedGridCell();
-            if (ids.Count > 0)
+            
+            if (ediDataGridView.SelectedRows.Count > 0)
             {
-                // TODO 数据上传
-                // 上传相应ASN数据
+                List<string> shipNOs = new List<string>();
+
+                foreach (DataGridViewRow row in ediDataGridView.SelectedRows)
+                {
+                    var gorder = row.DataBoundItem as v_groupedorder;
+                    shipNOs.Add(gorder.ShipNO);
+                }
+
+                // 数据上传送信, 上传相应ASN数据
+                // 更新数据，上传成功
+                long mid = 0;
                 using (var ctx = new GODDbContext())
                 {
-                    var edidata = ctx.t_edidata.Find(ids.First());
-                    string sql = String.Format("UPDATE t_orderdata SET `Status`= {2}  WHERE `ASN管理連番` = ({0}) AND `Status`= {1} ", edidata.管理連番, (int)OrderStatus.ASN, (int)OrderStatus.Shipped);
-                    ctx.Database.ExecuteSqlCommand(sql);
-                    edidata.is_sent = true;
-                    edidata.sent_at = DateTime.Now;
-                    ctx.SaveChanges();
+                    // 生成ASN
+                    mid = OrderSqlHelper.GenerateASN2(ctx, shipNOs);
+
                 }
+
+                var path = EDITxtHandler.BuildASNFilePath(mid);
+                var newPath = Path.Combine(Properties.Settings.Default.NFWEInstallDir, @"NYOTEI\NYOTEI.txt");
+
+                // copy for later send
+                File.Copy(path, newPath, true);
+
+                // 上传ASN
+                sendForm.Mid = mid;
+                sendForm.IsCanceledOrder = false;
+                sendForm.ShowDialog();
+
             }
-            // 送信
+            
  
-            new SendASNForm().ShowDialog();
+            
             InitializeEdiData();
             pager3.Bind();
         }
@@ -203,21 +245,6 @@ namespace GODInventoryWinForm.Controls
                 rows.Add(cell.OwningRow);
             }
             return rows.Distinct();
-        }
-
-
-        private List<int> GetEdiDataIdsBySelectedGridCell()
-        {
-
-            List<int> ids = new List<int>();
-            var rows = GetSelectedRowsBySelectedCells(dataGridView2);
-            foreach (DataGridViewRow row in rows)
-            {
-                var t_edidata = row.DataBoundItem as t_edidata;
-                ids.Add(t_edidata.Id);
-            }
-
-            return ids;
         }
 
 
@@ -347,9 +374,9 @@ namespace GODInventoryWinForm.Controls
         private void PrintReportForEDI()
         {
 
-            var row = dataGridView2.CurrentRow;
-            var edidata = row.DataBoundItem as t_edidata;
-            var orders = OrderSqlHelper.ASNOrderDataListByMid(entityDataSource1, edidata.管理連番);
+            var row = ediDataGridView.CurrentRow;
+            var gorder = row.DataBoundItem as v_groupedorder;
+            var orders = OrderSqlHelper.ASNOrderDataListByShipNo(entityDataSource1, gorder.ShipNO);
 
             reportForm.InitializeDataSource(orders);
             reportForm.ShowDialog();
@@ -358,13 +385,14 @@ namespace GODInventoryWinForm.Controls
 
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var row = shipNODataGridView.CurrentRow;
+            var row = ediDataGridView.CurrentRow;
             var gorder = row.DataBoundItem as v_groupedorder;
             var orders = OrderSqlHelper.OrderListByShipNO(entityDataSource1, gorder.ShipNO);
 
             shippingItemsReportForm.InitializeDataSource(orders);
             shippingItemsReportForm.ShowDialog();
         }
+
 
         private void shipNODataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -377,6 +405,36 @@ namespace GODInventoryWinForm.Controls
         private void shipNODataGridView_CurrentCellChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void canceledButton1_Click(object sender, EventArgs e)
+        {
+            using( var ctx = new GODDbContext())
+            {
+                string shipNo = DateTime.Now.ToString("yyyyMMddHHmmss");
+                string sql = String.Format("UPDATE t_orderdata SET `shipNO`='{1}' WHERE `Status`= {0}", (int)OrderStatus.Cancelled, shipNo);
+
+                List<string> shipNOs = new List<string>(){ shipNo };
+                ctx.Database.ExecuteSqlCommand(sql);
+
+                OrderSqlHelper.GenerateASN(shipNOs);
+                
+                // 生成ASN
+                long mid = OrderSqlHelper.GenerateASN2(ctx, shipNOs);                
+
+                var path = EDITxtHandler.BuildASNFilePath(mid);
+                var newPath = Path.Combine(Properties.Settings.Default.NFWEInstallDir, @"NYOTEI\NYOTEI.txt");
+
+                // copy for later send
+                File.Copy(path, newPath, true);
+
+                // 上传ASN
+                sendForm.Mid = mid;
+                sendForm.IsCanceledOrder = true;
+                sendForm.ShowDialog();
+
+            }
+            InitializeCanceledOrder();
         }
 
     }

@@ -292,6 +292,17 @@ namespace GODInventory.ViewModel
                      );
             return q;
         }
+
+        public static IQueryable<t_orderdata> CanceledOrderSql(EntityDataSource entityDataSource1)
+        {
+            var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
+                     where o.Status == OrderStatus.Cancelled
+                     orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
+                     select o
+                     );
+            return q;
+        }
+
         public static IQueryable<t_orderdata> ReceivedOrderSql(EntityDataSource entityDataSource1)
         {
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
@@ -310,6 +321,39 @@ namespace GODInventory.ViewModel
                           where o.ASN管理連番 == mid
                           select new v_pendingorder {
                               ASN管理連番 = o.ASN管理連番,
+                              出荷No = o.出荷No,
+                              店舗コード = o.店舗コード,
+                              伝票番号 = o.伝票番号,
+                              納品場所名カナ = o.納品場所名カナ,
+                              納品場所名漢字 = o.納品場所名漢字,
+                              出荷業務仕入先コード = o.出荷業務仕入先コード,
+                              発注形態区分 = o.発注形態区分,
+                              納品日 = o.納品日,
+                              ＪＡＮコード = o.ＪＡＮコード,
+                              商品コード = o.商品コード,
+                              品名漢字 = o.品名漢字,
+                              規格名漢字 = o.規格名漢字,
+                              実際出荷数量 = o.実際出荷数量,
+                              原単価_税抜_ = o.原単価_税抜_,
+                              口数 = o.口数,
+                              オプション使用欄 = o.オプション使用欄,
+                              店舗名漢字 = o.店舗名漢字,
+                              直送区分 = "通常",
+                              店名 = s.店名,
+                              住所 = s.住所,
+                              電話番号 = s.電話番号
+                          }).ToList();
+            return orders;
+        }
+
+        public static List<v_pendingorder> ASNOrderDataListByShipNo(EntityDataSource entityDataSource1, string shipNo)
+        {
+
+            var orders = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
+                          join t_shoplist s in entityDataSource1.EntitySets["t_shoplist"] on o.店舗コード equals s.店番
+                          where o.ShipNO == shipNo
+                          select new v_pendingorder
+                          {
                               出荷No = o.出荷No,
                               店舗コード = o.店舗コード,
                               伝票番号 = o.伝票番号,
@@ -503,52 +547,61 @@ namespace GODInventory.ViewModel
         }
 
         public static int GenerateASN(List<string> shipNOs) {
-            var now = DateTime.Now;
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, EDITxtHandler.ASNFolder, "NYOTEI_" + now.ToString("yyyyMMddHHmmss") + ".txt");
-
+            
             using (var ctx = new GODDbContext())
             {
                 // get 受注管理連番 by shipNos
-                //var ediNOs = (from t_orderdata o in ctx.t_orderdata
-                //              where shipNOs.Contains(o.ShipNO)
-                //              select new { 受注管理連番 = o.受注管理連番 }).Select( o=> o.受注管理連番 ).Distinct().ToList();
 
                 var orders = (from t_orderdata o in ctx.t_orderdata
                               where shipNOs.Contains(o.ShipNO)                             
                               select o).ToList();
 
-
-
                 // generate ASN管理連番, 出荷No
-                var mid = EDITxtHandler.GenerateMID(ctx);
-                var grouped_orders = orders.GroupBy(o => new { o.法人コード, o.店舗コード }, o => o);
-                foreach (var gos in grouped_orders)
-                {
-                    long ship_no = EDITxtHandler.GenerateEDIShipNO(ctx, gos.First());
-                    foreach (var o in gos)
-                    {
-                        o.出荷No = ship_no;
-                        o.ASN管理連番 = mid;
-                    }
-                }
-
-                ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(path, orders);
-
-                string sql = asnhead.ToRawSql();
-
-                ctx.Database.ExecuteSqlCommand(sql);
-
-                foreach (var gos in grouped_orders)
-                {
-                    var oids = gos.Select(order => order.id受注データ);
-                    var o = gos.First();
-                    var sql1 = String.Format("UPDATE t_orderdata SET  `出荷No`={3}, `Status`={4}, `ASN管理連番`={5}  WHERE  `id受注データ` in ({0}) AND `ShipNO` in ({1}) AND `Status`={2} ", String.Join(",", oids.ToArray()), String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray()), (int)OrderStatus.Locked, o.出荷No, (int)OrderStatus.ASN, mid);
-                    ctx.Database.ExecuteSqlCommand(sql1);                  
-                }
-                //ctx.SaveChanges();
+                UpdateOrderChuHeNO(ctx, orders);
             }
             return 0;
         }
+
+        public static void UpdateOrderChuHeNO(GODDbContext ctx, List<t_orderdata> orders)
+        {
+            var grouped_orders = orders.GroupBy(o => new { o.法人コード, o.店舗コード, o.ShipNO }, o => o);
+            foreach (var gos in grouped_orders)
+            {
+                var oids = gos.Select(o => o.id受注データ);
+                long chuhe_no = EDITxtHandler.GenerateEDIShipNO(ctx, gos.First());
+                var sql1 = String.Format("UPDATE t_orderdata SET  `出荷No`={2}, `Status`={3}  WHERE  `id受注データ` in ({0}) AND `Status`={1} ", String.Join(",", oids.ToArray()), (int)OrderStatus.Locked, chuhe_no, (int)OrderStatus.ASN);
+                ctx.Database.ExecuteSqlCommand(sql1);
+            }
+
+        }
+
+        // 返回 管理连番
+        public static long GenerateASN2(GODDbContext ctx, List<string> shipNOs)
+        {
+
+            var now = DateTime.Now;
+
+            // generate ASN管理連番
+            long mid = EDITxtHandler.GenerateMID(ctx);
+            var sql1 = String.Format("UPDATE t_orderdata SET `ASN管理連番`={2}  WHERE `ShipNO` in ({0}) AND `Status`={1} ", String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray()), (int)OrderStatus.ASN, mid);
+            var path = EDITxtHandler.BuildASNFilePath(mid);
+
+            ctx.Database.ExecuteSqlCommand(sql1);
+
+            var orders = (from t_orderdata o in ctx.t_orderdata
+                            where shipNOs.Contains(o.ShipNO)
+                            select o).ToList(); 
+
+            ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(path, orders);
+            
+
+            string sql = asnhead.ToRawSql();
+
+            ctx.Database.ExecuteSqlCommand(sql);
+            return mid;
+
+        }
+
 
         private static string BuildStockNum(GODDbContext ctx, int genre_id, string warehouseName, DateTime selectedDate)
         {

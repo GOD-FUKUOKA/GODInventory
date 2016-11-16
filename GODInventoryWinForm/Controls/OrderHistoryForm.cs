@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using GODInventory.MyLinq;
 using GODInventory.ViewModel;
 using MySql.Data.MySqlClient;
+using GODInventory.ViewModel.EDI;
+using System.IO;
 
 namespace GODInventoryWinForm.Controls
 {
@@ -416,6 +418,44 @@ namespace GODInventoryWinForm.Controls
                     order.Status = editOrderForm.Order.Status;
                     dataGridView1.Refresh();
                 }
+            }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                var order = dataGridView1.CurrentRow.DataBoundItem as v_pendingorder;
+                if (order.Status == OrderStatus.Shipped)
+                {
+                    this.contextMenuStrip1.Items["uploadASNToolStripMenuItem"].Enabled = true;
+                }
+                else {
+                    this.contextMenuStrip1.Items["uploadASNToolStripMenuItem"].Enabled = false;
+                }
+            }
+        }
+
+        private void uploadASNToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SendASNForm sendForm = new SendASNForm();
+            var newPath = Path.Combine(Properties.Settings.Default.NFWEInstallDir, @"NYOTEI\NYOTEI.txt");
+            var order = dataGridView1.CurrentRow.DataBoundItem as v_pendingorder;
+            if (order != null)
+            {
+                using (var ctx = new GODDbContext())
+                {
+
+                    var orders = ctx.t_orderdata.Where(o => o.出荷No == order.出荷No).ToList();
+
+                    ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(newPath, orders);
+                }
+
+
+                // 上传ASN
+                sendForm.Mid = order.ASN管理連番;
+                sendForm.IsCanceledOrder = false;
+                sendForm.ShowDialog();
             }
         }
 

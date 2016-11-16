@@ -123,6 +123,12 @@ namespace GODInventory.ViewModel.EDI
             return order_head;
         }
 
+        public static string BuildASNFilePath(long mid)
+        {
+
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, EDITxtHandler.ASNFolder, "NYOTEI_" + mid.ToString() + ".txt");
+        }
+
         public static void ImportOrderTxt(string path)
         {
             
@@ -190,7 +196,7 @@ namespace GODInventory.ViewModel.EDI
                             group o by o.ASN管理連番 into g
                             select g
                         ).Count();
-                var s=  String.Format("{0}{1}{2}{3}{4}", order.法人コード.ToString("D2"), order.店舗コード.ToString("D3"), EDITxtHandler.出荷業務仕入先コード, "01", (count + 1).ToString("D5")) ;
+                var s=  String.Format("{0}{1}{2}{3}{4}", order.法人コード.ToString("D2"), order.店舗コード.ToString("D3"), EDITxtHandler.出荷業務仕入先コード, "03", (count + 1).ToString("D5")) ;
                 return Convert.ToInt64( s );
                    
         }

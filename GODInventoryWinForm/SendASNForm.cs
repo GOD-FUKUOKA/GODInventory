@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GODInventory.MyLinq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +16,13 @@ namespace GODInventoryWinForm
 {
     public partial class SendASNForm : Form
     {
+        public long Mid { get; set; }
+        public bool IsCanceledOrder { get; set; }
+
         public SendASNForm()
         {
             InitializeComponent();
-
+            IsCanceledOrder = false;
             this.msgLabel.Text = "";
         }
 
@@ -55,13 +59,28 @@ namespace GODInventoryWinForm
                             int ireturn = Convert.ToInt16(original_messages[0]);
                             if (ireturn == 0) //正常終了しました
                             {
+                                using (var ctx = new GODDbContext())
+                                {
+                                    // 上传成功，更新数据库
+                                    var edidata = ctx.t_edidata.Where(t => t.管理連番 == Mid).First();
+                                    if (IsCanceledOrder)
+                                    {
+                                        string sql = String.Format("UPDATE t_orderdata SET `Status`= {2}  WHERE `ASN管理連番` = ({0}) AND `Status`= {1} ", edidata.管理連番, (int)OrderStatus.ASN, (int)OrderStatus.Completed);
+                                        ctx.Database.ExecuteSqlCommand(sql);
+                                    }
+                                    else
+                                    {
+                                        string sql = String.Format("UPDATE t_orderdata SET `Status`= {2}  WHERE `ASN管理連番` = ({0}) AND `Status`= {1} ", edidata.管理連番, (int)OrderStatus.ASN, (int)OrderStatus.Shipped);
+                                        ctx.Database.ExecuteSqlCommand(sql);
+                                    }
+                                    edidata.is_sent = true;
+                                    edidata.sent_at = DateTime.Now;
+                                    ctx.SaveChanges();
 
+                                }
                             }
                         }
-                        string _path = Properties.Settings.Default.NFWEInstallDir + @"\nyotei";
-                        List<string> Blist = GetFileName(_path);
-                        if (Blist.Count > 1)
-                            new GenerateASNTextForm_Auto(Blist[0]).ShowDialog();
+                        
                     }
 
 
