@@ -313,64 +313,40 @@ namespace GODInventoryWinForm.Controls
         {
         }
 
-        private int GenerateInvoiceNumber(int store_id)
-        {
-
-            int num = 1;
-            using (var ctx = new GODDbContext())
-            {
-                var last_order = (from s in ctx.t_orderdata
-                                  where s.店舗コード == ((short)store_id)
-                                  orderby s.発注日 descending, s.伝票番号 descending
-                                  select s).FirstOrDefault();
-                if (last_order != null)
-                {
-
-                    num = last_order.伝票番号 + 1;
-                }
-            }
-            return num;
-        }
-
 
         private int GenerateInvoiceNo(int storeId)
         {
-            int invoiceNo = lastInvoiceNOByStoreId(storeId);
-
-            int position = GetPositionByInvoiceNO(invoiceNo);
-            position %= 99999; // max position is 99999,
-            position += (1 + orderList.Count);
-
-            return (position * 10) + (position % 7);
-
-        }
-
-        private int lastInvoiceNOByStoreId(int storeId)
-        {
-
-
+            int max = 1000000; //传真订单 6位，小于 1000000
             int invoiceNo = 0;
             using (var ctx = new GODDbContext())
             {
                 var last_order = (from s in ctx.t_orderdata
-                                  where s.店舗コード == ((short)storeId)
+                                  where s.店舗コード == ((short)storeId) && s.伝票番号 < max
                                   orderby s.発注日 descending, s.伝票番号 descending
                                   select s).FirstOrDefault();
                 if (last_order != null)
                 {
-
                     invoiceNo = last_order.伝票番号;
                 }
             }
-            return invoiceNo;
-
-
+            return GetNextByInvoiceNO(invoiceNo);
         }
 
-        private int GetPositionByInvoiceNO(int invoiceNo)
-        {
 
-            return invoiceNo / 10;
+        private int GetNextByInvoiceNO(int invoiceNo)
+        {
+            int startAt = 40000;
+            int position = invoiceNo / 10;  // remove last check number
+            position %= 99999;              // max position is 99999,
+            if (position < startAt)           // start from 40000
+            {
+                position += startAt;
+            }
+
+            position += 1;
+
+            return (position * 10) + (position % 7);
+           
         }
 
         ////  発注形態 is enum, binding is not working, we have to handle it manually
@@ -541,8 +517,7 @@ namespace GODInventoryWinForm.Controls
                 }
                 else
                 {
-
-                    order.伝票番号 = this.orderList[i - 1].伝票番号 + 1;
+                    order.伝票番号 = GetNextByInvoiceNO(this.orderList[i - 1].伝票番号);
                 }
 
                 this.orderList.Add(order);
