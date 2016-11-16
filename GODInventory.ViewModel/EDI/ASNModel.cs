@@ -255,7 +255,6 @@ namespace GODInventory.ViewModel.EDI
             // 納品数 = 納品口数*口数 ?
             this.納品数 = Encoding.ASCII.GetBytes(order.実際出荷数量.ToString("D6")); //40 納品数        6 325
 
-            //tbd..
             this.訂正理由区分 = Encoding.ASCII.GetBytes(order.訂正理由区分.ToString("D2")); ;//41 訂正理由区分     2 331
 
             this.総額取引区分 = Encoding.ASCII.GetBytes(order.総額取引区分.ToString("D1"));//42 総額取引区分     1 333
