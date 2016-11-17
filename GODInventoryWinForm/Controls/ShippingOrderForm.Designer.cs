@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.uploadForEDIButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -366,8 +366,8 @@
             // 県別Column1
             // 
             this.県別Column1.DataPropertyName = "県別";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle1;
             this.県別Column1.HeaderText = "県別";
             this.県別Column1.Name = "県別Column1";
             this.県別Column1.ReadOnly = true;
@@ -765,6 +765,7 @@
             this.receivedDataGridView.Name = "receivedDataGridView";
             this.receivedDataGridView.RowHeadersVisible = false;
             this.receivedDataGridView.RowTemplate.Height = 23;
+            this.receivedDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.receivedDataGridView.Size = new System.Drawing.Size(903, 280);
             this.receivedDataGridView.TabIndex = 0;
             // 

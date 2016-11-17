@@ -48,6 +48,8 @@ namespace GODInventoryWinForm.Controls
             InitializeShippedOrders();
 
             InitializeCanceledOrder();
+
+            InitializeReceivedOrder();
         }
 
         private int InitializeOrderData()

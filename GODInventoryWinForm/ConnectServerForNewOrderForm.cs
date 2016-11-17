@@ -17,6 +17,7 @@ namespace GODInventoryWinForm
         public ConnectServerForNewOrderForm()
         {
             InitializeComponent();
+            this.ControlBox = false;   // 设置不出现关闭按钮
             this.msgLabel.Text = "";
         }
 
@@ -38,7 +39,7 @@ namespace GODInventoryWinForm
                     proc.StartInfo.FileName = receive_bat_path;
                     proc.StartInfo.Arguments = string.Format("A01");//this is argument
                     proc.StartInfo.UseShellExecute = false;
-                    proc.StartInfo.CreateNoWindow = false;
+                    proc.StartInfo.CreateNoWindow = true;
                     proc.Start();
                     proc.WaitForExit();
                     ecode = proc.ExitCode;
@@ -56,10 +57,11 @@ namespace GODInventoryWinForm
 
                             }
                         }
-                        string _path = Properties.Settings.Default.NFWEInstallDir + @"\haccyu";
-                        List<string> Blist = GetFileName(_path);
-                        if (Blist.Count>1)
-                        new ImportOrderTextForm_Auto(Blist[0]).ShowDialog();
+                        string path = Properties.Settings.Default.NFWEInstallDir + @"\haccyu\HACCYU.txt";                        
+                        if (File.Exists(path))
+                        {
+                            new ImportOrderTextForm_Auto( path ).ShowDialog();
+                        }
                     }
 
 

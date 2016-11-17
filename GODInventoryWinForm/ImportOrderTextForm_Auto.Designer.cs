@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.openFileBtton = new System.Windows.Forms.Button();
             this.pathTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.importButton = new System.Windows.Forms.Button();
@@ -46,23 +45,13 @@
             this.openFileDialog1.FileName = "HACCYU";
             this.openFileDialog1.Filter = "Text Files (.txt)|*.txt|All Files (*.*)|*.*";
             // 
-            // openFileBtton
-            // 
-            this.openFileBtton.Location = new System.Drawing.Point(482, 97);
-            this.openFileBtton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.openFileBtton.Name = "openFileBtton";
-            this.openFileBtton.Size = new System.Drawing.Size(36, 27);
-            this.openFileBtton.TabIndex = 0;
-            this.openFileBtton.Text = "...";
-            this.openFileBtton.UseVisualStyleBackColor = true;
-            this.openFileBtton.Click += new System.EventHandler(this.openFileBtton_Click);
-            // 
             // pathTextBox
             // 
             this.pathTextBox.Location = new System.Drawing.Point(152, 98);
             this.pathTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pathTextBox.Name = "pathTextBox";
-            this.pathTextBox.Size = new System.Drawing.Size(322, 21);
+            this.pathTextBox.ReadOnly = true;
+            this.pathTextBox.Size = new System.Drawing.Size(366, 21);
             this.pathTextBox.TabIndex = 0;
             // 
             // label1
@@ -144,7 +133,7 @@
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
-            // ImportOrderTextForm
+            // ImportOrderTextForm_Auto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -157,12 +146,11 @@
             this.Controls.Add(this.importButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pathTextBox);
-            this.Controls.Add(this.openFileBtton);
             this.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ImportOrderTextForm";
+            this.Name = "ImportOrderTextForm_Auto";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -175,7 +163,6 @@
         #endregion
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button openFileBtton;
         private System.Windows.Forms.TextBox pathTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button importButton;

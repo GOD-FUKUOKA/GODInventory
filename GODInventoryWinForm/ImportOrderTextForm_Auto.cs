@@ -96,7 +96,7 @@ namespace GODInventoryWinForm
                 MessageBox.Show(string.Format("{0}", e.Result));
                 //this.progressMsgLabel.Text = "Great, it is done!";
             }
-            
+            this.Close();
         }
 
 

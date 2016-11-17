@@ -92,6 +92,7 @@ namespace GODInventoryWinForm
                 MessageBox.Show(string.Format("{0}", e.Result));
                 //this.progressMsgLabel.Text = "Great, it is done!";
             }
+            this.Close();
         }
 
         private bool ImportJuryouTxt(string path, BackgroundWorker worker, DoWorkEventArgs e)

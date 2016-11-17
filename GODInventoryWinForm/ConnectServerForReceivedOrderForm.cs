@@ -18,6 +18,7 @@ namespace GODInventoryWinForm
         public ConnectServerForReceivedOrderForm()
         {
             InitializeComponent();
+            this.ControlBox = false;   // 设置不出现关闭按钮
             this.msgLabel.Text = "";
         }
         private void ReceiveForm_Shown(object sender, EventArgs e)
@@ -38,7 +39,7 @@ namespace GODInventoryWinForm
                     proc.StartInfo.FileName = receive_bat_path;
                     proc.StartInfo.Arguments = string.Format("C02");//this is argument
                     proc.StartInfo.UseShellExecute = false;
-                    proc.StartInfo.CreateNoWindow = false;
+                    proc.StartInfo.CreateNoWindow = true;
                     proc.Start();
                     proc.WaitForExit();
                     ecode = proc.ExitCode;
@@ -56,10 +57,11 @@ namespace GODInventoryWinForm
 
                             }
                         }
-                        string _path = Properties.Settings.Default.NFWEInstallDir + @"\juryou";
-                        List<string> Blist = GetFileName(_path);
-                        if (Blist.Count > 1)
-                        new ImportOrderTextForm_Auto(Blist[0]).ShowDialog();
+                        string path = Properties.Settings.Default.NFWEInstallDir + @"\juryou\JURYOU.txt";
+                        if (File.Exists(path))
+                        {
+                            new ImportReceivedTextForm_Auto(path).ShowDialog();
+                        }
 
                     }
 
@@ -108,24 +110,6 @@ namespace GODInventoryWinForm
         {
 
         }
-        private List<string> GetFileName(string dirPath)
-        {
-            List<string> FileNameList = new List<string>();
-            ArrayList list = new ArrayList();
 
-            if (Directory.Exists(dirPath))
-            {
-                list.AddRange(Directory.GetFiles(dirPath));
-            }
-            if (list.Count > 0)
-            {
-                foreach (object item in list)
-                {
-                    FileNameList.Add(item.ToString().Replace(dirPath + "\\", ""));
-                }
-            }
-
-            return FileNameList;
-        }
     }
 }

@@ -121,7 +121,6 @@
             // 
             // orderConfirmButton
             // 
-            this.orderConfirmButton.Enabled = false;
             this.orderConfirmButton.Font = new System.Drawing.Font("SimSun", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.orderConfirmButton.Location = new System.Drawing.Point(588, 68);
             this.orderConfirmButton.Name = "orderConfirmButton";

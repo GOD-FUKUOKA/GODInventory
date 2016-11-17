@@ -280,7 +280,7 @@ namespace GODInventory.ViewModel.EDI
                 this.納品場所コード = Encoding.ASCII.GetBytes(order.納品場所コード.ToString("D1")); ;//53 納品場所コード    1 401
             }
             else {
-                this.納品場所コード = Encoding.ASCII.GetBytes(" ");
+                this.納品場所コード = new Byte[1] { 0x20 };
             }
 
             var jis1 = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.納品場所名漢字);

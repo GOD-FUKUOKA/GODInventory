@@ -85,6 +85,8 @@
             this.Controls.Add(this.processMsgLabel2);
             this.Controls.Add(this.okButton1);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ConnectServerForReceivedOrderForm";
             this.Text = "ConnectServerForReceivedOrderForm";
             this.Shown += new System.EventHandler(this.ReceiveForm_Shown);

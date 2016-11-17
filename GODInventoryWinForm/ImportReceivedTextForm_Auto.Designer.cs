@@ -33,7 +33,6 @@
             this.importButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pathTextBox = new System.Windows.Forms.TextBox();
-            this.openFileBtton = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.progressMsgLabel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -83,19 +82,9 @@
             this.pathTextBox.Location = new System.Drawing.Point(154, 97);
             this.pathTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pathTextBox.Name = "pathTextBox";
-            this.pathTextBox.Size = new System.Drawing.Size(320, 21);
+            this.pathTextBox.ReadOnly = true;
+            this.pathTextBox.Size = new System.Drawing.Size(364, 21);
             this.pathTextBox.TabIndex = 8;
-            // 
-            // openFileBtton
-            // 
-            this.openFileBtton.Location = new System.Drawing.Point(482, 94);
-            this.openFileBtton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.openFileBtton.Name = "openFileBtton";
-            this.openFileBtton.Size = new System.Drawing.Size(36, 27);
-            this.openFileBtton.TabIndex = 0;
-            this.openFileBtton.Text = "...";
-            this.openFileBtton.UseVisualStyleBackColor = true;
-            this.openFileBtton.Click += new System.EventHandler(this.openFileBtton_Click);
             // 
             // backgroundWorker1
             // 
@@ -142,7 +131,7 @@
             this.closeButton.Text = "閉じる";
             this.closeButton.UseVisualStyleBackColor = true;
             // 
-            // ImportReceivedTextForm
+            // ImportReceivedTextForm_Auto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -153,14 +142,13 @@
             this.Controls.Add(this.importButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pathTextBox);
-            this.Controls.Add(this.openFileBtton);
             this.Controls.Add(this.progressMsgLabel);
             this.Controls.Add(this.progressBar1);
             this.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ImportReceivedTextForm";
+            this.Name = "ImportReceivedTextForm_Auto";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "受領データ導入";
@@ -176,7 +164,6 @@
         private System.Windows.Forms.Button importButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox pathTextBox;
-        private System.Windows.Forms.Button openFileBtton;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label progressMsgLabel;
         private System.Windows.Forms.ProgressBar progressBar1;
