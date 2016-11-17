@@ -32,7 +32,7 @@ namespace GODInventory.ViewModel.EDI
 
             var date = DateTime.Now.ToString("yyyyMMdd");
             var time = DateTime.Now.ToString("HHmmss");
-            this.データID = Encoding.ASCII.GetBytes(EDITxtHandler.NYOTEL_ID);
+            this.データID = Encoding.ASCII.GetBytes( "CH1");
             
             this.管理連番 = Encoding.ASCII.GetBytes( orders.First().ASN管理連番.ToString( "D13"));
 

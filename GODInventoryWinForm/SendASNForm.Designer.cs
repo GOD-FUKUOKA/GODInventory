@@ -36,8 +36,9 @@
             // 
             // msgLabel
             // 
+            this.msgLabel.Font = new System.Drawing.Font("SimSun", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.msgLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.msgLabel.Location = new System.Drawing.Point(-9, 80);
+            this.msgLabel.Location = new System.Drawing.Point(0, 80);
             this.msgLabel.Name = "msgLabel";
             this.msgLabel.Size = new System.Drawing.Size(441, 35);
             this.msgLabel.TabIndex = 11;
@@ -46,7 +47,8 @@
             // 
             // processMsgLabel2
             // 
-            this.processMsgLabel2.Location = new System.Drawing.Point(-11, 53);
+            this.processMsgLabel2.Font = new System.Drawing.Font("SimSun", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.processMsgLabel2.Location = new System.Drawing.Point(0, 53);
             this.processMsgLabel2.Name = "processMsgLabel2";
             this.processMsgLabel2.Size = new System.Drawing.Size(441, 19);
             this.processMsgLabel2.TabIndex = 10;
@@ -58,9 +60,10 @@
             this.okButton1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton1.Location = new System.Drawing.Point(171, 128);
+            this.okButton1.Font = new System.Drawing.Font("SimSun", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.okButton1.Location = new System.Drawing.Point(167, 128);
             this.okButton1.Name = "okButton1";
-            this.okButton1.Size = new System.Drawing.Size(127, 21);
+            this.okButton1.Size = new System.Drawing.Size(106, 32);
             this.okButton1.TabIndex = 8;
             this.okButton1.Text = "OK";
             this.okButton1.UseVisualStyleBackColor = true;
@@ -68,9 +71,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("SimSun", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(14, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 12);
+            this.label1.Size = new System.Drawing.Size(119, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "ナフコEDI受信処理";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -84,6 +88,8 @@
             this.Controls.Add(this.processMsgLabel2);
             this.Controls.Add(this.okButton1);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SendASNForm";
             this.Text = "SendASNForm";
             this.Shown += new System.EventHandler(this.ReceiveForm_Shown);

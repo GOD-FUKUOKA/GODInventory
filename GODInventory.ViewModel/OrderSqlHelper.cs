@@ -515,7 +515,7 @@ namespace GODInventory.ViewModel
             using (var ctx = new GODDbContext())
             {
                 MySqlParameter[] parameters = { new MySqlParameter("@p3", ((int)OrderStatus.Completed)) };
-                string sql = String.Format("UPDATE t_orderdata SET `Status`=@p3  WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()));
+                string sql = String.Format("UPDATE t_orderdata SET `受領確認`=1, `Status`=@p3  WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()));
                 count = ctx.Database.ExecuteSqlCommand(sql, parameters);
                 ctx.SaveChanges();
             }

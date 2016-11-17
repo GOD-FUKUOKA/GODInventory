@@ -22,6 +22,7 @@ namespace GODInventoryWinForm
         public SendASNForm()
         {
             InitializeComponent();
+            this.ControlBox = false;   // 设置不出现关闭按钮
             IsCanceledOrder = false;
             this.msgLabel.Text = "";
         }
@@ -44,7 +45,7 @@ namespace GODInventoryWinForm
                     proc.StartInfo.FileName = Send_bat_path;
                     proc.StartInfo.Arguments = string.Format("C01");//this is argument
                     proc.StartInfo.UseShellExecute = false;
-                    proc.StartInfo.CreateNoWindow = false;
+                    proc.StartInfo.CreateNoWindow = true;
                     proc.Start();
                     proc.WaitForExit();
                     ecode = proc.ExitCode;

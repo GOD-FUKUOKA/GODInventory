@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GODInventory.MyLinq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,6 +62,15 @@ namespace GODInventoryWinForm
                         if (File.Exists(path))
                         {
                             new ImportReceivedTextForm_Auto(path).ShowDialog();
+                            using (var ctx = new GODDbContext())
+                            {
+                                // 对于受领没有差异的，设置订单完成
+
+                                string sql = String.Format("UPDATE t_orderdata SET `Status`= {1}  WHERE `Status`= {0} AND `受領数量`=`実際出荷数量` ", (int)OrderStatus.Received, (int)OrderStatus.Completed);
+                                ctx.Database.ExecuteSqlCommand(sql);
+                                                                
+
+                            }
                         }
 
                     }
