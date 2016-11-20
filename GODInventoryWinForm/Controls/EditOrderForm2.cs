@@ -150,6 +150,13 @@ namespace GODInventoryWinForm.Controls
         {
             if (orderQuantityTextBox11.Text.Length > 0) {
 
+                //控制 実際出荷数量 <発注数量
+                if (Order.発注数量 < Convert.ToInt32(orderQuantityTextBox11.Text))
+                {
+                    MessageBox.Show("実際出荷数量 >発注数量,", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 Order.実際出荷数量 = Convert.ToInt32(orderQuantityTextBox11.Text);
                 if (Order.最小発注単位数量 > 0)
                 {

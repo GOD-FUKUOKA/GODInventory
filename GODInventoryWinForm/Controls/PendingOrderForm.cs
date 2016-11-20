@@ -207,6 +207,15 @@ namespace GODInventoryWinForm.Controls
             if (実際出荷数量Column.Index == e.ColumnIndex)
             {
                 var order = cell.OwningRow.DataBoundItem as v_pendingorder;
+                //控制 実際出荷数量 <発注数量
+                List<v_pendingorder> orders = GetDataGridViewBoundOrders();
+                IEnumerable<int> orderIds = GetChangedOrderIds();
+                var pendingorder = orders.Find(o => o.id受注データ == Convert.ToInt32(cellKey));
+                if (pendingorder.発注数量 < (int)cell.Value)
+                {
+                    MessageBox.Show("実際出荷数量 >発注数量,", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 order.実際出荷数量 = (int)cell.Value;
                 if (order.最小発注単位数量 > 0)
                 {

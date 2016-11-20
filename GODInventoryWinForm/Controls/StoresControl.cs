@@ -27,7 +27,7 @@ namespace GODInventoryWinForm.Controls
             int iRow = dataGridView1.CurrentCell.OwningRow.Index;
             var oids = GetOrderIdsBySelectedGridCell();
 
-            if (oids.Count() > 0)
+            if (oids.Count() > 0 && oids[0] != null)
             {
                 var form = new StoresManagement(oids, "Update");
 

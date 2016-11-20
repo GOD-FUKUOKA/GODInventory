@@ -51,8 +51,8 @@ namespace GODInventoryWinForm.Controls
             int i = dataGridView1.CurrentCell.OwningColumn.Index;
             int iRow = dataGridView1.CurrentCell.OwningRow.Index;
             var oids = GetOrderIdsBySelectedGridCell();
-          
-            if (oids.Count() == 1)
+
+            if (oids.Count() == 1 && oids[0] != null )
             {
                 var form = new ProductsManagement(oids,"Update");
             
