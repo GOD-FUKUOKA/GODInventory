@@ -99,6 +99,48 @@ namespace GODInventory.ViewModel.EDI
 
         }
 
+        // pad right with ' '
+        public static byte[] ShiftJisSpacePadRight(byte[] bytes, int length)
+        {
+
+            List<byte> new_bytes = new List<byte>(bytes);
+            int delta = length - bytes.Length;
+
+            if (delta > 0)
+            {
+                while (new_bytes.Count< length)
+                {
+                    new_bytes.Add(0x81);
+                    new_bytes.Add(0x40);
+                }
+                return new_bytes.ToArray();
+            }
+            else
+            {
+                return bytes;
+            }
+        }
+
+        // pad right with ' '
+        public static byte[] PadRightBytes(byte[] bytes, int length)
+        {
+            List<byte> new_bytes = new List<byte>(bytes);
+            int delta = length - bytes.Length;
+
+            if (delta > 0)
+            {
+                for (int i = 0; i < delta; i++)
+                {
+                    new_bytes.Add(0x20);
+                }
+                return new_bytes.ToArray();
+            }
+            else
+            {
+                return bytes;
+            }
+
+        }
 
         public static ASNHeadModel GenerateASNTxt(string path, List<t_orderdata> orders)
         {

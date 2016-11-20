@@ -439,5 +439,16 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
             InitializeCanceledOrder();
         }
 
+        private void printForShipperToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+            var row = shipNODataGridView.CurrentRow;
+            var gorder = row.DataBoundItem as v_groupedorder;
+            var orders = OrderSqlHelper.OrderListByShipNO(entityDataSource1, gorder.ShipNO);
+
+            shippingItemsReportForm.InitializeDataSource(orders);
+            shippingItemsReportForm.ShowDialog();
+        }
+
     }
 }

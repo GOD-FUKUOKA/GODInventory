@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.uploadForEDIButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -59,7 +59,7 @@
             this.重量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.printForShipperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printForShipperToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.printForEDIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.canceledTabPage = new System.Windows.Forms.TabPage();
             this.uploadAsnButton = new System.Windows.Forms.Button();
@@ -116,6 +116,7 @@
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.canceledBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.printForShipperToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.pendingTabPage.SuspendLayout();
@@ -276,28 +277,29 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lockToolStripMenuItem,
             this.unlockToolStripMenuItem,
-            this.editToolStripMenuItem});
+            this.editToolStripMenuItem,
+            this.printForShipperToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(131, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 114);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.lockToolStripMenuItem.Text = "配車表ﾛｯｸ";
             this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
             // 
             // unlockToolStripMenuItem
             // 
             this.unlockToolStripMenuItem.Name = "unlockToolStripMenuItem";
-            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.unlockToolStripMenuItem.Text = "ﾛｯｸ解消";
             this.unlockToolStripMenuItem.Click += new System.EventHandler(this.unlockToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.editToolStripMenuItem.Text = "編集";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
@@ -366,8 +368,8 @@
             // 県別Column1
             // 
             this.県別Column1.DataPropertyName = "県別";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle3;
             this.県別Column1.HeaderText = "県別";
             this.県別Column1.Name = "県別Column1";
             this.県別Column1.ReadOnly = true;
@@ -399,17 +401,17 @@
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.printForShipperToolStripMenuItem,
+            this.printForShipperToolStripMenuItem2,
             this.printForEDIToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(197, 48);
             // 
-            // printForShipperToolStripMenuItem
+            // printForShipperToolStripMenuItem2
             // 
-            this.printForShipperToolStripMenuItem.Name = "printForShipperToolStripMenuItem";
-            this.printForShipperToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.printForShipperToolStripMenuItem.Text = "ピッキングリスト印刷";
-            this.printForShipperToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
+            this.printForShipperToolStripMenuItem2.Name = "printForShipperToolStripMenuItem2";
+            this.printForShipperToolStripMenuItem2.Size = new System.Drawing.Size(196, 22);
+            this.printForShipperToolStripMenuItem2.Text = "ピッキングリスト印刷";
+            this.printForShipperToolStripMenuItem2.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // printForEDIToolStripMenuItem
             // 
@@ -868,6 +870,13 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // printForShipperToolStripMenuItem1
+            // 
+            this.printForShipperToolStripMenuItem1.Name = "printForShipperToolStripMenuItem1";
+            this.printForShipperToolStripMenuItem1.Size = new System.Drawing.Size(196, 22);
+            this.printForShipperToolStripMenuItem1.Text = "ピッキングリスト印刷";
+            this.printForShipperToolStripMenuItem1.Click += new System.EventHandler(this.printForShipperToolStripMenuItem1_Click);
+            // 
             // ShippingOrderForm
             // 
             this.ClientSize = new System.Drawing.Size(917, 369);
@@ -970,7 +979,7 @@
         private System.Windows.Forms.DataGridView canceledDataGridView;
         private System.Windows.Forms.Button uploadAsnButton;
         private System.Windows.Forms.BindingSource canceledBindingSource;
-        private System.Windows.Forms.ToolStripMenuItem printForShipperToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printForShipperToolStripMenuItem2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 配车单单号Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品日Column1;
@@ -990,5 +999,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注日Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 備考Column1;
+        private System.Windows.Forms.ToolStripMenuItem printForShipperToolStripMenuItem1;
     }
 }

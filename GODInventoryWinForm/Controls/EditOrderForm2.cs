@@ -36,6 +36,10 @@ namespace GODInventoryWinForm.Controls
 
         private void InitializeOrder()
         {
+            this.qtyChangeReasonComboBox.ValueMember = "ID";
+            this.qtyChangeReasonComboBox.DisplayMember = "FullName";
+            this.qtyChangeReasonComboBox.DataSource = OrderQuantityChangeReasonRespository.ToList();
+
             var ctx = entityDataSource1.DbContext as GODDbContext;
             Order = ctx.t_orderdata.Find(OrderId);            
             Stockrec = ( from s in ctx.t_stockrec
@@ -75,6 +79,8 @@ namespace GODInventoryWinForm.Controls
 
             this.cancelComboBox.Text = Order.キャンセル;
 
+            this.qtyChangeReasonComboBox.SelectedValue = Order.訂正理由区分;
+
             if (Order.Status == OrderStatus.Cancelled || Order.Status == OrderStatus.WaitToShip)
             {
                 this.cancelComboBox.Enabled = true;
@@ -87,20 +93,16 @@ namespace GODInventoryWinForm.Controls
 
         private void submitFormButton_Click(object sender, EventArgs e)
         {
-            if (Order.Status == OrderStatus.WaitToShip)
+
+            if (Order.Status == OrderStatus.Pending || Order.Status == OrderStatus.Duplicated)
             {
                 if (Order.キャンセル == "yes")
                 {
                     Order.実際出荷数量 = 0;
                     Order.Status = OrderStatus.Cancelled;
                 }
-
-                Stockrec.数量 = -Order.実際出荷数量;
+                Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
                 entityDataSource1.SaveChanges();
-
-                var stockrecs = new List<t_stockrec>() { Stockrec };
-                var ctx = entityDataSource1.DbContext as GODDbContext;
-                OrderSqlHelper.UpdateStockState(ctx, stockrecs);
 
             }
             else if (Order.Status == OrderStatus.Cancelled)
@@ -114,9 +116,21 @@ namespace GODInventoryWinForm.Controls
                     entityDataSource1.SaveChanges();
                 }
             }
-            else { 
-            
-            
+            else {
+
+                if (Order.キャンセル == "yes")
+                {
+                    Order.実際出荷数量 = 0;
+                    Order.Status = OrderStatus.Cancelled;
+                }
+                Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
+
+                Stockrec.数量 = -Order.実際出荷数量;
+                entityDataSource1.SaveChanges();
+
+                var stockrecs = new List<t_stockrec>() { Stockrec };
+                var ctx = entityDataSource1.DbContext as GODDbContext;
+                OrderSqlHelper.UpdateStockState(ctx, stockrecs);            
             }
                 
             this.Close();

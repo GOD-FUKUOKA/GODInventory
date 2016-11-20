@@ -87,7 +87,7 @@ namespace GODInventoryWinForm.Controls
 
                 //string sql2 = String.Format( "SELECT `自社コード`, SUM(o.`実際出荷数量`) FROM t_orderdata o WHERE o.`Status`={0} GROUP by o.`自社コード`;", (int)OrderStatus.Pending);
                 var pendingOrders = (from o in ctx.t_orderdata
-                                     where o.Status == OrderStatus.NotifyShipper
+                                     where o.Status == OrderStatus.NotifyShipper ||  o.Status == OrderStatus.WaitToShip
                                      group o by new { 自社コード = o.自社コード, 実際配送担当 = o.実際配送担当 } into g
                                      select new { 自社コード = g.Key.自社コード, 実際配送担当 = g.Key.実際配送担当, 数量 = g.Sum(o => o.実際出荷数量) }).ToList();
 

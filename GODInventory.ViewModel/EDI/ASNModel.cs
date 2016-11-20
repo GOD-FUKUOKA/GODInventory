@@ -184,7 +184,7 @@ namespace GODInventory.ViewModel.EDI
             this.head = head;
             this.entity = order;
 
-            this.データID = head.データID ; //1 データID               3  1
+            this.データID =  Encoding.ASCII.GetBytes("C01") ; //1 データID               3  1
             this.管理連番 = head.管理連番;  //2 管理連番                13  4
             this.システム管理日付 = head.システム管理日付; //3 システム管理日付        8 17
             this.データ作成日 = head.データ作成日;  //4 データ作成日            8 25
@@ -216,7 +216,6 @@ namespace GODInventory.ViewModel.EDI
             this.出荷日 = EDITxtHandler.DateToBytes(order.出荷日);//19 出荷日                8 106
             this.発注形態区分 = Encoding.ASCII.GetBytes(order.発注形態区分.ToString("D2")); //20 発注形態区分         2 114
 
-
             this.入力区分 = Encoding.ASCII.GetBytes("0") ;//21 入力区分       1 116
             this.直送区分 = Encoding.ASCII.GetBytes("0"); //22 直送区分       1 117
             this.運送区分 = Encoding.ASCII.GetBytes("1"); //23 運送区分       1 118
@@ -241,16 +240,20 @@ namespace GODInventory.ViewModel.EDI
             this.ＧＴＩＮ = EDITxtHandler.GetSpacedBytes(14); //34 ＧＴＩＮ           14 215
 
             var jis = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.発注品名漢字);
-            this.品名漢字 = EDITxtHandler.PadLeftBytes(jis, 20); //35 品名漢字       20 229
-
+            this.品名漢字 = EDITxtHandler.ShiftJisSpacePadRight(jis, 20); //35 品名漢字       20 229
+            Debug.Assert(this.品名漢字.Length == 20);
             jis = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.品名カナ);
-            this.品名カナ = EDITxtHandler.PadLeftBytes(jis, 25);//36 品名カナ      25 249
+            this.品名カナ = EDITxtHandler.PadRightBytes(jis, 25);//36 品名カナ      25 249
+            Debug.Assert(this.品名カナ.Length == 25);
 
             jis = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.発注規格名漢字);
-            this.規格名漢字 = EDITxtHandler.PadLeftBytes(jis, 20);//37 規格名漢字      20 274
+            this.規格名漢字 = EDITxtHandler.ShiftJisSpacePadRight(jis, 20);//37 規格名漢字      20 274
+            Debug.Assert(this.規格名漢字.Length == 20);
 
             jis = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.規格名カナ);
-            this.規格名カナ = EDITxtHandler.PadLeftBytes(jis, 25);//38 規格名カナ      25 294
+            this.規格名カナ = EDITxtHandler.PadRightBytes(jis, 25);//38 規格名カナ      25 294
+            Debug.Assert(this.規格名カナ.Length == 25);
+
             this.発注数 = Encoding.ASCII.GetBytes(order.発注数量.ToString("D6"));//39 発注数        6 319
             // 納品数 = 納品口数*口数 ?
             this.納品数 = Encoding.ASCII.GetBytes(order.実際出荷数量.ToString("D6")); //40 納品数        6 325
@@ -284,9 +287,9 @@ namespace GODInventory.ViewModel.EDI
             }
 
             var jis1 = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.納品場所名漢字);
-            this.納品場所名漢字 = EDITxtHandler.PadLeftBytes(jis1, 6); //54 納品場所名漢字    6 402
+            this.納品場所名漢字 = EDITxtHandler.ShiftJisSpacePadRight(jis1, 6); //54 納品場所名漢字    6 402
             var jis2 = EncodingUtility.ConvertUtf8ToShiftJisBytes(order.納品場所名カナ);
-            this.納品場所カナ = EDITxtHandler.PadLeftBytes(jis2, 6); //55 納品場所カナ         6 408
+            this.納品場所カナ = EDITxtHandler.PadRightBytes(jis2, 6); //55 納品場所カナ         6 408
             this.センター経由区分 = Encoding.ASCII.GetBytes(order.センター経由区分.ToString("D1")); //56 センター経由区分   1 414
             this.センターコード = Encoding.ASCII.GetBytes(order.センターコード.ToString("D5")); //57 センターコード    5 415
             this.便区分 = new Byte[1] { 0x30 };//58 便区分            1 420

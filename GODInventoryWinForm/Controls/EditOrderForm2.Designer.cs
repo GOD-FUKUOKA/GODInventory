@@ -37,7 +37,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.qtyChangeReasonTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cancelComboBox = new System.Windows.Forms.ComboBox();
             this.shipAtTextBox = new System.Windows.Forms.TextBox();
@@ -59,6 +58,7 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.qtyChangeReasonComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -122,8 +122,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.qtyChangeReasonComboBox);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.qtyChangeReasonTextBox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cancelComboBox);
             this.groupBox1.Controls.Add(this.shipperComboBox3);
@@ -161,13 +161,6 @@
             this.label7.Size = new System.Drawing.Size(91, 14);
             this.label7.TabIndex = 10000015;
             this.label7.Text = "数量变更理由";
-            // 
-            // qtyChangeReasonTextBox
-            // 
-            this.qtyChangeReasonTextBox.Location = new System.Drawing.Point(433, 179);
-            this.qtyChangeReasonTextBox.Name = "qtyChangeReasonTextBox";
-            this.qtyChangeReasonTextBox.Size = new System.Drawing.Size(190, 21);
-            this.qtyChangeReasonTextBox.TabIndex = 3;
             // 
             // label1
             // 
@@ -353,6 +346,15 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // qtyChangeReasonComboBox
+            // 
+            this.qtyChangeReasonComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.qtyChangeReasonComboBox.FormattingEnabled = true;
+            this.qtyChangeReasonComboBox.Location = new System.Drawing.Point(433, 178);
+            this.qtyChangeReasonComboBox.Name = "qtyChangeReasonComboBox";
+            this.qtyChangeReasonComboBox.Size = new System.Drawing.Size(190, 22);
+            this.qtyChangeReasonComboBox.TabIndex = 10000016;
+            // 
             // EditOrderForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -406,6 +408,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cancelComboBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox qtyChangeReasonTextBox;
+        private System.Windows.Forms.ComboBox qtyChangeReasonComboBox;
     }
 }
