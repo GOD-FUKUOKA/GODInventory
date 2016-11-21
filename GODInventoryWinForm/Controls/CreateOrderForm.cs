@@ -30,7 +30,7 @@ namespace GODInventoryWinForm.Controls
         private BindingList<t_orderdata> orderList;
         private List<t_pricelist> t_pricelistR;
         private ComboBox specialColumn;
-
+        private List<t_customers> customersList;
         private SelectProductForm selectProductForm;
 
         public CreateOrderForm()
@@ -41,12 +41,12 @@ namespace GODInventoryWinForm.Controls
 
             shopList = new List<t_shoplist>();
             locationList = new List<t_locations>();
-
+            customersList = new List<t_customers>();
             using (var ctx = new GODDbContext())
             {
 
                 shopList = ctx.t_shoplist.ToList();
-
+                customersList = ctx.t_customers.ToList();
                 locationList = ctx.t_locations.ToList();
                 t_pricelistR = ctx.t_pricelist.ToList();
 
@@ -66,6 +66,11 @@ namespace GODInventoryWinForm.Controls
             this.storeComboBox.DisplayMember = "店名";
             this.storeComboBox.ValueMember = "店番";
             this.storeComboBox.DataSource = shopList;
+
+            this.customerComboBox.DisplayMember = "FullName";
+            this.customerComboBox.ValueMember = "Id";
+             this.customerComboBox.DataSource = customersList;
+
 
             this.locationComboBox.DisplayMember = "納品場所名略称";
             this.locationComboBox.ValueMember = "Id";
@@ -295,7 +300,32 @@ namespace GODInventoryWinForm.Controls
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
+            if (customerIdTextBox.Text.Trim().Length > 0)
+            {
+                int storeId = Convert.ToInt32(customerIdTextBox.Text);
+                if (storeId > 0)
+                {
+                    var shops = this.customersList.Where(s => s.Id.ToString().Equals(storeId.ToString())).ToList();
+                    if (shops.Count > 0)
+                    {
+                        var store = shops.First();
+                        if (shops.Count == 1)
+                        {
+                            this.customerComboBox.SelectedValue = store.Id;
+                        }
+                    }
+                    else
+                    {
+                        errorProvider2.SetError(customerComboBox, String.Format("customer  {0}の店舗は登録されていません", storeId));
+                    }
 
+                }
+                else
+                {
+                    errorProvider2.SetError(customerComboBox, String.Format("customer  {0}の店舗は登録されていません", customerIdTextBox.Text));
+                }
+            
+            }
 
         }
 

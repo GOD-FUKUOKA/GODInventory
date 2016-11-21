@@ -26,17 +26,29 @@ namespace GODInventoryWinForm.Controls
                 {
 
                     t_shoplist order = ctx.t_shoplist.Find(itemlist[0]);
+                    if (order.店番!=null)
                     storeCodeTextBox.Text = order.店番.ToString();
+                    if (order.店名 != null)
                     storeNameTextBox.Text = order.店名;
+                    if (order.店名カナ != null)
                     textBox12.Text = order.店名カナ;
+                    if (order.配送担当 != null)
                     shipperTextBox.Text = order.配送担当;
+                    if (order.郵便番号 != null)
                     postalTextBox8.Text = order.郵便番号.ToString();
+                    if (order.県別 != null)
                     countyTextBox.Text = order.県別.ToString();
+                    if (order.県内エリア != null)
                     districtTextBox.Text = order.県内エリア.ToString();
+                    if (order.customerId != null)
                     customerTextBox11.Text = order.customerId.ToString();
+                    if (order.住所 != null)
                     addressTextBox1.Text = order.住所;
+                    if (order.電話番号 != null)
                     phoneTextBox2.Text = order.電話番号.ToString();
+                    if (order.営業担当 != null)
                     officerTextBox3.Text = order.営業担当.ToString();
+                    if (order.FAX番号 != null)
                     faxTextBox3.Text = order.FAX番号.ToString();
                 }
             }
