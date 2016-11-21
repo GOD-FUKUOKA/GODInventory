@@ -449,7 +449,14 @@ namespace GODInventory.ViewModel.EDI
             orderdata.納品先店舗コード = Convert.ToInt16(Encoding.ASCII.GetString(this.納品先店舗コード));
             orderdata.納品先店舗名漢字 = EncodingUtility.ConvertShiftJisToUtf8(this.納品先店舗名漢字).Trim();
             orderdata.納品先店舗名カナ = EncodingUtility.ConvertShiftJisToUtf8(this.納品先店舗名カナ).Trim();
-            orderdata.納品場所コード = Convert.ToInt16(Encoding.ASCII.GetString(this.納品場所コード));
+            if (EDITxtHandler.IsSpaceOnly(this.納品場所コード))
+            {
+                orderdata.納品場所コード = -1;
+            }
+            else {
+                orderdata.納品場所コード = Convert.ToInt16(Encoding.ASCII.GetString(this.納品場所コード));
+
+            }
             orderdata.納品場所名漢字 = EncodingUtility.ConvertShiftJisToUtf8(this.納品場所名漢字).Trim();
             orderdata.納品場所名カナ = EncodingUtility.ConvertShiftJisToUtf8(this.納品場所名カナ).Trim();
             orderdata.便区分 = Convert.ToInt16(Encoding.ASCII.GetString(this.便区分));

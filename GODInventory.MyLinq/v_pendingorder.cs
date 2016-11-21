@@ -69,15 +69,19 @@ namespace GODInventory.MyLinq
         public int 重量 { get; set; }
 
         public int 原単価_税抜_ { get; set; }
-
+        public double? 原単価_税込_ { get; set; }
 
         public int 原価金額_税抜_ { get; set; }
 
+        public double? 原価金額_税込_ { get; set; }
 
         public int 納品原価金額 { get; set; }
 
-
         public int? 売単価_税抜_ { get; set; }
+        public double? 売単価_税込_ { get; set; }
+
+        public double? 税額 { get; set; }
+        public double? 税率 { get; set; }
 
         public int 出荷業務仕入先コード { get; set; }
 

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.uploadForEDIButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -49,6 +49,7 @@
             this.lockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unlockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printForShipperToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.asnTabPage = new System.Windows.Forms.TabPage();
             this.ediDataGridView = new System.Windows.Forms.DataGridView();
             this.配车单单号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,7 +78,6 @@
             this.発注日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.備考Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shippedTabPage = new System.Windows.Forms.TabPage();
-            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             this.shippedDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -116,7 +116,9 @@
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.canceledBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.printForShipperToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pager3 = new GODInventoryWinForm.Controls.Pager();
+            this.canceledContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cancelConfirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.pendingTabPage.SuspendLayout();
@@ -135,6 +137,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.canceledBindingSource)).BeginInit();
+            this.canceledContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // uploadForEDIButton
@@ -280,7 +283,7 @@
             this.editToolStripMenuItem,
             this.printForShipperToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 92);
             // 
             // lockToolStripMenuItem
             // 
@@ -302,6 +305,13 @@
             this.editToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.editToolStripMenuItem.Text = "編集";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // printForShipperToolStripMenuItem1
+            // 
+            this.printForShipperToolStripMenuItem1.Name = "printForShipperToolStripMenuItem1";
+            this.printForShipperToolStripMenuItem1.Size = new System.Drawing.Size(196, 22);
+            this.printForShipperToolStripMenuItem1.Text = "ピッキングリスト印刷";
+            this.printForShipperToolStripMenuItem1.Click += new System.EventHandler(this.printForShipperToolStripMenuItem1_Click);
             // 
             // asnTabPage
             // 
@@ -368,8 +378,8 @@
             // 県別Column1
             // 
             this.県別Column1.DataPropertyName = "県別";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle1;
             this.県別Column1.HeaderText = "県別";
             this.県別Column1.Name = "県別Column1";
             this.県別Column1.ReadOnly = true;
@@ -560,21 +570,6 @@
             this.shippedTabPage.TabIndex = 3;
             this.shippedTabPage.Text = "出荷済み伝票";
             this.shippedTabPage.UseVisualStyleBackColor = true;
-            // 
-            // pager3
-            // 
-            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager3.AutoSize = true;
-            this.pager3.Location = new System.Drawing.Point(3, 307);
-            this.pager3.Name = "pager3";
-            this.pager3.NMax = 0;
-            this.pager3.PageCount = 0;
-            this.pager3.PageCurrent = 1;
-            this.pager3.PageSize = 5000;
-            this.pager3.Size = new System.Drawing.Size(903, 34);
-            this.pager3.TabIndex = 2;
-            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
             // 
             // shippedDataGridView
             // 
@@ -870,12 +865,33 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
-            // printForShipperToolStripMenuItem1
+            // pager3
             // 
-            this.printForShipperToolStripMenuItem1.Name = "printForShipperToolStripMenuItem1";
-            this.printForShipperToolStripMenuItem1.Size = new System.Drawing.Size(196, 22);
-            this.printForShipperToolStripMenuItem1.Text = "ピッキングリスト印刷";
-            this.printForShipperToolStripMenuItem1.Click += new System.EventHandler(this.printForShipperToolStripMenuItem1_Click);
+            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager3.AutoSize = true;
+            this.pager3.Location = new System.Drawing.Point(3, 307);
+            this.pager3.Name = "pager3";
+            this.pager3.NMax = 0;
+            this.pager3.PageCount = 0;
+            this.pager3.PageCurrent = 1;
+            this.pager3.PageSize = 5000;
+            this.pager3.Size = new System.Drawing.Size(903, 34);
+            this.pager3.TabIndex = 2;
+            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
+            // 
+            // canceledContextMenuStrip
+            // 
+            this.canceledContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cancelConfirmToolStripMenuItem});
+            this.canceledContextMenuStrip.Name = "canceledContextMenuStrip";
+            this.canceledContextMenuStrip.Size = new System.Drawing.Size(161, 48);
+            // 
+            // cancelConfirmToolStripMenuItem
+            // 
+            this.cancelConfirmToolStripMenuItem.Name = "cancelConfirmToolStripMenuItem";
+            this.cancelConfirmToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.cancelConfirmToolStripMenuItem.Text = "キャンセル確定";
             // 
             // ShippingOrderForm
             // 
@@ -907,6 +923,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.canceledBindingSource)).EndInit();
+            this.canceledContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1000,5 +1017,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注日Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 備考Column1;
         private System.Windows.Forms.ToolStripMenuItem printForShipperToolStripMenuItem1;
+        private System.Windows.Forms.ContextMenuStrip canceledContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem cancelConfirmToolStripMenuItem;
     }
 }

@@ -142,6 +142,19 @@ namespace GODInventory.ViewModel.EDI
 
         }
 
+        public static bool IsSpaceOnly(byte[] bytes )
+        {
+            bool allspace = true;
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                if (bytes[i] != 0x20)
+                {
+                    allspace = false;
+                    break;
+                }
+            }
+            return allspace;
+        }
         public static ASNHeadModel GenerateASNTxt(string path, List<t_orderdata> orders)
         {
             var directory_path = Path.GetDirectoryName(path);

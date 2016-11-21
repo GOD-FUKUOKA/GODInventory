@@ -24,7 +24,7 @@ namespace GODInventoryWinForm.Controls
         private Hashtable datagrid_changes = null;
         private List<t_stockstate> stockstates;
         private List<v_shipper> shipperList;
-        List<t_orderdata> Findorderdataresults;
+        //List<t_orderdata> Findorderdataresults;
         private BindingList<v_stockios> stockiosList;
         int RowRemark = 0;
         int cloumn = 0;
@@ -208,27 +208,28 @@ namespace GODInventoryWinForm.Controls
             {
                 var order = cell.OwningRow.DataBoundItem as v_pendingorder;
                 //控制 実際出荷数量 <発注数量
-                List<v_pendingorder> orders = GetDataGridViewBoundOrders();
-                IEnumerable<int> orderIds = GetChangedOrderIds();
-                var pendingorder = orders.Find(o => o.id受注データ == Convert.ToInt32(cellKey));
-                if (pendingorder.発注数量 < (int)cell.Value)
+
+                int new_qty = (int)cell.Value;
+                if (!EditOrderQuantity(order, new_qty))
                 {
                     MessageBox.Show("実際出荷数量 >発注数量,", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
-                }
-                order.実際出荷数量 = (int)cell.Value;
-                if (order.最小発注単位数量 > 0)
-                {
-                    order.納品口数 = (int)order.実際出荷数量 / order.最小発注単位数量;
-                }
+                }                
             }
 
 
             if (納品口数Column.Index == e.ColumnIndex)
             {
                 var order = cell.OwningRow.DataBoundItem as v_pendingorder;
-                order.納品口数 = (int)cell.Value;
-                order.実際出荷数量 = (int)order.納品口数 * order.最小発注単位数量;
+                int new_qty = (int)cell.Value * order.最小発注単位数量;
+
+                if (!EditOrderQuantity(order, new_qty))
+                {
+                    MessageBox.Show("実際出荷数量 >発注数量,", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+
             }
 
         }
@@ -1100,7 +1101,22 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         }
 
+        //验证 新的数量是否有效， 実際出荷数量 >発注数量
+        public bool EditOrderQuantity(v_pendingorder order, int new_qty)
+        {
+            if (order.発注数量 < new_qty) return false;
 
+            order.実際出荷数量 = new_qty;
+            if (order.最小発注単位数量 > 0)
+            {
+                order.納品口数 = (int)order.実際出荷数量 / order.最小発注単位数量;
+            }
+
+            order.原価金額_税抜_ = order.実際出荷数量 * order.原単価_税抜_;
+            order.原価金額_税込_ = order.実際出荷数量 * order.原単価_税込_;
+            order.税額 = order.原価金額_税抜_ * order.税率;
+            return true;
+        }
 
 
 
