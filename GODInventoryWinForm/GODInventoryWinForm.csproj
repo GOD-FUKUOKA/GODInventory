@@ -104,6 +104,12 @@
     <Compile Include="ConnectServerForReceivedOrderForm.Designer.cs">
       <DependentUpon>ConnectServerForReceivedOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CancelConfirmForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\CancelConfirmForm.Designer.cs">
+      <DependentUpon>CancelConfirmForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\InputStockBig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -375,6 +381,9 @@
     <Compile Include="WorkerArgument.cs" />
     <EmbeddedResource Include="ConnectServerForReceivedOrderForm.resx">
       <DependentUpon>ConnectServerForReceivedOrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CancelConfirmForm.resx">
+      <DependentUpon>CancelConfirmForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InputStockBig.resx">
       <DependentUpon>InputStockBig.cs</DependentUpon>
