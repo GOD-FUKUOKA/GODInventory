@@ -30,18 +30,29 @@ namespace GODInventoryWinForm.Controls
                 if (type == "Update")
                 {
                     t_itemlist order = ctx.t_itemlist.Find(itemlist[0]);
+                    if (order.自社コード != null)
                     InnerCodeTextBox.Text = order.自社コード.ToString();
+                    if (order.得意先 != null)
                     customerTextBox.Text = order.得意先;
+                    if (order.ジャンル != null)
                     genreComboBox.Text = order.ジャンル.ToString();
+                    if (order.商品名 != null)
                     productNameTextBox12.Text = order.商品名;
+                    if (order.規格 != null)
                     specTextBox.Text = order.規格;
+                    if (order.PT入数 != null)
                     moqTextBox8.Text = order.PT入数.ToString();
+                    if (order.JANコード != null)
                     janCodeTextBox.Text = order.JANコード.ToString();
+                    if (order.インストアコード != null)
                     instoreCodeTextBox3.Text = order.インストアコード.ToString();
+                    if (order.単品重量 != null)
                     unitWeightTextBox11.Text = order.単品重量.ToString();
+                    if (order.単位 != null)
                     unitTextBox1.Text = order.単位;
+                    if (order.PT単位か != null)
                     textBox2.Text = order.PT単位か.ToString();
-
+                    if (order.商品コード != null)
                     this.productCodeTextBox.Text = order.商品コード.ToString();
 
                 }
