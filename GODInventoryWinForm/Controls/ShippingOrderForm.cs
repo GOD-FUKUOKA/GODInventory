@@ -451,5 +451,18 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
             shippingItemsReportForm.ShowDialog();
         }
 
+        private void cancelConfirmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //
+            var form = new CancelConfirmForm( );
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+
+                this.entityDataSource1.Refresh();
+
+            }
+        }
+
     }
 }

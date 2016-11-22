@@ -16,5 +16,24 @@ namespace GODInventoryWinForm.Controls
         {
             InitializeComponent();
         }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+          //  startDateTimePicker
+
+            var startAt = this.startDateTimePicker.Value.Date;
+
+            var endAt = this.dateTimePicker1.Value.Date;
+
+     
+          
+
+        }
     }
 }
