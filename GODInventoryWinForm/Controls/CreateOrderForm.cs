@@ -72,8 +72,8 @@ namespace GODInventoryWinForm.Controls
              this.customerComboBox.DataSource = customersList;
 
 
-            this.locationComboBox.DisplayMember = "納品場所名略称";
-            this.locationComboBox.ValueMember = "Id";
+            //this.locationComboBox.DisplayMember = "納品場所名略称";
+            //this.locationComboBox.ValueMember = "Id";
 
 
             this.dataGridView1.AutoGenerateColumns = false;
@@ -178,6 +178,8 @@ namespace GODInventoryWinForm.Controls
                     foreach (var o in newOrderList)
                     {
                         v_itemprice selectedItem = itemPriceList.Find(i => i.自社コード == o.自社コード);
+                        SetOrderBaseInfo(o);
+
                         o.税率 = 0.08;
                         o.特価区分 = 0;
                         o.PB区分 = 0;
@@ -191,14 +193,14 @@ namespace GODInventoryWinForm.Controls
                         o.発注形態区分 = Convert.ToInt16(this.orderReasonComboBox.SelectedValue);
                         o.発注形態名称漢字 = this.orderReasonComboBox.Text;
                         //o.原単価_税抜_ = (int)selectedItem.原単価;
-                        o.原単価_税込_ = o.原単価_税抜_ * (1+o.税率);
+                        o.原単価_税込_ = (int)(o.原単価_税抜_ * (1+o.税率));
 
                         o.原価金額_税抜_ = o.実際出荷数量 * o.原単価_税抜_;
-                        o.原価金額_税込_ = o.実際出荷数量 * o.原単価_税込_;
+                        o.原価金額_税込_ = (int)(o.実際出荷数量 * o.原単価_税込_);
 
                         //o.売単価_税抜_ = (int)selectedItem.売単価;
-                        o.売単価_税込_ = o.売単価_税抜_ * (1+o.税率) ;
-                        o.税額 = o.原価金額_税抜_ * o.税率;
+                        o.売単価_税込_ = (int)(o.売単価_税抜_ * (1 + o.税率));
+                        o.税額 = (int)(o.原価金額_税抜_ * o.税率);
 
                         o.発注品名漢字 = o.品名漢字;
                         o.発注規格名漢字 = o.規格名漢字;
@@ -261,21 +263,22 @@ namespace GODInventoryWinForm.Controls
                     if (shops.Count > 0)
                     {
                         var store = shops.First();
-                        var locations = this.locationList.Where(l => l.店舗コード == store.店番).ToList();
-                        this.locationComboBox.DisplayMember = "納品場所名略称";
-                        this.locationComboBox.ValueMember = "Id";
+                        var locations = this.locationList.Where(l => l.店舗コード == store.店番).Select(l => new { l.納品場所コード, l.納品場所名漢字 }).ToList();
+                        locations.Insert(0, new { 納品場所コード = (short)-1, 納品場所名漢字 = "" });
+                        this.locationComboBox.DisplayMember = "納品場所名漢字";
+                        this.locationComboBox.ValueMember = "納品場所コード";
                         this.locationComboBox.DataSource = locations;
-                        if (locations.Count > 0)
+                        if (locations.Count > 1)
                         {
+
                             this.locationTextBox.Enabled = true;
                             this.locationComboBox.SelectedIndex = 0;
                             this.locationTextBox.Text = this.locationComboBox.SelectedValue.ToString();
                         }
-                        else
-                        {
+                        else {
                             this.locationTextBox.Enabled = false;
-                            this.locationTextBox.Text = "";
                         }
+                        
 
                         if (shops.Count == 1)
                         {
@@ -338,20 +341,15 @@ namespace GODInventoryWinForm.Controls
                 MessageBox.Show("超えた長さ");
                 return;
             }
-
+            var storeId = Convert.ToInt16(this.storeCodeTextBox.Text);
             var locationId = Convert.ToInt16(locationTextBox.Text);
-            var locations = this.locationComboBox.DataSource as List<t_locations>;
-            if (locations != null)
-            {
-                if (locations.Exists(i => i.納品場所コード == locationId))
-                {
-                    if ((int)locationComboBox.SelectedValue != locationId)
+
+                    if ((short)locationComboBox.SelectedValue != locationId)
                     {
                         //Fix it later
-                        //this.locationComboBox.
+                        this.locationComboBox.SelectedValue = locationId;
                     }
-                }
-            }
+          
         }
 
 
@@ -551,10 +549,24 @@ namespace GODInventoryWinForm.Controls
                 order.納品予定日 = this.deliveredAtDateTimePicker.Value.Date;
                 if (this.locationTextBox.Enabled)
                 {
-                    order.納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
+                    var lid = (short)Convert.ToInt16(this.locationComboBox.SelectedValue);
+                    if (lid > 0)
+                    {
+                        var location = this.locationList.FirstOrDefault(l => l.店舗コード == order.店舗コード && l.納品場所コード == lid);
+                        order.納品場所コード = location.納品場所コード;
+                        order.納品場所名漢字 = location.納品場所名漢字;
+                        order.納品場所名カナ = location.納品場所名カナ;
+                    }
+                    else {
+                        order.納品場所コード = -1;
+                        order.納品場所名漢字 = "";
+                        order.納品場所名カナ = "";
+                    }
                 }
                 else {
                     order.納品場所コード = -1;
+                    order.納品場所名漢字 = "";
+                    order.納品場所名カナ = "";
                 }
                 //order.納品先店舗名漢字 = this.locationComboBox.Text;
                 order.発注形態区分 = (short)this.orderReasonComboBox.SelectedValue;
@@ -748,6 +760,49 @@ namespace GODInventoryWinForm.Controls
         private void locationComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             locationTextBox.Text = locationComboBox.SelectedValue.ToString();
+        }
+
+
+        private void SetOrderBaseInfo(t_orderdata order)
+        {
+            order.法人コード = Convert.ToInt16(this.customerIdTextBox.Text);
+            order.法人名漢字 = this.customerComboBox.Text;
+
+            order.部門コード = Convert.ToInt16(this.textBox5.Text);
+            order.納品予定日 = this.deliveredAtDateTimePicker.Value.Date;
+            if (this.locationTextBox.Enabled)
+            {
+                var lid = (short)Convert.ToInt16(this.locationComboBox.SelectedValue);
+                if (lid >= 0)
+                {
+                    var location = this.locationList.FirstOrDefault(l => l.店舗コード == order.店舗コード && l.納品場所コード == lid);
+                    order.納品場所コード = location.納品場所コード;
+                    order.納品場所名漢字 = location.納品場所名漢字;
+                    order.納品場所名カナ = location.納品場所名カナ;
+                }
+                else
+                {
+                    order.納品場所コード = -1;
+                    order.納品場所名漢字 = "";
+                    order.納品場所名カナ = "";
+                }
+            }
+            else
+            {
+                order.納品場所コード = -1;
+                order.納品場所名漢字 = "";
+                order.納品場所名カナ = "";
+            }
+            //order.納品先店舗名漢字 = this.locationComboBox.Text;
+            order.発注形態区分 = (short)this.orderReasonComboBox.SelectedValue;
+            order.発注形態名称漢字 = this.orderReasonComboBox.Text;
+        
+        }
+
+        private void customerComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            customerIdTextBox.Text = customerComboBox.SelectedValue.ToString();
+
         }
     }
 }
