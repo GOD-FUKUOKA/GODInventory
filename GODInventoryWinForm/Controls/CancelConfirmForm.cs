@@ -12,6 +12,9 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class CancelConfirmForm : Form
     {
+        public DateTime CHUHERI;
+        public DateTime NAPINRI;
+
         public CancelConfirmForm()
         {
             InitializeComponent();
@@ -27,11 +30,12 @@ namespace GODInventoryWinForm.Controls
         {
           //  startDateTimePicker
 
-            var startAt = this.startDateTimePicker.Value.Date;
+            CHUHERI = this.startDateTimePicker.Value.Date;
 
-            var endAt = this.dateTimePicker1.Value.Date;
+            NAPINRI = this.dateTimePicker1.Value.Date;
 
-     
+            this.Close();
+
           
 
         }
