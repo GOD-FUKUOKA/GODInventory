@@ -419,7 +419,16 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 string sql = String.Format("UPDATE t_orderdata SET `shipNO`='{1}' WHERE `Status`= {0}", (int)OrderStatus.Cancelled, shipNo);
 
                 List<string> shipNOs = new List<string>() { shipNo };
-                ctx.Database.ExecuteSqlCommand(sql);
+                //ago
+                //  ctx.Database.ExecuteSqlCommand(sql);
+                //
+
+                for (int i = 0; i < canelorders.Count; i++)
+                {
+                    t_orderdata order = ctx.t_orderdata.Find(canelorders[i].id受注データ);
+                    order.ShipNO = shipNo;
+                }
+                ctx.SaveChanges();
 
                 OrderSqlHelper.GenerateASN(shipNOs);
 
@@ -478,7 +487,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 {
                     for (int i = 0; i < orders.Count; i++)
                     {
-                       
+
                         t_orderdata order = ctx.t_orderdata.Find(orders[i].id受注データ);
                         orders[i].出荷日 = CHUHERI;
                         orders[i].納品日 = CHUHERI;
