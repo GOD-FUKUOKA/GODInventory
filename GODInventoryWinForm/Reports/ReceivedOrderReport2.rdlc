@@ -1155,7 +1155,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>出荷業務仕入先コード</Value>
+                              <Value>出荷業務仕入先名</Value>
                               <Style>
                                 <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>

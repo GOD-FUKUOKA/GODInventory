@@ -11,6 +11,7 @@ using GODInventory.MyLinq;
 using GODInventory.ViewModel;
 using Microsoft.Reporting.WinForms;
 using GODInventory.ViewModel.EDI;
+using System.Diagnostics;
 
 
 namespace GODInventoryWinForm.Controls
@@ -123,6 +124,7 @@ namespace GODInventoryWinForm.Controls
             // ASN is printing.
             var order = OrderEnities.First();
             using (var ctx = new GODDbContext()) {
+                var oids = OrderEnities.Select(o => o.id受注データ).ToList();
 
                 var edidata = (from o in ctx.t_edidata
                                where o.管理連番 == order.ASN管理連番
@@ -130,6 +132,10 @@ namespace GODInventoryWinForm.Controls
 
                 edidata.is_printed = true;
                 edidata.printed_at = DateTime.Now;
+
+                string sql = string.Format("UPDATE t_orderdata SET `Status`={1}  WHERE `id受注データ` in ({0})", String.Join(",", oids), (int)OrderStatus.Shipped);
+                int count = ctx.Database.ExecuteSqlCommand(sql);
+                Debug.Assert(count == OrderEnities.Count);
                 ctx.SaveChanges();
             }
         }

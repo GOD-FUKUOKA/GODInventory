@@ -404,7 +404,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1076,13 +1075,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.65684cm</Width>
+              <Width>1.5907cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.22849cm</Width>
+              <Width>2.42691cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.71849cm</Width>
+              <Width>1.58621cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.24686cm</Width>
@@ -1304,7 +1303,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!店舗名漢字.Value</Value>
+                              <Value>="" &amp; Fields!店舗コード.Value &amp;  " " &amp; Fields!店舗名漢字.Value</Value>
                               <Style>
                                 <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -1327,6 +1326,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>

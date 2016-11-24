@@ -36,6 +36,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.qtyChangeReasonComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cancelComboBox = new System.Windows.Forms.ComboBox();
@@ -58,7 +59,6 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.qtyChangeReasonComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -152,6 +152,15 @@
             this.groupBox1.Size = new System.Drawing.Size(647, 225);
             this.groupBox1.TabIndex = 10000006;
             this.groupBox1.TabStop = false;
+            // 
+            // qtyChangeReasonComboBox
+            // 
+            this.qtyChangeReasonComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.qtyChangeReasonComboBox.FormattingEnabled = true;
+            this.qtyChangeReasonComboBox.Location = new System.Drawing.Point(433, 178);
+            this.qtyChangeReasonComboBox.Name = "qtyChangeReasonComboBox";
+            this.qtyChangeReasonComboBox.Size = new System.Drawing.Size(190, 22);
+            this.qtyChangeReasonComboBox.TabIndex = 10000016;
             // 
             // label7
             // 
@@ -323,9 +332,9 @@
             // 
             this.submitFormButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.submitFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.submitFormButton.Location = new System.Drawing.Point(451, 259);
+            this.submitFormButton.Location = new System.Drawing.Point(443, 259);
             this.submitFormButton.Name = "submitFormButton";
-            this.submitFormButton.Size = new System.Drawing.Size(100, 30);
+            this.submitFormButton.Size = new System.Drawing.Size(108, 30);
             this.submitFormButton.TabIndex = 0;
             this.submitFormButton.Text = "保存";
             this.submitFormButton.UseVisualStyleBackColor = true;
@@ -337,7 +346,7 @@
             this.cancelFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cancelFormButton.Location = new System.Drawing.Point(557, 259);
             this.cancelFormButton.Name = "cancelFormButton";
-            this.cancelFormButton.Size = new System.Drawing.Size(100, 30);
+            this.cancelFormButton.Size = new System.Drawing.Size(108, 30);
             this.cancelFormButton.TabIndex = 1;
             this.cancelFormButton.Text = "閉じる";
             this.cancelFormButton.UseVisualStyleBackColor = true;
@@ -345,15 +354,6 @@
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // qtyChangeReasonComboBox
-            // 
-            this.qtyChangeReasonComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.qtyChangeReasonComboBox.FormattingEnabled = true;
-            this.qtyChangeReasonComboBox.Location = new System.Drawing.Point(433, 178);
-            this.qtyChangeReasonComboBox.Name = "qtyChangeReasonComboBox";
-            this.qtyChangeReasonComboBox.Size = new System.Drawing.Size(190, 22);
-            this.qtyChangeReasonComboBox.TabIndex = 10000016;
             // 
             // EditOrderForm2
             // 

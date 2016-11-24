@@ -1155,7 +1155,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>出荷業務仕入先コード</Value>
+                              <Value>出荷業務仕入先名</Value>
                               <Style>
                                 <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -1587,9 +1587,9 @@
         <Value>stamp</Value>
         <Sizing>FitProportional</Sizing>
         <Top>19.59401cm</Top>
-        <Left>6.22275cm</Left>
-        <Height>1.92333cm</Height>
-        <Width>5.09801cm</Width>
+        <Left>3.7235cm</Left>
+        <Height>3.69604cm</Height>
+        <Width>9.54301cm</Width>
         <ZIndex>16</ZIndex>
         <Style>
           <Border>
@@ -1898,7 +1898,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>8.66584in</Height>
+    <Height>9.29084in</Height>
     <Style>
       <Border />
     </Style>

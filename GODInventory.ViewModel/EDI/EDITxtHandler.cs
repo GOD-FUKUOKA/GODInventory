@@ -112,7 +112,7 @@ namespace GODInventory.ViewModel.EDI
         public static byte[] ShiftJisSpacePadRight(byte[] bytes, int length)
         {
 
-            List<byte> new_bytes = new List<byte>(bytes);
+            List<byte> new_bytes = new List<byte>(length);
             int delta = length - bytes.Length;
 
             if (delta > 0)
@@ -140,14 +140,29 @@ namespace GODInventory.ViewModel.EDI
         // pad right with ' '
         public static byte[] PadRightBytes(byte[] bytes, int length)
         {
-            List<byte> new_bytes = new List<byte>(bytes);
+            List<byte> new_bytes = new List<byte>(length);
             int delta = length - bytes.Length;
 
             if (delta > 0)
             {
-                for (int i = 0; i < delta; i++)
+                for (int i = 0; i < length; i++)
                 {
-                    new_bytes.Add(0x20);
+                    if (i < bytes.Length)
+                    {
+                        new_bytes.Add(bytes[i]);
+                    }
+                    else
+                    {
+                        new_bytes.Add(0x20);
+                    }
+                }
+                return new_bytes.ToArray();
+            }
+            else if (delta < 0)
+            {
+                while (new_bytes.Count < length)
+                {
+                    new_bytes.Add(bytes[new_bytes.Count]);
                 }
                 return new_bytes.ToArray();
             }

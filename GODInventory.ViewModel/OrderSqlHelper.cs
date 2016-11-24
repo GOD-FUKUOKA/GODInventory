@@ -293,14 +293,20 @@ namespace GODInventory.ViewModel
             return q;
         }
 
-        public static IQueryable<t_orderdata> CanceledOrderSql(EntityDataSource entityDataSource1)
+        public static List<t_orderdata> CanceledOrderSql(EntityDataSource entityDataSource1)
         {
-            var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
+            //由于entityDataSource1 缓存问题，所以使用新连接
+            List<t_orderdata> list = null;
+            using (GODDbContext ctx = new GODDbContext())
+            {
+
+                list = (from t_orderdata o in ctx.t_orderdata
                      where o.Status == OrderStatus.Cancelled
                      orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                      select o
-                     );
-            return q;
+                         ).ToList();
+            }
+            return list;
         }
 
         public static IQueryable<t_orderdata> ReceivedOrderSql(EntityDataSource entityDataSource1)
@@ -354,6 +360,8 @@ namespace GODInventory.ViewModel
                           where o.ShipNO == shipNo
                           select new v_pendingorder
                           {
+                              id受注データ = o.id受注データ,
+                              ASN管理連番 = o.ASN管理連番,
                               出荷No = o.出荷No,
                               店舗コード = o.店舗コード,
                               伝票番号 = o.伝票番号,

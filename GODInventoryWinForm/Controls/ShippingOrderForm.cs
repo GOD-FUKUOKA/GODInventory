@@ -23,7 +23,6 @@ namespace GODInventoryWinForm.Controls
         public List<t_orderdata> orderList;
         public List<t_orderdata> canceledOrderList;
         public SendASNForm sendForm;
-        List<t_orderdata> canelorders;
 
         public ShippingOrderForm()
         {
@@ -182,9 +181,9 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 File.Copy(path, newPath, true);
 
                 // 上传ASN
-                sendForm.Mid = mid;
-                sendForm.IsCanceledOrder = false;
-                sendForm.ShowDialog();
+                //sendForm.Mid = mid;
+                //sendForm.IsCanceledOrder = false;
+                //sendForm.ShowDialog();
 
             }
 
@@ -413,42 +412,46 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
         private void canceledButton1_Click(object sender, EventArgs e)
         {
-            using (var ctx = new GODDbContext())
+            List<t_orderdata> orders = new List<t_orderdata>();
+            foreach (DataGridViewRow row in canceledDataGridView.SelectedRows)
             {
-                string shipNo = DateTime.Now.ToString("yyyyMMddHHmmss");
-                string sql = String.Format("UPDATE t_orderdata SET `shipNO`='{1}' WHERE `Status`= {0}", (int)OrderStatus.Cancelled, shipNo);
-
-                List<string> shipNOs = new List<string>() { shipNo };
-                //ago
-                //  ctx.Database.ExecuteSqlCommand(sql);
-                //
-
-                for (int i = 0; i < canelorders.Count; i++)
-                {
-                    t_orderdata order = ctx.t_orderdata.Find(canelorders[i].id受注データ);
-                    order.ShipNO = shipNo;
-                }
-                ctx.SaveChanges();
-
-                OrderSqlHelper.GenerateASN(shipNOs);
-
-                // 生成ASN
-                long mid = OrderSqlHelper.GenerateASN2(ctx, shipNOs);
-
-                var path = EDITxtHandler.BuildASNFilePath(mid);
-                var newPath = Path.Combine(Properties.Settings.Default.NFWEInstallDir, @"NYOTEI\NYOTEI.txt");
-
-                // copy for later send
-                File.Copy(path, newPath, true);
-
-                // 上传ASN,
-                // 联调暂停 上传ASN， 
-                //sendForm.Mid = mid;
-                //sendForm.IsCanceledOrder = true;
-                //sendForm.ShowDialog();
-
+                var order = row.DataBoundItem as t_orderdata;
+                orders.Add(order);
             }
-            InitializeCanceledOrder();
+            if (orders.Count > 0)
+            {
+                var oids = orders.Select(o => o.id受注データ).ToList();
+                using (var ctx = new GODDbContext())
+                {
+                    string shipNo = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    string sql = String.Format("UPDATE t_orderdata SET `shipNO`='{1}' WHERE `id受注データ` in( {0} )", string.Join(",", oids), shipNo);
+
+                    List<string> shipNOs = new List<string>() { shipNo };                   
+                    ctx.Database.ExecuteSqlCommand(sql);
+
+                    OrderSqlHelper.GenerateASN(shipNOs);
+
+                    // 生成ASN
+                    long mid = OrderSqlHelper.GenerateASN2(ctx, shipNOs);
+
+                    var path = EDITxtHandler.BuildASNFilePath(mid);
+                    var newPath = Path.Combine(Properties.Settings.Default.NFWEInstallDir, @"NYOTEI\NYOTEI.txt");
+
+                    // copy for later send
+                    File.Copy(path, newPath, true);
+
+                    // 上传ASN,
+                    // 联调暂停 上传ASN， 
+                    //sendForm.Mid = mid;
+                    //sendForm.IsCanceledOrder = true;
+                    //sendForm.ShowDialog();
+                    sql = String.Format("UPDATE t_orderdata SET `Status`={1} WHERE `id受注データ` in( {0} )", string.Join(",", oids), (int) OrderStatus.Completed);
+                    ctx.Database.ExecuteSqlCommand(sql);
+
+
+                }
+                InitializeCanceledOrder();
+            }
         }
 
         private void printForShipperToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -464,32 +467,36 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
         private void cancelConfirmToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            canelorders = new List<t_orderdata>();
-            var orders = GetPendingOrdersBySelectedGridCell();
-            var form = new CancelConfirmForm();
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                this.entityDataSource1.Refresh();
+            List<t_orderdata> orders = new List<t_orderdata>();
+            foreach (DataGridViewRow row in canceledDataGridView.SelectedRows)
+            {              
+                var order = row.DataBoundItem as t_orderdata;
+                orders.Add(order);                
             }
-            DateTime CHUHERI = form.CHUHERI;
-            DateTime NAPINRI = form.CHUHERI;
+
+            var form = new CancelConfirmForm();
             if (orders.Count() > 0)
             {
-                using (var ctx = new GODDbContext())
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    for (int i = 0; i < orders.Count; i++)
+                    DateTime CHUHERI = form.CHUHERI;
+                    DateTime NAPINRI = form.NAPINRI;
+                    using (var ctx = new GODDbContext())
                     {
-                        t_orderdata order = ctx.t_orderdata.Find(orders[i].id受注データ);
-                        orders[i].出荷日 = CHUHERI;
-                        orders[i].納品日 = CHUHERI;
-                        order.出荷日 = CHUHERI;
-                        order.納品日 = CHUHERI;
+                        
+                        for (int i = 0; i < orders.Count; i++)
+                        {
+                            t_orderdata order = ctx.t_orderdata.Find(orders[i].id受注データ);
+                            order.出荷日 = CHUHERI;
+                            order.納品日 = NAPINRI;
+                        }
+                        ctx.SaveChanges();
                     }
-                    ctx.SaveChanges();
+
+                    InitializeCanceledOrder();
                 }
-                canelorders = orders;
-                InitializeCanceledOrder();
             }
+           
         }
         private List<t_orderdata> GetPendingOrdersBySelectedGridCell()
         {
