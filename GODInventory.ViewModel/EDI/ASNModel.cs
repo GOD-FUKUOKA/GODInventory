@@ -271,9 +271,16 @@ namespace GODInventory.ViewModel.EDI
             this.原単価_税抜_ = Encoding.ASCII.GetBytes((order.原単価_税抜_*100).ToString("D9")); //43 原単価(税抜 )   9 334
             // v99
             this.原単価_税込_ = Encoding.ASCII.GetBytes( Convert.ToInt32((order.原単価_税抜_ * (1+ order.税率 )* 100)).ToString("D9")); //44 原単価(税込 )   9 343
-            this.原価金額_税抜_ = Encoding.ASCII.GetBytes(order.原価金額_税抜_.ToString("D9")); //45 原価金額(税抜 )  9 352
-            this.原価金額_税込_ = Encoding.ASCII.GetBytes(Convert.ToInt32(order.原価金額_税込_).ToString("D9")); //46 原価金額(税込 )  9 361
 
+            if (this.head.TotalQuantity > 0)
+            {
+                this.原価金額_税抜_ = Encoding.ASCII.GetBytes(order.原価金額_税抜_.ToString("D9")); //45 原価金額(税抜 )  9 352
+                this.原価金額_税込_ = Encoding.ASCII.GetBytes(Convert.ToInt32(order.原価金額_税込_).ToString("D9")); //46 原価金額(税込 )  9 361
+            }
+            else {
+                this.原価金額_税抜_ = EDITxtHandler.GetZeroedBytes(9);
+                this.原価金額_税込_ = EDITxtHandler.GetZeroedBytes(9);
+            }
             this.税額 = Encoding.ASCII.GetBytes( Convert.ToInt32(order.原価金額_税込_- order.原価金額_税抜_).ToString("D9"));//47 税額             9 370
             this.税区分 = Encoding.ASCII.GetBytes( "1" );  //48 税区分            1 379
             // 0.05 * 1000 => 50  50.toString("D4") => "0050"

@@ -193,13 +193,13 @@ namespace GODInventoryWinForm.Controls
                         o.発注形態区分 = Convert.ToInt16(this.orderReasonComboBox.SelectedValue);
                         o.発注形態名称漢字 = this.orderReasonComboBox.Text;
                         //o.原単価_税抜_ = (int)selectedItem.原単価;
-                        o.原単価_税込_ = (int)(o.原単価_税抜_ * (1+o.税率));
+                        o.原単価_税込_ = ((int)(o.原単価_税抜_ * (1+o.税率)*100))*1.0/100;
 
                         o.原価金額_税抜_ = o.実際出荷数量 * o.原単価_税抜_;
                         o.原価金額_税込_ = (int)(o.実際出荷数量 * o.原単価_税込_);
 
                         //o.売単価_税抜_ = (int)selectedItem.売単価;
-                        o.売単価_税込_ = (int)(o.売単価_税抜_ * (1 + o.税率));
+                        o.売単価_税込_ = ((int)(o.売単価_税抜_ * (1 + o.税率)*100))*1.0/100;
                         o.税額 = (int)(o.原価金額_税抜_ * o.税率);
 
                         o.発注品名漢字 = o.品名漢字;

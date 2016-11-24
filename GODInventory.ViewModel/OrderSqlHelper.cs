@@ -591,14 +591,15 @@ namespace GODInventory.ViewModel
 
             // generate ASN管理連番
             long mid = EDITxtHandler.GenerateMID(ctx);
-            var sql1 = String.Format("UPDATE t_orderdata SET `ASN管理連番`={2}  WHERE `ShipNO` in ({0}) AND `Status`={1} ", String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray()), (int)OrderStatus.ASN, mid);
+            // 无需 条件OrderStatus.ASN, 取消的订单也要生成ASN
+            var sql1 = String.Format("UPDATE t_orderdata SET `ASN管理連番`={1}  WHERE `ShipNO` in ({0}) ", String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray()), mid);
             var path = EDITxtHandler.BuildASNFilePath(mid);
 
             ctx.Database.ExecuteSqlCommand(sql1);
 
             var orders = (from t_orderdata o in ctx.t_orderdata
                             where shipNOs.Contains(o.ShipNO)
-                            orderby o.ShipNO
+                            orderby o.出荷No
                             select o
                             ).ToList(); 
 
