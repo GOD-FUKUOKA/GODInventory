@@ -372,8 +372,8 @@ namespace GODInventory.ViewModel
                               納品日 = o.納品日,
                               ＪＡＮコード = o.ＪＡＮコード,
                               商品コード = o.商品コード,
-                              品名漢字 = o.品名漢字,
-                              規格名漢字 = o.規格名漢字,
+                              品名漢字 = o.発注品名漢字,
+                              規格名漢字 = o.発注規格名漢字,
                               実際出荷数量 = o.実際出荷数量,
                               原単価_税抜_ = o.原単価_税抜_,
                               口数 = o.口数,
@@ -598,7 +598,9 @@ namespace GODInventory.ViewModel
 
             var orders = (from t_orderdata o in ctx.t_orderdata
                             where shipNOs.Contains(o.ShipNO)
-                            select o).ToList(); 
+                            orderby o.ShipNO
+                            select o
+                            ).ToList(); 
 
             ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(path, orders);
             

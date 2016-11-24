@@ -765,6 +765,7 @@ namespace GODInventoryWinForm.Controls
 
         private void SetOrderBaseInfo(t_orderdata order)
         {
+            order.税区分 = 1;
             order.発注日 = orderCreatedAtDateTimePicker.Value.Date;
             order.受注日 = orderCreatedAtDateTimePicker.Value.Date;
             order.法人コード = Convert.ToInt16(this.customerIdTextBox.Text);

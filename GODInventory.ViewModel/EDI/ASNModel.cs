@@ -195,10 +195,16 @@ namespace GODInventory.ViewModel.EDI
             this.部門コード = Encoding.ASCII.GetBytes( order.部門コード.ToString( "D2") ); //8 部門コード           2   44
             this.仕入先コード = Encoding.ASCII.GetBytes(order.仕入先コード.ToString("D6"));  //9 仕入先コード         6   46
             this.出荷業務仕入先コード = Encoding.ASCII.GetBytes(order.出荷業務仕入先コード.ToString("D6")); //10 出荷業務仕入先コード    6 52
-            this.伝票区分 = Encoding.ASCII.GetBytes(order.伝票区分.ToString("D2")); //11 伝票区分               2 58
+            if (order.入力区分 == 1)// fax
+            {
+                this.伝票区分 = Encoding.ASCII.GetBytes("02"); //11 伝票区分               2 58
+            }
+            else {
+                this.伝票区分 = Encoding.ASCII.GetBytes(order.伝票区分.ToString("D2")); //11 伝票区分               2 58
+            }
             
             this.伝票番号 = Encoding.ASCII.GetBytes(order.伝票番号.ToString("D8"));//12 伝票番号               8 60
-            this.行番号 = Encoding.ASCII.GetBytes(order.行番号.ToString("D2")); //13 行番号                2 68
+            this.行番号 = Encoding.ASCII.GetBytes( "01"); //13 行番号                2 68
             this.元伝票番号 = Encoding.ASCII.GetBytes( "00000000");//14 元伝票番号              8 70
            
             this.発注日 = EDITxtHandler.DateToBytes( order.発注日 );//15 発注日                8 78
@@ -216,7 +222,7 @@ namespace GODInventory.ViewModel.EDI
             this.出荷日 = EDITxtHandler.DateToBytes(order.出荷日);//19 出荷日                8 106
             this.発注形態区分 = Encoding.ASCII.GetBytes(order.発注形態区分.ToString("D2")); //20 発注形態区分         2 114
 
-            this.入力区分 = Encoding.ASCII.GetBytes("0") ;//21 入力区分       1 116
+            this.入力区分 = Encoding.ASCII.GetBytes(order.入力区分.ToString("D1"));//21 入力区分       1 116
             this.直送区分 = Encoding.ASCII.GetBytes("0"); //22 直送区分       1 117
             this.運送区分 = Encoding.ASCII.GetBytes("1"); //23 運送区分       1 118
             this.出荷No = Encoding.ASCII.GetBytes(order.出荷No.ToString("D18"));//24 出荷No          18 119
@@ -254,9 +260,9 @@ namespace GODInventory.ViewModel.EDI
             this.規格名カナ = EDITxtHandler.PadRightBytes(jis, 25);//38 規格名カナ      25 294
             Debug.Assert(this.規格名カナ.Length == 25);
 
-            this.発注数 = Encoding.ASCII.GetBytes(order.発注数量.ToString("D6"));//39 発注数        6 319
+            this.発注数 = Encoding.ASCII.GetBytes((order.発注数量*10).ToString("D6"));//39 発注数        6 319
             // 納品数 = 納品口数*口数 ?
-            this.納品数 = Encoding.ASCII.GetBytes(order.実際出荷数量.ToString("D6")); //40 納品数        6 325
+            this.納品数 = Encoding.ASCII.GetBytes((order.実際出荷数量*10).ToString("D6")); //40 納品数        6 325
 
             this.訂正理由区分 = Encoding.ASCII.GetBytes(order.訂正理由区分.ToString("D2")); ;//41 訂正理由区分     2 331
 
@@ -269,7 +275,7 @@ namespace GODInventory.ViewModel.EDI
             this.原価金額_税込_ = Encoding.ASCII.GetBytes(Convert.ToInt32(order.原価金額_税込_).ToString("D9")); //46 原価金額(税込 )  9 361
 
             this.税額 = Encoding.ASCII.GetBytes( Convert.ToInt32(order.原価金額_税込_- order.原価金額_税抜_).ToString("D9"));//47 税額             9 370
-            this.税区分 = Encoding.ASCII.GetBytes(order.税区分.ToString("D1"));  //48 税区分            1 379
+            this.税区分 = Encoding.ASCII.GetBytes( "1" );  //48 税区分            1 379
             // 0.05 * 1000 => 50  50.toString("D4") => "0050"
             this.税率= Encoding.ASCII.GetBytes(Convert.ToInt32(order.税率 * 1000).ToString("D4")); //49 税率             4 380
             this.売単価_税抜_ = Encoding.ASCII.GetBytes(order.売単価_税抜_.ToString("D7")); //50 売単価（税抜  ）  7 384

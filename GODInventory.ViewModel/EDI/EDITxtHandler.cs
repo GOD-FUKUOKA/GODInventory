@@ -112,19 +112,22 @@ namespace GODInventory.ViewModel.EDI
         public static byte[] ShiftJisSpacePadRight(byte[] bytes, int length)
         {
 
-            List<byte> new_bytes = new List<byte>(length);
+            List<byte> new_bytes = null;
             int delta = length - bytes.Length;
 
             if (delta > 0)
             {
-                while (new_bytes.Count< length)
+                new_bytes = new List<byte>(bytes);
+                while (new_bytes.Count < length)
                 {
                     new_bytes.Add(0x81);
                     new_bytes.Add(0x40);
                 }
                 return new_bytes.ToArray();
             }
-            else if (delta < 0) {
+            else if (delta < 0) 
+            {
+                new_bytes = new List<byte>(length);
                 while (new_bytes.Count < length)
                 {
                     new_bytes.Add(bytes[new_bytes.Count]);
