@@ -77,22 +77,31 @@ namespace GODInventory.ViewModel.EDI
             List<byte> new_bytes = new List<byte>(length);
             int delta = length - bytes.Length;
 
-            if (delta>0)
+            if (delta > 0)
             {
-                for(int i = 0; i<length; i++)
+                for (int i = 0; i < length; i++)
                 {
-                    if( delta -i > 0 )
+                    if (delta - i > 0)
                     {
-                        new_bytes.Add( 0x20 );
+                        new_bytes.Add(0x20);
                     }
                     else
                     {
-                        new_bytes.Add(bytes[i-delta ]);
+                        new_bytes.Add(bytes[i - delta]);
                     }
 
                 }
                 return new_bytes.ToArray();
-            }else
+            }
+            else if (delta < 0)
+            {
+                while (new_bytes.Count < length)
+                {
+                    new_bytes.Add(bytes[new_bytes.Count]);
+                }
+                return new_bytes.ToArray();
+            }
+            else
             {
                 return bytes;
             }
@@ -115,7 +124,12 @@ namespace GODInventory.ViewModel.EDI
                 }
                 return new_bytes.ToArray();
             }
-            else if (delta < 0) { 
+            else if (delta < 0) {
+                while (new_bytes.Count < length)
+                {
+                    new_bytes.Add(bytes[new_bytes.Count]);
+                }
+                return new_bytes.ToArray();
             }
             else
             {
