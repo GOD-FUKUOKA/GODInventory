@@ -116,9 +116,9 @@
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.canceledBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             this.canceledContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cancelConfirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.pendingTabPage.SuspendLayout();
@@ -283,33 +283,33 @@
             this.editToolStripMenuItem,
             this.printForShipperToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(195, 92);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.lockToolStripMenuItem.Text = "配車表ﾛｯｸ";
             this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
             // 
             // unlockToolStripMenuItem
             // 
             this.unlockToolStripMenuItem.Name = "unlockToolStripMenuItem";
-            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.unlockToolStripMenuItem.Text = "ﾛｯｸ解消";
             this.unlockToolStripMenuItem.Click += new System.EventHandler(this.unlockToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.editToolStripMenuItem.Text = "編集";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // printForShipperToolStripMenuItem1
             // 
             this.printForShipperToolStripMenuItem1.Name = "printForShipperToolStripMenuItem1";
-            this.printForShipperToolStripMenuItem1.Size = new System.Drawing.Size(196, 22);
+            this.printForShipperToolStripMenuItem1.Size = new System.Drawing.Size(194, 22);
             this.printForShipperToolStripMenuItem1.Text = "ピッキングリスト印刷";
             this.printForShipperToolStripMenuItem1.Click += new System.EventHandler(this.printForShipperToolStripMenuItem1_Click);
             // 
@@ -414,19 +414,19 @@
             this.printForShipperToolStripMenuItem2,
             this.printForEDIToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(197, 48);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(195, 48);
             // 
             // printForShipperToolStripMenuItem2
             // 
             this.printForShipperToolStripMenuItem2.Name = "printForShipperToolStripMenuItem2";
-            this.printForShipperToolStripMenuItem2.Size = new System.Drawing.Size(196, 22);
+            this.printForShipperToolStripMenuItem2.Size = new System.Drawing.Size(194, 22);
             this.printForShipperToolStripMenuItem2.Text = "ピッキングリスト印刷";
             this.printForShipperToolStripMenuItem2.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // printForEDIToolStripMenuItem
             // 
             this.printForEDIToolStripMenuItem.Name = "printForEDIToolStripMenuItem";
-            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.printForEDIToolStripMenuItem.Text = "納品書印刷";
             this.printForEDIToolStripMenuItem.Click += new System.EventHandler(this.printForEDIToolStripMenuItem_Click);
             // 
@@ -475,6 +475,7 @@
             this.実際配送担当Column2,
             this.発注日Column1,
             this.備考Column1});
+            this.canceledDataGridView.ContextMenuStrip = this.canceledContextMenuStrip;
             this.canceledDataGridView.Location = new System.Drawing.Point(3, 61);
             this.canceledDataGridView.Name = "canceledDataGridView";
             this.canceledDataGridView.RowHeadersVisible = false;
@@ -865,6 +866,20 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // canceledContextMenuStrip
+            // 
+            this.canceledContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cancelConfirmToolStripMenuItem});
+            this.canceledContextMenuStrip.Name = "canceledContextMenuStrip";
+            this.canceledContextMenuStrip.Size = new System.Drawing.Size(159, 26);
+            // 
+            // cancelConfirmToolStripMenuItem
+            // 
+            this.cancelConfirmToolStripMenuItem.Name = "cancelConfirmToolStripMenuItem";
+            this.cancelConfirmToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.cancelConfirmToolStripMenuItem.Text = "キャンセル確定";
+            this.cancelConfirmToolStripMenuItem.Click += new System.EventHandler(this.cancelConfirmToolStripMenuItem_Click);
+            // 
             // pager3
             // 
             this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -879,19 +894,6 @@
             this.pager3.Size = new System.Drawing.Size(903, 34);
             this.pager3.TabIndex = 2;
             this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
-            // 
-            // canceledContextMenuStrip
-            // 
-            this.canceledContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cancelConfirmToolStripMenuItem});
-            this.canceledContextMenuStrip.Name = "canceledContextMenuStrip";
-            this.canceledContextMenuStrip.Size = new System.Drawing.Size(161, 48);
-            // 
-            // cancelConfirmToolStripMenuItem
-            // 
-            this.cancelConfirmToolStripMenuItem.Name = "cancelConfirmToolStripMenuItem";
-            this.cancelConfirmToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.cancelConfirmToolStripMenuItem.Text = "キャンセル確定";
             // 
             // ShippingOrderForm
             // 
