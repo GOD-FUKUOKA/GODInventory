@@ -464,12 +464,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
         private void cancelConfirmToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var groupedOrder = canceledDataGridView.CurrentRow.DataBoundItem as t_orderdata;
-            //var row = canceledDataGridView.CurrentRow;
-            //var gorder = row.DataBoundItem as t_orderdata;
-            //var orders = OrderSqlHelper.OrderListByShipNO(entityDataSource1, gorder.ShipNO);
             canelorders = new List<t_orderdata>();
-
             var orders = GetPendingOrdersBySelectedGridCell();
             var form = new CancelConfirmForm();
             if (form.ShowDialog() == DialogResult.OK)
@@ -478,16 +473,12 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
             }
             DateTime CHUHERI = form.CHUHERI;
             DateTime NAPINRI = form.CHUHERI;
-            //canceledOrderList
-            groupedOrder.出荷日 = CHUHERI;
-            groupedOrder.納品日 = NAPINRI;
             if (orders.Count() > 0)
             {
                 using (var ctx = new GODDbContext())
                 {
                     for (int i = 0; i < orders.Count; i++)
                     {
-
                         t_orderdata order = ctx.t_orderdata.Find(orders[i].id受注データ);
                         orders[i].出荷日 = CHUHERI;
                         orders[i].納品日 = CHUHERI;
@@ -497,12 +488,8 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     ctx.SaveChanges();
                 }
                 canelorders = orders;
-
-                //OrderSqlHelper.SendOrderToShipper(orders);
                 InitializeCanceledOrder();
             }
-
-
         }
         private List<t_orderdata> GetPendingOrdersBySelectedGridCell()
         {
