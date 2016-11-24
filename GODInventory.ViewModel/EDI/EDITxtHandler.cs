@@ -115,6 +115,8 @@ namespace GODInventory.ViewModel.EDI
                 }
                 return new_bytes.ToArray();
             }
+            else if (delta < 0) { 
+            }
             else
             {
                 return bytes;
@@ -247,8 +249,8 @@ namespace GODInventory.ViewModel.EDI
                
                    
                 int count = (from t_orderdata o in ctx.t_orderdata
-                            where o.店舗コード == order.店舗コード && o.法人コード == order.法人コード && o.発注日 > date
-                            group o by o.ASN管理連番 into g
+                             where o.店舗コード == order.店舗コード && o.法人コード == order.法人コード && o.発注日 > date
+                             group o by o.出荷No into g
                             select g
                         ).Count();
                 var s=  String.Format("{0}{1}{2}{3}{4}", order.法人コード.ToString("D2"), order.店舗コード.ToString("D3"), EDITxtHandler.出荷業務仕入先コード, "03", (count + 1).ToString("D5")) ;

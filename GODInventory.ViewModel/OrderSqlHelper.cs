@@ -564,7 +564,7 @@ namespace GODInventory.ViewModel
 
         public static void UpdateOrderChuHeNO(GODDbContext ctx, List<t_orderdata> orders)
         {
-            var grouped_orders = orders.GroupBy(o => new { o.法人コード, o.店舗コード, o.ShipNO }, o => o);
+            var grouped_orders = orders.GroupBy(o => new { o.法人コード, o.店舗コード, o.ShipNO, o.納品場所コード }, o => o);
             foreach (var gos in grouped_orders)
             {
                 var oids = gos.Select(o => o.id受注データ);

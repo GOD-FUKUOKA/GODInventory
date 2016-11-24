@@ -366,9 +366,6 @@ namespace GODInventory.ViewModel.EDI
             var now = DateTime.Now;
             var orderdata = new t_orderdata();
 
-            orderdata.受注日 = DateTime.Now;
-            orderdata.受注時刻 = new TimeSpan(now.Hour, now.Minute, now.Second);
-
             orderdata.法人コード = Convert.ToInt16(Encoding.ASCII.GetString(this.法人コード));
             orderdata.法人名漢字 = EncodingUtility.ConvertShiftJisToUtf8(this.法人名漢字).Trim();
             orderdata.法人名カナ = EncodingUtility.ConvertShiftJisToUtf8(this.法人名カナ).Trim();
@@ -464,6 +461,9 @@ namespace GODInventory.ViewModel.EDI
             orderdata.センターコード = Convert.ToInt32(Encoding.ASCII.GetString(this.センターコード));
             orderdata.センター名漢字 = EncodingUtility.ConvertShiftJisToUtf8(this.センター名漢字).Trim();
             orderdata.センター名カナ = EncodingUtility.ConvertShiftJisToUtf8(this.センター名カナ).Trim();
+
+            orderdata.受注日 = orderdata.発注日;
+            orderdata.受注時刻 = new TimeSpan(now.Hour, now.Minute, now.Second);
 
             return orderdata;
 
@@ -681,7 +681,7 @@ VALUES (
 `ジャンル`,`自社コード`,`実際出荷数量`,`県別`,`Status`,
 `ダブリ`,`発注品名漢字`,`発注規格名漢字`) 
 VALUES ({0}
-'{1:yyyy-MM-dd}','{2:yyyy-MM-dd}','{3:HH:mm:ss}',{4},'{5}',
+'{1:yyyy-MM-dd}','{2:yyyy-MM-dd}','{3}',{4},'{5}',
 {6},{7},{8},'{9}','{10}',
 {11},{12},{13},{14},{15},{16},'{17}',{18},'{19}','{20}',
 '{21}',{22},'{23}','{24}',{25},{26},{27},'{28:yyyy-MM-dd}','{29:yyyy-MM-dd}',{30},
@@ -700,7 +700,7 @@ VALUES ({0}
             
 
             var qixian = DateTime.ParseExact(Encoding.Default.GetString(this.発注データ有効期限), "yyyyMMdd", CultureInfo.InvariantCulture).ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
-            return String.Format(format, "", o.発注日, now, now, o.店舗コード, o.店舗名漢字,
+            return String.Format(format, "", o.発注日, o.受注日, o.受注時刻, o.店舗コード, o.店舗名漢字,
                 o.伝票番号, o.ＪＡＮコード, o.商品コード, o.品名漢字, o.規格名漢字, 
                 o.発注数量, o.原単価_税抜_, o.原価金額_税抜_, o.納品原価金額, o.売単価_税抜_,
                 o.納品場所コード, o.納品場所名漢字, o.法人コード, o.法人名漢字,o.法人名カナ,

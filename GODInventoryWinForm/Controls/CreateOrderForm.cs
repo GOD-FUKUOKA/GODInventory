@@ -531,8 +531,8 @@ namespace GODInventoryWinForm.Controls
             for (int i = 0; i < 10; i++)
             {
                 t_orderdata order = new t_orderdata();
-                order.受注日 = DateTime.Now;
                 order.発注日 = orderCreatedAtDateTimePicker.Value.Date;
+                order.受注日 = orderCreatedAtDateTimePicker.Value.Date;
                 order.納品予定日 = deliveredAtDateTimePicker.Value.Date;
 
                 order.店舗コード = Convert.ToInt16(storeCodeTextBox.Text);
@@ -765,6 +765,8 @@ namespace GODInventoryWinForm.Controls
 
         private void SetOrderBaseInfo(t_orderdata order)
         {
+            order.発注日 = orderCreatedAtDateTimePicker.Value.Date;
+            order.受注日 = orderCreatedAtDateTimePicker.Value.Date;
             order.法人コード = Convert.ToInt16(this.customerIdTextBox.Text);
             order.法人名漢字 = this.customerComboBox.Text;
 

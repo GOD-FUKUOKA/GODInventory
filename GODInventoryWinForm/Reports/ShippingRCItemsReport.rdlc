@@ -607,7 +607,6 @@
                                               <VerticalAlign>Middle</VerticalAlign>
                                             </Style>
                                           </Textbox>
-                                          <rd:Selected>true</rd:Selected>
                                         </CellContents>
                                       </TablixCell>
                                       <TablixCell>
@@ -916,6 +915,7 @@
                         </Border>
                       </Style>
                     </Rectangle>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -932,7 +932,7 @@
             <TablixMember>
               <Group Name="Details">
                 <GroupExpressions>
-                  <GroupExpression>=Fields!店舗コード.Value</GroupExpression>
+                  <GroupExpression>=  CStr(Fields!店舗コード.Value) &amp; "_" &amp; (Fields!納品場所名漢字.Value)</GroupExpression>
                 </GroupExpressions>
               </Group>
             </TablixMember>
