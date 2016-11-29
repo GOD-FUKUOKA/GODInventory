@@ -11,6 +11,9 @@ using System.Windows.Forms;
 using GODInventory.MyLinq;
 using GODInventory.ViewModel.EDI;
 using System.IO;
+using ZXing.Common;
+using ZXing;
+
 
 namespace GODInventoryWinForm.Controls
 {
@@ -411,7 +414,8 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
         }
 
         private void canceledButton1_Click(object sender, EventArgs e)
-        {
+        {           
+
             List<t_orderdata> orders = new List<t_orderdata>();
             foreach (DataGridViewRow row in canceledDataGridView.SelectedRows)
             {
@@ -515,6 +519,8 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
             return orders;
         }
 
+
+     
 
 
     }
