@@ -120,7 +120,7 @@ namespace GODInventoryWinForm.Controls
                 this.reportViewer1.LocalReport.DataSources.Clear();
                 this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("ShippingItems", orders1));
                 this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("ShippingRCItems", orders2));
-                Create1DB();
+              
 
 
             }
@@ -174,74 +174,6 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private void Create1DB()
-        {
-            try
-            {
-                // 1.设置条形码规格
-                EncodingOptions encodeOption = new EncodingOptions();
-                encodeOption.Height = 130; // 必须制定高度、宽度
-                encodeOption.Width = 240;
-
-                // 2.生成条形码图片并保存
-                ZXing.BarcodeWriter wr = new BarcodeWriter();
-                wr.Options = encodeOption;
-                wr.Format = BarcodeFormat.EAN_13; //  条形码规格：EAN13规格：12（无校验位）或13位数字
-                Bitmap img = wr.Write("9787302380979"); // 生成图片
-                string filePath = System.AppDomain.CurrentDomain.BaseDirectory + "\\EAN_13-" + "9787302380979" + ".jpg";
-                img.Save(filePath, System.Drawing.Imaging.ImageFormat.Jpeg);
-
-                //// 3.读取保存的图片
-                //this.ImgPathTxt.Text = filePath;
-                //this.barCodeImg.Image = img;
-                //定位图片存放位置
-
-                Graphics g = Graphics.FromImage(img);
-                g.DrawImage(img, 270, 170, 612, 573);
-
-                #region 向 reportViewer1 插入条形码
-
-                reportViewer1.LocalReport.EnableExternalImages = true;
-                ReportParameter[] param = new ReportParameter[] { new ReportParameter("LogoUrl", filePath) };
-                byte[] imgBytes = bmpToBytes(img);
-                string strB64 = Convert.ToBase64String(imgBytes);
-                ReportParameter rpTest = new ReportParameter("RPTest", strB64);
-                this.reportViewer1.LocalReport.SetParameters(new ReportParameter[] { rpTest });
-
-                #endregion
-                this.reportViewer1.BackgroundImage = img;
-
-                //  MessageBox.Show("保存成功：" + filePath);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error:" + ex);
-                return;
-
-                throw ex;
-            }
-        }
-        private byte[] bmpToBytes(Bitmap bitmap)
-        {
-            System.IO.MemoryStream ms = null;
-
-            try
-            {
-
-                ms = new System.IO.MemoryStream();
-                bitmap.Save(ms, ImageFormat.Bmp);
-                byte[] byteImage = new Byte[ms.Length];
-                byteImage = ms.ToArray();
-                return byteImage;
-            }
-            catch (ArgumentNullException ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                ms.Close();
-            }
-        }
+    
     }
 }
