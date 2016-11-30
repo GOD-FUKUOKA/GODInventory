@@ -15,6 +15,7 @@ using System.Diagnostics;
 using ZXing.Common;
 using ZXing;
 using System.Drawing.Imaging;
+using System.IO;
 
 
 namespace GODInventoryWinForm.Controls
@@ -49,7 +50,9 @@ namespace GODInventoryWinForm.Controls
                     var gos = OrderEnities.GroupBy(x => x.出荷No).Select(y => y.First());
 
                     this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", gos));
+
                     var order = OrderEnities.First();
+
                     Create1DB(order.出荷No.ToString());
 
                 }
@@ -147,6 +150,7 @@ namespace GODInventoryWinForm.Controls
                 ctx.SaveChanges();
             }
         }
+
         private void Create1DB(string 出荷No)
         {
             try
@@ -175,16 +179,32 @@ namespace GODInventoryWinForm.Controls
                 g.DrawImage(img, 270, 170, 612, 573);
 
                 #region 向 reportViewer1 插入条形码
-
                 reportViewer1.LocalReport.EnableExternalImages = true;
-                ReportParameter[] param = new ReportParameter[] { new ReportParameter("LogoUrl", filePath) };
-                byte[] imgBytes = bmpToBytes(img);
-                string strB64 = Convert.ToBase64String(imgBytes);
-                ReportParameter rpTest = new ReportParameter("RPTest", strB64);
-                this.reportViewer1.LocalReport.SetParameters(new ReportParameter[] { rpTest });
-                
+                ReportParameter[] image = new ReportParameter[1];
+                string path = "file:///" + Application.StartupPath + "\\image.bmp";
+                path = "file:///C:/EAN_13-9787302380979.jpg";
+
+                image[0] = new ReportParameter("Report_Parameter_1", path);
+                this.reportViewer1.LocalReport.SetParameters(image);
+                return;
+
+                ReportParameter params2;
+                reportViewer1.LocalReport.EnableExternalImages = true;
+                params2 = new ReportParameter("REPORT_PARAMETER_1", "file:///c:/EAN_13-9787302380979.jpg");//路径全部用”/“
+                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { params2 });
+
+                return;
+
+                //reportViewer1.LocalReport.EnableExternalImages = true;
+                //ReportParameter[] param = new ReportParameter[] { new ReportParameter("LogoUrl", filePath) };
+                //byte[] imgBytes = bmpToBytes(img);
+                //string strB64 = Convert.ToBase64String(imgBytes);
+                //ReportParameter rpTest = new ReportParameter("RPTest", strB64);
+                //this.reportViewer1.LocalReport.SetParameters(new ReportParameter[] { rpTest });
+
                 #endregion
-                //this.reportViewer1.BackgroundImage = img;
+                File.Delete(filePath);
+
 
             }
             catch (Exception ex)
@@ -195,6 +215,7 @@ namespace GODInventoryWinForm.Controls
                 throw ex;
             }
         }
+
         private byte[] bmpToBytes(Bitmap bitmap)
         {
             System.IO.MemoryStream ms = null;

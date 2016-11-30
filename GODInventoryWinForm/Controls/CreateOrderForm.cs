@@ -69,7 +69,7 @@ namespace GODInventoryWinForm.Controls
 
             this.customerComboBox.DisplayMember = "FullName";
             this.customerComboBox.ValueMember = "Id";
-             this.customerComboBox.DataSource = customersList;
+            this.customerComboBox.DataSource = customersList;
 
 
             //this.locationComboBox.DisplayMember = "納品場所名略称";
@@ -193,18 +193,34 @@ namespace GODInventoryWinForm.Controls
                         o.発注形態区分 = Convert.ToInt16(this.orderReasonComboBox.SelectedValue);
                         o.発注形態名称漢字 = this.orderReasonComboBox.Text;
                         //o.原単価_税抜_ = (int)selectedItem.原単価;
-                        o.原単価_税込_ = ((int)(o.原単価_税抜_ * (1+o.税率)*100))*1.0/100;
+                        o.原単価_税込_ = ((int)(o.原単価_税抜_ * (1 + o.税率) * 100)) * 1.0 / 100;
 
                         o.原価金額_税抜_ = o.実際出荷数量 * o.原単価_税抜_;
                         o.原価金額_税込_ = (int)(o.実際出荷数量 * o.原単価_税込_);
 
                         //o.売単価_税抜_ = (int)selectedItem.売単価;
-                        o.売単価_税込_ = ((int)(o.売単価_税抜_ * (1 + o.税率)*100))*1.0/100;
+                        o.売単価_税込_ = ((int)(o.売単価_税抜_ * (1 + o.税率) * 100)) * 1.0 / 100;
                         o.税額 = (int)(o.原価金額_税抜_ * o.税率);
 
                         o.発注品名漢字 = o.品名漢字;
                         o.発注規格名漢字 = o.規格名漢字;
                         o.用度品区分 = 0;
+
+                        bool isrun = NewMethod(o);
+                        if (isrun == true)
+                        {
+                            MessageBox.Show(String.Format("{0} 発注規格名漢字 包含半角!", newOrderList.Count));
+                
+                            return;
+                        }
+                        bool isrun1 = NewMethod1(o);
+                        if (isrun1 == true)
+                        {
+                            MessageBox.Show(String.Format("{0} 発注品名漢字 包含半角!", newOrderList.Count));
+
+                            return;
+                        }
+
                     }
                     ctx.t_orderdata.AddRange(newOrderList);
                     ctx.SaveChanges();
@@ -216,6 +232,28 @@ namespace GODInventoryWinForm.Controls
 
         }
 
+        private bool NewMethod(t_orderdata o)
+        {
+            if (o.発注規格名漢字.Length == Encoding.Default.GetByteCount(o.発注規格名漢字))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private bool NewMethod1(t_orderdata o)
+        {
+            if (o.発注品名漢字.Length == Encoding.Default.GetByteCount(o.発注品名漢字))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
@@ -275,10 +313,11 @@ namespace GODInventoryWinForm.Controls
                             this.locationComboBox.SelectedIndex = 0;
                             this.locationTextBox.Text = this.locationComboBox.SelectedValue.ToString();
                         }
-                        else {
+                        else
+                        {
                             this.locationTextBox.Enabled = false;
                         }
-                        
+
 
                         if (shops.Count == 1)
                         {
@@ -327,7 +366,7 @@ namespace GODInventoryWinForm.Controls
                 {
                     errorProvider2.SetError(customerComboBox, String.Format("customer  {0}の店舗は登録されていません", customerIdTextBox.Text));
                 }
-            
+
             }
 
         }
@@ -344,12 +383,12 @@ namespace GODInventoryWinForm.Controls
             var storeId = Convert.ToInt16(this.storeCodeTextBox.Text);
             var locationId = Convert.ToInt16(locationTextBox.Text);
 
-                    if ((short)locationComboBox.SelectedValue != locationId)
-                    {
-                        //Fix it later
-                        this.locationComboBox.SelectedValue = locationId;
-                    }
-          
+            if ((short)locationComboBox.SelectedValue != locationId)
+            {
+                //Fix it later
+                this.locationComboBox.SelectedValue = locationId;
+            }
+
         }
 
 
@@ -390,7 +429,7 @@ namespace GODInventoryWinForm.Controls
             position += 1;
 
             return (position * 10) + (position % 7);
-           
+
         }
 
         ////  発注形態 is enum, binding is not working, we have to handle it manually
@@ -557,13 +596,15 @@ namespace GODInventoryWinForm.Controls
                         order.納品場所名漢字 = location.納品場所名漢字;
                         order.納品場所名カナ = location.納品場所名カナ;
                     }
-                    else {
+                    else
+                    {
                         order.納品場所コード = -1;
                         order.納品場所名漢字 = "";
                         order.納品場所名カナ = "";
                     }
                 }
-                else {
+                else
+                {
                     order.納品場所コード = -1;
                     order.納品場所名漢字 = "";
                     order.納品場所名カナ = "";
@@ -799,7 +840,7 @@ namespace GODInventoryWinForm.Controls
             //order.納品先店舗名漢字 = this.locationComboBox.Text;
             order.発注形態区分 = (short)this.orderReasonComboBox.SelectedValue;
             order.発注形態名称漢字 = this.orderReasonComboBox.Text;
-        
+
         }
 
         private void customerComboBox_SelectedIndexChanged(object sender, EventArgs e)
