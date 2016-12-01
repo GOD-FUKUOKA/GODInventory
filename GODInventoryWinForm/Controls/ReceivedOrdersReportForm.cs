@@ -51,6 +51,8 @@ namespace GODInventoryWinForm.Controls
 
                     this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", gos));
 
+                
+
                     var order = OrderEnities.First();
 
                     Create1DB(order.出荷No.ToString());
@@ -179,18 +181,19 @@ namespace GODInventoryWinForm.Controls
                 g.DrawImage(img, 270, 170, 612, 573);
 
                 #region 向 reportViewer1 插入条形码
-                reportViewer1.LocalReport.EnableExternalImages = true;
+                this.reportViewer1.LocalReport.ReportEmbeddedResource = "GODInventoryWinForm.Reports.ReceivedOrderDetailReport.rdlc";
+                this.reportViewer1.LocalReport.EnableExternalImages = true;
                 ReportParameter[] image = new ReportParameter[1];
-                string path = "file:///" + Application.StartupPath + "\\image.bmp";
-                path = "file:///C:/EAN_13-9787302380979.jpg";
+                string path = "file:///" + Application.StartupPath + "\\EAN_13-0000000000000.jpg";
+               // path = "file:///C:/EAN_13-9787302380979.jpg";
 
-                image[0] = new ReportParameter("Report_Parameter_1", path);
+                image[0] = new ReportParameter("image1", path);
                 this.reportViewer1.LocalReport.SetParameters(image);
                 return;
 
                 ReportParameter params2;
                 reportViewer1.LocalReport.EnableExternalImages = true;
-                params2 = new ReportParameter("REPORT_PARAMETER_1", "file:///c:/EAN_13-9787302380979.jpg");//路径全部用”/“
+                params2 = new ReportParameter("Report_Parameter_1", "file:///c:/EAN_13-9787302380979.jpg");//路径全部用”/“
                 reportViewer1.LocalReport.SetParameters(new ReportParameter[] { params2 });
 
                 return;

@@ -193,11 +193,27 @@
         </Style>
       </Textbox>
       <Rectangle Name="Rectangle1">
+        <ReportItems>
+          <Image Name="image1">
+            <Source>External</Source>
+            <Value>=Parameters!image1.Value</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>0cm</Top>
+            <Left>0cm</Left>
+            <Height>0.82972cm</Height>
+            <Width>5.06628cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+        </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>3.04793cm</Top>
-        <Left>11.48953cm</Left>
-        <Height>0.8cm</Height>
-        <Width>5cm</Width>
+        <Top>3.01821cm</Top>
+        <Left>11.48675cm</Left>
+        <Height>0.82972cm</Height>
+        <Width>5.06628cm</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -2243,6 +2259,12 @@
           <Value>false</Value>
         </Values>
       </DefaultValue>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="image1">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
