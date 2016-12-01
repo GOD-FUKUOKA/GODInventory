@@ -15,27 +15,31 @@ namespace GODInventory.ViewModel.EDI
         public static string ASNFileName = "NYOTEI.txt";
         public static string ASNFolder = "nyotei";
 
-        public static string ASNRelativePath {
+        public static string ASNRelativePath
+        {
             get { return Path.Combine(ASNFolder, ASNFileName); }
         }
 
-        public static string NYOTEL_ID {
+        public static string NYOTEL_ID
+        {
             get { return "C01"; }
         }
 
-        public static int 出荷業務仕入先コード {
+        public static int 出荷業務仕入先コード
+        {
 
-            get { return 249706;  }
+            get { return 249706; }
         }
 
-        public static int レコード長 {
+        public static int レコード長
+        {
 
-            get { return 500;  }
+            get { return 500; }
         }
 
         public static byte[] NR = new byte[2] { 0x0D, 0x0A };
 
-        public static Byte[] DateToBytes( DateTime? nullable_datetime)
+        public static Byte[] DateToBytes(DateTime? nullable_datetime)
         {
             DateTime datetime = nullable_datetime ?? DateTime.Now;
             return Encoding.ASCII.GetBytes(datetime.ToString("yyyyMMdd"));
@@ -50,10 +54,10 @@ namespace GODInventory.ViewModel.EDI
         }
 
         // lenght(2) => "  "
-        public static byte[] GetSpacedBytes( int length)
+        public static byte[] GetSpacedBytes(int length)
         {
             List<Byte> list = new List<byte>(length);
-            for( var i = 0; i< length; i++)
+            for (var i = 0; i < length; i++)
             {
                 list.Add(0x20);
             }
@@ -72,7 +76,7 @@ namespace GODInventory.ViewModel.EDI
         }
 
         // pad left with ' '
-        public static byte[] PadLeftBytes( byte[] bytes, int length )
+        public static byte[] PadLeftBytes(byte[] bytes, int length)
         {
             List<byte> new_bytes = new List<byte>(length);
             int delta = length - bytes.Length;
@@ -125,7 +129,7 @@ namespace GODInventory.ViewModel.EDI
                 }
                 return new_bytes.ToArray();
             }
-            else if (delta < 0) 
+            else if (delta < 0)
             {
                 new_bytes = new List<byte>(length);
                 while (new_bytes.Count < length)
@@ -176,7 +180,7 @@ namespace GODInventory.ViewModel.EDI
 
         }
 
-        public static bool IsSpaceOnly(byte[] bytes )
+        public static bool IsSpaceOnly(byte[] bytes)
         {
             bool allspace = true;
             for (int i = 0; i < bytes.Length; i++)
@@ -196,7 +200,7 @@ namespace GODInventory.ViewModel.EDI
             {
                 Directory.CreateDirectory(directory_path);
             }
- 
+
 
             ASNHeadModel order_head;
             using (BinaryWriter bw = new BinaryWriter(new FileStream(path, FileMode.Create, FileAccess.Write)))
@@ -220,8 +224,8 @@ namespace GODInventory.ViewModel.EDI
 
         public static void ImportOrderTxt(string path)
         {
-            
-            
+
+
             //File.ReadLines(path, Encoding.)
             File.ReadAllBytes(path);
 
@@ -237,16 +241,16 @@ namespace GODInventory.ViewModel.EDI
                     OrderHeadModel order_head = new OrderHeadModel(br);
                     Console.WriteLine(" write head ={0}", order_head.DetailCount);
 
-                    for ( var i = 0; i< order_head.DetailCount; i++)
+                    for (var i = 0; i < order_head.DetailCount; i++)
                     {
-                        order_models.Add( new OrderModel(br) );
+                        order_models.Add(new OrderModel(br));
                     }
                     //while (line = br.ReadBytes(702))
                     //{
                     //}
                 }
             }
-            catch(EndOfStreamException e)
+            catch (EndOfStreamException e)
             {
 
             }
@@ -269,42 +273,43 @@ namespace GODInventory.ViewModel.EDI
         }
 
         // get ship no for order  
-        public static long GenerateEDIShipNO(GODDbContext ctx, t_orderdata order )
+        public static long GenerateEDIShipNO(GODDbContext ctx, t_orderdata order)
         {
-           //一般六个月不能重复。
-                var date = DateTime.Now.AddMonths(-6);
-                //var orders = (from t_orderdata o in ctx.t_orderdata
-                //              where order_ids.Contains(o.id受注データ)
-                //              select o).ToList();
+            //一般六个月不能重复。
+            var date = DateTime.Now.AddMonths(-6);
+            //var orders = (from t_orderdata o in ctx.t_orderdata
+            //              where order_ids.Contains(o.id受注データ)
+            //              select o).ToList();
 
-                //var grouped_orders = orders.GroupBy( o => new { o.法人コード, o.店舗コード }, o=>o );
-               
-                   
-                int count = (from t_orderdata o in ctx.t_orderdata
-                             where o.店舗コード == order.店舗コード && o.法人コード == order.法人コード && o.発注日 > date
-                             group o by o.出荷No into g
-                            select g
-                        ).Count();
-                var s=  String.Format("{0}{1}{2}{3}{4}", order.法人コード.ToString("D2"), order.店舗コード.ToString("D3"), EDITxtHandler.出荷業務仕入先コード, "03", (count + 1).ToString("D5")) ;
-                return Convert.ToInt64( s );
-                   
+            //var grouped_orders = orders.GroupBy( o => new { o.法人コード, o.店舗コード }, o=>o );
+
+
+            int count = (from t_orderdata o in ctx.t_orderdata
+                         where o.店舗コード == order.店舗コード && o.法人コード == order.法人コード && o.発注日 > date
+                         group o by o.出荷No into g
+                         select g
+                    ).Count();
+            var s = String.Format("{0}{1}{2}{3}{4}", order.法人コード.ToString("D2"), order.店舗コード.ToString("D3"), EDITxtHandler.出荷業務仕入先コード, "03", (count + 1).ToString("D5"));
+            return Convert.ToInt64(s);
+
         }
 
         // generate 管理連番  length = 13 
-        public static long GenerateMID(GODDbContext ctx) {
+        public static long GenerateMID(GODDbContext ctx)
+        {
 
             int count = 0;
             var today = DateTime.Now.Date;
             var tommorrow = today.AddDays(1);
             count = (from t_edidata o in ctx.t_edidata
-                        where o.created_at >= today && o.created_at< tommorrow && o.データID == "CH1"
-                        select o).Count();
-  
-           
+                     where o.created_at >= today && o.created_at < tommorrow && o.データID == "CH1"
+                     select o).Count();
+
+
             var s = today.ToString("yyyyMMdd") + (count + 1).ToString("D5");
             return Convert.ToInt64(s);
         }
-        
+
         //public static string GenerateMID()
         //{
         //    string s;           
@@ -315,13 +320,32 @@ namespace GODInventory.ViewModel.EDI
         //    return s;
         //}
 
-        private static string[] ConvertToUtf8Strings( string path)
+        private static string[] ConvertToUtf8Strings(string path)
         {
             byte[] bytes = File.ReadAllBytes(path);
             string text_in_utf8 = EncodingUtility.ConvertShiftJisToUtf8(bytes);
             return text_in_utf8.Split(System.Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
         }
 
+
+        //说 明：Encoding.Default.GetByteCount(c.ToString());会返回字符占用的空间个数，返回1表示半角，返回2表示 全角，测试通过
+        /// <summary>
+        /// 根据GetByteCount返回的值判断半角和全角
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public static bool IsAllQuanjiaoJapan(string parStr)
+        {
+            foreach (char c in parStr.ToCharArray())
+            {
+                int k = Encoding.Default.GetByteCount(c.ToString());  //k=1 半角  k=2全角
+                if (k == 1)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
 
     }
 }

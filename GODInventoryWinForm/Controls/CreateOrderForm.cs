@@ -16,6 +16,7 @@ using System.Threading;
 //using Spring.Context.Support;
 //using System.Collections;
 using System.Configuration;
+using GODInventory.ViewModel.EDI;
 
 
 namespace GODInventoryWinForm.Controls
@@ -90,77 +91,7 @@ namespace GODInventoryWinForm.Controls
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-
-
-            //if (storeCodeTextBox.Text == "" || productCodeTextBox.Text == "")
-            //{
-            //    MessageBox.Show("内容を书いてください", "誤っ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
-            //if (Convert.ToInt32(orderQuantityTextBox.Text) == 0)
-            //{
-            //    MessageBox.Show(" 発注数量  ゼロにできない", "誤っ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
-            //if (invoiceNOTextBox.Text.Length != 8)
-            //{
-            //    if (MessageBox.Show("伝票番号  キャラクタ丈正しくない, 引き続き?", "Info", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            //    {
-            //    }
-            //    else
-            //        return;
-            //}
-            //受注日, 伝票番号, 発注日, 店舗コード, 店舗名漢字, JANコード, 商品コード, 品名漢字, 規格名漢字,  発注数量
-            //原単価(税抜),原価金額(税抜), 売単価(税抜),納品先店舗コード, 納品先店舗名漢字, 納品場所名漢字
-
-            //    t_orderdata order = new t_orderdata();
-            //    order.受注日 = DateTime.Now;
-            //    order.発注日 = orderCreatedAtDateTimePicker.Value;
-
-            //    order.店舗コード = Convert.ToInt16(storeCodeTextBox.Text);
-            //    //order.商品コード = Convert.ToInt32(productCodeTextBox.Text);
-            //    //order.発注数量 = Convert.ToInt32(orderQuantityTextBox.Text);
-
-            //    order.仕入先コード = Convert.ToInt32(selfCodeTextBox1.Text);
-            //    order.出荷業務仕入先コード = Convert.ToInt32(this.shipperTextBox.Text);
-            //    order.仕入先名カナ = this.selfNameTextBox.Text;
-            //    order.店舗名漢字 = this.storeComboBox.Text;
-            //    order.法人コード = Convert.ToInt16(this.customerIdTextBox.Text);
-            //    order.法人名漢字 = this.customerComboBox.Text;
-            //    order.部門コード = Convert.ToInt16(this.textBox5.Text);
-            //    order.納品予定日 = this.dateTimePicker1.Value;
-            //    order.納品場所コード = Convert.ToInt16(this.locationTextBox.Text);
-            //    order.納品先店舗名漢字 = this.locationComboBox.Text;
-
-            //    order.伝票番号 = GenerateInvoiceNo(order.店舗コード);
-
-            //    #region 联动
-            //    foreach (t_rcvdata item in t_rcvdataR)
-            //    {
-
-            //        if (item.商品コード == Convert.ToDouble(order.商品コード))
-            //        {
-            //            order.品名漢字 = item.品名漢字.ToString();
-            //            order.規格名漢字 = item.規格名漢字.ToString();
-            //            order.原単価_税抜_ = Convert.ToInt32(item.原単価_税抜_.ToString());
-            //            order.売単価_税抜_ = Convert.ToInt32(item.売単価_税抜_.ToString());
-            //            order.ＪＡＮコード = long.Parse(item.ＪＡＮコード.ToString());
-            //            break;
-
-            //        }
-
-            //    }
-            //    #endregion
-
-            //    orderList.Add(order);
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Ex" + ex, "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+           
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -206,21 +137,6 @@ namespace GODInventoryWinForm.Controls
                         o.発注規格名漢字 = o.規格名漢字;
                         o.用度品区分 = 0;
 
-                        bool isrun = NewMethod(o);
-                        if (isrun == true)
-                        {
-                            MessageBox.Show(String.Format("{0} 発注規格名漢字 包含半角!", newOrderList.Count));
-                
-                            return;
-                        }
-                        bool isrun1 = NewMethod1(o);
-                        if (isrun1 == true)
-                        {
-                            MessageBox.Show(String.Format("{0} 発注品名漢字 包含半角!", newOrderList.Count));
-
-                            return;
-                        }
-
                     }
                     ctx.t_orderdata.AddRange(newOrderList);
                     ctx.SaveChanges();
@@ -231,29 +147,7 @@ namespace GODInventoryWinForm.Controls
             }
 
         }
-
-        private bool NewMethod(t_orderdata o)
-        {
-            if (o.発注規格名漢字.Length == Encoding.Default.GetByteCount(o.発注規格名漢字))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        private bool NewMethod1(t_orderdata o)
-        {
-            if (o.発注品名漢字.Length == Encoding.Default.GetByteCount(o.発注品名漢字))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+      
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
@@ -848,5 +742,26 @@ namespace GODInventoryWinForm.Controls
             customerIdTextBox.Text = customerComboBox.SelectedValue.ToString();
 
         }
+
+        //http://blog.sina.com.cn/s/blog_463b79ca01019b46.html
+        private void dataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            //这种判断方法的关键是要知道EditedFormattedValue存放的是编辑的新值，而Value和FormattedValue存放的是编辑前的值。
+            DataGridView dgv = (DataGridView)sender;
+            var cell = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            //daGrid.CurrentCell.EditedFormattedValue.ToString
+            if (cell.OwningColumn == this.productSpecColumn || cell.OwningColumn == this.productNameColumn)
+            {
+                if (cell.EditedFormattedValue != null && cell.EditedFormattedValue.ToString() != String.Empty)
+                {
+                    if (!EDITxtHandler.IsAllQuanjiaoJapan(cell.EditedFormattedValue.ToString()))
+                    {
+                        MessageBox.Show("输入数据包含半角字符！");
+                    }
+                }
+            }
+        }
+
+
     }
 }

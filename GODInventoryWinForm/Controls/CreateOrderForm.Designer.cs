@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -85,9 +85,9 @@
             this.submitButton.BackColor = System.Drawing.SystemColors.Control;
             this.submitButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.submitButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.submitButton.Location = new System.Drawing.Point(745, 408);
+            this.submitButton.Location = new System.Drawing.Point(745, 445);
             this.submitButton.Name = "submitButton";
-            this.submitButton.Size = new System.Drawing.Size(100, 30);
+            this.submitButton.Size = new System.Drawing.Size(100, 33);
             this.submitButton.TabIndex = 13;
             this.submitButton.Text = "保存";
             this.submitButton.UseVisualStyleBackColor = false;
@@ -97,9 +97,9 @@
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelButton.Location = new System.Drawing.Point(851, 408);
+            this.cancelButton.Location = new System.Drawing.Point(851, 445);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 30);
+            this.cancelButton.Size = new System.Drawing.Size(100, 33);
             this.cancelButton.TabIndex = 14;
             this.cancelButton.Text = "取消す";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -110,7 +110,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(784, 42);
+            this.label1.Location = new System.Drawing.Point(784, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 14);
             this.label1.TabIndex = 20;
@@ -119,7 +119,7 @@
             // orderCreatedAtDateTimePicker
             // 
             this.orderCreatedAtDateTimePicker.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(836, 39);
+            this.orderCreatedAtDateTimePicker.Location = new System.Drawing.Point(836, 43);
             this.orderCreatedAtDateTimePicker.Name = "orderCreatedAtDateTimePicker";
             this.orderCreatedAtDateTimePicker.Size = new System.Drawing.Size(123, 21);
             this.orderCreatedAtDateTimePicker.TabIndex = 11;
@@ -150,23 +150,23 @@
             this.deleteButtonColumn});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(5, 106);
+            this.dataGridView1.Location = new System.Drawing.Point(5, 116);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1044, 290);
+            this.dataGridView1.Size = new System.Drawing.Size(1044, 316);
             this.dataGridView1.TabIndex = 23;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            this.dataGridView1.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellLeave);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             // 
             // invoiceNODataGridViewTextBoxColumn
             // 
             this.invoiceNODataGridViewTextBoxColumn.DataPropertyName = "伝票番号";
-            dataGridViewCellStyle1.Format = "D8";
-            dataGridViewCellStyle1.NullValue = null;
-            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle15.Format = "D8";
+            dataGridViewCellStyle15.NullValue = null;
+            this.invoiceNODataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle15;
             this.invoiceNODataGridViewTextBoxColumn.Frozen = true;
             this.invoiceNODataGridViewTextBoxColumn.HeaderText = "伝票番号";
             this.invoiceNODataGridViewTextBoxColumn.Name = "invoiceNODataGridViewTextBoxColumn";
@@ -176,8 +176,8 @@
             // 
             // specialCodeColumn
             // 
-            dataGridViewCellStyle2.NullValue = "NO";
-            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle16.NullValue = "NO";
+            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle16;
             this.specialCodeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.specialCodeColumn.HeaderText = "雑コード";
             this.specialCodeColumn.Items.AddRange(new object[] {
@@ -288,7 +288,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.Control;
             this.label2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(79, 42);
+            this.label2.Location = new System.Drawing.Point(79, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 14);
             this.label2.TabIndex = 5;
@@ -297,7 +297,7 @@
             // storeCodeTextBox
             // 
             this.storeCodeTextBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.storeCodeTextBox.Location = new System.Drawing.Point(120, 39);
+            this.storeCodeTextBox.Location = new System.Drawing.Point(120, 43);
             this.storeCodeTextBox.MaxLength = 8;
             this.storeCodeTextBox.Name = "storeCodeTextBox";
             this.storeCodeTextBox.Size = new System.Drawing.Size(58, 21);
@@ -309,7 +309,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.SystemColors.Control;
             this.label5.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(31, 12);
+            this.label5.Location = new System.Drawing.Point(31, 13);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(83, 14);
             this.label5.TabIndex = 21;
@@ -319,7 +319,7 @@
             // 
             this.selfCodeTextBox1.BackColor = System.Drawing.SystemColors.Control;
             this.selfCodeTextBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.selfCodeTextBox1.Location = new System.Drawing.Point(120, 9);
+            this.selfCodeTextBox1.Location = new System.Drawing.Point(120, 10);
             this.selfCodeTextBox1.Name = "selfCodeTextBox1";
             this.selfCodeTextBox1.ReadOnly = true;
             this.selfCodeTextBox1.Size = new System.Drawing.Size(159, 21);
@@ -329,7 +329,7 @@
             // 
             this.shipperTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.shipperTextBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.shipperTextBox.Location = new System.Drawing.Point(438, 9);
+            this.shipperTextBox.Location = new System.Drawing.Point(438, 10);
             this.shipperTextBox.Name = "shipperTextBox";
             this.shipperTextBox.ReadOnly = true;
             this.shipperTextBox.Size = new System.Drawing.Size(159, 21);
@@ -340,7 +340,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.label6.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(293, 12);
+            this.label6.Location = new System.Drawing.Point(293, 13);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(139, 14);
             this.label6.TabIndex = 23;
@@ -350,7 +350,7 @@
             // 
             this.selfNameTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.selfNameTextBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.selfNameTextBox.Location = new System.Drawing.Point(695, 9);
+            this.selfNameTextBox.Location = new System.Drawing.Point(695, 10);
             this.selfNameTextBox.Name = "selfNameTextBox";
             this.selfNameTextBox.ReadOnly = true;
             this.selfNameTextBox.Size = new System.Drawing.Size(264, 21);
@@ -361,7 +361,7 @@
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Control;
             this.label8.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.Location = new System.Drawing.Point(626, 12);
+            this.label8.Location = new System.Drawing.Point(626, 13);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(63, 14);
             this.label8.TabIndex = 25;
@@ -372,7 +372,7 @@
             this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.storeComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.storeComboBox.FormattingEnabled = true;
-            this.storeComboBox.Location = new System.Drawing.Point(184, 38);
+            this.storeComboBox.Location = new System.Drawing.Point(184, 41);
             this.storeComboBox.Name = "storeComboBox";
             this.storeComboBox.Size = new System.Drawing.Size(95, 22);
             this.storeComboBox.TabIndex = 3;
@@ -383,7 +383,7 @@
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.SystemColors.Control;
             this.label9.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label9.Location = new System.Drawing.Point(363, 42);
+            this.label9.Location = new System.Drawing.Point(363, 46);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(69, 14);
             this.label9.TabIndex = 28;
@@ -394,7 +394,7 @@
             this.customerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.customerComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.customerComboBox.FormattingEnabled = true;
-            this.customerComboBox.Location = new System.Drawing.Point(496, 38);
+            this.customerComboBox.Location = new System.Drawing.Point(496, 41);
             this.customerComboBox.Name = "customerComboBox";
             this.customerComboBox.Size = new System.Drawing.Size(101, 22);
             this.customerComboBox.TabIndex = 5;
@@ -403,7 +403,7 @@
             // customerIdTextBox
             // 
             this.customerIdTextBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.customerIdTextBox.Location = new System.Drawing.Point(438, 39);
+            this.customerIdTextBox.Location = new System.Drawing.Point(438, 43);
             this.customerIdTextBox.Name = "customerIdTextBox";
             this.customerIdTextBox.Size = new System.Drawing.Size(52, 21);
             this.customerIdTextBox.TabIndex = 4;
@@ -415,7 +415,7 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.SystemColors.Control;
             this.label10.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label10.Location = new System.Drawing.Point(620, 42);
+            this.label10.Location = new System.Drawing.Point(620, 46);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(69, 14);
             this.label10.TabIndex = 31;
@@ -424,7 +424,7 @@
             // textBox5
             // 
             this.textBox5.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox5.Location = new System.Drawing.Point(695, 39);
+            this.textBox5.Location = new System.Drawing.Point(695, 43);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(52, 21);
             this.textBox5.TabIndex = 6;
@@ -433,7 +433,7 @@
             // deliveredAtDateTimePicker
             // 
             this.deliveredAtDateTimePicker.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.deliveredAtDateTimePicker.Location = new System.Drawing.Point(836, 69);
+            this.deliveredAtDateTimePicker.Location = new System.Drawing.Point(836, 75);
             this.deliveredAtDateTimePicker.Name = "deliveredAtDateTimePicker";
             this.deliveredAtDateTimePicker.Size = new System.Drawing.Size(123, 21);
             this.deliveredAtDateTimePicker.TabIndex = 12;
@@ -443,7 +443,7 @@
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.SystemColors.Control;
             this.label11.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label11.Location = new System.Drawing.Point(760, 72);
+            this.label11.Location = new System.Drawing.Point(760, 79);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(77, 14);
             this.label11.TabIndex = 33;
@@ -454,7 +454,7 @@
             this.locationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.locationComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.locationComboBox.FormattingEnabled = true;
-            this.locationComboBox.Location = new System.Drawing.Point(184, 68);
+            this.locationComboBox.Location = new System.Drawing.Point(184, 74);
             this.locationComboBox.Name = "locationComboBox";
             this.locationComboBox.Size = new System.Drawing.Size(95, 22);
             this.locationComboBox.TabIndex = 8;
@@ -464,7 +464,7 @@
             // 
             this.locationTextBox.Enabled = false;
             this.locationTextBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.locationTextBox.Location = new System.Drawing.Point(120, 69);
+            this.locationTextBox.Location = new System.Drawing.Point(120, 75);
             this.locationTextBox.Name = "locationTextBox";
             this.locationTextBox.Size = new System.Drawing.Size(58, 21);
             this.locationTextBox.TabIndex = 7;
@@ -475,7 +475,7 @@
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.SystemColors.Control;
             this.label12.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label12.Location = new System.Drawing.Point(17, 72);
+            this.label12.Location = new System.Drawing.Point(17, 79);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(97, 14);
             this.label12.TabIndex = 35;
@@ -489,7 +489,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(369, 72);
+            this.label3.Location = new System.Drawing.Point(369, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 14);
             this.label3.TabIndex = 39;
@@ -500,7 +500,7 @@
             this.orderReasonComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.orderReasonComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.orderReasonComboBox.FormattingEnabled = true;
-            this.orderReasonComboBox.Location = new System.Drawing.Point(438, 68);
+            this.orderReasonComboBox.Location = new System.Drawing.Point(438, 74);
             this.orderReasonComboBox.Name = "orderReasonComboBox";
             this.orderReasonComboBox.Size = new System.Drawing.Size(159, 22);
             this.orderReasonComboBox.TabIndex = 10;
@@ -511,9 +511,9 @@
             // 
             // CreateOrderForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1055, 448);
+            this.ClientSize = new System.Drawing.Size(1055, 489);
             this.Controls.Add(this.orderReasonComboBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.locationComboBox);
@@ -540,7 +540,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.submitButton);
-            this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CreateOrderForm";

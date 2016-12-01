@@ -126,6 +126,7 @@
             this.specTextBox.Name = "specTextBox";
             this.specTextBox.Size = new System.Drawing.Size(222, 21);
             this.specTextBox.TabIndex = 4;
+            this.specTextBox.TextChanged += new System.EventHandler(this.specTextBox_TextChanged);
             // 
             // label9
             // 
@@ -268,6 +269,7 @@
             this.productNameTextBox12.Name = "productNameTextBox12";
             this.productNameTextBox12.Size = new System.Drawing.Size(222, 21);
             this.productNameTextBox12.TabIndex = 3;
+            this.productNameTextBox12.TextChanged += new System.EventHandler(this.productNameTextBox12_TextChanged);
             // 
             // label13
             // 
