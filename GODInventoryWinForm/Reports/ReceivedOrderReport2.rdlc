@@ -192,36 +192,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Rectangle Name="Rectangle1">
-        <ReportItems>
-          <Image Name="image1">
-            <Source>External</Source>
-            <Value>=Parameters!image1.Value</Value>
-            <Sizing>FitProportional</Sizing>
-            <Top>0cm</Top>
-            <Left>0cm</Left>
-            <Height>0.82972cm</Height>
-            <Width>5.06628cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
-        </ReportItems>
-        <KeepTogether>true</KeepTogether>
-        <Top>3.01821cm</Top>
-        <Left>11.48675cm</Left>
-        <Height>0.82972cm</Height>
-        <Width>5.06628cm</Width>
-        <ZIndex>5</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-          <BackgroundColor>LightGrey</BackgroundColor>
-        </Style>
-      </Rectangle>
       <Textbox Name="Textbox6">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -242,11 +212,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox6</rd:DefaultName>
-        <Top>3.96543cm</Top>
-        <Left>10.89669cm</Left>
+        <Top>3.89827cm</Top>
+        <Left>10.38039cm</Left>
         <Height>0.6cm</Height>
         <Width>5.94928cm</Width>
-        <ZIndex>6</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -658,7 +628,7 @@
         <Left>0.95875cm</Left>
         <Height>2.4cm</Height>
         <Width>15.792cm</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -757,7 +727,7 @@
         <Left>0.15875cm</Left>
         <Height>2.4cm</Height>
         <Width>0.8cm</Width>
-        <ZIndex>8</ZIndex>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -813,7 +783,7 @@
         <Left>1.06652cm</Left>
         <Height>1.12917cm</Height>
         <Width>14.43236cm</Width>
-        <ZIndex>9</ZIndex>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1101,7 +1071,7 @@
         <Left>0.15875cm</Left>
         <Height>1.6cm</Height>
         <Width>8.34921cm</Width>
-        <ZIndex>10</ZIndex>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1384,7 +1354,7 @@
         <Left>0.95875cm</Left>
         <Height>2.4cm</Height>
         <Width>15.792cm</Width>
-        <ZIndex>11</ZIndex>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1410,7 +1380,7 @@
         <Left>0.95875cm</Left>
         <Height>1.84354cm</Height>
         <Width>15.79197cm</Width>
-        <ZIndex>12</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1492,7 +1462,7 @@
         <Left>0.15875cm</Left>
         <Height>2.4cm</Height>
         <Width>0.8cm</Width>
-        <ZIndex>13</ZIndex>
+        <ZIndex>12</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1555,7 +1525,7 @@
         <Left>0.15875cm</Left>
         <Height>1.84354cm</Height>
         <Width>0.8cm</Width>
-        <ZIndex>14</ZIndex>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1587,7 +1557,7 @@
         <Left>0.15875cm</Left>
         <Height>1.84354cm</Height>
         <Width>16.59199cm</Width>
-        <ZIndex>15</ZIndex>
+        <ZIndex>14</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1871,7 +1841,7 @@
         <Left>8.50796cm</Left>
         <Height>1.6cm</Height>
         <Width>6.17682cm</Width>
-        <ZIndex>16</ZIndex>
+        <ZIndex>15</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -1898,6 +1868,22 @@
           </RightBorder>
         </Style>
       </Tablix>
+      <Image Name="image1">
+        <Source>Database</Source>
+        <Value>=System.Convert.ToBase64String(First(Fields!BarcodeImage.Value, "DataSet1"))</Value>
+        <MIMEType>image/jpeg</MIMEType>
+        <Sizing>FitProportional</Sizing>
+        <Top>3.01265cm</Top>
+        <Left>10.5669cm</Left>
+        <Height>0.88562cm</Height>
+        <Width>5.54052cm</Width>
+        <ZIndex>16</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
     </ReportItems>
     <Height>8.66584in</Height>
     <Style>
@@ -1935,6 +1921,14 @@
         <Field Name="ASN管理連番">
           <DataField>ASN管理連番</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="BarcodeImage">
+          <DataField>BarcodeImage</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="BarcodeImagePath">
+          <DataField>BarcodeImagePath</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="GenreName">
           <DataField>GenreName</DataField>
@@ -2064,6 +2058,10 @@
           <DataField>売単価_税抜_</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
+        <Field Name="売単価_税込_">
+          <DataField>売単価_税込_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
         <Field Name="納品場所名カナ">
           <DataField>納品場所名カナ</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2128,6 +2126,14 @@
           <DataField>受注日</DataField>
           <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
+        <Field Name="税額">
+          <DataField>税額</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="税率">
+          <DataField>税率</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
         <Field Name="県別">
           <DataField>県別</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2140,9 +2146,17 @@
           <DataField>原単価_税抜_</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
+        <Field Name="原単価_税込_">
+          <DataField>原単価_税込_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
         <Field Name="原価金額_税抜_">
           <DataField>原価金額_税抜_</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="原価金額_税込_">
+          <DataField>原価金額_税込_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
         <Field Name="伝票番号">
           <DataField>伝票番号</DataField>
@@ -2259,12 +2273,6 @@
           <Value>false</Value>
         </Values>
       </DefaultValue>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="image1">
-      <DataType>String</DataType>
-      <Nullable>true</Nullable>
-      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>

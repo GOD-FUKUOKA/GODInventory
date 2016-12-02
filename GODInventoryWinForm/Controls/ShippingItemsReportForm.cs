@@ -126,21 +126,21 @@ namespace GODInventoryWinForm.Controls
             }
 
         }
-        public void InitializeItemEnitiesDataSource()
-        {
-            if (ItemEnities != null)
-            {
-                this.reportViewer1.LocalReport.DataSources.Clear();
+        //public void InitializeItemEnitiesDataSource()
+        //{
+        //    if (ItemEnities != null)
+        //    {
+        //        this.reportViewer1.LocalReport.DataSources.Clear();
 
-                using (var ctx = new GODDbContext())
-                {
-                    var orders = ItemEnities.GroupBy(x => x.ジャンル).Select(y => y.First());
+        //        using (var ctx = new GODDbContext())
+        //        {
+        //            var orders = ItemEnities.GroupBy(x => x.ジャンル).Select(y => y.First());
 
-                    this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", orders));
-                }
-            }
+        //            this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", orders));
+        //        }
+        //    }
 
-        }
+        //}
 
 
 

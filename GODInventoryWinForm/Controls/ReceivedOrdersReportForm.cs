@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Collections;
 
 using GODInventory.MyLinq;
 using GODInventory.ViewModel;
@@ -24,6 +25,7 @@ namespace GODInventoryWinForm.Controls
     {
         public List<v_pendingorder> OrderEnities { get; set; }
         public List<t_itemlist> ItemEnities { get; set; }
+        public Hashtable BarcodeHashTable { get; set; }
 
         public ReceivedOrdersReportForm()
         {
@@ -39,6 +41,7 @@ namespace GODInventoryWinForm.Controls
 
         public void InitializeDataSource(List<v_pendingorder> orders)
         {
+            BarcodeHashTable = new Hashtable();
             OrderEnities = orders;
 
             if (OrderEnities != null)
@@ -51,31 +54,32 @@ namespace GODInventoryWinForm.Controls
 
                     this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", gos));
 
-                
-
-                    var order = OrderEnities.First();
-
-                    Create1DB(order.出荷No.ToString());
+                    foreach (var go in gos)
+                    {
+                        var bitmap =  GenerateBarCodeBitmap( go.出荷No );
+                        BarcodeHashTable[go.出荷No] = BmpToBytes(bitmap);
+                        //go.BarcodeImagePath = GenerateBarCodeImage(go.出荷No.ToString());
+                    }
 
                 }
             }
 
         }
-        public void InitializeItemEnitiesDataSource()
-        {
-            if (ItemEnities != null)
-            {
-                this.reportViewer1.LocalReport.DataSources.Clear();
+        //public void InitializeItemEnitiesDataSource()
+        //{
+        //    if (ItemEnities != null)
+        //    {
+        //        this.reportViewer1.LocalReport.DataSources.Clear();
 
-                using (var ctx = new GODDbContext())
-                {
-                    var orders = ItemEnities.GroupBy(x => x.ジャンル).Select(y => y.First());
+        //        using (var ctx = new GODDbContext())
+        //        {
+        //            var orders = ItemEnities.GroupBy(x => x.ジャンル).Select(y => y.First());
 
-                    this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", orders));
-                }
-            }
+        //            this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", orders));
+        //        }
+        //    }
 
-        }
+        //}
 
 
         void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
@@ -86,13 +90,17 @@ namespace GODInventoryWinForm.Controls
             if (s == "ReceivedOrderReport" || s == "ReceivedOrderReport2")
             {
                 var orders = OrderEnities.Where(o => o.出荷No == chuhe_no).ToList();
-                var orderFirst = new List<v_pendingorder>() { orders.First() };
+
+                var orderFirst = orders.First();
+               
+                orderFirst.BarcodeImage = (byte[])BarcodeHashTable[ orderFirst.出荷No ];
+
                 var orderKeZhuCount = orders.Count(o => o.発注形態区分 == (int)OrderReasonEnum.客注);
                 var orderADCount = orders.Count(o => o.発注形態区分 == (int)OrderReasonEnum.広告);
                 var orderYongDuCount = orders.Count(o => o.発注形態区分 == (int)OrderReasonEnum.用度品);
 
                 var orderreason = new List<v_orderreason>() { new v_orderreason() { hasOrderAD = orderADCount, hasOrderKeZhu = orderKeZhuCount, hasOrderYongDu = orderYongDuCount } };
-                e.DataSources.Add(new ReportDataSource("DataSet1", orderFirst));
+                e.DataSources.Add(new ReportDataSource("DataSet1", new List<v_pendingorder>() { orderFirst }));
                 e.DataSources.Add(new ReportDataSource("DataSet2", orderreason));
             }
             else if (s == "ReceivedOrderDetailReport")
@@ -109,7 +117,7 @@ namespace GODInventoryWinForm.Controls
 
         private void ReceivedOrdersReportForm_Load(object sender, EventArgs e)
         {
-            ReportParameter[] parameters = new ReportParameter[1];
+            //ReportParameter[] parameters = new ReportParameter[1];
             //parameters[0] = new ReportParameter( "orders", this.orders, false);
 
             //this.reportViewer1.LocalReport.DataSources.Add( this.orders);
@@ -165,11 +173,12 @@ namespace GODInventoryWinForm.Controls
                 // 2.生成条形码图片并保存
                 ZXing.BarcodeWriter wr = new BarcodeWriter();
                 wr.Options = encodeOption;
-                wr.Format = BarcodeFormat.EAN_13; //  条形码规格：EAN13规格：12（无校验位）或13位数字
+                wr.Format = BarcodeFormat.CODE_128; //  条形码规格：EAN13规格：12（无校验位）或13位数字
                 //
+                string barcode = "CODE_128-" + 出荷No + ".jpg";
                 出荷No = 出荷No.PadLeft(13, '0');
                 Bitmap img = wr.Write(出荷No); // 生成图片
-                string filePath = System.AppDomain.CurrentDomain.BaseDirectory + "\\EAN_13-" + 出荷No + ".jpg";//"9787302380979"
+                string filePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, barcode);
                 img.Save(filePath, System.Drawing.Imaging.ImageFormat.Jpeg);
 
                 //// 3.读取保存的图片
@@ -187,7 +196,7 @@ namespace GODInventoryWinForm.Controls
                 string path = "file:///" + Application.StartupPath + "\\EAN_13-0000000000000.jpg";
                // path = "file:///C:/EAN_13-9787302380979.jpg";
 
-                image[0] = new ReportParameter("image1", path);
+                image[0] = new ReportParameter("image1", barcode);
                 this.reportViewer1.LocalReport.SetParameters(image);
                 return;
 
@@ -219,7 +228,68 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
-        private byte[] bmpToBytes(Bitmap bitmap)
+        private Bitmap GenerateBarCodeBitmap(long chuHeNo)
+        {
+            // 1.设置条形码规格
+            EncodingOptions encodeOption = new EncodingOptions();
+            encodeOption.Height = 80; // 必须制定高度、宽度
+            encodeOption.Width = 500;
+            encodeOption.PureBarcode = true;
+            // 2.生成条形码图片并保存
+            ZXing.BarcodeWriter wr = new BarcodeWriter();
+            wr.Options = encodeOption;
+            wr.Format = BarcodeFormat.CODE_128; //  条形码规格：EAN13规格：12（无校验位）或13位数字
+
+            Bitmap img = wr.Write(chuHeNo.ToString()); // 生成图片
+
+            return img;
+        }
+
+        private string GenerateBarCodeImage(string 出荷No)
+        {
+            string filePath = BuildBarCodeFilePath(出荷No);
+            try
+            {
+                // 1.设置条形码规格
+                EncodingOptions encodeOption = new EncodingOptions();
+                encodeOption.Height = 130; // 必须制定高度、宽度
+                encodeOption.Width = 240;
+
+                // 2.生成条形码图片并保存
+                ZXing.BarcodeWriter wr = new BarcodeWriter();
+                wr.Options = encodeOption;
+                wr.Format = BarcodeFormat.CODE_128; //  条形码规格：EAN13规格：12（无校验位）或13位数字
+                              
+                Bitmap img = wr.Write(出荷No); // 生成图片
+                
+                img.Save(filePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                //// 3.读取保存的图片
+                //this.ImgPathTxt.Text = filePath;
+                //this.barCodeImg.Image = img;
+                //定位图片存放位置
+
+                Graphics g = Graphics.FromImage(img);
+                g.DrawImage(img, 270, 170, 612, 573);
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex);
+                return null;
+
+            }
+            return filePath;
+        }
+
+        private string BuildBarCodeFilePath(string 出荷No)
+        {
+            string barcode = "CODE_128-" + 出荷No + ".jpg";
+            
+            string filePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, barcode);
+
+            return filePath;
+        }
+
+        private byte[] BmpToBytes(Bitmap bitmap)
         {
             System.IO.MemoryStream ms = null;
 

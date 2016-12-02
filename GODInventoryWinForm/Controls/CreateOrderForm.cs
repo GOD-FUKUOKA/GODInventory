@@ -108,7 +108,7 @@ namespace GODInventoryWinForm.Controls
 
                     foreach (var o in newOrderList)
                     {
-                        v_itemprice selectedItem = itemPriceList.Find(i => i.自社コード == o.自社コード);
+                        v_itemprice selectedItem = itemPriceList.Find(i => i.商品コード == o.商品コード);
                         SetOrderBaseInfo(o);
 
                         o.税率 = 0.08;
@@ -202,7 +202,6 @@ namespace GODInventoryWinForm.Controls
                         this.locationComboBox.DataSource = locations;
                         if (locations.Count > 1)
                         {
-
                             this.locationTextBox.Enabled = true;
                             this.locationComboBox.SelectedIndex = 0;
                             this.locationTextBox.Text = this.locationComboBox.SelectedValue.ToString();
@@ -346,12 +345,40 @@ namespace GODInventoryWinForm.Controls
 
             #region 基于商品コード查找商品
 
+            if (cell.OwningColumn == specialCodeColumn)
+            {
+                var row = cell.OwningRow;
+                if (cell.Value != null && cell.Value.ToString() == "YES")
+                {
+                    //row.Cells["商品コード"].ReadOnly = false;
+                    //row.Cells["ジャンル"].ReadOnly = false;
+                    row.Cells["productNameColumn"].ReadOnly = false;
+                    row.Cells["productSpecColumn"].ReadOnly = false;
+                    row.Cells["ＪＡＮコード"].ReadOnly = false;
+                    row.Cells["原単価"].ReadOnly = false;
+                    row.Cells["売単価"].ReadOnly = false;
+                    row.Cells["ロット"].ReadOnly = false;
+
+                }
+                else // cell.Value is null
+                {
+                    //row.Cells["ジャンル"].ReadOnly = true;
+                    row.Cells["productNameColumn"].ReadOnly = true;
+                    row.Cells["productSpecColumn"].ReadOnly = true;
+                    row.Cells["ＪＡＮコード"].ReadOnly = true;
+                    row.Cells["原単価"].ReadOnly = false;
+                    row.Cells["売単価"].ReadOnly = false;
+                    row.Cells["ロット"].ReadOnly = true;
+
+                }
+            }else
             if (cell.OwningColumn == this.productCodeColumn)
             {
                 int productCode = Convert.ToInt32(cell.Value);
                 var item = this.itemPriceList.Find(o => o.商品コード == productCode);
                 if (item != null)
                 {
+                    order.自社コード = item.自社コード;
                     order.ジャンル = Convert.ToInt16(item.ジャンル);
                     order.品名漢字 = item.商品名;
                     order.規格名漢字 = item.規格;
@@ -564,34 +591,7 @@ namespace GODInventoryWinForm.Controls
 
                 var cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
-                if (cell.OwningColumn == specialCodeColumn)
-                {
-                    var row = cell.OwningRow;
-                    if (cell.Value != null && cell.Value.ToString() == "YES")
-                    {
-                        //row.Cells["ジャンル"].ReadOnly = false;
-                        row.Cells["productNameColumn"].ReadOnly = false;
-                        row.Cells["productSpecColumn"].ReadOnly = false;
-                        row.Cells["ＪＡＮコード"].ReadOnly = false;
-                        row.Cells["原単価"].ReadOnly = false;
-                        row.Cells["売単価"].ReadOnly = false;
-                        row.Cells["ロット"].ReadOnly = false;
 
-                    }
-                    else // cell.Value is null
-                    {
-                        //row.Cells["ジャンル"].ReadOnly = true;
-                        row.Cells["productNameColumn"].ReadOnly = true;
-                        row.Cells["productSpecColumn"].ReadOnly = true;
-                        row.Cells["ＪＡＮコード"].ReadOnly = true;
-                        row.Cells["原単価"].ReadOnly = false;
-                        row.Cells["売単価"].ReadOnly = false;
-                        row.Cells["ロット"].ReadOnly = true;
-
-                    }
-
-
-                }
             }
 
         }

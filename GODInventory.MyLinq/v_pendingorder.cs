@@ -158,6 +158,8 @@ namespace GODInventory.MyLinq
 
         public string ShipNO { get; set; }
 
+        public string BarcodeImagePath { get; set; }
+        public byte[] BarcodeImage { get; set; }
     }
 
 }
