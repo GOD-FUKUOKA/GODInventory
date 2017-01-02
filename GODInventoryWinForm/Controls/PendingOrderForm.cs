@@ -35,7 +35,7 @@ namespace GODInventoryWinForm.Controls
         private List<v_pendingorder> sortablePendingOrderList2;
         private List<v_pendingorder> ecOrderList;
         private List<v_pendingorder> shipperOrderList;
-
+        private List<t_shoplist> shopList;
 
         public PendingOrderForm()
         {
@@ -64,10 +64,11 @@ namespace GODInventoryWinForm.Controls
             this.訂正理由区分Column.DisplayMember = "FullName";
             this.訂正理由区分Column.DataSource = OrderQuantityChangeReasonRespository.ToList();
             //物流
-
+            //
+            shopList = ctx.t_shoplist.ToList();
         }
 
- 
+
 
         #region Pager Methods
 
@@ -162,7 +163,7 @@ namespace GODInventoryWinForm.Controls
                     {
                         row.DefaultCellStyle.ForeColor = Color.Red;
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -173,7 +174,7 @@ namespace GODInventoryWinForm.Controls
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             DataGridViewRow dgrSingle = dataGridView1.Rows[e.RowIndex];
-            string cellKey = GetCellKey( e.RowIndex, e.ColumnIndex);
+            string cellKey = GetCellKey(e.RowIndex, e.ColumnIndex);
 
             if (!datagrid_changes.ContainsKey(cellKey))
             {
@@ -185,7 +186,7 @@ namespace GODInventoryWinForm.Controls
         {
             var cell = this.dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
-            string cellKey = GetCellKey( e.RowIndex, e.ColumnIndex);
+            string cellKey = GetCellKey(e.RowIndex, e.ColumnIndex);
             string cellChangedKey = GetCellKey(e.RowIndex, e.ColumnIndex, true);
             var new_cell_value = cell.Value;
             var original_cell_value = datagrid_changes[cellKey];
@@ -214,7 +215,7 @@ namespace GODInventoryWinForm.Controls
                 {
                     MessageBox.Show("実際出荷数量 >発注数量,", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
-                }                
+                }
             }
 
 
@@ -263,7 +264,7 @@ namespace GODInventoryWinForm.Controls
 
         #region 初始化数据
 
-        private int InitializeDataSource(string shipper = "すべて", string genre = "すべて", string product = "すべて", string stockState = "すべて")
+        private int InitializeDataSource(string shipper = "すべて", string genre = "すべて", string product = "すべて", string stockState = "すべて", string shops = "すべて")
         {
             this.datagrid_changes.Clear();
             this.pendingOrderList.Clear();
@@ -305,18 +306,19 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
                 sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
             }
-            else {
+            else
+            {
                 pendingOrderIBindList = null;
                 sortablePendingOrderList = null;
             }
 
 
-            InitializeOrderData(shipper, genre, product, stockState);
+            InitializeOrderData(shipper, genre, product, stockState, shops);
 
             return count;
         }
 
-        private int InitializeOrderData(string shipper, string genre, string product, string stockState)
+        private int InitializeOrderData(string shipper, string genre, string product, string stockState, string shops)
         {
             this.bindingSource1.DataSource = null;
             // 记录DataGridView改变数据          
@@ -344,7 +346,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 this.genreComboBox.Text = genre;
                 this.productComboBox.Text = product;
                 // PageEvent 时, stockState 在初始化为 “”， 需设置为 “すべて”
-                this.ZKZTcomboBox3.Text = (stockState.Length ==0 ? "すべて" : stockState);
+                this.ZKZTcomboBox3.Text = (stockState.Length == 0 ? "すべて" : stockState);
+                this.storeComboBox.Text = shops;
                 //// 品名漢字
                 //var PMHZ = pendingOrderList.Select(s => new MockEntity {Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().ToList();
                 //PMHZ.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
@@ -366,12 +369,12 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 //this.ZKZTcomboBox3.ValueMember = "ShortName";
                 //this.ZKZTcomboBox3.DataSource = ZKZT;
             }
-           
+
 
             return 0;
         }
 
-        private void InitializeShipperOrderList( string shipperName = null)
+        private void InitializeShipperOrderList(string shipperName = null)
         {
 
             //this.shipperComboBox.DisplayMember = "ShortName";
@@ -526,7 +529,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             {
                 rows.Add(row);
             }
-            return rows ;
+            return rows;
         }
 
 
@@ -543,8 +546,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             string genre = this.genreComboBox.Text;
             string product = this.productComboBox.Text;
             string stockState = this.ZKZTcomboBox3.Text;
-
-            int orderCount = InitializeDataSource(shipper, genre, product, stockState);
+            string shops = this.storeComboBox.Text;
+            int orderCount = InitializeDataSource(shipper, genre, product, stockState, shops);
 
             var direction = ListSortDirection.Ascending;
             if (originalSortOrder == System.Windows.Forms.SortOrder.Descending)
@@ -723,7 +726,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             {
                 productComboBox.SelectedIndex = 0;
             }
-            
+
             if (ZKZTcomboBox3.SelectedIndex != 0)
             {
                 ZKZTcomboBox3.SelectedIndex = 0;
@@ -738,7 +741,28 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             string county = countyComboBox1.Text;
             var orders = GetOrdersByShipper(shipper, county);
 
-          
+            //联动 店名
+
+            var filtered = shopList.FindAll(s => s.県別 == county);
+            if (filtered.Count > 0)
+            {
+                var shops = filtered.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+                this.storeComboBox.DisplayMember = "FullName";
+                this.storeComboBox.ValueMember = "Id";
+                this.storeComboBox.DataSource = shops;
+                this.storeComboBox.SelectedIndex = 0;
+            }
+            else
+            {
+                var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+                shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+                this.storeComboBox.DisplayMember = "FullName";
+                this.storeComboBox.ValueMember = "Id";
+                this.storeComboBox.DataSource = shops;
+
+            }
+
             // 品名漢字
             InitializeGenreComboBox(orders);
         }
@@ -763,7 +787,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             string product = productComboBox.Text;
             string stock = ZKZTcomboBox3.Text;
             string county = countyComboBox1.Text;
-            ApplyFilter4(shipper,county, genre, product, stock);
+            string shops = storeComboBox.Text;
+            ApplyFilter4(shipper, county, genre, product, stock, shops);
 
         }
         //在库状态
@@ -774,7 +799,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             string product = productComboBox.Text;
             string stock = ZKZTcomboBox3.Text;
             string county = countyComboBox1.Text;
-            ApplyFilter4(shipper,county, genre, product, stock);
+            string shops = storeComboBox.Text;
+            ApplyFilter4(shipper, county, genre, product, stock, shops);
         }
         // 配送担当
         private void DanDangComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -782,7 +808,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
             var combox = sender as ComboBox;
             string shipper = combox.Text;
-            var orders = GetOrdersByShipper(shipper);                        
+            var orders = GetOrdersByShipper(shipper);
             InitializeCountyComboBox(orders);
             //InitializeProductComboBox(orders);
         }
@@ -808,7 +834,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         private void InitializeProductComboBox(List<v_pendingorder> orders)
         {
             // 品名漢字
-            var PMHZ = orders.Select(s => new MockEntity { Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().OrderBy(s=>s.Id).ToList();
+            var PMHZ = orders.Select(s => new MockEntity { Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().OrderBy(s => s.Id).ToList();
             PMHZ.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
             this.productComboBox.DisplayMember = "FullName";
             this.productComboBox.ValueMember = "Id";
@@ -826,7 +852,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             return orders;
         }
 
-        private void ApplyFilter4(string shipper = "", string county = "", string genre = "", string product = "", string stock = "")
+        private void ApplyFilter4(string shipper = "", string county = "", string genre = "", string product = "", string stock = "", string shops = "")
         {
             var originalSortOrder = this.dataGridView1.SortOrder;
             var originalSortedColumn = this.dataGridView1.SortedColumn;
@@ -843,8 +869,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             if (county.Length > 0 && county != "すべて")
             {
                 filteredOrderList = filteredOrderList.FindAll(o => o.県別 == county);
-            } 
-            
+            }
+
             if (product.Length > 0 && product != "すべて")
             {
                 filteredOrderList = filteredOrderList.FindAll(o => o.品名漢字 == product);
@@ -857,9 +883,12 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             }
             if (stock.Length > 0 && stock != "すべて")
             {
-                filteredOrderList = filteredOrderList.FindAll(o => o.在庫状態 == stock);                
+                filteredOrderList = filteredOrderList.FindAll(o => o.在庫状態 == stock);
             }
-
+            if (shops.Length > 0 && shops != "すべて")
+            {
+                filteredOrderList = filteredOrderList.FindAll(o => o.店名 == shops);
+            }
             sortablePendingOrderList = new SortableBindingList<v_pendingorder>(filteredOrderList);
 
             this.bindingSource1.DataSource = sortablePendingOrderList;
@@ -878,7 +907,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         private void UpdateStockState(List<v_pendingorder> orders)
         {
             // 每次应用过滤条件时，都会生成新的结果集，根据新的结果集更新“在庫状態”
-            var grouped_orders = orders.GroupBy(o => new {自社コード=o.自社コード, 実際配送担当=o.実際配送担当}, o => o);
+            var grouped_orders = orders.GroupBy(o => new { 自社コード = o.自社コード, 実際配送担当 = o.実際配送担当 }, o => o);
             foreach (var gos in grouped_orders)
             {
                 int total = gos.Sum(o => o.実際出荷数量);
@@ -901,7 +930,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                     }
                 }
             }
-        
+
         }
 
         private void ApplyFilter2()
@@ -977,7 +1006,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             string zkzt = ZKZTcomboBox3.Text;
 
             // 在库状态 过滤条件 检查, 因为在库状态是动态值，所以需要使用 visible 来过滤
-            
+
             {
                 CurrencyManager cm = (CurrencyManager)BindingContext[dataGridView1.DataSource];
                 cm.SuspendBinding();
@@ -1007,7 +1036,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             {
                 orders = orders.FindAll(o => o.GenreName == genre);
             }
-            
+
             return orders;
         }
 
@@ -1015,7 +1044,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
 
         #region 退单功能
-        
+
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             string selectedShipperName = this.shipperComboBox.Text;
@@ -1034,27 +1063,27 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         }
 
 
-        private void RollbackOrder( List<v_pendingorder> pendingOrders ) 
+        private void RollbackOrder(List<v_pendingorder> pendingOrders)
         {
             using (var ctx = new GODDbContext())
             {
                 var orderIds = pendingOrders.Select(o => o.id受注データ);
-                
+
                 var orderList = (from t_orderdata o in ctx.t_orderdata
-                    where orderIds.Contains(o.id受注データ)
-                    select o).ToList();
+                                 where orderIds.Contains(o.id受注データ)
+                                 select o).ToList();
                 var stockrecList = (from t_stockrec s in ctx.t_stockrec
                                     where orderIds.Contains(s.OrderId)
                                     select s).ToList();
 
-                foreach (var order in orderList) 
+                foreach (var order in orderList)
                 {
                     //二次制品订单？
                     order.社内伝番 = 0;
                     order.一旦保留 = true;
                     order.配送担当受信 = false;
                     order.配送担当受信時刻 = null;
-                    order.Status = OrderStatus.Pending;               
+                    order.Status = OrderStatus.Pending;
                 }
 
                 ctx.t_stockrec.RemoveRange(stockrecList);
@@ -1069,7 +1098,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         {
             int count = dataGridView1.SelectedRows.Count;
             int total = 0;
-            for (int i = 0; i < count; i++) 
+            for (int i = 0; i < count; i++)
             {
                 var order = dataGridView1.SelectedRows[i].DataBoundItem as v_pendingorder;
                 total += order.実際出荷数量;
@@ -1083,8 +1112,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             string shipperName = shipperComboBox.Text;
             for (int i = 0; i < dataGridView3.SelectedRows.Count; i++)
             {
-                var order = dataGridView3.SelectedRows[i].DataBoundItem as v_pendingorder;               
-                orders.Add(order);                
+                var order = dataGridView3.SelectedRows[i].DataBoundItem as v_pendingorder;
+                orders.Add(order);
             }
 
             if (orders.Count() > 0)
@@ -1116,6 +1145,21 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             order.原価金額_税込_ = order.実際出荷数量 * order.原単価_税込_;
             order.税額 = order.原価金額_税抜_ * order.税率;
             return true;
+        }
+
+        private void storeComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            string shipper = DanDangComboBox.Text;
+            string genre = genreComboBox.Text;
+            string product = productComboBox.Text;
+            string stock = ZKZTcomboBox3.Text;
+            string county = countyComboBox1.Text;
+            string shops = storeComboBox.Text;
+            ApplyFilter4(shipper, county, genre, product, stock, shops);
+
+
+
+
         }
 
 
