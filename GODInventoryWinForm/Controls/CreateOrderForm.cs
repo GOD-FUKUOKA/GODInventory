@@ -91,7 +91,7 @@ namespace GODInventoryWinForm.Controls
 
         private void addButton_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void submitButton_Click(object sender, EventArgs e)
@@ -137,6 +137,31 @@ namespace GODInventoryWinForm.Controls
                         o.発注規格名漢字 = o.規格名漢字;
                         o.用度品区分 = 0;
 
+                        //判断全角半角
+                        bool isrun = true;
+
+                        if (o.発注数量 != null)
+                            isrun = QuanJiaoBanJiao(o.発注数量.ToString());
+                        if (o.県別 != null)
+                            isrun = QuanJiaoBanJiao(o.県別);
+                        if (o.発注形態名称漢字 != null)
+                            isrun = QuanJiaoBanJiao(o.発注形態名称漢字);
+                        if (o.原単価_税込_ != null)
+                            isrun = QuanJiaoBanJiao(o.原単価_税込_.ToString());
+                        if (o.原価金額_税抜_ != null)
+                            isrun = QuanJiaoBanJiao(o.原価金額_税抜_.ToString());
+                        if (o.原価金額_税込_ != null)
+                            isrun = QuanJiaoBanJiao(o.原価金額_税込_.ToString());
+                        if (o.売単価_税込_ != null)
+                            isrun = QuanJiaoBanJiao(o.売単価_税込_.ToString());
+                        if (o.税額 != null)
+                            isrun = QuanJiaoBanJiao(o.税額.ToString());
+                        if (o.発注品名漢字 != null)
+                            isrun = QuanJiaoBanJiao(o.発注品名漢字);
+                        if (o.発注規格名漢字 != null)
+                            isrun = QuanJiaoBanJiao(o.発注規格名漢字);
+                        if (isrun == false)
+                            return ;
                     }
                     ctx.t_orderdata.AddRange(newOrderList);
                     ctx.SaveChanges();
@@ -147,7 +172,24 @@ namespace GODInventoryWinForm.Controls
             }
 
         }
-      
+
+        private bool QuanJiaoBanJiao(string o)
+        {
+            bool isrun = true;
+
+            if (o != null && o.ToString() != String.Empty)
+            {
+                if (!EDITxtHandler.IsAllQuanjiaoJapan(o.ToString()))
+                {
+                    MessageBox.Show("输入数据包含半角字符！" + o);
+                    isrun = false;
+
+
+                }
+            }
+            return isrun;
+        }
+
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
@@ -371,25 +413,26 @@ namespace GODInventoryWinForm.Controls
                     row.Cells["ロット"].ReadOnly = true;
 
                 }
-            }else
-            if (cell.OwningColumn == this.productCodeColumn)
-            {
-                int productCode = Convert.ToInt32(cell.Value);
-                var item = this.itemPriceList.Find(o => o.商品コード == productCode);
-                if (item != null)
-                {
-                    order.自社コード = item.自社コード;
-                    order.ジャンル = Convert.ToInt16(item.ジャンル);
-                    order.品名漢字 = item.商品名;
-                    order.規格名漢字 = item.規格;
-                    order.ＪＡＮコード = item.JANコード;
-                    order.原単価_税抜_ = Convert.ToInt32(item.原単価);
-                    order.売単価_税抜_ = Convert.ToInt32(item.原単価);
-                    order.最小発注単位数量 = item.PT入数;
-                    order.納品口数 = 0;
-                    cell.OwningRow.Cells["genreNameColumn"].Value = item.ジャンル名;
-                }
             }
+            else
+                if (cell.OwningColumn == this.productCodeColumn)
+                {
+                    int productCode = Convert.ToInt32(cell.Value);
+                    var item = this.itemPriceList.Find(o => o.商品コード == productCode);
+                    if (item != null)
+                    {
+                        order.自社コード = item.自社コード;
+                        order.ジャンル = Convert.ToInt16(item.ジャンル);
+                        order.品名漢字 = item.商品名;
+                        order.規格名漢字 = item.規格;
+                        order.ＪＡＮコード = item.JANコード;
+                        order.原単価_税抜_ = Convert.ToInt32(item.原単価);
+                        order.売単価_税抜_ = Convert.ToInt32(item.原単価);
+                        order.最小発注単位数量 = item.PT入数;
+                        order.納品口数 = 0;
+                        cell.OwningRow.Cells["genreNameColumn"].Value = item.ジャンル名;
+                    }
+                }
 
             #endregion
 
