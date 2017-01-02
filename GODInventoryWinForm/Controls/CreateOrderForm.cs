@@ -141,27 +141,66 @@ namespace GODInventoryWinForm.Controls
                         bool isrun = true;
 
                         if (o.発注数量 != null)
+                        {
                             isrun = QuanJiaoBanJiao(o.発注数量.ToString());
+                            if (isrun == false)
+                                return;
+                        }
                         if (o.県別 != null)
+                        {
                             isrun = QuanJiaoBanJiao(o.県別);
+                            if (isrun == false)
+                                return;
+                        }
                         if (o.発注形態名称漢字 != null)
+                        {
                             isrun = QuanJiaoBanJiao(o.発注形態名称漢字);
+                            if (isrun == false)
+                                return;
+                        }
                         if (o.原単価_税込_ != null)
+                        {
                             isrun = QuanJiaoBanJiao(o.原単価_税込_.ToString());
+                            if (isrun == false)
+                                return;
+                        }
                         if (o.原価金額_税抜_ != null)
+                        {
                             isrun = QuanJiaoBanJiao(o.原価金額_税抜_.ToString());
+                            if (isrun == false)
+                                return;
+                        }
                         if (o.原価金額_税込_ != null)
+                        {
                             isrun = QuanJiaoBanJiao(o.原価金額_税込_.ToString());
+                            if (isrun == false)
+                                return;
+                        }
                         if (o.売単価_税込_ != null)
+                        {
                             isrun = QuanJiaoBanJiao(o.売単価_税込_.ToString());
+                            if (isrun == false)
+                                return;
+                        }
                         if (o.税額 != null)
+                        {
                             isrun = QuanJiaoBanJiao(o.税額.ToString());
+                            if (isrun == false)
+                                return;
+                        }
                         if (o.発注品名漢字 != null)
+                        {
                             isrun = QuanJiaoBanJiao(o.発注品名漢字);
+                            if (isrun == false)
+                                return;
+                        }
+
                         if (o.発注規格名漢字 != null)
+                        {
                             isrun = QuanJiaoBanJiao(o.発注規格名漢字);
-                        if (isrun == false)
-                            return ;
+                            if (isrun == false)
+                                return;
+                        }
                     }
                     ctx.t_orderdata.AddRange(newOrderList);
                     ctx.SaveChanges();
