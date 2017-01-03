@@ -123,3 +123,8 @@ ADD COLUMN `訂正理由区分` INT(4) UNSIGNED NOT NULL DEFAULT 0;
 
 ALTER TABLE  `t_orderdata` 
 CHANGE COLUMN `納品先店舗コード` `納品先店舗コード` INT(4) NOT NULL DEFAULT 0;
+
+#v5.11
+==============================================
+ALTER TABLE  `t_orderdata` 
+ADD COLUMN `最终实际出货数量` INT(4) UNSIGNED NOT NULL DEFAULT 0;

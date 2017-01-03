@@ -19,6 +19,8 @@ namespace GODInventoryWinForm.Controls
         EditOrderForm2 editOrderForm;
         private static string NoOptionSelected = "すべて";
         List<v_pendingorder> orderList;
+        List<t_orderdata> shippedOrderList;
+        List<v_groupedorder> groupedOrderList;
         SortableBindingList<v_pendingorder> orderListBindingList;
         private List<t_shoplist> shopList;
 
@@ -32,6 +34,8 @@ namespace GODInventoryWinForm.Controls
             startDateTimePicker.Select();
             this.ActiveControl = startDateTimePicker;
 
+            InitializeEdiDataDataSource();
+            
         }
 
 
@@ -440,17 +444,13 @@ namespace GODInventoryWinForm.Controls
         {
             SendASNForm sendForm = new SendASNForm();
             var newPath = Path.Combine(Properties.Settings.Default.NFWEInstallDir, @"NYOTEI\NYOTEI.txt");
-            var order = dataGridView1.CurrentRow.DataBoundItem as v_pendingorder;
+            var order = dataGridView2.CurrentRow.DataBoundItem as t_orderdata;
             if (order != null)
             {
-                using (var ctx = new GODDbContext())
-                {
+               
+                var orders = this.shippedOrderList.Where(o => o.出荷No == order.出荷No).ToList();
 
-                    var orders = ctx.t_orderdata.Where(o => o.出荷No == order.出荷No).ToList();
-
-                    ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(newPath, orders);
-                }
-
+                ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(newPath, orders);
 
                 // 上传ASN
                 sendForm.Mid = order.ASN管理連番;
@@ -459,5 +459,94 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
+        private void InitializeEdiDataDataSource() {
+            var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+
+            this.storeNameComboBox2.DisplayMember = "FullName";
+            this.storeNameComboBox2.ValueMember = "Id";
+            this.storeNameComboBox2.DataSource = shops;
+            this.dataGridView2.AutoGenerateColumns = false;
+        }
+
+        private void InitializeEdiDataByStore()
+        {
+
+            int storeId = Convert.ToInt32( this.storeNameComboBox2.SelectedValue );
+            if (storeId > 0)
+            {
+                using (var ctx = new GODDbContext())
+                {
+                    DateTime threeMonthAgo = DateTime.Now.AddMonths(-3);
+                    string sql = @"SELECT o.`出荷No`, o.`出荷日`, o.`納品日`, o.`県別`, o.`実際配送担当`, o.`原価金額(税抜)`, o.`重量`
+                        FROM  t_orderdata o WHERE o.`出荷No`> 0  ORDER BY  o.`実際配送担当`, o.`出荷No`, o.`出荷日`, o.`納品日`";
+
+//                  string sql = @"SELECT o.`出荷No`, o.`出荷日`, o.`納品日`,
+//     min(o.`県別`) as `県別`, o.`実際配送担当`, 
+//    sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight  
+//    FROM  t_orderdata o WHERE o.`出荷No`>0 GROUP BY  o.`実際配送担当`, o.`出荷No`, o.`出荷日`, o.`納品日`";
+//                  groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql).ToList();
+                    shippedOrderList = (from t_orderdata o in ctx.t_orderdata
+                                        where o.出荷No > 0 && o.受注日 > threeMonthAgo
+                                     orderby  o.実際配送担当, o.出荷No, o.出荷日, o.納品日
+                                     select o).ToList();
+ 
+
+                    dataGridView2.DataSource = shippedOrderList;
+                }
+            }
+        }
+
+        private void searchEdiDataByStoreButton2_Click(object sender, EventArgs e)
+        {
+            InitializeEdiDataByStore();
+        }
+
+        private void storeNameComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void storeIdTextBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void storeNameComboBox2_TextChanged(object sender, EventArgs e)
+        {
+            int code = (int)storeNameComboBox2.SelectedValue;
+            if (code > 0)
+            {
+                this.storeCodeTextBox2.Text = code.ToString();
+            }
+            else
+            {
+                this.storeCodeTextBox2.Text = "";
+            }
+        }
+
+        private void storeCodeTextBox2_MouseLeave(object sender, EventArgs e)
+        {
+            if (storeCodeTextBox2.Text.Trim().Length > 0)
+            {
+                int storeId = Convert.ToInt32(storeCodeTextBox2.Text);
+                if (storeId > 0)
+                {
+                    var shops = this.shopList.Where(s => s.店番.ToString().StartsWith(storeId.ToString())).ToList();
+                    if (shops.Count > 0)
+                    {
+                        var store = shops.First();
+                        this.storeNameComboBox2.SelectedValue = store.店番;
+                    }
+                    else
+                    {
+                        errorProvider2.SetError(storeCodeTextBox2, String.Format("Can not find store by ID {0}", storeId));
+                    }
+                }
+                else
+                {
+                    errorProvider2.SetError(storeCodeTextBox2, String.Format("Can not find store by ID {0}", storeCodeTextBox2.Text));
+                }
+            }
+        }
     }
 }
