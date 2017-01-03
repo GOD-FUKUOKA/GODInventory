@@ -577,7 +577,8 @@ namespace GODInventory.ViewModel
             {
                 var oids = gos.Select(o => o.id受注データ);
                 long chuhe_no = EDITxtHandler.GenerateEDIShipNO(ctx, gos.First());
-                var sql1 = String.Format("UPDATE t_orderdata SET  `出荷No`={2}, `Status`={3}  WHERE  `id受注データ` in ({0}) AND `Status`={1} ", String.Join(",", oids.ToArray()), (int)OrderStatus.Locked, chuhe_no, (int)OrderStatus.ASN);
+                // 不能加入状态条件， 取消的订单也需要生成 出荷NO
+                var sql1 = String.Format("UPDATE t_orderdata SET  `出荷No`={1}, `Status`={2}  WHERE  `id受注データ` in ({0}) ", String.Join(",", oids.ToArray()), chuhe_no, (int)OrderStatus.ASN);
                 ctx.Database.ExecuteSqlCommand(sql1);
             }
 
@@ -706,7 +707,7 @@ namespace GODInventory.ViewModel
                    //income = Convert.ToInt32(income);
                    //outcome = Convert.ToInt32(outcome);
                    var nullableQty = (from s in ctx.t_stockrec
-                              where s.自社コード == pid && s.状態 == "完了" && (s.先==warehouse.FullName || s.元 == warehouse.FullName)
+                              where s.自社コード == pid && s.状態 == "完了" &&  ((s.先 ==warehouse.FullName && s.区分 == "入庫") || (s.元 ==warehouse.FullName && s.区分 == "出庫") )
                                   select s.数量).Sum();
                    var qty = Convert.ToInt32(nullableQty);
 

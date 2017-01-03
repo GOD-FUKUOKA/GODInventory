@@ -286,7 +286,7 @@ namespace GODInventory.ViewModel.EDI
             // 0.05 * 1000 => 50  50.toString("D4") => "0050"
             this.税率= Encoding.ASCII.GetBytes(Convert.ToInt32(order.税率 * 1000).ToString("D4")); //49 税率             4 380
             this.売単価_税抜_ = Encoding.ASCII.GetBytes(order.売単価_税抜_.ToString("D7")); //50 売単価（税抜  ）  7 384
-            this.売単価_税込_ = Encoding.ASCII.GetBytes(Convert.ToInt32(order.売単価_税込_).ToString("D7")); //51 売単価（税込）    7 391
+            this.売単価_税込_ = Encoding.ASCII.GetBytes( ((int)order.売単価_税込_).ToString("D7")); //51 売単価（税込）    7 391
 
 
             this.納品先店舗コード = Encoding.ASCII.GetBytes(order.納品先店舗コード.ToString("D3")); //52 納品先店舗コード   3 398

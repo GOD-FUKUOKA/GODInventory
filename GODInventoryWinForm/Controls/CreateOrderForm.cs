@@ -110,7 +110,8 @@ namespace GODInventoryWinForm.Controls
                     {
                         v_itemprice selectedItem = itemPriceList.Find(i => i.商品コード == o.商品コード);
                         SetOrderBaseInfo(o);
-
+                        o.納品先店舗コード = (short)o.店舗コード;
+                        o.納品先店舗名漢字 = o.店舗名漢字;
                         o.税率 = 0.08;
                         o.特価区分 = 0;
                         o.PB区分 = 0;
@@ -130,7 +131,7 @@ namespace GODInventoryWinForm.Controls
                         o.原価金額_税込_ = (int)(o.実際出荷数量 * o.原単価_税込_);
 
                         //o.売単価_税抜_ = (int)selectedItem.売単価;
-                        o.売単価_税込_ = ((int)(o.売単価_税抜_ * (1 + o.税率) * 100)) * 1.0 / 100;
+                        o.売単価_税込_ = (int)(o.売単価_税抜_ * (1 + o.税率));
                         o.税額 = (int)(o.原価金額_税抜_ * o.税率);
 
                         o.発注品名漢字 = o.品名漢字;

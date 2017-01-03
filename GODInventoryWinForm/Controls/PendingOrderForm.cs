@@ -24,6 +24,7 @@ namespace GODInventoryWinForm.Controls
         private Hashtable datagrid_changes = null;
         private List<t_stockstate> stockstates;
         private List<v_shipper> shipperList;
+        private List<t_itemlist> productList;
         //List<t_orderdata> Findorderdataresults;
         private BindingList<v_stockios> stockiosList;
         int RowRemark = 0;
@@ -48,7 +49,7 @@ namespace GODInventoryWinForm.Controls
 
             var ctx = entityDataSource1.DbContext as GODDbContext;
             this.stockstates = ctx.t_stockstate.Select(s => s).ToList();
-
+            this.productList = ctx.t_itemlist.Select(s => s).ToList();
             //shipperList = (from s in ctx.t_shoplist
             //         group s by s.配送担当 into g
             //               select new v_shipper { ShortName = g.Key }).ToList();
@@ -100,10 +101,18 @@ namespace GODInventoryWinForm.Controls
                         var pendingorder = orders.Find(o => o.id受注データ == id);
                         t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
                         //需要修改的字段为: “口数” “发注数量” “担当” “形态”
-                        order.実際出荷数量 = pendingorder.実際出荷数量;
+                        if (order.実際出荷数量 != pendingorder.実際出荷数量)
+                        {
+                            // 修正相应 金額
+                            order.実際出荷数量 = pendingorder.実際出荷数量;
+                            order.原価金額_税抜_ = pendingorder.原価金額_税抜_;
+                            order.原価金額_税込_ = pendingorder.原価金額_税込_;
+                            order.税額 = pendingorder.税額;
+                            order.納品口数 = pendingorder.納品口数;
+                            order.重量 = pendingorder.重量;
+                        }
                         order.訂正理由区分 = pendingorder.訂正理由区分;
-                        order.納品口数 = pendingorder.納品口数;
-                        order.重量 = pendingorder.重量;
+
                         order.発注形態名称漢字 = pendingorder.発注形態名称漢字;
                         order.実際配送担当 = pendingorder.実際配送担当;
                         order.備考 = pendingorder.備考;
@@ -290,7 +299,9 @@ namespace GODInventoryWinForm.Controls
                 //{
                 //    pendingOrderList.Add(o as v_pendingorder);
                 //}
-                string sql = @" SELECT o.*, g.`ジャンル名` as `GenreName`, k.`在庫数` as `在庫数`  from t_orderdata o
+                string sql = @" SELECT o.*, o.`原単価(税抜)` as `原単価_税抜_`, o.`原単価(税込)` as `原単価_税込_`, o.`売単価（税抜）` as `売単価_税抜_`, o.`売単価（税込）` as `売単価_税込_`,
+g.`ジャンル名` as `GenreName`, k.`在庫数` as `在庫数`  
+FROM t_orderdata o
 INNER JOIN t_genre g  on o.ジャンル = g.idジャンル
 LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.実際配送担当 = k.ShipperName 
 WHERE o.Status ={0}
@@ -1109,12 +1120,17 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             order.実際出荷数量 = new_qty;
             if (order.最小発注単位数量 > 0)
             {
-                order.納品口数 = (int)order.実際出荷数量 / order.最小発注単位数量;
+                order.納品口数 = (int)(order.実際出荷数量 / order.最小発注単位数量);
+            }
+            var product = productList.FirstOrDefault(i => i.商品コード == order.商品コード);
+            if (product != null)
+            {
+                order.重量 = (int)(Convert.ToDecimal(product.単品重量) * order.実際出荷数量); 
             }
 
             order.原価金額_税抜_ = order.実際出荷数量 * order.原単価_税抜_;
-            order.原価金額_税込_ = order.実際出荷数量 * order.原単価_税込_;
-            order.税額 = order.原価金額_税抜_ * order.税率;
+            order.原価金額_税込_ = (int)(order.実際出荷数量 * order.原単価_税込_);
+            order.税額 = (int)(order.原価金額_税抜_ * order.税率);
             return true;
         }
 

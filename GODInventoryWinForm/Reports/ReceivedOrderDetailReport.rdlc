@@ -1303,7 +1303,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>="" &amp; Fields!店舗コード.Value &amp;  " " &amp; Fields!店舗名漢字.Value</Value>
+                              <Value>= Format(Fields!店舗コード.Value,"000") &amp;  " " &amp; Fields!店舗名漢字.Value</Value>
                               <Style>
                                 <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>

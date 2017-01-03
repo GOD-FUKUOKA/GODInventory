@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Spatial;
 
 namespace GODInventory.MyLinq
 {
@@ -69,8 +72,10 @@ namespace GODInventory.MyLinq
         public int 重量 { get; set; }
 
         public int 原単価_税抜_ { get; set; }
+
         public double? 原単価_税込_ { get; set; }
 
+        [Column("原価金額(税抜)")]
         public int 原価金額_税抜_ { get; set; }
 
         public double? 原価金額_税込_ { get; set; }
