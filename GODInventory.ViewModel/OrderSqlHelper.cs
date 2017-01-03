@@ -8,6 +8,7 @@ using System.ComponentModel;
 using MySql.Data.MySqlClient;
 using GODInventory.ViewModel.EDI;
 using System.IO;
+using System.Diagnostics;
 
 namespace GODInventory.ViewModel
 {
@@ -515,7 +516,32 @@ namespace GODInventory.ViewModel
             }
             return count;
 
-        }   
+        }
+
+        public static int UpdateOrderStatusShipped(List<string> shipNOs)
+        {
+            int count = 0;
+            using (var ctx = new GODDbContext())
+            {
+                //var orderList = (from t_orderdata o in ctx.t_orderdata
+                //                 where orderIds.Contains(o.id受注データ)
+                //                 select o).ToList();
+
+                string sql = string.Format("UPDATE t_orderdata SET `Status`={1}  WHERE `shipNO` in ({0})", String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray()), (int)OrderStatus.Shipped);
+                count = ctx.Database.ExecuteSqlCommand(sql);
+                //Debug.Assert(count == orderList.Count);
+                //var order = orderList.First();
+                //if (order != null) {
+                //    var edidata = (from o in ctx.t_edidata
+                //                   where o.管理連番 == order.ASN管理連番
+                //                   select o).First();
+                //    edidata.is_printed = true;
+                //    edidata.printed_at = DateTime.Now;
+                //    ctx.SaveChanges();
+                //}
+            }
+            return count;
+        }
 
         public static int FinishOrders(List<int> orderIds)
         {

@@ -188,6 +188,8 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 //sendForm.IsCanceledOrder = false;
                 //sendForm.ShowDialog();
 
+                //
+                OrderSqlHelper.UpdateOrderStatusShipped(shipNOs);
             }
 
 

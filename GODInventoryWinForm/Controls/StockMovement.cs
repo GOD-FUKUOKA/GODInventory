@@ -96,7 +96,7 @@ namespace GODInventoryWinForm.Controls
                             order.数量 = -item.qty;
                             order.自社コード = item.自社コード;
                             order.状態 = this.fromStatusComboBox4.Text;
-                            //order.客 = item.客;
+                            order.工場 = this.manufacturerComboBox.Text;
 
                             changeList.Add(order);
 
@@ -114,7 +114,7 @@ namespace GODInventoryWinForm.Controls
 
                             order.数量 = item.qty;
                             order.状態 = this.toStatusComboBox.Text;
-                            //order.客 = item.客;
+                            order.工場 = this.manufacturerComboBox.Text;
 
                             changeList.Add(order);
 
