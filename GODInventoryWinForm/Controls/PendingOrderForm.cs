@@ -427,8 +427,11 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             {
                 // 用户退单后刷新
                 this.shipperComboBox.Text = shipperName;
-                this.dataGridView3.AutoGenerateColumns = false;
-                this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName);
+                // this.dataGridView3.AutoGenerateColumns = false;
+                //   this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName);
+                //new 
+                this.bindingSource2.DataSource = shipperOrderList;
+                this.entityDataSource2.Refresh();
             }
         }
 
@@ -684,8 +687,12 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             // skip first time initialization
             if (shipperOrderList != null)
             {
-                this.dataGridView3.AutoGenerateColumns = false;
-                this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
+                //this.dataGridView3.AutoGenerateColumns = false;
+                //this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
+                //new
+               
+                this.bindingSource2.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
+                this.entityDataSource2.Refresh();
             }
 
         }
@@ -1135,7 +1142,10 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                     OrderSqlHelper.NotifyShipper(ctx, orders, shipperName);
                 }
                 this.shipperOrderList.RemoveAll(o => orders.Contains(o));
-                this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName); ;
+               // this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName); ;
+                //
+                this.bindingSource2.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
+                this.entityDataSource2.Refresh();
                 MessageBox.Show(String.Format(" {0} 件転送処理しました!", orders.Count));
             }
 
@@ -1154,7 +1164,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             var product = productList.FirstOrDefault(i => i.商品コード == order.商品コード);
             if (product != null)
             {
-                order.重量 = (int)(Convert.ToDecimal(product.単品重量) * order.実際出荷数量); 
+                order.重量 = (int)(Convert.ToDecimal(product.単品重量) * order.実際出荷数量);
             }
 
             order.原価金額_税抜_ = order.実際出荷数量 * order.原単価_税抜_;

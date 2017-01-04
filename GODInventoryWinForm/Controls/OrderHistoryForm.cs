@@ -176,8 +176,11 @@ namespace GODInventoryWinForm.Controls
                 }
                 string sqlCount = string.Format(" SELECT count(*) FROM t_orderdata {0}", conditions);
                 count = ctx.Database.SqlQuery<int>(sqlCount, condition_params.ToArray()).First();
-                string sql = string.Format(" SELECT * FROM t_orderdata {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
+                //string sql = string.Format(" SELECT * FROM t_orderdata {0} LIMIT {1} OFFSET {2}", conditions, limit, offset);
+                string sql = string.Format(" SELECT * FROM t_orderdata {0} LIMIT {1} OFFSET {2}", conditions , limit, offset);//+ "order by o1.`受注日`"
                 orderList = ctx.Database.SqlQuery<v_pendingorder>(sql, condition_params.ToArray()).ToList();
+                //new 
+                orderList = orderList.Distinct().OrderBy(s => s.受注日).ToList();
             }
             orderListBindingList = new SortableBindingList<v_pendingorder>(orderList);
             dataGridView1.AutoGenerateColumns = false;

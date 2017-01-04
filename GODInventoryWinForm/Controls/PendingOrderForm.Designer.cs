@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ordersTabPage = new System.Windows.Forms.TabPage();
@@ -101,6 +101,8 @@
             this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注形態 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource2 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -111,6 +113,7 @@
             this.contextMenuStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // id受注データDataGridViewTextBoxColumn
@@ -385,14 +388,14 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.OrderReceivedAtColumn1,
@@ -437,8 +440,8 @@
             // OrderReceivedAtColumn1
             // 
             this.OrderReceivedAtColumn1.DataPropertyName = "受注日";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.OrderReceivedAtColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.OrderReceivedAtColumn1.DefaultCellStyle = dataGridViewCellStyle4;
             this.OrderReceivedAtColumn1.HeaderText = "受注日";
             this.OrderReceivedAtColumn1.Name = "OrderReceivedAtColumn1";
             this.OrderReceivedAtColumn1.ReadOnly = true;
@@ -659,6 +662,7 @@
             this.dataGridView3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView3.AutoGenerateColumns = false;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn20,
@@ -677,6 +681,7 @@
             this.発注形態,
             this.dataGridViewTextBoxColumn36});
             this.dataGridView3.ContextMenuStrip = this.contextMenuStrip3;
+            this.dataGridView3.DataSource = this.bindingSource2;
             this.dataGridView3.Location = new System.Drawing.Point(3, 55);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
@@ -825,6 +830,15 @@
             this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
             this.dataGridViewTextBoxColumn36.ReadOnly = true;
             // 
+            // bindingSource2
+            // 
+            this.bindingSource2.DataSource = this.entityDataSource1;
+            this.bindingSource2.Position = 0;
+            // 
+            // entityDataSource2
+            // 
+            this.entityDataSource2.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
             // PendingOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -850,6 +864,7 @@
             this.contextMenuStrip3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -925,5 +940,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注形態;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
+        private System.Windows.Forms.BindingSource bindingSource2;
+        private GODInventory.ViewModel.EntityDataSource entityDataSource2;
     }
 }

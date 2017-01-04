@@ -66,11 +66,16 @@ namespace GODInventoryWinForm.Controls
                 //FROM  t_orderdata o WHERE o.Status = {0} OR o.Status = {1} GROUP BY o.`Status`, o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`";
                 //                groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.PendingShipment, OrderStatus.Locked).ToList();
 
+                //orderList = (from t_orderdata o in ctx.t_orderdata
+                //             where o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.Locked
+                //             select o).ToList();
+                //new
                 orderList = (from t_orderdata o in ctx.t_orderdata
                              where o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.Locked
+                             orderby o.実際配送担当, o.県別, o.出荷No
                              select o).ToList();
-                var groupedOrders = orderList.GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 });
 
+                var groupedOrders = orderList.GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 });
                 foreach (var gos in groupedOrders)
                 {
                     var v_groupedorder = new v_groupedorder
@@ -87,6 +92,7 @@ namespace GODInventoryWinForm.Controls
                     };
                     groupedOrderList.Add(v_groupedorder);
                 }
+         
                 shipNODataGridView.DataSource = groupedOrderList;
             }
             //var q = OrderSqlHelper.ShippingOrderSql(entityDataSource1);            
@@ -106,16 +112,16 @@ namespace GODInventoryWinForm.Controls
                 string sql = @"SELECT o.`ShipNO`, o.`出荷日`, o.`納品日`,
  min(o.`県別`) as `県別`, o.`実際配送担当`, 
 sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight  
-FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`";
+FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`ORDER BY o.伝票番号";
                 groupedAsnOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.ASN).ToList();
 
                 //this.bindingSource2.DataSource = OrderSqlHelper.ASNEdiDataList(entityDataSource1);
                 ediDataGridView.DataSource = groupedAsnOrderList;
                 //new 
-                 //groupedAsnOrderList = groupedAsnOrderList.GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 });
+                //groupedAsnOrderList = groupedAsnOrderList.GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 });
 
                 ediDataGridView.DataSource = groupedAsnOrderList;
-               
+
             }
         }
 
@@ -197,7 +203,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 OrderSqlHelper.UpdateOrderStatusShipped(shipNOs);
             }
 
-            
+
 
             InitializeEdiData();
             pager3.Bind();
@@ -421,7 +427,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
         }
 
         private void canceledButton1_Click(object sender, EventArgs e)
-        {           
+        {
 
             List<t_orderdata> orders = new List<t_orderdata>();
             foreach (DataGridViewRow row in canceledDataGridView.SelectedRows)
@@ -437,7 +443,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     string shipNo = DateTime.Now.ToString("yyyyMMddHHmmss");
                     string sql = String.Format("UPDATE t_orderdata SET `shipNO`='{1}' WHERE `id受注データ` in( {0} )", string.Join(",", oids), shipNo);
 
-                    List<string> shipNOs = new List<string>() { shipNo };                   
+                    List<string> shipNOs = new List<string>() { shipNo };
                     ctx.Database.ExecuteSqlCommand(sql);
 
                     OrderSqlHelper.GenerateASN(shipNOs);
@@ -456,7 +462,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     //sendForm.Mid = mid;
                     //sendForm.IsCanceledOrder = true;
                     //sendForm.ShowDialog();
-                    sql = String.Format("UPDATE t_orderdata SET `Status`={1} WHERE `id受注データ` in( {0} )", string.Join(",", oids), (int) OrderStatus.Completed);
+                    sql = String.Format("UPDATE t_orderdata SET `Status`={1} WHERE `id受注データ` in( {0} )", string.Join(",", oids), (int)OrderStatus.Completed);
                     ctx.Database.ExecuteSqlCommand(sql);
 
 
@@ -480,9 +486,9 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
         {
             List<t_orderdata> orders = new List<t_orderdata>();
             foreach (DataGridViewRow row in canceledDataGridView.SelectedRows)
-            {              
+            {
                 var order = row.DataBoundItem as t_orderdata;
-                orders.Add(order);                
+                orders.Add(order);
             }
 
             var form = new CancelConfirmForm();
@@ -494,7 +500,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     DateTime NAPINRI = form.NAPINRI;
                     using (var ctx = new GODDbContext())
                     {
-                        
+
                         for (int i = 0; i < orders.Count; i++)
                         {
                             t_orderdata order = ctx.t_orderdata.Find(orders[i].id受注データ);
@@ -507,7 +513,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     InitializeCanceledOrder();
                 }
             }
-           
+
         }
         private List<t_orderdata> GetPendingOrdersBySelectedGridCell()
         {
@@ -527,7 +533,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
         }
 
 
-     
+
 
 
     }
