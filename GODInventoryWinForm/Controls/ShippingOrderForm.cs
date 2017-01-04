@@ -111,6 +111,11 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
                 //this.bindingSource2.DataSource = OrderSqlHelper.ASNEdiDataList(entityDataSource1);
                 ediDataGridView.DataSource = groupedAsnOrderList;
+                //new 
+                 //groupedAsnOrderList = groupedAsnOrderList.GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 });
+
+                ediDataGridView.DataSource = groupedAsnOrderList;
+               
             }
         }
 
@@ -192,7 +197,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 OrderSqlHelper.UpdateOrderStatusShipped(shipNOs);
             }
 
-
+            
 
             InitializeEdiData();
             pager3.Bind();
