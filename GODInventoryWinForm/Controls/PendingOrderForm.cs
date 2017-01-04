@@ -806,7 +806,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             string stock = ZKZTcomboBox3.Text;
             string county = countyComboBox1.Text;
             string shops = storeComboBox.Text;
-            ApplyFilter4(shipper, county, genre, product, stock, shops);
+            int code = (int)storeComboBox.SelectedValue;
+            ApplyFilter4(shipper, county, genre, product, stock, code);
 
         }
         //在库状态
@@ -818,7 +819,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             string stock = ZKZTcomboBox3.Text;
             string county = countyComboBox1.Text;
             string shops = storeComboBox.Text;
-            ApplyFilter4(shipper, county, genre, product, stock, shops);
+            int code = (int)storeComboBox.SelectedValue;
+            ApplyFilter4(shipper, county, genre, product, stock, code);
         }
         // 配送担当
         private void DanDangComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -830,6 +832,24 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             InitializeCountyComboBox(orders);
             //InitializeProductComboBox(orders);
         }
+
+        //店名 
+        private void storeComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            string shipper = DanDangComboBox.Text;
+            string genre = genreComboBox.Text;
+            string product = productComboBox.Text;
+            string stock = ZKZTcomboBox3.Text;
+            string county = countyComboBox1.Text;
+            string shops = storeComboBox.Text;
+            int code = (int)storeComboBox.SelectedValue;
+            ApplyFilter4(shipper, county, genre, product, stock, code);
+
+
+
+
+        }
+
         private void InitializeCountyComboBox(List<v_pendingorder> orders)
         {
             // County
@@ -859,6 +879,18 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             this.productComboBox.DataSource = PMHZ;
         }
 
+        private void InitializeshopsComboBox(List<v_pendingorder> orders)
+        {    
+
+            var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+            shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+            this.storeComboBox.DisplayMember = "FullName";
+            this.storeComboBox.ValueMember = "Id";
+            this.storeComboBox.DataSource = shops;
+
+
+        }
+
         private List<v_pendingorder> GetDataGridViewBoundOrders()
         {
             List<v_pendingorder> orders = new List<v_pendingorder>();
@@ -870,7 +902,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             return orders;
         }
 
-        private void ApplyFilter4(string shipper = "", string county = "", string genre = "", string product = "", string stock = "", string shops = "")
+        private void ApplyFilter4(string shipper = "", string county = "", string genre = "", string product = "", string stock = "", int shops = 0)
         {
             var originalSortOrder = this.dataGridView1.SortOrder;
             var originalSortedColumn = this.dataGridView1.SortedColumn;
@@ -903,9 +935,9 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             {
                 filteredOrderList = filteredOrderList.FindAll(o => o.在庫状態 == stock);
             }
-            if (shops.Length > 0 && shops != "すべて")
+            if (shops > 0 )
             {
-                filteredOrderList = filteredOrderList.FindAll(o => o.店名 == shops);
+                filteredOrderList = filteredOrderList.FindAll(o => o.店舗コード == shops);
             }
             sortablePendingOrderList = new SortableBindingList<v_pendingorder>(filteredOrderList);
 
@@ -1173,21 +1205,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             return true;
         }
 
-        private void storeComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            string shipper = DanDangComboBox.Text;
-            string genre = genreComboBox.Text;
-            string product = productComboBox.Text;
-            string stock = ZKZTcomboBox3.Text;
-            string county = countyComboBox1.Text;
-            string shops = storeComboBox.Text;
-            ApplyFilter4(shipper, county, genre, product, stock, shops);
-
-
-
-
-        }
-
+      
 
 
     }
