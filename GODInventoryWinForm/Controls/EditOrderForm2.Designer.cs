@@ -247,7 +247,6 @@
             // 
             this.productKanjiSpecificationTextBox.Location = new System.Drawing.Point(433, 118);
             this.productKanjiSpecificationTextBox.Name = "productKanjiSpecificationTextBox";
-            this.productKanjiSpecificationTextBox.ReadOnly = true;
             this.productKanjiSpecificationTextBox.Size = new System.Drawing.Size(190, 21);
             this.productKanjiSpecificationTextBox.TabIndex = 28;
             // 
@@ -264,7 +263,6 @@
             // 
             this.productKanjiNameTextBox.Location = new System.Drawing.Point(111, 118);
             this.productKanjiNameTextBox.Name = "productKanjiNameTextBox";
-            this.productKanjiNameTextBox.ReadOnly = true;
             this.productKanjiNameTextBox.Size = new System.Drawing.Size(190, 21);
             this.productKanjiNameTextBox.TabIndex = 26;
             // 

@@ -131,6 +131,15 @@ namespace GODInventoryWinForm.Controls
                     Order.実際出荷数量 = 0;
                     Order.Status = OrderStatus.Cancelled;
                 }
+
+                if (Order.納品日 != null)
+                {
+                    Order.納品日 = this.fullfilledAtDateTimePicker2.Value;
+                }
+
+                Order.品名漢字 = this.productKanjiNameTextBox.Text;
+                Order.規格名漢字 = this.productKanjiSpecificationTextBox.Text;
+
                 Order.発注日 = this.placedAtDateTimePicker1.Value;
                 Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
                 bool isQtyChanged = (Stockrec.数量 != -Order.実際出荷数量);

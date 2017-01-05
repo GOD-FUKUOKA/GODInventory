@@ -50,6 +50,7 @@
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.キャンセル = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.キャンセル時刻 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,7 +97,6 @@
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.出荷NoColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -104,6 +104,8 @@
             this.県別Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店舗名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.実際配送担当Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.品名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品口数Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.重量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.実際出荷数量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -322,6 +324,21 @@
             this.label6.Size = new System.Drawing.Size(21, 14);
             this.label6.TabIndex = 89;
             this.label6.Text = "～";
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(3, 484);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 1;
+            this.pager1.PageSize = 5000;
+            this.pager1.Size = new System.Drawing.Size(1356, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // dataGridView1
             // 
@@ -709,6 +726,8 @@
             this.県別Column1,
             this.店舗名漢字Column1,
             this.実際配送担当Column1,
+            this.品名漢字Column1,
+            this.規格名漢字Column1,
             this.納品口数Column1,
             this.重量Column1,
             this.実際出荷数量Column1,
@@ -768,21 +787,6 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(3, 484);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 1;
-            this.pager1.PageSize = 5000;
-            this.pager1.Size = new System.Drawing.Size(1356, 34);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
-            // 
             // 出荷NoColumn1
             // 
             this.出荷NoColumn1.DataPropertyName = "出荷No";
@@ -833,6 +837,22 @@
             this.実際配送担当Column1.Name = "実際配送担当Column1";
             this.実際配送担当Column1.ReadOnly = true;
             this.実際配送担当Column1.Width = 120;
+            // 
+            // 品名漢字Column1
+            // 
+            this.品名漢字Column1.DataPropertyName = "品名漢字";
+            this.品名漢字Column1.HeaderText = "品名";
+            this.品名漢字Column1.Name = "品名漢字Column1";
+            this.品名漢字Column1.ReadOnly = true;
+            this.品名漢字Column1.Width = 160;
+            // 
+            // 規格名漢字Column1
+            // 
+            this.規格名漢字Column1.DataPropertyName = "規格名漢字";
+            this.規格名漢字Column1.HeaderText = "規格名";
+            this.規格名漢字Column1.Name = "規格名漢字Column1";
+            this.規格名漢字Column1.ReadOnly = true;
+            this.規格名漢字Column1.Width = 120;
             // 
             // 納品口数Column1
             // 
@@ -970,6 +990,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店舗名漢字Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 品名漢字Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 規格名漢字Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品口数Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際出荷数量Column1;
