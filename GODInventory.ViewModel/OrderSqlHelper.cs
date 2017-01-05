@@ -84,7 +84,6 @@ namespace GODInventory.ViewModel
 
         public static IQueryable<v_pendingorder> ECWithoutCodeOrderQuery(EntityDataSource entityDataSource1, int genreId)
         {
-            var a = entityDataSource1.EntitySets["t_orderdatas"];
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
                      where o.Status == OrderStatus.NotifyShipper && o.ジャンル == genreId && o.社内伝番 == 0 && o.実際配送担当 == "丸健"
                      orderby o.店舗コード

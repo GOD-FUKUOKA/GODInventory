@@ -211,15 +211,11 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
         private void printForEDIButton_Click(object sender, EventArgs e)
         {
-
-
-
         }
 
         private void generateASNButton_Click(object sender, EventArgs e)
         {
             var shipNOList = this.groupedOrderList.Where(o => o.Status == OrderStatus.Locked).Select(o1 => o1.ShipNO).ToList();
-
 
             if (shipNOList.Count() > 0)
             {

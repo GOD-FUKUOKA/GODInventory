@@ -40,6 +40,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.selectedRowsLabel = new System.Windows.Forms.Label();
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.ClearSelect = new System.Windows.Forms.Button();
             this.ZKZTcomboBox3 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -78,12 +79,11 @@
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.notifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource2 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreCodeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreNameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -111,8 +111,8 @@
             this.toShipperTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.contextMenuStrip3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -168,7 +168,7 @@
             this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.storeComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.storeComboBox.FormattingEnabled = true;
-            this.storeComboBox.Location = new System.Drawing.Point(461, 42);
+            this.storeComboBox.Location = new System.Drawing.Point(461, 37);
             this.storeComboBox.Name = "storeComboBox";
             this.storeComboBox.Size = new System.Drawing.Size(121, 22);
             this.storeComboBox.TabIndex = 89;
@@ -178,7 +178,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(421, 46);
+            this.label6.Location = new System.Drawing.Point(424, 41);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 14);
             this.label6.TabIndex = 90;
@@ -226,6 +226,22 @@
             this.selectedRowsLabel.TabIndex = 26;
             this.selectedRowsLabel.Text = "label5";
             this.selectedRowsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(0, 3);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(727, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // ClearSelect
             // 
@@ -666,22 +682,6 @@
             // 
             this.entityDataSource2.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(0, 3);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(727, 34);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
-            // 
             // OrderReceivedAtColumn1
             // 
             this.OrderReceivedAtColumn1.DataPropertyName = "受注日";
@@ -690,7 +690,6 @@
             this.OrderReceivedAtColumn1.HeaderText = "受注日";
             this.OrderReceivedAtColumn1.Name = "OrderReceivedAtColumn1";
             this.OrderReceivedAtColumn1.ReadOnly = true;
-            this.OrderReceivedAtColumn1.Width = 90;
             // 
             // StoreCodeColumn1
             // 
@@ -706,6 +705,7 @@
             this.StoreNameColumn1.HeaderText = "店名";
             this.StoreNameColumn1.Name = "StoreNameColumn1";
             this.StoreNameColumn1.ReadOnly = true;
+            this.StoreNameColumn1.Width = 180;
             // 
             // 場所
             // 
@@ -713,7 +713,6 @@
             this.場所.HeaderText = "場所";
             this.場所.Name = "場所";
             this.場所.ReadOnly = true;
-            this.場所.Width = 60;
             // 
             // InvoiceNOColumn1
             // 
@@ -721,7 +720,6 @@
             this.InvoiceNOColumn1.HeaderText = "伝票番号";
             this.InvoiceNOColumn1.Name = "InvoiceNOColumn1";
             this.InvoiceNOColumn1.ReadOnly = true;
-            this.InvoiceNOColumn1.Width = 70;
             // 
             // ジャンルColumn
             // 
@@ -730,7 +728,6 @@
             this.ジャンルColumn.Name = "ジャンルColumn";
             this.ジャンルColumn.ReadOnly = true;
             this.ジャンルColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ジャンルColumn.Width = 70;
             // 
             // ProductKanjiNameColumn1
             // 
@@ -738,7 +735,7 @@
             this.ProductKanjiNameColumn1.HeaderText = "品名漢字";
             this.ProductKanjiNameColumn1.Name = "ProductKanjiNameColumn1";
             this.ProductKanjiNameColumn1.ReadOnly = true;
-            this.ProductKanjiNameColumn1.Width = 110;
+            this.ProductKanjiNameColumn1.Width = 240;
             // 
             // ProductKanjiSpecificationColumn1
             // 
@@ -746,21 +743,21 @@
             this.ProductKanjiSpecificationColumn1.HeaderText = "規格名漢字";
             this.ProductKanjiSpecificationColumn1.Name = "ProductKanjiSpecificationColumn1";
             this.ProductKanjiSpecificationColumn1.ReadOnly = true;
-            this.ProductKanjiSpecificationColumn1.Width = 80;
+            this.ProductKanjiSpecificationColumn1.Width = 140;
             // 
             // 納品口数Column
             // 
             this.納品口数Column.DataPropertyName = "納品口数";
             this.納品口数Column.HeaderText = "口数";
             this.納品口数Column.Name = "納品口数Column";
-            this.納品口数Column.Width = 40;
+            this.納品口数Column.Width = 60;
             // 
             // 実際出荷数量Column
             // 
             this.実際出荷数量Column.DataPropertyName = "実際出荷数量";
             this.実際出荷数量Column.HeaderText = "発注数量";
             this.実際出荷数量Column.Name = "実際出荷数量Column";
-            this.実際出荷数量Column.Width = 60;
+            this.実際出荷数量Column.Width = 80;
             // 
             // 訂正理由区分Column
             // 
@@ -770,7 +767,7 @@
             this.訂正理由区分Column.Name = "訂正理由区分Column";
             this.訂正理由区分Column.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.訂正理由区分Column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.訂正理由区分Column.Width = 90;
+            this.訂正理由区分Column.Width = 140;
             // 
             // ShipperColumn1
             // 
@@ -786,28 +783,27 @@
             this.ShipperColumn1.Name = "ShipperColumn1";
             this.ShipperColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ShipperColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ShipperColumn1.Width = 80;
             // 
             // Column2
             // 
             this.Column2.DataPropertyName = "発注形態名称漢字";
             this.Column2.HeaderText = "形態";
             this.Column2.Name = "Column2";
-            this.Column2.Width = 40;
+            this.Column2.Width = 80;
             // 
             // 納品指示Column1
             // 
             this.納品指示Column1.DataPropertyName = "納品指示";
             this.納品指示Column1.HeaderText = "納品指示";
             this.納品指示Column1.Name = "納品指示Column1";
-            this.納品指示Column1.Width = 50;
+            this.納品指示Column1.Width = 60;
             // 
             // 備考Column1
             // 
             this.備考Column1.DataPropertyName = "備考";
             this.備考Column1.HeaderText = "備考";
             this.備考Column1.Name = "備考Column1";
-            this.備考Column1.Width = 70;
+            this.備考Column1.Width = 180;
             // 
             // StoreDistrictColumn1
             // 
@@ -815,14 +811,14 @@
             this.StoreDistrictColumn1.HeaderText = "県別";
             this.StoreDistrictColumn1.Name = "StoreDistrictColumn1";
             this.StoreDistrictColumn1.ReadOnly = true;
-            this.StoreDistrictColumn1.Width = 40;
+            this.StoreDistrictColumn1.Width = 60;
             // 
             // IsPendingColumn1
             // 
             this.IsPendingColumn1.DataPropertyName = "一旦保留";
             this.IsPendingColumn1.HeaderText = "一旦保留";
             this.IsPendingColumn1.Name = "IsPendingColumn1";
-            this.IsPendingColumn1.Width = 60;
+            this.IsPendingColumn1.Width = 90;
             // 
             // 在庫状態Column
             // 
@@ -830,7 +826,7 @@
             this.在庫状態Column.HeaderText = "在庫状態";
             this.在庫状態Column.Name = "在庫状態Column";
             this.在庫状態Column.ReadOnly = true;
-            this.在庫状態Column.Width = 50;
+            this.在庫状態Column.Width = 60;
             // 
             // Column4
             // 
@@ -863,8 +859,8 @@
             this.toShipperTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.contextMenuStrip3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 

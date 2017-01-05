@@ -60,15 +60,23 @@ namespace GODInventoryWinForm.Controls
             this.storeCodeTextBox.Text = Order.店舗コード.ToString();
             this.invoiceNOTextBox.Text = Order.伝票番号.ToString();
             this.countyTextBox1.Text = Order.県別;
-            if (Order.納品日 != null)
-            {
-                //this.deliveredAtTextBox.Text = Order.納品日.GetValueOrDefault().ToShortDateString();
-            }
+            
             if (Order.受注日 != null)
             {
                 this.orderAtTextBox.Text = Order.受注日.GetValueOrDefault().ToShortDateString();
             }
-            this.shipAtTextBox.Text = Order.発注日.ToShortDateString();
+            
+            this.placedAtDateTimePicker1.Value = Order.発注日;
+
+            if (Order.納品日 != null)
+            {
+                this.fullfilledAtDateTimePicker2.Value = Order.納品日.GetValueOrDefault();
+            }
+
+            if (Order.出荷日 != null)
+            {
+                this.shipAtTextBox.Text = Order.出荷日.GetValueOrDefault().ToShortDateString();
+            }
             this.productKanjiNameTextBox.Text = Order.品名漢字;
             this.productKanjiSpecificationTextBox.Text = Order.規格名漢字;
             //this.innerNOTextBox.Text = Order.社内伝番.ToString();
@@ -123,14 +131,18 @@ namespace GODInventoryWinForm.Controls
                     Order.実際出荷数量 = 0;
                     Order.Status = OrderStatus.Cancelled;
                 }
+                Order.発注日 = this.placedAtDateTimePicker1.Value;
                 Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
-
+                bool isQtyChanged = (Stockrec.数量 != -Order.実際出荷数量);
                 Stockrec.数量 = -Order.実際出荷数量;
                 entityDataSource1.SaveChanges();
 
-                var stockrecs = new List<t_stockrec>() { Stockrec };
-                var ctx = entityDataSource1.DbContext as GODDbContext;
-                OrderSqlHelper.UpdateStockState(ctx, stockrecs);            
+                if (isQtyChanged)
+                {
+                    var stockrecs = new List<t_stockrec>() { Stockrec };
+                    var ctx = entityDataSource1.DbContext as GODDbContext;
+                    OrderSqlHelper.UpdateStockState(ctx, stockrecs);
+                }
             }
                 
             this.Close();

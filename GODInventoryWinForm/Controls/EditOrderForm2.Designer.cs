@@ -59,13 +59,17 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.placedAtDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.fullfilledAtDateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // orderIDTextBox
             // 
             this.orderIDTextBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.orderIDTextBox.Location = new System.Drawing.Point(23, 259);
+            this.orderIDTextBox.Location = new System.Drawing.Point(23, 293);
             this.orderIDTextBox.Name = "orderIDTextBox";
             this.orderIDTextBox.Size = new System.Drawing.Size(100, 21);
             this.orderIDTextBox.TabIndex = 10000012;
@@ -80,7 +84,7 @@
             "丸健",
             "MKL",
             "マツモト産業"});
-            this.shipperComboBox3.Location = new System.Drawing.Point(111, 149);
+            this.shipperComboBox3.Location = new System.Drawing.Point(111, 175);
             this.shipperComboBox3.Name = "shipperComboBox3";
             this.shipperComboBox3.Size = new System.Drawing.Size(190, 22);
             this.shipperComboBox3.TabIndex = 0;
@@ -88,7 +92,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(336, 152);
+            this.label12.Location = new System.Drawing.Point(336, 178);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(91, 14);
             this.label12.TabIndex = 10000003;
@@ -96,7 +100,7 @@
             // 
             // orderQuantityTextBox11
             // 
-            this.orderQuantityTextBox11.Location = new System.Drawing.Point(433, 149);
+            this.orderQuantityTextBox11.Location = new System.Drawing.Point(433, 175);
             this.orderQuantityTextBox11.Name = "orderQuantityTextBox11";
             this.orderQuantityTextBox11.Size = new System.Drawing.Size(190, 21);
             this.orderQuantityTextBox11.TabIndex = 1;
@@ -105,7 +109,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(14, 152);
+            this.label8.Location = new System.Drawing.Point(14, 178);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(91, 14);
             this.label8.TabIndex = 10000004;
@@ -122,6 +126,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.fullfilledAtDateTimePicker2);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.placedAtDateTimePicker1);
             this.groupBox1.Controls.Add(this.qtyChangeReasonComboBox);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label1);
@@ -149,7 +157,7 @@
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(23, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(647, 225);
+            this.groupBox1.Size = new System.Drawing.Size(647, 258);
             this.groupBox1.TabIndex = 10000006;
             this.groupBox1.TabStop = false;
             // 
@@ -157,7 +165,7 @@
             // 
             this.qtyChangeReasonComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.qtyChangeReasonComboBox.FormattingEnabled = true;
-            this.qtyChangeReasonComboBox.Location = new System.Drawing.Point(433, 178);
+            this.qtyChangeReasonComboBox.Location = new System.Drawing.Point(433, 204);
             this.qtyChangeReasonComboBox.Name = "qtyChangeReasonComboBox";
             this.qtyChangeReasonComboBox.Size = new System.Drawing.Size(190, 22);
             this.qtyChangeReasonComboBox.TabIndex = 10000016;
@@ -165,7 +173,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(336, 183);
+            this.label7.Location = new System.Drawing.Point(336, 209);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(91, 14);
             this.label7.TabIndex = 10000015;
@@ -174,7 +182,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 182);
+            this.label1.Location = new System.Drawing.Point(35, 207);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 14);
             this.label1.TabIndex = 10000014;
@@ -186,7 +194,7 @@
             this.cancelComboBox.Items.AddRange(new object[] {
             "no",
             "yes"});
-            this.cancelComboBox.Location = new System.Drawing.Point(111, 178);
+            this.cancelComboBox.Location = new System.Drawing.Point(111, 203);
             this.cancelComboBox.Name = "cancelComboBox";
             this.cancelComboBox.Size = new System.Drawing.Size(190, 22);
             this.cancelComboBox.TabIndex = 2;
@@ -332,7 +340,7 @@
             // 
             this.submitFormButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.submitFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.submitFormButton.Location = new System.Drawing.Point(443, 259);
+            this.submitFormButton.Location = new System.Drawing.Point(443, 293);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(108, 30);
             this.submitFormButton.TabIndex = 0;
@@ -344,7 +352,7 @@
             // 
             this.cancelFormButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelFormButton.Location = new System.Drawing.Point(557, 259);
+            this.cancelFormButton.Location = new System.Drawing.Point(557, 293);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(108, 30);
             this.cancelFormButton.TabIndex = 1;
@@ -355,11 +363,43 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // placedAtDateTimePicker1
+            // 
+            this.placedAtDateTimePicker1.Location = new System.Drawing.Point(111, 148);
+            this.placedAtDateTimePicker1.Name = "placedAtDateTimePicker1";
+            this.placedAtDateTimePicker1.Size = new System.Drawing.Size(190, 21);
+            this.placedAtDateTimePicker1.TabIndex = 10000017;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(63, 152);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(49, 14);
+            this.label9.TabIndex = 10000018;
+            this.label9.Text = "発注日";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(385, 151);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(49, 14);
+            this.label14.TabIndex = 10000020;
+            this.label14.Text = "納品日";
+            // 
+            // fullfilledAtDateTimePicker2
+            // 
+            this.fullfilledAtDateTimePicker2.Location = new System.Drawing.Point(433, 147);
+            this.fullfilledAtDateTimePicker2.Name = "fullfilledAtDateTimePicker2";
+            this.fullfilledAtDateTimePicker2.Size = new System.Drawing.Size(190, 21);
+            this.fullfilledAtDateTimePicker2.TabIndex = 10000019;
+            // 
             // EditOrderForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(697, 325);
+            this.ClientSize = new System.Drawing.Size(697, 358);
             this.Controls.Add(this.orderIDTextBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBox1);
@@ -409,5 +449,9 @@
         private System.Windows.Forms.ComboBox cancelComboBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox qtyChangeReasonComboBox;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.DateTimePicker fullfilledAtDateTimePicker2;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DateTimePicker placedAtDateTimePicker1;
     }
 }

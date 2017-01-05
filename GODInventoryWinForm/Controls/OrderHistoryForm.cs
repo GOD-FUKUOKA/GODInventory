@@ -423,6 +423,7 @@ namespace GODInventoryWinForm.Controls
                     order.キャンセル = editOrderForm.Order.キャンセル;
                     order.キャンセル時刻 = editOrderForm.Order.キャンセル時刻;
                     order.Status = editOrderForm.Order.Status;
+                    order.発注日 = editOrderForm.Order.発注日;
                     dataGridView1.Refresh();
                 }
             }
@@ -438,7 +439,7 @@ namespace GODInventoryWinForm.Controls
                     this.contextMenuStrip1.Items["uploadASNToolStripMenuItem"].Enabled = true;
                 }
                 else {
-                    this.contextMenuStrip1.Items["uploadASNToolStripMenuItem"].Enabled = false;
+                    //this.contextMenuStrip1.Items["uploadASNToolStripMenuItem"].Enabled = false;
                 }
             }
         }
@@ -456,14 +457,16 @@ namespace GODInventoryWinForm.Controls
                 ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(newPath, orders);
 
                 // 上传ASN
-                sendForm.Mid = order.ASN管理連番;
-                sendForm.IsCanceledOrder = false;
-                sendForm.ShowDialog();
+                //sendForm.Mid = order.ASN管理連番;
+                //sendForm.IsCanceledOrder = false;
+                //sendForm.ShowDialog();
+                MessageBox.Show("ASNデータ作成");
             }
         }
 
         private void InitializeEdiDataDataSource() {
             var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+            shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
 
             this.storeNameComboBox2.DisplayMember = "FullName";
             this.storeNameComboBox2.ValueMember = "Id";
@@ -489,7 +492,7 @@ namespace GODInventoryWinForm.Controls
 //    FROM  t_orderdata o WHERE o.`出荷No`>0 GROUP BY  o.`実際配送担当`, o.`出荷No`, o.`出荷日`, o.`納品日`";
 //                  groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql).ToList();
                     shippedOrderList = (from t_orderdata o in ctx.t_orderdata
-                                        where o.出荷No > 0 && o.受注日 > threeMonthAgo
+                                        where o.店舗コード==storeId && o.出荷No > 0 && o.受注日 > threeMonthAgo
                                      orderby  o.実際配送担当, o.出荷No, o.出荷日, o.納品日
                                      select o).ToList();
  
@@ -548,6 +551,27 @@ namespace GODInventoryWinForm.Controls
                 else
                 {
                     errorProvider2.SetError(storeCodeTextBox2, String.Format("Can not find store by ID {0}", storeCodeTextBox2.Text));
+                }
+            }
+        }
+
+        private void editToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            var row = dataGridView2.CurrentRow;
+            if (row != null)
+            {
+                var order = row.DataBoundItem as t_orderdata;
+                editOrderForm.OrderId = order.id受注データ;
+                if (editOrderForm.ShowDialog() == DialogResult.OK)
+                {
+                    order.実際出荷数量 = editOrderForm.Order.実際出荷数量;
+                    order.納品口数 = editOrderForm.Order.納品口数;
+                    order.重量 = editOrderForm.Order.重量;
+                    order.発注日 = editOrderForm.Order.発注日;
+                    order.キャンセル = editOrderForm.Order.キャンセル;
+                    order.キャンセル時刻 = editOrderForm.Order.キャンセル時刻;
+                    order.Status = editOrderForm.Order.Status;
+                    dataGridView2.Refresh();
                 }
             }
         }
