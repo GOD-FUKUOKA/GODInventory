@@ -21,6 +21,7 @@ namespace GODInventoryWinForm.Controls
         List<v_pendingorder> orderList;
         List<t_orderdata> shippedOrderList;
         List<v_groupedorder> groupedOrderList;
+        List<int> orderShopIdsInThreeMonth;
         SortableBindingList<v_pendingorder> orderListBindingList;
         private List<t_shoplist> shopList;
 
@@ -51,6 +52,12 @@ namespace GODInventoryWinForm.Controls
 
             using (var ctx = new GODDbContext())
             {
+                DateTime threeMonthAgo = DateTime.Now.AddMonths(-3);
+
+                orderShopIdsInThreeMonth = (from t_orderdata o in ctx.t_orderdata
+                                 where o.出荷No > 0 && o.受注日 > threeMonthAgo
+                                 select o.店舗コード).ToList();
+                    
                 shopList = ctx.t_shoplist.ToList();
             }
 
@@ -447,15 +454,19 @@ namespace GODInventoryWinForm.Controls
         private void uploadASNToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SendASNForm sendForm = new SendASNForm();
-            var newPath = Path.Combine(Properties.Settings.Default.NFWEInstallDir, @"NYOTEI\NYOTEI.txt");
+
             var order = dataGridView2.CurrentRow.DataBoundItem as t_orderdata;
             if (order != null)
             {
                
                 var orders = this.shippedOrderList.Where(o => o.出荷No == order.出荷No).ToList();
 
-                ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(newPath, orders);
-
+                var orderIds = orders.Select(o => o.id受注データ).ToList();
+                using (GODDbContext ctx = new GODDbContext())
+                {
+                    OrderSqlHelper.GenerateASNByOrderIds(ctx, orderIds);
+                    //ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(newPath, orders);
+                }
                 // 上传ASN
                 //sendForm.Mid = order.ASN管理連番;
                 //sendForm.IsCanceledOrder = false;
@@ -465,7 +476,7 @@ namespace GODInventoryWinForm.Controls
         }
 
         private void InitializeEdiDataDataSource() {
-            var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+            var shops = shopList.Where(s=>orderShopIdsInThreeMonth.Contains(s.店番)).Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
             shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
 
             this.storeNameComboBox2.DisplayMember = "FullName";

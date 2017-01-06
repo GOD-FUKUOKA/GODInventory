@@ -579,38 +579,34 @@ namespace GODInventory.ViewModel
             return count;
         }
 
-        public static int GenerateASN(List<string> shipNOs) {
+        // 生成出荷NO，为生成ASN做准备。
+        // 对于上传后，再修正的订单，需要保留原来的 “出荷NO”。
+        public static int GenerateOrderChuHeNO(List<string> shipNOs) {
             
             using (var ctx = new GODDbContext())
             {
                 // get 受注管理連番 by shipNos
-
                 var orders = (from t_orderdata o in ctx.t_orderdata
                               where shipNOs.Contains(o.ShipNO)                             
                               select o).ToList();
-
                 // generate ASN管理連番, 出荷No
-                UpdateOrderChuHeNO(ctx, orders);
+
+                var grouped_orders = orders.GroupBy(o => new { o.法人コード, o.店舗コード, o.ShipNO, o.納品場所コード }, o => o);
+                foreach (var gos in grouped_orders)
+                {
+                    var oids = gos.Select(o => o.id受注データ);
+                    long chuhe_no = EDITxtHandler.GenerateEDIShipNO(ctx, gos.First());
+                    // 不能加入状态条件， 取消的订单也需要生成 出荷NO
+                    var sql1 = String.Format("UPDATE t_orderdata SET  `出荷No`={1}, `Status`={2}  WHERE  `id受注データ` in ({0}) ", String.Join(",", oids.ToArray()), chuhe_no, (int)OrderStatus.ASN);
+                    ctx.Database.ExecuteSqlCommand(sql1);
+                }
             }
             return 0;
         }
 
-        public static void UpdateOrderChuHeNO(GODDbContext ctx, List<t_orderdata> orders)
-        {
-            var grouped_orders = orders.GroupBy(o => new { o.法人コード, o.店舗コード, o.ShipNO, o.納品場所コード }, o => o);
-            foreach (var gos in grouped_orders)
-            {
-                var oids = gos.Select(o => o.id受注データ);
-                long chuhe_no = EDITxtHandler.GenerateEDIShipNO(ctx, gos.First());
-                // 不能加入状态条件， 取消的订单也需要生成 出荷NO
-                var sql1 = String.Format("UPDATE t_orderdata SET  `出荷No`={1}, `Status`={2}  WHERE  `id受注データ` in ({0}) ", String.Join(",", oids.ToArray()), chuhe_no, (int)OrderStatus.ASN);
-                ctx.Database.ExecuteSqlCommand(sql1);
-            }
-
-        }
-
+        // 生成管理连番， 更新订单的管理连番，生成ASN文件
         // 返回 管理连番
-        public static long GenerateASN2(GODDbContext ctx, List<string> shipNOs)
+        public static long GenerateASNByShipNOs(GODDbContext ctx, List<string> shipNOs)
         {
 
             var now = DateTime.Now;
@@ -631,7 +627,6 @@ namespace GODInventory.ViewModel
 
             ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(path, orders);
             
-
             string sql = asnhead.ToRawSql();
 
             ctx.Database.ExecuteSqlCommand(sql);
@@ -639,6 +634,35 @@ namespace GODInventory.ViewModel
 
         }
 
+        // 生成管理连番， 更新订单的管理连番，生成ASN文件
+        // 返回 管理连番
+        public static long GenerateASNByOrderIds(GODDbContext ctx, List<int> orderIds)
+        {
+
+            var now = DateTime.Now;
+
+            // generate ASN管理連番
+            long mid = EDITxtHandler.GenerateMID(ctx);
+            // 无需 条件OrderStatus.ASN, 取消的订单也要生成ASN
+            var sql1 = String.Format("UPDATE t_orderdata SET `ASN管理連番`={1}  WHERE `id受注データ` in ({0}) ", String.Join(",", orderIds.ToArray()), mid);
+            var path = EDITxtHandler.BuildASNFilePath(mid);
+
+            ctx.Database.ExecuteSqlCommand(sql1);
+
+            var orders = (from t_orderdata o in ctx.t_orderdata
+                          where orderIds.Contains(o.id受注データ)
+                          orderby o.出荷No
+                          select o
+                            ).ToList();
+
+            ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(path, orders);
+
+            string sql = asnhead.ToRawSql();
+
+            ctx.Database.ExecuteSqlCommand(sql);
+            return mid;
+
+        }
 
         private static string BuildStockNum(GODDbContext ctx, int genre_id, string warehouseName, DateTime selectedDate)
         {

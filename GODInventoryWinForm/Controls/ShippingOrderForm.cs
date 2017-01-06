@@ -184,7 +184,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 using (var ctx = new GODDbContext())
                 {
                     // 生成ASN
-                    mid = OrderSqlHelper.GenerateASN2(ctx, shipNOs);
+                    mid = OrderSqlHelper.GenerateASNByShipNOs(ctx, shipNOs);
 
                 }
 
@@ -220,7 +220,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
             if (shipNOList.Count() > 0)
             {
                 // FIXME
-                OrderSqlHelper.GenerateASN(shipNOList);
+                OrderSqlHelper.GenerateOrderChuHeNO(shipNOList);
                 InitializeOrderData();
                 InitializeEdiData();
                 //pager3.Bind();
@@ -240,7 +240,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
             if (shipNOList.Count() > 0)
             {
                 // FIXME
-                OrderSqlHelper.GenerateASN(shipNOList);
+                OrderSqlHelper.GenerateOrderChuHeNO(shipNOList);
                 InitializeOrderData();
                 InitializeEdiData();
                 //pager3.Bind();
@@ -442,10 +442,10 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     List<string> shipNOs = new List<string>() { shipNo };
                     ctx.Database.ExecuteSqlCommand(sql);
 
-                    OrderSqlHelper.GenerateASN(shipNOs);
+                    OrderSqlHelper.GenerateOrderChuHeNO(shipNOs);
 
                     // 生成ASN
-                    long mid = OrderSqlHelper.GenerateASN2(ctx, shipNOs);
+                    long mid = OrderSqlHelper.GenerateASNByShipNOs(ctx, shipNOs);
 
                     var path = EDITxtHandler.BuildASNFilePath(mid);
                     var newPath = Path.Combine(Properties.Settings.Default.NFWEInstallDir, @"NYOTEI\NYOTEI.txt");
