@@ -761,26 +761,26 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
             //联动 店名
 
-            var filtered = shopList.FindAll(s => s.県別 == county);
-            if (filtered.Count > 0)
-            {
-                var shops = filtered.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
-                this.storeComboBox.DisplayMember = "FullName";
-                this.storeComboBox.ValueMember = "Id";
-                this.storeComboBox.DataSource = shops;
-                this.storeComboBox.SelectedIndex = 0;
-            }
-            else
-            {
-                var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
-                this.storeComboBox.DisplayMember = "FullName";
-                this.storeComboBox.ValueMember = "Id";
-                this.storeComboBox.DataSource = shops;
+            //var filtered = orders.FindAll(s => s.県別 == county);
+            //if (filtered.Count > 0)
+            //{
+            //    var shops = filtered.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+            //    shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+            //    this.storeComboBox.DisplayMember = "FullName";
+            //    this.storeComboBox.ValueMember = "Id";
+            //    this.storeComboBox.DataSource = shops;
+            //    this.storeComboBox.SelectedIndex = 0;
+            //}
+            //else
+            //{
+            //    var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+            //    shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+            //    this.storeComboBox.DisplayMember = "FullName";
+            //    this.storeComboBox.ValueMember = "Id";
+            //    this.storeComboBox.DataSource = shops;
 
-            }
-
+            //}
+            InitializeshopsComboBox(orders);
             // 品名漢字
             InitializeGenreComboBox(orders);
         }
@@ -880,9 +880,9 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         }
 
         private void InitializeshopsComboBox(List<v_pendingorder> orders)
-        {    
+        {
 
-            var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+            var shops = orders.Select(s => new MockEntity { Id = s.店舗コード, FullName = s.店舗名漢字 }).ToList();
             shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
             this.storeComboBox.DisplayMember = "FullName";
             this.storeComboBox.ValueMember = "Id";

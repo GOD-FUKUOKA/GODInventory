@@ -99,7 +99,7 @@
             this.submitButton2.Name = "submitButton2";
             this.submitButton2.Size = new System.Drawing.Size(106, 32);
             this.submitButton2.TabIndex = 2;
-            this.submitButton2.Text = "确定";
+            this.submitButton2.Text = "確定";
             this.submitButton2.UseVisualStyleBackColor = true;
             // 
             // cancelButton3
@@ -109,7 +109,7 @@
             this.cancelButton3.Name = "cancelButton3";
             this.cancelButton3.Size = new System.Drawing.Size(106, 32);
             this.cancelButton3.TabIndex = 3;
-            this.cancelButton3.Text = "取消";
+            this.cancelButton3.Text = "キャンセル";
             this.cancelButton3.UseVisualStyleBackColor = true;
             // 
             // SelectProductForm
@@ -130,7 +130,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "选择商品界面";
+            this.Text = "商品選択";
             this.Load += new System.EventHandler(this.SelectProductForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
