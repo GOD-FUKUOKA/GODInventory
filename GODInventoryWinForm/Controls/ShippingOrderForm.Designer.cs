@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.uploadForEDIButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -204,6 +205,14 @@
             this.shipNODataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.shipNODataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.shipNODataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.shipNODataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ShipNOColumn1,
@@ -330,8 +339,8 @@
             // 県別Column1
             // 
             this.県別Column1.DataPropertyName = "県別";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle2;
             this.県別Column1.HeaderText = "県別";
             this.県別Column1.Name = "県別Column1";
             this.県別Column1.ReadOnly = true;
@@ -867,6 +876,7 @@
             this.ShipNOColumn1.HeaderText = "出荷指示書番号";
             this.ShipNOColumn1.Name = "ShipNOColumn1";
             this.ShipNOColumn1.ReadOnly = true;
+            this.ShipNOColumn1.Width = 150;
             // 
             // shipAtColumn
             // 

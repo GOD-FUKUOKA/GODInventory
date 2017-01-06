@@ -37,10 +37,14 @@ namespace GODInventoryWinForm.Controls
         private List<v_pendingorder> ecOrderList;
         private List<v_pendingorder> shipperOrderList;
         private List<t_shoplist> shopList;
-
+        private CreateOrderForm CreateOrderForm;
+        private SortableBindingList<v_pendingorder> sortablePendingOrderList3;
         public PendingOrderForm()
         {
             InitializeComponent();
+
+            // InitializeShipperOrderList(null);
+
             dataGridView1.AutoGenerateColumns = false;
 
             this.datagrid_changes = new Hashtable();
@@ -387,6 +391,13 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
 
         private void InitializeShipperOrderList(string shipperName = null)
         {
+            shipperOrderList = new List<v_pendingorder>();
+
+            this.shipperOrderList.Clear();
+            this.bindingSource2.DataSource = null;
+            // 记录DataGridView改变数据
+            this.bindingSource2.DataSource = sortablePendingOrderList3;
+            dataGridView3.DataSource = this.bindingSource2;
 
             //this.shipperComboBox.DisplayMember = "ShortName";
             //this.shipperComboBox.ValueMember = "ShortName";
@@ -413,7 +424,14 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
      WHERE  `Status`={0}
      ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
 
-            this.shipperOrderList = this.entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql2, OrderStatus.NotifyShipper).ToList();
+            //this.shipperOrderList = this.entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql2, OrderStatus.NotifyShipper).ToList();
+            this.shipperOrderList = this.entityDataSource2.DbContext.Database.SqlQuery<v_pendingorder>(sql2, OrderStatus.NotifyShipper).ToList();
+
+            sortablePendingOrderList3 = new SortableBindingList<v_pendingorder>(shipperOrderList);
+            this.bindingSource2.DataSource = null;
+            this.bindingSource2.DataSource = sortablePendingOrderList3;
+            dataGridView3.DataSource = this.bindingSource2;
+             return;
 
             // 第一次初始化情况
             if (shipperName == null)
@@ -422,16 +440,20 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 // 第二次回到转发物流界面，如果以前选择的是SelectedIndex =0， 需要先设置-1，才能触发 change 事件。
                 shipperComboBox.SelectedIndex = -1;
                 shipperComboBox.SelectedIndex = 0;
+
             }
             else
             {
                 // 用户退单后刷新
                 this.shipperComboBox.Text = shipperName;
-                // this.dataGridView3.AutoGenerateColumns = false;
+                this.dataGridView3.AutoGenerateColumns = false;
                 //   this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName);
                 //new 
-                this.bindingSource2.DataSource = shipperOrderList;
-                this.entityDataSource2.Refresh();
+                //  this.bindingSource2.DataSource = shipperOrderList;
+                //  this.dataGridView3.DataSource = bindingSource2;
+
+
+                // this.entityDataSource2.Refresh();
             }
         }
 
@@ -494,10 +516,14 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
         private void newOrderbutton_Click(object sender, EventArgs e)
         {
             var form = new CreateOrderForm();
+            //var form1 = form.ShowDialog();
+
             if (form.ShowDialog() == DialogResult.OK)
             {
                 pager1.Bind();
             }
+
+
             #region MyRegion
             //if (NewOrdersForm == null)
             //{
@@ -690,9 +716,14 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                 //this.dataGridView3.AutoGenerateColumns = false;
                 //this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
                 //new
-               
-                this.bindingSource2.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
-                this.entityDataSource2.Refresh();
+                List<v_pendingorder> shipperOrderList1 = new List<v_pendingorder>();
+
+                shipperOrderList1 = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
+                sortablePendingOrderList3 = new SortableBindingList<v_pendingorder>(shipperOrderList1);
+                //    this.entityDataSource2.Refresh();
+                this.bindingSource2.DataSource = null;
+                this.bindingSource2.DataSource = sortablePendingOrderList3;
+                dataGridView3.DataSource = this.bindingSource2;
             }
 
         }
@@ -935,7 +966,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             {
                 filteredOrderList = filteredOrderList.FindAll(o => o.在庫状態 == stock);
             }
-            if (shops > 0 )
+            if (shops > 0)
             {
                 filteredOrderList = filteredOrderList.FindAll(o => o.店舗コード == shops);
             }
@@ -1174,10 +1205,10 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
                     OrderSqlHelper.NotifyShipper(ctx, orders, shipperName);
                 }
                 this.shipperOrderList.RemoveAll(o => orders.Contains(o));
-               // this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName); ;
+                // this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName); ;
                 //
                 this.bindingSource2.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
-                this.entityDataSource2.Refresh();
+                // this.entityDataSource2.Refresh();
                 MessageBox.Show(String.Format(" {0} 件転送処理しました!", orders.Count));
             }
 
@@ -1205,7 +1236,30 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             return true;
         }
 
-      
+        #region 排序 dav3
+        private List<int> GetOrderIdsBySelectedGridCell3()
+        {
+
+            List<int> order_ids = new List<int>();
+            var rows = GetSelectedRowsBySelectedCells3(dataGridView3);
+            foreach (DataGridViewRow row in rows)
+            {
+                var pendingorder = row.DataBoundItem as t_itemlist;
+                order_ids.Add(pendingorder.自社コード);
+            }
+
+            return order_ids;
+        }
+        private IEnumerable<DataGridViewRow> GetSelectedRowsBySelectedCells3(DataGridView dgv)
+        {
+            List<DataGridViewRow> rows = new List<DataGridViewRow>();
+            foreach (DataGridViewCell cell in dgv.SelectedCells)
+            {
+                rows.Add(cell.OwningRow);
+            }
+            return rows.Distinct();
+        }
+        #endregion
 
 
     }

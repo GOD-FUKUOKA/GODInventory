@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.submitButton2 = new System.Windows.Forms.Button();
             this.cancelButton3 = new System.Windows.Forms.Button();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listBox1
@@ -52,7 +53,8 @@
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2});
+            this.columnHeader2,
+            this.columnHeader3});
             this.listView1.FullRowSelect = true;
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.Location = new System.Drawing.Point(228, 55);
@@ -112,6 +114,10 @@
             this.cancelButton3.Text = "キャンセル";
             this.cancelButton3.UseVisualStyleBackColor = true;
             // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "T入数";
+            // 
             // SelectProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -147,5 +153,6 @@
         private System.Windows.Forms.Button cancelButton3;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
     }
 }

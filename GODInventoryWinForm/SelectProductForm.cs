@@ -73,7 +73,7 @@ namespace GODInventoryWinForm
 
             foreach (v_itemprice item in stockiosList)
             {
-                string[] subItems = { item.商品名, item.規格 };
+                string[] subItems = { item.商品名, item.規格, item.PT入数.ToString() };
                 ListViewItem lvi = new ListViewItem(subItems);
 
                 this.listView1.Items.Add(lvi);

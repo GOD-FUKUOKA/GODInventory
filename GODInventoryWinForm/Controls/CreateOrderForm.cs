@@ -96,119 +96,137 @@ namespace GODInventoryWinForm.Controls
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            //BindingList<t_orderdata> newOrderList = new BindingList<t_orderdata>();
-            var newOrderList = this.orderList.Where(o => o.発注数量 > 0).ToList();
-
-            if (newOrderList.Count > 0)
+            try
             {
-                int storeCode = (int)this.storeComboBox.SelectedValue;
-                var store = shopList.Find(s => s.店番 == storeCode);
-                using (var ctx = new GODDbContext())
+                //BindingList<t_orderdata> newOrderList = new BindingList<t_orderdata>();
+                var newOrderList = this.orderList.Where(o => o.発注数量 > 0).ToList();
+
+                if (newOrderList.Count > 0)
                 {
-
-                    foreach (var o in newOrderList)
+                    int storeCode = (int)this.storeComboBox.SelectedValue;
+                    var store = shopList.Find(s => s.店番 == storeCode);
+                    using (var ctx = new GODDbContext())
                     {
-                        v_itemprice selectedItem = itemPriceList.Find(i => i.商品コード == o.商品コード);
-                        SetOrderBaseInfo(o);
-                        o.納品先店舗コード = (short)o.店舗コード;
-                        o.納品先店舗名漢字 = o.店舗名漢字;
-                        o.税率 = 0.08;
-                        o.特価区分 = 0;
-                        o.PB区分 = 0;
-                        o.原価区分 = 0;
-                        o.納期回答区分 = 0;
-                        o.回答納期 = "00000000";
-                        o.入力区分 = 1;
-                        o.実際出荷数量 = o.発注数量;
-                        o.重量 = (int)(Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
-                        o.県別 = store.県別;
-                        o.発注形態区分 = Convert.ToInt16(this.orderReasonComboBox.SelectedValue);
-                        o.発注形態名称漢字 = this.orderReasonComboBox.Text;
-                        //o.原単価_税抜_ = (int)selectedItem.原単価;
-                        o.原単価_税込_ = ((int)(o.原単価_税抜_ * (1 + o.税率) * 100)) * 1.0 / 100;
 
-                        o.原価金額_税抜_ = o.実際出荷数量 * o.原単価_税抜_;
-                        o.原価金額_税込_ = (int)(o.実際出荷数量 * o.原単価_税込_);
+                        foreach (var o in newOrderList)
+                        {
+                            v_itemprice selectedItem = itemPriceList.Find(i => i.商品コード == o.商品コード);
 
-                        //o.売単価_税抜_ = (int)selectedItem.売単価;
-                        o.売単価_税込_ = (int)(o.売単価_税抜_ * (1 + o.税率));
-                        o.税額 = (int)(o.原価金額_税抜_ * o.税率);
+                            SetOrderBaseInfo(o);
+                            o.納品先店舗コード = (short)o.店舗コード;
+                            o.納品先店舗名漢字 = o.店舗名漢字;
+                            o.税率 = 0.08;
+                            o.特価区分 = 0;
+                            o.PB区分 = 0;
+                            o.原価区分 = 0;
+                            o.納期回答区分 = 0;
+                            o.回答納期 = "00000000";
+                            o.入力区分 = 1;
+                            o.実際出荷数量 = o.発注数量;
+                            if (selectedItem == null)
+                            {
+                                MessageBox.Show(String.Format("誤った: 単品重量, 商品コード! されていません"));
+                                return;
 
-                        o.発注品名漢字 = o.品名漢字;
-                        o.発注規格名漢字 = o.規格名漢字;
-                        o.用度品区分 = 0;
 
-                        //判断全角半角
-                        bool isrun = true;
+                            }
+                            o.重量 = (int)(Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
+                            o.県別 = store.県別;
+                            o.発注形態区分 = Convert.ToInt16(this.orderReasonComboBox.SelectedValue);
+                            o.発注形態名称漢字 = this.orderReasonComboBox.Text;
+                            //o.原単価_税抜_ = (int)selectedItem.原単価;
+                            o.原単価_税込_ = ((int)(o.原単価_税抜_ * (1 + o.税率) * 100)) * 1.0 / 100;
 
-                        if (o.発注数量 != null)
-                        {
-                            isrun = QuanJiaoBanJiao(o.発注数量.ToString());
-                            if (isrun == false)
-                                return;
-                        }
-                        if (o.県別 != null)
-                        {
-                            isrun = QuanJiaoBanJiao(o.県別);
-                            if (isrun == false)
-                                return;
-                        }
-                        if (o.発注形態名称漢字 != null)
-                        {
-                            isrun = QuanJiaoBanJiao(o.発注形態名称漢字);
-                            if (isrun == false)
-                                return;
-                        }
-                        if (o.原単価_税込_ != null)
-                        {
-                            isrun = QuanJiaoBanJiao(o.原単価_税込_.ToString());
-                            if (isrun == false)
-                                return;
-                        }
-                        if (o.原価金額_税抜_ != null)
-                        {
-                            isrun = QuanJiaoBanJiao(o.原価金額_税抜_.ToString());
-                            if (isrun == false)
-                                return;
-                        }
-                        if (o.原価金額_税込_ != null)
-                        {
-                            isrun = QuanJiaoBanJiao(o.原価金額_税込_.ToString());
-                            if (isrun == false)
-                                return;
-                        }
-                        if (o.売単価_税込_ != null)
-                        {
-                            isrun = QuanJiaoBanJiao(o.売単価_税込_.ToString());
-                            if (isrun == false)
-                                return;
-                        }
-                        if (o.税額 != null)
-                        {
-                            isrun = QuanJiaoBanJiao(o.税額.ToString());
-                            if (isrun == false)
-                                return;
-                        }
-                        if (o.発注品名漢字 != null)
-                        {
-                            isrun = QuanJiaoBanJiao(o.発注品名漢字);
-                            if (isrun == false)
-                                return;
-                        }
+                            o.原価金額_税抜_ = o.実際出荷数量 * o.原単価_税抜_;
+                            o.原価金額_税込_ = (int)(o.実際出荷数量 * o.原単価_税込_);
 
-                        if (o.発注規格名漢字 != null)
-                        {
-                            isrun = QuanJiaoBanJiao(o.発注規格名漢字);
-                            if (isrun == false)
-                                return;
+                            //o.売単価_税抜_ = (int)selectedItem.売単価;
+                            o.売単価_税込_ = (int)(o.売単価_税抜_ * (1 + o.税率));
+                            o.税額 = (int)(o.原価金額_税抜_ * o.税率);
+
+                            o.発注品名漢字 = o.品名漢字;
+                            o.発注規格名漢字 = o.規格名漢字;
+                            o.用度品区分 = 0;
+
+                            //判断全角半角
+                            bool isrun = true;
+
+                            //if (o.発注数量 != null)
+                            //{
+                            //    isrun = QuanJiaoBanJiao(o.発注数量.ToString());
+                            //    if (isrun == false)
+                            //        return;
+                            //}
+                            if (o.県別 != null)
+                            {
+                                isrun = QuanJiaoBanJiao(o.県別);
+                                if (isrun == false)
+                                    return;
+                            }
+                            if (o.発注形態名称漢字 != null)
+                            {
+                                isrun = QuanJiaoBanJiao(o.発注形態名称漢字);
+                                if (isrun == false)
+                                    return;
+                            }
+                            if (o.原単価_税込_ != null)
+                            {
+                                isrun = QuanJiaoBanJiao(o.原単価_税込_.ToString());
+                                if (isrun == false)
+                                    return;
+                            }
+                            if (o.原価金額_税抜_ != null)
+                            {
+                                isrun = QuanJiaoBanJiao(o.原価金額_税抜_.ToString());
+                                if (isrun == false)
+                                    return;
+                            }
+                            if (o.原価金額_税込_ != null)
+                            {
+                                isrun = QuanJiaoBanJiao(o.原価金額_税込_.ToString());
+                                if (isrun == false)
+                                    return;
+                            }
+                            if (o.売単価_税込_ != null)
+                            {
+                                isrun = QuanJiaoBanJiao(o.売単価_税込_.ToString());
+                                if (isrun == false)
+                                    return;
+                            }
+                            //if (o.税額 != null)
+                            //{
+                            //    isrun = QuanJiaoBanJiao(o.税額.ToString());
+                            //    if (isrun == false)
+                            //        return;
+                            //}
+                            if (o.発注品名漢字 != null)
+                            {
+                                isrun = QuanJiaoBanJiao(o.発注品名漢字);
+                                if (isrun == false)
+                                    return;
+                            }
+
+                            if (o.発注規格名漢字 != null)
+                            {
+                                isrun = QuanJiaoBanJiao(o.発注規格名漢字);
+                                if (isrun == false)
+                                    return;
+                            }
                         }
+                        ctx.t_orderdata.AddRange(newOrderList);
+                        ctx.SaveChanges();
+                        MessageBox.Show(String.Format("{0} 枚のFAX注文登録完了!", newOrderList.Count));
+                        orderList.Clear();
                     }
-                    ctx.t_orderdata.AddRange(newOrderList);
-                    ctx.SaveChanges();
-                    MessageBox.Show(String.Format("{0} 枚のFAX注文登録完了!", newOrderList.Count));
-                    orderList.Clear();
-                }
 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(String.Format("誤った: 単品重量, 商品コード! されていません"));
+                return;
+
+                throw;
             }
 
         }
@@ -221,7 +239,7 @@ namespace GODInventoryWinForm.Controls
             {
                 if (!EDITxtHandler.IsAllQuanjiaoJapan(o.ToString()))
                 {
-                    MessageBox.Show("输入数据包含半角字符！" + o);
+                    MessageBox.Show("商品名と規格名を全角で入力ください！" + o);
                     isrun = false;
 
 
@@ -839,10 +857,152 @@ namespace GODInventoryWinForm.Controls
                 {
                     if (!EDITxtHandler.IsAllQuanjiaoJapan(cell.EditedFormattedValue.ToString()))
                     {
-                        MessageBox.Show("输入数据包含半角字符！");
+                        MessageBox.Show("商品名と規格名を全角で入力ください！");//输入数据包含半角字符
                     }
                 }
             }
+        }
+
+
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            {
+                try
+                {
+                    //BindingList<t_orderdata> newOrderList = new BindingList<t_orderdata>();
+                    var newOrderList = this.orderList.Where(o => o.発注数量 > 0).ToList();
+
+                    if (newOrderList.Count > 0)
+                    {
+                        int storeCode = (int)this.storeComboBox.SelectedValue;
+                        var store = shopList.Find(s => s.店番 == storeCode);
+                        using (var ctx = new GODDbContext())
+                        {
+
+                            foreach (var o in newOrderList)
+                            {
+                                v_itemprice selectedItem = itemPriceList.Find(i => i.商品コード == o.商品コード);
+
+                                SetOrderBaseInfo(o);
+                                o.納品先店舗コード = (short)o.店舗コード;
+                                o.納品先店舗名漢字 = o.店舗名漢字;
+                                o.税率 = 0.08;
+                                o.特価区分 = 0;
+                                o.PB区分 = 0;
+                                o.原価区分 = 0;
+                                o.納期回答区分 = 0;
+                                o.回答納期 = "00000000";
+                                o.入力区分 = 1;
+                                o.実際出荷数量 = o.発注数量;
+                                if (selectedItem == null)
+                                {
+                                    MessageBox.Show(String.Format("誤った: 単品重量, 商品コード! されていません"));
+                                    return;
+
+
+                                }
+                                o.重量 = (int)(Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
+                                o.県別 = store.県別;
+                                o.発注形態区分 = Convert.ToInt16(this.orderReasonComboBox.SelectedValue);
+                                o.発注形態名称漢字 = this.orderReasonComboBox.Text;
+                                //o.原単価_税抜_ = (int)selectedItem.原単価;
+                                o.原単価_税込_ = ((int)(o.原単価_税抜_ * (1 + o.税率) * 100)) * 1.0 / 100;
+
+                                o.原価金額_税抜_ = o.実際出荷数量 * o.原単価_税抜_;
+                                o.原価金額_税込_ = (int)(o.実際出荷数量 * o.原単価_税込_);
+
+                                //o.売単価_税抜_ = (int)selectedItem.売単価;
+                                o.売単価_税込_ = (int)(o.売単価_税抜_ * (1 + o.税率));
+                                o.税額 = (int)(o.原価金額_税抜_ * o.税率);
+
+                                o.発注品名漢字 = o.品名漢字;
+                                o.発注規格名漢字 = o.規格名漢字;
+                                o.用度品区分 = 0;
+
+                                //判断全角半角
+                                bool isrun = true;
+
+                                //if (o.発注数量 != null)
+                                //{
+                                //    isrun = QuanJiaoBanJiao(o.発注数量.ToString());
+                                //    if (isrun == false)
+                                //        return;
+                                //}
+                                if (o.県別 != null)
+                                {
+                                    isrun = QuanJiaoBanJiao(o.県別);
+                                    if (isrun == false)
+                                        return;
+                                }
+                                if (o.発注形態名称漢字 != null)
+                                {
+                                    isrun = QuanJiaoBanJiao(o.発注形態名称漢字);
+                                    if (isrun == false)
+                                        return;
+                                }
+                                if (o.原単価_税込_ != null)
+                                {
+                                    isrun = QuanJiaoBanJiao(o.原単価_税込_.ToString());
+                                    if (isrun == false)
+                                        return;
+                                }
+                                if (o.原価金額_税抜_ != null)
+                                {
+                                    isrun = QuanJiaoBanJiao(o.原価金額_税抜_.ToString());
+                                    if (isrun == false)
+                                        return;
+                                }
+                                if (o.原価金額_税込_ != null)
+                                {
+                                    isrun = QuanJiaoBanJiao(o.原価金額_税込_.ToString());
+                                    if (isrun == false)
+                                        return;
+                                }
+                                if (o.売単価_税込_ != null)
+                                {
+                                    isrun = QuanJiaoBanJiao(o.売単価_税込_.ToString());
+                                    if (isrun == false)
+                                        return;
+                                }
+                                //if (o.税額 != null)
+                                //{
+                                //    isrun = QuanJiaoBanJiao(o.税額.ToString());
+                                //    if (isrun == false)
+                                //        return;
+                                //}
+                                if (o.発注品名漢字 != null)
+                                {
+                                    isrun = QuanJiaoBanJiao(o.発注品名漢字);
+                                    if (isrun == false)
+                                        return;
+                                }
+
+                                if (o.発注規格名漢字 != null)
+                                {
+                                    isrun = QuanJiaoBanJiao(o.発注規格名漢字);
+                                    if (isrun == false)
+                                        return;
+                                }
+                            }
+                            ctx.t_orderdata.AddRange(newOrderList);
+                            ctx.SaveChanges();
+                            MessageBox.Show(String.Format("{0} 枚のFAX注文登録完了!", newOrderList.Count));
+                            orderList.Clear();
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(String.Format("誤った: 単品重量, 商品コード! されていません"));
+                    return;
+
+                    throw;
+                }
+
+            }
+
         }
 
 
