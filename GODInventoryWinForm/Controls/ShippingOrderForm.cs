@@ -66,14 +66,14 @@ namespace GODInventoryWinForm.Controls
                 //FROM  t_orderdata o WHERE o.Status = {0} OR o.Status = {1} GROUP BY o.`Status`, o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`";
                 //                groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.PendingShipment, OrderStatus.Locked).ToList();
 
-                //orderList = (from t_orderdata o in ctx.t_orderdata
-                //             where o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.Locked
-                //             select o).ToList();
-                //new 担当-県別-出荷指示書番号 的顺序
                 orderList = (from t_orderdata o in ctx.t_orderdata
                              where o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.Locked
-                             orderby o.実際配送担当, o.県別, o.出荷No
                              select o).ToList();
+                //new 担当-県別-出荷指示書番号 的顺序
+                //orderList = (from t_orderdata o in ctx.t_orderdata
+                //             where o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.Locked
+                //             orderby o.実際配送担当, o.県別, o.出荷No
+                //             select o).ToList();
 
                 //orderList = (from o in ctx.t_orderdata
                 //             where o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.Locked
@@ -102,27 +102,29 @@ namespace GODInventoryWinForm.Controls
               //  var dd = sortablePendingOrderList1.ToList().OrderBy(c => c.実際配送担当).ThenBy(c => c.県別).ThenBy(c => c.出荷No).ToList();
 
 
-                //foreach (var gos in dd)
-                //{
-                //    var v_groupedorder = new v_groupedorder
-                //    {
-                //        Status = gos.Key.Status,
-                //        ShipNO = gos.Key.ShipNO,
-                //        出荷日 = gos.Key.出荷日,
-                //        納品日 = gos.Key.納品日,
-                //        実際配送担当 = gos.Key.実際配送担当,
-                //        店名 = gos.First().店舗名漢字,
-                //        県別 = gos.First().県別,
-                //        TotalPrice = gos.Sum(o => o.原価金額_税抜_),
-                //        TotalWeight = gos.Sum(o => o.重量)
-                //    };
-                //    groupedOrderList.Add(v_groupedorder);
-                //}
+                foreach (var gos in groupedOrders)
+                {
+                    var v_groupedorder = new v_groupedorder
+                    {
+                        Status = gos.Key.Status,
+                        ShipNO = gos.Key.ShipNO,
+                        出荷日 = gos.Key.出荷日,
+                        納品日 = gos.Key.納品日,
+                        実際配送担当 = gos.Key.実際配送担当,
+                        店名 = gos.First().店舗名漢字,
+                        県別 = gos.First().県別,
+                        TotalPrice = gos.Sum(o => o.原価金額_税抜_),
+                        TotalWeight = gos.Sum(o => o.重量)
+                    };
+                    groupedOrderList.Add(v_groupedorder);
+                }
 
 
-              //  sortablePendingOrderList = new SortableBindingList<v_groupedorder>(groupedOrderList);
+                sortablePendingOrderList1 = new SortableBindingList<v_groupedorder>(groupedOrderList);
+                var dd = sortablePendingOrderList1.ToList().OrderBy(c => c.実際配送担当).ThenBy(c => c.県別).ThenBy(c => c.出荷No).ToList();
+
                 this.bindingSource5.DataSource = null;
-                this.bindingSource5.DataSource = sortablePendingOrderList;
+                this.bindingSource5.DataSource = dd;
                 shipNODataGridView.DataSource = this.bindingSource5;
 
                 // shipNODataGridView.DataSource = groupedOrderList;
