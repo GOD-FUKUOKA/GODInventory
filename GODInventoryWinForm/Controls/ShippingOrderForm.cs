@@ -73,21 +73,7 @@ namespace GODInventoryWinForm.Controls
                 //orderList = (from t_orderdata o in ctx.t_orderdata
                 //             where o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.Locked
                 //             orderby o.実際配送担当, o.県別, o.出荷No
-                //             select o).ToList();
-
-                //orderList = (from o in ctx.t_orderdata
-                //             where o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.Locked
-                //             group o by new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 } into g
-                //             ).ToList();
-
-
-                //var   orderListnew= (from o in ctx.t_orderdata
-                //                where o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.Locked
-                //                group o by new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 } into g
-                //                orderby t.実際配送担当, o.県別, o.出荷No
-                //                select new { Status = g.Key.Status, ShipNO = g.Key.ShipNO, 出荷日 = g.Key.出荷日, 納品日 = g.Key.納品日, 実際配送担当 = g.Key.実際配送担当 }).ToList();
-
-
+                //             select o).ToList();     
 
                 //原始代码 留用
                 // var groupedOrders = orderList.GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 });
@@ -95,12 +81,7 @@ namespace GODInventoryWinForm.Controls
                 List<t_orderdata> orderList1 = new List<t_orderdata>();
                 SortableBindingList<v_groupedorder> sortablePendingOrderList1;
                 var groupedOrders = orderList.GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 }).ToList();
-              //  groupedOrderList = groupedOrders.ToList();
-
-               // sortablePendingOrderList1 = new SortableBindingList<v_groupedorder>(groupedOrders);
-
-              //  var dd = sortablePendingOrderList1.ToList().OrderBy(c => c.実際配送担当).ThenBy(c => c.県別).ThenBy(c => c.出荷No).ToList();
-
+              
 
                 foreach (var gos in groupedOrders)
                 {
@@ -118,7 +99,6 @@ namespace GODInventoryWinForm.Controls
                     };
                     groupedOrderList.Add(v_groupedorder);
                 }
-
 
                 sortablePendingOrderList1 = new SortableBindingList<v_groupedorder>(groupedOrderList);
                 var dd = sortablePendingOrderList1.ToList().OrderBy(c => c.実際配送担当).ThenBy(c => c.県別).ThenBy(c => c.出荷No).ToList();

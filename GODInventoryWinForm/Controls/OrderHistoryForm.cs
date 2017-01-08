@@ -24,7 +24,7 @@ namespace GODInventoryWinForm.Controls
         List<int> orderShopIdsInThreeMonth;
         SortableBindingList<v_pendingorder> orderListBindingList;
         private List<t_shoplist> shopList;
-
+        private SortableBindingList<v_pendingorder> sortableOrderList;
         public OrderHistoryForm()
         {
             InitializeComponent();
@@ -187,7 +187,13 @@ namespace GODInventoryWinForm.Controls
                 string sql = string.Format(" SELECT * FROM t_orderdata {0} LIMIT {1} OFFSET {2}", conditions , limit, offset);//+ "order by o1.`受注日`"
                 orderList = ctx.Database.SqlQuery<v_pendingorder>(sql, condition_params.ToArray()).ToList();
                 //new 
-                orderList = orderList.Distinct().OrderBy(s => s.受注日).ToList();
+                //orderList = orderList.Distinct().OrderBy(s => s.受注日).ToList();
+                orderList = orderList.Distinct().OrderByDescending(s => s.受注日).ToList();
+                //sortableOrderList = new SortableBindingList<v_pendingorder>(orderList);
+
+
+               // orderList = sortableOrderList.Distinct().OrderByDescending(s => s.受注日).ToList();
+                
             }
             orderListBindingList = new SortableBindingList<v_pendingorder>(orderList);
             dataGridView1.AutoGenerateColumns = false;
