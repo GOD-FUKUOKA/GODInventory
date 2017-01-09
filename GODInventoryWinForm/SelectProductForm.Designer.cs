@@ -32,20 +32,20 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.manualButton1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.submitButton2 = new System.Windows.Forms.Button();
             this.cancelButton3 = new System.Windows.Forms.Button();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(14, 57);
+            this.listBox1.ItemHeight = 14;
+            this.listBox1.Location = new System.Drawing.Point(16, 66);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(208, 304);
+            this.listBox1.Size = new System.Drawing.Size(242, 354);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -57,29 +57,33 @@
             this.columnHeader3});
             this.listView1.FullRowSelect = true;
             this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView1.Location = new System.Drawing.Point(228, 55);
+            this.listView1.Location = new System.Drawing.Point(266, 64);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(462, 308);
+            this.listView1.Size = new System.Drawing.Size(538, 359);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.Click += new System.EventHandler(this.listView1_Click);
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "商品名";
+            this.columnHeader1.Text = "品名";
             this.columnHeader1.Width = 200;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "規格";
+            this.columnHeader2.Text = "規格名";
             this.columnHeader2.Width = 200;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "ロット";
             // 
             // manualButton1
             // 
             this.manualButton1.DialogResult = System.Windows.Forms.DialogResult.Ignore;
-            this.manualButton1.Location = new System.Drawing.Point(366, 381);
+            this.manualButton1.Location = new System.Drawing.Point(419, 441);
             this.manualButton1.Name = "manualButton1";
-            this.manualButton1.Size = new System.Drawing.Size(106, 32);
+            this.manualButton1.Size = new System.Drawing.Size(124, 37);
             this.manualButton1.TabIndex = 1;
             this.manualButton1.Text = "入力";
             this.manualButton1.UseVisualStyleBackColor = true;
@@ -88,18 +92,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 33);
+            this.label1.Location = new System.Drawing.Point(17, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 12);
+            this.label1.Size = new System.Drawing.Size(71, 14);
             this.label1.TabIndex = 3;
             this.label1.Text = "ジャンル名";
             // 
             // submitButton2
             // 
             this.submitButton2.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.submitButton2.Location = new System.Drawing.Point(478, 381);
+            this.submitButton2.Location = new System.Drawing.Point(550, 441);
             this.submitButton2.Name = "submitButton2";
-            this.submitButton2.Size = new System.Drawing.Size(106, 32);
+            this.submitButton2.Size = new System.Drawing.Size(124, 37);
             this.submitButton2.TabIndex = 2;
             this.submitButton2.Text = "確定";
             this.submitButton2.UseVisualStyleBackColor = true;
@@ -107,29 +111,25 @@
             // cancelButton3
             // 
             this.cancelButton3.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.cancelButton3.Location = new System.Drawing.Point(590, 381);
+            this.cancelButton3.Location = new System.Drawing.Point(680, 441);
             this.cancelButton3.Name = "cancelButton3";
-            this.cancelButton3.Size = new System.Drawing.Size(106, 32);
+            this.cancelButton3.Size = new System.Drawing.Size(124, 37);
             this.cancelButton3.TabIndex = 3;
             this.cancelButton3.Text = "キャンセル";
             this.cancelButton3.UseVisualStyleBackColor = true;
             // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "T入数";
-            // 
             // SelectProductForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 430);
+            this.ClientSize = new System.Drawing.Size(821, 502);
             this.Controls.Add(this.cancelButton3);
             this.Controls.Add(this.submitButton2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.manualButton1);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.listBox1);
-            this.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SelectProductForm";

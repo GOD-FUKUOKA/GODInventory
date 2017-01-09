@@ -123,10 +123,11 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {
 
+                //这个界面下各条记录的排序方式是按照后来的在最下面
                 string sql = @"SELECT o.`ShipNO`, o.`出荷日`, o.`納品日`,
  min(o.`県別`) as `県別`, o.`実際配送担当`, 
 sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight  
-FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`ORDER BY o.伝票番号";
+FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`ORDER BY o.出荷日 desc";
                 groupedAsnOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.ASN).ToList();
 
                 //this.bindingSource2.DataSource = OrderSqlHelper.ASNEdiDataList(entityDataSource1);

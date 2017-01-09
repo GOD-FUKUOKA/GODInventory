@@ -310,7 +310,7 @@ FROM t_orderdata o
 INNER JOIN t_genre g  on o.ジャンル = g.idジャンル
 LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.実際配送担当 = k.ShipperName 
 WHERE o.Status ={0}
-ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号 LIMIT {1} OFFSET {2};";
+ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
 
 
                 // create BindingList (sortable/filterable)
@@ -396,8 +396,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             this.shipperOrderList.Clear();
             this.bindingSource2.DataSource = null;
             // 记录DataGridView改变数据
-            this.bindingSource2.DataSource = sortablePendingOrderList3;
-            dataGridView3.DataSource = this.bindingSource2;
+            //this.bindingSource2.DataSource = sortablePendingOrderList3;
+            //dataGridView3.DataSource = this.bindingSource2;
 
             //this.shipperComboBox.DisplayMember = "ShortName";
             //this.shipperComboBox.ValueMember = "ShortName";
@@ -419,7 +419,7 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
      ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
 
             string sql2 = @"SELECT `id受注データ`,`受注日`,`店舗コード`, `納品場所コード`,
-       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
+       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`,`発注形態名称漢字`, `備考`
      FROM t_orderdata
      WHERE  `Status`={0}
      ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
@@ -430,7 +430,8 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             sortablePendingOrderList3 = new SortableBindingList<v_pendingorder>(shipperOrderList);
             this.bindingSource2.DataSource = null;
             this.bindingSource2.DataSource = sortablePendingOrderList3;
-            dataGridView3.DataSource = this.bindingSource2;
+            this.dataGridView3.AutoGenerateColumns = false;
+            this.dataGridView3.DataSource = this.bindingSource2;
              return;
 
             // 第一次初始化情况
@@ -446,7 +447,6 @@ ORDER BY o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡ�
             {
                 // 用户退单后刷新
                 this.shipperComboBox.Text = shipperName;
-                this.dataGridView3.AutoGenerateColumns = false;
                 //   this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName);
                 //new 
                 //  this.bindingSource2.DataSource = shipperOrderList;

@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.uploadForEDIButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -46,13 +47,6 @@
             this.printForShipperToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.asnTabPage = new System.Windows.Forms.TabPage();
             this.ediDataGridView = new System.Windows.Forms.DataGridView();
-            this.配车单单号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.納品日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.県別Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.実際配送担当Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.重量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.printForShipperToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.printForEDIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,6 +109,7 @@
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.canceledBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.bindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.ShipNOColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shipAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.arrivedAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -122,7 +117,13 @@
             this.shipperColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.weightColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource5 = new System.Windows.Forms.BindingSource(this.components);
+            this.配车单单号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.県別Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.実際配送担当Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.重量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.pendingTabPage.SuspendLayout();
@@ -207,14 +208,14 @@
             this.shipNODataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.shipNODataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.shipNODataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.shipNODataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.shipNODataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ShipNOColumn1,
@@ -246,33 +247,33 @@
             this.editToolStripMenuItem,
             this.printForShipperToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(195, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 92);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.lockToolStripMenuItem.Text = "配車表ﾛｯｸ";
             this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
             // 
             // unlockToolStripMenuItem
             // 
             this.unlockToolStripMenuItem.Name = "unlockToolStripMenuItem";
-            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.unlockToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.unlockToolStripMenuItem.Text = "ﾛｯｸ解消";
             this.unlockToolStripMenuItem.Click += new System.EventHandler(this.unlockToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.editToolStripMenuItem.Text = "編集";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // printForShipperToolStripMenuItem1
             // 
             this.printForShipperToolStripMenuItem1.Name = "printForShipperToolStripMenuItem1";
-            this.printForShipperToolStripMenuItem1.Size = new System.Drawing.Size(194, 22);
+            this.printForShipperToolStripMenuItem1.Size = new System.Drawing.Size(196, 22);
             this.printForShipperToolStripMenuItem1.Text = "ピッキングリスト印刷";
             this.printForShipperToolStripMenuItem1.Click += new System.EventHandler(this.printForShipperToolStripMenuItem1_Click);
             // 
@@ -296,6 +297,14 @@
             this.ediDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ediDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.ediDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ediDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.配车单单号Column1,
@@ -309,67 +318,11 @@
             this.ediDataGridView.Location = new System.Drawing.Point(3, 60);
             this.ediDataGridView.Name = "ediDataGridView";
             this.ediDataGridView.ReadOnly = true;
-            this.ediDataGridView.RowHeadersVisible = false;
             this.ediDataGridView.RowTemplate.Height = 23;
             this.ediDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ediDataGridView.Size = new System.Drawing.Size(903, 280);
             this.ediDataGridView.TabIndex = 3;
             this.ediDataGridView.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
-            // 
-            // 配车单单号Column1
-            // 
-            this.配车单单号Column1.DataPropertyName = "ShipNO";
-            this.配车单单号Column1.HeaderText = "配车单单号";
-            this.配车单单号Column1.Name = "配车单单号Column1";
-            this.配车单单号Column1.ReadOnly = true;
-            // 
-            // 出荷日Column1
-            // 
-            this.出荷日Column1.DataPropertyName = "出荷日";
-            this.出荷日Column1.HeaderText = "出荷日";
-            this.出荷日Column1.Name = "出荷日Column1";
-            this.出荷日Column1.ReadOnly = true;
-            // 
-            // 納品日Column1
-            // 
-            this.納品日Column1.DataPropertyName = "納品日";
-            this.納品日Column1.HeaderText = "納品日";
-            this.納品日Column1.Name = "納品日Column1";
-            this.納品日Column1.ReadOnly = true;
-            this.納品日Column1.Width = 120;
-            // 
-            // 県別Column1
-            // 
-            this.県別Column1.DataPropertyName = "県別";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.県別Column1.HeaderText = "県別";
-            this.県別Column1.Name = "県別Column1";
-            this.県別Column1.ReadOnly = true;
-            this.県別Column1.Width = 120;
-            // 
-            // 実際配送担当Column1
-            // 
-            this.実際配送担当Column1.DataPropertyName = "実際配送担当";
-            this.実際配送担当Column1.HeaderText = "実際配送担当";
-            this.実際配送担当Column1.Name = "実際配送担当Column1";
-            this.実際配送担当Column1.ReadOnly = true;
-            this.実際配送担当Column1.Width = 120;
-            // 
-            // 重量Column1
-            // 
-            this.重量Column1.DataPropertyName = "TotalWeight";
-            this.重量Column1.HeaderText = "重量";
-            this.重量Column1.Name = "重量Column1";
-            this.重量Column1.ReadOnly = true;
-            // 
-            // 原価金額_税抜_Column1
-            // 
-            this.原価金額_税抜_Column1.DataPropertyName = "TotalPrice";
-            this.原価金額_税抜_Column1.HeaderText = "原価金額(税抜)";
-            this.原価金額_税抜_Column1.Name = "原価金額_税抜_Column1";
-            this.原価金額_税抜_Column1.ReadOnly = true;
-            this.原価金額_税抜_Column1.Width = 120;
             // 
             // contextMenuStrip2
             // 
@@ -377,19 +330,19 @@
             this.printForShipperToolStripMenuItem2,
             this.printForEDIToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(195, 48);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(197, 48);
             // 
             // printForShipperToolStripMenuItem2
             // 
             this.printForShipperToolStripMenuItem2.Name = "printForShipperToolStripMenuItem2";
-            this.printForShipperToolStripMenuItem2.Size = new System.Drawing.Size(194, 22);
+            this.printForShipperToolStripMenuItem2.Size = new System.Drawing.Size(196, 22);
             this.printForShipperToolStripMenuItem2.Text = "ピッキングリスト印刷";
             this.printForShipperToolStripMenuItem2.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // printForEDIToolStripMenuItem
             // 
             this.printForEDIToolStripMenuItem.Name = "printForEDIToolStripMenuItem";
-            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.printForEDIToolStripMenuItem.Text = "納品書印刷";
             this.printForEDIToolStripMenuItem.Click += new System.EventHandler(this.printForEDIToolStripMenuItem_Click);
             // 
@@ -543,12 +496,12 @@
             this.canceledContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cancelConfirmToolStripMenuItem});
             this.canceledContextMenuStrip.Name = "canceledContextMenuStrip";
-            this.canceledContextMenuStrip.Size = new System.Drawing.Size(159, 26);
+            this.canceledContextMenuStrip.Size = new System.Drawing.Size(161, 26);
             // 
             // cancelConfirmToolStripMenuItem
             // 
             this.cancelConfirmToolStripMenuItem.Name = "cancelConfirmToolStripMenuItem";
-            this.cancelConfirmToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.cancelConfirmToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.cancelConfirmToolStripMenuItem.Text = "キャンセル確定";
             this.cancelConfirmToolStripMenuItem.Click += new System.EventHandler(this.cancelConfirmToolStripMenuItem_Click);
             // 
@@ -878,7 +831,7 @@
             this.ShipNOColumn1.HeaderText = "出荷指示書番号";
             this.ShipNOColumn1.Name = "ShipNOColumn1";
             this.ShipNOColumn1.ReadOnly = true;
-            this.ShipNOColumn1.Width = 150;
+            this.ShipNOColumn1.Width = 280;
             // 
             // shipAtColumn
             // 
@@ -886,6 +839,7 @@
             this.shipAtColumn.HeaderText = "出荷日";
             this.shipAtColumn.Name = "shipAtColumn";
             this.shipAtColumn.ReadOnly = true;
+            this.shipAtColumn.Width = 160;
             // 
             // arrivedAtColumn
             // 
@@ -893,6 +847,7 @@
             this.arrivedAtColumn.HeaderText = "納品日";
             this.arrivedAtColumn.Name = "arrivedAtColumn";
             this.arrivedAtColumn.ReadOnly = true;
+            this.arrivedAtColumn.Width = 160;
             // 
             // districtColumn
             // 
@@ -900,6 +855,7 @@
             this.districtColumn.HeaderText = "県別";
             this.districtColumn.Name = "districtColumn";
             this.districtColumn.ReadOnly = true;
+            this.districtColumn.Width = 120;
             // 
             // shipperColumn
             // 
@@ -907,6 +863,7 @@
             this.shipperColumn.HeaderText = "担当";
             this.shipperColumn.Name = "shipperColumn";
             this.shipperColumn.ReadOnly = true;
+            this.shipperColumn.Width = 120;
             // 
             // weightColumn
             // 
@@ -914,6 +871,7 @@
             this.weightColumn.HeaderText = "重量";
             this.weightColumn.Name = "weightColumn";
             this.weightColumn.ReadOnly = true;
+            this.weightColumn.Width = 120;
             // 
             // totalPrice
             // 
@@ -921,7 +879,65 @@
             this.totalPrice.HeaderText = "原価金額(税抜)";
             this.totalPrice.Name = "totalPrice";
             this.totalPrice.ReadOnly = true;
-            this.totalPrice.Width = 120;
+            this.totalPrice.Width = 160;
+            // 
+            // 配车单单号Column1
+            // 
+            this.配车单单号Column1.DataPropertyName = "ShipNO";
+            this.配车单单号Column1.HeaderText = "配车单单号";
+            this.配车单单号Column1.Name = "配车单单号Column1";
+            this.配车单单号Column1.ReadOnly = true;
+            this.配车单单号Column1.Width = 280;
+            // 
+            // 出荷日Column1
+            // 
+            this.出荷日Column1.DataPropertyName = "出荷日";
+            this.出荷日Column1.HeaderText = "出荷日";
+            this.出荷日Column1.Name = "出荷日Column1";
+            this.出荷日Column1.ReadOnly = true;
+            this.出荷日Column1.Width = 160;
+            // 
+            // 納品日Column1
+            // 
+            this.納品日Column1.DataPropertyName = "納品日";
+            this.納品日Column1.HeaderText = "納品日";
+            this.納品日Column1.Name = "納品日Column1";
+            this.納品日Column1.ReadOnly = true;
+            this.納品日Column1.Width = 160;
+            // 
+            // 県別Column1
+            // 
+            this.県別Column1.DataPropertyName = "県別";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.県別Column1.HeaderText = "県別";
+            this.県別Column1.Name = "県別Column1";
+            this.県別Column1.ReadOnly = true;
+            this.県別Column1.Width = 120;
+            // 
+            // 実際配送担当Column1
+            // 
+            this.実際配送担当Column1.DataPropertyName = "実際配送担当";
+            this.実際配送担当Column1.HeaderText = "実際配送担当";
+            this.実際配送担当Column1.Name = "実際配送担当Column1";
+            this.実際配送担当Column1.ReadOnly = true;
+            this.実際配送担当Column1.Width = 120;
+            // 
+            // 重量Column1
+            // 
+            this.重量Column1.DataPropertyName = "TotalWeight";
+            this.重量Column1.HeaderText = "重量";
+            this.重量Column1.Name = "重量Column1";
+            this.重量Column1.ReadOnly = true;
+            this.重量Column1.Width = 120;
+            // 
+            // 原価金額_税抜_Column1
+            // 
+            this.原価金額_税抜_Column1.DataPropertyName = "TotalPrice";
+            this.原価金額_税抜_Column1.HeaderText = "原価金額(税抜)";
+            this.原価金額_税抜_Column1.Name = "原価金額_税抜_Column1";
+            this.原価金額_税抜_Column1.ReadOnly = true;
+            this.原価金額_税抜_Column1.Width = 140;
             // 
             // ShippingOrderForm
             // 
@@ -1021,13 +1037,6 @@
         private System.Windows.Forms.Button uploadAsnButton;
         private System.Windows.Forms.BindingSource canceledBindingSource;
         private System.Windows.Forms.ToolStripMenuItem printForShipperToolStripMenuItem2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 配车单单号Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 納品日Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 原価金額_税抜_Column1;
         private System.Windows.Forms.ToolStripMenuItem printForShipperToolStripMenuItem1;
         private System.Windows.Forms.ContextMenuStrip canceledContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem cancelConfirmToolStripMenuItem;
@@ -1045,6 +1054,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注数量Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 備考Column1;
+        private System.Windows.Forms.BindingSource bindingSource5;
         private System.Windows.Forms.DataGridViewTextBoxColumn ShipNOColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn shipAtColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn arrivedAtColumn;
@@ -1052,6 +1062,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn shipperColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn weightColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPrice;
-        private System.Windows.Forms.BindingSource bindingSource5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 配车单单号Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 納品日Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 原価金額_税抜_Column1;
     }
 }

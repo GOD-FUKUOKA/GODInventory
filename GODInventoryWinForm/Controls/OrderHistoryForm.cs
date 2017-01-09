@@ -468,11 +468,21 @@ namespace GODInventoryWinForm.Controls
                 var orders = this.shippedOrderList.Where(o => o.出荷No == order.出荷No).ToList();
 
                 var orderIds = orders.Select(o => o.id受注データ).ToList();
+                long mid = 0;
+
                 using (GODDbContext ctx = new GODDbContext())
                 {
-                    OrderSqlHelper.GenerateASNByOrderIds(ctx, orderIds);
+                    mid = OrderSqlHelper.GenerateASNByOrderIds(ctx, orderIds);
                     //ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(newPath, orders);
                 }
+
+
+                var path = EDITxtHandler.BuildASNFilePath(mid);
+                var newPath = Path.Combine(Properties.Settings.Default.NFWEInstallDir, @"NYOTEI\NYOTEI.txt");
+
+                // copy for later send
+                File.Copy(path, newPath, true);
+
                 // 上传ASN
                 //sendForm.Mid = order.ASN管理連番;
                 //sendForm.IsCanceledOrder = false;
