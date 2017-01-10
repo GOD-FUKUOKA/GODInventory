@@ -163,6 +163,8 @@ namespace GODInventory.MyLinq
 
         public string ShipNO { get; set; }
 
+        public int 最终实际出货数量 { get; set; }
+
         public string BarcodeImagePath { get; set; }
         public byte[] BarcodeImage { get; set; }
     }

@@ -60,7 +60,9 @@ namespace GODInventoryWinForm.Controls
             this.storeCodeTextBox.Text = Order.店舗コード.ToString();
             this.invoiceNOTextBox.Text = Order.伝票番号.ToString();
             this.countyTextBox1.Text = Order.県別;
-            
+            this.finalOrderQtyTextBox2.Text = Order.最终实际出货数量.ToString();
+
+
             if (Order.受注日 != null)
             {
                 this.orderAtTextBox.Text = Order.受注日.GetValueOrDefault().ToShortDateString();
@@ -97,6 +99,17 @@ namespace GODInventoryWinForm.Controls
 
                 this.cancelComboBox.Enabled = false;
             }
+
+            if (Order.Status == OrderStatus.Shipped || Order.Status == OrderStatus.Received || Order.Status == OrderStatus.Completed)
+            {
+                this.finalOrderQtyTextBox2.Enabled = true;
+            }
+            else
+            {
+
+                this.finalOrderQtyTextBox2.Enabled = false;
+            }
+
         }
 
         private void submitFormButton_Click(object sender, EventArgs e)
@@ -142,8 +155,16 @@ namespace GODInventoryWinForm.Controls
 
                 Order.発注日 = this.placedAtDateTimePicker1.Value;
                 Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
-                bool isQtyChanged = (Stockrec.数量 != -Order.実際出荷数量);
-                Stockrec.数量 = -Order.実際出荷数量;
+
+                Order.最终实际出货数量 = Convert.ToInt32(this.finalOrderQtyTextBox2.Text);
+
+                bool isQtyChanged = false;
+                // 历史原因，有些订单没有出货记录
+                if (Stockrec != null)
+                {
+                    isQtyChanged = (Stockrec.数量 != -Order.実際出荷数量);
+                    Stockrec.数量 = -Order.実際出荷数量;
+                }
                 entityDataSource1.SaveChanges();
 
                 if (isQtyChanged)
