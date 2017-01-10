@@ -98,7 +98,7 @@
             this.MOQColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderQuantityColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.実際出荷数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.最终实际出货数量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.最終出荷数Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ShipperColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.重量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.受領 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -354,7 +354,7 @@
             this.MOQColumn1,
             this.OrderQuantityColumn1,
             this.実際出荷数量,
-            this.最终实际出货数量Column1,
+            this.最終出荷数Column1,
             this.ShipperColumn1,
             this.重量,
             this.受領,
@@ -780,13 +780,13 @@
             this.実際出荷数量.ReadOnly = true;
             this.実際出荷数量.Width = 60;
             // 
-            // 最终实际出货数量Column1
+            // 最終出荷数Column1
             // 
-            this.最终实际出货数量Column1.DataPropertyName = "最终实际出货数量";
-            this.最终实际出货数量Column1.HeaderText = "最終出荷数量";
-            this.最终实际出货数量Column1.Name = "最终实际出货数量Column1";
-            this.最终实际出货数量Column1.ReadOnly = true;
-            this.最终实际出货数量Column1.Width = 60;
+            this.最終出荷数Column1.DataPropertyName = "最終出荷数";
+            this.最終出荷数Column1.HeaderText = "最終出荷数量";
+            this.最終出荷数Column1.Name = "最終出荷数Column1";
+            this.最終出荷数Column1.ReadOnly = true;
+            this.最終出荷数Column1.Width = 60;
             // 
             // ShipperColumn1
             // 
@@ -997,7 +997,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MOQColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderQuantityColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際出荷数量;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 最终实际出货数量Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 最終出荷数Column1;
         private System.Windows.Forms.DataGridViewComboBoxColumn ShipperColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 重量;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受領;

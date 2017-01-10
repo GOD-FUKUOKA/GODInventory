@@ -381,7 +381,7 @@
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.deleteToolStripMenuItem.Text = "清除记录";
+            this.deleteToolStripMenuItem.Text = "記録削除";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // vScrollBar1

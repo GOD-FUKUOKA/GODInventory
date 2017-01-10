@@ -299,7 +299,7 @@ namespace GODInventory.MyLinq
 
         public int 訂正理由区分 { get; set; }
 
-        public int 最终实际出货数量 { get; set; }
+        public int 最終出荷数 { get; set; }
 
 
         public t_orderdata()

@@ -60,7 +60,7 @@ namespace GODInventoryWinForm.Controls
             this.storeCodeTextBox.Text = Order.店舗コード.ToString();
             this.invoiceNOTextBox.Text = Order.伝票番号.ToString();
             this.countyTextBox1.Text = Order.県別;
-            this.finalOrderQtyTextBox2.Text = Order.最终实际出货数量.ToString();
+            this.finalOrderQtyTextBox2.Text = Order.最終出荷数.ToString();
 
 
             if (Order.受注日 != null)
@@ -156,7 +156,7 @@ namespace GODInventoryWinForm.Controls
                 Order.発注日 = this.placedAtDateTimePicker1.Value;
                 Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
 
-                Order.最终实际出货数量 = Convert.ToInt32(this.finalOrderQtyTextBox2.Text);
+                Order.最終出荷数 = Convert.ToInt32(this.finalOrderQtyTextBox2.Text);
 
                 bool isQtyChanged = false;
                 // 历史原因，有些订单没有出货记录

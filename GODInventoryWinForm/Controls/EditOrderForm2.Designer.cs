@@ -404,7 +404,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(119, 14);
             this.label15.TabIndex = 10000022;
-            this.label15.Text = "最终实际出货数量";
+            this.label15.Text = "最終出荷数";
             // 
             // finalOrderQtyTextBox2
             // 

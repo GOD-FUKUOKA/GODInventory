@@ -882,7 +882,7 @@ namespace GODInventory.ViewModel
 
             ctx.t_maruken_trans.AddRange(trans);
 
-            sql = String.Format("UPDATE t_orderdata SET `Status`={3}, `最终实际出货数量`=`実際出荷数量`, `配送担当受信`=TRUE, `配送担当受信時刻`= NOW() WHERE `Status`={0} AND `実際配送担当`='{1}' AND `id受注データ` in ({2});", (int)OrderStatus.NotifyShipper, shipperName, String.Join(",", orderIds.ToArray()), (int)OrderStatus.WaitToShip);
+            sql = String.Format("UPDATE t_orderdata SET `Status`={3}, `最終出荷数`=`実際出荷数量`, `配送担当受信`=TRUE, `配送担当受信時刻`= NOW() WHERE `Status`={0} AND `実際配送担当`='{1}' AND `id受注データ` in ({2});", (int)OrderStatus.NotifyShipper, shipperName, String.Join(",", orderIds.ToArray()), (int)OrderStatus.WaitToShip);
 
             count = ctx.Database.ExecuteSqlCommand(sql); 
             
