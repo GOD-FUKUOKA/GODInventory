@@ -281,7 +281,10 @@ namespace GODInventory.ViewModel.EDI
                 this.原価金額_税抜_ = EDITxtHandler.GetZeroedBytes(9);
                 this.原価金額_税込_ = EDITxtHandler.GetZeroedBytes(9);
             }
-            this.税額 = Encoding.ASCII.GetBytes( Convert.ToInt32(order.原価金額_税込_- order.原価金額_税抜_).ToString("D9"));//47 税額             9 370
+            // in fact do not need abs here, just in case
+            this.税額 = Encoding.ASCII.GetBytes( Math.Abs(Convert.ToInt32(order.原価金額_税込_- order.原価金額_税抜_)).ToString("D9"));//47 税額             9 370
+            Debug.Assert(this.税額.Count() == 9);
+
             this.税区分 = Encoding.ASCII.GetBytes( "1" );  //48 税区分            1 379
             // 0.05 * 1000 => 50  50.toString("D4") => "0050"
             this.税率= Encoding.ASCII.GetBytes(Convert.ToInt32(order.税率 * 1000).ToString("D4")); //49 税率             4 380
@@ -333,63 +336,82 @@ namespace GODInventory.ViewModel.EDI
             line.AddRange(this.システム管理日付 );
             line.AddRange( this.データ作成日 );
             line.AddRange( this.データ作成時刻 );
-            line.AddRange( this.法人コード );
+
+            Debug.Assert(line.Count == 38);
+
+            line.AddRange(this.法人コード);
             line.AddRange( this.店舗コード );
             line.AddRange( this.部門コード );
             line.AddRange( this.仕入先コード );
             line.AddRange( this.出荷業務仕入先コード );
+            Debug.Assert(line.Count == 57);
+
             line.AddRange( this.伝票区分 );
             line.AddRange( this.伝票番号 );
             line.AddRange( this.行番号 );
             line.AddRange( this.元伝票番号 );
             line.AddRange( this.発注日 );
-            line.AddRange( this.納品予定日 );
+            Debug.Assert(line.Count == 85);
+            line.AddRange(this.納品予定日);
             line.AddRange( this.入荷予定日 );
             line.AddRange( this.入荷予定時刻 );
             line.AddRange( this.出荷日 );
-
             line.AddRange( this.発注形態区分 );
+            Debug.Assert(line.Count == 115);
+
             line.AddRange( this.入力区分 );
             line.AddRange( this.直送区分 );
             line.AddRange( this.運送区分 );
             line.AddRange( this.出荷No );
             line.AddRange( this.梱包識別区分 );
-            line.AddRange( this.梱包No );
+            Debug.Assert(line.Count == 137);
+            line.AddRange(this.梱包No);
             line.AddRange( this.出荷総梱数 );
             line.AddRange( this.出荷ケース数 );
             line.AddRange( this.出荷バラ混載箱数 );
             line.AddRange( this.商品コード区分 );
-            line.AddRange( this.ＪＡＮコード );
+            
+            Debug.Assert(line.Count == 173);
+            line.AddRange(this.ＪＡＮコード);
             line.AddRange( this.商品コード );
             line.AddRange( this.オプション使用欄 );
             line.AddRange( this.ＧＴＩＮ );
             line.AddRange( this.品名漢字 );
-            line.AddRange( this.品名カナ );
+            Debug.Assert(line.Count == 248);
+            line.AddRange(this.品名カナ);
             line.AddRange( this.規格名漢字 );
             line.AddRange( this.規格名カナ );
             line.AddRange( this.発注数 );
             line.AddRange( this.納品数 );
-            line.AddRange( this.訂正理由区分 );
+            Debug.Assert(line.Count == 330);
+
+            line.AddRange(this.訂正理由区分);
             line.AddRange( this.総額取引区分 );
             line.AddRange( this.原単価_税抜_ );
             line.AddRange( this.原単価_税込_ );
             line.AddRange( this.原価金額_税抜_ );
-            line.AddRange( this.原価金額_税込_ );
+            Debug.Assert(line.Count == 360);
+            line.AddRange(this.原価金額_税込_);
             line.AddRange( this.税額 );
             line.AddRange( this.税区分 );
             line.AddRange( this.税率 );
             line.AddRange( this.売単価_税抜_ );
-            line.AddRange( this.売単価_税込_ );
+            Debug.Assert(line.Count == 390);
+
+            line.AddRange(this.売単価_税込_);
 
             line.AddRange( this.納品先店舗コード );
             line.AddRange( this.納品場所コード );
             line.AddRange( this.納品場所名漢字 );
             line.AddRange( this.納品場所カナ );
-            line.AddRange( this.センター経由区分 );
+            Debug.Assert(line.Count == 413);
+            line.AddRange(this.センター経由区分);
             line.AddRange( this.センターコード );
             line.AddRange( this.便区分 );
             line.AddRange( this.カゴ車No );
             line.AddRange( this.梱包サイズ_縦_ );
+            Debug.Assert(line.Count == 445);
+
             line.AddRange( this.梱包サイズ_高さ_ );
             line.AddRange( this.梱包サイズ_横_ );
             line.AddRange( this.梱包重量 );

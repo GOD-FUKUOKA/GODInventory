@@ -33,6 +33,7 @@ namespace GODInventoryWinForm.Controls
         private ComboBox specialColumn;
         private List<t_customers> customersList;
         private SelectProductForm selectProductForm;
+        public List<t_orderdata> newOrderList;
 
         public CreateOrderForm()
         {
@@ -99,7 +100,7 @@ namespace GODInventoryWinForm.Controls
             try
             {
                 //BindingList<t_orderdata> newOrderList = new BindingList<t_orderdata>();
-                var newOrderList = this.orderList.Where(o => o.発注数量 > 0).ToList();
+                newOrderList = this.orderList.Where(o => o.発注数量 > 0).ToList();
 
                 if (newOrderList.Count > 0)
                 {
@@ -823,7 +824,7 @@ namespace GODInventoryWinForm.Controls
                 try
                 {
                     //BindingList<t_orderdata> newOrderList = new BindingList<t_orderdata>();
-                    var newOrderList = this.orderList.Where(o => o.発注数量 > 0).ToList();
+                    newOrderList = this.orderList.Where(o => o.発注数量 > 0).ToList();
 
                     if (newOrderList.Count > 0)
                     {

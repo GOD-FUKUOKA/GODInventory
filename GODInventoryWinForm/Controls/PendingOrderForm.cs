@@ -516,9 +516,9 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
         private void newOrderbutton_Click(object sender, EventArgs e)
         {
             var form = new CreateOrderForm();
-            //var form1 = form.ShowDialog();
+            form.ShowDialog();
 
-            if (form.ShowDialog() == DialogResult.OK)
+            if (form.newOrderList != null && form.newOrderList.Count()>0)
             {
                 pager1.Bind();
             }

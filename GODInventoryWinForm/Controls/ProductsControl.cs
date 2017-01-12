@@ -23,7 +23,6 @@ namespace GODInventoryWinForm.Controls
             //shopList = ctx.t_shoplist.ToList();
 
 
-
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

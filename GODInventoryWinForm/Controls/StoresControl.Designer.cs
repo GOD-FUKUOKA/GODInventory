@@ -33,6 +33,8 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ChangeItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.btAddItem = new System.Windows.Forms.Button();
             this.店番DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,12 +47,11 @@
             this.住所DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.電話番号DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fAX番号DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.営業担当 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -70,7 +71,8 @@
             this.県内エリアDataGridViewTextBoxColumn,
             this.住所DataGridViewTextBoxColumn,
             this.電話番号DataGridViewTextBoxColumn,
-            this.fAX番号DataGridViewTextBoxColumn});
+            this.fAX番号DataGridViewTextBoxColumn,
+            this.営業担当});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.DataSource = this.bindingSource1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -107,6 +109,17 @@
             this.addItemToolStripMenuItem.Text = "新規";
             this.addItemToolStripMenuItem.Visible = false;
             this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataMember = "t_shoplist";
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Filter = "";
+            this.bindingSource1.Position = 0;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // panel1
             // 
@@ -205,16 +218,12 @@
             this.fAX番号DataGridViewTextBoxColumn.Name = "fAX番号DataGridViewTextBoxColumn";
             this.fAX番号DataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // bindingSource1
+            // 営業担当
             // 
-            this.bindingSource1.DataMember = "t_shoplist";
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Filter = "";
-            this.bindingSource1.Position = 0;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            this.営業担当.DataPropertyName = "営業担当";
+            this.営業担当.HeaderText = "営業担当";
+            this.営業担当.Name = "営業担当";
+            this.営業担当.ReadOnly = true;
             // 
             // StoresControl
             // 
@@ -227,8 +236,8 @@
             this.Size = new System.Drawing.Size(635, 357);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -253,5 +262,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 住所DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 電話番号DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fAX番号DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 営業担当;
     }
 }

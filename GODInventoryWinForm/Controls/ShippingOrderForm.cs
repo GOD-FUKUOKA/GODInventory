@@ -209,10 +209,13 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 // copy for later send
                 File.Copy(path, newPath, true);
 
-                // 上传ASN
-                //sendForm.Mid = mid;
-                //sendForm.IsCanceledOrder = false;
-                //sendForm.ShowDialog();
+                // 上传ASN，ASN上传确认
+                if (MessageBox.Show("是否上传ASN","ASN上传确认", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    sendForm.Mid = mid;
+                    sendForm.IsCanceledOrder = false;
+                    sendForm.ShowDialog();
+                }
 
                 //
                 OrderSqlHelper.UpdateOrderStatusShipped(shipNOs);
