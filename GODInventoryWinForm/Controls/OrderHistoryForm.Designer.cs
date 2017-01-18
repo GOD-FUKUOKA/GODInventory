@@ -50,7 +50,6 @@
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.キャンセル = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.キャンセル時刻 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -109,9 +108,10 @@
             this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.printForEDIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.printForEDIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             this.ordersTabPage.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -327,21 +327,6 @@
             this.label6.TabIndex = 89;
             this.label6.Text = "～";
             // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(3, 484);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 1;
-            this.pager1.PageSize = 5000;
-            this.pager1.Size = new System.Drawing.Size(1356, 34);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -388,7 +373,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1356, 382);
+            this.dataGridView1.Size = new System.Drawing.Size(1356, 376);
             this.dataGridView1.TabIndex = 2;
             // 
             // キャンセル
@@ -855,19 +840,19 @@
             this.uploadASNToolStripMenuItem,
             this.printForEDIToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(150, 70);
             // 
             // editToolStripMenuItem2
             // 
             this.editToolStripMenuItem2.Name = "editToolStripMenuItem2";
-            this.editToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem2.Size = new System.Drawing.Size(149, 22);
             this.editToolStripMenuItem2.Text = "編集";
             this.editToolStripMenuItem2.Click += new System.EventHandler(this.editToolStripMenuItem2_Click);
             // 
             // uploadASNToolStripMenuItem
             // 
             this.uploadASNToolStripMenuItem.Name = "uploadASNToolStripMenuItem";
-            this.uploadASNToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.uploadASNToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.uploadASNToolStripMenuItem.Text = "ASNｱｯﾌﾟﾛｰﾄﾞ";
             this.uploadASNToolStripMenuItem.Click += new System.EventHandler(this.uploadASNToolStripMenuItem_Click);
             // 
@@ -885,6 +870,13 @@
             // 
             this.errorProvider2.ContainerControl = this;
             // 
+            // printForEDIToolStripMenuItem
+            // 
+            this.printForEDIToolStripMenuItem.Name = "printForEDIToolStripMenuItem";
+            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.printForEDIToolStripMenuItem.Text = "納品書印刷";
+            this.printForEDIToolStripMenuItem.Click += new System.EventHandler(this.printForEDIToolStripMenuItem_Click);
+            // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
@@ -894,12 +886,20 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
-            // printForEDIToolStripMenuItem
+            // pager1
             // 
-            this.printForEDIToolStripMenuItem.Name = "printForEDIToolStripMenuItem";
-            this.printForEDIToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.printForEDIToolStripMenuItem.Text = "納品書印刷";
-            this.printForEDIToolStripMenuItem.Click += new System.EventHandler(this.printForEDIToolStripMenuItem_Click);
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(3, 484);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 1;
+            this.pager1.PageSize = 5000;
+            this.pager1.Size = new System.Drawing.Size(1356, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // OrderHistoryForm
             // 
