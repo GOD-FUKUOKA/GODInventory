@@ -80,7 +80,7 @@ namespace GODInventoryWinForm.Controls
                 // 品名漢字
                 List<t_orderdata> orderList1 = new List<t_orderdata>();
                 SortableBindingList<v_groupedorder> sortablePendingOrderList1;
-                var groupedOrders = orderList.GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 }).ToList();
+                var groupedOrders = orderList.OrderBy(c => c.実際配送担当).ThenBy(c => c.県別).ThenBy(c => c.出荷No).GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 }).ToList();
               
 
                 foreach (var gos in groupedOrders)
@@ -101,10 +101,10 @@ namespace GODInventoryWinForm.Controls
                 }
 
                 sortablePendingOrderList1 = new SortableBindingList<v_groupedorder>(groupedOrderList);
-                var dd = sortablePendingOrderList1.ToList().OrderBy(c => c.実際配送担当).ThenBy(c => c.県別).ThenBy(c => c.出荷No).ToList();
+                //var dd = sortablePendingOrderList1.ToList().OrderBy(c => c.実際配送担当).ThenBy(c => c.県別).ThenBy(c => c.出荷No).ToList();
 
                 this.bindingSource5.DataSource = null;
-                this.bindingSource5.DataSource = dd;
+                this.bindingSource5.DataSource = sortablePendingOrderList1;
                 shipNODataGridView.DataSource = this.bindingSource5;
 
                 // shipNODataGridView.DataSource = groupedOrderList;
@@ -210,7 +210,8 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 File.Copy(path, newPath, true);
 
                 // 上传ASN，ASN上传确认
-                if (MessageBox.Show("是否上传ASN","ASN上传确认", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                // 文件已生成，是否即刻上传asn文件
+                if (MessageBox.Show("ASNデータを作成します。このまま送信しますか？", "送信確認", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
                     sendForm.Mid = mid;
                     sendForm.IsCanceledOrder = false;
@@ -375,13 +376,13 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
         }
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int i = shipNODataGridView.CurrentRow.Index;
-            if (groupedOrderList[i].Status == OrderStatus.PendingShipment)
+            var groupedOrder = shipNODataGridView.CurrentRow.DataBoundItem as v_groupedorder;
+            if (groupedOrder.Status == OrderStatus.PendingShipment)
             {
 
                 var form = new ShipOrderListForm();
 
-                form.InitializeDataSource(groupedOrderList[i].ShipNO);
+                form.InitializeDataSource(groupedOrder.ShipNO);
 
                 if (form.ShowDialog() != System.Windows.Forms.DialogResult.Cancel)
                 {
@@ -544,6 +545,11 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
             }
 
             return orders;
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
         }
 
 

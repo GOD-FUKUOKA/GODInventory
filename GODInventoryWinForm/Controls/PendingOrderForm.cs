@@ -33,17 +33,12 @@ namespace GODInventoryWinForm.Controls
         private IBindingList pendingOrderIBindList;
         private List<v_pendingorder> pendingOrderList;
         private SortableBindingList<v_pendingorder> sortablePendingOrderList;
-        private List<v_pendingorder> sortablePendingOrderList2;
-        private List<v_pendingorder> ecOrderList;
         private List<v_pendingorder> shipperOrderList;
         private List<t_shoplist> shopList;
-        private CreateOrderForm CreateOrderForm;
         private SortableBindingList<v_pendingorder> sortablePendingOrderList3;
         public PendingOrderForm()
         {
             InitializeComponent();
-
-            // InitializeShipperOrderList(null);
 
             dataGridView1.AutoGenerateColumns = false;
 
@@ -407,16 +402,16 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             //http://stackoverflow.com/questions/23921117/disable-only-full-group-by
             //handle SET SESSION sql_mode='ANSI';
 
-            string sql = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
-       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
-     FROM t_orderdata
-     WHERE  `Status`={0} AND ( (`ジャンル`<> 1003) OR ( `ジャンル`= 1003 AND `実際配送担当` != '丸健'))
-     UNION ALL
-     SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`社内伝番`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `納品口数`, sum(`重量`) as `実際出荷数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
-     FROM t_orderdata
-     WHERE `Status`={0} AND `ジャンル`= 1003 AND `社内伝番` >0 AND `実際配送担当` = '丸健'
-     GROUP BY `社内伝番`
-     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
+//            string sql = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
+//       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
+//     FROM t_orderdata
+//     WHERE  `Status`={0} AND ( (`ジャンル`<> 1003) OR ( `ジャンル`= 1003 AND `実際配送担当` != '丸健'))
+//     UNION ALL
+//     SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`社内伝番`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `納品口数`, sum(`重量`) as `実際出荷数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
+//     FROM t_orderdata
+//     WHERE `Status`={0} AND `ジャンル`= 1003 AND `社内伝番` >0 AND `実際配送担当` = '丸健'
+//     GROUP BY `社内伝番`
+//     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
 
             string sql2 = @"SELECT `id受注データ`,`受注日`,`店舗コード`, `納品場所コード`,
        `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`,`発注形態名称漢字`, `備考`
@@ -427,12 +422,17 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             //this.shipperOrderList = this.entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql2, OrderStatus.NotifyShipper).ToList();
             this.shipperOrderList = this.entityDataSource2.DbContext.Database.SqlQuery<v_pendingorder>(sql2, OrderStatus.NotifyShipper).ToList();
 
+            //var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
+            //         where o.Status == OrderStatus.NotifyShipper
+            //         orderby o.実際配送担当,o.県別, o.店舗コード, o.受注日, o.伝票番号
+            //         select o
+            //        );
+
             sortablePendingOrderList3 = new SortableBindingList<v_pendingorder>(shipperOrderList);
             this.bindingSource2.DataSource = null;
             this.bindingSource2.DataSource = sortablePendingOrderList3;
             this.dataGridView3.AutoGenerateColumns = false;
             this.dataGridView3.DataSource = this.bindingSource2;
-             return;
 
             // 第一次初始化情况
             if (shipperName == null)
@@ -518,7 +518,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             var form = new CreateOrderForm();
             form.ShowDialog();
 
-            if (form.newOrderList != null && form.newOrderList.Count()>0)
+            //if (form.newOrderList != null && form.newOrderList.Count()>0)
             {
                 pager1.Bind();
             }
@@ -1235,31 +1235,6 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             order.税額 = (int)(order.原価金額_税抜_ * order.税率);
             return true;
         }
-
-        #region 排序 dav3
-        private List<int> GetOrderIdsBySelectedGridCell3()
-        {
-
-            List<int> order_ids = new List<int>();
-            var rows = GetSelectedRowsBySelectedCells3(dataGridView3);
-            foreach (DataGridViewRow row in rows)
-            {
-                var pendingorder = row.DataBoundItem as t_itemlist;
-                order_ids.Add(pendingorder.自社コード);
-            }
-
-            return order_ids;
-        }
-        private IEnumerable<DataGridViewRow> GetSelectedRowsBySelectedCells3(DataGridView dgv)
-        {
-            List<DataGridViewRow> rows = new List<DataGridViewRow>();
-            foreach (DataGridViewCell cell in dgv.SelectedCells)
-            {
-                rows.Add(cell.OwningRow);
-            }
-            return rows.Distinct();
-        }
-        #endregion
 
 
     }

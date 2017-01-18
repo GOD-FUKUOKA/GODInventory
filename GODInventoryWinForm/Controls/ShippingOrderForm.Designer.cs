@@ -40,6 +40,13 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.pendingTabPage = new System.Windows.Forms.TabPage();
             this.shipNODataGridView = new System.Windows.Forms.DataGridView();
+            this.ShipNOColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shipAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.arrivedAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.districtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shipperColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.weightColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.lockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unlockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +54,13 @@
             this.printForShipperToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.asnTabPage = new System.Windows.Forms.TabPage();
             this.ediDataGridView = new System.Windows.Forms.DataGridView();
+            this.配车单单号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.県別Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.実際配送担当Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.重量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.printForShipperToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.printForEDIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,20 +124,6 @@
             this.canceledBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.bindingSource5 = new System.Windows.Forms.BindingSource(this.components);
-            this.ShipNOColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.shipAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.arrivedAtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.districtColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.shipperColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.weightColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.配车单单号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.納品日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.県別Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.実際配送担当Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.重量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.pendingTabPage.SuspendLayout();
@@ -239,6 +239,62 @@
             this.shipNODataGridView.CurrentCellChanged += new System.EventHandler(this.shipNODataGridView_CurrentCellChanged);
             this.shipNODataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.shipNODataGridView_RowPrePaint);
             // 
+            // ShipNOColumn1
+            // 
+            this.ShipNOColumn1.DataPropertyName = "ShipNO";
+            this.ShipNOColumn1.HeaderText = "出荷指示書番号";
+            this.ShipNOColumn1.Name = "ShipNOColumn1";
+            this.ShipNOColumn1.ReadOnly = true;
+            this.ShipNOColumn1.Width = 280;
+            // 
+            // shipAtColumn
+            // 
+            this.shipAtColumn.DataPropertyName = "出荷日";
+            this.shipAtColumn.HeaderText = "出荷日";
+            this.shipAtColumn.Name = "shipAtColumn";
+            this.shipAtColumn.ReadOnly = true;
+            this.shipAtColumn.Width = 160;
+            // 
+            // arrivedAtColumn
+            // 
+            this.arrivedAtColumn.DataPropertyName = "納品日";
+            this.arrivedAtColumn.HeaderText = "納品日";
+            this.arrivedAtColumn.Name = "arrivedAtColumn";
+            this.arrivedAtColumn.ReadOnly = true;
+            this.arrivedAtColumn.Width = 160;
+            // 
+            // districtColumn
+            // 
+            this.districtColumn.DataPropertyName = "県別";
+            this.districtColumn.HeaderText = "県別";
+            this.districtColumn.Name = "districtColumn";
+            this.districtColumn.ReadOnly = true;
+            this.districtColumn.Width = 120;
+            // 
+            // shipperColumn
+            // 
+            this.shipperColumn.DataPropertyName = "実際配送担当";
+            this.shipperColumn.HeaderText = "担当";
+            this.shipperColumn.Name = "shipperColumn";
+            this.shipperColumn.ReadOnly = true;
+            this.shipperColumn.Width = 120;
+            // 
+            // weightColumn
+            // 
+            this.weightColumn.DataPropertyName = "TotalWeight";
+            this.weightColumn.HeaderText = "重量";
+            this.weightColumn.Name = "weightColumn";
+            this.weightColumn.ReadOnly = true;
+            this.weightColumn.Width = 120;
+            // 
+            // totalPrice
+            // 
+            this.totalPrice.DataPropertyName = "TotalPrice";
+            this.totalPrice.HeaderText = "原価金額(税抜)";
+            this.totalPrice.Name = "totalPrice";
+            this.totalPrice.ReadOnly = true;
+            this.totalPrice.Width = 160;
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -247,7 +303,8 @@
             this.editToolStripMenuItem,
             this.printForShipperToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 114);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // lockToolStripMenuItem
             // 
@@ -323,6 +380,64 @@
             this.ediDataGridView.Size = new System.Drawing.Size(903, 280);
             this.ediDataGridView.TabIndex = 3;
             this.ediDataGridView.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
+            // 
+            // 配车单单号Column1
+            // 
+            this.配车单单号Column1.DataPropertyName = "ShipNO";
+            this.配车单单号Column1.HeaderText = "配车单单号";
+            this.配车单单号Column1.Name = "配车单单号Column1";
+            this.配车单单号Column1.ReadOnly = true;
+            this.配车单单号Column1.Width = 280;
+            // 
+            // 出荷日Column1
+            // 
+            this.出荷日Column1.DataPropertyName = "出荷日";
+            this.出荷日Column1.HeaderText = "出荷日";
+            this.出荷日Column1.Name = "出荷日Column1";
+            this.出荷日Column1.ReadOnly = true;
+            this.出荷日Column1.Width = 160;
+            // 
+            // 納品日Column1
+            // 
+            this.納品日Column1.DataPropertyName = "納品日";
+            this.納品日Column1.HeaderText = "納品日";
+            this.納品日Column1.Name = "納品日Column1";
+            this.納品日Column1.ReadOnly = true;
+            this.納品日Column1.Width = 160;
+            // 
+            // 県別Column1
+            // 
+            this.県別Column1.DataPropertyName = "県別";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.県別Column1.HeaderText = "県別";
+            this.県別Column1.Name = "県別Column1";
+            this.県別Column1.ReadOnly = true;
+            this.県別Column1.Width = 120;
+            // 
+            // 実際配送担当Column1
+            // 
+            this.実際配送担当Column1.DataPropertyName = "実際配送担当";
+            this.実際配送担当Column1.HeaderText = "実際配送担当";
+            this.実際配送担当Column1.Name = "実際配送担当Column1";
+            this.実際配送担当Column1.ReadOnly = true;
+            this.実際配送担当Column1.Width = 120;
+            // 
+            // 重量Column1
+            // 
+            this.重量Column1.DataPropertyName = "TotalWeight";
+            this.重量Column1.HeaderText = "重量";
+            this.重量Column1.Name = "重量Column1";
+            this.重量Column1.ReadOnly = true;
+            this.重量Column1.Width = 120;
+            // 
+            // 原価金額_税抜_Column1
+            // 
+            this.原価金額_税抜_Column1.DataPropertyName = "TotalPrice";
+            this.原価金額_税抜_Column1.HeaderText = "原価金額(税抜)";
+            this.原価金額_税抜_Column1.Name = "原価金額_税抜_Column1";
+            this.原価金額_税抜_Column1.ReadOnly = true;
+            this.原価金額_税抜_Column1.Width = 140;
             // 
             // contextMenuStrip2
             // 
@@ -824,120 +939,6 @@
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // ShipNOColumn1
-            // 
-            this.ShipNOColumn1.DataPropertyName = "ShipNO";
-            this.ShipNOColumn1.HeaderText = "出荷指示書番号";
-            this.ShipNOColumn1.Name = "ShipNOColumn1";
-            this.ShipNOColumn1.ReadOnly = true;
-            this.ShipNOColumn1.Width = 280;
-            // 
-            // shipAtColumn
-            // 
-            this.shipAtColumn.DataPropertyName = "出荷日";
-            this.shipAtColumn.HeaderText = "出荷日";
-            this.shipAtColumn.Name = "shipAtColumn";
-            this.shipAtColumn.ReadOnly = true;
-            this.shipAtColumn.Width = 160;
-            // 
-            // arrivedAtColumn
-            // 
-            this.arrivedAtColumn.DataPropertyName = "納品日";
-            this.arrivedAtColumn.HeaderText = "納品日";
-            this.arrivedAtColumn.Name = "arrivedAtColumn";
-            this.arrivedAtColumn.ReadOnly = true;
-            this.arrivedAtColumn.Width = 160;
-            // 
-            // districtColumn
-            // 
-            this.districtColumn.DataPropertyName = "県別";
-            this.districtColumn.HeaderText = "県別";
-            this.districtColumn.Name = "districtColumn";
-            this.districtColumn.ReadOnly = true;
-            this.districtColumn.Width = 120;
-            // 
-            // shipperColumn
-            // 
-            this.shipperColumn.DataPropertyName = "実際配送担当";
-            this.shipperColumn.HeaderText = "担当";
-            this.shipperColumn.Name = "shipperColumn";
-            this.shipperColumn.ReadOnly = true;
-            this.shipperColumn.Width = 120;
-            // 
-            // weightColumn
-            // 
-            this.weightColumn.DataPropertyName = "TotalWeight";
-            this.weightColumn.HeaderText = "重量";
-            this.weightColumn.Name = "weightColumn";
-            this.weightColumn.ReadOnly = true;
-            this.weightColumn.Width = 120;
-            // 
-            // totalPrice
-            // 
-            this.totalPrice.DataPropertyName = "TotalPrice";
-            this.totalPrice.HeaderText = "原価金額(税抜)";
-            this.totalPrice.Name = "totalPrice";
-            this.totalPrice.ReadOnly = true;
-            this.totalPrice.Width = 160;
-            // 
-            // 配车单单号Column1
-            // 
-            this.配车单单号Column1.DataPropertyName = "ShipNO";
-            this.配车单单号Column1.HeaderText = "配车单单号";
-            this.配车单单号Column1.Name = "配车单单号Column1";
-            this.配车单单号Column1.ReadOnly = true;
-            this.配车单单号Column1.Width = 280;
-            // 
-            // 出荷日Column1
-            // 
-            this.出荷日Column1.DataPropertyName = "出荷日";
-            this.出荷日Column1.HeaderText = "出荷日";
-            this.出荷日Column1.Name = "出荷日Column1";
-            this.出荷日Column1.ReadOnly = true;
-            this.出荷日Column1.Width = 160;
-            // 
-            // 納品日Column1
-            // 
-            this.納品日Column1.DataPropertyName = "納品日";
-            this.納品日Column1.HeaderText = "納品日";
-            this.納品日Column1.Name = "納品日Column1";
-            this.納品日Column1.ReadOnly = true;
-            this.納品日Column1.Width = 160;
-            // 
-            // 県別Column1
-            // 
-            this.県別Column1.DataPropertyName = "県別";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.県別Column1.HeaderText = "県別";
-            this.県別Column1.Name = "県別Column1";
-            this.県別Column1.ReadOnly = true;
-            this.県別Column1.Width = 120;
-            // 
-            // 実際配送担当Column1
-            // 
-            this.実際配送担当Column1.DataPropertyName = "実際配送担当";
-            this.実際配送担当Column1.HeaderText = "実際配送担当";
-            this.実際配送担当Column1.Name = "実際配送担当Column1";
-            this.実際配送担当Column1.ReadOnly = true;
-            this.実際配送担当Column1.Width = 120;
-            // 
-            // 重量Column1
-            // 
-            this.重量Column1.DataPropertyName = "TotalWeight";
-            this.重量Column1.HeaderText = "重量";
-            this.重量Column1.Name = "重量Column1";
-            this.重量Column1.ReadOnly = true;
-            this.重量Column1.Width = 120;
-            // 
-            // 原価金額_税抜_Column1
-            // 
-            this.原価金額_税抜_Column1.DataPropertyName = "TotalPrice";
-            this.原価金額_税抜_Column1.HeaderText = "原価金額(税抜)";
-            this.原価金額_税抜_Column1.Name = "原価金額_税抜_Column1";
-            this.原価金額_税抜_Column1.ReadOnly = true;
-            this.原価金額_税抜_Column1.Width = 140;
             // 
             // ShippingOrderForm
             // 

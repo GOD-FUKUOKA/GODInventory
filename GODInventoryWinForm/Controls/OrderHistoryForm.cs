@@ -16,6 +16,8 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class OrderHistoryForm : Form
     {
+        public ReceivedOrdersReportForm reportForm;
+
         EditOrderForm2 editOrderForm;
         private static string NoOptionSelected = "すべて";
         List<v_pendingorder> orderList;
@@ -30,6 +32,7 @@ namespace GODInventoryWinForm.Controls
             InitializeComponent();
            
             editOrderForm = new EditOrderForm2();
+            reportForm = new ReceivedOrdersReportForm();
 
             InitializeDataSource();
             startDateTimePicker.Select();
@@ -431,6 +434,7 @@ namespace GODInventoryWinForm.Controls
                 if (editOrderForm.ShowDialog() == DialogResult.OK)
                 {
                     order.実際出荷数量 = editOrderForm.Order.実際出荷数量;
+                    order.最終出荷数 = editOrderForm.Order.最終出荷数;
                     order.納品口数 = editOrderForm.Order.納品口数;
                     order.重量 = editOrderForm.Order.重量;
                     order.キャンセル = editOrderForm.Order.キャンセル;
@@ -604,6 +608,19 @@ namespace GODInventoryWinForm.Controls
                     order.Status = editOrderForm.Order.Status;
                     dataGridView2.Refresh();
                 }
+            }
+        }
+
+        private void printForEDIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var row = dataGridView2.CurrentRow;
+            var order = row.DataBoundItem as t_orderdata;
+            if (order != null)
+            {
+                var orders = OrderSqlHelper.ASNOrderDataListByChuHeNo(entityDataSource1, order.出荷No);
+
+                reportForm.InitializeDataSource(orders);
+                reportForm.ShowDialog();
             }
         }
     }

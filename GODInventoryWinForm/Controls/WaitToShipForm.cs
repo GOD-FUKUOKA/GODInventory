@@ -104,13 +104,21 @@ namespace GODInventoryWinForm.Controls
             this.shipNOComboBox.DisplayMember = "FullName";
             this.shipNOComboBox.ValueMember = "ShortName";
             this.shipNOComboBox.DataSource = shipNOs;
-            if (shipNO.Length > 0)
+            if (shipNO.Length > 0 && shipNOs.Count()>0)
             {
-                this.shipNOComboBox.SelectedValue = shipNO;
+                // 检查 shipNOs 中是否存在 shipNO， 可能不存在了。
+                if (shipNOs.Exists(o => o.FullName == shipNO))
+                {
+                    this.shipNOComboBox.SelectedValue = shipNO;
+                }
+                else {
+                    this.shipNOComboBox.Text = "";
+                }
             }
             else
             {
-                this.shipNOComboBox.SelectedItem = null;
+                this.shipNOComboBox.Text = "";
+                //this.shipNOComboBox.SelectedItem = null;
             }
 
             
