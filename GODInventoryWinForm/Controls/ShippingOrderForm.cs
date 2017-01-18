@@ -209,6 +209,8 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 // copy for later send
                 File.Copy(path, newPath, true);
 
+                // update order state first, then call upload. in case state right
+                OrderSqlHelper.UpdateOrderStatusShipped(shipNOs);
                 // 上传ASN，ASN上传确认
                 // 文件已生成，是否即刻上传asn文件
                 if (MessageBox.Show("ASNデータを作成します。このまま送信しますか？", "送信確認", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
@@ -218,8 +220,6 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     sendForm.ShowDialog();
                 }
 
-                //
-                OrderSqlHelper.UpdateOrderStatusShipped(shipNOs);
             }
 
 
@@ -472,13 +472,18 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     // copy for later send
                     File.Copy(path, newPath, true);
 
-                    // 上传ASN,
-                    // 联调暂停 上传ASN， 
-                    //sendForm.Mid = mid;
-                    //sendForm.IsCanceledOrder = true;
-                    //sendForm.ShowDialog();
                     sql = String.Format("UPDATE t_orderdata SET `Status`={1} WHERE `id受注データ` in( {0} )", string.Join(",", oids), (int)OrderStatus.Completed);
                     ctx.Database.ExecuteSqlCommand(sql);
+
+                    if (MessageBox.Show("ASNデータを作成します。このまま送信しますか？", "送信確認", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        // 上传ASN,
+                        // 联调暂停 上传ASN， 
+                        sendForm.Mid = mid;
+                        sendForm.IsCanceledOrder = true;
+                        sendForm.ShowDialog();                    
+                    }
+
 
 
                 }

@@ -453,7 +453,7 @@ namespace GODInventoryWinForm.Controls
                 var order = dataGridView1.CurrentRow.DataBoundItem as v_pendingorder;
                 if (order.Status == OrderStatus.Shipped)
                 {
-                    this.contextMenuStrip1.Items["uploadASNToolStripMenuItem"].Enabled = true;
+                    //this.contextMenuStrip1.Items["uploadASNToolStripMenuItem"].Enabled = true;
                 }
                 else {
                     //this.contextMenuStrip1.Items["uploadASNToolStripMenuItem"].Enabled = false;
@@ -487,11 +487,15 @@ namespace GODInventoryWinForm.Controls
                 // copy for later send
                 File.Copy(path, newPath, true);
 
-                // 上传ASN
-                //sendForm.Mid = order.ASN管理連番;
-                //sendForm.IsCanceledOrder = false;
-                //sendForm.ShowDialog();
-                MessageBox.Show("ASNデータ作成");
+                if (MessageBox.Show("ASNデータを作成します。このまま送信しますか？", "送信確認", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    // 上传ASN
+                    sendForm.Mid = order.ASN管理連番;
+                    sendForm.IsCanceledOrder = false;
+                    sendForm.ShowDialog();
+                    //MessageBox.Show("ASNデータ作成");
+                }
+
             }
         }
 
