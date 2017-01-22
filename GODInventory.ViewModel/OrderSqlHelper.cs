@@ -475,7 +475,8 @@ namespace GODInventory.ViewModel
                 //order.備考 = "キャンセル";
                 var orderIds = orders.Select(o => o.id受注データ).ToList();
                 MySqlParameter[] parameters = { new MySqlParameter("@p1", "yes"), new MySqlParameter("@p2", DateTime.Now), new MySqlParameter("@p3", ((int)OrderStatus.Cancelled)) };
-                string sql = String.Format("UPDATE t_orderdata SET `備考`='キャンセル',`キャンセル`=@p1, `キャンセル時刻`=@p2 ,`Status`=@p3 WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()));
+                string sqlFormat = "UPDATE t_orderdata SET `実際出荷数量`=0, `最終出荷数`=0, `原価金額(税抜)`=0, `納品原価金額`=0, `原価金額(税込)`=0, `税額`=0, `備考`='キャンセル',`キャンセル`=@p1, `キャンセル時刻`=@p2 ,`Status`=@p3 WHERE `id受注データ` in ({0})";
+                string sql = String.Format(sqlFormat, String.Join(",", orderIds.ToArray()));
                 count = ctx.Database.ExecuteSqlCommand(sql, parameters);
 
             }
@@ -1012,7 +1013,60 @@ namespace GODInventory.ViewModel
             }
         }
 
+        public static int DeleteFaxOrder(int orderId)
+        {
+            int count = 0;
+            using (var ctx = new GODDbContext())
+            {
+                string sql = "DELETE  from t_orderdata WHERE `id受注データ`={0} AND `入力区分`=1;";
+                count = ctx.Database.ExecuteSqlCommand(sql, orderId); 
+
+            }
+            return count;
+        }
+
+        // 当订单的数量被修改后，需要相应修改的字段
+        public static void AfterOrderQtyChanged(t_orderdata order, t_itemlist item)
+        {
+            
+            //order.重量 = (int)(Convert.ToDecimal(product.単品重量) * order.実際出荷数量);
+           
+            //order.原価金額_税抜_ = order.実際出荷数量 * order.原単価_税抜_;
+            //order.原価金額_税込_ = (int)(order.実際出荷数量 * order.原単価_税込_);
+            //order.税額 = (int)(order.原価金額_税抜_ * order.税率);
+
+            order.最終出荷数 = order.実際出荷数量;
+            order.納品原価金額 = order.実際出荷数量 * order.原単価_税抜_;
 
 
+            order.原価金額_税込_ = (int)(order.実際出荷数量 * order.原単価_税込_);
+
+
+            order.税額 = (int)(order.原価金額_税抜_ * order.税率);
+            order.重量 = (int)(Convert.ToDecimal(item.単品重量) * order.実際出荷数量);
+
+        }
+
+        // 当订单的数量被修改后，需要相应修改的字段
+        public static void AfterOrderQtyChanged(v_pendingorder order, t_itemlist item)
+        {
+
+            //order.重量 = (int)(Convert.ToDecimal(product.単品重量) * order.実際出荷数量);
+
+            //order.原価金額_税抜_ = order.実際出荷数量 * order.原単価_税抜_;
+            //order.原価金額_税込_ = (int)(order.実際出荷数量 * order.原単価_税込_);
+            //order.税額 = (int)(order.原価金額_税抜_ * order.税率);
+
+            order.最終出荷数 = order.実際出荷数量;
+            order.納品原価金額 = order.実際出荷数量 * order.原単価_税抜_;
+
+
+            order.原価金額_税込_ = (int)(order.実際出荷数量 * order.原単価_税込_);
+
+
+            order.税額 = (int)(order.原価金額_税抜_ * order.税率);
+            order.重量 = (int)(Convert.ToDecimal(item.単品重量) * order.実際出荷数量);
+
+        }
     }
 }

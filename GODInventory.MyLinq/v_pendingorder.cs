@@ -165,6 +165,8 @@ namespace GODInventory.MyLinq
 
         public int 最終出荷数 { get; set; }
 
+        public short 入力区分 { get; set; }
+
         public string BarcodeImagePath { get; set; }
         public byte[] BarcodeImage { get; set; }
     }

@@ -105,11 +105,11 @@ namespace GODInventoryWinForm.Controls
                         {
                             // 修正相应 金額
                             order.実際出荷数量 = pendingorder.実際出荷数量;
-                            order.原価金額_税抜_ = pendingorder.原価金額_税抜_;
-                            order.原価金額_税込_ = pendingorder.原価金額_税込_;
-                            order.税額 = pendingorder.税額;
                             order.納品口数 = pendingorder.納品口数;
-                            order.重量 = pendingorder.重量;
+                            var product = productList.FirstOrDefault(i => i.商品コード == order.商品コード);
+
+                            OrderSqlHelper.AfterOrderQtyChanged(order, product);
+
                         }
                         order.訂正理由区分 = pendingorder.訂正理由区分;
 
@@ -1224,16 +1224,30 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             {
                 order.納品口数 = (int)(order.実際出荷数量 / order.最小発注単位数量);
             }
-            var product = productList.FirstOrDefault(i => i.商品コード == order.商品コード);
-            if (product != null)
-            {
-                order.重量 = (int)(Convert.ToDecimal(product.単品重量) * order.実際出荷数量);
-            }
 
-            order.原価金額_税抜_ = order.実際出荷数量 * order.原単価_税抜_;
-            order.原価金額_税込_ = (int)(order.実際出荷数量 * order.原単価_税込_);
-            order.税額 = (int)(order.原価金額_税抜_ * order.税率);
+            var product = productList.FirstOrDefault(i => i.商品コード == order.商品コード);
+            OrderSqlHelper.AfterOrderQtyChanged(order, product);
+
+            
             return true;
+        }
+
+        private void deleteFaxOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int count = 0;
+            var currentRow = this.dataGridView1.CurrentRow;
+            if( currentRow != null )
+            {
+                v_pendingorder order = currentRow.DataBoundItem as v_pendingorder;
+                if( order.入力区分 == 1 )
+                {
+                    count = OrderSqlHelper.DeleteFaxOrder( order.id受注データ);
+                }
+            }
+            if (count > 0)
+            {
+                pager1.Bind();
+            }
         }
 
 

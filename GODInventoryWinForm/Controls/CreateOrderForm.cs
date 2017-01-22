@@ -140,7 +140,8 @@ namespace GODInventoryWinForm.Controls
 
                             o.原価金額_税抜_ = o.実際出荷数量 * o.原単価_税抜_;
                             o.原価金額_税込_ = (int)(o.実際出荷数量 * o.原単価_税込_);
-
+                            
+                            o.納品原価金額 = o.原価金額_税抜_;
                             //o.売単価_税抜_ = (int)selectedItem.売単価;
                             o.売単価_税込_ = (int)(o.売単価_税抜_ * (1 + o.税率));
                             o.税額 = (int)(o.原価金額_税抜_ * o.税率);
@@ -864,6 +865,8 @@ namespace GODInventoryWinForm.Controls
 
                                 o.原価金額_税抜_ = o.実際出荷数量 * o.原単価_税抜_;
                                 o.原価金額_税込_ = (int)(o.実際出荷数量 * o.原単価_税込_);
+
+                                o.納品原価金額 = o.原価金額_税抜_;
 
                                 //o.売単価_税抜_ = (int)selectedItem.売単価;
                                 o.売単価_税込_ = (int)(o.売単価_税抜_ * (1 + o.税率));

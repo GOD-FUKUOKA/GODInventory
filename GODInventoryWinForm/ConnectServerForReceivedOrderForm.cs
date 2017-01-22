@@ -66,7 +66,7 @@ namespace GODInventoryWinForm
                             {
                                 // 对于受领没有差异的，设置订单完成
 
-                                string sql = String.Format("UPDATE t_orderdata SET `Status`= {1}  WHERE `Status`= {0} AND `受領数量`=`実際出荷数量` ", (int)OrderStatus.Received, (int)OrderStatus.Completed);
+                                string sql = String.Format("UPDATE t_orderdata SET  `受領チェック` = 1, `Status`= {1}  WHERE `Status`= {0} AND  `受領チェック` = 0 AND `受領確認` = 1 AND `受領差異金額` = 0 ", (int)OrderStatus.Received, (int)OrderStatus.Completed);
                                 ctx.Database.ExecuteSqlCommand(sql);
                                                                 
 

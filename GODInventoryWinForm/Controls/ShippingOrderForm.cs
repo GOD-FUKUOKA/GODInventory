@@ -472,8 +472,9 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     // copy for later send
                     File.Copy(path, newPath, true);
 
-                    sql = String.Format("UPDATE t_orderdata SET `Status`={1} WHERE `id受注データ` in( {0} )", string.Join(",", oids), (int)OrderStatus.Completed);
-                    ctx.Database.ExecuteSqlCommand(sql);
+                    //sql = String.Format("UPDATE t_orderdata SET `Status`={1} WHERE `id受注データ` in( {0} )", string.Join(",", oids), (int)OrderStatus.Completed);
+                    //ctx.Database.ExecuteSqlCommand(sql);
+                    OrderSqlHelper.UpdateOrderStatusShipped(shipNOs);
 
                     if (MessageBox.Show("ASNデータを作成します。このまま送信しますか？", "送信確認", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                     {

@@ -274,7 +274,7 @@ namespace GODInventory.ViewModel.EDI
 
             if (this.head.TotalQuantity > 0)
             {
-                this.原価金額_税抜_ = Encoding.ASCII.GetBytes(order.原価金額_税抜_.ToString("D9")); //45 原価金額(税抜 )  9 352
+                this.原価金額_税抜_ = Encoding.ASCII.GetBytes(order.納品原価金額.ToString("D9")); //45 原価金額(税抜 )  9 352
                 this.原価金額_税込_ = Encoding.ASCII.GetBytes(Convert.ToInt32(order.原価金額_税込_).ToString("D9")); //46 原価金額(税込 )  9 361
             }
             else {
@@ -282,7 +282,7 @@ namespace GODInventory.ViewModel.EDI
                 this.原価金額_税込_ = EDITxtHandler.GetZeroedBytes(9);
             }
             // in fact do not need abs here, just in case
-            this.税額 = Encoding.ASCII.GetBytes( Math.Abs(Convert.ToInt32(order.原価金額_税込_- order.原価金額_税抜_)).ToString("D9"));//47 税額             9 370
+            this.税額 = Encoding.ASCII.GetBytes(Math.Abs(Convert.ToInt32(order.納品原価金額 - order.原価金額_税抜_)).ToString("D9"));//47 税額             9 370
             Debug.Assert(this.税額.Count() == 9);
 
             this.税区分 = Encoding.ASCII.GetBytes( "1" );  //48 税区分            1 379

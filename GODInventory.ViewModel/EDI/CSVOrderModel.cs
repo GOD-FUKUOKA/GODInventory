@@ -499,6 +499,7 @@ namespace GODInventory.ViewModel.EDI
                 orderdata.実際配送担当 = "丸健";
             }
 
+            orderdata.納品原価金額 = orderdata.原価金額_税抜_;
             orderdata.発注品名漢字 = orderdata.品名漢字;
             orderdata.発注規格名漢字 = orderdata.規格名漢字;
             if (orders != null)

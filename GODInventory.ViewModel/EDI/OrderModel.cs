@@ -482,6 +482,7 @@ namespace GODInventory.ViewModel.EDI
             orderdata.最小発注単位数量 = item.PT入数;
             orderdata.重量 = (int)(item.単品重量 * orderdata.発注数量);
             orderdata.口数 = orderdata.発注数量 / orderdata.最小発注単位数量;
+            
             if (orderdata.発注数量 % orderdata.最小発注単位数量 != 0)
             {
                 orderdata.口数++;
@@ -492,6 +493,8 @@ namespace GODInventory.ViewModel.EDI
             {
                 orderdata.実際配送担当 = "丸健";
             }
+
+            orderdata.納品原価金額 = orderdata.原価金額_税抜_;
             orderdata.発注品名漢字 = orderdata.品名漢字;
             orderdata.発注規格名漢字 = orderdata.規格名漢字;
 

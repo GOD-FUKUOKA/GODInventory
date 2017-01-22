@@ -1,4 +1,5 @@
 ﻿using GODInventory.MyLinq;
+using GODInventory.ViewModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +21,9 @@ namespace GODInventoryWinForm.Controls
         private Hashtable dataGridChanges = null;
 
         private IBindingList orderList;
+
         private List<t_itemlist> itemList = null;
+        private List<t_stockrec> stockrecList = null;
 
         public ShipOrderListForm()
         {
@@ -50,7 +53,13 @@ namespace GODInventoryWinForm.Controls
                 this.bindingSource1.DataSource = this.orderList;
                 this.dataGridView1.AutoGenerateColumns = false;
                 this.dataGridView1.DataSource = this.bindingSource1;
-            
+
+                List<t_orderdata> orders = orderList.Cast<t_orderdata>().ToList();
+                var orderIds = orders.Select(o => o.id受注データ);
+
+                this.stockrecList = (from t_stockrec s in entityDataSource1.EntitySets["t_stockrec"] 
+                                    where orderIds.Contains(s.OrderId)
+                                    select s).ToList();
             }
         
         
@@ -116,14 +125,18 @@ namespace GODInventoryWinForm.Controls
 
             if (cell.OwningColumn == this.実際出荷数量Column1)
             {
-                order.納品口数 = Convert.ToInt32(new_cell_value) / order.最小発注単位数量;
-                order.重量 = (int) ( item.単品重量 * order.実際出荷数量 );
+                int qty = Convert.ToInt32(new_cell_value);
+                order.納品口数 =  qty/ order.最小発注単位数量;
+
+                OrderSqlHelper.AfterOrderQtyChanged(order, item);
+
             }
             else
                 if (cell.OwningColumn == this.納品口数Column1)
                 {
                     order.実際出荷数量 = Convert.ToInt32(new_cell_value) * order.最小発注単位数量;
-                    order.重量 = (int)(item.単品重量 * order.実際出荷数量);
+
+                    OrderSqlHelper.AfterOrderQtyChanged(order, item);
 
                 }
 
@@ -154,7 +167,22 @@ namespace GODInventoryWinForm.Controls
         private void saveButton_Click(object sender, EventArgs e)
         {
             // 可能有订单被退回了。status = WaitToShip
+            bool isQtyChanged = false;
+            List<t_orderdata> orders =  orderList.Cast<t_orderdata>().ToList();
+            foreach( t_orderdata order in  orders){
+                var stockrec = stockrecList.Find(s => s.OrderId == order.id受注データ);
+
+                if (Math.Abs(stockrec.数量) != order.実際出荷数量) {
+                    stockrec.数量 = -order.実際出荷数量;
+                    isQtyChanged = true;
+                }
+            }
             entityDataSource1.SaveChanges();
+            if (isQtyChanged)
+            {
+                OrderSqlHelper.UpdateStockState(entityDataSource1.DbContext as GODDbContext, stockrecList);
+            }
+
             if (dataGridChanges.Count > 0)
             {
                 dataGridChanges.Clear();
@@ -201,6 +229,7 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
+        
         #region 修改键生成
         private string GetCellKey(int rowIndex, int columnIndex, bool forChanged)
         {

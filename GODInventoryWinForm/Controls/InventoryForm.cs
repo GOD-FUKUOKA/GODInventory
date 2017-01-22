@@ -221,7 +221,7 @@ namespace GODInventoryWinForm.Controls
             {
 
                 this.stockcheckList[i].qingDianShu = null;
-                this.stockcheckList[i].chaZhi = null;
+                this.stockcheckList[i].chaZhi = 0;
             }
             dataGridView1.Refresh();
         }

@@ -262,10 +262,18 @@ WHERE id受注データ= @P0;";
 
         public string ToRawSql() {
 
+            //UPDATE t_orderdata
+            //INNER JOIN t_rcvdata ON t_rcvdata.`店舗コード` = t_orderdata.`店舗コード`
+            //AND t_rcvdata.`伝票番号` = t_orderdata.`伝票番号`
+            //SET `受領確認` = TRUE, 受領数量 = t_rcvdata.`数量`, 受領金額 = t_rcvdata.`原価金額(税抜)`,
+            //受領差異数量 = t_rcvdata.`数量` - t_orderdata.`実際出荷数量`,
+            //受領差異金額 = t_rcvdata.`原価金額(税抜)` - t_orderdata.`納品原価金額`,
+            //Status = 8
+            //WHERE Status = 7
             var o = this.entity;
-            string format = @"UPDATE  `t_orderdata` SET `受領`= 1, `受領数量`= {2}, `Status`={3} WHERE `Status`!={4} and `伝票番号`= {0} and `店舗コード`={1};";
+            string format = @"UPDATE  `t_orderdata` SET `受領確認`= 1, `受領数量`= {2}, `受領金額`={5},`受領差異数量`={6},`受領差異金額`={7}, `Status`={3} WHERE `Status`!={4} and `伝票番号`= {0} and `店舗コード`={1};";
 
-            return String.Format(format, this.InvoiceCode, this.StoreCode, this.ReceivedQuantity, (int)OrderStatus.Received, (int)OrderStatus.Completed);
+            return String.Format(format, this.InvoiceCode, this.StoreCode, this.ReceivedQuantity, (int)OrderStatus.Shipped, (int)OrderStatus.Received, this.ReceivedAmount, this.ReceivedQuantity - o.実際出荷数量, this.ReceivedAmount - o.納品原価金額);
         
         }
 
@@ -292,6 +300,9 @@ WHERE id受注データ= @P0;";
             get { return Convert.ToInt32(Encoding.ASCII.GetString(this.数量))/10; }
         }
 
+        public float ReceivedAmount {
+            get { return Convert.ToInt32(Encoding.ASCII.GetString(this.原価金額_税抜_)); }
+        }
 
         private v_receivedorder FindMatchedOrder(GODDbContext ctx)
         {
