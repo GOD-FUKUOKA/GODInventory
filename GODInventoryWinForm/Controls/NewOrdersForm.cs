@@ -25,6 +25,8 @@ namespace GODInventoryWinForm.Controls
         private Hashtable datagrid_changes = null;
         List<v_duplicatedorder> duplicatedOrderList;
         SortableBindingList<v_duplicatedorder> duplicatedOrderBindingList;
+        private List<t_itemlist> productList;
+
         public NewOrdersForm()
         {
             InitializeComponent();
@@ -53,10 +55,15 @@ namespace GODInventoryWinForm.Controls
 
                                 if (duplicated_order.キャンセル == "yes")
                                 {
+                                    order.実際出荷数量 = 0;
+                                    order.納品口数 = 0;
                                     order.キャンセル = "yes";
                                     order.キャンセル時刻 = DateTime.Now;
                                     order.Status = OrderStatus.Cancelled;
                                     order.備考 = "キャンセル";
+                                    var product = productList.FirstOrDefault(o => o.商品コード == order.商品コード);
+                                    OrderSqlHelper.AfterOrderQtyChanged(order, product);
+
                                 }
                                 else if (duplicated_order.ダブリ == "no")
                                 {
@@ -65,6 +72,8 @@ namespace GODInventoryWinForm.Controls
                                         order.納品口数 = duplicated_order.納品口数;
                                         order.ダブリ = "no";
                                         order.Status = OrderStatus.Pending;
+                                        var product = productList.FirstOrDefault(o => o.商品コード == order.商品コード);
+                                        OrderSqlHelper.AfterOrderQtyChanged(order, product);
                                     }
                                 }
 
@@ -117,6 +126,7 @@ namespace GODInventoryWinForm.Controls
 
             using (var ctx = new GODDbContext())
             {
+                this.productList = ctx.t_itemlist.Select(s => s).ToList();
 
                 duplicatedOrderList = ctx.Database.SqlQuery<v_duplicatedorder>(sql).ToList();
             }

@@ -22,6 +22,7 @@ namespace GODInventoryWinForm.Controls
 
         private IBindingList orderList;
 
+        private List<t_orderdata> originalOrderList = null;
         private List<t_itemlist> itemList = null;
         private List<t_stockrec> stockrecList = null;
 
@@ -34,13 +35,15 @@ namespace GODInventoryWinForm.Controls
 
             // 记录DataGridView改变数据
             this.dataGridChanges = new Hashtable();
-            itemList = (from t_itemlist i in entityDataSource1.EntitySets["t_itemlist"]
+            this.itemList = (from t_itemlist i in entityDataSource1.EntitySets["t_itemlist"]
                             select i).ToList();
+            this.originalOrderList = new List<t_orderdata>();
         }
 
 
         public void InitializeDataSource( string shipNO) {
             dataGridChanges.Clear();
+            originalOrderList.Clear();
             this.bindingSource1.DataSource = null;
             ShipNO = shipNO;
             if (ShipNO != null) {
@@ -55,6 +58,12 @@ namespace GODInventoryWinForm.Controls
                 this.dataGridView1.DataSource = this.bindingSource1;
 
                 List<t_orderdata> orders = orderList.Cast<t_orderdata>().ToList();
+
+                foreach (var order in orders)
+                {
+                    originalOrderList.Add(new t_orderdata { id受注データ = order.id受注データ, 実際出荷数量 = order.実際出荷数量 });                
+                }
+
                 var orderIds = orders.Select(o => o.id受注データ);
 
                 this.stockrecList = (from t_stockrec s in entityDataSource1.EntitySets["t_stockrec"] 
@@ -168,27 +177,44 @@ namespace GODInventoryWinForm.Controls
         {
             // 可能有订单被退回了。status = WaitToShip
             bool isQtyChanged = false;
+            bool isValid = true;
+            string errorMessage = "";
             List<t_orderdata> orders =  orderList.Cast<t_orderdata>().ToList();
-            foreach( t_orderdata order in  orders){
+            foreach( t_orderdata order in  orders)
+            {
                 var stockrec = stockrecList.Find(s => s.OrderId == order.id受注データ);
 
                 if (Math.Abs(stockrec.数量) != order.実際出荷数量) {
-                    stockrec.数量 = -order.実際出荷数量;
+                    if (order.訂正理由区分 == 0)
+                    {
+                        isValid = false;
+                        errorMessage = "数量変更の理由をつけてください！";
+                        break;
+                    }
                     isQtyChanged = true;
+                    stockrec.数量 = -order.実際出荷数量;
+
                 }
             }
-            entityDataSource1.SaveChanges();
-            if (isQtyChanged)
+            if (isValid)
             {
-                OrderSqlHelper.UpdateStockState(entityDataSource1.DbContext as GODDbContext, stockrecList);
-            }
+                entityDataSource1.SaveChanges();
+                if (isQtyChanged)
+                {
+                    OrderSqlHelper.UpdateStockState(entityDataSource1.DbContext as GODDbContext, stockrecList);
+                }
 
-            if (dataGridChanges.Count > 0)
-            {
-                dataGridChanges.Clear();
+                if (dataGridChanges.Count > 0)
+                {
+                    dataGridChanges.Clear();
+                }
+
+                InitializeDataSource(ShipNO);
             }
-            
-            InitializeDataSource(ShipNO);
+            else {
+                MessageBox.Show(errorMessage);
+
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

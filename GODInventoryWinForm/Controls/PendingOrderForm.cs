@@ -87,8 +87,15 @@ namespace GODInventoryWinForm.Controls
 
         }
 
+        // 保存對訂單的修改。
         private void saveButton_Click(object sender, EventArgs e)
         {
+            // 可以编辑数量的主要是2个界面，伝票訂正界面、出荷内容確認的右键编辑界面
+            // 在点击保存按钮的时候，对需要保存的订单做一个检查，
+            // 比较一下修改后的数量与　発注数量 字段的值，如果不一致，判断一下 訂正理由区分是否有修改（是否<>0），
+            // 如果=0，则提示要求给出订正理由，并等待修改；如果<>0，再执行保存操作
+            bool isValid = true;
+            string errorMessage = "";
             using (var ctx = new GODDbContext())
             {
                 IEnumerable<int> orderIds = GetChangedOrderIds();
@@ -100,9 +107,18 @@ namespace GODInventoryWinForm.Controls
                     {
                         var pendingorder = orders.Find(o => o.id受注データ == id);
                         t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
+
+                         
                         //需要修改的字段为: “口数” “发注数量” “担当” “形态”
                         if (order.実際出荷数量 != pendingorder.実際出荷数量)
                         {
+                            if (pendingorder.訂正理由区分 == 0)
+                            {
+                                isValid = false;
+                                errorMessage = "数量変更の理由をつけてください！";
+                                break;
+                            }
+
                             // 修正相应 金額
                             order.実際出荷数量 = pendingorder.実際出荷数量;
                             order.納品口数 = pendingorder.納品口数;
@@ -119,8 +135,14 @@ namespace GODInventoryWinForm.Controls
                         order.納品指示 = pendingorder.納品指示;
 
                     }
-                    ctx.SaveChanges();
-                    pager1.Bind();
+                    if (isValid)
+                    {
+                        ctx.SaveChanges();
+                        pager1.Bind();
+                    }
+                    else {
+                        MessageBox.Show(errorMessage);
+                    }
                 }
             }
 
