@@ -949,36 +949,37 @@ namespace GODInventory.ViewModel
             }
         }
 
-        public static void CancelOrder(List<v_pendingorder> pendingOrders)
-        {
-            using (var ctx = new GODDbContext())
-            {
-                var orderIds = pendingOrders.Select(o => o.id受注データ);
+        // 取消订单
+        //public static void CancelOrder(List<v_pendingorder> pendingOrders)
+        //{
+        //    using (var ctx = new GODDbContext())
+        //    {
+        //        var orderIds = pendingOrders.Select(o => o.id受注データ);
 
-                var orderList = (from t_orderdata o in ctx.t_orderdata
-                                 where orderIds.Contains(o.id受注データ)
-                                 select o).ToList();
-                var stockrecList = (from t_stockrec s in ctx.t_stockrec
-                                    where orderIds.Contains(s.OrderId)
-                                    select s).ToList();
-                var marukenTransList = (from t_maruken_trans s in ctx.t_maruken_trans
-                                        where orderIds.Contains(s.OrderId)
-                                        select s).ToList();
+        //        var orderList = (from t_orderdata o in ctx.t_orderdata
+        //                         where orderIds.Contains(o.id受注データ)
+        //                         select o).ToList();
+        //        var stockrecList = (from t_stockrec s in ctx.t_stockrec
+        //                            where orderIds.Contains(s.OrderId)
+        //                            select s).ToList();
+        //        var marukenTransList = (from t_maruken_trans s in ctx.t_maruken_trans
+        //                                where orderIds.Contains(s.OrderId)
+        //                                select s).ToList();
 
-                foreach (var order in orderList)
-                {
-                    //二次制品订单？
-                    order.キャンセル = "yes";
-                    order.キャンセル時刻 = DateTime.Now;
-                    order.Status = OrderStatus.Cancelled;
-                }
+        //        foreach (var order in orderList)
+        //        {
+        //            //二次制品订单？
+        //            order.キャンセル = "yes";
+        //            order.キャンセル時刻 = DateTime.Now;
+        //            order.Status = OrderStatus.Cancelled;
+        //        }
 
-                ctx.t_stockrec.RemoveRange(stockrecList);
-                ctx.t_maruken_trans.RemoveRange(marukenTransList);
-                ctx.SaveChanges();
-                OrderSqlHelper.UpdateStockState(ctx, stockrecList);
-            }
-        }
+        //        ctx.t_stockrec.RemoveRange(stockrecList);
+        //        ctx.t_maruken_trans.RemoveRange(marukenTransList);
+        //        ctx.SaveChanges();
+        //        OrderSqlHelper.UpdateStockState(ctx, stockrecList);
+        //    }
+        //}
 
         public static void RollbackOrder(List<v_pendingorder> pendingOrders) 
         {
@@ -1068,5 +1069,7 @@ namespace GODInventory.ViewModel
             order.重量 = (int)(Convert.ToDecimal(item.単品重量) * order.実際出荷数量);
 
         }
+
+    
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GODInventory.MyLinq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,10 +15,15 @@ namespace GODInventoryWinForm.Controls
     {
         public DateTime CHUHERI;
         public DateTime NAPINRI;
+        public int QtyChangeReason;
 
         public CancelConfirmForm()
         {
             InitializeComponent();
+
+            this.qtyChangeReasonComboBox.ValueMember = "ID";
+            this.qtyChangeReasonComboBox.DisplayMember = "FullName";
+            this.qtyChangeReasonComboBox.DataSource = OrderQuantityChangeReasonRespository.ToList();
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -34,6 +40,8 @@ namespace GODInventoryWinForm.Controls
 
             NAPINRI = this.dateTimePicker1.Value.Date;
 
+            QtyChangeReason = (int)qtyChangeReasonComboBox.SelectedValue;
+            
             this.Close();
 
           

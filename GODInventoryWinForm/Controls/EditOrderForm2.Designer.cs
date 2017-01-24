@@ -36,6 +36,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.finalOrderQtyTextBox2 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.fullfilledAtDateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
@@ -63,8 +65,6 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.label15 = new System.Windows.Forms.Label();
-            this.finalOrderQtyTextBox2 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -164,6 +164,22 @@
             this.groupBox1.Size = new System.Drawing.Size(647, 291);
             this.groupBox1.TabIndex = 10000006;
             this.groupBox1.TabStop = false;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(355, 205);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(77, 14);
+            this.label15.TabIndex = 10000022;
+            this.label15.Text = "最終出荷数";
+            // 
+            // finalOrderQtyTextBox2
+            // 
+            this.finalOrderQtyTextBox2.Location = new System.Drawing.Point(438, 202);
+            this.finalOrderQtyTextBox2.Name = "finalOrderQtyTextBox2";
+            this.finalOrderQtyTextBox2.Size = new System.Drawing.Size(190, 21);
+            this.finalOrderQtyTextBox2.TabIndex = 10000021;
             // 
             // label14
             // 
@@ -396,22 +412,6 @@
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(313, 205);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(119, 14);
-            this.label15.TabIndex = 10000022;
-            this.label15.Text = "最終出荷数";
-            // 
-            // finalOrderQtyTextBox2
-            // 
-            this.finalOrderQtyTextBox2.Location = new System.Drawing.Point(438, 202);
-            this.finalOrderQtyTextBox2.Name = "finalOrderQtyTextBox2";
-            this.finalOrderQtyTextBox2.Size = new System.Drawing.Size(190, 21);
-            this.finalOrderQtyTextBox2.TabIndex = 10000021;
             // 
             // EditOrderForm2
             // 

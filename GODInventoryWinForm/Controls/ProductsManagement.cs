@@ -31,7 +31,12 @@ namespace GODInventoryWinForm.Controls
                 if (type == "Update")
                 {
                     t_itemlist order = ctx.t_itemlist.Find(itemlist[0]);
-                    
+
+                    this.innerCodeTextBox.Text = order.自社コード.ToString();
+
+                    //this.genreComboBox.SelectedValue = order.ジャンル;
+                    this.genreComboBox.SelectedItem = genreList.Find(o => o.idジャンル == order.ジャンル);
+
                     if (order.得意先 != null)
                     customerTextBox.Text = order.得意先;
                    
@@ -41,19 +46,35 @@ namespace GODInventoryWinForm.Controls
                     specTextBox.Text = order.規格;
 
                     if (order.インストアコード != null)
-                    instoreCodeTextBox3.Text = order.インストアコード.ToString();
-                    
+                    {
+                        instoreCodeTextBox3.Text = order.インストアコード.ToString();
+                    }
+
                     if (order.単位 != null)
-                    unitTextBox1.Text = order.単位;
+                    {
+                        unitTextBox1.Text = order.単位;
+                    }
+
                     if (order.PT単位か != null)
-                    textBox2.Text = order.PT単位か.ToString();
+                    {
+                        textBox2.Text = order.PT単位か.ToString();
+                    }
+
                     if (order.商品コード != null)
-                    this.productCodeTextBox.Text = order.商品コード.ToString();
+                    {
+                        this.productCodeTextBox.Text = order.商品コード.ToString();
+                    }
+
+                    this.janCodeTextBox.Text = order.JANコード.ToString();
+
+                    this.unitWeightTextBox11.Text = order.単品重量.ToString();
+
+                    this.moqTextBox8.Text = order.PT入数.ToString();
 
                 }
                 else
                 {
-                    this.InnerCodeTextBox.Enabled = true;
+                    this.innerCodeTextBox.Enabled = true;
                 }
             }
             showtype = type;
@@ -67,7 +88,7 @@ namespace GODInventoryWinForm.Controls
             {
                 if (showtype == "Update")
                 {
-                    t_itemlist order = ctx.t_itemlist.Find(Convert.ToInt32(InnerCodeTextBox.Text));
+                    t_itemlist order = ctx.t_itemlist.Find(Convert.ToInt32(innerCodeTextBox.Text));
 
                     order.得意先 = customerTextBox.Text;
                     order.ジャンル = Convert.ToInt16(genreComboBox.SelectedValue);
@@ -100,7 +121,7 @@ namespace GODInventoryWinForm.Controls
                 {
 
                     t_itemlist order = new t_itemlist();
-                    order.自社コード = Convert.ToInt32(InnerCodeTextBox.Text);
+                    order.自社コード = Convert.ToInt32(innerCodeTextBox.Text);
 
                     order.得意先 = customerTextBox.Text;
                     
@@ -138,10 +159,10 @@ namespace GODInventoryWinForm.Controls
 
         private void storeNamTextBox_MouseLeave(object sender, EventArgs e)
         {
-            if (InnerCodeTextBox.Text == "")
+            if (innerCodeTextBox.Text == "")
                 return;
 
-            int zisheID = Convert.ToInt32(InnerCodeTextBox.Text);
+            int zisheID = Convert.ToInt32(innerCodeTextBox.Text);
 
             using (var ctx = new GODDbContext())
             {
@@ -151,7 +172,7 @@ namespace GODInventoryWinForm.Controls
 
                 if (List.Count > 0)
                 {
-                    errorProvider1.SetError(InnerCodeTextBox, String.Format("自社コードがすでに存在しています"));
+                    errorProvider1.SetError(innerCodeTextBox, String.Format("自社コードがすでに存在しています"));
                     return;
                 }
             }

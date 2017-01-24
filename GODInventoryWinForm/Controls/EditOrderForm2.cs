@@ -15,10 +15,10 @@ namespace GODInventoryWinForm.Controls
     public partial class EditOrderForm2 : Form
     {
         private int orderId;
-        private int originalOrderQty;
         private t_itemlist Product { get; set; }
         private t_stockrec Stockrec { get; set; }
 
+        private t_orderdata OriginalOrder { get; set; }
         public t_orderdata Order { get; set; }
         public int OrderId
         {
@@ -49,12 +49,13 @@ namespace GODInventoryWinForm.Controls
                        where p.自社コード == Order.自社コード
                        select p).First();
             if (Order != null) {
+
+                this.OriginalOrder = new t_orderdata { キャンセル = Order.キャンセル, Status = Order.Status, 実際出荷数量 = Order.実際出荷数量 };
                 InitializeControls();            
             }
         }
 
         private void InitializeControls() {
-            originalOrderQty = Order.実際出荷数量;
 
             this.storeNamTextBox.Text = Order.店舗名漢字;
             this.storeCodeTextBox.Text = Order.店舗コード.ToString();
@@ -70,7 +71,7 @@ namespace GODInventoryWinForm.Controls
             
             this.placedAtDateTimePicker1.Value = Order.発注日;
 
-            if (Order.納品日 != null)
+            if (Order.納品日 != null && Order.納品日> DateTime.MinValue)
             {
                 this.fullfilledAtDateTimePicker2.Value = Order.納品日.GetValueOrDefault();
             }
@@ -91,7 +92,7 @@ namespace GODInventoryWinForm.Controls
 
             this.qtyChangeReasonComboBox.SelectedValue = Order.訂正理由区分;
 
-            if (Order.Status == OrderStatus.Cancelled || Order.Status == OrderStatus.WaitToShip)
+            if (Order.Status == OrderStatus.Cancelled || Order.Status == OrderStatus.Pending || Order.Status == OrderStatus.WaitToShip)
             {
                 this.cancelComboBox.Enabled = true;
             }
@@ -121,6 +122,7 @@ namespace GODInventoryWinForm.Controls
                 {
                     Order.実際出荷数量 = 0;
                     Order.Status = OrderStatus.Cancelled;
+                    OrderSqlHelper.AfterOrderQtyChanged(Order, Product);
                 }
                 Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
                 entityDataSource1.SaveChanges();
@@ -133,7 +135,9 @@ namespace GODInventoryWinForm.Controls
                     Order.Status = OrderStatus.Pending;
                     Order.キャンセル時刻 = null;
                     Order.実際出荷数量 = Order.発注数量;
+                    Order.納品口数 = Order.口数;
                     Order.一旦保留 = true;
+                    OrderSqlHelper.AfterOrderQtyChanged(Order, Product);
                     entityDataSource1.SaveChanges();
                 }
             }
@@ -142,7 +146,10 @@ namespace GODInventoryWinForm.Controls
                 if (Order.キャンセル == "yes")
                 {
                     Order.実際出荷数量 = 0;
+                    Order.納品口数 = 0;
                     Order.Status = OrderStatus.Cancelled;
+                    OrderSqlHelper.AfterOrderQtyChanged(Order, Product);
+
                 }
 
                 if (Order.納品日 != null)
@@ -158,12 +165,17 @@ namespace GODInventoryWinForm.Controls
 
                 Order.最終出荷数 = Convert.ToInt32(this.finalOrderQtyTextBox2.Text);
 
-                bool isQtyChanged = false;
+                bool isQtyChanged = (Order.実際出荷数量 != OriginalOrder.実際出荷数量);
                 // 历史原因，有些订单没有出货记录
-                if (Stockrec != null)
+                if ( isQtyChanged )
                 {
-                    isQtyChanged = (Stockrec.数量 != -Order.実際出荷数量);
-                    Stockrec.数量 = -Order.実際出荷数量;
+                    OrderSqlHelper.AfterOrderQtyChanged(Order, Product);
+
+                    if (Stockrec != null)
+                    {
+                        isQtyChanged = (Stockrec.数量 != -Order.実際出荷数量);
+                        Stockrec.数量 = -Order.実際出荷数量;
+                    }
                 }
                 entityDataSource1.SaveChanges();
 

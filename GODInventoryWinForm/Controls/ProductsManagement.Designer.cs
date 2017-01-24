@@ -32,7 +32,7 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.InnerCodeTextBox = new System.Windows.Forms.TextBox();
+            this.innerCodeTextBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.specTextBox = new System.Windows.Forms.TextBox();
@@ -93,14 +93,14 @@
             this.label7.TabIndex = 19;
             this.label7.Text = "インストアコード";
             // 
-            // InnerCodeTextBox
+            // innerCodeTextBox
             // 
-            this.InnerCodeTextBox.Enabled = false;
-            this.InnerCodeTextBox.Location = new System.Drawing.Point(456, 58);
-            this.InnerCodeTextBox.Name = "InnerCodeTextBox";
-            this.InnerCodeTextBox.Size = new System.Drawing.Size(222, 21);
-            this.InnerCodeTextBox.TabIndex = 2;
-            this.InnerCodeTextBox.MouseLeave += new System.EventHandler(this.storeNamTextBox_MouseLeave);
+            this.innerCodeTextBox.Enabled = false;
+            this.innerCodeTextBox.Location = new System.Drawing.Point(456, 58);
+            this.innerCodeTextBox.Name = "innerCodeTextBox";
+            this.innerCodeTextBox.Size = new System.Drawing.Size(222, 21);
+            this.innerCodeTextBox.TabIndex = 2;
+            this.innerCodeTextBox.MouseLeave += new System.EventHandler(this.storeNamTextBox_MouseLeave);
             // 
             // label11
             // 
@@ -162,7 +162,7 @@
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.InnerCodeTextBox);
+            this.groupBox1.Controls.Add(this.innerCodeTextBox);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.specTextBox);
@@ -344,7 +344,7 @@
         private System.Windows.Forms.Button submitFormButton;
         private System.Windows.Forms.Button cancelFormButton;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox InnerCodeTextBox;
+        private System.Windows.Forms.TextBox innerCodeTextBox;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox specTextBox;

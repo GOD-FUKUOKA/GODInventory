@@ -67,24 +67,9 @@
             this.canceledTabPage = new System.Windows.Forms.TabPage();
             this.uploadAsnButton = new System.Windows.Forms.Button();
             this.canceledDataGridView = new System.Windows.Forms.DataGridView();
-            this.キャンセルColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.キャンセル時刻Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.発注日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.受注日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.出荷日Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.納品日Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.店舗名漢字Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.県別Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.伝票番号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.品名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.発注数量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.実際配送担当Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.備考Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.canceledContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cancelConfirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shippedTabPage = new System.Windows.Forms.TabPage();
-            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             this.shippedDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -122,8 +107,24 @@
             this.bindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.canceledBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.bindingSource5 = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.pager3 = new GODInventoryWinForm.Controls.Pager();
+            this.キャンセルColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.キャンセル時刻Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.受注日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.出荷日Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品日Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店舗名漢字Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.県別Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.伝票番号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.品名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格名漢字Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注数量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.実際配送担当Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.訂正理由区分Column1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.備考Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.pendingTabPage.SuspendLayout();
@@ -303,7 +304,7 @@
             this.editToolStripMenuItem,
             this.printForShipperToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(197, 92);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // lockToolStripMenuItem
@@ -507,6 +508,7 @@
             this.規格名漢字Column1,
             this.発注数量Column1,
             this.実際配送担当Column2,
+            this.訂正理由区分Column1,
             this.備考Column1});
             this.canceledDataGridView.ContextMenuStrip = this.canceledContextMenuStrip;
             this.canceledDataGridView.Location = new System.Drawing.Point(3, 61);
@@ -516,95 +518,6 @@
             this.canceledDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.canceledDataGridView.Size = new System.Drawing.Size(903, 279);
             this.canceledDataGridView.TabIndex = 0;
-            // 
-            // キャンセルColumn1
-            // 
-            this.キャンセルColumn1.DataPropertyName = "キャンセル";
-            this.キャンセルColumn1.HeaderText = "キャンセル";
-            this.キャンセルColumn1.Name = "キャンセルColumn1";
-            // 
-            // キャンセル時刻Column1
-            // 
-            this.キャンセル時刻Column1.DataPropertyName = "キャンセル時刻";
-            this.キャンセル時刻Column1.HeaderText = "キャンセル時刻";
-            this.キャンセル時刻Column1.Name = "キャンセル時刻Column1";
-            this.キャンセル時刻Column1.Width = 120;
-            // 
-            // 発注日Column1
-            // 
-            this.発注日Column1.DataPropertyName = "発注日";
-            this.発注日Column1.HeaderText = "発注日";
-            this.発注日Column1.Name = "発注日Column1";
-            // 
-            // 受注日Column1
-            // 
-            this.受注日Column1.DataPropertyName = "受注日";
-            this.受注日Column1.HeaderText = "受注日";
-            this.受注日Column1.Name = "受注日Column1";
-            // 
-            // 出荷日Column2
-            // 
-            this.出荷日Column2.DataPropertyName = "出荷日";
-            this.出荷日Column2.HeaderText = "出荷日";
-            this.出荷日Column2.Name = "出荷日Column2";
-            // 
-            // 納品日Column2
-            // 
-            this.納品日Column2.DataPropertyName = "納品日";
-            this.納品日Column2.HeaderText = "納品日";
-            this.納品日Column2.Name = "納品日Column2";
-            // 
-            // 店舗名漢字Column2
-            // 
-            this.店舗名漢字Column2.DataPropertyName = "店舗名漢字";
-            this.店舗名漢字Column2.HeaderText = "店名";
-            this.店舗名漢字Column2.Name = "店舗名漢字Column2";
-            // 
-            // 県別Column2
-            // 
-            this.県別Column2.DataPropertyName = "県別";
-            this.県別Column2.HeaderText = "県別";
-            this.県別Column2.Name = "県別Column2";
-            // 
-            // 伝票番号Column1
-            // 
-            this.伝票番号Column1.DataPropertyName = "伝票番号";
-            this.伝票番号Column1.HeaderText = "伝票番号";
-            this.伝票番号Column1.Name = "伝票番号Column1";
-            // 
-            // 品名漢字Column1
-            // 
-            this.品名漢字Column1.DataPropertyName = "品名漢字";
-            this.品名漢字Column1.HeaderText = "品名";
-            this.品名漢字Column1.Name = "品名漢字Column1";
-            this.品名漢字Column1.Width = 200;
-            // 
-            // 規格名漢字Column1
-            // 
-            this.規格名漢字Column1.DataPropertyName = "規格名漢字";
-            this.規格名漢字Column1.HeaderText = "規格名";
-            this.規格名漢字Column1.Name = "規格名漢字Column1";
-            this.規格名漢字Column1.Width = 200;
-            // 
-            // 発注数量Column1
-            // 
-            this.発注数量Column1.DataPropertyName = "発注数量";
-            this.発注数量Column1.HeaderText = "発注数量";
-            this.発注数量Column1.Name = "発注数量Column1";
-            // 
-            // 実際配送担当Column2
-            // 
-            this.実際配送担当Column2.DataPropertyName = "実際配送担当";
-            this.実際配送担当Column2.HeaderText = "実際配送担当";
-            this.実際配送担当Column2.Name = "実際配送担当Column2";
-            this.実際配送担当Column2.Width = 120;
-            // 
-            // 備考Column1
-            // 
-            this.備考Column1.DataPropertyName = "備考";
-            this.備考Column1.HeaderText = "備考";
-            this.備考Column1.Name = "備考Column1";
-            this.備考Column1.Width = 180;
             // 
             // canceledContextMenuStrip
             // 
@@ -630,21 +543,6 @@
             this.shippedTabPage.TabIndex = 3;
             this.shippedTabPage.Text = "出荷済み伝票";
             this.shippedTabPage.UseVisualStyleBackColor = true;
-            // 
-            // pager3
-            // 
-            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager3.AutoSize = true;
-            this.pager3.Location = new System.Drawing.Point(3, 307);
-            this.pager3.Name = "pager3";
-            this.pager3.NMax = 0;
-            this.pager3.PageCount = 0;
-            this.pager3.PageCurrent = 1;
-            this.pager3.PageSize = 5000;
-            this.pager3.Size = new System.Drawing.Size(903, 34);
-            this.pager3.TabIndex = 2;
-            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
             // 
             // shippedDataGridView
             // 
@@ -755,8 +653,8 @@
             // 
             // dataGridViewTextBoxColumn10
             // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "受領";
-            this.dataGridViewTextBoxColumn10.HeaderText = "受領";
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "受領確認";
+            this.dataGridViewTextBoxColumn10.HeaderText = "受領確認";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
             // 
@@ -903,8 +801,8 @@
             // 
             // 受領Column1
             // 
-            this.受領Column1.DataPropertyName = "受領";
-            this.受領Column1.HeaderText = "受領";
+            this.受領Column1.DataPropertyName = "受領確認";
+            this.受領Column1.HeaderText = "受領確認";
             this.受領Column1.Name = "受領Column1";
             this.受領Column1.ReadOnly = true;
             // 
@@ -939,6 +837,119 @@
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // pager3
+            // 
+            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager3.AutoSize = true;
+            this.pager3.Location = new System.Drawing.Point(3, 307);
+            this.pager3.Name = "pager3";
+            this.pager3.NMax = 0;
+            this.pager3.PageCount = 0;
+            this.pager3.PageCurrent = 1;
+            this.pager3.PageSize = 5000;
+            this.pager3.Size = new System.Drawing.Size(903, 34);
+            this.pager3.TabIndex = 2;
+            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
+            // 
+            // キャンセルColumn1
+            // 
+            this.キャンセルColumn1.DataPropertyName = "キャンセル";
+            this.キャンセルColumn1.HeaderText = "キャンセル";
+            this.キャンセルColumn1.Name = "キャンセルColumn1";
+            // 
+            // キャンセル時刻Column1
+            // 
+            this.キャンセル時刻Column1.DataPropertyName = "キャンセル時刻";
+            this.キャンセル時刻Column1.HeaderText = "キャンセル時刻";
+            this.キャンセル時刻Column1.Name = "キャンセル時刻Column1";
+            this.キャンセル時刻Column1.Width = 120;
+            // 
+            // 発注日Column1
+            // 
+            this.発注日Column1.DataPropertyName = "発注日";
+            this.発注日Column1.HeaderText = "発注日";
+            this.発注日Column1.Name = "発注日Column1";
+            // 
+            // 受注日Column1
+            // 
+            this.受注日Column1.DataPropertyName = "受注日";
+            this.受注日Column1.HeaderText = "受注日";
+            this.受注日Column1.Name = "受注日Column1";
+            // 
+            // 出荷日Column2
+            // 
+            this.出荷日Column2.DataPropertyName = "出荷日";
+            this.出荷日Column2.HeaderText = "出荷日";
+            this.出荷日Column2.Name = "出荷日Column2";
+            // 
+            // 納品日Column2
+            // 
+            this.納品日Column2.DataPropertyName = "納品日";
+            this.納品日Column2.HeaderText = "納品日";
+            this.納品日Column2.Name = "納品日Column2";
+            // 
+            // 店舗名漢字Column2
+            // 
+            this.店舗名漢字Column2.DataPropertyName = "店舗名漢字";
+            this.店舗名漢字Column2.HeaderText = "店名";
+            this.店舗名漢字Column2.Name = "店舗名漢字Column2";
+            // 
+            // 県別Column2
+            // 
+            this.県別Column2.DataPropertyName = "県別";
+            this.県別Column2.HeaderText = "県別";
+            this.県別Column2.Name = "県別Column2";
+            // 
+            // 伝票番号Column1
+            // 
+            this.伝票番号Column1.DataPropertyName = "伝票番号";
+            this.伝票番号Column1.HeaderText = "伝票番号";
+            this.伝票番号Column1.Name = "伝票番号Column1";
+            // 
+            // 品名漢字Column1
+            // 
+            this.品名漢字Column1.DataPropertyName = "品名漢字";
+            this.品名漢字Column1.HeaderText = "品名";
+            this.品名漢字Column1.Name = "品名漢字Column1";
+            this.品名漢字Column1.Width = 200;
+            // 
+            // 規格名漢字Column1
+            // 
+            this.規格名漢字Column1.DataPropertyName = "規格名漢字";
+            this.規格名漢字Column1.HeaderText = "規格名";
+            this.規格名漢字Column1.Name = "規格名漢字Column1";
+            this.規格名漢字Column1.Width = 200;
+            // 
+            // 発注数量Column1
+            // 
+            this.発注数量Column1.DataPropertyName = "発注数量";
+            this.発注数量Column1.HeaderText = "発注数量";
+            this.発注数量Column1.Name = "発注数量Column1";
+            // 
+            // 実際配送担当Column2
+            // 
+            this.実際配送担当Column2.DataPropertyName = "実際配送担当";
+            this.実際配送担当Column2.HeaderText = "実際配送担当";
+            this.実際配送担当Column2.Name = "実際配送担当Column2";
+            this.実際配送担当Column2.Width = 120;
+            // 
+            // 訂正理由区分Column1
+            // 
+            this.訂正理由区分Column1.DataPropertyName = "訂正理由区分";
+            this.訂正理由区分Column1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.訂正理由区分Column1.HeaderText = "訂正理由区分";
+            this.訂正理由区分Column1.Name = "訂正理由区分Column1";
+            this.訂正理由区分Column1.ReadOnly = true;
+            this.訂正理由区分Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // 備考Column1
+            // 
+            this.備考Column1.DataPropertyName = "備考";
+            this.備考Column1.HeaderText = "備考";
+            this.備考Column1.Name = "備考Column1";
+            this.備考Column1.Width = 180;
             // 
             // ShippingOrderForm
             // 
@@ -992,20 +1003,6 @@
         private System.Windows.Forms.TabPage receivedTabPage;
         private System.Windows.Forms.DataGridView receivedDataGridView;
         private System.Windows.Forms.Button finishOrderButton1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 納品日Column21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日Column21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 店舗名漢字Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号Column21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 品名漢字Column21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 規格名漢字Column21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 実際出荷数量Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 受領Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 受領数量Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 受領金額Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 受領差異数量Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 受領差異金額Column1;
         private System.Windows.Forms.BindingSource bindingSource4;
         private System.Windows.Forms.DataGridView shipNODataGridView;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
@@ -1018,21 +1015,6 @@
         private System.Windows.Forms.BindingSource bindingSource3;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem printForEDIToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 納品場所名漢字Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.TabPage canceledTabPage;
         private System.Windows.Forms.DataGridView canceledDataGridView;
         private System.Windows.Forms.Button uploadAsnButton;
@@ -1041,20 +1023,6 @@
         private System.Windows.Forms.ToolStripMenuItem printForShipperToolStripMenuItem1;
         private System.Windows.Forms.ContextMenuStrip canceledContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem cancelConfirmToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn キャンセルColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn キャンセル時刻Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 発注日Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 納品日Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 店舗名漢字Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 品名漢字Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 規格名漢字Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 発注数量Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 備考Column1;
         private System.Windows.Forms.BindingSource bindingSource5;
         private System.Windows.Forms.DataGridViewTextBoxColumn ShipNOColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn shipAtColumn;
@@ -1070,5 +1038,49 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 原価金額_税抜_Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 納品場所名漢字Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 納品日Column21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日Column21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 店舗名漢字Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号Column21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 品名漢字Column21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 規格名漢字Column21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 実際出荷数量Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 受領Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 受領数量Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 受領金額Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 受領差異数量Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 受領差異金額Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn キャンセルColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn キャンセル時刻Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注日Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 納品日Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 店舗名漢字Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 品名漢字Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 規格名漢字Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注数量Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column2;
+        private System.Windows.Forms.DataGridViewComboBoxColumn 訂正理由区分Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 備考Column1;
     }
 }

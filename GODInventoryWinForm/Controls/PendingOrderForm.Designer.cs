@@ -41,6 +41,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.selectedRowsLabel = new System.Windows.Forms.Label();
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.ClearSelect = new System.Windows.Forms.Button();
             this.ZKZTcomboBox3 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -76,6 +77,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sendToShipperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteFaxOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toShipperTabPage = new System.Windows.Forms.TabPage();
             this.label17 = new System.Windows.Forms.Label();
             this.shipperComboBox = new System.Windows.Forms.ComboBox();
@@ -103,8 +105,6 @@
             this.entityDataSource2 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
-            this.deleteFaxOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -228,6 +228,22 @@
             this.selectedRowsLabel.TabIndex = 26;
             this.selectedRowsLabel.Text = "label5";
             this.selectedRowsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(0, 3);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(727, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // ClearSelect
             // 
@@ -588,21 +604,28 @@
             this.cancelOrderToolStripMenuItem,
             this.deleteFaxOrderToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(167, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
             // 
             // sendToShipperToolStripMenuItem
             // 
             this.sendToShipperToolStripMenuItem.Name = "sendToShipperToolStripMenuItem";
-            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.sendToShipperToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sendToShipperToolStripMenuItem.Text = "転送";
             this.sendToShipperToolStripMenuItem.Click += new System.EventHandler(this.sendToShipperToolStripMenuItem_Click);
             // 
             // cancelOrderToolStripMenuItem
             // 
             this.cancelOrderToolStripMenuItem.Name = "cancelOrderToolStripMenuItem";
-            this.cancelOrderToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.cancelOrderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cancelOrderToolStripMenuItem.Text = "キャンセル";
             this.cancelOrderToolStripMenuItem.Click += new System.EventHandler(this.cancelOrderToolStripMenuItem_Click);
+            // 
+            // deleteFaxOrderToolStripMenuItem
+            // 
+            this.deleteFaxOrderToolStripMenuItem.Name = "deleteFaxOrderToolStripMenuItem";
+            this.deleteFaxOrderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteFaxOrderToolStripMenuItem.Text = "伝票を廃棄";
+            this.deleteFaxOrderToolStripMenuItem.Click += new System.EventHandler(this.deleteFaxOrderToolStripMenuItem_Click);
             // 
             // toShipperTabPage
             // 
@@ -831,29 +854,6 @@
             // 
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
-            // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(0, 3);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(727, 34);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
-            // 
-            // deleteFaxOrderToolStripMenuItem
-            // 
-            this.deleteFaxOrderToolStripMenuItem.Name = "deleteFaxOrderToolStripMenuItem";
-            this.deleteFaxOrderToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.deleteFaxOrderToolStripMenuItem.Text = "deleteFaxOrder";
-            this.deleteFaxOrderToolStripMenuItem.Click += new System.EventHandler(this.deleteFaxOrderToolStripMenuItem_Click);
             // 
             // PendingOrderForm
             // 

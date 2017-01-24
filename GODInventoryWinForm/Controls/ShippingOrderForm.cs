@@ -38,6 +38,11 @@ namespace GODInventoryWinForm.Controls
             reportForm = new ReceivedOrdersReportForm();
             shippingItemsReportForm = new ShippingItemsReportForm();
             sendForm = new SendASNForm();
+
+
+            this.訂正理由区分Column1.ValueMember = "ID";
+            this.訂正理由区分Column1.DisplayMember = "FullName";
+            this.訂正理由区分Column1.DataSource = OrderQuantityChangeReasonRespository.ToList();
         }
 
 
@@ -48,7 +53,8 @@ namespace GODInventoryWinForm.Controls
 
             InitializeEdiData();
 
-            InitializeShippedOrders();
+            //InitializeShippedOrders();
+            this.pager3.Bind();
 
             InitializeCanceledOrder();
 
@@ -94,7 +100,7 @@ namespace GODInventoryWinForm.Controls
                         実際配送担当 = gos.Key.実際配送担当,
                         店名 = gos.First().店舗名漢字,
                         県別 = gos.First().県別,
-                        TotalPrice = gos.Sum(o => o.原価金額_税抜_),
+                        TotalPrice = gos.Sum(o => o.納品原価金額),
                         TotalWeight = gos.Sum(o => o.重量)
                     };
                     groupedOrderList.Add(v_groupedorder);
@@ -126,7 +132,7 @@ namespace GODInventoryWinForm.Controls
                 //这个界面下各条记录的排序方式是按照后来的在最下面
                 string sql = @"SELECT o.`ShipNO`, o.`出荷日`, o.`納品日`,
  min(o.`県別`) as `県別`, o.`実際配送担当`, 
-sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight  
+sum(`納品原価金額`) as TotalPrice, sum(`重量`) as TotalWeight  
 FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`ORDER BY o.出荷日 desc";
                 groupedAsnOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.ASN).ToList();
 
@@ -176,7 +182,8 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
         {
             this.canceledOrderList = OrderSqlHelper.CanceledOrderSql(entityDataSource1).ToList();
             // assign BindingList to grid
-            canceledDataGridView.DataSource = this.canceledOrderList;
+            SortableBindingList<t_orderdata> sortableCanceledOrderList = new SortableBindingList<t_orderdata>(canceledOrderList);
+            canceledDataGridView.DataSource = sortableCanceledOrderList;
             return 0;
         }
 
@@ -393,9 +400,10 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
-            //if (e.TabPage == shippedTabPage) {
-            //    pager3.Bind();                        
-            //}else if (e.TabPage == asnTabPage) { 
+            if (e.TabPage == shippedTabPage) {
+                pager3.Bind();                        
+            }
+            //else if (e.TabPage == asnTabPage) { 
             //}
         }
 
@@ -519,6 +527,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 {
                     DateTime CHUHERI = form.CHUHERI;
                     DateTime NAPINRI = form.NAPINRI;
+                    int QtyChangeReason = form.QtyChangeReason;
                     using (var ctx = new GODDbContext())
                     {
 
@@ -527,6 +536,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                             t_orderdata order = ctx.t_orderdata.Find(orders[i].id受注データ);
                             order.出荷日 = CHUHERI;
                             order.納品日 = NAPINRI;
+                            order.訂正理由区分 = QtyChangeReason;
                         }
                         ctx.SaveChanges();
                     }

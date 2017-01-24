@@ -284,7 +284,7 @@
             this.MinimizeBox = false;
             this.Name = "ShipOrderListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "OrderListForm";
+            this.Text = "出荷指示書内容編集";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();

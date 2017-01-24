@@ -245,7 +245,8 @@ namespace GODInventoryWinForm.Controls
                 int storeId = Convert.ToInt32(storeCodeTextBox.Text);
                 if (storeId > 0)
                 {
-                    var shops = this.shopList.Where(s => s.店番.ToString().StartsWith(storeId.ToString())).ToList();
+                    //var shops = this.shopList.Where(s => s.店番.ToString().StartsWith(storeId.ToString())).ToList();
+                    var shops = this.shopList.Where(s => s.店番 == storeId ).ToList();
                     if (shops.Count > 0)
                     {
                         var store = shops.First();
@@ -265,12 +266,12 @@ namespace GODInventoryWinForm.Controls
                             this.locationTextBox.Enabled = false;
                         }
 
-
-                        if (shops.Count == 1)
+                        //不能限制为1， 15/150 都是 15 开头
+                        //if (shops.Count == 1)
                         {
                             this.storeComboBox.SelectedValue = store.店番;
                         }
-
+                        errorProvider1.SetError(storeComboBox, String.Empty);
                     }
                     else
                     {
@@ -789,6 +790,7 @@ namespace GODInventoryWinForm.Controls
             //order.納品先店舗名漢字 = this.locationComboBox.Text;
             order.発注形態区分 = (short)this.orderReasonComboBox.SelectedValue;
             order.発注形態名称漢字 = this.orderReasonComboBox.Text;
+            order.備考 = "FAX";
 
         }
 

@@ -271,9 +271,9 @@ WHERE id受注データ= @P0;";
             //Status = 8
             //WHERE Status = 7
             var o = this.entity;
-            string format = @"UPDATE  `t_orderdata` SET `受領確認`= 1, `受領数量`= {2}, `受領金額`={5},`受領差異数量`={6},`受領差異金額`={7}, `Status`={3} WHERE `Status`!={4} and `伝票番号`= {0} and `店舗コード`={1};";
+            string format = @"UPDATE  `t_orderdata` SET `受領確認`= 1, `受領数量`= {2}, `受領金額`={5},`受領差異数量`={6}-`実際出荷数量`,`受領差異金額`={7}- `納品原価金額`, `Status`={3} WHERE `Status`={4} and `伝票番号`= {0} and `店舗コード`={1};";
 
-            return String.Format(format, this.InvoiceCode, this.StoreCode, this.ReceivedQuantity, (int)OrderStatus.Shipped, (int)OrderStatus.Received, this.ReceivedAmount, this.ReceivedQuantity - o.実際出荷数量, this.ReceivedAmount - o.納品原価金額);
+            return String.Format(format, this.InvoiceCode, this.StoreCode, this.ReceivedQuantity, (int)OrderStatus.Received, (int)OrderStatus.Shipped, this.ReceivedAmount, this.ReceivedQuantity, this.ReceivedAmount);
         
         }
 
@@ -300,7 +300,7 @@ WHERE id受注データ= @P0;";
             get { return Convert.ToInt32(Encoding.ASCII.GetString(this.数量))/10; }
         }
 
-        public float ReceivedAmount {
+        public int ReceivedAmount {
             get { return Convert.ToInt32(Encoding.ASCII.GetString(this.原価金額_税抜_)); }
         }
 

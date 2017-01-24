@@ -519,7 +519,7 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
-
+        //退单功能
         private void rollbackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int count = dataGridView1.SelectedRows.Count;

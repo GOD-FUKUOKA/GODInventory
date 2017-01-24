@@ -1238,10 +1238,15 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             var currentRow = this.dataGridView1.CurrentRow;
             if( currentRow != null )
             {
-                v_pendingorder order = currentRow.DataBoundItem as v_pendingorder;
-                if( order.入力区分 == 1 )
+                // 是否删除FAX订单
+                if (MessageBox.Show("伝票を完全に廃棄（削除）します。よろしいですか？", "伝票を廃棄", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
-                    count = OrderSqlHelper.DeleteFaxOrder( order.id受注データ);
+
+                    v_pendingorder order = currentRow.DataBoundItem as v_pendingorder;
+                    if (order.入力区分 == 1)
+                    {
+                        count = OrderSqlHelper.DeleteFaxOrder(order.id受注データ);
+                    }
                 }
             }
             if (count > 0)
