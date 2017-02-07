@@ -17,6 +17,7 @@ using System.Threading;
 //using System.Collections;
 using System.Configuration;
 using GODInventory.ViewModel.EDI;
+using GODInventory.ViewModel;
 
 
 namespace GODInventoryWinForm.Controls
@@ -25,6 +26,7 @@ namespace GODInventoryWinForm.Controls
     {
 
         List<int> newfaxno = new List<int>();
+        private List<t_genre> genreList;
         private List<t_shoplist> shopList;
         private List<v_itemprice> itemPriceList;
         private List<t_locations> locationList;
@@ -51,6 +53,7 @@ namespace GODInventoryWinForm.Controls
                 customersList = ctx.t_customers.ToList();
                 locationList = ctx.t_locations.ToList();
                 t_pricelistR = ctx.t_pricelist.ToList();
+                genreList = ctx.t_genre.ToList();
 
             }
             selfCodeTextBox1.Text = Properties.Settings.Default.Createorder_scc;
@@ -76,6 +79,10 @@ namespace GODInventoryWinForm.Controls
 
             //this.locationComboBox.DisplayMember = "納品場所名略称";
             //this.locationComboBox.ValueMember = "Id";
+
+            this.genreNameColumn.ValueMember = "idジャンル";
+            this.genreNameColumn.DisplayMember = "ジャンル名";
+            this.genreNameColumn.DataSource = genreList;
 
 
             this.dataGridView1.AutoGenerateColumns = false;
@@ -124,13 +131,15 @@ namespace GODInventoryWinForm.Controls
                             o.回答納期 = "00000000";
                             o.入力区分 = 1;
                             o.実際出荷数量 = o.発注数量;
+                            o.口数 = o.納品口数;
                             if (selectedItem == null)
                             {
                                 MessageBox.Show(String.Format("誤った: 単品重量, 商品コード! されていません"));
                                 return;
-
-
                             }
+                            o.品名漢字 = selectedItem.商品名;
+                            o.規格名漢字 = selectedItem.規格;
+                            o.単位 = selectedItem.単位;
                             o.重量 = (int)(Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
                             o.県別 = store.県別;
                             o.発注形態区分 = Convert.ToInt16(this.orderReasonComboBox.SelectedValue);
@@ -150,6 +159,7 @@ namespace GODInventoryWinForm.Controls
                             o.発注規格名漢字 = o.規格名漢字;
                             o.用度品区分 = 0;
 
+                            o.id = String.Format("{0}a{1}", o.店舗コード, o.伝票番号);
                             //判断全角半角
                             bool isrun = true;
                             
@@ -166,6 +176,14 @@ namespace GODInventoryWinForm.Controls
                                 if (isrun == false)
                                     return;
                             }
+
+                            o.実際配送担当 = store.配送担当;
+
+                            if (o.実際配送担当 == "MKL" && (o.ジャンル == 1001 || o.ジャンル == 1003))
+                            {
+                                o.実際配送担当 = "丸健";
+                            }
+                            o.週目 = OrderSqlHelper.GetWeekOfYear(o.受注日.Value.AddDays(6 - Properties.Settings.Default.OrderWeekEndDay)); 
                         }
                         ctx.t_orderdata.AddRange(newOrderList);
                         ctx.SaveChanges();
@@ -406,7 +424,7 @@ namespace GODInventoryWinForm.Controls
                 if (cell.Value != null && cell.Value.ToString() == "YES")
                 {
                     //row.Cells["商品コード"].ReadOnly = false;
-                    //row.Cells["ジャンル"].ReadOnly = false;
+                    row.Cells["genreNameColumn"].ReadOnly = false;
                     row.Cells["productNameColumn"].ReadOnly = false;
                     row.Cells["productSpecColumn"].ReadOnly = false;
                     row.Cells["ＪＡＮコード"].ReadOnly = false;
@@ -417,7 +435,7 @@ namespace GODInventoryWinForm.Controls
                 }
                 else // cell.Value is null
                 {
-                    //row.Cells["ジャンル"].ReadOnly = true;
+                    row.Cells["genreNameColumn"].ReadOnly = true;
                     row.Cells["productNameColumn"].ReadOnly = true;
                     row.Cells["productSpecColumn"].ReadOnly = true;
                     row.Cells["ＪＡＮコード"].ReadOnly = true;
@@ -440,10 +458,10 @@ namespace GODInventoryWinForm.Controls
                         order.規格名漢字 = item.規格;
                         order.ＪＡＮコード = item.JANコード;
                         order.原単価_税抜_ = Convert.ToInt32(item.原単価);
-                        order.売単価_税抜_ = Convert.ToInt32(item.原単価);
+                        order.売単価_税抜_ = Convert.ToInt32(item.売単価);
                         order.最小発注単位数量 = item.PT入数;
                         order.納品口数 = 0;
-                        cell.OwningRow.Cells["genreNameColumn"].Value = item.ジャンル名;
+                        //cell.OwningRow.Cells["genreNameColumn"].Value = item.ジャンル;
                     }
                 }
 
@@ -790,6 +808,7 @@ namespace GODInventoryWinForm.Controls
             //order.納品先店舗名漢字 = this.locationComboBox.Text;
             order.発注形態区分 = (short)this.orderReasonComboBox.SelectedValue;
             order.発注形態名称漢字 = this.orderReasonComboBox.Text;
+            order.一旦保留 = true;
             order.備考 = "FAX";
 
         }
@@ -851,14 +870,18 @@ namespace GODInventoryWinForm.Controls
                                 o.回答納期 = "00000000";
                                 o.入力区分 = 1;
                                 o.実際出荷数量 = o.発注数量;
+                                o.口数 = o.納品口数;
+
                                 if (selectedItem == null)
                                 {
                                     MessageBox.Show(String.Format("誤った: 単品重量, 商品コード! されていません"));
                                     return;
-
-
                                 }
+
+                                o.品名漢字 = selectedItem.商品名;
+                                o.規格名漢字 = selectedItem.規格;
                                 o.重量 = (int)(Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
+                                o.単位 = selectedItem.単位;
                                 o.県別 = store.県別;
                                 o.発注形態区分 = Convert.ToInt16(this.orderReasonComboBox.SelectedValue);
                                 o.発注形態名称漢字 = this.orderReasonComboBox.Text;
@@ -877,6 +900,7 @@ namespace GODInventoryWinForm.Controls
                                 o.発注品名漢字 = o.品名漢字;
                                 o.発注規格名漢字 = o.規格名漢字;
                                 o.用度品区分 = 0;
+                                o.id = String.Format("{0}a{1}", o.店舗コード, o.伝票番号);
 
                                 //判断全角半角
                                 bool isrun = true;
@@ -895,6 +919,14 @@ namespace GODInventoryWinForm.Controls
                                     if (isrun == false)
                                         return;
                                 }
+                                o.実際配送担当 = store.配送担当;
+
+                                if (o.実際配送担当 == "MKL" && (o.ジャンル == 1001 || o.ジャンル == 1003))
+                                {
+                                    o.実際配送担当 = "丸健";
+                                }
+                                o.週目 = OrderSqlHelper.GetWeekOfYear(o.受注日.Value.AddDays(6 - Properties.Settings.Default.OrderWeekEndDay)); 
+
                             }
                             ctx.t_orderdata.AddRange(newOrderList);
                             ctx.SaveChanges();

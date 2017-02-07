@@ -176,30 +176,44 @@ namespace GODInventoryWinForm.Controls
         private void saveButton_Click(object sender, EventArgs e)
         {
             // 可能有订单被退回了。status = WaitToShip
-            bool isQtyChanged = false;
+            bool isAnyQtyChanged = false;
+
             bool isValid = true;
             string errorMessage = "";
             List<t_orderdata> orders =  orderList.Cast<t_orderdata>().ToList();
             foreach( t_orderdata order in  orders)
             {
                 var stockrec = stockrecList.Find(s => s.OrderId == order.id受注データ);
+                bool isQtyChanged = ( Math.Abs(stockrec.数量) != order.実際出荷数量 );
+                if (order.実際出荷数量 == order.発注数量 && order.訂正理由区分 != 0)
+                {
+                    isValid = false;
+                    errorMessage = "元の発注数量になっています。訂正理由区分を「訂正なし」にしてください。";
+                    break;
+                } 
 
-                if (Math.Abs(stockrec.数量) != order.実際出荷数量) {
-                    if (order.訂正理由区分 == 0)
+                if (isQtyChanged)
+                {
+                    if (order.実際出荷数量 > order.発注数量)
+                    {
+                        isValid = false;
+                        errorMessage = "発注数量（数值）より多くなっています。発注数量以下に修正してください。";
+                        break;
+                    }
+                    else if (order.実際出荷数量 != order.発注数量 && order.訂正理由区分 == 0)
                     {
                         isValid = false;
                         errorMessage = "数量変更の理由をつけてください！";
                         break;
                     }
-                    isQtyChanged = true;
+                    isAnyQtyChanged = true;
                     stockrec.数量 = -order.実際出荷数量;
-
                 }
             }
             if (isValid)
             {
                 entityDataSource1.SaveChanges();
-                if (isQtyChanged)
+                if (isAnyQtyChanged)
                 {
                     OrderSqlHelper.UpdateStockState(entityDataSource1.DbContext as GODDbContext, stockrecList);
                 }

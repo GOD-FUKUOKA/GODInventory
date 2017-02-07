@@ -283,14 +283,27 @@ namespace GODInventory.ViewModel.EDI
 
             //var grouped_orders = orders.GroupBy( o => new { o.法人コード, o.店舗コード }, o=>o );
 
+            string sql = "SELECT max(`出荷No`) as chuHeNo FROM t_orderdata WHERE `店舗コード`={0} AND `法人コード`={1} AND `発注日`>{2} ";
 
-            int count = (from t_orderdata o in ctx.t_orderdata
-                         where o.店舗コード == order.店舗コード && o.法人コード == order.法人コード && o.発注日 > date
-                         group o by o.出荷No into g
-                         select g
-                    ).Count();
-            var s = String.Format("{0}{1}{2}{3}{4}", order.法人コード.ToString("D2"), order.店舗コード.ToString("D3"), EDITxtHandler.出荷業務仕入先コード, "03", (count + 1).ToString("D5"));
-            return Convert.ToInt64(s);
+            //int count = (from t_orderdata o in ctx.t_orderdata
+            //             where o.店舗コード == order.店舗コード && o.法人コード == order.法人コード && o.発注日 > date
+            //             group o by o.出荷No into g
+            //             select g
+            //        ).Count();
+
+            var max = ctx.Database.SqlQuery<long>(sql, order.店舗コード, order.法人コード, date).FirstOrDefault();
+            long chuHeNo = 0;
+            if ( max == 0)
+            {                 
+                string s = String.Format("{0}{1}{2}{3}{4}", order.法人コード.ToString("D2"), order.店舗コード.ToString("D3"), EDITxtHandler.出荷業務仕入先コード, "03", ( 1).ToString("D5"));
+                chuHeNo = Convert.ToInt64(s);
+            }
+            else {
+                chuHeNo = max + 1;
+            }
+
+
+            return chuHeNo;
 
         }
 

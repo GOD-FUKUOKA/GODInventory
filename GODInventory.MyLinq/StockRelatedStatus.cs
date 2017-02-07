@@ -21,7 +21,8 @@ namespace GODInventory.MyLinq
 
     public enum StockIoClueEnum
     {
-        清点库存 = 0,
+        //清点库存(日文： 棚卸)
+        棚卸 = 0,
         EDI出荷 = 1
     }
 

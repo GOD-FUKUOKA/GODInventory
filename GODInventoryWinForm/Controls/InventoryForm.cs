@@ -158,7 +158,7 @@ namespace GODInventoryWinForm.Controls
                 List<t_stockrec> changes = new List<t_stockrec>();
                 var genreId = Convert.ToInt16(this.genreComboBox.SelectedValue);
                 var warehouseName = GetWarehouseShortName();
-                var date = DateTime.Now;
+                var date = this.endDateTimePicker1.Value;
                 string stockNum = BuildStockNum(ctx, genreId, warehouseName, date);
 
                 foreach (var item in stockcheckList)
@@ -174,7 +174,7 @@ namespace GODInventoryWinForm.Controls
                         s.日付 = date;
                         s.区分 = StockIoEnum.入庫.ToString();
                         s.状態 = StockIoProgressEnum.完了.ToString();
-                        s.事由 = StockIoClueEnum.清点库存.ToString();
+                        s.事由 = StockIoClueEnum.棚卸.ToString();
                         s.納品書番号 = stockNum;
                         changes.Add(s);
                     }

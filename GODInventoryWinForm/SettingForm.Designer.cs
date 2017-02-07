@@ -36,12 +36,14 @@
             this.saveButton3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.inventoryStartAtDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.weekEndDayComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 66);
+            this.label1.Location = new System.Drawing.Point(38, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 14);
             this.label1.TabIndex = 4;
@@ -49,7 +51,7 @@
             // 
             // folderBrowserButton1
             // 
-            this.folderBrowserButton1.Location = new System.Drawing.Point(442, 60);
+            this.folderBrowserButton1.Location = new System.Drawing.Point(442, 37);
             this.folderBrowserButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.folderBrowserButton1.Name = "folderBrowserButton1";
             this.folderBrowserButton1.Size = new System.Drawing.Size(37, 27);
@@ -60,7 +62,7 @@
             // 
             // installDirTextBox
             // 
-            this.installDirTextBox.Location = new System.Drawing.Point(201, 64);
+            this.installDirTextBox.Location = new System.Drawing.Point(201, 41);
             this.installDirTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.installDirTextBox.Name = "installDirTextBox";
             this.installDirTextBox.ReadOnly = true;
@@ -93,7 +95,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(49, 111);
+            this.label2.Location = new System.Drawing.Point(90, 85);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(105, 14);
             this.label2.TabIndex = 6;
@@ -101,17 +103,44 @@
             // 
             // inventoryStartAtDateTimePicker1
             // 
-            this.inventoryStartAtDateTimePicker1.Location = new System.Drawing.Point(201, 108);
+            this.inventoryStartAtDateTimePicker1.Location = new System.Drawing.Point(201, 82);
             this.inventoryStartAtDateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.inventoryStartAtDateTimePicker1.Name = "inventoryStartAtDateTimePicker1";
             this.inventoryStartAtDateTimePicker1.Size = new System.Drawing.Size(278, 21);
             this.inventoryStartAtDateTimePicker1.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(98, 121);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(97, 14);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "EDI受注締切日";
+            // 
+            // weekEndDayComboBox
+            // 
+            this.weekEndDayComboBox.FormattingEnabled = true;
+            this.weekEndDayComboBox.Items.AddRange(new object[] {
+            "日",
+            "月",
+            "火",
+            "水",
+            "木",
+            "金",
+            "土"});
+            this.weekEndDayComboBox.Location = new System.Drawing.Point(201, 117);
+            this.weekEndDayComboBox.Name = "weekEndDayComboBox";
+            this.weekEndDayComboBox.Size = new System.Drawing.Size(278, 22);
+            this.weekEndDayComboBox.TabIndex = 10;
             // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(532, 209);
+            this.Controls.Add(this.weekEndDayComboBox);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.inventoryStartAtDateTimePicker1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.saveButton3);
@@ -144,5 +173,7 @@
         private System.Windows.Forms.Button saveButton3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker inventoryStartAtDateTimePicker1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox weekEndDayComboBox;
     }
 }

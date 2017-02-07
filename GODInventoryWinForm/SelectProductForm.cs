@@ -73,7 +73,7 @@ namespace GODInventoryWinForm
 
             foreach (v_itemprice item in stockiosList)
             {
-                string[] subItems = { item.商品名, item.規格, item.PT入数.ToString() };
+                string[] subItems = { item.自社コード.ToString(), item.商品名, item.規格, item.PT入数.ToString() };
                 ListViewItem lvi = new ListViewItem(subItems);
 
                 this.listView1.Items.Add(lvi);
@@ -95,11 +95,11 @@ namespace GODInventoryWinForm
             int selectCount = this.listView1.SelectedItems.Count; //SelectedItems.Count就是：取得值，表示SelectedItems集合的物件数目。 
             if (selectCount > 0)//若selectCount大於0，说明用户有选中某列。
             {
-                string textShopname = this.listView1.SelectedItems[0].SubItems[0].Text;
+                string selectId = this.listView1.SelectedItems[0].SubItems[0].Text;
 
                 foreach (v_itemprice item in stockiosList)
                 {
-                    if (item.商品名 == textShopname)
+                    if (item.自社コード.ToString() == selectId)
                     {
                         this.selectedItemPrice = item;
                         this.selectedItemCode = item.自社コード;
@@ -114,6 +114,24 @@ namespace GODInventoryWinForm
         private void SelectProductForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void manualButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void submitButton2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            e.DrawFocusRectangle();
+            var genre  = listBox1.Items[e.Index] as t_genre;
+            e.Graphics.DrawString(genre.ジャンル名, e.Font, new SolidBrush(e.ForeColor), e.Bounds);
         }
 
 

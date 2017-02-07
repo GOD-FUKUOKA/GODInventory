@@ -207,7 +207,7 @@
             this.cancelButton.Location = new System.Drawing.Point(668, 22);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(106, 35);
+            this.cancelButton.Size = new System.Drawing.Size(106, 32);
             this.cancelButton.TabIndex = 0;
             this.cancelButton.Text = "取消";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -221,7 +221,7 @@
             this.saveButton.Location = new System.Drawing.Point(780, 22);
             this.saveButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(106, 35);
+            this.saveButton.Size = new System.Drawing.Size(106, 32);
             this.saveButton.TabIndex = 1;
             this.saveButton.Text = "保存";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -257,7 +257,7 @@
             this.closeButton.Location = new System.Drawing.Point(892, 22);
             this.closeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(106, 35);
+            this.closeButton.Size = new System.Drawing.Size(106, 32);
             this.closeButton.TabIndex = 2;
             this.closeButton.Text = "閉じる";
             this.closeButton.UseVisualStyleBackColor = true;

@@ -9,6 +9,7 @@ using MySql.Data.MySqlClient;
 using GODInventory.ViewModel.EDI;
 using System.IO;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace GODInventory.ViewModel
 {
@@ -893,6 +894,8 @@ namespace GODInventory.ViewModel
                 temp.県別 = order.県別;
                 temp.納品指示 = order.納品指示;
                 temp.備考 = order.備考;
+                temp.配送担当受信 = true;
+                temp.配送担当受信時刻 = DateTime.Now;
                 trans.Add(temp);
             }
 
@@ -918,6 +921,8 @@ namespace GODInventory.ViewModel
                 temp.県別 = o.県別;
                 temp.納品指示 = o.納品指示;
                 temp.備考 = o.備考;
+                temp.配送担当受信 = true;
+                temp.配送担当受信時刻 = DateTime.Now;
                 trans.Add(temp);
             }
 
@@ -1070,6 +1075,14 @@ namespace GODInventory.ViewModel
 
         }
 
-    
+        public static int GetWeekOfYear( DateTime time)
+        {
+            //CultureInfo ci = new CultureInfo("zh-CN");
+            System.Globalization.Calendar cal = CultureInfo.CurrentCulture.Calendar;
+            CalendarWeekRule cwr = CultureInfo.CurrentCulture.DateTimeFormat.CalendarWeekRule;
+            DayOfWeek dow = DayOfWeek.Sunday;
+            int week = cal.GetWeekOfYear(time, cwr, dow);
+            return Convert.ToInt32( string.Format("{0:D4}{1:D2}", time.Year, week) );
+        }
     }
 }

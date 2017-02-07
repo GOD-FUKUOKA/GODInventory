@@ -544,39 +544,26 @@ namespace GODInventoryWinForm.Controls
 
         private void storeNameComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            // 跳过 0
+            if (this.storeNameComboBox2.SelectedValue!=null && ((int)this.storeNameComboBox2.SelectedValue > 0))
+            {
+                this.storeCodeTextBox2.Text = this.storeNameComboBox2.SelectedValue.ToString();
+            }
         }
 
         private void storeIdTextBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void storeNameComboBox2_TextChanged(object sender, EventArgs e)
-        {
-            int code = (int)storeNameComboBox2.SelectedValue;
-            if (code > 0)
-            {
-                this.storeCodeTextBox2.Text = code.ToString();
-            }
-            else
-            {
-                this.storeCodeTextBox2.Text = "";
-            }
-        }
-
-        private void storeCodeTextBox2_MouseLeave(object sender, EventArgs e)
         {
             if (storeCodeTextBox2.Text.Trim().Length > 0)
             {
                 int storeId = Convert.ToInt32(storeCodeTextBox2.Text);
                 if (storeId > 0)
                 {
-                    var shops = this.shopList.Where(s => s.店番.ToString().StartsWith(storeId.ToString())).ToList();
+                    var shops = this.shopList.Where(s => s.店番 == storeId).ToList();
                     if (shops.Count > 0)
                     {
                         var store = shops.First();
                         this.storeNameComboBox2.SelectedValue = store.店番;
+                        errorProvider2.SetError(storeCodeTextBox2, "");
                     }
                     else
                     {
@@ -588,6 +575,16 @@ namespace GODInventoryWinForm.Controls
                     errorProvider2.SetError(storeCodeTextBox2, String.Format("Can not find store by ID {0}", storeCodeTextBox2.Text));
                 }
             }
+        }
+
+        private void storeNameComboBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void storeCodeTextBox2_MouseLeave(object sender, EventArgs e)
+        {
+            
         }
 
         private void editToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -625,6 +622,14 @@ namespace GODInventoryWinForm.Controls
 
                 reportForm.InitializeDataSource(orders);
                 reportForm.ShowDialog();
+            }
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            if (e.TabPage == this.shippedTabPage)
+            {
+                this.storeCodeTextBox2.SelectAll();
             }
         }
     }

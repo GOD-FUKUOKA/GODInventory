@@ -76,7 +76,7 @@
             // 
             // closeButton
             // 
-            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.closeButton.Font = new System.Drawing.Font("MS PMincho", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.closeButton.Location = new System.Drawing.Point(293, 183);
             this.closeButton.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
@@ -135,7 +135,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CancelConfirmForm";
-            this.Text = "CancelConfirmForm";
+            this.Text = "キャンセル確定";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -64,9 +63,9 @@
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.invoiceNODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.specialCodeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.specialCodeColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.productCodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.genreNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.genreNameColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.productNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productSpecColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ＪＡＮコード = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,6 +74,7 @@
             this.ロット = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品口数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.受注数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.備考Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -157,6 +157,7 @@
             this.ロット,
             this.納品口数,
             this.受注数,
+            this.備考Column1,
             this.deleteButtonColumn});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -437,14 +438,11 @@
             // 
             // specialCodeColumn
             // 
-            dataGridViewCellStyle3.NullValue = "NO";
-            this.specialCodeColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.specialCodeColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.specialCodeColumn.FalseValue = "NO";
             this.specialCodeColumn.HeaderText = "雑コード";
-            this.specialCodeColumn.Items.AddRange(new object[] {
-            "NO",
-            "YES"});
             this.specialCodeColumn.Name = "specialCodeColumn";
+            this.specialCodeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.specialCodeColumn.TrueValue = "YES";
             this.specialCodeColumn.Width = 80;
             // 
             // productCodeColumn
@@ -456,9 +454,13 @@
             // 
             // genreNameColumn
             // 
+            this.genreNameColumn.DataPropertyName = "ジャンル";
+            this.genreNameColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.genreNameColumn.HeaderText = "ジャンル";
             this.genreNameColumn.Name = "genreNameColumn";
             this.genreNameColumn.ReadOnly = true;
+            this.genreNameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.genreNameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // productNameColumn
             // 
@@ -519,6 +521,12 @@
             this.受注数.HeaderText = "受注数";
             this.受注数.Name = "受注数";
             this.受注数.Width = 70;
+            // 
+            // 備考Column1
+            // 
+            this.備考Column1.DataPropertyName = "備考";
+            this.備考Column1.HeaderText = "備考";
+            this.備考Column1.Name = "備考Column1";
             // 
             // deleteButtonColumn
             // 
@@ -615,9 +623,9 @@
         private System.Windows.Forms.ErrorProvider errorProvider2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoiceNODataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn specialCodeColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn specialCodeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productCodeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn genreNameColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn genreNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productSpecColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ＪＡＮコード;
@@ -626,6 +634,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ロット;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品口数;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受注数;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 備考Column1;
         private System.Windows.Forms.DataGridViewButtonColumn deleteButtonColumn;
     }
 }

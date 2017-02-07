@@ -107,18 +107,38 @@ namespace GODInventoryWinForm.Controls
                     {
                         var pendingorder = orders.Find(o => o.id受注データ == id);
                         t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
+                        bool isQtyChanged = (order.実際出荷数量 != pendingorder.実際出荷数量);
 
-                         
-                        //需要修改的字段为: “口数” “发注数量” “担当” “形态”
-                        if (order.実際出荷数量 != pendingorder.実際出荷数量)
+                        if (pendingorder.実際出荷数量 == order.発注数量 && pendingorder.訂正理由区分 != 0)
                         {
-                            if (pendingorder.訂正理由区分 == 0)
+                            isValid = false;
+                            errorMessage = "元の発注数量になっています。訂正理由区分を「訂正なし」にしてください。";
+                            break;
+
+                        } 
+                        
+                        if (isQtyChanged)
+                        {
+
+                            if (pendingorder.実際出荷数量 > order.発注数量)
+                            {
+                                isValid = false;
+                                errorMessage = "発注数量（数值）より多くなっています。発注数量以下に修正してください。";
+                                break;
+                            }
+                            else if (pendingorder.実際出荷数量 != order.発注数量 && pendingorder.訂正理由区分 == 0)
                             {
                                 isValid = false;
                                 errorMessage = "数量変更の理由をつけてください！";
                                 break;
                             }
+                        }
 
+                         
+                        //需要修改的字段为: “口数” “发注数量” “担当” “形态”
+                        if (isQtyChanged)
+                        {
+                            
                             // 修正相应 金額
                             order.実際出荷数量 = pendingorder.実際出荷数量;
                             order.納品口数 = pendingorder.納品口数;
