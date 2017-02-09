@@ -31,5 +31,17 @@ namespace GODInventory.ViewModel.Properties {
                 return ((string)(this["DBConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int OrderWeekEndDay {
+            get {
+                return ((int)(this["OrderWeekEndDay"]));
+            }
+            set {
+                this["OrderWeekEndDay"] = value;
+            }
+        }
     }
 }

@@ -213,7 +213,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox6</rd:DefaultName>
         <Top>3.89827cm</Top>
-        <Left>10.38039cm</Left>
+        <Left>10.06289cm</Left>
         <Height>0.6cm</Height>
         <Width>5.94928cm</Width>
         <ZIndex>5</ZIndex>
@@ -1874,7 +1874,7 @@
         <MIMEType>image/jpeg</MIMEType>
         <Sizing>FitProportional</Sizing>
         <Top>3.01265cm</Top>
-        <Left>10.5669cm</Left>
+        <Left>10.2494cm</Left>
         <Height>0.88562cm</Height>
         <Width>5.54052cm</Width>
         <ZIndex>16</ZIndex>
@@ -1890,7 +1890,7 @@
       <Border />
     </Style>
   </Body>
-  <Width>6.65727in</Width>
+  <Width>6.63118in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

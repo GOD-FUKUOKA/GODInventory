@@ -176,6 +176,7 @@ namespace GODInventoryWinForm.Controls
                         s.状態 = StockIoProgressEnum.完了.ToString();
                         s.事由 = StockIoClueEnum.棚卸.ToString();
                         s.納品書番号 = stockNum;
+                        s.工場 = manufacturerComboBox.Text;
                         changes.Add(s);
                     }
 

@@ -638,7 +638,11 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             }
             if (originalSortedColumn != null)
             {
-                this.dataGridView1.Sort(originalSortedColumn, direction);
+                // 需检查是否有数据，否则排序会有异常。
+                if (this.dataGridView1.RowCount > 0)
+                {
+                    this.dataGridView1.Sort(originalSortedColumn, direction);
+                }
             }
             return orderCount;
         }

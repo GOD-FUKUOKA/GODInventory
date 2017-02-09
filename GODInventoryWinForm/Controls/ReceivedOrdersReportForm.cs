@@ -56,7 +56,7 @@ namespace GODInventoryWinForm.Controls
 
                     foreach (var go in gos)
                     {
-                        var bitmap =  GenerateBarCodeBitmap( go.出荷No );
+                        var bitmap =  GenerateBarCodeBitmap( go.出荷No.ToString("D18") );
                         BarcodeHashTable[go.出荷No] = BmpToBytes(bitmap);
                         //go.BarcodeImagePath = GenerateBarCodeImage(go.出荷No.ToString());
                     }
@@ -226,7 +226,7 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
-        private Bitmap GenerateBarCodeBitmap(long chuHeNo)
+        private Bitmap GenerateBarCodeBitmap(string chuHeNo)
         {
             // 1.设置条形码规格
             EncodingOptions encodeOption = new EncodingOptions();
@@ -238,7 +238,7 @@ namespace GODInventoryWinForm.Controls
             wr.Options = encodeOption;
             wr.Format = BarcodeFormat.CODE_128; //  条形码规格：EAN13规格：12（无校验位）或13位数字
 
-            Bitmap img = wr.Write(chuHeNo.ToString()); // 生成图片
+            Bitmap img = wr.Write(chuHeNo); // 生成图片
 
             return img;
         }

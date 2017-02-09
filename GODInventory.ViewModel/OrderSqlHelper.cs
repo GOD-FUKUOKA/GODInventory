@@ -1075,14 +1075,17 @@ namespace GODInventory.ViewModel
 
         }
 
-        public static int GetWeekOfYear( DateTime time)
+        public static int GetOrderWeekOfYear(DateTime time)
         {
+            var newTime = time.AddDays(6 - CustomPropertyHelper.GetOrderWeekEndDay());
             //CultureInfo ci = new CultureInfo("zh-CN");
             System.Globalization.Calendar cal = CultureInfo.CurrentCulture.Calendar;
             CalendarWeekRule cwr = CultureInfo.CurrentCulture.DateTimeFormat.CalendarWeekRule;
             DayOfWeek dow = DayOfWeek.Sunday;
-            int week = cal.GetWeekOfYear(time, cwr, dow);
-            return Convert.ToInt32( string.Format("{0:D4}{1:D2}", time.Year, week) );
+            int week = cal.GetWeekOfYear(newTime, cwr, dow);
+            return Convert.ToInt32(string.Format("{0:D4}{1:D2}", newTime.Year, week));
         }
+
+
     }
 }

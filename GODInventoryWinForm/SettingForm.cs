@@ -1,4 +1,5 @@
 ﻿using GODInventory.MyLinq;
+using GODInventory.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,14 +31,14 @@ namespace GODInventoryWinForm
             this.weekEndDayComboBox.ValueMember = "Id";
             this.weekEndDayComboBox.DataSource = dayEnums;
 
-            this.weekEndDayComboBox.SelectedIndex = Properties.Settings.Default.OrderWeekEndDay;
+            this.weekEndDayComboBox.SelectedIndex = CustomPropertyHelper.GetOrderWeekEndDay();
         }
 
         private void saveButton3_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.NFWEInstallDir = this.installDirTextBox.Text;
             Properties.Settings.Default.InventoryStartAt = this.inventoryStartAtDateTimePicker1.Value;
-            Properties.Settings.Default.OrderWeekEndDay = (int)this.weekEndDayComboBox.SelectedValue;
+            CustomPropertyHelper.SetOrderWeekEndDay( (int)this.weekEndDayComboBox.SelectedValue );
         }
 
         private void folderBrowserButton1_Click(object sender, EventArgs e)

@@ -60,6 +60,13 @@ namespace GODInventoryWinForm.Controls
             shipperTextBox.Text = Properties.Settings.Default.Createorder_hsbsc;
             selfNameTextBox.Text = Properties.Settings.Default.Createorder_sog;
 
+
+            this.genreNameColumn.ValueMember = "Id";
+            this.genreNameColumn.DisplayMember = "FullName";
+            // convert idジャンル to short,  order.ジャンル is short
+            this.genreNameColumn.DataSource = genreList.Select(o => new { Id = (short)o.idジャンル, FullName = o.ジャンル名 }).ToList();
+               
+
             //orderReasonDataGridviewComboBox.ValueType = typeof(OrderReasonEnum);
             this.orderReasonComboBox.ValueMember = "Value";
             this.orderReasonComboBox.DisplayMember = "Display";
@@ -76,14 +83,8 @@ namespace GODInventoryWinForm.Controls
             this.customerComboBox.ValueMember = "Id";
             this.customerComboBox.DataSource = customersList;
 
-
             //this.locationComboBox.DisplayMember = "納品場所名略称";
             //this.locationComboBox.ValueMember = "Id";
-
-            this.genreNameColumn.ValueMember = "idジャンル";
-            this.genreNameColumn.DisplayMember = "ジャンル名";
-            this.genreNameColumn.DataSource = genreList;
-
 
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.DataSource = orderList;
@@ -183,7 +184,7 @@ namespace GODInventoryWinForm.Controls
                             {
                                 o.実際配送担当 = "丸健";
                             }
-                            o.週目 = OrderSqlHelper.GetWeekOfYear(o.受注日.Value.AddDays(6 - Properties.Settings.Default.OrderWeekEndDay)); 
+                            o.週目 = OrderSqlHelper.GetOrderWeekOfYear(o.受注日.Value); 
                         }
                         ctx.t_orderdata.AddRange(newOrderList);
                         ctx.SaveChanges();
@@ -570,9 +571,6 @@ namespace GODInventoryWinForm.Controls
                 order.納品予定日 = deliveredAtDateTimePicker.Value.Date;
 
                 order.店舗コード = Convert.ToInt16(storeCodeTextBox.Text);
-                //order.商品コード = Convert.ToInt32(productCodeTextBox.Text);
-                //order.発注数量 = Convert.ToInt32(orderQuantityTextBox.Text);
-
                 order.仕入先コード = Convert.ToInt32(selfCodeTextBox1.Text);
                 order.出荷業務仕入先コード = Convert.ToInt32(this.shipperTextBox.Text);
                 order.仕入先名漢字 = this.selfNameTextBox.Text;
@@ -616,6 +614,9 @@ namespace GODInventoryWinForm.Controls
                 {
                     order.伝票番号 = GetNextByInvoiceNO(this.orderList[i - 1].伝票番号);
                 }
+
+                // set default ジャンル, or get error when drawing grid
+                order.ジャンル = (short)genreList.First().idジャンル;
 
                 this.orderList.Add(order);
             }
@@ -708,12 +709,12 @@ namespace GODInventoryWinForm.Controls
             order.最小発注単位数量 = 0;
             order.納品口数 = 0;
             order.発注数量 = 0;
-            order.ジャンル = 0;
+            //order.ジャンル = 0;
             order.原単価_税抜_ = 0;
             order.売単価_税抜_ = 0;
 
-            var row = dataGridView1.Rows[i];
-            row.Cells["genreNameColumn"].Value = null;
+            //var row = dataGridView1.Rows[i];
+            //row.Cells["genreNameColumn"].Value = null;
 
             this.dataGridView1.Refresh();
         }
@@ -756,7 +757,7 @@ namespace GODInventoryWinForm.Controls
                 orderList[selectedRowIndex].売単価_税抜_ = Convert.ToInt32(selectedItem.売単価);
 
                 #endregion
-                row.Cells["genreNameColumn"].Value = selectedItem.ジャンル名;
+                //row.Cells["genreNameColumn"].Value = selectedItem.ジャンル名;
                 this.dataGridView1.Refresh();
             }
             else
@@ -810,7 +811,6 @@ namespace GODInventoryWinForm.Controls
             order.発注形態名称漢字 = this.orderReasonComboBox.Text;
             order.一旦保留 = true;
             order.備考 = "FAX";
-
         }
 
         private void customerComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -857,7 +857,7 @@ namespace GODInventoryWinForm.Controls
 
                             foreach (var o in newOrderList)
                             {
-                                v_itemprice selectedItem = itemPriceList.Find(i => i.商品コード == o.商品コード);
+                                v_itemprice selectedItem = itemPriceList.Find(i => i.自社コード == o.自社コード);
 
                                 SetOrderBaseInfo(o);
                                 o.納品先店舗コード = (short)o.店舗コード;
@@ -925,7 +925,7 @@ namespace GODInventoryWinForm.Controls
                                 {
                                     o.実際配送担当 = "丸健";
                                 }
-                                o.週目 = OrderSqlHelper.GetWeekOfYear(o.受注日.Value.AddDays(6 - Properties.Settings.Default.OrderWeekEndDay)); 
+                                o.週目 = OrderSqlHelper.GetOrderWeekOfYear(o.受注日.Value); 
 
                             }
                             ctx.t_orderdata.AddRange(newOrderList);
