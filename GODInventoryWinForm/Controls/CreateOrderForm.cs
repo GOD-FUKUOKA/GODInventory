@@ -103,106 +103,6 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private void submitButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //BindingList<t_orderdata> newOrderList = new BindingList<t_orderdata>();
-                newOrderList = this.orderList.Where(o => o.発注数量 > 0).ToList();
-
-                if (newOrderList.Count > 0)
-                {
-                    int storeCode = (int)this.storeComboBox.SelectedValue;
-                    var store = shopList.Find(s => s.店番 == storeCode);
-                    using (var ctx = new GODDbContext())
-                    {
-
-                        foreach (var o in newOrderList)
-                        {
-                            v_itemprice selectedItem = itemPriceList.Find(i => i.商品コード == o.商品コード);
-
-                            SetOrderBaseInfo(o);
-                            o.納品先店舗コード = (short)o.店舗コード;
-                            o.納品先店舗名漢字 = o.店舗名漢字;
-                            o.税率 = 0.08;
-                            o.特価区分 = 0;
-                            o.PB区分 = 0;
-                            o.原価区分 = 0;
-                            o.納期回答区分 = 0;
-                            o.回答納期 = "00000000";
-                            o.入力区分 = 1;
-                            o.実際出荷数量 = o.発注数量;
-                            o.口数 = o.納品口数;
-                            if (selectedItem == null)
-                            {
-                                MessageBox.Show(String.Format("誤った: 単品重量, 商品コード! されていません"));
-                                return;
-                            }
-                            o.品名漢字 = selectedItem.商品名;
-                            o.規格名漢字 = selectedItem.規格;
-                            o.単位 = selectedItem.単位;
-                            o.重量 = (int)(Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
-                            o.県別 = store.県別;
-                            o.発注形態区分 = Convert.ToInt16(this.orderReasonComboBox.SelectedValue);
-                            o.発注形態名称漢字 = this.orderReasonComboBox.Text;
-                            //o.原単価_税抜_ = (int)selectedItem.原単価;
-                            o.原単価_税込_ = ((int)(o.原単価_税抜_ * (1 + o.税率) * 100)) * 1.0 / 100;
-
-                            o.原価金額_税抜_ = o.実際出荷数量 * o.原単価_税抜_;
-                            o.原価金額_税込_ = (int)(o.実際出荷数量 * o.原単価_税込_);
-                            
-                            o.納品原価金額 = o.原価金額_税抜_;
-                            //o.売単価_税抜_ = (int)selectedItem.売単価;
-                            o.売単価_税込_ = (int)(o.売単価_税抜_ * (1 + o.税率));
-                            o.税額 = (int)(o.原価金額_税抜_ * o.税率);
-
-                            o.発注品名漢字 = o.品名漢字;
-                            o.発注規格名漢字 = o.規格名漢字;
-                            o.用度品区分 = 0;
-
-                            o.id = String.Format("{0}a{1}", o.店舗コード, o.伝票番号);
-                            //判断全角半角
-                            bool isrun = true;
-                            
-                            if (o.発注品名漢字 != null)
-                            {
-                                isrun = QuanJiaoBanJiao(o.発注品名漢字);
-                                if (isrun == false)
-                                    return;
-                            }
-
-                            if (o.発注規格名漢字 != null)
-                            {
-                                isrun = QuanJiaoBanJiao(o.発注規格名漢字);
-                                if (isrun == false)
-                                    return;
-                            }
-
-                            o.実際配送担当 = store.配送担当;
-
-                            if (o.実際配送担当 == "MKL" && (o.ジャンル == 1001 || o.ジャンル == 1003))
-                            {
-                                o.実際配送担当 = "丸健";
-                            }
-                            o.週目 = OrderSqlHelper.GetOrderWeekOfYear(o.受注日.Value); 
-                        }
-                        ctx.t_orderdata.AddRange(newOrderList);
-                        ctx.SaveChanges();
-                        MessageBox.Show(String.Format("{0} 枚のFAX注文登録完了!", newOrderList.Count));
-                        orderList.Clear();
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(String.Format("誤った: 単品重量, 商品コード! されていません"));
-                return;
-
-                throw;
-            }
-
-        }
 
         private bool QuanJiaoBanJiao(string o)
         {
@@ -618,6 +518,8 @@ namespace GODInventoryWinForm.Controls
                 // set default ジャンル, or get error when drawing grid
                 order.ジャンル = (short)genreList.First().idジャンル;
 
+                order.備考 = "FAX";
+
                 this.orderList.Add(order);
             }
         }
@@ -810,7 +712,6 @@ namespace GODInventoryWinForm.Controls
             order.発注形態区分 = (short)this.orderReasonComboBox.SelectedValue;
             order.発注形態名称漢字 = this.orderReasonComboBox.Text;
             order.一旦保留 = true;
-            order.備考 = "FAX";
         }
 
         private void customerComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -878,8 +779,7 @@ namespace GODInventoryWinForm.Controls
                                     return;
                                 }
 
-                                o.品名漢字 = selectedItem.商品名;
-                                o.規格名漢字 = selectedItem.規格;
+                               
                                 o.重量 = (int)(Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
                                 o.単位 = selectedItem.単位;
                                 o.県別 = store.県別;
