@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GODInventoryWinForm</RootNamespace>
-    <AssemblyName>InventoryDemoV5</AssemblyName>
+    <AssemblyName>GODInventory</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
@@ -546,7 +546,6 @@
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="GODInventoryWinForm_TemporaryKey.pfx" />
     <None Include="log4net.config">

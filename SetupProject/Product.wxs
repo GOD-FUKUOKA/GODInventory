@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="SetupProject" Language="1033" Version="$(var.Version)" Manufacturer="RuanShan Ltd." UpgradeCode="ffcb6e46-3e35-4a7f-a260-b0293a978be1">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <Icon Id="logo.ico" SourceFile="$(var.Version)/logo_128.ico" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="Complete" Title="SetupProject" Level="1"  Description='The complete package.' >
+			<Feature Id='MainProgram' Title='Program' Description='The main executable.' Level='1'>  
+                 <ComponentGroupRef Id='MainCompGroup' />  
+                 <ComponentRef Id='compCommonLibrary' />  
+                 <ComponentRef Id='compMyLibrary' />  
+      </Feature>  
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="SetupProject" />
+			</Directory>
+      
+      <Directory Id="ProgramMenuFolder" Name="Programs">  
+          <Directory Id="ProgramMenuDir" Name="SetupProject 1.0">  
+          </Directory>  
+      </Directory>  
+               
+      <Directory Id="DesktopFolder" Name="Desktop" />  
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+		</ComponentGroup>
+    <ComponentGroup Id ="MainCompGroup">  
+        <Component Id='compMainExecutable' Guid='{0008EE68-EA36-4d5d-8BC5-713029E1909A}' Directory='INSTALLFOLDER'>  
+            <File Id='filFoobarEXE' Name='GODInventory.exe' DiskId='1' Source='$(var.Version)/GODInventory.exe' KeyPath='yes'>
+              
+                <Shortcut Id="startmenuFoobar10" Directory="ProgramMenuDir" Name="GODInventory 1.0" WorkingDirectory='INSTALLFOLDER' Icon="logo.ico" IconIndex="0" Advertise="yes" />  
+                <Shortcut Id="desktopFoobar10" Directory="DesktopFolder" Name="GODInventory 1.0" WorkingDirectory='INSTALLFOLDER' Icon="logo.ico" IconIndex="0" Advertise="yes" />  
+               
+            </File>  
+        </Component>  
+        <Component Id="compProgramMenuDir" Guid="{6886685C-E1B1-48d9-B6A7-548175BD8F17}" Directory="ProgramMenuDir">  
+            <Shortcut Id="UninstallProduct"  Name="Uninstall My Application" Directory="ProgramMenuDir" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Description="Uninstall"/>  
+            <RemoveFolder Id='rmvProgramMenuDir' On='uninstall' />  
+            <RegistryValue Root='HKCU' Key='Software/[Manufacturer]/[ProductName]' Type='string' Value='' KeyPath='yes' />  
+        </Component>  
+    </ComponentGroup>  
+    <ComponentGroup Id='ExtraGroup'>  
+        <Component Id='compMyLibrary' Guid='{A30DAC3F-2902-479c-B530-B90A7BA8E514}' Directory='INSTALLFOLDER'>  
+            <File Id='GODInventory.exe.config' Name='GODInventory.exe.config' DiskId='1' Source='$(var.Version)/GODInventory.exe.config'   />  
+            <File Id='GODInventory.MyLinq' Name='GODInventory.MyLinq.dll' DiskId='1' Source='$(var.Version)/GODInventory.MyLinq.dll'   />  
+            <File Id='GODInventory.ViewModel' Name='GODInventory.ViewModel.dll' DiskId='1' Source='$(var.Version)/GODInventory.ViewModel.dll'  />  
+        </Component>  
+        <Component Id='compCommonLibrary' Guid='{8d0da227-4d85-4534-bde1-66076f008642}' Directory='INSTALLFOLDER'>  
+            <File Id='EntityFramework' Name='EntityFramework.dll' DiskId='1' Source='$(var.Version)/EntityFramework.dll'   />  
+            <File Id='EntityFramework.xml' Name='EntityFramework.xml' DiskId='1' Source='$(var.Version)/EntityFramework.xml'   />  
+            <File Id='MySql.Data' Name='MySql.Data.dll' DiskId='1' Source='$(var.Version)/MySql.Data.dll'   />  
+            <File Id='MySql.Data.Entity.EF6' Name='MySql.Data.Entity.EF6.dll' DiskId='1' Source='$(var.Version)/MySql.Data.Entity.EF6.dll'   />  
+            <File Id='log4net' Name='log4net.dll' DiskId='1' Source='$(var.Version)/log4net.dll'  />  
+            <File Id='log4net.xml' Name='log4net.xml' DiskId='1' Source='$(var.Version)/log4net.xml'  />  
+            <File Id='zxing' Name='zxing.dll' DiskId='1' Source='$(var.Version)/zxing.dll'  />  
+            <File Id='zxing.xml' Name='zxing.xml' DiskId='1' Source='$(var.Version)/zxing.xml'  />  
+            <File Id='zxing.presentation' Name='zxing.presentation.dll' DiskId='1' Source='$(var.Version)/zxing.presentation.dll'   />  
+            <File Id='zxing.presentation.xml' Name='zxing.presentation.xml' DiskId='1' Source='$(var.Version)/zxing.presentation.xml'   />  
+        </Component> 
+        <!--
+        <Component Id='compManual' Guid='{25518565-2E48-415c-B4FD-A20E2EA869D5}' Directory='INSTALLFOLDER'>  
+            <File Id='filManual' Name='Manual.pdf' DiskId='1' Source='$(var.Version)/Manual.pdf' KeyPath='yes'>  
+                <Shortcut Id="startmenuManual" Directory="ProgramMenuDir" Name="Instruction Manual" Icon="word.ico" Advertise="yes" />  
+            </File>  
+        </Component> 
+        -->
+    </ComponentGroup>  
+	</Fragment>
+</Wix>
