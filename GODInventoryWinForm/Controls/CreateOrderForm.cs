@@ -49,8 +49,8 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {
 
-                shopList = ctx.t_shoplist.ToList();
                 customersList = ctx.t_customers.ToList();
+                shopList = ctx.t_shoplist.ToList();
                 locationList = ctx.t_locations.ToList();
                 t_pricelistR = ctx.t_pricelist.ToList();
                 genreList = ctx.t_genre.ToList();
@@ -75,13 +75,13 @@ namespace GODInventoryWinForm.Controls
                 .ToList();
             this.orderReasonComboBox.SelectedIndex = 0;
 
-            this.storeComboBox.DisplayMember = "店名";
-            this.storeComboBox.ValueMember = "店番";
-            this.storeComboBox.DataSource = shopList;
-
             this.customerComboBox.DisplayMember = "FullName";
             this.customerComboBox.ValueMember = "Id";
             this.customerComboBox.DataSource = customersList;
+            
+            this.storeComboBox.DisplayMember = "店名";
+            this.storeComboBox.ValueMember = "店番";
+            this.storeComboBox.DataSource = shopList;
 
             //this.locationComboBox.DisplayMember = "納品場所名略称";
             //this.locationComboBox.ValueMember = "Id";
@@ -718,6 +718,12 @@ namespace GODInventoryWinForm.Controls
         {
             customerIdTextBox.Text = customerComboBox.SelectedValue.ToString();
 
+            int customerId = (int) customerComboBox.SelectedValue ;
+
+            var stores = shopList.FindAll(o => o.customerId == customerId).ToList();
+            this.storeComboBox.DisplayMember = "店名";
+            this.storeComboBox.ValueMember = "店番";
+            this.storeComboBox.DataSource = stores;
         }
 
         //http://blog.sina.com.cn/s/blog_463b79ca01019b46.html

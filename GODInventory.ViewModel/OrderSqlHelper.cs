@@ -465,7 +465,9 @@ namespace GODInventory.ViewModel
             return 0;
 
         }
-        public static int CancelOrders(List<v_pendingorder> orders)
+
+        // 取消 pending 订单
+        public static int CancelOrders(List<int> orderIds)
         {
             int count = 0;
             using (var ctx = new GODDbContext())
@@ -474,15 +476,64 @@ namespace GODInventory.ViewModel
                 //order.キャンセル時刻 = DateTime.Now;
                 //order.Status = OrderStatus.Cancelled;
                 //order.備考 = "キャンセル";
-                var orderIds = orders.Select(o => o.id受注データ).ToList();
-                MySqlParameter[] parameters = { new MySqlParameter("@p1", "yes"), new MySqlParameter("@p2", DateTime.Now), new MySqlParameter("@p3", ((int)OrderStatus.Cancelled)) };
-                string sqlFormat = "UPDATE t_orderdata SET `実際出荷数量`=0, `最終出荷数`=0, `原価金額(税抜)`=0, `納品原価金額`=0, `原価金額(税込)`=0, `税額`=0, `備考`='キャンセル',`キャンセル`=@p1, `キャンセル時刻`=@p2 ,`Status`=@p3 WHERE `id受注データ` in ({0})";
-                string sql = String.Format(sqlFormat, String.Join(",", orderIds.ToArray()));
-                count = ctx.Database.ExecuteSqlCommand(sql, parameters);
+                //MySqlParameter[] parameters = { new MySqlParameter("@p1", "yes"), new MySqlParameter("@p2", DateTime.Now), new MySqlParameter("@p3", ((int)OrderStatus.Cancelled)) };
+                //string sqlFormat = "UPDATE t_orderdata SET `実際出荷数量`=0, `最終出荷数`=0, `納品原価金額`=0, `税額`=0, `備考`='キャンセル',`キャンセル`=@p1, `キャンセル時刻`=@p2 ,`Status`=@p3 WHERE `id受注データ` in ({0})";
+                //string sql = String.Format(sqlFormat, String.Join(",", orderIds.ToArray()));
+                //count = ctx.Database.ExecuteSqlCommand(sql, parameters);
 
+                List<t_orderdata> orders = (from t_orderdata o in ctx.t_orderdata
+                                            where orderIds.Contains(o.id受注データ)
+                                            select o).ToList();
+                foreach (var order in orders)
+                {
+                    OrderSqlHelper.CancelOrder(ctx, order);
+                }
+               
             }
             return count;
         }
+
+        // 取消任意状态订单
+        public static void CancelOrder(GODDbContext ctx, t_orderdata order)
+        {
+
+            var orderIds = new List<int> {  order.id受注データ };
+
+            var orderList = new List<t_orderdata> { order };
+
+            var stockrecList = (from t_stockrec s in ctx.t_stockrec
+                                where orderIds.Contains(s.OrderId)
+                                select s).ToList();
+            var marukenTransList = (from t_maruken_trans s in ctx.t_maruken_trans
+                                    where orderIds.Contains(s.OrderId)
+                                    select s).ToList();
+
+            order.実際出荷数量 = 0;
+            order.納品口数 = 0;
+
+            var product = ctx.t_itemlist.Find( order.自社コード);
+            OrderSqlHelper.AfterOrderQtyChanged(order, product);
+            order.キャンセル = "yes";
+            order.キャンセル時刻 = DateTime.Now;
+            order.Status = OrderStatus.Cancelled;
+            order.備考 = "キャンセル";
+
+            ctx.t_stockrec.RemoveRange(stockrecList);
+            ctx.t_maruken_trans.RemoveRange(marukenTransList);
+
+            var priceItem = ctx.t_pricelist.Where(p => p.自社コード == order.自社コード && p.店番 == order.店舗コード).FirstOrDefault();
+            priceItem.欠品カウンター += 1;    
+
+            ctx.SaveChanges();
+
+            if (stockrecList.Count > 0)
+            {
+                OrderSqlHelper.UpdateStockState(ctx, stockrecList);
+            }
+            
+        }
+
+
         public static int SendOrderToShipper(List<v_pendingorder> orders)
         {
             int count = 0;
@@ -651,7 +702,7 @@ namespace GODInventory.ViewModel
             // generate ASN管理連番
             long mid = EDITxtHandler.GenerateMID(ctx);
             // 无需 条件OrderStatus.ASN, 取消的订单也要生成ASN
-            var sql1 = String.Format("UPDATE t_orderdata SET `ASN管理連番`={1}  WHERE `ShipNO` in ({0}) ", String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray()), mid);
+            string sql1 = String.Format("UPDATE t_orderdata SET `ASN管理連番`={1}  WHERE `ShipNO` in ({0}) ", String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray()), mid);
             var path = EDITxtHandler.BuildASNFilePath(mid);
 
             ctx.Database.ExecuteSqlCommand(sql1);
@@ -663,7 +714,24 @@ namespace GODInventory.ViewModel
                             ).ToList(); 
 
             ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(path, orders);
-            
+
+            List<t_pricelist> canceledPriceItems = (from t_pricelist p in ctx.t_pricelist
+                                                    where p.欠品カウンター > 0
+                                                    select p).ToList();
+
+            foreach (var order in orders)
+            {
+                if (order.実際出荷数量 > 0)
+                {
+                    var priceItem = canceledPriceItems.Where(p => p.自社コード == order.自社コード && p.店番 == order.店舗コード).FirstOrDefault();
+                    if (priceItem != null)
+                    {
+                        priceItem.欠品カウンター = 0;
+                    }
+                }
+            }
+            ctx.SaveChanges();
+
             string sql = asnhead.ToRawSql();
 
             ctx.Database.ExecuteSqlCommand(sql);
@@ -693,6 +761,22 @@ namespace GODInventory.ViewModel
                             ).ToList();
 
             ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(path, orders);
+
+            List<t_pricelist> canceledPriceItems = (from t_pricelist p in ctx.t_pricelist
+                                                    where p.欠品カウンター > 0
+                                                    select p).ToList();
+            foreach (var order in orders)
+            {
+                if (order.実際出荷数量 > 0)
+                {
+                    var priceItem = canceledPriceItems.Where(p => p.自社コード == order.自社コード && p.店番 == order.店舗コード).FirstOrDefault();
+                    if (priceItem != null)
+                    {
+                        priceItem.欠品カウンター = 0;
+                    }
+                }
+            }
+            ctx.SaveChanges();
 
             string sql = asnhead.ToRawSql();
 
@@ -954,37 +1038,6 @@ namespace GODInventory.ViewModel
             }
         }
 
-        // 取消订单
-        //public static void CancelOrder(List<v_pendingorder> pendingOrders)
-        //{
-        //    using (var ctx = new GODDbContext())
-        //    {
-        //        var orderIds = pendingOrders.Select(o => o.id受注データ);
-
-        //        var orderList = (from t_orderdata o in ctx.t_orderdata
-        //                         where orderIds.Contains(o.id受注データ)
-        //                         select o).ToList();
-        //        var stockrecList = (from t_stockrec s in ctx.t_stockrec
-        //                            where orderIds.Contains(s.OrderId)
-        //                            select s).ToList();
-        //        var marukenTransList = (from t_maruken_trans s in ctx.t_maruken_trans
-        //                                where orderIds.Contains(s.OrderId)
-        //                                select s).ToList();
-
-        //        foreach (var order in orderList)
-        //        {
-        //            //二次制品订单？
-        //            order.キャンセル = "yes";
-        //            order.キャンセル時刻 = DateTime.Now;
-        //            order.Status = OrderStatus.Cancelled;
-        //        }
-
-        //        ctx.t_stockrec.RemoveRange(stockrecList);
-        //        ctx.t_maruken_trans.RemoveRange(marukenTransList);
-        //        ctx.SaveChanges();
-        //        OrderSqlHelper.UpdateStockState(ctx, stockrecList);
-        //    }
-        //}
 
         public static void RollbackOrder(List<v_pendingorder> pendingOrders) 
         {
@@ -1035,42 +1088,28 @@ namespace GODInventory.ViewModel
         public static void AfterOrderQtyChanged(t_orderdata order, t_itemlist item)
         {
             
-            //order.重量 = (int)(Convert.ToDecimal(product.単品重量) * order.実際出荷数量);
-           
-            //order.原価金額_税抜_ = order.実際出荷数量 * order.原単価_税抜_;
-            //order.原価金額_税込_ = (int)(order.実際出荷数量 * order.原単価_税込_);
-            //order.税額 = (int)(order.原価金額_税抜_ * order.税率);
-
             order.最終出荷数 = order.実際出荷数量;
             order.納品原価金額 = order.実際出荷数量 * order.原単価_税抜_;
-
-
             order.原価金額_税込_ = (int)(order.実際出荷数量 * order.原単価_税込_);
-
-
-            order.税額 = (int)(order.原価金額_税抜_ * order.税率);
+            order.税額 = (int)(order.納品原価金額 * order.税率);
             order.重量 = (int)(Convert.ToDecimal(item.単品重量) * order.実際出荷数量);
 
+            if (item.PT入数 > 0)
+            {
+                order.納品口数 = (int)(order.実際出荷数量 / item.PT入数);
+            }
+             
         }
 
         // 当订单的数量被修改后，需要相应修改的字段
         public static void AfterOrderQtyChanged(v_pendingorder order, t_itemlist item)
         {
-
-            //order.重量 = (int)(Convert.ToDecimal(product.単品重量) * order.実際出荷数量);
-
-            //order.原価金額_税抜_ = order.実際出荷数量 * order.原単価_税抜_;
-            //order.原価金額_税込_ = (int)(order.実際出荷数量 * order.原単価_税込_);
-            //order.税額 = (int)(order.原価金額_税抜_ * order.税率);
+            //`原価金額(税抜)`=0 ?
 
             order.最終出荷数 = order.実際出荷数量;
             order.納品原価金額 = order.実際出荷数量 * order.原単価_税抜_;
-
-
             order.原価金額_税込_ = (int)(order.実際出荷数量 * order.原単価_税込_);
-
-
-            order.税額 = (int)(order.原価金額_税抜_ * order.税率);
+            order.税額 = (int)(order.納品原価金額 * order.税率);
             order.重量 = (int)(Convert.ToDecimal(item.単品重量) * order.実際出荷数量);
 
         }
@@ -1086,6 +1125,16 @@ namespace GODInventory.ViewModel
             return Convert.ToInt32(string.Format("{0:D4}{1:D2}", newTime.Year, week));
         }
 
-
+        // order status duplicated -> pending
+        public static void ChangeOrderStatusToPending(GODDbContext ctx, t_orderdata order)
+        {
+            order.実際出荷数量 = order.発注数量;
+            order.納品口数 = order.口数;
+            order.ダブリ = "no";
+            order.Status = OrderStatus.Pending;
+            var product = ctx.t_itemlist.Find( order.自社コード);
+            OrderSqlHelper.AfterOrderQtyChanged(order, product);
+            ctx.SaveChanges();
+        }
     }
 }

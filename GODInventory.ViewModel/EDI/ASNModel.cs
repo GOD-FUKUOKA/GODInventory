@@ -272,7 +272,7 @@ namespace GODInventory.ViewModel.EDI
             // v99
             this.原単価_税込_ = Encoding.ASCII.GetBytes( Convert.ToInt32((order.原単価_税抜_ * (1+ order.税率 )* 100)).ToString("D9")); //44 原単価(税込 )   9 343
 
-            if (this.head.TotalQuantity > 0)
+            if (order.実際出荷数量 > 0)
             {
                 this.原価金額_税抜_ = Encoding.ASCII.GetBytes(order.納品原価金額.ToString("D9")); //45 原価金額(税抜 )  9 352
                 this.原価金額_税込_ = Encoding.ASCII.GetBytes(Convert.ToInt32(order.原価金額_税込_).ToString("D9")); //46 原価金額(税込 )  9 361

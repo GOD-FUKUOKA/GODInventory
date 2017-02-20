@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace GODInventory.MyLinq
 {
+    public enum StoreRankEnum
+    {
+        A = 0, B = 1, C = 2, D = 3
+    }
+
     public class MockEntity : IEquatable<MockEntity>
     {
         public int Id { get; set; }

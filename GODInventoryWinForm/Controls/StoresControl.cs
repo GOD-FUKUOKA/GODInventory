@@ -12,9 +12,17 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class StoresControl : UserControl
     {
+        List<t_customers> customerList = new List<t_customers>();
         public StoresControl()
         {
             InitializeComponent();
+            using (var ctx = new GODDbContext()) {
+                customerList = ctx.t_customers.ToList();
+            }
+
+            this.CustomerColumn1.ValueMember = "Id";
+            this.CustomerColumn1.DisplayMember = "FullName";
+            this.CustomerColumn1.DataSource = customerList;
         }
 
         private void SaveItem_Click(object sender, EventArgs e)
@@ -23,13 +31,11 @@ namespace GODInventoryWinForm.Controls
 
             //MessageBox.Show(String.Format("Congratulations, items changed successfully!" ));
 
-            int i = dataGridView1.CurrentCell.OwningColumn.Index;
-            int iRow = dataGridView1.CurrentCell.OwningRow.Index;
-            var oids = GetOrderIdsBySelectedGridCell();
+            t_shoplist store = dataGridView1.CurrentRow.DataBoundItem as t_shoplist;
 
-            if (oids.Count() > 0 )
+            if (store != null)
             {
-                var form = new StoresManagement(oids, "Update");
+                var form = new StoresManagement(store.店番, "Update");
 
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -63,7 +69,7 @@ namespace GODInventoryWinForm.Controls
 
         private void addItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new StoresManagement(null, "Add");
+            var form = new StoresManagement(0, "Add");
 
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -99,7 +105,7 @@ namespace GODInventoryWinForm.Controls
 
         private void btAddItem_Click(object sender, EventArgs e)
         {
-            var form = new StoresManagement(null, "Add");
+            var form = new StoresManagement(0, "Add");
 
             if (form.ShowDialog() == DialogResult.OK)
             {

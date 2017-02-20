@@ -45,6 +45,9 @@ namespace GODInventory.MyLinq
         [StringLength(255)]
         public string 営業担当 { get; set; }
 
+        [StringLength(12)]
+        public string 売上ランク { get; set; }
+
         public int customerId { get; set; }
 
     }

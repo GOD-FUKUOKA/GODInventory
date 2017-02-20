@@ -120,12 +120,16 @@ namespace GODInventoryWinForm.Controls
             {
                 if (Order.キャンセル == "yes")
                 {
+                    Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
                     Order.実際出荷数量 = 0;
                     Order.Status = OrderStatus.Cancelled;
                     OrderSqlHelper.AfterOrderQtyChanged(Order, Product);
+                    OrderSqlHelper.CancelOrder(entityDataSource1.DbContext as GODDbContext, Order);
                 }
-                Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
-                entityDataSource1.SaveChanges();
+                else {
+                    Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
+                    entityDataSource1.SaveChanges();                
+                }
 
             }
             else if (Order.Status == OrderStatus.Cancelled)
@@ -149,41 +153,44 @@ namespace GODInventoryWinForm.Controls
                     Order.納品口数 = 0;
                     Order.Status = OrderStatus.Cancelled;
                     OrderSqlHelper.AfterOrderQtyChanged(Order, Product);
-
+                    OrderSqlHelper.CancelOrder(entityDataSource1.DbContext as GODDbContext, Order);
                 }
-
-                if (Order.納品日 != null)
+                else
                 {
-                    Order.納品日 = this.fullfilledAtDateTimePicker2.Value;
-                }
 
-                Order.品名漢字 = this.productKanjiNameTextBox.Text;
-                Order.規格名漢字 = this.productKanjiSpecificationTextBox.Text;
-
-                Order.発注日 = this.placedAtDateTimePicker1.Value;
-                Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
-
-                Order.最終出荷数 = Convert.ToInt32(this.finalOrderQtyTextBox2.Text);
-
-                bool isQtyChanged = (Order.実際出荷数量 != OriginalOrder.実際出荷数量);
-                // 历史原因，有些订单没有出货记录
-                if ( isQtyChanged )
-                {
-                    OrderSqlHelper.AfterOrderQtyChanged(Order, Product);
-
-                    if (Stockrec != null)
+                    if (Order.納品日 != null)
                     {
-                        isQtyChanged = (Stockrec.数量 != -Order.実際出荷数量);
-                        Stockrec.数量 = -Order.実際出荷数量;
+                        Order.納品日 = this.fullfilledAtDateTimePicker2.Value;
                     }
-                }
-                entityDataSource1.SaveChanges();
 
-                if (isQtyChanged)
-                {
-                    var stockrecs = new List<t_stockrec>() { Stockrec };
-                    var ctx = entityDataSource1.DbContext as GODDbContext;
-                    OrderSqlHelper.UpdateStockState(ctx, stockrecs);
+                    Order.品名漢字 = this.productKanjiNameTextBox.Text;
+                    Order.規格名漢字 = this.productKanjiSpecificationTextBox.Text;
+
+                    Order.発注日 = this.placedAtDateTimePicker1.Value;
+                    Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
+
+                    Order.最終出荷数 = Convert.ToInt32(this.finalOrderQtyTextBox2.Text);
+
+                    bool isQtyChanged = (Order.実際出荷数量 != OriginalOrder.実際出荷数量);
+                    // 历史原因，有些订单没有出货记录
+                    if (isQtyChanged)
+                    {
+                        OrderSqlHelper.AfterOrderQtyChanged(Order, Product);
+
+                        if (Stockrec != null)
+                        {
+                            isQtyChanged = (Stockrec.数量 != -Order.実際出荷数量);
+                            Stockrec.数量 = -Order.実際出荷数量;
+                        }
+                    }
+                    entityDataSource1.SaveChanges();
+
+                    if (isQtyChanged)
+                    {
+                        var stockrecs = new List<t_stockrec>() { Stockrec };
+                        var ctx = entityDataSource1.DbContext as GODDbContext;
+                        OrderSqlHelper.UpdateStockState(ctx, stockrecs);
+                    }
                 }
             }
                 

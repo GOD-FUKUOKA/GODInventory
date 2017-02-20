@@ -477,7 +477,6 @@ namespace GODInventoryWinForm.Controls
                 using (GODDbContext ctx = new GODDbContext())
                 {
                     mid = OrderSqlHelper.GenerateASNByOrderIds(ctx, orderIds);
-                    //ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(newPath, orders);
                 }
 
 
@@ -532,7 +531,7 @@ namespace GODInventoryWinForm.Controls
                                      select o).ToList();
  
 
-                    dataGridView2.DataSource = shippedOrderList;
+                    dataGridView2.DataSource = new SortableBindingList<t_orderdata>(shippedOrderList);
                 }
             }
         }

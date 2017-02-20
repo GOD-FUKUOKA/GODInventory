@@ -128,3 +128,15 @@ CHANGE COLUMN `納品先店舗コード` `納品先店舗コード` INT(4) NOT N
 ==============================================
 ALTER TABLE  `t_orderdata` 
 ADD COLUMN `最終出荷数` INT(4) UNSIGNED NOT NULL DEFAULT 0;
+
+#v6.
+==============================================
+#根据各个店铺的总订货金额，进行分级
+ALTER TABLE  `t_shoplist` 
+ADD COLUMN `売上ランク` varchar(12)  CHARACTER SET 'utf8' COLLATE utf8_unicode_ci DEFAULT "";
+#根据各个店铺负责人的性格进行分级
+ALTER TABLE  `t_pricelist` 
+ADD COLUMN `厳しさ` varchar(12)  CHARACTER SET 'utf8' COLLATE utf8_unicode_ci DEFAULT "";
+#每次因缺货取消订单的时候计数1次
+ALTER TABLE  `t_pricelist` 
+ADD COLUMN `欠品カウンター` INT(4) UNSIGNED NOT NULL DEFAULT 0;

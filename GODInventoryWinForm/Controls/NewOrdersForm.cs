@@ -48,38 +48,37 @@ namespace GODInventoryWinForm.Controls
                     {
                         for (int i = 0; i < duplicatedOrderBindingList.Count; i++)
                         {
-                            //  if ((int) != 0)
+                            var duplicated_order = duplicatedOrderBindingList[i];
+                            t_orderdata order = ctx.t_orderdata.Find(duplicated_order.id受注データ);
+
+                            if (duplicated_order.キャンセル == "yes")
                             {
-                                var duplicated_order = duplicatedOrderBindingList[i];
-                                t_orderdata order = ctx.t_orderdata.Find(duplicated_order.id受注データ);
-
-                                if (duplicated_order.キャンセル == "yes")
-                                {
-                                    order.実際出荷数量 = 0;
-                                    order.納品口数 = 0;
-                                    order.キャンセル = "yes";
-                                    order.キャンセル時刻 = DateTime.Now;
-                                    order.Status = OrderStatus.Cancelled;
-                                    order.備考 = "キャンセル";
-                                    var product = productList.FirstOrDefault(o => o.商品コード == order.商品コード);
-                                    OrderSqlHelper.AfterOrderQtyChanged(order, product);
-
-                                }
-                                else if (duplicated_order.ダブリ == "no")
-                                {
-                                    if (order.Status == OrderStatus.Duplicated) {
-                                        order.実際出荷数量 = duplicated_order.実際出荷数量;
-                                        order.納品口数 = duplicated_order.納品口数;
-                                        order.ダブリ = "no";
-                                        order.Status = OrderStatus.Pending;
-                                        var product = productList.FirstOrDefault(o => o.商品コード == order.商品コード);
-                                        OrderSqlHelper.AfterOrderQtyChanged(order, product);
-                                    }
-                                }
+                                //List<int> orderIds = new List<int> { duplicated_order.id受注データ };
+                                //order.実際出荷数量 = 0;
+                                //order.納品口数 = 0;
+                                //order.キャンセル = "yes";
+                                //order.キャンセル時刻 = DateTime.Now;
+                                //order.Status = OrderStatus.Cancelled;
+                                //order.備考 = "キャンセル";
+                                //var product = productList.FirstOrDefault(o => o.自社コード == order.自社コード);
+                                //OrderSqlHelper.AfterOrderQtyChanged(order, product);
+                                OrderSqlHelper.CancelOrder(ctx, order);
 
                             }
+                            else if (duplicated_order.ダブリ == "no")
+                            {
+                                if (order.Status == OrderStatus.Duplicated) {
+                                    order.実際出荷数量 = duplicated_order.実際出荷数量;
+                                    order.納品口数 = duplicated_order.納品口数;
+                                    //order.ダブリ = "no";
+                                    //order.Status = OrderStatus.Pending;
+                                    //var product = productList.FirstOrDefault(o => o.自社コード == order.自社コード);
+                                    //OrderSqlHelper.AfterOrderQtyChanged(order, product);
+                                    OrderSqlHelper.ChangeOrderStatusToPending(ctx, order);
+                                }
+                            }
+
                         }
-                        ctx.SaveChanges();
                     }
                     var originalSortOrder = this.dataGridView1.SortOrder;
                     var originalSortedColumn = this.dataGridView1.SortedColumn;
@@ -92,7 +91,10 @@ namespace GODInventoryWinForm.Controls
                     }
                     if (originalSortedColumn != null)
                     {
-                        this.dataGridView1.Sort(originalSortedColumn, direction);
+                        if (this.dataGridView1.RowCount > 0)
+                        {
+                            this.dataGridView1.Sort(originalSortedColumn, direction);
+                        }
                     }
                 }
                 else

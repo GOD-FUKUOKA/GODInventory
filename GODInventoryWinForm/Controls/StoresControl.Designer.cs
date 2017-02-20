@@ -33,13 +33,15 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ChangeItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.btAddItem = new System.Windows.Forms.Button();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.CustomerColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.店番DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名カナDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.売上ランク = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.配送担当DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.郵便番号DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.県別DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,8 +52,8 @@
             this.営業担当 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -62,9 +64,11 @@
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CustomerColumn1,
             this.店番DataGridViewTextBoxColumn,
             this.店名DataGridViewTextBoxColumn,
             this.店名カナDataGridViewTextBoxColumn,
+            this.売上ランク,
             this.配送担当DataGridViewTextBoxColumn,
             this.郵便番号DataGridViewTextBoxColumn,
             this.県別DataGridViewTextBoxColumn,
@@ -110,17 +114,6 @@
             this.addItemToolStripMenuItem.Visible = false;
             this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
             // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataMember = "t_shoplist";
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Filter = "";
-            this.bindingSource1.Position = 0;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -144,12 +137,33 @@
             this.btAddItem.UseVisualStyleBackColor = true;
             this.btAddItem.Click += new System.EventHandler(this.btAddItem_Click);
             // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataMember = "t_shoplist";
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Filter = "";
+            this.bindingSource1.Position = 0;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // CustomerColumn1
+            // 
+            this.CustomerColumn1.DataPropertyName = "customerId";
+            this.CustomerColumn1.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.CustomerColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CustomerColumn1.HeaderText = "法人名";
+            this.CustomerColumn1.Name = "CustomerColumn1";
+            this.CustomerColumn1.ReadOnly = true;
+            // 
             // 店番DataGridViewTextBoxColumn
             // 
             this.店番DataGridViewTextBoxColumn.DataPropertyName = "店番";
             this.店番DataGridViewTextBoxColumn.HeaderText = "店番";
             this.店番DataGridViewTextBoxColumn.Name = "店番DataGridViewTextBoxColumn";
             this.店番DataGridViewTextBoxColumn.ReadOnly = true;
+            this.店番DataGridViewTextBoxColumn.Width = 60;
             // 
             // 店名DataGridViewTextBoxColumn
             // 
@@ -167,12 +181,21 @@
             this.店名カナDataGridViewTextBoxColumn.ReadOnly = true;
             this.店名カナDataGridViewTextBoxColumn.Width = 180;
             // 
+            // 売上ランク
+            // 
+            this.売上ランク.DataPropertyName = "売上ランク";
+            this.売上ランク.HeaderText = "売上ランク";
+            this.売上ランク.Name = "売上ランク";
+            this.売上ランク.ReadOnly = true;
+            this.売上ランク.Width = 90;
+            // 
             // 配送担当DataGridViewTextBoxColumn
             // 
             this.配送担当DataGridViewTextBoxColumn.DataPropertyName = "配送担当";
             this.配送担当DataGridViewTextBoxColumn.HeaderText = "配送担当";
             this.配送担当DataGridViewTextBoxColumn.Name = "配送担当DataGridViewTextBoxColumn";
             this.配送担当DataGridViewTextBoxColumn.ReadOnly = true;
+            this.配送担当DataGridViewTextBoxColumn.Width = 80;
             // 
             // 郵便番号DataGridViewTextBoxColumn
             // 
@@ -180,6 +203,7 @@
             this.郵便番号DataGridViewTextBoxColumn.HeaderText = "郵便番号";
             this.郵便番号DataGridViewTextBoxColumn.Name = "郵便番号DataGridViewTextBoxColumn";
             this.郵便番号DataGridViewTextBoxColumn.ReadOnly = true;
+            this.郵便番号DataGridViewTextBoxColumn.Width = 80;
             // 
             // 県別DataGridViewTextBoxColumn
             // 
@@ -224,6 +248,7 @@
             this.営業担当.HeaderText = "営業担当";
             this.営業担当.Name = "営業担当";
             this.営業担当.ReadOnly = true;
+            this.営業担当.Width = 80;
             // 
             // StoresControl
             // 
@@ -236,8 +261,8 @@
             this.Size = new System.Drawing.Size(635, 357);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -252,9 +277,11 @@
         private System.Windows.Forms.ToolStripMenuItem ChangeItem;
         private System.Windows.Forms.ToolStripMenuItem addItemToolStripMenuItem;
         private System.Windows.Forms.Button btAddItem;
+        private System.Windows.Forms.DataGridViewComboBoxColumn CustomerColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店番DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店名DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店名カナDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 売上ランク;
         private System.Windows.Forms.DataGridViewTextBoxColumn 配送担当DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 郵便番号DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 県別DataGridViewTextBoxColumn;

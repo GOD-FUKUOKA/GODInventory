@@ -36,6 +36,7 @@ namespace GODInventoryWinForm.Controls
         private List<v_pendingorder> shipperOrderList;
         private List<t_shoplist> shopList;
         private SortableBindingList<v_pendingorder> sortablePendingOrderList3;
+
         public PendingOrderForm()
         {
             InitializeComponent();
@@ -44,7 +45,6 @@ namespace GODInventoryWinForm.Controls
 
             this.datagrid_changes = new Hashtable();
             this.pendingOrderList = new List<v_pendingorder>();
-
 
             var ctx = entityDataSource1.DbContext as GODDbContext;
             this.stockstates = ctx.t_stockstate.Select(s => s).ToList();
@@ -342,9 +342,11 @@ namespace GODInventoryWinForm.Controls
                 //    pendingOrderList.Add(o as v_pendingorder);
                 //}
                 string sql = @" SELECT o.*, o.`原単価(税抜)` as `原単価_税抜_`, o.`原単価(税込)` as `原単価_税込_`, o.`売単価（税抜）` as `売単価_税抜_`, o.`売単価（税込）` as `売単価_税込_`,
-g.`ジャンル名` as `GenreName`, k.`在庫数` as `在庫数`  
+g.`ジャンル名` as `GenreName`, k.`在庫数` as `在庫数`, s.`売上ランク`, p.`厳しさ`, p.`欠品カウンター`
 FROM t_orderdata o
 INNER JOIN t_genre g  on o.ジャンル = g.idジャンル
+INNER JOIN t_shoplist s  on o.法人コード = s.customerId AND  o.店舗コード = s.店番 
+LEFT JOIN t_pricelist p on  o.自社コード = p.自社コード AND  o.店舗コード = p.店番 
 LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.実際配送担当 = k.ShipperName 
 WHERE o.Status ={0}
 ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
@@ -543,7 +545,9 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             {
                 if (MessageBox.Show("選択された伝票をキャンセル?", "確認メッセージ", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    OrderSqlHelper.CancelOrders(orders);
+                    var orderIds = orders.Select(o => o.id受注データ).ToList();
+
+                    OrderSqlHelper.CancelOrders(orderIds);
                     pager1.Bind();
                 }
             }

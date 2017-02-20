@@ -152,6 +152,22 @@ namespace GODInventory.MyLinq
         public string 電話番号 { get; set; }
 
         public long 出荷No { get; set; }
+
+        public string 売上ランク { get; set; }
+
+        //`売上ランク`, p.`厳しさ`, p.`欠品カウンター`
+
+        //price
+        public int 欠品カウンター { get; set; }
+        public string 厳しさ { get; set; }
+
+        public string UnitedShopLevel
+        {
+            get {
+                return String.Format("{0}-{1}-{2}", this.売上ランク, this.厳しさ, this.欠品カウンター);
+            }
+        }
+
         // fixed
         public string 直送区分 { get; set; }
 

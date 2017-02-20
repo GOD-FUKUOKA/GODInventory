@@ -37,7 +37,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.districtTextBox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.customerTextBox11 = new System.Windows.Forms.TextBox();
             this.postalTextBox8 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.countyTextBox = new System.Windows.Forms.TextBox();
@@ -53,17 +52,20 @@
             this.label7 = new System.Windows.Forms.Label();
             this.faxTextBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.shipperTextBox = new System.Windows.Forms.ComboBox();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cusotmerComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.officerTextBox3 = new System.Windows.Forms.TextBox();
+            this.shipperTextBox = new System.Windows.Forms.ComboBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label8 = new System.Windows.Forms.Label();
+            this.storeRankComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // phoneTextBox2
             // 
-            this.phoneTextBox2.Location = new System.Drawing.Point(105, 194);
+            this.phoneTextBox2.Location = new System.Drawing.Point(105, 183);
             this.phoneTextBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.phoneTextBox2.Name = "phoneTextBox2";
             this.phoneTextBox2.Size = new System.Drawing.Size(268, 21);
@@ -72,7 +74,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(456, 120);
+            this.label1.Location = new System.Drawing.Point(456, 147);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 14);
             this.label1.TabIndex = 17;
@@ -80,7 +82,7 @@
             // 
             // addressTextBox1
             // 
-            this.addressTextBox1.Location = new System.Drawing.Point(496, 117);
+            this.addressTextBox1.Location = new System.Drawing.Point(496, 144);
             this.addressTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addressTextBox1.Name = "addressTextBox1";
             this.addressTextBox1.Size = new System.Drawing.Size(268, 21);
@@ -89,7 +91,7 @@
             // storeCodeTextBox
             // 
             this.storeCodeTextBox.Enabled = false;
-            this.storeCodeTextBox.Location = new System.Drawing.Point(105, 41);
+            this.storeCodeTextBox.Location = new System.Drawing.Point(105, 30);
             this.storeCodeTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.storeCodeTextBox.Name = "storeCodeTextBox";
             this.storeCodeTextBox.Size = new System.Drawing.Size(268, 21);
@@ -99,7 +101,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(420, 158);
+            this.label11.Location = new System.Drawing.Point(420, 186);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(71, 14);
             this.label11.TabIndex = 19;
@@ -108,7 +110,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(36, 120);
+            this.label9.Location = new System.Drawing.Point(36, 109);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(63, 14);
             this.label9.TabIndex = 16;
@@ -116,7 +118,7 @@
             // 
             // districtTextBox
             // 
-            this.districtTextBox.Location = new System.Drawing.Point(496, 155);
+            this.districtTextBox.Location = new System.Drawing.Point(496, 183);
             this.districtTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.districtTextBox.Name = "districtTextBox";
             this.districtTextBox.Size = new System.Drawing.Size(268, 21);
@@ -125,26 +127,15 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(28, 82);
+            this.label12.Location = new System.Drawing.Point(50, 70);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(71, 14);
+            this.label12.Size = new System.Drawing.Size(49, 14);
             this.label12.TabIndex = 14;
-            this.label12.Text = "customerId";
-            this.label12.Visible = false;
-            // 
-            // customerTextBox11
-            // 
-            this.customerTextBox11.Location = new System.Drawing.Point(105, 79);
-            this.customerTextBox11.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.customerTextBox11.Name = "customerTextBox11";
-            this.customerTextBox11.Size = new System.Drawing.Size(268, 21);
-            this.customerTextBox11.TabIndex = 2;
-            this.customerTextBox11.Text = "4";
-            this.customerTextBox11.Visible = false;
+            this.label12.Text = "法人名";
             // 
             // postalTextBox8
             // 
-            this.postalTextBox8.Location = new System.Drawing.Point(105, 117);
+            this.postalTextBox8.Location = new System.Drawing.Point(105, 106);
             this.postalTextBox8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.postalTextBox8.Name = "postalTextBox8";
             this.postalTextBox8.Size = new System.Drawing.Size(268, 21);
@@ -153,7 +144,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(64, 158);
+            this.label10.Location = new System.Drawing.Point(64, 147);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(35, 14);
             this.label10.TabIndex = 18;
@@ -161,7 +152,7 @@
             // 
             // countyTextBox
             // 
-            this.countyTextBox.Location = new System.Drawing.Point(105, 155);
+            this.countyTextBox.Location = new System.Drawing.Point(105, 144);
             this.countyTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.countyTextBox.Name = "countyTextBox";
             this.countyTextBox.Size = new System.Drawing.Size(268, 21);
@@ -169,7 +160,7 @@
             // 
             // textBox12
             // 
-            this.textBox12.Location = new System.Drawing.Point(496, 79);
+            this.textBox12.Location = new System.Drawing.Point(496, 68);
             this.textBox12.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(268, 21);
@@ -178,7 +169,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(431, 82);
+            this.label13.Location = new System.Drawing.Point(431, 71);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(60, 14);
             this.label13.TabIndex = 15;
@@ -187,7 +178,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(36, 237);
+            this.label4.Location = new System.Drawing.Point(36, 226);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 14);
             this.label4.TabIndex = 22;
@@ -196,7 +187,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(456, 44);
+            this.label6.Location = new System.Drawing.Point(456, 33);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 14);
             this.label6.TabIndex = 13;
@@ -204,7 +195,7 @@
             // 
             // storeNameTextBox
             // 
-            this.storeNameTextBox.Location = new System.Drawing.Point(496, 41);
+            this.storeNameTextBox.Location = new System.Drawing.Point(496, 30);
             this.storeNameTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.storeNameTextBox.Name = "storeNameTextBox";
             this.storeNameTextBox.Size = new System.Drawing.Size(268, 21);
@@ -213,7 +204,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(64, 44);
+            this.label2.Location = new System.Drawing.Point(64, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 14);
             this.label2.TabIndex = 12;
@@ -222,7 +213,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(36, 197);
+            this.label5.Location = new System.Drawing.Point(36, 186);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 14);
             this.label5.TabIndex = 20;
@@ -231,7 +222,7 @@
             // submitFormButton
             // 
             this.submitFormButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.submitFormButton.Location = new System.Drawing.Point(558, 317);
+            this.submitFormButton.Location = new System.Drawing.Point(558, 341);
             this.submitFormButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(106, 32);
@@ -242,7 +233,7 @@
             // 
             // cancelFormButton
             // 
-            this.cancelFormButton.Location = new System.Drawing.Point(681, 317);
+            this.cancelFormButton.Location = new System.Drawing.Point(681, 341);
             this.cancelFormButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(106, 32);
@@ -254,7 +245,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(431, 197);
+            this.label7.Location = new System.Drawing.Point(431, 226);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 14);
             this.label7.TabIndex = 21;
@@ -262,7 +253,7 @@
             // 
             // faxTextBox3
             // 
-            this.faxTextBox3.Location = new System.Drawing.Point(496, 194);
+            this.faxTextBox3.Location = new System.Drawing.Point(496, 223);
             this.faxTextBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.faxTextBox3.Name = "faxTextBox3";
             this.faxTextBox3.Size = new System.Drawing.Size(268, 21);
@@ -270,6 +261,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.storeRankComboBox);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.cusotmerComboBox);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.officerTextBox3);
             this.groupBox1.Controls.Add(this.shipperTextBox);
@@ -281,7 +275,6 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.customerTextBox11);
             this.groupBox1.Controls.Add(this.faxTextBox3);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.districtTextBox);
@@ -294,14 +287,39 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.storeNameTextBox);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(23, 13);
+            this.groupBox1.Location = new System.Drawing.Point(23, 24);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(782, 285);
+            this.groupBox1.Size = new System.Drawing.Size(782, 302);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // cusotmerComboBox
+            // 
+            this.cusotmerComboBox.FormattingEnabled = true;
+            this.cusotmerComboBox.Location = new System.Drawing.Point(105, 67);
+            this.cusotmerComboBox.Name = "cusotmerComboBox";
+            this.cusotmerComboBox.Size = new System.Drawing.Size(268, 22);
+            this.cusotmerComboBox.TabIndex = 24;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(428, 265);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 14);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "営業担当";
+            // 
+            // officerTextBox3
+            // 
+            this.officerTextBox3.Location = new System.Drawing.Point(496, 262);
+            this.officerTextBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.officerTextBox3.Name = "officerTextBox3";
+            this.officerTextBox3.Size = new System.Drawing.Size(268, 21);
+            this.officerTextBox3.TabIndex = 11;
             // 
             // shipperTextBox
             // 
@@ -310,7 +328,7 @@
             "丸健",
             "MKL",
             "マツモト産業"});
-            this.shipperTextBox.Location = new System.Drawing.Point(105, 233);
+            this.shipperTextBox.Location = new System.Drawing.Point(105, 222);
             this.shipperTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.shipperTextBox.Name = "shipperTextBox";
             this.shipperTextBox.Size = new System.Drawing.Size(268, 22);
@@ -320,28 +338,34 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // label3
+            // label8
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(428, 237);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 14);
-            this.label3.TabIndex = 23;
-            this.label3.Text = "営業担当";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(422, 112);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 14);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "売上ランク";
             // 
-            // officerTextBox3
+            // storeRankComboBox
             // 
-            this.officerTextBox3.Location = new System.Drawing.Point(496, 234);
-            this.officerTextBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.officerTextBox3.Name = "officerTextBox3";
-            this.officerTextBox3.Size = new System.Drawing.Size(268, 21);
-            this.officerTextBox3.TabIndex = 11;
+            this.storeRankComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.storeRankComboBox.FormattingEnabled = true;
+            this.storeRankComboBox.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C",
+            "D"});
+            this.storeRankComboBox.Location = new System.Drawing.Point(498, 109);
+            this.storeRankComboBox.Name = "storeRankComboBox";
+            this.storeRankComboBox.Size = new System.Drawing.Size(266, 22);
+            this.storeRankComboBox.TabIndex = 27;
             // 
             // StoresManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 385);
+            this.ClientSize = new System.Drawing.Size(828, 393);
             this.Controls.Add(this.submitFormButton);
             this.Controls.Add(this.cancelFormButton);
             this.Controls.Add(this.groupBox1);
@@ -369,7 +393,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox districtTextBox;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox customerTextBox11;
         private System.Windows.Forms.TextBox postalTextBox8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox countyTextBox;
@@ -389,5 +412,8 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox officerTextBox3;
+        private System.Windows.Forms.ComboBox cusotmerComboBox;
+        private System.Windows.Forms.ComboBox storeRankComboBox;
+        private System.Windows.Forms.Label label8;
     }
 }
