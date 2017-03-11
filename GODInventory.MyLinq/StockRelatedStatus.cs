@@ -29,4 +29,10 @@ namespace GODInventory.MyLinq
     public enum StockInClueEnum {
         仕入 = 2
     }
+
+    public enum StockStateEnum { 
+        あり = 10,
+        一部不足 = 1,
+        なし = 0,
+    }
 }

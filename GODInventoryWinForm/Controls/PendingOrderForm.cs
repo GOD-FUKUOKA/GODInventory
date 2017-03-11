@@ -314,7 +314,7 @@ namespace GODInventoryWinForm.Controls
 
         #region 初始化数据
 
-        private int InitializeDataSource(string shipper = "すべて", string genre = "すべて", string product = "すべて", string stockState = "すべて", string shops = "すべて")
+        private int InitializeDataSource(string shipper = "すべて", string stockState = "すべて", string genre = "すべて", string product = "すべて", string county = "すべて", string storeName = "すべて")
         {
             this.datagrid_changes.Clear();
             this.pendingOrderList.Clear();
@@ -367,12 +367,12 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             }
 
 
-            InitializeOrderData(shipper, genre, product, stockState, shops);
+            InitializeOrderData(shipper, stockState, genre, product, county, storeName);
 
             return count;
         }
 
-        private int InitializeOrderData(string shipper, string genre, string product, string stockState, string shops)
+        private int InitializeOrderData(string shipper, string stockState, string genre, string product, string county, string storeName)
         {
             // 过滤优先顺序
             // 配送担当 > 库存状态 > 产品分类 > 产品
@@ -385,45 +385,21 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
 
             if (pendingOrderList.Count > 0)
             {
-                //var shops = pendingOrderList.Select(s => new MockEntity { Id = s.id受注データ, FullName = s.実際配送担当 }).Distinct().ToList();
-                //shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
-                //this.DanDangComboBox.DisplayMember = "FullName";
-                //this.DanDangComboBox.ValueMember = "Id";
-                //this.DanDangComboBox.DataSource = shops;
-
                 // 担当
-                var counties = pendingOrderList.Select(s => new MockEntity { ShortName = s.実際配送担当, FullName = s.実際配送担当 }).Distinct().ToList();
-                counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
+                var shippers = pendingOrderList.Select(s => new MockEntity { ShortName = s.実際配送担当, FullName = s.実際配送担当 }).Distinct().ToList();
+                shippers.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
                 this.DanDangComboBox.DisplayMember = "FullName";
                 this.DanDangComboBox.ValueMember = "ShortName";
-                this.DanDangComboBox.DataSource = counties;
+                this.DanDangComboBox.DataSource = shippers;
 
                 this.DanDangComboBox.Text = shipper;
-                this.genreComboBox.Text = genre;
-                this.productComboBox.Text = product;
                 // PageEvent 时, stockState 在初始化为 “”， 需设置为 “すべて”
                 this.ZKZTcomboBox3.Text = (stockState.Length == 0 ? "すべて" : stockState);
-                this.storeComboBox.Text = shops;
-                //// 品名漢字
-                //var PMHZ = pendingOrderList.Select(s => new MockEntity {Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().ToList();
-                //PMHZ.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
-                //this.PMHZCombox.DisplayMember = "FullName";
-                //this.PMHZCombox.ValueMember = "Id";
-                //this.PMHZCombox.DataSource = PMHZ;
+                this.genreComboBox.Text = genre;
+                this.productComboBox.Text = product;
+                this.countyComboBox1.Text = county;
+                this.storeComboBox.Text = storeName;
 
-                //// GenreName
-                //var GenreName = pendingOrderList.Select(s => new MockEntity { Id = s.ジャンル, ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
-                //GenreName.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
-                //this.GenreNamecomboBox.DisplayMember = "FullName";
-                //this.GenreNamecomboBox.ValueMember = "Id";
-                //this.GenreNamecomboBox.DataSource = GenreName;
-
-                // 在庫状態
-                //var ZKZT = pendingOrderList.Select(s => new MockEntity { ShortName = s.在庫状態, FullName = s.在庫状態 }).Distinct().ToList();
-                //ZKZT.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
-                //this.ZKZTcomboBox3.DisplayMember = "FullName";
-                //this.ZKZTcomboBox3.ValueMember = "ShortName";
-                //this.ZKZTcomboBox3.DataSource = ZKZT;
             }
 
 
@@ -634,8 +610,10 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             string genre = this.genreComboBox.Text;
             string product = this.productComboBox.Text;
             string stockState = this.ZKZTcomboBox3.Text;
-            string shops = this.storeComboBox.Text;
-            int orderCount = InitializeDataSource(shipper, genre, product, stockState, shops);
+            string county = countyComboBox1.Text;
+            string store = this.storeComboBox.Text;
+
+            int orderCount = InitializeDataSource(shipper, stockState, genre, product, county, store);
 
             var direction = ListSortDirection.Ascending;
             if (originalSortOrder == System.Windows.Forms.SortOrder.Descending)
@@ -815,9 +793,9 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             {
                 DanDangComboBox.SelectedIndex = 0;
             }
-            else if (countyComboBox1.SelectedIndex != 0)
+            else if(ZKZTcomboBox3.SelectedIndex != 0)
             {
-                countyComboBox1.SelectedIndex = 0;
+                ZKZTcomboBox3.SelectedIndex = 0;
             }
             else if (genreComboBox.SelectedIndex != 0)
             {
@@ -827,11 +805,16 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             {
                 productComboBox.SelectedIndex = 0;
             }
-
-            if (ZKZTcomboBox3.SelectedIndex != 0)
+            else if (countyComboBox1.SelectedIndex != 0)
             {
-                ZKZTcomboBox3.SelectedIndex = 0;
+                countyComboBox1.SelectedIndex = 0;
             }
+            else if (storeComboBox.SelectedIndex != 0)
+            {
+                storeComboBox.SelectedIndex = 0;
+            }
+
+
 
 
         }
@@ -839,47 +822,33 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
         // 配送担当
         private void DanDangComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             var combox = sender as ComboBox;
             string shipper = combox.Text;
-            var orders = GetOrdersByShipper(shipper);
-            InitializeCountyComboBox(orders);
-            //InitializeProductComboBox(orders);
+            var orders = GetOrdersByShipper(shipper);           
+
+            InitializeStockState(orders);
         }
 
         //在库状态
         private void ZKZTcomboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
             string shipper = DanDangComboBox.Text;
-            string genre = genreComboBox.Text;
-            string product = productComboBox.Text;
             string stock = ZKZTcomboBox3.Text;
-            string county = countyComboBox1.Text;
-            string shops = storeComboBox.Text;
-            int code = (int)storeComboBox.SelectedValue;
-            ApplyFilter4(shipper, county, genre, product, stock, code);
-        }
 
-        private void countyComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string shipper = DanDangComboBox.Text;
-            string county = countyComboBox1.Text;
-            var orders = GetOrdersByShipper(shipper, county);
+            var orders = GetOrdersByShipper(shipper, stock);
 
-            //联动 店名
-            InitializeshopsComboBox(orders);
-            // 品名漢字
             InitializeGenreComboBox(orders);
         }
+
+
 
         //分类名称
         private void GenreNamecomboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string shipper = DanDangComboBox.Text;
-            string county = countyComboBox1.Text;
             string genre = genreComboBox.Text;
-            var orders = GetOrdersByShipper(shipper, county, genre);
-
+            string stock = ZKZTcomboBox3.Text;
+            var orders = GetOrdersByShipper(shipper, stock, genre);
 
             // 品名漢字
             InitializeProductComboBox(orders);
@@ -888,45 +857,55 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
         private void PMHZCombox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string shipper = DanDangComboBox.Text;
+            string stock = ZKZTcomboBox3.Text;
             string genre = genreComboBox.Text;
             string product = productComboBox.Text;
-            string stock = ZKZTcomboBox3.Text;
-            string county = countyComboBox1.Text;
-            string shops = storeComboBox.Text;
-            int code = (int)storeComboBox.SelectedValue;
-            ApplyFilter4(shipper, county, genre, product, stock, code);
+            var orders = GetOrdersByShipper(shipper, stock, genre, product);
 
+            InitializeCountyComboBox(orders);
         }
 
+        //县别
+        private void countyComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string shipper = DanDangComboBox.Text;
+            string stock = ZKZTcomboBox3.Text;
+            string genre = genreComboBox.Text;
+            string product = productComboBox.Text;
+            string county = countyComboBox1.Text;
+            var orders = GetOrdersByShipper(shipper, stock, genre, product, county);
 
+            //联动 店名
+            InitializeshopsComboBox(orders);
+
+        }
         //店名 
         private void storeComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             string shipper = DanDangComboBox.Text;
             string genre = genreComboBox.Text;
             string product = productComboBox.Text;
-            string stock = ZKZTcomboBox3.Text;
+            string stockState = ZKZTcomboBox3.Text;
             string county = countyComboBox1.Text;
-            string shops = storeComboBox.Text;
-            int code = (int)storeComboBox.SelectedValue;
-            ApplyFilter4(shipper, county, genre, product, stock, code);
+            int storeId = (int)storeComboBox.SelectedValue;
+            ApplyFilter4(shipper, stockState, genre, product, county, storeId);
 
         }
 
-        private void InitializeCountyComboBox(List<v_pendingorder> orders)
+        private void InitializeStockState(List<v_pendingorder> orders)
         {
-            // County
-            var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-            counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
-            this.countyComboBox1.DisplayMember = "FullName";
-            this.countyComboBox1.ValueMember = "ShortName";
-            this.countyComboBox1.DataSource = counties;
+            // stockState
+            var stockStates = orders.Select(s => new MockEntity { ShortName = s.在庫状態, FullName = s.在庫状態 }).Distinct().ToList();
+            stockStates.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
+            this.ZKZTcomboBox3.DisplayMember = "FullName";
+            this.ZKZTcomboBox3.ValueMember = "ShortName";
+            this.ZKZTcomboBox3.DataSource = stockStates;
         }
 
         private void InitializeGenreComboBox(List<v_pendingorder> orders)
         {
             // GenreName
-            var GenreName = orders.Select(s => new MockEntity { Id = s.ジャンル, ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
+            var GenreName = orders.Select(s => new MockEntity { ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
             GenreName.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
             this.genreComboBox.DisplayMember = "FullName";
             this.genreComboBox.ValueMember = "Id";
@@ -943,6 +922,16 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             this.productComboBox.DataSource = PMHZ;
         }
 
+        private void InitializeCountyComboBox(List<v_pendingorder> orders)
+        {
+            // County
+            var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
+            counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
+            this.countyComboBox1.DisplayMember = "FullName";
+            this.countyComboBox1.ValueMember = "ShortName";
+            this.countyComboBox1.DataSource = counties;
+        }
+        
         private void InitializeshopsComboBox(List<v_pendingorder> orders)
         {
             // 店名列表
@@ -965,7 +954,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             return orders;
         }
 
-        private void ApplyFilter4(string shipper = "", string county = "", string genre = "", string product = "", string stock = "", int shops = 0)
+        private void ApplyFilter4(string shipper = "", string stock = "", string genre = "", string product = "", string county = "", int storeId = 0)
         {
             var originalSortOrder = this.dataGridView1.SortOrder;
             var originalSortedColumn = this.dataGridView1.SortedColumn;
@@ -998,9 +987,9 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             {
                 filteredOrderList = filteredOrderList.FindAll(o => o.在庫状態 == stock);
             }
-            if (shops > 0)
+            if (storeId > 0)
             {
-                filteredOrderList = filteredOrderList.FindAll(o => o.店舗コード == shops);
+                filteredOrderList = filteredOrderList.FindAll(o => o.店舗コード == storeId);
             }
             sortablePendingOrderList = new SortableBindingList<v_pendingorder>(filteredOrderList);
 
@@ -1047,20 +1036,32 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
         }
 
 
-        private List<v_pendingorder> GetOrdersByShipper(string shipper, string county = "", string genre = "")
+        private List<v_pendingorder> GetOrdersByShipper(string shipper, string stockState = "", string genre = "", string product = "", string county = "")
         {
             List<v_pendingorder> orders = pendingOrderList;
             if (shipper != "すべて")
             {
                 orders = orders.FindAll(o => o.実際配送担当 == shipper);
             }
-            if (county.Length > 0 && county != "すべて")
+
+            if (stockState.Length > 0 && stockState != "すべて")
             {
-                orders = orders.FindAll(o => o.県別 == county);
+                orders = orders.FindAll(o => o.在庫状態 == stockState);
             }
+
             if (genre.Length > 0 && genre != "すべて")
             {
                 orders = orders.FindAll(o => o.GenreName == genre);
+            }
+
+            if (product.Length > 0 && product != "すべて")
+            {
+                orders = orders.FindAll(o => o.品名漢字 == product);
+            } 
+            
+            if (county.Length > 0 && county != "すべて")
+            {
+                orders = orders.FindAll(o => o.県別 == county);
             }
 
             return orders;
