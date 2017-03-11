@@ -406,7 +406,10 @@ namespace GODInventoryWinForm.Controls
             }
             if (originalSortedColumn != null)
             {
-                this.dataGridView1.Sort(originalSortedColumn, direction);
+                if (this.dataGridView1.RowCount > 0)
+                {
+                    this.dataGridView1.Sort(originalSortedColumn, direction);
+                }
             }
         }
 

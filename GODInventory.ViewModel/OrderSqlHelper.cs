@@ -533,6 +533,31 @@ namespace GODInventory.ViewModel
             
         }
 
+        // 撤销取消掉订单
+        public static void UncancelOrder(GODDbContext ctx, t_orderdata order)
+        {
+
+            order.Status = OrderStatus.Pending;
+            order.キャンセル時刻 = null;
+            order.実際出荷数量 = order.発注数量;
+            order.納品口数 = order.口数;
+            order.一旦保留 = true;
+
+            var product = ctx.t_itemlist.Find(order.自社コード);
+    
+
+            var priceItem = ctx.t_pricelist.Where(p => p.自社コード == order.自社コード && p.店番 == order.店舗コード).FirstOrDefault();
+
+            if (priceItem.欠品カウンター > 0)
+            {
+                priceItem.欠品カウンター -= 1;
+            }
+
+            OrderSqlHelper.AfterOrderQtyChanged(order, product);
+
+            ctx.SaveChanges();
+
+        }
 
         public static int SendOrderToShipper(List<v_pendingorder> orders)
         {

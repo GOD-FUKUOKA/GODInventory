@@ -242,6 +242,7 @@
             // 
             // cancelComboBox
             // 
+            this.cancelComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cancelComboBox.FormattingEnabled = true;
             this.cancelComboBox.Items.AddRange(new object[] {
             "no",

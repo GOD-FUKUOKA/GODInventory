@@ -63,13 +63,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.storeComboBox = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.countyComboBox1 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.shipperComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.受注日Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店番Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.場所Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.伝票番号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,8 +88,8 @@
             this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注区分Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品指示Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.storeCodeTextBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -107,7 +109,7 @@
             this.editToolStripMenuItem,
             this.rollbackToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 70);
             // 
             // moveDownToolStripMenuItem
             // 
@@ -177,10 +179,10 @@
             // 
             this.shipNOComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.shipNOComboBox.FormattingEnabled = true;
-            this.shipNOComboBox.Location = new System.Drawing.Point(122, 24);
+            this.shipNOComboBox.Location = new System.Drawing.Point(115, 24);
             this.shipNOComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.shipNOComboBox.Name = "shipNOComboBox";
-            this.shipNOComboBox.Size = new System.Drawing.Size(138, 22);
+            this.shipNOComboBox.Size = new System.Drawing.Size(175, 22);
             this.shipNOComboBox.TabIndex = 0;
             this.shipNOComboBox.SelectedIndexChanged += new System.EventHandler(this.shipNOComboBox_SelectedIndexChanged);
             this.shipNOComboBox.TextChanged += new System.EventHandler(this.shipNOComboBox_TextChanged);
@@ -379,10 +381,10 @@
             // deliveredAtDateTimePicker2
             // 
             this.deliveredAtDateTimePicker2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.deliveredAtDateTimePicker2.Location = new System.Drawing.Point(624, 25);
+            this.deliveredAtDateTimePicker2.Location = new System.Drawing.Point(612, 25);
             this.deliveredAtDateTimePicker2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.deliveredAtDateTimePicker2.Name = "deliveredAtDateTimePicker2";
-            this.deliveredAtDateTimePicker2.Size = new System.Drawing.Size(178, 21);
+            this.deliveredAtDateTimePicker2.Size = new System.Drawing.Size(175, 21);
             this.deliveredAtDateTimePicker2.TabIndex = 2;
             this.deliveredAtDateTimePicker2.ValueChanged += new System.EventHandler(this.deliveredAtDateTimePicker2_ValueChanged);
             // 
@@ -390,7 +392,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(569, 28);
+            this.label4.Location = new System.Drawing.Point(561, 28);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 14);
             this.label4.TabIndex = 5;
@@ -399,10 +401,10 @@
             // shippedAtDateTimePicker1
             // 
             this.shippedAtDateTimePicker1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.shippedAtDateTimePicker1.Location = new System.Drawing.Point(358, 25);
+            this.shippedAtDateTimePicker1.Location = new System.Drawing.Point(364, 25);
             this.shippedAtDateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.shippedAtDateTimePicker1.Name = "shippedAtDateTimePicker1";
-            this.shippedAtDateTimePicker1.Size = new System.Drawing.Size(178, 21);
+            this.shippedAtDateTimePicker1.Size = new System.Drawing.Size(175, 21);
             this.shippedAtDateTimePicker1.TabIndex = 1;
             this.shippedAtDateTimePicker1.ValueChanged += new System.EventHandler(this.shippedAtDateTimePicker1_ValueChanged);
             // 
@@ -410,7 +412,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(303, 28);
+            this.label3.Location = new System.Drawing.Point(313, 28);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 14);
             this.label3.TabIndex = 5;
@@ -421,8 +423,9 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.storeCodeTextBox);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.storeComboBox);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.countyComboBox1);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.shipperComboBox);
@@ -442,29 +445,19 @@
             this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.storeComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.storeComboBox.FormattingEnabled = true;
-            this.storeComboBox.Location = new System.Drawing.Point(624, 23);
+            this.storeComboBox.Location = new System.Drawing.Point(576, 23);
             this.storeComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.storeComboBox.Name = "storeComboBox";
             this.storeComboBox.Size = new System.Drawing.Size(140, 22);
             this.storeComboBox.TabIndex = 2;
             this.storeComboBox.SelectedIndexChanged += new System.EventHandler(this.storeComboBox_SelectedIndexChanged);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(541, 27);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 14);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "店舗名漢字";
-            // 
             // countyComboBox1
             // 
             this.countyComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.countyComboBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countyComboBox1.FormattingEnabled = true;
-            this.countyComboBox1.Location = new System.Drawing.Point(344, 23);
+            this.countyComboBox1.Location = new System.Drawing.Point(311, 23);
             this.countyComboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.countyComboBox1.Name = "countyComboBox1";
             this.countyComboBox1.Size = new System.Drawing.Size(140, 22);
@@ -475,7 +468,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(303, 27);
+            this.label5.Location = new System.Drawing.Point(271, 27);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 14);
             this.label5.TabIndex = 5;
@@ -518,6 +511,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.受注日Column,
+            this.店番Column1,
             this.店名Column1,
             this.場所Column1,
             this.伝票番号Column1,
@@ -546,12 +540,28 @@
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
             // 受注日Column
             // 
             this.受注日Column.DataPropertyName = "受注日";
             this.受注日Column.HeaderText = "受注日";
             this.受注日Column.Name = "受注日Column";
             this.受注日Column.ReadOnly = true;
+            // 
+            // 店番Column1
+            // 
+            this.店番Column1.DataPropertyName = "店舗コード";
+            this.店番Column1.HeaderText = "店番";
+            this.店番Column1.Name = "店番Column1";
+            this.店番Column1.ReadOnly = true;
+            this.店番Column1.Width = 60;
             // 
             // 店名Column1
             // 
@@ -678,13 +688,26 @@
             this.納品指示Column1.Name = "納品指示Column1";
             this.納品指示Column1.ReadOnly = true;
             // 
-            // errorProvider1
+            // storeCodeTextBox
             // 
-            this.errorProvider1.ContainerControl = this;
+            this.storeCodeTextBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.storeCodeTextBox.Location = new System.Drawing.Point(516, 24);
+            this.storeCodeTextBox.MaxLength = 8;
+            this.storeCodeTextBox.Name = "storeCodeTextBox";
+            this.storeCodeTextBox.Size = new System.Drawing.Size(58, 21);
+            this.storeCodeTextBox.TabIndex = 8;
+            this.storeCodeTextBox.TextChanged += new System.EventHandler(this.storeCodeTextBox_TextChanged);
             // 
-            // entityDataSource1
+            // label7
             // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.SystemColors.Control;
+            this.label7.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.Location = new System.Drawing.Point(477, 27);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 14);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "店番";
             // 
             // WaitToShipForm
             // 
@@ -736,7 +759,6 @@
         private GODInventory.ViewModel.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.ComboBox storeComboBox;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox countyComboBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox shipNOComboBox;
@@ -757,7 +779,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注区分Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column2;
+        private System.Windows.Forms.ToolStripMenuItem rollbackToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn 受注日Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 店番Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 場所Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号Column1;
@@ -774,6 +798,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 原価金額_税抜_Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注区分Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column1;
-        private System.Windows.Forms.ToolStripMenuItem rollbackToolStripMenuItem;
+        private System.Windows.Forms.TextBox storeCodeTextBox;
+        private System.Windows.Forms.Label label7;
     }
 }

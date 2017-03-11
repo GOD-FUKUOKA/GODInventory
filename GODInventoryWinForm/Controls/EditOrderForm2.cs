@@ -136,13 +136,15 @@ namespace GODInventoryWinForm.Controls
             {
                 if (Order.キャンセル == "no")
                 {
-                    Order.Status = OrderStatus.Pending;
-                    Order.キャンセル時刻 = null;
-                    Order.実際出荷数量 = Order.発注数量;
-                    Order.納品口数 = Order.口数;
-                    Order.一旦保留 = true;
-                    OrderSqlHelper.AfterOrderQtyChanged(Order, Product);
-                    entityDataSource1.SaveChanges();
+                    //Order.Status = OrderStatus.Pending;
+                    //Order.キャンセル時刻 = null;
+                    //Order.実際出荷数量 = Order.発注数量;
+                    //Order.納品口数 = Order.口数;
+                    //Order.一旦保留 = true;
+                    //OrderSqlHelper.AfterOrderQtyChanged(Order, Product);
+                    //entityDataSource1.SaveChanges();
+                    OrderSqlHelper.UncancelOrder(entityDataSource1.DbContext as GODDbContext, Order);
+
                 }
             }
             else {

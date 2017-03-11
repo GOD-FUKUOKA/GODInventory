@@ -307,6 +307,11 @@ namespace GODInventoryWinForm.Controls
             {
                 return false;
             }
+
+            if (errorProvider1.GetError(this.shipNOComboBox).Length > 0)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -341,7 +346,13 @@ namespace GODInventoryWinForm.Controls
             string shipper = shipperComboBox.Text;
             string county = countyComboBox1.Text;
             string store = storeComboBox.Text;
-
+            if (Convert.ToInt32(storeComboBox.SelectedValue) > 0)
+            {
+                this.storeCodeTextBox.Text = this.storeComboBox.SelectedValue.ToString();
+            }
+            else {
+                this.storeCodeTextBox.Text = String.Empty;
+            }
             ApplyBindSourceFilter(shipper, county, store);
         }
 
@@ -457,13 +468,36 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-
+        // 当用户输入新的配车单号，需检查是否存在
+        // 如果重复了，在生成ASN时，导致其他状态订单上传，即上传数据出错。
         private void shipNOComboBox_TextChanged(object sender, EventArgs e)
         {
+            //配车单号原则上是不会重复，但是有时候比如上周出了点情况，也有可能输入一个已经存在的配车单号
+            //1. 检查 配车单号在是否存在，Status == OrderStatus.PendingShipment
+            //2. 检查 配车单号在是否存在，Status != OrderStatus.Completed
             string shipNO = shipNOComboBox.Text;
             this.orderListForShip = shippingOrderList.FindAll(o => o.ShipNO == shipNO);
 
-            dataGridView2.DataSource = this.orderListForShip;
+            if (this.orderListForShip.Count > 0)
+            {
+                dataGridView2.DataSource = this.orderListForShip;
+                errorProvider1.SetError(shipNOComboBox, String.Empty);
+
+            }
+            else {
+                if( shipNO.Length>0)
+                {
+                    GODDbContext ctx = this.entityDataSource1.DbContext as GODDbContext;
+                    t_orderdata order = ctx.t_orderdata.FirstOrDefault(o => o.ShipNO == shipNO && o.Status!= OrderStatus.Completed && o.Status!= OrderStatus.PendingShipment);
+                    if (order != null)
+                    {
+                        errorProvider1.SetError(shipNOComboBox, "この出荷指示書番号はすでに送信されたものです。新しい番号で作成してください。");
+                    }
+                    else {
+                        errorProvider1.SetError(shipNOComboBox, String.Empty);
+                    }
+                }
+            }
         }
 
         private void shippedAtDateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -579,6 +613,36 @@ namespace GODInventoryWinForm.Controls
             string county = countyComboBox1.Text;
             string store = storeComboBox.Text;
             InitializeDataSource(shipper, county, store, shipNO);
+        }
+
+        private void storeCodeTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (storeCodeTextBox.Text.Trim().Length > 0)
+            {
+                int storeId = Convert.ToInt32(storeCodeTextBox.Text);
+                if (storeId > 0)
+                {
+                    //var shops = this.shopList.Where(s => s.店番.ToString().StartsWith(storeId.ToString())).ToList();
+                    var shops = this.shopList.Where(s => s.店番 == storeId).ToList();
+                    if (shops.Count > 0)
+                    {
+                        var store = shops.First();
+                        
+                        this.storeComboBox.SelectedValue = store.店番;
+                        
+                        errorProvider1.SetError(storeComboBox, String.Empty);
+                    }
+                    else
+                    {
+                        errorProvider1.SetError(storeComboBox, String.Format("店番  {0}の店舗は登録されていません", storeId));
+                    }
+
+                }
+                else
+                {
+                    errorProvider1.SetError(storeComboBox, String.Format("店番  {0}の店舗は登録されていません", storeCodeTextBox.Text));
+                }
+            }
         }
     }
 }

@@ -81,11 +81,11 @@
             this.notifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource2 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreCodeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreNameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -104,8 +104,10 @@
             this.StoreDistrictColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsPendingColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.在庫状態Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.売上ランクColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.厳しさColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.欠品カウンターColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnitedShopLevelColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -403,8 +405,10 @@
             this.StoreDistrictColumn1,
             this.IsPendingColumn1,
             this.在庫状態Column,
-            this.Column4,
-            this.UnitedShopLevelColumn1});
+            this.売上ランクColumn1,
+            this.厳しさColumn1,
+            this.欠品カウンターColumn1,
+            this.Column4});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(3, 70);
@@ -666,22 +670,6 @@
             this.toolStripMenuItem2.Text = "前の画面へ戻す";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(0, 3);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(727, 34);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
-            // 
             // bindingSource2
             // 
             this.bindingSource2.DataSource = this.entityDataSource2;
@@ -699,6 +687,22 @@
             // 
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(0, 3);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(727, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // OrderReceivedAtColumn1
             // 
@@ -849,6 +853,27 @@
             this.在庫状態Column.ReadOnly = true;
             this.在庫状態Column.Width = 60;
             // 
+            // 売上ランクColumn1
+            // 
+            this.売上ランクColumn1.DataPropertyName = "売上ランク";
+            this.売上ランクColumn1.HeaderText = "売上ランク";
+            this.売上ランクColumn1.Name = "売上ランクColumn1";
+            this.売上ランクColumn1.Width = 50;
+            // 
+            // 厳しさColumn1
+            // 
+            this.厳しさColumn1.DataPropertyName = "厳しさ";
+            this.厳しさColumn1.HeaderText = "厳しさ";
+            this.厳しさColumn1.Name = "厳しさColumn1";
+            this.厳しさColumn1.Width = 50;
+            // 
+            // 欠品カウンターColumn1
+            // 
+            this.欠品カウンターColumn1.DataPropertyName = "欠品カウンター";
+            this.欠品カウンターColumn1.HeaderText = "欠品カウンター";
+            this.欠品カウンターColumn1.Name = "欠品カウンターColumn1";
+            this.欠品カウンターColumn1.Width = 50;
+            // 
             // Column4
             // 
             this.Column4.DataPropertyName = "在庫数";
@@ -856,13 +881,6 @@
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             this.Column4.Width = 60;
-            // 
-            // UnitedShopLevelColumn1
-            // 
-            this.UnitedShopLevelColumn1.DataPropertyName = "UnitedShopLevel";
-            this.UnitedShopLevelColumn1.HeaderText = "UnitedShopLevel";
-            this.UnitedShopLevelColumn1.Name = "UnitedShopLevelColumn1";
-            this.UnitedShopLevelColumn1.Width = 80;
             // 
             // PendingOrderForm
             // 
@@ -966,7 +984,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn StoreDistrictColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsPendingColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 在庫状態Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 売上ランクColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 厳しさColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 欠品カウンターColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UnitedShopLevelColumn1;
     }
 }
