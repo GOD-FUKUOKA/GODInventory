@@ -104,23 +104,25 @@ namespace GODInventoryWinForm.Controls
             this.shipNOComboBox.DisplayMember = "FullName";
             this.shipNOComboBox.ValueMember = "ShortName";
             this.shipNOComboBox.DataSource = shipNOs;
-            if (shipNO.Length > 0 && shipNOs.Count()>0)
+            if (shipNO.Length > 0 && shipNOs.Count() > 0)
             {
                 // 检查 shipNOs 中是否存在 shipNO， 可能不存在了。
                 if (shipNOs.Exists(o => o.FullName == shipNO))
                 {
                     this.shipNOComboBox.SelectedValue = shipNO;
                 }
-                else {
-                    this.shipNOComboBox.Text = "";
+                else
+                {
+                    //this.shipNOComboBox.Text = String.Empty;
+                    shipNOComboBox.SelectedIndex = -1;
                 }
             }
             else
             {
-                this.shipNOComboBox.Text = "";
-                //this.shipNOComboBox.SelectedItem = null;
+                //设置为“”时，数据列表为空，但是Text 还是第一条数据
+                //this.shipNOComboBox.Text = String.Empty;
+                this.shipNOComboBox.SelectedIndex = -1;
             }
-
             
         }
 
@@ -478,26 +480,8 @@ namespace GODInventoryWinForm.Controls
             string shipNO = shipNOComboBox.Text;
             this.orderListForShip = shippingOrderList.FindAll(o => o.ShipNO == shipNO);
 
-            if (this.orderListForShip.Count > 0)
-            {
-                dataGridView2.DataSource = this.orderListForShip;
-                errorProvider1.SetError(shipNOComboBox, String.Empty);
-
-            }
-            else {
-                if( shipNO.Length>0)
-                {
-                    GODDbContext ctx = this.entityDataSource1.DbContext as GODDbContext;
-                    t_orderdata order = ctx.t_orderdata.FirstOrDefault(o => o.ShipNO == shipNO && o.Status!= OrderStatus.Completed && o.Status!= OrderStatus.PendingShipment);
-                    if (order != null)
-                    {
-                        errorProvider1.SetError(shipNOComboBox, "この出荷指示書番号はすでに送信されたものです。新しい番号で作成してください。");
-                    }
-                    else {
-                        errorProvider1.SetError(shipNOComboBox, String.Empty);
-                    }
-                }
-            }
+            dataGridView2.DataSource = this.orderListForShip;
+            errorProvider1.SetError(shipNOComboBox, String.Empty);
         }
 
         private void shippedAtDateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -641,6 +625,24 @@ namespace GODInventoryWinForm.Controls
                 else
                 {
                     errorProvider1.SetError(storeComboBox, String.Format("店番  {0}の店舗は登録されていません", storeCodeTextBox.Text));
+                }
+            }
+        }
+
+        private void shipNOComboBox_Leave(object sender, EventArgs e)
+        {
+            string shipNO = shipNOComboBox.Text;
+            if (shipNO.Length > 0)
+            {
+                GODDbContext ctx = this.entityDataSource1.DbContext as GODDbContext;
+                t_orderdata order = ctx.t_orderdata.FirstOrDefault(o => o.ShipNO == shipNO && o.Status != OrderStatus.PendingShipment);
+                if (order != null)
+                {
+                    errorProvider1.SetError(shipNOComboBox, "この出荷指示書番号はすでに送信されたものです。新しい番号で作成してください。");
+                }
+                else
+                {
+                    errorProvider1.SetError(shipNOComboBox, String.Empty);
                 }
             }
         }

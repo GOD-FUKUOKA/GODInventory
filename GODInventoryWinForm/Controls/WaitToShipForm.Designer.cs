@@ -62,14 +62,14 @@
             this.shippedAtDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.storeCodeTextBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.storeComboBox = new System.Windows.Forms.ComboBox();
             this.countyComboBox1 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.shipperComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.受注日Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店番Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,8 +88,8 @@
             this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注区分Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品指示Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.storeCodeTextBox = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -186,6 +186,7 @@
             this.shipNOComboBox.TabIndex = 0;
             this.shipNOComboBox.SelectedIndexChanged += new System.EventHandler(this.shipNOComboBox_SelectedIndexChanged);
             this.shipNOComboBox.TextChanged += new System.EventHandler(this.shipNOComboBox_TextChanged);
+            this.shipNOComboBox.Leave += new System.EventHandler(this.shipNOComboBox_Leave);
             // 
             // saveButton
             // 
@@ -440,6 +441,27 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // storeCodeTextBox
+            // 
+            this.storeCodeTextBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.storeCodeTextBox.Location = new System.Drawing.Point(516, 24);
+            this.storeCodeTextBox.MaxLength = 8;
+            this.storeCodeTextBox.Name = "storeCodeTextBox";
+            this.storeCodeTextBox.Size = new System.Drawing.Size(58, 21);
+            this.storeCodeTextBox.TabIndex = 8;
+            this.storeCodeTextBox.TextChanged += new System.EventHandler(this.storeCodeTextBox_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.SystemColors.Control;
+            this.label7.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.Location = new System.Drawing.Point(477, 27);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 14);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "店番";
+            // 
             // storeComboBox
             // 
             this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -539,14 +561,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(1186, 185);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // 受注日Column
             // 
@@ -688,26 +702,13 @@
             this.納品指示Column1.Name = "納品指示Column1";
             this.納品指示Column1.ReadOnly = true;
             // 
-            // storeCodeTextBox
+            // errorProvider1
             // 
-            this.storeCodeTextBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.storeCodeTextBox.Location = new System.Drawing.Point(516, 24);
-            this.storeCodeTextBox.MaxLength = 8;
-            this.storeCodeTextBox.Name = "storeCodeTextBox";
-            this.storeCodeTextBox.Size = new System.Drawing.Size(58, 21);
-            this.storeCodeTextBox.TabIndex = 8;
-            this.storeCodeTextBox.TextChanged += new System.EventHandler(this.storeCodeTextBox_TextChanged);
+            this.errorProvider1.ContainerControl = this;
             // 
-            // label7
+            // entityDataSource1
             // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.SystemColors.Control;
-            this.label7.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(477, 27);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 14);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "店番";
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
             // WaitToShipForm
             // 
