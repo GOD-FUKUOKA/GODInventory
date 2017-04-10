@@ -1,0 +1,1 @@
+﻿https://www.codeproject.com/articles/221931/entity-framework-in-winforms

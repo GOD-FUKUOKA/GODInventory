@@ -61,7 +61,6 @@ namespace GODInventoryWinForm.Controls
                                 //order.Status = OrderStatus.Cancelled;
                                 //order.備考 = "キャンセル";
                                 //var product = productList.FirstOrDefault(o => o.自社コード == order.自社コード);
-                                //OrderSqlHelper.AfterOrderQtyChanged(order, product);
                                 OrderSqlHelper.CancelOrder(ctx, order);
 
                             }
@@ -73,7 +72,6 @@ namespace GODInventoryWinForm.Controls
                                     //order.ダブリ = "no";
                                     //order.Status = OrderStatus.Pending;
                                     //var product = productList.FirstOrDefault(o => o.自社コード == order.自社コード);
-                                    //OrderSqlHelper.AfterOrderQtyChanged(order, product);
                                     OrderSqlHelper.ChangeOrderStatusToPending(ctx, order);
                                 }
                             }

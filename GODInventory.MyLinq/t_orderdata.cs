@@ -54,7 +54,7 @@ namespace GODInventory.MyLinq
 
         public DateTime? キャンセル時刻 { get; set; }
 
-        public short ジャンル { get; set; }
+        public int ジャンル { get; set; }
 
         public long ＪＡＮコード { get; set; }
 
@@ -301,6 +301,9 @@ namespace GODInventory.MyLinq
 
         public int 最終出荷数 { get; set; }
 
+        public decimal 仕入原価 { get; set; }
+        public decimal 仕入金額 { get; set; }
+        public decimal 粗利金額 { get; set; }
 
         public t_orderdata()
         {

@@ -143,7 +143,6 @@ namespace GODInventoryWinForm
                             var model = models.ElementAt(i);
                             progress = Convert.ToInt16(((i + 1) * 1.0 / models.Count) * 100);
                             // use sql instead of orm
-                            //var order = model.ConverToEntity( ctx );
                             int count = 0;
                             
                                 //sql_parameters = model.ToSqlArguments(shop, item);

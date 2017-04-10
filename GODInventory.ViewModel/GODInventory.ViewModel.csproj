@@ -73,6 +73,7 @@
     <Compile Include="Commands\UpdateProductCommand.cs" />
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="CustomPropertyHelper.cs" />
+    <Compile Include="OrderHelper.cs" />
     <Compile Include="SortableBindingList.cs" />
     <Compile Include="Design\ContextTypeTypeConverter.cs" />
     <Compile Include="Design\EntitySetTypeDescriptor.cs" />

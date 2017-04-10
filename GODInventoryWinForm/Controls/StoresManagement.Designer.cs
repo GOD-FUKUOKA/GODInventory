@@ -52,13 +52,15 @@
             this.label7 = new System.Windows.Forms.Label();
             this.faxTextBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.storeRankComboBox = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.cusotmerComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.officerTextBox3 = new System.Windows.Forms.TextBox();
             this.shipperTextBox = new System.Windows.Forms.ComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label8 = new System.Windows.Forms.Label();
-            this.storeRankComboBox = new System.Windows.Forms.ComboBox();
+            this.storesComboBox = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -157,6 +159,7 @@
             this.countyTextBox.Name = "countyTextBox";
             this.countyTextBox.Size = new System.Drawing.Size(268, 21);
             this.countyTextBox.TabIndex = 6;
+            this.countyTextBox.TextChanged += new System.EventHandler(this.countyTextBox_TextChanged);
             // 
             // textBox12
             // 
@@ -261,6 +264,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.storesComboBox);
+            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.storeRankComboBox);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.cusotmerComboBox);
@@ -295,6 +300,29 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // storeRankComboBox
+            // 
+            this.storeRankComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.storeRankComboBox.FormattingEnabled = true;
+            this.storeRankComboBox.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C",
+            "D"});
+            this.storeRankComboBox.Location = new System.Drawing.Point(498, 109);
+            this.storeRankComboBox.Name = "storeRankComboBox";
+            this.storeRankComboBox.Size = new System.Drawing.Size(266, 22);
+            this.storeRankComboBox.TabIndex = 27;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(422, 112);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 14);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "売上ランク";
             // 
             // cusotmerComboBox
             // 
@@ -338,34 +366,34 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // label8
+            // storesComboBox
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(422, 112);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 14);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "売上ランク";
-            // 
-            // storeRankComboBox
-            // 
-            this.storeRankComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.storeRankComboBox.FormattingEnabled = true;
-            this.storeRankComboBox.Items.AddRange(new object[] {
+            this.storesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.storesComboBox.FormattingEnabled = true;
+            this.storesComboBox.Items.AddRange(new object[] {
             "A",
             "B",
             "C",
             "D"});
-            this.storeRankComboBox.Location = new System.Drawing.Point(498, 109);
-            this.storeRankComboBox.Name = "storeRankComboBox";
-            this.storeRankComboBox.Size = new System.Drawing.Size(266, 22);
-            this.storeRankComboBox.TabIndex = 27;
+            this.storesComboBox.Location = new System.Drawing.Point(105, 262);
+            this.storesComboBox.Name = "storesComboBox";
+            this.storesComboBox.Size = new System.Drawing.Size(266, 22);
+            this.storesComboBox.TabIndex = 29;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(29, 265);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(63, 14);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "参考店舗";
             // 
             // StoresManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 393);
+            this.ClientSize = new System.Drawing.Size(828, 397);
             this.Controls.Add(this.submitFormButton);
             this.Controls.Add(this.cancelFormButton);
             this.Controls.Add(this.groupBox1);
@@ -415,5 +443,7 @@
         private System.Windows.Forms.ComboBox cusotmerComboBox;
         private System.Windows.Forms.ComboBox storeRankComboBox;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox storesComboBox;
+        private System.Windows.Forms.Label label14;
     }
 }

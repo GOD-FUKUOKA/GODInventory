@@ -7,9 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GODInventory.MyLinq;
+using GODInventory.ViewModel;
 
 namespace GODInventoryWinForm.Controls
 {
+
     public partial class StoresControl : UserControl
     {
         List<t_customers> customerList = new List<t_customers>();
@@ -19,7 +21,7 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext()) {
                 customerList = ctx.t_customers.ToList();
             }
-
+            this.pricesDataGridView.AutoGenerateColumns = false;
             this.CustomerColumn1.ValueMember = "Id";
             this.CustomerColumn1.DisplayMember = "FullName";
             this.CustomerColumn1.DataSource = customerList;
@@ -31,7 +33,7 @@ namespace GODInventoryWinForm.Controls
 
             //MessageBox.Show(String.Format("Congratulations, items changed successfully!" ));
 
-            t_shoplist store = dataGridView1.CurrentRow.DataBoundItem as t_shoplist;
+            t_shoplist store = storesDataGridView.CurrentRow.DataBoundItem as t_shoplist;
 
             if (store != null)
             {
@@ -84,7 +86,7 @@ namespace GODInventoryWinForm.Controls
         {
 
             List<int> order_ids = new List<int>();
-            var rows = GetSelectedRowsBySelectedCells(dataGridView1);
+            var rows = GetSelectedRowsBySelectedCells(storesDataGridView);
             foreach (DataGridViewRow row in rows)
             {
                 var pendingorder = row.DataBoundItem as t_shoplist;
@@ -115,6 +117,97 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
+        private void InitializePriceListDatagridView(int storeId)
+        {
+           
+                var query = from t_pricelist p in this.entityDataSource1.EntitySets["t_pricelist"]
+                            join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on p.自社コード equals i.自社コード
+                            where p.店番 == storeId
+                            select new v_itemprice
+                            {
+                                Id = p.Id,
+                                自社コード = i.自社コード,
+                                商品名 = i.商品名,
+                                規格 = i.規格,
+                                店番 = p.店番,
+                                店名 = p.店名,
+                                県別 = p.県別,
+                                売単価 = p.売単価,
+                                原単価 = p.通常原単価,
+                                広告原単価 = p.広告原単価,
+                                特売原単価 = p.特売原単価,
+                                仕入原価 = p.仕入原価
+
+                            };
+
+                this.pricesBindingSource.DataSource = this.entityDataSource1.CreateView(query);
+                this.pricesDataGridView.DataSource = this.pricesBindingSource;
+
+           
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (this.tabControl1.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    if (this.storesDataGridView.RowCount > 0)
+                    {
+                        var stores = storesDataGridView.DataSource as BindingSource;
+
+
+                        this.storesComboBox.ValueMember = "店番";
+                        this.storesComboBox.DisplayMember = "店名";
+                        this.storesComboBox.DataSource = stores;
+
+                        //var store = storesDataGridView.CurrentRow.DataBoundItem as t_shoplist;
+                        //this.pricesBindingSource.Filter = string.Format("店番={0}", store.店番);
+                    }
+                    break;
+
+            }
+
+        }
+
+        private void editPriceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.pricesDataGridView.RowCount > 0)
+            {
+                var price = pricesDataGridView.CurrentRow.DataBoundItem as v_itemprice;
+
+                var form = new EditPriceForm(price.Id);
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    price.原単価 = form.Price.通常原単価;
+                    price.広告原単価 = form.Price.広告原単価;
+                    price.特売原単価 = form.Price.特売原単価;
+                    price.売単価 = form.Price.売単価;
+                    this.pricesDataGridView.Refresh();
+                    //MessageBox.Show("saved");
+                }
+            }
+            
+        }
+
+        private void storesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //int storeId = (int)this.storesComboBox.SelectedValue;
+            //InitializePriceListDatagridView(storeId);
+
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
+            if (storeId > 0)
+            {
+                InitializePriceListDatagridView(storeId);
+            }
+
+        }
 
     }
 }

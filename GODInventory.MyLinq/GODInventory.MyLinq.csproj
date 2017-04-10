@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelCallback.cs" />
     <Compile Include="v_orderreason.cs" />
     <Compile Include="OrderQuantityChangeReasonRespository.cs" />
     <Compile Include="v_shipper.cs" />

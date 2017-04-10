@@ -15,6 +15,7 @@ namespace GODInventoryWinForm.Controls
     public partial class StoresManagement : Form
     {
         private string showtype;
+        private List<t_shoplist> stores;
 
         public StoresManagement( int  storeId, string type)
         {
@@ -22,53 +23,58 @@ namespace GODInventoryWinForm.Controls
 
             using (var ctx = new GODDbContext())
             {
+                this.stores = ctx.t_shoplist.ToList();
                 List<t_customers> customers = ctx.t_customers.ToList();
 
                 this.cusotmerComboBox.ValueMember = "Id";
                 this.cusotmerComboBox.DisplayMember = "FullName";
-                this.cusotmerComboBox.DataSource = customers; 
-                
+                this.cusotmerComboBox.DataSource = customers;
+
+                this.storesComboBox.ValueMember = "店番";
+                this.storesComboBox.DisplayMember = "店名";
+                this.storesComboBox.DataSource = this.stores; 
+
                 if (type == "Update")
                 {
-                    t_shoplist order = ctx.t_shoplist.Find(storeId);
-                    storeCodeTextBox.Text = order.店番.ToString();
+                    t_shoplist store = ctx.t_shoplist.Find(storeId);
+                    storeCodeTextBox.Text = store.店番.ToString();
 
-                    if (order.店名 != null)
-                        storeNameTextBox.Text = order.店名;
-                    if (order.店名カナ != null)
-                        textBox12.Text = order.店名カナ;
-                    if (order.配送担当 != null)
-                        shipperTextBox.Text = order.配送担当;
-                    if (order.郵便番号 != null)
-                        postalTextBox8.Text = order.郵便番号.ToString();
-                    if (order.県別 != null)
-                        countyTextBox.Text = order.県別.ToString();
-                    if (order.県内エリア != null)
-                        districtTextBox.Text = order.県内エリア.ToString();
+                    if (store.店名 != null)
+                        storeNameTextBox.Text = store.店名;
+                    if (store.店名カナ != null)
+                        textBox12.Text = store.店名カナ;
+                    if (store.配送担当 != null)
+                        shipperTextBox.Text = store.配送担当;
+                    if (store.郵便番号 != null)
+                        postalTextBox8.Text = store.郵便番号.ToString();
+                    if (store.県別 != null)
+                        countyTextBox.Text = store.県別.ToString();
+                    if (store.県内エリア != null)
+                        districtTextBox.Text = store.県内エリア.ToString();
 
-                    var customer = customers.Find(o => o.Id == order.customerId);
+                    var customer = customers.Find(o => o.Id == store.customerId);
                     if (customer != null)
                     {
                         cusotmerComboBox.SelectedItem = customer;
                     }
 
-                    if (order.住所 != null)
-                        addressTextBox1.Text = order.住所;
-                    if (order.電話番号 != null)
+                    if (store.住所 != null)
+                        addressTextBox1.Text = store.住所;
+                    if (store.電話番号 != null)
                     {
-                        phoneTextBox2.Text = order.電話番号.ToString();
+                        phoneTextBox2.Text = store.電話番号.ToString();
                     }
-                    if (order.営業担当 != null)
+                    if (store.営業担当 != null)
                     {
-                        officerTextBox3.Text = order.営業担当.ToString();
+                        officerTextBox3.Text = store.営業担当.ToString();
                     }
-                    if (order.FAX番号 != null)
+                    if (store.FAX番号 != null)
                     {
-                        faxTextBox3.Text = order.FAX番号.ToString();
+                        faxTextBox3.Text = store.FAX番号.ToString();
                     }
-                    if (order.売上ランク != null)
+                    if (store.売上ランク != null)
                     {
-                        storeRankComboBox.Text = order.売上ランク;
+                        storeRankComboBox.Text = store.売上ランク;
                     }
                 }
                 else
@@ -91,60 +97,70 @@ namespace GODInventoryWinForm.Controls
         {
             try
             {
+                if (countyTextBox.Text.Length == 0)
+                {
+                    MessageBox.Show("*県別*を入力してください");
+                    return;
+                }
+
                 using (var ctx = new GODDbContext())
                 {
                     if (showtype == "Update")
                     {
-                        t_shoplist order = ctx.t_shoplist.Find(Convert.ToInt32(storeCodeTextBox.Text));
+                        t_shoplist store = ctx.t_shoplist.Find(Convert.ToInt32(storeCodeTextBox.Text));
 
-                        order.店番 = Convert.ToInt32(storeCodeTextBox.Text);
-                        order.店名 = storeNameTextBox.Text;
-                        order.店名カナ = textBox12.Text;
-                        order.配送担当 = shipperTextBox.Text;
-                        order.郵便番号 = postalTextBox8.Text;
-                        order.県別 = countyTextBox.Text;
-                        order.県内エリア = districtTextBox.Text;
-                        order.customerId = Convert.ToInt32(cusotmerComboBox.SelectedValue);
-                        order.住所 = addressTextBox1.Text;
-                        order.電話番号 = phoneTextBox2.Text;
-                        order.FAX番号 = this.faxTextBox3.Text;
-                        order.営業担当 = this.officerTextBox3.Text;
-                        order.売上ランク = this.storeRankComboBox.Text;
+                        store.店番 = Convert.ToInt32(storeCodeTextBox.Text);
+                        store.店名 = storeNameTextBox.Text;
+                        store.店名カナ = textBox12.Text;
+                        store.配送担当 = shipperTextBox.Text;
+                        store.郵便番号 = postalTextBox8.Text;
+                        store.県別 = countyTextBox.Text;
+                        store.県内エリア = districtTextBox.Text;
+                        store.customerId = Convert.ToInt32(cusotmerComboBox.SelectedValue);
+                        store.住所 = addressTextBox1.Text;
+                        store.電話番号 = phoneTextBox2.Text;
+                        store.FAX番号 = this.faxTextBox3.Text;
+                        store.営業担当 = this.officerTextBox3.Text;
+                        store.売上ランク = this.storeRankComboBox.Text;
                         ctx.SaveChanges();
                         MessageBox.Show(String.Format("店舗情報更新完了!"));
                     }
                     else if (showtype == "Add")
                     {
 
-                        t_shoplist order = new t_shoplist();
-                        order.店番 = Convert.ToInt32(storeCodeTextBox.Text);
+                        t_shoplist store = new t_shoplist();
+                        store.店番 = Convert.ToInt32(storeCodeTextBox.Text);
 
-                        order.店名 = storeNameTextBox.Text;
+                        store.店名 = storeNameTextBox.Text;
 
-                        order.店名カナ = textBox12.Text;
+                        store.店名カナ = textBox12.Text;
 
-                        order.配送担当 = shipperTextBox.Text;
+                        store.配送担当 = shipperTextBox.Text;
 
-                        order.郵便番号 = postalTextBox8.Text;
+                        store.郵便番号 = postalTextBox8.Text;
 
-                        order.県別 = countyTextBox.Text;
+                        store.県別 = countyTextBox.Text;
 
-                        order.県内エリア = districtTextBox.Text;
+                        store.県内エリア = districtTextBox.Text;
 
-                        order.customerId = Convert.ToInt32(cusotmerComboBox.SelectedValue);
+                        store.customerId = Convert.ToInt32(cusotmerComboBox.SelectedValue);
                         
-                        order.住所 = addressTextBox1.Text;
+                        store.住所 = addressTextBox1.Text;
 
-                        order.電話番号 = phoneTextBox2.Text;
+                        store.電話番号 = phoneTextBox2.Text;
 
-                        order.FAX番号 = this.faxTextBox3.Text;
+                        store.FAX番号 = this.faxTextBox3.Text;
 
-                        order.営業担当 = this.officerTextBox3.Text;
+                        store.営業担当 = this.officerTextBox3.Text;
 
-                        order.売上ランク = this.storeRankComboBox.Text;
+                        store.売上ランク = this.storeRankComboBox.Text;
 
-                        ctx.t_shoplist.Add(order);
+                        store.参考店舗 = Convert.ToInt32(this.storesComboBox.SelectedValue);
+
+                        ctx.t_shoplist.Add(store);
                         ctx.SaveChanges();
+                        ModelCallback.AfterStoreCreated(store);
+
                         MessageBox.Show(String.Format("店舗登録完了!"));
 
                     }
@@ -197,6 +213,18 @@ namespace GODInventoryWinForm.Controls
                 {
                     errorProvider1.SetError(storeCodeTextBox, String.Format("店番がすでに存在しています"));
                     return;
+                }
+            }
+        }
+
+        private void countyTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (countyTextBox.Text.Length > 0)
+            {
+                var storesByCounty = this.stores.Where(s => s.県別 == countyTextBox.Text).ToList();
+                if (storesByCounty.Count > 0)
+                {
+                    this.storesComboBox.DataSource =storesByCounty; 
                 }
             }
         }

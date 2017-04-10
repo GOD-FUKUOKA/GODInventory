@@ -145,3 +145,28 @@ ALTER TABLE `god_test03`.`t_pricelist`
 ADD INDEX `product_store` (`店番` ASC, `自社コード` ASC);
 ALTER TABLE `god_test03`.`t_shoplist` 
 ADD INDEX `customer_store` (`店番` ASC, `customerId` ASC);
+
+#v8.0.0
+==============================================
+ALTER TABLE  `t_shoplist` 
+ADD COLUMN `参考店舗` INT(4) UNSIGNED NOT NULL DEFAULT 0;
+
+ALTER TABLE `t_pricelist` 
+CHANGE COLUMN `通常原単価` `通常原単価` DECIMAL(11,0) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `広告原単価` `広告原単価` DECIMAL(11,0) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `特売原単価` `特売原単価` DECIMAL(11,0) NOT NULL DEFAULT 0 ,
+CHANGE COLUMN `売単価` `売単価` DECIMAL(11,0) NOT NULL DEFAULT 0 ;
+
+
+ALTER TABLE  `t_itemlist` 
+ADD COLUMN `通常原単価` DECIMAL(11,0) NOT NULL DEFAULT 0,
+ADD COLUMN `売単価` DECIMAL(11,0) NOT NULL DEFAULT 0;
+
+
+ALTER TABLE  `t_pricelist` 
+ADD COLUMN `仕入原価` DECIMAL(11,0) NOT NULL DEFAULT 0;
+
+ALTER TABLE  `t_orderdata` 
+ADD COLUMN `仕入原価` DECIMAL(11,0) NOT NULL DEFAULT 0,
+ADD COLUMN `仕入金額` DECIMAL(11,0) NOT NULL DEFAULT 0,
+ADD COLUMN `粗利金額` DECIMAL(11,0) NOT NULL DEFAULT 0;

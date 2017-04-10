@@ -152,5 +152,21 @@ namespace GODInventoryWinForm
                 }
             }
         }
+
+        private void toolStripDropDownButton2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void generalSettingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new SettingForm().ShowDialog();
+
+        }
+
+        private void orderSettingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new OrderCostSettingForm().ShowDialog();
+        }
     }
 }

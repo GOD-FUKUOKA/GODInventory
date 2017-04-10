@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GODInventory.MyLinq
 {
+    // join item and price
     public class v_itemprice
     {
         public int Id { get; set; }
@@ -23,8 +24,14 @@ namespace GODInventory.MyLinq
         public double 単品重量 { get; set; }     
         public string 単位 { get; set; }
 
-        public decimal? 原単価 { get; set; }
-        public decimal? 売単価 { get; set; }
-        
+        public decimal 原単価 { get; set; }
+        public decimal 売単価 { get; set; }
+        public decimal 広告原単価 { get; set; }
+        public decimal 特売原単価 { get; set; }
+        public decimal 仕入原価 { get; set; }
+
+        public int 店番 { get; set; }
+        public string 店名 { get; set; }
+        public string 県別 { get; set; }
     }
 }

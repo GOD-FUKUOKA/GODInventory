@@ -785,7 +785,8 @@ namespace GODInventoryWinForm.Controls
                                     return;
                                 }
 
-                               
+
+
                                 o.重量 = (int)(Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
                                 o.単位 = selectedItem.単位;
                                 o.県別 = store.県別;
@@ -802,6 +803,10 @@ namespace GODInventoryWinForm.Controls
                                 //o.売単価_税抜_ = (int)selectedItem.売単価;
                                 o.売単価_税込_ = (int)(o.売単価_税抜_ * (1 + o.税率));
                                 o.税額 = (int)(o.原価金額_税抜_ * o.税率);
+
+                                o.仕入原価 = selectedItem.仕入原価;
+                                o.仕入金額 = o.実際出荷数量 * o.仕入原価;
+                                o.粗利金額 = o.納品原価金額 - o.仕入金額; 
 
                                 o.発注品名漢字 = o.品名漢字;
                                 o.発注規格名漢字 = o.規格名漢字;

@@ -181,6 +181,7 @@ namespace GODInventoryWinForm
                     
                 var shops = ctx.t_shoplist.ToList();
                 var locations = ctx.t_locations.ToList();
+                var prices = ctx.t_pricelist.ToList();
 
                 CSVOrderModel model = null;
                 int progress = 0;
@@ -190,10 +191,6 @@ namespace GODInventoryWinForm
                     try
                     {
                         List<string> sqls = new List<string>(100);
-                        //var orders = models.Select(x => x.ConverToEntity());
-                        //var result = ctx.Entry(orders.First()).GetValidationResult();
-                        //ctx.t_orderdata.AddRange(orders);                        
-                        //ctx.SaveChanges();
                         arg.OrderCount = models.Count;
                       
                         for (var i = 0; i < models.Count; i++)
@@ -219,9 +216,15 @@ namespace GODInventoryWinForm
                                 throw new Exception(String.Format("Can not find shop by shopcode {0}", model.StoreCode));
                             }
 
+                            var price = prices.FirstOrDefault(s => s.店番 == shop.店番 && s.自社コード == item.自社コード);
+                            if (price == null)
+                            {
+                                throw new Exception(String.Format("Can not find price by 自社コード {0} and 店番 {1}", item.自社コード, model.StoreCode));
+                            }
+
                             var location = locations.FirstOrDefault(s => s.納品場所名漢字 == model.LocationName);
                             //sql_parameters = model.ToSqlArguments(shop, item);
-                            var sql = model.ToRawSql(shop, item, location, orders);
+                            var sql = model.ToRawSql(shop, item, price, location, orders);
                             //Console.WriteLine("sql = #{0}", sql);
                             if (sql != null)
                             {
@@ -237,9 +240,6 @@ namespace GODInventoryWinForm
                             }
                             //ctx.Database.ExecuteSqlCommand(sql_parameters.SqlString, sql_parameters.Parameters);
                             // use sql instead of orm
-                            //var order = models.ElementAt(i).ConverToEntity();
-                            //ctx.t_orderdata.Add(order);
-                            //ctx.SaveChanges();
                             if (arg.CurrentIndex % 25 == 0)
                             {
                                 backgroundWorker1.ReportProgress(progress, arg);

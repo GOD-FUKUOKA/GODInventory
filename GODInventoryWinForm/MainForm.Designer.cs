@@ -37,7 +37,6 @@
             this.productToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.storesToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.settingToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.importOrderTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importReceivedOrderTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +45,9 @@
             this.importFaxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.generalSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.orderSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +61,7 @@
             this.productToolStripButton,
             this.storesToolStripButton,
             this.toolStripSeparator1,
-            this.settingToolStripButton,
+            this.toolStripDropDownButton2,
             this.toolStripDropDownButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -127,17 +129,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 57);
             // 
-            // settingToolStripButton
-            // 
-            this.settingToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.settingToolStripButton.Image = global::GODInventoryWinForm.Properties.Resources.setting;
-            this.settingToolStripButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.settingToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.settingToolStripButton.Name = "settingToolStripButton";
-            this.settingToolStripButton.Size = new System.Drawing.Size(54, 54);
-            this.settingToolStripButton.Text = "設定";
-            this.settingToolStripButton.Click += new System.EventHandler(this.settingToolStripButton_Click);
-            // 
             // toolStripDropDownButton1
             // 
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -204,6 +195,34 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // toolStripDropDownButton2
+            // 
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generalSettingToolStripMenuItem,
+            this.orderSettingToolStripMenuItem});
+            this.toolStripDropDownButton2.Image = global::GODInventoryWinForm.Properties.Resources.setting;
+            this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(63, 54);
+            this.toolStripDropDownButton2.Text = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Click += new System.EventHandler(this.toolStripDropDownButton2_Click);
+            // 
+            // generalSettingToolStripMenuItem
+            // 
+            this.generalSettingToolStripMenuItem.Name = "generalSettingToolStripMenuItem";
+            this.generalSettingToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.generalSettingToolStripMenuItem.Text = "GeneralSetting";
+            this.generalSettingToolStripMenuItem.Click += new System.EventHandler(this.generalSettingToolStripMenuItem_Click);
+            // 
+            // orderSettingToolStripMenuItem
+            // 
+            this.orderSettingToolStripMenuItem.Name = "orderSettingToolStripMenuItem";
+            this.orderSettingToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.orderSettingToolStripMenuItem.Text = "OrderSetting";
+            this.orderSettingToolStripMenuItem.Click += new System.EventHandler(this.orderSettingToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -234,13 +253,15 @@
         private System.Windows.Forms.ToolStripButton warehouseToolStripButton;
         private System.Windows.Forms.ToolStripButton storesToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton settingToolStripButton;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem importOrderTextToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importReceivedOrderTextToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importCSVToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importReceivedCSVToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importFaxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripMenuItem generalSettingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem orderSettingToolStripMenuItem;
     }
 }
 

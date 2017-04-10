@@ -88,62 +88,64 @@ namespace GODInventoryWinForm.Controls
             {
                 if (showtype == "Update")
                 {
-                    t_itemlist order = ctx.t_itemlist.Find(Convert.ToInt32(innerCodeTextBox.Text));
+                    t_itemlist product = ctx.t_itemlist.Find(Convert.ToInt32(innerCodeTextBox.Text));
 
-                    order.得意先 = customerTextBox.Text;
-                    order.ジャンル = Convert.ToInt16(genreComboBox.SelectedValue);
-                    order.商品名 = productNameTextBox12.Text;
-                    order.規格 = specTextBox.Text;
-                    order.PT入数 = Convert.ToInt32(moqTextBox8.Text);
-                    order.JANコード = Convert.ToInt64(janCodeTextBox.Text);
+                    product.得意先 = customerTextBox.Text;
+                    product.ジャンル = Convert.ToInt16(genreComboBox.SelectedValue);
+                    product.商品名 = productNameTextBox12.Text;
+                    product.規格 = specTextBox.Text;
+                    product.PT入数 = Convert.ToInt32(moqTextBox8.Text);
+                    product.JANコード = Convert.ToInt64(janCodeTextBox.Text);
                     if (instoreCodeTextBox3.Text != "")
                     {
-                        order.インストアコード = Convert.ToInt64(instoreCodeTextBox3.Text);
+                        product.インストアコード = Convert.ToInt64(instoreCodeTextBox3.Text);
                     }
                     else {
-                        order.インストアコード = null;
+                        product.インストアコード = null;
                     }
-                    order.単品重量 = Convert.ToDouble(unitWeightTextBox11.Text);
-                    order.単位 = unitTextBox1.Text;
+                    product.単品重量 = Convert.ToDouble(unitWeightTextBox11.Text);
+                    product.単位 = unitTextBox1.Text;
 
                     if (textBox2.Text != "")
                     {
-                        order.PT単位か = Convert.ToSByte(textBox2.Text);
+                        product.PT単位か = Convert.ToSByte(textBox2.Text);
                     }
                     else {
-                        order.PT単位か = null;
+                        product.PT単位か = null;
                     }
-                    order.商品コード = Convert.ToInt32(this.productCodeTextBox.Text);
+                    product.商品コード = Convert.ToInt32(this.productCodeTextBox.Text);
                     ctx.SaveChanges();
                     MessageBox.Show(String.Format("商品情報更新完了!"));
                 }
                 else if (showtype == "Add")
                 {
 
-                    t_itemlist order = new t_itemlist();
-                    order.自社コード = Convert.ToInt32(innerCodeTextBox.Text);
+                    t_itemlist product = new t_itemlist();
+                    product.自社コード = Convert.ToInt32(innerCodeTextBox.Text);
 
-                    order.得意先 = customerTextBox.Text;
+                    product.得意先 = customerTextBox.Text;
                     
-                    order.ジャンル = Convert.ToInt16(genreComboBox.SelectedValue);
-                    order.商品名 = productNameTextBox12.Text;
-                    order.規格 = specTextBox.Text;
+                    product.ジャンル = Convert.ToInt16(genreComboBox.SelectedValue);
+                    product.商品名 = productNameTextBox12.Text;
+                    product.規格 = specTextBox.Text;
                     if (moqTextBox8.Text != "")
-                        order.PT入数 = Convert.ToInt32(moqTextBox8.Text);
+                        product.PT入数 = Convert.ToInt32(moqTextBox8.Text);
                     if (janCodeTextBox.Text != "")
-                        order.JANコード = Convert.ToInt64(janCodeTextBox.Text);
+                        product.JANコード = Convert.ToInt64(janCodeTextBox.Text);
                     if (instoreCodeTextBox3.Text != "")
-                        order.インストアコード = Convert.ToInt64(instoreCodeTextBox3.Text);
+                        product.インストアコード = Convert.ToInt64(instoreCodeTextBox3.Text);
                     if (unitWeightTextBox11.Text != "")
-                        order.単品重量 = Convert.ToDouble(unitWeightTextBox11.Text);
-                    order.単位 = unitTextBox1.Text;
+                        product.単品重量 = Convert.ToDouble(unitWeightTextBox11.Text);
+                    product.単位 = unitTextBox1.Text;
                     if (textBox2.Text != "")
-                        order.PT単位か = Convert.ToSByte(textBox2.Text);
+                        product.PT単位か = Convert.ToSByte(textBox2.Text);
                     if (productCodeTextBox.Text != "")
-                        order.商品コード = Convert.ToInt32(this.productCodeTextBox.Text);
+                        product.商品コード = Convert.ToInt32(this.productCodeTextBox.Text);
 
-                    ctx.t_itemlist.Add(order);
+                    ctx.t_itemlist.Add(product);
                     ctx.SaveChanges();
+
+                    ModelCallback.AfterProductCreated(product);
                     MessageBox.Show(String.Format("商品登録完了!"));
 
                 }                                    

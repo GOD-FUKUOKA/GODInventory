@@ -513,6 +513,9 @@ namespace GODInventory.ViewModel
 
             var product = ctx.t_itemlist.Find( order.自社コード);
             OrderSqlHelper.AfterOrderQtyChanged(order, product);
+            //当订单被取消掉的时候，重量=t_orderdata.`発注数量`* t_itemlist.`単品重量`。
+
+            order.重量 = Convert.ToInt32( ((double)order.発注数量) * product.単品重量 );
             order.キャンセル = "yes";
             order.キャンセル時刻 = DateTime.Now;
             order.Status = OrderStatus.Cancelled;
@@ -1123,7 +1126,9 @@ namespace GODInventory.ViewModel
             {
                 order.納品口数 = (int)(order.実際出荷数量 / item.PT入数);
             }
-             
+
+            order.仕入金額 = order.実際出荷数量 * order.仕入原価;
+            order.粗利金額 = order.納品原価金額 - order.仕入金額; 
         }
 
         // 当订单的数量被修改后，需要相应修改的字段
@@ -1136,6 +1141,7 @@ namespace GODInventory.ViewModel
             order.原価金額_税込_ = (int)(order.実際出荷数量 * order.原単価_税込_);
             order.税額 = (int)(order.納品原価金額 * order.税率);
             order.重量 = (int)(Convert.ToDecimal(item.単品重量) * order.実際出荷数量);
+
 
         }
 

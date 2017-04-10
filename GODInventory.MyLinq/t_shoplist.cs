@@ -50,5 +50,9 @@ namespace GODInventory.MyLinq
 
         public int customerId { get; set; }
 
+        public int 参考店舗 { get; set; }
+
+        
+
     }
 }

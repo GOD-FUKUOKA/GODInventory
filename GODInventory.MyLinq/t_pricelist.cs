@@ -27,11 +27,12 @@ namespace GODInventory.MyLinq
 
         public int 欠品カウンター { get; set; }
 
-        public decimal? 売単価 { get; set; }
+        public decimal 売単価 { get; set; }
 
-        public decimal? 通常原単価 { get; set; }
-        public decimal? 広告原単価 { get; set; }
-        public decimal? 特売原単価 { get; set; }
+        public decimal 通常原単価 { get; set; }
+        public decimal 広告原単価 { get; set; }
+        public decimal 特売原単価 { get; set; }
+        public decimal 仕入原価 { get; set; }
 
 
     }
