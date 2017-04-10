@@ -21,7 +21,6 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext()) {
                 customerList = ctx.t_customers.ToList();
             }
-            this.pricesDataGridView.AutoGenerateColumns = false;
             this.CustomerColumn1.ValueMember = "Id";
             this.CustomerColumn1.DisplayMember = "FullName";
             this.CustomerColumn1.DataSource = customerList;
@@ -141,8 +140,7 @@ namespace GODInventoryWinForm.Controls
                             };
 
                 this.pricesBindingSource.DataSource = this.entityDataSource1.CreateView(query);
-                this.pricesDataGridView.DataSource = this.pricesBindingSource;
-
+ 
            
 
         }
@@ -154,43 +152,14 @@ namespace GODInventoryWinForm.Controls
                 case 0:
                     break;
                 case 1:
-                    if (this.storesDataGridView.RowCount > 0)
-                    {
-                        var stores = storesDataGridView.DataSource as BindingSource;
-
-
-                        this.storesComboBox.ValueMember = "店番";
-                        this.storesComboBox.DisplayMember = "店名";
-                        this.storesComboBox.DataSource = stores;
-
-                        //var store = storesDataGridView.CurrentRow.DataBoundItem as t_shoplist;
-                        //this.pricesBindingSource.Filter = string.Format("店番={0}", store.店番);
-                    }
+                    
                     break;
 
             }
 
         }
 
-        private void editPriceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (this.pricesDataGridView.RowCount > 0)
-            {
-                var price = pricesDataGridView.CurrentRow.DataBoundItem as v_itemprice;
 
-                var form = new EditPriceForm(price.Id);
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    price.原単価 = form.Price.通常原単価;
-                    price.広告原単価 = form.Price.広告原単価;
-                    price.特売原単価 = form.Price.特売原単価;
-                    price.売単価 = form.Price.売単価;
-                    this.pricesDataGridView.Refresh();
-                    //MessageBox.Show("saved");
-                }
-            }
-            
-        }
 
         private void storesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -199,15 +168,6 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private void searchButton_Click(object sender, EventArgs e)
-        {
-            int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
-            if (storeId > 0)
-            {
-                InitializePriceListDatagridView(storeId);
-            }
-
-        }
 
     }
 }

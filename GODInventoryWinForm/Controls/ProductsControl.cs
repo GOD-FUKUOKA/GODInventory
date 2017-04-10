@@ -174,7 +174,6 @@ namespace GODInventoryWinForm.Controls
              
             var query = from t_pricelist p in this.entityDataSource1.EntitySets["t_pricelist"]
                         join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on p.自社コード equals i.自社コード
-                        where p.自社コード == productCode
 
                         select new v_itemprice { 
                             Id = p.Id,
@@ -199,6 +198,10 @@ namespace GODInventoryWinForm.Controls
             if (storeId > 0)
             {
                 query = query.Where(o => o.店番 == storeId);
+            }
+            if (productCode > 0)
+            {
+                query = query.Where(o => o.自社コード == productCode);
             }
 
             this.pricesBindingSource.DataSource = this.entityDataSource1.CreateView( query);
@@ -233,7 +236,7 @@ namespace GODInventoryWinForm.Controls
             string county = this.countyComboBox.SelectedValue.ToString();
             int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
 
-            if (productCode > 0)
+            if (productCode > 0 || storeId >0)
             {
                 InitializePriceListDatagridView(productCode, county, storeId);
             }
@@ -291,6 +294,14 @@ namespace GODInventoryWinForm.Controls
             int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
             string county = Convert.ToString(this.countyComboBox.SelectedValue);
             decimal cost = Convert.ToDecimal(this.costTextBox.Text);
+
+
+            if (productCode == 0)
+            {
+                MessageBox.Show("Please input ");
+                return;
+            }
+
             int count = OrderHelper.UpdateProductCost(productCode, cost, county, storeId);
 
             if (count > 0)
