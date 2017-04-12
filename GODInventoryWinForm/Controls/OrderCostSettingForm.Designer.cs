@@ -46,8 +46,6 @@
             this.countyComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ordersDataGridView = new System.Windows.Forms.DataGridView();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.発注日Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店番Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,8 +60,10 @@
             this.粗利金額Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.原単価_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ordersDataGridView)).BeginInit();
@@ -75,31 +75,31 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 20);
+            this.label1.Location = new System.Drawing.Point(18, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 14);
             this.label1.TabIndex = 2;
-            this.label1.Text = "发注日";
+            this.label1.Text = "発注日";
             // 
             // startAtDateTimePicker
             // 
             this.startAtDateTimePicker.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startAtDateTimePicker.Location = new System.Drawing.Point(74, 25);
+            this.startAtDateTimePicker.Location = new System.Drawing.Point(83, 25);
             this.startAtDateTimePicker.Name = "startAtDateTimePicker";
             this.startAtDateTimePicker.Size = new System.Drawing.Size(173, 21);
-            this.startAtDateTimePicker.TabIndex = 3;
+            this.startAtDateTimePicker.TabIndex = 0;
             // 
             // endAtDateTimePicker
             // 
-            this.endAtDateTimePicker.Location = new System.Drawing.Point(265, 18);
+            this.endAtDateTimePicker.Location = new System.Drawing.Point(274, 18);
             this.endAtDateTimePicker.Name = "endAtDateTimePicker";
             this.endAtDateTimePicker.Size = new System.Drawing.Size(173, 21);
-            this.endAtDateTimePicker.TabIndex = 4;
+            this.endAtDateTimePicker.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(244, 22);
+            this.label2.Location = new System.Drawing.Point(253, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(14, 14);
             this.label2.TabIndex = 5;
@@ -109,74 +109,74 @@
             // 
             this.genresComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.genresComboBox.FormattingEnabled = true;
-            this.genresComboBox.Location = new System.Drawing.Point(61, 45);
+            this.genresComboBox.Location = new System.Drawing.Point(70, 45);
             this.genresComboBox.Name = "genresComboBox";
             this.genresComboBox.Size = new System.Drawing.Size(155, 22);
-            this.genresComboBox.TabIndex = 6;
+            this.genresComboBox.TabIndex = 1;
             this.genresComboBox.SelectedIndexChanged += new System.EventHandler(this.genresComboBox_SelectedIndexChanged);
             // 
             // productsComboBox
             // 
             this.productsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.productsComboBox.FormattingEnabled = true;
-            this.productsComboBox.Location = new System.Drawing.Point(265, 45);
+            this.productsComboBox.Location = new System.Drawing.Point(274, 45);
             this.productsComboBox.Name = "productsComboBox";
             this.productsComboBox.Size = new System.Drawing.Size(173, 22);
-            this.productsComboBox.TabIndex = 7;
+            this.productsComboBox.TabIndex = 2;
             // 
             // searchButton1
             // 
-            this.searchButton1.Location = new System.Drawing.Point(619, 15);
+            this.searchButton1.Location = new System.Drawing.Point(628, 15);
             this.searchButton1.Name = "searchButton1";
             this.searchButton1.Size = new System.Drawing.Size(102, 36);
-            this.searchButton1.TabIndex = 8;
-            this.searchButton1.Text = "查询";
+            this.searchButton1.TabIndex = 4;
+            this.searchButton1.Text = "検索";
             this.searchButton1.UseVisualStyleBackColor = true;
             this.searchButton1.Click += new System.EventHandler(this.searchButton1_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 48);
+            this.label3.Location = new System.Drawing.Point(10, 48);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 14);
+            this.label3.Size = new System.Drawing.Size(57, 14);
             this.label3.TabIndex = 9;
-            this.label3.Text = "分类";
+            this.label3.Text = "ジャンル";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(230, 49);
+            this.label4.Location = new System.Drawing.Point(238, 49);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 14);
             this.label4.TabIndex = 9;
-            this.label4.Text = "产品";
+            this.label4.Text = "商品";
             // 
             // costTextBox
             // 
-            this.costTextBox.Location = new System.Drawing.Point(65, 17);
+            this.costTextBox.Location = new System.Drawing.Point(79, 17);
             this.costTextBox.Name = "costTextBox";
-            this.costTextBox.Size = new System.Drawing.Size(100, 21);
-            this.costTextBox.TabIndex = 10;
+            this.costTextBox.Size = new System.Drawing.Size(95, 21);
+            this.costTextBox.TabIndex = 0;
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(171, 15);
+            this.updateButton.Location = new System.Drawing.Point(180, 15);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(102, 36);
-            this.updateButton.TabIndex = 11;
-            this.updateButton.Text = "更新";
+            this.updateButton.TabIndex = 1;
+            this.updateButton.Text = "保存";
             this.updateButton.UseVisualStyleBackColor = true;
             this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 20);
+            this.label5.Location = new System.Drawing.Point(13, 20);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 14);
+            this.label5.Size = new System.Drawing.Size(63, 14);
             this.label5.TabIndex = 9;
-            this.label5.Text = "成本价";
+            this.label5.Text = "仕入原価";
             // 
             // groupBox1
             // 
@@ -193,14 +193,14 @@
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(13, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(734, 77);
+            this.groupBox1.Size = new System.Drawing.Size(747, 77);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(449, 21);
+            this.label6.Location = new System.Drawing.Point(461, 21);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 14);
             this.label6.TabIndex = 11;
@@ -210,10 +210,10 @@
             // 
             this.countyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.countyComboBox.FormattingEnabled = true;
-            this.countyComboBox.Location = new System.Drawing.Point(490, 17);
+            this.countyComboBox.Location = new System.Drawing.Point(499, 17);
             this.countyComboBox.Name = "countyComboBox";
             this.countyComboBox.Size = new System.Drawing.Size(123, 22);
-            this.countyComboBox.TabIndex = 10;
+            this.countyComboBox.TabIndex = 3;
             // 
             // groupBox2
             // 
@@ -223,7 +223,7 @@
             this.groupBox2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(766, 7);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(287, 77);
+            this.groupBox2.Size = new System.Drawing.Size(297, 77);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             // 
@@ -258,16 +258,8 @@
             this.ordersDataGridView.RowHeadersVisible = false;
             this.ordersDataGridView.RowTemplate.Height = 23;
             this.ordersDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ordersDataGridView.Size = new System.Drawing.Size(1062, 333);
+            this.ordersDataGridView.Size = new System.Drawing.Size(1156, 333);
             this.ordersDataGridView.TabIndex = 14;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
             // 
             // 発注日Column
             // 
@@ -290,7 +282,6 @@
             this.店名Column1.HeaderText = "店名";
             this.店名Column1.Name = "店名Column1";
             this.店名Column1.ReadOnly = true;
-            this.店名Column1.Width = 120;
             // 
             // 県別Column1
             // 
@@ -377,6 +368,14 @@
             this.原価金額_税抜_Column1.ReadOnly = true;
             this.原価金額_税抜_Column1.Visible = false;
             // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // pager1
             // 
             this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -388,7 +387,7 @@
             this.pager1.PageCount = 0;
             this.pager1.PageCurrent = 0;
             this.pager1.PageSize = 5000;
-            this.pager1.Size = new System.Drawing.Size(1062, 31);
+            this.pager1.Size = new System.Drawing.Size(1156, 31);
             this.pager1.TabIndex = 1;
             this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
@@ -396,18 +395,20 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1086, 474);
+            this.ClientSize = new System.Drawing.Size(1180, 474);
             this.Controls.Add(this.ordersDataGridView);
             this.Controls.Add(this.startAtDateTimePicker);
             this.Controls.Add(this.pager1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "OrderCostSettingForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "OrderCostSettingForm";
+            this.Text = "商品仕入原価設定";
             this.Load += new System.EventHandler(this.OrderCostSettingForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -443,6 +444,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox countyComboBox;
+        private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注日Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店番Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column1;
@@ -457,6 +459,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 粗利金額Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 原単価_税抜_Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 原価金額_税抜_Column1;
-        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }

@@ -37,6 +37,9 @@
             this.productToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.storesToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.generalSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.orderSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.importOrderTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importReceivedOrderTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,9 +48,6 @@
             this.importFaxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.generalSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.orderSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,6 +129,34 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 57);
             // 
+            // toolStripDropDownButton2
+            // 
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generalSettingToolStripMenuItem,
+            this.orderSettingToolStripMenuItem});
+            this.toolStripDropDownButton2.Image = global::GODInventoryWinForm.Properties.Resources.setting;
+            this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(63, 54);
+            this.toolStripDropDownButton2.Text = "設定";
+            this.toolStripDropDownButton2.Click += new System.EventHandler(this.toolStripDropDownButton2_Click);
+            // 
+            // generalSettingToolStripMenuItem
+            // 
+            this.generalSettingToolStripMenuItem.Name = "generalSettingToolStripMenuItem";
+            this.generalSettingToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.generalSettingToolStripMenuItem.Text = "基本設定";
+            this.generalSettingToolStripMenuItem.Click += new System.EventHandler(this.generalSettingToolStripMenuItem_Click);
+            // 
+            // orderSettingToolStripMenuItem
+            // 
+            this.orderSettingToolStripMenuItem.Name = "orderSettingToolStripMenuItem";
+            this.orderSettingToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.orderSettingToolStripMenuItem.Text = "商品仕入原価設定";
+            this.orderSettingToolStripMenuItem.Click += new System.EventHandler(this.orderSettingToolStripMenuItem_Click);
+            // 
             // toolStripDropDownButton1
             // 
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -194,34 +222,6 @@
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // toolStripDropDownButton2
-            // 
-            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generalSettingToolStripMenuItem,
-            this.orderSettingToolStripMenuItem});
-            this.toolStripDropDownButton2.Image = global::GODInventoryWinForm.Properties.Resources.setting;
-            this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(63, 54);
-            this.toolStripDropDownButton2.Text = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Click += new System.EventHandler(this.toolStripDropDownButton2_Click);
-            // 
-            // generalSettingToolStripMenuItem
-            // 
-            this.generalSettingToolStripMenuItem.Name = "generalSettingToolStripMenuItem";
-            this.generalSettingToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.generalSettingToolStripMenuItem.Text = "GeneralSetting";
-            this.generalSettingToolStripMenuItem.Click += new System.EventHandler(this.generalSettingToolStripMenuItem_Click);
-            // 
-            // orderSettingToolStripMenuItem
-            // 
-            this.orderSettingToolStripMenuItem.Name = "orderSettingToolStripMenuItem";
-            this.orderSettingToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.orderSettingToolStripMenuItem.Text = "OrderSetting";
-            this.orderSettingToolStripMenuItem.Click += new System.EventHandler(this.orderSettingToolStripMenuItem_Click);
             // 
             // MainForm
             // 

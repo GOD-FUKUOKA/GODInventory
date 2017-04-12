@@ -149,14 +149,14 @@
             // lblPageCount1
             // 
             this.lblPageCount1.Name = "lblPageCount1";
-            this.lblPageCount1.Size = new System.Drawing.Size(72, 28);
-            this.lblPageCount1.Text = "total 0 pages";
+            this.lblPageCount1.Size = new System.Drawing.Size(77, 28);
+            this.lblPageCount1.Text = "合計 0 ページ";
             // 
             // lblRecordCount
             // 
             this.lblRecordCount.Name = "lblRecordCount";
-            this.lblRecordCount.Size = new System.Drawing.Size(80, 28);
-            this.lblRecordCount.Text = "total 0 records";
+            this.lblRecordCount.Size = new System.Drawing.Size(55, 28);
+            this.lblRecordCount.Text = "合計 0 行";
             // 
             // Pager
             // 

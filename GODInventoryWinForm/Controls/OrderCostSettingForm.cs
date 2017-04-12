@@ -59,7 +59,7 @@ namespace GODInventoryWinForm.Controls
         {
             if (this.costTextBox.Text.Length == 0)
             {
-                MessageBox.Show("Please input ");
+                MessageBox.Show("有効な単価を入力下さい");
                 return;
             }
 

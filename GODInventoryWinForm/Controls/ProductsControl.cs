@@ -26,7 +26,7 @@ namespace GODInventoryWinForm.Controls
             this.pricesDataGridView.AutoGenerateColumns = false;
             this.productsDataGridView.AutoGenerateColumns = false;
 
-            InitializeDataSource();
+           
 
         }
 
@@ -53,7 +53,12 @@ namespace GODInventoryWinForm.Controls
             this.countyComboBox.DisplayMember = "FullName";
             this.countyComboBox.DataSource = counties;
 
-        
+            this.pricesDataGridView.DataSource = null;
+            this.costTextBox.Text = String.Empty;
+            this.priceTextBox.Text = String.Empty;
+            this.promotePriceTextBox.Text = String.Empty;
+            this.adPriceTextBox.Text = String.Empty;
+            this.salePriceTextBox.Text = String.Empty;
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -157,12 +162,9 @@ namespace GODInventoryWinForm.Controls
                 case 0:
                     break;
                 case 1:
-                    {
-
-
-                        //var store = storesDataGridView.CurrentRow.DataBoundItem as t_shoplist;
-                        //this.pricesBindingSource.Filter = string.Format("店番={0}", store.店番);
-                    }
+                    
+                    InitializeDataSource();
+                    
                     break;
                     
             }
@@ -284,17 +286,40 @@ namespace GODInventoryWinForm.Controls
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            if (this.costTextBox.Text.Length == 0)
-            {
-                MessageBox.Show("Please input ");
-                return;
-            }
+
 
             int productCode = (int)this.productsComboBox.SelectedValue;
             int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
             string county = Convert.ToString(this.countyComboBox.SelectedValue);
-            decimal cost = Convert.ToDecimal(this.costTextBox.Text);
+            decimal cost = -1;
+            decimal price = -1;
+            decimal promotePrice = -1;
+            decimal adPrice = -1;
+            decimal salePrice = -1;
 
+            if (this.costTextBox.Text.Trim().Length > 0)
+            {
+                cost = Convert.ToDecimal(this.costTextBox.Text);
+            }
+
+            if (this.priceTextBox.Text.Trim().Length > 0)
+            {
+                price = Convert.ToDecimal(this.priceTextBox.Text);
+            }
+
+            if (this.promotePriceTextBox.Text.Trim().Length > 0)
+            {
+                promotePrice = Convert.ToDecimal(this.promotePriceTextBox.Text);
+            }
+
+            if (this.adPriceTextBox.Text.Trim().Length > 0)
+            {
+                adPrice = Convert.ToDecimal(this.adPriceTextBox.Text);
+            }
+            if (this.salePriceTextBox.Text.Trim().Length > 0)
+            {
+                salePrice = Convert.ToDecimal(this.salePriceTextBox.Text);
+            }
 
             if (productCode == 0)
             {
@@ -302,7 +327,15 @@ namespace GODInventoryWinForm.Controls
                 return;
             }
 
-            int count = OrderHelper.UpdateProductCost(productCode, cost, county, storeId);
+            if (cost == -1 && price == -1 && promotePrice == -1 && adPrice == -1 && salePrice==-1)
+            {
+                MessageBox.Show("有効な単価を入力下さい");
+                return;
+            }
+
+
+
+            int count = OrderHelper.UpdateProductCost(productCode, county, storeId, cost, price, promotePrice,adPrice,salePrice);
 
             if (count > 0)
             {

@@ -57,6 +57,12 @@
             this.customerTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label12 = new System.Windows.Forms.Label();
+            this.costTextBox = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.priceTextBox = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.salePriceTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -65,7 +71,7 @@
             // 
             this.submitFormButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.submitFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.submitFormButton.Location = new System.Drawing.Point(480, 275);
+            this.submitFormButton.Location = new System.Drawing.Point(482, 353);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(106, 32);
             this.submitFormButton.TabIndex = 1;
@@ -76,7 +82,7 @@
             // cancelFormButton
             // 
             this.cancelFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelFormButton.Location = new System.Drawing.Point(592, 275);
+            this.cancelFormButton.Location = new System.Drawing.Point(594, 353);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(106, 32);
             this.cancelFormButton.TabIndex = 2;
@@ -153,6 +159,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.salePriceTextBox);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.priceTextBox);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.costTextBox);
             this.groupBox1.Controls.Add(this.genreComboBox);
             this.groupBox1.Controls.Add(this.unitTextBox1);
             this.groupBox1.Controls.Add(this.label1);
@@ -180,7 +192,7 @@
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(22, 14);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(711, 255);
+            this.groupBox1.Size = new System.Drawing.Size(711, 321);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -318,11 +330,59 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(40, 247);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(63, 14);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "仕入原価";
+            // 
+            // costTextBox
+            // 
+            this.costTextBox.Location = new System.Drawing.Point(109, 244);
+            this.costTextBox.Name = "costTextBox";
+            this.costTextBox.Size = new System.Drawing.Size(222, 21);
+            this.costTextBox.TabIndex = 24;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(373, 247);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(77, 14);
+            this.label14.TabIndex = 27;
+            this.label14.Text = "通常原単価";
+            // 
+            // priceTextBox
+            // 
+            this.priceTextBox.Location = new System.Drawing.Point(456, 244);
+            this.priceTextBox.Name = "priceTextBox";
+            this.priceTextBox.Size = new System.Drawing.Size(222, 21);
+            this.priceTextBox.TabIndex = 26;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(54, 278);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(49, 14);
+            this.label15.TabIndex = 29;
+            this.label15.Text = "売単価";
+            // 
+            // salePriceTextBox
+            // 
+            this.salePriceTextBox.Location = new System.Drawing.Point(109, 275);
+            this.salePriceTextBox.Name = "salePriceTextBox";
+            this.salePriceTextBox.Size = new System.Drawing.Size(222, 21);
+            this.salePriceTextBox.TabIndex = 28;
+            // 
             // ProductsManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(756, 325);
+            this.ClientSize = new System.Drawing.Size(756, 414);
             this.Controls.Add(this.submitFormButton);
             this.Controls.Add(this.cancelFormButton);
             this.Controls.Add(this.groupBox1);
@@ -369,5 +429,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ComboBox genreComboBox;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox costTextBox;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox salePriceTextBox;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox priceTextBox;
     }
 }

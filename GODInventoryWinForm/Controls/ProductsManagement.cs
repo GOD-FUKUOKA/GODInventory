@@ -71,6 +71,10 @@ namespace GODInventoryWinForm.Controls
 
                     this.moqTextBox8.Text = order.PT入数.ToString();
 
+                    this.costTextBox.Text = order.仕入原価.ToString();
+                    this.priceTextBox.Text = order.通常原単価.ToString();
+                    this.salePriceTextBox.Text = order.売単価.ToString();
+
                 }
                 else
                 {
@@ -113,7 +117,24 @@ namespace GODInventoryWinForm.Controls
                     else {
                         product.PT単位か = null;
                     }
-                    product.商品コード = Convert.ToInt32(this.productCodeTextBox.Text);
+                    if (this.productCodeTextBox.Text.Length > 0)
+                    {
+                        product.商品コード = Convert.ToInt32(this.productCodeTextBox.Text);
+                    }
+                    if (costTextBox.Text.Length > 0)
+                    {
+                        product.仕入原価 = Convert.ToDecimal(this.costTextBox.Text);
+                    }
+                    if (priceTextBox.Text.Length > 0)
+                    {
+                        product.通常原単価 = Convert.ToDecimal(this.priceTextBox.Text);
+                    }
+                    if (salePriceTextBox.Text.Length > 0)
+                    {
+                        product.売単価 = Convert.ToDecimal(this.salePriceTextBox.Text);
+                    }
+
+
                     ctx.SaveChanges();
                     MessageBox.Show(String.Format("商品情報更新完了!"));
                 }
@@ -129,19 +150,43 @@ namespace GODInventoryWinForm.Controls
                     product.商品名 = productNameTextBox12.Text;
                     product.規格 = specTextBox.Text;
                     if (moqTextBox8.Text != "")
+                    {
                         product.PT入数 = Convert.ToInt32(moqTextBox8.Text);
+                    }
                     if (janCodeTextBox.Text != "")
+                    {
                         product.JANコード = Convert.ToInt64(janCodeTextBox.Text);
+                    }
                     if (instoreCodeTextBox3.Text != "")
+                    {
                         product.インストアコード = Convert.ToInt64(instoreCodeTextBox3.Text);
+                    }
                     if (unitWeightTextBox11.Text != "")
+                    {
                         product.単品重量 = Convert.ToDouble(unitWeightTextBox11.Text);
+                    }
                     product.単位 = unitTextBox1.Text;
                     if (textBox2.Text != "")
+                    {
                         product.PT単位か = Convert.ToSByte(textBox2.Text);
+                    }
                     if (productCodeTextBox.Text != "")
+                    {
                         product.商品コード = Convert.ToInt32(this.productCodeTextBox.Text);
+                    }
 
+                    if (costTextBox.Text.Length>0)
+                    {
+                        product.仕入原価 = Convert.ToDecimal(this.costTextBox.Text);
+                    }
+                    if (priceTextBox.Text.Length > 0)
+                    {
+                        product.通常原単価 = Convert.ToDecimal(this.priceTextBox.Text);
+                    }
+                    if (salePriceTextBox.Text.Length > 0)
+                    {
+                        product.売単価 = Convert.ToDecimal(this.salePriceTextBox.Text);
+                    }                    
                     ctx.t_itemlist.Add(product);
                     ctx.SaveChanges();
 

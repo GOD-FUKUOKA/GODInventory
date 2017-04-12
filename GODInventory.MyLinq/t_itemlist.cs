@@ -45,6 +45,7 @@ namespace GODInventory.MyLinq
 
         public decimal 通常原単価 { get; set; }
         public decimal 売単価 { get; set; }
+        public decimal 仕入原価 { get; set; }
 
         public double 単品重量 { get; set; }
 

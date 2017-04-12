@@ -52,6 +52,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.faxTextBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.storesComboBox = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.storeRankComboBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cusotmerComboBox = new System.Windows.Forms.ComboBox();
@@ -59,8 +61,6 @@
             this.officerTextBox3 = new System.Windows.Forms.TextBox();
             this.shipperTextBox = new System.Windows.Forms.ComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.storesComboBox = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -301,6 +301,29 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // storesComboBox
+            // 
+            this.storesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.storesComboBox.FormattingEnabled = true;
+            this.storesComboBox.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C",
+            "D"});
+            this.storesComboBox.Location = new System.Drawing.Point(105, 261);
+            this.storesComboBox.Name = "storesComboBox";
+            this.storesComboBox.Size = new System.Drawing.Size(266, 22);
+            this.storesComboBox.TabIndex = 29;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(36, 265);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(63, 14);
+            this.label14.TabIndex = 28;
+            this.label14.Text = "参考店舗";
+            // 
             // storeRankComboBox
             // 
             this.storeRankComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -310,7 +333,7 @@
             "B",
             "C",
             "D"});
-            this.storeRankComboBox.Location = new System.Drawing.Point(498, 109);
+            this.storeRankComboBox.Location = new System.Drawing.Point(498, 105);
             this.storeRankComboBox.Name = "storeRankComboBox";
             this.storeRankComboBox.Size = new System.Drawing.Size(266, 22);
             this.storeRankComboBox.TabIndex = 27;
@@ -318,7 +341,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(422, 112);
+            this.label8.Location = new System.Drawing.Point(422, 109);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 14);
             this.label8.TabIndex = 26;
@@ -365,29 +388,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // storesComboBox
-            // 
-            this.storesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.storesComboBox.FormattingEnabled = true;
-            this.storesComboBox.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C",
-            "D"});
-            this.storesComboBox.Location = new System.Drawing.Point(105, 262);
-            this.storesComboBox.Name = "storesComboBox";
-            this.storesComboBox.Size = new System.Drawing.Size(266, 22);
-            this.storesComboBox.TabIndex = 29;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(29, 265);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(63, 14);
-            this.label14.TabIndex = 28;
-            this.label14.Text = "参考店舗";
             // 
             // StoresManagement
             // 
