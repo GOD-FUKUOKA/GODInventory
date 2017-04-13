@@ -16,17 +16,22 @@ namespace GODInventoryWinForm.Controls
     {
         private string showtype;
         private List<t_genre> genreList;
+        private List<t_customers> customerList;
         public ProductsManagement(List<int> itemlist, string type)
         {
             InitializeComponent();
             using (var ctx = new GODDbContext())
             {
+                customerList = ctx.t_customers.ToList();
                 genreList = ctx.t_genre.OrderBy(o => o.Position).ToList();
 
                 this.genreComboBox.DisplayMember = "ジャンル名";
                 this.genreComboBox.ValueMember = "idジャンル";
                 this.genreComboBox.DataSource = genreList;
 
+                this.customerComboBox.DisplayMember = "FullName";
+                this.customerComboBox.ValueMember = "FullName";
+                this.customerComboBox.DataSource = customerList;
 
                 if (type == "Update")
                 {
@@ -38,8 +43,10 @@ namespace GODInventoryWinForm.Controls
                     this.genreComboBox.SelectedItem = genreList.Find(o => o.idジャンル == order.ジャンル);
 
                     if (order.得意先 != null)
-                    customerTextBox.Text = order.得意先;
-                   
+                    {
+                        customerComboBox.Text = order.得意先;
+                    }
+
                     if (order.商品名 != null)
                     productNameTextBox12.Text = order.商品名;
                     if (order.規格 != null)
@@ -94,7 +101,7 @@ namespace GODInventoryWinForm.Controls
                 {
                     t_itemlist product = ctx.t_itemlist.Find(Convert.ToInt32(innerCodeTextBox.Text));
 
-                    product.得意先 = customerTextBox.Text;
+                    product.得意先 = customerComboBox.Text;
                     product.ジャンル = Convert.ToInt16(genreComboBox.SelectedValue);
                     product.商品名 = productNameTextBox12.Text;
                     product.規格 = specTextBox.Text;
@@ -144,7 +151,7 @@ namespace GODInventoryWinForm.Controls
                     t_itemlist product = new t_itemlist();
                     product.自社コード = Convert.ToInt32(innerCodeTextBox.Text);
 
-                    product.得意先 = customerTextBox.Text;
+                    product.得意先 = customerComboBox.Text;
                     
                     product.ジャンル = Convert.ToInt16(genreComboBox.SelectedValue);
                     product.商品名 = productNameTextBox12.Text;

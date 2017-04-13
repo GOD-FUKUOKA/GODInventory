@@ -40,6 +40,12 @@
             this.janCodeTextBox = new System.Windows.Forms.TextBox();
             this.instoreCodeTextBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.salePriceTextBox = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.priceTextBox = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.costTextBox = new System.Windows.Forms.TextBox();
             this.genreComboBox = new System.Windows.Forms.ComboBox();
             this.unitTextBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,15 +60,9 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.customerTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label12 = new System.Windows.Forms.Label();
-            this.costTextBox = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.priceTextBox = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.salePriceTextBox = new System.Windows.Forms.TextBox();
+            this.customerComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -159,6 +159,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.customerComboBox);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.salePriceTextBox);
             this.groupBox1.Controls.Add(this.label14);
@@ -187,7 +188,6 @@
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.customerTextBox);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(22, 14);
@@ -196,8 +196,57 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(54, 278);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(49, 14);
+            this.label15.TabIndex = 29;
+            this.label15.Text = "売単価";
+            // 
+            // salePriceTextBox
+            // 
+            this.salePriceTextBox.Location = new System.Drawing.Point(109, 275);
+            this.salePriceTextBox.Name = "salePriceTextBox";
+            this.salePriceTextBox.Size = new System.Drawing.Size(222, 21);
+            this.salePriceTextBox.TabIndex = 28;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(373, 247);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(77, 14);
+            this.label14.TabIndex = 27;
+            this.label14.Text = "通常原単価";
+            // 
+            // priceTextBox
+            // 
+            this.priceTextBox.Location = new System.Drawing.Point(456, 244);
+            this.priceTextBox.Name = "priceTextBox";
+            this.priceTextBox.Size = new System.Drawing.Size(222, 21);
+            this.priceTextBox.TabIndex = 26;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(40, 247);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(63, 14);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "仕入原価";
+            // 
+            // costTextBox
+            // 
+            this.costTextBox.Location = new System.Drawing.Point(109, 244);
+            this.costTextBox.Name = "costTextBox";
+            this.costTextBox.Size = new System.Drawing.Size(222, 21);
+            this.costTextBox.TabIndex = 24;
+            // 
             // genreComboBox
             // 
+            this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.genreComboBox.FormattingEnabled = true;
             this.genreComboBox.Location = new System.Drawing.Point(109, 57);
             this.genreComboBox.Name = "genreComboBox";
@@ -310,13 +359,6 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "得意先";
             // 
-            // customerTextBox
-            // 
-            this.customerTextBox.Location = new System.Drawing.Point(109, 26);
-            this.customerTextBox.Name = "customerTextBox";
-            this.customerTextBox.Size = new System.Drawing.Size(222, 21);
-            this.customerTextBox.TabIndex = 0;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -330,53 +372,14 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // label12
+            // customerComboBox
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(40, 247);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(63, 14);
-            this.label12.TabIndex = 25;
-            this.label12.Text = "仕入原価";
-            // 
-            // costTextBox
-            // 
-            this.costTextBox.Location = new System.Drawing.Point(109, 244);
-            this.costTextBox.Name = "costTextBox";
-            this.costTextBox.Size = new System.Drawing.Size(222, 21);
-            this.costTextBox.TabIndex = 24;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(373, 247);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(77, 14);
-            this.label14.TabIndex = 27;
-            this.label14.Text = "通常原単価";
-            // 
-            // priceTextBox
-            // 
-            this.priceTextBox.Location = new System.Drawing.Point(456, 244);
-            this.priceTextBox.Name = "priceTextBox";
-            this.priceTextBox.Size = new System.Drawing.Size(222, 21);
-            this.priceTextBox.TabIndex = 26;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(54, 278);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(49, 14);
-            this.label15.TabIndex = 29;
-            this.label15.Text = "売単価";
-            // 
-            // salePriceTextBox
-            // 
-            this.salePriceTextBox.Location = new System.Drawing.Point(109, 275);
-            this.salePriceTextBox.Name = "salePriceTextBox";
-            this.salePriceTextBox.Size = new System.Drawing.Size(222, 21);
-            this.salePriceTextBox.TabIndex = 28;
+            this.customerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.customerComboBox.FormattingEnabled = true;
+            this.customerComboBox.Location = new System.Drawing.Point(109, 27);
+            this.customerComboBox.Name = "customerComboBox";
+            this.customerComboBox.Size = new System.Drawing.Size(222, 22);
+            this.customerComboBox.TabIndex = 30;
             // 
             // ProductsManagement
             // 
@@ -419,7 +422,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox customerTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox unitTextBox1;
@@ -435,5 +437,6 @@
         private System.Windows.Forms.TextBox salePriceTextBox;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox priceTextBox;
+        private System.Windows.Forms.ComboBox customerComboBox;
     }
 }

@@ -64,7 +64,7 @@ namespace GODInventoryWinForm.Controls
             this.genreNameColumn.ValueMember = "Id";
             this.genreNameColumn.DisplayMember = "FullName";
             // convert idジャンル to short,  order.ジャンル is short
-            this.genreNameColumn.DataSource = genreList.Select(o => new { Id = (short)o.idジャンル, FullName = o.ジャンル名 }).ToList();
+            this.genreNameColumn.DataSource = genreList.Select(o => new { Id = o.idジャンル, FullName = o.ジャンル名 }).ToList();
                
 
             //orderReasonDataGridviewComboBox.ValueType = typeof(OrderReasonEnum);
@@ -516,7 +516,7 @@ namespace GODInventoryWinForm.Controls
                 }
 
                 // set default ジャンル, or get error when drawing grid
-                order.ジャンル = (short)genreList.First().idジャンル;
+                order.ジャンル = genreList.First().idジャンル;
 
                 order.備考 = "FAX";
 
@@ -857,6 +857,11 @@ namespace GODInventoryWinForm.Controls
 
             }
 
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show(e.ToString());
         }
 
 

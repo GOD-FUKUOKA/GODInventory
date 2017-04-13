@@ -88,7 +88,7 @@
             this.addressTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.addressTextBox1.Name = "addressTextBox1";
             this.addressTextBox1.Size = new System.Drawing.Size(268, 21);
-            this.addressTextBox1.TabIndex = 5;
+            this.addressTextBox1.TabIndex = 7;
             // 
             // storeCodeTextBox
             // 
@@ -124,7 +124,7 @@
             this.districtTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.districtTextBox.Name = "districtTextBox";
             this.districtTextBox.Size = new System.Drawing.Size(268, 21);
-            this.districtTextBox.TabIndex = 7;
+            this.districtTextBox.TabIndex = 9;
             // 
             // label12
             // 
@@ -260,7 +260,7 @@
             this.faxTextBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.faxTextBox3.Name = "faxTextBox3";
             this.faxTextBox3.Size = new System.Drawing.Size(268, 21);
-            this.faxTextBox3.TabIndex = 9;
+            this.faxTextBox3.TabIndex = 11;
             // 
             // groupBox1
             // 
@@ -313,16 +313,16 @@
             this.storesComboBox.Location = new System.Drawing.Point(105, 261);
             this.storesComboBox.Name = "storesComboBox";
             this.storesComboBox.Size = new System.Drawing.Size(266, 22);
-            this.storesComboBox.TabIndex = 29;
+            this.storesComboBox.TabIndex = 12;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(36, 265);
+            this.label14.Location = new System.Drawing.Point(22, 265);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(63, 14);
+            this.label14.Size = new System.Drawing.Size(77, 14);
             this.label14.TabIndex = 28;
-            this.label14.Text = "参考店舗";
+            this.label14.Text = "価格参考先";
             // 
             // storeRankComboBox
             // 
@@ -336,7 +336,7 @@
             this.storeRankComboBox.Location = new System.Drawing.Point(498, 105);
             this.storeRankComboBox.Name = "storeRankComboBox";
             this.storeRankComboBox.Size = new System.Drawing.Size(266, 22);
-            this.storeRankComboBox.TabIndex = 27;
+            this.storeRankComboBox.TabIndex = 5;
             // 
             // label8
             // 
@@ -349,11 +349,12 @@
             // 
             // cusotmerComboBox
             // 
+            this.cusotmerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cusotmerComboBox.FormattingEnabled = true;
             this.cusotmerComboBox.Location = new System.Drawing.Point(105, 67);
             this.cusotmerComboBox.Name = "cusotmerComboBox";
             this.cusotmerComboBox.Size = new System.Drawing.Size(268, 22);
-            this.cusotmerComboBox.TabIndex = 24;
+            this.cusotmerComboBox.TabIndex = 2;
             // 
             // label3
             // 
@@ -370,7 +371,7 @@
             this.officerTextBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.officerTextBox3.Name = "officerTextBox3";
             this.officerTextBox3.Size = new System.Drawing.Size(268, 21);
-            this.officerTextBox3.TabIndex = 11;
+            this.officerTextBox3.TabIndex = 13;
             // 
             // shipperTextBox
             // 
