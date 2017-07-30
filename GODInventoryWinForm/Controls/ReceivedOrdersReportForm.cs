@@ -106,12 +106,15 @@ namespace GODInventoryWinForm.Controls
                 //new   20170728
 
                 var ordersnew = OrderEnities.Where(o => o.出荷No == chuhe_no);
-                var filtercout = ordersnew.Take(31).ToList();
+                var filtercout = ordersnew.Take(1).ToList();
 
-                var filtercout31 = ordersnew.Skip(31).ToList();
+                var filtercout31 = ordersnew.Skip(1).ToList();
 
                 var order = new List<v_pendingorder>() { orders.First() };
                 e.DataSources.Add(new ReportDataSource("DataSet1", filtercout));
+
+                e.DataSources.Add(new ReportDataSource("DataSet3", filtercout31));
+
 
             }
             else if (s == "ReceivedOrderDetailReport")
