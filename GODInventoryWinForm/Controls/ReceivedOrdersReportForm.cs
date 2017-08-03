@@ -37,6 +37,9 @@ namespace GODInventoryWinForm.Controls
         {
             this.reportViewer1.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(LocalReport_SubreportProcessing);
             this.reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
+     
+
+
         }
 
         public void InitializeDataSource(List<v_pendingorder> orders)
@@ -53,6 +56,10 @@ namespace GODInventoryWinForm.Controls
                     var gos = OrderEnities.GroupBy(x => x.出荷No).Select(y => y.First());
 
                     this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", gos));
+                    this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSetnew", OrderEnities.ToList()));
+
+                    
+                 
 
                     foreach (var go in gos)
                     {
@@ -106,14 +113,18 @@ namespace GODInventoryWinForm.Controls
                 //new   20170728
 
                 var ordersnew = OrderEnities.Where(o => o.出荷No == chuhe_no);
-                var filtercout = ordersnew.Take(1).ToList();
-
-                var filtercout31 = ordersnew.Skip(1).ToList();
-
-                var order = new List<v_pendingorder>() { orders.First() };
+                //page1 左侧数据
+                var filtercout = ordersnew.Take(10).ToList();
+                //var order = new List<v_pendingorder>() { orders.First() };
                 e.DataSources.Add(new ReportDataSource("DataSet1", filtercout));
+                //page2 右侧
+                //if (ordersnew != null && ordersnew.Count() > 10)
+                {
+                    var filtercout11 = ordersnew.Skip(10).ToList();
+                    e.DataSources.Add(new ReportDataSource("DataSet3", filtercout11));
+                }
 
-                e.DataSources.Add(new ReportDataSource("DataSet3", filtercout31));
+
 
 
             }
@@ -127,6 +138,21 @@ namespace GODInventoryWinForm.Controls
 
             //e.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource(reportName, ds1.Tables[0]));
             //throw new NotImplementedException();
+
+            //new 如果数据超出 20 条则显示到本 RDLc 中
+            else if (s == "OrderTemplateReport")
+            {
+                var orders = OrderEnities.Where(o => o.出荷No == chuhe_no).ToList();
+                var ordersnew = OrderEnities.Where(o => o.出荷No == chuhe_no);
+                var filtercout = ordersnew.Take(10).ToList();
+                e.DataSources.Add(new ReportDataSource("DataSet5", filtercout));
+            }
+            else if (s == "SubReceivedOrderReport")
+            {
+
+
+            }
+
         }
 
         private void ReceivedOrdersReportForm_Load(object sender, EventArgs e)
@@ -135,7 +161,10 @@ namespace GODInventoryWinForm.Controls
             //parameters[0] = new ReportParameter( "orders", this.orders, false);
 
             //this.reportViewer1.LocalReport.DataSources.Add( this.orders);
+
             this.reportViewer1.RefreshReport();
+            //按照单子数量判断是否显示page2 
+  
         }
 
         private void ReceivedOrdersReportForm_FormClosing(object sender, FormClosingEventArgs e)

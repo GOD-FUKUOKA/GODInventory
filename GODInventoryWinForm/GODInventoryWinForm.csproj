@@ -477,6 +477,8 @@
     <EmbeddedResource Include="Reports\ReceivedOrderReport2.rdlc" />
     <EmbeddedResource Include="Reports\ShippingItemsReport.rdlc" />
     <EmbeddedResource Include="Reports\ReceivedOrderReport.rdlc" />
+    <EmbeddedResource Include="Reports\SubReceivedOrderReport.rdlc" />
+    <EmbeddedResource Include="Reports\OrderTemplateReportBak.rdlc" />
     <EmbeddedResource Include="SelectProductForm.resx">
       <DependentUpon>SelectProductForm.cs</DependentUpon>
     </EmbeddedResource>
