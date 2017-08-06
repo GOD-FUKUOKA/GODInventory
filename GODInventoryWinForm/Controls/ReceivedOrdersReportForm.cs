@@ -37,6 +37,9 @@ namespace GODInventoryWinForm.Controls
         {
             this.reportViewer1.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(LocalReport_SubreportProcessing);
             this.reportViewer1.SetDisplayMode(Microsoft.Reporting.WinForms.DisplayMode.PrintLayout);
+     
+
+
         }
 
         public void InitializeDataSource(List<v_pendingorder> orders)
@@ -53,10 +56,14 @@ namespace GODInventoryWinForm.Controls
                     var gos = OrderEnities.GroupBy(x => x.出荷No).Select(y => y.First());
 
                     this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", gos));
+                    this.reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSetnew", OrderEnities.ToList()));
+
+                    
+                 
 
                     foreach (var go in gos)
                     {
-                        var bitmap =  GenerateBarCodeBitmap( go.出荷No.ToString("D18") );
+                        var bitmap = GenerateBarCodeBitmap(go.出荷No.ToString("D18"));
                         BarcodeHashTable[go.出荷No] = BmpToBytes(bitmap);
                         //go.BarcodeImagePath = GenerateBarCodeImage(go.出荷No.ToString());
                     }
@@ -92,16 +99,34 @@ namespace GODInventoryWinForm.Controls
                 var orders = OrderEnities.Where(o => o.出荷No == chuhe_no).ToList();
 
                 var orderFirst = orders.First();
-               
-                orderFirst.BarcodeImage = (byte[])BarcodeHashTable[ orderFirst.出荷No ];
+
+                orderFirst.BarcodeImage = (byte[])BarcodeHashTable[orderFirst.出荷No];
 
                 var orderKeZhuCount = orders.Count(o => o.発注形態区分 == (int)OrderReasonEnum.客注);
                 var orderADCount = orders.Count(o => o.発注形態区分 == (int)OrderReasonEnum.広告);
                 var orderYongDuCount = orders.Count(o => o.発注形態区分 == (int)OrderReasonEnum.用度品);
 
                 var orderreason = new List<v_orderreason>() { new v_orderreason() { hasOrderAD = orderADCount, hasOrderKeZhu = orderKeZhuCount, hasOrderYongDu = orderYongDuCount } };
-                e.DataSources.Add(new ReportDataSource("DataSet1", new List<v_pendingorder>() { orderFirst }));
+                //  e.DataSources.Add(new ReportDataSource("DataSet1", new List<v_pendingorder>() { orderFirst }));
                 e.DataSources.Add(new ReportDataSource("DataSet2", orderreason));
+
+                //new   20170728
+
+                var ordersnew = OrderEnities.Where(o => o.出荷No == chuhe_no);
+                //page1 左侧数据
+                var filtercout = ordersnew.Take(10).ToList();
+                //var order = new List<v_pendingorder>() { orders.First() };
+                e.DataSources.Add(new ReportDataSource("DataSet1", filtercout));
+                //page2 右侧
+                //if (ordersnew != null && ordersnew.Count() > 10)
+                {
+                    var filtercout11 = ordersnew.Skip(10).ToList();
+                    e.DataSources.Add(new ReportDataSource("DataSet3", filtercout11));
+                }
+
+
+
+
             }
             else if (s == "ReceivedOrderDetailReport")
             {
@@ -113,6 +138,21 @@ namespace GODInventoryWinForm.Controls
 
             //e.DataSources.Add(new Microsoft.Reporting.WebForms.ReportDataSource(reportName, ds1.Tables[0]));
             //throw new NotImplementedException();
+
+            //new 如果数据超出 20 条则显示到本 RDLc 中
+            else if (s == "OrderTemplateReport")
+            {
+                var orders = OrderEnities.Where(o => o.出荷No == chuhe_no).ToList();
+                var ordersnew = OrderEnities.Where(o => o.出荷No == chuhe_no);
+                var filtercout = ordersnew.Take(10).ToList();
+                e.DataSources.Add(new ReportDataSource("DataSet5", filtercout));
+            }
+            else if (s == "SubReceivedOrderReport")
+            {
+
+
+            }
+
         }
 
         private void ReceivedOrdersReportForm_Load(object sender, EventArgs e)
@@ -121,7 +161,10 @@ namespace GODInventoryWinForm.Controls
             //parameters[0] = new ReportParameter( "orders", this.orders, false);
 
             //this.reportViewer1.LocalReport.DataSources.Add( this.orders);
+
             this.reportViewer1.RefreshReport();
+            //按照单子数量判断是否显示page2 
+  
         }
 
         private void ReceivedOrdersReportForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -192,7 +235,7 @@ namespace GODInventoryWinForm.Controls
                 this.reportViewer1.LocalReport.EnableExternalImages = true;
                 ReportParameter[] image = new ReportParameter[1];
                 string path = "file:///" + Application.StartupPath + "\\EAN_13-0000000000000.jpg";
-               // path = "file:///C:/EAN_13-9787302380979.jpg";
+                // path = "file:///C:/EAN_13-9787302380979.jpg";
 
                 image[0] = new ReportParameter("image1", barcode);
                 this.reportViewer1.LocalReport.SetParameters(image);
@@ -257,9 +300,9 @@ namespace GODInventoryWinForm.Controls
                 ZXing.BarcodeWriter wr = new BarcodeWriter();
                 wr.Options = encodeOption;
                 wr.Format = BarcodeFormat.CODE_128; //  条形码规格：EAN13规格：12（无校验位）或13位数字
-                              
+
                 Bitmap img = wr.Write(出荷No); // 生成图片
-                
+
                 img.Save(filePath, System.Drawing.Imaging.ImageFormat.Jpeg);
 
                 //// 3.读取保存的图片
@@ -269,7 +312,8 @@ namespace GODInventoryWinForm.Controls
 
                 Graphics g = Graphics.FromImage(img);
                 g.DrawImage(img, 270, 170, 612, 573);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Error:" + ex);
                 return null;
@@ -281,7 +325,7 @@ namespace GODInventoryWinForm.Controls
         private string BuildBarCodeFilePath(string 出荷No)
         {
             string barcode = "CODE_128-" + 出荷No + ".jpg";
-            
+
             string filePath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, barcode);
 
             return filePath;

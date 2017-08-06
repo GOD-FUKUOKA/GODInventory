@@ -476,6 +476,9 @@
     <EmbeddedResource Include="Reports\ShippingItemsReportBak.rdlc" />
     <EmbeddedResource Include="Reports\ReceivedOrderReport2.rdlc" />
     <EmbeddedResource Include="Reports\ShippingItemsReport.rdlc" />
+    <EmbeddedResource Include="Reports\ReceivedOrderReport.rdlc" />
+    <EmbeddedResource Include="Reports\SubReceivedOrderReport.rdlc" />
+    <EmbeddedResource Include="Reports\OrderTemplateReportBak.rdlc" />
     <EmbeddedResource Include="SelectProductForm.resx">
       <DependentUpon>SelectProductForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -556,7 +559,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\OrderTemplateReport.rdlc" />
     <EmbeddedResource Include="Reports\ReceivedOrderDetailReport.rdlc" />
-    <EmbeddedResource Include="Reports\ReceivedOrderReport.rdlc" />
     <EmbeddedResource Include="Reports\ReceivedOrderCollectionReport.rdlc" />
     <EmbeddedResource Include="SendASNForm.resx">
       <DependentUpon>SendASNForm.cs</DependentUpon>
@@ -603,6 +605,7 @@
   <ItemGroup>
     <Content Include="Doc\help.txt" />
     <Content Include="nafco_128X128.ico" />
+    <EmbeddedResource Include="Reports\ReceivedOrderReportbak.rdlc" />
     <None Include="Resources\warehouse.png" />
     <None Include="Resources\FirstRecord_small.png" />
     <None Include="Resources\LastRecord_small.png" />
