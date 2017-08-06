@@ -85,7 +85,33 @@ namespace GODInventoryWinForm.Controls
             }
 
             this.dateEnumComboBox.SelectedIndex = 0;
+            // Pending = 0,	未確認  NotifyShipper = 2,	引当済   WaitToShip = 3,	転送済   PendingShipment = 5,	出荷待ち
+            // ASN = 6,	送信待ち   Shipped = 7,	送信済   Received = 8,	受領済   Completed = 10,	完結  Cancelled = 14,	キャンセル   Duplicated = 22,  Locked = 33,	 Existed = 44 }	
 
+            MockEntity[] statusSet = new MockEntity[] { new MockEntity { OStatus = OrderStatus.Pending, FullName = "未確認" } ,
+                new MockEntity { OStatus = OrderStatus.NotifyShipper, FullName = "引当済" } ,
+                new MockEntity { OStatus = OrderStatus.WaitToShip, FullName = "転送済" } ,
+                new MockEntity { OStatus = OrderStatus.PendingShipment, FullName = "出荷待ち" } ,
+                new MockEntity { OStatus = OrderStatus.ASN, FullName = "送信待ち" } ,
+                new MockEntity { OStatus = OrderStatus.Shipped, FullName = "送信済" } ,
+                new MockEntity { OStatus = OrderStatus.Received, FullName = "受領済" } ,
+                new MockEntity { OStatus = OrderStatus.Completed, FullName = "完結" } ,
+                new MockEntity { OStatus = OrderStatus.Cancelled, FullName = "キャンセル" } ,
+                new MockEntity { OStatus = OrderStatus.Duplicated, FullName = "Duplicated" } ,
+                new MockEntity { OStatus = OrderStatus.Locked, FullName = "Locked" } ,
+                new MockEntity { OStatus = OrderStatus.Existed, FullName = "Existed" } ,
+              };
+            this.StatusColumn1.DisplayMember = "FullName";
+            this.StatusColumn1.ValueMember = "OStatus";
+            this.StatusColumn1.DataSource = statusSet;
+
+            //  受領	          FALSE	未        TRUE	済
+            MockEntity[] receivedSet = new MockEntity[] { new MockEntity { BStatus = true, FullName = "済" } ,
+                 new MockEntity { BStatus = false, FullName = "未" } 
+              };
+            this.receivedColumn.DisplayMember = "FullName";
+            this.receivedColumn.ValueMember = "BStatus";
+            this.receivedColumn.DataSource = receivedSet;            
             return 0;
         }
 
@@ -630,6 +656,11 @@ namespace GODInventoryWinForm.Controls
             {
                 this.storeCodeTextBox2.SelectAll();
             }
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            ; ;
         }
     }
 }

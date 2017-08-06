@@ -17,6 +17,8 @@ namespace GODInventory.MyLinq
         public int TaxonId { get; set; } // genreId
         public string FullName { get; set; }
         public string ShortName { get; set; }
+        public OrderStatus OStatus { get; set; }
+        public bool BStatus { get; set; }
 
         //https://msdn.microsoft.com/zh-cn/library/bb348436(v=vs.110).aspx
         public bool Equals(MockEntity other)

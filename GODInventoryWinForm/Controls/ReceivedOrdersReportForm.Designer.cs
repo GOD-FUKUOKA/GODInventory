@@ -30,23 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            this.t_orderdataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.t_orderdataBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // t_orderdataBindingSource
-            // 
-            this.t_orderdataBindingSource.DataSource = typeof(GODInventory.MyLinq.t_orderdata);
             // 
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             reportDataSource1.Name = "DataSet2";
-            reportDataSource1.Value = this.t_orderdataBindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "GODInventoryWinForm.Reports.ReceivedOrderCollectionReport.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
@@ -75,7 +68,6 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ReceivedOrdersReportForm_FormClosed);
             this.Load += new System.EventHandler(this.ReceivedOrdersReportForm_Load);
             this.Shown += new System.EventHandler(this.ReceivedOrdersReportForm_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.t_orderdataBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
@@ -86,6 +78,5 @@
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private GODInventory.ViewModel.EntityDataSource entityDataSource1;
         private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.BindingSource t_orderdataBindingSource;
     }
 }

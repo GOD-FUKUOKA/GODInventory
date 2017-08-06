@@ -183,6 +183,8 @@ namespace GODInventory.MyLinq
 
         public short 入力区分 { get; set; }
 
+        // 打印报表时使用。
+        public int SubOrderCount { get; set; }
         public string BarcodeImagePath { get; set; }
         public byte[] BarcodeImage { get; set; }
     }

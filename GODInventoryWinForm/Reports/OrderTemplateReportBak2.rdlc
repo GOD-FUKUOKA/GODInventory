@@ -16,7 +16,7 @@
             </Parameters>
             <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
             <Height>0.7891cm</Height>
-            <Width>5.36353in</Width>
+            <Width>5.9627in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -29,8 +29,9 @@
           <BreakLocation>End</BreakLocation>
         </PageBreak>
         <KeepTogether>true</KeepTogether>
+        <Left>0.0127cm</Left>
         <Height>0.7891cm</Height>
-        <Width>5.36353in</Width>
+        <Width>5.9627in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -47,7 +48,7 @@
               </Parameter>
             </Parameters>
             <Height>0.81556cm</Height>
-            <Width>5.35853in</Width>
+            <Width>5.9627in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -57,10 +58,10 @@
           </Subreport>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>2.25588cm</Top>
+        <Top>2.16063cm</Top>
         <Left>0.0127cm</Left>
         <Height>0.81556cm</Height>
-        <Width>5.35853in</Width>
+        <Width>5.9627in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -82,7 +83,7 @@
             </Parameters>
             <OmitBorderOnPageBreak>true</OmitBorderOnPageBreak>
             <Height>0.81556cm</Height>
-            <Width>5.35853in</Width>
+            <Width>5.9627in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -95,10 +96,10 @@
           <BreakLocation>End</BreakLocation>
         </PageBreak>
         <KeepTogether>true</KeepTogether>
-        <Top>1.28158cm</Top>
+        <Top>1.18633cm</Top>
         <Left>0.0127cm</Left>
         <Height>0.82967cm</Height>
-        <Width>5.35853in</Width>
+        <Width>5.9627in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -118,8 +119,11 @@
                 <Value>=Parameters!OrderCount.Value</Value>
               </Parameter>
             </Parameters>
-            <Height>0.25583cm</Height>
-            <Width>5.35853in</Width>
+            <Height>0.15cm</Height>
+            <Width>5.9627in</Width>
+            <Visibility>
+              <Hidden>true</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -130,13 +134,13 @@
         <PageBreak>
           <BreakLocation>End</BreakLocation>
         </PageBreak>
-        <Top>0.92406cm</Top>
+        <Top>0.89112cm</Top>
         <Left>0.0127cm</Left>
-        <Height>0.25583cm</Height>
-        <Width>5.35853in</Width>
+        <Height>0.1541cm</Height>
+        <Width>5.9627in</Width>
         <ZIndex>3</ZIndex>
         <Visibility>
-          <Hidden>=IIf(Parameters!OrderCount.Value&lt;5,true,false)</Hidden>
+          <Hidden>true</Hidden>
         </Visibility>
         <Style>
           <Border>
@@ -145,10 +149,10 @@
         </Style>
       </Rectangle>
     </ReportItems>
-    <Height>1.20923in</Height>
+    <Height>1.17173in</Height>
     <Style />
   </Body>
-  <Width>5.36353in</Width>
+  <Width>5.9677in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
@@ -182,7 +186,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="OrderCount">
-      <DataType>Integer</DataType>
+      <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>

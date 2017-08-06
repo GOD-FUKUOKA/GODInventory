@@ -2,20 +2,6 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
-      <Image Name="Image2">
-        <Source>Embedded</Source>
-        <Value>stamp2</Value>
-        <Sizing>Fit</Sizing>
-        <Top>22.21339cm</Top>
-        <Left>2.99389cm</Left>
-        <Height>2.40878cm</Height>
-        <Width>8.74482cm</Width>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Image>
       <Textbox Name="Textbox8">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -44,7 +30,6 @@
         <Top>1.31742cm</Top>
         <Height>0.98086cm</Height>
         <Width>16.75074cm</Width>
-        <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -84,7 +69,7 @@
         <Left>0.10993cm</Left>
         <Height>0.8cm</Height>
         <Width>1.67979cm</Width>
-        <ZIndex>2</ZIndex>
+        <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -121,7 +106,7 @@
         <Left>1.78972cm</Left>
         <Height>0.8cm</Height>
         <Width>7.26404cm</Width>
-        <ZIndex>3</ZIndex>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -153,10 +138,10 @@
         </Paragraphs>
         <rd:DefaultName>ExecutionTime</rd:DefaultName>
         <Top>0.32936cm</Top>
-        <Left>13.26651cm</Left>
+        <Left>13.20301cm</Left>
         <Height>0.6cm</Height>
         <Width>3.57668cm</Width>
-        <ZIndex>4</ZIndex>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -192,10 +177,10 @@
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
         <Top>0.32936cm</Top>
-        <Left>11.42325cm</Left>
+        <Left>11.35975cm</Left>
         <Height>0.6cm</Height>
         <Width>1.84326cm</Width>
-        <ZIndex>5</ZIndex>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -608,7 +593,7 @@
         <Left>0.95875cm</Left>
         <Height>2.4cm</Height>
         <Width>15.792cm</Width>
-        <ZIndex>6</ZIndex>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -707,7 +692,7 @@
         <Left>0.15875cm</Left>
         <Height>2.4cm</Height>
         <Width>0.8cm</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>Solid</Style>
@@ -763,7 +748,7 @@
         <Left>1.06652cm</Left>
         <Height>0.83813cm</Height>
         <Width>14.43236cm</Width>
-        <ZIndex>8</ZIndex>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -783,7 +768,7 @@
         <Left>10.2494cm</Left>
         <Height>0.88562cm</Height>
         <Width>5.54052cm</Width>
-        <ZIndex>9</ZIndex>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -814,7 +799,7 @@
         <Left>10.0589cm</Left>
         <Height>0.6cm</Height>
         <Width>5.94928cm</Width>
-        <ZIndex>10</ZIndex>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -829,16 +814,16 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.65054cm</Width>
+              <Width>1.60424cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.82743cm</Width>
+              <Width>1.78113cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.03556cm</Width>
+              <Width>2.98926cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.6756cm</Width>
+              <Width>1.6293cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -1149,157 +1134,6 @@
                 </TablixCell>
               </TablixCells>
             </TablixRow>
-            <TablixRow>
-              <Height>1.04097cm</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox47">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <Language>ja-JP</Language>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox45</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox48">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>合計</Value>
-                              <Style>
-                                <FontStyle>Normal</FontStyle>
-                                <FontFamily>MS PGothic</FontFamily>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Normal</FontWeight>
-                                <TextDecoration>None</TextDecoration>
-                                <Color>#000000</Color>
-                                <Language>ja-JP</Language>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox46</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox51">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <Language>ja-JP</Language>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox49</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox52">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Sum(Fields!実際出荷数量.Value)</Value>
-                              <Style>
-                                <FontFamily>MS PGothic</FontFamily>
-                                <FontSize>9pt</FontSize>
-                                <Language>ja-JP</Language>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox50</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
@@ -1318,17 +1152,14 @@
             <TablixMember>
               <Group Name="详细信息2" />
             </TablixMember>
-            <TablixMember>
-              <KeepWithGroup>Before</KeepWithGroup>
-            </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet1</DataSetName>
-        <Top>8.36838cm</Top>
-        <Left>0.31883cm</Left>
-        <Height>3.2023cm</Height>
-        <Width>8.18913cm</Width>
-        <ZIndex>11</ZIndex>
+        <DataSetName>DataSet3</DataSetName>
+        <Top>8.65074cm</Top>
+        <Left>0.1633cm</Left>
+        <Height>2.16133cm</Height>
+        <Width>8.00393cm</Width>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1660,157 +1491,6 @@
                 </TablixCell>
               </TablixCells>
             </TablixRow>
-            <TablixRow>
-              <Height>1.04097cm</Height>
-              <TablixCells>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox49">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <Language>ja-JP</Language>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox45</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox50">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>合計</Value>
-                              <Style>
-                                <FontStyle>Normal</FontStyle>
-                                <FontFamily>MS PGothic</FontFamily>
-                                <FontSize>9pt</FontSize>
-                                <FontWeight>Normal</FontWeight>
-                                <TextDecoration>None</TextDecoration>
-                                <Color>#000000</Color>
-                                <Language>ja-JP</Language>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox46</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox53">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value />
-                              <Style>
-                                <FontSize>9pt</FontSize>
-                                <Language>ja-JP</Language>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style />
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox49</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-                <TablixCell>
-                  <CellContents>
-                    <Textbox Name="Textbox54">
-                      <CanGrow>true</CanGrow>
-                      <KeepTogether>true</KeepTogether>
-                      <Paragraphs>
-                        <Paragraph>
-                          <TextRuns>
-                            <TextRun>
-                              <Value>=Sum(Fields!実際出荷数量.Value)</Value>
-                              <Style>
-                                <FontFamily>MS PGothic</FontFamily>
-                                <FontSize>9pt</FontSize>
-                                <Language>ja-JP</Language>
-                              </Style>
-                            </TextRun>
-                          </TextRuns>
-                          <Style>
-                            <TextAlign>Right</TextAlign>
-                          </Style>
-                        </Paragraph>
-                      </Paragraphs>
-                      <rd:DefaultName>Textbox50</rd:DefaultName>
-                      <Style>
-                        <Border>
-                          <Style>Solid</Style>
-                        </Border>
-                        <BackgroundColor>LightGrey</BackgroundColor>
-                        <VerticalAlign>Middle</VerticalAlign>
-                        <PaddingLeft>2pt</PaddingLeft>
-                        <PaddingRight>2pt</PaddingRight>
-                        <PaddingTop>2pt</PaddingTop>
-                        <PaddingBottom>2pt</PaddingBottom>
-                      </Style>
-                    </Textbox>
-                  </CellContents>
-                </TablixCell>
-              </TablixCells>
-            </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
@@ -1829,17 +1509,14 @@
             <TablixMember>
               <Group Name="详细信息3" />
             </TablixMember>
-            <TablixMember>
-              <KeepWithGroup>Before</KeepWithGroup>
-            </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>DataSet3</DataSetName>
-        <Top>8.36837cm</Top>
-        <Left>8.64907cm</Left>
-        <Height>3.2023cm</Height>
+        <DataSetName>DataSet4</DataSetName>
+        <Top>8.65073cm</Top>
+        <Left>8.55704cm</Left>
+        <Height>2.16133cm</Height>
         <Width>8.18913cm</Width>
-        <ZIndex>12</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1848,12 +1525,12 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>10.16252in</Height>
+    <Height>4.25672in</Height>
     <Style>
       <Border />
     </Style>
   </Body>
-  <Width>6.65727in</Width>
+  <Width>6.60618in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
@@ -1893,6 +1570,13 @@
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
       <rd:DataSourceID>d07b41c1-7d38-4582-8d64-c0a5a977b185</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="GODInventoryMyLinq4">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>d95c9006-f2d9-4206-85f7-07cc7e0bde8c</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -1938,6 +1622,10 @@
           <DataField>Status</DataField>
           <rd:TypeName>GODInventory.MyLinq.OrderStatus</rd:TypeName>
         </Field>
+        <Field Name="SubOrderCount">
+          <DataField>SubOrderCount</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="UnitedShopLevel">
           <DataField>UnitedShopLevel</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -1962,25 +1650,9 @@
           <DataField>ダブリ</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="一旦保留">
-          <DataField>一旦保留</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-        <Field Name="伝票番号">
-          <DataField>伝票番号</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="住所">
-          <DataField>住所</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="備考">
           <DataField>備考</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="入力区分">
-          <DataField>入力区分</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
         </Field>
         <Field Name="出荷No">
           <DataField>出荷No</DataField>
@@ -1998,81 +1670,13 @@
           <DataField>単位</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="原価金額_税抜_">
-          <DataField>原価金額_税抜_</DataField>
+        <Field Name="店番">
+          <DataField>店番</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="原価金額_税込_">
-          <DataField>原価金額_税込_</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="原単価_税抜_">
-          <DataField>原単価_税抜_</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="原単価_税込_">
-          <DataField>原単価_税込_</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="厳しさ">
-          <DataField>厳しさ</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="受注日">
-          <DataField>受注日</DataField>
-          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="受領">
-          <DataField>受領</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-        <Field Name="口数">
-          <DataField>口数</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="品名漢字">
-          <DataField>品名漢字</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="商品コード">
-          <DataField>商品コード</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="在庫数">
-          <DataField>在庫数</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="在庫状態">
-          <DataField>在庫状態</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="売上ランク">
-          <DataField>売上ランク</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="売単価_税抜_">
-          <DataField>売単価_税抜_</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="売単価_税込_">
-          <DataField>売単価_税込_</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="実際出荷数量">
-          <DataField>実際出荷数量</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="実際配送担当">
-          <DataField>実際配送担当</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="店名">
           <DataField>店名</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="店番">
-          <DataField>店番</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="店舗コード">
           <DataField>店舗コード</DataField>
@@ -2086,6 +1690,194 @@
           <DataField>店舗名漢字</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="電話番号">
+          <DataField>電話番号</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="訂正理由区分">
+          <DataField>訂正理由区分</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="発注日">
+          <DataField>発注日</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="発注数量">
+          <DataField>発注数量</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="発注形態名称漢字">
+          <DataField>発注形態名称漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="発注形態区分">
+          <DataField>発注形態区分</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="法人名漢字">
+          <DataField>法人名漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="規格名漢字">
+          <DataField>規格名漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="行数">
+          <DataField>行数</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="口数">
+          <DataField>口数</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="売単価_税抜_">
+          <DataField>売単価_税抜_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="売単価_税込_">
+          <DataField>売単価_税込_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="売上ランク">
+          <DataField>売上ランク</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="納品場所名カナ">
+          <DataField>納品場所名カナ</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="納品場所名漢字">
+          <DataField>納品場所名漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="納品口数">
+          <DataField>納品口数</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="納品日">
+          <DataField>納品日</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="納品原価金額">
+          <DataField>納品原価金額</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="納品指示">
+          <DataField>納品指示</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="配送担当受信">
+          <DataField>配送担当受信</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="配送担当受信時刻">
+          <DataField>配送担当受信時刻</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="品名漢字">
+          <DataField>品名漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="欠品カウンター">
+          <DataField>欠品カウンター</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="入力区分">
+          <DataField>入力区分</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="商品コード">
+          <DataField>商品コード</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="社内伝番">
+          <DataField>社内伝番</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="社内伝番UnSaved">
+          <DataField>社内伝番UnSaved</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="実際出荷数量">
+          <DataField>実際出荷数量</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="実際配送担当">
+          <DataField>実際配送担当</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="受領">
+          <DataField>受領</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="受注日">
+          <DataField>受注日</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="税額">
+          <DataField>税額</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="税率">
+          <DataField>税率</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="県別">
+          <DataField>県別</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="厳しさ">
+          <DataField>厳しさ</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="一旦保留">
+          <DataField>一旦保留</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="原単価_税抜_">
+          <DataField>原単価_税抜_</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="原単価_税込_">
+          <DataField>原単価_税込_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="原価金額_税抜_">
+          <DataField>原価金額_税抜_</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="原価金額_税込_">
+          <DataField>原価金額_税込_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="伝票番号">
+          <DataField>伝票番号</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="在庫数">
+          <DataField>在庫数</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="在庫状態">
+          <DataField>在庫状態</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="直送区分">
+          <DataField>直送区分</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="重量">
+          <DataField>重量</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="住所">
+          <DataField>住所</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="自社コード">
+          <DataField>自社コード</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="最大行数">
           <DataField>最大行数</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
@@ -2098,140 +1890,11 @@
           <DataField>最終出荷数</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="欠品カウンター">
-          <DataField>欠品カウンター</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="法人名漢字">
-          <DataField>法人名漢字</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="発注形態区分">
-          <DataField>発注形態区分</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
-        </Field>
-        <Field Name="発注形態名称漢字">
-          <DataField>発注形態名称漢字</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="発注数量">
-          <DataField>発注数量</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="発注日">
-          <DataField>発注日</DataField>
-          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="直送区分">
-          <DataField>直送区分</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="県別">
-          <DataField>県別</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="社内伝番">
-          <DataField>社内伝番</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="社内伝番UnSaved">
-          <DataField>社内伝番UnSaved</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="税率">
-          <DataField>税率</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="税額">
-          <DataField>税額</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="納品原価金額">
-          <DataField>納品原価金額</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="納品口数">
-          <DataField>納品口数</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="納品場所名カナ">
-          <DataField>納品場所名カナ</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="納品場所名漢字">
-          <DataField>納品場所名漢字</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="納品指示">
-          <DataField>納品指示</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="納品日">
-          <DataField>納品日</DataField>
-          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="自社コード">
-          <DataField>自社コード</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="行数">
-          <DataField>行数</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="規格名漢字">
-          <DataField>規格名漢字</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="訂正理由区分">
-          <DataField>訂正理由区分</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="配送担当受信">
-          <DataField>配送担当受信</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
-        </Field>
-        <Field Name="配送担当受信時刻">
-          <DataField>配送担当受信時刻</DataField>
-          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="重量">
-          <DataField>重量</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="電話番号">
-          <DataField>電話番号</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>GODInventory.MyLinq</rd:DataSetName>
         <rd:TableName>v_pendingorder</rd:TableName>
         <rd:ObjectDataSourceType>GODInventory.MyLinq.v_pendingorder, GODInventory.MyLinq, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
-      </rd:DataSetInfo>
-    </DataSet>
-    <DataSet Name="DataSet2">
-      <Query>
-        <DataSourceName>GODInventoryMyLinq1</DataSourceName>
-        <CommandText>/* Local Query */</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="hasOrderAD">
-          <DataField>hasOrderAD</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="hasOrderKeZhu">
-          <DataField>hasOrderKeZhu</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="hasOrderYongDu">
-          <DataField>hasOrderYongDu</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-      </Fields>
-      <rd:DataSetInfo>
-        <rd:DataSetName>GODInventory.MyLinq</rd:DataSetName>
-        <rd:TableName>v_orderreason</rd:TableName>
-        <rd:ObjectDataSourceType>GODInventory.MyLinq.v_orderreason, GODInventory.MyLinq, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
     <DataSet Name="DataSet3">
@@ -2276,6 +1939,10 @@
           <DataField>Status</DataField>
           <rd:TypeName>GODInventory.MyLinq.OrderStatus</rd:TypeName>
         </Field>
+        <Field Name="SubOrderCount">
+          <DataField>SubOrderCount</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="UnitedShopLevel">
           <DataField>UnitedShopLevel</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -2300,25 +1967,9 @@
           <DataField>ダブリ</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="一旦保留">
-          <DataField>一旦保留</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-        <Field Name="伝票番号">
-          <DataField>伝票番号</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="住所">
-          <DataField>住所</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="備考">
           <DataField>備考</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="入力区分">
-          <DataField>入力区分</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
         </Field>
         <Field Name="出荷No">
           <DataField>出荷No</DataField>
@@ -2336,81 +1987,13 @@
           <DataField>単位</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="原価金額_税抜_">
-          <DataField>原価金額_税抜_</DataField>
+        <Field Name="店番">
+          <DataField>店番</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="原価金額_税込_">
-          <DataField>原価金額_税込_</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="原単価_税抜_">
-          <DataField>原単価_税抜_</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="原単価_税込_">
-          <DataField>原単価_税込_</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="厳しさ">
-          <DataField>厳しさ</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="受注日">
-          <DataField>受注日</DataField>
-          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="受領">
-          <DataField>受領</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-        <Field Name="口数">
-          <DataField>口数</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="品名漢字">
-          <DataField>品名漢字</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="商品コード">
-          <DataField>商品コード</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="在庫数">
-          <DataField>在庫数</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="在庫状態">
-          <DataField>在庫状態</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="売上ランク">
-          <DataField>売上ランク</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="売単価_税抜_">
-          <DataField>売単価_税抜_</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="売単価_税込_">
-          <DataField>売単価_税込_</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="実際出荷数量">
-          <DataField>実際出荷数量</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="実際配送担当">
-          <DataField>実際配送担当</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="店名">
           <DataField>店名</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="店番">
-          <DataField>店番</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="店舗コード">
           <DataField>店舗コード</DataField>
@@ -2424,6 +2007,194 @@
           <DataField>店舗名漢字</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="電話番号">
+          <DataField>電話番号</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="訂正理由区分">
+          <DataField>訂正理由区分</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="発注日">
+          <DataField>発注日</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="発注数量">
+          <DataField>発注数量</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="発注形態名称漢字">
+          <DataField>発注形態名称漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="発注形態区分">
+          <DataField>発注形態区分</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="法人名漢字">
+          <DataField>法人名漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="規格名漢字">
+          <DataField>規格名漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="行数">
+          <DataField>行数</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="口数">
+          <DataField>口数</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="売単価_税抜_">
+          <DataField>売単価_税抜_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="売単価_税込_">
+          <DataField>売単価_税込_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="売上ランク">
+          <DataField>売上ランク</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="納品場所名カナ">
+          <DataField>納品場所名カナ</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="納品場所名漢字">
+          <DataField>納品場所名漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="納品口数">
+          <DataField>納品口数</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="納品日">
+          <DataField>納品日</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="納品原価金額">
+          <DataField>納品原価金額</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="納品指示">
+          <DataField>納品指示</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="配送担当受信">
+          <DataField>配送担当受信</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="配送担当受信時刻">
+          <DataField>配送担当受信時刻</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="品名漢字">
+          <DataField>品名漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="欠品カウンター">
+          <DataField>欠品カウンター</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="入力区分">
+          <DataField>入力区分</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="商品コード">
+          <DataField>商品コード</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="社内伝番">
+          <DataField>社内伝番</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="社内伝番UnSaved">
+          <DataField>社内伝番UnSaved</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="実際出荷数量">
+          <DataField>実際出荷数量</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="実際配送担当">
+          <DataField>実際配送担当</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="受領">
+          <DataField>受領</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="受注日">
+          <DataField>受注日</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="税額">
+          <DataField>税額</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="税率">
+          <DataField>税率</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="県別">
+          <DataField>県別</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="厳しさ">
+          <DataField>厳しさ</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="一旦保留">
+          <DataField>一旦保留</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="原単価_税抜_">
+          <DataField>原単価_税抜_</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="原単価_税込_">
+          <DataField>原単価_税込_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="原価金額_税抜_">
+          <DataField>原価金額_税抜_</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="原価金額_税込_">
+          <DataField>原価金額_税込_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="伝票番号">
+          <DataField>伝票番号</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="在庫数">
+          <DataField>在庫数</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="在庫状態">
+          <DataField>在庫状態</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="直送区分">
+          <DataField>直送区分</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="重量">
+          <DataField>重量</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="住所">
+          <DataField>住所</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="自社コード">
+          <DataField>自社コード</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
         <Field Name="最大行数">
           <DataField>最大行数</DataField>
           <rd:TypeName>System.Nullable`1[[System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
@@ -2436,61 +2207,174 @@
           <DataField>最終出荷数</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="欠品カウンター">
-          <DataField>欠品カウンター</DataField>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>GODInventory.MyLinq</rd:DataSetName>
+        <rd:TableName>v_pendingorder</rd:TableName>
+        <rd:ObjectDataSourceType>GODInventory.MyLinq.v_pendingorder, GODInventory.MyLinq, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="DataSet4">
+      <Query>
+        <DataSourceName>GODInventoryMyLinq4</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="ASN管理連番">
+          <DataField>ASN管理連番</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="BarcodeImage">
+          <DataField>BarcodeImage</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="BarcodeImagePath">
+          <DataField>BarcodeImagePath</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GenreName">
+          <DataField>GenreName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="id受注データ">
+          <DataField>id受注データ</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="法人名漢字">
-          <DataField>法人名漢字</DataField>
+        <Field Name="ＪＡＮコード">
+          <DataField>ＪＡＮコード</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="maichuanfanhao">
+          <DataField>maichuanfanhao</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="発注形態区分">
-          <DataField>発注形態区分</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
-        </Field>
-        <Field Name="発注形態名称漢字">
-          <DataField>発注形態名称漢字</DataField>
+        <Field Name="ShipNO">
+          <DataField>ShipNO</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="発注数量">
-          <DataField>発注数量</DataField>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+          <rd:TypeName>GODInventory.MyLinq.OrderStatus</rd:TypeName>
+        </Field>
+        <Field Name="SubOrderCount">
+          <DataField>SubOrderCount</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="UnitedShopLevel">
+          <DataField>UnitedShopLevel</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="オプション使用欄">
+          <DataField>オプション使用欄</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="キャンセル">
+          <DataField>キャンセル</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="キャンセル時刻">
+          <DataField>キャンセル時刻</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="ジャンル">
+          <DataField>ジャンル</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ダブリ">
+          <DataField>ダブリ</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="備考">
+          <DataField>備考</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="出荷No">
+          <DataField>出荷No</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="出荷日">
+          <DataField>出荷日</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="出荷業務仕入先コード">
+          <DataField>出荷業務仕入先コード</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="単位">
+          <DataField>単位</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="店番">
+          <DataField>店番</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="店名">
+          <DataField>店名</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="店舗コード">
+          <DataField>店舗コード</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="店舗名カナ">
+          <DataField>店舗名カナ</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="店舗名漢字">
+          <DataField>店舗名漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="電話番号">
+          <DataField>電話番号</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="訂正理由区分">
+          <DataField>訂正理由区分</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="発注日">
           <DataField>発注日</DataField>
           <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
-        <Field Name="直送区分">
-          <DataField>直送区分</DataField>
+        <Field Name="発注数量">
+          <DataField>発注数量</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="発注形態名称漢字">
+          <DataField>発注形態名称漢字</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="県別">
-          <DataField>県別</DataField>
+        <Field Name="発注形態区分">
+          <DataField>発注形態区分</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="法人名漢字">
+          <DataField>法人名漢字</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="社内伝番">
-          <DataField>社内伝番</DataField>
+        <Field Name="規格名漢字">
+          <DataField>規格名漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="行数">
+          <DataField>行数</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="口数">
+          <DataField>口数</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="社内伝番UnSaved">
-          <DataField>社内伝番UnSaved</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="売単価_税抜_">
+          <DataField>売単価_税抜_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
-        <Field Name="税率">
-          <DataField>税率</DataField>
+        <Field Name="売単価_税込_">
+          <DataField>売単価_税込_</DataField>
           <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
-        <Field Name="税額">
-          <DataField>税額</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="納品原価金額">
-          <DataField>納品原価金額</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="納品口数">
-          <DataField>納品口数</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="売上ランク">
+          <DataField>売上ランク</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="納品場所名カナ">
           <DataField>納品場所名カナ</DataField>
@@ -2500,29 +2384,21 @@
           <DataField>納品場所名漢字</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="納品指示">
-          <DataField>納品指示</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="納品口数">
+          <DataField>納品口数</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="納品日">
           <DataField>納品日</DataField>
           <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
-        <Field Name="自社コード">
-          <DataField>自社コード</DataField>
+        <Field Name="納品原価金額">
+          <DataField>納品原価金額</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="行数">
-          <DataField>行数</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
-        </Field>
-        <Field Name="規格名漢字">
-          <DataField>規格名漢字</DataField>
+        <Field Name="納品指示">
+          <DataField>納品指示</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="訂正理由区分">
-          <DataField>訂正理由区分</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="配送担当受信">
           <DataField>配送担当受信</DataField>
@@ -2532,13 +2408,121 @@
           <DataField>配送担当受信時刻</DataField>
           <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
         </Field>
+        <Field Name="品名漢字">
+          <DataField>品名漢字</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="欠品カウンター">
+          <DataField>欠品カウンター</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="入力区分">
+          <DataField>入力区分</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="商品コード">
+          <DataField>商品コード</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="社内伝番">
+          <DataField>社内伝番</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="社内伝番UnSaved">
+          <DataField>社内伝番UnSaved</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="実際出荷数量">
+          <DataField>実際出荷数量</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="実際配送担当">
+          <DataField>実際配送担当</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="受領">
+          <DataField>受領</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="受注日">
+          <DataField>受注日</DataField>
+          <rd:TypeName>System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="税額">
+          <DataField>税額</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="税率">
+          <DataField>税率</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="県別">
+          <DataField>県別</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="厳しさ">
+          <DataField>厳しさ</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="一旦保留">
+          <DataField>一旦保留</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="原単価_税抜_">
+          <DataField>原単価_税抜_</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="原単価_税込_">
+          <DataField>原単価_税込_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="原価金額_税抜_">
+          <DataField>原価金額_税抜_</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="原価金額_税込_">
+          <DataField>原価金額_税込_</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Double, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="伝票番号">
+          <DataField>伝票番号</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="在庫数">
+          <DataField>在庫数</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="在庫状態">
+          <DataField>在庫状態</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="直送区分">
+          <DataField>直送区分</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="重量">
           <DataField>重量</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="電話番号">
-          <DataField>電話番号</DataField>
+        <Field Name="住所">
+          <DataField>住所</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="自社コード">
+          <DataField>自社コード</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="最大行数">
+          <DataField>最大行数</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
+        <Field Name="最小発注単位数量">
+          <DataField>最小発注単位数量</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="最終出荷数">
+          <DataField>最終出荷数</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
@@ -2553,24 +2537,8 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
-    <ReportParameter Name="HasStamp">
+    <ReportParameter Name="OrderCount">
       <DataType>Integer</DataType>
-      <Prompt>ReportParameter1</Prompt>
-      <ValidValues>
-        <ParameterValues>
-          <ParameterValue>
-            <Value>1</Value>
-            <Label>1</Label>
-          </ParameterValue>
-          <ParameterValue>
-            <Value>0</Value>
-            <Label>0</Label>
-          </ParameterValue>
-        </ParameterValues>
-      </ValidValues>
-    </ReportParameter>
-    <ReportParameter Name="subReportHidden">
-      <DataType>Boolean</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
