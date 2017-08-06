@@ -40,7 +40,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(615, 103);
             this.label1.TabIndex = 0;
-            this.label1.Text = "受注管理システム For ナフコ\n（バージョン0.8.3）";
+            this.label1.Text = "受注管理システム For ナフコ\r\n（バージョン0.8.4）";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainControl

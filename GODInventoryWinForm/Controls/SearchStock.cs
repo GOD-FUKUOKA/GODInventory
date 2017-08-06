@@ -369,7 +369,7 @@ namespace GODInventoryWinForm.Controls
                 var i = productList.FindIndex(o => o.自社コード == igrouping.Key);
                 foreach (var stock in igrouping.ToList())
                 {
-                    qtyTable.Rows[i][stock.納品書番号] = Math.Abs((int)stock.数量);
+                    qtyTable.Rows[i][stock.納品書番号] = (int)stock.数量;//Math.Abs((int)stock.数量);
                 }
             }
 
