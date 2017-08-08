@@ -136,7 +136,7 @@
         <Width>5.35853in</Width>
         <ZIndex>3</ZIndex>
         <Visibility>
-          <Hidden>=IIf(Parameters!OrderCount.Value&lt;5,true,false)</Hidden>
+          <Hidden>=IIf(Parameters!OrderCount.Value&lt;=20,true,false)</Hidden>
         </Visibility>
         <Style>
           <Border>
