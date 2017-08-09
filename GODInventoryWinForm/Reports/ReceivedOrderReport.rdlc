@@ -1940,7 +1940,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=RowNumber(nothing )</Value>
+                              <Value>=RowNumber(nothing )+10</Value>
                               <Style>
                                 <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -1965,6 +1965,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2098,7 +2099,7 @@
         <DataSetName>DataSet4</DataSetName>
         <Top>13.82937cm</Top>
         <Left>8.55382cm</Left>
-        <Height>1.73801cm</Height>
+        <Height>1.738cm</Height>
         <Width>8.19692cm</Width>
         <ZIndex>13</ZIndex>
         <Style>

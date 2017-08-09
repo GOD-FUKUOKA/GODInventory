@@ -40,6 +40,7 @@
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             reportDataSource1.Name = "DataSet2";
+            reportDataSource1.Value = null;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "GODInventoryWinForm.Reports.ReceivedOrderCollectionReport.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
@@ -47,6 +48,7 @@
             this.reportViewer1.Size = new System.Drawing.Size(732, 256);
             this.reportViewer1.TabIndex = 0;
             this.reportViewer1.Print += new Microsoft.Reporting.WinForms.ReportPrintEventHandler(this.reportViewer1_Print);
+            this.reportViewer1.PrintingBegin += new Microsoft.Reporting.WinForms.ReportPrintEventHandler(this.reportViewer1_PrintingBegin);
             // 
             // entityDataSource1
             // 
