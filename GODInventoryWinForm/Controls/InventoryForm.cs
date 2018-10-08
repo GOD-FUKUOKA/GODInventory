@@ -131,8 +131,7 @@ namespace GODInventoryWinForm.Controls
                     {
                         stockcheck.daiFaHuoShu = order.数量;                    
                     }
-                    stockcheck.shiJiKuCunShu = stockcheck.yingYouKuCunShu + stockcheck.daiFaHuoShu;
-
+                    stockcheck.shiJiKuCunShu = stockcheck.yingYouKuCunShu + stockcheck.daiFaHuoShu;                
                     stockcheckList.Add(stockcheck);
                 }
 

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.uploadForEDIButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -54,10 +54,19 @@
             this.printForShipperToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.asnTabPage = new System.Windows.Forms.TabPage();
             this.ediDataGridView = new System.Windows.Forms.DataGridView();
+            this.配车单单号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.納品日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.県別Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.実際配送担当Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.重量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.printForShipperToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.printForEDIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.canceledTabPage = new System.Windows.Forms.TabPage();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.uploadAsnButton = new System.Windows.Forms.Button();
             this.canceledDataGridView = new System.Windows.Forms.DataGridView();
             this.キャンセルColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -118,13 +127,6 @@
             this.canceledBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.配车单单号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.納品日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.県別Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.実際配送担当Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.重量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.pendingTabPage.SuspendLayout();
@@ -209,14 +211,14 @@
             this.shipNODataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.shipNODataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.shipNODataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.shipNODataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.shipNODataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ShipNOColumn1,
@@ -355,14 +357,14 @@
             this.ediDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ediDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ediDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.ediDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ediDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.配车单单号Column1,
@@ -381,6 +383,64 @@
             this.ediDataGridView.Size = new System.Drawing.Size(903, 280);
             this.ediDataGridView.TabIndex = 3;
             this.ediDataGridView.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
+            // 
+            // 配车单单号Column1
+            // 
+            this.配车单单号Column1.DataPropertyName = "ShipNO";
+            this.配车单单号Column1.HeaderText = "出荷指示書番号";
+            this.配车单单号Column1.Name = "配车单单号Column1";
+            this.配车单单号Column1.ReadOnly = true;
+            this.配车单单号Column1.Width = 280;
+            // 
+            // 出荷日Column1
+            // 
+            this.出荷日Column1.DataPropertyName = "出荷日";
+            this.出荷日Column1.HeaderText = "出荷日";
+            this.出荷日Column1.Name = "出荷日Column1";
+            this.出荷日Column1.ReadOnly = true;
+            this.出荷日Column1.Width = 160;
+            // 
+            // 納品日Column1
+            // 
+            this.納品日Column1.DataPropertyName = "納品日";
+            this.納品日Column1.HeaderText = "納品日";
+            this.納品日Column1.Name = "納品日Column1";
+            this.納品日Column1.ReadOnly = true;
+            this.納品日Column1.Width = 160;
+            // 
+            // 県別Column1
+            // 
+            this.県別Column1.DataPropertyName = "県別";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle8;
+            this.県別Column1.HeaderText = "県別";
+            this.県別Column1.Name = "県別Column1";
+            this.県別Column1.ReadOnly = true;
+            this.県別Column1.Width = 120;
+            // 
+            // 実際配送担当Column1
+            // 
+            this.実際配送担当Column1.DataPropertyName = "実際配送担当";
+            this.実際配送担当Column1.HeaderText = "実際配送担当";
+            this.実際配送担当Column1.Name = "実際配送担当Column1";
+            this.実際配送担当Column1.ReadOnly = true;
+            this.実際配送担当Column1.Width = 120;
+            // 
+            // 重量Column1
+            // 
+            this.重量Column1.DataPropertyName = "TotalWeight";
+            this.重量Column1.HeaderText = "重量";
+            this.重量Column1.Name = "重量Column1";
+            this.重量Column1.ReadOnly = true;
+            this.重量Column1.Width = 120;
+            // 
+            // 原価金額_税抜_Column1
+            // 
+            this.原価金額_税抜_Column1.DataPropertyName = "TotalPrice";
+            this.原価金額_税抜_Column1.HeaderText = "原価金額(税抜)";
+            this.原価金額_税抜_Column1.Name = "原価金額_税抜_Column1";
+            this.原価金額_税抜_Column1.ReadOnly = true;
+            this.原価金額_税抜_Column1.Width = 140;
             // 
             // contextMenuStrip2
             // 
@@ -406,6 +466,8 @@
             // 
             // canceledTabPage
             // 
+            this.canceledTabPage.Controls.Add(this.saveButton);
+            this.canceledTabPage.Controls.Add(this.cancelButton);
             this.canceledTabPage.Controls.Add(this.uploadAsnButton);
             this.canceledTabPage.Controls.Add(this.canceledDataGridView);
             this.canceledTabPage.Location = new System.Drawing.Point(4, 22);
@@ -414,6 +476,30 @@
             this.canceledTabPage.TabIndex = 4;
             this.canceledTabPage.Text = "Canceled";
             this.canceledTabPage.UseVisualStyleBackColor = true;
+            // 
+            // saveButton
+            // 
+            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.saveButton.Location = new System.Drawing.Point(579, 13);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(106, 32);
+            this.saveButton.TabIndex = 8;
+            this.saveButton.Text = "変更を保存";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cancelButton.Location = new System.Drawing.Point(687, 13);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(106, 32);
+            this.cancelButton.TabIndex = 9;
+            this.cancelButton.Text = "変更を取消す";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // uploadAsnButton
             // 
@@ -460,6 +546,10 @@
             this.canceledDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.canceledDataGridView.Size = new System.Drawing.Size(903, 279);
             this.canceledDataGridView.TabIndex = 0;
+            this.canceledDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.canceledDataGridView_CellBeginEdit);
+            this.canceledDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.canceledDataGridView_CellEndEdit);
+            this.canceledDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.canceledDataGridView_CellFormatting);
+            this.canceledDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.canceledDataGridView_RowPrePaint);
             // 
             // キャンセルColumn1
             // 
@@ -893,64 +983,6 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
-            // 配车单单号Column1
-            // 
-            this.配车单单号Column1.DataPropertyName = "ShipNO";
-            this.配车单单号Column1.HeaderText = "出荷指示書番号";
-            this.配车单单号Column1.Name = "配车单单号Column1";
-            this.配车单单号Column1.ReadOnly = true;
-            this.配车单单号Column1.Width = 280;
-            // 
-            // 出荷日Column1
-            // 
-            this.出荷日Column1.DataPropertyName = "出荷日";
-            this.出荷日Column1.HeaderText = "出荷日";
-            this.出荷日Column1.Name = "出荷日Column1";
-            this.出荷日Column1.ReadOnly = true;
-            this.出荷日Column1.Width = 160;
-            // 
-            // 納品日Column1
-            // 
-            this.納品日Column1.DataPropertyName = "納品日";
-            this.納品日Column1.HeaderText = "納品日";
-            this.納品日Column1.Name = "納品日Column1";
-            this.納品日Column1.ReadOnly = true;
-            this.納品日Column1.Width = 160;
-            // 
-            // 県別Column1
-            // 
-            this.県別Column1.DataPropertyName = "県別";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.県別Column1.HeaderText = "県別";
-            this.県別Column1.Name = "県別Column1";
-            this.県別Column1.ReadOnly = true;
-            this.県別Column1.Width = 120;
-            // 
-            // 実際配送担当Column1
-            // 
-            this.実際配送担当Column1.DataPropertyName = "実際配送担当";
-            this.実際配送担当Column1.HeaderText = "実際配送担当";
-            this.実際配送担当Column1.Name = "実際配送担当Column1";
-            this.実際配送担当Column1.ReadOnly = true;
-            this.実際配送担当Column1.Width = 120;
-            // 
-            // 重量Column1
-            // 
-            this.重量Column1.DataPropertyName = "TotalWeight";
-            this.重量Column1.HeaderText = "重量";
-            this.重量Column1.Name = "重量Column1";
-            this.重量Column1.ReadOnly = true;
-            this.重量Column1.Width = 120;
-            // 
-            // 原価金額_税抜_Column1
-            // 
-            this.原価金額_税抜_Column1.DataPropertyName = "TotalPrice";
-            this.原価金額_税抜_Column1.HeaderText = "原価金額(税抜)";
-            this.原価金額_税抜_Column1.Name = "原価金額_税抜_Column1";
-            this.原価金額_税抜_Column1.ReadOnly = true;
-            this.原価金額_税抜_Column1.Width = 140;
-            // 
             // ShippingOrderForm
             // 
             this.ClientSize = new System.Drawing.Size(917, 369);
@@ -1082,5 +1114,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 原価金額_税抜_Column1;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button cancelButton;
     }
 }
