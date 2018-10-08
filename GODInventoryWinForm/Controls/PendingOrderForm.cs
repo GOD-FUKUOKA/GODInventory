@@ -937,12 +937,24 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
 
         private void InitializeCountyComboBox(List<v_pendingorder> orders)
         {
-            // County
-            var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-            counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
+            //mark 20181008
+            var shopIds = orders.Select(o => o.店舗コード);
+            var shops = shopList.FindAll(s => shopIds.Contains(s.店番));
+
+            var shopMockEntities = shops.Select(s => new MockEntity { Id = s.店番, ShortName = s.店名カナ, FullName = s.店名 }).ToList();
+            shopMockEntities.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
             this.countyComboBox1.DisplayMember = "FullName";
-            this.countyComboBox1.ValueMember = "ShortName";
-            this.countyComboBox1.DataSource = counties;
+            this.countyComboBox1.ValueMember = "Id";
+            this.countyComboBox1.DataSource = shopMockEntities;
+            this.countyComboBox1.SelectedIndex = 0;
+
+
+            // County
+            //var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
+            //counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
+            //this.countyComboBox1.DisplayMember = "FullName";
+            //this.countyComboBox1.ValueMember = "ShortName";
+            //this.countyComboBox1.DataSource = counties;
         }
         
         private void InitializeshopsComboBox(List<v_pendingorder> orders)
