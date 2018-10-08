@@ -41,6 +41,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.selectedRowsLabel = new System.Windows.Forms.Label();
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.ClearSelect = new System.Windows.Forms.Button();
             this.ZKZTcomboBox3 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -85,7 +86,6 @@
             this.entityDataSource2 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreCodeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreNameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -96,6 +96,7 @@
             this.ProductKanjiSpecificationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品口数Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.実際出荷数量Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.重量Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.訂正理由区分Column = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.ShipperColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -231,6 +232,22 @@
             this.selectedRowsLabel.TabIndex = 26;
             this.selectedRowsLabel.Text = "label5";
             this.selectedRowsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(0, 3);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(727, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // ClearSelect
             // 
@@ -397,6 +414,7 @@
             this.ProductKanjiSpecificationColumn1,
             this.納品口数Column,
             this.実際出荷数量Column,
+            this.重量Column,
             this.訂正理由区分Column,
             this.ShipperColumn1,
             this.Column2,
@@ -431,7 +449,7 @@
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.contextMenuStrip1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sendToShipperToolStripMenuItem,
             this.cancelOrderToolStripMenuItem,
@@ -649,7 +667,7 @@
             // 
             // contextMenuStrip3
             // 
-            this.contextMenuStrip3.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.contextMenuStrip3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.notifyToolStripMenuItem,
             this.toolStripMenuItem2});
@@ -687,22 +705,6 @@
             // 
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
-            // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(0, 3);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(727, 34);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // OrderReceivedAtColumn1
             // 
@@ -782,6 +784,12 @@
             this.実際出荷数量Column.HeaderText = "発注数量";
             this.実際出荷数量Column.Name = "実際出荷数量Column";
             this.実際出荷数量Column.Width = 80;
+            // 
+            // 重量Column
+            // 
+            this.重量Column.DataPropertyName = "重量";
+            this.重量Column.HeaderText = "重量";
+            this.重量Column.Name = "重量Column";
             // 
             // 訂正理由区分Column
             // 
@@ -976,6 +984,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductKanjiSpecificationColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品口数Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際出荷数量Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column;
         private System.Windows.Forms.DataGridViewComboBoxColumn 訂正理由区分Column;
         private System.Windows.Forms.DataGridViewComboBoxColumn ShipperColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;

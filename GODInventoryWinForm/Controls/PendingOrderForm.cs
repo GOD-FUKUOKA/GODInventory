@@ -108,6 +108,19 @@ namespace GODInventoryWinForm.Controls
                         var pendingorder = orders.Find(o => o.id受注データ == id);
                         t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
                         bool isQtyChanged = (order.実際出荷数量 != pendingorder.実際出荷数量);
+                        //mark 20181008
+                        bool isNewQtyChanged = (order.重量 != pendingorder.重量);
+
+                        if (isNewQtyChanged)
+                        {
+                            if (pendingorder.訂正理由区分 == order.訂正理由区分 )
+                            {
+                                isValid = false;
+                                errorMessage = "重量になっています。訂正理由区分を「訂正なし」にしてください。";
+                                break;
+                            }
+                        
+                        }
 
                         if (pendingorder.実際出荷数量 == order.発注数量 && pendingorder.訂正理由区分 != 0)
                         {
