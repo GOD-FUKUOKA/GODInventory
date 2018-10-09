@@ -12,6 +12,7 @@ namespace GODInventoryWinForm.Controls
     using GODInventory.MyLinq;
     using GODInventory.ViewModel;
     using MySql.Data.MySqlClient;
+    using System.Text.RegularExpressions;
 
     public partial class WaitToShipForm : Form
     {
@@ -446,6 +447,7 @@ namespace GODInventoryWinForm.Controls
                 deliveredAtDateTimePicker2.Value = Convert.ToDateTime( order.納品日 );
             }
             dataGridView2.DataSource = orderListForShip;
+            sum_ZL();
         }
 
 
@@ -482,6 +484,7 @@ namespace GODInventoryWinForm.Controls
 
             dataGridView2.DataSource = this.orderListForShip;
             errorProvider1.SetError(shipNOComboBox, String.Empty);
+            sum_ZL();
         }
 
         private void shippedAtDateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -645,6 +648,32 @@ namespace GODInventoryWinForm.Controls
                     errorProvider1.SetError(shipNOComboBox, String.Empty);
                 }
             }
+        }
+
+        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+          
+
+
+        }
+
+        private void sum_ZL()
+        {
+            decimal showtotal = 0;
+
+            for (int ik = 0; ik < dataGridView2.RowCount; ik++)
+            {
+                string sum = dataGridView1.Rows[ik].Cells["重量"].EditedFormattedValue.ToString();
+
+                if (Regex.Matches(sum, "[a-zA-Z]").Count <= 0)
+                {
+                    if (sum != null && sum != "")
+                        showtotal += Convert.ToDecimal(sum);
+                }
+
+            }
+
+            this.label8.Text = showtotal.ToString();
         }
     }
 }

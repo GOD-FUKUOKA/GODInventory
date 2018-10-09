@@ -558,6 +558,7 @@ namespace GODInventoryWinForm.Controls
  
 
                     dataGridView2.DataSource = new SortableBindingList<t_orderdata>(shippedOrderList);
+             
                 }
             }
         }
