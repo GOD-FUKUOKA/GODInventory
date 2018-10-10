@@ -37,6 +37,8 @@ namespace GODInventoryWinForm.Controls
         private List<t_shoplist> shopList;
         private SortableBindingList<v_pendingorder> sortablePendingOrderList3;
 
+        //mark 20181008
+        private List<t_warehouses> warehouseList;
         public PendingOrderForm()
         {
             InitializeComponent();
@@ -66,6 +68,28 @@ namespace GODInventoryWinForm.Controls
             //物流
             //
             shopList = ctx.t_shoplist.ToList();
+
+
+            //mark   20181009           
+             warehouseList = ctx.t_warehouses.ToList();
+             var ShipperCo = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.ShipperName }).Distinct().ToList();
+             ShipperCo.Insert(0, new MockEntity { Id = 0, FullName = "その他" });
+             this.ShipperColumn1.DisplayMember = "FullName";
+             this.ShipperColumn1.ValueMember = "Id";
+             this.ShipperColumn1.DataSource = ShipperCo.ToList();
+
+
+             this.shipperComboBox.DisplayMember = "FullName";
+             this.shipperComboBox.ValueMember = "Id";
+             this.shipperComboBox.DataSource = ShipperCo.ToList();
+
+            // 担当
+            // var shippers = warehouseList.Select(s => new MockEntity { ShortName = s.ShortName, FullName = s.ShipperName }).Distinct().ToList();
+            //shippers.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
+            //this.ShipperColumn1.DisplayMember = "FullName";
+            //this.ShipperColumn1.ValueMember = "ShortName";
+            //this.ShipperColumn1.DataSource = shippers;
+
         }
 
 
@@ -113,13 +137,13 @@ namespace GODInventoryWinForm.Controls
 
                         if (isNewQtyChanged)
                         {
-                            if (pendingorder.訂正理由区分 == order.訂正理由区分 )
+                            if (pendingorder.訂正理由区分 == order.訂正理由区分)
                             {
                                 isValid = false;
                                 errorMessage = "重量になっています。訂正理由区分を「訂正なし」にしてください。";
                                 break;
                             }
-                        
+
                         }
 
                         if (pendingorder.実際出荷数量 == order.発注数量 && pendingorder.訂正理由区分 != 0)
@@ -128,8 +152,8 @@ namespace GODInventoryWinForm.Controls
                             errorMessage = "元の発注数量になっています。訂正理由区分を「訂正なし」にしてください。";
                             break;
 
-                        } 
-                        
+                        }
+
                         if (isQtyChanged)
                         {
 
@@ -147,11 +171,11 @@ namespace GODInventoryWinForm.Controls
                             }
                         }
 
-                         
+
                         //需要修改的字段为: “口数” “发注数量” “担当” “形态”
                         if (isQtyChanged)
                         {
-                            
+
                             // 修正相应 金額
                             order.実際出荷数量 = pendingorder.実際出荷数量;
                             order.納品口数 = pendingorder.納品口数;
@@ -173,7 +197,8 @@ namespace GODInventoryWinForm.Controls
                         ctx.SaveChanges();
                         pager1.Bind();
                     }
-                    else {
+                    else
+                    {
                         MessageBox.Show(errorMessage);
                     }
                 }
@@ -437,16 +462,16 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             //http://stackoverflow.com/questions/23921117/disable-only-full-group-by
             //handle SET SESSION sql_mode='ANSI';
 
-//            string sql = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
-//       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
-//     FROM t_orderdata
-//     WHERE  `Status`={0} AND ( (`ジャンル`<> 1003) OR ( `ジャンル`= 1003 AND `実際配送担当` != '丸健'))
-//     UNION ALL
-//     SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`社内伝番`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `納品口数`, sum(`重量`) as `実際出荷数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
-//     FROM t_orderdata
-//     WHERE `Status`={0} AND `ジャンル`= 1003 AND `社内伝番` >0 AND `実際配送担当` = '丸健'
-//     GROUP BY `社内伝番`
-//     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
+            //            string sql = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
+            //       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
+            //     FROM t_orderdata
+            //     WHERE  `Status`={0} AND ( (`ジャンル`<> 1003) OR ( `ジャンル`= 1003 AND `実際配送担当` != '丸健'))
+            //     UNION ALL
+            //     SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`社内伝番`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `納品口数`, sum(`重量`) as `実際出荷数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
+            //     FROM t_orderdata
+            //     WHERE `Status`={0} AND `ジャンル`= 1003 AND `社内伝番` >0 AND `実際配送担当` = '丸健'
+            //     GROUP BY `社内伝番`
+            //     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
 
             string sql2 = @"SELECT `id受注データ`,`受注日`,`店舗コード`, `納品場所コード`,
        `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`,`発注形態名称漢字`, `備考`
@@ -806,7 +831,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             {
                 DanDangComboBox.SelectedIndex = 0;
             }
-            else if(ZKZTcomboBox3.SelectedIndex != 0)
+            else if (ZKZTcomboBox3.SelectedIndex != 0)
             {
                 ZKZTcomboBox3.SelectedIndex = 0;
             }
@@ -837,7 +862,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
         {
             var combox = sender as ComboBox;
             string shipper = combox.Text;
-            var orders = GetOrdersByShipper(shipper);           
+            var orders = GetOrdersByShipper(shipper);
 
             InitializeStockState(orders);
         }
@@ -956,7 +981,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             //this.countyComboBox1.ValueMember = "ShortName";
             //this.countyComboBox1.DataSource = counties;
         }
-        
+
         private void InitializeshopsComboBox(List<v_pendingorder> orders)
         {
             // 店名列表
@@ -1082,8 +1107,8 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             if (product.Length > 0 && product != "すべて")
             {
                 orders = orders.FindAll(o => o.品名漢字 == product);
-            } 
-            
+            }
+
             if (county.Length > 0 && county != "すべて")
             {
                 orders = orders.FindAll(o => o.県別 == county);
@@ -1199,7 +1224,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             var product = productList.FirstOrDefault(i => i.商品コード == order.商品コード);
             OrderSqlHelper.AfterOrderQtyChanged(order, product);
 
-            
+
             return true;
         }
 
@@ -1207,7 +1232,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
         {
             int count = 0;
             var currentRow = this.dataGridView1.CurrentRow;
-            if( currentRow != null )
+            if (currentRow != null)
             {
                 // 是否删除FAX订单
                 if (MessageBox.Show("伝票を完全に廃棄（削除）します。よろしいですか？", "伝票を廃棄", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
@@ -1224,6 +1249,18 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             {
                 pager1.Bind();
             }
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            bool handle;
+            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.Equals(DBNull.Value))
+            {
+                handle = true;
+            }
+            else
+                handle = false;
+            e.Cancel = handle;
         }
 
 
