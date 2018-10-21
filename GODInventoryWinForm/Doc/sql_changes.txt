@@ -198,3 +198,11 @@ ALTER TABLE `god_inventory`.`t_genre`
 ADD COLUMN `社内伝番処理`  int(11) NOT NULL DEFAULT 0;
 ALTER TABLE `god_inventory`.`t_orderdata` 
 ADD COLUMN `社内伝番処理`  int(11) NOT NULL DEFAULT 0;
+
+2018-10-21
+-- V10-----------------------------------------------------------------
+ALTER TABLE `god_om2`.`t_orderdata` 
+ADD COLUMN `reportState` INT(11) NOT NULL DEFAULT 0 AFTER `社内伝番処理`;
+
+ALTER TABLE `god_om2`.`t_pricelist` 
+ADD COLUMN `配送担当` VARCHAR(45) NULL AFTER `運賃`;

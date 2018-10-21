@@ -986,7 +986,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
         private void InitializeshopsComboBox(List<v_pendingorder> orders)
         {
             // 店名列表
-            var shops = orders.Select(s => new MockEntity { Id = s.店舗コード, ShortName= s.店舗名カナ, FullName = s.店舗名漢字 }).Distinct().OrderBy(s => s.ShortName).ToList();
+            var shops = orders.Select(s => new MockEntity { Id = s.店舗コード, FullName = s.店舗名漢字 }).Distinct().OrderBy(s => s.FullName).ToList();
             shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
             this.storeComboBox.DisplayMember = "FullName";
             this.storeComboBox.ValueMember = "Id";

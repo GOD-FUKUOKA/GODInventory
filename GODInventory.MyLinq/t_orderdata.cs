@@ -307,6 +307,8 @@ namespace GODInventory.MyLinq
 
         public int 社内伝番処理 { get; set; }
 
+        public int reportState { get; set; }
+
         public t_orderdata()
         {
             this.キャンセル = "no";

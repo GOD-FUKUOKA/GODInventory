@@ -46,6 +46,7 @@
             this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.規格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.未転送Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.yingYouKuCunShuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daiFaHuoShuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shiJiKuCunShuColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -156,6 +157,7 @@
             this.自社コード,
             this.商品名,
             this.規格,
+            this.未転送Column1,
             this.yingYouKuCunShuColumn,
             this.daiFaHuoShuColumn,
             this.shiJiKuCunShuColumn,
@@ -250,6 +252,13 @@
             this.規格.ReadOnly = true;
             this.規格.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.規格.Width = 160;
+            // 
+            // 未転送Column1
+            // 
+            this.未転送Column1.DataPropertyName = "weiChuanSong";
+            this.未転送Column1.HeaderText = "未転送";
+            this.未転送Column1.Name = "未転送Column1";
+            this.未転送Column1.Width = 70;
             // 
             // yingYouKuCunShuColumn
             // 
@@ -354,6 +363,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;
         private System.Windows.Forms.DataGridViewTextBoxColumn 商品名;
         private System.Windows.Forms.DataGridViewTextBoxColumn 規格;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 未転送Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn yingYouKuCunShuColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn daiFaHuoShuColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn shiJiKuCunShuColumn;

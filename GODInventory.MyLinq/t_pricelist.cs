@@ -34,8 +34,8 @@ namespace GODInventory.MyLinq
         public decimal 特売原単価 { get; set; }
         public decimal 仕入原価 { get; set; }
 
-       // [StringLength(64)]
-       // public string 配送担当 { get; set; }
+        [StringLength(64)]
+        public string 配送担当 { get; set; }
 
     }
 }
