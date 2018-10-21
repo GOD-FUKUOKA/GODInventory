@@ -786,7 +786,6 @@ namespace GODInventoryWinForm.Controls
                                 }
 
 
-
                                 o.重量 = (int)(Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
                                 o.単位 = selectedItem.単位;
                                 o.県別 = store.県別;
@@ -831,6 +830,9 @@ namespace GODInventoryWinForm.Controls
                                         return;
                                 }
                                 o.実際配送担当 = store.配送担当;
+
+                                // 社内伝番処理
+                                o.社内伝番処理 = OrderSqlHelper.IsInnerCodeRequired(o.ジャンル);
 
                                 if (o.実際配送担当 == "MKL" && (o.ジャンル == 1001 || o.ジャンル == 1003))
                                 {

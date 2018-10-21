@@ -121,10 +121,10 @@ namespace GODInventoryWinForm.Controls
 
                 e.DataSources.Add(new ReportDataSource("DataSet1", new List<v_pendingorder>() { orderFirst }));
 
-                var leftOrders = orderQuery.Skip(20).Take(20).ToList();
+                var leftOrders = orderQuery.Skip(20).Take(18).ToList();
                 //var leftOrders = orderQuery.Skip(5).Take(20).ToList();
                 e.DataSources.Add(new ReportDataSource("DataSet3", leftOrders));
-                var rightOrders = orderQuery.Skip(40).Take(20).ToList();
+                var rightOrders = orderQuery.Skip(38).Take(18).ToList();
                 //var rightOrders = orderQuery.Skip(8).Take(20).ToList();
                 e.DataSources.Add(new ReportDataSource("DataSet4", rightOrders));
 

@@ -305,6 +305,8 @@ namespace GODInventory.MyLinq
         public decimal 仕入金額 { get; set; }
         public decimal 粗利金額 { get; set; }
 
+        public int 社内伝番処理 { get; set; }
+
         public t_orderdata()
         {
             this.キャンセル = "no";

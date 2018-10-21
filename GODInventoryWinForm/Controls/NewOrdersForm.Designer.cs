@@ -42,6 +42,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cancelOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uncancleOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unduplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.OrderPlacedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,14 +68,6 @@
             this.ShipperColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreDistrictColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cancelOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uncancleOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unduplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -224,6 +225,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.OrderPlacedAtColumn1,
             this.OrderReceivedAtColumn1,
             this.出荷日,
             this.納品日,
@@ -255,6 +257,66 @@
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cancelOrderToolStripMenuItem,
+            this.uncancleOrderToolStripMenuItem,
+            this.duplicateToolStripMenuItem,
+            this.unduplicateToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
+            // 
+            // cancelOrderToolStripMenuItem
+            // 
+            this.cancelOrderToolStripMenuItem.Name = "cancelOrderToolStripMenuItem";
+            this.cancelOrderToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.cancelOrderToolStripMenuItem.Text = "キャンセル確認";
+            this.cancelOrderToolStripMenuItem.Click += new System.EventHandler(this.cancelOrderToolStripMenuItem_Click);
+            // 
+            // uncancleOrderToolStripMenuItem
+            // 
+            this.uncancleOrderToolStripMenuItem.Name = "uncancleOrderToolStripMenuItem";
+            this.uncancleOrderToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.uncancleOrderToolStripMenuItem.Text = "キャンセル解除";
+            this.uncancleOrderToolStripMenuItem.Click += new System.EventHandler(this.uncancleOrderToolStripMenuItem_Click);
+            // 
+            // duplicateToolStripMenuItem
+            // 
+            this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
+            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.duplicateToolStripMenuItem.Text = "ダブり確認";
+            this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
+            // 
+            // unduplicateToolStripMenuItem
+            // 
+            this.unduplicateToolStripMenuItem.Name = "unduplicateToolStripMenuItem";
+            this.unduplicateToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.unduplicateToolStripMenuItem.Text = "ダブリ解除";
+            this.unduplicateToolStripMenuItem.Click += new System.EventHandler(this.unduplicateToolStripMenuItem_Click);
+            // 
+            // id受注データDataGridViewTextBoxColumn
+            // 
+            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
+            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // OrderPlacedAtColumn1
+            // 
+            this.OrderPlacedAtColumn1.DataPropertyName = "発注日";
+            this.OrderPlacedAtColumn1.HeaderText = "発注日";
+            this.OrderPlacedAtColumn1.Name = "OrderPlacedAtColumn1";
+            this.OrderPlacedAtColumn1.ReadOnly = true;
             // 
             // OrderReceivedAtColumn1
             // 
@@ -387,59 +449,6 @@
             this.Column2.ReadOnly = true;
             this.Column2.Width = 80;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cancelOrderToolStripMenuItem,
-            this.uncancleOrderToolStripMenuItem,
-            this.duplicateToolStripMenuItem,
-            this.unduplicateToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
-            // 
-            // cancelOrderToolStripMenuItem
-            // 
-            this.cancelOrderToolStripMenuItem.Name = "cancelOrderToolStripMenuItem";
-            this.cancelOrderToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.cancelOrderToolStripMenuItem.Text = "キャンセル確認";
-            this.cancelOrderToolStripMenuItem.Click += new System.EventHandler(this.cancelOrderToolStripMenuItem_Click);
-            // 
-            // uncancleOrderToolStripMenuItem
-            // 
-            this.uncancleOrderToolStripMenuItem.Name = "uncancleOrderToolStripMenuItem";
-            this.uncancleOrderToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.uncancleOrderToolStripMenuItem.Text = "キャンセル解除";
-            this.uncancleOrderToolStripMenuItem.Click += new System.EventHandler(this.uncancleOrderToolStripMenuItem_Click);
-            // 
-            // duplicateToolStripMenuItem
-            // 
-            this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
-            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.duplicateToolStripMenuItem.Text = "ダブり確認";
-            this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
-            // 
-            // unduplicateToolStripMenuItem
-            // 
-            this.unduplicateToolStripMenuItem.Name = "unduplicateToolStripMenuItem";
-            this.unduplicateToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.unduplicateToolStripMenuItem.Text = "ダブリ解除";
-            this.unduplicateToolStripMenuItem.Click += new System.EventHandler(this.unduplicateToolStripMenuItem_Click);
-            // 
-            // id受注データDataGridViewTextBoxColumn
-            // 
-            this.id受注データDataGridViewTextBoxColumn.DataPropertyName = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.HeaderText = "id受注データ";
-            this.id受注データDataGridViewTextBoxColumn.Name = "id受注データDataGridViewTextBoxColumn";
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
             // NewOrdersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -485,6 +494,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox countyComboBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OrderPlacedAtColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderReceivedAtColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品日;

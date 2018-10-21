@@ -250,6 +250,18 @@ namespace GODInventoryWinForm.Controls
                                   select g;
 
                     count = results.Count();
+                    //记录有可能被删除，需要取得 ‘納品書番号’的最大值
+                    if (count > 0) {
+                        foreach (var grouped in results)
+                        {
+                            var s = grouped.Key.Split('-').Last();
+                            var i = Int32.Parse(s);
+                            if (count < i)
+                            {
+                                count = i;
+                            }
+                        }
+                    }
                     var warehouse = warehouseComboBox1();
                     if (warehouse > 0)
                     {

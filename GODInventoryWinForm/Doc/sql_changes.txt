@@ -192,3 +192,9 @@ CHANGE COLUMN `最小発注単位数量` `最小発注単位数量` int(11) NOT 
 
 ALTER TABLE `god_inventory`.`t_orderdata` 
 CHANGE COLUMN `社内伝番` `社内伝番` int(11) NOT NULL DEFAULT 0;
+
+-- V9-----------------------------------------------------------------
+ALTER TABLE `god_inventory`.`t_genre` 
+ADD COLUMN `社内伝番処理`  int(11) NOT NULL DEFAULT 0;
+ALTER TABLE `god_inventory`.`t_orderdata` 
+ADD COLUMN `社内伝番処理`  int(11) NOT NULL DEFAULT 0;

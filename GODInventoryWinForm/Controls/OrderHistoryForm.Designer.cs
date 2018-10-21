@@ -858,9 +858,9 @@
             // 
             // receivedColumn
             // 
-            this.receivedColumn.DataPropertyName = "受領";
+            this.receivedColumn.DataPropertyName = "受領確認";
             this.receivedColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.receivedColumn.HeaderText = "受領";
+            this.receivedColumn.HeaderText = "受領確認";
             this.receivedColumn.Name = "receivedColumn";
             this.receivedColumn.ReadOnly = true;
             this.receivedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;

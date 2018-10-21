@@ -19,5 +19,8 @@ namespace GODInventory.MyLinq
 
         public int Position { get; set; }
 
+        //是否需要二次编码处理
+        public int 社内伝番処理 { get; set; }
+
     }
 }

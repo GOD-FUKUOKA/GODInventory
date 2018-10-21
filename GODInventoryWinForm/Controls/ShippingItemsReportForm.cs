@@ -106,8 +106,8 @@ namespace GODInventoryWinForm.Controls
 
             if (OrderEnities != null)
             {
-                var orders1 = OrderEnities.Where(o => o.ジャンル != 1003).ToList();
-                var orders2 = OrderEnities.Where(o => o.ジャンル == 1003).ToList();
+                var orders1 = OrderEnities.Where(o => o.社内伝番処理 != 1).ToList();
+                var orders2 = OrderEnities.Where(o => o.社内伝番処理 == 1).ToList();
                 // 分别使用不同报表解决出现空白页问题
                 if (orders1.Count == 0 && orders2.Count > 0)
                 {

@@ -102,6 +102,7 @@ namespace GODInventory.MyLinq
         public string 店舗名漢字 { get; set; }
 
         public bool 受領 { get; set; }
+        public bool 受領確認 { get; set; }
 
         public string ダブリ { get; set; }
 
@@ -182,6 +183,8 @@ namespace GODInventory.MyLinq
         public int 最終出荷数 { get; set; }
 
         public short 入力区分 { get; set; }
+
+        public int 社内伝番処理 { get; set; }
 
         // 打印报表时使用。
         public int SubOrderCount { get; set; }

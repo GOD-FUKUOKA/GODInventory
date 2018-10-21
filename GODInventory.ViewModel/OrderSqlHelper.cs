@@ -15,6 +15,22 @@ namespace GODInventory.ViewModel
 {
     public class OrderSqlHelper
     {
+        public static List<t_genre> genreList = null;
+
+        public static int IsInnerCodeRequired(int genre_id)
+        {
+            int 社内伝番処理 = 0;
+            if (genreList == null)
+            {
+                using (var ctx = new GODDbContext())
+                {
+                    genreList = ctx.t_genre.ToList();
+                }            
+            }
+            var genre = genreList.Where(o => o.idジャンル == genre_id).First();
+            社内伝番処理 = genre.社内伝番処理;
+            return 社内伝番処理;
+        }
 
         //sqlStr = "SELECT t_orderdata.`出荷日`,t_orderdata.`納品日`,t_orderdata.`受注日`,t_orderdata.`キャンセル`,t_orderdata.`一旦保留`," _
         //& " t_orderdata.`伝票番号`,t_orderdata.`社内伝番`,t_orderdata.`行数`,t_orderdata.`最大行数`,t_orderdata.`口数`,t_orderdata.`発注数量`," _
@@ -971,7 +987,8 @@ namespace GODInventory.ViewModel
             //二次制品订单
             //where o.Status == OrderStatus.NotifyShipper && o.ジャンル == genreId && o.社内伝番 == 0 && o.実際配送担当 == "丸健"
 
-            var groupedOrders = orders.Where(o => (o.実際配送担当 == "丸健" && o.ジャンル == 1003)).GroupBy(o => new { o.店舗コード, o.納品場所コード });
+            //var groupedOrders = orders.Where(o => (o.実際配送担当 == "丸健" && o.ジャンル == 1003)).GroupBy(o => new { o.店舗コード, o.納品場所コード });
+            var groupedOrders = orders.Where(o => (o.社内伝番処理 == 1)).GroupBy(o => new { o.店舗コード, o.納品場所コード });
 
             int i = 0;
             foreach (var gos in groupedOrders)
@@ -1011,7 +1028,7 @@ namespace GODInventory.ViewModel
                 trans.Add(temp);
             }
 
-            var normalOrders = orders.Where(o => !(o.実際配送担当 == "丸健" && o.ジャンル == 1003));
+            var normalOrders = orders.Where(o => !(o.社内伝番処理==1));
 
             foreach (var o in normalOrders)
             {

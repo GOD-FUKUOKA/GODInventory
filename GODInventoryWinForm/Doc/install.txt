@@ -171,3 +171,15 @@ ALTER TABLE  `t_orderdata`
 ADD COLUMN `仕入原価` DECIMAL(11,0) NOT NULL DEFAULT 0,
 ADD COLUMN `仕入金額` DECIMAL(11,0) NOT NULL DEFAULT 0,
 ADD COLUMN `粗利金額` DECIMAL(11,0) NOT NULL DEFAULT 0;
+
+
+#v9.0.0
+==============================================
+ALTER TABLE `t_genre` 
+ADD COLUMN `社内伝番処理`  int(11) NOT NULL DEFAULT 0;
+ALTER TABLE `t_orderdata` 
+ADD COLUMN `社内伝番処理`  int(11) NOT NULL DEFAULT 0;
+
+#
+update  t_genre set 社内伝番処理=1 where `idジャンル`=1003;
+update  t_orderdata set 社内伝番処理=1 where `ジャンル`=1003 and `id受注データ`>0;

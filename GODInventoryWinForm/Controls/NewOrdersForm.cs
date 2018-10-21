@@ -113,7 +113,7 @@ namespace GODInventoryWinForm.Controls
         {
             this.datagrid_changes.Clear();
 
-            string sql = @"SELECT o1.id受注データ as duplicatedId, o2.id受注データ, o2.`出荷日`,o2.`納品日`,o2.`受注日`,o2.`店舗コード`, o2.`店舗名漢字`,
+            string sql = @"SELECT o1.id受注データ as duplicatedId, o2.id受注データ, o2.`発注日`,o2.`出荷日`,o2.`納品日`,o2.`受注日`,o2.`店舗コード`, o2.`店舗名漢字`,
           o2.`納品場所名漢字`,o2.`伝票番号`,o2.`納品口数`,o2.`ジャンル`,o2.`品名漢字`,o2.`規格名漢字`, 
           o2.`実際出荷数量`,o2.`実際配送担当`,o2.`県別`, 
           o2.`発注形態名称漢字`,o2.`キャンセル`,o2.`ダブリ`, o2.Status, o3.ジャンル名 as GenreName

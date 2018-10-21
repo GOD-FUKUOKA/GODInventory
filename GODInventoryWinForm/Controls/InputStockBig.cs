@@ -178,6 +178,15 @@ namespace GODInventoryWinForm.Controls
                                   group s by s.納品書番号 into g
                                   select g;
                     count = results.Count();
+                    foreach (var grouped in results)
+                    {
+                        var s = grouped.Key.Split('-').Last();
+                        var i = Int32.Parse(s);
+                        if (count < i)
+                        {
+                            count = i;
+                        }
+                    }
                     var warehouse = warehouseComboBox1();
                     if (warehouse > 0)
                     {

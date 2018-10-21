@@ -35,12 +35,12 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Font = new System.Drawing.Font("SimSun", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Font = new System.Drawing.Font("宋体", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(3, 160);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(615, 103);
             this.label1.TabIndex = 0;
-            this.label1.Text = "受注管理システム For ナフコ\r\n（バージョン0.8.5）";
+            this.label1.Text = "受注管理システム For ナフコ\r\n（バージョン0.9.0）";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainControl

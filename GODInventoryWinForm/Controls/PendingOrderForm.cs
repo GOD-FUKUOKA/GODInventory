@@ -18,7 +18,6 @@ namespace GODInventoryWinForm.Controls
     public partial class PendingOrderForm : Form
     {
         public Size ParentContainerSize { get; set; }
-        int ErCiZhiPinId { get; set; }
 
         //  [c1_r1_changed=> new_value,c1_r1=> original_value] ]
         private Hashtable datagrid_changes = null;
@@ -53,10 +52,6 @@ namespace GODInventoryWinForm.Controls
             //         group s by s.配送担当 into g
             //               select new v_shipper { ShortName = g.Key }).ToList();
 
-            var genre = (from g in ctx.t_genre
-                         where g.ジャンル名 == "二次製品"
-                         select g).FirstOrDefault();
-            ErCiZhiPinId = (genre != null ? genre.idジャンル : 0);
 
             //InitializePager();
 
@@ -424,19 +419,8 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             //http://stackoverflow.com/questions/23921117/disable-only-full-group-by
             //handle SET SESSION sql_mode='ANSI';
 
-//            string sql = @"SELECT `id受注データ`,`受注日`,`店舗コード`,
-//       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`, `備考`
-//     FROM t_orderdata
-//     WHERE  `Status`={0} AND ( (`ジャンル`<> 1003) OR ( `ジャンル`= 1003 AND `実際配送担当` != '丸健'))
-//     UNION ALL
-//     SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`社内伝番`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `納品口数`, sum(`重量`) as `実際出荷数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
-//     FROM t_orderdata
-//     WHERE `Status`={0} AND `ジャンル`= 1003 AND `社内伝番` >0 AND `実際配送担当` = '丸健'
-//     GROUP BY `社内伝番`
-//     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
-
             string sql2 = @"SELECT `id受注データ`,`受注日`,`店舗コード`, `納品場所コード`,
-       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`,`発注形態名称漢字`, `備考`
+       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`,`発注形態名称漢字`, `備考`, `社内伝番処理`
      FROM t_orderdata
      WHERE  `Status`={0}
      ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
