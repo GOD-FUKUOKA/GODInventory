@@ -244,7 +244,8 @@ namespace GODInventory.ViewModel
                          一旦保留 = o.一旦保留,
                          納品指示 = o.納品指示,
                          ShipNO = o.ShipNO,
-                         GenreName = g.ジャンル名
+                         GenreName = g.ジャンル名,
+                         備考 = o.備考
 
                      });
             return q;
@@ -269,6 +270,7 @@ namespace GODInventory.ViewModel
                          伝票番号 = o.伝票番号,
                          社内伝番 = o.社内伝番,
                          口数 = o.口数,
+                         重量 = o.重量,
                          納品口数 = o.納品口数,
                          ジャンル = o.ジャンル,
                          品名漢字 = o.品名漢字,
@@ -286,7 +288,9 @@ namespace GODInventory.ViewModel
                          ダブリ = o.ダブリ,
                          ShipNO = o.ShipNO,
                          GenreName = g.ジャンル名,
-                         一旦保留 = o.一旦保留
+                         一旦保留 = o.一旦保留,
+                         備考 = o.備考
+
                      });
             return q;
         }

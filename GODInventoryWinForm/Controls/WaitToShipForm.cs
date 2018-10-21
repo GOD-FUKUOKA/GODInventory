@@ -56,22 +56,6 @@ namespace GODInventoryWinForm.Controls
             var q = OrderSqlHelper.WaitToShipOrderSql(this.entityDataSource1);
             this.orderBindingList = this.entityDataSource1.CreateView(q);
 
-            //mark 改为t_orderdata.`備考`
-            using (var ctx = new GODDbContext())
-            {
-                foreach (var item in orderBindingList)
-                {
-                    var order = item as v_pendingorder;
-                    List<t_orderdata> orderList = (from t_orderdata o in ctx.t_orderdata
-                                                   where order.ShipNO != null && o.ShipNO == order.ShipNO
-                                                   select o).ToList();
-                    if (orderList.Count>0)
-                    order.備考 = orderList[0].備考;
-
-                }
-
-            }
-
             this.bindingSource1.Filter = null;
             this.bindingSource1.DataSource = this.orderBindingList;
             this.dataGridView1.DataSource = this.bindingSource1;
@@ -82,6 +66,14 @@ namespace GODInventoryWinForm.Controls
                 var order = o as v_pendingorder;
                 pendingOrderList.Add(order);
             }
+
+
+            // 担当
+            var shippers = pendingOrderList.Select(s => new MockEntity { FullName = s.実際配送担当 }).Distinct().ToList();
+            //shippers.Insert(0, new MockEntity { FullName = "すべて" });
+            this.shipperComboBox.DisplayMember = "FullName";
+            this.shipperComboBox.ValueMember = "FullName";
+            this.shipperComboBox.DataSource = shippers;
 
             // 第二次 調用InitializeDataSource，顯示 WaitToShipForm shipperComboBox.SelectedIndex =0 不會觸發 change 事件,
             // 所以需要每次都要初始化數據，觸發change事件。
@@ -111,27 +103,6 @@ namespace GODInventoryWinForm.Controls
 
             var q = OrderSqlHelper.ShippingOrderSql(this.entityDataSource1);
             shippingOrderList = q.ToList();
-
-
-            //mark  20181009 改为t_orderdata.`備考`
-            //using (var ctx = new GODDbContext())
-            {
-                foreach (var item in shippingOrderList)
-                {
-                    //var order = item as v_pendingorder;
-                    //List<t_orderdata> orderList = (from t_orderdata o in ctx.t_orderdata
-                    //                               where o.ShipNO == order.ShipNO
-                    //                               select o).ToList();
-
-                    var BK = (from o in (entityDataSource1.DbContext as GODDbContext).t_orderdata
-                              where item.ShipNO != null && o.ShipNO == item.ShipNO
-                              select o).ToList();
-                    if (BK.Count > 0)
-                    item.備考 = BK[0].備考;
-
-                }
-
-            }
 
 
             //var shipNOs = (from o in (entityDataSource1.DbContext as GODDbContext).t_orderdata
@@ -700,21 +671,15 @@ namespace GODInventoryWinForm.Controls
 
         private void sum_ZL()
         {
-            decimal showtotal = 0;
-
-            for (int ik = 0; ik < dataGridView2.RowCount; ik++)
+            int showtotal = 0;
+ 
+            foreach (DataGridViewRow row in this.dataGridView2.Rows)
             {
-                string sum = dataGridView1.Rows[ik].Cells["重量"].EditedFormattedValue.ToString();
-
-                if (Regex.Matches(sum, "[a-zA-Z]").Count <= 0)
-                {
-                    if (sum != null && sum != "")
-                        showtotal += Convert.ToDecimal(sum);
-                }
-
+                var order = row.DataBoundItem as v_pendingorder;
+                showtotal += order.重量;
             }
 
-            this.label8.Text = showtotal.ToString();
+            this.label8.Text = showtotal.ToString()+" kg";
         }
     }
 }
