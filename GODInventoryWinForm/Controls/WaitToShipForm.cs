@@ -12,6 +12,7 @@ namespace GODInventoryWinForm.Controls
     using GODInventory.MyLinq;
     using GODInventory.ViewModel;
     using MySql.Data.MySqlClient;
+    using System.Text.RegularExpressions;
 
     public partial class WaitToShipForm : Form
     {
@@ -54,12 +55,29 @@ namespace GODInventoryWinForm.Controls
             pendingOrderList.Clear();
             var q = OrderSqlHelper.WaitToShipOrderSql(this.entityDataSource1);
             this.orderBindingList = this.entityDataSource1.CreateView(q);
+
+            //mark 改为t_orderdata.`備考`
+            using (var ctx = new GODDbContext())
+            {
+                foreach (var item in orderBindingList)
+                {
+                    var order = item as v_pendingorder;
+                    List<t_orderdata> orderList = (from t_orderdata o in ctx.t_orderdata
+                                                   where order.ShipNO != null && o.ShipNO == order.ShipNO
+                                                   select o).ToList();
+                    if (orderList.Count>0)
+                    order.備考 = orderList[0].備考;
+
+                }
+
+            }
+
             this.bindingSource1.Filter = null;
             this.bindingSource1.DataSource = this.orderBindingList;
             this.dataGridView1.DataSource = this.bindingSource1;
-                        
+
             // 保存新查询到的结果，作为过滤条件用
-            foreach (var o in orderBindingList) 
+            foreach (var o in orderBindingList)
             {
                 var order = o as v_pendingorder;
                 pendingOrderList.Add(order);
@@ -81,18 +99,40 @@ namespace GODInventoryWinForm.Controls
                 }
             }
 
-            InitializeShipNOComboBox(shipNO );
+            InitializeShipNOComboBox(shipNO);
 
-            
+
 
             return 0;
         }
 
         private void InitializeShipNOComboBox(string shipNO)
         {
-            
+
             var q = OrderSqlHelper.ShippingOrderSql(this.entityDataSource1);
             shippingOrderList = q.ToList();
+
+
+            //mark  20181009 改为t_orderdata.`備考`
+            //using (var ctx = new GODDbContext())
+            {
+                foreach (var item in shippingOrderList)
+                {
+                    //var order = item as v_pendingorder;
+                    //List<t_orderdata> orderList = (from t_orderdata o in ctx.t_orderdata
+                    //                               where o.ShipNO == order.ShipNO
+                    //                               select o).ToList();
+
+                    var BK = (from o in (entityDataSource1.DbContext as GODDbContext).t_orderdata
+                              where item.ShipNO != null && o.ShipNO == item.ShipNO
+                              select o).ToList();
+                    if (BK.Count > 0)
+                    item.備考 = BK[0].備考;
+
+                }
+
+            }
+
 
             //var shipNOs = (from o in (entityDataSource1.DbContext as GODDbContext).t_orderdata
             //               where o.Status == OrderStatus.PendingShipment
@@ -123,7 +163,7 @@ namespace GODInventoryWinForm.Controls
                 //this.shipNOComboBox.Text = String.Empty;
                 this.shipNOComboBox.SelectedIndex = -1;
             }
-            
+
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -147,7 +187,7 @@ namespace GODInventoryWinForm.Controls
 
         }
 
- 
+
 
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -196,7 +236,7 @@ namespace GODInventoryWinForm.Controls
                 List<int> orderIds = new List<int>();
                 for (int i = 0; i < count; i++)
                 {
-                    var row = dataGridView1.SelectedRows[i];                    
+                    var row = dataGridView1.SelectedRows[i];
                     var order = row.DataBoundItem as v_pendingorder;
                     orderIds.Add(order.id受注データ);
                 }
@@ -324,7 +364,7 @@ namespace GODInventoryWinForm.Controls
             string shipper = shipperComboBox.Text;
             //ApplyBindSourceFilter(shipper);
             //var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
-            var orders = pendingOrderList.FindAll(o => o.実際配送担当 == shipper); 
+            var orders = pendingOrderList.FindAll(o => o.実際配送担当 == shipper);
             InitializeCountyComboBox(orders);
             //InitializeStoreComboBox(orders);
         }
@@ -352,16 +392,17 @@ namespace GODInventoryWinForm.Controls
             {
                 this.storeCodeTextBox.Text = this.storeComboBox.SelectedValue.ToString();
             }
-            else {
+            else
+            {
                 this.storeCodeTextBox.Text = String.Empty;
             }
             ApplyBindSourceFilter(shipper, county, store);
         }
 
 
-        private void ApplyBindSourceFilter(string shipper, string county ="", string store ="")
+        private void ApplyBindSourceFilter(string shipper, string county = "", string store = "")
         {
-            
+
             //if (bindingSource1.Count > 0)
             {
                 string filter = "";
@@ -370,7 +411,7 @@ namespace GODInventoryWinForm.Controls
                     filter += " (実際配送担当='" + shipper + "')";
                 }
 
-                if (county.Length > 0 && county  != "すべて")
+                if (county.Length > 0 && county != "すべて")
                 {
                     if (filter.Length > 0)
                     {
@@ -395,7 +436,7 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
-        private void InitializeCountyComboBox( List<v_pendingorder> orders )
+        private void InitializeCountyComboBox(List<v_pendingorder> orders)
         {
             var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
             counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
@@ -421,7 +462,7 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-       
+
         private List<v_pendingorder> GetDataGridViewBoundOrders()
         {
             List<v_pendingorder> orders = new List<v_pendingorder>();
@@ -442,24 +483,26 @@ namespace GODInventoryWinForm.Controls
             if (orderListForShip.Count > 0)
             {
                 var order = orderListForShip.First();
-                shippedAtDateTimePicker1.Value =  Convert.ToDateTime( order.出荷日 );
-                deliveredAtDateTimePicker2.Value = Convert.ToDateTime( order.納品日 );
+                shippedAtDateTimePicker1.Value = Convert.ToDateTime(order.出荷日);
+                deliveredAtDateTimePicker2.Value = Convert.ToDateTime(order.納品日);
             }
             dataGridView2.DataSource = orderListForShip;
+            sum_ZL();
         }
 
 
-        private void SaveOrderForShip(List<int> orderIds, bool undo = false )
+        private void SaveOrderForShip(List<int> orderIds, bool undo = false)
         {
-            
+
             string shipNO = shipNOComboBox.Text;
             var ShippedAtDate = this.shippedAtDateTimePicker1.Value;
             var ReceivedAtDate = this.deliveredAtDateTimePicker2.Value;
             if (undo)
             {
-                OrderSqlHelper.UnShippingInfoConfirm(orderIds );
+                OrderSqlHelper.UnShippingInfoConfirm(orderIds);
             }
-            else {
+            else
+            {
                 OrderSqlHelper.ShippingInfoConfirm(orderIds, ShippedAtDate, ReceivedAtDate, shipNO);
             }
 
@@ -482,6 +525,7 @@ namespace GODInventoryWinForm.Controls
 
             dataGridView2.DataSource = this.orderListForShip;
             errorProvider1.SetError(shipNOComboBox, String.Empty);
+            sum_ZL();
         }
 
         private void shippedAtDateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -611,9 +655,9 @@ namespace GODInventoryWinForm.Controls
                     if (shops.Count > 0)
                     {
                         var store = shops.First();
-                        
+
                         this.storeComboBox.SelectedValue = store.店番;
-                        
+
                         errorProvider1.SetError(storeComboBox, String.Empty);
                     }
                     else
@@ -645,6 +689,32 @@ namespace GODInventoryWinForm.Controls
                     errorProvider1.SetError(shipNOComboBox, String.Empty);
                 }
             }
+        }
+
+        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+
+
+
+        }
+
+        private void sum_ZL()
+        {
+            decimal showtotal = 0;
+
+            for (int ik = 0; ik < dataGridView2.RowCount; ik++)
+            {
+                string sum = dataGridView1.Rows[ik].Cells["重量"].EditedFormattedValue.ToString();
+
+                if (Regex.Matches(sum, "[a-zA-Z]").Count <= 0)
+                {
+                    if (sum != null && sum != "")
+                        showtotal += Convert.ToDecimal(sum);
+                }
+
+            }
+
+            this.label8.Text = showtotal.ToString();
         }
     }
 }

@@ -108,6 +108,8 @@
             this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注形態 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+
+            this.重量Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -413,6 +415,7 @@
             this.ProductKanjiSpecificationColumn1,
             this.納品口数Column,
             this.実際出荷数量Column,
+            this.重量Column,
             this.訂正理由区分Column,
             this.ShipperColumn1,
             this.Column2,
@@ -441,19 +444,11 @@
             this.dataGridView1.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView1_CellPainting);
             this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
+            this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Layout += new System.Windows.Forms.LayoutEventHandler(this.dataGridView1_Layout);
-            // 
-            // OrderReceivedAtColumn1
-            // 
-            this.OrderReceivedAtColumn1.DataPropertyName = "受注日";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.OrderReceivedAtColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.OrderReceivedAtColumn1.HeaderText = "受注日";
-            this.OrderReceivedAtColumn1.Name = "OrderReceivedAtColumn1";
-            this.OrderReceivedAtColumn1.ReadOnly = true;
-            this.OrderReceivedAtColumn1.Width = 90;
+
             // 
             // StoreCodeColumn1
             // 
@@ -536,19 +531,6 @@
             // 
             // ShipperColumn1
             // 
-            this.ShipperColumn1.DataPropertyName = "実際配送担当";
-            this.ShipperColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ShipperColumn1.HeaderText = "担当";
-            this.ShipperColumn1.Items.AddRange(new object[] {
-            "丸健",
-            "MKL",
-            "マツモト産業",
-            "石川住宅管理",
-            "その他"});
-            this.ShipperColumn1.Name = "ShipperColumn1";
-            this.ShipperColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ShipperColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ShipperColumn1.Width = 90;
             // 
             // Column2
             // 
@@ -775,7 +757,64 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
-            // dataGridViewTextBoxColumn20
+            // OrderReceivedAtColumn1
+            // 
+            this.OrderReceivedAtColumn1.DataPropertyName = "受注日";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.OrderReceivedAtColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.OrderReceivedAtColumn1.HeaderText = "受注日";
+            this.OrderReceivedAtColumn1.Name = "OrderReceivedAtColumn1";
+            this.OrderReceivedAtColumn1.ReadOnly = true;
+            this.OrderReceivedAtColumn1.Width = 90;
+            // 
+            // StoreCodeColumn1
+            // 
+            this.StoreCodeColumn1.DataPropertyName = "店舗コード";
+            this.StoreCodeColumn1.HeaderText = "店番";
+            this.StoreCodeColumn1.Name = "StoreCodeColumn1";
+            this.StoreCodeColumn1.ReadOnly = true;
+            this.StoreCodeColumn1.Width = 60;
+            // 
+            // StoreNameColumn1
+            // 
+            this.StoreNameColumn1.DataPropertyName = "店舗名漢字";
+            this.StoreNameColumn1.HeaderText = "店名";
+            this.StoreNameColumn1.Name = "StoreNameColumn1";
+            this.StoreNameColumn1.ReadOnly = true;
+            this.StoreNameColumn1.Width = 120;
+            // 
+            // 場所
+            // 
+            this.場所.DataPropertyName = "納品場所名漢字";
+            this.場所.HeaderText = "場所";
+            this.場所.Name = "場所";
+            this.場所.ReadOnly = true;
+            // 
+            // InvoiceNOColumn1
+            // 
+            this.InvoiceNOColumn1.DataPropertyName = "伝票番号";
+            this.InvoiceNOColumn1.HeaderText = "伝票番号";
+            this.InvoiceNOColumn1.Name = "InvoiceNOColumn1";
+            this.InvoiceNOColumn1.ReadOnly = true;
+            this.InvoiceNOColumn1.Width = 80;
+            // 
+            // ジャンルColumn
+            // 
+            this.ジャンルColumn.DataPropertyName = "GenreName";
+            this.ジャンルColumn.HeaderText = "ジャンル";
+            this.ジャンルColumn.Name = "ジャンルColumn";
+            this.ジャンルColumn.ReadOnly = true;
+            this.ジャンルColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // ProductKanjiNameColumn1
+            // 
+            this.ProductKanjiNameColumn1.DataPropertyName = "品名漢字";
+            this.ProductKanjiNameColumn1.HeaderText = "品名漢字";
+            this.ProductKanjiNameColumn1.Name = "ProductKanjiNameColumn1";
+            this.ProductKanjiNameColumn1.ReadOnly = true;
+            this.ProductKanjiNameColumn1.Width = 200;
+            // 
+            // ProductKanjiSpecificationColumn1
             // 
             this.dataGridViewTextBoxColumn20.DataPropertyName = "受注日";
             this.dataGridViewTextBoxColumn20.HeaderText = "受注日";
@@ -796,7 +835,13 @@
             this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
             this.dataGridViewTextBoxColumn21.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn23
+            // 重量Column
+            // 
+            this.重量Column.DataPropertyName = "重量";
+            this.重量Column.HeaderText = "重量";
+            this.重量Column.Name = "重量Column";
+            // 
+            // 訂正理由区分Column
             // 
             this.dataGridViewTextBoxColumn23.DataPropertyName = "伝票番号";
             this.dataGridViewTextBoxColumn23.HeaderText = "伝票番号";
@@ -809,6 +854,13 @@
             this.dataGridViewTextBoxColumn27.HeaderText = "ジャンル";
             this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
             this.dataGridViewTextBoxColumn27.ReadOnly = true;
+            this.ShipperColumn1.DataPropertyName = "実際配送担当";
+            this.ShipperColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ShipperColumn1.HeaderText = "担当";
+            this.ShipperColumn1.Name = "ShipperColumn1";
+            this.ShipperColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ShipperColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ShipperColumn1.Width = 90;
             // 
             // dataGridViewTextBoxColumn28
             // 
@@ -961,6 +1013,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductKanjiSpecificationColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品口数Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際出荷数量Column;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column;
         private System.Windows.Forms.DataGridViewComboBoxColumn 訂正理由区分Column;
         private System.Windows.Forms.DataGridViewComboBoxColumn ShipperColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;

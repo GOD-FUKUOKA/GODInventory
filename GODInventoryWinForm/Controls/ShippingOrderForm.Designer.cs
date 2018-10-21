@@ -58,6 +58,8 @@
             this.printForShipperToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.printForEDIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.canceledTabPage = new System.Windows.Forms.TabPage();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.uploadAsnButton = new System.Windows.Forms.Button();
             this.canceledDataGridView = new System.Windows.Forms.DataGridView();
             this.キャンセルColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,7 +80,6 @@
             this.canceledContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cancelConfirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shippedTabPage = new System.Windows.Forms.TabPage();
-            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             this.shippedDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -118,6 +119,9 @@
             this.canceledBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.bindingSource6 = new System.Windows.Forms.BindingSource(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             this.配车单单号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -145,6 +149,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.canceledBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource6)).BeginInit();
             this.SuspendLayout();
             // 
             // uploadForEDIButton
@@ -337,6 +342,7 @@
             // 
             // asnTabPage
             // 
+            this.asnTabPage.Controls.Add(this.button1);
             this.asnTabPage.Controls.Add(this.ediDataGridView);
             this.asnTabPage.Controls.Add(this.uploadForEDIButton);
             this.asnTabPage.Location = new System.Drawing.Point(4, 22);
@@ -375,11 +381,14 @@
             this.ediDataGridView.ContextMenuStrip = this.contextMenuStrip2;
             this.ediDataGridView.Location = new System.Drawing.Point(3, 60);
             this.ediDataGridView.Name = "ediDataGridView";
-            this.ediDataGridView.ReadOnly = true;
             this.ediDataGridView.RowTemplate.Height = 23;
             this.ediDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ediDataGridView.Size = new System.Drawing.Size(903, 280);
             this.ediDataGridView.TabIndex = 3;
+            this.ediDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.ediDataGridView_CellBeginEdit);
+            this.ediDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ediDataGridView_CellEndEdit);
+            this.ediDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ediDataGridView_CellFormatting);
+            this.ediDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.ediDataGridView_RowPrePaint);
             this.ediDataGridView.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
             // contextMenuStrip2
@@ -406,6 +415,8 @@
             // 
             // canceledTabPage
             // 
+            this.canceledTabPage.Controls.Add(this.saveButton);
+            this.canceledTabPage.Controls.Add(this.cancelButton);
             this.canceledTabPage.Controls.Add(this.uploadAsnButton);
             this.canceledTabPage.Controls.Add(this.canceledDataGridView);
             this.canceledTabPage.Location = new System.Drawing.Point(4, 22);
@@ -414,6 +425,30 @@
             this.canceledTabPage.TabIndex = 4;
             this.canceledTabPage.Text = "Canceled";
             this.canceledTabPage.UseVisualStyleBackColor = true;
+            // 
+            // saveButton
+            // 
+            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.saveButton.Location = new System.Drawing.Point(579, 13);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(106, 32);
+            this.saveButton.TabIndex = 8;
+            this.saveButton.Text = "変更を保存";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cancelButton.Location = new System.Drawing.Point(687, 13);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(106, 32);
+            this.cancelButton.TabIndex = 9;
+            this.cancelButton.Text = "変更を取消す";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // uploadAsnButton
             // 
@@ -460,6 +495,10 @@
             this.canceledDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.canceledDataGridView.Size = new System.Drawing.Size(903, 279);
             this.canceledDataGridView.TabIndex = 0;
+            this.canceledDataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.canceledDataGridView_CellBeginEdit);
+            this.canceledDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.canceledDataGridView_CellEndEdit);
+            this.canceledDataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.canceledDataGridView_CellFormatting);
+            this.canceledDataGridView.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.canceledDataGridView_RowPrePaint);
             // 
             // キャンセルColumn1
             // 
@@ -583,21 +622,6 @@
             this.shippedTabPage.TabIndex = 3;
             this.shippedTabPage.Text = "出荷済み伝票";
             this.shippedTabPage.UseVisualStyleBackColor = true;
-            // 
-            // pager3
-            // 
-            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager3.AutoSize = true;
-            this.pager3.Location = new System.Drawing.Point(3, 307);
-            this.pager3.Name = "pager3";
-            this.pager3.NMax = 0;
-            this.pager3.PageCount = 0;
-            this.pager3.PageCurrent = 1;
-            this.pager3.PageSize = 5000;
-            this.pager3.Size = new System.Drawing.Size(903, 34);
-            this.pager3.TabIndex = 2;
-            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
             // 
             // shippedDataGridView
             // 
@@ -893,6 +917,33 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(685, 14);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(106, 32);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "変更を保存";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // pager3
+            // 
+            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager3.AutoSize = true;
+            this.pager3.Location = new System.Drawing.Point(3, 307);
+            this.pager3.Name = "pager3";
+            this.pager3.NMax = 0;
+            this.pager3.PageCount = 0;
+            this.pager3.PageCurrent = 1;
+            this.pager3.PageSize = 5000;
+            this.pager3.Size = new System.Drawing.Size(903, 34);
+            this.pager3.TabIndex = 2;
+            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
+            // 
             // 配车单单号Column1
             // 
             this.配车单单号Column1.DataPropertyName = "ShipNO";
@@ -906,7 +957,6 @@
             this.出荷日Column1.DataPropertyName = "出荷日";
             this.出荷日Column1.HeaderText = "出荷日";
             this.出荷日Column1.Name = "出荷日Column1";
-            this.出荷日Column1.ReadOnly = true;
             this.出荷日Column1.Width = 160;
             // 
             // 納品日Column1
@@ -914,7 +964,6 @@
             this.納品日Column1.DataPropertyName = "納品日";
             this.納品日Column1.HeaderText = "納品日";
             this.納品日Column1.Name = "納品日Column1";
-            this.納品日Column1.ReadOnly = true;
             this.納品日Column1.Width = 160;
             // 
             // 県別Column1
@@ -983,6 +1032,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.canceledBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1075,6 +1125,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際配送担当Column2;
         private System.Windows.Forms.DataGridViewComboBoxColumn 訂正理由区分Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 備考Column1;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.BindingSource bindingSource6;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 配车单单号Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品日Column1;

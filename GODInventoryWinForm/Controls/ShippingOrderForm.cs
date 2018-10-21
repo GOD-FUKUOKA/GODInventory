@@ -13,6 +13,7 @@ using GODInventory.ViewModel.EDI;
 using System.IO;
 using ZXing.Common;
 using ZXing;
+using System.Collections;
 
 
 namespace GODInventoryWinForm.Controls
@@ -27,6 +28,9 @@ namespace GODInventoryWinForm.Controls
         public List<t_orderdata> canceledOrderList;
         public SendASNForm sendForm;
         private SortableBindingList<v_groupedorder> sortablePendingOrderList;
+        private Hashtable datagrid_changes = null;
+        private SortableBindingList<v_groupedorder> sortablegroupedAsnOrderList;
+        private Hashtable ediDataGridView_datagrid_changes = null;
         public ShippingOrderForm()
         {
             InitializeComponent();
@@ -43,6 +47,10 @@ namespace GODInventoryWinForm.Controls
             this.訂正理由区分Column1.ValueMember = "ID";
             this.訂正理由区分Column1.DisplayMember = "FullName";
             this.訂正理由区分Column1.DataSource = OrderQuantityChangeReasonRespository.ToList();
+
+            this.datagrid_changes = new Hashtable();
+            this.ediDataGridView_datagrid_changes = new Hashtable();
+
         }
 
 
@@ -87,7 +95,7 @@ namespace GODInventoryWinForm.Controls
                 List<t_orderdata> orderList1 = new List<t_orderdata>();
                 SortableBindingList<v_groupedorder> sortablePendingOrderList1;
                 var groupedOrders = orderList.OrderBy(c => c.実際配送担当).ThenBy(c => c.県別).ThenBy(c => c.出荷No).GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 }).ToList();
-              
+
 
                 foreach (var gos in groupedOrders)
                 {
@@ -141,7 +149,21 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 //new 
                 //groupedAsnOrderList = groupedAsnOrderList.GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 });
                 var newlist = groupedAsnOrderList.OrderBy(s => s.発注日).ToList();
-                ediDataGridView.DataSource = groupedAsnOrderList;
+
+
+
+                //var dd = sortablePendingOrderList1.ToList().OrderBy(c => c.実際配送担当).ThenBy(c => c.県別).ThenBy(c => c.出荷No).ToList();
+                //mark  20181009  注销
+                //ediDataGridView.DataSource = groupedAsnOrderList;
+
+                //mark  20181009 add
+                sortablegroupedAsnOrderList = new SortableBindingList<v_groupedorder>(groupedAsnOrderList);
+                this.bindingSource6.DataSource = null;
+                this.bindingSource6.DataSource = sortablegroupedAsnOrderList;
+                ediDataGridView.DataSource = this.bindingSource6;
+
+
+
 
             }
         }
@@ -227,6 +249,42 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     sendForm.ShowDialog();
                 }
 
+                #region   mark   20181008 标记已打印
+
+                bool isValid = true;
+                string errorMessage = "";
+                using (var ctx = new GODDbContext())
+                {
+                    List<v_groupedorder> orders = GetDataGridViewBoundOrders2();
+
+                    if (shipNOs.Count() > 0)
+                    {
+                        foreach (var id in shipNOs.Distinct())
+                        {
+                            var pendingorder = orders.Find(o => o.ShipNO == id.ToString());
+
+                            List<t_orderdata> orderList = (from t_orderdata o in ctx.t_orderdata
+                                                           where o.ShipNO == pendingorder.ShipNO
+                                                           select o).ToList();
+
+                            foreach (t_orderdata item in orderList)
+                            {
+                                //  item.ShipNO = pendingorder.ShipNO + "0";
+                            }
+                        }
+                        if (isValid)
+                        {
+                            ctx.SaveChanges();
+                        }
+                        else
+                        {
+                            MessageBox.Show(errorMessage);
+                        }
+                    }
+
+                }
+
+                #endregion
             }
 
 
@@ -400,8 +458,9 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
-            if (e.TabPage == shippedTabPage) {
-                pager3.Bind();                        
+            if (e.TabPage == shippedTabPage)
+            {
+                pager3.Bind();
             }
             //else if (e.TabPage == asnTabPage) { 
             //}
@@ -451,6 +510,9 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
         private void canceledButton1_Click(object sender, EventArgs e)
         {
+            //mark 20181008
+            bool isValid = true;
+            string errorMessage = "";
 
             List<t_orderdata> orders = new List<t_orderdata>();
             foreach (DataGridViewRow row in canceledDataGridView.SelectedRows)
@@ -463,6 +525,37 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 var oids = orders.Select(o => o.id受注データ).ToList();
                 using (var ctx = new GODDbContext())
                 {
+                    //mark 20181008
+                    foreach (var id in oids.Distinct())
+                    {
+                        var pendingorder = orders.Find(o => o.id受注データ == id);
+                        t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
+                        bool isQtyChanged = (order.発注数量 != pendingorder.発注数量);
+
+
+                        if (isQtyChanged)
+                        {
+                            if (pendingorder.訂正理由区分 != order.訂正理由区分)
+                            {
+                                isValid = false;
+                                errorMessage = "数量変更の理由をつけてください！";
+                                break;
+                            }
+                        }
+
+                    }
+                    if (isValid)
+                    {
+
+                    }
+                    else
+                    {
+                        MessageBox.Show(errorMessage);
+                        return;
+
+                    }
+
+
                     string shipNo = DateTime.Now.ToString("yyyyMMddHHmmss");
                     string sql = String.Format("UPDATE t_orderdata SET `shipNO`='{1}' WHERE `id受注データ` in( {0} )", string.Join(",", oids), shipNo);
 
@@ -490,7 +583,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                         // 联调暂停 上传ASN， 
                         sendForm.Mid = mid;
                         sendForm.IsCanceledOrder = true;
-                        sendForm.ShowDialog();                    
+                        sendForm.ShowDialog();
                     }
 
 
@@ -568,9 +661,299 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
         }
 
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            bool isValid = true;
+            string errorMessage = "";
+            using (var ctx = new GODDbContext())
+            {
+                IEnumerable<int> orderIds = GetChangedOrderIds();
+                List<t_orderdata> orders = GetDataGridViewBoundOrders();
+
+                if (orderIds.Count() > 0)
+                {
+                    foreach (var id in orderIds.Distinct())
+                    {
+                        var pendingorder = orders.Find(o => o.id受注データ == id);
+                        t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
 
 
+                        order.備考 = pendingorder.備考;
+                    }
+                    if (isValid)
+                    {
+                        ctx.SaveChanges();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show(errorMessage);
+                    }
+                }
+
+            }
+
+        }
+        private IEnumerable<int> GetChangedOrderIds()
+        {
+
+            List<int> rows = new List<int>();
+            foreach (DictionaryEntry entry in datagrid_changes)
+            {
+                var key = entry.Key as string;
+                if (key.EndsWith("_changed"))
+                {
+                    int row = Int32.Parse(key.Split('_')[0]);
+                    rows.Add(row);
+                }
+
+            }
+            return rows.Distinct();
+        }
 
 
+        private List<t_orderdata> GetDataGridViewBoundOrders()
+        {
+            List<t_orderdata> orders = new List<t_orderdata>();
+            for (int i = 0; i < canceledDataGridView.Rows.Count; i++)
+            {
+                orders.Add(canceledDataGridView.Rows[i].DataBoundItem as t_orderdata);
+            }
+
+            return orders;
+        }
+
+        private void canceledDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex < canceledDataGridView.Rows.Count - 1)
+            {
+                DataGridViewRow row = canceledDataGridView.Rows[e.RowIndex];
+                try
+                {
+                    if (datagrid_changes.ContainsKey(e.RowIndex))//if (dgrSingle.Cells["列名"].Value.ToString().Contains("比较值"))
+                    {
+                        row.DefaultCellStyle.ForeColor = Color.Red;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void canceledDataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            DataGridViewRow dgrSingle = canceledDataGridView.Rows[e.RowIndex];
+            string cellKey = GetCellKey(e.RowIndex, e.ColumnIndex);
+
+            if (!datagrid_changes.ContainsKey(cellKey))
+            {
+                datagrid_changes[cellKey] = dgrSingle.Cells[e.ColumnIndex].Value;
+            }
+        }
+        #region 修改键生成
+        private string GetCellKey(int rowIndex, int columnIndex, bool forChanged)
+        {
+            return GetCellKey(rowIndex, columnIndex) + "_changed";
+        }
+
+        private string GetCellKey(int rowIndex, int columnIndex)
+        {
+            var row = canceledDataGridView.Rows[rowIndex];
+            var model = row.DataBoundItem as t_orderdata;
+
+            return string.Format("{0}_{1}", model.id受注データ, columnIndex.ToString());
+        }
+        #endregion
+
+        private void canceledDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = this.canceledDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            string cellKey = GetCellKey(e.RowIndex, e.ColumnIndex);
+            string cellChangedKey = GetCellKey(e.RowIndex, e.ColumnIndex, true);
+            var new_cell_value = cell.Value;
+            var original_cell_value = datagrid_changes[cellKey];
+            if (new_cell_value == null && original_cell_value == null)
+            {
+                datagrid_changes.Remove(cellChangedKey);
+            }
+            else if ((new_cell_value == null && original_cell_value != null) || (new_cell_value != null && original_cell_value == null) || !new_cell_value.Equals(original_cell_value))
+            {
+                datagrid_changes[cellChangedKey] = new_cell_value;
+            }
+            else
+            {
+                datagrid_changes.Remove(cellChangedKey);
+            }
+
+        }
+
+        private void canceledDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            string cellChangedKey = GetCellKey(e.RowIndex, e.ColumnIndex, true);
+
+            if (datagrid_changes.ContainsKey(cellChangedKey))
+            {
+                e.CellStyle.BackColor = Color.Red;
+                e.CellStyle.SelectionBackColor = Color.DarkRed;
+            }
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.datagrid_changes.Clear();
+
+            //IEnumerable<int> ids = GetChangedOrderIds();
+            //if (ids.Count() > 0)
+            //{
+            //  //  pager1.Bind();
+            //}
+            InitializeCanceledOrder();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            bool isValid = true;
+            string errorMessage = "";
+            using (var ctx = new GODDbContext())
+            {
+                IEnumerable<int> orderIds = GetChangedOrderIds2();
+                List<v_groupedorder> orders = GetDataGridViewBoundOrders2();
+
+                if (orderIds.Count() > 0)
+                {
+                    foreach (var id in orderIds.Distinct())
+                    {
+                        var pendingorder = orders.Find(o => o.ShipNO == id.ToString());
+                        // t_orderdata order = ctx.t_orderdata.Find(pendingorder.ShipNO);
+                        List<t_orderdata> orderList = (from t_orderdata o in ctx.t_orderdata
+                                                       where o.ShipNO == pendingorder.ShipNO
+                                                       select o).ToList();
+
+                        foreach (t_orderdata item in orderList)
+                        {
+                            item.出荷日 = pendingorder.出荷日;
+                            item.納品日 = pendingorder.納品日;
+
+                        }
+                    }
+                    if (isValid)
+                    {
+                        ctx.SaveChanges();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show(errorMessage);
+                    }
+                }
+
+            }
+        }
+
+        private void ediDataGridView_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex < ediDataGridView.Rows.Count - 1)
+            {
+                DataGridViewRow row = ediDataGridView.Rows[e.RowIndex];
+                try
+                {
+                    if (ediDataGridView_datagrid_changes.ContainsKey(e.RowIndex))//if (dgrSingle.Cells["列名"].Value.ToString().Contains("比较值"))
+                    {
+                        row.DefaultCellStyle.ForeColor = Color.Red;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void ediDataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            DataGridViewRow dgrSingle = ediDataGridView.Rows[e.RowIndex];
+            string cellKey = GetCellKey2(e.RowIndex, e.ColumnIndex);
+
+            if (!ediDataGridView_datagrid_changes.ContainsKey(cellKey))
+            {
+                ediDataGridView_datagrid_changes[cellKey] = dgrSingle.Cells[e.ColumnIndex].Value;
+            }
+        }
+
+        private void ediDataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var cell = this.ediDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+            string cellKey = GetCellKey2(e.RowIndex, e.ColumnIndex);
+            string cellChangedKey = GetCellKey2(e.RowIndex, e.ColumnIndex, true);
+            var new_cell_value = cell.Value;
+            var original_cell_value = ediDataGridView_datagrid_changes[cellKey];
+            if (new_cell_value == null && original_cell_value == null)
+            {
+                ediDataGridView_datagrid_changes.Remove(cellChangedKey);
+            }
+            else if ((new_cell_value == null && original_cell_value != null) || (new_cell_value != null && original_cell_value == null) || !new_cell_value.Equals(original_cell_value))
+            {
+                ediDataGridView_datagrid_changes[cellChangedKey] = new_cell_value;
+            }
+            else
+            {
+                ediDataGridView_datagrid_changes.Remove(cellChangedKey);
+            }
+        }
+        private IEnumerable<int> GetChangedOrderIds2()
+        {
+
+            List<int> rows = new List<int>();
+            foreach (DictionaryEntry entry in ediDataGridView_datagrid_changes)
+            {
+                var key = entry.Key as string;
+                if (key.EndsWith("_changed"))
+                {
+
+                    int row = Int32.Parse(key.Split('_')[0]);
+                    rows.Add(row);
+                }
+
+            }
+            return rows.Distinct();
+        }
+        private string GetCellKey2(int rowIndex, int columnIndex, bool forChanged)
+        {
+            return GetCellKey2(rowIndex, columnIndex) + "_changed";
+        }
+        private string GetCellKey2(int rowIndex, int columnIndex)
+        {
+            var row = ediDataGridView.Rows[rowIndex];
+            var model = row.DataBoundItem as v_groupedorder;
+
+            return string.Format("{0}_{1}", model.ShipNO, columnIndex.ToString());
+        }
+        private List<v_groupedorder> GetDataGridViewBoundOrders2()
+        {
+            List<v_groupedorder> orders = new List<v_groupedorder>();
+            for (int i = 0; i < ediDataGridView.Rows.Count; i++)
+            {
+                orders.Add(ediDataGridView.Rows[i].DataBoundItem as v_groupedorder);
+            }
+
+            return orders;
+        }
+
+        private void ediDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            string cellChangedKey = GetCellKey2(e.RowIndex, e.ColumnIndex, true);
+
+            if (ediDataGridView_datagrid_changes.ContainsKey(cellChangedKey))
+            {
+                e.CellStyle.BackColor = Color.Red;
+                e.CellStyle.SelectionBackColor = Color.DarkRed;
+            }
+        }
     }
 }
