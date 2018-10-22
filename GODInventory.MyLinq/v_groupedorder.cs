@@ -122,7 +122,7 @@ namespace GODInventory.MyLinq
 
         public int TotalWeight { get; set; }
 
-
+        public int reportState { get; set; }
     }
 
 }

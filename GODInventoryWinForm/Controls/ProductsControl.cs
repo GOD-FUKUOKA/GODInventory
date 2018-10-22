@@ -17,7 +17,7 @@ namespace GODInventoryWinForm.Controls
         List<t_shoplist> stores = null;
         List<t_genre> genres = null;
         List<t_itemlist> products = null;
-
+        private List<t_warehouses> warehouseList;
         public ProductsControl()
         {
             InitializeComponent();
@@ -59,6 +59,12 @@ namespace GODInventoryWinForm.Controls
             this.promotePriceTextBox.Text = String.Empty;
             this.adPriceTextBox.Text = String.Empty;
             this.salePriceTextBox.Text = String.Empty;
+
+            //mark 20181022
+            warehouseList = ctx.t_warehouses.ToList();
+            this.warehouseComboBox.DisplayMember = "FullName";
+            this.warehouseComboBox.ValueMember = "Id";
+            this.warehouseComboBox.DataSource = warehouseList;
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -296,6 +302,7 @@ namespace GODInventoryWinForm.Controls
             decimal promotePrice = -1;
             decimal adPrice = -1;
             decimal salePrice = -1;
+            string stores = "";
 
             if (this.costTextBox.Text.Trim().Length > 0)
             {
@@ -320,6 +327,12 @@ namespace GODInventoryWinForm.Controls
             {
                 salePrice = Convert.ToDecimal(this.salePriceTextBox.Text);
             }
+            //
+            if (this.warehouseComboBox.Text.Trim().Length > 0)
+            {
+                stores = Convert.ToString(this.warehouseComboBox.Text);
+            }
+
 
             if (productCode == 0)
             {
@@ -335,7 +348,7 @@ namespace GODInventoryWinForm.Controls
 
 
 
-            int count = OrderHelper.UpdateProductCost(productCode, county, storeId, cost, price, promotePrice,adPrice,salePrice);
+            int count = OrderHelper.UpdateProductCost(productCode, county, storeId, cost, price, promotePrice, adPrice, salePrice, stores.Trim());
 
             if (count > 0)
             {
