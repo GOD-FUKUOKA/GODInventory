@@ -302,7 +302,7 @@ namespace GODInventoryWinForm.Controls
             decimal promotePrice = -1;
             decimal adPrice = -1;
             decimal salePrice = -1;
-            string stores = "";
+            string warehouse = "";
 
             if (this.costTextBox.Text.Trim().Length > 0)
             {
@@ -330,7 +330,7 @@ namespace GODInventoryWinForm.Controls
             //
             if (this.warehouseComboBox.Text.Trim().Length > 0)
             {
-                stores = Convert.ToString(this.warehouseComboBox.Text);
+                warehouse = Convert.ToString(this.warehouseComboBox.Text);
             }
 
 
@@ -348,7 +348,7 @@ namespace GODInventoryWinForm.Controls
 
 
 
-            int count = OrderHelper.UpdateProductCost(productCode, county, storeId, cost, price, promotePrice, adPrice, salePrice, stores.Trim());
+            int count = OrderHelper.UpdateProductCost(productCode, county, storeId, cost, price, promotePrice, adPrice, salePrice, warehouse);
 
             if (count > 0)
             {

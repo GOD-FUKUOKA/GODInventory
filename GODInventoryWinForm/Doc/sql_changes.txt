@@ -206,3 +206,6 @@ ADD COLUMN `reportState` INT(11) NOT NULL DEFAULT 0 AFTER `社内伝番処理`;
 
 ALTER TABLE `god_om2`.`t_pricelist` 
 ADD COLUMN `配送担当` VARCHAR(45) NULL AFTER `運賃`;
+
+ALTER TABLE `god_om2`.`t_itemlist` 
+CHANGE COLUMN `順番` `順番` INT(2) NOT NULL DEFAULT 0 ;

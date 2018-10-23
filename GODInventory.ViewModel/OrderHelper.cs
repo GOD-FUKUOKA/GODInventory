@@ -38,14 +38,20 @@ namespace GODInventory.ViewModel
         }
 
 
-        public static int UpdateProductCost(int productCode, string county = "", int storeId = 0, decimal cost = -1, decimal price = -1, decimal promotePrice = -1, decimal adPrice = -1, decimal salePrice = -1, string stores = "")
+        public static int UpdateProductCost(int productCode, string county = "", int storeId = 0, decimal cost = -1, decimal price = -1, decimal promotePrice = -1, decimal adPrice = -1, decimal salePrice = -1, string warehouse = "")
         {
             int count = 0;
             string sql = "";
             using (var ctx = new GODDbContext())
             {
-                String[] cols = { "仕入原価", "通常原単価", "特売原単価", "広告原単価", "売単価", "配送担当" };
+                String[] cols = { "仕入原価", "通常原単価", "特売原単価", "広告原単価", "売単価" };
                 Decimal[] prices = { cost, price, promotePrice, adPrice, salePrice };
+                
+                if (warehouse.Length > 0)
+                {
+                    sql = String.Format("UPDATE t_pricelist SET `配送担当`={0} WHERE `自社コード`={1}", warehouse, productCode);
+                    count = ctx.Database.ExecuteSqlCommand(sql);
+                }
 
                 for (int i = 0; i < cols.Length; i++)
                 {
@@ -53,13 +59,8 @@ namespace GODInventory.ViewModel
                     {
                         continue;
                     }
-                    if (cols[i] != "配送担当")
-                        sql = String.Format("UPDATE t_pricelist SET `{0}`={1} WHERE `自社コード`={2}", cols[i], prices[i], productCode);
-                    else
-                    {          
-                        //mark 2018 10 22
-                        sql = String.Format("UPDATE t_pricelist SET `{0}`='{1}' WHERE `自社コード`={2}", cols[i], stores, productCode);
-                    }
+                    sql = String.Format("UPDATE t_pricelist SET `{0}`={1} WHERE `自社コード`={2}", cols[i], prices[i], productCode);
+                    
                     if (county.Length > 0)
                     {
                         sql += string.Format(" AND `県別`='{0}'", county);

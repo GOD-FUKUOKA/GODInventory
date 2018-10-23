@@ -145,7 +145,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 groupedAsnOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.ASN).ToList();
 
                 //this.bindingSource2.DataSource = OrderSqlHelper.ASNEdiDataList(entityDataSource1);
-                ediDataGridView.DataSource = groupedAsnOrderList;
+                //ediDataGridView.DataSource = groupedAsnOrderList;
                 //new 
                 //groupedAsnOrderList = groupedAsnOrderList.GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 });
                 var newlist = groupedAsnOrderList.OrderBy(s => s.発注日).ToList();
@@ -820,14 +820,14 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
             string errorMessage = "";
             using (var ctx = new GODDbContext())
             {
-                IEnumerable<int> orderIds = GetChangedOrderIds2();
+                IEnumerable<string> orderIds = GetChangedOrderIds2();
                 List<v_groupedorder> orders = GetDataGridViewBoundOrders2();
 
                 if (orderIds.Count() > 0)
                 {
                     foreach (var id in orderIds.Distinct())
                     {
-                        var pendingorder = orders.Find(o => o.ShipNO == id.ToString());
+                        var pendingorder = orders.Find(o => orderIds.Contains(o.ShipNO));
                         // t_orderdata order = ctx.t_orderdata.Find(pendingorder.ShipNO);
                         List<t_orderdata> orderList = (from t_orderdata o in ctx.t_orderdata
                                                        where o.ShipNO == pendingorder.ShipNO
@@ -906,17 +906,17 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                 ediDataGridView_datagrid_changes.Remove(cellChangedKey);
             }
         }
-        private IEnumerable<int> GetChangedOrderIds2()
+        private IEnumerable<string> GetChangedOrderIds2()
         {
 
-            List<int> rows = new List<int>();
+            List<string> rows = new List<string>();
             foreach (DictionaryEntry entry in ediDataGridView_datagrid_changes)
             {
                 var key = entry.Key as string;
                 if (key.EndsWith("_changed"))
                 {
 
-                    int row = Int32.Parse(key.Split('_')[0]);
+                    var row = key.Split('_')[0];
                     rows.Add(row);
                 }
 
@@ -960,7 +960,8 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
         {
             this.ediDataGridView_datagrid_changes.Clear();
 
-            InitializeEdiData();
+            //InitializeEdiData();
+            this.ediDataGridView.Refresh();
         }
     }
 }

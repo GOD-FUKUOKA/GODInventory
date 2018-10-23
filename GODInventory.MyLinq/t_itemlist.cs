@@ -53,5 +53,7 @@ namespace GODInventory.MyLinq
         public string 単位 { get; set; }
 
         public sbyte? PT単位か { get; set; }
+        public int? 順番 { get; set; }
+
     }
 }
