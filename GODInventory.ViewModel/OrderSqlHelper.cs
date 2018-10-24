@@ -677,6 +677,21 @@ namespace GODInventory.ViewModel
             }
             return count;
         }
+        public static int UpdateOrderreportState(List<string> shipNOs,int status)
+        {
+            int count = 0;
+            using (var ctx = new GODDbContext())
+            {
+
+                //string sql = String.Format("UPDATE t_orderdata SET `reportState`={0} WHERE `ShipNO`={1}", status, shipNOs);
+
+                string sql = string.Format("UPDATE t_orderdata SET `reportState`={1}  WHERE `shipNO` in ({0})", String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray()), status);
+                count = ctx.Database.ExecuteSqlCommand(sql);
+     
+            }
+            return count;
+        }
+
 
         public static int FinishOrders(List<int> orderIds)
         {

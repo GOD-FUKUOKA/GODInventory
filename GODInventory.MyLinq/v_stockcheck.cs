@@ -20,5 +20,7 @@ namespace GODInventory.MyLinq
         public int chaZhi { get; set; }
         public int weiChuanSong { get; set; }
         public int? 数量 { get; set; }
+        public int? 順番 { get; set; }
+
     }
 }

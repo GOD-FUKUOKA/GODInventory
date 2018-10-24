@@ -211,6 +211,9 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
         private void uploadForEDIButton_Click(object sender, EventArgs e)
         {
+            //mark 20181008
+            bool isValid = true;
+            string errorMessage = "";
 
             if (ediDataGridView.SelectedRows.Count > 0)
             {
@@ -221,6 +224,8 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     var gorder = row.DataBoundItem as v_groupedorder;
                     shipNOs.Add(gorder.ShipNO);
                 }
+
+
 
                 // 数据上传送信, 上传相应ASN数据
                 // 更新数据，上传成功
@@ -240,6 +245,9 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
                 // update order state first, then call upload. in case state right
                 OrderSqlHelper.UpdateOrderStatusShipped(shipNOs);
+                //标记未经打印mark 20181008
+                OrderSqlHelper.UpdateOrderreportState(shipNOs, 0);
+
                 // 上传ASN，ASN上传确认
                 // 文件已生成，是否即刻上传asn文件
                 if (MessageBox.Show("ASNデータを作成します。このまま送信しますか？", "送信確認", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
@@ -249,48 +257,45 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     sendForm.ShowDialog();
                 }
 
-                #region   mark   20181008 标记已打印
 
-                bool isValid = true;
-                string errorMessage = "";
-                using (var ctx = new GODDbContext())
-                {
-                    List<v_groupedorder> orders = GetDataGridViewBoundOrders2();
-
-                    if (shipNOs.Count() > 0)
-                    {
-                        foreach (var id in shipNOs.Distinct())
-                        {
-                            var pendingorder = orders.Find(o => o.ShipNO == id.ToString());
-
-                            List<t_orderdata> orderList = (from t_orderdata o in ctx.t_orderdata
-                                                           where o.ShipNO == pendingorder.ShipNO
-                                                           select o).ToList();
-
-                            foreach (t_orderdata item in orderList)
-                            {
-                                item.reportState = 1;
-                            }
-                        }
-                        if (isValid)
-                        {
-                            ctx.SaveChanges();
-                        }
-                        else
-                        {
-                            MessageBox.Show(errorMessage);
-                        }
-                    }
-
-                }
-
-                #endregion
             }
-
-
+            // mark 20181008
+            this.ediDataGridView_datagrid_changes.Clear();
 
             InitializeEdiData();
             pager3.Bind();
+        }
+
+        private void mark_ReportState(string shipNOs, int status)
+        {
+            #region   mark   20181008 标记已打印
+
+
+            string errorMessage = "";
+            using (var ctx = new GODDbContext())
+            {
+                List<v_groupedorder> orders = GetDataGridViewBoundOrders2();
+
+                if (shipNOs != null && shipNOs != null && shipNOs.Length > 0)
+                {
+
+                    string sql = String.Format("UPDATE t_orderdata SET `reportState`={0} WHERE `ShipNO`={1}", status, shipNOs);
+                    int count = ctx.Database.ExecuteSqlCommand(sql);
+
+
+                    if (count == 1)
+                    {
+
+                    }
+                    else
+                    {
+                        MessageBox.Show(errorMessage);
+                    }
+                }
+
+            }
+
+            #endregion
         }
 
         private void printForEDIButton_Click(object sender, EventArgs e)
@@ -481,6 +486,9 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
             reportForm.InitializeDataSource(orders);
             reportForm.ShowDialog();
+
+            //标记已经打印
+            mark_ReportState(gorder.ShipNO, 1);
             InitializeEdiData();
         }
 
@@ -531,14 +539,24 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                         var pendingorder = orders.Find(o => o.id受注データ == id);
                         t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
                         bool isQtyChanged = (order.発注数量 != pendingorder.発注数量);
+                        bool isdingzhengliyouChanged = (order.訂正理由区分 != pendingorder.訂正理由区分);
 
 
                         if (isQtyChanged)
                         {
-                            if (pendingorder.訂正理由区分 != order.訂正理由区分)
+                            if (pendingorder.訂正理由区分 == order.訂正理由区分)
                             {
                                 isValid = false;
                                 errorMessage = "数量変更の理由をつけてください！";
+                                break;
+                            }
+                        }
+                        if (isdingzhengliyouChanged)
+                        {
+                            if (pendingorder.発注数量 == order.発注数量)
+                            {
+                                isValid = false;
+                                errorMessage = "訂正理由区分変更の理由をつけてください！";
                                 break;
                             }
                         }
@@ -554,7 +572,6 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                         return;
 
                     }
-
 
                     string shipNo = DateTime.Now.ToString("yyyyMMddHHmmss");
                     string sql = String.Format("UPDATE t_orderdata SET `shipNO`='{1}' WHERE `id受注データ` in( {0} )", string.Join(",", oids), shipNo);
@@ -589,6 +606,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
 
                 }
+                this.datagrid_changes.Clear();
                 InitializeCanceledOrder();
             }
         }
@@ -683,6 +701,8 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                     if (isValid)
                     {
                         ctx.SaveChanges();
+                        this.datagrid_changes.Clear();
+                        canceledDataGridView.Refresh();
 
                     }
                     else
@@ -839,11 +859,17 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                             item.納品日 = pendingorder.納品日;
 
                         }
+                        mark_ReportState(pendingorder.ShipNO, 1);
                     }
+
+
+
+
                     if (isValid)
                     {
                         ctx.SaveChanges();
-
+                        this.ediDataGridView_datagrid_changes.Clear();
+                        ediDataGridView.Refresh();
                     }
                     else
                     {
@@ -962,6 +988,11 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
 
             //InitializeEdiData();
             this.ediDataGridView.Refresh();
+        }
+
+        private void pendingTabPage_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

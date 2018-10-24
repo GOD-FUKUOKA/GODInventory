@@ -114,8 +114,10 @@ namespace GODInventoryWinForm.Controls
                                  規格 = p.規格,
                                  自社コード = p.自社コード,
                                  商品名 = p.商品名,
+                                 順番 = p.順番,
                              }).ToList();
-
+                //mark 20181024
+                NewstockcheckList = NewstockcheckList.OrderBy(o => o.順番).ToList();
                 foreach (var stockcheck in NewstockcheckList)
                 {
 
@@ -153,7 +155,6 @@ namespace GODInventoryWinForm.Controls
                     stockcheck.shiJiKuCunShu = stockcheck.yingYouKuCunShu + stockcheck.daiFaHuoShu;                
                     stockcheckList.Add(stockcheck);
                 }
-
             }
 
         }

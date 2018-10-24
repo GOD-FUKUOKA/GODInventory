@@ -99,13 +99,17 @@ namespace GODInventoryWinForm.Controls
                 {
                     var results = (from s in ctx.t_itemlist
                                    where s.ジャンル == (short)genre_id
-                                   select new v_stockios { 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
+                                   select new v_stockios { 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名, 順番 = s.順番 }).ToList();
+                   // mark sort by 順番
+                    results = results.OrderBy(o => o.順番).ToList();
                     for (int i = 0; i < results.Count; i++)
                     {
                         results[i].Id = i + 1;
                         stockiosList.Add(results[i]);
                     }
                 }
+         
+
             }
         }
 
@@ -125,7 +129,7 @@ namespace GODInventoryWinForm.Controls
         private void btcanel_Click(object sender, EventArgs e)
         {
             this.FindDataSources();
-            
+
             this.BindDataGridView();
         }
 
@@ -592,7 +596,7 @@ namespace GODInventoryWinForm.Controls
             {
                 stock = this.stockList.Find(o => (o.自社コード == productNum && o.納品書番号 == stockNum));
             }
-            
+
             if (stock == null)
             {
                 var originalStock = this.stockList.Find(o => (o.納品書番号 == stockNum));
