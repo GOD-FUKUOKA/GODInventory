@@ -69,7 +69,7 @@ namespace GODInventoryWinForm.Controls
 
 
             // 担当
-            var shippers = pendingOrderList.Select(s => new MockEntity { FullName = s.実際配送担当 }).Distinct().ToList();
+            var shippers = pendingOrderList.Select(s => new  {  FullName = s.実際配送担当 }).Distinct().ToList();
             //shippers.Insert(0, new MockEntity { FullName = "すべて" });
             this.shipperComboBox.DisplayMember = "FullName";
             this.shipperComboBox.ValueMember = "FullName";

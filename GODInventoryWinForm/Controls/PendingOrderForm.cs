@@ -140,7 +140,8 @@ namespace GODInventoryWinForm.Controls
                             if (pendingorder.訂正理由区分 == order.訂正理由区分)
                             {
                                 isValid = false;
-                                errorMessage = "重量になっています。訂正理由区分を「訂正なし」にしてください。";
+                                errorMessage = "理由が設定されていない伝票があります。訂正してください。";
+                                //errorMessage = "重量になっています。訂正理由区分を「訂正なし」にしてください。";
                                 break;
                             }
 
