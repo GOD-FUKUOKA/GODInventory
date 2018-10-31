@@ -45,47 +45,6 @@
             this.単品重量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.単位Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PT単位かColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btAddItem = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.salePriceTextBox = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.promotePriceTextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.adPriceTextBox = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.priceTextBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.updateButton = new System.Windows.Forms.Button();
-            this.costTextBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.countyComboBox = new System.Windows.Forms.ComboBox();
-            this.pricesDataGridView = new System.Windows.Forms.DataGridView();
-            this.自社コードColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.商品名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.県別Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.店番Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.店名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.仕入原価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.通常原単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.広告原単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.特売原単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.売単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editPriceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.storesComboBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.genresComboBox = new System.Windows.Forms.ComboBox();
-            this.searchButton = new System.Windows.Forms.Button();
-            this.productsComboBox = new System.Windows.Forms.ComboBox();
-            this.pricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.自社コードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.得意先DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ジャンルDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -103,10 +62,53 @@
             this.pT単位かDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.btAddItem = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.warehouseComboBox = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.salePriceTextBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.promotePriceTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.adPriceTextBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.priceTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.updateButton = new System.Windows.Forms.Button();
+            this.costTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.countyComboBox = new System.Windows.Forms.ComboBox();
+            this.pricesDataGridView = new System.Windows.Forms.DataGridView();
+            this.priceContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editPriceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.storesComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.genresComboBox = new System.Windows.Forms.ComboBox();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.productsComboBox = new System.Windows.Forms.ComboBox();
+            this.pricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.自社コードColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.県別Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店番Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.仕入原価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.通常原単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.広告原単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.特売原単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.売単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.配送担当Column2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.productContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productsDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -115,7 +117,6 @@
             this.priceContextMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pricesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // productContextMenuStrip
@@ -278,6 +279,121 @@
             this.PT単位かColumn1.Name = "PT単位かColumn1";
             this.PT単位かColumn1.ReadOnly = true;
             // 
+            // 自社コードDataGridViewTextBoxColumn
+            // 
+            this.自社コードDataGridViewTextBoxColumn.DataPropertyName = "自社コード";
+            this.自社コードDataGridViewTextBoxColumn.HeaderText = "自社コード";
+            this.自社コードDataGridViewTextBoxColumn.Name = "自社コードDataGridViewTextBoxColumn";
+            this.自社コードDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 得意先DataGridViewTextBoxColumn
+            // 
+            this.得意先DataGridViewTextBoxColumn.DataPropertyName = "得意先";
+            this.得意先DataGridViewTextBoxColumn.HeaderText = "得意先";
+            this.得意先DataGridViewTextBoxColumn.Name = "得意先DataGridViewTextBoxColumn";
+            this.得意先DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // ジャンルDataGridViewTextBoxColumn
+            // 
+            this.ジャンルDataGridViewTextBoxColumn.DataPropertyName = "ジャンル";
+            this.ジャンルDataGridViewTextBoxColumn.HeaderText = "ジャンル";
+            this.ジャンルDataGridViewTextBoxColumn.Name = "ジャンルDataGridViewTextBoxColumn";
+            this.ジャンルDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 商品名DataGridViewTextBoxColumn
+            // 
+            this.商品名DataGridViewTextBoxColumn.DataPropertyName = "商品名";
+            this.商品名DataGridViewTextBoxColumn.HeaderText = "商品名";
+            this.商品名DataGridViewTextBoxColumn.Name = "商品名DataGridViewTextBoxColumn";
+            this.商品名DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 規格DataGridViewTextBoxColumn
+            // 
+            this.規格DataGridViewTextBoxColumn.DataPropertyName = "規格";
+            this.規格DataGridViewTextBoxColumn.HeaderText = "規格";
+            this.規格DataGridViewTextBoxColumn.Name = "規格DataGridViewTextBoxColumn";
+            this.規格DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // pT入数DataGridViewTextBoxColumn
+            // 
+            this.pT入数DataGridViewTextBoxColumn.DataPropertyName = "PT入数";
+            this.pT入数DataGridViewTextBoxColumn.HeaderText = "PT入数";
+            this.pT入数DataGridViewTextBoxColumn.Name = "pT入数DataGridViewTextBoxColumn";
+            this.pT入数DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 商品コードDataGridViewTextBoxColumn
+            // 
+            this.商品コードDataGridViewTextBoxColumn.DataPropertyName = "商品コード";
+            this.商品コードDataGridViewTextBoxColumn.HeaderText = "商品コード";
+            this.商品コードDataGridViewTextBoxColumn.Name = "商品コードDataGridViewTextBoxColumn";
+            this.商品コードDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // jANコードDataGridViewTextBoxColumn
+            // 
+            this.jANコードDataGridViewTextBoxColumn.DataPropertyName = "JANコード";
+            this.jANコードDataGridViewTextBoxColumn.HeaderText = "JANコード";
+            this.jANコードDataGridViewTextBoxColumn.Name = "jANコードDataGridViewTextBoxColumn";
+            this.jANコードDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // インストアコードDataGridViewTextBoxColumn
+            // 
+            this.インストアコードDataGridViewTextBoxColumn.DataPropertyName = "インストアコード";
+            this.インストアコードDataGridViewTextBoxColumn.HeaderText = "インストアコード";
+            this.インストアコードDataGridViewTextBoxColumn.Name = "インストアコードDataGridViewTextBoxColumn";
+            this.インストアコードDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 通常原単価DataGridViewTextBoxColumn
+            // 
+            this.通常原単価DataGridViewTextBoxColumn.DataPropertyName = "通常原単価";
+            this.通常原単価DataGridViewTextBoxColumn.HeaderText = "通常原単価";
+            this.通常原単価DataGridViewTextBoxColumn.Name = "通常原単価DataGridViewTextBoxColumn";
+            this.通常原単価DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 売単価DataGridViewTextBoxColumn
+            // 
+            this.売単価DataGridViewTextBoxColumn.DataPropertyName = "売単価";
+            this.売単価DataGridViewTextBoxColumn.HeaderText = "売単価";
+            this.売単価DataGridViewTextBoxColumn.Name = "売単価DataGridViewTextBoxColumn";
+            this.売単価DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 仕入原価DataGridViewTextBoxColumn
+            // 
+            this.仕入原価DataGridViewTextBoxColumn.DataPropertyName = "仕入原価";
+            this.仕入原価DataGridViewTextBoxColumn.HeaderText = "仕入原価";
+            this.仕入原価DataGridViewTextBoxColumn.Name = "仕入原価DataGridViewTextBoxColumn";
+            this.仕入原価DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 単品重量DataGridViewTextBoxColumn
+            // 
+            this.単品重量DataGridViewTextBoxColumn.DataPropertyName = "単品重量";
+            this.単品重量DataGridViewTextBoxColumn.HeaderText = "単品重量";
+            this.単品重量DataGridViewTextBoxColumn.Name = "単品重量DataGridViewTextBoxColumn";
+            this.単品重量DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 単位DataGridViewTextBoxColumn
+            // 
+            this.単位DataGridViewTextBoxColumn.DataPropertyName = "単位";
+            this.単位DataGridViewTextBoxColumn.HeaderText = "単位";
+            this.単位DataGridViewTextBoxColumn.Name = "単位DataGridViewTextBoxColumn";
+            this.単位DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // pT単位かDataGridViewTextBoxColumn
+            // 
+            this.pT単位かDataGridViewTextBoxColumn.DataPropertyName = "PT単位か";
+            this.pT単位かDataGridViewTextBoxColumn.HeaderText = "PT単位か";
+            this.pT単位かDataGridViewTextBoxColumn.Name = "pT単位かDataGridViewTextBoxColumn";
+            this.pT単位かDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataMember = "t_itemlist";
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
             // btAddItem
             // 
             this.btAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -349,6 +465,26 @@
             this.groupBox2.Size = new System.Drawing.Size(609, 77);
             this.groupBox2.TabIndex = 41;
             this.groupBox2.TabStop = false;
+            // 
+            // warehouseComboBox
+            // 
+            this.warehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.warehouseComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.warehouseComboBox.FormattingEnabled = true;
+            this.warehouseComboBox.Location = new System.Drawing.Point(407, 42);
+            this.warehouseComboBox.Name = "warehouseComboBox";
+            this.warehouseComboBox.Size = new System.Drawing.Size(84, 22);
+            this.warehouseComboBox.TabIndex = 60;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label9.Location = new System.Drawing.Point(364, 46);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(35, 14);
+            this.label9.TabIndex = 61;
+            this.label9.Text = "倉庫";
             // 
             // salePriceTextBox
             // 
@@ -476,7 +612,8 @@
             this.通常原単価Column2,
             this.広告原単価Column2,
             this.特売原単価Column2,
-            this.売単価Column2});
+            this.売単価Column2,
+            this.配送担当Column2});
             this.pricesDataGridView.ContextMenuStrip = this.priceContextMenuStrip;
             this.pricesDataGridView.Location = new System.Drawing.Point(15, 92);
             this.pricesDataGridView.Name = "pricesDataGridView";
@@ -486,85 +623,6 @@
             this.pricesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.pricesDataGridView.Size = new System.Drawing.Size(1111, 332);
             this.pricesDataGridView.TabIndex = 0;
-            // 
-            // 自社コードColumn2
-            // 
-            this.自社コードColumn2.DataPropertyName = "自社コード";
-            this.自社コードColumn2.HeaderText = "自社コード";
-            this.自社コードColumn2.Name = "自社コードColumn2";
-            this.自社コードColumn2.ReadOnly = true;
-            // 
-            // 商品名Column2
-            // 
-            this.商品名Column2.DataPropertyName = "商品名";
-            this.商品名Column2.HeaderText = "商品名";
-            this.商品名Column2.Name = "商品名Column2";
-            this.商品名Column2.ReadOnly = true;
-            this.商品名Column2.Width = 200;
-            // 
-            // 規格Column2
-            // 
-            this.規格Column2.DataPropertyName = "規格";
-            this.規格Column2.HeaderText = "規格";
-            this.規格Column2.Name = "規格Column2";
-            this.規格Column2.ReadOnly = true;
-            this.規格Column2.Width = 180;
-            // 
-            // 県別Column2
-            // 
-            this.県別Column2.DataPropertyName = "県別";
-            this.県別Column2.HeaderText = "県別";
-            this.県別Column2.Name = "県別Column2";
-            this.県別Column2.ReadOnly = true;
-            // 
-            // 店番Column2
-            // 
-            this.店番Column2.DataPropertyName = "店番";
-            this.店番Column2.HeaderText = "店番";
-            this.店番Column2.Name = "店番Column2";
-            this.店番Column2.ReadOnly = true;
-            // 
-            // 店名Column2
-            // 
-            this.店名Column2.DataPropertyName = "店名";
-            this.店名Column2.HeaderText = "店名";
-            this.店名Column2.Name = "店名Column2";
-            this.店名Column2.ReadOnly = true;
-            // 
-            // 仕入原価Column2
-            // 
-            this.仕入原価Column2.DataPropertyName = "仕入原価";
-            this.仕入原価Column2.HeaderText = "仕入原価";
-            this.仕入原価Column2.Name = "仕入原価Column2";
-            this.仕入原価Column2.ReadOnly = true;
-            // 
-            // 通常原単価Column2
-            // 
-            this.通常原単価Column2.DataPropertyName = "原単価";
-            this.通常原単価Column2.HeaderText = "通常原単価";
-            this.通常原単価Column2.Name = "通常原単価Column2";
-            this.通常原単価Column2.ReadOnly = true;
-            // 
-            // 広告原単価Column2
-            // 
-            this.広告原単価Column2.DataPropertyName = "広告原単価";
-            this.広告原単価Column2.HeaderText = "広告原単価";
-            this.広告原単価Column2.Name = "広告原単価Column2";
-            this.広告原単価Column2.ReadOnly = true;
-            // 
-            // 特売原単価Column2
-            // 
-            this.特売原単価Column2.DataPropertyName = "特売原単価";
-            this.特売原単価Column2.HeaderText = "特売原単価";
-            this.特売原単価Column2.Name = "特売原単価Column2";
-            this.特売原単価Column2.ReadOnly = true;
-            // 
-            // 売単価Column2
-            // 
-            this.売単価Column2.DataPropertyName = "売単価";
-            this.売単価Column2.HeaderText = "売単価";
-            this.売単価Column2.Name = "売単価Column2";
-            this.売単価Column2.ReadOnly = true;
             // 
             // priceContextMenuStrip
             // 
@@ -678,140 +736,91 @@
             this.productsComboBox.Size = new System.Drawing.Size(125, 22);
             this.productsComboBox.TabIndex = 1;
             // 
-            // 自社コードDataGridViewTextBoxColumn
+            // 自社コードColumn2
             // 
-            this.自社コードDataGridViewTextBoxColumn.DataPropertyName = "自社コード";
-            this.自社コードDataGridViewTextBoxColumn.HeaderText = "自社コード";
-            this.自社コードDataGridViewTextBoxColumn.Name = "自社コードDataGridViewTextBoxColumn";
-            this.自社コードDataGridViewTextBoxColumn.ReadOnly = true;
+            this.自社コードColumn2.DataPropertyName = "自社コード";
+            this.自社コードColumn2.HeaderText = "自社コード";
+            this.自社コードColumn2.Name = "自社コードColumn2";
+            this.自社コードColumn2.ReadOnly = true;
             // 
-            // 得意先DataGridViewTextBoxColumn
+            // 商品名Column2
             // 
-            this.得意先DataGridViewTextBoxColumn.DataPropertyName = "得意先";
-            this.得意先DataGridViewTextBoxColumn.HeaderText = "得意先";
-            this.得意先DataGridViewTextBoxColumn.Name = "得意先DataGridViewTextBoxColumn";
-            this.得意先DataGridViewTextBoxColumn.ReadOnly = true;
+            this.商品名Column2.DataPropertyName = "商品名";
+            this.商品名Column2.HeaderText = "商品名";
+            this.商品名Column2.Name = "商品名Column2";
+            this.商品名Column2.ReadOnly = true;
+            this.商品名Column2.Width = 200;
             // 
-            // ジャンルDataGridViewTextBoxColumn
+            // 規格Column2
             // 
-            this.ジャンルDataGridViewTextBoxColumn.DataPropertyName = "ジャンル";
-            this.ジャンルDataGridViewTextBoxColumn.HeaderText = "ジャンル";
-            this.ジャンルDataGridViewTextBoxColumn.Name = "ジャンルDataGridViewTextBoxColumn";
-            this.ジャンルDataGridViewTextBoxColumn.ReadOnly = true;
+            this.規格Column2.DataPropertyName = "規格";
+            this.規格Column2.HeaderText = "規格";
+            this.規格Column2.Name = "規格Column2";
+            this.規格Column2.ReadOnly = true;
+            this.規格Column2.Width = 180;
             // 
-            // 商品名DataGridViewTextBoxColumn
+            // 県別Column2
             // 
-            this.商品名DataGridViewTextBoxColumn.DataPropertyName = "商品名";
-            this.商品名DataGridViewTextBoxColumn.HeaderText = "商品名";
-            this.商品名DataGridViewTextBoxColumn.Name = "商品名DataGridViewTextBoxColumn";
-            this.商品名DataGridViewTextBoxColumn.ReadOnly = true;
+            this.県別Column2.DataPropertyName = "県別";
+            this.県別Column2.HeaderText = "県別";
+            this.県別Column2.Name = "県別Column2";
+            this.県別Column2.ReadOnly = true;
             // 
-            // 規格DataGridViewTextBoxColumn
+            // 店番Column2
             // 
-            this.規格DataGridViewTextBoxColumn.DataPropertyName = "規格";
-            this.規格DataGridViewTextBoxColumn.HeaderText = "規格";
-            this.規格DataGridViewTextBoxColumn.Name = "規格DataGridViewTextBoxColumn";
-            this.規格DataGridViewTextBoxColumn.ReadOnly = true;
+            this.店番Column2.DataPropertyName = "店番";
+            this.店番Column2.HeaderText = "店番";
+            this.店番Column2.Name = "店番Column2";
+            this.店番Column2.ReadOnly = true;
             // 
-            // pT入数DataGridViewTextBoxColumn
+            // 店名Column2
             // 
-            this.pT入数DataGridViewTextBoxColumn.DataPropertyName = "PT入数";
-            this.pT入数DataGridViewTextBoxColumn.HeaderText = "PT入数";
-            this.pT入数DataGridViewTextBoxColumn.Name = "pT入数DataGridViewTextBoxColumn";
-            this.pT入数DataGridViewTextBoxColumn.ReadOnly = true;
+            this.店名Column2.DataPropertyName = "店名";
+            this.店名Column2.HeaderText = "店名";
+            this.店名Column2.Name = "店名Column2";
+            this.店名Column2.ReadOnly = true;
             // 
-            // 商品コードDataGridViewTextBoxColumn
+            // 仕入原価Column2
             // 
-            this.商品コードDataGridViewTextBoxColumn.DataPropertyName = "商品コード";
-            this.商品コードDataGridViewTextBoxColumn.HeaderText = "商品コード";
-            this.商品コードDataGridViewTextBoxColumn.Name = "商品コードDataGridViewTextBoxColumn";
-            this.商品コードDataGridViewTextBoxColumn.ReadOnly = true;
+            this.仕入原価Column2.DataPropertyName = "仕入原価";
+            this.仕入原価Column2.HeaderText = "仕入原価";
+            this.仕入原価Column2.Name = "仕入原価Column2";
+            this.仕入原価Column2.ReadOnly = true;
             // 
-            // jANコードDataGridViewTextBoxColumn
+            // 通常原単価Column2
             // 
-            this.jANコードDataGridViewTextBoxColumn.DataPropertyName = "JANコード";
-            this.jANコードDataGridViewTextBoxColumn.HeaderText = "JANコード";
-            this.jANコードDataGridViewTextBoxColumn.Name = "jANコードDataGridViewTextBoxColumn";
-            this.jANコードDataGridViewTextBoxColumn.ReadOnly = true;
+            this.通常原単価Column2.DataPropertyName = "原単価";
+            this.通常原単価Column2.HeaderText = "通常原単価";
+            this.通常原単価Column2.Name = "通常原単価Column2";
+            this.通常原単価Column2.ReadOnly = true;
             // 
-            // インストアコードDataGridViewTextBoxColumn
+            // 広告原単価Column2
             // 
-            this.インストアコードDataGridViewTextBoxColumn.DataPropertyName = "インストアコード";
-            this.インストアコードDataGridViewTextBoxColumn.HeaderText = "インストアコード";
-            this.インストアコードDataGridViewTextBoxColumn.Name = "インストアコードDataGridViewTextBoxColumn";
-            this.インストアコードDataGridViewTextBoxColumn.ReadOnly = true;
+            this.広告原単価Column2.DataPropertyName = "広告原単価";
+            this.広告原単価Column2.HeaderText = "広告原単価";
+            this.広告原単価Column2.Name = "広告原単価Column2";
+            this.広告原単価Column2.ReadOnly = true;
             // 
-            // 通常原単価DataGridViewTextBoxColumn
+            // 特売原単価Column2
             // 
-            this.通常原単価DataGridViewTextBoxColumn.DataPropertyName = "通常原単価";
-            this.通常原単価DataGridViewTextBoxColumn.HeaderText = "通常原単価";
-            this.通常原単価DataGridViewTextBoxColumn.Name = "通常原単価DataGridViewTextBoxColumn";
-            this.通常原単価DataGridViewTextBoxColumn.ReadOnly = true;
+            this.特売原単価Column2.DataPropertyName = "特売原単価";
+            this.特売原単価Column2.HeaderText = "特売原単価";
+            this.特売原単価Column2.Name = "特売原単価Column2";
+            this.特売原単価Column2.ReadOnly = true;
             // 
-            // 売単価DataGridViewTextBoxColumn
+            // 売単価Column2
             // 
-            this.売単価DataGridViewTextBoxColumn.DataPropertyName = "売単価";
-            this.売単価DataGridViewTextBoxColumn.HeaderText = "売単価";
-            this.売単価DataGridViewTextBoxColumn.Name = "売単価DataGridViewTextBoxColumn";
-            this.売単価DataGridViewTextBoxColumn.ReadOnly = true;
+            this.売単価Column2.DataPropertyName = "売単価";
+            this.売単価Column2.HeaderText = "売単価";
+            this.売単価Column2.Name = "売単価Column2";
+            this.売単価Column2.ReadOnly = true;
             // 
-            // 仕入原価DataGridViewTextBoxColumn
+            // 配送担当Column2
             // 
-            this.仕入原価DataGridViewTextBoxColumn.DataPropertyName = "仕入原価";
-            this.仕入原価DataGridViewTextBoxColumn.HeaderText = "仕入原価";
-            this.仕入原価DataGridViewTextBoxColumn.Name = "仕入原価DataGridViewTextBoxColumn";
-            this.仕入原価DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // 単品重量DataGridViewTextBoxColumn
-            // 
-            this.単品重量DataGridViewTextBoxColumn.DataPropertyName = "単品重量";
-            this.単品重量DataGridViewTextBoxColumn.HeaderText = "単品重量";
-            this.単品重量DataGridViewTextBoxColumn.Name = "単品重量DataGridViewTextBoxColumn";
-            this.単品重量DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // 単位DataGridViewTextBoxColumn
-            // 
-            this.単位DataGridViewTextBoxColumn.DataPropertyName = "単位";
-            this.単位DataGridViewTextBoxColumn.HeaderText = "単位";
-            this.単位DataGridViewTextBoxColumn.Name = "単位DataGridViewTextBoxColumn";
-            this.単位DataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // pT単位かDataGridViewTextBoxColumn
-            // 
-            this.pT単位かDataGridViewTextBoxColumn.DataPropertyName = "PT単位か";
-            this.pT単位かDataGridViewTextBoxColumn.HeaderText = "PT単位か";
-            this.pT単位かDataGridViewTextBoxColumn.Name = "pT単位かDataGridViewTextBoxColumn";
-            this.pT単位かDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataMember = "t_itemlist";
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // warehouseComboBox
-            // 
-            this.warehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.warehouseComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.warehouseComboBox.FormattingEnabled = true;
-            this.warehouseComboBox.Location = new System.Drawing.Point(407, 42);
-            this.warehouseComboBox.Name = "warehouseComboBox";
-            this.warehouseComboBox.Size = new System.Drawing.Size(84, 22);
-            this.warehouseComboBox.TabIndex = 60;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label9.Location = new System.Drawing.Point(364, 46);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(35, 14);
-            this.label9.TabIndex = 61;
-            this.label9.Text = "倉庫";
+            this.配送担当Column2.DataPropertyName = "配送担当";
+            this.配送担当Column2.HeaderText = "配送担当";
+            this.配送担当Column2.Name = "配送担当Column2";
+            this.配送担当Column2.ReadOnly = true;
             // 
             // ProductsControl
             // 
@@ -824,6 +833,7 @@
             this.Size = new System.Drawing.Size(1150, 468);
             this.productContextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.productsDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -834,7 +844,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pricesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -881,17 +890,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox adPriceTextBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 自社コードColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 商品名Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 規格Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 店番Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 仕入原価Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 通常原単価Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 広告原単価Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 特売原単価Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 売単価Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 自社コードColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 得意先Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ジャンルColumn1;
@@ -921,5 +919,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn pT単位かDataGridViewTextBoxColumn;
         private System.Windows.Forms.ComboBox warehouseComboBox;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 自社コードColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 商品名Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 規格Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 県別Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 店番Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 店名Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 仕入原価Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 通常原単価Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 広告原単価Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 特売原単価Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 売単価Column2;
+        private System.Windows.Forms.DataGridViewComboBoxColumn 配送担当Column2;
     }
 }

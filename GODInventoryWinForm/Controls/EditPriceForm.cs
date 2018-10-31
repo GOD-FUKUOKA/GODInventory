@@ -19,7 +19,8 @@ namespace GODInventoryWinForm.Controls
         private int priceId;
         private t_itemlist Product { get; set; }
 
-
+        //mark 20181008
+        private List<t_warehouses> warehouseList;
         public EditPriceForm( int price)
         {
             InitializeComponent();
@@ -54,6 +55,17 @@ namespace GODInventoryWinForm.Controls
             this.adPriceTextBox.Text = Price.広告原単価.ToString();
             this.salePriceTextBox.Text = Price.売単価.ToString();
             this.costTextBox.Text = Price.仕入原価.ToString();
+
+            var ctx = entityDataSource1.DbContext as GODDbContext;
+          
+            warehouseList = ctx.t_warehouses.ToList();
+            var shipperCo = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
+        
+            this.shipperComboBox3.DisplayMember = "FullName";
+            this.shipperComboBox3.ValueMember = "FullName";
+            this.shipperComboBox3.DataSource = shipperCo.ToList();
+           
+
         }
 
         private void submitFormButton_Click(object sender, EventArgs e)
@@ -64,6 +76,8 @@ namespace GODInventoryWinForm.Controls
             Price.特売原単価 = Convert.ToDecimal(this.promotePriceTextBox.Text);
             Price.売単価 = Convert.ToDecimal(this.salePriceTextBox.Text);
             Price.仕入原価 = Convert.ToDecimal(this.costTextBox.Text);
+            Price.配送担当 = Convert.ToString(this.shipperComboBox3.Text);
+         
             this.entityDataSource1.SaveChanges();
                 
             this.Close();

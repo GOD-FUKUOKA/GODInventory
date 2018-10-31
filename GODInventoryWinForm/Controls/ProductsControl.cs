@@ -62,9 +62,17 @@ namespace GODInventoryWinForm.Controls
 
             //mark 20181022
             warehouseList = ctx.t_warehouses.ToList();
+            var shipperCo = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
+           
             this.warehouseComboBox.DisplayMember = "FullName";
             this.warehouseComboBox.ValueMember = "Id";
-            this.warehouseComboBox.DataSource = warehouseList;
+            this.warehouseComboBox.DataSource = shipperCo;
+
+            this.配送担当Column2.DisplayMember = "FullName";
+            this.配送担当Column2.ValueMember = "FullName";
+            this.配送担当Column2.DataSource = shipperCo.ToList();
+
+
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
