@@ -185,7 +185,7 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private void InitializePriceListDatagridView(int productCode, string county= "", int storeId = 0)
+        private void InitializePriceListDatagridView(int productCode, string county = "", int storeId = 0, int genresId = 0)
         {
              
             var query = from t_pricelist p in this.entityDataSource1.EntitySets["t_pricelist"]
@@ -203,8 +203,8 @@ namespace GODInventoryWinForm.Controls
                             売単価 = p.売単価,
                             原単価 = p.通常原単価,
                             広告原単価 = p.広告原単価,
-                            特売原単価 = p.特売原単価
-                                    
+                            特売原単価 = p.特売原単価,
+                            ジャンル = i.ジャンル    
                         };
             if( county.Length>0)
             {
@@ -219,7 +219,10 @@ namespace GODInventoryWinForm.Controls
             {
                 query = query.Where(o => o.自社コード == productCode);
             }
-
+            if (genresId > 0)
+            {
+                query = query.Where(o => o.ジャンル == genresId);
+            }
             this.pricesBindingSource.DataSource = this.entityDataSource1.CreateView( query);
             this.pricesDataGridView.DataSource = this.pricesBindingSource;           
                          
@@ -251,10 +254,11 @@ namespace GODInventoryWinForm.Controls
             int productCode = Convert.ToInt32(this.productsComboBox.SelectedValue);
             string county = this.countyComboBox.SelectedValue.ToString();
             int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
+            int genresId = Convert.ToInt32(this.genresComboBox.SelectedValue);
 
             if (productCode > 0 || storeId >0)
             {
-                InitializePriceListDatagridView(productCode, county, storeId);
+                InitializePriceListDatagridView(productCode, county, storeId, genresId);
             }
 
         }
