@@ -16,11 +16,12 @@ namespace GODInventoryWinForm.Controls
     {
         private string showtype;
         private List<t_shoplist> stores;
-
+        //mark 20181008
+        private List<t_warehouses> warehouseList;
         public StoresManagement( int  storeId, string type)
         {
             InitializeComponent();
-
+            
             using (var ctx = new GODDbContext())
             {
                 this.stores = ctx.t_shoplist.ToList();
@@ -32,7 +33,18 @@ namespace GODInventoryWinForm.Controls
 
                 this.storesComboBox.ValueMember = "店番";
                 this.storesComboBox.DisplayMember = "店名";
-                this.storesComboBox.DataSource = this.stores; 
+                this.storesComboBox.DataSource = this.stores;
+
+
+                //mark   20181009           
+                warehouseList = ctx.t_warehouses.ToList();
+                var shipperCo = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
+                //shipperCo.Insert(0, new MockEntity { ShortName = "その他", FullName = "その他" });
+                this.shipperTextBox.DisplayMember = "FullName";
+                this.shipperTextBox.ValueMember = "FullName";
+                this.shipperTextBox.DataSource = shipperCo.ToList();
+
+ 
 
                 if (type == "Update")
                 {
