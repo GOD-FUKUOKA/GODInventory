@@ -163,9 +163,10 @@ namespace GODInventoryWinForm.Controls
                 {
                     var results = (from s in ctx.t_itemlist
                                    where s.ジャンル == (short)genre_id
-                                   select new v_stockios { 商品コード = s.商品コード, 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
+                                   orderby s.順番
+                                   select new v_stockios { 商品コード = s.商品コード, 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名, 順番 = s.順番 }).ToList();
                     //mark 20181024
-                    results = results.OrderBy(o => o.順番).ToList();
+                     
                     for (int i = 0; i < results.Count; i++)
                     {
                         results[i].Id = i + 1;

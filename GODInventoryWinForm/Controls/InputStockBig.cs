@@ -32,7 +32,7 @@ namespace GODInventoryWinForm.Controls
             this.dataGridView1.DataSource = stockiosList;
 
             InitializeDataSource();
-            
+
             //http://stackoverflow.com/questions/2653153/c-sharp-winforms-vertical-alignment-for-textbox-etc
 
         }
@@ -42,7 +42,7 @@ namespace GODInventoryWinForm.Controls
 
             using (var ctx = new GODDbContext())
             {
-                genreList = ctx.t_genre.OrderBy( o=>o.Position).ToList();
+                genreList = ctx.t_genre.OrderBy(o => o.Position).ToList();
                 warehouseList = ctx.t_warehouses.ToList();
                 manufacturerList = ctx.t_manufacturers.OrderBy(o => o.Position).ToList();
                 customersList = ctx.t_customers.ToList();
@@ -50,7 +50,7 @@ namespace GODInventoryWinForm.Controls
             }
             this.genreComboBox.DisplayMember = "ジャンル名";
             this.genreComboBox.ValueMember = "idジャンル";
-            
+
             this.genreComboBox.DataSource = genreList;
 
             //this.manufacturerList = ManufactureRespository.ToList();
@@ -76,63 +76,63 @@ namespace GODInventoryWinForm.Controls
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            
-                List<t_stockrec> receivedList = new List<t_stockrec>();
-                foreach (var item in stockiosList)
+
+            List<t_stockrec> receivedList = new List<t_stockrec>();
+            foreach (var item in stockiosList)
+            {
+                if (item.qty > 0)
                 {
-                    if (item.qty > 0)
+                    var order = new t_stockrec();
+
+                    order.日付 = orderCreatedAtDateTimePicker.Value;
+                    order.先 = this.warehouseComboBox.Text;
+
+                    order.元 = this.manufacturerComboBox.Text;
+                    order.工場 = this.manufacturerComboBox.Text;
+                    order.納品書番号 = stockNOTextBox.Text;
+
+                    order.数量 = item.qty;
+                    order.区分 = StockIoEnum.入庫.ToString();
+                    order.事由 = this.remarkTextBox1.Text;
+                    //order.仓库 = storeComboBox.Text;
+                    order.自社コード = Convert.ToInt32(item.自社コード);
+                    order.状態 = this.stockStatusComboBox.Text;
+                    order.客 = this.clientComboBox.Text;
+
+                    receivedList.Add(order);
+
+                }
+
+
+            }
+            if (receivedList.Count > 0)
+            {
+                using (var ctx = new GODDbContext())
+                {
+                    ctx.t_stockrec.AddRange(receivedList);
+                    List<int> pids = new List<int>();
+                    foreach (var item in receivedList)
                     {
-                        var order = new t_stockrec();
-
-                        order.日付 = orderCreatedAtDateTimePicker.Value;
-                        order.先 = this.warehouseComboBox.Text;
-
-                        order.元 = this.manufacturerComboBox.Text;
-                        order.工場 = this.manufacturerComboBox.Text;
-                        order.納品書番号 = stockNOTextBox.Text;
-
-                        order.数量 = item.qty;
-                        order.区分 = StockIoEnum.入庫.ToString();
-                        order.事由 = this.remarkTextBox1.Text;
-                        //order.仓库 = storeComboBox.Text;
-                        order.自社コード = Convert.ToInt32(item.自社コード);
-                        order.状態 = this.stockStatusComboBox.Text;
-                        order.客 = this.clientComboBox.Text;
-
-                        receivedList.Add(order);
-
+                        pids.Add(item.自社コード);
                     }
+                    // save stockrec before update stock state
+                    ctx.SaveChanges();
+
+                    OrderSqlHelper.UpdateStockState(ctx, receivedList);
 
 
+                    this.stockiosList.Clear();
                 }
-                if (receivedList.Count > 0)
-                {
-                    using (var ctx = new GODDbContext())
-                    {
-                        ctx.t_stockrec.AddRange(receivedList);
-                        List<int> pids = new List<int>();
-                        foreach (var item in receivedList)
-                        {
-                            pids.Add(item.自社コード);
-                        }
-                        // save stockrec before update stock state
-                        ctx.SaveChanges();
+                MessageBox.Show(String.Format(" {0}種類商品入庫登録できました", receivedList.Count));
+                // rebuild stock no, new stockrec created.
+                BuildStockNO();
+            }
+            else
+            {
+                MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                        OrderSqlHelper.UpdateStockState(ctx, receivedList);
-
-
-                        this.stockiosList.Clear();
-                    }
-                    MessageBox.Show(String.Format(" {0}種類商品入庫登録できました", receivedList.Count));
-                    // rebuild stock no, new stockrec created.
-                    BuildStockNO();
-                }
-                else
-                {
-                    MessageBox.Show("Ex" + "データを书いてください", "誤った", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -140,7 +140,7 @@ namespace GODInventoryWinForm.Controls
 
             //this.bindingSource1.Filter = String.Format( "genreId={0}", this.genreComboBox.SelectedValue);
 
-            var filtered = manufacturerList.FindAll(s => s.genreId ==  Convert.ToInt32( this.genreComboBox.SelectedValue));
+            var filtered = manufacturerList.FindAll(s => s.genreId == Convert.ToInt32(this.genreComboBox.SelectedValue));
             if (filtered.Count > 0)
             {
                 this.manufacturerComboBox.DataSource = filtered;
@@ -220,7 +220,8 @@ namespace GODInventoryWinForm.Controls
                 {
                     var results = (from s in ctx.t_itemlist
                                    where s.ジャンル == (short)genre_id
-                                   select new v_stockios { 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
+                                   orderby s.順番
+                                   select new v_stockios { 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名, 順番 = s.順番 }).ToList();
                     for (int i = 0; i < results.Count; i++)
                     {
                         results[i].Id = i + 1;
@@ -269,7 +270,7 @@ namespace GODInventoryWinForm.Controls
         private void addButton_Click(object sender, EventArgs e)
         {
             int qty = Convert.ToInt32(qtyTextBox.Text);
-            int code  = Convert.ToInt32(codeTextBox.Text);
+            int code = Convert.ToInt32(codeTextBox.Text);
             var dd = ManufactureRespository.CodeDict.ToList();
             // factory_code : product_code
             KeyValuePair<int, int> pair = dd.FirstOrDefault(o => o.Key == code);
@@ -286,10 +287,11 @@ namespace GODInventoryWinForm.Controls
                 }
                 codeTextBox.Text = "";
                 qtyTextBox.Text = "";
-                this.ActiveControl = codeTextBox;                
+                this.ActiveControl = codeTextBox;
                 this.dataGridView1.Refresh();
             }
-            else {
+            else
+            {
                 MessageBox.Show(String.Format("工場コード{0}の該当商品は見つかりません。", code));
             }
 
