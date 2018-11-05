@@ -34,6 +34,8 @@
             this.promotePriceTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.shipperComboBox3 = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.costTextBox = new System.Windows.Forms.TextBox();
             this.storeCountyTextBox = new System.Windows.Forms.TextBox();
@@ -55,8 +57,6 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.shipperComboBox3 = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,6 +128,27 @@
             this.groupBox1.Size = new System.Drawing.Size(647, 283);
             this.groupBox1.TabIndex = 10000006;
             this.groupBox1.TabStop = false;
+            // 
+            // shipperComboBox3
+            // 
+            this.shipperComboBox3.FormattingEnabled = true;
+            this.shipperComboBox3.Items.AddRange(new object[] {
+            "丸健",
+            "MKL",
+            "マツモト産業"});
+            this.shipperComboBox3.Location = new System.Drawing.Point(109, 246);
+            this.shipperComboBox3.Name = "shipperComboBox3";
+            this.shipperComboBox3.Size = new System.Drawing.Size(190, 22);
+            this.shipperComboBox3.TabIndex = 10000024;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(37, 250);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(63, 14);
+            this.label8.TabIndex = 10000025;
+            this.label8.Text = "配送担当";
             // 
             // label6
             // 
@@ -306,27 +327,6 @@
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // shipperComboBox3
-            // 
-            this.shipperComboBox3.FormattingEnabled = true;
-            this.shipperComboBox3.Items.AddRange(new object[] {
-            "丸健",
-            "MKL",
-            "マツモト産業"});
-            this.shipperComboBox3.Location = new System.Drawing.Point(109, 246);
-            this.shipperComboBox3.Name = "shipperComboBox3";
-            this.shipperComboBox3.Size = new System.Drawing.Size(190, 22);
-            this.shipperComboBox3.TabIndex = 10000024;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 250);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(91, 14);
-            this.label8.TabIndex = 10000025;
-            this.label8.Text = "実際配送担当";
             // 
             // EditPriceForm
             // 

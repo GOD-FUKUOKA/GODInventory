@@ -460,7 +460,7 @@ namespace GODInventoryWinForm.Controls
                                       join p in ctx.t_pricelist on i.自社コード equals p.自社コード
                                       join g in ctx.t_genre on i.ジャンル equals g.idジャンル
                                       where p.店番 == storeId
-                                      select new v_itemprice { 自社コード = i.自社コード, ジャンル = g.idジャンル, ジャンル名 = g.ジャンル名, 商品コード = i.商品コード, JANコード = i.JANコード, 商品名 = i.商品名, 原単価 = p.通常原単価, 売単価 = p.売単価, 規格 = i.規格, PT入数 = i.PT入数, 単品重量 = i.単品重量, 単位 = i.単位 }).ToList();
+                                      select new v_itemprice { 配送担当=p.配送担当, 自社コード = i.自社コード, ジャンル = g.idジャンル, ジャンル名 = g.ジャンル名, 商品コード = i.商品コード, JANコード = i.JANコード, 商品名 = i.商品名, 原単価 = p.通常原単価, 売単価 = p.売単価, 規格 = i.規格, PT入数 = i.PT入数, 単品重量 = i.単品重量, 単位 = i.単位 }).ToList();
             }
 
             for (int i = 0; i < 10; i++)
@@ -829,7 +829,7 @@ namespace GODInventoryWinForm.Controls
                                     if (isrun == false)
                                         return;
                                 }
-                                o.実際配送担当 = store.配送担当;
+                                o.実際配送担当 = selectedItem.配送担当;
 
                                 // 社内伝番処理
                                 o.社内伝番処理 = OrderSqlHelper.IsInnerCodeRequired(o.ジャンル);

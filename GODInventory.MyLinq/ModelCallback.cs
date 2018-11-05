@@ -51,8 +51,9 @@ namespace GODInventory.MyLinq
             {
                 List<t_pricelist> newPrices = new List<t_pricelist>();
                 var stores = ctx.t_shoplist.ToList();
-                // 
-                string sqlFormat = "INSERT INTO `t_pricelist`(`店番`, `店名`, `県別`, `自社コード`,  `仕入原価`, `通常原単価`, `売単価`) select `店番`, `店名`, `県別`,{0},{1},{2},{3} from t_shoplist;";
+                // 添加商品缺省配送担当
+
+                string sqlFormat = "INSERT INTO `t_pricelist`(`店番`, `店名`, `県別`, `配送担当`, `自社コード`,  `仕入原価`, `通常原単価`, `売単価`) select `店番`, `店名`, `県別`, `配送担当`,{0},{1},{2},{3} from t_shoplist;";
 
                 string sql = string.Format(sqlFormat, product.自社コード, product.仕入原価, product.通常原単価, product.売単価);
                 //foreach (var store in stores)

@@ -33,6 +33,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.uploadForEDIButton = new System.Windows.Forms.Button();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -83,6 +88,7 @@
             this.canceledContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cancelConfirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shippedTabPage = new System.Windows.Forms.TabPage();
+            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             this.shippedDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -122,7 +128,6 @@
             this.canceledBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource6 = new System.Windows.Forms.BindingSource(this.components);
-            this.pager3 = new GODInventoryWinForm.Controls.Pager();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.printStateColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.配车单单号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -652,6 +657,21 @@
             this.shippedTabPage.Text = "出荷済み伝票";
             this.shippedTabPage.UseVisualStyleBackColor = true;
             // 
+            // pager3
+            // 
+            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager3.AutoSize = true;
+            this.pager3.Location = new System.Drawing.Point(3, 307);
+            this.pager3.Name = "pager3";
+            this.pager3.NMax = 0;
+            this.pager3.PageCount = 0;
+            this.pager3.PageCurrent = 1;
+            this.pager3.PageSize = 5000;
+            this.pager3.Size = new System.Drawing.Size(903, 34);
+            this.pager3.TabIndex = 2;
+            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
+            // 
             // shippedDataGridView
             // 
             this.shippedDataGridView.AllowUserToAddRows = false;
@@ -942,21 +962,6 @@
             this.受領差異金額Column1.Name = "受領差異金額Column1";
             this.受領差異金額Column1.ReadOnly = true;
             // 
-            // pager3
-            // 
-            this.pager3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager3.AutoSize = true;
-            this.pager3.Location = new System.Drawing.Point(3, 307);
-            this.pager3.Name = "pager3";
-            this.pager3.NMax = 0;
-            this.pager3.PageCount = 0;
-            this.pager3.PageCurrent = 1;
-            this.pager3.PageSize = 5000;
-            this.pager3.Size = new System.Drawing.Size(903, 34);
-            this.pager3.TabIndex = 2;
-            this.pager3.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager3_EventPaging);
-            // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
@@ -985,6 +990,8 @@
             // 出荷日Column1
             // 
             this.出荷日Column1.DataPropertyName = "出荷日";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.出荷日Column1.DefaultCellStyle = dataGridViewCellStyle4;
             this.出荷日Column1.HeaderText = "出荷日";
             this.出荷日Column1.Name = "出荷日Column1";
             this.出荷日Column1.Width = 160;
@@ -992,6 +999,8 @@
             // 納品日Column1
             // 
             this.納品日Column1.DataPropertyName = "納品日";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.納品日Column1.DefaultCellStyle = dataGridViewCellStyle5;
             this.納品日Column1.HeaderText = "納品日";
             this.納品日Column1.Name = "納品日Column1";
             this.納品日Column1.Width = 160;
@@ -999,8 +1008,8 @@
             // 県別Column1
             // 
             this.県別Column1.DataPropertyName = "県別";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.県別Column1.DefaultCellStyle = dataGridViewCellStyle6;
             this.県別Column1.HeaderText = "県別";
             this.県別Column1.Name = "県別Column1";
             this.県別Column1.ReadOnly = true;
@@ -1009,6 +1018,8 @@
             // 実際配送担当Column1
             // 
             this.実際配送担当Column1.DataPropertyName = "実際配送担当";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.実際配送担当Column1.DefaultCellStyle = dataGridViewCellStyle7;
             this.実際配送担当Column1.HeaderText = "実際配送担当";
             this.実際配送担当Column1.Name = "実際配送担当Column1";
             this.実際配送担当Column1.ReadOnly = true;
@@ -1017,6 +1028,8 @@
             // 重量Column1
             // 
             this.重量Column1.DataPropertyName = "TotalWeight";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.重量Column1.DefaultCellStyle = dataGridViewCellStyle8;
             this.重量Column1.HeaderText = "重量";
             this.重量Column1.Name = "重量Column1";
             this.重量Column1.ReadOnly = true;
@@ -1025,6 +1038,8 @@
             // 原価金額_税抜_Column1
             // 
             this.原価金額_税抜_Column1.DataPropertyName = "TotalPrice";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.原価金額_税抜_Column1.DefaultCellStyle = dataGridViewCellStyle9;
             this.原価金額_税抜_Column1.HeaderText = "原価金額(税抜)";
             this.原価金額_税抜_Column1.Name = "原価金額_税抜_Column1";
             this.原価金額_税抜_Column1.ReadOnly = true;

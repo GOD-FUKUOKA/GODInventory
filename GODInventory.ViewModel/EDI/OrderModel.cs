@@ -477,7 +477,7 @@ namespace GODInventory.ViewModel.EDI
             orderdata.ジャンル = item.ジャンル;
             orderdata.単位 = item.単位;
             orderdata.自社コード = item.自社コード;
-            orderdata.実際配送担当 = shop.配送担当;
+            orderdata.実際配送担当 = price.配送担当;
             orderdata.県別 = shop.県別;
             orderdata.最小発注単位数量 = item.PT入数;
             orderdata.重量 = (int)(item.単品重量 * orderdata.発注数量);
@@ -497,7 +497,11 @@ namespace GODInventory.ViewModel.EDI
             orderdata.実際出荷数量 = orderdata.発注数量;
             orderdata.社内伝番処理 = OrderSqlHelper.IsInnerCodeRequired(orderdata.ジャンル);
 
-            if (orderdata.実際配送担当 == "MKL" && (orderdata.ジャンル == 1001 || orderdata.ジャンル == 1003))
+            //if (orderdata.実際配送担当 == "MKL" && (orderdata.ジャンル == 1001 || orderdata.ジャンル == 1003))
+            //{
+            //    orderdata.実際配送担当 = "丸健";
+            //}
+            if (orderdata.実際配送担当==null || orderdata.実際配送担当 == String.Empty)
             {
                 orderdata.実際配送担当 = "丸健";
             }

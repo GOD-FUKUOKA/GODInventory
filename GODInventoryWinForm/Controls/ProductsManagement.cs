@@ -149,6 +149,7 @@ namespace GODInventoryWinForm.Controls
                 {
 
                     t_itemlist product = new t_itemlist();
+                    product.順番 = 0;//不能为空
                     product.自社コード = Convert.ToInt32(innerCodeTextBox.Text);
 
                     product.得意先 = customerComboBox.Text;

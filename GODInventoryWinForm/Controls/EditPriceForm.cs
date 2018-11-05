@@ -64,6 +64,7 @@ namespace GODInventoryWinForm.Controls
             this.shipperComboBox3.DisplayMember = "FullName";
             this.shipperComboBox3.ValueMember = "FullName";
             this.shipperComboBox3.DataSource = shipperCo.ToList();
+            this.shipperComboBox3.Text = Price.配送担当;
            
 
         }

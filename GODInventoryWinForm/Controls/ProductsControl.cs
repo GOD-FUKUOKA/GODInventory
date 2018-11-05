@@ -68,9 +68,9 @@ namespace GODInventoryWinForm.Controls
             this.warehouseComboBox.ValueMember = "Id";
             this.warehouseComboBox.DataSource = shipperCo;
 
-            this.配送担当Column2.DisplayMember = "FullName";
-            this.配送担当Column2.ValueMember = "FullName";
-            this.配送担当Column2.DataSource = shipperCo.ToList();
+            //this.配送担当Column2.DisplayMember = "FullName";
+            //this.配送担当Column2.ValueMember = "FullName";
+            //this.配送担当Column2.DataSource = shipperCo.ToList();
 
 
         }
@@ -204,7 +204,8 @@ namespace GODInventoryWinForm.Controls
                             原単価 = p.通常原単価,
                             広告原単価 = p.広告原単価,
                             特売原単価 = p.特売原単価,
-                            ジャンル = i.ジャンル    
+                            ジャンル = i.ジャンル,
+                            配送担当 = p.配送担当
                         };
             if( county.Length>0)
             {
@@ -309,12 +310,12 @@ namespace GODInventoryWinForm.Controls
             int productCode = (int)this.productsComboBox.SelectedValue;
             int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
             string county = Convert.ToString(this.countyComboBox.SelectedValue);
+            int genresId = Convert.ToInt32(this.genresComboBox.SelectedValue);
             decimal cost = -1;
             decimal price = -1;
             decimal promotePrice = -1;
             decimal adPrice = -1;
             decimal salePrice = -1;
-            string warehouse = "";
 
             if (this.costTextBox.Text.Trim().Length > 0)
             {
@@ -339,11 +340,6 @@ namespace GODInventoryWinForm.Controls
             {
                 salePrice = Convert.ToDecimal(this.salePriceTextBox.Text);
             }
-            //
-            if (this.warehouseComboBox.Text.Trim().Length > 0)
-            {
-                warehouse = Convert.ToString(this.warehouseComboBox.Text);
-            }
 
 
             if (productCode == 0)
@@ -352,22 +348,75 @@ namespace GODInventoryWinForm.Controls
                 return;
             }
 
-            if (cost == -1 && price == -1 && promotePrice == -1 && adPrice == -1 && salePrice==-1)
+            if (cost == -1 || price == -1 || promotePrice == -1 || adPrice == -1 || salePrice==-1)
             {
-                MessageBox.Show("有効な単価を入力下さい");
+                MessageBox.Show("単価を修正する際、すべての欄に入力してください。設定されていない単価は0で入力してください。");
                 return;
             }
 
 
 
-            int count = OrderHelper.UpdateProductCost(productCode, county, storeId, cost, price, promotePrice, adPrice, salePrice, warehouse);
+            int count = OrderHelper.UpdateProductCost(productCode, county, storeId, cost, price, promotePrice, adPrice, salePrice);
 
             if (count > 0)
             {
                 //MessageBox.Show(string.Format("update {0} prices successfully", count));
 
-                InitializePriceListDatagridView(productCode, county, storeId);
+                InitializePriceListDatagridView(productCode, county, storeId, genresId);
             }
+        }
+
+        private void saveDanButton_Click(object sender, EventArgs e)
+        {
+            int productCode = (int)this.productsComboBox.SelectedValue;
+            int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
+            string county = Convert.ToString(this.countyComboBox.SelectedValue);
+            int genresId = Convert.ToInt32(this.genresComboBox.SelectedValue);
+
+            string warehouse = String.Empty;
+            String sql = String.Empty;
+            //保存配送担当
+
+            if (genresId == 0)
+            {
+                MessageBox.Show("Please input ");
+                return;
+            }
+
+            if (this.warehouseComboBox.Text.Length > 0)
+            {
+                warehouse = Convert.ToString(this.warehouseComboBox.Text);
+
+                using (var ctx = new GODDbContext())
+                {
+                    if (productCode > 0)
+                    {
+                        sql = String.Format("UPDATE t_pricelist SET `配送担当`='{0}' WHERE `自社コード`={1}", warehouse, productCode);
+                    }
+                    else {
+                        var productCodes = (from t_itemlist item in ctx.t_itemlist
+                            where item.ジャンル == genresId
+                            select item.自社コード).ToList();
+                        sql = String.Format("UPDATE t_pricelist SET `配送担当`='{0}' WHERE `自社コード`in ({1})", warehouse, String.Join(",", productCodes));
+
+                    }
+                  
+
+                     if (county.Length > 0)
+                     {
+                         sql += string.Format(" AND `県別`='{0}'", county);
+                     }
+                     if (storeId > 0)
+                     {
+                         sql += string.Format(" AND `店番`={0}", storeId);
+                     }
+                    ctx.Database.ExecuteSqlCommand(sql);
+                    
+                }
+                InitializePriceListDatagridView(productCode, county, storeId, genresId);
+
+            }
+
         }
 
     }

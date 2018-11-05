@@ -135,17 +135,16 @@ namespace GODInventoryWinForm.Controls
                         //mark 20181008
                         bool isNewQtyChanged = (order.重量 != pendingorder.重量);
 
-                        if (isNewQtyChanged)
-                        {
-                            if (pendingorder.訂正理由区分 == order.訂正理由区分)
-                            {
-                                isValid = false;
-                                errorMessage = "理由が設定されていない伝票があります。訂正してください。";
-                                //errorMessage = "重量になっています。訂正理由区分を「訂正なし」にしてください。";
-                                break;
-                            }
-
-                        }
+                        //if (isQtyChanged)
+                        //{
+                        //    if (pendingorder.訂正理由区分 == 0)
+                        //    {
+                        //        isValid = false;
+                        //        errorMessage = "理由が設定されていない伝票があります。訂正してください。";
+                        //        //errorMessage = "重量になっています。訂正理由区分を「訂正なし」にしてください。";
+                        //        break;
+                        //    }
+                        //}
 
                         if (pendingorder.実際出荷数量 == order.発注数量 && pendingorder.訂正理由区分 != 0)
                         {
@@ -167,7 +166,8 @@ namespace GODInventoryWinForm.Controls
                             else if (pendingorder.実際出荷数量 != order.発注数量 && pendingorder.訂正理由区分 == 0)
                             {
                                 isValid = false;
-                                errorMessage = "数量変更の理由をつけてください！";
+                                errorMessage = "理由が設定されていない伝票があります。訂正してください。";
+                                //errorMessage = "数量変更の理由をつけてください！";
                                 break;
                             }
                         }
