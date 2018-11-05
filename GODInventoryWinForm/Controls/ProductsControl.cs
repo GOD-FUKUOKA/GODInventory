@@ -243,6 +243,8 @@ namespace GODInventoryWinForm.Controls
                     price.広告原単価 = form.Price.広告原単価;
                     price.特売原単価 = form.Price.特売原単価;
                     price.売単価 = form.Price.売単価;
+
+                    searchButton_Click(null, EventArgs.Empty);
                     this.pricesDataGridView.Refresh();
                     //MessageBox.Show("saved");
                 }
