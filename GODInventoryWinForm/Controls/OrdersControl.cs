@@ -16,7 +16,7 @@ namespace GODInventoryWinForm.Controls
         private WaitToShipForm waitToShipOrderForm;
         private ShippingOrderForm shippingOrderForm;
         private OrderHistoryForm OrderHistoryForm;
-        private CreateTransportForm CreateTransportForm;
+        private WarehouseTransportForm CreateTransportForm;
 
         public OrdersControl()
         {
@@ -150,7 +150,7 @@ namespace GODInventoryWinForm.Controls
         {
             if (CreateTransportForm == null)
             {
-                CreateTransportForm = new CreateTransportForm();
+                CreateTransportForm = new WarehouseTransportForm();
             }
             AdjustSubformSize(CreateTransportForm);
             // 显示之前重新加载数据，订单数据可能已更新。

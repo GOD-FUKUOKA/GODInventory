@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace GODInventoryWinForm.Controls
 {
-    public partial class CreateTransportForm : Form
+    public partial class WarehouseTransportForm : Form
     {
         private BindingList<v_transport> transportList;
         private List<t_warehouses> warehouseList;
 
 
 
-        public CreateTransportForm()
+        public WarehouseTransportForm()
         {
             InitializeComponent();
 
@@ -40,9 +40,9 @@ namespace GODInventoryWinForm.Controls
                 warehouseList = ctx.t_warehouses.ToList();
             }
 
-            this.ComboBox.DisplayMember = "FullName";
-            this.ComboBox.ValueMember = "Id";
-            this.ComboBox.DataSource = warehouseList;
+            //this.ComboBox.DisplayMember = "FullName";
+            //this.ComboBox.ValueMember = "Id";
+            //this.ComboBox.DataSource = warehouseList;
 
 
 
@@ -52,9 +52,6 @@ namespace GODInventoryWinForm.Controls
         {
             v_transport item = new v_transport();
 
-            item.Transport_name = selfCodeTextBox1.Text;
-
-            item.ShipperName = shipperTextBox.Text;
 
 
             transportList.Add(item);
@@ -64,11 +61,11 @@ namespace GODInventoryWinForm.Controls
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var filtered = warehouseList.FindAll(s => s.Id == (int)this.ComboBox.SelectedValue);
-            if (filtered.Count > 0)
+            //var filtered = warehouseList.FindAll(s => s.Id == (int)this.ComboBox.SelectedValue);
+            //if (filtered.Count > 0)
             {
                 //shipperTextBox.Text = ComboBox.Text;
-                shipperTextBox.Text = filtered[0].FullName;
+            //    shipperTextBox.Text = filtered[0].FullName;
             }
 
         }

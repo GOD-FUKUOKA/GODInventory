@@ -29,6 +29,10 @@
         public virtual DbSet<t_customers> t_customers { get; set; }
         public virtual DbSet<t_pricelist> t_pricelist { get; set; }
 
+        public virtual DbSet<t_transports> t_transports { get; set; }
+        public virtual DbSet<t_warehouses_transports> t_warehouses_transports { get; set; }
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<t_genre>()
