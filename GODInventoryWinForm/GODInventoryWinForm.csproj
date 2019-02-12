@@ -121,6 +121,12 @@
     <Compile Include="Controls\CancelConfirmForm.Designer.cs">
       <DependentUpon>CancelConfirmForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CreateTransportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\CreateTransportForm.Designer.cs">
+      <DependentUpon>CreateTransportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\EditPriceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,6 +211,12 @@
     </Compile>
     <Compile Include="Controls\Strock_CompanyCode.Designer.cs">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WarehouseTransportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\WarehouseTransportForm.Designer.cs">
+      <DependentUpon>WarehouseTransportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GenerateASNTextForm_Auto.cs">
       <SubType>Form</SubType>
@@ -408,6 +420,9 @@
     <EmbeddedResource Include="Controls\CancelConfirmForm.resx">
       <DependentUpon>CancelConfirmForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CreateTransportForm.resx">
+      <DependentUpon>CreateTransportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\EditPriceForm.resx">
       <DependentUpon>EditPriceForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -453,6 +468,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Strock_CompanyCode.resx">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\WarehouseTransportForm.resx">
+      <DependentUpon>WarehouseTransportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenerateASNTextForm_Auto.resx">
       <DependentUpon>GenerateASNTextForm_Auto.cs</DependentUpon>
