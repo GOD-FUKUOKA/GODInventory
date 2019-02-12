@@ -25,6 +25,9 @@ namespace GODInventoryWinForm.Controls
         List<v_pendingorder> shippingOrderList = null;
         public List<v_groupedorder> groupedOrderList;
 
+        string lastShipper = "";
+        string lastCounty = "";
+        string lastStore = "";
 
         public WaitToShipForm()
         {
@@ -67,18 +70,23 @@ namespace GODInventoryWinForm.Controls
                 pendingOrderList.Add(order);
             }
 
+            // 
+            lastShipper = shipper;
+            lastCounty = county;
+            lastStore = store;
 
             // 担当
-            var shippers = pendingOrderList.Select(s => new  {  FullName = s.実際配送担当 }).Distinct().ToList();
+            var shippers = pendingOrderList.Select(s =>  s.実際配送担当 ).Distinct().ToList();
             //shippers.Insert(0, new MockEntity { FullName = "すべて" });
-            this.shipperComboBox.DisplayMember = "FullName";
-            this.shipperComboBox.ValueMember = "FullName";
+            //this.shipperComboBox.DisplayMember = "FullName";
+            //this.shipperComboBox.ValueMember = "FullName";
             this.shipperComboBox.DataSource = shippers;
 
             // 第二次 調用InitializeDataSource，顯示 WaitToShipForm shipperComboBox.SelectedIndex =0 不會觸發 change 事件,
             // 所以需要每次都要初始化數據，觸發change事件。
             if (this.orderBindingList.Count > 0)
             {
+
                 if (shipperComboBox.Text != shipper)
                 {
                     // trigger change event;
@@ -333,11 +341,8 @@ namespace GODInventoryWinForm.Controls
         private void shipperComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string shipper = shipperComboBox.Text;
-            //ApplyBindSourceFilter(shipper);
-            //var orders = this.orderBindingList.Cast<v_pendingorder>().ToList();
             var orders = pendingOrderList.FindAll(o => o.実際配送担当 == shipper);
             InitializeCountyComboBox(orders);
-            //InitializeStoreComboBox(orders);
         }
 
         private void countyComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -409,13 +414,27 @@ namespace GODInventoryWinForm.Controls
 
         private void InitializeCountyComboBox(List<v_pendingorder> orders)
         {
-            var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-            counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
-            this.countyComboBox1.DisplayMember = "FullName";
-            this.countyComboBox1.ValueMember = "ShortName";
+            //var counties = orders.Select(s => new MockEntity { FullName = s.県別 }).Distinct().ToList();
+            //counties.Insert(0, new MockEntity {  FullName = "すべて" });
+            //this.countyComboBox1.DisplayMember = "FullName";
+            //this.countyComboBox1.ValueMember = "FullName";
+            //this.countyComboBox1.DataSource = counties;
+
+            var counties = orders.Select(s =>  s.県別 ).Distinct().ToList();
+            counties.Insert(0, "すべて" );
+            //this.countyComboBox1.DisplayMember = "FullName";
+            //this.countyComboBox1.ValueMember = "FullName";
             this.countyComboBox1.DataSource = counties;
 
-            this.countyComboBox1.SelectedIndex = 0;
+            Boolean exist = counties.Exists((string a) => a == lastCounty);
+            if (exist)
+            {
+                this.countyComboBox1.Text = lastCounty;
+            }
+            else {
+                this.countyComboBox1.SelectedIndex = 0;
+            
+            }
 
         }
 
@@ -429,7 +448,17 @@ namespace GODInventoryWinForm.Controls
             this.storeComboBox.DisplayMember = "FullName";
             this.storeComboBox.ValueMember = "Id";
             this.storeComboBox.DataSource = shopMockEntities;
-            this.storeComboBox.SelectedIndex = 0;
+
+
+            Boolean exist = shopMockEntities.Exists((MockEntity a) => a.FullName == lastStore);
+            if (exist)
+            {
+                this.storeComboBox.Text = lastStore;
+            }
+            else
+            {
+                this.storeComboBox.SelectedIndex = 0;
+            }
 
         }
 

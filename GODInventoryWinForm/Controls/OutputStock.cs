@@ -16,7 +16,6 @@ namespace GODInventoryWinForm.Controls
     {
         private List<t_manufacturers> manufacturerList;
 
-        //private List<MockEntity> manufacturerList;
         private BindingList<v_stockios> stockiosList;
         private List<t_genre> genreList;
         private List<t_warehouses> warehouseList;

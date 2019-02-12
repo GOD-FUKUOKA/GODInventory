@@ -72,10 +72,8 @@ namespace GODInventoryWinForm.Controls
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
                 // 県別
-                var counties = shopList.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-                counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
-                this.countyComboBox1.DisplayMember = "FullName";
-                this.countyComboBox1.ValueMember = "ShortName";
+                var counties = shopList.Select(s =>  s.県別 ).Distinct().ToList();
+                counties.Insert(0,  "すべて");
                 this.countyComboBox1.DataSource = counties;
 
                 var dateEnums = (new OrderDateEnum[] { OrderDateEnum.すべて, OrderDateEnum.出荷日, OrderDateEnum.受注日, OrderDateEnum.納品日 }).Select(o => new { FullName = o.ToString(), ShortName = o.ToString() }).ToList();
@@ -88,26 +86,26 @@ namespace GODInventoryWinForm.Controls
             // Pending = 0,	未確認  NotifyShipper = 2,	引当済   WaitToShip = 3,	転送済   PendingShipment = 5,	出荷待ち
             // ASN = 6,	送信待ち   Shipped = 7,	送信済   Received = 8,	受領済   Completed = 10,	完結  Cancelled = 14,	キャンセル   Duplicated = 22,  Locked = 33,	 Existed = 44 }	
 
-            MockEntity[] statusSet = new MockEntity[] { new MockEntity { OStatus = OrderStatus.Pending, FullName = "未確認" } ,
-                new MockEntity { OStatus = OrderStatus.NotifyShipper, FullName = "引当済" } ,
-                new MockEntity { OStatus = OrderStatus.WaitToShip, FullName = "転送済" } ,
-                new MockEntity { OStatus = OrderStatus.PendingShipment, FullName = "出荷待ち" } ,
-                new MockEntity { OStatus = OrderStatus.ASN, FullName = "送信待ち" } ,
-                new MockEntity { OStatus = OrderStatus.Shipped, FullName = "送信済" } ,
-                new MockEntity { OStatus = OrderStatus.Received, FullName = "受領済" } ,
-                new MockEntity { OStatus = OrderStatus.Completed, FullName = "完結" } ,
-                new MockEntity { OStatus = OrderStatus.Cancelled, FullName = "キャンセル" } ,
-                new MockEntity { OStatus = OrderStatus.Duplicated, FullName = "Duplicated" } ,
-                new MockEntity { OStatus = OrderStatus.Locked, FullName = "Locked" } ,
-                new MockEntity { OStatus = OrderStatus.Existed, FullName = "Existed" } ,
+            MockNamedEntity[] statusSet = new MockNamedEntity[] { new MockNamedEntity { OStatus = OrderStatus.Pending, FullName = "未確認" } ,
+                new MockNamedEntity { OStatus = OrderStatus.NotifyShipper, FullName = "引当済" } ,
+                new MockNamedEntity { OStatus = OrderStatus.WaitToShip, FullName = "転送済" } ,
+                new MockNamedEntity { OStatus = OrderStatus.PendingShipment, FullName = "出荷待ち" } ,
+                new MockNamedEntity { OStatus = OrderStatus.ASN, FullName = "送信待ち" } ,
+                new MockNamedEntity { OStatus = OrderStatus.Shipped, FullName = "送信済" } ,
+                new MockNamedEntity { OStatus = OrderStatus.Received, FullName = "受領済" } ,
+                new MockNamedEntity { OStatus = OrderStatus.Completed, FullName = "完結" } ,
+                new MockNamedEntity { OStatus = OrderStatus.Cancelled, FullName = "キャンセル" } ,
+                new MockNamedEntity { OStatus = OrderStatus.Duplicated, FullName = "Duplicated" } ,
+                new MockNamedEntity { OStatus = OrderStatus.Locked, FullName = "Locked" } ,
+                new MockNamedEntity { OStatus = OrderStatus.Existed, FullName = "Existed" } ,
               };
             this.StatusColumn1.DisplayMember = "FullName";
             this.StatusColumn1.ValueMember = "OStatus";
             this.StatusColumn1.DataSource = statusSet;
 
             //  受領	          FALSE	未        TRUE	済
-            MockEntity[] receivedSet = new MockEntity[] { new MockEntity { BStatus = true, FullName = "済" } ,
-                 new MockEntity { BStatus = false, FullName = "未" } 
+            MockNamedEntity[] receivedSet = new MockNamedEntity[] { new MockNamedEntity { BStatus = true, FullName = "済" } ,
+                 new MockNamedEntity { BStatus = false, FullName = "未" } 
               };
             this.receivedColumn.DisplayMember = "FullName";
             this.receivedColumn.ValueMember = "BStatus";
@@ -392,10 +390,8 @@ namespace GODInventoryWinForm.Controls
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
                 // 県別
-                var counties = shopList.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-                counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
-                this.countyComboBox1.DisplayMember = "FullName";
-                this.countyComboBox1.ValueMember = "ShortName";
+                var counties = shopList.Select(s => s.県別 ).Distinct().ToList();
+                counties.Insert(0,  "すべて" );
                 this.countyComboBox1.DataSource = counties;
 
                 var dateEnums = (new OrderDateEnum[] { OrderDateEnum.すべて, OrderDateEnum.出荷日, OrderDateEnum.受注日, OrderDateEnum.納品日 }).Select(o => new { FullName = o.ToString(), ShortName = o.ToString() }).ToList();

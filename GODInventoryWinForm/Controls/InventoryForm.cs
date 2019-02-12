@@ -14,7 +14,6 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class InventoryForm : Form
     {
-        //private List<MockEntity> manufacturerList;
         private List<t_warehouses> warehouseList;
         private List<t_manufacturers> manufacturerList;
 

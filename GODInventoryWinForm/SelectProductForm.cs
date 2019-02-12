@@ -60,6 +60,7 @@ namespace GODInventoryWinForm
                 {
                     var results = (from s in ctx.t_itemlist
                                    where s.ジャンル == (short)genre_id
+                                   orderby s.順番
                                    select new v_itemprice { 商品コード = s.商品コード, 規格 = s.規格, 商品名 = s.商品名, ジャンル = s.ジャンル, JANコード = s.JANコード, PT入数 = s.PT入数, 自社コード = s.自社コード }).ToList();
                     for (int i = 0; i < results.Count; i++)
                     {

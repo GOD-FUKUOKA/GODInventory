@@ -14,6 +14,7 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class OrderCostSettingForm : Form
     {
+        static string anycontry = "すべて";
         List<t_genre> genres = new List<t_genre>();
         List<t_itemlist> products = new List<t_itemlist>();
         List<t_shoplist> stores = new List<t_shoplist>();
@@ -33,16 +34,16 @@ namespace GODInventoryWinForm.Controls
                 this.genres = ctx.t_genre.ToList();
                 this.products = ctx.t_itemlist.ToList();
                 this.stores = ctx.t_shoplist.ToList();
-                var counties = this.stores.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
+                var counties = this.stores.Select(s => s.県別 ).Distinct().ToList();
 
-                counties.Insert(0, new MockEntity { ShortName = "", FullName = "すべて" });
+                counties.Insert(0, anycontry);
 
                 this.genresComboBox.ValueMember = "idジャンル";
                 this.genresComboBox.DisplayMember = "ジャンル名";
                 this.genresComboBox.DataSource = genres;
 
-                this.countyComboBox.ValueMember = "ShortName";
-                this.countyComboBox.DisplayMember = "FullName";
+                //this.countyComboBox.ValueMember = "ShortName";
+                //this.countyComboBox.DisplayMember = "FullName";
                 this.countyComboBox.DataSource = counties;
 
             }
@@ -69,7 +70,7 @@ namespace GODInventoryWinForm.Controls
             int productCode = (int)this.productsComboBox.SelectedValue;
             decimal cost = Convert.ToDecimal(this.costTextBox.Text);
             string county = Convert.ToString( this.countyComboBox.SelectedValue );
-
+            county = (county == anycontry ? String.Empty : county);
             int count = OrderHelper.ChangeOrderCost(productCode, cost, startAt, endAt, county);
 
             if (count > 0)
@@ -112,7 +113,7 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {
                 var query = ctx.t_orderdata.Where(o => (o.発注日 >= startAt) && (o.発注日 <= endAt) && (o.自社コード == productCode));
-                if (county.Length > 0)
+                if (county.Length > 0 && county != anycontry)
                 {
                     query = query.Where(o => o.県別 == county);
                 }

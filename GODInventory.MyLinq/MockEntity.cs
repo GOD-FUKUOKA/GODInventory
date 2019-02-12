@@ -50,4 +50,15 @@ namespace GODInventory.MyLinq
             return hashProductName ^ hashProductCode;
         }
     }
+
+
+    public class MockNamedEntity
+    {
+        public bool BStatus { get; set; }
+        public OrderStatus OStatus { get; set; }
+        public string FullName { get; set; }
+        public string ShortName { get; set; }
+
+    }
+
 }

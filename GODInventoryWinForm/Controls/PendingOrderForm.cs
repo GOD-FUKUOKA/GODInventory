@@ -67,16 +67,16 @@ namespace GODInventoryWinForm.Controls
 
             //mark   20181009           
             warehouseList = ctx.t_warehouses.ToList();
-            var shipperCo = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
-            //shipperCo.Insert(0, new MockEntity { ShortName = "その他", FullName = "その他" });
+            var shipperCo1 = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
+            var shipperCo2 = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
             this.ShipperColumn1.DisplayMember = "FullName";
             this.ShipperColumn1.ValueMember = "FullName";
-            this.ShipperColumn1.DataSource = shipperCo.ToList();
+            this.ShipperColumn1.DataSource = shipperCo1;
 
 
             this.shipperComboBox.DisplayMember = "FullName";
             this.shipperComboBox.ValueMember = "FullName";
-            this.shipperComboBox.DataSource = shipperCo.ToList();
+            this.shipperComboBox.DataSource = shipperCo2;
             
             //过滤条件添加任意选项
             //shipperCo.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
@@ -425,10 +425,9 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             if (pendingOrderList.Count > 0)
             {
                 // 担当
-                var shippers = pendingOrderList.Select(s => new MockEntity { FullName = s.実際配送担当 }).Distinct().ToList();
-                shippers.Insert(0, new MockEntity { FullName = "すべて" });
-                this.DanDangComboBox.DisplayMember = "FullName";
-                this.DanDangComboBox.ValueMember = "FullName";
+                var shippers = pendingOrderList.Select(s =>  s.実際配送担当 ).Distinct().ToList();
+                shippers.Insert(0,  "すべて" );
+
                 this.DanDangComboBox.DataSource = shippers;
 
                 this.DanDangComboBox.Text = shipper;
@@ -935,20 +934,17 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
         private void InitializeStockState(List<v_pendingorder> orders)
         {
             // stockState
-            var stockStates = orders.Select(s => new MockEntity { ShortName = s.在庫状態, FullName = s.在庫状態 }).Distinct().ToList();
-            stockStates.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
-            this.ZKZTcomboBox3.DisplayMember = "FullName";
-            this.ZKZTcomboBox3.ValueMember = "ShortName";
+            var stockStates = orders.Select(s => s.在庫状態).Distinct().ToList();
+            stockStates.Insert(0, "すべて" );
             this.ZKZTcomboBox3.DataSource = stockStates;
         }
 
         private void InitializeGenreComboBox(List<v_pendingorder> orders)
         {
             // GenreName
-            var GenreName = orders.Select(s => new MockEntity { ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
-            GenreName.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
-            this.genreComboBox.DisplayMember = "FullName";
-            this.genreComboBox.ValueMember = "Id";
+            var GenreName = orders.Select(s =>  s.GenreName ).Distinct().ToList();
+            GenreName.Insert(0,  "すべて" );
+
             this.genreComboBox.DataSource = GenreName;
         }
 
@@ -956,7 +952,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
         {
             // 品名漢字
             var PMHZ = orders.Select(s => new MockEntity { Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().OrderBy(s => s.Id).ToList();
-            PMHZ.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
+            PMHZ.Insert(0, new MockEntity { Id=0, ShortName = "すべて", FullName = "すべて" });
             this.productComboBox.DisplayMember = "FullName";
             this.productComboBox.ValueMember = "Id";
             this.productComboBox.DataSource = PMHZ;
@@ -964,24 +960,12 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
 
         private void InitializeCountyComboBox(List<v_pendingorder> orders)
         {
-            //mark 20181008
-            var shopIds = orders.Select(o => o.店舗コード);
-            var shops = shopList.FindAll(s => shopIds.Contains(s.店番));
-
-            var shopMockEntities = shops.Select(s => new MockEntity { Id = s.店番, ShortName = s.店名カナ, FullName = s.店名 }).ToList();
-            shopMockEntities.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
-            this.countyComboBox1.DisplayMember = "FullName";
-            this.countyComboBox1.ValueMember = "Id";
-            this.countyComboBox1.DataSource = shopMockEntities;
-            this.countyComboBox1.SelectedIndex = 0;
-
-
             // County
-            //var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-            //counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
-            //this.countyComboBox1.DisplayMember = "FullName";
-            //this.countyComboBox1.ValueMember = "ShortName";
-            //this.countyComboBox1.DataSource = counties;
+            var counties = orders.Select(s =>  s.県別 ).Distinct().ToList();
+            counties.Insert(0,  "すべて" );
+
+            this.countyComboBox1.DataSource = counties;
+
         }
 
         private void InitializeshopsComboBox(List<v_pendingorder> orders)

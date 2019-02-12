@@ -130,10 +130,8 @@ namespace GODInventoryWinForm.Controls
 
                 duplicatedOrderList = ctx.Database.SqlQuery<v_duplicatedorder>(sql).ToList();
             }
-            var shippers = duplicatedOrderList.Select(s => new MockEntity { ShortName = s.実際配送担当, FullName = s.実際配送担当 }).Distinct().ToList();
-            shippers.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
-            this.shipperComboBox.DisplayMember = "FullName";
-            this.shipperComboBox.ValueMember = "ShortName";
+            var shippers = duplicatedOrderList.Select(s =>  s.実際配送担当 ).Distinct().ToList();
+            shippers.Insert(0, "すべて" );
             this.shipperComboBox.DataSource = shippers;
 
             duplicatedOrderBindingList = new SortableBindingList<v_duplicatedorder>(duplicatedOrderList);
@@ -414,10 +412,9 @@ namespace GODInventoryWinForm.Controls
         private void InitializeCountyComboBox(List<v_duplicatedorder> orders)
         {
             // GenreName
-            var counties = orders.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
-            counties.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
-            this.countyComboBox.DisplayMember = "FullName";
-            this.countyComboBox.ValueMember = "ShortName";
+            var counties = orders.Select(s =>  s.県別 ).Distinct().ToList();
+            counties.Insert(0,  "すべて" );
+
             this.countyComboBox.DataSource = counties;
         }
 
@@ -425,7 +422,7 @@ namespace GODInventoryWinForm.Controls
         {
             // GenreName
             var GenreName = orders.Select(s => new MockEntity { Id = s.ジャンル, ShortName = s.GenreName, FullName = s.GenreName }).Distinct().ToList();
-            GenreName.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
+            GenreName.Insert(0, new MockEntity {Id=0, ShortName = "すべて", FullName = "すべて" });
             this.genreComboBox.DisplayMember = "FullName";
             this.genreComboBox.ValueMember = "Id";
             this.genreComboBox.DataSource = GenreName;
@@ -435,7 +432,7 @@ namespace GODInventoryWinForm.Controls
         {
             // 品名漢字
             var PMHZ = orders.Select(s => new MockEntity { Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().ToList();
-            PMHZ.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
+            PMHZ.Insert(0, new MockEntity { Id = 0, ShortName = "すべて", FullName = "すべて" });
             this.productComboBox.DisplayMember = "FullName";
             this.productComboBox.ValueMember = "Id";
             this.productComboBox.DataSource = PMHZ;

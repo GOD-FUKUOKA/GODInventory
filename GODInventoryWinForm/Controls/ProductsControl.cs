@@ -14,6 +14,7 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class ProductsControl : UserControl
     {
+        static string anyCountyName = "すべて";
         List<t_shoplist> stores = null;
         List<t_genre> genres = null;
         List<t_itemlist> products = null;
@@ -45,9 +46,9 @@ namespace GODInventoryWinForm.Controls
             this.genresComboBox.DisplayMember = "FullName";
             this.genresComboBox.DataSource = genreList;
             //
-            var counties = this.stores.Select(s => new MockEntity { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
+            var counties = this.stores.Select(s => new { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
 
-            counties.Insert(0, new MockEntity { ShortName = "", FullName = "すべて" });
+            counties.Insert(0, new { ShortName = "", FullName = "すべて" });
 
             this.countyComboBox.ValueMember = "ShortName";
             this.countyComboBox.DisplayMember = "FullName";
