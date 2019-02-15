@@ -212,6 +212,30 @@
     <Compile Include="Controls\WarehouseTransportForm.Designer.cs">
       <DependentUpon>WarehouseTransportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Create_Transports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Create_Transports.Designer.cs">
+      <DependentUpon>Create_Transports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Create_Warehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Create_Warehouse.Designer.cs">
+      <DependentUpon>Create_Warehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Edit_Warehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Edit_Warehouse.Designer.cs">
+      <DependentUpon>Edit_Warehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Edit__Transports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Edit__Transports.Designer.cs">
+      <DependentUpon>Edit__Transports.cs</DependentUpon>
+    </Compile>
     <Compile Include="GenerateASNTextForm_Auto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -462,6 +486,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\WarehouseTransportForm.resx">
       <DependentUpon>WarehouseTransportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Create_Transports.resx">
+      <DependentUpon>Create_Transports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Create_Warehouse.resx">
+      <DependentUpon>Create_Warehouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Edit_Warehouse.resx">
+      <DependentUpon>Edit_Warehouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Edit__Transports.resx">
+      <DependentUpon>Edit__Transports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenerateASNTextForm_Auto.resx">
       <DependentUpon>GenerateASNTextForm_Auto.cs</DependentUpon>

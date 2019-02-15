@@ -13,6 +13,5 @@ namespace GODInventory.MyLinq
         public int id { get; set; }
         public string shortname { get; set; }
         public string fullname { get; set; }
-
     }
 }
