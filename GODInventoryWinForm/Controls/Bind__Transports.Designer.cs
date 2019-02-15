@@ -1,6 +1,6 @@
 ﻿namespace GODInventoryWinForm
 {
-    partial class Edit_Warehouse
+    partial class Bind__Transports
     {
         /// <summary>
         /// Required designer variable.
@@ -36,35 +36,41 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.tidComboBox3 = new System.Windows.Forms.ComboBox();
+            this.widextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // fullNameTextBox12
             // 
-            this.fullNameTextBox12.Location = new System.Drawing.Point(87, 20);
+            this.fullNameTextBox12.Location = new System.Drawing.Point(91, 62);
             this.fullNameTextBox12.Name = "fullNameTextBox12";
-            this.fullNameTextBox12.Size = new System.Drawing.Size(222, 21);
+            this.fullNameTextBox12.Size = new System.Drawing.Size(190, 21);
             this.fullNameTextBox12.TabIndex = 16;
+            this.fullNameTextBox12.TextChanged += new System.EventHandler(this.fullNameTextBox12_TextChanged);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(28, 24);
+            this.label13.Location = new System.Drawing.Point(28, 66);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(53, 12);
             this.label13.TabIndex = 17;
-            this.label13.Text = "仓库名称";
+            this.label13.Text = "运输公司";
             // 
             // shortNameTextBox12
             // 
-            this.shortNameTextBox12.Location = new System.Drawing.Point(87, 61);
+            this.shortNameTextBox12.Location = new System.Drawing.Point(91, 103);
             this.shortNameTextBox12.Name = "shortNameTextBox12";
-            this.shortNameTextBox12.Size = new System.Drawing.Size(222, 21);
+            this.shortNameTextBox12.Size = new System.Drawing.Size(190, 21);
             this.shortNameTextBox12.TabIndex = 18;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 65);
+            this.label1.Location = new System.Drawing.Point(28, 107);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 19;
@@ -86,7 +92,7 @@
             // 
             this.cancelFormButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelFormButton.Location = new System.Drawing.Point(203, 145);
+            this.cancelFormButton.Location = new System.Drawing.Point(377, 145);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(106, 32);
             this.cancelFormButton.TabIndex = 21;
@@ -98,11 +104,48 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
-            // Edit_Warehouse
+            // tidComboBox3
+            // 
+            this.tidComboBox3.FormattingEnabled = true;
+            this.tidComboBox3.Items.AddRange(new object[] {
+            "丸健",
+            "MKL",
+            "マツモト産業"});
+            this.tidComboBox3.Location = new System.Drawing.Point(295, 63);
+            this.tidComboBox3.Name = "tidComboBox3";
+            this.tidComboBox3.Size = new System.Drawing.Size(190, 20);
+            this.tidComboBox3.TabIndex = 10000025;
+            this.tidComboBox3.SelectedIndexChanged += new System.EventHandler(this.tidComboBox3_SelectedIndexChanged);
+            // 
+            // widextBox
+            // 
+            this.widextBox.Location = new System.Drawing.Point(91, 12);
+            this.widextBox.Name = "widextBox";
+            this.widextBox.ReadOnly = true;
+            this.widextBox.Size = new System.Drawing.Size(190, 21);
+            this.widextBox.TabIndex = 10000027;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(52, 15);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 10000026;
+            this.label4.Text = "仓库";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // Edit__Transports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 205);
+            this.ClientSize = new System.Drawing.Size(539, 205);
+            this.Controls.Add(this.widextBox);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.tidComboBox3);
             this.Controls.Add(this.submitFormButton);
             this.Controls.Add(this.cancelFormButton);
             this.Controls.Add(this.shortNameTextBox12);
@@ -110,9 +153,10 @@
             this.Controls.Add(this.fullNameTextBox12);
             this.Controls.Add(this.label13);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Edit_Warehouse";
+            this.Name = "Edit__Transports";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edit_Warehouse";
+            this.Text = "Edit__Transports";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -127,5 +171,9 @@
         private System.Windows.Forms.Button submitFormButton;
         private System.Windows.Forms.Button cancelFormButton;
         private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private System.Windows.Forms.ComboBox tidComboBox3;
+        private System.Windows.Forms.TextBox widextBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

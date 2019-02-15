@@ -94,6 +94,7 @@ namespace GODInventoryWinForm.Controls
             {
                 var form = new Edit__Transports();
                 form.tid = tlist.id;
+                form.wid = wid;
                 form.InitializeOrder();
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -234,7 +235,6 @@ namespace GODInventoryWinForm.Controls
         {
             var form = new Create_Transports();
             form.wid = wid;
-
             if (form.ShowDialog() == DialogResult.OK)
             {
                 int tid = form.tid;
@@ -250,8 +250,6 @@ namespace GODInventoryWinForm.Controls
                     ctx.SaveChanges();
 
                 }
-
-
                 //this.entityDataSource1.Refresh();
 
             }
@@ -347,6 +345,34 @@ namespace GODInventoryWinForm.Controls
                 InitializeDataSource();
 
             }
+        }
+
+        private void bteditwh_Click(object sender, EventArgs e)
+        {
+
+            var form = new Edit_Warehouse();
+            form.wid = wid;
+            form.InitializeOrder();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                InitializeDataSource();
+            }
+        }
+
+        private void btloadTransport_Click(object sender, EventArgs e)
+        {
+
+            var form = new Bind__Transports();
+          
+            form.wid = wid;
+            form.InitializeOrder();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                InitializeDataSource();
+
+            }
+
+
         }
     }
 }

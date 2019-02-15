@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace GODInventoryWinForm
 {
-    public partial class Edit__Transports : Form
+    public partial class Bind__Transports : Form
     {
         public int tid;
         public t_transports transports { get; set; }
         public int wid;
         public t_warehouses warehouses { get; set; }
         private List<t_transports> transportList;
-        public Edit__Transports()
+        public Bind__Transports()
         {
             InitializeComponent();
         }
@@ -30,31 +30,25 @@ namespace GODInventoryWinForm
 
             transportList = ctx.t_transports.ToList();
 
+            if (warehouses != null)
+                this.widextBox.Text = warehouses.FullName;
 
             this.tidComboBox3.DisplayMember = "fullname";
             this.tidComboBox3.ValueMember = "Id";
             this.tidComboBox3.DataSource = transportList;
 
-
-            transports = ctx.t_transports.Find(tid);
-            warehouses = ctx.t_warehouses.Find(wid);
-            if (transports != null)
-            {
-                this.fullNameTextBox12.Text = transports.fullname;
-                this.shortNameTextBox12.Text = transports.shortname;
-
-            }
-            if (warehouses != null)
-                this.widextBox.Text = warehouses.FullName;
-
         }
         private void submitFormButton_Click(object sender, EventArgs e)
         {
+            var ctx = entityDataSource1.DbContext as GODDbContext;
 
-            transports.fullname = this.fullNameTextBox12.Text.Trim();
-            transports.shortname = this.shortNameTextBox12.Text.Trim();
- 
-            this.entityDataSource1.SaveChanges();
+
+            t_warehouses_transports item = new t_warehouses_transports();
+            item.wid = wid;
+            item.tid = tid;
+
+            ctx.t_warehouses_transports.Add(item);
+            ctx.SaveChanges();
 
             this.Close();
 
@@ -80,24 +74,24 @@ namespace GODInventoryWinForm
         {
             if (fullNameTextBox12.Text.Trim().Length > 0)
             {
-             //   int storeId = Convert.ToInt32(fullNameTextBox12.Text);
-             int   storeId = 0;
-             if (fullNameTextBox12.Text.Length > 0)
+                //   int storeId = Convert.ToInt32(fullNameTextBox12.Text);
+                int storeId = 0;
+                if (fullNameTextBox12.Text.Length > 0)
                 {
                     var shops = this.transportList.Where(s => s.fullname == fullNameTextBox12.Text).ToList();
                     if (shops.Count > 0)
                     {
                         var store = shops.First();
 
-                        this.tidComboBox3.Text = store.fullname;
+                        this.tidComboBox3.SelectedValue = store.id;
                         this.shortNameTextBox12.Text = store.shortname;
+                        tid = store.id;
 
-                        errorProvider1.SetError(fullNameTextBox12, "已存在");
+                        errorProvider1.SetError(tidComboBox3, String.Empty);
                     }
                     else
                     {
-                        errorProvider1.SetError(fullNameTextBox12, String.Empty);
-                        //errorProvider1.SetError(tidComboBox3, String.Format("仓库されていません", storeId));
+                        errorProvider1.SetError(tidComboBox3, String.Format("仓库されていません", storeId));
                     }
 
                 }

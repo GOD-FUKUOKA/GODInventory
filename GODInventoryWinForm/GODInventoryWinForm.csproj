@@ -236,6 +236,12 @@
     <Compile Include="Controls\Edit__Transports.Designer.cs">
       <DependentUpon>Edit__Transports.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Bind__Transports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Bind__Transports.Designer.cs">
+      <DependentUpon>Bind__Transports.cs</DependentUpon>
+    </Compile>
     <Compile Include="GenerateASNTextForm_Auto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -498,6 +504,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Edit__Transports.resx">
       <DependentUpon>Edit__Transports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Bind__Transports.resx">
+      <DependentUpon>Bind__Transports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenerateASNTextForm_Auto.resx">
       <DependentUpon>GenerateASNTextForm_Auto.cs</DependentUpon>

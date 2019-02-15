@@ -42,9 +42,10 @@
             this.addtsButton = new System.Windows.Forms.Button();
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btAddWarehouse = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.bteditwh = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btloadTransport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -173,16 +174,16 @@
             this.btAddWarehouse.UseVisualStyleBackColor = true;
             this.btAddWarehouse.Click += new System.EventHandler(this.btAddWarehouse_Click);
             // 
-            // button3
+            // bteditwh
             // 
-            this.button3.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(105, 435);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(54, 22);
-            this.button3.TabIndex = 66;
-            this.button3.Text = "编辑";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button1_Click);
+            this.bteditwh.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bteditwh.Location = new System.Drawing.Point(105, 435);
+            this.bteditwh.Name = "bteditwh";
+            this.bteditwh.Size = new System.Drawing.Size(54, 22);
+            this.bteditwh.TabIndex = 66;
+            this.bteditwh.Text = "编辑";
+            this.bteditwh.UseVisualStyleBackColor = true;
+            this.bteditwh.Click += new System.EventHandler(this.bteditwh_Click);
             // 
             // label2
             // 
@@ -209,14 +210,27 @@
             this.listBox1.TabIndex = 68;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
+            // btloadTransport
+            // 
+            this.btloadTransport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btloadTransport.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btloadTransport.Location = new System.Drawing.Point(640, 435);
+            this.btloadTransport.Name = "btloadTransport";
+            this.btloadTransport.Size = new System.Drawing.Size(102, 22);
+            this.btloadTransport.TabIndex = 71;
+            this.btloadTransport.Text = "绑定运输公司";
+            this.btloadTransport.UseVisualStyleBackColor = true;
+            this.btloadTransport.Click += new System.EventHandler(this.btloadTransport_Click);
+            // 
             // WarehouseTransportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(870, 489);
+            this.Controls.Add(this.btloadTransport);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.bteditwh);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btAddWarehouse);
             this.Controls.Add(this.addtsButton);
@@ -244,7 +258,7 @@
         private System.Windows.Forms.ToolStripMenuItem productToolStripMenuItem;
         private System.Windows.Forms.Button addtsButton;
         private System.Windows.Forms.ErrorProvider errorProvider2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button bteditwh;
         private System.Windows.Forms.Button btAddWarehouse;
         private System.Windows.Forms.DataGridViewTextBoxColumn indexColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ShipperName;
@@ -252,5 +266,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn deleteButtonColumn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button btloadTransport;
     }
 }
