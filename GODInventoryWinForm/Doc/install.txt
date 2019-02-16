@@ -189,16 +189,17 @@ update  t_orderdata set 社内伝番処理=1 where `ジャンル`=1003 and `id�
 ==============================================
 创建物流公司表  t_transports
 CREATE TABLE `god_om2`.`t_transports` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `shortname` VARCHAR(45) NULL,
   `fullname` VARCHAR(255) NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 
 
 创建仓库和物流功能对应表 t_warehouse_transports
 CREATE TABLE `god_om2`.`t_warehouses_transports` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `wid` INT NOT NULL DEFAULT 0,
   `tid` INT NOT NULL DEFAULT 0,
   `position` INT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;
