@@ -48,8 +48,8 @@
             this.btloadTransport = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.btaddtransportitem = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.btremovetransportItem = new System.Windows.Forms.Button();
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -77,9 +77,9 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("MS PGothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -99,9 +99,11 @@
             this.dataGridView1.Location = new System.Drawing.Point(281, 17);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(324, 412);
             this.dataGridView1.TabIndex = 56;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
@@ -152,7 +154,6 @@
             // addtsButton
             // 
             this.addtsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addtsButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.addtsButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.addtsButton.Location = new System.Drawing.Point(808, 435);
             this.addtsButton.Name = "addtsButton";
@@ -168,7 +169,6 @@
             // 
             // btAddWarehouse
             // 
-            this.btAddWarehouse.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btAddWarehouse.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btAddWarehouse.Location = new System.Drawing.Point(165, 435);
             this.btAddWarehouse.Name = "btAddWarehouse";
@@ -228,6 +228,7 @@
             // 
             // listBox2
             // 
+            this.listBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 12;
             this.listBox2.Items.AddRange(new object[] {
@@ -238,9 +239,11 @@
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(165, 412);
             this.listBox2.TabIndex = 72;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // btaddtransportitem
             // 
+            this.btaddtransportitem.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btaddtransportitem.Location = new System.Drawing.Point(622, 183);
             this.btaddtransportitem.Name = "btaddtransportitem";
             this.btaddtransportitem.Size = new System.Drawing.Size(51, 23);
@@ -249,17 +252,9 @@
             this.btaddtransportitem.UseVisualStyleBackColor = true;
             this.btaddtransportitem.Click += new System.EventHandler(this.btaddtransportitem_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(314, 435);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(191, 12);
-            this.label1.TabIndex = 74;
-            this.label1.Text = "考虑使用listbox代替datagridview";
-            // 
             // btremovetransportItem
             // 
+            this.btremovetransportItem.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btremovetransportItem.Location = new System.Drawing.Point(622, 222);
             this.btremovetransportItem.Name = "btremovetransportItem";
             this.btremovetransportItem.Size = new System.Drawing.Size(51, 23);
@@ -268,13 +263,16 @@
             this.btremovetransportItem.UseVisualStyleBackColor = true;
             this.btremovetransportItem.Click += new System.EventHandler(this.btremovetransportItem_Click);
             // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
             // WarehouseTransportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(870, 489);
             this.Controls.Add(this.btremovetransportItem);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btaddtransportitem);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.btloadTransport);
@@ -319,7 +317,7 @@
         private System.Windows.Forms.Button btloadTransport;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button btaddtransportitem;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btremovetransportItem;
+        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
     }
 }

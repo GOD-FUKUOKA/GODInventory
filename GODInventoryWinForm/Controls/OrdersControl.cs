@@ -152,7 +152,7 @@ namespace GODInventoryWinForm.Controls
             {
                 CreateTransportForm = new WarehouseTransportForm();
             }
-            AdjustSubformSize(CreateTransportForm);
+          //  AdjustSubformSize(CreateTransportForm);
             // 显示之前重新加载数据，订单数据可能已更新。
             CreateTransportForm.InitializeDataSource();
             CreateTransportForm.ShowDialog();

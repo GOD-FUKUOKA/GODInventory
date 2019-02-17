@@ -19,10 +19,12 @@ namespace GODInventoryWinForm.Controls
         private List<t_warehouses_transports> warehouses_transportsList;
         List<t_transports> FindtransportList;
         private int wid;
+        private int tid;
         //private List<v_transport> V_transportList;
         private BindingList<v_transport> V_transportList;
         private Hashtable datagridChanges = null;
-
+        int RowRemark = 0;
+        int cloumn = 0;
         public WarehouseTransportForm()
         {
             InitializeComponent();
@@ -58,6 +60,11 @@ namespace GODInventoryWinForm.Controls
             this.listBox1.DisplayMember = "FullName";
             this.listBox1.ValueMember = "Id";
             this.listBox1.DataSource = warehouseList;
+
+
+            this.listBox2.DisplayMember = "fullname";
+            this.listBox2.ValueMember = "id";
+            this.listBox2.DataSource = transportList;
 
 
 
@@ -230,6 +237,11 @@ namespace GODInventoryWinForm.Controls
 
             return ((this.listBox1.SelectedIndex >= 0) ? (int)this.listBox1.SelectedValue : 0);
         }
+        private int transportslistBox()
+        {
+
+            return ((this.listBox2.SelectedIndex >= 0) ? (int)this.listBox2.SelectedValue : 0);
+        }
 
         private void addtsButton_Click(object sender, EventArgs e)
         {
@@ -345,6 +357,9 @@ namespace GODInventoryWinForm.Controls
                 InitializeDataSource();
 
             }
+
+        
+
         }
 
         private void bteditwh_Click(object sender, EventArgs e)
@@ -363,7 +378,7 @@ namespace GODInventoryWinForm.Controls
         {
 
             var form = new Bind__Transports();
-          
+
             form.wid = wid;
             form.InitializeOrder();
             if (form.ShowDialog() == DialogResult.OK)
@@ -378,12 +393,65 @@ namespace GODInventoryWinForm.Controls
         private void btaddtransportitem_Click(object sender, EventArgs e)
         {
 
+            List<t_warehouses_transports> mlist = warehouses_transportsList.FindAll(o => o.wid != null && o.wid == Convert.ToInt32(wid) && o.tid == Convert.ToInt32(tid)).ToList();
+            if (mlist.Count>0)
+            {
 
+                return;
+
+            }
+            else
+            {
+
+                var ctx = entityDataSource1.DbContext as GODDbContext;
+                t_warehouses_transports item = new t_warehouses_transports();
+                item.wid = wid;
+                item.tid = tid;
+                ctx.t_warehouses_transports.Add(item);
+                ctx.SaveChanges();
+                this.Close();
+
+                InitializeDataSource();
+            }
         }
 
         private void btremovetransportItem_Click(object sender, EventArgs e)
         {
+            var oids = GetOrderIdsBySelectedGridCell();
+            using (var ctx = new GODDbContext())
+            {
+                t_transports tlist = transportList.Find(o => o.fullname != null && o.fullname == oids[0]);
+                if (tlist != null && tlist.id != null)
+                {
+                    t_warehouses_transports widlist = warehouses_transportsList.Find(o => o.wid != null && o.wid == Convert.ToInt32(wid) && o.tid == tlist.id);
 
+                    var del = (from s in ctx.t_warehouses_transports
+                               where s.wid == wid && s.tid == widlist.tid
+                               select s).ToList();
+                    ctx.t_warehouses_transports.RemoveRange(del);
+                    ctx.SaveChanges();
+
+                }
+                InitializeDataSource();
+            }
+
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listBox2.SelectedItems.Count > 0)
+            {
+                //获取选中的值
+                string selecttx = listBox2.Text.ToString();
+                tid = transportslistBox();
+            }
+
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            RowRemark = e.RowIndex;
+            cloumn = e.ColumnIndex;
         }
     }
 }
