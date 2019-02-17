@@ -203,3 +203,6 @@ CREATE TABLE `god_om2`.`t_warehouses_transports` (
   `tid` INT NOT NULL DEFAULT 0,
   `position` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+  ALTER TABLE `god_om2`.`t_orderdata` 
+ADD COLUMN `warehouseName` VARCHAR(45) NOT NULL DEFAULT '' AFTER `reportState`;
