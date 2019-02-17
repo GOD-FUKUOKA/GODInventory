@@ -374,5 +374,15 @@ namespace GODInventoryWinForm.Controls
 
 
         }
+
+        private void btaddtransportitem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btremovetransportItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

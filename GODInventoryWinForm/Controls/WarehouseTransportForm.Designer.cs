@@ -47,8 +47,9 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.btloadTransport = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btaddtransportitem = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btremovetransportItem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -95,7 +96,7 @@
             this.deleteButtonColumn});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(271, 17);
+            this.dataGridView1.Location = new System.Drawing.Point(281, 17);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(324, 412);
@@ -238,14 +239,15 @@
             this.listBox2.Size = new System.Drawing.Size(165, 412);
             this.listBox2.TabIndex = 72;
             // 
-            // button2
+            // btaddtransportitem
             // 
-            this.button2.Location = new System.Drawing.Point(640, 183);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(51, 23);
-            this.button2.TabIndex = 73;
-            this.button2.Text = "<--";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btaddtransportitem.Location = new System.Drawing.Point(622, 183);
+            this.btaddtransportitem.Name = "btaddtransportitem";
+            this.btaddtransportitem.Size = new System.Drawing.Size(51, 23);
+            this.btaddtransportitem.TabIndex = 73;
+            this.btaddtransportitem.Text = "<--";
+            this.btaddtransportitem.UseVisualStyleBackColor = true;
+            this.btaddtransportitem.Click += new System.EventHandler(this.btaddtransportitem_Click);
             // 
             // label1
             // 
@@ -256,13 +258,24 @@
             this.label1.TabIndex = 74;
             this.label1.Text = "考虑使用listbox代替datagridview";
             // 
+            // btremovetransportItem
+            // 
+            this.btremovetransportItem.Location = new System.Drawing.Point(622, 222);
+            this.btremovetransportItem.Name = "btremovetransportItem";
+            this.btremovetransportItem.Size = new System.Drawing.Size(51, 23);
+            this.btremovetransportItem.TabIndex = 75;
+            this.btremovetransportItem.Text = "-->";
+            this.btremovetransportItem.UseVisualStyleBackColor = true;
+            this.btremovetransportItem.Click += new System.EventHandler(this.btremovetransportItem_Click);
+            // 
             // WarehouseTransportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(870, 489);
+            this.Controls.Add(this.btremovetransportItem);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btaddtransportitem);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.btloadTransport);
             this.Controls.Add(this.label2);
@@ -305,7 +318,8 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button btloadTransport;
         private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btaddtransportitem;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btremovetransportItem;
     }
 }
