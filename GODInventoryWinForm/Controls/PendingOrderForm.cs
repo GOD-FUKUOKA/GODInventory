@@ -866,6 +866,11 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             var orders = GetOrdersByShipper(shipper);
 
             InitializeStockState(orders);
+
+            //运输公司
+
+
+
         }
 
         //在库状态

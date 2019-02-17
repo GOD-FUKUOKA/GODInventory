@@ -65,6 +65,7 @@
             this.ProductKanjiSpecificationColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品口数Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.実際出荷数量Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.重量Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.訂正理由区分Column = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.ShipperColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,14 +86,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.shipperComboBox = new System.Windows.Forms.ComboBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.notifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource2 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -108,8 +101,16 @@
             this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注形態 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-
-            this.重量Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.notifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource2 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.transportcomboBox1 = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -144,6 +145,8 @@
             // 
             // ordersTabPage
             // 
+            this.ordersTabPage.Controls.Add(this.transportcomboBox1);
+            this.ordersTabPage.Controls.Add(this.label7);
             this.ordersTabPage.Controls.Add(this.storeComboBox);
             this.ordersTabPage.Controls.Add(this.label6);
             this.ordersTabPage.Controls.Add(this.countyComboBox1);
@@ -253,7 +256,7 @@
             // ClearSelect
             // 
             this.ClearSelect.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ClearSelect.Location = new System.Drawing.Point(588, 11);
+            this.ClearSelect.Location = new System.Drawing.Point(792, 11);
             this.ClearSelect.Name = "ClearSelect";
             this.ClearSelect.Size = new System.Drawing.Size(100, 48);
             this.ClearSelect.TabIndex = 5;
@@ -448,7 +451,16 @@
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.Layout += new System.Windows.Forms.LayoutEventHandler(this.dataGridView1_Layout);
-
+            // 
+            // OrderReceivedAtColumn1
+            // 
+            this.OrderReceivedAtColumn1.DataPropertyName = "受注日";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.OrderReceivedAtColumn1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.OrderReceivedAtColumn1.HeaderText = "受注日";
+            this.OrderReceivedAtColumn1.Name = "OrderReceivedAtColumn1";
+            this.OrderReceivedAtColumn1.ReadOnly = true;
+            this.OrderReceivedAtColumn1.Width = 90;
             // 
             // StoreCodeColumn1
             // 
@@ -519,6 +531,12 @@
             this.実際出荷数量Column.Name = "実際出荷数量Column";
             this.実際出荷数量Column.Width = 80;
             // 
+            // 重量Column
+            // 
+            this.重量Column.DataPropertyName = "重量";
+            this.重量Column.HeaderText = "重量";
+            this.重量Column.Name = "重量Column";
+            // 
             // 訂正理由区分Column
             // 
             this.訂正理由区分Column.DataPropertyName = "訂正理由区分";
@@ -531,6 +549,13 @@
             // 
             // ShipperColumn1
             // 
+            this.ShipperColumn1.DataPropertyName = "実際配送担当";
+            this.ShipperColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ShipperColumn1.HeaderText = "担当";
+            this.ShipperColumn1.Name = "ShipperColumn1";
+            this.ShipperColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ShipperColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ShipperColumn1.Width = 90;
             // 
             // Column2
             // 
@@ -716,105 +741,7 @@
             this.dataGridView3.Size = new System.Drawing.Size(1217, 440);
             this.dataGridView3.TabIndex = 16;
             // 
-            // contextMenuStrip3
-            // 
-            this.contextMenuStrip3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.notifyToolStripMenuItem,
-            this.toolStripMenuItem2});
-            this.contextMenuStrip3.Name = "contextMenuStrip1";
-            this.contextMenuStrip3.Size = new System.Drawing.Size(161, 48);
-            // 
-            // notifyToolStripMenuItem
-            // 
-            this.notifyToolStripMenuItem.Name = "notifyToolStripMenuItem";
-            this.notifyToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.notifyToolStripMenuItem.Text = "転送処理";
-            this.notifyToolStripMenuItem.Click += new System.EventHandler(this.notifyToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(160, 22);
-            this.toolStripMenuItem2.Text = "前の画面へ戻す";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
-            // bindingSource2
-            // 
-            this.bindingSource2.DataSource = this.entityDataSource2;
-            this.bindingSource2.Position = 0;
-            // 
-            // entityDataSource2
-            // 
-            this.entityDataSource2.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // OrderReceivedAtColumn1
-            // 
-            this.OrderReceivedAtColumn1.DataPropertyName = "受注日";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.OrderReceivedAtColumn1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.OrderReceivedAtColumn1.HeaderText = "受注日";
-            this.OrderReceivedAtColumn1.Name = "OrderReceivedAtColumn1";
-            this.OrderReceivedAtColumn1.ReadOnly = true;
-            this.OrderReceivedAtColumn1.Width = 90;
-            // 
-            // StoreCodeColumn1
-            // 
-            this.StoreCodeColumn1.DataPropertyName = "店舗コード";
-            this.StoreCodeColumn1.HeaderText = "店番";
-            this.StoreCodeColumn1.Name = "StoreCodeColumn1";
-            this.StoreCodeColumn1.ReadOnly = true;
-            this.StoreCodeColumn1.Width = 60;
-            // 
-            // StoreNameColumn1
-            // 
-            this.StoreNameColumn1.DataPropertyName = "店舗名漢字";
-            this.StoreNameColumn1.HeaderText = "店名";
-            this.StoreNameColumn1.Name = "StoreNameColumn1";
-            this.StoreNameColumn1.ReadOnly = true;
-            this.StoreNameColumn1.Width = 120;
-            // 
-            // 場所
-            // 
-            this.場所.DataPropertyName = "納品場所名漢字";
-            this.場所.HeaderText = "場所";
-            this.場所.Name = "場所";
-            this.場所.ReadOnly = true;
-            // 
-            // InvoiceNOColumn1
-            // 
-            this.InvoiceNOColumn1.DataPropertyName = "伝票番号";
-            this.InvoiceNOColumn1.HeaderText = "伝票番号";
-            this.InvoiceNOColumn1.Name = "InvoiceNOColumn1";
-            this.InvoiceNOColumn1.ReadOnly = true;
-            this.InvoiceNOColumn1.Width = 80;
-            // 
-            // ジャンルColumn
-            // 
-            this.ジャンルColumn.DataPropertyName = "GenreName";
-            this.ジャンルColumn.HeaderText = "ジャンル";
-            this.ジャンルColumn.Name = "ジャンルColumn";
-            this.ジャンルColumn.ReadOnly = true;
-            this.ジャンルColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // ProductKanjiNameColumn1
-            // 
-            this.ProductKanjiNameColumn1.DataPropertyName = "品名漢字";
-            this.ProductKanjiNameColumn1.HeaderText = "品名漢字";
-            this.ProductKanjiNameColumn1.Name = "ProductKanjiNameColumn1";
-            this.ProductKanjiNameColumn1.ReadOnly = true;
-            this.ProductKanjiNameColumn1.Width = 200;
-            // 
-            // ProductKanjiSpecificationColumn1
+            // dataGridViewTextBoxColumn20
             // 
             this.dataGridViewTextBoxColumn20.DataPropertyName = "受注日";
             this.dataGridViewTextBoxColumn20.HeaderText = "受注日";
@@ -835,13 +762,7 @@
             this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
             this.dataGridViewTextBoxColumn21.ReadOnly = true;
             // 
-            // 重量Column
-            // 
-            this.重量Column.DataPropertyName = "重量";
-            this.重量Column.HeaderText = "重量";
-            this.重量Column.Name = "重量Column";
-            // 
-            // 訂正理由区分Column
+            // dataGridViewTextBoxColumn23
             // 
             this.dataGridViewTextBoxColumn23.DataPropertyName = "伝票番号";
             this.dataGridViewTextBoxColumn23.HeaderText = "伝票番号";
@@ -854,13 +775,6 @@
             this.dataGridViewTextBoxColumn27.HeaderText = "ジャンル";
             this.dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
             this.dataGridViewTextBoxColumn27.ReadOnly = true;
-            this.ShipperColumn1.DataPropertyName = "実際配送担当";
-            this.ShipperColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ShipperColumn1.HeaderText = "担当";
-            this.ShipperColumn1.Name = "ShipperColumn1";
-            this.ShipperColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ShipperColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ShipperColumn1.Width = 90;
             // 
             // dataGridViewTextBoxColumn28
             // 
@@ -933,6 +847,73 @@
             this.dataGridViewTextBoxColumn36.HeaderText = "備考";
             this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
             this.dataGridViewTextBoxColumn36.ReadOnly = true;
+            // 
+            // contextMenuStrip3
+            // 
+            this.contextMenuStrip3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.notifyToolStripMenuItem,
+            this.toolStripMenuItem2});
+            this.contextMenuStrip3.Name = "contextMenuStrip1";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(161, 48);
+            // 
+            // notifyToolStripMenuItem
+            // 
+            this.notifyToolStripMenuItem.Name = "notifyToolStripMenuItem";
+            this.notifyToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.notifyToolStripMenuItem.Text = "転送処理";
+            this.notifyToolStripMenuItem.Click += new System.EventHandler(this.notifyToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(160, 22);
+            this.toolStripMenuItem2.Text = "前の画面へ戻す";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // bindingSource2
+            // 
+            this.bindingSource2.DataSource = this.entityDataSource2;
+            this.bindingSource2.Position = 0;
+            // 
+            // entityDataSource2
+            // 
+            this.entityDataSource2.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
+            // transportcomboBox1
+            // 
+            this.transportcomboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.transportcomboBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.transportcomboBox1.FormattingEnabled = true;
+            this.transportcomboBox1.Items.AddRange(new object[] {
+            "すべて",
+            "あり",
+            "一部不足",
+            "なし"});
+            this.transportcomboBox1.Location = new System.Drawing.Point(647, 11);
+            this.transportcomboBox1.Name = "transportcomboBox1";
+            this.transportcomboBox1.Size = new System.Drawing.Size(120, 22);
+            this.transportcomboBox1.TabIndex = 91;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.Location = new System.Drawing.Point(579, 15);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(63, 14);
+            this.label7.TabIndex = 92;
+            this.label7.Tag = "";
+            this.label7.Text = "运输公司";
             // 
             // PendingOrderForm
             // 
@@ -1041,5 +1022,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注形態;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
+        private System.Windows.Forms.ComboBox transportcomboBox1;
+        private System.Windows.Forms.Label label7;
     }
 }
