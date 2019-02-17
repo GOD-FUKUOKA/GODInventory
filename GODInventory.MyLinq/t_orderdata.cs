@@ -309,6 +309,9 @@ namespace GODInventory.MyLinq
 
         public int reportState { get; set; }
 
+        [StringLength(45)]
+        public string warehouseName { get; set; }
+
         public t_orderdata()
         {
             this.キャンセル = "no";
