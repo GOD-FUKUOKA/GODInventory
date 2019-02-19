@@ -35,9 +35,17 @@ namespace GODInventoryWinForm.Controls
         private List<v_pendingorder> shipperOrderList;
         private List<t_shoplist> shopList;
         private SortableBindingList<v_pendingorder> sortablePendingOrderList3;
-
+        private List<t_transports> transportList;
         //mark 20181008
         private List<t_warehouses> warehouseList;
+        private List<t_warehouses_transports> warehouses_transportsList;
+        List<t_transports> FindtransportList;
+        private BindingList<v_transport> V_transportList;
+
+        DataGridView clickdav;
+
+
+
         public PendingOrderForm()
         {
             InitializeComponent();
@@ -50,6 +58,11 @@ namespace GODInventoryWinForm.Controls
             var ctx = entityDataSource1.DbContext as GODDbContext;
             this.stockstates = ctx.t_stockstate.Select(s => s).ToList();
             this.productList = ctx.t_itemlist.Select(s => s).ToList();
+            transportList = ctx.t_transports.ToList();
+            warehouses_transportsList = ctx.t_warehouses_transports.ToList();
+
+
+
             //shipperList = (from s in ctx.t_shoplist
             //         group s by s.配送担当 into g
             //               select new v_shipper { ShortName = g.Key }).ToList();
@@ -77,7 +90,7 @@ namespace GODInventoryWinForm.Controls
             this.shipperComboBox.DisplayMember = "FullName";
             this.shipperComboBox.ValueMember = "FullName";
             this.shipperComboBox.DataSource = shipperCo2;
-            
+
             //过滤条件添加任意选项
             //shipperCo.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
             //this.DanDangComboBox.DisplayMember = "FullName";
@@ -89,6 +102,19 @@ namespace GODInventoryWinForm.Controls
             //this.ShipperColumn1.DisplayMember = "FullName";
             //this.ShipperColumn1.ValueMember = "ShortName";
             //this.ShipperColumn1.DataSource = shippers;
+
+            //仓库
+            var shippers = warehouseList.Select(s => new MockEntity { ShortName = s.ShortName, FullName = s.ShipperName }).Distinct().ToList();
+            this.warehouseName.DisplayMember = "FullName";
+            this.warehouseName.ValueMember = "ShortName";
+            this.warehouseName.DataSource = shippers;
+
+            this.warehouseNameColumn1.DisplayMember = "FullName";
+            this.warehouseNameColumn1.ValueMember = "ShortName";
+            this.warehouseNameColumn1.DataSource = shippers;
+
+
+
 
         }
 
@@ -191,6 +217,8 @@ namespace GODInventoryWinForm.Controls
                         order.実際配送担当 = pendingorder.実際配送担当;
                         order.備考 = pendingorder.備考;
                         order.納品指示 = pendingorder.納品指示;
+
+                        order.warehouseName = pendingorder.warehouseName;
 
                     }
                     if (isValid)
@@ -322,6 +350,8 @@ namespace GODInventoryWinForm.Controls
 
             }
 
+
+
         }
 
         private void dataGridView1_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
@@ -388,7 +418,7 @@ INNER JOIN t_shoplist s  on o.法人コード = s.customerId AND  o.店舗コー
 INNER JOIN t_pricelist p on  o.自社コード = p.自社コード AND  o.店舗コード = p.店番 
 LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.実際配送担当 = k.ShipperName 
 WHERE o.Status ={0}
-ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
+ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
 
 
                 // create BindingList (sortable/filterable)
@@ -425,8 +455,8 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             if (pendingOrderList.Count > 0)
             {
                 // 担当
-                var shippers = pendingOrderList.Select(s =>  s.実際配送担当 ).Distinct().ToList();
-                shippers.Insert(0,  "すべて" );
+                var shippers = pendingOrderList.Select(s => s.実際配送担当).Distinct().ToList();
+                shippers.Insert(0, "すべて");
 
                 this.DanDangComboBox.DataSource = shippers;
 
@@ -751,6 +781,14 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
             RowRemark = e.RowIndex;
             cloumn = e.ColumnIndex;
 
+            if (dataGridView1.CurrentCell.ColumnIndex == 12)
+            {
+
+                //ComboBox comboBox = e.Control as ComboBox;
+                //comboBox.SelectedIndexChanged += new EventHandler(comboBox_SelectedIndexChanged);
+            }
+
+
         }
 
 
@@ -940,15 +978,15 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
         {
             // stockState
             var stockStates = orders.Select(s => s.在庫状態).Distinct().ToList();
-            stockStates.Insert(0, "すべて" );
+            stockStates.Insert(0, "すべて");
             this.ZKZTcomboBox3.DataSource = stockStates;
         }
 
         private void InitializeGenreComboBox(List<v_pendingorder> orders)
         {
             // GenreName
-            var GenreName = orders.Select(s =>  s.GenreName ).Distinct().ToList();
-            GenreName.Insert(0,  "すべて" );
+            var GenreName = orders.Select(s => s.GenreName).Distinct().ToList();
+            GenreName.Insert(0, "すべて");
 
             this.genreComboBox.DataSource = GenreName;
         }
@@ -957,7 +995,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
         {
             // 品名漢字
             var PMHZ = orders.Select(s => new MockEntity { Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().OrderBy(s => s.Id).ToList();
-            PMHZ.Insert(0, new MockEntity { Id=0, ShortName = "すべて", FullName = "すべて" });
+            PMHZ.Insert(0, new MockEntity { Id = 0, ShortName = "すべて", FullName = "すべて" });
             this.productComboBox.DisplayMember = "FullName";
             this.productComboBox.ValueMember = "Id";
             this.productComboBox.DataSource = PMHZ;
@@ -966,8 +1004,8 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
         private void InitializeCountyComboBox(List<v_pendingorder> orders)
         {
             // County
-            var counties = orders.Select(s =>  s.県別 ).Distinct().ToList();
-            counties.Insert(0,  "すべて" );
+            var counties = orders.Select(s => s.県別).Distinct().ToList();
+            counties.Insert(0, "すべて");
 
             this.countyComboBox1.DataSource = counties;
 
@@ -1244,16 +1282,145 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当, o.県別, o.店舗コ
 
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            bool handle;
-            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.Equals(DBNull.Value))
+            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
-                handle = true;
+                bool handle;
+                if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.Equals(DBNull.Value))
+                {
+                    handle = true;
+                }
+                else
+                    handle = false;
+                e.Cancel = handle;
             }
-            else
-                handle = false;
-            e.Cancel = handle;
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
+
+        }
+        private int warehouselistBox()
+        {
+
+            var oids = GetOrderIdsBySelectedGridCell();
+
+            return (Int32)oids[0];
+
+        }
+
+        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            //a
+            clickdav = dataGridView3;
+
+            var warehouse = warehouselistBox();
+            //List<t_warehouses_transports> mlist = warehouses_transportsList.FindAll(o => o.wid != null && o.wid == Convert.ToInt32(warehouse)).ToList();
+            RowRemark = dataGridView1.CurrentCell.RowIndex;
+            if (dataGridView1.CurrentCell.ColumnIndex == 12)
+            {
+
+                ComboBox comboBox = e.Control as ComboBox;
+                comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
+                //comboBox.Click += delegate(Object o, DataGridViewEditingControlShowingEventArgs e) { comboBox_SelectedIndexChanged(o, e, dataGridView1); };
+          
+            }
+
+        }
+ 
+        private void comboBox_SelectedIndexChanged(object sender, EventArgs e )
+        {
+            if (clickdav.CurrentCell.ColumnIndex != 12)
+                return;
+
+            // Set the value of column "dgv_txt"
+            string snsd = ((ComboBox)sender).Text;
+            if (clickdav.Rows[RowRemark].Cells["warehouseName"].EditedFormattedValue.ToString() == null)
+                return;
+
+            snsd = clickdav.Rows[RowRemark].Cells["warehouseName"].EditedFormattedValue.ToString();
+
+            t_warehouses widlist1 = warehouseList.Find(o => o.FullName != null && o.FullName == snsd);
+            if (widlist1 != null)
+            {
+                int wid = widlist1.Id;
+
+
+                //读取关系表内的所有 仓库下的 关系 运输公司
+                List<t_warehouses_transports> mlist = warehouses_transportsList.FindAll(o => o.wid != null && o.wid == Convert.ToInt32(wid)).ToList();
+                V_transportList = new BindingList<v_transport>();
+                if (mlist.Count > 0)
+                {
+                    //循环读取出运输公司下的所有子信息
+                    FindtransportList = new List<t_transports>();
+
+                    for (int i = 0; i < mlist.Count; i++)
+                    {
+                        List<t_transports> nlist = transportList.FindAll(o => o.id != null && o.id == Convert.ToInt32(mlist[i].tid)).ToList();
+                        FindtransportList = FindtransportList.Concat(nlist).ToList();
+                    }
+                    //添加显示集合
+                    t_warehouses widlist = warehouseList.Find(o => o.Id != null && o.Id == Convert.ToInt32(wid));
+                    V_transportList = new BindingList<v_transport>();
+                    foreach (t_transports item in FindtransportList)
+                    {
+                        v_transport temp = new v_transport();
+
+                        temp.ShipperName = widlist.ShipperName;
+                        temp.Transport_name = item.fullname;
+                        temp.FullName = item.fullname;
+                        V_transportList.Add(temp);
+                    }
+                    //this.ShipperColumn1.DisplayMember = "FullName";
+                    //this.ShipperColumn1.ValueMember = "FullName";
+                    //this.ShipperColumn1.DataSource = V_transportList;
+
+
+                    ((ComboBox)sender).DisplayMember = "FullName";
+                    ((ComboBox)sender).ValueMember = "FullName";
+                    ((ComboBox)sender).DataSource = V_transportList;
+
+
+                }
+                else
+                {
+                    ((ComboBox)sender).DisplayMember = "FullName";
+                    ((ComboBox)sender).ValueMember = "FullName";
+                    ((ComboBox)sender).DataSource = V_transportList;
+
+
+                }
+
+            }
+            else
+            {
+
+                //warehouseList = ctx.t_warehouses.ToList();
+                var shipperCo1 = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
+                var shipperCo2 = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
+                ((ComboBox)sender).DisplayMember = "FullName";
+                ((ComboBox)sender).ValueMember = "FullName";
+                ((ComboBox)sender).DataSource = shipperCo1;
+            }
+        }
+
+        private void dataGridView3_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+
+            clickdav = dataGridView3;
+
+            RowRemark = dataGridView3.CurrentCell.RowIndex;
+            if (dataGridView3.CurrentCell.ColumnIndex == 12)
+            {
+
+                ComboBox comboBox = e.Control as ComboBox;
+                comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
+            }
+
+
+
+
+
+        }
     }
 }

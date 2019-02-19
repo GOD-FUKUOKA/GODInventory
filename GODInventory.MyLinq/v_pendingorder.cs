@@ -93,7 +93,10 @@ namespace GODInventory.MyLinq
         public bool 一旦保留 { get; set; }
 
         public string 実際配送担当 { get; set; }
-        
+
+        public string warehouseName { get; set; }
+     
+
         public DateTime? 配送担当受信時刻 { get; set; }
 
 
