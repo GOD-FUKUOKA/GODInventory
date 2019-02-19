@@ -1322,13 +1322,15 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
 
                 ComboBox comboBox = e.Control as ComboBox;
                 comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
-                //comboBox.Click += delegate(Object o, DataGridViewEditingControlShowingEventArgs e) { comboBox_SelectedIndexChanged(o, e, dataGridView1); };
-          
+                // comboBox.Click += (s, arg) =>
+                //{
+                //    comboBox_SelectedIndexChanged(sender, e, dataGridView1);
+                //};
             }
 
         }
- 
-        private void comboBox_SelectedIndexChanged(object sender, EventArgs e )
+
+        private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (clickdav.CurrentCell.ColumnIndex != 12)
                 return;
@@ -1415,6 +1417,12 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
 
                 ComboBox comboBox = e.Control as ComboBox;
                 comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
+
+                //comboBox.Click += (s, arg) =>
+                //{
+                //    comboBox_SelectedIndexChanged(sender, e, dataGridView3);
+                //};
+
             }
 
 
