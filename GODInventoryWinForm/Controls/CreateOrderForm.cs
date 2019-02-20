@@ -272,7 +272,7 @@ namespace GODInventoryWinForm.Controls
             {
                 var last_order = (from s in ctx.t_orderdata
                                   where s.店舗コード == ((short)storeId) && s.伝票番号 < max
-                                  orderby s.発注日 descending, s.伝票番号 descending
+                                  orderby s.伝票番号 descending
                                   select s).FirstOrDefault();
                 if (last_order != null)
                 {
