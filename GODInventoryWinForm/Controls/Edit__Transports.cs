@@ -44,8 +44,7 @@ namespace GODInventoryWinForm
                 this.shortNameTextBox12.Text = transports.shortname;
 
             }
-            if (warehouses != null)
-                this.widextBox.Text = warehouses.FullName;
+ 
 
         }
         private void submitFormButton_Click(object sender, EventArgs e)

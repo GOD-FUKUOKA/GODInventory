@@ -30,9 +30,7 @@ namespace GODInventoryWinForm
 
             transportList = ctx.t_transports.ToList();
 
-            if (warehouses != null)
-                this.widextBox.Text = warehouses.FullName;
-
+            
             this.tidComboBox3.DisplayMember = "fullname";
             this.tidComboBox3.ValueMember = "Id";
             this.tidComboBox3.DataSource = transportList;

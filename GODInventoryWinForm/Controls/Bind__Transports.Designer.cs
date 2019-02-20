@@ -37,9 +37,9 @@
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.tidComboBox3 = new System.Windows.Forms.ComboBox();
-            this.widextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.widextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,13 +117,9 @@
             this.tidComboBox3.TabIndex = 10000025;
             this.tidComboBox3.SelectedIndexChanged += new System.EventHandler(this.tidComboBox3_SelectedIndexChanged);
             // 
-            // widextBox
+            // errorProvider1
             // 
-            this.widextBox.Location = new System.Drawing.Point(91, 12);
-            this.widextBox.Name = "widextBox";
-            this.widextBox.ReadOnly = true;
-            this.widextBox.Size = new System.Drawing.Size(190, 21);
-            this.widextBox.TabIndex = 10000027;
+            this.errorProvider1.ContainerControl = this;
             // 
             // label4
             // 
@@ -134,11 +130,15 @@
             this.label4.TabIndex = 10000026;
             this.label4.Text = "仓库";
             // 
-            // errorProvider1
+            // widextBox
             // 
-            this.errorProvider1.ContainerControl = this;
+            this.widextBox.Location = new System.Drawing.Point(91, 12);
+            this.widextBox.Name = "widextBox";
+            this.widextBox.ReadOnly = true;
+            this.widextBox.Size = new System.Drawing.Size(190, 21);
+            this.widextBox.TabIndex = 10000027;
             // 
-            // Edit__Transports
+            // Bind__Transports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -153,7 +153,7 @@
             this.Controls.Add(this.fullNameTextBox12);
             this.Controls.Add(this.label13);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Edit__Transports";
+            this.Name = "Bind__Transports";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit__Transports";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -172,8 +172,8 @@
         private System.Windows.Forms.Button cancelFormButton;
         private GODInventory.ViewModel.EntityDataSource entityDataSource1;
         private System.Windows.Forms.ComboBox tidComboBox3;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.TextBox widextBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -33,10 +33,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.indexColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ShipperName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Transport_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.productToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addtsButton = new System.Windows.Forms.Button();
@@ -45,11 +41,14 @@
             this.bteditwh = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.btloadTransport = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.btaddtransportitem = new System.Windows.Forms.Button();
             this.btremovetransportItem = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.indexColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ShipperName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Transport_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -98,45 +97,17 @@
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(281, 17);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(324, 412);
             this.dataGridView1.TabIndex = 56;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
-            this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             this.dataGridView1.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dataGridView1_RowPrePaint);
-            // 
-            // indexColumn1
-            // 
-            this.indexColumn1.HeaderText = "序号";
-            this.indexColumn1.Name = "indexColumn1";
-            // 
-            // ShipperName
-            // 
-            this.ShipperName.DataPropertyName = "ShipperName";
-            this.ShipperName.HeaderText = "仓库";
-            this.ShipperName.Name = "ShipperName";
-            // 
-            // Transport_name
-            // 
-            this.Transport_name.DataPropertyName = "Transport_name";
-            this.Transport_name.HeaderText = "运输公司";
-            this.Transport_name.Name = "Transport_name";
-            // 
-            // deleteButtonColumn
-            // 
-            this.deleteButtonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.deleteButtonColumn.FillWeight = 30F;
-            this.deleteButtonColumn.HeaderText = "";
-            this.deleteButtonColumn.Name = "deleteButtonColumn";
-            this.deleteButtonColumn.Text = "クリア";
-            this.deleteButtonColumn.ToolTipText = "クリア";
-            this.deleteButtonColumn.UseColumnTextForButtonValue = true;
-            this.deleteButtonColumn.Width = 40;
             // 
             // contextMenuStrip1
             // 
@@ -214,18 +185,6 @@
             this.listBox1.TabIndex = 68;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
-            // btloadTransport
-            // 
-            this.btloadTransport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btloadTransport.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btloadTransport.Location = new System.Drawing.Point(640, 435);
-            this.btloadTransport.Name = "btloadTransport";
-            this.btloadTransport.Size = new System.Drawing.Size(102, 22);
-            this.btloadTransport.TabIndex = 71;
-            this.btloadTransport.Text = "绑定运输公司";
-            this.btloadTransport.UseVisualStyleBackColor = true;
-            this.btloadTransport.Click += new System.EventHandler(this.btloadTransport_Click);
-            // 
             // listBox2
             // 
             this.listBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -267,6 +226,39 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // indexColumn1
+            // 
+            this.indexColumn1.HeaderText = "序号";
+            this.indexColumn1.Name = "indexColumn1";
+            this.indexColumn1.ReadOnly = true;
+            // 
+            // ShipperName
+            // 
+            this.ShipperName.DataPropertyName = "ShipperName";
+            this.ShipperName.HeaderText = "仓库";
+            this.ShipperName.Name = "ShipperName";
+            this.ShipperName.ReadOnly = true;
+            // 
+            // Transport_name
+            // 
+            this.Transport_name.DataPropertyName = "Transport_name";
+            this.Transport_name.HeaderText = "运输公司";
+            this.Transport_name.Name = "Transport_name";
+            this.Transport_name.ReadOnly = true;
+            // 
+            // deleteButtonColumn
+            // 
+            this.deleteButtonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.deleteButtonColumn.FillWeight = 30F;
+            this.deleteButtonColumn.HeaderText = "";
+            this.deleteButtonColumn.Name = "deleteButtonColumn";
+            this.deleteButtonColumn.ReadOnly = true;
+            this.deleteButtonColumn.Text = "クリア";
+            this.deleteButtonColumn.ToolTipText = "クリア";
+            this.deleteButtonColumn.UseColumnTextForButtonValue = true;
+            this.deleteButtonColumn.Visible = false;
+            this.deleteButtonColumn.Width = 40;
+            // 
             // WarehouseTransportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -275,7 +267,6 @@
             this.Controls.Add(this.btremovetransportItem);
             this.Controls.Add(this.btaddtransportitem);
             this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.btloadTransport);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.bteditwh);
@@ -308,16 +299,15 @@
         private System.Windows.Forms.ErrorProvider errorProvider2;
         private System.Windows.Forms.Button bteditwh;
         private System.Windows.Forms.Button btAddWarehouse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn indexColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ShipperName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Transport_name;
-        private System.Windows.Forms.DataGridViewButtonColumn deleteButtonColumn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button btloadTransport;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button btaddtransportitem;
         private System.Windows.Forms.Button btremovetransportItem;
         private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn indexColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ShipperName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Transport_name;
+        private System.Windows.Forms.DataGridViewButtonColumn deleteButtonColumn;
     }
 }

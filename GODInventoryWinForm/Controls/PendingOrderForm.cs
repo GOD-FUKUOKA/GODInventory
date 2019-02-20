@@ -82,14 +82,16 @@ namespace GODInventoryWinForm.Controls
             warehouseList = ctx.t_warehouses.ToList();
             var shipperCo1 = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
             var shipperCo2 = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
-            this.ShipperColumn1.DisplayMember = "FullName";
-            this.ShipperColumn1.ValueMember = "FullName";
-            this.ShipperColumn1.DataSource = shipperCo1;
 
 
-            this.shipperComboBox.DisplayMember = "FullName";
-            this.shipperComboBox.ValueMember = "FullName";
-            this.shipperComboBox.DataSource = shipperCo2;
+            this.ShipperColumn1.DisplayMember = "fullname";
+            this.ShipperColumn1.ValueMember = "fullname";
+            this.ShipperColumn1.DataSource = transportList;
+
+
+            this.shipperComboBox.DisplayMember = "fullname";
+            this.shipperComboBox.ValueMember = "fullname";
+            this.shipperComboBox.DataSource = transportList;
 
             //过滤条件添加任意选项
             //shipperCo.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
@@ -846,6 +848,9 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
 
         private string GetCellKey(int rowIndex, int columnIndex)
         {
+            if (rowIndex < 1)
+                return "";
+
             var row = dataGridView1.Rows[rowIndex];
             var model = row.DataBoundItem as v_pendingorder;
 
@@ -1396,13 +1401,11 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
             }
             else
             {
+                ((ComboBox)sender).DisplayMember = "fullname";
+                ((ComboBox)sender).ValueMember = "fullname";
+                ((ComboBox)sender).DataSource = transportList;
 
-                //warehouseList = ctx.t_warehouses.ToList();
-                var shipperCo1 = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
-                var shipperCo2 = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
-                ((ComboBox)sender).DisplayMember = "FullName";
-                ((ComboBox)sender).ValueMember = "FullName";
-                ((ComboBox)sender).DataSource = shipperCo1;
+
             }
         }
 

@@ -25,6 +25,8 @@ namespace GODInventoryWinForm.Controls
         private Hashtable datagridChanges = null;
         int RowRemark = 0;
         int cloumn = 0;
+        int selectlistboxindex = 0;
+
         public WarehouseTransportForm()
         {
             InitializeComponent();
@@ -66,7 +68,7 @@ namespace GODInventoryWinForm.Controls
             this.listBox2.ValueMember = "id";
             this.listBox2.DataSource = transportList;
 
-
+           
 
             //BuildStockNO();
         }
@@ -94,8 +96,9 @@ namespace GODInventoryWinForm.Controls
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var oids = GetOrderIdsBySelectedGridCell();
-            t_transports tlist = transportList.Find(o => o.fullname != null && o.fullname == oids[0]);
+            //var oids = GetOrderIdsBySelectedGridCell();
+            string oids = listBox2.Text.ToString();
+            t_transports tlist = transportList.Find(o => o.fullname != null && o.fullname == oids);
 
             if (tlist != null)
             {
@@ -249,21 +252,23 @@ namespace GODInventoryWinForm.Controls
             form.wid = wid;
             if (form.ShowDialog() == DialogResult.OK)
             {
-                int tid = form.tid;
 
-                using (var ctx = new GODDbContext())
-                {
+                //待确认，是否选择仓库直接添加到其名下
+                //int tid = form.tid;
 
-                    t_warehouses_transports item = new t_warehouses_transports();
-                    item.wid = wid;
-                    item.tid = tid;
+                //using (var ctx = new GODDbContext())
+                //{
 
-                    ctx.t_warehouses_transports.Add(item);
-                    ctx.SaveChanges();
+                //    t_warehouses_transports item = new t_warehouses_transports();
+                //    item.wid = wid;
+                //    item.tid = tid;
 
-                }
+                //    ctx.t_warehouses_transports.Add(item);
+                //    ctx.SaveChanges();
+
+                //}
                 //this.entityDataSource1.Refresh();
-
+                InitializeDataSource();
             }
 
         }
@@ -358,7 +363,7 @@ namespace GODInventoryWinForm.Controls
 
             }
 
-        
+
 
         }
 
@@ -394,7 +399,7 @@ namespace GODInventoryWinForm.Controls
         {
 
             List<t_warehouses_transports> mlist = warehouses_transportsList.FindAll(o => o.wid != null && o.wid == Convert.ToInt32(wid) && o.tid == Convert.ToInt32(tid)).ToList();
-            if (mlist.Count>0)
+            if (mlist.Count > 0)
             {
 
                 return;
@@ -409,12 +414,17 @@ namespace GODInventoryWinForm.Controls
                 item.tid = tid;
                 ctx.t_warehouses_transports.Add(item);
                 ctx.SaveChanges();
-                this.Close();
+                selectlistboxindex = listBox1.SelectedIndex;
+
 
                 InitializeDataSource();
+                listBox1.SelectedIndex = selectlistboxindex;
+
+                
             }
         }
 
+     
         private void btremovetransportItem_Click(object sender, EventArgs e)
         {
             var oids = GetOrderIdsBySelectedGridCell();
@@ -432,7 +442,11 @@ namespace GODInventoryWinForm.Controls
                     ctx.SaveChanges();
 
                 }
+                selectlistboxindex = listBox1.SelectedIndex;
+
+
                 InitializeDataSource();
+                listBox1.SelectedIndex = selectlistboxindex;
             }
 
         }
