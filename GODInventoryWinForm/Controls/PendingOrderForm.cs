@@ -1312,7 +1312,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             //a
-            clickdav = dataGridView3;
+            clickdav = dataGridView1;
 
             var warehouse = warehouselistBox();
             //List<t_warehouses_transports> mlist = warehouses_transportsList.FindAll(o => o.wid != null && o.wid == Convert.ToInt32(warehouse)).ToList();
