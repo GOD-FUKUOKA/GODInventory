@@ -44,7 +44,7 @@ namespace GODInventoryWinForm
                 this.shortNameTextBox12.Text = transports.shortname;
 
             }
- 
+
 
         }
         private void submitFormButton_Click(object sender, EventArgs e)
@@ -52,7 +52,7 @@ namespace GODInventoryWinForm
 
             transports.fullname = this.fullNameTextBox12.Text.Trim();
             transports.shortname = this.shortNameTextBox12.Text.Trim();
- 
+
             this.entityDataSource1.SaveChanges();
 
             this.Close();
@@ -79,9 +79,9 @@ namespace GODInventoryWinForm
         {
             if (fullNameTextBox12.Text.Trim().Length > 0)
             {
-             //   int storeId = Convert.ToInt32(fullNameTextBox12.Text);
-             int   storeId = 0;
-             if (fullNameTextBox12.Text.Length > 0)
+                //   int storeId = Convert.ToInt32(fullNameTextBox12.Text);
+                int storeId = 0;
+                if (fullNameTextBox12.Text.Length > 0)
                 {
                     var shops = this.transportList.Where(s => s.fullname == fullNameTextBox12.Text).ToList();
                     if (shops.Count > 0)
@@ -90,8 +90,8 @@ namespace GODInventoryWinForm
 
                         this.tidComboBox3.Text = store.fullname;
                         this.shortNameTextBox12.Text = store.shortname;
-
-                        errorProvider1.SetError(fullNameTextBox12, "已存在");
+                        if (shops.Count > 1)
+                            errorProvider1.SetError(fullNameTextBox12, "已存在");
                     }
                     else
                     {

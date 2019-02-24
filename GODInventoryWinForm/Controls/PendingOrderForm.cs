@@ -370,7 +370,7 @@ namespace GODInventoryWinForm.Controls
             //出荷日,納品日,受注日,店舗コード,店名,伝票番号,口数,品名漢字,規格名漢字,発注数量,実際配送担当,県別,キャンセル,ダブリ,一旦保留
             string cellChangedKey = GetCellKey(e.RowIndex, e.ColumnIndex, true);
 
-            if (datagrid_changes.ContainsKey(cellChangedKey))
+            if (datagrid_changes.ContainsKey(cellChangedKey) && cellChangedKey != "_changed")
             {
                 e.CellStyle.BackColor = Color.Red;
                 e.CellStyle.SelectionBackColor = Color.DarkRed;
@@ -848,8 +848,8 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
 
         private string GetCellKey(int rowIndex, int columnIndex)
         {
-            if (rowIndex < 1)
-                return "";
+            //if (rowIndex < 1)
+            //    return "";
 
             var row = dataGridView1.Rows[rowIndex];
             var model = row.DataBoundItem as v_pendingorder;

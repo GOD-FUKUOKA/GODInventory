@@ -29,7 +29,9 @@ namespace GODInventoryWinForm.Controls
 
         private void pendingButton_Click(object sender, EventArgs e)
         {
-            if (pendingOrderForm == null) {
+            //if (pendingOrderForm == null) 
+            
+            {
                 pendingOrderForm = new PendingOrderForm();
             }
             AdjustSubformSize(pendingOrderForm);
