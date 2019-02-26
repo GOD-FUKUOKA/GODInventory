@@ -103,6 +103,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.RegularExpressions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -445,6 +446,12 @@
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkerArgument.cs" />
+    <Compile Include="ImportShipNumberForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportShipNumberForm.Designer.cs">
+      <DependentUpon>ImportShipNumberForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ConnectServerForReceivedOrderForm.resx">
       <DependentUpon>ConnectServerForReceivedOrderForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -630,6 +637,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportShipNumberForm.resx">
+      <DependentUpon>ImportShipNumberForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
