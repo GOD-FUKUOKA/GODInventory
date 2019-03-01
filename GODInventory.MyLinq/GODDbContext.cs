@@ -31,6 +31,7 @@
 
         public virtual DbSet<t_transports> t_transports { get; set; }
         public virtual DbSet<t_warehouses_transports> t_warehouses_transports { get; set; }
+        public virtual DbSet<t_freights> t_freights { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -206,3 +206,15 @@ CREATE TABLE `god_om2`.`t_warehouses_transports` (
 
   ALTER TABLE `god_om2`.`t_orderdata` 
 ADD COLUMN `warehouseName` VARCHAR(45) NOT NULL DEFAULT '' AFTER `reportState`;
+
+CREATE TABLE `t_freights` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `自社コード` int(11) DEFAULT NULL,
+  `warehousename` varchar(45) DEFAULT NULL,
+  `transportname` varchar(45) DEFAULT NULL,
+  `warehouse_id` int(11) DEFAULT NULL,
+  `transport_id` int(11) DEFAULT NULL,
+  `fee` int(11) DEFAULT NULL,
+  `unitname` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
