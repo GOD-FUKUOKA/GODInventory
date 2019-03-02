@@ -77,7 +77,7 @@ namespace GODInventoryWinForm
             freights.transportname = storeNamTextBox.Text;
 
 
-            freights.unitname  =Convert.ToInt32( storeCodeTextBox.Text);
+            freights.unitname  = storeCodeTextBox.Text ;
 
 
             freights.fee   =Convert.ToInt32( invoiceNOTextBox.Text);

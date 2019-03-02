@@ -32,19 +32,22 @@ namespace GODInventoryWinForm.Controls
             this.productsDataGridView.AutoGenerateColumns = false;
             this.transportdataGridView1.AutoGenerateColumns = false;
 
-        
+            EditTransportsFeeForm = new EditTransportsFee();
+
 
         }
 
 
         private void InitializeDataSource()
         {
+            freights = new List<t_freights>();
+
             var ctx = this.entityDataSource1.DbContext as GODDbContext;
 
             this.stores = ctx.t_shoplist.ToList();
             this.genres = ctx.t_genre.ToList();
             this.products = ctx.t_itemlist.ToList();
-            freights = ctx.t_freights.ToList();
+      
            
             var genreList = this.genres.Select(s => new MockEntity { Id = s.idジャンル, FullName = s.ジャンル名 }).ToList();
             genreList.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
@@ -143,6 +146,19 @@ namespace GODInventoryWinForm.Controls
 
             return order_ids;
         }
+        private List<int> GetOrderIdsBySelectedGridCell_transportdataGridView1()
+        {
+
+            List<int> order_ids = new List<int>();
+            var rows = GetSelectedRowsBySelectedCells(transportdataGridView1);
+            foreach (DataGridViewRow row in rows)
+            {
+                var pendingorder = row.DataBoundItem as t_freights;
+                order_ids.Add(pendingorder.id);
+            }
+
+            return order_ids;
+        }
         private IEnumerable<DataGridViewRow> GetSelectedRowsBySelectedCells(DataGridView dgv)
         {
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
@@ -191,7 +207,11 @@ namespace GODInventoryWinForm.Controls
                     InitializeDataSource();
                     
                     break;
-                    
+                case 2:
+
+                    InitializeDataSource();
+
+                    break;    
             }
 
         }
@@ -439,17 +459,66 @@ namespace GODInventoryWinForm.Controls
                 var order = transportdataGridView1.CurrentRow.DataBoundItem as t_freights;
 
                 EditTransportsFeeForm.OrderId = order.id;
-
+                if (EditTransportsFeeForm.ShowDialog() == DialogResult.OK)
+                {
+                    InitializeDataSource();
+                }
             }
         }
 
         private void InitializetransportdataGridView1()
         {
+            using (var ctx = new GODDbContext())
+            {
+                freights = ctx.t_freights.ToList();
+            }
+            transportdatabindingSource2.DataSource = null;
+
             transportdatabindingSource2.DataSource = freights;
+           transportdataGridView1.DataSource = null;
+
+           transportdataGridView1.DataSource = transportdatabindingSource2;
+            //transportdataGridView1.Refresh();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form = new CreateTransportsFee();
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                InitializeDataSource();
+            }
+        }
+
+        private void transportdataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewColumn column = transportdataGridView1.Columns[e.ColumnIndex];
+            var deletedStockNumList = new List<string>();
+
+            if (column == deleteButtonColumn)
+            {
 
 
-            this.pricesDataGridView.DataSource = this.transportdatabindingSource2;  
-        
+                var oids = GetOrderIdsBySelectedGridCell_transportdataGridView1();
+                using (var ctx = new GODDbContext())
+                {
+                    t_freights tlist = freights.Find(o => o.id != null && o.id == oids[0]);
+                    if (tlist != null && tlist.id != null)
+                    {
+                        t_freights widlist = freights.Find(o => o.id != null && o.id == Convert.ToInt32(oids[0]));
+
+                        var del = (from s in ctx.t_freights
+                                   where s.id == widlist.id
+                                   select s).ToList();
+                        ctx.t_freights.RemoveRange(del);
+                        ctx.SaveChanges();
+
+                    }
+                    InitializeDataSource();
+                }
+
+            }
         }
     }
 }

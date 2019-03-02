@@ -11,6 +11,7 @@ namespace GODInventory.MyLinq
     {
         [Key]
         public int id { get; set; }
+        public int ×ÔÉç¥³©`¥É { get; set; }
         public string transportname { get; set; }
         public string warehousename { get; set; }
         public int transport_id { get; set; }

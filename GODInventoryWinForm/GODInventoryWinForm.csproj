@@ -256,6 +256,12 @@
     <Compile Include="Controls\EditTransportsFee.Designer.cs">
       <DependentUpon>EditTransportsFee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CreateTransportsFee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\CreateTransportsFee.Designer.cs">
+      <DependentUpon>CreateTransportsFee.cs</DependentUpon>
+    </Compile>
     <Compile Include="GenerateASNTextForm_Auto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -530,6 +536,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\EditTransportsFee.resx">
       <DependentUpon>EditTransportsFee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CreateTransportsFee.resx">
+      <DependentUpon>CreateTransportsFee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenerateASNTextForm_Auto.resx">
       <DependentUpon>GenerateASNTextForm_Auto.cs</DependentUpon>

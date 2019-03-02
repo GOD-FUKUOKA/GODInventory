@@ -110,15 +110,16 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.transportdataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.transportdatabindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.warehousename = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.transportname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.transportdatabindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.deleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.productContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -132,8 +133,8 @@
             this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.transportdataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pricesBindingSource)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pricesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.transportdatabindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -885,12 +886,12 @@
             this.button1.TabIndex = 19;
             this.button1.Text = "新规";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // transportdataGridView1
             // 
             this.transportdataGridView1.AllowUserToAddRows = false;
-            this.transportdataGridView1.AllowUserToDeleteRows = false;
-            this.transportdataGridView1.AllowUserToResizeRows = false;
+            this.transportdataGridView1.AllowUserToOrderColumns = true;
             this.transportdataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -900,16 +901,31 @@
             this.warehousename,
             this.transportname,
             this.unitname,
-            this.fee});
+            this.fee,
+            this.deleteButtonColumn});
             this.transportdataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.transportdataGridView1.Location = new System.Drawing.Point(10, 101);
             this.transportdataGridView1.Name = "transportdataGridView1";
-            this.transportdataGridView1.ReadOnly = true;
             this.transportdataGridView1.RowHeadersVisible = false;
             this.transportdataGridView1.RowTemplate.Height = 23;
             this.transportdataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.transportdataGridView1.Size = new System.Drawing.Size(1398, 332);
             this.transportdataGridView1.TabIndex = 43;
+            this.transportdataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.transportdataGridView1_CellContentClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip1.Name = "priceContextMenuStrip";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem1.Text = "編集";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // 自社コード
             // 
@@ -946,19 +962,14 @@
             this.fee.Name = "fee";
             this.fee.ReadOnly = true;
             // 
-            // contextMenuStrip1
+            // deleteButtonColumn
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.contextMenuStrip1.Name = "priceContextMenuStrip";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
-            this.toolStripMenuItem1.Text = "編集";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.deleteButtonColumn.HeaderText = "";
+            this.deleteButtonColumn.Name = "deleteButtonColumn";
+            this.deleteButtonColumn.Text = "クリア";
+            this.deleteButtonColumn.ToolTipText = "クリア";
+            this.deleteButtonColumn.UseColumnTextForButtonValue = true;
+            this.deleteButtonColumn.Width = 40;
             // 
             // ProductsControl
             // 
@@ -985,8 +996,8 @@
             this.groupBox1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.transportdataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pricesBindingSource)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pricesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.transportdatabindingSource2)).EndInit();
             this.ResumeLayout(false);
 
@@ -1080,13 +1091,14 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView transportdataGridView1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.BindingSource transportdatabindingSource2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;
         private System.Windows.Forms.DataGridViewTextBoxColumn warehousename;
         private System.Windows.Forms.DataGridViewTextBoxColumn transportname;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitname;
         private System.Windows.Forms.DataGridViewTextBoxColumn fee;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.BindingSource transportdatabindingSource2;
+        private System.Windows.Forms.DataGridViewButtonColumn deleteButtonColumn;
     }
 }

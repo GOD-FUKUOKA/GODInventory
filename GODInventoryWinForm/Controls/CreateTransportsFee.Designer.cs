@@ -1,6 +1,6 @@
 ﻿namespace GODInventoryWinForm
 {
-    partial class EditTransportsFee
+    partial class CreateTransportsFee
     {
         /// <summary>
         /// Required designer variable.
@@ -186,7 +186,7 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
-            // EditTransportsFee
+            // CreateTransportsFee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -195,7 +195,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.submitFormButton);
             this.Controls.Add(this.cancelFormButton);
-            this.Name = "EditTransportsFee";
+            this.Name = "CreateTransportsFee";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditTransportsFee";
             this.groupBox1.ResumeLayout(false);
