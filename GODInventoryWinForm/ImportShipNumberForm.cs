@@ -20,11 +20,13 @@ namespace GODInventoryWinForm
     using System.Data.Entity.Validation;
     using System.IO;
 
+
     public partial class ImportShipNumberForm : Form
     {
 
         public string formTitle = "Import HACCYU.csv";
-
+        List<XLSXImportShipNumber> models;
+        private SortableBindingList<XLSXImportShipNumber> sortablemodelsList;
         public ImportShipNumberForm()
         {
             InitializeComponent();
@@ -53,6 +55,39 @@ namespace GODInventoryWinForm
             if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 this.pathTextBox.Text = openFileDialog1.FileName;
+            }
+            if (this.pathTextBox.Text != "")
+            {
+                bool success = true;
+
+                List<XLSXImportShipNumber> models = new List<XLSXImportShipNumber>();
+
+                try
+                {
+
+                    models = readExcel(this.pathTextBox.Text);
+                    this.bindingSource1.DataSource = null;
+                    dataGridView1.AutoGenerateColumns = false;
+
+                    // 记录DataGridView改变数据          
+                    sortablemodelsList = new SortableBindingList<XLSXImportShipNumber>(models);
+                    this.bindingSource1.DataSource = sortablemodelsList;
+
+                    dataGridView1.DataSource = this.bindingSource1;
+
+                }
+                catch (EndOfStreamException exception)
+                {
+                    models.Clear();
+                    success = false;
+                }
+                catch (Exception exception)
+                {
+                    models.Clear();
+                    success = false;
+                }
+
+
             }
         }
 
@@ -121,28 +156,7 @@ namespace GODInventoryWinForm
             WorkerArgument arg = e.Argument as WorkerArgument;
 
             bool success = true;
-            //File.ReadLines(path, Encoding.)
-            //File.ReadAllBytes(path);
 
-            //var lines = ConvertToUtf8Strings(path);
-            List<XLSXImportShipNumber> models = new List<XLSXImportShipNumber>();
-
-            try
-            {
-
-
-                models = readExcel(path);
-            }
-            catch (EndOfStreamException exception)
-            {
-                models.Clear();
-                success = false;
-            }
-            catch (Exception exception)
-            {
-                models.Clear();
-                success = false;
-            }
 
             using (var ctx = new GODDbContext())
             {
@@ -560,6 +574,11 @@ namespace GODInventoryWinForm
                 .InnerText;
 
             return value;
+
+        }
+
+        private void ImportShipNumberForm_Load(object sender, EventArgs e)
+        {
 
         }
 

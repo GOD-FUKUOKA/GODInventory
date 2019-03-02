@@ -710,5 +710,10 @@ namespace GODInventoryWinForm.Controls
 
             this.label8.Text = showtotal.ToString()+" kg";
         }
+
+        private void btImportShipNumberForm_Click(object sender, EventArgs e)
+        {
+            new ImportShipNumberForm().ShowDialog();
+        }
     }
 }

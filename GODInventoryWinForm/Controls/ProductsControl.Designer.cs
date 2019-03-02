@@ -107,7 +107,18 @@
             this.genresComboBox = new System.Windows.Forms.ComboBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.productsComboBox = new System.Windows.Forms.ComboBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.transportdataGridView1 = new System.Windows.Forms.DataGridView();
+            this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warehousename = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transportname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.transportdatabindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.productContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -119,7 +130,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pricesDataGridView)).BeginInit();
             this.priceContextMenuStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.transportdataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pricesBindingSource)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.transportdatabindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // productContextMenuStrip
@@ -413,6 +428,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -847,6 +863,103 @@
             this.productsComboBox.Size = new System.Drawing.Size(125, 22);
             this.productsComboBox.TabIndex = 1;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.transportdataGridView1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1429, 442);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "运费";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.button1.Location = new System.Drawing.Point(1313, 22);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 54);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "新规";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // transportdataGridView1
+            // 
+            this.transportdataGridView1.AllowUserToAddRows = false;
+            this.transportdataGridView1.AllowUserToDeleteRows = false;
+            this.transportdataGridView1.AllowUserToResizeRows = false;
+            this.transportdataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.transportdataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.transportdataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.自社コード,
+            this.warehousename,
+            this.transportname,
+            this.unitname,
+            this.fee});
+            this.transportdataGridView1.ContextMenuStrip = this.contextMenuStrip1;
+            this.transportdataGridView1.Location = new System.Drawing.Point(10, 101);
+            this.transportdataGridView1.Name = "transportdataGridView1";
+            this.transportdataGridView1.ReadOnly = true;
+            this.transportdataGridView1.RowHeadersVisible = false;
+            this.transportdataGridView1.RowTemplate.Height = 23;
+            this.transportdataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.transportdataGridView1.Size = new System.Drawing.Size(1398, 332);
+            this.transportdataGridView1.TabIndex = 43;
+            // 
+            // 自社コード
+            // 
+            this.自社コード.DataPropertyName = "自社コード";
+            this.自社コード.HeaderText = "商品编码";
+            this.自社コード.Name = "自社コード";
+            this.自社コード.ReadOnly = true;
+            // 
+            // warehousename
+            // 
+            this.warehousename.DataPropertyName = "warehousename";
+            this.warehousename.HeaderText = "仓库名称";
+            this.warehousename.Name = "warehousename";
+            this.warehousename.ReadOnly = true;
+            // 
+            // transportname
+            // 
+            this.transportname.DataPropertyName = "transportname";
+            this.transportname.HeaderText = "运输名称";
+            this.transportname.Name = "transportname";
+            this.transportname.ReadOnly = true;
+            // 
+            // unitname
+            // 
+            this.unitname.DataPropertyName = "unitname";
+            this.unitname.HeaderText = "单位";
+            this.unitname.Name = "unitname";
+            this.unitname.ReadOnly = true;
+            // 
+            // fee
+            // 
+            this.fee.DataPropertyName = "fee";
+            this.fee.HeaderText = "费用";
+            this.fee.Name = "fee";
+            this.fee.ReadOnly = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip1.Name = "priceContextMenuStrip";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem1.Text = "編集";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // ProductsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -870,7 +983,11 @@
             this.priceContextMenuStrip.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.transportdataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pricesBindingSource)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.transportdatabindingSource2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -960,5 +1077,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 配送担当Column2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button saveDanButton;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView transportdataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 自社コード;
+        private System.Windows.Forms.DataGridViewTextBoxColumn warehousename;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transportname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fee;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.BindingSource transportdatabindingSource2;
     }
 }

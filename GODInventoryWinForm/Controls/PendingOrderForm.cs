@@ -782,14 +782,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
         {
             RowRemark = e.RowIndex;
             cloumn = e.ColumnIndex;
-
-            if (dataGridView1.CurrentCell.ColumnIndex == 12)
-            {
-
-                //ComboBox comboBox = e.Control as ComboBox;
-                //comboBox.SelectedIndexChanged += new EventHandler(comboBox_SelectedIndexChanged);
-            }
-
+ 
 
         }
 
@@ -1324,13 +1317,10 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
             RowRemark = dataGridView1.CurrentCell.RowIndex;
             if (dataGridView1.CurrentCell.ColumnIndex == 12)
             {
-
-                ComboBox comboBox = e.Control as ComboBox;
-                comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
-                // comboBox.Click += (s, arg) =>
-                //{
-                //    comboBox_SelectedIndexChanged(sender, e, dataGridView1);
-                //};
+                //临时更改需求注销
+                //ComboBox comboBox = e.Control as ComboBox;
+                //comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
+            
             }
 
         }
@@ -1417,14 +1407,10 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
             RowRemark = dataGridView3.CurrentCell.RowIndex;
             if (dataGridView3.CurrentCell.ColumnIndex == 12)
             {
-
-                ComboBox comboBox = e.Control as ComboBox;
-                comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
-
-                //comboBox.Click += (s, arg) =>
-                //{
-                //    comboBox_SelectedIndexChanged(sender, e, dataGridView3);
-                //};
+                //临时更改需求注销
+                //ComboBox comboBox = e.Control as ComboBox;
+                //comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
+ 
 
             }
 

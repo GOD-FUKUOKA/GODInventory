@@ -19,6 +19,10 @@ namespace GODInventoryWinForm.Controls
         List<t_genre> genres = null;
         List<t_itemlist> products = null;
         private List<t_warehouses> warehouseList;
+        EditTransportsFee EditTransportsFeeForm;
+        List<t_freights>  freights = null;
+      
+
         public ProductsControl()
         {
             InitializeComponent();
@@ -26,8 +30,9 @@ namespace GODInventoryWinForm.Controls
             //shopList = ctx.t_shoplist.ToList();
             this.pricesDataGridView.AutoGenerateColumns = false;
             this.productsDataGridView.AutoGenerateColumns = false;
+            this.transportdataGridView1.AutoGenerateColumns = false;
 
-           
+        
 
         }
 
@@ -39,7 +44,8 @@ namespace GODInventoryWinForm.Controls
             this.stores = ctx.t_shoplist.ToList();
             this.genres = ctx.t_genre.ToList();
             this.products = ctx.t_itemlist.ToList();
-
+            freights = ctx.t_freights.ToList();
+           
             var genreList = this.genres.Select(s => new MockEntity { Id = s.idジャンル, FullName = s.ジャンル名 }).ToList();
             genreList.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
             this.genresComboBox.ValueMember = "Id";
@@ -72,6 +78,10 @@ namespace GODInventoryWinForm.Controls
             //this.配送担当Column2.DisplayMember = "FullName";
             //this.配送担当Column2.ValueMember = "FullName";
             //this.配送担当Column2.DataSource = shipperCo.ToList();
+
+
+            InitializetransportdataGridView1();
+
 
 
         }
@@ -422,5 +432,24 @@ namespace GODInventoryWinForm.Controls
 
         }
 
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (this.transportdataGridView1.RowCount > 0)
+            {
+                var order = transportdataGridView1.CurrentRow.DataBoundItem as t_freights;
+
+                EditTransportsFeeForm.OrderId = order.id;
+
+            }
+        }
+
+        private void InitializetransportdataGridView1()
+        {
+            transportdatabindingSource2.DataSource = freights;
+
+
+            this.pricesDataGridView.DataSource = this.transportdatabindingSource2;  
+        
+        }
     }
 }
