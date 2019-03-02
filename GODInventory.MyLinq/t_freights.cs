@@ -18,7 +18,7 @@ namespace GODInventory.MyLinq
         //ß\ÙU
         public int fee { get; set; }
         //…gÎ»
-        public int unitname { get; set; }
+        public string unitname { get; set; }
 
     }
 }
