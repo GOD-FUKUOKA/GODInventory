@@ -60,7 +60,7 @@ namespace GODInventoryWinForm
             {
                 bool success = true;
 
-                List<XLSXImportShipNumber> models = new List<XLSXImportShipNumber>();
+                models = new List<XLSXImportShipNumber>();
 
                 try
                 {
@@ -85,6 +85,8 @@ namespace GODInventoryWinForm
                 {
                     models.Clear();
                     success = false;
+                    MessageBox.Show(string.Format("{0}", exception.Message));
+              
                 }
 
 
@@ -178,7 +180,7 @@ namespace GODInventoryWinForm
                                 models[i].出荷No = DateTime.Now.ToString("yyMMdd") + models[i].車番;
                             }
                         }
-                        List<XLSXImportShipNumber> we = models.FindAll(s => s.処理済 != null && s.処理済 == "未");
+                        List<XLSXImportShipNumber> we = models.FindAll(s => s.処理済 != null && s.処理済.Contains("未"));
 
                         long m = we.Count;
                         if (m > 0)
@@ -204,7 +206,7 @@ namespace GODInventoryWinForm
                                 int ii = 0;
 
                                 string sql = "";
-                                if (models[i].品名 != "二次製品" && models[i].処理済 == "未")
+                                if (models[i].品名 != "二次製品" && models[i].処理済.Contains("未"))
                                 {
                                     sql = "UPDATE t_orderdata  SET `出荷日` = '" + models[i].出荷日 + "', `納品日`= '" + models[i].納品日 + "', `Status` = 5, `ShipNO` = '" + models[i].出荷No + "' " + " WHERE (`伝票番号` = " + models[i].伝票番号 + " AND `店舗名漢字` = '" + models[i].卸先 + "')";
                                     models[i].処理済 = "済";
@@ -232,7 +234,7 @@ namespace GODInventoryWinForm
                                 ii = 0;
                                 j = 0;
 
-                                if (models[i].品名 == "二次製品" && models[i].処理済 == "未")
+                                if (models[i].品名 == "二次製品" && models[i].処理済.Contains("未"))
                                 {
                                     sql = "UPDATE t_orderdata SET `出荷日` = '" + models[i].出荷日 + "', `納品日`= '" + models[i].納品日 + "', `Status` = 5, `ShipNO` = '" + models[i].出荷No + "' " + " WHERE (`社内伝番` = " + models[i].伝票番号 + " AND `店舗名漢字` = '" + models[i].卸先 + "')";
                                     models[i].処理済 = "済";
