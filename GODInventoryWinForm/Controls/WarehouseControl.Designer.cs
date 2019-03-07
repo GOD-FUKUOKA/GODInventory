@@ -37,8 +37,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.contentPanel = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.transportButton = new System.Windows.Forms.Button();
+            this.warehouseButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.contentPanel.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -142,18 +146,49 @@
             this.contentPanel.Size = new System.Drawing.Size(769, 309);
             this.contentPanel.TabIndex = 5;
             // 
+            // panel2
+            // 
+            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.panel2.Controls.Add(this.transportButton);
+            this.panel2.Controls.Add(this.warehouseButton);
+            this.panel2.Location = new System.Drawing.Point(3, 400);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(769, 82);
+            this.panel2.TabIndex = 6;
+            // 
+            // transportButton
+            // 
+            this.transportButton.Location = new System.Drawing.Point(428, 3);
+            this.transportButton.Name = "transportButton";
+            this.transportButton.Size = new System.Drawing.Size(144, 58);
+            this.transportButton.TabIndex = 0;
+            this.transportButton.Text = "物流信息维护";
+            this.transportButton.UseVisualStyleBackColor = true;
+            // 
+            // warehouseButton
+            // 
+            this.warehouseButton.Location = new System.Drawing.Point(190, 3);
+            this.warehouseButton.Name = "warehouseButton";
+            this.warehouseButton.Size = new System.Drawing.Size(144, 58);
+            this.warehouseButton.TabIndex = 0;
+            this.warehouseButton.Text = "仓库信息维护";
+            this.warehouseButton.UseVisualStyleBackColor = true;
+            this.warehouseButton.Click += new System.EventHandler(this.warehouseButton_Click);
+            // 
             // WarehouseControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.contentPanel);
             this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "WarehouseControl";
-            this.Size = new System.Drawing.Size(775, 392);
+            this.Size = new System.Drawing.Size(775, 485);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.WarehouseControl_Paint);
             this.panel1.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);
             this.contentPanel.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -169,5 +204,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel contentPanel;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button warehouseButton;
+        private System.Windows.Forms.Button transportButton;
     }
 }

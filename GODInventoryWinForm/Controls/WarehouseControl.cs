@@ -16,7 +16,8 @@ namespace GODInventoryWinForm.Controls
         private StockMovement StockTransfer;
         private InventoryForm StockCheckForm;
         private CopyofInputStock CopyofInputStock;
-        
+        private Transports.IndexForm transportsIndexForm;
+
 
         private SearchStock Search_Strock;
 
@@ -180,6 +181,17 @@ namespace GODInventoryWinForm.Controls
             size.Height = size.Height - 100;
             size.Width = size.Width - 50;
             form.Size = size;
+        }
+
+        private void warehouseButton_Click(object sender, EventArgs e)
+        {
+            if (transportsIndexForm == null)
+            {
+                transportsIndexForm = new Transports.IndexForm();
+            }
+            //  AdjustSubformSize(CreateTransportForm);
+            // 显示之前重新加载数据，订单数据可能已更新。
+            transportsIndexForm.ShowDialog();
         }
     }
 }

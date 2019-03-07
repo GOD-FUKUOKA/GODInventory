@@ -102,17 +102,15 @@ namespace GODInventoryWinForm.Controls
 
             if (tlist != null)
             {
-                var form = new Edit__Transports();
-                form.tid = tlist.id;
-                form.wid = wid;
-                form.InitializeOrder();
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-
-                    //this.entityDataSource1.Refresh();
-                    InitializeDataSource();
-
-                }
+                //var form = new Edit__Transports();
+                //form.tid = tlist.id;
+                //form.wid = wid;
+                //form.InitializeOrder();
+                //if (form.ShowDialog() == DialogResult.OK)
+                //{
+                //    //this.entityDataSource1.Refresh();
+                //    InitializeDataSource();
+                //}
             }
 
         }

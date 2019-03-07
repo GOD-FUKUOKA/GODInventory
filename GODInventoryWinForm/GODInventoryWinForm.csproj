@@ -214,6 +214,18 @@
     <Compile Include="Controls\Strock_CompanyCode.Designer.cs">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Transports\IndexForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Transports\IndexForm.Designer.cs">
+      <DependentUpon>IndexForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Transports\NewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Transports\NewForm.Designer.cs">
+      <DependentUpon>NewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\WarehouseTransportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,11 +250,11 @@
     <Compile Include="Controls\Edit_Warehouse.Designer.cs">
       <DependentUpon>Edit_Warehouse.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Edit__Transports.cs">
+    <Compile Include="Controls\Transports\EditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\Edit__Transports.Designer.cs">
-      <DependentUpon>Edit__Transports.cs</DependentUpon>
+    <Compile Include="Controls\Transports\EditForm.Designer.cs">
+      <DependentUpon>EditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Bind__Transports.cs">
       <SubType>Form</SubType>
@@ -516,6 +528,12 @@
     <EmbeddedResource Include="Controls\Strock_CompanyCode.resx">
       <DependentUpon>Strock_CompanyCode.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Transports\IndexForm.resx">
+      <DependentUpon>IndexForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Transports\NewForm.resx">
+      <DependentUpon>NewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\WarehouseTransportForm.resx">
       <DependentUpon>WarehouseTransportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -528,8 +546,8 @@
     <EmbeddedResource Include="Controls\Edit_Warehouse.resx">
       <DependentUpon>Edit_Warehouse.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Edit__Transports.resx">
-      <DependentUpon>Edit__Transports.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Transports\EditForm.resx">
+      <DependentUpon>EditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Bind__Transports.resx">
       <DependentUpon>Bind__Transports.cs</DependentUpon>

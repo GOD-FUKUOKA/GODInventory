@@ -1,1 +1,5 @@
 ﻿https://www.codeproject.com/articles/221931/entity-framework-in-winforms
+
+
+Entity Framework 增删改查和事务操作
+http://www.cnblogs.com/bomo/p/3331602.html

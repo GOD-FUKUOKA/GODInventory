@@ -40,6 +40,7 @@
             this.janCodeTextBox = new System.Windows.Forms.TextBox();
             this.instoreCodeTextBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.customerComboBox = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.salePriceTextBox = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -62,7 +63,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.customerComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -195,6 +195,15 @@
             this.groupBox1.Size = new System.Drawing.Size(711, 321);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // customerComboBox
+            // 
+            this.customerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.customerComboBox.FormattingEnabled = true;
+            this.customerComboBox.Location = new System.Drawing.Point(109, 27);
+            this.customerComboBox.Name = "customerComboBox";
+            this.customerComboBox.Size = new System.Drawing.Size(222, 22);
+            this.customerComboBox.TabIndex = 30;
             // 
             // label15
             // 
@@ -372,15 +381,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // customerComboBox
-            // 
-            this.customerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.customerComboBox.FormattingEnabled = true;
-            this.customerComboBox.Location = new System.Drawing.Point(109, 27);
-            this.customerComboBox.Name = "customerComboBox";
-            this.customerComboBox.Size = new System.Drawing.Size(222, 22);
-            this.customerComboBox.TabIndex = 30;
-            // 
             // ProductsManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -393,6 +393,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ProductsManagement";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "商品管理";
             this.groupBox1.ResumeLayout(false);

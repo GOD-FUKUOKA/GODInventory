@@ -41,7 +41,6 @@
             this.contentPanel = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.newButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.contentPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -155,7 +154,6 @@
             // contentPanel
             // 
             this.contentPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.contentPanel.Controls.Add(this.button1);
             this.contentPanel.Controls.Add(this.label5);
             this.contentPanel.Controls.Add(this.newButton);
             this.contentPanel.Controls.Add(this.button6);
@@ -195,17 +193,6 @@
             this.newButton.UseVisualStyleBackColor = true;
             this.newButton.Click += new System.EventHandler(this.newButton_Click);
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(21, 316);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 58);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "运输公司";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // OrdersControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -239,6 +226,5 @@
         private System.Windows.Forms.Panel contentPanel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button newButton;
-        private System.Windows.Forms.Button button1;
     }
 }
