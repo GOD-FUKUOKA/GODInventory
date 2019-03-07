@@ -165,12 +165,6 @@
     <Compile Include="Controls\EditOrderForm2.Designer.cs">
       <DependentUpon>EditOrderForm2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\InputStock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\InputStock.Designer.cs">
-      <DependentUpon>InputStock.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\MySqlParameters.cs" />
     <Compile Include="Controls\ShipOrderListForm.cs">
       <SubType>Form</SubType>
@@ -501,10 +495,6 @@
     <EmbeddedResource Include="Controls\EditOrderForm2.resx">
       <DependentUpon>EditOrderForm2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\InputStock.resx">
-      <DependentUpon>InputStock.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ShipOrderListForm.resx">
       <DependentUpon>ShipOrderListForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -712,6 +702,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\help.txt" />
+    <Content Include="Doc\todo.txt" />
     <Content Include="nafco_128X128.ico" />
     <EmbeddedResource Include="Reports\ReceivedOrderReportbak.rdlc" />
     <None Include="Resources\warehouse.png" />

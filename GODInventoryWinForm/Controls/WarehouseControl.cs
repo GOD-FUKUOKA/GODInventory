@@ -11,7 +11,7 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class WarehouseControl : UserControl
     {
-        private InputStock InputStock;
+        //private InputStock InputStock;
         private OutputStock OutputStock;
         private StockMovement StockTransfer;
         private InventoryForm StockCheckForm;
@@ -70,10 +70,7 @@ namespace GODInventoryWinForm.Controls
         }
         void FrmOMS_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (sender is InputStock)
-            {
-                InputStock = null;
-            }
+            
 
             if (sender is OutputStock)
             {

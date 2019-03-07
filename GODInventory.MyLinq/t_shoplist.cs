@@ -52,7 +52,10 @@ namespace GODInventory.MyLinq
 
         public int 参考店舗 { get; set; }
 
-        
+        public int warehouse_id { get; set; }
+
+        public int transport_id { get; set; }
+
 
     }
 }

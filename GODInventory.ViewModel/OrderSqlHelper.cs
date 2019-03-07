@@ -908,7 +908,12 @@ namespace GODInventory.ViewModel
            return null;
         }
 
-
+        /// <summary>
+        /// 根据商品出入库信息，更新商品库存状态
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="stockrecs"></param>
+        /// <returns></returns>
         public static int UpdateStockState(GODDbContext ctx, List<t_stockrec> stockrecs)
         {
             int count = 0;
@@ -928,8 +933,8 @@ namespace GODInventory.ViewModel
                 }
                 
 
-                    //SELECT sum() FROM god_inventory.t_stockrec where `区分`='入庫' and `自社コード`=100234 and `状態`="完了";
-                    //SELECT * FROM god_inventory.t_stockrec where `区分`='出庫' and `自社コード`=100234 and `状態`="完了";
+                   //SELECT sum() FROM god_inventory.t_stockrec where `区分`='入庫' and `自社コード`=100234 and `状態`="完了";
+                   //SELECT * FROM god_inventory.t_stockrec where `区分`='出庫' and `自社コード`=100234 and `状態`="完了";
                    //var income = (from s in ctx.t_stockrec
                    //  where s.区分 == "入庫" && s.自社コード == pid && s.状態 == "完了"
                    //  select s.数量).Sum();
@@ -974,11 +979,12 @@ namespace GODInventory.ViewModel
                 ctx.SaveChanges();
                    
             }
-            
-            
+                        
             return count;
 
         }
+
+
         public static int NotifyShipper(GODDbContext ctx, List<v_pendingorder> pendingOrders, string shipperName)
         {
             var orderIds = pendingOrders.Select(order => order.id受注データ).ToList();

@@ -41,7 +41,6 @@
             this.titleLabel = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.配送担当 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.車番 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,6 +51,7 @@
             this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.伝票番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.処理済 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +63,7 @@
             // 
             // openFileBtton
             // 
-            this.openFileBtton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.openFileBtton.BackColor = System.Drawing.SystemColors.Control;
             this.openFileBtton.Location = new System.Drawing.Point(787, 43);
             this.openFileBtton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.openFileBtton.Name = "openFileBtton";
@@ -92,7 +92,7 @@
             // 
             // importButton
             // 
-            this.importButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.importButton.BackColor = System.Drawing.SystemColors.Control;
             this.importButton.Location = new System.Drawing.Point(493, 387);
             this.importButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.importButton.Name = "importButton";
@@ -151,7 +151,7 @@
             // 
             // closeButton
             // 
-            this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.closeButton.BackColor = System.Drawing.SystemColors.Control;
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.closeButton.Location = new System.Drawing.Point(717, 387);
             this.closeButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

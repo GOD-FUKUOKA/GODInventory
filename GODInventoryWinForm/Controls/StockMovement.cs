@@ -12,6 +12,9 @@ using GODInventory.ViewModel;
 
 namespace GODInventoryWinForm.Controls
 {
+    /// <summary>
+    /// 仓库间移动窗口。
+    /// </summary>
     public partial class StockMovement : Form
     {
         private List<t_manufacturers> manufacturerList;

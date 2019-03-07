@@ -212,13 +212,15 @@ CREATE TABLE `t_freights` (
   `自社コード` int(11) DEFAULT NULL,
   `warehousename` varchar(45) DEFAULT NULL,
   `transportname` varchar(45) DEFAULT NULL,
-  `warehouse_id` int(11) DEFAULT NULL,
-  `transport_id` int(11) DEFAULT NULL,
-  `fee` int(11) DEFAULT NULL,
+  `warehouse_id` int(11)  UNSIGNED NOT NULL DEFAULT 0 ,
+  `transport_id` int(11)  UNSIGNED NOT NULL DEFAULT 0 ,
+  `fee` int(11) DEFAULT 0,
   `unitname` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+
+# 20190306添加
 ALTER TABLE `t_transports` 
 ADD COLUMN `address` VARCHAR(255) NULL DEFAULT '',
 ADD COLUMN `phone` VARCHAR(45) NULL DEFAULT '' ,
@@ -230,3 +232,10 @@ ADD COLUMN `address` VARCHAR(255) NULL DEFAULT '',
 ADD COLUMN `phone` VARCHAR(45) NULL DEFAULT '' ,
 ADD COLUMN `fax` VARCHAR(45) NULL DEFAULT '' ,
 ADD COLUMN `memo` VARCHAR(255) NULL DEFAULT '';
+
+ALTER TABLE `t_shoplist` 
+ADD COLUMN `warehouse_id` INT UNSIGNED NOT NULL DEFAULT 0 ,
+ADD COLUMN `transport_id` INT UNSIGNED NOT NULL DEFAULT 0 AFTER `warehouse_id`;
+
+ALTER TABLE `t_freights` 
+ADD COLUMN `shop_id` INT UNSIGNED NOT NULL DEFAULT 0 AFTER `transport_id`;
