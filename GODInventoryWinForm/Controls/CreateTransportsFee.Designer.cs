@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.whComboBox = new System.Windows.Forms.ComboBox();
-            this.storeNamTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.orderAtTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -44,13 +43,22 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.countyComboBox1 = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.storeComboBox = new System.Windows.Forms.ComboBox();
+            this.storeNamTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.whComboBox);
             this.groupBox1.Controls.Add(this.storeNamTextBox);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.storeComboBox);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.countyComboBox1);
+            this.groupBox1.Controls.Add(this.whComboBox);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.orderAtTextBox);
             this.groupBox1.Controls.Add(this.label5);
@@ -62,7 +70,7 @@
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(25, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(647, 132);
+            this.groupBox1.Size = new System.Drawing.Size(647, 182);
             this.groupBox1.TabIndex = 10000016;
             this.groupBox1.TabStop = false;
             // 
@@ -77,13 +85,6 @@
             this.whComboBox.Name = "whComboBox";
             this.whComboBox.Size = new System.Drawing.Size(190, 22);
             this.whComboBox.TabIndex = 2;
-            // 
-            // storeNamTextBox
-            // 
-            this.storeNamTextBox.Location = new System.Drawing.Point(109, 57);
-            this.storeNamTextBox.Name = "storeNamTextBox";
-            this.storeNamTextBox.Size = new System.Drawing.Size(190, 21);
-            this.storeNamTextBox.TabIndex = 31;
             // 
             // label3
             // 
@@ -163,7 +164,7 @@
             // 
             this.submitFormButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.submitFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.submitFormButton.Location = new System.Drawing.Point(431, 161);
+            this.submitFormButton.Location = new System.Drawing.Point(431, 200);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(108, 30);
             this.submitFormButton.TabIndex = 10000013;
@@ -175,7 +176,7 @@
             // 
             this.cancelFormButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelFormButton.Location = new System.Drawing.Point(545, 161);
+            this.cancelFormButton.Location = new System.Drawing.Point(545, 200);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(108, 30);
             this.cancelFormButton.TabIndex = 10000014;
@@ -186,11 +187,55 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(68, 126);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 14);
+            this.label1.TabIndex = 10000004;
+            this.label1.Text = "県別";
+            // 
+            // countyComboBox1
+            // 
+            this.countyComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.countyComboBox1.FormattingEnabled = true;
+            this.countyComboBox1.Location = new System.Drawing.Point(109, 122);
+            this.countyComboBox1.Name = "countyComboBox1";
+            this.countyComboBox1.Size = new System.Drawing.Size(190, 22);
+            this.countyComboBox1.TabIndex = 10000003;
+            this.countyComboBox1.SelectedIndexChanged += new System.EventHandler(this.countyComboBox1_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(400, 130);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 14);
+            this.label7.TabIndex = 10000006;
+            this.label7.Text = "店名";
+            // 
+            // storeComboBox
+            // 
+            this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.storeComboBox.FormattingEnabled = true;
+            this.storeComboBox.Location = new System.Drawing.Point(438, 126);
+            this.storeComboBox.Name = "storeComboBox";
+            this.storeComboBox.Size = new System.Drawing.Size(190, 22);
+            this.storeComboBox.TabIndex = 10000005;
+            // 
+            // storeNamTextBox
+            // 
+            this.storeNamTextBox.Location = new System.Drawing.Point(109, 55);
+            this.storeNamTextBox.Name = "storeNamTextBox";
+            this.storeNamTextBox.Size = new System.Drawing.Size(190, 21);
+            this.storeNamTextBox.TabIndex = 10000007;
+            // 
             // CreateTransportsFee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(691, 217);
+            this.ClientSize = new System.Drawing.Size(691, 246);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.submitFormButton);
@@ -210,7 +255,6 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox whComboBox;
-        private System.Windows.Forms.TextBox storeNamTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox orderAtTextBox;
         private System.Windows.Forms.Label label5;
@@ -223,5 +267,10 @@
         private System.Windows.Forms.Button submitFormButton;
         private System.Windows.Forms.Button cancelFormButton;
         private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox countyComboBox1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox storeComboBox;
+        private System.Windows.Forms.TextBox storeNamTextBox;
     }
 }

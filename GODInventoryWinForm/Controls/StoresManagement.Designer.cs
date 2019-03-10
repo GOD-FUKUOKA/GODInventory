@@ -61,6 +61,10 @@
             this.officerTextBox3 = new System.Windows.Forms.TextBox();
             this.shipperTextBox = new System.Windows.Forms.ComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.warehouseNamecomboBox1 = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.transportnamecomboBox2 = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -225,7 +229,7 @@
             // submitFormButton
             // 
             this.submitFormButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.submitFormButton.Location = new System.Drawing.Point(558, 341);
+            this.submitFormButton.Location = new System.Drawing.Point(558, 383);
             this.submitFormButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(106, 32);
@@ -236,7 +240,7 @@
             // 
             // cancelFormButton
             // 
-            this.cancelFormButton.Location = new System.Drawing.Point(681, 341);
+            this.cancelFormButton.Location = new System.Drawing.Point(681, 383);
             this.cancelFormButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(106, 32);
@@ -264,6 +268,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.transportnamecomboBox2);
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.warehouseNamecomboBox1);
+            this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.storesComboBox);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.storeRankComboBox);
@@ -296,7 +304,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(782, 302);
+            this.groupBox1.Size = new System.Drawing.Size(782, 351);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
@@ -390,11 +398,57 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // warehouseNamecomboBox1
+            // 
+            this.warehouseNamecomboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.warehouseNamecomboBox1.FormattingEnabled = true;
+            this.warehouseNamecomboBox1.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C",
+            "D"});
+            this.warehouseNamecomboBox1.Location = new System.Drawing.Point(105, 301);
+            this.warehouseNamecomboBox1.Name = "warehouseNamecomboBox1";
+            this.warehouseNamecomboBox1.Size = new System.Drawing.Size(266, 22);
+            this.warehouseNamecomboBox1.TabIndex = 29;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(64, 304);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(35, 14);
+            this.label15.TabIndex = 30;
+            this.label15.Text = "仓库";
+            // 
+            // transportnamecomboBox2
+            // 
+            this.transportnamecomboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.transportnamecomboBox2.FormattingEnabled = true;
+            this.transportnamecomboBox2.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C",
+            "D"});
+            this.transportnamecomboBox2.Location = new System.Drawing.Point(498, 302);
+            this.transportnamecomboBox2.Name = "transportnamecomboBox2";
+            this.transportnamecomboBox2.Size = new System.Drawing.Size(266, 22);
+            this.transportnamecomboBox2.TabIndex = 31;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(428, 304);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(63, 14);
+            this.label16.TabIndex = 32;
+            this.label16.Text = "运输公司";
+            // 
             // StoresManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 397);
+            this.ClientSize = new System.Drawing.Size(828, 421);
             this.Controls.Add(this.submitFormButton);
             this.Controls.Add(this.cancelFormButton);
             this.Controls.Add(this.groupBox1);
@@ -446,5 +500,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox storesComboBox;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox transportnamecomboBox2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox warehouseNamecomboBox1;
+        private System.Windows.Forms.Label label15;
     }
 }

@@ -52,14 +52,16 @@
             this.伝票番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.処理済 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "HACCYU";
-            this.openFileDialog1.Filter = "Files (.xlsm)|*.xlsm|All Files (*.*)|*.*";
+            this.openFileDialog1.Filter = "Files (*.xlsm,*.xlsx)|*.xlsm;*.xlsx|All Files (*.*)|*.*";
             // 
             // openFileBtton
             // 
@@ -262,6 +264,10 @@
             this.処理済.Name = "処理済";
             this.処理済.ReadOnly = true;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // ImportShipNumberForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -289,6 +295,7 @@
             this.Load += new System.EventHandler(this.ImportShipNumberForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -319,5 +326,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
         private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 処理済;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

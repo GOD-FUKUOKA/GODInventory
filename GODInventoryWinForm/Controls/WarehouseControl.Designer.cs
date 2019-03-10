@@ -164,6 +164,7 @@
             this.transportButton.TabIndex = 0;
             this.transportButton.Text = "物流信息维护";
             this.transportButton.UseVisualStyleBackColor = true;
+            this.transportButton.Click += new System.EventHandler(this.transportButton_Click);
             // 
             // warehouseButton
             // 

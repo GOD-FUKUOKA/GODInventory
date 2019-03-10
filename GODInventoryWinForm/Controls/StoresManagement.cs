@@ -18,14 +18,18 @@ namespace GODInventoryWinForm.Controls
         private List<t_shoplist> stores;
         //mark 20181008
         private List<t_warehouses> warehouseList;
-        public StoresManagement( int  storeId, string type)
+        private List<t_transports> transportList;
+
+        public StoresManagement(int storeId, string type)
         {
             InitializeComponent();
-            
+
             using (var ctx = new GODDbContext())
             {
                 this.stores = ctx.t_shoplist.ToList();
                 List<t_customers> customers = ctx.t_customers.ToList();
+                transportList = ctx.t_transports.ToList();
+
 
                 this.cusotmerComboBox.ValueMember = "Id";
                 this.cusotmerComboBox.DisplayMember = "FullName";
@@ -44,7 +48,16 @@ namespace GODInventoryWinForm.Controls
                 this.shipperTextBox.ValueMember = "FullName";
                 this.shipperTextBox.DataSource = shipperCo.ToList();
 
- 
+                this.warehouseNamecomboBox1.DisplayMember = "FullName";
+                this.warehouseNamecomboBox1.ValueMember = "Id";
+                this.warehouseNamecomboBox1.DataSource = shipperCo.ToList();
+
+
+                this.transportnamecomboBox2.DisplayMember = "fullname";
+                this.transportnamecomboBox2.ValueMember = "id";
+                this.transportnamecomboBox2.DataSource = transportList;
+
+
 
                 if (type == "Update")
                 {
@@ -88,6 +101,12 @@ namespace GODInventoryWinForm.Controls
                     {
                         storeRankComboBox.Text = store.売上ランク;
                     }
+
+                    warehouseNamecomboBox1.SelectedValue = store.warehouse_id;
+                    transportnamecomboBox2.SelectedValue = store.transport_id;
+
+
+
                 }
                 else
                 {
@@ -134,6 +153,11 @@ namespace GODInventoryWinForm.Controls
                         store.FAX番号 = this.faxTextBox3.Text;
                         store.営業担当 = this.officerTextBox3.Text;
                         store.売上ランク = this.storeRankComboBox.Text;
+
+                        store.warehouse_id = Convert.ToInt32(this.warehouseNamecomboBox1.SelectedValue);
+                        store.transport_id = Convert.ToInt32(this.transportnamecomboBox2.SelectedValue);
+
+
                         ctx.SaveChanges();
                         MessageBox.Show(String.Format("店舗情報更新完了!"));
                     }
@@ -156,7 +180,7 @@ namespace GODInventoryWinForm.Controls
                         store.県内エリア = districtTextBox.Text;
 
                         store.customerId = Convert.ToInt32(cusotmerComboBox.SelectedValue);
-                        
+
                         store.住所 = addressTextBox1.Text;
 
                         store.電話番号 = phoneTextBox2.Text;
@@ -168,6 +192,11 @@ namespace GODInventoryWinForm.Controls
                         store.売上ランク = this.storeRankComboBox.Text;
 
                         store.参考店舗 = Convert.ToInt32(this.storesComboBox.SelectedValue);
+
+                        store.warehouse_id = Convert.ToInt32(this.warehouseNamecomboBox1.SelectedValue);
+                        store.transport_id = Convert.ToInt32(this.transportnamecomboBox2.SelectedValue);
+
+
 
                         ctx.t_shoplist.Add(store);
                         ctx.SaveChanges();
@@ -218,8 +247,8 @@ namespace GODInventoryWinForm.Controls
             using (var ctx = new GODDbContext())
             {
                 var exists = (from i in ctx.t_shoplist
-                            where i.店番 == zisheID
-                            select i).FirstOrDefault();
+                              where i.店番 == zisheID
+                              select i).FirstOrDefault();
 
                 if (exists != null)
                 {
@@ -236,7 +265,7 @@ namespace GODInventoryWinForm.Controls
                 var storesByCounty = this.stores.Where(s => s.県別 == countyTextBox.Text).ToList();
                 if (storesByCounty.Count > 0)
                 {
-                    this.storesComboBox.DataSource =storesByCounty; 
+                    this.storesComboBox.DataSource = storesByCounty;
                 }
             }
         }

@@ -268,6 +268,24 @@
     <Compile Include="Controls\CreateTransportsFee.Designer.cs">
       <DependentUpon>CreateTransportsFee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Warehouse\EditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Warehouse\EditForm.Designer.cs">
+      <DependentUpon>EditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Warehouse\IndexForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Warehouse\IndexForm.Designer.cs">
+      <DependentUpon>IndexForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Warehouse\NewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Warehouse\NewForm.Designer.cs">
+      <DependentUpon>NewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GenerateASNTextForm_Auto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -547,6 +565,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CreateTransportsFee.resx">
       <DependentUpon>CreateTransportsFee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Warehouse\EditForm.resx">
+      <DependentUpon>EditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Warehouse\IndexForm.resx">
+      <DependentUpon>IndexForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Warehouse\NewForm.resx">
+      <DependentUpon>NewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GenerateASNTextForm_Auto.resx">
       <DependentUpon>GenerateASNTextForm_Auto.cs</DependentUpon>

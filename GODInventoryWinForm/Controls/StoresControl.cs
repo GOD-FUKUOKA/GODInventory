@@ -14,16 +14,40 @@ namespace GODInventoryWinForm.Controls
 
     public partial class StoresControl : UserControl
     {
+        private List<t_warehouses> warehouseList;
+        private List<t_transports> transportList;
+
         List<t_customers> customerList = new List<t_customers>();
         public StoresControl()
         {
             InitializeComponent();
             using (var ctx = new GODDbContext()) {
                 customerList = ctx.t_customers.ToList();
+                warehouseList = ctx.t_warehouses.ToList();
+                transportList = ctx.t_transports.ToList();
             }
             this.CustomerColumn1.ValueMember = "Id";
             this.CustomerColumn1.DisplayMember = "FullName";
             this.CustomerColumn1.DataSource = customerList;
+
+
+            var shipperCo = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
+
+            shipperCo.Insert(0, new MockEntity { ShortName = "", FullName = "" });
+            this.warehouseidDataGridViewTextBoxColumn.DisplayMember = "FullName";
+            this.warehouseidDataGridViewTextBoxColumn.ValueMember = "Id";
+            this.warehouseidDataGridViewTextBoxColumn.DataSource = shipperCo.ToList();
+
+
+            var transportListCo = transportList.Select(s => new MockEntity { Id = s.id, ShortName = s.shortname, FullName = s.fullname }).Distinct().ToList();
+
+            transportListCo.Insert(0, new MockEntity { ShortName = "", FullName = "" });
+            this.transportidDataGridViewTextBoxColumn.DisplayMember = "FullName";
+            this.transportidDataGridViewTextBoxColumn.ValueMember = "Id";
+            this.transportidDataGridViewTextBoxColumn.DataSource = transportListCo;
+
+
+
         }
 
         private void SaveItem_Click(object sender, EventArgs e)
@@ -166,6 +190,19 @@ namespace GODInventoryWinForm.Controls
             //int storeId = (int)this.storesComboBox.SelectedValue;
             //InitializePriceListDatagridView(storeId);
 
+        }
+
+        private void storesDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            var row = storesDataGridView.CurrentRow;
+           
+            //var order = row.DataBoundItem as t_shoplist;
+
+            //t_shoplist store = ctx.t_shoplist.Find(storeId);
+               
+
+            //editOrderForm.OrderId = order.店番;
+              
         }
 
 

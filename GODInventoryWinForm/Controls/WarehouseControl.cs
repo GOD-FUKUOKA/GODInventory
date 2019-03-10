@@ -17,8 +17,9 @@ namespace GODInventoryWinForm.Controls
         private InventoryForm StockCheckForm;
         private CopyofInputStock CopyofInputStock;
         private Transports.IndexForm transportsIndexForm;
+        private Warehouse.IndexForm warehouseIndexForm;
 
-
+        
         private SearchStock Search_Strock;
 
         public WarehouseControl()
@@ -189,6 +190,17 @@ namespace GODInventoryWinForm.Controls
             //  AdjustSubformSize(CreateTransportForm);
             // 显示之前重新加载数据，订单数据可能已更新。
             transportsIndexForm.ShowDialog();
+        }
+
+        private void transportButton_Click(object sender, EventArgs e)
+        {
+            if (warehouseIndexForm == null)
+            {
+                warehouseIndexForm = new Warehouse.IndexForm();
+            }
+            //  AdjustSubformSize(CreateTransportForm);
+            // 显示之前重新加载数据，订单数据可能已更新。
+            warehouseIndexForm.ShowDialog();
         }
     }
 }

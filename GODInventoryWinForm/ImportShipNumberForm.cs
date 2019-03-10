@@ -86,7 +86,7 @@ namespace GODInventoryWinForm
                     models.Clear();
                     success = false;
                     MessageBox.Show(string.Format("{0}", exception.Message));
-              
+
                 }
 
 
@@ -334,6 +334,13 @@ namespace GODInventoryWinForm
                     throw new Exception(String.Format("Can not find price by sheet", "", ""));
 
                 }
+
+                //保存之前需要检验属性是否正确
+                if (!validateAttributes(worksheetPart, wbPart))
+                {
+                    return null;
+                }
+
 
                 int indexrow = 5;
                 int rocount = worksheetPart.Worksheet.Count();
@@ -583,6 +590,40 @@ namespace GODInventoryWinForm
         {
 
         }
+
+
+
+        private bool validateAttributes(WorksheetPart worksheetPart, WorkbookPart wbPart)
+        {
+
+            string msg = String.Empty;
+            var validated = true;
+
+            Cell theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "A" + 4).FirstOrDefault();
+            if (theCell != null)
+            {
+                string version = GetCellValue(wbPart, theCell);
+                if (!version.Contains("出荷No"))
+                    validated = false;
+
+            }
+            theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "O" + 4).FirstOrDefault();
+            if (theCell != null)
+            {
+                string version = GetCellValue(wbPart, theCell);
+                if (!version.Contains("処理済"))
+                    validated = false;
+
+            }
+
+            if (validated == false)
+            {
+                msg = "选择文件错误，请检查！";
+                errorProvider1.SetError(pathTextBox, msg);
+            }
+            return validated;
+        }
+
 
     }
 }
