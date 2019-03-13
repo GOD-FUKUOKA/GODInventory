@@ -312,6 +312,8 @@ namespace GODInventory.MyLinq
         [StringLength(45)]
         public string warehouseName { get; set; }
 
+        public decimal 運賃 { get; set; }        
+
         public t_orderdata()
         {
             this.キャンセル = "no";
