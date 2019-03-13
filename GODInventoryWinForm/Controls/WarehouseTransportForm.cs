@@ -20,8 +20,8 @@ namespace GODInventoryWinForm.Controls
         List<t_transports> FindtransportList;
         private int wid;
         private int tid;
-        //private List<v_transport> V_transportList;
-        private BindingList<v_transport> V_transportList;
+        //private List<t_transports> V_transportList;
+        private BindingList<t_transports> V_transportList;
         private Hashtable datagridChanges = null;
         int RowRemark = 0;
         int cloumn = 0;
@@ -74,7 +74,7 @@ namespace GODInventoryWinForm.Controls
         }
         private void addButton_Click(object sender, EventArgs e)
         {
-            v_transport item = new v_transport();
+            t_transports item = new t_transports();
 
 
 
@@ -158,8 +158,8 @@ namespace GODInventoryWinForm.Controls
             var rows = GetSelectedRowsBySelectedCells(dataGridView1);
             foreach (DataGridViewRow row in rows)
             {
-                var order = row.DataBoundItem as v_transport;
-                order_ids.Add(order.Transport_name);
+                var order = row.DataBoundItem as t_transports;
+                order_ids.Add(order.fullname);
             }
 
             return order_ids;
@@ -206,13 +206,12 @@ namespace GODInventoryWinForm.Controls
                         }
                         //添加显示集合
                         t_warehouses widlist = warehouseList.Find(o => o.Id != null && o.Id == Convert.ToInt32(wid));
-                        V_transportList = new BindingList<v_transport>();
+                        V_transportList = new BindingList<t_transports>();
                         foreach (t_transports item in FindtransportList)
                         {
-                            v_transport temp = new v_transport();
+                            t_transports temp = new t_transports();
 
-                            temp.ShipperName = widlist.ShipperName;
-                            temp.Transport_name = item.fullname;
+                            temp.fullname = item.fullname;
                             V_transportList.Add(temp);
                         }
 
@@ -338,13 +337,7 @@ namespace GODInventoryWinForm.Controls
         private void bteditwh_Click(object sender, EventArgs e)
         {
 
-            var form = new Edit_Warehouse();
-            form.wid = wid;
-            form.InitializeOrder();
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                InitializeDataSource();
-            }
+          
         }
 
         private void btloadTransport_Click(object sender, EventArgs e)

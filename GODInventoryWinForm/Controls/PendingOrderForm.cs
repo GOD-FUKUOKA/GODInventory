@@ -40,9 +40,7 @@ namespace GODInventoryWinForm.Controls
         private List<t_warehouses> warehouseList;
         private List<t_warehouses_transports> warehouses_transportsList;
         List<t_transports> FindtransportList;
-        private BindingList<v_transport> V_transportList;
-
-        DataGridView clickdav;
+        //private BindingList<v_transport> V_transportList;
 
 
 
@@ -88,6 +86,7 @@ namespace GODInventoryWinForm.Controls
             this.transportColumn1.DataSource = transports1;
 
 
+            // 担当
             this.shipperComboBox.DisplayMember = "fullname";
             this.shipperComboBox.ValueMember = "fullname";
             this.shipperComboBox.DataSource = transports2;
@@ -98,11 +97,6 @@ namespace GODInventoryWinForm.Controls
             //this.DanDangComboBox.ValueMember = "FullName";
             //this.DanDangComboBox.DataSource = shipperCo.ToList();
 
-            // 担当
-            // var shippers = warehouseList.Select(s => new MockEntity { ShortName = s.ShortName, FullName = s.ShipperName }).Distinct().ToList();
-            //this.ShipperColumn1.DisplayMember = "FullName";
-            //this.ShipperColumn1.ValueMember = "ShortName";
-            //this.ShipperColumn1.DataSource = shippers;
 
             // 传票订正仓库
             var warehouse1 = warehouseList.Select(s => new {   fullname = s.FullName }).Distinct().ToList();
@@ -418,7 +412,7 @@ FROM t_orderdata o
 INNER JOIN t_genre g  on o.ジャンル = g.idジャンル
 INNER JOIN t_shoplist s  on o.法人コード = s.customerId AND  o.店舗コード = s.店番 
 INNER JOIN t_pricelist p on  o.自社コード = p.自社コード AND  o.店舗コード = p.店番 
-LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.実際配送担当 = k.ShipperName 
+LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.warehouseName = k.ShipperName 
 WHERE o.Status ={0}
 ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
 
@@ -1307,117 +1301,117 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
 
         }
 
-        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            //a
-            clickdav = dataGridView1;
+        //private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        //{
+        //    //a
+        //    clickdav = dataGridView1;
 
-            var warehouse = warehouselistBox();
-            //List<t_warehouses_transports> mlist = warehouses_transportsList.FindAll(o => o.wid != null && o.wid == Convert.ToInt32(warehouse)).ToList();
-            RowRemark = dataGridView1.CurrentCell.RowIndex;
-            if (dataGridView1.CurrentCell.ColumnIndex == 12)
-            {
-                //临时更改需求注销
-                //ComboBox comboBox = e.Control as ComboBox;
-                //comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
+        //    var warehouse = warehouselistBox();
+        //    //List<t_warehouses_transports> mlist = warehouses_transportsList.FindAll(o => o.wid != null && o.wid == Convert.ToInt32(warehouse)).ToList();
+        //    RowRemark = dataGridView1.CurrentCell.RowIndex;
+        //    if (dataGridView1.CurrentCell.ColumnIndex == 12)
+        //    {
+        //        //临时更改需求注销
+        //        //ComboBox comboBox = e.Control as ComboBox;
+        //        //comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
             
-            }
+        //    }
 
-        }
+        //}
 
-        private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (clickdav.CurrentCell.ColumnIndex != 12)
-                return;
+        //private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if (clickdav.CurrentCell.ColumnIndex != 12)
+        //        return;
 
-            // Set the value of column "dgv_txt"
-            string snsd = ((ComboBox)sender).Text;
-            if (clickdav.Rows[RowRemark].Cells["warehouseName"].EditedFormattedValue.ToString() == null)
-                return;
+        //    // Set the value of column "dgv_txt"
+        //    string snsd = ((ComboBox)sender).Text;
+        //    if (clickdav.Rows[RowRemark].Cells["warehouseName"].EditedFormattedValue.ToString() == null)
+        //        return;
 
-            snsd = clickdav.Rows[RowRemark].Cells["warehouseName"].EditedFormattedValue.ToString();
+        //    snsd = clickdav.Rows[RowRemark].Cells["warehouseName"].EditedFormattedValue.ToString();
 
-            t_warehouses widlist1 = warehouseList.Find(o => o.FullName != null && o.FullName == snsd);
-            if (widlist1 != null)
-            {
-                int wid = widlist1.Id;
-
-
-                //读取关系表内的所有 仓库下的 关系 运输公司
-                List<t_warehouses_transports> mlist = warehouses_transportsList.FindAll(o => o.wid != null && o.wid == Convert.ToInt32(wid)).ToList();
-                V_transportList = new BindingList<v_transport>();
-                if (mlist.Count > 0)
-                {
-                    //循环读取出运输公司下的所有子信息
-                    FindtransportList = new List<t_transports>();
-
-                    for (int i = 0; i < mlist.Count; i++)
-                    {
-                        List<t_transports> nlist = transportList.FindAll(o => o.id != null && o.id == Convert.ToInt32(mlist[i].tid)).ToList();
-                        FindtransportList = FindtransportList.Concat(nlist).ToList();
-                    }
-                    //添加显示集合
-                    t_warehouses widlist = warehouseList.Find(o => o.Id != null && o.Id == Convert.ToInt32(wid));
-                    V_transportList = new BindingList<v_transport>();
-                    foreach (t_transports item in FindtransportList)
-                    {
-                        v_transport temp = new v_transport();
-
-                        temp.ShipperName = widlist.ShipperName;
-                        temp.Transport_name = item.fullname;
-                        temp.FullName = item.fullname;
-                        V_transportList.Add(temp);
-                    }
-                    //this.ShipperColumn1.DisplayMember = "FullName";
-                    //this.ShipperColumn1.ValueMember = "FullName";
-                    //this.ShipperColumn1.DataSource = V_transportList;
+        //    t_warehouses widlist1 = warehouseList.Find(o => o.FullName != null && o.FullName == snsd);
+        //    if (widlist1 != null)
+        //    {
+        //        int wid = widlist1.Id;
 
 
-                    ((ComboBox)sender).DisplayMember = "FullName";
-                    ((ComboBox)sender).ValueMember = "FullName";
-                    ((ComboBox)sender).DataSource = V_transportList;
+        //        //读取关系表内的所有 仓库下的 关系 运输公司
+        //        List<t_warehouses_transports> mlist = warehouses_transportsList.FindAll(o => o.wid != null && o.wid == Convert.ToInt32(wid)).ToList();
+        //        V_transportList = new BindingList<v_transport>();
+        //        if (mlist.Count > 0)
+        //        {
+        //            //循环读取出运输公司下的所有子信息
+        //            FindtransportList = new List<t_transports>();
+
+        //            for (int i = 0; i < mlist.Count; i++)
+        //            {
+        //                List<t_transports> nlist = transportList.FindAll(o => o.id != null && o.id == Convert.ToInt32(mlist[i].tid)).ToList();
+        //                FindtransportList = FindtransportList.Concat(nlist).ToList();
+        //            }
+        //            //添加显示集合
+        //            t_warehouses widlist = warehouseList.Find(o => o.Id != null && o.Id == Convert.ToInt32(wid));
+        //            V_transportList = new BindingList<v_transport>();
+        //            foreach (t_transports item in FindtransportList)
+        //            {
+        //                v_transport temp = new v_transport();
+
+        //                temp.ShipperName = widlist.ShipperName;
+        //                temp.Transport_name = item.fullname;
+        //                temp.FullName = item.fullname;
+        //                V_transportList.Add(temp);
+        //            }
+        //            //this.ShipperColumn1.DisplayMember = "FullName";
+        //            //this.ShipperColumn1.ValueMember = "FullName";
+        //            //this.ShipperColumn1.DataSource = V_transportList;
 
 
-                }
-                else
-                {
-                    ((ComboBox)sender).DisplayMember = "FullName";
-                    ((ComboBox)sender).ValueMember = "FullName";
-                    ((ComboBox)sender).DataSource = V_transportList;
+        //            ((ComboBox)sender).DisplayMember = "FullName";
+        //            ((ComboBox)sender).ValueMember = "FullName";
+        //            ((ComboBox)sender).DataSource = V_transportList;
 
 
-                }
-
-            }
-            else
-            {
-                ((ComboBox)sender).DisplayMember = "fullname";
-                ((ComboBox)sender).ValueMember = "fullname";
-                ((ComboBox)sender).DataSource = transportList;
+        //        }
+        //        else
+        //        {
+        //            ((ComboBox)sender).DisplayMember = "FullName";
+        //            ((ComboBox)sender).ValueMember = "FullName";
+        //            ((ComboBox)sender).DataSource = V_transportList;
 
 
-            }
-        }
+        //        }
 
-        private void dataGridView3_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
+        //    }
+        //    else
+        //    {
+        //        ((ComboBox)sender).DisplayMember = "fullname";
+        //        ((ComboBox)sender).ValueMember = "fullname";
+        //        ((ComboBox)sender).DataSource = transportList;
 
-            clickdav = dataGridView3;
 
-            RowRemark = dataGridView3.CurrentCell.RowIndex;
-            if (dataGridView3.CurrentCell.ColumnIndex == 12)
-            {
-                //临时更改需求注销
-                //ComboBox comboBox = e.Control as ComboBox;
-                //comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
+        //    }
+        //}
+
+        //private void dataGridView3_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        //{
+
+        //    clickdav = dataGridView3;
+
+        //    RowRemark = dataGridView3.CurrentCell.RowIndex;
+        //    if (dataGridView3.CurrentCell.ColumnIndex == 12)
+        //    {
+        //        //临时更改需求注销
+        //        //ComboBox comboBox = e.Control as ComboBox;
+        //        //comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
  
 
-            }
+        //    }
 
 
 
 
 
-        }
+        //}
     }
 }

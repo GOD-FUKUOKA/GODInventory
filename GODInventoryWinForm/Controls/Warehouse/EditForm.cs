@@ -123,7 +123,6 @@ namespace GODInventoryWinForm.Controls.Warehouse
             model.phone = this.phoneTextBox.Text.Trim();
             model.fax = this.faxTextBox.Text.Trim();
             model.memo = this.memoTextBox.Text.Trim();
-            model.ShipperName = this.fullNameTextBox.Text.Trim();
            
             return model;
         }

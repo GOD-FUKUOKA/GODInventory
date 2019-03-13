@@ -226,12 +226,6 @@
     <Compile Include="Controls\WarehouseTransportForm.Designer.cs">
       <DependentUpon>WarehouseTransportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Edit_Warehouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controls\Edit_Warehouse.Designer.cs">
-      <DependentUpon>Edit_Warehouse.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Transports\EditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -532,9 +526,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\WarehouseTransportForm.resx">
       <DependentUpon>WarehouseTransportForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Edit_Warehouse.resx">
-      <DependentUpon>Edit_Warehouse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Transports\EditForm.resx">
       <DependentUpon>EditForm.cs</DependentUpon>

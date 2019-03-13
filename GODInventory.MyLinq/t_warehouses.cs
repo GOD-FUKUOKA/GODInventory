@@ -13,7 +13,7 @@ namespace GODInventory.MyLinq
         public int Id { get; set; }
         public string ShortName { get; set; }
         public string FullName { get; set; }
-        public string ShipperName { get; set; }
+        //public string ShipperName { get; set; }
         public string address { get; set; }
         public string phone { get; set; }
         public string fax { get; set; }

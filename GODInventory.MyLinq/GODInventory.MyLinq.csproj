@@ -82,7 +82,6 @@
     <Compile Include="GODDbContext.cs" />
     <Compile Include="v_stockcheck.cs" />
     <Compile Include="WeekDayEnum.cs" />
-    <Compile Include="v_transport.cs" />
     <Compile Include="t_transports.cs" />
     <Compile Include="t_warehouses_transports.cs" />
     <Compile Include="t_freights.cs" />
