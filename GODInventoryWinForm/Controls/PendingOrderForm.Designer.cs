@@ -41,6 +41,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.selectedRowsLabel = new System.Windows.Forms.Label();
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.ClearSelect = new System.Windows.Forms.Button();
             this.ZKZTcomboBox3 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -73,7 +74,7 @@
             this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.重量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warehouseNameColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.warehouseNameColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注形態 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,7 +87,6 @@
             this.entityDataSource2 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreCodeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreNameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -99,8 +99,8 @@
             this.実際出荷数量Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.重量Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.訂正理由区分Column = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.ShipperColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.warehouseName = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.transportColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.warehouseNameColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品指示Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.備考Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -234,6 +234,22 @@
             this.selectedRowsLabel.TabIndex = 26;
             this.selectedRowsLabel.Text = "label5";
             this.selectedRowsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(0, 3);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(727, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // ClearSelect
             // 
@@ -402,8 +418,8 @@
             this.実際出荷数量Column,
             this.重量Column,
             this.訂正理由区分Column,
-            this.ShipperColumn1,
-            this.warehouseName,
+            this.transportColumn1,
+            this.warehouseNameColumn,
             this.Column2,
             this.納品指示Column1,
             this.備考Column1,
@@ -534,7 +550,7 @@
             this.dataGridViewTextBoxColumn31,
             this.重量Column1,
             this.dataGridViewTextBoxColumn32,
-            this.warehouseNameColumn1,
+            this.warehouseNameColumn2,
             this.dataGridViewTextBoxColumn33,
             this.dataGridViewTextBoxColumn35,
             this.発注形態,
@@ -629,15 +645,15 @@
             this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
             this.dataGridViewTextBoxColumn32.ReadOnly = true;
             // 
-            // warehouseNameColumn1
+            // warehouseNameColumn2
             // 
-            this.warehouseNameColumn1.DataPropertyName = "warehouseName";
-            this.warehouseNameColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.warehouseNameColumn1.HeaderText = "仓库";
-            this.warehouseNameColumn1.Name = "warehouseNameColumn1";
-            this.warehouseNameColumn1.ReadOnly = true;
-            this.warehouseNameColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.warehouseNameColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.warehouseNameColumn2.DataPropertyName = "warehouseName";
+            this.warehouseNameColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.warehouseNameColumn2.HeaderText = "仓库";
+            this.warehouseNameColumn2.Name = "warehouseNameColumn2";
+            this.warehouseNameColumn2.ReadOnly = true;
+            this.warehouseNameColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.warehouseNameColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // dataGridViewTextBoxColumn33
             // 
@@ -707,22 +723,6 @@
             // 
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
-            // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(0, 3);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(727, 34);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // OrderReceivedAtColumn1
             // 
@@ -819,25 +819,26 @@
             this.訂正理由区分Column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.訂正理由区分Column.Width = 90;
             // 
-            // ShipperColumn1
+            // transportColumn1
             // 
-            this.ShipperColumn1.DataPropertyName = "実際配送担当";
-            this.ShipperColumn1.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.ShipperColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ShipperColumn1.HeaderText = "担当";
-            this.ShipperColumn1.Name = "ShipperColumn1";
-            this.ShipperColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ShipperColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ShipperColumn1.Width = 90;
+            this.transportColumn1.DataPropertyName = "実際配送担当";
+            this.transportColumn1.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.transportColumn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.transportColumn1.HeaderText = "担当";
+            this.transportColumn1.Name = "transportColumn1";
+            this.transportColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.transportColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.transportColumn1.Width = 90;
             // 
-            // warehouseName
+            // warehouseNameColumn
             // 
-            this.warehouseName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.warehouseName.HeaderText = "仓库";
-            this.warehouseName.Name = "warehouseName";
-            this.warehouseName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.warehouseName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.warehouseName.Width = 90;
+            this.warehouseNameColumn.DataPropertyName = "warehouseName";
+            this.warehouseNameColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.warehouseNameColumn.HeaderText = "仓库";
+            this.warehouseNameColumn.Name = "warehouseNameColumn";
+            this.warehouseNameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.warehouseNameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.warehouseNameColumn.Width = 90;
             // 
             // Column2
             // 
@@ -992,7 +993,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
         private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
-        private System.Windows.Forms.DataGridViewComboBoxColumn warehouseNameColumn1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn warehouseNameColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注形態;
@@ -1009,8 +1010,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 実際出荷数量Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column;
         private System.Windows.Forms.DataGridViewComboBoxColumn 訂正理由区分Column;
-        private System.Windows.Forms.DataGridViewComboBoxColumn ShipperColumn1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn warehouseName;
+        private System.Windows.Forms.DataGridViewComboBoxColumn transportColumn1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn warehouseNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 備考Column1;

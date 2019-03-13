@@ -246,28 +246,7 @@ namespace GODInventoryWinForm.Controls
 
         private void addtsButton_Click(object sender, EventArgs e)
         {
-            var form = new Create_Transports();
-            form.wid = wid;
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-
-                //待确认，是否选择仓库直接添加到其名下
-                //int tid = form.tid;
-
-                //using (var ctx = new GODDbContext())
-                //{
-
-                //    t_warehouses_transports item = new t_warehouses_transports();
-                //    item.wid = wid;
-                //    item.tid = tid;
-
-                //    ctx.t_warehouses_transports.Add(item);
-                //    ctx.SaveChanges();
-
-                //}
-                //this.entityDataSource1.Refresh();
-                InitializeDataSource();
-            }
+            
 
         }
 
@@ -351,16 +330,7 @@ namespace GODInventoryWinForm.Controls
 
         private void btAddWarehouse_Click(object sender, EventArgs e)
         {
-            var form = new Create_Warehouse();
-
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-
-                //this.entityDataSource1.Refresh();
-                InitializeDataSource();
-
-            }
-
+           
 
 
         }

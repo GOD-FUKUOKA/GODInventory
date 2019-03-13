@@ -192,6 +192,10 @@ namespace GODInventoryWinForm
                             {
                                 throw new Exception(String.Format("Can not find shop by shopcode {0}", model.StoreCode));
                             }
+                            if (shop.warehouseName == null || shop.warehouseName == string.Empty)
+                            {
+                                throw new Exception(String.Format("Can not find shop default warehouse name for shop {0}", shop.店名));
+                            }
                             var price = prices.FirstOrDefault(s => s.店番 == shop.店番 && s.自社コード==item.自社コード);
                             if (price == null)
                             {

@@ -138,53 +138,52 @@ namespace GODInventory.ViewModel
             return q;
         }
 
-        public static IQueryable<v_pendingorder> PendingOrderQueryEx(EntityDataSource entityDataSource1)
-        {
-            var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                     //join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on new { jid = o.ＪＡＮコード, sid = o.実際配送担当 } equals new { jid = i.JANコード, sid = i.配送担当 }
-                     //join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on o.自社コード equals  i.自社コード
-                     join t_stockstate k in entityDataSource1.EntitySets["t_stockstate"] on new { pid = o.自社コード, sid = o.実際配送担当 } equals new { pid = k.自社コード, sid = k.ShipperName } into t_join
-                     from x in t_join.DefaultIfEmpty()
-                     join t_genre g in entityDataSource1.EntitySets["t_genre"] on o.ジャンル equals g.idジャンル
-                     where o.Status == OrderStatus.Pending
-                     orderby o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
-                     select new v_pendingorder
-                     {
-                         id受注データ = o.id受注データ,
-                         出荷日 = o.出荷日,
-                         納品日 = o.納品日,
-                         受注日 = o.受注日,
-                         店舗名漢字 = o.店舗名漢字,
-                         店舗コード = o.店舗コード,
-                         納品場所名漢字 = o.納品場所名漢字,
-                         伝票番号 = o.伝票番号,
-                         自社コード = o.自社コード,
-                         口数 = o.口数,
-                         納品口数 = o.納品口数,
-                         重量 = o.重量,
-                         ジャンル = o.ジャンル,
-                         品名漢字 = o.品名漢字,
-                         規格名漢字 = o.規格名漢字,
-                         発注数量 = o.発注数量,
-                         最小発注単位数量 = o.最小発注単位数量,
-                         実際出荷数量 = o.実際出荷数量,
-                         実際配送担当 = o.実際配送担当,
-                         県別 = o.県別,
-                         発注形態名称漢字 = o.発注形態名称漢字,
-                         キャンセル = o.キャンセル,
-                         ダブリ = o.ダブリ,
-                         一旦保留 = o.一旦保留,
-                         在庫状態 = "unkown",
-                         法人名漢字 = o.法人名漢字,
-                         備考 = o.備考,
-                         納品指示 = o.納品指示,
-                         訂正理由区分 = o.訂正理由区分,
-                         在庫数 = x.在庫数,
-                         GenreName = g.ジャンル名
-                     });
-            return q;
-
-        }
+        //public static IQueryable<v_pendingorder> PendingOrderQueryEx(EntityDataSource entityDataSource1)
+        //{
+        //    var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
+        //             //join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on new { jid = o.ＪＡＮコード, sid = o.実際配送担当 } equals new { jid = i.JANコード, sid = i.配送担当 }
+        //             //join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on o.自社コード equals  i.自社コード
+        //             join t_stockstate k in entityDataSource1.EntitySets["t_stockstate"] on new { pid = o.自社コード, sid = o.実際配送担当 } equals new { pid = k.自社コード, sid = k.ShipperName } into t_join
+        //             from x in t_join.DefaultIfEmpty()
+        //             join t_genre g in entityDataSource1.EntitySets["t_genre"] on o.ジャンル equals g.idジャンル
+        //             where o.Status == OrderStatus.Pending
+        //             orderby o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
+        //             select new v_pendingorder
+        //             {
+        //                 id受注データ = o.id受注データ,
+        //                 出荷日 = o.出荷日,
+        //                 納品日 = o.納品日,
+        //                 受注日 = o.受注日,
+        //                 店舗名漢字 = o.店舗名漢字,
+        //                 店舗コード = o.店舗コード,
+        //                 納品場所名漢字 = o.納品場所名漢字,
+        //                 伝票番号 = o.伝票番号,
+        //                 自社コード = o.自社コード,
+        //                 口数 = o.口数,
+        //                 納品口数 = o.納品口数,
+        //                 重量 = o.重量,
+        //                 ジャンル = o.ジャンル,
+        //                 品名漢字 = o.品名漢字,
+        //                 規格名漢字 = o.規格名漢字,
+        //                 発注数量 = o.発注数量,
+        //                 最小発注単位数量 = o.最小発注単位数量,
+        //                 実際出荷数量 = o.実際出荷数量,
+        //                 実際配送担当 = o.実際配送担当,
+        //                 県別 = o.県別,
+        //                 発注形態名称漢字 = o.発注形態名称漢字,
+        //                 キャンセル = o.キャンセル,
+        //                 ダブリ = o.ダブリ,
+        //                 一旦保留 = o.一旦保留,
+        //                 在庫状態 = "unkown",
+        //                 法人名漢字 = o.法人名漢字,
+        //                 備考 = o.備考,
+        //                 納品指示 = o.納品指示,
+        //                 訂正理由区分 = o.訂正理由区分,
+        //                 在庫数 = x.在庫数,
+        //                 GenreName = g.ジャンル名
+        //             });
+        //    return q;
+        //}
 
         //sqlStr = "SELECT t_orderdata.`出荷日`,t_orderdata.`納品日`,t_orderdata.`受注日`,t_orderdata.`キャンセル`,t_orderdata.`一旦保留`," _
         //& " t_orderdata.`伝票番号`,t_orderdata.`社内伝番`,t_orderdata.`行数`,t_orderdata.`最大行数`,t_orderdata.`口数`,t_orderdata.`発注数量`," _
@@ -597,7 +596,7 @@ namespace GODInventory.ViewModel
                 List<t_stockrec> changes = new List<t_stockrec>();
                 foreach (var order in orders)
                 {
-                    var warehouse = warehouseList.Find(o => o.ShipperName == order.実際配送担当);
+                    var warehouse = warehouseList.Find(o => o.FullName == order.warehouseName);
                     // add stockrec
                     var genreId = order.ジャンル;
                     var date = DateTime.Now;
@@ -956,13 +955,13 @@ namespace GODInventory.ViewModel
                    if (stockstate != null)
                    {
                        stockstate.在庫数 = qty;
-                       stockstate.ShipperName = warehouse.ShipperName;
+                       stockstate.ShipperName = warehouse.FullName;
                    }
                    else {
                        stockstate = new t_stockstate();
                        stockstate.自社コード = pid;
                        stockstate.WarehouseID = warehouse.Id;
-                       stockstate.ShipperName = warehouse.ShipperName;
+                       stockstate.ShipperName = warehouse.FullName;
                        stockstate.在庫数 = qty;
 
                        ctx.t_stockstate.Add(stockstate);
@@ -985,7 +984,7 @@ namespace GODInventory.ViewModel
         }
 
 
-        public static int NotifyShipper(GODDbContext ctx, List<v_pendingorder> pendingOrders, string shipperName)
+        public static int NotifyShipper(GODDbContext ctx, List<v_pendingorder> pendingOrders, string transportName)
         {
             var orderIds = pendingOrders.Select(order => order.id受注データ).ToList();
             // 确保没有 OrderId 冲突
@@ -1082,7 +1081,7 @@ namespace GODInventory.ViewModel
 
             ctx.t_maruken_trans.AddRange(trans);
 
-            sql = String.Format("UPDATE t_orderdata SET `Status`={3}, `最終出荷数`=`実際出荷数量`, `配送担当受信`=TRUE, `配送担当受信時刻`= NOW() WHERE `Status`={0} AND `実際配送担当`='{1}' AND `id受注データ` in ({2});", (int)OrderStatus.NotifyShipper, shipperName, String.Join(",", orderIds.ToArray()), (int)OrderStatus.WaitToShip);
+            sql = String.Format("UPDATE t_orderdata SET `Status`={3}, `最終出荷数`=`実際出荷数量`, `配送担当受信`=TRUE, `配送担当受信時刻`= NOW() WHERE `Status`={0} AND `実際配送担当`='{1}' AND `id受注データ` in ({2});", (int)OrderStatus.NotifyShipper, transportName, String.Join(",", orderIds.ToArray()), (int)OrderStatus.WaitToShip);
 
             count = ctx.Database.ExecuteSqlCommand(sql); 
             

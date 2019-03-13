@@ -42,8 +42,6 @@
             this.CustomerColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.売上ランク = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.営業担当 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warehouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transport = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店番DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.店名カナDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,8 +80,6 @@
             this.CustomerColumn1,
             this.売上ランク,
             this.営業担当,
-            this.warehouse,
-            this.transport,
             this.店番DataGridViewTextBoxColumn,
             this.店名DataGridViewTextBoxColumn,
             this.店名カナDataGridViewTextBoxColumn,
@@ -207,20 +203,6 @@
             this.営業担当.Name = "営業担当";
             this.営業担当.ReadOnly = true;
             this.営業担当.Width = 80;
-            // 
-            // warehouse
-            // 
-            this.warehouse.DataPropertyName = "店番";
-            this.warehouse.HeaderText = "仓库";
-            this.warehouse.Name = "warehouse";
-            this.warehouse.ReadOnly = true;
-            // 
-            // transport
-            // 
-            this.transport.DataPropertyName = "店番";
-            this.transport.HeaderText = "运输公司";
-            this.transport.Name = "transport";
-            this.transport.ReadOnly = true;
             // 
             // 店番DataGridViewTextBoxColumn
             // 
@@ -373,8 +355,6 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn CustomerColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 売上ランク;
         private System.Windows.Forms.DataGridViewTextBoxColumn 営業担当;
-        private System.Windows.Forms.DataGridViewTextBoxColumn warehouse;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transport;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店番DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店名DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 店名カナDataGridViewTextBoxColumn;

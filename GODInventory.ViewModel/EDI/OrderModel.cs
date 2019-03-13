@@ -11,6 +11,21 @@ namespace GODInventory.ViewModel.EDI
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
+
+
+    /// <summary>
+    /// 定义edi订单处理模型，收到的订单文件，每一行是一个订单，解析行数据，生成订单模型，再转换成sql，最后插入数据库。
+    /// <para>
+    /// Use the <strong>mvvminpc</strong> snippet to add bindable properties to this ViewModel.
+    /// </para>
+    /// <para>
+    /// You can also use Blend to data bind with the tool's support.
+    /// </para>
+    /// <para>
+    /// See http://www.galasoft.ch/mvvm
+    /// </para>
+    /// </summary>
+    /// 
     public class OrderModel
     {
         //1 データID       3 1
@@ -479,6 +494,7 @@ namespace GODInventory.ViewModel.EDI
             orderdata.自社コード = item.自社コード;
             orderdata.実際配送担当 = price.配送担当;
             orderdata.県別 = shop.県別;
+            orderdata.warehouseName = shop.warehouseName;
             orderdata.最小発注単位数量 = item.PT入数;
             orderdata.重量 = (int)(item.単品重量 * orderdata.発注数量);
             if (orderdata.最小発注単位数量 > 0)
@@ -503,7 +519,7 @@ namespace GODInventory.ViewModel.EDI
             //}
             if (orderdata.実際配送担当==null || orderdata.実際配送担当 == String.Empty)
             {
-                orderdata.実際配送担当 = "丸健";
+                orderdata.実際配送担当 = shop.配送担当;
             }
 
             orderdata.納品原価金額 = orderdata.原価金額_税抜_;
@@ -643,7 +659,7 @@ namespace GODInventory.ViewModel.EDI
 `伝票出力単位`, `納品先店舗コード`, `納品先店舗名漢字`, `納品先店舗名カナ`, `納品場所名カナ`, 
 `便区分`, `センター経由区分`, `センターコード`, `センター名漢字`, `センター名カナ`,
 `実際配送担当`, `配送担当受信`,`口数`,`重量`,`単位`,
-`ジャンル`) 
+`ジャンル`,`warehouseName`) 
 VALUES (
 @p1, @p2, @p3, @p4, @p5, 
 @p6, @p7, @p8, @p9, @p10, 
@@ -654,7 +670,7 @@ VALUES (
 @p51, @p52, @p53, @p54, @p55, @p56, @p57, @p58, @p59, @p60, 
 @p61, @p62, @p63, @p64, @p65, @p66, @p67, @p68, @p69, @p70, 
 @p71, @p72, @p73, @p74, @p75, @p76, @p77, @p78, @p79, @p80,
-@p81);";
+@p81, @p82);";
 
             MySqlParameter[] parameters = { new MySqlParameter("@p1", o.発注日), new MySqlParameter("@p2", o.受注日), new MySqlParameter("@p3", o.受注時刻), new MySqlParameter("@p4", o.店舗コード), new MySqlParameter("@p5", o.店舗名漢字),
        new MySqlParameter("@p6", o.伝票番号), new MySqlParameter("@p7", o.ＪＡＮコード), new MySqlParameter("@p8", o.商品コード), new MySqlParameter("@p9", o.品名漢字),new MySqlParameter("@p10", o.規格名漢字),
@@ -672,7 +688,7 @@ VALUES (
        new MySqlParameter("@p66", o.伝票出力単位), new MySqlParameter("@p67", o.納品先店舗コード), new MySqlParameter("@p68", o.納品先店舗名漢字), new MySqlParameter("@p69", o.納品先店舗名カナ),new MySqlParameter("@p70", o.納品場所名カナ),
        new MySqlParameter("@p71", o.便区分), new MySqlParameter("@p72", o.センター経由区分), new MySqlParameter("@p73", o.センターコード), new MySqlParameter("@p74", o.センター名漢字),new MySqlParameter("@p75", o.センター名カナ),
        new MySqlParameter("@p76", o.実際配送担当),new MySqlParameter("@p77", o.配送担当受信),new MySqlParameter("@p78", o.口数),new MySqlParameter("@p79", o.重量),new MySqlParameter("@p80", o.単位),
-       new MySqlParameter("@p81", o.ジャンル)     };
+       new MySqlParameter("@p81", o.ジャンル) ,new MySqlParameter("@p82", o.warehouseName)    };
 
             return new CustomMySqlParameters(parameters, sql);
 
@@ -705,7 +721,7 @@ VALUES (
 `実際配送担当`, `配送担当受信`,`口数`,`重量`,`単位`,
 `ジャンル`,`自社コード`,`実際出荷数量`,`県別`,`Status`,
 `ダブリ`,`発注品名漢字`,`発注規格名漢字`,`納品口数`,`週目`,
-`id`, `仕入原価`, `仕入金額`, `粗利金額`,`社内伝番処理`) 
+`id`, `仕入原価`, `仕入金額`, `粗利金額`,`社内伝番処理`,`warehouseName`) 
 VALUES ({0}
 '{1:yyyy-MM-dd}','{2:yyyy-MM-dd}','{3}',{4},'{5}',
 {6},{7},{8},'{9}','{10}',
@@ -717,7 +733,7 @@ VALUES ({0}
 '{61}','{62}','{63}','{64}',{65},{66},{67},'{68}','{69}','{70}',
 {71},{72},{73},'{74}','{75}','{76}',{77},{78},{79},'{80}',
 {81},{82},{83},'{84}',{85},'{86}','{87}','{88}',{89},{90},
-'{91}',{92},{93},{94},{95});";
+'{91}',{92},{93},{94},{95},'{96}');";
             var now = DateTime.Now;
             var fazhuri = o.発注日.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
             var souzhuri = now.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
@@ -749,7 +765,7 @@ VALUES ({0}
                 
                 o.ジャンル, o.自社コード, o.実際出荷数量, o.県別, (int)o.Status,
                 o.ダブリ, o.発注品名漢字, o.発注規格名漢字, o.納品口数, o.週目,
-                o.id, o.仕入原価, o.仕入金額, o.粗利金額, o.社内伝番処理);
+                o.id, o.仕入原価, o.仕入金額, o.粗利金額, o.社内伝番処理, o.warehouseName);
                 
         }
 

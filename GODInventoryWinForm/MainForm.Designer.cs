@@ -48,7 +48,6 @@
             this.importFaxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.updateOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,8 +165,7 @@
             this.importReceivedOrderTextToolStripMenuItem,
             this.importCSVToolStripMenuItem,
             this.importReceivedCSVToolStripMenuItem,
-            this.importFaxToolStripMenuItem,
-            this.updateOrderToolStripMenuItem});
+            this.importFaxToolStripMenuItem});
             this.toolStripDropDownButton1.Image = global::GODInventoryWinForm.Properties.Resources.tool;
             this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -225,13 +223,6 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
-            // updateOrderToolStripMenuItem
-            // 
-            this.updateOrderToolStripMenuItem.Name = "updateOrderToolStripMenuItem";
-            this.updateOrderToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-            this.updateOrderToolStripMenuItem.Text = "Update Order 導入";
-            this.updateOrderToolStripMenuItem.Click += new System.EventHandler(this.updateOrderToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -271,7 +262,6 @@
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem generalSettingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orderSettingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem updateOrderToolStripMenuItem;
     }
 }
 

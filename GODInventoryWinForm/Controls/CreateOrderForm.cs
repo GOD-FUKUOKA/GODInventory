@@ -103,7 +103,7 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-
+        // 全角半角检查
         private bool QuanJiaoBanJiao(string o)
         {
             bool isrun = true;
@@ -759,6 +759,12 @@ namespace GODInventoryWinForm.Controls
                     {
                         int storeCode = (int)this.storeComboBox.SelectedValue;
                         var store = shopList.Find(s => s.店番 == storeCode);
+                        
+                        if (store.warehouseName.Length == 0) {
+                            /// TODO
+                            MessageBox.Show(string.Format("error: please default warehouse of store {0}", store.店名));
+                            return;
+                        }
                         using (var ctx = new GODDbContext())
                         {
 
@@ -789,6 +795,7 @@ namespace GODInventoryWinForm.Controls
                                 o.重量 = (int)(Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
                                 o.単位 = selectedItem.単位;
                                 o.県別 = store.県別;
+                                o.warehouseName = store.warehouseName;
                                 o.発注形態区分 = Convert.ToInt16(this.orderReasonComboBox.SelectedValue);
                                 o.発注形態名称漢字 = this.orderReasonComboBox.Text;
                                 //o.原単価_税抜_ = (int)selectedItem.原単価;

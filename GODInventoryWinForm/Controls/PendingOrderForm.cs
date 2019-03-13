@@ -33,7 +33,7 @@ namespace GODInventoryWinForm.Controls
         private List<v_pendingorder> pendingOrderList;
         private SortableBindingList<v_pendingorder> sortablePendingOrderList;
         private List<v_pendingorder> shipperOrderList;
-        private List<t_shoplist> shopList;
+        //private List<t_shoplist> shopList;
         private SortableBindingList<v_pendingorder> sortablePendingOrderList3;
         private List<t_transports> transportList;
         //mark 20181008
@@ -58,8 +58,8 @@ namespace GODInventoryWinForm.Controls
             var ctx = entityDataSource1.DbContext as GODDbContext;
             this.stockstates = ctx.t_stockstate.Select(s => s).ToList();
             this.productList = ctx.t_itemlist.Select(s => s).ToList();
-            transportList = ctx.t_transports.ToList();
-            warehouses_transportsList = ctx.t_warehouses_transports.ToList();
+            this.transportList = ctx.t_transports.ToList();
+            this.warehouseList = ctx.t_warehouses.ToList();
 
 
 
@@ -75,23 +75,22 @@ namespace GODInventoryWinForm.Controls
             this.訂正理由区分Column.DataSource = OrderQuantityChangeReasonRespository.ToList();
             //物流
             //
-            shopList = ctx.t_shoplist.ToList();
+            //shopList = ctx.t_shoplist.ToList();
 
 
             //mark   20181009           
-            warehouseList = ctx.t_warehouses.ToList();
-            var shipperCo1 = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
-            var shipperCo2 = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
+            var transports1 = transportList.Select(s => new {  fullname = s.fullname }).Distinct().ToList();
+            var transports2 = transportList.Select(s => new {  fullname = s.fullname }).Distinct().ToList();
 
 
-            this.ShipperColumn1.DisplayMember = "fullname";
-            this.ShipperColumn1.ValueMember = "fullname";
-            this.ShipperColumn1.DataSource = transportList;
+            this.transportColumn1.DisplayMember = "fullname";
+            this.transportColumn1.ValueMember = "fullname";
+            this.transportColumn1.DataSource = transports1;
 
 
             this.shipperComboBox.DisplayMember = "fullname";
             this.shipperComboBox.ValueMember = "fullname";
-            this.shipperComboBox.DataSource = transportList;
+            this.shipperComboBox.DataSource = transports2;
 
             //过滤条件添加任意选项
             //shipperCo.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
@@ -105,15 +104,16 @@ namespace GODInventoryWinForm.Controls
             //this.ShipperColumn1.ValueMember = "ShortName";
             //this.ShipperColumn1.DataSource = shippers;
 
-            //仓库
-            var shippers = warehouseList.Select(s => new MockEntity { ShortName = s.ShortName, FullName = s.ShipperName }).Distinct().ToList();
-            this.warehouseName.DisplayMember = "FullName";
-            this.warehouseName.ValueMember = "ShortName";
-            this.warehouseName.DataSource = shippers;
-
-            this.warehouseNameColumn1.DisplayMember = "FullName";
-            this.warehouseNameColumn1.ValueMember = "ShortName";
-            this.warehouseNameColumn1.DataSource = shippers;
+            // 传票订正仓库
+            var warehouse1 = warehouseList.Select(s => new {   fullname = s.FullName }).Distinct().ToList();
+            this.warehouseNameColumn.DisplayMember = "fullname";
+            this.warehouseNameColumn.ValueMember = "fullname";
+            this.warehouseNameColumn.DataSource = warehouse1;
+            // 传送确认仓库
+            var warehouse2 = warehouseList.Select(s => new { fullname = s.FullName }).Distinct().ToList();
+            this.warehouseNameColumn2.DisplayMember = "fullname";
+            this.warehouseNameColumn2.ValueMember = "fullname";
+            this.warehouseNameColumn2.DataSource = warehouse2;
 
 
 
@@ -476,7 +476,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
             return 0;
         }
 
-        private void InitializeShipperOrderList(string shipperName = null)
+        private void InitializeShipperOrderList(string transportName = null)
         {
             shipperOrderList = new List<v_pendingorder>();
 
@@ -528,7 +528,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
             this.dataGridView3.DataSource = this.bindingSource2;
 
             // 第一次初始化情况
-            if (shipperName == null)
+            if (transportName == null)
             {
                 // 触发 change 事件
                 // 第二次回到转发物流界面，如果以前选择的是SelectedIndex =0， 需要先设置-1，才能触发 change 事件。
@@ -539,8 +539,8 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
             else
             {
                 // 用户退单后刷新
-                this.shipperComboBox.Text = shipperName;
-                //   this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName);
+                this.shipperComboBox.Text = transportName;
+                //   this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == transportName);
                 //new 
                 //  this.bindingSource2.DataSource = shipperOrderList;
                 //  this.dataGridView3.DataSource = bindingSource2;
@@ -1213,7 +1213,7 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
         private void notifyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<v_pendingorder> orders = new List<v_pendingorder>();
-            string shipperName = shipperComboBox.Text;
+            string transportName = shipperComboBox.Text;
             for (int i = 0; i < dataGridView3.SelectedRows.Count; i++)
             {
                 var order = dataGridView3.SelectedRows[i].DataBoundItem as v_pendingorder;
@@ -1225,10 +1225,10 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
 
                 using (var ctx = new GODDbContext())
                 {
-                    OrderSqlHelper.NotifyShipper(ctx, orders, shipperName);
+                    OrderSqlHelper.NotifyShipper(ctx, orders, transportName);
                 }
                 this.shipperOrderList.RemoveAll(o => orders.Contains(o));
-                // this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperName); ;
+                // this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == transportName); ;
                 //
                 this.bindingSource2.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
                 // this.entityDataSource2.Refresh();

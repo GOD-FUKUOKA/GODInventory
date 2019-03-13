@@ -169,9 +169,6 @@ namespace GODInventoryWinForm
             new OrderCostSettingForm().ShowDialog();
         }
 
-        private void updateOrderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new ImportShipNumberForm().ShowDialog();
-        }
+
     }
 }

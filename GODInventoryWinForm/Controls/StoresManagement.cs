@@ -156,6 +156,7 @@ namespace GODInventoryWinForm.Controls
 
                         store.warehouse_id = Convert.ToInt32(this.warehouseNamecomboBox1.SelectedValue);
                         store.transport_id = Convert.ToInt32(this.transportnamecomboBox2.SelectedValue);
+                        store.warehouseName = this.warehouseNamecomboBox1.Text;
 
 
                         ctx.SaveChanges();
@@ -195,7 +196,7 @@ namespace GODInventoryWinForm.Controls
 
                         store.warehouse_id = Convert.ToInt32(this.warehouseNamecomboBox1.SelectedValue);
                         store.transport_id = Convert.ToInt32(this.transportnamecomboBox2.SelectedValue);
-
+                        store.warehouseName = this.warehouseNamecomboBox1.Text;
 
 
                         ctx.t_shoplist.Add(store);
