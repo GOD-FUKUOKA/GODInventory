@@ -17,6 +17,8 @@ namespace GODInventoryWinForm
         private List<t_transports> transportList;
         private List<t_shoplist> shopList;
         private List<t_warehouses> warehouseList;
+        List<t_genre> genres = null;
+
         private int orderId;
         private t_freights freights { get; set; }
         public CreateTransportsFee()
@@ -32,7 +34,10 @@ namespace GODInventoryWinForm
     
             warehouseList = ctx.t_warehouses.ToList();
             transportList = ctx.t_transports.ToList();
-        
+            this.genres = ctx.t_genre.ToList();
+            this.products = ctx.t_itemlist.ToList();
+      
+
             this.whComboBox.ValueMember = "Id";
             this.whComboBox.DisplayMember = "FullName";
             this.whComboBox.DataSource = warehouseList;
@@ -56,15 +61,26 @@ namespace GODInventoryWinForm
             this.storeComboBox.DisplayMember = "FullName";
             this.storeComboBox.ValueMember = "Id";
             this.storeComboBox.DataSource = shops;
+
+
+
+            var genreList = this.genres.Select(s => new MockEntity { Id = s.idジャンル, FullName = s.ジャンル名 }).ToList();
+            genreList.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+            this.genresComboBox.ValueMember = "Id";
+            this.genresComboBox.DisplayMember = "FullName";
+            this.genresComboBox.DataSource = genreList;
+
+
+
         }
      
         private void submitFormButton_Click(object sender, EventArgs e)
         {
-            using (var ctx = new GODDbContext())
+            using (var ctx = new GODDbContext()) 
             {
                 if (orderAtTextBox.Text.Length > 0)
                 {
-                  int zi= Convert.ToInt32( orderAtTextBox.Text);
+                  int zi= Convert.ToInt32( orderAtTextBox.SelectedValue);
 
 
                     var List = (from t_freights o in ctx.t_freights
@@ -73,7 +89,7 @@ namespace GODInventoryWinForm
                     if (List.Count == 0)
                     {
                         t_freights freights = new t_freights();
-                        freights.自社コード = Convert.ToInt32(orderAtTextBox.Text);
+                        freights.自社コード = Convert.ToInt32(orderAtTextBox.SelectedValue);
                         freights.warehousename = whComboBox.Text;
                         freights.transportname = storeNamTextBox.Text;
                         freights.unitname = storeCodeTextBox.Text;

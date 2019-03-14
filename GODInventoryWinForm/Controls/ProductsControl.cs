@@ -20,9 +20,9 @@ namespace GODInventoryWinForm.Controls
         List<t_itemlist> products = null;
         private List<t_warehouses> warehouseList;
         EditTransportsFee EditTransportsFeeForm;
-        List<t_freights>  freights = null;
-      
-
+        List<t_freights> freights = null;
+        private List<t_transports> transportList;
+        private List<t_shoplist> shopList;
         public ProductsControl()
         {
             InitializeComponent();
@@ -47,8 +47,9 @@ namespace GODInventoryWinForm.Controls
             this.stores = ctx.t_shoplist.ToList();
             this.genres = ctx.t_genre.ToList();
             this.products = ctx.t_itemlist.ToList();
-      
-           
+            transportList = ctx.t_transports.ToList();
+        
+
             var genreList = this.genres.Select(s => new MockEntity { Id = s.idジャンル, FullName = s.ジャンル名 }).ToList();
             genreList.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
             this.genresComboBox.ValueMember = "Id";
@@ -73,7 +74,7 @@ namespace GODInventoryWinForm.Controls
             //mark 20181022
             warehouseList = ctx.t_warehouses.ToList();
             var shipperCo = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
-           
+
             this.warehouseComboBox.DisplayMember = "FullName";
             this.warehouseComboBox.ValueMember = "Id";
             this.warehouseComboBox.DataSource = shipperCo;
@@ -85,6 +86,25 @@ namespace GODInventoryWinForm.Controls
 
             InitializetransportdataGridView1();
 
+
+            //
+
+            this.comboBox2.ValueMember = "Id";
+            this.comboBox2.DisplayMember = "FullName";
+            this.comboBox2.DataSource = genreList;
+
+            //
+            this.comboBox5.ValueMember = "Id";
+            this.comboBox5.DisplayMember = "FullName";
+            this.comboBox5.DataSource = warehouseList;
+            //
+            this.comboBox6.DisplayMember = "fullname";
+            this.comboBox6.ValueMember = "id";
+            this.comboBox6.DataSource = transportList;
+            //  // 県別
+            this.comboBox4.ValueMember = "ShortName";
+            this.comboBox4.DisplayMember = "FullName";
+            this.comboBox4.DataSource = counties;
 
 
         }
@@ -115,13 +135,13 @@ namespace GODInventoryWinForm.Controls
             int iRow = productsDataGridView.CurrentCell.OwningRow.Index;
             var oids = GetOrderIdsBySelectedGridCell();
 
-            if (oids.Count() == 1 )
+            if (oids.Count() == 1)
             {
-                var form = new ProductsManagement(oids,"Update");
-            
+                var form = new ProductsManagement(oids, "Update");
+
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                 
+
                     this.entityDataSource1.Refresh();
 
                 }
@@ -199,30 +219,31 @@ namespace GODInventoryWinForm.Controls
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (this.tabControl1.SelectedIndex)
-            { 
+            {
                 case 0:
                     break;
                 case 1:
-                    
+
                     InitializeDataSource();
-                    
+
                     break;
                 case 2:
 
                     InitializeDataSource();
 
-                    break;    
+                    break;
             }
 
         }
 
         private void InitializePriceListDatagridView(int productCode, string county = "", int storeId = 0, int genresId = 0)
         {
-             
+
             var query = from t_pricelist p in this.entityDataSource1.EntitySets["t_pricelist"]
                         join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on p.自社コード equals i.自社コード
 
-                        select new v_itemprice { 
+                        select new v_itemprice
+                        {
                             Id = p.Id,
                             自社コード = i.自社コード,
                             商品名 = i.商品名,
@@ -238,7 +259,7 @@ namespace GODInventoryWinForm.Controls
                             ジャンル = i.ジャンル,
                             配送担当 = p.配送担当
                         };
-            if( county.Length>0)
+            if (county.Length > 0)
             {
                 query = query.Where(o => o.県別 == county);
             }
@@ -255,9 +276,9 @@ namespace GODInventoryWinForm.Controls
             {
                 query = query.Where(o => o.ジャンル == genresId);
             }
-            this.pricesBindingSource.DataSource = this.entityDataSource1.CreateView( query);
-            this.pricesDataGridView.DataSource = this.pricesBindingSource;           
-                         
+            this.pricesBindingSource.DataSource = this.entityDataSource1.CreateView(query);
+            this.pricesDataGridView.DataSource = this.pricesBindingSource;
+
         }
 
         private void editPriceToolStripMenuItem_Click(object sender, EventArgs e)
@@ -266,7 +287,7 @@ namespace GODInventoryWinForm.Controls
             {
                 var price = pricesDataGridView.CurrentRow.DataBoundItem as v_itemprice;
 
-                var form = new EditPriceForm( price.Id);
+                var form = new EditPriceForm(price.Id);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     price.仕入原価 = form.Price.仕入原価;
@@ -280,7 +301,7 @@ namespace GODInventoryWinForm.Controls
                     //MessageBox.Show("saved");
                 }
             }
-            
+
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -290,7 +311,7 @@ namespace GODInventoryWinForm.Controls
             int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
             int genresId = Convert.ToInt32(this.genresComboBox.SelectedValue);
 
-            if (productCode > 0 || storeId >0)
+            if (productCode > 0 || storeId > 0)
             {
                 InitializePriceListDatagridView(productCode, county, storeId, genresId);
             }
@@ -306,8 +327,9 @@ namespace GODInventoryWinForm.Controls
             {
                 productsByGenre = this.products.Where(o => o.ジャンル == genreId).Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
             }
-            else {
-                productsByGenre = this.products.Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();            
+            else
+            {
+                productsByGenre = this.products.Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
             }
             productsByGenre.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
 
@@ -325,7 +347,8 @@ namespace GODInventoryWinForm.Controls
             {
                 storesByCounty = this.stores.Where(s => s.県別 == county).Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
             }
-            else {
+            else
+            {
                 storesByCounty = this.stores.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
 
             }
@@ -381,7 +404,7 @@ namespace GODInventoryWinForm.Controls
                 return;
             }
 
-            if (cost == -1 || price == -1 || promotePrice == -1 || adPrice == -1 || salePrice==-1)
+            if (cost == -1 || price == -1 || promotePrice == -1 || adPrice == -1 || salePrice == -1)
             {
                 MessageBox.Show("単価を修正する際、すべての欄に入力してください。設定されていない単価は0で入力してください。");
                 return;
@@ -426,25 +449,26 @@ namespace GODInventoryWinForm.Controls
                     {
                         sql = String.Format("UPDATE t_pricelist SET `配送担当`='{0}' WHERE `自社コード`={1}", warehouse, productCode);
                     }
-                    else {
+                    else
+                    {
                         var productCodes = (from t_itemlist item in ctx.t_itemlist
-                            where item.ジャンル == genresId
-                            select item.自社コード).ToList();
+                                            where item.ジャンル == genresId
+                                            select item.自社コード).ToList();
                         sql = String.Format("UPDATE t_pricelist SET `配送担当`='{0}' WHERE `自社コード`in ({1})", warehouse, String.Join(",", productCodes));
 
                     }
-                  
 
-                     if (county.Length > 0)
-                     {
-                         sql += string.Format(" AND `県別`='{0}'", county);
-                     }
-                     if (storeId > 0)
-                     {
-                         sql += string.Format(" AND `店番`={0}", storeId);
-                     }
+
+                    if (county.Length > 0)
+                    {
+                        sql += string.Format(" AND `県別`='{0}'", county);
+                    }
+                    if (storeId > 0)
+                    {
+                        sql += string.Format(" AND `店番`={0}", storeId);
+                    }
                     ctx.Database.ExecuteSqlCommand(sql);
-                    
+
                 }
                 InitializePriceListDatagridView(productCode, county, storeId, genresId);
 
@@ -475,9 +499,9 @@ namespace GODInventoryWinForm.Controls
             transportdatabindingSource2.DataSource = null;
 
             transportdatabindingSource2.DataSource = freights;
-           transportdataGridView1.DataSource = null;
+            transportdataGridView1.DataSource = null;
 
-           transportdataGridView1.DataSource = transportdatabindingSource2;
+            transportdataGridView1.DataSource = transportdatabindingSource2;
             //transportdataGridView1.Refresh();
         }
 
@@ -520,5 +544,115 @@ namespace GODInventoryWinForm.Controls
 
             }
         }
+
+        private void bttransportfind_Click(object sender, EventArgs e)
+        {
+
+
+            int 自社コード = Convert.ToInt32(this.comboBox3.SelectedValue);
+            string warehousename = this.comboBox5.Text.ToString();
+            string transportname = this.comboBox6.Text;
+
+            int shop_id = Convert.ToInt32(this.comboBox1.SelectedValue);
+
+            if (自社コード > 0)
+            {
+                InitializetransportdataGridView1(自社コード, warehousename, transportname, shop_id);
+            }
+
+
+
+
+        }
+
+        private void InitializetransportdataGridView1(int 自社コード, string warehousename = "", string transportname = "", int shop_id = 0)
+        {
+            using (var ctx = new GODDbContext())
+            {
+                var query = (from t_freights o in ctx.t_freights
+                             where 自社コード == o.自社コード
+                             select o);
+                if (warehousename.Length > 0)
+                {
+                    query = query.Where(o => o.warehousename == warehousename);
+                }
+
+                if (transportname.Length > 0)
+                {
+                    query = query.Where(o => o.transportname == transportname);
+                }
+                if (shop_id > 0)
+                {
+                    query = query.Where(o => o.shop_id == shop_id);
+                }
+                
+                this.transportdatabindingSource2.DataSource = this.entityDataSource1.CreateView(query);
+                this.transportdataGridView1.DataSource = this.transportdatabindingSource2;
+            }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<MockEntity> productsByGenre;
+            int genreId = (int)this.comboBox2.SelectedValue;
+
+            if (genreId > 0)
+            {
+                productsByGenre = this.products.Where(o => o.ジャンル == genreId).Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
+            }
+            else
+            {
+                productsByGenre = this.products.Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
+            }
+            productsByGenre.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+
+            this.comboBox3.ValueMember = "Id";
+            this.comboBox3.DisplayMember = "FullName";
+            this.comboBox3.DataSource = productsByGenre;
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //string county = this.comboBox4.Text;
+            //var filtered = shopList.FindAll(s => s.県別 == county);
+            //if (filtered.Count > 0)
+            //{
+            //    var shops = filtered.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+            //    shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+            //    this.comboBox1.DisplayMember = "FullName";
+            //    this.comboBox1.ValueMember = "Id";
+            //    this.comboBox1.DataSource = shops;
+            //    this.comboBox1.SelectedIndex = 0;
+            //}
+            //else
+            //{
+            //    var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+            //    shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+            //    this.comboBox1.DisplayMember = "FullName";
+            //    this.comboBox1.ValueMember = "Id";
+            //    this.comboBox1.DataSource = shops;
+
+            //}
+
+            string county = this.countyComboBox.SelectedValue.ToString();
+            List<MockEntity> storesByCounty;
+
+            if (county.Length > 0)
+            {
+                storesByCounty = this.stores.Where(s => s.県別 == county).Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+            }
+            else
+            {
+                storesByCounty = this.stores.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
+
+            }
+            storesByCounty.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+
+            this.comboBox1.ValueMember = "Id";
+            this.comboBox1.DisplayMember = "FullName";
+            this.comboBox1.DataSource = storesByCounty;
+        }
+
+
     }
 }
