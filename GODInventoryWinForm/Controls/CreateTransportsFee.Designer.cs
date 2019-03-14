@@ -30,9 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.storeComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.countyComboBox1 = new System.Windows.Forms.ComboBox();
             this.whComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.orderAtTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -43,24 +46,25 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.countyComboBox1 = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.storeComboBox = new System.Windows.Forms.ComboBox();
-            this.storeNamTextBox = new System.Windows.Forms.TextBox();
+            this.orderAtTextBox = new System.Windows.Forms.ComboBox();
+            this.storeNamTextBox = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.genresComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.genresComboBox);
             this.groupBox1.Controls.Add(this.storeNamTextBox);
+            this.groupBox1.Controls.Add(this.orderAtTextBox);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.storeComboBox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.countyComboBox1);
             this.groupBox1.Controls.Add(this.whComboBox);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.orderAtTextBox);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label6);
@@ -74,6 +78,43 @@
             this.groupBox1.TabIndex = 10000016;
             this.groupBox1.TabStop = false;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(400, 130);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 14);
+            this.label7.TabIndex = 10000006;
+            this.label7.Text = "店名";
+            // 
+            // storeComboBox
+            // 
+            this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.storeComboBox.FormattingEnabled = true;
+            this.storeComboBox.Location = new System.Drawing.Point(438, 126);
+            this.storeComboBox.Name = "storeComboBox";
+            this.storeComboBox.Size = new System.Drawing.Size(190, 22);
+            this.storeComboBox.TabIndex = 10000005;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(68, 126);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 14);
+            this.label1.TabIndex = 10000004;
+            this.label1.Text = "県別";
+            // 
+            // countyComboBox1
+            // 
+            this.countyComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.countyComboBox1.FormattingEnabled = true;
+            this.countyComboBox1.Location = new System.Drawing.Point(109, 122);
+            this.countyComboBox1.Name = "countyComboBox1";
+            this.countyComboBox1.Size = new System.Drawing.Size(190, 22);
+            this.countyComboBox1.TabIndex = 10000003;
+            this.countyComboBox1.SelectedIndexChanged += new System.EventHandler(this.countyComboBox1_SelectedIndexChanged);
+            // 
             // whComboBox
             // 
             this.whComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -81,7 +122,7 @@
             this.whComboBox.Items.AddRange(new object[] {
             "no",
             "yes"});
-            this.whComboBox.Location = new System.Drawing.Point(438, 24);
+            this.whComboBox.Location = new System.Drawing.Point(438, 89);
             this.whComboBox.Name = "whComboBox";
             this.whComboBox.Size = new System.Drawing.Size(190, 22);
             this.whComboBox.TabIndex = 2;
@@ -95,17 +136,10 @@
             this.label3.TabIndex = 24;
             this.label3.Text = "费用";
             // 
-            // orderAtTextBox
-            // 
-            this.orderAtTextBox.Location = new System.Drawing.Point(109, 28);
-            this.orderAtTextBox.Name = "orderAtTextBox";
-            this.orderAtTextBox.Size = new System.Drawing.Size(190, 21);
-            this.orderAtTextBox.TabIndex = 28;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(369, 28);
+            this.label5.Location = new System.Drawing.Point(369, 93);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 14);
             this.label5.TabIndex = 10000002;
@@ -114,7 +148,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(40, 28);
+            this.label4.Location = new System.Drawing.Point(369, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 14);
             this.label4.TabIndex = 27;
@@ -138,7 +172,7 @@
             // 
             // invoiceNOTextBox
             // 
-            this.invoiceNOTextBox.Location = new System.Drawing.Point(109, 86);
+            this.invoiceNOTextBox.Location = new System.Drawing.Point(109, 88);
             this.invoiceNOTextBox.Name = "invoiceNOTextBox";
             this.invoiceNOTextBox.Size = new System.Drawing.Size(190, 21);
             this.invoiceNOTextBox.TabIndex = 4;
@@ -187,49 +221,44 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
-            // label1
+            // orderAtTextBox
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(68, 126);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 14);
-            this.label1.TabIndex = 10000004;
-            this.label1.Text = "県別";
-            // 
-            // countyComboBox1
-            // 
-            this.countyComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.countyComboBox1.FormattingEnabled = true;
-            this.countyComboBox1.Location = new System.Drawing.Point(109, 122);
-            this.countyComboBox1.Name = "countyComboBox1";
-            this.countyComboBox1.Size = new System.Drawing.Size(190, 22);
-            this.countyComboBox1.TabIndex = 10000003;
-            this.countyComboBox1.SelectedIndexChanged += new System.EventHandler(this.countyComboBox1_SelectedIndexChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(400, 130);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 14);
-            this.label7.TabIndex = 10000006;
-            this.label7.Text = "店名";
-            // 
-            // storeComboBox
-            // 
-            this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.storeComboBox.FormattingEnabled = true;
-            this.storeComboBox.Location = new System.Drawing.Point(438, 126);
-            this.storeComboBox.Name = "storeComboBox";
-            this.storeComboBox.Size = new System.Drawing.Size(190, 22);
-            this.storeComboBox.TabIndex = 10000005;
+            this.orderAtTextBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.orderAtTextBox.FormattingEnabled = true;
+            this.orderAtTextBox.Location = new System.Drawing.Point(438, 20);
+            this.orderAtTextBox.Name = "orderAtTextBox";
+            this.orderAtTextBox.Size = new System.Drawing.Size(190, 22);
+            this.orderAtTextBox.TabIndex = 10000008;
             // 
             // storeNamTextBox
             // 
-            this.storeNamTextBox.Location = new System.Drawing.Point(109, 55);
+            this.storeNamTextBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.storeNamTextBox.FormattingEnabled = true;
+            this.storeNamTextBox.Location = new System.Drawing.Point(109, 58);
             this.storeNamTextBox.Name = "storeNamTextBox";
-            this.storeNamTextBox.Size = new System.Drawing.Size(190, 21);
-            this.storeNamTextBox.TabIndex = 10000007;
+            this.storeNamTextBox.Size = new System.Drawing.Size(190, 22);
+            this.storeNamTextBox.TabIndex = 10000009;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label8.Location = new System.Drawing.Point(51, 23);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(57, 14);
+            this.label8.TabIndex = 10000011;
+            this.label8.Text = "ジャンル";
+            // 
+            // genresComboBox
+            // 
+            this.genresComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.genresComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.genresComboBox.FormattingEnabled = true;
+            this.genresComboBox.Location = new System.Drawing.Point(111, 20);
+            this.genresComboBox.Name = "genresComboBox";
+            this.genresComboBox.Size = new System.Drawing.Size(190, 22);
+            this.genresComboBox.TabIndex = 10000010;
+            this.genresComboBox.SelectedIndexChanged += new System.EventHandler(this.genresComboBox_SelectedIndexChanged);
             // 
             // CreateTransportsFee
             // 
@@ -256,7 +285,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox whComboBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox orderAtTextBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
@@ -271,6 +299,9 @@
         private System.Windows.Forms.ComboBox countyComboBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox storeComboBox;
-        private System.Windows.Forms.TextBox storeNamTextBox;
+        private System.Windows.Forms.ComboBox storeNamTextBox;
+        private System.Windows.Forms.ComboBox orderAtTextBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox genresComboBox;
     }
 }
