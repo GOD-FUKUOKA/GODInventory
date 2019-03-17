@@ -38,9 +38,7 @@ namespace GODInventoryWinForm.Controls
         private List<t_transports> transportList;
         //mark 20181008
         private List<t_warehouses> warehouseList;
-        private List<t_warehouses_transports> warehouses_transportsList;
         List<t_transports> FindtransportList;
-        //private BindingList<v_transport> V_transportList;
 
 
 
@@ -1241,10 +1239,9 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
             {
                 order.納品口数 = (int)(order.実際出荷数量 / order.最小発注単位数量);
             }
-
+            
             var product = productList.FirstOrDefault(i => i.商品コード == order.商品コード);
             OrderSqlHelper.AfterOrderQtyChanged(order, product);
-
 
             return true;
         }

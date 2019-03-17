@@ -214,6 +214,7 @@ CREATE TABLE `t_freights` (
   `transportname` varchar(45) DEFAULT NULL,
   `warehouse_id` int(11)  UNSIGNED NOT NULL DEFAULT 0 ,
   `transport_id` int(11)  UNSIGNED NOT NULL DEFAULT 0 ,
+  `shop_id` int(11)  UNSIGNED NOT NULL DEFAULT 0 ,
   `fee` int(11) DEFAULT 0,
   `unitname` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -237,11 +238,13 @@ ALTER TABLE `t_shoplist`
 ADD COLUMN `warehouse_id` INT UNSIGNED NOT NULL DEFAULT 0 ,
 ADD COLUMN `transport_id` INT UNSIGNED NOT NULL DEFAULT 0 AFTER `warehouse_id`;
 
-ALTER TABLE `t_freights` 
-ADD COLUMN `shop_id` INT UNSIGNED NOT NULL DEFAULT 0 AFTER `transport_id`;
-
 ALTER TABLE `t_shoplist` 
 ADD COLUMN `warehousename` VARCHAR(45) NOT NULL DEFAULT '' AFTER `transport_id`;
+
+// 最新数据库中已经存在。
+ALTER TABLE `t_pricelist` 
+ADD COLUMN `パレット運賃` DECIMAL NOT NULL DEFAULT 0;
+
 
 // 原有数据修正
 update t_shoplist set warehousename='丸健倉庫' where `配送担当`='丸健'

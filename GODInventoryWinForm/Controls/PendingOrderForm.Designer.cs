@@ -100,6 +100,7 @@
             this.重量Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.訂正理由区分Column = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.transportColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.feeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.warehouseNameColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品指示Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -419,6 +420,7 @@
             this.重量Column,
             this.訂正理由区分Column,
             this.transportColumn1,
+            this.feeColumn1,
             this.warehouseNameColumn,
             this.Column2,
             this.納品指示Column1,
@@ -828,6 +830,11 @@
             this.transportColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.transportColumn1.Width = 90;
             // 
+            // feeColumn1
+            // 
+            this.feeColumn1.HeaderText = "運賃";
+            this.feeColumn1.Name = "feeColumn1";
+            // 
             // warehouseNameColumn
             // 
             this.warehouseNameColumn.DataPropertyName = "warehouseName";
@@ -1009,6 +1016,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column;
         private System.Windows.Forms.DataGridViewComboBoxColumn 訂正理由区分Column;
         private System.Windows.Forms.DataGridViewComboBoxColumn transportColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn feeColumn1;
         private System.Windows.Forms.DataGridViewComboBoxColumn warehouseNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column1;

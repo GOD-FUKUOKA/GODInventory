@@ -37,5 +37,7 @@ namespace GODInventory.MyLinq
         [StringLength(64)]
         public string 配送担当 { get; set; }
 
+        public decimal 運賃 { get; set; }  // 重量运费
+        public decimal パレット運賃 { get; set; }  // 口数运费
     }
 }

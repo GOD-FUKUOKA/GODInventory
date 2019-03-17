@@ -1169,7 +1169,10 @@ namespace GODInventory.ViewModel
             }
 
             order.仕入金額 = order.実際出荷数量 * order.仕入原価;
-            order.粗利金額 = order.納品原価金額 - order.仕入金額; 
+            order.粗利金額 = order.納品原価金額 - order.仕入金額;
+
+            // 更新出荷数量后更新运费
+
         }
 
         // 当订单的数量被修改后，需要相应修改的字段
@@ -1183,6 +1186,26 @@ namespace GODInventory.ViewModel
             order.税額 = (int)(order.納品原価金額 * order.税率);
             order.重量 = (int)(Convert.ToDecimal(item.単品重量) * order.実際出荷数量);
 
+            if (item.PT入数 > 0)
+            {
+                order.納品口数 = (int)(order.実際出荷数量 / item.PT入数);
+            }
+            // 更新出荷数量后更新运费
+            using (var ctx = new GODDbContext()) { 
+                var price = (from t_pricelist t in ctx.t_pricelist
+                             where t.店番 == order.店番 && t.自社コード == order.自社コード
+                             select t).FirstOrDefault();
+                var  freight = ( from t_freights t in  ctx.t_freights
+                  where t.自社コード== order.自社コード && t.transportname == order.warehouseName && t.transportname ==order.実際配送担当
+                            select t).FirstOrDefault();
+                if( price!=null && freight!=null ){
+                    // sqlStr = "UPDATE t_orderdata a LEFT JOIN t_pricelist b ON a.`店舗コード` = b.`店番` AND a.`自社コード` = b.`自社コード`" _
+                    // & " SET a.`運賃` = IF ( b.`パレット運賃` = 0, b.`運賃` * a.`重量`, b.`パレット運賃` * a.`納品口数`)" _
+                    // & " WHERE (b.`運賃` + b.`パレット運賃`) <> 0 AND a.`運賃` IS NULL AND a.`出荷日` BETWEEN '" & Cells(1, 5).Value & "' AND '" & Cells(1, 8).Value & "'"
+
+                    order.運賃 = ( price.パレット運賃 == 0 ?  price.運賃 * order.重量 : price.パレット運賃 * order.納品口数 );
+                }
+            }
 
         }
 
