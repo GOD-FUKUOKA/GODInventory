@@ -60,13 +60,12 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "HACCYU";
             this.openFileDialog1.Filter = "Files (*.xlsm,*.xlsx)|*.xlsm;*.xlsx|All Files (*.*)|*.*";
             // 
             // openFileBtton
             // 
             this.openFileBtton.BackColor = System.Drawing.SystemColors.Control;
-            this.openFileBtton.Location = new System.Drawing.Point(787, 43);
+            this.openFileBtton.Location = new System.Drawing.Point(787, 58);
             this.openFileBtton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.openFileBtton.Name = "openFileBtton";
             this.openFileBtton.Size = new System.Drawing.Size(36, 21);
@@ -77,16 +76,16 @@
             // 
             // pathTextBox
             // 
-            this.pathTextBox.Location = new System.Drawing.Point(125, 43);
+            this.pathTextBox.Location = new System.Drawing.Point(125, 58);
             this.pathTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pathTextBox.Name = "pathTextBox";
-            this.pathTextBox.Size = new System.Drawing.Size(642, 21);
+            this.pathTextBox.Size = new System.Drawing.Size(656, 21);
             this.pathTextBox.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 47);
+            this.label1.Location = new System.Drawing.Point(11, 61);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 14);
             this.label1.TabIndex = 5;
@@ -144,9 +143,9 @@
             // titleLabel
             // 
             this.titleLabel.Font = new System.Drawing.Font("MS PGothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(121, 9);
+            this.titleLabel.Location = new System.Drawing.Point(2, 17);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(534, 27);
+            this.titleLabel.Size = new System.Drawing.Size(840, 27);
             this.titleLabel.TabIndex = 7;
             this.titleLabel.Text = "配车单导入";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -291,7 +290,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Update Order導入";
+            this.Text = "Ship number import";
             this.Load += new System.EventHandler(this.ImportShipNumberForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
