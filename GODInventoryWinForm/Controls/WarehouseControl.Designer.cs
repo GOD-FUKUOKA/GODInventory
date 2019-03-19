@@ -158,6 +158,7 @@
             // 
             // transportButton
             // 
+            this.transportButton.Font = new System.Drawing.Font("MS PGothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.transportButton.Location = new System.Drawing.Point(428, 3);
             this.transportButton.Name = "transportButton";
             this.transportButton.Size = new System.Drawing.Size(144, 58);
@@ -168,6 +169,7 @@
             // 
             // warehouseButton
             // 
+            this.warehouseButton.Font = new System.Drawing.Font("MS PGothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.warehouseButton.Location = new System.Drawing.Point(190, 3);
             this.warehouseButton.Name = "warehouseButton";
             this.warehouseButton.Size = new System.Drawing.Size(144, 58);

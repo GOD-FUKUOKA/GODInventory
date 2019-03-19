@@ -44,14 +44,14 @@
             this.label7 = new System.Windows.Forms.Label();
             this.addressTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // submitFormButton
             // 
             this.submitFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.submitFormButton.Location = new System.Drawing.Point(331, 340);
+            this.submitFormButton.Location = new System.Drawing.Point(339, 340);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(106, 32);
             this.submitFormButton.TabIndex = 10000042;
@@ -63,7 +63,7 @@
             // 
             this.cancelFormButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelFormButton.Location = new System.Drawing.Point(443, 340);
+            this.cancelFormButton.Location = new System.Drawing.Point(451, 340);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(106, 32);
             this.cancelFormButton.TabIndex = 10000043;
@@ -73,34 +73,36 @@
             // 
             // shortNameTextBox
             // 
-            this.shortNameTextBox.Location = new System.Drawing.Point(85, 110);
+            this.shortNameTextBox.Location = new System.Drawing.Point(93, 110);
             this.shortNameTextBox.Name = "shortNameTextBox";
-            this.shortNameTextBox.Size = new System.Drawing.Size(466, 21);
+            this.shortNameTextBox.Size = new System.Drawing.Size(466, 19);
             this.shortNameTextBox.TabIndex = 10000037;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label1.Location = new System.Drawing.Point(26, 113);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.TabIndex = 10000045;
             this.label1.Text = "仓库简称";
             // 
             // fullNameTextBox
             // 
-            this.fullNameTextBox.Location = new System.Drawing.Point(85, 80);
+            this.fullNameTextBox.Location = new System.Drawing.Point(93, 80);
             this.fullNameTextBox.Name = "fullNameTextBox";
-            this.fullNameTextBox.Size = new System.Drawing.Size(466, 21);
+            this.fullNameTextBox.Size = new System.Drawing.Size(466, 19);
             this.fullNameTextBox.TabIndex = 10000036;
             this.fullNameTextBox.TextChanged += new System.EventHandler(this.fullNameTextBox12_TextChanged);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(22, 83);
+            this.label13.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label13.Location = new System.Drawing.Point(26, 83);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(53, 12);
+            this.label13.Size = new System.Drawing.Size(63, 14);
             this.label13.TabIndex = 10000044;
             this.label13.Text = "仓库全称";
             // 
@@ -110,39 +112,41 @@
             // 
             // faxTextBox
             // 
-            this.faxTextBox.Location = new System.Drawing.Point(85, 230);
+            this.faxTextBox.Location = new System.Drawing.Point(93, 230);
             this.faxTextBox.Name = "faxTextBox";
-            this.faxTextBox.Size = new System.Drawing.Size(466, 21);
+            this.faxTextBox.Size = new System.Drawing.Size(466, 19);
             this.faxTextBox.TabIndex = 10000040;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(46, 233);
+            this.label6.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label6.Location = new System.Drawing.Point(54, 233);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.Size = new System.Drawing.Size(35, 14);
             this.label6.TabIndex = 10000050;
             this.label6.Text = "传真";
             // 
             // phoneTextBox
             // 
-            this.phoneTextBox.Location = new System.Drawing.Point(85, 200);
+            this.phoneTextBox.Location = new System.Drawing.Point(93, 200);
             this.phoneTextBox.Name = "phoneTextBox";
-            this.phoneTextBox.Size = new System.Drawing.Size(466, 21);
+            this.phoneTextBox.Size = new System.Drawing.Size(466, 19);
             this.phoneTextBox.TabIndex = 10000039;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(46, 203);
+            this.label5.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label5.Location = new System.Drawing.Point(54, 203);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.Size = new System.Drawing.Size(35, 14);
             this.label5.TabIndex = 10000049;
             this.label5.Text = "电话";
             // 
             // memoTextBox
             // 
-            this.memoTextBox.Location = new System.Drawing.Point(85, 260);
+            this.memoTextBox.Location = new System.Drawing.Point(93, 260);
             this.memoTextBox.Multiline = true;
             this.memoTextBox.Name = "memoTextBox";
             this.memoTextBox.Size = new System.Drawing.Size(466, 60);
@@ -151,15 +155,16 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(46, 263);
+            this.label7.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.Location = new System.Drawing.Point(54, 263);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(29, 12);
+            this.label7.Size = new System.Drawing.Size(35, 14);
             this.label7.TabIndex = 10000047;
             this.label7.Text = "备注";
             // 
             // addressTextBox
             // 
-            this.addressTextBox.Location = new System.Drawing.Point(85, 140);
+            this.addressTextBox.Location = new System.Drawing.Point(93, 140);
             this.addressTextBox.Multiline = true;
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.Size = new System.Drawing.Size(466, 51);
@@ -168,26 +173,31 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(46, 143);
+            this.label4.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label4.Location = new System.Drawing.Point(54, 143);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.Size = new System.Drawing.Size(35, 14);
             this.label4.TabIndex = 10000048;
             this.label4.Text = "地址";
             // 
-            // label3
+            // label2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(141, 33);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
-            this.label3.TabIndex = 10000046;
-            this.label3.Text = "创建仓库";
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Font = new System.Drawing.Font("MS PGothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label2.Location = new System.Drawing.Point(2, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(600, 37);
+            this.label2.TabIndex = 10000051;
+            this.label2.Text = "创建仓库";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(581, 413);
+            this.ClientSize = new System.Drawing.Size(603, 413);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.submitFormButton);
             this.Controls.Add(this.cancelFormButton);
             this.Controls.Add(this.shortNameTextBox);
@@ -202,7 +212,7 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.addressTextBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Font = new System.Drawing.Font("MS PGothic", 9F);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewForm";
@@ -233,6 +243,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox addressTextBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
     }
 }
