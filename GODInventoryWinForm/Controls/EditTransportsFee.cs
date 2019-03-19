@@ -18,7 +18,8 @@ namespace GODInventoryWinForm
         private t_freights freights { get; set; }
         private List<t_transports> transportList;
         private List<t_shoplist> shopList;
-
+        List<t_itemlist> products = null;
+        List<t_genre> genres = null;
         public EditTransportsFee()
         {
             InitializeComponent();
@@ -41,7 +42,10 @@ namespace GODInventoryWinForm
             //            where s.id == OrderId
             //            select s).FirstOrDefault();
             warehouseList = ctx.t_warehouses.ToList();
-
+            this.products = ctx.t_itemlist.ToList();
+            this.genres = ctx.t_genre.ToList();
+            transportList = ctx.t_transports.ToList();
+         
             this.whComboBox.ValueMember = "Id";
             this.whComboBox.DisplayMember = "FullName";
             this.whComboBox.DataSource = warehouseList;
@@ -53,7 +57,7 @@ namespace GODInventoryWinForm
             if (shopList.Count > 0)
             {
                 var counties = shopList.Select(s => s.県別).Distinct().ToList();
-                counties.Insert(0, "すべて");
+                //counties.Insert(0, "すべて");
                 this.countyComboBox1.DataSource = counties;
             }
 
@@ -61,12 +65,27 @@ namespace GODInventoryWinForm
             //this.transcomboBox1.DisplayMember = "fullname";
             //this.transcomboBox1.ValueMember = "id";
             //this.transcomboBox1.DataSource = transportList;
+      
+
+
+
+            this.storeNamTextBox.DisplayMember = "fullname";
+            this.storeNamTextBox.ValueMember = "id";
+            this.storeNamTextBox.DataSource = transportList;
+
             var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-            shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+
             this.storeComboBox.DisplayMember = "FullName";
             this.storeComboBox.ValueMember = "Id";
             this.storeComboBox.DataSource = shops;
 
+
+
+            var genreList = this.genres.Select(s => new MockEntity { Id = s.idジャンル, FullName = s.ジャンル名 }).ToList();
+
+            this.genresComboBox.ValueMember = "Id";
+            this.genresComboBox.DisplayMember = "FullName";
+            this.genresComboBox.DataSource = genreList;
 
             if (freights != null)
                 InitializeControls();
@@ -94,7 +113,7 @@ namespace GODInventoryWinForm
         private void submitFormButton_Click(object sender, EventArgs e)
         {
 
-            freights.id =Convert.ToInt32( orderAtTextBox.Text);
+            freights.自社コード = Convert.ToInt32(orderAtTextBox.SelectedValue);
 
 
             freights.warehousename = whComboBox.Text;
@@ -139,6 +158,26 @@ namespace GODInventoryWinForm
                 this.storeComboBox.DataSource = shops;
 
             }
+        }
+
+        private void genresComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<MockEntity> productsByGenre;
+            int genreId = (int)this.genresComboBox.SelectedValue;
+
+            if (genreId > 0)
+            {
+                productsByGenre = this.products.Where(o => o.ジャンル == genreId).Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
+            }
+            else
+            {
+                productsByGenre = this.products.Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
+            }
+            //productsByGenre.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+
+            this.orderAtTextBox.ValueMember = "Id";
+            this.orderAtTextBox.DisplayMember = "FullName";
+            this.orderAtTextBox.DataSource = productsByGenre;
         }
 
 

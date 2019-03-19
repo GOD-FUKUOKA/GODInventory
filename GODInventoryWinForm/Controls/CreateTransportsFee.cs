@@ -47,7 +47,7 @@ namespace GODInventoryWinForm
             if (shopList.Count > 0)
             {
                 var counties = shopList.Select(s => s.県別).Distinct().ToList();
-                counties.Insert(0, "すべて");
+            
                 this.countyComboBox1.DataSource = counties;
             }
 
@@ -57,7 +57,7 @@ namespace GODInventoryWinForm
             this.storeNamTextBox.DataSource = transportList;
 
             var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-            shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+      
             this.storeComboBox.DisplayMember = "FullName";
             this.storeComboBox.ValueMember = "Id";
             this.storeComboBox.DataSource = shops;
@@ -65,7 +65,7 @@ namespace GODInventoryWinForm
 
 
             var genreList = this.genres.Select(s => new MockEntity { Id = s.idジャンル, FullName = s.ジャンル名 }).ToList();
-            genreList.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+ 
             this.genresComboBox.ValueMember = "Id";
             this.genresComboBox.DisplayMember = "FullName";
             this.genresComboBox.DataSource = genreList;
@@ -121,7 +121,7 @@ namespace GODInventoryWinForm
             if (filtered.Count > 0)
             {
                 var shops = filtered.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+         
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
@@ -130,7 +130,7 @@ namespace GODInventoryWinForm
             else
             {
                 var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+       
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
@@ -151,7 +151,7 @@ namespace GODInventoryWinForm
             {
                 productsByGenre = this.products.Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
             }
-            productsByGenre.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+            //productsByGenre.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
 
             this.orderAtTextBox.ValueMember = "Id";
             this.orderAtTextBox.DisplayMember = "FullName";

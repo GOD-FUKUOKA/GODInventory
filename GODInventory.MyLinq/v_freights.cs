@@ -1,28 +1,27 @@
+ï»¿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace GODInventory.MyLinq
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
-    //[Table("t_freights")]
-    public partial class t_freights
+    // join item and price
+    public class v_freights
     {
-        [Key]
         public int id { get; set; }
-        public int ×ÔÉç¥³©`¥É { get; set; }
+        public int è‡ªç¤¾ã‚³ãƒ¼ãƒ‰ { get; set; }
         public string transportname { get; set; }
         public string warehousename { get; set; }
         public int transport_id { get; set; }
         public int warehouse_id { get; set; }
         public int shop_id { get; set; }
-        //ß\ÙU
+        //é‹è³ƒ
         public int fee { get; set; }
-        //…gÎ»
+        //å˜ä½
         public string unitname { get; set; }
 
- 
+        public string å•†å“å { get; set; }
 
     }
 }
