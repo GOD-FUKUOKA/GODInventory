@@ -100,23 +100,18 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.warehouseComboBox5 = new System.Windows.Forms.ComboBox();
+            this.transportComboBox6 = new System.Windows.Forms.ComboBox();
+            this.countyComboBox4 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.shopComboBox1 = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.categoryComboBox2 = new System.Windows.Forms.ComboBox();
             this.bttransportfind = new System.Windows.Forms.Button();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.productComboBox3 = new System.Windows.Forms.ComboBox();
             this.transportdataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.transportdatabindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.自社コード = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.商品名Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.warehousename = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -124,6 +119,27 @@
             this.unitname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.button2 = new System.Windows.Forms.Button();
+            this.pricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.transportdatabindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.自社コードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.得意先DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ジャンルDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品名DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pT入数DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品コードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.jANコードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.インストアコードDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.通常原単価DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.売単価DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.仕入原価DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.単品重量DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.単位DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pT単位かDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.順番DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -189,7 +205,23 @@
             this.インストアコードColumn1,
             this.単品重量Column1,
             this.単位Column1,
-            this.PT単位かColumn1});
+            this.PT単位かColumn1,
+            this.自社コードDataGridViewTextBoxColumn,
+            this.得意先DataGridViewTextBoxColumn,
+            this.ジャンルDataGridViewTextBoxColumn,
+            this.商品名DataGridViewTextBoxColumn,
+            this.規格DataGridViewTextBoxColumn,
+            this.pT入数DataGridViewTextBoxColumn,
+            this.商品コードDataGridViewTextBoxColumn,
+            this.jANコードDataGridViewTextBoxColumn,
+            this.インストアコードDataGridViewTextBoxColumn,
+            this.通常原単価DataGridViewTextBoxColumn,
+            this.売単価DataGridViewTextBoxColumn,
+            this.仕入原価DataGridViewTextBoxColumn,
+            this.単品重量DataGridViewTextBoxColumn,
+            this.単位DataGridViewTextBoxColumn,
+            this.pT単位かDataGridViewTextBoxColumn,
+            this.順番DataGridViewTextBoxColumn});
             this.productsDataGridView.ContextMenuStrip = this.productContextMenuStrip;
             this.productsDataGridView.DataSource = this.bindingSource1;
             this.productsDataGridView.Location = new System.Drawing.Point(16, 58);
@@ -293,6 +325,7 @@
             // 
             this.bindingSource1.DataMember = "t_itemlist";
             this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
             // 
             // entityDataSource1
             // 
@@ -765,11 +798,12 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.button1);
             this.groupBox5.Controls.Add(this.transportfee);
             this.groupBox5.Controls.Add(this.label21);
             this.groupBox5.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(943, 6);
+            this.groupBox5.Location = new System.Drawing.Point(983, 6);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(295, 77);
             this.groupBox5.TabIndex = 45;
@@ -777,9 +811,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(187, 17);
+            this.button1.Location = new System.Drawing.Point(187, 16);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 54);
+            this.button1.Size = new System.Drawing.Size(95, 51);
             this.button1.TabIndex = 5;
             this.button1.Text = "保存";
             this.button1.UseVisualStyleBackColor = true;
@@ -788,9 +822,9 @@
             // transportfee
             // 
             this.transportfee.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.transportfee.Location = new System.Drawing.Point(87, 17);
+            this.transportfee.Location = new System.Drawing.Point(64, 17);
             this.transportfee.Name = "transportfee";
-            this.transportfee.Size = new System.Drawing.Size(80, 21);
+            this.transportfee.Size = new System.Drawing.Size(103, 21);
             this.transportfee.TabIndex = 0;
             // 
             // label21
@@ -806,20 +840,20 @@
             // 
             this.groupBox4.Controls.Add(this.label15);
             this.groupBox4.Controls.Add(this.label16);
-            this.groupBox4.Controls.Add(this.comboBox5);
-            this.groupBox4.Controls.Add(this.comboBox6);
-            this.groupBox4.Controls.Add(this.comboBox4);
+            this.groupBox4.Controls.Add(this.warehouseComboBox5);
+            this.groupBox4.Controls.Add(this.transportComboBox6);
+            this.groupBox4.Controls.Add(this.countyComboBox4);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label11);
-            this.groupBox4.Controls.Add(this.comboBox1);
+            this.groupBox4.Controls.Add(this.shopComboBox1);
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.label13);
-            this.groupBox4.Controls.Add(this.comboBox2);
+            this.groupBox4.Controls.Add(this.categoryComboBox2);
             this.groupBox4.Controls.Add(this.bttransportfind);
-            this.groupBox4.Controls.Add(this.comboBox3);
+            this.groupBox4.Controls.Add(this.productComboBox3);
             this.groupBox4.Location = new System.Drawing.Point(10, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(916, 77);
+            this.groupBox4.Size = new System.Drawing.Size(726, 77);
             this.groupBox4.TabIndex = 44;
             this.groupBox4.TabStop = false;
             // 
@@ -827,7 +861,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label15.Location = new System.Drawing.Point(377, 19);
+            this.label15.Location = new System.Drawing.Point(422, 20);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(35, 14);
             this.label15.TabIndex = 49;
@@ -837,42 +871,42 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label16.Location = new System.Drawing.Point(571, 20);
+            this.label16.Location = new System.Drawing.Point(394, 48);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(63, 14);
             this.label16.TabIndex = 48;
             this.label16.Text = "运输公司";
             // 
-            // comboBox5
+            // warehouseComboBox5
             // 
-            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox5.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(437, 16);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(125, 22);
-            this.comboBox5.TabIndex = 46;
+            this.warehouseComboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.warehouseComboBox5.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.warehouseComboBox5.FormattingEnabled = true;
+            this.warehouseComboBox5.Location = new System.Drawing.Point(462, 16);
+            this.warehouseComboBox5.Name = "warehouseComboBox5";
+            this.warehouseComboBox5.Size = new System.Drawing.Size(125, 22);
+            this.warehouseComboBox5.TabIndex = 46;
             // 
-            // comboBox6
+            // transportComboBox6
             // 
-            this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox6.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(640, 16);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(125, 22);
-            this.comboBox6.TabIndex = 47;
+            this.transportComboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.transportComboBox6.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.transportComboBox6.FormattingEnabled = true;
+            this.transportComboBox6.Location = new System.Drawing.Point(462, 44);
+            this.transportComboBox6.Name = "transportComboBox6";
+            this.transportComboBox6.Size = new System.Drawing.Size(125, 22);
+            this.transportComboBox6.TabIndex = 47;
             // 
-            // comboBox4
+            // countyComboBox4
             // 
-            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox4.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(70, 45);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(125, 22);
-            this.comboBox4.TabIndex = 45;
-            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
+            this.countyComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.countyComboBox4.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.countyComboBox4.FormattingEnabled = true;
+            this.countyComboBox4.Location = new System.Drawing.Point(70, 45);
+            this.countyComboBox4.Name = "countyComboBox4";
+            this.countyComboBox4.Size = new System.Drawing.Size(125, 22);
+            this.countyComboBox4.TabIndex = 45;
+            this.countyComboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -894,21 +928,21 @@
             this.label11.TabIndex = 39;
             this.label11.Text = "県別";
             // 
-            // comboBox1
+            // shopComboBox1
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(242, 44);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(125, 22);
-            this.comboBox1.TabIndex = 2;
+            this.shopComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.shopComboBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.shopComboBox1.FormattingEnabled = true;
+            this.shopComboBox1.Location = new System.Drawing.Point(265, 44);
+            this.shopComboBox1.Name = "shopComboBox1";
+            this.shopComboBox1.Size = new System.Drawing.Size(125, 22);
+            this.shopComboBox1.TabIndex = 2;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label12.Location = new System.Drawing.Point(204, 48);
+            this.label12.Location = new System.Drawing.Point(226, 48);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(35, 14);
             this.label12.TabIndex = 36;
@@ -918,43 +952,43 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label13.Location = new System.Drawing.Point(204, 20);
+            this.label13.Location = new System.Drawing.Point(227, 20);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(35, 14);
             this.label13.TabIndex = 33;
             this.label13.Text = "商品";
             // 
-            // comboBox2
+            // categoryComboBox2
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(70, 16);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(125, 22);
-            this.comboBox2.TabIndex = 0;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.categoryComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.categoryComboBox2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.categoryComboBox2.FormattingEnabled = true;
+            this.categoryComboBox2.Location = new System.Drawing.Point(70, 16);
+            this.categoryComboBox2.Name = "categoryComboBox2";
+            this.categoryComboBox2.Size = new System.Drawing.Size(125, 22);
+            this.categoryComboBox2.TabIndex = 0;
+            this.categoryComboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // bttransportfind
             // 
             this.bttransportfind.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.bttransportfind.Location = new System.Drawing.Point(815, 13);
+            this.bttransportfind.Location = new System.Drawing.Point(608, 16);
             this.bttransportfind.Name = "bttransportfind";
-            this.bttransportfind.Size = new System.Drawing.Size(95, 54);
+            this.bttransportfind.Size = new System.Drawing.Size(95, 51);
             this.bttransportfind.TabIndex = 3;
             this.bttransportfind.Text = "検索";
             this.bttransportfind.UseVisualStyleBackColor = true;
             this.bttransportfind.Click += new System.EventHandler(this.bttransportfind_Click);
             // 
-            // comboBox3
+            // productComboBox3
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(242, 16);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(125, 22);
-            this.comboBox3.TabIndex = 1;
+            this.productComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.productComboBox3.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.productComboBox3.FormattingEnabled = true;
+            this.productComboBox3.Location = new System.Drawing.Point(265, 16);
+            this.productComboBox3.Name = "productComboBox3";
+            this.productComboBox3.Size = new System.Drawing.Size(125, 22);
+            this.productComboBox3.TabIndex = 1;
             // 
             // transportdataGridView1
             // 
@@ -981,32 +1015,6 @@
             this.transportdataGridView1.Size = new System.Drawing.Size(1405, 332);
             this.transportdataGridView1.TabIndex = 43;
             this.transportdataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.transportdataGridView1_CellContentClick);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.contextMenuStrip1.Name = "priceContextMenuStrip";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
-            this.toolStripMenuItem1.Text = "編集";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button2.Location = new System.Drawing.Point(1320, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 54);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "新规";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button1_Click);
             // 
             // 自社コード
             // 
@@ -1057,6 +1065,144 @@
             this.deleteButtonColumn.ToolTipText = "クリア";
             this.deleteButtonColumn.UseColumnTextForButtonValue = true;
             this.deleteButtonColumn.Width = 40;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip1.Name = "priceContextMenuStrip";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem1.Text = "編集";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button2.Location = new System.Drawing.Point(1320, 21);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(95, 51);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "新规";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // 自社コードDataGridViewTextBoxColumn
+            // 
+            this.自社コードDataGridViewTextBoxColumn.DataPropertyName = "自社コード";
+            this.自社コードDataGridViewTextBoxColumn.HeaderText = "自社コード";
+            this.自社コードDataGridViewTextBoxColumn.Name = "自社コードDataGridViewTextBoxColumn";
+            this.自社コードDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 得意先DataGridViewTextBoxColumn
+            // 
+            this.得意先DataGridViewTextBoxColumn.DataPropertyName = "得意先";
+            this.得意先DataGridViewTextBoxColumn.HeaderText = "得意先";
+            this.得意先DataGridViewTextBoxColumn.Name = "得意先DataGridViewTextBoxColumn";
+            this.得意先DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // ジャンルDataGridViewTextBoxColumn
+            // 
+            this.ジャンルDataGridViewTextBoxColumn.DataPropertyName = "ジャンル";
+            this.ジャンルDataGridViewTextBoxColumn.HeaderText = "ジャンル";
+            this.ジャンルDataGridViewTextBoxColumn.Name = "ジャンルDataGridViewTextBoxColumn";
+            this.ジャンルDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 商品名DataGridViewTextBoxColumn
+            // 
+            this.商品名DataGridViewTextBoxColumn.DataPropertyName = "商品名";
+            this.商品名DataGridViewTextBoxColumn.HeaderText = "商品名";
+            this.商品名DataGridViewTextBoxColumn.Name = "商品名DataGridViewTextBoxColumn";
+            this.商品名DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 規格DataGridViewTextBoxColumn
+            // 
+            this.規格DataGridViewTextBoxColumn.DataPropertyName = "規格";
+            this.規格DataGridViewTextBoxColumn.HeaderText = "規格";
+            this.規格DataGridViewTextBoxColumn.Name = "規格DataGridViewTextBoxColumn";
+            this.規格DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // pT入数DataGridViewTextBoxColumn
+            // 
+            this.pT入数DataGridViewTextBoxColumn.DataPropertyName = "PT入数";
+            this.pT入数DataGridViewTextBoxColumn.HeaderText = "PT入数";
+            this.pT入数DataGridViewTextBoxColumn.Name = "pT入数DataGridViewTextBoxColumn";
+            this.pT入数DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 商品コードDataGridViewTextBoxColumn
+            // 
+            this.商品コードDataGridViewTextBoxColumn.DataPropertyName = "商品コード";
+            this.商品コードDataGridViewTextBoxColumn.HeaderText = "商品コード";
+            this.商品コードDataGridViewTextBoxColumn.Name = "商品コードDataGridViewTextBoxColumn";
+            this.商品コードDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // jANコードDataGridViewTextBoxColumn
+            // 
+            this.jANコードDataGridViewTextBoxColumn.DataPropertyName = "JANコード";
+            this.jANコードDataGridViewTextBoxColumn.HeaderText = "JANコード";
+            this.jANコードDataGridViewTextBoxColumn.Name = "jANコードDataGridViewTextBoxColumn";
+            this.jANコードDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // インストアコードDataGridViewTextBoxColumn
+            // 
+            this.インストアコードDataGridViewTextBoxColumn.DataPropertyName = "インストアコード";
+            this.インストアコードDataGridViewTextBoxColumn.HeaderText = "インストアコード";
+            this.インストアコードDataGridViewTextBoxColumn.Name = "インストアコードDataGridViewTextBoxColumn";
+            this.インストアコードDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 通常原単価DataGridViewTextBoxColumn
+            // 
+            this.通常原単価DataGridViewTextBoxColumn.DataPropertyName = "通常原単価";
+            this.通常原単価DataGridViewTextBoxColumn.HeaderText = "通常原単価";
+            this.通常原単価DataGridViewTextBoxColumn.Name = "通常原単価DataGridViewTextBoxColumn";
+            this.通常原単価DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 売単価DataGridViewTextBoxColumn
+            // 
+            this.売単価DataGridViewTextBoxColumn.DataPropertyName = "売単価";
+            this.売単価DataGridViewTextBoxColumn.HeaderText = "売単価";
+            this.売単価DataGridViewTextBoxColumn.Name = "売単価DataGridViewTextBoxColumn";
+            this.売単価DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 仕入原価DataGridViewTextBoxColumn
+            // 
+            this.仕入原価DataGridViewTextBoxColumn.DataPropertyName = "仕入原価";
+            this.仕入原価DataGridViewTextBoxColumn.HeaderText = "仕入原価";
+            this.仕入原価DataGridViewTextBoxColumn.Name = "仕入原価DataGridViewTextBoxColumn";
+            this.仕入原価DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 単品重量DataGridViewTextBoxColumn
+            // 
+            this.単品重量DataGridViewTextBoxColumn.DataPropertyName = "単品重量";
+            this.単品重量DataGridViewTextBoxColumn.HeaderText = "単品重量";
+            this.単品重量DataGridViewTextBoxColumn.Name = "単品重量DataGridViewTextBoxColumn";
+            this.単品重量DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 単位DataGridViewTextBoxColumn
+            // 
+            this.単位DataGridViewTextBoxColumn.DataPropertyName = "単位";
+            this.単位DataGridViewTextBoxColumn.HeaderText = "単位";
+            this.単位DataGridViewTextBoxColumn.Name = "単位DataGridViewTextBoxColumn";
+            this.単位DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // pT単位かDataGridViewTextBoxColumn
+            // 
+            this.pT単位かDataGridViewTextBoxColumn.DataPropertyName = "PT単位か";
+            this.pT単位かDataGridViewTextBoxColumn.HeaderText = "PT単位か";
+            this.pT単位かDataGridViewTextBoxColumn.Name = "pT単位かDataGridViewTextBoxColumn";
+            this.pT単位かDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // 順番DataGridViewTextBoxColumn
+            // 
+            this.順番DataGridViewTextBoxColumn.DataPropertyName = "順番";
+            this.順番DataGridViewTextBoxColumn.HeaderText = "順番";
+            this.順番DataGridViewTextBoxColumn.Name = "順番DataGridViewTextBoxColumn";
+            this.順番DataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // ProductsControl
             // 
@@ -1187,17 +1333,17 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox shopComboBox1;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox categoryComboBox2;
         private System.Windows.Forms.Button bttransportfind;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox productComboBox3;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox warehouseComboBox5;
+        private System.Windows.Forms.ComboBox transportComboBox6;
+        private System.Windows.Forms.ComboBox countyComboBox4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button button1;
@@ -1210,5 +1356,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn unitname;
         private System.Windows.Forms.DataGridViewTextBoxColumn fee;
         private System.Windows.Forms.DataGridViewButtonColumn deleteButtonColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 順番DataGridViewTextBoxColumn;
     }
 }

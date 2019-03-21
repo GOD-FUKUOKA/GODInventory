@@ -38,9 +38,9 @@ namespace GODInventoryWinForm
             this.products = ctx.t_itemlist.ToList();
       
 
-            this.whComboBox.ValueMember = "Id";
-            this.whComboBox.DisplayMember = "FullName";
-            this.whComboBox.DataSource = warehouseList;
+            this.warehouseComboBox.ValueMember = "Id";
+            this.warehouseComboBox.DisplayMember = "FullName";
+            this.warehouseComboBox.DataSource = warehouseList;
 
             // 県別
             shopList = ctx.t_shoplist.ToList();
@@ -52,9 +52,9 @@ namespace GODInventoryWinForm
             }
 
 
-            this.storeNamTextBox.DisplayMember = "fullname";
-            this.storeNamTextBox.ValueMember = "id";
-            this.storeNamTextBox.DataSource = transportList;
+            this.transportComboBox.DisplayMember = "fullname";
+            this.transportComboBox.ValueMember = "id";
+            this.transportComboBox.DataSource = transportList;
 
             var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
       
@@ -78,27 +78,30 @@ namespace GODInventoryWinForm
         {
             using (var ctx = new GODDbContext()) 
             {
-                if (orderAtTextBox.Text.Length > 0)
+                if (productComboBox.Text.Length > 0)
                 {
-                  int zi= Convert.ToInt32( orderAtTextBox.SelectedValue);
+                    // 运费依赖于 商品、仓库、商店、物流公司
+                    int productId = Convert.ToInt32(productComboBox.SelectedValue);
+                    int warehouseId = Convert.ToInt32(warehouseComboBox.SelectedValue);
+                    int storeId = Convert.ToInt32(storeComboBox.SelectedValue);
+                    int transportId = Convert.ToInt32(transportComboBox.SelectedValue);
 
-
-                    var List = (from t_freights o in ctx.t_freights
-                                where zi == o.自社コード
-                                select o).ToList();
-                    if (List.Count == 0)
+                    var freight = (from t_freights o in ctx.t_freights
+                                where productId == o.自社コード && warehouseId == o.warehouse_id && storeId == o.shop_id && transportId == o.transport_id
+                                select o).FirstOrDefault();
+                    if (freight  == null )
                     {
                         t_freights freights = new t_freights();
-                        freights.自社コード = Convert.ToInt32(orderAtTextBox.SelectedValue);
-                        freights.warehousename = whComboBox.Text;
-                        freights.transportname = storeNamTextBox.Text;
+                        freights.自社コード = Convert.ToInt32(productComboBox.SelectedValue);
+                        freights.warehousename = warehouseComboBox.Text;
+                        freights.transportname = transportComboBox.Text;
                         freights.unitname = storeCodeTextBox.Text;
                         freights.fee = Convert.ToInt32(invoiceNOTextBox.Text);
 
 
                         freights.shop_id = Convert.ToInt32(storeComboBox.SelectedValue);
-                        //freights.transport_id = Convert.ToInt32(transcomboBox1.SelectedValue);
-                        freights.warehouse_id = Convert.ToInt32(whComboBox.SelectedValue); 
+                        freights.transport_id = Convert.ToInt32(transportComboBox.SelectedValue);
+                        freights.warehouse_id = Convert.ToInt32(warehouseComboBox.SelectedValue); 
  
                         ctx.t_freights.Add(freights);
                         ctx.SaveChanges();
@@ -153,9 +156,9 @@ namespace GODInventoryWinForm
             }
             //productsByGenre.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
 
-            this.orderAtTextBox.ValueMember = "Id";
-            this.orderAtTextBox.DisplayMember = "FullName";
-            this.orderAtTextBox.DataSource = productsByGenre;
+            this.productComboBox.ValueMember = "Id";
+            this.productComboBox.DisplayMember = "FullName";
+            this.productComboBox.DataSource = productsByGenre;
         }
 
 

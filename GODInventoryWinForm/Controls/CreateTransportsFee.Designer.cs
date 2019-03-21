@@ -32,13 +32,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.genresComboBox = new System.Windows.Forms.ComboBox();
-            this.storeNamTextBox = new System.Windows.Forms.ComboBox();
-            this.orderAtTextBox = new System.Windows.Forms.ComboBox();
+            this.transportComboBox = new System.Windows.Forms.ComboBox();
+            this.warehouseComboBox = new System.Windows.Forms.ComboBox();
+            this.productComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.storeComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.countyComboBox1 = new System.Windows.Forms.ComboBox();
-            this.whComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -56,9 +56,9 @@
             // 
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.genresComboBox);
-            this.groupBox1.Controls.Add(this.storeNamTextBox);
-            this.groupBox1.Controls.Add(this.whComboBox);
-            this.groupBox1.Controls.Add(this.orderAtTextBox);
+            this.groupBox1.Controls.Add(this.transportComboBox);
+            this.groupBox1.Controls.Add(this.warehouseComboBox);
+            this.groupBox1.Controls.Add(this.productComboBox);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.storeComboBox);
             this.groupBox1.Controls.Add(this.label1);
@@ -97,23 +97,35 @@
             this.genresComboBox.TabIndex = 0;
             this.genresComboBox.SelectedIndexChanged += new System.EventHandler(this.genresComboBox_SelectedIndexChanged);
             // 
-            // storeNamTextBox
+            // transportComboBox
             // 
-            this.storeNamTextBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.storeNamTextBox.FormattingEnabled = true;
-            this.storeNamTextBox.Location = new System.Drawing.Point(425, 64);
-            this.storeNamTextBox.Name = "storeNamTextBox";
-            this.storeNamTextBox.Size = new System.Drawing.Size(190, 22);
-            this.storeNamTextBox.TabIndex = 3;
+            this.transportComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.transportComboBox.FormattingEnabled = true;
+            this.transportComboBox.Location = new System.Drawing.Point(425, 64);
+            this.transportComboBox.Name = "transportComboBox";
+            this.transportComboBox.Size = new System.Drawing.Size(190, 22);
+            this.transportComboBox.TabIndex = 3;
             // 
-            // orderAtTextBox
+            // warehouseComboBox
             // 
-            this.orderAtTextBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.orderAtTextBox.FormattingEnabled = true;
-            this.orderAtTextBox.Location = new System.Drawing.Point(425, 26);
-            this.orderAtTextBox.Name = "orderAtTextBox";
-            this.orderAtTextBox.Size = new System.Drawing.Size(190, 22);
-            this.orderAtTextBox.TabIndex = 1;
+            this.warehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.warehouseComboBox.FormattingEnabled = true;
+            this.warehouseComboBox.Items.AddRange(new object[] {
+            "no",
+            "yes"});
+            this.warehouseComboBox.Location = new System.Drawing.Point(105, 64);
+            this.warehouseComboBox.Name = "warehouseComboBox";
+            this.warehouseComboBox.Size = new System.Drawing.Size(190, 22);
+            this.warehouseComboBox.TabIndex = 2;
+            // 
+            // productComboBox
+            // 
+            this.productComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.productComboBox.FormattingEnabled = true;
+            this.productComboBox.Location = new System.Drawing.Point(425, 26);
+            this.productComboBox.Name = "productComboBox";
+            this.productComboBox.Size = new System.Drawing.Size(190, 22);
+            this.productComboBox.TabIndex = 1;
             // 
             // label7
             // 
@@ -149,18 +161,6 @@
             this.countyComboBox1.Size = new System.Drawing.Size(190, 22);
             this.countyComboBox1.TabIndex = 4;
             this.countyComboBox1.SelectedIndexChanged += new System.EventHandler(this.countyComboBox1_SelectedIndexChanged);
-            // 
-            // whComboBox
-            // 
-            this.whComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.whComboBox.FormattingEnabled = true;
-            this.whComboBox.Items.AddRange(new object[] {
-            "no",
-            "yes"});
-            this.whComboBox.Location = new System.Drawing.Point(105, 64);
-            this.whComboBox.Name = "whComboBox";
-            this.whComboBox.Size = new System.Drawing.Size(190, 22);
-            this.whComboBox.TabIndex = 2;
             // 
             // label3
             // 
@@ -264,7 +264,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox whComboBox;
+        private System.Windows.Forms.ComboBox warehouseComboBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -279,8 +279,8 @@
         private System.Windows.Forms.ComboBox countyComboBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox storeComboBox;
-        private System.Windows.Forms.ComboBox storeNamTextBox;
-        private System.Windows.Forms.ComboBox orderAtTextBox;
+        private System.Windows.Forms.ComboBox transportComboBox;
+        private System.Windows.Forms.ComboBox productComboBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox genresComboBox;
     }

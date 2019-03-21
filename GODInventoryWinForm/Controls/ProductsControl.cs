@@ -20,7 +20,7 @@ namespace GODInventoryWinForm.Controls
         List<t_itemlist> products = null;
         private List<t_warehouses> warehouseList;
         EditTransportsFee EditTransportsFeeForm;
-        List<t_freights> freights = null;
+        //List<t_freights> freights = null;
         private List<t_transports> transportList;
         private List<t_shoplist> shopList;
         public ProductsControl()
@@ -40,7 +40,7 @@ namespace GODInventoryWinForm.Controls
 
         private void InitializeDataSource()
         {
-            freights = new List<t_freights>();
+            //freights = new List<t_freights>();
 
             var ctx = this.entityDataSource1.DbContext as GODDbContext;
 
@@ -84,33 +84,33 @@ namespace GODInventoryWinForm.Controls
             //this.配送担当Column2.DataSource = shipperCo.ToList();
 
 
-            InitializetransportdataGridView1();
+            //InitializetransportdataGridView1();
 
 
             //
 
-            this.comboBox2.ValueMember = "Id";
-            this.comboBox2.DisplayMember = "FullName";
-            this.comboBox2.DataSource = genreList;
+            this.categoryComboBox2.ValueMember = "Id";
+            this.categoryComboBox2.DisplayMember = "FullName";
+            this.categoryComboBox2.DataSource = genreList;
 
             //
             var shipperConew = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
             shipperConew.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
             // shipperConew.Insert(0, new { ShortName = "", FullName = "すべて" });
 
-            this.comboBox5.ValueMember = "Id";
-            this.comboBox5.DisplayMember = "FullName";
-            this.comboBox5.DataSource = shipperConew;
+            this.warehouseComboBox5.ValueMember = "Id";
+            this.warehouseComboBox5.DisplayMember = "FullName";
+            this.warehouseComboBox5.DataSource = shipperConew;
             //
             var transportListnew = transportList.Select(s => new MockEntity { Id = s.id, ShortName = s.shortname, FullName = s.fullname }).Distinct().ToList();
             transportListnew.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
-            this.comboBox6.DisplayMember = "FullName";
-            this.comboBox6.ValueMember = "Id";
-            this.comboBox6.DataSource = transportListnew;
+            this.transportComboBox6.DisplayMember = "FullName";
+            this.transportComboBox6.ValueMember = "Id";
+            this.transportComboBox6.DataSource = transportListnew;
             //  // 県別
-            this.comboBox4.ValueMember = "ShortName";
-            this.comboBox4.DisplayMember = "FullName";
-            this.comboBox4.DataSource = counties;
+            this.countyComboBox4.ValueMember = "ShortName";
+            this.countyComboBox4.DisplayMember = "FullName";
+            this.countyComboBox4.DataSource = counties;
 
 
         }
@@ -179,7 +179,7 @@ namespace GODInventoryWinForm.Controls
             var rows = GetSelectedRowsBySelectedCells(transportdataGridView1);
             foreach (DataGridViewRow row in rows)
             {
-                var pendingorder = row.DataBoundItem as t_freights;
+                var pendingorder = row.DataBoundItem as v_freights;
                 order_ids.Add(pendingorder.id);
             }
 
@@ -486,56 +486,17 @@ namespace GODInventoryWinForm.Controls
         {
             if (this.transportdataGridView1.RowCount > 0)
             {
-                var order = transportdataGridView1.CurrentRow.DataBoundItem as t_freights;
+                var order = transportdataGridView1.CurrentRow.DataBoundItem as v_freights;
 
                 EditTransportsFeeForm.OrderId = order.id;
                 if (EditTransportsFeeForm.ShowDialog() == DialogResult.OK)
                 {
-                    InitializeDataSource();
+                    InitializetransportdataGridViewBySelectedValue();
                 }
             }
         }
 
-        private void InitializetransportdataGridView1()
-        {
-            using (var ctx = new GODDbContext())
-            {
-                freights = ctx.t_freights.ToList();
-            }
-
-
-
-            var query = from t_freights p in this.entityDataSource1.EntitySets["t_freights"]
-                        join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on p.自社コード equals i.自社コード
-
-                        select new v_freights
-                        {
-                            id = p.id,
-                            自社コード = p.自社コード,
-                            商品名 = i.商品名,
-                            transportname = p.transportname,
-                            warehousename = p.warehousename,
-                            transport_id = p.transport_id,
-                            warehouse_id = p.warehouse_id,
-                            shop_id = p.shop_id,
-                            fee = p.fee,
-                            unitname = p.unitname,
-                           
-                        };
-
-       
-
-
-
-            transportdatabindingSource2.DataSource = null;
-
-            transportdatabindingSource2.DataSource = query.ToList();
-            transportdataGridView1.DataSource = null;
-
-            transportdataGridView1.DataSource = transportdatabindingSource2;
-            //transportdataGridView1.Refresh();
-        }
-
+     
         private void button1_Click(object sender, EventArgs e)
         {
             var form = new CreateTransportsFee();
@@ -549,28 +510,28 @@ namespace GODInventoryWinForm.Controls
         private void transportdataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewColumn column = transportdataGridView1.Columns[e.ColumnIndex];
-            var deletedStockNumList = new List<string>();
 
             if (column == deleteButtonColumn)
             {
 
+                var freight = transportdataGridView1.Rows[e.RowIndex].DataBoundItem as v_freights;
 
-                var oids = GetOrderIdsBySelectedGridCell_transportdataGridView1();
                 using (var ctx = new GODDbContext())
                 {
-                    t_freights tlist = freights.Find(o => o.id != null && o.id == oids[0]);
-                    if (tlist != null && tlist.id != null)
+                    if (freight!=null)
                     {
-                        t_freights widlist = freights.Find(o => o.id != null && o.id == Convert.ToInt32(oids[0]));
+                        var fid = freight.id;
 
                         var del = (from s in ctx.t_freights
-                                   where s.id == widlist.id
-                                   select s).ToList();
-                        ctx.t_freights.RemoveRange(del);
+                                   where s.id == fid
+                                   select s).First();
+                        ctx.t_freights.Remove(del);
                         ctx.SaveChanges();
 
                     }
-                    InitializeDataSource();
+                    int 自社コード = Convert.ToInt32(this.productComboBox3.SelectedValue);
+
+                    InitializetransportdataGridView1(自社コード);
                 }
 
             }
@@ -580,25 +541,36 @@ namespace GODInventoryWinForm.Controls
         {
 
 
-            int 自社コード = Convert.ToInt32(this.comboBox3.SelectedValue);
-            string warehousename = this.comboBox5.Text.ToString();
-            string transportname = this.comboBox6.Text;
-
-            int shop_id = Convert.ToInt32(this.comboBox1.SelectedValue);
-
-            if (自社コード > 0)
-            {
-                InitializetransportdataGridView1(自社コード, warehousename, transportname, shop_id);
-            }
+            InitializetransportdataGridViewBySelectedValue();
+           
         }
 
-        private void InitializetransportdataGridView1(int 自社コード, string warehousename = "", string transportname = "", int shop_id = 0)
+        private void InitializetransportdataGridView1(int 自社コード=0, string warehousename = "", string transportname = "", int shop_id = 0)
         {
             using (var ctx = new GODDbContext())
             {
-                var query = (from t_freights o in ctx.t_freights
-                             where 自社コード == o.自社コード
-                             select o);
+                var query = from t_freights p in this.entityDataSource1.EntitySets["t_freights"]
+                            join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on p.自社コード equals i.自社コード
+
+                            select new v_freights
+                            {
+                                id = p.id,
+                                自社コード = p.自社コード,
+                                商品名 = i.商品名,
+                                transportname = p.transportname,
+                                warehousename = p.warehousename,
+                                transport_id = p.transport_id,
+                                warehouse_id = p.warehouse_id,
+                                shop_id = p.shop_id,
+                                fee = p.fee,
+                                unitname = p.unitname,
+
+                            };
+
+
+                query = query.Where(o => o.自社コード == 自社コード);
+               
+
                 if (warehousename.Length > 0 && warehousename != "すべて")
                 {
                     query = query.Where(o => o.warehousename == warehousename);
@@ -621,7 +593,7 @@ namespace GODInventoryWinForm.Controls
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<MockEntity> productsByGenre;
-            int genreId = (int)this.comboBox2.SelectedValue;
+            int genreId = (int)this.categoryComboBox2.SelectedValue;
 
             if (genreId > 0)
             {
@@ -633,9 +605,9 @@ namespace GODInventoryWinForm.Controls
             }
             productsByGenre.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
 
-            this.comboBox3.ValueMember = "Id";
-            this.comboBox3.DisplayMember = "FullName";
-            this.comboBox3.DataSource = productsByGenre;
+            this.productComboBox3.ValueMember = "Id";
+            this.productComboBox3.DisplayMember = "FullName";
+            this.productComboBox3.DataSource = productsByGenre;
         }
 
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
@@ -656,19 +628,19 @@ namespace GODInventoryWinForm.Controls
             }
             storesByCounty.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
 
-            this.comboBox1.ValueMember = "Id";
-            this.comboBox1.DisplayMember = "FullName";
-            this.comboBox1.DataSource = storesByCounty;
+            this.shopComboBox1.ValueMember = "Id";
+            this.shopComboBox1.DisplayMember = "FullName";
+            this.shopComboBox1.DataSource = storesByCounty;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
 
 
-            int 自社コード = Convert.ToInt32(this.comboBox3.SelectedValue);
-            string warehousename = this.comboBox5.Text.ToString();
-            string transportname = this.comboBox6.Text;
-            int shop_id = Convert.ToInt32(this.comboBox1.SelectedValue);
+            int 自社コード = Convert.ToInt32(this.productComboBox3.SelectedValue);
+            string warehousename = this.warehouseComboBox5.Text.ToString();
+            string transportname = this.transportComboBox6.Text;
+            int shop_id = Convert.ToInt32(this.shopComboBox1.SelectedValue);
 
             decimal fee = -1;
 
@@ -691,11 +663,19 @@ namespace GODInventoryWinForm.Controls
 
                 }
             }
+        }
 
+        // 根据当前选择的过滤条件查询运费
+        private void InitializetransportdataGridViewBySelectedValue() {
+            int 自社コード = Convert.ToInt32(this.productComboBox3.SelectedValue);
+            int shop_id = Convert.ToInt32(this.shopComboBox1.SelectedValue);
+            string warehousename = this.warehouseComboBox5.Text.ToString();
+            string transportname = this.transportComboBox6.Text;
 
-
-
-
+            if (自社コード > 0 || shop_id > 0)
+            {
+                InitializetransportdataGridView1(自社コード, warehousename, transportname, shop_id);
+            }
         }
 
 
