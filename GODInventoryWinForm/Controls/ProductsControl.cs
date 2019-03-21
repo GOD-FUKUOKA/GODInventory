@@ -563,12 +563,15 @@ namespace GODInventoryWinForm.Controls
                                 warehouse_id = p.warehouse_id,
                                 shop_id = p.shop_id,
                                 fee = p.fee,
+                                lot_fee = p.lot_fee,
                                 unitname = p.unitname,
 
                             };
 
-
-                query = query.Where(o => o.自社コード == 自社コード);
+                if (自社コード > 0)
+                {
+                    query = query.Where(o => o.自社コード == 自社コード);
+                }
                
 
                 if (warehousename.Length > 0 && warehousename != "すべて")
@@ -672,7 +675,7 @@ namespace GODInventoryWinForm.Controls
             string warehousename = this.warehouseComboBox5.Text.ToString();
             string transportname = this.transportComboBox6.Text;
 
-            if (自社コード > 0 || shop_id > 0)
+            //if (自社コード > 0 || shop_id > 0)
             {
                 InitializetransportdataGridView1(自社コード, warehousename, transportname, shop_id);
             }

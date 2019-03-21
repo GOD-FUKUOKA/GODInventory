@@ -187,8 +187,8 @@ update  t_orderdata set 社内伝番処理=1 where `ジャンル`=1003 and `id�
 
 #v10.0.0 仓库和物流公司分离
 ==============================================
-创建物流公司表  t_transports
-CREATE TABLE `god_om2`.`t_transports` (
+#创建物流公司表  t_transports
+CREATE TABLE `t_transports` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `shortname` VARCHAR(45) NULL,
   `fullname` VARCHAR(255) NULL,
@@ -196,7 +196,7 @@ CREATE TABLE `god_om2`.`t_transports` (
 
 
 
-创建仓库和物流功能对应表 t_warehouse_transports
+#创建仓库和物流功能对应表 t_warehouse_transports
 CREATE TABLE `god_om2`.`t_warehouses_transports` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `wid` INT NOT NULL DEFAULT 0,
@@ -210,13 +210,14 @@ ADD COLUMN `warehouseName` VARCHAR(45) NOT NULL DEFAULT '' AFTER `reportState`;
 CREATE TABLE `t_freights` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `自社コード` int(11) DEFAULT NULL,
-  `warehousename` varchar(45) DEFAULT NULL,
-  `transportname` varchar(45) DEFAULT NULL,
+  `warehousename` varchar(45) DEFAULT '',
+  `transportname` varchar(45) DEFAULT '',
   `warehouse_id` int(11)  UNSIGNED NOT NULL DEFAULT 0 ,
   `transport_id` int(11)  UNSIGNED NOT NULL DEFAULT 0 ,
   `shop_id` int(11)  UNSIGNED NOT NULL DEFAULT 0 ,
   `fee` int(11) DEFAULT 0,
-  `unitname` varchar(45) DEFAULT NULL,
+  `lot_fee` int(11) DEFAULT 0,   
+  `unitname` varchar(45) DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -241,10 +242,14 @@ ADD COLUMN `transport_id` INT UNSIGNED NOT NULL DEFAULT 0 AFTER `warehouse_id`;
 ALTER TABLE `t_shoplist` 
 ADD COLUMN `warehousename` VARCHAR(45) NOT NULL DEFAULT '' AFTER `transport_id`;
 
-// 最新数据库中已经存在。
-ALTER TABLE `t_pricelist` 
-ADD COLUMN `パレット運賃` DECIMAL NOT NULL DEFAULT 0;
 
 
-// 原有数据修正
-update t_shoplist set warehousename='丸健倉庫' where `配送担当`='丸健'
+# 原有数据修正
+# 设置 t_shoplist表中 warehouse_id, transport_id, warehousename
+# 添加 t_freights 表数据
+# 示例sql: insert into t_freights(自社コード, warehousename, transportname, warehouse_id, transport_id, shop_id, fee, lot_fee ) SELECT 自社コード, '丸健倉庫', 配送担当, 1, 1, 店番, 運賃,  パレット運賃 FROM god_om2.t_pricelist 
+# 示例sql: update t_shoplist set warehousename='丸健倉庫' where `配送担当`='丸健'
+
+# 开发执行
+ALTER TABLE `god_om2`.`t_freights` 
+ADD COLUMN `lot_fee` INT UNSIGNED NOT NULL DEFAULT 0 AFTER `fee`;

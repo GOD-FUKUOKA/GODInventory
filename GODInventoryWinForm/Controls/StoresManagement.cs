@@ -44,9 +44,6 @@ namespace GODInventoryWinForm.Controls
                 warehouseList = ctx.t_warehouses.ToList();
                 var shipperCo = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
                 //shipperCo.Insert(0, new MockEntity { ShortName = "その他", FullName = "その他" });
-                this.shipperTextBox.DisplayMember = "FullName";
-                this.shipperTextBox.ValueMember = "FullName";
-                this.shipperTextBox.DataSource = shipperCo.ToList();
 
                 this.warehouseNamecomboBox1.DisplayMember = "FullName";
                 this.warehouseNamecomboBox1.ValueMember = "Id";
@@ -68,8 +65,7 @@ namespace GODInventoryWinForm.Controls
                         storeNameTextBox.Text = store.店名;
                     if (store.店名カナ != null)
                         textBox12.Text = store.店名カナ;
-                    if (store.配送担当 != null)
-                        shipperTextBox.Text = store.配送担当;
+                    
                     if (store.郵便番号 != null)
                         postalTextBox8.Text = store.郵便番号.ToString();
                     if (store.県別 != null)
@@ -143,7 +139,6 @@ namespace GODInventoryWinForm.Controls
                         store.店番 = Convert.ToInt32(storeCodeTextBox.Text);
                         store.店名 = storeNameTextBox.Text;
                         store.店名カナ = textBox12.Text;
-                        store.配送担当 = shipperTextBox.Text;
                         store.郵便番号 = postalTextBox8.Text;
                         store.県別 = countyTextBox.Text;
                         store.県内エリア = districtTextBox.Text;
@@ -157,7 +152,7 @@ namespace GODInventoryWinForm.Controls
                         store.warehouse_id = Convert.ToInt32(this.warehouseNamecomboBox1.SelectedValue);
                         store.transport_id = Convert.ToInt32(this.transportnamecomboBox2.SelectedValue);
                         store.warehouseName = this.warehouseNamecomboBox1.Text;
-
+                        store.配送担当 = this.transportnamecomboBox2.Text;
 
                         ctx.SaveChanges();
                         MessageBox.Show(String.Format("店舗情報更新完了!"));
@@ -171,8 +166,6 @@ namespace GODInventoryWinForm.Controls
                         store.店名 = storeNameTextBox.Text;
 
                         store.店名カナ = textBox12.Text;
-
-                        store.配送担当 = shipperTextBox.Text;
 
                         store.郵便番号 = postalTextBox8.Text;
 
@@ -197,6 +190,7 @@ namespace GODInventoryWinForm.Controls
                         store.warehouse_id = Convert.ToInt32(this.warehouseNamecomboBox1.SelectedValue);
                         store.transport_id = Convert.ToInt32(this.transportnamecomboBox2.SelectedValue);
                         store.warehouseName = this.warehouseNamecomboBox1.Text;
+                        store.配送担当 = this.transportnamecomboBox2.Text;
 
 
                         ctx.t_shoplist.Add(store);

@@ -52,6 +52,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.faxTextBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.transportnamecomboBox2 = new System.Windows.Forms.ComboBox();
+            this.warehouseNamecomboBox1 = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.storesComboBox = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.storeRankComboBox = new System.Windows.Forms.ComboBox();
@@ -59,12 +62,7 @@
             this.cusotmerComboBox = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.officerTextBox3 = new System.Windows.Forms.TextBox();
-            this.shipperTextBox = new System.Windows.Forms.ComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.warehouseNamecomboBox1 = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.transportnamecomboBox2 = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -269,7 +267,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.transportnamecomboBox2);
-            this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.warehouseNamecomboBox1);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.storesComboBox);
@@ -279,7 +276,6 @@
             this.groupBox1.Controls.Add(this.cusotmerComboBox);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.officerTextBox3);
-            this.groupBox1.Controls.Add(this.shipperTextBox);
             this.groupBox1.Controls.Add(this.phoneTextBox2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.storeCodeTextBox);
@@ -308,6 +304,43 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // transportnamecomboBox2
+            // 
+            this.transportnamecomboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.transportnamecomboBox2.FormattingEnabled = true;
+            this.transportnamecomboBox2.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C",
+            "D"});
+            this.transportnamecomboBox2.Location = new System.Drawing.Point(105, 223);
+            this.transportnamecomboBox2.Name = "transportnamecomboBox2";
+            this.transportnamecomboBox2.Size = new System.Drawing.Size(266, 22);
+            this.transportnamecomboBox2.TabIndex = 31;
+            // 
+            // warehouseNamecomboBox1
+            // 
+            this.warehouseNamecomboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.warehouseNamecomboBox1.FormattingEnabled = true;
+            this.warehouseNamecomboBox1.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C",
+            "D"});
+            this.warehouseNamecomboBox1.Location = new System.Drawing.Point(105, 301);
+            this.warehouseNamecomboBox1.Name = "warehouseNamecomboBox1";
+            this.warehouseNamecomboBox1.Size = new System.Drawing.Size(266, 22);
+            this.warehouseNamecomboBox1.TabIndex = 29;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(64, 304);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(35, 14);
+            this.label15.TabIndex = 30;
+            this.label15.Text = "倉庫";
             // 
             // storesComboBox
             // 
@@ -381,68 +414,9 @@
             this.officerTextBox3.Size = new System.Drawing.Size(268, 21);
             this.officerTextBox3.TabIndex = 13;
             // 
-            // shipperTextBox
-            // 
-            this.shipperTextBox.FormattingEnabled = true;
-            this.shipperTextBox.Items.AddRange(new object[] {
-            "丸健",
-            "MKL",
-            "マツモト産業"});
-            this.shipperTextBox.Location = new System.Drawing.Point(105, 222);
-            this.shipperTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.shipperTextBox.Name = "shipperTextBox";
-            this.shipperTextBox.Size = new System.Drawing.Size(268, 22);
-            this.shipperTextBox.TabIndex = 10;
-            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // warehouseNamecomboBox1
-            // 
-            this.warehouseNamecomboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.warehouseNamecomboBox1.FormattingEnabled = true;
-            this.warehouseNamecomboBox1.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C",
-            "D"});
-            this.warehouseNamecomboBox1.Location = new System.Drawing.Point(105, 301);
-            this.warehouseNamecomboBox1.Name = "warehouseNamecomboBox1";
-            this.warehouseNamecomboBox1.Size = new System.Drawing.Size(266, 22);
-            this.warehouseNamecomboBox1.TabIndex = 29;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(64, 304);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(35, 14);
-            this.label15.TabIndex = 30;
-            this.label15.Text = "仓库";
-            // 
-            // transportnamecomboBox2
-            // 
-            this.transportnamecomboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.transportnamecomboBox2.FormattingEnabled = true;
-            this.transportnamecomboBox2.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C",
-            "D"});
-            this.transportnamecomboBox2.Location = new System.Drawing.Point(498, 302);
-            this.transportnamecomboBox2.Name = "transportnamecomboBox2";
-            this.transportnamecomboBox2.Size = new System.Drawing.Size(266, 22);
-            this.transportnamecomboBox2.TabIndex = 31;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(428, 304);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(63, 14);
-            this.label16.TabIndex = 32;
-            this.label16.Text = "运输公司";
             // 
             // StoresManagement
             // 
@@ -491,7 +465,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox faxTextBox3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox shipperTextBox;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox officerTextBox3;
@@ -501,7 +474,6 @@
         private System.Windows.Forms.ComboBox storesComboBox;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox transportnamecomboBox2;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox warehouseNamecomboBox1;
         private System.Windows.Forms.Label label15;
     }

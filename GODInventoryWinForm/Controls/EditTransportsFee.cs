@@ -100,11 +100,11 @@ namespace GODInventoryWinForm
 
             storeNamTextBox.Text = freights.transportname;
 
-            storeCodeTextBox.Text = freights.unitname.ToString();
+            storeCodeTextBox.Text = freights.unitname;
 
-            invoiceNOTextBox.Text = freights.fee.ToString();
+            feeTextBox.Text = freights.fee.ToString();
 
-
+            lotFeeTextBox.Text = freights.lot_fee.ToString();
 
             storeComboBox.SelectedValue = freights.shop_id;
            
@@ -115,19 +115,15 @@ namespace GODInventoryWinForm
 
             freights.自社コード = Convert.ToInt32(orderAtTextBox.SelectedValue);
 
-
             freights.warehousename = whComboBox.Text;
-
-
 
             freights.transportname = storeNamTextBox.Text;
 
-
             freights.unitname  = storeCodeTextBox.Text ;
 
+            freights.fee = Convert.ToInt32(feeTextBox.Text);
 
-            freights.fee   =Convert.ToInt32( invoiceNOTextBox.Text);
-
+            freights.lot_fee = Convert.ToInt32(lotFeeTextBox.Text);
 
             freights.shop_id = Convert.ToInt32(storeComboBox.SelectedValue);
                      

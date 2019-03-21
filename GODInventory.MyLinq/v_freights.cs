@@ -18,6 +18,8 @@ namespace GODInventory.MyLinq
         public int shop_id { get; set; }
         //運賃
         public int fee { get; set; }
+        public int lot_fee { get; set; }
+
         //単位
         public string unitname { get; set; }
 

@@ -1172,7 +1172,24 @@ namespace GODInventory.ViewModel
             order.粗利金額 = order.納品原価金額 - order.仕入金額;
 
             // 更新出荷数量后更新运费
+            // 更新出荷数量后更新运费
+            using (var ctx = new GODDbContext())
+            {
+                var price = (from t_pricelist t in ctx.t_pricelist
+                             where t.店番 == order.店舗コード && t.自社コード == order.自社コード
+                             select t).FirstOrDefault();
+                var freight = (from t_freights t in ctx.t_freights
+                               where t.自社コード == order.自社コード && t.warehousename == order.warehouseName && t.transportname == order.実際配送担当 && t.shop_id == order.店舗コード
+                               select t).FirstOrDefault();
+                if (price != null && freight != null)
+                {
+                    // sqlStr = "UPDATE t_orderdata a LEFT JOIN t_pricelist b ON a.`店舗コード` = b.`店番` AND a.`自社コード` = b.`自社コード`" _
+                    // & " SET a.`運賃` = IF ( b.`パレット運賃` = 0, b.`運賃` * a.`重量`, b.`パレット運賃` * a.`納品口数`)" _
+                    // & " WHERE (b.`運賃` + b.`パレット運賃`) <> 0 AND a.`運賃` IS NULL AND a.`出荷日` BETWEEN '" & Cells(1, 5).Value & "' AND '" & Cells(1, 8).Value & "'"
 
+                    order.運賃 = (freight.lot_fee == 0 ? freight.fee * order.重量 : freight.lot_fee * order.納品口数);
+                }
+            }
         }
 
         // 当订单的数量被修改后，需要相应修改的字段

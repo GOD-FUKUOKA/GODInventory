@@ -19,6 +19,8 @@ namespace GODInventory.MyLinq
         public int shop_id { get; set; }
         //ß\ÙU
         public int fee { get; set; }
+        //¥Ñ¥ì¥Ã¥Èß\ÙU
+        public int lot_fee { get; set; }
         //…gÎ»
         public string unitname { get; set; }
 

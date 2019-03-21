@@ -41,7 +41,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.selectedRowsLabel = new System.Windows.Forms.Label();
-            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.ClearSelect = new System.Windows.Forms.Button();
             this.ZKZTcomboBox3 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -83,6 +82,7 @@
             this.notifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.pager1 = new GODInventoryWinForm.Controls.Pager();
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.entityDataSource2 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
@@ -235,22 +235,6 @@
             this.selectedRowsLabel.TabIndex = 26;
             this.selectedRowsLabel.Text = "label5";
             this.selectedRowsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // pager1
-            // 
-            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pager1.AutoSize = true;
-            this.pager1.Location = new System.Drawing.Point(0, 3);
-            this.pager1.Name = "pager1";
-            this.pager1.NMax = 0;
-            this.pager1.PageCount = 0;
-            this.pager1.PageCurrent = 0;
-            this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(727, 34);
-            this.pager1.TabIndex = 25;
-            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // ClearSelect
             // 
@@ -706,6 +690,22 @@
             this.toolStripMenuItem2.Text = "前の画面へ戻す";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
+            // pager1
+            // 
+            this.pager1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pager1.AutoSize = true;
+            this.pager1.Location = new System.Drawing.Point(0, 3);
+            this.pager1.Name = "pager1";
+            this.pager1.NMax = 0;
+            this.pager1.PageCount = 0;
+            this.pager1.PageCurrent = 0;
+            this.pager1.PageSize = 50;
+            this.pager1.Size = new System.Drawing.Size(727, 34);
+            this.pager1.TabIndex = 25;
+            this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
+            // 
             // bindingSource2
             // 
             this.bindingSource2.DataSource = this.entityDataSource2;
@@ -832,14 +832,16 @@
             // 
             // feeColumn1
             // 
+            this.feeColumn1.DataPropertyName = "運賃";
             this.feeColumn1.HeaderText = "運賃";
             this.feeColumn1.Name = "feeColumn1";
             // 
             // warehouseNameColumn
             // 
             this.warehouseNameColumn.DataPropertyName = "warehouseName";
+            this.warehouseNameColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
             this.warehouseNameColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.warehouseNameColumn.HeaderText = "仓库";
+            this.warehouseNameColumn.HeaderText = "倉庫";
             this.warehouseNameColumn.Name = "warehouseNameColumn";
             this.warehouseNameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.warehouseNameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;

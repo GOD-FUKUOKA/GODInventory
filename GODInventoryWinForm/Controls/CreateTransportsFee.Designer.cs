@@ -49,11 +49,15 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.label9 = new System.Windows.Forms.Label();
+            this.lotFeeTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.lotFeeTextBox);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.genresComboBox);
             this.groupBox1.Controls.Add(this.transportComboBox);
@@ -73,14 +77,14 @@
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(21, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(647, 182);
+            this.groupBox1.Size = new System.Drawing.Size(647, 211);
             this.groupBox1.TabIndex = 10000016;
             this.groupBox1.TabStop = false;
             // 
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.Location = new System.Drawing.Point(36, 30);
+            this.label8.Location = new System.Drawing.Point(46, 30);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(57, 14);
             this.label8.TabIndex = 10000011;
@@ -91,7 +95,7 @@
             this.genresComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.genresComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.genresComboBox.FormattingEnabled = true;
-            this.genresComboBox.Location = new System.Drawing.Point(105, 26);
+            this.genresComboBox.Location = new System.Drawing.Point(112, 26);
             this.genresComboBox.Name = "genresComboBox";
             this.genresComboBox.Size = new System.Drawing.Size(190, 22);
             this.genresComboBox.TabIndex = 0;
@@ -113,7 +117,7 @@
             this.warehouseComboBox.Items.AddRange(new object[] {
             "no",
             "yes"});
-            this.warehouseComboBox.Location = new System.Drawing.Point(105, 64);
+            this.warehouseComboBox.Location = new System.Drawing.Point(112, 64);
             this.warehouseComboBox.Name = "warehouseComboBox";
             this.warehouseComboBox.Size = new System.Drawing.Size(190, 22);
             this.warehouseComboBox.TabIndex = 2;
@@ -146,7 +150,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(58, 106);
+            this.label1.Location = new System.Drawing.Point(68, 106);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 14);
             this.label1.TabIndex = 10000004;
@@ -156,7 +160,7 @@
             // 
             this.countyComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.countyComboBox1.FormattingEnabled = true;
-            this.countyComboBox1.Location = new System.Drawing.Point(105, 102);
+            this.countyComboBox1.Location = new System.Drawing.Point(112, 102);
             this.countyComboBox1.Name = "countyComboBox1";
             this.countyComboBox1.Size = new System.Drawing.Size(190, 22);
             this.countyComboBox1.TabIndex = 4;
@@ -164,15 +168,15 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(58, 144);
+            this.label3.Location = new System.Drawing.Point(68, 144);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 14);
             this.label3.TabIndex = 24;
-            this.label3.Text = "费用";
+            this.label3.Text = "運賃";
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(30, 68);
+            this.label5.Location = new System.Drawing.Point(40, 68);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 14);
             this.label5.TabIndex = 10000002;
@@ -203,7 +207,7 @@
             // 
             // invoiceNOTextBox
             // 
-            this.invoiceNOTextBox.Location = new System.Drawing.Point(105, 141);
+            this.invoiceNOTextBox.Location = new System.Drawing.Point(112, 141);
             this.invoiceNOTextBox.Name = "invoiceNOTextBox";
             this.invoiceNOTextBox.Size = new System.Drawing.Size(190, 21);
             this.invoiceNOTextBox.TabIndex = 6;
@@ -220,7 +224,7 @@
             // 
             this.submitFormButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.submitFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.submitFormButton.Location = new System.Drawing.Point(431, 198);
+            this.submitFormButton.Location = new System.Drawing.Point(414, 242);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(108, 30);
             this.submitFormButton.TabIndex = 0;
@@ -232,7 +236,7 @@
             // 
             this.cancelFormButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelFormButton.Location = new System.Drawing.Point(545, 198);
+            this.cancelFormButton.Location = new System.Drawing.Point(528, 242);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(108, 30);
             this.cancelFormButton.TabIndex = 1;
@@ -243,11 +247,26 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(21, 177);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 18);
+            this.label9.TabIndex = 10000013;
+            this.label9.Text = "パレット運賃";
+            // 
+            // lotFeeTextBox
+            // 
+            this.lotFeeTextBox.Location = new System.Drawing.Point(112, 174);
+            this.lotFeeTextBox.Name = "lotFeeTextBox";
+            this.lotFeeTextBox.Size = new System.Drawing.Size(190, 21);
+            this.lotFeeTextBox.TabIndex = 10000012;
+            // 
             // CreateTransportsFee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(691, 246);
+            this.ClientSize = new System.Drawing.Size(691, 302);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.submitFormButton);
             this.Controls.Add(this.cancelFormButton);
@@ -283,5 +302,7 @@
         private System.Windows.Forms.ComboBox productComboBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox genresComboBox;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox lotFeeTextBox;
     }
 }
