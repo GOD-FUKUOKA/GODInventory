@@ -31,7 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.lotFeeTextBox = new System.Windows.Forms.TextBox();
             this.genresComboBox = new System.Windows.Forms.ComboBox();
             this.storeNamTextBox = new System.Windows.Forms.ComboBox();
             this.whComboBox = new System.Windows.Forms.ComboBox();
@@ -49,9 +51,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lotFeeTextBox = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // entityDataSource1
@@ -85,6 +87,14 @@
             this.groupBox1.TabIndex = 10000019;
             this.groupBox1.TabStop = false;
             // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(17, 180);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 18);
+            this.label9.TabIndex = 10000021;
+            this.label9.Text = "パレット運賃";
+            // 
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -93,6 +103,13 @@
             this.label8.Size = new System.Drawing.Size(57, 14);
             this.label8.TabIndex = 10000011;
             this.label8.Text = "ジャンル";
+            // 
+            // lotFeeTextBox
+            // 
+            this.lotFeeTextBox.Location = new System.Drawing.Point(107, 177);
+            this.lotFeeTextBox.Name = "lotFeeTextBox";
+            this.lotFeeTextBox.Size = new System.Drawing.Size(190, 21);
+            this.lotFeeTextBox.TabIndex = 10000020;
             // 
             // genresComboBox
             // 
@@ -226,7 +243,6 @@
             // 
             // submitFormButton
             // 
-            this.submitFormButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.submitFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.submitFormButton.Location = new System.Drawing.Point(415, 250);
             this.submitFormButton.Name = "submitFormButton";
@@ -247,20 +263,9 @@
             this.cancelFormButton.Text = "閉じる";
             this.cancelFormButton.UseVisualStyleBackColor = true;
             // 
-            // label9
+            // errorProvider1
             // 
-            this.label9.Location = new System.Drawing.Point(17, 180);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 18);
-            this.label9.TabIndex = 10000021;
-            this.label9.Text = "パレット運賃";
-            // 
-            // lotFeeTextBox
-            // 
-            this.lotFeeTextBox.Location = new System.Drawing.Point(107, 177);
-            this.lotFeeTextBox.Name = "lotFeeTextBox";
-            this.lotFeeTextBox.Size = new System.Drawing.Size(190, 21);
-            this.lotFeeTextBox.TabIndex = 10000020;
+            this.errorProvider1.ContainerControl = this;
             // 
             // EditTransportsFee
             // 
@@ -276,6 +281,7 @@
             this.Text = "EditTransportsFee";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -304,5 +310,6 @@
         private System.Windows.Forms.Button cancelFormButton;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox lotFeeTextBox;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

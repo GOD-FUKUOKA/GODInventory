@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lotFeeTextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.genresComboBox = new System.Windows.Forms.ComboBox();
             this.transportComboBox = new System.Windows.Forms.ComboBox();
@@ -49,9 +51,9 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.label9 = new System.Windows.Forms.Label();
-            this.lotFeeTextBox = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -80,6 +82,21 @@
             this.groupBox1.Size = new System.Drawing.Size(647, 211);
             this.groupBox1.TabIndex = 10000016;
             this.groupBox1.TabStop = false;
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(21, 177);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 18);
+            this.label9.TabIndex = 10000013;
+            this.label9.Text = "パレット運賃";
+            // 
+            // lotFeeTextBox
+            // 
+            this.lotFeeTextBox.Location = new System.Drawing.Point(112, 174);
+            this.lotFeeTextBox.Name = "lotFeeTextBox";
+            this.lotFeeTextBox.Size = new System.Drawing.Size(190, 21);
+            this.lotFeeTextBox.TabIndex = 10000012;
             // 
             // label8
             // 
@@ -222,7 +239,6 @@
             // 
             // submitFormButton
             // 
-            this.submitFormButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.submitFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.submitFormButton.Location = new System.Drawing.Point(414, 242);
             this.submitFormButton.Name = "submitFormButton";
@@ -247,20 +263,9 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
-            // label9
+            // errorProvider1
             // 
-            this.label9.Location = new System.Drawing.Point(21, 177);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 18);
-            this.label9.TabIndex = 10000013;
-            this.label9.Text = "パレット運賃";
-            // 
-            // lotFeeTextBox
-            // 
-            this.lotFeeTextBox.Location = new System.Drawing.Point(112, 174);
-            this.lotFeeTextBox.Name = "lotFeeTextBox";
-            this.lotFeeTextBox.Size = new System.Drawing.Size(190, 21);
-            this.lotFeeTextBox.TabIndex = 10000012;
+            this.errorProvider1.ContainerControl = this;
             // 
             // CreateTransportsFee
             // 
@@ -276,6 +281,7 @@
             this.Text = "CreateTransportsFee";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -304,5 +310,6 @@
         private System.Windows.Forms.ComboBox genresComboBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox lotFeeTextBox;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

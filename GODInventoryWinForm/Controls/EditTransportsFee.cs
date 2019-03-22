@@ -113,6 +113,10 @@ namespace GODInventoryWinForm
         private void submitFormButton_Click(object sender, EventArgs e)
         {
 
+            if (!validateAttributes())
+            {
+                return;
+            }
             freights.自社コード = Convert.ToInt32(orderAtTextBox.SelectedValue);
 
             freights.warehousename = whComboBox.Text;
@@ -129,9 +133,35 @@ namespace GODInventoryWinForm
                      
             this.entityDataSource1.SaveChanges();
 
+
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+         
             this.Close();
         }
+        private bool validateAttributes(string[] selectedAttributeNames = null)
+        {
+            var validated = true;
+            string msg = String.Empty;
 
+            if (this.feeTextBox.Text.Trim() == null || this.feeTextBox.Text.Trim() == "")
+            {
+                errorProvider1.SetError(feeTextBox, "不能为空");
+                validated = false;
+            }
+            if (this.storeCodeTextBox.Text.Trim() == null || this.storeCodeTextBox.Text.Trim() == "")
+            {
+                errorProvider1.SetError(storeCodeTextBox, "不能为空");
+                validated = false;
+            }
+            if (this.lotFeeTextBox.Text.Trim() == null || this.lotFeeTextBox.Text.Trim() == "")
+            {
+                errorProvider1.SetError(lotFeeTextBox, "不能为空");
+                validated = false;
+
+            }
+            return validated;
+
+        }
         private void countyComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string county = this.countyComboBox1.Text;

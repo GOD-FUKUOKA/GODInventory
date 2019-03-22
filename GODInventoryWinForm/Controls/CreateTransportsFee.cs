@@ -26,17 +26,17 @@ namespace GODInventoryWinForm
             InitializeComponent();
             InitializeOrder();
         }
-       
+
         private void InitializeOrder()
         {
 
             var ctx = entityDataSource1.DbContext as GODDbContext;
-    
+
             warehouseList = ctx.t_warehouses.ToList();
             transportList = ctx.t_transports.ToList();
             this.genres = ctx.t_genre.ToList();
             this.products = ctx.t_itemlist.ToList();
-      
+
 
             this.warehouseComboBox.ValueMember = "Id";
             this.warehouseComboBox.DisplayMember = "FullName";
@@ -47,7 +47,7 @@ namespace GODInventoryWinForm
             if (shopList.Count > 0)
             {
                 var counties = shopList.Select(s => s.県別).Distinct().ToList();
-            
+
                 this.countyComboBox1.DataSource = counties;
             }
 
@@ -57,7 +57,7 @@ namespace GODInventoryWinForm
             this.transportComboBox.DataSource = transportList;
 
             var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-      
+
             this.storeComboBox.DisplayMember = "FullName";
             this.storeComboBox.ValueMember = "Id";
             this.storeComboBox.DataSource = shops;
@@ -65,7 +65,7 @@ namespace GODInventoryWinForm
 
 
             var genreList = this.genres.Select(s => new MockEntity { Id = s.idジャンル, FullName = s.ジャンル名 }).ToList();
- 
+
             this.genresComboBox.ValueMember = "Id";
             this.genresComboBox.DisplayMember = "FullName";
             this.genresComboBox.DataSource = genreList;
@@ -73,10 +73,16 @@ namespace GODInventoryWinForm
 
 
         }
-     
+
         private void submitFormButton_Click(object sender, EventArgs e)
         {
-            using (var ctx = new GODDbContext()) 
+            if (!validateAttributes())
+            {
+                return;
+            }
+
+
+            using (var ctx = new GODDbContext())
             {
                 if (productComboBox.Text.Length > 0)
                 {
@@ -87,9 +93,9 @@ namespace GODInventoryWinForm
                     int transportId = Convert.ToInt32(transportComboBox.SelectedValue);
 
                     var freight = (from t_freights o in ctx.t_freights
-                                where productId == o.自社コード && warehouseId == o.warehouse_id && storeId == o.shop_id && transportId == o.transport_id
-                                select o).FirstOrDefault();
-                    if (freight  == null )
+                                   where productId == o.自社コード && warehouseId == o.warehouse_id && storeId == o.shop_id && transportId == o.transport_id
+                                   select o).FirstOrDefault();
+                    if (freight == null)
                     {
                         t_freights freights = new t_freights();
                         freights.自社コード = Convert.ToInt32(productComboBox.SelectedValue);
@@ -102,12 +108,16 @@ namespace GODInventoryWinForm
 
                         freights.shop_id = Convert.ToInt32(storeComboBox.SelectedValue);
                         freights.transport_id = Convert.ToInt32(transportComboBox.SelectedValue);
-                        freights.warehouse_id = Convert.ToInt32(warehouseComboBox.SelectedValue); 
- 
+                        freights.warehouse_id = Convert.ToInt32(warehouseComboBox.SelectedValue);
+
                         ctx.t_freights.Add(freights);
                         ctx.SaveChanges();
 
                         MessageBox.Show(String.Format("登録完了!"));
+
+                        this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                        this.Close();
+
                     }
                     else
                     {
@@ -125,7 +135,7 @@ namespace GODInventoryWinForm
             if (filtered.Count > 0)
             {
                 var shops = filtered.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-         
+
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
@@ -134,7 +144,7 @@ namespace GODInventoryWinForm
             else
             {
                 var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-       
+
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
@@ -162,7 +172,30 @@ namespace GODInventoryWinForm
             this.productComboBox.DataSource = productsByGenre;
         }
 
+        private bool validateAttributes(string[] selectedAttributeNames = null)
+        {
+            var validated = true;
+            string msg = String.Empty;
 
+            if (this.invoiceNOTextBox.Text.Trim() == null || this.invoiceNOTextBox.Text.Trim() == "")
+            {
+                errorProvider1.SetError(invoiceNOTextBox, "不能为空");
+                validated = false;
+            }
+            if (this.storeCodeTextBox.Text.Trim() == null || this.storeCodeTextBox.Text.Trim() == "")
+            {
+                errorProvider1.SetError(storeCodeTextBox, "不能为空");
+                validated = false;
+            }
+            if (this.lotFeeTextBox.Text.Trim() == null || this.lotFeeTextBox.Text.Trim() == "")
+            {
+                errorProvider1.SetError(lotFeeTextBox, "不能为空");
+                validated = false;
+
+            }
+            return validated;
+
+        }
 
     }
 }
