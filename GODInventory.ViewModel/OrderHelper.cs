@@ -75,22 +75,88 @@ namespace GODInventory.ViewModel
 
             return count;
         }
-        public static int Updatetransportfee(int 自社コード, string warehousename = "", string transportname = "", int shop_id = 0, decimal fee = -1)
+        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="warehouse_id"></param>
+        /// <param name="transport_id"></param>
+        /// <param name="shop_id"></param>
+        /// <param name="unitname"></param>
+        /// <param name="newFee"> -1 表示不更新</param>
+        /// <param name="newUnitname"></param>
+        /// <param name="newColumnname"></param>
+        /// <returns></returns>
+        public static int Updatetransportfee(int warehouse_id, int transport_id, int shop_id = 0, string unitname="", decimal newFee = -1, string newUnitname = "", string newColumnname = "")
         {
             int count = 0;
-            string sql = "";
+            string sql = "UPDATE t_freights SET ";
             using (var ctx = new GODDbContext())
             {
-
-                String[] cols = { "fee" };
-                Decimal[] prices = { fee };
-                for (int i = 0; i < cols.Length; i++)
+                List<string> sets = new List<string>();
+                List<string> conditions = new List<string>();
+                if (newFee >= 0)
                 {
-                    sql = String.Format("UPDATE t_freights SET `{0}`={1} WHERE `自社コード`={2}", cols[i], prices[i], 自社コード);
+                    sets.Add(string.Format(" `fee`={0} ", newFee));
+                }
+                if (newUnitname.Length >= 0)
+                {
+                    sets.Add(string.Format(" `unitname`='{0}' ", newUnitname));
+                }
+                if (newColumnname.Length >= 0)
+                {
+                    sets.Add(string.Format(" `columnname`='{0}' ", newColumnname));
+                }
+
+                if (warehouse_id > 0) {
+                    conditions.Add(string.Format(" `warehouse_id`={0} ", warehouse_id));
+                }
+                if (transport_id > 0)
+                {
+                    conditions.Add(string.Format(" `transport_id`={0} ", transport_id));
+                }
+                if (shop_id > 0)
+                {
+                    conditions.Add(string.Format(" `shop_id`={0} ", shop_id));
+                }
+                if (unitname.Length > 0)
+                {
+                    conditions.Add(string.Format(" `unitname`='{0}' ", unitname));
+                }
+
+                if (sets.Count > 0 && conditions.Count> 0)
+                {
+
+                    sql = String.Format("UPDATE t_freights SET  {0} WHERE {1}",  string.Join(",", sets ), string.Join(" AND ", conditions));
                     count = ctx.Database.ExecuteSqlCommand(sql);
                 }
             }
             return count;
+        }
+
+
+
+
+        /// <summary>
+        /// 设置类中的属性值
+        /// </summary>
+        /// <param name="FieldName"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static bool SetModelValue(string FieldName, string Value, object obj)
+        {
+            try
+            {
+                Type Ts = obj.GetType();
+                object v = Convert.ChangeType(Value, Ts.GetProperty(FieldName).PropertyType);
+                Ts.GetProperty(FieldName).SetValue(obj, v, null);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

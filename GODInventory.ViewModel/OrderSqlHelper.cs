@@ -1178,16 +1178,24 @@ namespace GODInventory.ViewModel
                 var price = (from t_pricelist t in ctx.t_pricelist
                              where t.店番 == order.店舗コード && t.自社コード == order.自社コード
                              select t).FirstOrDefault();
-                var freight = (from t_freights t in ctx.t_freights
-                               where t.自社コード == order.自社コード && t.warehousename == order.warehouseName && t.transportname == order.実際配送担当 && t.shop_id == order.店舗コード
-                               select t).FirstOrDefault();
-                if (price != null && freight != null)
-                {
-                    // sqlStr = "UPDATE t_orderdata a LEFT JOIN t_pricelist b ON a.`店舗コード` = b.`店番` AND a.`自社コード` = b.`自社コード`" _
-                    // & " SET a.`運賃` = IF ( b.`パレット運賃` = 0, b.`運賃` * a.`重量`, b.`パレット運賃` * a.`納品口数`)" _
-                    // & " WHERE (b.`運賃` + b.`パレット運賃`) <> 0 AND a.`運賃` IS NULL AND a.`出荷日` BETWEEN '" & Cells(1, 5).Value & "' AND '" & Cells(1, 8).Value & "'"
 
-                    order.運賃 = (freight.lot_fee == 0 ? freight.fee * order.重量 : freight.lot_fee * order.納品口数);
+                if (price != null )
+                {
+                    var freight = (from t_freights t in ctx.t_freights
+                                   where t.unitname == price.unitname && t.warehousename == order.warehouseName && t.transportname == order.実際配送担当 && t.shop_id == order.店舗コード
+                                   select t).FirstOrDefault();
+                    if( freight != null){
+                        string val = GetModelValue(freight.columnname, order);
+
+
+                        // sqlStr = "UPDATE t_orderdata a LEFT JOIN t_pricelist b ON a.`店舗コード` = b.`店番` AND a.`自社コード` = b.`自社コード`" _
+                        // & " SET a.`運賃` = IF ( b.`パレット運賃` = 0, b.`運賃` * a.`重量`, b.`パレット運賃` * a.`納品口数`)" _
+                        // & " WHERE (b.`運賃` + b.`パレット運賃`) <> 0 AND a.`運賃` IS NULL AND a.`出荷日` BETWEEN '" & Cells(1, 5).Value & "' AND '" & Cells(1, 8).Value & "'"
+                        if (!string.IsNullOrEmpty(val))
+                        {
+                            order.運賃 =   freight.fee *  Convert.ToInt32(val);
+                        }
+                    }
                 }
             }
         }
@@ -1208,19 +1216,30 @@ namespace GODInventory.ViewModel
                 order.納品口数 = (int)(order.実際出荷数量 / item.PT入数);
             }
             // 更新出荷数量后更新运费
-            using (var ctx = new GODDbContext()) { 
+            using (var ctx = new GODDbContext())
+            {
                 var price = (from t_pricelist t in ctx.t_pricelist
-                             where t.店番 == order.店番 && t.自社コード == order.自社コード
+                             where t.店番 == order.店舗コード && t.自社コード == order.自社コード
                              select t).FirstOrDefault();
-                var  freight = ( from t_freights t in  ctx.t_freights
-                  where t.自社コード== order.自社コード && t.transportname == order.warehouseName && t.transportname ==order.実際配送担当
-                            select t).FirstOrDefault();
-                if( price!=null && freight!=null ){
-                    // sqlStr = "UPDATE t_orderdata a LEFT JOIN t_pricelist b ON a.`店舗コード` = b.`店番` AND a.`自社コード` = b.`自社コード`" _
-                    // & " SET a.`運賃` = IF ( b.`パレット運賃` = 0, b.`運賃` * a.`重量`, b.`パレット運賃` * a.`納品口数`)" _
-                    // & " WHERE (b.`運賃` + b.`パレット運賃`) <> 0 AND a.`運賃` IS NULL AND a.`出荷日` BETWEEN '" & Cells(1, 5).Value & "' AND '" & Cells(1, 8).Value & "'"
 
-                    order.運賃 = ( price.パレット運賃 == 0 ?  price.運賃 * order.重量 : price.パレット運賃 * order.納品口数 );
+                if (price != null)
+                {
+                    var freight = (from t_freights t in ctx.t_freights
+                                   where t.unitname == price.unitname && t.warehousename == order.warehouseName && t.transportname == order.実際配送担当 && t.shop_id == order.店舗コード
+                                   select t).FirstOrDefault();
+                    if (freight != null)
+                    {
+                        string val = GetModelValue(freight.columnname, order);
+
+
+                        // sqlStr = "UPDATE t_orderdata a LEFT JOIN t_pricelist b ON a.`店舗コード` = b.`店番` AND a.`自社コード` = b.`自社コード`" _
+                        // & " SET a.`運賃` = IF ( b.`パレット運賃` = 0, b.`運賃` * a.`重量`, b.`パレット運賃` * a.`納品口数`)" _
+                        // & " WHERE (b.`運賃` + b.`パレット運賃`) <> 0 AND a.`運賃` IS NULL AND a.`出荷日` BETWEEN '" & Cells(1, 5).Value & "' AND '" & Cells(1, 8).Value & "'"
+                        if (!string.IsNullOrEmpty(val))
+                        {
+                            order.運賃 = freight.fee * Convert.ToInt32(val);
+                        }
+                    }
                 }
             }
 
@@ -1247,6 +1266,29 @@ namespace GODInventory.ViewModel
             var product = ctx.t_itemlist.Find( order.自社コード);
             OrderSqlHelper.AfterOrderQtyChanged(order, product);
             ctx.SaveChanges();
+        }
+
+        /// <summary>
+
+        /// 获取类中的属性值
+        /// </summary>
+        /// <param name="FieldName"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string GetModelValue(string FieldName, object obj)
+        {
+            try
+            {
+                Type Ts = obj.GetType();
+                object o = Ts.GetProperty(FieldName).GetValue(obj, null);
+                string Value = Convert.ToString(o);
+                if (string.IsNullOrEmpty(Value)) return null;
+                return Value;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

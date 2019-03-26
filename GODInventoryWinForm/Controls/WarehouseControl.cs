@@ -183,6 +183,18 @@ namespace GODInventoryWinForm.Controls
 
         private void warehouseButton_Click(object sender, EventArgs e)
         {
+            if (warehouseIndexForm == null)
+            {
+                warehouseIndexForm = new Warehouse.IndexForm();
+            }
+            //  AdjustSubformSize(CreateTransportForm);
+            // 显示之前重新加载数据，订单数据可能已更新。
+            warehouseIndexForm.ShowDialog(); 
+            
+        }
+
+        private void transportButton_Click(object sender, EventArgs e)
+        {
             if (transportsIndexForm == null)
             {
                 transportsIndexForm = new Transports.IndexForm();
@@ -190,17 +202,7 @@ namespace GODInventoryWinForm.Controls
             //  AdjustSubformSize(CreateTransportForm);
             // 显示之前重新加载数据，订单数据可能已更新。
             transportsIndexForm.ShowDialog();
-        }
 
-        private void transportButton_Click(object sender, EventArgs e)
-        {
-            if (warehouseIndexForm == null)
-            {
-                warehouseIndexForm = new Warehouse.IndexForm();
-            }
-            //  AdjustSubformSize(CreateTransportForm);
-            // 显示之前重新加载数据，订单数据可能已更新。
-            warehouseIndexForm.ShowDialog();
         }
     }
 }

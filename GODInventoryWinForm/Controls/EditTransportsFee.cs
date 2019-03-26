@@ -117,7 +117,6 @@ namespace GODInventoryWinForm
             {
                 return;
             }
-            freights.自社コード = Convert.ToInt32(orderAtTextBox.SelectedValue);
 
             freights.warehousename = whComboBox.Text;
 

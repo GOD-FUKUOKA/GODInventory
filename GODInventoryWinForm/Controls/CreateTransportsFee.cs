@@ -93,12 +93,11 @@ namespace GODInventoryWinForm
                     int transportId = Convert.ToInt32(transportComboBox.SelectedValue);
 
                     var freight = (from t_freights o in ctx.t_freights
-                                   where productId == o.自社コード && warehouseId == o.warehouse_id && storeId == o.shop_id && transportId == o.transport_id
+                                   where  warehouseId == o.warehouse_id && storeId == o.shop_id && transportId == o.transport_id
                                    select o).FirstOrDefault();
                     if (freight == null)
                     {
                         t_freights freights = new t_freights();
-                        freights.自社コード = Convert.ToInt32(productComboBox.SelectedValue);
                         freights.warehousename = warehouseComboBox.Text;
                         freights.transportname = transportComboBox.Text;
                         freights.unitname = storeCodeTextBox.Text;

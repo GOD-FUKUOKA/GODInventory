@@ -39,5 +39,13 @@ namespace GODInventory.MyLinq
 
         public decimal 運賃 { get; set; }  // 重量运费
         public decimal パレット運賃 { get; set; }  // 口数运费
+
+        public int warehouse_id { get; set; }
+        public int transport_id { get; set; }
+
+        public string warehouseName { get; set; }
+        //運賃単位
+        public string unitname { get; set; }
+
     }
 }

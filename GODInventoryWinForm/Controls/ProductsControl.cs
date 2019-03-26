@@ -14,7 +14,7 @@ namespace GODInventoryWinForm.Controls
 {
     public partial class ProductsControl : UserControl
     {
-        static string anyCountyName = "すべて";
+        static string anyOption = "すべて";
         List<t_shoplist> stores = null;
         List<t_genre> genres = null;
         List<t_itemlist> products = null;
@@ -23,6 +23,8 @@ namespace GODInventoryWinForm.Controls
         //List<t_freights> freights = null;
         private List<t_transports> transportList;
         private List<t_shoplist> shopList;
+        private List<v_itemunit> unitList;
+
         public ProductsControl()
         {
             InitializeComponent();
@@ -47,11 +49,15 @@ namespace GODInventoryWinForm.Controls
             this.stores = ctx.t_shoplist.ToList();
             this.genres = ctx.t_genre.ToList();
             this.products = ctx.t_itemlist.ToList();
-            transportList = ctx.t_transports.ToList();
+            this.transportList = ctx.t_transports.ToList();
+            this.warehouseList = ctx.t_warehouses.ToList();
 
+            this.unitList = (from s in ctx.t_pricelist
+                             group s by s.unitname into g
+                             select new v_itemunit { unitname = g.Key, total = g.Count() }).ToList();
 
             var genreList = this.genres.Select(s => new MockEntity { Id = s.idジャンル, FullName = s.ジャンル名 }).ToList();
-            genreList.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
+            genreList.Insert(0, new MockEntity { Id = 0, FullName = anyOption });
             this.genresComboBox.ValueMember = "Id";
             this.genresComboBox.DisplayMember = "FullName";
             this.genresComboBox.DataSource = genreList;
@@ -72,26 +78,30 @@ namespace GODInventoryWinForm.Controls
             this.salePriceTextBox.Text = String.Empty;
 
             //mark 20181022
-            warehouseList = ctx.t_warehouses.ToList();
-            var shipperCo = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
+            var warehouses = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
 
             this.warehouseComboBox.DisplayMember = "FullName";
             this.warehouseComboBox.ValueMember = "Id";
-            this.warehouseComboBox.DataSource = shipperCo;
+            this.warehouseComboBox.DataSource = warehouses;
 
-            //this.配送担当Column2.DisplayMember = "FullName";
-            //this.配送担当Column2.ValueMember = "FullName";
-            //this.配送担当Column2.DataSource = shipperCo.ToList();
+            var transports = transportList.Select(s => new { id = s.id, fullname = s.fullname }).ToList();
+            this.transportComboBox.DisplayMember = "fullname";
+            this.transportComboBox.ValueMember = "id";
+            this.transportComboBox.DataSource = transports;
 
 
             //InitializetransportdataGridView1();
 
+            initializeTabFreights();
 
-            //
 
-            this.categoryComboBox2.ValueMember = "Id";
-            this.categoryComboBox2.DisplayMember = "FullName";
-            this.categoryComboBox2.DataSource = genreList;
+        }
+
+        private void initializeTabFreights() {
+            var counties = this.stores.Select(s => new { ShortName = s.県別, FullName = s.県別 }).Distinct().ToList();
+            counties.Insert(0, new { ShortName = "", FullName = "すべて" });
+
+
 
             //
             var shipperConew = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
@@ -107,12 +117,19 @@ namespace GODInventoryWinForm.Controls
             this.transportComboBox6.DisplayMember = "FullName";
             this.transportComboBox6.ValueMember = "Id";
             this.transportComboBox6.DataSource = transportListnew;
-            //  // 県別
+            //  県別
             this.countyComboBox4.ValueMember = "ShortName";
             this.countyComboBox4.DisplayMember = "FullName";
             this.countyComboBox4.DataSource = counties;
 
 
+            var unitnames = unitList.Select(s => new { unitname = s.unitname }).ToList();
+            unitnames.Insert(0, new { unitname = "すべて" });
+            // 单位
+            this.unitComboBox3.ValueMember = "unitname";
+            this.unitComboBox3.DisplayMember = "unitname";
+            this.unitComboBox3.DataSource = unitnames;
+            
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -263,7 +280,11 @@ namespace GODInventoryWinForm.Controls
                             広告原単価 = p.広告原単価,
                             特売原単価 = p.特売原単価,
                             ジャンル = i.ジャンル,
-                            配送担当 = p.配送担当
+                            配送担当 = p.配送担当,
+                            transport_id = p.transport_id,
+                            warehouse_id = p.warehouse_id,
+                            warehouseName = p.warehouseName,
+                            unitname = p.unitname
                         };
             if (county.Length > 0)
             {
@@ -296,14 +317,14 @@ namespace GODInventoryWinForm.Controls
                 var form = new EditPriceForm(price.Id);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    price.仕入原価 = form.Price.仕入原価;
-                    price.原単価 = form.Price.通常原単価;
-                    price.広告原単価 = form.Price.広告原単価;
-                    price.特売原単価 = form.Price.特売原単価;
-                    price.売単価 = form.Price.売単価;
+                    //price.仕入原価 = form.price.仕入原価;
+                    //price.原単価 = form.price.通常原単価;
+                    //price.広告原単価 = form.price.広告原単価;
+                    //price.特売原単価 = form.price.特売原単価;
+                    //price.売単価 = form.price.売単価;
 
                     searchButton_Click(null, EventArgs.Empty);
-                    this.pricesDataGridView.Refresh();
+                    //this.pricesDataGridView.Refresh();
                     //MessageBox.Show("saved");
                 }
             }
@@ -435,35 +456,51 @@ namespace GODInventoryWinForm.Controls
             string county = Convert.ToString(this.countyComboBox.SelectedValue);
             int genresId = Convert.ToInt32(this.genresComboBox.SelectedValue);
 
-            string warehouse = String.Empty;
+            string warehouseName = this.warehouseComboBox.Text;
+            string transportName = this.transportComboBox.Text;
+            int warehouseId = Convert.ToInt32(this.warehouseComboBox.SelectedValue);
+            int transportId = Convert.ToInt32(this.transportComboBox.SelectedValue);
+            string unitname = this.unitnameComboBox.Text;
+
             String sql = String.Empty;
             //保存配送担当
+            int rows = this.pricesDataGridView.RowCount;
 
-            if (genresId == 0)
+            if (rows == 0)
             {
-                MessageBox.Show("Please input ");
+                MessageBox.Show("Please click search to find product!");
                 return;
             }
 
-            if (this.warehouseComboBox.Text.Length > 0)
+            if (warehouseName.Length > 0 && transportName.Length > 0)
             {
-                warehouse = Convert.ToString(this.warehouseComboBox.Text);
 
                 using (var ctx = new GODDbContext())
                 {
+                    // List<int> priceids = new List<int>();
+
+                    //`for (var i = 0; i < transportdataGridView1.RowCount; i++) {
+                    //    var row = transportdataGridView1.Rows[i];
+                    //    var price = row.DataBoundItem as v_itemprice;
+                    //    priceids.Add(price.Id);
+                    //`}
+                    
+
                     if (productCode > 0)
                     {
-                        sql = String.Format("UPDATE t_pricelist SET `配送担当`='{0}' WHERE `自社コード`={1}", warehouse, productCode);
+                        sql = String.Format("UPDATE t_pricelist SET `transport_id`={0},`配送担当`='{1}',`warehouse_id`={2},`warehousename`='{3}' ", transportId, transportName, warehouseId, warehouseName);
                     }
-                    else
-                    {
-                        var productCodes = (from t_itemlist item in ctx.t_itemlist
-                                            where item.ジャンル == genresId
-                                            select item.自社コード).ToList();
-                        sql = String.Format("UPDATE t_pricelist SET `配送担当`='{0}' WHERE `自社コード`in ({1})", warehouse, String.Join(",", productCodes));
-
+                    if (unitname.Length > 0) {
+                        sql += string.Format(", `unitname`='{0}'", unitname);
                     }
-
+                    sql += string.Format("WHERE `自社コード`={0}", productCode);
+                    //else
+                    //{
+                    //    var productCodes = (from t_itemlist item in ctx.t_itemlist
+                    //                        where item.ジャンル == genresId
+                    //                        select item.自社コード).ToList();
+                    //    sql = String.Format("UPDATE t_pricelist SET  `transport_id`={0},`配送担当`='{1}',`warehouse_id`={2},`warehousename`='{3}' WHERE `自社コード`in ({1})", transportId, transportName, warehouseId, warehouseName, String.Join(",", productCodes));
+                    //}
 
                     if (county.Length > 0)
                     {
@@ -529,9 +566,8 @@ namespace GODInventoryWinForm.Controls
                         ctx.SaveChanges();
 
                     }
-                    int 自社コード = Convert.ToInt32(this.productComboBox3.SelectedValue);
 
-                    InitializetransportdataGridView1(自社コード);
+                    InitializetransportdataGridViewBySelectedValue();
                 }
 
             }
@@ -545,18 +581,16 @@ namespace GODInventoryWinForm.Controls
            
         }
 
-        private void InitializetransportdataGridView1(int 自社コード=0, string warehousename = "", string transportname = "", int shop_id = 0)
+        private void InitializetransportdataGridView1(int warehouse_id = 0, int transport_id = 0, int shop_id = 0, string unitname="すべて")
         {
             using (var ctx = new GODDbContext())
             {
                 var query = from t_freights p in this.entityDataSource1.EntitySets["t_freights"]
-                            join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on p.自社コード equals i.自社コード
+                            join t_shoplist s in this.entityDataSource1.EntitySets["t_shoplist"] on p.shop_id equals s.店番
 
                             select new v_freights
                             {
                                 id = p.id,
-                                自社コード = p.自社コード,
-                                商品名 = i.商品名,
                                 transportname = p.transportname,
                                 warehousename = p.warehousename,
                                 transport_id = p.transport_id,
@@ -565,27 +599,27 @@ namespace GODInventoryWinForm.Controls
                                 fee = p.fee,
                                 lot_fee = p.lot_fee,
                                 unitname = p.unitname,
-
+                                columnname = p.columnname,
+                                shopname = s.店名
                             };
 
-                if (自社コード > 0)
+                if (warehouse_id > 0 )
                 {
-                    query = query.Where(o => o.自社コード == 自社コード);
-                }
-               
-
-                if (warehousename.Length > 0 && warehousename != "すべて")
-                {
-                    query = query.Where(o => o.warehousename == warehousename);
+                    query = query.Where(o => o.warehouse_id == warehouse_id);
                 }
 
-                if (transportname.Length > 0 && transportname != "すべて")
+                if (transport_id > 0 )
                 {
-                    query = query.Where(o => o.transportname == transportname);
+                    query = query.Where(o => o.transport_id == transport_id);
                 }
                 if (shop_id > 0)
                 {
                     query = query.Where(o => o.shop_id == shop_id);
+                }
+                if (unitname != anyOption) 
+                {
+
+                    query = query.Where(o => o.unitname == unitname);
                 }
 
                 this.transportdatabindingSource2.DataSource = this.entityDataSource1.CreateView(query);
@@ -593,25 +627,6 @@ namespace GODInventoryWinForm.Controls
             }
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            List<MockEntity> productsByGenre;
-            int genreId = (int)this.categoryComboBox2.SelectedValue;
-
-            if (genreId > 0)
-            {
-                productsByGenre = this.products.Where(o => o.ジャンル == genreId).Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
-            }
-            else
-            {
-                productsByGenre = this.products.Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
-            }
-            productsByGenre.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
-
-            this.productComboBox3.ValueMember = "Id";
-            this.productComboBox3.DisplayMember = "FullName";
-            this.productComboBox3.DataSource = productsByGenre;
-        }
 
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -640,44 +655,44 @@ namespace GODInventoryWinForm.Controls
         {
 
 
-            int 自社コード = Convert.ToInt32(this.productComboBox3.SelectedValue);
-            string warehousename = this.warehouseComboBox5.Text.ToString();
-            string transportname = this.transportComboBox6.Text;
+            int warehouse_id = Convert.ToInt32(this.warehouseComboBox5.SelectedValue);
+            int transport_id = Convert.ToInt32(this.transportComboBox6.SelectedValue);
             int shop_id = Convert.ToInt32(this.shopComboBox1.SelectedValue);
+            string unitname = this.unitComboBox3.Text;
 
-            decimal fee = -1;
+            string feestring = this.transportfeeTextBox.Text.Trim();
+            string newUnitname = this.unitnameComboBox4.Text.Trim();
+            string newColumnname = this.columnnameComboBox4.Text.Trim();
 
-            if (this.transportfee.Text.Trim().Length > 0)
+            if (feestring.Length > 0 && newUnitname.Length > 0 && newColumnname.Length > 0)
             {
-                fee = Convert.ToDecimal(this.transportfee.Text);
+                decimal fee = Convert.ToDecimal(this.transportfeeTextBox.Text);
 
 
-                if (自社コード > 0)
                 {
-                    int count = OrderHelper.Updatetransportfee(自社コード, warehousename, transportname, shop_id, fee);
+                    int count = OrderHelper.Updatetransportfee(warehouse_id, transport_id, shop_id, unitname, fee, newUnitname, newColumnname);
                     if (count > 0)
                     {
                         //InitializeDataSource();
                         //InitializetransportdataGridView1();
-
                         bttransportfind_Click(null, EventArgs.Empty);
-
                     }
-
                 }
+            }
+            else {
+                MessageBox.Show(string.Format("please input valid value 運賃={0}, 単位={1}, 订单字段={2} to update", feestring, newUnitname, newColumnname));
             }
         }
 
         // 根据当前选择的过滤条件查询运费
         private void InitializetransportdataGridViewBySelectedValue() {
-            int 自社コード = Convert.ToInt32(this.productComboBox3.SelectedValue);
             int shop_id = Convert.ToInt32(this.shopComboBox1.SelectedValue);
-            string warehousename = this.warehouseComboBox5.Text.ToString();
-            string transportname = this.transportComboBox6.Text;
-
-            //if (自社コード > 0 || shop_id > 0)
+            int warehouseid = Convert.ToInt32(this.warehouseComboBox5.SelectedValue);
+            int transportid = Convert.ToInt32(this.transportComboBox6.SelectedValue);
+            string unitname = this.unitComboBox3.Text;
+            if (warehouseid > 0 && transportid > 0)
             {
-                InitializetransportdataGridView1(自社コード, warehousename, transportname, shop_id);
+                InitializetransportdataGridView1(warehouseid, transportid, shop_id, unitname);
             }
         }
 

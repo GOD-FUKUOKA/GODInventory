@@ -34,7 +34,7 @@
             this.promotePriceTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.shipperComboBox3 = new System.Windows.Forms.ComboBox();
+            this.transportComboBox3 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.costTextBox = new System.Windows.Forms.TextBox();
@@ -57,6 +57,8 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.warehouseNamecomboBox1 = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +77,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(343, 221);
+            this.label12.Location = new System.Drawing.Point(343, 218);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(77, 14);
             this.label12.TabIndex = 10000003;
@@ -83,7 +85,7 @@
             // 
             // promotePriceTextBox
             // 
-            this.promotePriceTextBox.Location = new System.Drawing.Point(426, 218);
+            this.promotePriceTextBox.Location = new System.Drawing.Point(426, 215);
             this.promotePriceTextBox.Name = "promotePriceTextBox";
             this.promotePriceTextBox.Size = new System.Drawing.Size(190, 21);
             this.promotePriceTextBox.TabIndex = 1;
@@ -100,7 +102,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.shipperComboBox3);
+            this.groupBox1.Controls.Add(this.warehouseNamecomboBox1);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.transportComboBox3);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.costTextBox);
@@ -129,17 +133,17 @@
             this.groupBox1.TabIndex = 10000006;
             this.groupBox1.TabStop = false;
             // 
-            // shipperComboBox3
+            // transportComboBox3
             // 
-            this.shipperComboBox3.FormattingEnabled = true;
-            this.shipperComboBox3.Items.AddRange(new object[] {
+            this.transportComboBox3.FormattingEnabled = true;
+            this.transportComboBox3.Items.AddRange(new object[] {
             "丸健",
             "MKL",
             "マツモト産業"});
-            this.shipperComboBox3.Location = new System.Drawing.Point(109, 246);
-            this.shipperComboBox3.Name = "shipperComboBox3";
-            this.shipperComboBox3.Size = new System.Drawing.Size(190, 22);
-            this.shipperComboBox3.TabIndex = 10000024;
+            this.transportComboBox3.Location = new System.Drawing.Point(109, 246);
+            this.transportComboBox3.Name = "transportComboBox3";
+            this.transportComboBox3.Size = new System.Drawing.Size(190, 22);
+            this.transportComboBox3.TabIndex = 10000024;
             // 
             // label8
             // 
@@ -185,7 +189,7 @@
             // 
             // adPriceTextBox
             // 
-            this.adPriceTextBox.Location = new System.Drawing.Point(109, 218);
+            this.adPriceTextBox.Location = new System.Drawing.Point(109, 215);
             this.adPriceTextBox.Name = "adPriceTextBox";
             this.adPriceTextBox.Size = new System.Drawing.Size(190, 21);
             this.adPriceTextBox.TabIndex = 10000019;
@@ -219,7 +223,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(371, 189);
+            this.label11.Location = new System.Drawing.Point(371, 187);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(49, 14);
             this.label11.TabIndex = 27;
@@ -244,7 +248,7 @@
             // 
             // salePriceTextBox
             // 
-            this.salePriceTextBox.Location = new System.Drawing.Point(426, 186);
+            this.salePriceTextBox.Location = new System.Drawing.Point(426, 184);
             this.salePriceTextBox.Name = "salePriceTextBox";
             this.salePriceTextBox.Size = new System.Drawing.Size(190, 21);
             this.salePriceTextBox.TabIndex = 28;
@@ -252,7 +256,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(23, 189);
+            this.label10.Location = new System.Drawing.Point(23, 187);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(77, 14);
             this.label10.TabIndex = 25;
@@ -260,7 +264,7 @@
             // 
             // priceTextBox
             // 
-            this.priceTextBox.Location = new System.Drawing.Point(109, 186);
+            this.priceTextBox.Location = new System.Drawing.Point(109, 184);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(190, 21);
             this.priceTextBox.TabIndex = 26;
@@ -328,6 +332,29 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // warehouseNamecomboBox1
+            // 
+            this.warehouseNamecomboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.warehouseNamecomboBox1.FormattingEnabled = true;
+            this.warehouseNamecomboBox1.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C",
+            "D"});
+            this.warehouseNamecomboBox1.Location = new System.Drawing.Point(426, 246);
+            this.warehouseNamecomboBox1.Name = "warehouseNamecomboBox1";
+            this.warehouseNamecomboBox1.Size = new System.Drawing.Size(190, 22);
+            this.warehouseNamecomboBox1.TabIndex = 10000026;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(385, 250);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(35, 14);
+            this.label15.TabIndex = 10000027;
+            this.label15.Text = "倉庫";
+            // 
             // EditPriceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -381,7 +408,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox costTextBox;
-        private System.Windows.Forms.ComboBox shipperComboBox3;
+        private System.Windows.Forms.ComboBox transportComboBox3;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox warehouseNamecomboBox1;
+        private System.Windows.Forms.Label label15;
     }
 }

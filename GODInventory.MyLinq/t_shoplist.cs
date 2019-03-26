@@ -56,7 +56,6 @@ namespace GODInventory.MyLinq
 
         public int transport_id { get; set; }
 
-        [StringLength(45)]
         public string warehouseName { get; set; }
 
     }

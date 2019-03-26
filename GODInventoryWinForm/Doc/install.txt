@@ -215,8 +215,8 @@ CREATE TABLE `t_freights` (
   `warehouse_id` int(11)  UNSIGNED NOT NULL DEFAULT 0 ,
   `transport_id` int(11)  UNSIGNED NOT NULL DEFAULT 0 ,
   `shop_id` int(11)  UNSIGNED NOT NULL DEFAULT 0 ,
-  `fee` int(11) DEFAULT 0,
-  `lot_fee` int(11) DEFAULT 0,   
+  `fee` DECIMAL DEFAULT 0,
+  `lot_fee` DECIMAL DEFAULT 0,   
   `unitname` varchar(45) DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -237,18 +237,45 @@ ADD COLUMN `memo` VARCHAR(255) NULL DEFAULT '';
 
 ALTER TABLE `t_shoplist` 
 ADD COLUMN `warehouse_id` INT UNSIGNED NOT NULL DEFAULT 0 ,
-ADD COLUMN `transport_id` INT UNSIGNED NOT NULL DEFAULT 0 AFTER `warehouse_id`;
+ADD COLUMN `transport_id` INT UNSIGNED NOT NULL DEFAULT 0 ,
+ADD COLUMN `warehousename` VARCHAR(45) NOT NULL DEFAULT '';
 
-ALTER TABLE `t_shoplist` 
-ADD COLUMN `warehousename` VARCHAR(45) NOT NULL DEFAULT '' AFTER `transport_id`;
+# 20190325添加， 
+# 产品的缺省运输公司和仓库，使用商品价格表
+# 调整运费计算方式，
+# 收到订单后，查询商品价格表，得到运费单位， 根据（运输公司，仓库，商店，运费单位）查询商品运费单价和计算运费所用订单表字段名。
+# 订单表(商店，商品,运输公司，仓库)
+# 商品价格表 (商店，商品，价格，運賃単位)
+# 商品运费表 (运输公司，仓库，商店，運賃単位，运费单价，订单表字段名)
 
+ALTER TABLE `t_pricelist` 
+ADD COLUMN `warehouse_id` INT UNSIGNED NOT NULL DEFAULT 0 ,
+ADD COLUMN `transport_id` INT UNSIGNED NOT NULL DEFAULT 0 ,
+ADD COLUMN `warehousename` VARCHAR(45) NOT NULL DEFAULT '';
+ALTER TABLE `t_pricelist`  ADD COLUMN `unitname` VARCHAR(45) NOT NULL DEFAULT '';
 
+ALTER TABLE `t_freights` ADD COLUMN `columnname`  VARCHAR(45) NOT NULL DEFAULT '';
+
+ALTER TABLE `t_freights` 
+ADD INDEX `combo` (`warehouse_id` ASC, `transport_id` ASC, `shop_id` ASC, `unitname` ASC);
+
+ALTER TABLE `t_freights` 
+CHANGE COLUMN `fee` `fee` DECIMAL NOT NULL DEFAULT '0' ;
 
 # 原有数据修正
 # 设置 t_shoplist表中 warehouse_id, transport_id, warehousename
+# 更新 t_pricelist unitname 
+# 示例sql: update t_pricelist t1 inner join t_itemlist t2 on t1.自社コード = t2.自社コード  set t1.unitname = t2.単位 where t1.id>0
+
 # 添加 t_freights 表数据
 # 示例sql: insert into t_freights(自社コード, warehousename, transportname, warehouse_id, transport_id, shop_id, fee, lot_fee ) SELECT 自社コード, '丸健倉庫', 配送担当, 1, 1, 店番, 運賃,  パレット運賃 FROM god_om2.t_pricelist 
 # 示例sql: update t_shoplist set warehousename='丸健倉庫' where `配送担当`='丸健'
+# SELECT i.自社コード, w.fullname, t.fullname, w.id, t.id, s.店番, 運賃,  パレット運賃 FROM god_om2.t_pricelist 
+# 示例sql: insert into t_freights( warehousename, transportname, warehouse_id, transport_id, shop_id, unitname ) 
+insert into t_freights( warehousename, transportname, warehouse_id, transport_id, shop_id, unitname ) 
+SELECT   w.fullname, t.fullname, w.id, t.id, s.店番,  u.unitname  FROM t_shoplist s 
+CROSS join (select unitname from t_pricelist t0 group by unitname) u
+CROSS  join t_warehouses w  CROSS  join t_transports t 
 
 # 开发执行
 ALTER TABLE `god_om2`.`t_freights` 
