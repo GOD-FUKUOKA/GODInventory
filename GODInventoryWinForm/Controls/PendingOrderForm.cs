@@ -563,6 +563,12 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
         }
 
         #region 订单修订上下文菜单事件
+
+        /// <summary>
+        /// 发送给运输公司
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void sendToShipperToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var orders = GetPendingOrdersBySelectedGridCell();
@@ -1202,6 +1208,11 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
             selectedRowsLabel.Text = String.Format("選択中の数量合計: {0}", total);
         }
 
+        /// <summary>
+        /// 传送处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void notifyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<v_pendingorder> orders = new List<v_pendingorder>();

@@ -147,6 +147,12 @@
     <Compile Include="Controls\OrderCostSettingForm.Designer.cs">
       <DependentUpon>OrderCostSettingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Prices\MissingReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Prices\MissingReportForm.Designer.cs">
+      <DependentUpon>MissingReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ProductsManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,16 +250,16 @@
     <Compile Include="Controls\Bind__Transports.Designer.cs">
       <DependentUpon>Bind__Transports.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\EditTransportsFee.cs">
+    <Compile Include="Controls\Freights\EditTransportsFee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\EditTransportsFee.Designer.cs">
+    <Compile Include="Controls\Freights\EditTransportsFee.Designer.cs">
       <DependentUpon>EditTransportsFee.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CreateTransportsFee.cs">
+    <Compile Include="Controls\Freights\CreateTransportsFee.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\CreateTransportsFee.Designer.cs">
+    <Compile Include="Controls\Freights\CreateTransportsFee.Designer.cs">
       <DependentUpon>CreateTransportsFee.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Warehouse\EditForm.cs">
@@ -492,6 +498,9 @@
     <EmbeddedResource Include="Controls\OrderCostSettingForm.resx">
       <DependentUpon>OrderCostSettingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Prices\MissingReportForm.resx">
+      <DependentUpon>MissingReportForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ProductsManagement.resx">
       <DependentUpon>ProductsManagement.cs</DependentUpon>
     </EmbeddedResource>
@@ -542,10 +551,10 @@
     <EmbeddedResource Include="Controls\Bind__Transports.resx">
       <DependentUpon>Bind__Transports.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\EditTransportsFee.resx">
+    <EmbeddedResource Include="Controls\Freights\EditTransportsFee.resx">
       <DependentUpon>EditTransportsFee.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CreateTransportsFee.resx">
+    <EmbeddedResource Include="Controls\Freights\CreateTransportsFee.resx">
       <DependentUpon>CreateTransportsFee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Warehouse\EditForm.resx">

@@ -459,8 +459,11 @@ namespace GODInventoryWinForm.Controls
                 this.itemPriceList = (from i in ctx.t_itemlist
                                       join p in ctx.t_pricelist on i.自社コード equals p.自社コード
                                       join g in ctx.t_genre on i.ジャンル equals g.idジャンル
+                                      join f in ctx.t_freights on
+                                        new { p.transport_id, p.warehouse_id, p.自社コード, shop_id= p.店番 } equals
+                                        new { f.transport_id, f.warehouse_id, f.自社コード, f.shop_id  }
                                       where p.店番 == storeId
-                                      select new v_itemprice { 配送担当=p.配送担当, 自社コード = i.自社コード, ジャンル = g.idジャンル, ジャンル名 = g.ジャンル名, 商品コード = i.商品コード, JANコード = i.JANコード, 商品名 = i.商品名, 原単価 = p.通常原単価, 売単価 = p.売単価, 規格 = i.規格, PT入数 = i.PT入数, 単品重量 = i.単品重量, 単位 = i.単位 }).ToList();
+                                      select new v_itemprice { 配送担当 = p.配送担当, 自社コード = i.自社コード, ジャンル = g.idジャンル, ジャンル名 = g.ジャンル名, 商品コード = i.商品コード, JANコード = i.JANコード, 商品名 = i.商品名, 原単価 = p.通常原単価, 売単価 = p.売単価, 規格 = i.規格, PT入数 = i.PT入数, 単品重量 = i.単品重量, 単位 = i.単位, fee = f.fee, columnname=f.columnname }).ToList();
             }
 
             for (int i = 0; i < 10; i++)
@@ -760,11 +763,7 @@ namespace GODInventoryWinForm.Controls
                         int storeCode = (int)this.storeComboBox.SelectedValue;
                         var store = shopList.Find(s => s.店番 == storeCode);
                         
-                        if (store.warehouseName.Length == 0) {
-                            /// TODO
-                            MessageBox.Show(string.Format("error: please default warehouse of store {0}", store.店名));
-                            return;
-                        }
+
                         using (var ctx = new GODDbContext())
                         {
 
@@ -790,12 +789,16 @@ namespace GODInventoryWinForm.Controls
                                     MessageBox.Show(String.Format("誤った: 単品重量, 商品コード! されていません"));
                                     return;
                                 }
-
+                                if (selectedItem.warehouseName.Length == 0 || selectedItem.配送担当.Length == 0)
+                                {
+                                    /// TODO
+                                    MessageBox.Show(string.Format("error: please set default warehouse and 配送担当 of product {0}", selectedItem.商品名));
+                                    return;
+                                }
 
                                 o.重量 = (int)(Convert.ToDecimal(selectedItem.単品重量) * o.発注数量);
                                 o.単位 = selectedItem.単位;
                                 o.県別 = store.県別;
-                                o.warehouseName = store.warehouseName;
                                 o.発注形態区分 = Convert.ToInt16(this.orderReasonComboBox.SelectedValue);
                                 o.発注形態名称漢字 = this.orderReasonComboBox.Text;
                                 //o.原単価_税抜_ = (int)selectedItem.原単価;
@@ -837,15 +840,19 @@ namespace GODInventoryWinForm.Controls
                                         return;
                                 }
                                 o.実際配送担当 = selectedItem.配送担当;
+                                o.warehouseName = selectedItem.warehouseName;
 
-                                // 社内伝番処理
+                                // 社内伝番処理使用缺省配置
                                 o.社内伝番処理 = OrderSqlHelper.IsInnerCodeRequired(o.ジャンル);
 
-                                if (o.実際配送担当 == "MKL" && (o.ジャンル == 1001 || o.ジャンル == 1003))
-                                {
-                                    o.実際配送担当 = "丸健";
-                                }
-                                o.週目 = OrderSqlHelper.GetOrderWeekOfYear(o.受注日.Value); 
+                                // 
+                                //if (o.実際配送担当 == "MKL" && (o.ジャンル == 1001 || o.ジャンル == 1003))
+                                //{
+                                //    o.実際配送担当 = "丸健";
+                                //}
+                                o.週目 = OrderSqlHelper.GetOrderWeekOfYear(o.受注日.Value);
+
+                                o.運賃 = OrderSqlHelper.ComputeFreight(o, selectedItem.fee, selectedItem.columnname);
 
                             }
                             ctx.t_orderdata.AddRange(newOrderList);

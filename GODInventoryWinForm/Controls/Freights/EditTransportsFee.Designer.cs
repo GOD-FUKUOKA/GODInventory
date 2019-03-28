@@ -1,4 +1,4 @@
-﻿namespace GODInventoryWinForm
+﻿namespace GODInventoryWinForm.Controls.Freights
 {
     partial class EditTransportsFee
     {
@@ -32,26 +32,23 @@
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.lotFeeTextBox = new System.Windows.Forms.TextBox();
-            this.genresComboBox = new System.Windows.Forms.ComboBox();
-            this.storeNamTextBox = new System.Windows.Forms.ComboBox();
+            this.columnnameTextBox = new System.Windows.Forms.TextBox();
+            this.transportnameTextBox = new System.Windows.Forms.ComboBox();
             this.whComboBox = new System.Windows.Forms.ComboBox();
-            this.orderAtTextBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.storeComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.countyComboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.storeCodeTextBox = new System.Windows.Forms.TextBox();
+            this.unitnameTextBox = new System.Windows.Forms.TextBox();
             this.feeTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -63,73 +60,50 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.lotFeeTextBox);
-            this.groupBox1.Controls.Add(this.genresComboBox);
-            this.groupBox1.Controls.Add(this.storeNamTextBox);
+            this.groupBox1.Controls.Add(this.columnnameTextBox);
+            this.groupBox1.Controls.Add(this.transportnameTextBox);
             this.groupBox1.Controls.Add(this.whComboBox);
-            this.groupBox1.Controls.Add(this.orderAtTextBox);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.storeComboBox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.countyComboBox1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.storeCodeTextBox);
+            this.groupBox1.Controls.Add(this.unitnameTextBox);
             this.groupBox1.Controls.Add(this.feeTextBox);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.groupBox1.Location = new System.Drawing.Point(22, 14);
+            this.groupBox1.Location = new System.Drawing.Point(22, 48);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(647, 220);
+            this.groupBox1.Size = new System.Drawing.Size(647, 186);
             this.groupBox1.TabIndex = 10000019;
             this.groupBox1.TabStop = false;
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(17, 180);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(33, 149);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 18);
+            this.label9.Size = new System.Drawing.Size(63, 14);
             this.label9.TabIndex = 10000021;
-            this.label9.Text = "パレット運賃";
+            this.label9.Text = "订单字段";
             // 
-            // label8
+            // columnnameTextBox
             // 
-            this.label8.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.Location = new System.Drawing.Point(42, 30);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(57, 14);
-            this.label8.TabIndex = 10000011;
-            this.label8.Text = "ジャンル";
+            this.columnnameTextBox.Location = new System.Drawing.Point(107, 146);
+            this.columnnameTextBox.Name = "columnnameTextBox";
+            this.columnnameTextBox.Size = new System.Drawing.Size(190, 21);
+            this.columnnameTextBox.TabIndex = 10000020;
             // 
-            // lotFeeTextBox
+            // transportnameTextBox
             // 
-            this.lotFeeTextBox.Location = new System.Drawing.Point(107, 177);
-            this.lotFeeTextBox.Name = "lotFeeTextBox";
-            this.lotFeeTextBox.Size = new System.Drawing.Size(190, 21);
-            this.lotFeeTextBox.TabIndex = 10000020;
-            // 
-            // genresComboBox
-            // 
-            this.genresComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.genresComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.genresComboBox.FormattingEnabled = true;
-            this.genresComboBox.Location = new System.Drawing.Point(107, 26);
-            this.genresComboBox.Name = "genresComboBox";
-            this.genresComboBox.Size = new System.Drawing.Size(190, 22);
-            this.genresComboBox.TabIndex = 0;
-            this.genresComboBox.SelectedIndexChanged += new System.EventHandler(this.genresComboBox_SelectedIndexChanged);
-            // 
-            // storeNamTextBox
-            // 
-            this.storeNamTextBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.storeNamTextBox.FormattingEnabled = true;
-            this.storeNamTextBox.Location = new System.Drawing.Point(425, 64);
-            this.storeNamTextBox.Name = "storeNamTextBox";
-            this.storeNamTextBox.Size = new System.Drawing.Size(190, 22);
-            this.storeNamTextBox.TabIndex = 3;
+            this.transportnameTextBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.transportnameTextBox.FormattingEnabled = true;
+            this.transportnameTextBox.Location = new System.Drawing.Point(107, 29);
+            this.transportnameTextBox.Name = "transportnameTextBox";
+            this.transportnameTextBox.Size = new System.Drawing.Size(190, 22);
+            this.transportnameTextBox.TabIndex = 3;
             // 
             // whComboBox
             // 
@@ -138,23 +112,14 @@
             this.whComboBox.Items.AddRange(new object[] {
             "no",
             "yes"});
-            this.whComboBox.Location = new System.Drawing.Point(107, 64);
+            this.whComboBox.Location = new System.Drawing.Point(425, 33);
             this.whComboBox.Name = "whComboBox";
             this.whComboBox.Size = new System.Drawing.Size(190, 22);
             this.whComboBox.TabIndex = 2;
             // 
-            // orderAtTextBox
-            // 
-            this.orderAtTextBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.orderAtTextBox.FormattingEnabled = true;
-            this.orderAtTextBox.Location = new System.Drawing.Point(425, 26);
-            this.orderAtTextBox.Name = "orderAtTextBox";
-            this.orderAtTextBox.Size = new System.Drawing.Size(190, 22);
-            this.orderAtTextBox.TabIndex = 1;
-            // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(379, 106);
+            this.label7.Location = new System.Drawing.Point(379, 75);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 14);
             this.label7.TabIndex = 10000006;
@@ -164,14 +129,14 @@
             // 
             this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.storeComboBox.FormattingEnabled = true;
-            this.storeComboBox.Location = new System.Drawing.Point(425, 102);
+            this.storeComboBox.Location = new System.Drawing.Point(425, 71);
             this.storeComboBox.Name = "storeComboBox";
             this.storeComboBox.Size = new System.Drawing.Size(190, 22);
             this.storeComboBox.TabIndex = 5;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(64, 106);
+            this.label1.Location = new System.Drawing.Point(64, 75);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 14);
             this.label1.TabIndex = 10000004;
@@ -181,7 +146,7 @@
             // 
             this.countyComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.countyComboBox1.FormattingEnabled = true;
-            this.countyComboBox1.Location = new System.Drawing.Point(107, 102);
+            this.countyComboBox1.Location = new System.Drawing.Point(107, 71);
             this.countyComboBox1.Name = "countyComboBox1";
             this.countyComboBox1.Size = new System.Drawing.Size(190, 22);
             this.countyComboBox1.TabIndex = 4;
@@ -189,7 +154,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(64, 144);
+            this.label3.Location = new System.Drawing.Point(64, 113);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 14);
             this.label3.TabIndex = 24;
@@ -197,45 +162,37 @@
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(36, 68);
+            this.label5.Location = new System.Drawing.Point(354, 37);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 14);
             this.label5.TabIndex = 10000002;
             this.label5.Text = "仓库名称";
             // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(351, 30);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 14);
-            this.label4.TabIndex = 27;
-            this.label4.Text = "商品编码";
-            // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(379, 144);
+            this.label6.Location = new System.Drawing.Point(379, 113);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 14);
             this.label6.TabIndex = 11;
             this.label6.Text = "单位";
             // 
-            // storeCodeTextBox
+            // unitnameTextBox
             // 
-            this.storeCodeTextBox.Location = new System.Drawing.Point(425, 141);
-            this.storeCodeTextBox.Name = "storeCodeTextBox";
-            this.storeCodeTextBox.Size = new System.Drawing.Size(190, 21);
-            this.storeCodeTextBox.TabIndex = 7;
+            this.unitnameTextBox.Location = new System.Drawing.Point(425, 110);
+            this.unitnameTextBox.Name = "unitnameTextBox";
+            this.unitnameTextBox.Size = new System.Drawing.Size(190, 21);
+            this.unitnameTextBox.TabIndex = 7;
             // 
             // feeTextBox
             // 
-            this.feeTextBox.Location = new System.Drawing.Point(107, 141);
+            this.feeTextBox.Location = new System.Drawing.Point(107, 110);
             this.feeTextBox.Name = "feeTextBox";
             this.feeTextBox.Size = new System.Drawing.Size(190, 21);
             this.feeTextBox.TabIndex = 6;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(351, 68);
+            this.label2.Location = new System.Drawing.Point(33, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 14);
             this.label2.TabIndex = 1;
@@ -267,11 +224,24 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.Font = new System.Drawing.Font("MS PGothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label4.Location = new System.Drawing.Point(18, 11);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(651, 37);
+            this.label4.TabIndex = 10000047;
+            this.label4.Text = "编辑运费信息";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // EditTransportsFee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(691, 307);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.submitFormButton);
             this.Controls.Add(this.cancelFormButton);
@@ -290,26 +260,23 @@
 
         private GODInventory.ViewModel.EntityDataSource entityDataSource1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox genresComboBox;
-        private System.Windows.Forms.ComboBox storeNamTextBox;
+        private System.Windows.Forms.ComboBox transportnameTextBox;
         private System.Windows.Forms.ComboBox whComboBox;
-        private System.Windows.Forms.ComboBox orderAtTextBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox storeComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox countyComboBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox storeCodeTextBox;
+        private System.Windows.Forms.TextBox unitnameTextBox;
         private System.Windows.Forms.TextBox feeTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button submitFormButton;
         private System.Windows.Forms.Button cancelFormButton;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox lotFeeTextBox;
+        private System.Windows.Forms.TextBox columnnameTextBox;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label label4;
     }
 }

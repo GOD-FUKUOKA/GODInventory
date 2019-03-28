@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace GODInventory.MyLinq
 {
-    // join item and price
+    /// 连接 商品，商店，运费 freight
     public class v_freights
     {
         public int id { get; set; }
+        public int 自社コード { get; set; }
+
         public string transportname { get; set; }
         public string warehousename { get; set; }
         public int transport_id { get; set; }

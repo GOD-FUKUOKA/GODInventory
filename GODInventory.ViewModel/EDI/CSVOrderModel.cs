@@ -420,7 +420,7 @@ namespace GODInventory.ViewModel.EDI
             return orderdata;
 
         }
-        public t_orderdata ConverToEntity(t_shoplist shop, t_itemlist item, t_pricelist price, t_locations location, List<t_orderdata> orders)
+        public t_orderdata ConverToEntity(t_shoplist shop, t_itemlist item, v_itemprice price, t_locations location, List<t_orderdata> orders)
         {
             if (IsByFax)
             {
@@ -513,8 +513,10 @@ namespace GODInventory.ViewModel.EDI
             orderdata.粗利金額 = orderdata.納品原価金額 - orderdata.仕入金額;
 
             orderdata.id = String.Format("{0}a{1}", orderdata.店舗コード, orderdata.伝票番号);
-            orderdata.週目 = OrderSqlHelper.GetOrderWeekOfYear(orderdata.受注日.Value); 
-            
+            orderdata.週目 = OrderSqlHelper.GetOrderWeekOfYear(orderdata.受注日.Value);
+
+            orderdata.運賃 = OrderSqlHelper.ComputeFreight(orderdata, price.fee, price.columnname);
+
             if (orders != null)
             {
                 bool existed = orders.Exists(o => (o.伝票番号 == orderdata.伝票番号 && o.店舗コード == orderdata.店舗コード));
@@ -526,7 +528,7 @@ namespace GODInventory.ViewModel.EDI
             return orderdata;
         }
 
-        public CustomMySqlParameters ToSqlArguments(t_shoplist shop, t_itemlist item, t_pricelist price, t_locations location, List<t_orderdata> orders)
+        public CustomMySqlParameters ToSqlArguments(t_shoplist shop, t_itemlist item, v_itemprice price, t_locations location, List<t_orderdata> orders)
         {
             //`発注日`, `受注日`, `出荷日`, `納品日`, `店舗コード`, `店舗名漢字`, `社内伝番`, `行数`, `最大行数`, `伝票番号`, `ダブリ`, 
             //`在庫状態`, `キャンセル`, `キャンセル時刻`, `ジャンル`, `ＪＡＮコード`, `商品コード`, `品名漢字`, `規格名漢字`, `発注数量`, 
@@ -672,7 +674,7 @@ VALUES (
 
         }
 
-        public string ToRawSql(t_shoplist shop, t_itemlist item, t_pricelist price, t_locations location, List<t_orderdata> orders)
+        public string ToRawSql(t_shoplist shop, t_itemlist item, v_itemprice price, t_locations location, List<t_orderdata> orders)
         {
             var isoDateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
             t_orderdata o = ConverToEntity(shop, item, price, location, orders);
@@ -712,7 +714,7 @@ VALUES ({0}
 '{61}','{62}','{63}','{64}',{65},{66},{67},'{68}','{69}','{70}',
 {71},{72},{73},'{74}','{75}','{76}',{77},{78},{79},'{80}',
 {81},{82},{83},'{84}',{85},'{86}','{87}','{88}',{89},{90},
-'{91}',{92},{93},{94},{95},'{96}');"; 
+'{91}',{92},{93},{94},{95},'{96}',{97});"; 
             var now = DateTime.Now;
             var fazhuri = o.発注日.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
             var souzhuri = now.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
@@ -742,7 +744,8 @@ VALUES ({0}
                 o.実際配送担当, o.配送担当受信,o.口数,o.重量, o.単位,
                 o.ジャンル, o.自社コード, o.実際出荷数量, o.県別, (int)o.Status, 
                 o.ダブリ, o.発注品名漢字, o.発注規格名漢字, o.納品口数, o.週目,
-                o.id, o.仕入原価, o.仕入金額, o.粗利金額, o.社内伝番処理, o.warehouseName);
+                o.id, o.仕入原価, o.仕入金額, o.粗利金額, o.社内伝番処理,
+                o.warehouseName, o.運賃);
                 
         }
 

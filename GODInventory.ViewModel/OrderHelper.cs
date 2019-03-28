@@ -100,11 +100,11 @@ namespace GODInventory.ViewModel
                 {
                     sets.Add(string.Format(" `fee`={0} ", newFee));
                 }
-                if (newUnitname.Length >= 0)
+                if (newUnitname.Length > 0)
                 {
                     sets.Add(string.Format(" `unitname`='{0}' ", newUnitname));
                 }
-                if (newColumnname.Length >= 0)
+                if (newColumnname.Length > 0)
                 {
                     sets.Add(string.Format(" `columnname`='{0}' ", newColumnname));
                 }

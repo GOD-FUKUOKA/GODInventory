@@ -1008,6 +1008,7 @@ namespace GODInventory.ViewModel
             var orders = (from t_orderdata o in ctx.t_orderdata
                 where orderIds.Contains( o.id受注データ )
                               select o).ToList();
+            var genres = ctx.t_genre.ToList();
             //二次制品订单
             //where o.Status == OrderStatus.NotifyShipper && o.ジャンル == genreId && o.社内伝番 == 0 && o.実際配送担当 == "丸健"
 
@@ -1026,19 +1027,21 @@ namespace GODInventory.ViewModel
                     o.行数 = Convert.ToInt16(j);
                     o.最大行数 = Convert.ToInt16(gos.Count());
                 }
+
                 //SELECT  min(`id受注データ`), min(`受注日`), min(`店舗コード`), min(`店舗名漢字`),`社内伝番` as `伝票番号`,`社内伝番`,`ジャンル`, '二次製品' as `品名漢字` , '' as `規格名漢字`, min(`最大行数`) as `納品口数`, sum(`重量`) as `実際出荷数量`, sum(`重量`) as `重量`, min(`実際配送担当`),min(`県別`), min(`納品指示`), min(`備考`)
                 //FROM t_orderdata
                 //WHERE `Status`={0} AND `ジャンル`= 1003 AND `社内伝番` >0 AND `実際配送担当` = '丸健'
                 //GROUP BY `社内伝番`
                 t_maruken_trans temp = new t_maruken_trans();
                 var order = gos.First();
+                var genre = genres.FirstOrDefault(o => (o.idジャンル == order.ジャンル));
                 temp.OrderId = order.id受注データ;
                 temp.受注日 = order.受注日;
                 temp.店舗コード = order.店舗コード;
                 temp.店舗名漢字 = order.店舗名漢字;
                 temp.伝票番号 = order.社内伝番;
                 temp.ジャンル = Convert.ToInt16(order.ジャンル);
-                temp.品名漢字 = "二次製品";
+                temp.品名漢字 = genre.ジャンル名; //使用分类的名称代替 "二次製品"
                 temp.規格名漢字 = "";
                 temp.口数 = gos.Count();
                 temp.発注数量 = gos.Sum(o => o.重量);
@@ -1172,32 +1175,9 @@ namespace GODInventory.ViewModel
             order.粗利金額 = order.納品原価金額 - order.仕入金額;
 
             // 更新出荷数量后更新运费
-            // 更新出荷数量后更新运费
-            using (var ctx = new GODDbContext())
-            {
-                var price = (from t_pricelist t in ctx.t_pricelist
-                             where t.店番 == order.店舗コード && t.自社コード == order.自社コード
-                             select t).FirstOrDefault();
 
-                if (price != null )
-                {
-                    var freight = (from t_freights t in ctx.t_freights
-                                   where t.unitname == price.unitname && t.warehousename == order.warehouseName && t.transportname == order.実際配送担当 && t.shop_id == order.店舗コード
-                                   select t).FirstOrDefault();
-                    if( freight != null){
-                        string val = GetModelValue(freight.columnname, order);
-
-
-                        // sqlStr = "UPDATE t_orderdata a LEFT JOIN t_pricelist b ON a.`店舗コード` = b.`店番` AND a.`自社コード` = b.`自社コード`" _
-                        // & " SET a.`運賃` = IF ( b.`パレット運賃` = 0, b.`運賃` * a.`重量`, b.`パレット運賃` * a.`納品口数`)" _
-                        // & " WHERE (b.`運賃` + b.`パレット運賃`) <> 0 AND a.`運賃` IS NULL AND a.`出荷日` BETWEEN '" & Cells(1, 5).Value & "' AND '" & Cells(1, 8).Value & "'"
-                        if (!string.IsNullOrEmpty(val))
-                        {
-                            order.運賃 =   freight.fee *  Convert.ToInt32(val);
-                        }
-                    }
-                }
-            }
+            order.運賃 = ComputeFreight( order );
+                      
         }
 
         // 当订单的数量被修改后，需要相应修改的字段
@@ -1216,32 +1196,7 @@ namespace GODInventory.ViewModel
                 order.納品口数 = (int)(order.実際出荷数量 / item.PT入数);
             }
             // 更新出荷数量后更新运费
-            using (var ctx = new GODDbContext())
-            {
-                var price = (from t_pricelist t in ctx.t_pricelist
-                             where t.店番 == order.店舗コード && t.自社コード == order.自社コード
-                             select t).FirstOrDefault();
-
-                if (price != null)
-                {
-                    var freight = (from t_freights t in ctx.t_freights
-                                   where t.unitname == price.unitname && t.warehousename == order.warehouseName && t.transportname == order.実際配送担当 && t.shop_id == order.店舗コード
-                                   select t).FirstOrDefault();
-                    if (freight != null)
-                    {
-                        string val = GetModelValue(freight.columnname, order);
-
-
-                        // sqlStr = "UPDATE t_orderdata a LEFT JOIN t_pricelist b ON a.`店舗コード` = b.`店番` AND a.`自社コード` = b.`自社コード`" _
-                        // & " SET a.`運賃` = IF ( b.`パレット運賃` = 0, b.`運賃` * a.`重量`, b.`パレット運賃` * a.`納品口数`)" _
-                        // & " WHERE (b.`運賃` + b.`パレット運賃`) <> 0 AND a.`運賃` IS NULL AND a.`出荷日` BETWEEN '" & Cells(1, 5).Value & "' AND '" & Cells(1, 8).Value & "'"
-                        if (!string.IsNullOrEmpty(val))
-                        {
-                            order.運賃 = freight.fee * Convert.ToInt32(val);
-                        }
-                    }
-                }
-            }
+            order.運賃 = ComputeFreight(order);
 
         }
 
@@ -1268,8 +1223,66 @@ namespace GODInventory.ViewModel
             ctx.SaveChanges();
         }
 
-        /// <summary>
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="itemprice"> 如果提供itemprice，使用 itemprice中的 fee 计算</param>
+        /// <returns></returns>
+        public static decimal ComputeFreight(t_orderdata order, decimal unitfee = 0, string columnname = null) 
+        {
+            decimal fee = 0;
+
+            if (columnname == null)
+            {
+                var freight = GetFreightByOrder(order.店舗コード, order.自社コード, order.warehouseName, order.実際配送担当);
+                if (freight != null)
+                {
+                    columnname = freight.columnname;
+                    unitfee = freight.fee;
+                }
+            }
+           
+            if (columnname != null)
+            {
+                string val = GetModelValue(columnname, order);
+                if (!string.IsNullOrEmpty(val))
+                {
+                    fee = unitfee * Convert.ToInt32(val);
+                }
+            }
+           
+            return fee;
+        }
+
+        public static decimal ComputeFreight(v_pendingorder order, decimal unitfee = 0, string columnname = null)
+        {
+            decimal fee = 0;
+
+            if (columnname == null)
+            {
+                var freight = GetFreightByOrder(order.店舗コード, order.自社コード, order.warehouseName, order.実際配送担当);
+                if (freight != null)
+                {
+                    columnname = freight.columnname;
+                    unitfee = freight.fee;
+                }
+            }
+
+            if (columnname != null)
+            {
+                string val = GetModelValue(columnname, order);
+                if (!string.IsNullOrEmpty(val))
+                {
+                    fee = unitfee * Convert.ToInt32(val);
+                }
+            }
+
+            return fee;
+        }
+        
+        /// <summary>
         /// 获取类中的属性值
         /// </summary>
         /// <param name="FieldName"></param>
@@ -1290,5 +1303,51 @@ namespace GODInventory.ViewModel
                 return null;
             }
         }
+
+        public static List<v_itemprice> GetItemPriceListByContext(GODDbContext ctx) { 
+        
+            List<v_itemprice> prices = (from i in ctx.t_itemlist
+                                        join p in ctx.t_pricelist on i.自社コード equals p.自社コード
+                                        join g in ctx.t_genre on i.ジャンル equals g.idジャンル
+                                        join f in ctx.t_freights on
+                                        new { p.transport_id, p.warehouse_id, p.自社コード, shop_id= p.店番 } equals
+                                        new { f.transport_id, f.warehouse_id, f.自社コード, f.shop_id  }
+                                      select new v_itemprice {  
+                                          ジャンル = g.idジャンル, 
+                                          ジャンル名 = g.ジャンル名,
+                                          自社コード = i.自社コード,
+                                          商品コード = i.商品コード,
+                                          JANコード = i.JANコード,
+                                          商品名 = i.商品名,
+                                          規格 = i.規格,
+                                          PT入数 = i.PT入数,
+                                          単品重量 = i.単品重量,
+                                          単位 = i.単位,
+                                          配送担当 = p.配送担当,
+                                          仕入原価 = p.仕入原価,
+                                          原単価 = p.通常原単価,
+                                          売単価 = p.売単価,
+                                          fee = f.fee,
+                                          columnname = f.columnname
+                                      }).ToList();
+            return prices;
+
+        }
+
+        private static t_freights GetFreightByOrder(int shopId, int productId, string warehousename, string transportname)
+        {
+            t_freights freight = null;
+            using (var ctx = new GODDbContext())
+            {
+
+                    freight = (from t_freights t in ctx.t_freights
+                               where t.自社コード == productId && t.warehousename == warehousename && t.transportname == transportname && t.shop_id == shopId
+                                   select t).FirstOrDefault();                    
+            }
+            return freight;
+        }
+
+
+       
     }
 }

@@ -197,14 +197,14 @@ CREATE TABLE `t_transports` (
 
 
 #创建仓库和物流功能对应表 t_warehouse_transports
-CREATE TABLE `god_om2`.`t_warehouses_transports` (
+CREATE TABLE `t_warehouses_transports` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `wid` INT NOT NULL DEFAULT 0,
   `tid` INT NOT NULL DEFAULT 0,
   `position` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-  ALTER TABLE `god_om2`.`t_orderdata` 
+  ALTER TABLE `t_orderdata` 
 ADD COLUMN `warehouseName` VARCHAR(45) NOT NULL DEFAULT '' AFTER `reportState`;
 
 CREATE TABLE `t_freights` (
@@ -257,7 +257,7 @@ ALTER TABLE `t_pricelist`  ADD COLUMN `unitname` VARCHAR(45) NOT NULL DEFAULT ''
 ALTER TABLE `t_freights` ADD COLUMN `columnname`  VARCHAR(45) NOT NULL DEFAULT '';
 
 ALTER TABLE `t_freights` 
-ADD INDEX `combo` (`warehouse_id` ASC, `transport_id` ASC, `shop_id` ASC, `unitname` ASC);
+ADD INDEX `combo` (`warehouse_id` ASC, `transport_id` ASC, `shop_id` ASC, `自社コード` ASC);
 
 ALTER TABLE `t_freights` 
 CHANGE COLUMN `fee` `fee` DECIMAL NOT NULL DEFAULT '0' ;
@@ -271,12 +271,23 @@ CHANGE COLUMN `fee` `fee` DECIMAL NOT NULL DEFAULT '0' ;
 # 示例sql: insert into t_freights(自社コード, warehousename, transportname, warehouse_id, transport_id, shop_id, fee, lot_fee ) SELECT 自社コード, '丸健倉庫', 配送担当, 1, 1, 店番, 運賃,  パレット運賃 FROM god_om2.t_pricelist 
 # 示例sql: update t_shoplist set warehousename='丸健倉庫' where `配送担当`='丸健'
 # SELECT i.自社コード, w.fullname, t.fullname, w.id, t.id, s.店番, 運賃,  パレット運賃 FROM god_om2.t_pricelist 
-# 示例sql: insert into t_freights( warehousename, transportname, warehouse_id, transport_id, shop_id, unitname ) 
+# 示例sql: 
 insert into t_freights( warehousename, transportname, warehouse_id, transport_id, shop_id, unitname ) 
 SELECT   w.fullname, t.fullname, w.id, t.id, s.店番,  u.unitname  FROM t_shoplist s 
 CROSS join (select unitname from t_pricelist t0 group by unitname) u
 CROSS  join t_warehouses w  CROSS  join t_transports t 
 
+
+insert into t_freights(自社コード, warehousename, transportname, warehouse_id, transport_id, shop_id ) 
+SELECT   s.自社コード, w.fullname, t.fullname, w.id, t.id, s.店番  FROM t_pricelist s 
+CROSS  join t_warehouses w  CROSS  join t_transports t 
+
+SELECT p.*, f.fee FROM t_itemlist i
+left join t_pricelist p on i.自社コード = p.自社コード
+left join t_shoplist s on s.店番 = p.店番
+left join t_freights f on p.transport_id = f.transport_id and p.warehouse_id = f.warehouse_id and 
+p.自社コード = f.自社コード and p.店番 = f.shop_id;
+
 # 开发执行
-ALTER TABLE `god_om2`.`t_freights` 
+ALTER TABLE `t_freights` 
 ADD COLUMN `lot_fee` INT UNSIGNED NOT NULL DEFAULT 0 AFTER `fee`;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GODInventory.MyLinq
 {
-    // join item and price
+    // join item and price 和缺省物流公司和缺省仓库的freight
     public class v_itemprice
     {
         public int Id { get; set; }
@@ -38,8 +38,12 @@ namespace GODInventory.MyLinq
         public int warehouse_id { get; set; }
         public int transport_id { get; set; }
         public string warehouseName { get; set; }
-        //運賃単位
+        // 運賃単位
         public string unitname { get; set; }
 
+        // 商品缺省运费信息
+        public decimal fee { get; set; }
+        // 计算运费时，订单表字段名称
+        public string columnname { get; set; }
     }
 }

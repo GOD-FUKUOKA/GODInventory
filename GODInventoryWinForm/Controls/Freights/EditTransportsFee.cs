@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GODInventoryWinForm
+namespace GODInventoryWinForm.Controls.Freights
 {
     public partial class EditTransportsFee : Form
     {
@@ -50,8 +50,6 @@ namespace GODInventoryWinForm
             this.whComboBox.DisplayMember = "FullName";
             this.whComboBox.DataSource = warehouseList;
       
-
-
             // 県別
             shopList = ctx.t_shoplist.ToList();
             if (shopList.Count > 0)
@@ -61,17 +59,13 @@ namespace GODInventoryWinForm
                 this.countyComboBox1.DataSource = counties;
             }
 
-
             //this.transcomboBox1.DisplayMember = "fullname";
             //this.transcomboBox1.ValueMember = "id";
             //this.transcomboBox1.DataSource = transportList;
       
-
-
-
-            this.storeNamTextBox.DisplayMember = "fullname";
-            this.storeNamTextBox.ValueMember = "id";
-            this.storeNamTextBox.DataSource = transportList;
+            this.transportnameTextBox.DisplayMember = "fullname";
+            this.transportnameTextBox.ValueMember = "id";
+            this.transportnameTextBox.DataSource = transportList;
 
             var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
 
@@ -80,34 +74,24 @@ namespace GODInventoryWinForm
             this.storeComboBox.DataSource = shops;
 
 
-
-            var genreList = this.genres.Select(s => new MockEntity { Id = s.idジャンル, FullName = s.ジャンル名 }).ToList();
-
-            this.genresComboBox.ValueMember = "Id";
-            this.genresComboBox.DisplayMember = "FullName";
-            this.genresComboBox.DataSource = genreList;
-
             if (freights != null)
+            {
                 InitializeControls();
+            }
         }
         private void InitializeControls()
         {
-
-            orderAtTextBox.Text = freights.id.ToString();
-
             whComboBox.Text = freights.warehousename;
 
+            transportnameTextBox.Text = freights.transportname;
 
-            storeNamTextBox.Text = freights.transportname;
-
-            storeCodeTextBox.Text = freights.unitname;
+            unitnameTextBox.Text = freights.unitname;
 
             feeTextBox.Text = freights.fee.ToString();
 
-            lotFeeTextBox.Text = freights.lot_fee.ToString();
+            columnnameTextBox.Text = freights.columnname;
 
-            storeComboBox.SelectedValue = freights.shop_id;
-           
+            storeComboBox.SelectedValue = freights.shop_id;         
 
         }
         private void submitFormButton_Click(object sender, EventArgs e)
@@ -120,18 +104,17 @@ namespace GODInventoryWinForm
 
             freights.warehousename = whComboBox.Text;
 
-            freights.transportname = storeNamTextBox.Text;
+            freights.transportname = transportnameTextBox.Text;
 
-            freights.unitname  = storeCodeTextBox.Text ;
+            freights.unitname  = unitnameTextBox.Text ;
 
-            freights.fee = Convert.ToInt32(feeTextBox.Text);
+            freights.fee = Convert.ToDecimal(feeTextBox.Text);
 
-            freights.lot_fee = Convert.ToInt32(lotFeeTextBox.Text);
+            freights.columnname = columnnameTextBox.Text;
 
             freights.shop_id = Convert.ToInt32(storeComboBox.SelectedValue);
                      
             this.entityDataSource1.SaveChanges();
-
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
          
@@ -147,17 +130,17 @@ namespace GODInventoryWinForm
                 errorProvider1.SetError(feeTextBox, "不能为空");
                 validated = false;
             }
-            if (this.storeCodeTextBox.Text.Trim() == null || this.storeCodeTextBox.Text.Trim() == "")
+            if (this.unitnameTextBox.Text.Trim() == null || this.unitnameTextBox.Text.Trim() == "")
             {
-                errorProvider1.SetError(storeCodeTextBox, "不能为空");
+                errorProvider1.SetError(unitnameTextBox, "不能为空");
                 validated = false;
             }
-            if (this.lotFeeTextBox.Text.Trim() == null || this.lotFeeTextBox.Text.Trim() == "")
+            if (this.columnnameTextBox.Text.Trim() == null || this.columnnameTextBox.Text.Trim() == "")
             {
-                errorProvider1.SetError(lotFeeTextBox, "不能为空");
+                errorProvider1.SetError(columnnameTextBox, "不能为空");
                 validated = false;
-
             }
+           
             return validated;
 
         }
@@ -187,22 +170,7 @@ namespace GODInventoryWinForm
 
         private void genresComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<MockEntity> productsByGenre;
-            int genreId = (int)this.genresComboBox.SelectedValue;
 
-            if (genreId > 0)
-            {
-                productsByGenre = this.products.Where(o => o.ジャンル == genreId).Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
-            }
-            else
-            {
-                productsByGenre = this.products.Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
-            }
-            //productsByGenre.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
-
-            this.orderAtTextBox.ValueMember = "Id";
-            this.orderAtTextBox.DisplayMember = "FullName";
-            this.orderAtTextBox.DataSource = productsByGenre;
         }
 
 

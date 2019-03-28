@@ -153,7 +153,9 @@ namespace GODInventoryWinForm
                 var date = DateTime.Now.Date;
                 var three_month_ago = date.AddMonths(-2);
                 List<t_itemlist> items = ctx.t_itemlist.ToList();
-                List<t_pricelist> prices = ctx.t_pricelist.ToList();
+                //List<t_pricelist> prices = ctx.t_pricelist.ToList();
+                List<v_itemprice> prices = OrderSqlHelper.GetItemPriceListByContext(ctx);
+
                 //= ( from t_orderdata o  in ctx.t_orderdata
                 //   where   o.Status == OrderStatus.Pending || o.Status == OrderStatus.WaitToShip || o.Status == OrderStatus.PendingShipment || o.Status == OrderStatus.ASN || o.Status == OrderStatus.Received
                 //   group o by new { o.店舗コード, o.商品コード} into g

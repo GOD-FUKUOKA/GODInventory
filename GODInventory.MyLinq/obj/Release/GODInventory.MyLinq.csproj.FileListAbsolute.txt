@@ -35,3 +35,4 @@ D:\projects\GODInventory\GODInventory.MyLinq\bin\Release\MySql.Data.Entity.EF6.d
 D:\projects\GODInventory\GODInventory.MyLinq\bin\Release\EntityFramework.xml
 D:\projects\GODInventory\GODInventory.MyLinq\obj\Release\GODInventory.MyLinq.dll
 D:\projects\GODInventory\GODInventory.MyLinq\obj\Release\GODInventory.MyLinq.pdb
+D:\projects\GODInventory\GODInventory.MyLinq\obj\Release\GODInventory.MyLinq.csprojResolveAssemblyReference.cache
