@@ -74,6 +74,7 @@
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="CustomPropertyHelper.cs" />
     <Compile Include="EDI\XLSXImportShipNumber.cs" />
+    <Compile Include="EDI\XLSXImportPrendingOrder.cs" />
     <Compile Include="OrderHelper.cs" />
     <Compile Include="SortableBindingList.cs" />
     <Compile Include="Design\ContextTypeTypeConverter.cs" />
