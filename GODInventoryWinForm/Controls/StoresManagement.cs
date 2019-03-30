@@ -45,9 +45,9 @@ namespace GODInventoryWinForm.Controls
                 var shipperCo = warehouseList.Select(s => new MockEntity { Id = s.Id, ShortName = s.ShortName, FullName = s.FullName }).Distinct().ToList();
                 //shipperCo.Insert(0, new MockEntity { ShortName = "その他", FullName = "その他" });
 
-                this.warehouseNamecomboBox1.DisplayMember = "FullName";
-                this.warehouseNamecomboBox1.ValueMember = "Id";
-                this.warehouseNamecomboBox1.DataSource = shipperCo.ToList();
+                this.warehousenamecomboBox1.DisplayMember = "FullName";
+                this.warehousenamecomboBox1.ValueMember = "Id";
+                this.warehousenamecomboBox1.DataSource = shipperCo.ToList();
 
 
                 this.transportnamecomboBox2.DisplayMember = "fullname";
@@ -98,7 +98,7 @@ namespace GODInventoryWinForm.Controls
                         storeRankComboBox.Text = store.売上ランク;
                     }
 
-                    warehouseNamecomboBox1.SelectedValue = store.warehouse_id;
+                    warehousenamecomboBox1.SelectedValue = store.warehouse_id;
                     transportnamecomboBox2.SelectedValue = store.transport_id;
 
 
@@ -149,9 +149,9 @@ namespace GODInventoryWinForm.Controls
                         store.営業担当 = this.officerTextBox3.Text;
                         store.売上ランク = this.storeRankComboBox.Text;
 
-                        store.warehouse_id = Convert.ToInt32(this.warehouseNamecomboBox1.SelectedValue);
+                        store.warehouse_id = Convert.ToInt32(this.warehousenamecomboBox1.SelectedValue);
                         store.transport_id = Convert.ToInt32(this.transportnamecomboBox2.SelectedValue);
-                        store.warehouseName = this.warehouseNamecomboBox1.Text;
+                        store.warehousename = this.warehousenamecomboBox1.Text;
                         store.配送担当 = this.transportnamecomboBox2.Text;
 
                         ctx.SaveChanges();
@@ -187,9 +187,9 @@ namespace GODInventoryWinForm.Controls
 
                         store.参考店舗 = Convert.ToInt32(this.storesComboBox.SelectedValue);
 
-                        store.warehouse_id = Convert.ToInt32(this.warehouseNamecomboBox1.SelectedValue);
+                        store.warehouse_id = Convert.ToInt32(this.warehousenamecomboBox1.SelectedValue);
                         store.transport_id = Convert.ToInt32(this.transportnamecomboBox2.SelectedValue);
-                        store.warehouseName = this.warehouseNamecomboBox1.Text;
+                        store.warehousename = this.warehousenamecomboBox1.Text;
                         store.配送担当 = this.transportnamecomboBox2.Text;
 
 

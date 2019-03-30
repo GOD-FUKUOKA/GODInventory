@@ -24,12 +24,14 @@ namespace GODInventory.ViewModel.EDI
         public string 数量 { get; set; }
         public string 伝票番号 { get; set; }
         public string 処理済 { get; set; }
+        public string 社内伝番 { get; set; }
+        
         public string mark1 { get; set; }
         public string mark2 { get; set; }
         public string mark3 { get; set; }
         public string mark4 { get; set; }
         public string mark5 { get; set; }
 
-
+        public string memo { get; set; }
     }
 }

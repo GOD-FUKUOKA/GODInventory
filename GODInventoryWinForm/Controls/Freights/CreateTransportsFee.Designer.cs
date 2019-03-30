@@ -30,8 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.columnnameTextBox = new System.Windows.Forms.TextBox();
+            this.genresComboBox = new System.Windows.Forms.ComboBox();
+            this.productsComboBox = new System.Windows.Forms.ComboBox();
             this.transportComboBox = new System.Windows.Forms.ComboBox();
             this.warehouseComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -55,8 +59,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.columnnameTextBox);
+            this.groupBox1.Controls.Add(this.genresComboBox);
+            this.groupBox1.Controls.Add(this.productsComboBox);
             this.groupBox1.Controls.Add(this.transportComboBox);
             this.groupBox1.Controls.Add(this.warehouseComboBox);
             this.groupBox1.Controls.Add(this.label7);
@@ -72,31 +80,72 @@
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(21, 58);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(647, 173);
+            this.groupBox1.Size = new System.Drawing.Size(647, 231);
             this.groupBox1.TabIndex = 10000016;
             this.groupBox1.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label8.Location = new System.Drawing.Point(49, 75);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(57, 14);
+            this.label8.TabIndex = 10000052;
+            this.label8.Text = "ジャンル";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(37, 137);
+            this.label9.Location = new System.Drawing.Point(40, 185);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(63, 14);
             this.label9.TabIndex = 10000013;
             this.label9.Text = "订单字段";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label14.Location = new System.Drawing.Point(380, 76);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(35, 14);
+            this.label14.TabIndex = 10000051;
+            this.label14.Text = "商品";
+            // 
             // columnnameTextBox
             // 
-            this.columnnameTextBox.Location = new System.Drawing.Point(109, 134);
+            this.columnnameTextBox.Location = new System.Drawing.Point(109, 182);
             this.columnnameTextBox.Name = "columnnameTextBox";
             this.columnnameTextBox.Size = new System.Drawing.Size(190, 21);
             this.columnnameTextBox.TabIndex = 10000012;
+            // 
+            // genresComboBox
+            // 
+            this.genresComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.genresComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.genresComboBox.FormattingEnabled = true;
+            this.genresComboBox.Location = new System.Drawing.Point(109, 72);
+            this.genresComboBox.Name = "genresComboBox";
+            this.genresComboBox.Size = new System.Drawing.Size(190, 22);
+            this.genresComboBox.TabIndex = 10000049;
+            this.genresComboBox.SelectedIndexChanged += new System.EventHandler(this.genresComboBox_SelectedIndexChanged);
+            // 
+            // productsComboBox
+            // 
+            this.productsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.productsComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.productsComboBox.FormattingEnabled = true;
+            this.productsComboBox.Location = new System.Drawing.Point(420, 72);
+            this.productsComboBox.Name = "productsComboBox";
+            this.productsComboBox.Size = new System.Drawing.Size(190, 22);
+            this.productsComboBox.TabIndex = 10000050;
             // 
             // transportComboBox
             // 
             this.transportComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.transportComboBox.FormattingEnabled = true;
-            this.transportComboBox.Location = new System.Drawing.Point(109, 24);
+            this.transportComboBox.Location = new System.Drawing.Point(109, 37);
             this.transportComboBox.Name = "transportComboBox";
             this.transportComboBox.Size = new System.Drawing.Size(190, 22);
             this.transportComboBox.TabIndex = 3;
@@ -108,14 +157,14 @@
             this.warehouseComboBox.Items.AddRange(new object[] {
             "no",
             "yes"});
-            this.warehouseComboBox.Location = new System.Drawing.Point(422, 24);
+            this.warehouseComboBox.Location = new System.Drawing.Point(420, 37);
             this.warehouseComboBox.Name = "warehouseComboBox";
             this.warehouseComboBox.Size = new System.Drawing.Size(190, 22);
             this.warehouseComboBox.TabIndex = 2;
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(376, 66);
+            this.label7.Location = new System.Drawing.Point(380, 114);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 14);
             this.label7.TabIndex = 10000006;
@@ -125,14 +174,14 @@
             // 
             this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.storeComboBox.FormattingEnabled = true;
-            this.storeComboBox.Location = new System.Drawing.Point(422, 62);
+            this.storeComboBox.Location = new System.Drawing.Point(420, 110);
             this.storeComboBox.Name = "storeComboBox";
             this.storeComboBox.Size = new System.Drawing.Size(190, 22);
             this.storeComboBox.TabIndex = 5;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(65, 66);
+            this.label1.Location = new System.Drawing.Point(68, 114);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 14);
             this.label1.TabIndex = 10000004;
@@ -142,7 +191,7 @@
             // 
             this.countyComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.countyComboBox1.FormattingEnabled = true;
-            this.countyComboBox1.Location = new System.Drawing.Point(109, 62);
+            this.countyComboBox1.Location = new System.Drawing.Point(109, 110);
             this.countyComboBox1.Name = "countyComboBox1";
             this.countyComboBox1.Size = new System.Drawing.Size(190, 22);
             this.countyComboBox1.TabIndex = 4;
@@ -150,7 +199,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(65, 104);
+            this.label3.Location = new System.Drawing.Point(68, 152);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 14);
             this.label3.TabIndex = 24;
@@ -158,7 +207,7 @@
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(350, 28);
+            this.label5.Location = new System.Drawing.Point(352, 41);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 14);
             this.label5.TabIndex = 10000002;
@@ -166,7 +215,7 @@
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(376, 104);
+            this.label6.Location = new System.Drawing.Point(380, 152);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 14);
             this.label6.TabIndex = 11;
@@ -174,21 +223,21 @@
             // 
             // unitnameTextBox
             // 
-            this.unitnameTextBox.Location = new System.Drawing.Point(422, 101);
+            this.unitnameTextBox.Location = new System.Drawing.Point(420, 149);
             this.unitnameTextBox.Name = "unitnameTextBox";
             this.unitnameTextBox.Size = new System.Drawing.Size(190, 21);
             this.unitnameTextBox.TabIndex = 7;
             // 
             // invoiceNOTextBox
             // 
-            this.invoiceNOTextBox.Location = new System.Drawing.Point(109, 101);
+            this.invoiceNOTextBox.Location = new System.Drawing.Point(109, 149);
             this.invoiceNOTextBox.Name = "invoiceNOTextBox";
             this.invoiceNOTextBox.Size = new System.Drawing.Size(190, 21);
             this.invoiceNOTextBox.TabIndex = 6;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(35, 28);
+            this.label2.Location = new System.Drawing.Point(40, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 14);
             this.label2.TabIndex = 1;
@@ -197,7 +246,7 @@
             // submitFormButton
             // 
             this.submitFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.submitFormButton.Location = new System.Drawing.Point(414, 242);
+            this.submitFormButton.Location = new System.Drawing.Point(411, 295);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(108, 30);
             this.submitFormButton.TabIndex = 0;
@@ -209,7 +258,7 @@
             // 
             this.cancelFormButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelFormButton.Location = new System.Drawing.Point(528, 242);
+            this.cancelFormButton.Location = new System.Drawing.Point(525, 295);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(108, 30);
             this.cancelFormButton.TabIndex = 1;
@@ -240,7 +289,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(691, 302);
+            this.ClientSize = new System.Drawing.Size(691, 349);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.submitFormButton);
@@ -249,6 +298,7 @@
             this.Name = "CreateTransportsFee";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CreateTransportsFee";
+            this.Load += new System.EventHandler(this.CreateTransportsFee_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -278,5 +328,9 @@
         private System.Windows.Forms.TextBox columnnameTextBox;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox genresComboBox;
+        private System.Windows.Forms.ComboBox productsComboBox;
     }
 }

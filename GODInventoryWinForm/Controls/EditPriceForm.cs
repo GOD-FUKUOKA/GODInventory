@@ -69,9 +69,9 @@ namespace GODInventoryWinForm.Controls
             this.transportComboBox3.DataSource = transportList;
             this.transportComboBox3.Text = price.配送担当;
            
-            this.warehouseNamecomboBox1.DisplayMember = "FullName";
-            this.warehouseNamecomboBox1.ValueMember = "Id";
-            this.warehouseNamecomboBox1.DataSource = warehouseList;
+            this.warehousenamecomboBox1.DisplayMember = "FullName";
+            this.warehousenamecomboBox1.ValueMember = "Id";
+            this.warehousenamecomboBox1.DataSource = warehouseList;
 
 
 
@@ -87,10 +87,10 @@ namespace GODInventoryWinForm.Controls
             price.売単価 = Convert.ToDecimal(this.salePriceTextBox.Text);
             price.仕入原価 = Convert.ToDecimal(this.costTextBox.Text);
 
-            price.warehouse_id = Convert.ToInt32(warehouseNamecomboBox1.SelectedValue);
+            price.warehouse_id = Convert.ToInt32(warehousenamecomboBox1.SelectedValue);
             price.transport_id = Convert.ToInt32(transportComboBox3.SelectedValue);
 
-            price.warehouseName = this.warehouseNamecomboBox1.Text;
+            price.warehousename = this.warehousenamecomboBox1.Text;
             price.配送担当 = this.transportComboBox3.Text;
 
 

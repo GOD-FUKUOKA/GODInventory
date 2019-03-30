@@ -194,7 +194,7 @@ namespace GODInventoryWinForm
                             {
                                 throw new Exception(String.Format("Can not find shop by shopcode {0}", model.StoreCode));
                             }
-                            if (shop.warehouseName == null || shop.warehouseName == string.Empty)
+                            if (shop.warehousename == null || shop.warehousename == string.Empty)
                             {
                                 throw new Exception(String.Format("Can not find shop default warehouse name for shop {0}", shop.店名));
                             }

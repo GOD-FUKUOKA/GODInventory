@@ -494,7 +494,7 @@ namespace GODInventory.ViewModel.EDI
             orderdata.自社コード = item.自社コード;
             orderdata.実際配送担当 = price.配送担当;
             orderdata.県別 = shop.県別;
-            orderdata.warehouseName = shop.warehouseName;
+            orderdata.warehousename = shop.warehousename;
             orderdata.最小発注単位数量 = item.PT入数;
             orderdata.重量 = (int)(item.単品重量 * orderdata.発注数量);
             if (orderdata.最小発注単位数量 > 0)
@@ -660,7 +660,7 @@ namespace GODInventory.ViewModel.EDI
 `伝票出力単位`, `納品先店舗コード`, `納品先店舗名漢字`, `納品先店舗名カナ`, `納品場所名カナ`, 
 `便区分`, `センター経由区分`, `センターコード`, `センター名漢字`, `センター名カナ`,
 `実際配送担当`, `配送担当受信`,`口数`,`重量`,`単位`,
-`ジャンル`,`warehouseName`) 
+`ジャンル`,`warehousename`) 
 VALUES (
 @p1, @p2, @p3, @p4, @p5, 
 @p6, @p7, @p8, @p9, @p10, 
@@ -689,7 +689,7 @@ VALUES (
        new MySqlParameter("@p66", o.伝票出力単位), new MySqlParameter("@p67", o.納品先店舗コード), new MySqlParameter("@p68", o.納品先店舗名漢字), new MySqlParameter("@p69", o.納品先店舗名カナ),new MySqlParameter("@p70", o.納品場所名カナ),
        new MySqlParameter("@p71", o.便区分), new MySqlParameter("@p72", o.センター経由区分), new MySqlParameter("@p73", o.センターコード), new MySqlParameter("@p74", o.センター名漢字),new MySqlParameter("@p75", o.センター名カナ),
        new MySqlParameter("@p76", o.実際配送担当),new MySqlParameter("@p77", o.配送担当受信),new MySqlParameter("@p78", o.口数),new MySqlParameter("@p79", o.重量),new MySqlParameter("@p80", o.単位),
-       new MySqlParameter("@p81", o.ジャンル) ,new MySqlParameter("@p82", o.warehouseName)    };
+       new MySqlParameter("@p81", o.ジャンル) ,new MySqlParameter("@p82", o.warehousename)    };
 
             return new CustomMySqlParameters(parameters, sql);
 
@@ -722,7 +722,8 @@ VALUES (
 `実際配送担当`, `配送担当受信`,`口数`,`重量`,`単位`,
 `ジャンル`,`自社コード`,`実際出荷数量`,`県別`,`Status`,
 `ダブリ`,`発注品名漢字`,`発注規格名漢字`,`納品口数`,`週目`,
-`id`, `仕入原価`, `仕入金額`, `粗利金額`,`社内伝番処理`,`warehouseName`) 
+`id`, `仕入原価`, `仕入金額`, `粗利金額`,`社内伝番処理`,
+`warehousename`, `運賃`) 
 VALUES ({0}
 '{1:yyyy-MM-dd}','{2:yyyy-MM-dd}','{3}',{4},'{5}',
 {6},{7},{8},'{9}','{10}',
@@ -767,7 +768,7 @@ VALUES ({0}
                 o.ジャンル, o.自社コード, o.実際出荷数量, o.県別, (int)o.Status,
                 o.ダブリ, o.発注品名漢字, o.発注規格名漢字, o.納品口数, o.週目,
                 o.id, o.仕入原価, o.仕入金額, o.粗利金額, o.社内伝番処理, 
-                o.warehouseName, o.運賃);
+                o.warehousename, o.運賃);
                 
         }
 

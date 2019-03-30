@@ -24,31 +24,19 @@ namespace GODInventoryWinForm
     public partial class ImportShipNumberForm : Form
     {
 
-        public string formTitle = "Import HACCYU.csv";
         List<XLSXImportShipNumber> models;
         private SortableBindingList<XLSXImportShipNumber> sortablemodelsList;
+
+        List<t_orderdata> xlsxOrderList;
+        List<t_orderdata> pendingOrderList;
+
         public ImportShipNumberForm()
         {
             InitializeComponent();
+            dataGridView1.AutoGenerateColumns = false;
+
             this.ControlBox = false;   // 设置不出现关闭按钮
         }
-
-        public string FormTitle
-        {
-            get { return this.titleLabel.Text; }
-            set
-            {
-                this.Text = value;
-                this.titleLabel.Text = value;
-            }
-        }
-
-        public int ProgressValue
-        {
-            get { return this.progressBar1.Value; }
-            set { progressBar1.Value = value; }
-        }
-
 
         private void openFileBtton_Click(object sender, EventArgs e)
         {
@@ -67,7 +55,6 @@ namespace GODInventoryWinForm
 
                     models = readExcel(this.pathTextBox.Text);
                     this.bindingSource1.DataSource = null;
-                    dataGridView1.AutoGenerateColumns = false;
 
                     // 记录DataGridView改变数据          
                     sortablemodelsList = new SortableBindingList<XLSXImportShipNumber>(models);
@@ -89,20 +76,38 @@ namespace GODInventoryWinForm
 
                 }
 
+                //根据读取到的传票番号，读取数据库中的订单，确认订单状态
 
+                var orderNumbers = models.Where(o => { return string.IsNullOrEmpty(o.伝票番号); }).Select(o => Convert.ToInt32(o.社内伝番));
+                var orderInnerNumbers = models.Where(o => { return string.IsNullOrEmpty(o.社内伝番); }).Select(o =>Convert.ToInt32( o.社内伝番));
+                OrderStatus[] orderStateRequired = { OrderStatus.Pending, OrderStatus.NotifyShipper, OrderStatus.PendingShipment };
+
+                //var shopIds = models.
+
+                // 查询 伝票番号和社内伝番所有订单，
+                using (var ctx = new GODDbContext())
+                {
+                    this.xlsxOrderList = (from t_orderdata o in ctx.t_orderdata
+                                    where orderNumbers.Contains(o.伝票番号) || orderInnerNumbers.Contains(o.社内伝番)
+                                    select o).ToList();
+                    var shopIds = xlsxOrderList.Select(o => o.店舗コード).ToList();
+                    this.pendingOrderList = (from t_orderdata o in ctx.t_orderdata
+                                         where shopIds.Contains(o.店舗コード) && orderStateRequired.Contains(o.Status)
+                                         select o).ToList();
+                }
+                // 查询 店铺内所有未处理订单
             }
         }
 
         private void importButton_Click(object sender, EventArgs e)
         {
             this.importButton.Enabled = false;
-            this.cancelButton.Enabled = true;
             this.closeButton.Enabled = false;
-            if (backgroundWorker1.IsBusy != true)
-            {
-                backgroundWorker1.RunWorkerAsync(new WorkerArgument { OrderCount = 0, CurrentIndex = 0 });
+            //if (backgroundWorker1.IsBusy != true)
+            //{
+            //    backgroundWorker1.RunWorkerAsync(new WorkerArgument { OrderCount = 0, CurrentIndex = 0 });
 
-            }
+            //}
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -113,25 +118,10 @@ namespace GODInventoryWinForm
 
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            WorkerArgument arg = e.UserState as WorkerArgument;
-            if (!arg.HasError)
-            {
-                this.progressMsgLabel.Text = String.Format("{0}/{1}", arg.CurrentIndex, arg.OrderCount);
-                this.ProgressValue = e.ProgressPercentage;
-            }
-            else
-            {
-                this.progressMsgLabel.Text = arg.ErrorMessage;
-            }
-
-        }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
-            this.cancelButton.Enabled = false;
             this.closeButton.Enabled = true;
             this.importButton.Enabled = true;
 
@@ -262,13 +252,9 @@ namespace GODInventoryWinForm
                                     ctx.Database.ExecuteSqlCommand(sql);
                                 }
 
-                                if (arg.CurrentIndex % 25 == 0)
-                                {
-                                    backgroundWorker1.ReportProgress(progress, arg);
-                                }
+                                 
                             }
                         }
-                        backgroundWorker1.ReportProgress(100, arg);
 
                         ctxTransaction.Commit();
 
@@ -292,28 +278,11 @@ namespace GODInventoryWinForm
             }
             return success;
         }
-        private string[] ConvertToUtf8Strings(string path)
-        {
-            byte[] bytes = File.ReadAllBytes(path);
-            string text_in_utf8 = EncodingUtility.ConvertShiftJisToUtf8(bytes);
-            return text_in_utf8.Split(System.Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-        }
-
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            if (this.backgroundWorker1.IsBusy)
-            {
-
-                this.backgroundWorker1.CancelAsync();
-                // Disable the Cancel button.
-                this.cancelButton.Enabled = false;
-            }
-        }
+       
 
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Close();
-
         }
 
 
@@ -323,7 +292,7 @@ namespace GODInventoryWinForm
 
             using (SpreadsheetDocument document = SpreadsheetDocument.Open(fileName, false))
             {
-                string version = string.Empty;
+                string cellvalue = string.Empty;
                 WorkbookPart wbPart = document.WorkbookPart;
                 List<Sheet> sheets = wbPart.Workbook.Descendants<Sheet>().ToList();
                 var versionSheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault(c => c.Name == "登録用");
@@ -342,98 +311,77 @@ namespace GODInventoryWinForm
                 }
 
 
-                int indexrow = 5;
+                int indexrow = 0;
                 int rocount = worksheetPart.Worksheet.Count();
 
-                #region 留用
-                //SheetData SheetData1 = worksheetPart.Worksheet.Elements<SheetData>().FirstOrDefault();
-                //foreach (var inst in SheetData1.Descendants<Cell>())
-                //{
-                //    version = GetValue(inst, wbPart);
-
-                //} 
-
-
-                //foreach (Row row in worksheetPart.Worksheet.Descendants<Row>())
-                //{
-                //    foreach (Cell cell in row)
-                //    {
-
-                //        MemoryStream stream = SpreadsheetReader.StreamFromFile(fileName);
-                //        SpreadsheetDocument doc = SpreadsheetDocument.Open(stream, true);
-
-                //        version = GetValue(cell, doc.WorkbookPart.SharedStringTablePart);
-                //    }
-                //}
-                #endregion
-
-
-                indexrow = 1;
 
                 foreach (Row row in worksheetPart.Worksheet.Descendants<Row>())
                 {
-                    if (indexrow < 5)
+                    // 第5行开始是数据
+                    if (indexrow < 4)
                     {
                         indexrow++;
-
                         continue;
                     }
                     XLSXImportShipNumber item = new XLSXImportShipNumber();
-                    #region ITEM
+
+
+                    #region 处理每一行数据
+
                     Cell theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "A" + indexrow).FirstOrDefault();
                     string type = string.Empty;
+                    double oaDteAsDouble;
+
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-
-                        item.出荷No = version;
-
-
-
-
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        item.出荷No = cellvalue;
                     }
                     else
                     {
-
-                        throw new Exception(String.Format("ploading file does not have version number!", "", ""));
-
+                        throw new Exception(String.Format("xlsx does not have valid 出荷No at A5!", "", ""));
                     }
 
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "B" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.配送担当 = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        item.配送担当 = cellvalue;
                     }
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "C" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.車番 = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        item.車番 = cellvalue;
                     }
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "D" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.ドライバー = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        item.ドライバー = cellvalue;
                     }
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "E" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.方面 = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        item.方面 = cellvalue;
                     }
 
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "F" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.出荷日 = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        if (double.TryParse(cellvalue, out oaDteAsDouble))
+                        {
+                            var date = DateTime.FromOADate(oaDteAsDouble);
+                            cellvalue = date.ToShortDateString();
+                        }
+                        item.出荷日 = cellvalue;
                     }
 
 
@@ -441,64 +389,83 @@ namespace GODInventoryWinForm
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.納品日 = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        if (double.TryParse(cellvalue, out oaDteAsDouble))
+                        {
+                            var date = DateTime.FromOADate(oaDteAsDouble);
+                            cellvalue = date.ToShortDateString();
+                        }
+            
+                        item.納品日 = cellvalue;
                     }
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "H" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.荷主 = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        item.荷主 = cellvalue;
                     }
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "I" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.県別 = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        item.県別 = cellvalue;
                     }
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "J" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.卸先 = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        item.卸先 = cellvalue;
                     }
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "K" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.品名 = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        item.品名 = cellvalue;
                     }
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "L" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.口数 = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        item.口数 = cellvalue;
                     }
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "M" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.数量 = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        item.数量 = cellvalue;
                     }
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "N" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.伝票番号 = version;
+                        // 表格的N列存储 “伝票番号”，对于 二次制品，存储的是 “社内伝番”
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        if (!string.IsNullOrEmpty(cellvalue)) { 
+                            // 社内传番应该为8位
+                            if (cellvalue.Length >= 8)
+                            {
+                                item.社内伝番 = cellvalue;
+
+                            }
+                            else {
+                                item.伝票番号 = cellvalue;                            
+                            }
+                        }
+
+
                     }
                     theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "O" + indexrow).FirstOrDefault();
 
                     if (theCell != null)
                     {
-                        version = GetCellValue(wbPart, theCell);
-                        item.処理済 = version;
+                        cellvalue = GetCellValue(wbPart, theCell);
+                        item.処理済 = cellvalue;
                     }
 
                     #endregion
@@ -602,23 +569,23 @@ namespace GODInventoryWinForm
             Cell theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "A" + 4).FirstOrDefault();
             if (theCell != null)
             {
-                string version = GetCellValue(wbPart, theCell);
-                if (!version.Contains("出荷No"))
+                string cellvalue = GetCellValue(wbPart, theCell);
+                if (!cellvalue.Contains("出荷No"))
                     validated = false;
 
             }
             theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "O" + 4).FirstOrDefault();
             if (theCell != null)
             {
-                string version = GetCellValue(wbPart, theCell);
-                if (!version.Contains("処理済"))
+                string cellvalue = GetCellValue(wbPart, theCell);
+                if (!cellvalue.Contains("処理済"))
                     validated = false;
 
             }
 
             if (validated == false)
             {
-                msg = "选择文件错误，请检查！";
+                msg = "选择的文件表格格式不正确，请重新选择！";
                 errorProvider1.SetError(pathTextBox, msg);
             }
             return validated;

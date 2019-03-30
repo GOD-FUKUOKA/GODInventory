@@ -73,7 +73,7 @@
             this.dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.重量Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warehouseNameColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.warehousenameColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridViewTextBoxColumn33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注形態 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,7 +101,7 @@
             this.訂正理由区分Column = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.transportColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.feeColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warehouseNameColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.warehousenameColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.納品指示Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.備考Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -405,7 +405,7 @@
             this.訂正理由区分Column,
             this.transportColumn1,
             this.feeColumn1,
-            this.warehouseNameColumn,
+            this.warehousenameColumn,
             this.Column2,
             this.納品指示Column1,
             this.備考Column1,
@@ -535,7 +535,7 @@
             this.dataGridViewTextBoxColumn31,
             this.重量Column1,
             this.dataGridViewTextBoxColumn32,
-            this.warehouseNameColumn2,
+            this.warehousenameColumn2,
             this.dataGridViewTextBoxColumn33,
             this.dataGridViewTextBoxColumn35,
             this.発注形態,
@@ -629,15 +629,15 @@
             this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
             this.dataGridViewTextBoxColumn32.ReadOnly = true;
             // 
-            // warehouseNameColumn2
+            // warehousenameColumn2
             // 
-            this.warehouseNameColumn2.DataPropertyName = "warehouseName";
-            this.warehouseNameColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.warehouseNameColumn2.HeaderText = "仓库";
-            this.warehouseNameColumn2.Name = "warehouseNameColumn2";
-            this.warehouseNameColumn2.ReadOnly = true;
-            this.warehouseNameColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.warehouseNameColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.warehousenameColumn2.DataPropertyName = "warehousename";
+            this.warehousenameColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.warehousenameColumn2.HeaderText = "仓库";
+            this.warehousenameColumn2.Name = "warehousenameColumn2";
+            this.warehousenameColumn2.ReadOnly = true;
+            this.warehousenameColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.warehousenameColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // dataGridViewTextBoxColumn33
             // 
@@ -836,16 +836,16 @@
             this.feeColumn1.HeaderText = "運賃";
             this.feeColumn1.Name = "feeColumn1";
             // 
-            // warehouseNameColumn
+            // warehousenameColumn
             // 
-            this.warehouseNameColumn.DataPropertyName = "warehouseName";
-            this.warehouseNameColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.warehouseNameColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.warehouseNameColumn.HeaderText = "倉庫";
-            this.warehouseNameColumn.Name = "warehouseNameColumn";
-            this.warehouseNameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.warehouseNameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.warehouseNameColumn.Width = 90;
+            this.warehousenameColumn.DataPropertyName = "warehousename";
+            this.warehousenameColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.warehousenameColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.warehousenameColumn.HeaderText = "倉庫";
+            this.warehousenameColumn.Name = "warehousenameColumn";
+            this.warehousenameColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.warehousenameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.warehousenameColumn.Width = 90;
             // 
             // Column2
             // 
@@ -1000,7 +1000,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
         private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
-        private System.Windows.Forms.DataGridViewComboBoxColumn warehouseNameColumn2;
+        private System.Windows.Forms.DataGridViewComboBoxColumn warehousenameColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注形態;
@@ -1019,7 +1019,7 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn 訂正理由区分Column;
         private System.Windows.Forms.DataGridViewComboBoxColumn transportColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn feeColumn1;
-        private System.Windows.Forms.DataGridViewComboBoxColumn warehouseNameColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn warehousenameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 備考Column1;

@@ -56,7 +56,9 @@ namespace GODInventory.MyLinq
 
         public int transport_id { get; set; }
 
-        public string warehouseName { get; set; }
+        public string warehousename { get; set; }
+
+        public string 地域 { get; set; }
 
     }
 }

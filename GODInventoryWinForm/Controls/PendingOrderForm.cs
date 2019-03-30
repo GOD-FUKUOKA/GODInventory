@@ -98,14 +98,14 @@ namespace GODInventoryWinForm.Controls
 
             // 传票订正仓库
             var warehouse1 = warehouseList.Select(s => new {   fullname = s.FullName }).Distinct().ToList();
-            this.warehouseNameColumn.DisplayMember = "fullname";
-            this.warehouseNameColumn.ValueMember = "fullname";
-            this.warehouseNameColumn.DataSource = warehouse1;
+            this.warehousenameColumn.DisplayMember = "fullname";
+            this.warehousenameColumn.ValueMember = "fullname";
+            this.warehousenameColumn.DataSource = warehouse1;
             // 传送确认仓库
             var warehouse2 = warehouseList.Select(s => new { fullname = s.FullName }).Distinct().ToList();
-            this.warehouseNameColumn2.DisplayMember = "fullname";
-            this.warehouseNameColumn2.ValueMember = "fullname";
-            this.warehouseNameColumn2.DataSource = warehouse2;
+            this.warehousenameColumn2.DisplayMember = "fullname";
+            this.warehousenameColumn2.ValueMember = "fullname";
+            this.warehousenameColumn2.DataSource = warehouse2;
 
 
 
@@ -152,8 +152,11 @@ namespace GODInventoryWinForm.Controls
                         var pendingorder = orders.Find(o => o.id受注データ == id);
                         t_orderdata order = ctx.t_orderdata.Find(pendingorder.id受注データ);
                         bool isQtyChanged = (order.実際出荷数量 != pendingorder.実際出荷数量);
-                        //mark 20181008
-                        bool isNewQtyChanged = (order.重量 != pendingorder.重量);
+                        bool isFeeChanged = (order.運賃 != pendingorder.運賃);
+                        bool isWarehouseChanged = (order.warehousename != pendingorder.warehousename);
+                        bool isTransportChanged = (order.実際配送担当 != pendingorder.実際配送担当);
+                        // 影响运费的字段有 仓库，运输公司，
+                        //bool isNewQtyChanged = (order.重量 != pendingorder.重量);
 
                         //if (isQtyChanged)
                         //{
@@ -205,14 +208,25 @@ namespace GODInventoryWinForm.Controls
                             OrderSqlHelper.AfterOrderQtyChanged(order, product);
 
                         }
+                        else {
+                            // 重新计算运费
+                            if (isWarehouseChanged || isTransportChanged) {
+
+                                pendingorder.運賃 = OrderSqlHelper.ComputeFreight(pendingorder);
+                            }
+                            
+                        }
+
+
+
                         order.訂正理由区分 = pendingorder.訂正理由区分;
 
                         order.発注形態名称漢字 = pendingorder.発注形態名称漢字;
                         order.実際配送担当 = pendingorder.実際配送担当;
                         order.備考 = pendingorder.備考;
                         order.納品指示 = pendingorder.納品指示;
-
-                        order.warehouseName = pendingorder.warehouseName;
+                        order.運賃 = pendingorder.運賃; //保存用户直接对运费的修改
+                        order.warehousename = pendingorder.warehousename;
 
                     }
                     if (isValid)
@@ -410,9 +424,9 @@ FROM t_orderdata o
 INNER JOIN t_genre g  on o.ジャンル = g.idジャンル
 INNER JOIN t_shoplist s  on o.法人コード = s.customerId AND  o.店舗コード = s.店番 
 INNER JOIN t_pricelist p on  o.自社コード = p.自社コード AND  o.店舗コード = p.店番 
-LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.warehouseName = k.ShipperName 
+LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.warehousename = k.ShipperName 
 WHERE o.Status ={0}
-ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
+ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehousename, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
 
 
                 // create BindingList (sortable/filterable)
@@ -1334,10 +1348,10 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehouseName, o.県
 
         //    // Set the value of column "dgv_txt"
         //    string snsd = ((ComboBox)sender).Text;
-        //    if (clickdav.Rows[RowRemark].Cells["warehouseName"].EditedFormattedValue.ToString() == null)
+        //    if (clickdav.Rows[RowRemark].Cells["warehousename"].EditedFormattedValue.ToString() == null)
         //        return;
 
-        //    snsd = clickdav.Rows[RowRemark].Cells["warehouseName"].EditedFormattedValue.ToString();
+        //    snsd = clickdav.Rows[RowRemark].Cells["warehousename"].EditedFormattedValue.ToString();
 
         //    t_warehouses widlist1 = warehouseList.Find(o => o.FullName != null && o.FullName == snsd);
         //    if (widlist1 != null)

@@ -596,7 +596,7 @@ namespace GODInventory.ViewModel
                 List<t_stockrec> changes = new List<t_stockrec>();
                 foreach (var order in orders)
                 {
-                    var warehouse = warehouseList.Find(o => o.FullName == order.warehouseName);
+                    var warehouse = warehouseList.Find(o => o.FullName == order.warehousename);
                     // add stockrec
                     var genreId = order.ジャンル;
                     var date = DateTime.Now;
@@ -847,7 +847,7 @@ namespace GODInventory.ViewModel
 
         }
 
-        private static string BuildStockNum(GODDbContext ctx, int genre_id, string warehouseName, DateTime selectedDate)
+        private static string BuildStockNum(GODDbContext ctx, int genre_id, string warehousename, DateTime selectedDate)
         {
 
             var startAt = selectedDate.Date;
@@ -859,7 +859,7 @@ namespace GODInventory.ViewModel
                           select g;
             int count = results.Count();
 
-            string stock_no = String.Format(warehouseName + "-" + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
+            string stock_no = String.Format(warehousename + "-" + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
 
             return stock_no;
         }
@@ -998,9 +998,9 @@ namespace GODInventory.ViewModel
             int max = Convert.ToInt32(ctx.Database.SqlQuery<int?>(sql).FirstOrDefault());
             //max = Convert.ToInt32(max);
             //社内传番应该为8位，我们现在排到了10009837
-            if (max < 10002000)
+            if (max < 10000000)
             {
-                max += 10002000;
+                max += 10000000;
             }
 
             int count = 0;
@@ -1236,7 +1236,7 @@ namespace GODInventory.ViewModel
 
             if (columnname == null)
             {
-                var freight = GetFreightByOrder(order.店舗コード, order.自社コード, order.warehouseName, order.実際配送担当);
+                var freight = GetFreightByOrder(order.店舗コード, order.自社コード, order.warehousename, order.実際配送担当);
                 if (freight != null)
                 {
                     columnname = freight.columnname;
@@ -1262,7 +1262,7 @@ namespace GODInventory.ViewModel
 
             if (columnname == null)
             {
-                var freight = GetFreightByOrder(order.店舗コード, order.自社コード, order.warehouseName, order.実際配送担当);
+                var freight = GetFreightByOrder(order.店舗コード, order.自社コード, order.warehousename, order.実際配送担当);
                 if (freight != null)
                 {
                     columnname = freight.columnname;
@@ -1306,30 +1306,35 @@ namespace GODInventory.ViewModel
 
         public static List<v_itemprice> GetItemPriceListByContext(GODDbContext ctx) { 
         
-            List<v_itemprice> prices = (from i in ctx.t_itemlist
-                                        join p in ctx.t_pricelist on i.自社コード equals p.自社コード
-                                        join g in ctx.t_genre on i.ジャンル equals g.idジャンル
-                                        join f in ctx.t_freights on
-                                        new { p.transport_id, p.warehouse_id, p.自社コード, shop_id= p.店番 } equals
-                                        new { f.transport_id, f.warehouse_id, f.自社コード, f.shop_id  }
-                                      select new v_itemprice {  
-                                          ジャンル = g.idジャンル, 
-                                          ジャンル名 = g.ジャンル名,
-                                          自社コード = i.自社コード,
-                                          商品コード = i.商品コード,
-                                          JANコード = i.JANコード,
-                                          商品名 = i.商品名,
-                                          規格 = i.規格,
-                                          PT入数 = i.PT入数,
-                                          単品重量 = i.単品重量,
-                                          単位 = i.単位,
-                                          配送担当 = p.配送担当,
-                                          仕入原価 = p.仕入原価,
-                                          原単価 = p.通常原単価,
-                                          売単価 = p.売単価,
-                                          fee = f.fee,
-                                          columnname = f.columnname
-                                      }).ToList();
+//            List<v_itemprice> prices = (from i in ctx.t_itemlist
+//                                        join p in ctx.t_pricelist on i.自社コード equals p.自社コード
+//                                        join g in ctx.t_genre on i.ジャンル equals g.idジャンル
+//                                        join f in ctx.t_freights on
+//                                        new { p.transport_id, p.warehouse_id, p.自社コード, shop_id= p.店番 } equals
+//                                        new { f.transport_id, f.warehouse_id, f.自社コード, f.shop_id  }
+//                                      select new v_itemprice {  
+//                                          ジャンル = g.idジャンル, 
+//                                          ジャンル名 = g.ジャンル名,
+//                                          自社コード = i.自社コード,
+//                                          商品コード = i.商品コード,
+//                                          JANコード = i.JANコード,
+//                                          商品名 = i.商品名,
+//                                          規格 = i.規格,
+//                                          PT入数 = i.PT入数,
+//                                          単品重量 = i.単品重量,
+//                                          単位 = i.単位,
+//                                          配送担当 = p.配送担当,
+//                                          仕入原価 = p.仕入原価,
+//                                          原単価 = p.通常原単価,
+//                                          売単価 = p.売単価,
+//                                          fee = f.fee,
+//                                          columnname = f.columnname
+//                                      }).ToList();
+            string sql = @"select g.idジャンル as ジャンル,  g.ジャンル名, i.自社コード, i.商品コード, i.JANコード, i.商品名, i.規格,
+i.PT入数,i.単品重量, i.単位, p.配送担当, p.仕入原価, p.通常原単価, p.売単価, p.店番, p.warehousename,  IFNULL(f.fee, -1) as fee,  IFNULL(f.columnname, '') as columnname  from t_itemlist i
+left join  t_pricelist p on i.自社コード = p.自社コード left join t_genre g on i.ジャンル = g.idジャンル 
+left join t_freights f on p.transport_id = f.transport_id and p.warehouse_id =f.warehouse_id and p.自社コード =  f.自社コード and f.shop_id= p.店番 ";
+            List<v_itemprice> prices = ctx.Database.SqlQuery<v_itemprice>(sql).ToList();
             return prices;
 
         }

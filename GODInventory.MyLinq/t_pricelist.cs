@@ -43,9 +43,12 @@ namespace GODInventory.MyLinq
         public int warehouse_id { get; set; }
         public int transport_id { get; set; }
 
-        public string warehouseName { get; set; }
+        public string warehousename { get; set; }
         //運賃単位
         public string unitname { get; set; }
 
+        public t_pricelist() {
+            this.unitname = "";
+        }
     }
 }

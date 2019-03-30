@@ -463,7 +463,10 @@ namespace GODInventoryWinForm.Controls
                                         new { p.transport_id, p.warehouse_id, p.自社コード, shop_id= p.店番 } equals
                                         new { f.transport_id, f.warehouse_id, f.自社コード, f.shop_id  }
                                       where p.店番 == storeId
-                                      select new v_itemprice { 配送担当 = p.配送担当, 自社コード = i.自社コード, ジャンル = g.idジャンル, ジャンル名 = g.ジャンル名, 商品コード = i.商品コード, JANコード = i.JANコード, 商品名 = i.商品名, 原単価 = p.通常原単価, 売単価 = p.売単価, 規格 = i.規格, PT入数 = i.PT入数, 単品重量 = i.単品重量, 単位 = i.単位, fee = f.fee, columnname=f.columnname }).ToList();
+                                      select new v_itemprice { 配送担当 = p.配送担当, 自社コード = i.自社コード, ジャンル = g.idジャンル, ジャンル名 = g.ジャンル名, 
+                                          商品コード = i.商品コード, JANコード = i.JANコード, 商品名 = i.商品名, 
+                                          原単価 = p.通常原単価, 売単価 = p.売単価, 規格 = i.規格, PT入数 = i.PT入数, 単品重量 = i.単品重量, 単位 = i.単位, 
+                                          warehousename = p.warehousename,  fee = f.fee, columnname=f.columnname }).ToList();
             }
 
             for (int i = 0; i < 10; i++)
@@ -789,7 +792,7 @@ namespace GODInventoryWinForm.Controls
                                     MessageBox.Show(String.Format("誤った: 単品重量, 商品コード! されていません"));
                                     return;
                                 }
-                                if (selectedItem.warehouseName.Length == 0 || selectedItem.配送担当.Length == 0)
+                                if (selectedItem.warehousename.Length == 0 || selectedItem.配送担当.Length == 0)
                                 {
                                     /// TODO
                                     MessageBox.Show(string.Format("error: please set default warehouse and 配送担当 of product {0}", selectedItem.商品名));
@@ -840,7 +843,7 @@ namespace GODInventoryWinForm.Controls
                                         return;
                                 }
                                 o.実際配送担当 = selectedItem.配送担当;
-                                o.warehouseName = selectedItem.warehouseName;
+                                o.warehousename = selectedItem.warehousename;
 
                                 // 社内伝番処理使用缺省配置
                                 o.社内伝番処理 = OrderSqlHelper.IsInnerCodeRequired(o.ジャンル);

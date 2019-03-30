@@ -53,7 +53,7 @@
             this.faxTextBox3 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.transportnamecomboBox2 = new System.Windows.Forms.ComboBox();
-            this.warehouseNamecomboBox1 = new System.Windows.Forms.ComboBox();
+            this.warehousenamecomboBox1 = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.storesComboBox = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -267,7 +267,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.transportnamecomboBox2);
-            this.groupBox1.Controls.Add(this.warehouseNamecomboBox1);
+            this.groupBox1.Controls.Add(this.warehousenamecomboBox1);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.storesComboBox);
             this.groupBox1.Controls.Add(this.label14);
@@ -319,19 +319,19 @@
             this.transportnamecomboBox2.Size = new System.Drawing.Size(266, 22);
             this.transportnamecomboBox2.TabIndex = 31;
             // 
-            // warehouseNamecomboBox1
+            // warehousenamecomboBox1
             // 
-            this.warehouseNamecomboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.warehouseNamecomboBox1.FormattingEnabled = true;
-            this.warehouseNamecomboBox1.Items.AddRange(new object[] {
+            this.warehousenamecomboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.warehousenamecomboBox1.FormattingEnabled = true;
+            this.warehousenamecomboBox1.Items.AddRange(new object[] {
             "A",
             "B",
             "C",
             "D"});
-            this.warehouseNamecomboBox1.Location = new System.Drawing.Point(105, 301);
-            this.warehouseNamecomboBox1.Name = "warehouseNamecomboBox1";
-            this.warehouseNamecomboBox1.Size = new System.Drawing.Size(266, 22);
-            this.warehouseNamecomboBox1.TabIndex = 29;
+            this.warehousenamecomboBox1.Location = new System.Drawing.Point(105, 301);
+            this.warehousenamecomboBox1.Name = "warehousenamecomboBox1";
+            this.warehousenamecomboBox1.Size = new System.Drawing.Size(266, 22);
+            this.warehousenamecomboBox1.TabIndex = 29;
             // 
             // label15
             // 
@@ -474,7 +474,7 @@
         private System.Windows.Forms.ComboBox storesComboBox;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox transportnamecomboBox2;
-        private System.Windows.Forms.ComboBox warehouseNamecomboBox1;
+        private System.Windows.Forms.ComboBox warehousenamecomboBox1;
         private System.Windows.Forms.Label label15;
     }
 }

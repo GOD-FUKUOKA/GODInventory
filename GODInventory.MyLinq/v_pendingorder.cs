@@ -94,7 +94,7 @@ namespace GODInventory.MyLinq
 
         public string 実際配送担当 { get; set; }
 
-        public string warehouseName { get; set; }
+        public string warehousename { get; set; }
      
 
         public DateTime? 配送担当受信時刻 { get; set; }

@@ -309,8 +309,7 @@ namespace GODInventory.MyLinq
 
         public int reportState { get; set; }
 
-        [StringLength(45)]
-        public string warehouseName { get; set; }
+        public string warehousename { get; set; }
 
         public decimal 運賃 { get; set; }        
 

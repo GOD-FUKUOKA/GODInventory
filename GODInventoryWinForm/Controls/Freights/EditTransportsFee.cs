@@ -18,8 +18,8 @@ namespace GODInventoryWinForm.Controls.Freights
         private t_freights freights { get; set; }
         private List<t_transports> transportList;
         private List<t_shoplist> shopList;
-        List<t_itemlist> products = null;
-        List<t_genre> genres = null;
+        List<t_itemlist> productList = null;
+        List<t_genre> genreList = null;
         public EditTransportsFee()
         {
             InitializeComponent();
@@ -42,8 +42,8 @@ namespace GODInventoryWinForm.Controls.Freights
             //            where s.id == OrderId
             //            select s).FirstOrDefault();
             warehouseList = ctx.t_warehouses.ToList();
-            this.products = ctx.t_itemlist.ToList();
-            this.genres = ctx.t_genre.ToList();
+            this.productList = ctx.t_itemlist.ToList();
+            this.genreList = ctx.t_genre.ToList();
             transportList = ctx.t_transports.ToList();
          
             this.whComboBox.ValueMember = "Id";
@@ -73,6 +73,12 @@ namespace GODInventoryWinForm.Controls.Freights
             this.storeComboBox.ValueMember = "Id";
             this.storeComboBox.DataSource = shops;
 
+            // 产品分类， 产品
+            var genres = this.genreList.Select(s => new MockEntity { Id = s.idジャンル, FullName = s.ジャンル名 }).ToList();
+
+            this.genresComboBox.DisplayMember = "FullName";
+            this.genresComboBox.ValueMember = "Id";
+            this.genresComboBox.DataSource = genres;
 
             if (freights != null)
             {
@@ -91,7 +97,15 @@ namespace GODInventoryWinForm.Controls.Freights
 
             columnnameTextBox.Text = freights.columnname;
 
-            storeComboBox.SelectedValue = freights.shop_id;         
+            storeComboBox.SelectedValue = freights.shop_id;
+
+            var pid = freights.自社コード;
+
+            var product = this.productList.FirstOrDefault(o => { return o.自社コード == freights.自社コード; });
+            if (product != null) {
+                genresComboBox.SelectedValue = Convert.ToInt32(product.ジャンル);
+                productsComboBox.SelectedValue = product.自社コード;
+            }
 
         }
         private void submitFormButton_Click(object sender, EventArgs e)
@@ -151,7 +165,6 @@ namespace GODInventoryWinForm.Controls.Freights
             if (filtered.Count > 0)
             {
                 var shops = filtered.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
@@ -160,7 +173,6 @@ namespace GODInventoryWinForm.Controls.Freights
             else
             {
                 var shops = shopList.Select(s => new MockEntity { Id = s.店番, FullName = s.店名 }).ToList();
-                shops.Insert(0, new MockEntity { Id = 0, FullName = "すべて" });
                 this.storeComboBox.DisplayMember = "FullName";
                 this.storeComboBox.ValueMember = "Id";
                 this.storeComboBox.DataSource = shops;
@@ -170,7 +182,21 @@ namespace GODInventoryWinForm.Controls.Freights
 
         private void genresComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            List<MockEntity> productsByGenre;
+            int genreId = Convert.ToInt32( this.genresComboBox.SelectedValue );
 
+            if (genreId > 0)
+            {
+                productsByGenre = this.productList.Where(o => o.ジャンル == genreId).Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
+            }
+            else
+            {
+                productsByGenre = this.productList.Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
+            }
+
+            this.productsComboBox.ValueMember = "Id";
+            this.productsComboBox.DisplayMember = "FullName";
+            this.productsComboBox.DataSource = productsByGenre;
         }
 
 

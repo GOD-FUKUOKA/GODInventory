@@ -135,6 +135,12 @@
     <Compile Include="Controls\EditPriceForm.Designer.cs">
       <DependentUpon>EditPriceForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Freights\AddBatchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Freights\AddBatchForm.Designer.cs">
+      <DependentUpon>AddBatchForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\InputStockBig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -490,6 +496,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\EditPriceForm.resx">
       <DependentUpon>EditPriceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Freights\AddBatchForm.resx">
+      <DependentUpon>AddBatchForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\InputStockBig.resx">
       <DependentUpon>InputStockBig.cs</DependentUpon>

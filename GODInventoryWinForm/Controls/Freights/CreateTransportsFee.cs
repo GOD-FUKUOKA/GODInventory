@@ -13,13 +13,12 @@ namespace GODInventoryWinForm.Controls.Freights
 {
     public partial class CreateTransportsFee : Form
     {
-        List<t_itemlist> products = null;
+        List<t_itemlist> productList = null;
         private List<t_transports> transportList;
         private List<t_shoplist> shopList;
         private List<t_warehouses> warehouseList;
-        List<t_genre> genres = null;
+        List<t_genre> genreList = null;
 
-        private int orderId;
         private t_freights freights { get; set; }
         public CreateTransportsFee()
         {
@@ -34,8 +33,8 @@ namespace GODInventoryWinForm.Controls.Freights
 
             warehouseList = ctx.t_warehouses.ToList();
             transportList = ctx.t_transports.ToList();
-            this.genres = ctx.t_genre.ToList();
-            this.products = ctx.t_itemlist.ToList();
+            this.genreList = ctx.t_genre.ToList();
+            this.productList = ctx.t_itemlist.ToList();
 
 
             this.warehouseComboBox.ValueMember = "Id";
@@ -62,6 +61,14 @@ namespace GODInventoryWinForm.Controls.Freights
             this.storeComboBox.ValueMember = "Id";
             this.storeComboBox.DataSource = shops;
 
+
+            // 产品分类， 产品
+            var genres = this.genreList.Select(s => new MockEntity { Id = s.idジャンル, FullName = s.ジャンル名 }).ToList();
+
+            this.genresComboBox.DisplayMember = "FullName";
+            this.genresComboBox.ValueMember = "Id";
+            this.genresComboBox.DataSource = genres;
+
         }
 
         private void submitFormButton_Click(object sender, EventArgs e)
@@ -78,26 +85,27 @@ namespace GODInventoryWinForm.Controls.Freights
                     int warehouseId = Convert.ToInt32(warehouseComboBox.SelectedValue);
                     int storeId = Convert.ToInt32(storeComboBox.SelectedValue);
                     int transportId = Convert.ToInt32(transportComboBox.SelectedValue);
+                    int productId = Convert.ToInt32(productsComboBox.SelectedValue);
                     string unitname = unitnameTextBox.Text;
 
-                    var freight = (from t_freights o in ctx.t_freights
-                                   where warehouseId == o.warehouse_id && storeId == o.shop_id && transportId == o.transport_id && unitname == o.unitname
+                    var existfreight = (from t_freights o in ctx.t_freights
+                                        where warehouseId == o.warehouse_id && storeId == o.shop_id && transportId == o.transport_id && productId == o.自社コード
                                    select o).FirstOrDefault();
-                    if (freight == null)
+                    if (existfreight == null)
                     {
-                        t_freights freights = new t_freights();
-                        freights.warehousename = warehouseComboBox.Text;
-                        freights.transportname = transportComboBox.Text;
-                        freights.unitname = unitnameTextBox.Text;
-                        freights.fee = Convert.ToDecimal(invoiceNOTextBox.Text);
-                        freights.columnname = this.columnnameTextBox.Text;
+                        t_freights freight = new t_freights();
+                        freight.warehousename = warehouseComboBox.Text;
+                        freight.transportname = transportComboBox.Text;
+                        freight.unitname = unitnameTextBox.Text;
+                        freight.fee = Convert.ToDecimal(invoiceNOTextBox.Text);
+                        freight.columnname = this.columnnameTextBox.Text;
 
+                        freight.自社コード = Convert.ToInt32(productsComboBox.SelectedValue);
+                        freight.shop_id = Convert.ToInt32(storeComboBox.SelectedValue);
+                        freight.transport_id = Convert.ToInt32(transportComboBox.SelectedValue);
+                        freight.warehouse_id = Convert.ToInt32(warehouseComboBox.SelectedValue);
 
-                        freights.shop_id = Convert.ToInt32(storeComboBox.SelectedValue);
-                        freights.transport_id = Convert.ToInt32(transportComboBox.SelectedValue);
-                        freights.warehouse_id = Convert.ToInt32(warehouseComboBox.SelectedValue);
-
-                        ctx.t_freights.Add(freights);
+                        ctx.t_freights.Add(freight);
                         ctx.SaveChanges();
 
                         MessageBox.Show(String.Format("登録完了!"));
@@ -137,11 +145,6 @@ namespace GODInventoryWinForm.Controls.Freights
             }
         }
 
-        private void genresComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private bool validateAttributes(string[] selectedAttributeNames = null)
         {
             var validated = true;
@@ -165,6 +168,30 @@ namespace GODInventoryWinForm.Controls.Freights
             }
             return validated;
 
+        }
+
+        private void CreateTransportsFee_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void genresComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<MockEntity> productsByGenre;
+            int genreId = (int)this.genresComboBox.SelectedValue;
+
+            if (genreId > 0)
+            {
+                productsByGenre = this.productList.Where(o => o.ジャンル == genreId).Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
+            }
+            else
+            {
+                productsByGenre = this.productList.Select(s => new MockEntity { Id = s.自社コード, FullName = s.商品名 }).ToList();
+            }
+
+            this.productsComboBox.ValueMember = "Id";
+            this.productsComboBox.DisplayMember = "FullName";
+            this.productsComboBox.DataSource = productsByGenre;
         }
 
     }

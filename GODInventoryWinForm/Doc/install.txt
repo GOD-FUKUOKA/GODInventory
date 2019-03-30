@@ -205,7 +205,7 @@ CREATE TABLE `t_warehouses_transports` (
   PRIMARY KEY (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
   ALTER TABLE `t_orderdata` 
-ADD COLUMN `warehouseName` VARCHAR(45) NOT NULL DEFAULT '' AFTER `reportState`;
+ADD COLUMN `warehousename` VARCHAR(45) NOT NULL DEFAULT '' AFTER `reportState`;
 
 CREATE TABLE `t_freights` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -262,6 +262,15 @@ ADD INDEX `combo` (`warehouse_id` ASC, `transport_id` ASC, `shop_id` ASC, `自�
 ALTER TABLE `t_freights` 
 CHANGE COLUMN `fee` `fee` DECIMAL NOT NULL DEFAULT '0' ;
 
+# 20190329
+ALTER TABLE `t_orderdata` 
+CHANGE COLUMN `warehousename` `warehousename` VARCHAR(45) NOT NULL DEFAULT '';
+
+ALTER TABLE `t_shoplist` 
+ADD COLUMN `地域` VARCHAR(12) NOT NULL DEFAULT '';
+
+
+#########################################################################################################
 # 原有数据修正
 # 设置 t_shoplist表中 warehouse_id, transport_id, warehousename
 # 更新 t_pricelist unitname 
@@ -277,7 +286,6 @@ SELECT   w.fullname, t.fullname, w.id, t.id, s.店番,  u.unitname  FROM t_shopl
 CROSS join (select unitname from t_pricelist t0 group by unitname) u
 CROSS  join t_warehouses w  CROSS  join t_transports t 
 
-
 insert into t_freights(自社コード, warehousename, transportname, warehouse_id, transport_id, shop_id ) 
 SELECT   s.自社コード, w.fullname, t.fullname, w.id, t.id, s.店番  FROM t_pricelist s 
 CROSS  join t_warehouses w  CROSS  join t_transports t 
@@ -288,6 +296,10 @@ left join t_shoplist s on s.店番 = p.店番
 left join t_freights f on p.transport_id = f.transport_id and p.warehouse_id = f.warehouse_id and 
 p.自社コード = f.自社コード and p.店番 = f.shop_id;
 
+# 设置 t_shoplist表中 地域 
+update t_shoplist t1 inner join (select * from t_area t3 group by t3.県別) t2 on t1.県別 = t2.県別  set t1.地域 = t2.地域 where t1.店番>0
+
+#########################################################################################################
 # 开发执行
 ALTER TABLE `t_freights` 
 ADD COLUMN `lot_fee` INT UNSIGNED NOT NULL DEFAULT 0 AFTER `fee`;

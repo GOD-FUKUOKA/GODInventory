@@ -70,8 +70,8 @@ namespace GODInventoryWinForm.Controls
         private void btfind_Click(object sender, EventArgs e)
         {
             this.stockcheckList.Clear();
-            string warehouseName = this.warehouseComboBox.Text;
-            var warehouse = warehouseList.Find( w=> w.FullName == warehouseName );
+            string warehousename = this.warehouseComboBox.Text;
+            var warehouse = warehouseList.Find( w=> w.FullName == warehousename );
             var genreId = Convert.ToInt16(this.genreComboBox.SelectedValue);
             var startDate = Properties.Settings.Default.InventoryStartAt.Date;
             var endDate = this.endDateTimePicker1.Value.AddDays(1).Date;
@@ -89,18 +89,18 @@ namespace GODInventoryWinForm.Controls
                 //string sql2 = String.Format( "SELECT `自社コード`, SUM(o.`実際出荷数量`) FROM t_orderdata o WHERE o.`Status`={0} GROUP by o.`自社コード`;", (int)OrderStatus.Pending);
                 var pendingOrders = (from o in ctx.t_orderdata
                                       where o.Status == OrderStatus.Pending
-                                     group o by new { 自社コード = o.自社コード, warehouseName = o.warehouseName } into g
-                                     select new { 自社コード = g.Key.自社コード, warehouseName = g.Key.warehouseName, 数量 = g.Sum(o => o.実際出荷数量) }).ToList();
+                                     group o by new { 自社コード = o.自社コード, warehousename = o.warehousename } into g
+                                     select new { 自社コード = g.Key.自社コード, warehousename = g.Key.warehousename, 数量 = g.Sum(o => o.実際出荷数量) }).ToList();
 
                 
                 var notifiedOrders = (from o in ctx.t_orderdata
                                      where o.Status == OrderStatus.NotifyShipper ||  o.Status == OrderStatus.WaitToShip
-                                      group o by new { 自社コード = o.自社コード, warehouseName = o.warehouseName } into g
-                                      select new { 自社コード = g.Key.自社コード, warehouseName = g.Key.warehouseName, 数量 = g.Sum(o => o.実際出荷数量) }).ToList();
+                                      group o by new { 自社コード = o.自社コード, warehousename = o.warehousename } into g
+                                      select new { 自社コード = g.Key.自社コード, warehousename = g.Key.warehousename, 数量 = g.Sum(o => o.実際出荷数量) }).ToList();
 
-                var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouseName, StockIoProgressEnum.完了.ToString(), endDate, startDate).ToList();
+                var summaries = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehousename, StockIoProgressEnum.完了.ToString(), endDate, startDate).ToList();
 
-                var summaries4plan = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehouseName, StockIoProgressEnum.仮.ToString(), endDate, startDate).ToList();
+                var summaries4plan = ctx.Database.SqlQuery<v_stockcheck>(sql, genreId, warehousename, StockIoProgressEnum.仮.ToString(), endDate, startDate).ToList();
 
                 #endregion
 
@@ -137,14 +137,14 @@ namespace GODInventoryWinForm.Controls
                         stockcheck.jiHuaRuCunShu = Convert.ToInt32(item4plan1.数量);
                     }
 
-                    var order = notifiedOrders.Find(s => s.自社コード == stockcheck.自社コード && s.warehouseName == warehouse.FullName);
+                    var order = notifiedOrders.Find(s => s.自社コード == stockcheck.自社コード && s.warehousename == warehouse.FullName);
                     if (order != null) 
                     {
                         //待出库数
                         stockcheck.daiFaHuoShu = order.数量;                    
                     }
 
-                    var order2 = pendingOrders.Find(s => s.自社コード == stockcheck.自社コード && s.warehouseName == warehouse.FullName);
+                    var order2 = pendingOrders.Find(s => s.自社コード == stockcheck.自社コード && s.warehousename == warehouse.FullName);
                     if (order2 != null)
                     {
                         //未転送
@@ -176,9 +176,9 @@ namespace GODInventoryWinForm.Controls
             {
                 List<t_stockrec> changes = new List<t_stockrec>();
                 var genreId = Convert.ToInt16(this.genreComboBox.SelectedValue);
-                var warehouseName = GetWarehouseShortName();
+                var warehousename = GetWarehouseShortName();
                 var date = this.endDateTimePicker1.Value;
-                string stockNum = BuildStockNum(ctx, genreId, warehouseName, date);
+                string stockNum = BuildStockNum(ctx, genreId, warehousename, date);
 
                 foreach (var item in stockcheckList)
                 {
@@ -248,7 +248,7 @@ namespace GODInventoryWinForm.Controls
 
        
 
-        private string BuildStockNum(GODDbContext ctx, int genre_id, string warehouseName, DateTime selectedDate)
+        private string BuildStockNum(GODDbContext ctx, int genre_id, string warehousename, DateTime selectedDate)
         {
 
             var startAt = selectedDate.Date;
@@ -260,7 +260,7 @@ namespace GODInventoryWinForm.Controls
                           select g;
             int count = results.Count();
 
-            string stock_no = String.Format(warehouseName + "-" + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
+            string stock_no = String.Format(warehousename + "-" + "{0:yyyyMMdd}-{1:D2}-{2:D2}", startAt, genre_id, count + 1);
 
             return stock_no;
         }

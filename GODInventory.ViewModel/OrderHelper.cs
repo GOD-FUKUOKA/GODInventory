@@ -88,7 +88,7 @@ namespace GODInventory.ViewModel
         /// <param name="newUnitname"></param>
         /// <param name="newColumnname"></param>
         /// <returns></returns>
-        public static int Updatetransportfee(int warehouse_id, int transport_id, int shop_id = 0, string unitname="", decimal newFee = -1, string newUnitname = "", string newColumnname = "")
+        public static int Updatetransportfee(int warehouse_id, int transport_id, int shop_id = 0, int genre_id = 0, int product_id = 0, string unitname = "", decimal newFee = -1, string newUnitname = "", string newColumnname = "")
         {
             int count = 0;
             string sql = "UPDATE t_freights SET ";
@@ -120,9 +120,20 @@ namespace GODInventory.ViewModel
                 {
                     conditions.Add(string.Format(" `shop_id`={0} ", shop_id));
                 }
-                if (unitname.Length > 0)
+                //if (unitname.Length > 0)
+                //{
+                //    conditions.Add(string.Format(" `unitname`='{0}' ", unitname));
+                //}
+                if (genre_id > 0) 
                 {
-                    conditions.Add(string.Format(" `unitname`='{0}' ", unitname));
+                    var pids = ctx.t_itemlist.Where(o => o.ジャンル == genre_id).Select(o => o.自社コード).ToList();
+                    if (pids.Count > 0) {
+                        conditions.Add(string.Format(" `自社コード` in ({0}) ", string.Join(",", pids)));
+                    }
+                }
+                if (product_id > 0)
+                {
+                    conditions.Add(string.Format(" `自社コード`={0} ", product_id));
                 }
 
                 if (sets.Count > 0 && conditions.Count> 0)
