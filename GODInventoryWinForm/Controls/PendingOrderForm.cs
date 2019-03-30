@@ -1323,6 +1323,18 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehousename, o.県
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+
+            new ImportPrendingOrderForm().ShowDialog();
+
+
+
+
+
+        }
+
         //private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         //{
         //    //a

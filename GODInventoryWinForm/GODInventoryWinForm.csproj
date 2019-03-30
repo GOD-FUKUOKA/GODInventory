@@ -488,6 +488,12 @@
     <Compile Include="ImportShipNumberForm.Designer.cs">
       <DependentUpon>ImportShipNumberForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImportPrendingOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportPrendingOrderForm.Designer.cs">
+      <DependentUpon>ImportPrendingOrderForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ConnectServerForReceivedOrderForm.resx">
       <DependentUpon>ConnectServerForReceivedOrderForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -693,6 +699,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImportShipNumberForm.resx">
       <DependentUpon>ImportShipNumberForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportPrendingOrderForm.resx">
+      <DependentUpon>ImportPrendingOrderForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
