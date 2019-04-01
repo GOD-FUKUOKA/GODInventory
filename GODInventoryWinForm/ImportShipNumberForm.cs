@@ -103,18 +103,9 @@ namespace GODInventoryWinForm
         {
             this.importButton.Enabled = false;
             this.closeButton.Enabled = false;
-            //if (backgroundWorker1.IsBusy != true)
-            //{
-            //    backgroundWorker1.RunWorkerAsync(new WorkerArgument { OrderCount = 0, CurrentIndex = 0 });
-
-            //}
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = sender as BackgroundWorker;
-
-            bool success = ImportOrderTxt(pathTextBox.Text, worker, e);
+            bool success = ImportOrderTxt(pathTextBox.Text);
+            this.importButton.Enabled = true;
+            this.closeButton.Enabled = true;
 
         }
 

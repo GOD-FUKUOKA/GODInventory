@@ -1323,15 +1323,14 @@ ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehousename, o.県
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void xlsxButton1_Click(object sender, EventArgs e)
         {
+            var importForm = new ImportPrendingOrderForm();
+            importForm.ShowDialog();
 
-
-            new ImportPrendingOrderForm().ShowDialog();
-
-
-
-
+            if (importForm.SavedOrderCount > 0) {
+                pager1.Bind();
+            }
 
         }
 

@@ -26,6 +26,6 @@
         [StringLength(64)]
         public string 納品場所名略称 { get; set; }
 
- 
+        public bool isdefault { get; set; }
     }
 }

@@ -182,7 +182,7 @@ namespace GODInventoryWinForm
                 var shops = ctx.t_shoplist.ToList();
                 var locations = ctx.t_locations.ToList();
                 //var prices = ctx.t_pricelist.ToList();
-                List<v_itemprice> prices = OrderSqlHelper.GetItemPriceListByContext(ctx);
+                List<v_itemprice> prices = OrderSqlHelper.GetItemPriceList(ctx);
 
                 CSVOrderModel model = null;
                 int progress = 0;

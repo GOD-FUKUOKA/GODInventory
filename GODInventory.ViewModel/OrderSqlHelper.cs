@@ -1200,16 +1200,6 @@ namespace GODInventory.ViewModel
 
         }
 
-        public static int GetOrderWeekOfYear(DateTime time)
-        {
-            var newTime = time.AddDays(6 - CustomPropertyHelper.GetOrderWeekEndDay());
-            //CultureInfo ci = new CultureInfo("zh-CN");
-            System.Globalization.Calendar cal = CultureInfo.CurrentCulture.Calendar;
-            CalendarWeekRule cwr = CultureInfo.CurrentCulture.DateTimeFormat.CalendarWeekRule;
-            DayOfWeek dow = DayOfWeek.Sunday;
-            int week = cal.GetWeekOfYear(newTime, cwr, dow);
-            return Convert.ToInt32(string.Format("{0:D4}{1:D2}", newTime.Year, week));
-        }
 
         // order status duplicated -> pending
         public static void ChangeOrderStatusToPending(GODDbContext ctx, t_orderdata order)
@@ -1246,11 +1236,8 @@ namespace GODInventory.ViewModel
            
             if (columnname != null)
             {
-                string val = GetModelValue(columnname, order);
-                if (!string.IsNullOrEmpty(val))
-                {
-                    fee = unitfee * Convert.ToInt32(val);
-                }
+                fee = OrderHelper.ComputeFreight(order, unitfee, columnname);
+
             }
            
             return fee;
@@ -1272,39 +1259,15 @@ namespace GODInventory.ViewModel
 
             if (columnname != null)
             {
-                string val = GetModelValue(columnname, order);
-                if (!string.IsNullOrEmpty(val))
-                {
-                    fee = unitfee * Convert.ToInt32(val);
-                }
+                 
+                fee = OrderHelper.ComputeFreight(order, unitfee, columnname);
             }
 
             return fee;
         }
         
-        /// <summary>
-        /// 获取类中的属性值
-        /// </summary>
-        /// <param name="FieldName"></param>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public static string GetModelValue(string FieldName, object obj)
-        {
-            try
-            {
-                Type Ts = obj.GetType();
-                object o = Ts.GetProperty(FieldName).GetValue(obj, null);
-                string Value = Convert.ToString(o);
-                if (string.IsNullOrEmpty(Value)) return null;
-                return Value;
-            }
-            catch
-            {
-                return null;
-            }
-        }
 
-        public static List<v_itemprice> GetItemPriceListByContext(GODDbContext ctx) { 
+        public static List<v_itemprice> GetItemPriceList(GODDbContext ctx, List<int> productids=null) { 
         
 //            List<v_itemprice> prices = (from i in ctx.t_itemlist
 //                                        join p in ctx.t_pricelist on i.自社コード equals p.自社コード
@@ -1330,14 +1293,56 @@ namespace GODInventory.ViewModel
 //                                          fee = f.fee,
 //                                          columnname = f.columnname
 //                                      }).ToList();
-            string sql = @"select g.idジャンル as ジャンル,  g.ジャンル名, i.自社コード, i.商品コード, i.JANコード, i.商品名, i.規格,
-i.PT入数,i.単品重量, i.単位, p.配送担当, p.仕入原価, p.通常原単価, p.売単価, p.店番, p.warehousename,  IFNULL(f.fee, -1) as fee,  IFNULL(f.columnname, '') as columnname  from t_itemlist i
+            string sql = @"select g.idジャンル as ジャンル,  g.ジャンル名, g.社内伝番処理, i.自社コード, i.商品コード, i.JANコード, i.商品名, i.規格,
+i.PT入数,i.単品重量, i.単位, p.配送担当, p.仕入原価, p.通常原単価, p.売単価, p.店番, p.warehousename,  IFNULL(f.fee, -1) as fee,  IFNULL(f.columnname, '') as columnname  
+from t_itemlist i
 left join  t_pricelist p on i.自社コード = p.自社コード left join t_genre g on i.ジャンル = g.idジャンル 
 left join t_freights f on p.transport_id = f.transport_id and p.warehouse_id =f.warehouse_id and p.自社コード =  f.自社コード and f.shop_id= p.店番 ";
+             var conditions = new List<string>();
+            if (productids != null) {
+                conditions.Add(  string.Format("i.自社コード in ({0})", string.Join(",", productids)) );
+            }
+
+            
+            if (conditions.Count > 0) {
+
+                sql += string.Format(" where {0}", string.Join(" AND ", conditions ));
+            }
+
             List<v_itemprice> prices = ctx.Database.SqlQuery<v_itemprice>(sql).ToList();
             return prices;
 
         }
+        /// <summary>
+        /// 取得商店信息，包括location信息
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="shopids"></param>
+        /// <returns></returns>
+        public static List<v_shop> GetShopList(GODDbContext ctx, List<int> shopids = null)
+        {
+            string sql = @"select s.店番 as 店番,  s.店名, s.県別, s.customerId, l.id as locationid, 
+IFNULL(l.納品場所コード, -1) as 納品場所コード,  IFNULL(l.納品場所名漢字, '') as 納品場所名漢字,  IFNULL(l.納品場所名カナ, '') as 納品場所名カナ
+from t_shoplist s
+left join  t_locations l on l.店舗コード = s.店番 and l.isdefault=true ";
+            var conditions = new List<string>();
+            if (shopids != null)
+            {
+                conditions.Add(string.Format("s.店番 in ({0})", string.Join(",", shopids)));
+            }
+
+
+            if (conditions.Count > 0)
+            {
+
+                sql += string.Format(" where {0}", string.Join(" AND ", conditions));
+            }
+
+            List<v_shop> prices = ctx.Database.SqlQuery<v_shop>(sql).ToList();
+            return prices;
+        }
+
+
 
         private static t_freights GetFreightByOrder(int shopId, int productId, string warehousename, string transportname)
         {

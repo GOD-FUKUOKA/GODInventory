@@ -266,10 +266,11 @@ namespace GODInventoryWinForm.Controls
 
         }
 
-        private void InitializePriceListDatagridView(int productCode=0, string county = "", int storeId = 0, int genresId = 0)
+        private void InitializePriceListDatagridView(int productCode=0, string county = "", int storeId = 0, int genresId = 0, string area="")
         {
 
             var query = from t_pricelist p in this.entityDataSource1.EntitySets["t_pricelist"]
+                        join t_shoplist s in entityDataSource1.EntitySets["t_shoplist"] on p.店番 equals s.店番
                         join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on p.自社コード equals i.自社コード
 
                         select new v_itemprice
@@ -291,9 +292,10 @@ namespace GODInventoryWinForm.Controls
                             transport_id = p.transport_id,
                             warehouse_id = p.warehouse_id,
                             warehousename = p.warehousename,
-                            unitname = p.unitname
+                            unitname = p.unitname,
+                            地域 = s.地域
                         };
-            if (county.Length > 0)
+            if (county.Length > 0 && county != anyOption)
             {
                 query = query.Where(o => o.県別 == county);
             }
@@ -309,6 +311,11 @@ namespace GODInventoryWinForm.Controls
             if (genresId > 0)
             {
                 query = query.Where(o => o.ジャンル == genresId);
+            }
+            if (area.Length > 0 && area!=anyOption)
+            {
+                query = query.Where(o => o.地域 == area);
+            
             }
             this.pricesBindingSource.DataSource = this.entityDataSource1.CreateView(query);
             this.pricesDataGridView.DataSource = this.pricesBindingSource;
@@ -342,12 +349,13 @@ namespace GODInventoryWinForm.Controls
         {
             int productCode = Convert.ToInt32(this.productsComboBox.SelectedValue);
             string county = this.countyComboBox2.SelectedValue.ToString();
+            string area = this.areaComboBox2.SelectedValue.ToString();
             int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
             int genresId = Convert.ToInt32(this.genresComboBox.SelectedValue);
 
-            if (genresId > 0 || storeId > 0)
+            if (genresId > 0 )
             {
-                InitializePriceListDatagridView(productCode, county, storeId, genresId);
+                InitializePriceListDatagridView(productCode, county, storeId, genresId, area);
             }
 
         }
@@ -452,7 +460,7 @@ namespace GODInventoryWinForm.Controls
             {
                 //MessageBox.Show(string.Format("update {0} prices successfully", count));
 
-                InitializePriceListDatagridView(productCode, county, storeId, genresId);
+                searchButton_Click(sender, e);
             }
         }
 
@@ -461,7 +469,7 @@ namespace GODInventoryWinForm.Controls
             int productCode = (int)this.productsComboBox.SelectedValue;
             int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
             string county = Convert.ToString(this.countyComboBox2.SelectedValue);
-            int genresId = Convert.ToInt32(this.genresComboBox.SelectedValue);
+            int genreId = Convert.ToInt32(this.genresComboBox.SelectedValue);
 
             string warehousename = this.warehouseComboBox.Text;
             string transportName = this.transportComboBox.Text;
@@ -478,7 +486,11 @@ namespace GODInventoryWinForm.Controls
                 MessageBox.Show("Please click search to find product!");
                 return;
             }
-
+            if( genreId == 0 )
+            {
+                MessageBox.Show("Please select genre !");
+                return;            
+            }
             if (warehousename.Length > 0 && transportName.Length > 0)
             {
 
@@ -491,16 +503,23 @@ namespace GODInventoryWinForm.Controls
                     //    var price = row.DataBoundItem as v_itemprice;
                     //    priceids.Add(price.Id);
                     //`}
-                    
 
-                    if (productCode > 0)
-                    {
-                        sql = String.Format("UPDATE t_pricelist SET `transport_id`={0},`配送担当`='{1}',`warehouse_id`={2},`warehousename`='{3}' ", transportId, transportName, warehouseId, warehousename);
-                    }
+                    //更新某一个具体产品 or 某一类产品
+                    sql = String.Format("UPDATE t_pricelist SET `transport_id`={0},`配送担当`='{1}',`warehouse_id`={2},`warehousename`='{3}' ", transportId, transportName, warehouseId, warehousename);
+
                     if (unitname.Length > 0) {
                         sql += string.Format(", `unitname`='{0}'", unitname);
                     }
-                    sql += string.Format("WHERE `自社コード`={0}", productCode);
+
+                    // 更新某一个具体产品 or 某一类产品
+                    if (productCode > 0)
+                    {
+                        sql += string.Format("WHERE `自社コード`={0}", productCode);
+                    }
+                    else {
+                        var productIdsByGenre = this.productList.Where(o => o.ジャンル == genreId).Select(s =>  s.自社コード).ToList();
+                        sql += string.Format("WHERE `自社コード`in ({0})", string.Join(",", productIdsByGenre));
+                    }
                     //else
                     //{
                     //    var productCodes = (from t_itemlist item in ctx.t_itemlist
@@ -520,7 +539,7 @@ namespace GODInventoryWinForm.Controls
                     ctx.Database.ExecuteSqlCommand(sql);
 
                 }
-                InitializePriceListDatagridView(productCode, county, storeId, genresId);
+                searchButton_Click(sender, e);
 
             }
 
@@ -586,7 +605,7 @@ namespace GODInventoryWinForm.Controls
            
         }
 
-        private void InitializetransportdataGridView1(int warehouse_id = 0, int transport_id = 0, int shop_id = 0, int genre_id=0, int product_id = 0, string unitname = "すべて")
+        private void InitializetransportdataGridView1(int warehouse_id = 0, int transport_id = 0, int shop_id = 0, int genre_id=0, int product_id = 0, string countyname = "すべて")
         {
             using (var ctx = new GODDbContext())
             {
@@ -608,7 +627,8 @@ namespace GODInventoryWinForm.Controls
                                 columnname = p.columnname,
                                 shopname = s.店名,
                                 商品名 = i.商品名,
-                                自社コード = i.自社コード
+                                自社コード = i.自社コード,
+                                県別 = s.県別
                             };
 
                 if (warehouse_id > 0 )
@@ -635,6 +655,10 @@ namespace GODInventoryWinForm.Controls
                     query = query.Where(o => o.自社コード == product_id);
                 }
 
+                if (!countyname.Equals(anyOption)) { 
+                    // 查询某一个县
+                    query = query.Where(o => o.県別 == countyname);
+                }
                 this.transportdatabindingSource2.DataSource = this.entityDataSource1.CreateView(query);
                 this.transportdataGridView1.DataSource = this.transportdatabindingSource2;
             }
@@ -707,10 +731,10 @@ namespace GODInventoryWinForm.Controls
             int transportid = Convert.ToInt32(this.transportComboBox6.SelectedValue);
             int productid = Convert.ToInt32(this.productsComboBox3.SelectedValue);
             int genreid = Convert.ToInt32(this.genresComboBox3.SelectedValue);
-
+            string countyname = this.countyComboBox3.Text;
             if (warehouseid > 0 && transportid > 0 && genreid> 0)
             {
-                InitializetransportdataGridView1(warehouseid, transportid, shopid, genreid, productid);
+                InitializetransportdataGridView1(warehouseid, transportid, shopid, genreid, productid, countyname);
             }
             else {
                 MessageBox.Show("请至少选择物流公司、仓库和产品分类作为查询条件！", "Warning", MessageBoxButtons.OK);

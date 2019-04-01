@@ -513,7 +513,7 @@ namespace GODInventory.ViewModel.EDI
             orderdata.粗利金額 = orderdata.納品原価金額 - orderdata.仕入金額;
 
             orderdata.id = String.Format("{0}a{1}", orderdata.店舗コード, orderdata.伝票番号);
-            orderdata.週目 = OrderSqlHelper.GetOrderWeekOfYear(orderdata.受注日.Value);
+            orderdata.週目 = OrderHelper.GetOrderWeekOfYear(orderdata.受注日.Value);
 
             orderdata.運賃 = OrderSqlHelper.ComputeFreight(orderdata, price.fee, price.columnname);
 

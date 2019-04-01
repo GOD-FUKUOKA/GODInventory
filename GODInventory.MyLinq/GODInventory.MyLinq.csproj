@@ -87,6 +87,7 @@
     <Compile Include="t_freights.cs" />
     <Compile Include="v_freights.cs" />
     <Compile Include="v_itemunit.cs" />
+    <Compile Include="v_shop.cs" />
     <None Include="GODDbContext.Views.csbak" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="t_date.cs" />

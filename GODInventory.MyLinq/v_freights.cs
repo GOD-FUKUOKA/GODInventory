@@ -17,12 +17,16 @@ namespace GODInventory.MyLinq
         public int transport_id { get; set; }
         public int warehouse_id { get; set; }
         public int shop_id { get; set; }
+
+        // 商店信息
         public string shopname { get; set; }
-        //運賃
+        public string 県別 { get; set; }
+
+        // 運賃
         public decimal fee { get; set; }
         public decimal lot_fee { get; set; }
 
-        //運賃単位
+        // 運賃単位
         public string unitname { get; set; }
         public string columnname { get; set; }
 

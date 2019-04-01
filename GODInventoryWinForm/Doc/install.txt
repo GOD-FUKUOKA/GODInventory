@@ -269,6 +269,34 @@ CHANGE COLUMN `warehousename` `warehousename` VARCHAR(45) NOT NULL DEFAULT '';
 ALTER TABLE `t_shoplist` 
 ADD COLUMN `地域` VARCHAR(12) NOT NULL DEFAULT '';
 
+#20190330
+
+ALTER TABLE  `t_locations` ADD COLUMN `isdefault` TINYINT NOT NULL DEFAULT 0;
+# 修正数据，对于有缺省location的shop，创建订单时，设置缺省location
+# update t_locations set isdefault = true where `納品場所コード`=0 and id>0;
+
+ALTER TABLE `t_freights` 
+DROP INDEX `combo` ,
+ADD INDEX `combo` (`warehouse_id` ASC, `transport_id` ASC, `shop_id` ASC, `自社コード` ASC);
+
+# 提高数据访问速度
+ALTER TABLE `god_test`.`t_pricelist` 
+ADD INDEX `itemid_idx` (`自社コード` ASC);
+ALTER TABLE `god_test`.`t_pricelist` 
+ADD CONSTRAINT `fk_itemid`
+  FOREIGN KEY (`自社コード`)
+  REFERENCES `god_test`.`t_itemlist` (`自社コード`)
+
+ALTER TABLE `god_test`.`t_itemlist` 
+ADD INDEX `fk_genreid_idx` (`ジャンル` ASC);
+ALTER TABLE `god_test`.`t_itemlist` 
+ADD CONSTRAINT `fk_genreid`
+  FOREIGN KEY (`ジャンル`)
+  REFERENCES `god_test`.`t_genre` (`idジャンル`);
+
+ALTER TABLE `god_test`.`t_freights` 
+DROP INDEX `combo` ,
+ADD INDEX `combo` (`warehouse_id` ASC, `transport_id` ASC, `shop_id` ASC, `自社コード` ASC);
 
 #########################################################################################################
 # 原有数据修正

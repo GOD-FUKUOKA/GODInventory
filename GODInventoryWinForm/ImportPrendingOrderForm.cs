@@ -27,26 +27,14 @@ namespace GODInventoryWinForm
         public string formTitle = "Import HACCYU.csv";
         List<XLSXImportPrendingOrder> models;
         private SortableBindingList<XLSXImportPrendingOrder> sortablemodelsList;
+
+        public int SavedOrderCount {get; set;} 
+
         public ImportPrendingOrderForm()
         {
             InitializeComponent();
             this.ControlBox = false;   // 设置不出现关闭按钮
-        }
-
-        public string FormTitle
-        {
-            get { return this.titleLabel.Text; }
-            set
-            {
-                this.Text = value;
-                this.titleLabel.Text = value;
-            }
-        }
-
-        public int ProgressValue
-        {
-            get { return this.progressBar1.Value; }
-            set { progressBar1.Value = value; }
+            this.SavedOrderCount = 0;
         }
 
 
@@ -90,6 +78,7 @@ namespace GODInventoryWinForm
                     MessageBox.Show(string.Format("{0}", exception.Message));
 
                 }
+                this.SavedOrderCount = 0;
 
 
             }
@@ -98,72 +87,33 @@ namespace GODInventoryWinForm
         private void importButton_Click(object sender, EventArgs e)
         {
             this.importButton.Enabled = false;
-            this.cancelButton.Enabled = true;
             this.closeButton.Enabled = false;
-            if (backgroundWorker1.IsBusy != true)
-            {
-                backgroundWorker1.RunWorkerAsync(new WorkerArgument { OrderCount = 0, CurrentIndex = 0 });
-
-            }
-        }
-
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = sender as BackgroundWorker;
-
-            bool success = ImportOrderTxt(pathTextBox.Text, worker, e);
-
-        }
-
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            WorkerArgument arg = e.UserState as WorkerArgument;
-            if (!arg.HasError)
-            {
-                this.progressMsgLabel.Text = String.Format("{0}/{1}", arg.CurrentIndex, arg.OrderCount);
-                this.ProgressValue = e.ProgressPercentage;
-            }
-            else
-            {
-                this.progressMsgLabel.Text = arg.ErrorMessage;
-            }
-
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-
-            this.cancelButton.Enabled = false;
+            
+            bool success = ImportOrderTxt(pathTextBox.Text);
             this.closeButton.Enabled = true;
-            this.importButton.Enabled = true;
-
-            if (e.Error != null)
-            {
-                MessageBox.Show(e.Error.Message);
+            if (this.SavedOrderCount == 0) {
+                this.importButton.Enabled = true;            
             }
-            else if (e.Cancelled)
-            {
-                MessageBox.Show(string.Format("キャンセルできました!"));
-            }
-            else
-            {
-                MessageBox.Show(string.Format("{0}", e.Result));
-                //this.progressMsgLabel.Text = "Great, it is done!";
-            }
-
         }
 
+                
 
-        private bool ImportOrderTxt(string path, BackgroundWorker worker, DoWorkEventArgs e)
+        private bool ImportOrderTxt(string path )
         {
 
-            WorkerArgument arg = e.Argument as WorkerArgument;
-
+ 
             bool success = true;
 
 
             using (var ctx = new GODDbContext())
             {
+                var shopids = models.Select(o => Convert.ToInt32(o.店舗コード)).ToList();
+                var productids = models.Select(o => Convert.ToInt32(o.自社コード)).ToList();
+                var products = ctx.t_itemlist.Where(o => productids.Contains(o.自社コード)).ToList();
+
+                var itemprices = OrderSqlHelper.GetItemPriceList(ctx, productids);
+                var shops = OrderSqlHelper.GetShopList(ctx, shopids);
+
 
                 XLSXImportPrendingOrder model = null;
                 int progress = 0;
@@ -172,79 +122,69 @@ namespace GODInventoryWinForm
                 {
                     try
                     {
-
-                        arg.OrderCount = models.Count;
-
-
-                        List<XLSXImportPrendingOrder> we = models.FindAll(s => s.県別 != null);
-
-                        long m = we.Count;
-                        if (m > 0)
+ 
+                        count = models.Count;
+                        if (count > 0)
                         {
+                            List<int> validModelIndexes = new List<int>();
+                             
                             for (var i = 0; i < models.Count; i++)
                             {
-
-                                if (worker.CancellationPending == true)
-                                {
-                                    e.Cancel = true;
-                                    throw new Exception("キャンセルできました!");
-                                }
-                                arg.CurrentIndex = i + 1;
-
+ 
+ 
                                 progress = Convert.ToInt16(((i + 1) * 1.0 / models.Count) * 100);
                                 model = models.ElementAt(i);
 
-
-                                //vba
-                                //models[i].出荷No = DateTime.Now.ToString("yyMMdd") + models[i].車番;
-                                string ShipNO = "";
-                                int j = 0;
-                                int ii = 0;
-
-                                string sql = "";
-
                                 t_orderdata orderdata = new t_orderdata();
-                                orderdata.県別 = models[i].県別;
-                                orderdata.店舗コード = Convert.ToInt32(models[i].店舗コード);
-                                orderdata.店舗名漢字 = models[i].店舗名漢字;
-                                orderdata.自社コード = Convert.ToInt32(models[i].自社コード);
-                                orderdata.品名漢字 = models[i].品名漢字;
-                                orderdata.最小発注単位数量 = Convert.ToInt32(models[i].最小発注単位数量);
-                                orderdata.口数 = Convert.ToInt32(models[i].口数);
-                                orderdata.発注数量 = Convert.ToInt32(models[i].発注数量);
-                                orderdata.原単価_税抜_ = Convert.ToInt32(models[i].原単価税抜);
-                                orderdata.原価金額_税込_ = orderdata.発注数量 * orderdata.原単価_税抜_;// Convert.ToInt32(models[i].原価金額税抜);
-                                orderdata.原単価_税込_ = 0;
-                                orderdata.税額 = 0;
+                                orderdata.県別 = model.県別;
+                                orderdata.店舗コード = Convert.ToInt32(model.店舗コード);
+                                orderdata.店舗名漢字 = model.店舗名漢字;
+                                orderdata.自社コード = Convert.ToInt32(model.自社コード);
+                                orderdata.品名漢字 = model.品名漢字;
+                                orderdata.最小発注単位数量 = Convert.ToInt32(model.最小発注単位数量);
+                                orderdata.口数 = Convert.ToInt32(model.口数);
+                                orderdata.発注数量 = Convert.ToInt32(model.発注数量);
+                                orderdata.原単価_税抜_ = Convert.ToInt32(model.原単価税抜);
 
-
-                                
-                                ctx.t_orderdata.Add(orderdata);
-                                ctx.SaveChanges();
-
-                                if (arg.CurrentIndex % 25 == 0)
-                                {
-                                    backgroundWorker1.ReportProgress(progress, arg);
+                                var shop = shops.FirstOrDefault(o => o.店番 == orderdata.店舗コード);
+                                var price = itemprices.FirstOrDefault(o => o.自社コード == orderdata.自社コード);
+                                if (shop == null) {
+                                    throw new Exception(string.Format("can not find shop by id {0}", model.店舗コード));
                                 }
+                                if (price == null)
+                                {
+                                    throw new Exception(string.Format("can not find pricelist by 自社コード {0}", model.自社コード));
+                                }
+                                if (price.fee < 0) {
+                                    throw new Exception(string.Format("can not find freight by 店舗コード {0} and 自社コード {1}", model.店舗コード, model.自社コード));                                
+                                }
+
+                                orderdata.伝票番号 = OrderHelper.GenerateOrderNumber(orderdata.店舗コード);
+
+                                bool valid = OrderHelper.InitializeOrderByXlsxOrder(orderdata, shop, price);
+                                if (valid) {
+                                    validModelIndexes.Add(i);
+                                    ctx.t_orderdata.Add(orderdata);
+                                    var saved = ctx.SaveChanges();
+                                    if (saved > 0) { 
+                                        SavedOrderCount++;
+                                    }
+                                }
+
+                               
                             }
+                            MessageBox.Show(string.Format("{0}件の受注伝票が登録できました", SavedOrderCount));
                         }
-                        backgroundWorker1.ReportProgress(100, arg);
 
                         //  ctxTransaction.Commit();
 
-                        e.Result = string.Format("{0}件の受注伝票が登録できました", count);
                     }
 
                     catch (Exception exception)
                     {
                        // ctxTransaction.Rollback();
-                        if (!e.Cancel)
-                        {
-                            //arg.HasError = true;
-                            //arg.ErrorMessage = exception.Message;
-                            e.Result = exception.Message;
-                        }
 
+                        MessageBox.Show( exception.Message );
                         success = false;
                     }
                 }
@@ -261,13 +201,7 @@ namespace GODInventoryWinForm
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            if (this.backgroundWorker1.IsBusy)
-            {
 
-                this.backgroundWorker1.CancelAsync();
-                // Disable the Cancel button.
-                this.cancelButton.Enabled = false;
-            }
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -286,12 +220,12 @@ namespace GODInventoryWinForm
                 string version = string.Empty;
                 WorkbookPart wbPart = document.WorkbookPart;
                 List<Sheet> sheets = wbPart.Workbook.Descendants<Sheet>().ToList();
-                var versionSheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault(c => c.Name == "Sheet1");
+                var versionSheet = wbPart.Workbook.Descendants<Sheet>().FirstOrDefault( );
                 WorksheetPart worksheetPart = (WorksheetPart)wbPart.GetPartById(versionSheet.Id);
 
                 if (versionSheet == null)
                 {
-                    throw new Exception(String.Format("Can not find price by sheet", "", ""));
+                    throw new Exception(String.Format("Can not find sheet！" ));
 
                 }
 
@@ -302,113 +236,78 @@ namespace GODInventoryWinForm
                 }
 
 
-                int indexrow = 5;
                 int rocount = worksheetPart.Worksheet.Count();
-
-                indexrow = 2;
+                int rowindex = 0;
 
                 foreach (Row row in worksheetPart.Worksheet.Descendants<Row>())
                 {
-                    if (indexrow < 1)
+                    if (rowindex < 1)// 数据在第二行开始
                     {
-                        indexrow++;
+                        rowindex++;
 
                         continue;
                     }
                     XLSXImportPrendingOrder item = new XLSXImportPrendingOrder();
-                    #region ITEM
-                    Cell theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "A" + indexrow).FirstOrDefault();
-                    string type = string.Empty;
-                    if (theCell != null)
-                    {
-                        version = GetCellValue(wbPart, theCell);
 
-                        item.県別 = version;
+                    #region 处理每一行数据
+                    int cellindex = 0;
+                    foreach (Cell cell in row) {
+                        // Console.WriteLine("cell = {0}", cell);
 
+                        if (cellindex == 0)// A
+                        {                            
+                            item.県別 = GetCellValue(wbPart, cell); ;
+                        }
+                        if (cellindex == 1)
+                        {
+                            item.店舗コード = GetCellValue(wbPart, cell); 
+                        }
+                        if (cellindex == 2)
+                        {
+                            item.店舗名漢字 = GetCellValue(wbPart, cell);
+                        }
+                        if (cellindex == 3)
+                        {
+                            item.自社コード = GetCellValue(wbPart, cell);
+                        }
+                        if (cellindex == 4)
+                        {
+                            item.品名漢字 = GetCellValue(wbPart, cell);
+                        }
+                        if (cellindex == 5)
+                        {
+                            item.最小発注単位数量 = GetCellValue(wbPart, cell);
+                        }
+                        if (cellindex == 6)
+                        {
+                            item.口数 = GetCellValue(wbPart, cell);
+                        }
+                        if (cellindex == 7)
+                        {
+                            item.発注数量 = GetCellValue(wbPart, cell);
+                        }
+                        if (cellindex == 8)
+                        {
+                            item.原単価税抜 = GetCellValue(wbPart, cell);
+                        }
+                        if (cellindex == 9)
+                        {
+                            item.原価金額税抜 = GetCellValue(wbPart, cell);
+                        }
+                        cellindex++;
                     }
-                    else
-                    {
-                        break;
-
-                        throw new Exception(String.Format("ploading file does not have version number!", "", ""));
-
-                    }
-
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "B" + indexrow).FirstOrDefault();
-
-                    if (theCell != null)
-                    {
-                        version = GetCellValue(wbPart, theCell);
-                        item.店舗コード = version;
-                    }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "C" + indexrow).FirstOrDefault();
-
-                    if (theCell != null)
-                    {
-                        version = GetCellValue(wbPart, theCell);
-                        item.店舗名漢字 = version;
-                    }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "D" + indexrow).FirstOrDefault();
-
-                    if (theCell != null)
-                    {
-                        version = GetCellValue(wbPart, theCell);
-                        item.自社コード = version;
-                    }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "E" + indexrow).FirstOrDefault();
-
-                    if (theCell != null)
-                    {
-                        version = GetCellValue(wbPart, theCell);
-                        item.品名漢字 = version;
-                    }
-
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "F" + indexrow).FirstOrDefault();
-
-                    if (theCell != null)
-                    {
-                        version = GetCellValue(wbPart, theCell);
-                        item.最小発注単位数量 = version;
-                    }
-
-
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "G" + indexrow).FirstOrDefault();
-
-                    if (theCell != null)
-                    {
-                        version = GetCellValue(wbPart, theCell);
-                        item.口数 = version;
-                    }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "H" + indexrow).FirstOrDefault();
-
-                    if (theCell != null)
-                    {
-                        version = GetCellValue(wbPart, theCell);
-                        item.発注数量 = version;
-                    }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "I" + indexrow).FirstOrDefault();
-
-                    if (theCell != null)
-                    {
-                        version = GetCellValue(wbPart, theCell);
-                        item.原単価税抜 = version;
-                    }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "J" + indexrow).FirstOrDefault();
-
-                    if (theCell != null)
-                    {
-                        version = GetCellValue(wbPart, theCell);
-                        item.原価金額税抜 = version;
-                    }
+                    
 
                     #endregion
 
-                    if (item.県別 == null || item.県別 == "")
+                    if (string.IsNullOrEmpty(item.県別))
+                    {
                         break;
+                    }
 
                     models.Add(item);
 
-                    indexrow++;
+                    rowindex++;
                 }
 
                 return models;
@@ -492,7 +391,12 @@ namespace GODInventoryWinForm
         }
 
 
-
+        /// <summary>
+        /// 检查文件格式是否正确
+        /// </summary>
+        /// <param name="worksheetPart"></param>
+        /// <param name="wbPart"></param>
+        /// <returns></returns>
         private bool validateAttributes(WorksheetPart worksheetPart, WorkbookPart wbPart)
         {
 
@@ -518,7 +422,7 @@ namespace GODInventoryWinForm
 
             if (validated == false)
             {
-                msg = "选择文件错误，请检查！";
+                msg = "选择的文件格式错误，请重新选择！";
                 errorProvider1.SetError(pathTextBox, msg);
             }
             return validated;
