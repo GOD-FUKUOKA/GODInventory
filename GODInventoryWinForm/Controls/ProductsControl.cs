@@ -295,15 +295,20 @@ namespace GODInventoryWinForm.Controls
                             unitname = p.unitname,
                             地域 = s.地域
                         };
-            if (county.Length > 0 && county != anyOption)
-            {
-                query = query.Where(o => o.県別 == county);
-            }
+
 
             if (storeId > 0)
             {
                 query = query.Where(o => o.店番 == storeId);
+            }else if (county.Length > 0 && county != anyOption)
+            {
+                query = query.Where(o => o.県別 == county);
+            }else if (area.Length > 0 && area != anyOption)
+            {
+                query = query.Where(o => o.地域 == area);
+
             }
+
             if (productCode > 0)
             {
                 query = query.Where(o => o.自社コード == productCode);
@@ -311,11 +316,6 @@ namespace GODInventoryWinForm.Controls
             if (genresId > 0)
             {
                 query = query.Where(o => o.ジャンル == genresId);
-            }
-            if (area.Length > 0 && area!=anyOption)
-            {
-                query = query.Where(o => o.地域 == area);
-            
             }
             this.pricesBindingSource.DataSource = this.entityDataSource1.CreateView(query);
             this.pricesDataGridView.DataSource = this.pricesBindingSource;
@@ -348,10 +348,13 @@ namespace GODInventoryWinForm.Controls
         private void searchButton_Click(object sender, EventArgs e)
         {
             int productCode = Convert.ToInt32(this.productsComboBox.SelectedValue);
-            string county = this.countyComboBox2.SelectedValue.ToString();
-            string area = this.areaComboBox2.SelectedValue.ToString();
             int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
             int genresId = Convert.ToInt32(this.genresComboBox.SelectedValue);
+
+            string county = this.countyComboBox2.SelectedValue.ToString();
+            string area = this.areaComboBox2.SelectedValue.ToString();
+            area = (area != anyOption ? area : String.Empty);
+            county = (county != anyOption ? county : String.Empty);
 
             if (genresId > 0 )
             {
@@ -407,8 +410,13 @@ namespace GODInventoryWinForm.Controls
 
             int productCode = (int)this.productsComboBox.SelectedValue;
             int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
-            string county = Convert.ToString(this.countyComboBox2.SelectedValue);
             int genresId = Convert.ToInt32(this.genresComboBox.SelectedValue);
+
+            string county = this.countyComboBox2.SelectedValue.ToString();
+            string area = this.areaComboBox2.SelectedValue.ToString();
+            area = (area != anyOption ? area : String.Empty);
+            county = (county != anyOption ? county : String.Empty);
+
             decimal cost = -1;
             decimal price = -1;
             decimal promotePrice = -1;
@@ -442,7 +450,7 @@ namespace GODInventoryWinForm.Controls
 
             if (productCode == 0)
             {
-                MessageBox.Show("Please input ");
+                MessageBox.Show("Please select a product!");
                 return;
             }
 
@@ -454,7 +462,7 @@ namespace GODInventoryWinForm.Controls
 
 
 
-            int count = OrderHelper.UpdateProductCost(productCode, county, storeId, cost, price, promotePrice, adPrice, salePrice);
+            int count = OrderHelper.UpdateProductCost(productCode, area, county, storeId, cost, price, promotePrice, adPrice, salePrice);
 
             if (count > 0)
             {
@@ -605,7 +613,7 @@ namespace GODInventoryWinForm.Controls
            
         }
 
-        private void InitializetransportdataGridView1(int warehouse_id = 0, int transport_id = 0, int shop_id = 0, int genre_id=0, int product_id = 0, string countyname = "すべて")
+        private void InitializetransportdataGridView1(int warehouse_id = 0, int transport_id = 0, int shop_id = 0, int genre_id=0, int product_id = 0, string area="", string county = "")
         {
             using (var ctx = new GODDbContext())
             {
@@ -628,7 +636,8 @@ namespace GODInventoryWinForm.Controls
                                 shopname = s.店名,
                                 商品名 = i.商品名,
                                 自社コード = i.自社コード,
-                                県別 = s.県別
+                                県別 = s.県別,
+                                地域 = s.地域
                             };
 
                 if (warehouse_id > 0 )
@@ -643,6 +652,15 @@ namespace GODInventoryWinForm.Controls
                 if (shop_id > 0)
                 {
                     query = query.Where(o => o.shop_id == shop_id);
+                } else if (county.Length > 0)
+                {
+                    // 查询某一个县
+                    query = query.Where(o => o.県別 == county);
+                }
+                else if (area.Length > 0)
+                {
+                    // 查询某一个地域
+                    query = query.Where(o => o.地域 == area);
                 }
 
                 if (genre_id > 0) 
@@ -655,10 +673,7 @@ namespace GODInventoryWinForm.Controls
                     query = query.Where(o => o.自社コード == product_id);
                 }
 
-                if (!countyname.Equals(anyOption)) { 
-                    // 查询某一个县
-                    query = query.Where(o => o.県別 == countyname);
-                }
+
                 this.transportdatabindingSource2.DataSource = this.entityDataSource1.CreateView(query);
                 this.transportdataGridView1.DataSource = this.transportdatabindingSource2;
             }
@@ -690,13 +705,16 @@ namespace GODInventoryWinForm.Controls
 
         private void updateFeeButton_Click_1(object sender, EventArgs e)
         {
-
-
             int warehouse_id = Convert.ToInt32(this.warehouseComboBox5.SelectedValue);
             int transport_id = Convert.ToInt32(this.transportComboBox6.SelectedValue);
             int shop_id = Convert.ToInt32(this.shopComboBox3.SelectedValue);
             int genre_id = Convert.ToInt32(this.genresComboBox3.SelectedValue);
             int product_id = Convert.ToInt32(this.productsComboBox3.SelectedValue);
+            string area = this.areaComboBox3.Text;
+            string county = this.countyComboBox3.Text;
+            area = (area != anyOption ? area : String.Empty);
+            county = (county != anyOption ? county : String.Empty);
+
 
             string feestring = this.transportfeeTextBox.Text.Trim();
             string newUnitname = this.unitnameComboBox4.Text.Trim();
@@ -710,7 +728,8 @@ namespace GODInventoryWinForm.Controls
                 } 
 
                 {
-                    int count = OrderHelper.Updatetransportfee(warehouse_id, transport_id, shop_id, genre_id, product_id, string.Empty, fee, newUnitname, newColumnname);
+
+                    int count = OrderHelper.Updatetransportfee(warehouse_id, transport_id, shop_id, genre_id, product_id, area, county, fee, newUnitname, newColumnname);
                     if (count > 0)
                     {
                         //InitializeDataSource();
@@ -731,10 +750,15 @@ namespace GODInventoryWinForm.Controls
             int transportid = Convert.ToInt32(this.transportComboBox6.SelectedValue);
             int productid = Convert.ToInt32(this.productsComboBox3.SelectedValue);
             int genreid = Convert.ToInt32(this.genresComboBox3.SelectedValue);
-            string countyname = this.countyComboBox3.Text;
-            if (warehouseid > 0 && transportid > 0 && genreid> 0)
+            string area = this.areaComboBox3.Text;
+            string county = this.countyComboBox3.Text;
+            area = (area != anyOption ? area : String.Empty);
+            county = (county != anyOption ? county : String.Empty);
+
+            if (warehouseid > 0 && transportid > 0 && genreid > 0)
             {
-                InitializetransportdataGridView1(warehouseid, transportid, shopid, genreid, productid, countyname);
+
+                InitializetransportdataGridView1(warehouseid, transportid, shopid, genreid, productid, area, county);
             }
             else {
                 MessageBox.Show("请至少选择物流公司、仓库和产品分类作为查询条件！", "Warning", MessageBoxButtons.OK);

@@ -30,6 +30,8 @@ namespace GODInventoryWinForm
         List<t_orderdata> xlsxOrderList;
         List<t_orderdata> pendingOrderList;
 
+        public int SavedOrderCount { get; set; } 
+
         public ImportShipNumberForm()
         {
             InitializeComponent();
@@ -62,11 +64,6 @@ namespace GODInventoryWinForm
 
                     dataGridView1.DataSource = this.bindingSource1;
 
-                }
-                catch (EndOfStreamException exception)
-                {
-                    models.Clear();
-                    success = false;
                 }
                 catch (Exception exception)
                 {
@@ -104,6 +101,12 @@ namespace GODInventoryWinForm
             this.importButton.Enabled = false;
             this.closeButton.Enabled = false;
             bool success = ImportOrderTxt(pathTextBox.Text);
+
+            if (this.SavedOrderCount > 0) {
+                MessageBox.Show( string.Format("{0}件の受注伝票が登録できました", this.SavedOrderCount), "INFO");            
+            }
+
+
             this.importButton.Enabled = true;
             this.closeButton.Enabled = true;
 
@@ -133,10 +136,8 @@ namespace GODInventoryWinForm
         }
 
 
-        private bool ImportOrderTxt(string path, BackgroundWorker worker, DoWorkEventArgs e)
+        private bool ImportOrderTxt(string path)
         {
-
-            WorkerArgument arg = e.Argument as WorkerArgument;
 
             bool success = true;
 
@@ -152,7 +153,6 @@ namespace GODInventoryWinForm
                     try
                     {
 
-                        arg.OrderCount = models.Count;
 
                         for (var i = 0; i < models.Count; i++)
                         {
@@ -169,18 +169,9 @@ namespace GODInventoryWinForm
                             for (var i = 0; i < models.Count; i++)
                             {
 
-                                if (worker.CancellationPending == true)
-                                {
-                                    e.Cancel = true;
-                                    throw new Exception("キャンセルできました!");
-                                }
-                                arg.CurrentIndex = i + 1;
-
                                 progress = Convert.ToInt16(((i + 1) * 1.0 / models.Count) * 100);
                                 model = models.ElementAt(i);
 
-
-                                //vba
                                 //models[i].出荷No = DateTime.Now.ToString("yyMMdd") + models[i].車番;
                                 string ShipNO = "";
                                 int j = 0;
@@ -249,18 +240,11 @@ namespace GODInventoryWinForm
 
                         ctxTransaction.Commit();
 
-                        e.Result = string.Format("{0}件の受注伝票が登録できました", count);
                     }
 
                     catch (Exception exception)
                     {
                         ctxTransaction.Rollback();
-                        if (!e.Cancel)
-                        {
-                            //arg.HasError = true;
-                            //arg.ErrorMessage = exception.Message;
-                            e.Result = exception.Message;
-                        }
 
                         success = false;
                     }
@@ -302,24 +286,32 @@ namespace GODInventoryWinForm
                 }
 
 
-                int indexrow = 0;
-                int rocount = worksheetPart.Worksheet.Count();
-
+                int rowindex = 0;
 
                 foreach (Row row in worksheetPart.Worksheet.Descendants<Row>())
                 {
                     // 第5行开始是数据
-                    if (indexrow < 4)
+                    if (rowindex < 4)
                     {
-                        indexrow++;
+                        rowindex++;
                         continue;
                     }
                     XLSXImportShipNumber item = new XLSXImportShipNumber();
 
 
                     #region 处理每一行数据
+                    foreach (Cell cell in row) {
+                        //double oaDteAsDouble;
+                        int cellindex = 0;
+                        if (cellindex == 0)// A
+                        {
+                            item.出荷No = GetCellValue(wbPart, cell); ;
+                        }
+                        cellindex++;
+                    }
 
-                    Cell theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "A" + indexrow).FirstOrDefault();
+
+                    Cell theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "A" + rowindex).FirstOrDefault();
                     string type = string.Empty;
                     double oaDteAsDouble;
 
@@ -333,28 +325,28 @@ namespace GODInventoryWinForm
                         throw new Exception(String.Format("xlsx does not have valid 出荷No at A5!", "", ""));
                     }
 
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "B" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "B" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
                         cellvalue = GetCellValue(wbPart, theCell);
                         item.配送担当 = cellvalue;
                     }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "C" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "C" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
                         cellvalue = GetCellValue(wbPart, theCell);
                         item.車番 = cellvalue;
                     }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "D" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "D" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
                         cellvalue = GetCellValue(wbPart, theCell);
                         item.ドライバー = cellvalue;
                     }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "E" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "E" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
@@ -362,7 +354,7 @@ namespace GODInventoryWinForm
                         item.方面 = cellvalue;
                     }
 
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "F" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "F" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
@@ -376,7 +368,7 @@ namespace GODInventoryWinForm
                     }
 
 
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "G" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "G" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
@@ -389,49 +381,49 @@ namespace GODInventoryWinForm
             
                         item.納品日 = cellvalue;
                     }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "H" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "H" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
                         cellvalue = GetCellValue(wbPart, theCell);
                         item.荷主 = cellvalue;
                     }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "I" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "I" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
                         cellvalue = GetCellValue(wbPart, theCell);
                         item.県別 = cellvalue;
                     }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "J" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "J" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
                         cellvalue = GetCellValue(wbPart, theCell);
                         item.卸先 = cellvalue;
                     }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "K" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "K" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
                         cellvalue = GetCellValue(wbPart, theCell);
                         item.品名 = cellvalue;
                     }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "L" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "L" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
                         cellvalue = GetCellValue(wbPart, theCell);
                         item.口数 = cellvalue;
                     }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "M" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "M" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
                         cellvalue = GetCellValue(wbPart, theCell);
                         item.数量 = cellvalue;
                     }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "N" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "N" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
@@ -451,7 +443,7 @@ namespace GODInventoryWinForm
 
 
                     }
-                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "O" + indexrow).FirstOrDefault();
+                    theCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == "O" + rowindex).FirstOrDefault();
 
                     if (theCell != null)
                     {
@@ -466,7 +458,7 @@ namespace GODInventoryWinForm
 
                     models.Add(item);
 
-                    indexrow++;
+                    rowindex++;
                 }
 
                 return models;

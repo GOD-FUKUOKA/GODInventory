@@ -21,6 +21,7 @@ namespace GODInventory.MyLinq
         // 商店信息
         public string shopname { get; set; }
         public string 県別 { get; set; }
+        public string 地域 { get; set; }
 
         // 運賃
         public decimal fee { get; set; }

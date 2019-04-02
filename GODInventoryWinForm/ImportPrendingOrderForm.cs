@@ -24,7 +24,6 @@ namespace GODInventoryWinForm
     public partial class ImportPrendingOrderForm : Form
     {
 
-        public string formTitle = "Import HACCYU.csv";
         List<XLSXImportPrendingOrder> models;
         private SortableBindingList<XLSXImportPrendingOrder> sortablemodelsList;
 
@@ -147,7 +146,7 @@ namespace GODInventoryWinForm
                                 orderdata.原単価_税抜_ = Convert.ToInt32(model.原単価税抜);
 
                                 var shop = shops.FirstOrDefault(o => o.店番 == orderdata.店舗コード);
-                                var price = itemprices.FirstOrDefault(o => o.自社コード == orderdata.自社コード);
+                                var price = itemprices.FirstOrDefault(o =>  o.店番 == orderdata.店舗コード && o.自社コード == orderdata.自社コード);
                                 if (shop == null) {
                                     throw new Exception(string.Format("can not find shop by id {0}", model.店舗コード));
                                 }

@@ -159,7 +159,7 @@ namespace GODInventory.ViewModel
         }
 
 
-        public static int UpdateProductCost(int productCode, string county = "", int storeId = 0, decimal cost = -1, decimal price = -1, decimal promotePrice = -1, decimal adPrice = -1, decimal salePrice = -1)
+        public static int UpdateProductCost(int productCode, string area = "", string county = "", int storeId = 0, decimal cost = -1, decimal price = -1, decimal promotePrice = -1, decimal adPrice = -1, decimal salePrice = -1)
         {
             int count = 0;
             string sql = "";
@@ -209,7 +209,7 @@ namespace GODInventory.ViewModel
         /// <param name="newUnitname"></param>
         /// <param name="newColumnname"></param>
         /// <returns></returns>
-        public static int Updatetransportfee(int warehouse_id, int transport_id, int shop_id = 0, int genre_id = 0, int product_id = 0, string unitname = "", decimal newFee = -1, string newUnitname = "", string newColumnname = "")
+        public static int Updatetransportfee(int warehouse_id, int transport_id, int shop_id = 0, int genre_id = 0, int product_id = 0, string area = "", string county="", decimal newFee = -1, string newUnitname = "", string newColumnname = "")
         {
             int count = 0;
             string sql = "UPDATE t_freights SET ";
@@ -241,10 +241,17 @@ namespace GODInventory.ViewModel
                 {
                     conditions.Add(string.Format(" `shop_id`={0} ", shop_id));
                 }
-                //if (unitname.Length > 0)
-                //{
-                //    conditions.Add(string.Format(" `unitname`='{0}' ", unitname));
-                //}
+                else if (county.Length > 0)
+                {
+                    var pids = ctx.t_shoplist.Where(o => o.県別 == county).Select(o => o.店番).ToList();
+                    conditions.Add(string.Format(" `shop_id` in ({0}) ", string.Join(",",pids)));
+                }
+                else if (area.Length > 0)
+                {
+                    var pids = ctx.t_shoplist.Where(o => o.地域 == area).Select(o => o.店番).ToList();
+                    conditions.Add(string.Format(" `shop_id` in ({0}) ", string.Join(",", pids)));
+                }
+
                 if (genre_id > 0) 
                 {
                     var pids = ctx.t_itemlist.Where(o => o.ジャンル == genre_id).Select(o => o.自社コード).ToList();
@@ -259,8 +266,7 @@ namespace GODInventory.ViewModel
 
                 if (sets.Count > 0 && conditions.Count> 0)
                 {
-
-                    sql = String.Format("UPDATE t_freights SET  {0} WHERE {1}",  string.Join(",", sets ), string.Join(" AND ", conditions));
+                    sql = String.Format("UPDATE t_freights SET {0} WHERE {1}",  string.Join(",", sets ), string.Join(" AND ", conditions));
                     count = ctx.Database.ExecuteSqlCommand(sql);
                 }
             }

@@ -285,10 +285,10 @@ ADD INDEX `itemid_idx` (`自社コード` ASC);
 ALTER TABLE `god_test`.`t_pricelist` 
 ADD CONSTRAINT `fk_itemid`
   FOREIGN KEY (`自社コード`)
-  REFERENCES `god_test`.`t_itemlist` (`自社コード`)
+  REFERENCES `god_test`.`t_itemlist` (`自社コード`);
 
 ALTER TABLE `god_test`.`t_itemlist` 
-ADD INDEX `fk_genreid_idx` (`ジャンル` ASC);
+ADD INDEX `genreid_idx` (`ジャンル` ASC);
 ALTER TABLE `god_test`.`t_itemlist` 
 ADD CONSTRAINT `fk_genreid`
   FOREIGN KEY (`ジャンル`)
@@ -298,6 +298,9 @@ ALTER TABLE `god_test`.`t_freights`
 DROP INDEX `combo` ,
 ADD INDEX `combo` (`warehouse_id` ASC, `transport_id` ASC, `shop_id` ASC, `自社コード` ASC);
 
+# 20190401
+ALTER TABLE `t_freights` CHANGE COLUMN `fee` `fee` DECIMAL(10,1) NOT NULL DEFAULT '0' ;
+ALTER TABLE `t_orderdata` CHANGE COLUMN `運賃` `運賃` DECIMAL(10,1) NOT NULL DEFAULT '0' ;
 #########################################################################################################
 # 原有数据修正
 # 设置 t_shoplist表中 warehouse_id, transport_id, warehousename
