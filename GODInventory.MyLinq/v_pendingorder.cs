@@ -189,7 +189,7 @@ namespace GODInventory.MyLinq
 
         public int 社内伝番処理 { get; set; }
        
-        public decimal 運賃 { get; set; }
+        public int 運賃 { get; set; }
         
         // 打印报表时使用。
         public int SubOrderCount { get; set; }

@@ -195,23 +195,30 @@ namespace GODInventoryWinForm
                             {
                                 throw new Exception(String.Format("Can not find shop by shopcode {0}", model.StoreCode));
                             }
-                            if (shop.warehousename == null || shop.warehousename == string.Empty)
-                            {
-                                throw new Exception(String.Format("Can not find shop default warehouse name for shop {0}", shop.店名));
-                            }
+                            //if (shop.warehousename == null || shop.warehousename == string.Empty)
+                            //{
+                            //    throw new Exception(String.Format("Can not find shop default warehouse name for shop {0}", shop.店名));
+                            //}
                             var price = prices.FirstOrDefault(s => s.店番 == shop.店番 && s.自社コード==item.自社コード);
                             if (price == null)
                             {
                                 throw new Exception(String.Format("Can not find price by 自社コード {0} and 店番 {1}", item.自社コード, model.StoreCode));
                             }
+                            if (price.fee < 0)
+                            {
+                                throw new Exception(string.Format("can not find freight by 店舗コード {0} and 自社コード {1}", model.StoreCode, item.自社コード));
+                            }
                             //sql_parameters = model.ToSqlArguments(shop, item);
                             var sql = model.ToRawSql(shop, item, price, orders);
                             //Console.WriteLine("sql = #{0}", sql);
-                           
+
                             if (sql != null)
                             {
                                 sqls.Add(sql);
                                 count++;
+                            }
+                            else {
+                                Console.WriteLine("sql is null");
                             }
                             if ((sqls.Count > 0) && ((i == models.Count - 1) || (sqls.Count % 25 == 0)))
                             {

@@ -299,8 +299,23 @@ DROP INDEX `combo` ,
 ADD INDEX `combo` (`warehouse_id` ASC, `transport_id` ASC, `shop_id` ASC, `自社コード` ASC);
 
 # 20190401
-ALTER TABLE `t_freights` CHANGE COLUMN `fee` `fee` DECIMAL(10,1) NOT NULL DEFAULT '0' ;
-ALTER TABLE `t_orderdata` CHANGE COLUMN `運賃` `運賃` DECIMAL(10,1) NOT NULL DEFAULT '0' ;
+ALTER TABLE `t_freights` CHANGE COLUMN `fee` `fee` DECIMAL(10,2) NOT NULL DEFAULT '0' ;
+ALTER TABLE `t_orderdata` CHANGE COLUMN `運賃` `運賃` INT NOT NULL DEFAULT '0' ;
+
+ALTER TABLE `t_freights` 
+ADD INDEX `unitIndex` (`unitname` ASC),
+ADD INDEX `columnIndex` (`columnname` ASC);
+
+ALTER TABLE `t_orderdata` 
+ADD COLUMN `warehouse_id` INT UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE `t_orderdata` 
+ADD COLUMN `transport_id` INT UNSIGNED NOT NULL DEFAULT 0;
+
+# 修正 订单表 warehouse_id, 查询库存时，依赖warehouse_id
+# SET SQL_SAFE_UPDATES=0;
+# update t_orderdata t1 inner join t_warehouses t2 on t1.実際配送担当 = t2.ShipperName  set t1.warehouse_id = t2.id where t1.id受注データ>0
+#
+
 #########################################################################################################
 # 原有数据修正
 # 设置 t_shoplist表中 warehouse_id, transport_id, warehousename

@@ -49,6 +49,7 @@
             this.原価金額税抜 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.totalRecordLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -226,11 +227,21 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // totalRecordLabel
+            // 
+            this.totalRecordLabel.AutoSize = true;
+            this.totalRecordLabel.Location = new System.Drawing.Point(14, 338);
+            this.totalRecordLabel.Name = "totalRecordLabel";
+            this.totalRecordLabel.Size = new System.Drawing.Size(64, 14);
+            this.totalRecordLabel.TabIndex = 9;
+            this.totalRecordLabel.Text = "合計 0 行";
+            // 
             // ImportPrendingOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(844, 432);
+            this.Controls.Add(this.totalRecordLabel);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.titleLabel);
@@ -278,5 +289,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 発注数量;
         private System.Windows.Forms.DataGridViewTextBoxColumn 原単価税抜;
         private System.Windows.Forms.DataGridViewTextBoxColumn 原価金額税抜;
+        private System.Windows.Forms.Label totalRecordLabel;
     }
 }

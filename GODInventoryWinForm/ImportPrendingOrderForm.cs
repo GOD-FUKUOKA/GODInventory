@@ -27,7 +27,9 @@ namespace GODInventoryWinForm
         List<XLSXImportPrendingOrder> models;
         private SortableBindingList<XLSXImportPrendingOrder> sortablemodelsList;
 
-        public int SavedOrderCount {get; set;} 
+        public int SavedOrderCount {get; set;}
+
+        private string totalRecordFormat = "合計 {0} 行";
 
         public ImportPrendingOrderForm()
         {
@@ -63,6 +65,7 @@ namespace GODInventoryWinForm
                         this.bindingSource1.DataSource = sortablemodelsList;
 
                         dataGridView1.DataSource = this.bindingSource1;
+                        this.totalRecordLabel.Text = string.Format(totalRecordFormat, models.Count);
                     }
                 }
                 catch (EndOfStreamException exception)
@@ -93,6 +96,8 @@ namespace GODInventoryWinForm
             if (this.SavedOrderCount == 0) {
                 this.importButton.Enabled = true;            
             }
+
+
         }
 
                 

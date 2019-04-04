@@ -118,6 +118,8 @@ namespace GODInventory.ViewModel
  
             order.実際配送担当 = price.配送担当;
             order.warehousename = price.warehousename;
+            order.warehouse_id = order.warehouse_id;
+            order.transport_id = order.transport_id;
 
             // 社内伝番処理使用缺省配置
             order.社内伝番処理 = price.社内伝番処理;
@@ -182,13 +184,18 @@ namespace GODInventory.ViewModel
                     }
                     sql = String.Format("UPDATE t_pricelist SET `{0}`={1} WHERE `自社コード`={2}", cols[i], prices[i], productCode);
 
-                    if (county.Length > 0)
-                    {
-                        sql += string.Format(" AND `県別`='{0}'", county);
-                    }
+
                     if (storeId > 0)
                     {
                         sql += string.Format(" AND `店番`={0}", storeId);
+                    }else if (county.Length > 0)
+                    {
+                        sql += string.Format(" AND `県別`='{0}'", county);
+                    }
+                    else if (area.Length > 0)
+                    {
+                        var pids = ctx.t_shoplist.Where(o => o.地域 == area).Select(o => o.店番).ToList();
+                        sql += string.Format(" AND  `店番` in ({0}) ", string.Join(",", pids));
                     }
                     count = ctx.Database.ExecuteSqlCommand(sql);
                 }
@@ -315,32 +322,32 @@ namespace GODInventory.ViewModel
         /// <param name="order"></param>
         /// <param name="itemprice"> 如果提供itemprice，使用 itemprice中的 fee 计算</param>
         /// <returns></returns>
-        public static decimal ComputeFreight(t_orderdata order, decimal unitfee = 0, string columnname = null)
+        public static int ComputeFreight(t_orderdata order, decimal unitfee = 0, string columnname = null)
         {
-            decimal fee = 0;           
+            int fee = 0;           
 
             if (columnname != null)
             {
                 string val = GetModelValue(columnname, order);
                 if (!string.IsNullOrEmpty(val))
                 {
-                    fee = unitfee * Convert.ToInt32(val);
+                    fee = Convert.ToInt32( unitfee * Convert.ToInt32(val) );
                 }
             }
 
             return fee;
         }
-         
-        public static decimal ComputeFreight(v_pendingorder order, decimal unitfee = 0, string columnname = null)
+
+        public static int ComputeFreight(v_pendingorder order, decimal unitfee = 0, string columnname = null)
         {
-            decimal fee = 0;
+            int fee = 0;
 
             if (columnname != null)
             {
                 string val = GetModelValue(columnname, order);
                 if (!string.IsNullOrEmpty(val))
                 {
-                    fee = unitfee * Convert.ToInt32(val);
+                    fee = Convert.ToInt32( unitfee * Convert.ToInt32(val) );
                 }
             }
 

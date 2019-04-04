@@ -492,9 +492,11 @@ namespace GODInventory.ViewModel.EDI
             orderdata.ジャンル = item.ジャンル;
             orderdata.単位 = item.単位;
             orderdata.自社コード = item.自社コード;
-            orderdata.実際配送担当 = price.配送担当;
             orderdata.県別 = shop.県別;
-            orderdata.warehousename = shop.warehousename;
+            orderdata.実際配送担当 = price.配送担当;
+            orderdata.transport_id = price.transport_id;
+            orderdata.warehousename = price.warehousename;
+            orderdata.warehouse_id = price.warehouse_id;
             orderdata.最小発注単位数量 = item.PT入数;
             orderdata.重量 = (int)(item.単品重量 * orderdata.発注数量);
             if (orderdata.最小発注単位数量 > 0)
@@ -535,7 +537,7 @@ namespace GODInventory.ViewModel.EDI
             
             orderdata.id = String.Format("{0}a{1}", orderdata.店舗コード, orderdata.伝票番号);
             orderdata.週目 = OrderHelper.GetOrderWeekOfYear( orderdata.受注日.Value );
-            orderdata.運賃 = OrderSqlHelper.ComputeFreight(orderdata, price.fee, price.columnname);
+            orderdata.運賃 = OrderHelper.ComputeFreight(orderdata, price.fee, price.columnname);
 
             if (orders != null)
             {
@@ -723,7 +725,7 @@ VALUES (
 `ジャンル`,`自社コード`,`実際出荷数量`,`県別`,`Status`,
 `ダブリ`,`発注品名漢字`,`発注規格名漢字`,`納品口数`,`週目`,
 `id`, `仕入原価`, `仕入金額`, `粗利金額`,`社内伝番処理`,
-`warehousename`, `運賃`) 
+`warehousename`, `運賃`, `warehouse_id`, `transport_id`) 
 VALUES ({0}
 '{1:yyyy-MM-dd}','{2:yyyy-MM-dd}','{3}',{4},'{5}',
 {6},{7},{8},'{9}','{10}',
@@ -735,7 +737,7 @@ VALUES ({0}
 '{61}','{62}','{63}','{64}',{65},{66},{67},'{68}','{69}','{70}',
 {71},{72},{73},'{74}','{75}','{76}',{77},{78},{79},'{80}',
 {81},{82},{83},'{84}',{85},'{86}','{87}','{88}',{89},{90},
-'{91}',{92},{93},{94},{95},'{96}',{97});";
+'{91}',{92},{93},{94},{95},'{96}',{97},{98},{98});";
             var now = DateTime.Now;
             var fazhuri = o.発注日.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
             var souzhuri = now.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
@@ -767,8 +769,8 @@ VALUES ({0}
                 
                 o.ジャンル, o.自社コード, o.実際出荷数量, o.県別, (int)o.Status,
                 o.ダブリ, o.発注品名漢字, o.発注規格名漢字, o.納品口数, o.週目,
-                o.id, o.仕入原価, o.仕入金額, o.粗利金額, o.社内伝番処理, 
-                o.warehousename, o.運賃);
+                o.id, o.仕入原価, o.仕入金額, o.粗利金額, o.社内伝番処理,
+                o.warehousename, o.運賃, o.warehouse_id, o.transport_id);
                 
         }
 

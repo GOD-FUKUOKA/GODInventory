@@ -223,6 +223,11 @@ namespace GODInventoryWinForm
                                 throw new Exception(String.Format("Can not find price by 自社コード {0} and 店番 {1}", item.自社コード, model.StoreCode));
                             }
 
+                            if (price.fee < 0)
+                            {
+                                throw new Exception(string.Format("can not find freight by 店舗コード {0} and 自社コード {1}", model.StoreCode, item.自社コード));
+                            }
+
                             var location = locations.FirstOrDefault(s => s.納品場所名漢字 == model.LocationName);
                             //sql_parameters = model.ToSqlArguments(shop, item);
                             var sql = model.ToRawSql(shop, item, price, location, orders);

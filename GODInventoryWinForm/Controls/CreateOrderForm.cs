@@ -834,6 +834,8 @@ namespace GODInventoryWinForm.Controls
                                 }
                                 o.実際配送担当 = selectedItem.配送担当;
                                 o.warehousename = selectedItem.warehousename;
+                                o.transport_id = selectedItem.transport_id;
+                                o.warehouse_id = selectedItem.warehouse_id;
 
                                 // 社内伝番処理使用缺省配置
                                 o.社内伝番処理 = selectedItem.社内伝番処理;

@@ -424,9 +424,9 @@ FROM t_orderdata o
 INNER JOIN t_genre g  on o.ジャンル = g.idジャンル
 INNER JOIN t_shoplist s  on o.法人コード = s.customerId AND  o.店舗コード = s.店番 
 INNER JOIN t_pricelist p on  o.自社コード = p.自社コード AND  o.店舗コード = p.店番 
-LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.warehousename = k.ShipperName 
+LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.warehouse_id = k.WarehouseId 
 WHERE o.Status ={0}
-ORDER BY o.受注日 desc, o.Status, o.実際配送担当,o.warehousename, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
+ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
 
 
                 // create BindingList (sortable/filterable)

@@ -311,8 +311,11 @@ namespace GODInventory.MyLinq
 
         public string warehousename { get; set; }
 
-        public decimal 運賃 { get; set; }        
+        public int 運賃 { get; set; }
 
+        public int warehouse_id { get; set; }
+        public int transport_id { get; set; }
+        
         public t_orderdata()
         {
             this.キャンセル = "no";

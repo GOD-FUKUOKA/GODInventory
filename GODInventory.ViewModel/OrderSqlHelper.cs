@@ -1220,9 +1220,9 @@ namespace GODInventory.ViewModel
         /// <param name="order"></param>
         /// <param name="itemprice"> 如果提供itemprice，使用 itemprice中的 fee 计算</param>
         /// <returns></returns>
-        public static decimal ComputeFreight(t_orderdata order, decimal unitfee = 0, string columnname = null) 
+        public static int ComputeFreight(t_orderdata order, decimal unitfee = 0, string columnname = null) 
         {
-            decimal fee = 0;
+            int fee = 0;
 
             if (columnname == null)
             {
@@ -1243,9 +1243,9 @@ namespace GODInventory.ViewModel
             return fee;
         }
 
-        public static decimal ComputeFreight(v_pendingorder order, decimal unitfee = 0, string columnname = null)
+        public static int ComputeFreight(v_pendingorder order, decimal unitfee = 0, string columnname = null)
         {
-            decimal fee = 0;
+            int fee = 0;
 
             if (columnname == null)
             {
@@ -1294,7 +1294,7 @@ namespace GODInventory.ViewModel
 //                                          columnname = f.columnname
 //                                      }).ToList();
             string sql = @"select g.idジャンル as ジャンル,  g.ジャンル名, g.社内伝番処理, i.自社コード, i.商品コード, i.JANコード, i.商品名, i.規格,
-i.PT入数,i.単品重量, i.単位, p.配送担当, p.仕入原価, p.通常原単価, p.売単価, p.店番, p.warehousename,  IFNULL(f.fee, -1) as fee,  IFNULL(f.columnname, '') as columnname  
+i.PT入数,i.単品重量, i.単位, p.配送担当, p.仕入原価, p.通常原単価, p.売単価, p.店番, p.warehousename, p.warehouse_id, p.配送担当, p.transport_id,  IFNULL(f.fee, -1) as fee,  IFNULL(f.columnname, '') as columnname  
 from t_itemlist i
 left join  t_pricelist p on i.自社コード = p.自社コード left join t_genre g on i.ジャンル = g.idジャンル 
 left join t_freights f on p.transport_id = f.transport_id and p.warehouse_id =f.warehouse_id and p.自社コード =  f.自社コード and f.shop_id= p.店番 ";

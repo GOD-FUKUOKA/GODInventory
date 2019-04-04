@@ -8,7 +8,7 @@ namespace GODInventory.ViewModel.EDI
 {
     public class XLSXImportShipNumber
     {
-
+        public int selected { get; set; }
         public string 出荷No { get; set; }
         public string 配送担当 { get; set; }
         public string 車番 { get; set; }
@@ -33,5 +33,10 @@ namespace GODInventory.ViewModel.EDI
         public string mark5 { get; set; }
 
         public string memo { get; set; }
+
+        public XLSXImportShipNumber(){
+            this.selected = 0; // 初始状态为未选择
+        }
+
     }
 }

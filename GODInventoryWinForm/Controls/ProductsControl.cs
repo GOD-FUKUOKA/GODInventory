@@ -25,6 +25,9 @@ namespace GODInventoryWinForm.Controls
         private List<t_transports> transportList;
         private List<t_shoplist> shopList;
         private List<v_itemunit> unitList;
+        private List<string> unitnameList;
+        private List<string> columnnameList;
+
 
         public ProductsControl()
         {
@@ -36,8 +39,7 @@ namespace GODInventoryWinForm.Controls
             this.transportdataGridView1.AutoGenerateColumns = false;
 
             EditTransportsFeeForm = new EditTransportsFee();
-
-
+            
         }
 
 
@@ -94,11 +96,17 @@ namespace GODInventoryWinForm.Controls
             this.transportComboBox.DataSource = transports;
 
 
-            //InitializetransportdataGridView1();
+            // 初始化datagridview 配送担当 数据列
+            var transportsForColumn = transportList.Select(s => new { id = s.id, fullname = s.fullname }).ToList();
+            transportsForColumn.Insert(0, new { id=0, fullname=""}); // transprot_id可能为0
 
-            initializeTabFreights();
+            this.transportColumn2.DataSource = transportsForColumn;
+            this.transportColumn2.DisplayMember = "fullname";
+            this.transportColumn2.ValueMember = "id";
+            
+            // initializeTabFreights();
 
-
+            //initializeUnitnames();
         }
 
         private void initializeTabFreights() {
@@ -136,7 +144,17 @@ namespace GODInventoryWinForm.Controls
             this.genresComboBox3.ValueMember = "Id";
             this.genresComboBox3.DisplayMember = "FullName";
             this.genresComboBox3.DataSource = genreList;
-            
+         
+        }
+
+        private void initializeUnitnames() {
+            var ctx = this.entityDataSource1.DbContext as GODDbContext;
+
+            this.unitnameList = ctx.t_freights.GroupBy(o => o.unitname).Select(o => o.Key).ToList();
+            this.columnnameList = ctx.t_freights.GroupBy(o => o.columnname).Select(o => o.Key).ToList();
+            // 单位选项
+            this.unitnameComboBox4.DataSource = this.unitnameList;
+            this.columnnameComboBox4.DataSource = this.columnnameList;
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -476,7 +494,8 @@ namespace GODInventoryWinForm.Controls
         {
             int productCode = (int)this.productsComboBox.SelectedValue;
             int storeId = Convert.ToInt32(this.storesComboBox.SelectedValue);
-            string county = Convert.ToString(this.countyComboBox2.SelectedValue);
+            string county = this.countyComboBox2.Text;
+            string area = this.areaComboBox2.Text;
             int genreId = Convert.ToInt32(this.genresComboBox.SelectedValue);
 
             string warehousename = this.warehouseComboBox.Text;
@@ -484,6 +503,9 @@ namespace GODInventoryWinForm.Controls
             int warehouseId = Convert.ToInt32(this.warehouseComboBox.SelectedValue);
             int transportId = Convert.ToInt32(this.transportComboBox.SelectedValue);
             string unitname = string.Empty;
+
+            area = (area != anyOption ? area : String.Empty);
+            county = (county != anyOption ? county : String.Empty);
 
             String sql = String.Empty;
             //保存配送担当
@@ -535,14 +557,17 @@ namespace GODInventoryWinForm.Controls
                     //                        select item.自社コード).ToList();
                     //    sql = String.Format("UPDATE t_pricelist SET  `transport_id`={0},`配送担当`='{1}',`warehouse_id`={2},`warehousename`='{3}' WHERE `自社コード`in ({1})", transportId, transportName, warehouseId, warehousename, String.Join(",", productCodes));
                     //}
-
-                    if (county.Length > 0)
-                    {
-                        sql += string.Format(" AND `県別`='{0}'", county);
-                    }
                     if (storeId > 0)
                     {
                         sql += string.Format(" AND `店番`={0}", storeId);
+                    }else if (county.Length > 0)
+                    {
+                        sql += string.Format(" AND `県別`='{0}'", county);
+                    }
+                    else if (area.Length > 0)
+                    {
+                        var pids = ctx.t_shoplist.Where(o => o.地域 == area).Select(o => o.店番).ToList();
+                        sql += string.Format(" AND  `店番` in ({0}) ", string.Join(",", pids));
                     }
                     ctx.Database.ExecuteSqlCommand(sql);
 
@@ -735,6 +760,7 @@ namespace GODInventoryWinForm.Controls
                         //InitializeDataSource();
                         //InitializetransportdataGridView1();
                         bttransportfind_Click(null, EventArgs.Empty);
+                        //initializeUnitnames();
                     }
                 }
             }
