@@ -31,7 +31,8 @@ namespace GODInventoryWinForm
         List<t_orderdata> allPendingOrderList;
         List<t_orderdata> pendingOrderList;
         List<t_orderdata> shippedOrderList;
-        List<t_orderdata> xlsxMissingOrderList;
+        List<t_orderdata> xlsxMissingPendingOrderList;
+        List<t_orderdata> xlsxMissingWaitingOrderList;
         List<t_orderdata> xlsxShippedOrderList;
 
         public int SavedOrderCount { get; set; }
@@ -107,14 +108,18 @@ namespace GODInventoryWinForm
                     // 当前店铺所有发出订单
                     this.shippedOrderList = pendingOrderList.Where(o => o.Status == OrderStatus.PendingShipment).ToList();
 
-                    // 遗漏订单 = 当前店铺所有待处理订单 - 所有发出订单 - 所有等待配车订单
-                    this.xlsxMissingOrderList = pendingOrderList.Except(shippedOrderList).Where(o => o.Status != OrderStatus.WaitToShip ).ToList();
+                    // 遗漏等待发货订单 = (当前店铺所有待处理订单 - xlsxOrderList) where  o.Status == OrderStatus.WaitToShip
+                    this.xlsxMissingWaitingOrderList = pendingOrderList.Except(xlsxOrderList).Where(o => o.Status == OrderStatus.WaitToShip).ToList();
+
+                    // 遗漏待处理订单 = 当前店铺所有待处理订单 - 所有发出订单 - 所有等待配车订单
+                    this.xlsxMissingPendingOrderList = pendingOrderList.Except(shippedOrderList).Where(o => o.Status != OrderStatus.WaitToShip ).ToList();
                     // 重复订单 =   xlsx订单 where 
-                   this.xlsxShippedOrderList = xlsxOrderList.Where(o => o.Status == OrderStatus.PendingShipment).ToList();
+                    this.xlsxShippedOrderList = xlsxOrderList.Where(o => o.Status == OrderStatus.PendingShipment).ToList();
 
                 }
-                this.dataGridView1.DataSource = this.xlsxMissingOrderList;
+                this.dataGridView1.DataSource = this.xlsxMissingPendingOrderList;
                 this.dataGridView2.DataSource = this.xlsxShippedOrderList;
+                this.dataGridView3.DataSource = this.xlsxMissingWaitingOrderList;
                 // 查询 店铺内所有未处理订单
             }
         }
@@ -280,29 +285,29 @@ namespace GODInventoryWinForm
                         //    }                            
                         //}
                         string val = GetCellValue(wbPart, cell);
+                        string rev = cell.CellReference.Value;
 
-
-                        if (cellindex == 1)// B
+                        if (rev.StartsWith("B"))// B
                         {
                             item.配送担当 = val;
                         }
 
-                        if (cellindex == 2)// C
+                        if (rev.StartsWith("C"))// C
                         {
                             item.車番 = val;
                         }
 
-                        if (cellindex == 3)// D
+                        if (rev.StartsWith("D"))// D
                         {
                             item.ドライバー = val;
                         }
 
-                        if (cellindex == 4)// E
+                        if (rev.StartsWith("E"))// E
                         {
                             item.方面 = val;
                         }
 
-                        if (cellindex == 5)// F
+                        if (rev.StartsWith("F"))// F
                         {
                             cellvalue = val;
                             if (double.TryParse(cellvalue, out oaDteAsDouble))
@@ -313,7 +318,7 @@ namespace GODInventoryWinForm
                             item.出荷日 = cellvalue;
                         }
 
-                        if (cellindex == 6)// G
+                        if (rev.StartsWith("G"))// G
                         {
                             cellvalue = val;
                             if (double.TryParse(cellvalue, out oaDteAsDouble))
@@ -324,16 +329,16 @@ namespace GODInventoryWinForm
                             item.納品日 = cellvalue;
                         }
 
-                        if (cellindex == 7)// H
+                        if (rev.StartsWith("H"))// H
                         {
                             item.荷主 = val;
                         }
-                        if (cellindex == 8)// I
+                        if (rev.StartsWith("I"))// I
                         {
                             item.県別 = val;
                         }
 
-                        if (cellindex == 9)// J
+                        if (rev.StartsWith("J"))// J
                         {
                             //对于日文 val 会多出一些文字，使用这个方法会取出正确结果。  如： 名張店 -> "名張店ナバリテン"
                             //var specialCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == ("J" + rowindex+1)).FirstOrDefault();
@@ -341,22 +346,22 @@ namespace GODInventoryWinForm
                             item.卸先 = val;
                         }
 
-                        if (cellindex == 10)// K
+                        if (rev.StartsWith("K"))// K
                         {
                             item.品名 = val;
                         }
 
-                        if (cellindex == 11)// L
+                        if (rev.StartsWith("L"))// L
                         {
                             item.口数 = val;
                         }
 
-                        if (cellindex == 12)// M
+                        if (rev.StartsWith("M"))// M
                         {
                             item.数量 = val;
                         }
 
-                        if (cellindex == 13)// N
+                        if (rev.StartsWith("N"))// N
                         {
                             // 表格的N列存储 “伝票番号”，对于 二次制品，存储的是 “社内伝番”
                             cellvalue = val;
@@ -375,12 +380,11 @@ namespace GODInventoryWinForm
                             }
                         }
 
-                        if (cellindex == 14)// O
+                        if (rev.StartsWith("O"))// O
                         {
                             item.処理済 = val;
                         }
 
-                        cellindex++;
                     }
 
 

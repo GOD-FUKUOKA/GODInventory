@@ -299,7 +299,7 @@ DROP INDEX `combo` ,
 ADD INDEX `combo` (`warehouse_id` ASC, `transport_id` ASC, `shop_id` ASC, `自社コード` ASC);
 
 # 20190401
-ALTER TABLE `t_freights` CHANGE COLUMN `fee` `fee` DECIMAL(10,2) NOT NULL DEFAULT '0' ;
+ALTER TABLE `t_freights` CHANGE COLUMN `fee` `fee` DECIMAL(10,3) NOT NULL DEFAULT '0' ;
 ALTER TABLE `t_orderdata` CHANGE COLUMN `運賃` `運賃` INT NOT NULL DEFAULT '0' ;
 
 ALTER TABLE `t_freights` 

@@ -257,46 +257,48 @@ namespace GODInventoryWinForm
                     int cellindex = 0;
                     foreach (Cell cell in row) {
                         // Console.WriteLine("cell = {0}", cell);
+                        string val = GetCellValue(wbPart, cell);
+                        string rev = cell.CellReference.Value;
 
-                        if (cellindex == 0)// A
+                        if (rev.StartsWith("A"))// A
                         {                            
-                            item.県別 = GetCellValue(wbPart, cell); ;
+                            item.県別 = val; 
                         }
-                        if (cellindex == 1)
+                        if (rev.StartsWith("B"))
                         {
-                            item.店舗コード = GetCellValue(wbPart, cell); 
+                            item.店舗コード = val; 
                         }
-                        if (cellindex == 2)
+                        if (rev.StartsWith("C"))
                         {
-                            item.店舗名漢字 = GetCellValue(wbPart, cell);
+                            item.店舗名漢字 = val;
                         }
-                        if (cellindex == 3)
+                        if (rev.StartsWith("D"))
                         {
-                            item.自社コード = GetCellValue(wbPart, cell);
+                            item.自社コード = val;
                         }
-                        if (cellindex == 4)
+                        if (rev.StartsWith("E"))
                         {
-                            item.品名漢字 = GetCellValue(wbPart, cell);
+                            item.品名漢字 = val;
                         }
-                        if (cellindex == 5)
+                        if (rev.StartsWith("F"))
                         {
-                            item.最小発注単位数量 = GetCellValue(wbPart, cell);
+                            item.最小発注単位数量 = val;
                         }
-                        if (cellindex == 6)
+                        if (rev.StartsWith("G"))
                         {
-                            item.口数 = GetCellValue(wbPart, cell);
+                            item.口数 = val;
                         }
-                        if (cellindex == 7)
+                        if (rev.StartsWith("H"))
                         {
-                            item.発注数量 = GetCellValue(wbPart, cell);
+                            item.発注数量 = val;
                         }
-                        if (cellindex == 8)
+                        if (rev.StartsWith("I"))
                         {
-                            item.原単価税抜 = GetCellValue(wbPart, cell);
+                            item.原単価税抜 = val;
                         }
-                        if (cellindex == 9)
+                        if (rev.StartsWith("J"))
                         {
-                            item.原価金額税抜 = GetCellValue(wbPart, cell);
+                            item.原価金額税抜 = val;
                         }
                         cellindex++;
                     }
