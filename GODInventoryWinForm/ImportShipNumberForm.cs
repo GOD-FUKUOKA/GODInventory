@@ -28,7 +28,11 @@ namespace GODInventoryWinForm
         private SortableBindingList<XLSXImportShipNumber> sortablemodelsList;
 
         List<t_orderdata> xlsxOrderList;
+        List<t_orderdata> allPendingOrderList;
         List<t_orderdata> pendingOrderList;
+        List<t_orderdata> shippedOrderList;
+        List<t_orderdata> xlsxMissingOrderList;
+        List<t_orderdata> xlsxShippedOrderList;
 
         public int SavedOrderCount { get; set; }
         private string totalRecordFormat = "合計 {0} 行";
@@ -37,6 +41,7 @@ namespace GODInventoryWinForm
         {
             InitializeComponent();
             dataGridView1.AutoGenerateColumns = false;
+            dataGridView2.AutoGenerateColumns = false;
 
             this.ControlBox = false;   // 设置不出现关闭按钮
         }
@@ -78,21 +83,38 @@ namespace GODInventoryWinForm
 
                 var orderNumbers = modelList.Where(o => { return !string.IsNullOrEmpty(o.伝票番号); }).Select(o => Convert.ToInt32(o.伝票番号));
                 var orderInnerNumbers = modelList.Where(o => { return !string.IsNullOrEmpty(o.社内伝番); }).Select(o => Convert.ToInt32(o.社内伝番));
-                OrderStatus[] orderStateRequired = { OrderStatus.Pending, OrderStatus.NotifyShipper, OrderStatus.PendingShipment };
+                OrderStatus[] orderStateRequired = { OrderStatus.Pending, OrderStatus.NotifyShipper, OrderStatus.PendingShipment, OrderStatus.WaitToShip };
 
                 //var shopIds = models.
 
                 // 查询 伝票番号和社内伝番所有订单，
                 using (var ctx = new GODDbContext())
                 {
-                    this.xlsxOrderList = (from t_orderdata o in ctx.t_orderdata
-                                          where orderStateRequired.Contains(o.Status) && (orderNumbers.Contains(o.伝票番号) || orderInnerNumbers.Contains(o.社内伝番))
-                                          select o).ToList();
-                    var shopIds = xlsxOrderList.Select(o => o.店舗コード).Distinct().ToList();
-                    this.pendingOrderList = (from t_orderdata o in ctx.t_orderdata
-                                             where shopIds.Contains(o.店舗コード) && orderStateRequired.Contains(o.Status)
+
+                    // 所有待处理订单，包括 需要导入、未传送的，传送的。包括所有店铺的
+                    this.allPendingOrderList = (from t_orderdata o in ctx.t_orderdata
+                                             where orderStateRequired.Contains(o.Status)
                                              select o).ToList();
+
+                    // xlsx订单，即需要导入的订单
+                    this.xlsxOrderList = allPendingOrderList.Where(o =>  (orderNumbers.Contains(o.伝票番号) || orderInnerNumbers.Contains(o.社内伝番))).ToList();
+
+                    var shopIds = xlsxOrderList.Select(o => o.店舗コード).Distinct().ToList();
+
+                    // 当前店铺所有待处理订单
+                    this.pendingOrderList = allPendingOrderList.Where(o => shopIds.Contains(o.店舗コード)).ToList();
+
+                    // 当前店铺所有发出订单
+                    this.shippedOrderList = pendingOrderList.Where(o => o.Status == OrderStatus.PendingShipment).ToList();
+
+                    // 遗漏订单 = 当前店铺所有待处理订单 - 所有发出订单 - 所有等待配车订单
+                    this.xlsxMissingOrderList = pendingOrderList.Except(shippedOrderList).Where(o => o.Status != OrderStatus.WaitToShip ).ToList();
+                    // 重复订单 =   xlsx订单 where 
+                   this.xlsxShippedOrderList = xlsxOrderList.Where(o => o.Status == OrderStatus.PendingShipment).ToList();
+
                 }
+                this.dataGridView1.DataSource = this.xlsxMissingOrderList;
+                this.dataGridView2.DataSource = this.xlsxShippedOrderList;
                 // 查询 店铺内所有未处理订单
             }
         }
@@ -102,12 +124,8 @@ namespace GODInventoryWinForm
             this.importButton.Enabled = false;
             this.closeButton.Enabled = false;
             bool success = ImportOrderTxt(pathTextBox.Text);
-
-            if (this.SavedOrderCount > 0)
-            {
-                MessageBox.Show(string.Format("{0}件の受注伝票が登録できました", this.SavedOrderCount), "INFO");
-            }
-
+             
+            MessageBox.Show(string.Format("{0}件の受注伝票が登録できました", this.SavedOrderCount), "INFO");
 
             this.importButton.Enabled = true;
             this.closeButton.Enabled = true;
@@ -147,96 +165,47 @@ namespace GODInventoryWinForm
             using (var ctx = new GODDbContext())
             {
 
-                XLSXImportShipNumber model = null;
-                int progress = 0;
-                int count = 0;
+
                 using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {
                     try
                     {
-
-
-
-                        List<XLSXImportShipNumber> we = modelList.FindAll(s => s.処理済 != null && s.処理済.Contains("未"));
-
-                        long m = we.Count;
-                        if (m > 0)
+                        foreach (var model in this.modelList)
                         {
-                            for (var i = 0; i < modelList.Count; i++)
+
+                            if (string.IsNullOrEmpty(model.出荷No))
                             {
-
-                                model = modelList.ElementAt(i);
-                                if (string.IsNullOrEmpty(model.出荷No))
-                                {
-                                    model.出荷No = DateTime.Now.ToString("yyMMdd") + model.車番;
-                                }
-                                string ShipNO = "";
-                                int j = 0;
-                                int ii = 0;
-
-                                string sql = "";
-                                if (model.品名 != "二次製品" && model.処理済.Contains("未"))
-                                {
-                                    sql = "UPDATE t_orderdata  SET `出荷日` = '" + model.出荷日 + "', `納品日`= '" + model.納品日 + "', `Status` = 5, `ShipNO` = '" + model.出荷No + "' " + " WHERE (`伝票番号` = " + model.伝票番号 + " AND `店舗名漢字` = '" + model.卸先 + "')";
-                                    model.処理済 = "済";
-                                    ShipNO = model.出荷No;
-                                    j = j + 1;
-                                    ii = ii + 1;
-                                }
-                                if (j > 0 && ii < modelList.Count)
-                                {
-                                    for (int k = i; k < modelList.Count; k++)
-                                    {
-                                        if (model.品名 != "二次製品" && model.品名 == "未" && modelList[k].品名 == ShipNO)
-                                        {
-                                            sql = sql + " OR (`伝票番号` = " + model.伝票番号 + " AND `店舗名漢字` = '" + model.卸先 + "')";
-
-                                            modelList[k].処理済 = "済";
-                                        }
-                                    }
-                                }
-                                if (sql != null && sql != "")
-                                {
-                                    ctx.Database.ExecuteSqlCommand(sql);
-                                }
-
-                                ii = 0;
-                                j = 0;
-
-                                if (model.品名 == "二次製品" && model.処理済.Contains("未"))
-                                {
-                                    sql = "UPDATE t_orderdata SET `出荷日` = '" + model.出荷日 + "', `納品日`= '" + model.納品日 + "', `Status` = 5, `ShipNO` = '" + model.出荷No + "' " + " WHERE (`社内伝番` = " + model.伝票番号 + " AND `店舗名漢字` = '" + model.卸先 + "')";
-                                    model.処理済 = "済";
-                                    ShipNO = model.出荷No;
-                                    ii = ii + 1;
-                                    j = j + 1;
-                                }
-                                else
-                                    ii = ii + 1;
-
-                                if (j > 0 && ii < modelList.Count)
-                                {
-                                    for (int k = i; k < modelList.Count; k++)
-                                    {
-
-                                        if (model.品名 == "二次製品" && model.品名 == "未" && modelList[k].品名 == ShipNO)
-                                        {
-                                            sql = sql + " OR (`社内伝番` = " + model.伝票番号 + " AND `店舗名漢字` = '" + model.卸先 + "')";
-                                            model.処理済 = "済";
-                                        }
-                                    }
-                                }
-                                if (sql != null && sql != "")
-                                {
-                                    ctx.Database.ExecuteSqlCommand(sql);
-                                }
-
-
+                                model.出荷No = DateTime.Now.ToString("yyMMdd") + model.車番;
                             }
                         }
+                        List<XLSXImportShipNumber> normalOrders = modelList.FindAll(s => !string.IsNullOrEmpty(s.伝票番号));
+                        List<XLSXImportShipNumber> twiceOrders = modelList.FindAll(s => !string.IsNullOrEmpty(s.社内伝番));
+
+
+                        List<string> sqls = new List<string>();
+
+                        if( normalOrders.Count>0){
+                            foreach (var model in normalOrders)
+                            {
+                                //对于日文 val 会多出一些文字，  如： 名張店 -> "名張店ナバリテン"
+                                var s = string.Format("UPDATE t_orderdata  SET `出荷日` = '{0}', `納品日`= '{1}', `Status` = 5, `ShipNO` = '{2}'  WHERE (`伝票番号` = {3} AND `Status` = 3 AND strcmp('{4}', `店舗名漢字`) >=0 );", model.出荷日, model.納品日, model.出荷No, model.伝票番号, model.卸先);
+                                sqls.Add(s);                            
+                            }
+                        
+                        }
+
+                        if(twiceOrders.Count>0){
+                            foreach (var model in twiceOrders)
+                            {
+                                var s = string.Format("UPDATE t_orderdata  SET `出荷日` = '{0}', `納品日`= '{1}', `Status` = 5, `ShipNO` = '{2}'  WHERE (`社内伝番` = {3} AND `Status` = 3 AND strcmp('{4}', `店舗名漢字`) >=0 );", model.出荷日, model.納品日, model.出荷No, model.社内伝番, model.卸先);
+                                sqls.Add(s);                            
+                            }
+                        }
+                                 
+                        this.SavedOrderCount = ctx.Database.ExecuteSqlCommand(string.Join("", sqls));
 
                         ctxTransaction.Commit();
-
+                         
                     }
 
                     catch (Exception exception)
@@ -366,6 +335,9 @@ namespace GODInventoryWinForm
 
                         if (cellindex == 9)// J
                         {
+                            //对于日文 val 会多出一些文字，使用这个方法会取出正确结果。  如： 名張店 -> "名張店ナバリテン"
+                            //var specialCell = worksheetPart.Worksheet.Descendants<Cell>().Where(c => c.CellReference.Value == ("J" + rowindex+1)).FirstOrDefault();
+                            //val = GetCellValue(wbPart, specialCell);
                             item.卸先 = val;
                         }
 
@@ -539,20 +511,7 @@ namespace GODInventoryWinForm
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
-            {
-                var row = this.dataGridView1.Rows[e.RowIndex];
-                var data = row.DataBoundItem as XLSXImportShipNumber;
-                //DataGridViewCell cell = this.dataGridView1.Rows[e.RowIndex].Cells["selectedColumn1"];
-                if (data.selected == 1)
-                {
-                    data.selected = 0;
-                }
-                else
-                {
-                    data.selected = 1;
-                }
-            }
+
         }
 
 

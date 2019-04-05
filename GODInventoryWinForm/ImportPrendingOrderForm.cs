@@ -122,7 +122,7 @@ namespace GODInventoryWinForm
                 XLSXImportPrendingOrder model = null;
                 int progress = 0;
                 int count = 0;
-                //using (var ctxTransaction = ctx.Database.BeginTransaction())
+                using (var ctxTransaction = ctx.Database.BeginTransaction())
                 {
                     try
                     {
@@ -180,20 +180,20 @@ namespace GODInventoryWinForm
                             MessageBox.Show(string.Format("{0}件の受注伝票が登録できました", SavedOrderCount));
                         }
 
-                        //  ctxTransaction.Commit();
+                          ctxTransaction.Commit();
 
                     }
 
                     catch (Exception exception)
                     {
-                       // ctxTransaction.Rollback();
+                        ctxTransaction.Rollback();
 
                         MessageBox.Show( exception.Message );
                         success = false;
                     }
-                }
+                }// transaction
 
-            }
+            }// ctx
             return success;
         }
         private string[] ConvertToUtf8Strings(string path)

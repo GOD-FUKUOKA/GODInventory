@@ -40,28 +40,25 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalRecordLabel = new System.Windows.Forms.Label();
-            this.selectedColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.warehouseColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.配送担当 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.車番 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.納品日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.荷主 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.伝票番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.発注日column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.品名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.口数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.伝票番号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.処理済 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warehouseColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -144,29 +141,25 @@
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.selectedColumn1,
+            this.warehouseColumn1,
             this.配送担当,
-            this.車番,
-            this.出荷日,
-            this.納品日,
-            this.荷主,
+            this.伝票番号,
+            this.発注日column,
             this.品名,
             this.口数,
-            this.数量,
-            this.伝票番号,
-            this.処理済});
-            this.dataGridView1.Location = new System.Drawing.Point(15, 94);
+            this.数量});
+            this.dataGridView1.Location = new System.Drawing.Point(15, 108);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(641, 261);
+            this.dataGridView1.Size = new System.Drawing.Size(641, 247);
             this.dataGridView1.TabIndex = 8;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // errorProvider1
             // 
@@ -180,159 +173,86 @@
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.warehouseColumn2,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn9,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10});
-            this.dataGridView2.Location = new System.Drawing.Point(675, 94);
+            this.dataGridViewTextBoxColumn8});
+            this.dataGridView2.Location = new System.Drawing.Point(675, 108);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(641, 261);
+            this.dataGridView2.Size = new System.Drawing.Size(641, 247);
             this.dataGridView2.TabIndex = 8;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "配送担当";
-            this.dataGridViewTextBoxColumn1.HeaderText = "配送担当";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "車番";
-            this.dataGridViewTextBoxColumn2.HeaderText = "車番";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "出荷日";
-            this.dataGridViewTextBoxColumn3.HeaderText = "出荷日";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "納品日";
-            this.dataGridViewTextBoxColumn4.HeaderText = "納品日";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "荷主";
-            this.dataGridViewTextBoxColumn5.HeaderText = "荷主";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "品名";
-            this.dataGridViewTextBoxColumn6.HeaderText = "品名";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "口数";
-            this.dataGridViewTextBoxColumn7.HeaderText = "口数";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "数量";
-            this.dataGridViewTextBoxColumn8.HeaderText = "数量";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "伝票番号";
-            this.dataGridViewTextBoxColumn9.HeaderText = "伝票番号";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "処理済";
-            this.dataGridViewTextBoxColumn10.HeaderText = "処理済";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
             // 
             // totalRecordLabel
             // 
             this.totalRecordLabel.AutoSize = true;
-            this.totalRecordLabel.Location = new System.Drawing.Point(12, 363);
+            this.totalRecordLabel.Location = new System.Drawing.Point(662, 61);
             this.totalRecordLabel.Name = "totalRecordLabel";
             this.totalRecordLabel.Size = new System.Drawing.Size(64, 14);
             this.totalRecordLabel.TabIndex = 10;
             this.totalRecordLabel.Text = "合計 0 行";
             // 
-            // selectedColumn1
+            // label2
             // 
-            this.selectedColumn1.DataPropertyName = "selected";
-            this.selectedColumn1.FalseValue = "0";
-            this.selectedColumn1.Frozen = true;
-            this.selectedColumn1.HeaderText = "selected";
-            this.selectedColumn1.Name = "selectedColumn1";
-            this.selectedColumn1.ReadOnly = true;
-            this.selectedColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.selectedColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.selectedColumn1.TrueValue = "1";
-            this.selectedColumn1.Width = 50;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 90);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(91, 14);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "可能遗漏数据";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(672, 90);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(91, 14);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "可能重复数据";
+            // 
+            // warehouseColumn1
+            // 
+            this.warehouseColumn1.DataPropertyName = "warehousename";
+            this.warehouseColumn1.HeaderText = "倉庫";
+            this.warehouseColumn1.Name = "warehouseColumn1";
+            this.warehouseColumn1.ReadOnly = true;
             // 
             // 配送担当
             // 
-            this.配送担当.DataPropertyName = "配送担当";
+            this.配送担当.DataPropertyName = "実際配送担当";
             this.配送担当.HeaderText = "配送担当";
             this.配送担当.Name = "配送担当";
             this.配送担当.ReadOnly = true;
             // 
-            // 車番
+            // 伝票番号
             // 
-            this.車番.DataPropertyName = "車番";
-            this.車番.HeaderText = "車番";
-            this.車番.Name = "車番";
-            this.車番.ReadOnly = true;
-            this.車番.Width = 60;
+            this.伝票番号.DataPropertyName = "伝票番号";
+            this.伝票番号.HeaderText = "伝票番号";
+            this.伝票番号.Name = "伝票番号";
+            this.伝票番号.ReadOnly = true;
             // 
-            // 出荷日
+            // 発注日column
             // 
-            this.出荷日.DataPropertyName = "出荷日";
-            this.出荷日.HeaderText = "出荷日";
-            this.出荷日.Name = "出荷日";
-            this.出荷日.ReadOnly = true;
-            // 
-            // 納品日
-            // 
-            this.納品日.DataPropertyName = "納品日";
-            this.納品日.HeaderText = "納品日";
-            this.納品日.Name = "納品日";
-            this.納品日.ReadOnly = true;
-            // 
-            // 荷主
-            // 
-            this.荷主.DataPropertyName = "荷主";
-            this.荷主.HeaderText = "荷主";
-            this.荷主.Name = "荷主";
-            this.荷主.ReadOnly = true;
+            this.発注日column.DataPropertyName = "発注日";
+            this.発注日column.HeaderText = "発注日";
+            this.発注日column.Name = "発注日column";
+            this.発注日column.ReadOnly = true;
             // 
             // 品名
             // 
-            this.品名.DataPropertyName = "品名";
+            this.品名.DataPropertyName = "品名漢字";
             this.品名.HeaderText = "品名";
             this.品名.Name = "品名";
             this.品名.ReadOnly = true;
@@ -343,35 +263,94 @@
             this.口数.HeaderText = "口数";
             this.口数.Name = "口数";
             this.口数.ReadOnly = true;
-            this.口数.Width = 60;
             // 
             // 数量
             // 
-            this.数量.DataPropertyName = "数量";
+            this.数量.DataPropertyName = "実際出荷数量";
             this.数量.HeaderText = "数量";
             this.数量.Name = "数量";
             this.数量.ReadOnly = true;
-            this.数量.Width = 50;
             // 
-            // 伝票番号
+            // warehouseColumn2
             // 
-            this.伝票番号.DataPropertyName = "伝票番号";
-            this.伝票番号.HeaderText = "伝票番号";
-            this.伝票番号.Name = "伝票番号";
-            this.伝票番号.ReadOnly = true;
+            this.warehouseColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.warehouseColumn2.DataPropertyName = "warehousename";
+            this.warehouseColumn2.FillWeight = 60F;
+            this.warehouseColumn2.HeaderText = "倉庫";
+            this.warehouseColumn2.Name = "warehouseColumn2";
+            this.warehouseColumn2.ReadOnly = true;
             // 
-            // 処理済
+            // dataGridViewTextBoxColumn1
             // 
-            this.処理済.DataPropertyName = "処理済";
-            this.処理済.HeaderText = "処理済";
-            this.処理済.Name = "処理済";
-            this.処理済.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "実際配送担当";
+            this.dataGridViewTextBoxColumn1.FillWeight = 51.36819F;
+            this.dataGridViewTextBoxColumn1.HeaderText = "配送担当";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "ShipNO";
+            this.dataGridViewTextBoxColumn2.FillWeight = 61.36819F;
+            this.dataGridViewTextBoxColumn2.HeaderText = "出荷番号";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "伝票番号";
+            this.dataGridViewTextBoxColumn9.FillWeight = 61.36819F;
+            this.dataGridViewTextBoxColumn9.HeaderText = "伝票番号";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "出荷日";
+            this.dataGridViewTextBoxColumn3.FillWeight = 61.36819F;
+            this.dataGridViewTextBoxColumn3.HeaderText = "出荷日";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "納品日";
+            this.dataGridViewTextBoxColumn4.FillWeight = 61.36819F;
+            this.dataGridViewTextBoxColumn4.HeaderText = "納品日";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "品名漢字";
+            this.dataGridViewTextBoxColumn6.FillWeight = 61.36819F;
+            this.dataGridViewTextBoxColumn6.HeaderText = "品名";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "口数";
+            this.dataGridViewTextBoxColumn7.FillWeight = 30F;
+            this.dataGridViewTextBoxColumn7.HeaderText = "口数";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "実際出荷数量";
+            this.dataGridViewTextBoxColumn8.FillWeight = 30F;
+            this.dataGridViewTextBoxColumn8.HeaderText = "数量";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
             // 
             // ImportShipNumberForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1330, 432);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.totalRecordLabel);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
@@ -413,27 +392,24 @@
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.Label totalRecordLabel;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn selectedColumn1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn warehouseColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 配送担当;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 車番;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 出荷日;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 納品日;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 荷主;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注日column;
         private System.Windows.Forms.DataGridViewTextBoxColumn 品名;
         private System.Windows.Forms.DataGridViewTextBoxColumn 口数;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 伝票番号;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 処理済;
+        private System.Windows.Forms.DataGridViewTextBoxColumn warehouseColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
     }
 }

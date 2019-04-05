@@ -34,7 +34,6 @@ namespace GODInventoryWinForm.Controls
             InitializeComponent();
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView2.AutoGenerateColumns = false;
-            //InitializeDataSource();
 
             //var q = OrderSqlHelper.WaitToShipOrderSql(entityDataSource1).ToList();
 
@@ -310,16 +309,21 @@ namespace GODInventoryWinForm.Controls
                     }
                     else
                     {
-                        string shipNO = shipNOComboBox.Text;
-                        string shipper = shipperComboBox.Text;
-                        string county = countyComboBox1.Text;
-                        string store = storeComboBox.Text;
-                        InitializeDataSource(shipper, county, store, shipNO);
+                        InitializeDataSourceBySelectedFilters();
 
                     }
                 }
             }
 
+        }
+
+        private void InitializeDataSourceBySelectedFilters() {
+
+            string shipNO = shipNOComboBox.Text;
+            string shipper = shipperComboBox.Text;
+            string county = countyComboBox1.Text;
+            string store = storeComboBox.Text;
+            InitializeDataSource(shipper, county, store, shipNO);
         }
 
         private bool ValidateShipNo()
@@ -596,7 +600,7 @@ namespace GODInventoryWinForm.Controls
             if (pendingOrders.Count > 0)
             {
                 RollbackOrder(pendingOrders);
-                RefreshWaitingOrderDataGridView();
+                InitializeDataSourceBySelectedFilters();
             }
 
         }
@@ -632,15 +636,6 @@ namespace GODInventoryWinForm.Controls
                 ctx.SaveChanges();
                 OrderSqlHelper.UpdateStockState(ctx, stockrecList);
             }
-        }
-
-        private void RefreshWaitingOrderDataGridView()
-        {
-            string shipNO = shipNOComboBox.Text;
-            string shipper = shipperComboBox.Text;
-            string county = countyComboBox1.Text;
-            string store = storeComboBox.Text;
-            InitializeDataSource(shipper, county, store, shipNO);
         }
 
         private void storeCodeTextBox_TextChanged(object sender, EventArgs e)
@@ -713,7 +708,13 @@ namespace GODInventoryWinForm.Controls
 
         private void btImportShipNumberForm_Click(object sender, EventArgs e)
         {
-            new ImportShipNumberForm().ShowDialog();
+            var form = new ImportShipNumberForm();
+            form.ShowDialog();
+            if (form.SavedOrderCount > 0) {
+
+                InitializeDataSourceBySelectedFilters();
+            }
+
         }
     }
 }
