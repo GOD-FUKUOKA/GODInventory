@@ -101,7 +101,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(63, 14);
             this.label9.TabIndex = 10000013;
-            this.label9.Text = "订单字段";
+            this.label9.Text = "計上項目";
             // 
             // label14
             // 
@@ -164,6 +164,7 @@
             // 
             // label7
             // 
+            this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(380, 114);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 14);
@@ -207,19 +208,21 @@
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(352, 41);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(380, 41);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 14);
+            this.label5.Size = new System.Drawing.Size(35, 14);
             this.label5.TabIndex = 10000002;
-            this.label5.Text = "仓库名称";
+            this.label5.Text = "倉庫";
             // 
             // label6
             // 
+            this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(380, 152);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 14);
             this.label6.TabIndex = 11;
-            this.label6.Text = "单位";
+            this.label6.Text = "単位";
             // 
             // unitnameTextBox
             // 
@@ -237,11 +240,12 @@
             // 
             // label2
             // 
+            this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(40, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 14);
             this.label2.TabIndex = 1;
-            this.label2.Text = "运输公司";
+            this.label2.Text = "配送担当";
             // 
             // submitFormButton
             // 
@@ -282,7 +286,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(651, 37);
             this.label4.TabIndex = 10000048;
-            this.label4.Text = "创建运费信息";
+            this.label4.Text = "新規運賃情報";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CreateTransportsFee
@@ -297,7 +301,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "CreateTransportsFee";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CreateTransportsFee";
+            this.Text = "新規運賃情報";
             this.Load += new System.EventHandler(this.CreateTransportsFee_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

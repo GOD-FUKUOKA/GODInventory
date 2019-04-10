@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.btAddItem = new System.Windows.Forms.Button();
             this.shortname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fullnameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.memoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.btAddItem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -74,32 +74,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(1035, 311);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDoubleClick);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.editToolStripMenuItem.Text = "编辑";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-            // 
-            // btAddItem
-            // 
-            this.btAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAddItem.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btAddItem.Location = new System.Drawing.Point(941, 34);
-            this.btAddItem.Name = "btAddItem";
-            this.btAddItem.Size = new System.Drawing.Size(106, 32);
-            this.btAddItem.TabIndex = 1;
-            this.btAddItem.Text = "新規";
-            this.btAddItem.UseVisualStyleBackColor = true;
-            this.btAddItem.Click += new System.EventHandler(this.btAddItem_Click);
             // 
             // shortname
             // 
@@ -140,6 +114,32 @@
             this.memoColumn.HeaderText = "備考";
             this.memoColumn.Name = "memoColumn";
             this.memoColumn.ReadOnly = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem.Text = "編集";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // btAddItem
+            // 
+            this.btAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAddItem.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btAddItem.Location = new System.Drawing.Point(941, 34);
+            this.btAddItem.Name = "btAddItem";
+            this.btAddItem.Size = new System.Drawing.Size(106, 32);
+            this.btAddItem.TabIndex = 1;
+            this.btAddItem.Text = "新規";
+            this.btAddItem.UseVisualStyleBackColor = true;
+            this.btAddItem.Click += new System.EventHandler(this.btAddItem_Click);
             // 
             // IndexForm
             // 

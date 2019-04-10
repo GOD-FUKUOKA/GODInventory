@@ -472,10 +472,10 @@
             // 
             this.btImportShipNumberForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btImportShipNumberForm.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btImportShipNumberForm.Location = new System.Drawing.Point(1083, 17);
+            this.btImportShipNumberForm.Location = new System.Drawing.Point(1042, 17);
             this.btImportShipNumberForm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btImportShipNumberForm.Name = "btImportShipNumberForm";
-            this.btImportShipNumberForm.Size = new System.Drawing.Size(106, 32);
+            this.btImportShipNumberForm.Size = new System.Drawing.Size(147, 32);
             this.btImportShipNumberForm.TabIndex = 11;
             this.btImportShipNumberForm.Text = "出荷指示書の導入";
             this.btImportShipNumberForm.UseVisualStyleBackColor = true;

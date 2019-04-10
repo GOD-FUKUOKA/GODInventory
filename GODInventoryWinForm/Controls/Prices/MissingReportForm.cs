@@ -84,7 +84,7 @@ namespace GODInventoryWinForm.Controls.Prices
             
             var rows = this.groupByShopDataGridView1.SelectedRows;
             if (rows.Count > 0) {
-                if (MessageBox.Show(String.Format("确定要为这{0}个店铺添加商品价格信息吗？", rows.Count), "添加操作确认", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                if (MessageBox.Show(String.Format("确定要为这{0}个店铺添加商品价格信息吗？", rows.Count), "Confirm", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
                     using (var ctx = new GODDbContext())
                     {
@@ -146,7 +146,7 @@ namespace GODInventoryWinForm.Controls.Prices
             var rows = this.groupByProductDataGridView2.SelectedRows;
             if (rows.Count > 0)
             {
-                if (MessageBox.Show(String.Format("确定要为这{0}个商品添加价格信息吗？", rows.Count), "添加操作确认", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                if (MessageBox.Show(String.Format("确定要为这{0}个商品添加价格信息吗？", rows.Count), "Confirm", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
                     using (var ctx = new GODDbContext())
                     {

@@ -60,7 +60,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label13.Location = new System.Drawing.Point(55, 92);
+            this.label13.Location = new System.Drawing.Point(55, 91);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(35, 14);
             this.label13.TabIndex = 17;
@@ -77,7 +77,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(27, 122);
+            this.label1.Location = new System.Drawing.Point(27, 121);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.TabIndex = 19;
@@ -119,7 +119,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(598, 45);
             this.label3.TabIndex = 10000029;
-            this.label3.Text = "新規配送担当";
+            this.label3.Text = "編集配送担当";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // addressTextBox
@@ -151,7 +151,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(55, 212);
+            this.label5.Location = new System.Drawing.Point(55, 211);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 14);
             this.label5.TabIndex = 10000033;
@@ -168,7 +168,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(58, 242);
+            this.label6.Location = new System.Drawing.Point(58, 241);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 14);
             this.label6.TabIndex = 10000035;
@@ -216,7 +216,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "EditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "新規配送担当";
+            this.Text = "編集配送担当";
             this.Shown += new System.EventHandler(this.EditForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

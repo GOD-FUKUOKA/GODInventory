@@ -116,7 +116,6 @@
             this.searchButton = new System.Windows.Forms.Button();
             this.productsComboBox = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.fillMissingButton3 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.columnnameComboBox4 = new System.Windows.Forms.ComboBox();
             this.unitnameComboBox4 = new System.Windows.Forms.ComboBox();
@@ -142,11 +141,6 @@
             this.genresComboBox3 = new System.Windows.Forms.ComboBox();
             this.bttransportfind = new System.Windows.Forms.Button();
             this.transportdataGridView1 = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.transportdatabindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.transportname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.warehousename = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shopIdColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -155,6 +149,11 @@
             this.fee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderColumNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.button2 = new System.Windows.Forms.Button();
+            this.pricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.transportdatabindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.productContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -990,7 +989,6 @@
             // tabPage3
             // 
             this.tabPage3.AutoScroll = true;
-            this.tabPage3.Controls.Add(this.fillMissingButton3);
             this.tabPage3.Controls.Add(this.groupBox5);
             this.tabPage3.Controls.Add(this.groupBox4);
             this.tabPage3.Controls.Add(this.transportdataGridView1);
@@ -1002,19 +1000,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "運賃";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // fillMissingButton3
-            // 
-            this.fillMissingButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.fillMissingButton3.Enabled = false;
-            this.fillMissingButton3.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.fillMissingButton3.Location = new System.Drawing.Point(1374, 22);
-            this.fillMissingButton3.Name = "fillMissingButton3";
-            this.fillMissingButton3.Size = new System.Drawing.Size(95, 51);
-            this.fillMissingButton3.TabIndex = 52;
-            this.fillMissingButton3.Text = "填充数据";
-            this.fillMissingButton3.UseVisualStyleBackColor = true;
-            this.fillMissingButton3.Click += new System.EventHandler(this.fillMissingButton3_Click);
             // 
             // groupBox5
             // 
@@ -1314,32 +1299,6 @@
             this.transportdataGridView1.TabIndex = 43;
             this.transportdataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.transportdataGridView1_CellContentClick);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.contextMenuStrip1.Name = "priceContextMenuStrip";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
-            this.toolStripMenuItem1.Text = "編集";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button2.Location = new System.Drawing.Point(1475, 21);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 51);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "新规";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button1_Click);
-            // 
             // transportname
             // 
             this.transportname.DataPropertyName = "transportname";
@@ -1398,6 +1357,32 @@
             this.deleteButtonColumn.ToolTipText = "クリア";
             this.deleteButtonColumn.UseColumnTextForButtonValue = true;
             this.deleteButtonColumn.Width = 40;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip1.Name = "priceContextMenuStrip";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.toolStripMenuItem1.Text = "編集";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button2.Location = new System.Drawing.Point(1475, 21);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(95, 51);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "新规";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button1_Click);
             // 
             // ProductsControl
             // 
@@ -1539,7 +1524,6 @@
         private System.Windows.Forms.ComboBox unitnameComboBox4;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox productsComboBox3;
-        private System.Windows.Forms.Button fillMissingButton3;
         private System.Windows.Forms.Button checkButton3;
         private System.Windows.Forms.ComboBox areaComboBox3;
         private System.Windows.Forms.Label label18;
