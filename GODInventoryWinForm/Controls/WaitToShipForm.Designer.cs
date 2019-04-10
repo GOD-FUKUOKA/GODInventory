@@ -64,6 +64,7 @@
             this.shippedAtDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btImportShipNumberForm = new System.Windows.Forms.Button();
             this.storeCodeTextBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.storeComboBox = new System.Windows.Forms.ComboBox();
@@ -92,7 +93,6 @@
             this.備考Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.btImportShipNumberForm = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -468,6 +468,19 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // btImportShipNumberForm
+            // 
+            this.btImportShipNumberForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btImportShipNumberForm.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btImportShipNumberForm.Location = new System.Drawing.Point(1083, 17);
+            this.btImportShipNumberForm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btImportShipNumberForm.Name = "btImportShipNumberForm";
+            this.btImportShipNumberForm.Size = new System.Drawing.Size(106, 32);
+            this.btImportShipNumberForm.TabIndex = 11;
+            this.btImportShipNumberForm.Text = "出荷指示書の導入";
+            this.btImportShipNumberForm.UseVisualStyleBackColor = true;
+            this.btImportShipNumberForm.Click += new System.EventHandler(this.btImportShipNumberForm_Click);
+            // 
             // storeCodeTextBox
             // 
             this.storeCodeTextBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -732,19 +745,6 @@
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // btImportShipNumberForm
-            // 
-            this.btImportShipNumberForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btImportShipNumberForm.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btImportShipNumberForm.Location = new System.Drawing.Point(1083, 17);
-            this.btImportShipNumberForm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btImportShipNumberForm.Name = "btImportShipNumberForm";
-            this.btImportShipNumberForm.Size = new System.Drawing.Size(106, 32);
-            this.btImportShipNumberForm.TabIndex = 11;
-            this.btImportShipNumberForm.Text = "配车单导入";
-            this.btImportShipNumberForm.UseVisualStyleBackColor = true;
-            this.btImportShipNumberForm.Click += new System.EventHandler(this.btImportShipNumberForm_Click);
             // 
             // WaitToShipForm
             // 

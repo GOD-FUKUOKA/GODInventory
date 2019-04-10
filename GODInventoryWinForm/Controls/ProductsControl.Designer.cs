@@ -87,6 +87,20 @@
             this.label5 = new System.Windows.Forms.Label();
             this.checkButton3 = new System.Windows.Forms.Button();
             this.pricesDataGridView = new System.Windows.Forms.DataGridView();
+            this.自社コードColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.商品名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.規格Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.県別Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店番Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.店名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.仕入原価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.通常原単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.広告原単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.特売原単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.売単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transportColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.倉庫Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitnameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editPriceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -128,6 +142,11 @@
             this.genresComboBox3 = new System.Windows.Forms.ComboBox();
             this.bttransportfind = new System.Windows.Forms.Button();
             this.transportdataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.button2 = new System.Windows.Forms.Button();
+            this.pricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.transportdatabindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.transportname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.warehousename = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shopIdColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -136,25 +155,6 @@
             this.fee = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderColumNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.button2 = new System.Windows.Forms.Button();
-            this.pricesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.transportdatabindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.自社コードColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.商品名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.規格Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.県別Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.店番Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.店名Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.仕入原価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.通常原単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.広告原単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.特売原単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.売単価Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transportColumn2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.倉庫Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitnameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -694,11 +694,11 @@
             // 
             this.checkButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkButton3.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.checkButton3.Location = new System.Drawing.Point(1490, 22);
+            this.checkButton3.Location = new System.Drawing.Point(1473, 22);
             this.checkButton3.Name = "checkButton3";
-            this.checkButton3.Size = new System.Drawing.Size(72, 54);
+            this.checkButton3.Size = new System.Drawing.Size(89, 54);
             this.checkButton3.TabIndex = 19;
-            this.checkButton3.Text = "检查数据";
+            this.checkButton3.Text = "不足データのチェック";
             this.checkButton3.UseVisualStyleBackColor = true;
             this.checkButton3.Click += new System.EventHandler(this.checkButton3_Click);
             // 
@@ -735,6 +735,110 @@
             this.pricesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.pricesDataGridView.Size = new System.Drawing.Size(1548, 328);
             this.pricesDataGridView.TabIndex = 0;
+            // 
+            // 自社コードColumn2
+            // 
+            this.自社コードColumn2.DataPropertyName = "自社コード";
+            this.自社コードColumn2.HeaderText = "自社コード";
+            this.自社コードColumn2.Name = "自社コードColumn2";
+            this.自社コードColumn2.ReadOnly = true;
+            // 
+            // 商品名Column2
+            // 
+            this.商品名Column2.DataPropertyName = "商品名";
+            this.商品名Column2.HeaderText = "商品名";
+            this.商品名Column2.Name = "商品名Column2";
+            this.商品名Column2.ReadOnly = true;
+            this.商品名Column2.Width = 200;
+            // 
+            // 規格Column2
+            // 
+            this.規格Column2.DataPropertyName = "規格";
+            this.規格Column2.HeaderText = "規格";
+            this.規格Column2.Name = "規格Column2";
+            this.規格Column2.ReadOnly = true;
+            this.規格Column2.Width = 180;
+            // 
+            // 県別Column2
+            // 
+            this.県別Column2.DataPropertyName = "県別";
+            this.県別Column2.HeaderText = "県別";
+            this.県別Column2.Name = "県別Column2";
+            this.県別Column2.ReadOnly = true;
+            // 
+            // 店番Column2
+            // 
+            this.店番Column2.DataPropertyName = "店番";
+            this.店番Column2.HeaderText = "店番";
+            this.店番Column2.Name = "店番Column2";
+            this.店番Column2.ReadOnly = true;
+            // 
+            // 店名Column2
+            // 
+            this.店名Column2.DataPropertyName = "店名";
+            this.店名Column2.HeaderText = "店名";
+            this.店名Column2.Name = "店名Column2";
+            this.店名Column2.ReadOnly = true;
+            // 
+            // 仕入原価Column2
+            // 
+            this.仕入原価Column2.DataPropertyName = "仕入原価";
+            this.仕入原価Column2.HeaderText = "仕入原価";
+            this.仕入原価Column2.Name = "仕入原価Column2";
+            this.仕入原価Column2.ReadOnly = true;
+            // 
+            // 通常原単価Column2
+            // 
+            this.通常原単価Column2.DataPropertyName = "原単価";
+            this.通常原単価Column2.HeaderText = "通常原単価";
+            this.通常原単価Column2.Name = "通常原単価Column2";
+            this.通常原単価Column2.ReadOnly = true;
+            // 
+            // 広告原単価Column2
+            // 
+            this.広告原単価Column2.DataPropertyName = "広告原単価";
+            this.広告原単価Column2.HeaderText = "広告原単価";
+            this.広告原単価Column2.Name = "広告原単価Column2";
+            this.広告原単価Column2.ReadOnly = true;
+            // 
+            // 特売原単価Column2
+            // 
+            this.特売原単価Column2.DataPropertyName = "特売原単価";
+            this.特売原単価Column2.HeaderText = "特売原単価";
+            this.特売原単価Column2.Name = "特売原単価Column2";
+            this.特売原単価Column2.ReadOnly = true;
+            // 
+            // 売単価Column2
+            // 
+            this.売単価Column2.DataPropertyName = "売単価";
+            this.売単価Column2.HeaderText = "売単価";
+            this.売単価Column2.Name = "売単価Column2";
+            this.売単価Column2.ReadOnly = true;
+            // 
+            // transportColumn2
+            // 
+            this.transportColumn2.DataPropertyName = "transport_id";
+            this.transportColumn2.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.transportColumn2.HeaderText = "配送担当";
+            this.transportColumn2.Name = "transportColumn2";
+            this.transportColumn2.ReadOnly = true;
+            this.transportColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // 倉庫Column2
+            // 
+            this.倉庫Column2.DataPropertyName = "warehousename";
+            this.倉庫Column2.HeaderText = "倉庫";
+            this.倉庫Column2.Name = "倉庫Column2";
+            this.倉庫Column2.ReadOnly = true;
+            // 
+            // unitnameColumn
+            // 
+            this.unitnameColumn.DataPropertyName = "unitname";
+            this.unitnameColumn.HeaderText = "運賃単位";
+            this.unitnameColumn.Name = "unitnameColumn";
+            this.unitnameColumn.ReadOnly = true;
+            this.unitnameColumn.Visible = false;
+            this.unitnameColumn.Width = 5;
             // 
             // priceContextMenuStrip
             // 
@@ -962,11 +1066,12 @@
             // 
             // label20
             // 
+            this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(161, 48);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(74, 14);
+            this.label20.Size = new System.Drawing.Size(63, 14);
             this.label20.TabIndex = 11;
-            this.label20.Text = "订单字段";
+            this.label20.Text = "計上項目";
             // 
             // label19
             // 
@@ -1065,7 +1170,7 @@
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(63, 14);
             this.label16.TabIndex = 48;
-            this.label16.Text = "运输公司";
+            this.label16.Text = "配送担当";
             // 
             // warehouseComboBox5
             // 
@@ -1209,65 +1314,6 @@
             this.transportdataGridView1.TabIndex = 43;
             this.transportdataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.transportdataGridView1_CellContentClick);
             // 
-            // transportname
-            // 
-            this.transportname.DataPropertyName = "transportname";
-            this.transportname.HeaderText = "运输名称";
-            this.transportname.Name = "transportname";
-            this.transportname.ReadOnly = true;
-            this.transportname.Width = 200;
-            // 
-            // warehousename
-            // 
-            this.warehousename.DataPropertyName = "warehousename";
-            this.warehousename.HeaderText = "仓库名称";
-            this.warehousename.Name = "warehousename";
-            this.warehousename.ReadOnly = true;
-            this.warehousename.Width = 200;
-            // 
-            // shopIdColumn3
-            // 
-            this.shopIdColumn3.DataPropertyName = "shopname";
-            this.shopIdColumn3.HeaderText = "店名";
-            this.shopIdColumn3.Name = "shopIdColumn3";
-            // 
-            // productNameColumn3
-            // 
-            this.productNameColumn3.DataPropertyName = "商品名";
-            this.productNameColumn3.HeaderText = "商品名";
-            this.productNameColumn3.Name = "productNameColumn3";
-            this.productNameColumn3.Width = 180;
-            // 
-            // unitname
-            // 
-            this.unitname.DataPropertyName = "unitname";
-            this.unitname.HeaderText = "单位";
-            this.unitname.Name = "unitname";
-            this.unitname.ReadOnly = true;
-            // 
-            // fee
-            // 
-            this.fee.DataPropertyName = "fee";
-            this.fee.HeaderText = "运费";
-            this.fee.Name = "fee";
-            this.fee.ReadOnly = true;
-            // 
-            // orderColumNameColumn
-            // 
-            this.orderColumNameColumn.DataPropertyName = "columnname";
-            this.orderColumNameColumn.HeaderText = "订单字段";
-            this.orderColumNameColumn.Name = "orderColumNameColumn";
-            this.orderColumNameColumn.Width = 180;
-            // 
-            // deleteButtonColumn
-            // 
-            this.deleteButtonColumn.HeaderText = "";
-            this.deleteButtonColumn.Name = "deleteButtonColumn";
-            this.deleteButtonColumn.Text = "クリア";
-            this.deleteButtonColumn.ToolTipText = "クリア";
-            this.deleteButtonColumn.UseColumnTextForButtonValue = true;
-            this.deleteButtonColumn.Width = 40;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1294,109 +1340,64 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button1_Click);
             // 
-            // 自社コードColumn2
+            // transportname
             // 
-            this.自社コードColumn2.DataPropertyName = "自社コード";
-            this.自社コードColumn2.HeaderText = "自社コード";
-            this.自社コードColumn2.Name = "自社コードColumn2";
-            this.自社コードColumn2.ReadOnly = true;
+            this.transportname.DataPropertyName = "transportname";
+            this.transportname.HeaderText = "配送担当";
+            this.transportname.Name = "transportname";
+            this.transportname.ReadOnly = true;
+            this.transportname.Width = 200;
             // 
-            // 商品名Column2
+            // warehousename
             // 
-            this.商品名Column2.DataPropertyName = "商品名";
-            this.商品名Column2.HeaderText = "商品名";
-            this.商品名Column2.Name = "商品名Column2";
-            this.商品名Column2.ReadOnly = true;
-            this.商品名Column2.Width = 200;
+            this.warehousename.DataPropertyName = "warehousename";
+            this.warehousename.HeaderText = "倉庫";
+            this.warehousename.Name = "warehousename";
+            this.warehousename.ReadOnly = true;
+            this.warehousename.Width = 200;
             // 
-            // 規格Column2
+            // shopIdColumn3
             // 
-            this.規格Column2.DataPropertyName = "規格";
-            this.規格Column2.HeaderText = "規格";
-            this.規格Column2.Name = "規格Column2";
-            this.規格Column2.ReadOnly = true;
-            this.規格Column2.Width = 180;
+            this.shopIdColumn3.DataPropertyName = "shopname";
+            this.shopIdColumn3.HeaderText = "店名";
+            this.shopIdColumn3.Name = "shopIdColumn3";
             // 
-            // 県別Column2
+            // productNameColumn3
             // 
-            this.県別Column2.DataPropertyName = "県別";
-            this.県別Column2.HeaderText = "県別";
-            this.県別Column2.Name = "県別Column2";
-            this.県別Column2.ReadOnly = true;
+            this.productNameColumn3.DataPropertyName = "商品名";
+            this.productNameColumn3.HeaderText = "商品名";
+            this.productNameColumn3.Name = "productNameColumn3";
+            this.productNameColumn3.Width = 180;
             // 
-            // 店番Column2
+            // unitname
             // 
-            this.店番Column2.DataPropertyName = "店番";
-            this.店番Column2.HeaderText = "店番";
-            this.店番Column2.Name = "店番Column2";
-            this.店番Column2.ReadOnly = true;
+            this.unitname.DataPropertyName = "unitname";
+            this.unitname.HeaderText = "単位";
+            this.unitname.Name = "unitname";
+            this.unitname.ReadOnly = true;
             // 
-            // 店名Column2
+            // fee
             // 
-            this.店名Column2.DataPropertyName = "店名";
-            this.店名Column2.HeaderText = "店名";
-            this.店名Column2.Name = "店名Column2";
-            this.店名Column2.ReadOnly = true;
+            this.fee.DataPropertyName = "fee";
+            this.fee.HeaderText = "運賃";
+            this.fee.Name = "fee";
+            this.fee.ReadOnly = true;
             // 
-            // 仕入原価Column2
+            // orderColumNameColumn
             // 
-            this.仕入原価Column2.DataPropertyName = "仕入原価";
-            this.仕入原価Column2.HeaderText = "仕入原価";
-            this.仕入原価Column2.Name = "仕入原価Column2";
-            this.仕入原価Column2.ReadOnly = true;
+            this.orderColumNameColumn.DataPropertyName = "columnname";
+            this.orderColumNameColumn.HeaderText = "計上項目";
+            this.orderColumNameColumn.Name = "orderColumNameColumn";
+            this.orderColumNameColumn.Width = 180;
             // 
-            // 通常原単価Column2
+            // deleteButtonColumn
             // 
-            this.通常原単価Column2.DataPropertyName = "原単価";
-            this.通常原単価Column2.HeaderText = "通常原単価";
-            this.通常原単価Column2.Name = "通常原単価Column2";
-            this.通常原単価Column2.ReadOnly = true;
-            // 
-            // 広告原単価Column2
-            // 
-            this.広告原単価Column2.DataPropertyName = "広告原単価";
-            this.広告原単価Column2.HeaderText = "広告原単価";
-            this.広告原単価Column2.Name = "広告原単価Column2";
-            this.広告原単価Column2.ReadOnly = true;
-            // 
-            // 特売原単価Column2
-            // 
-            this.特売原単価Column2.DataPropertyName = "特売原単価";
-            this.特売原単価Column2.HeaderText = "特売原単価";
-            this.特売原単価Column2.Name = "特売原単価Column2";
-            this.特売原単価Column2.ReadOnly = true;
-            // 
-            // 売単価Column2
-            // 
-            this.売単価Column2.DataPropertyName = "売単価";
-            this.売単価Column2.HeaderText = "売単価";
-            this.売単価Column2.Name = "売単価Column2";
-            this.売単価Column2.ReadOnly = true;
-            // 
-            // transportColumn2
-            // 
-            this.transportColumn2.DataPropertyName = "transport_id";
-            this.transportColumn2.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.transportColumn2.HeaderText = "配送担当";
-            this.transportColumn2.Name = "transportColumn2";
-            this.transportColumn2.ReadOnly = true;
-            this.transportColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // 倉庫Column2
-            // 
-            this.倉庫Column2.DataPropertyName = "warehousename";
-            this.倉庫Column2.HeaderText = "倉庫";
-            this.倉庫Column2.Name = "倉庫Column2";
-            this.倉庫Column2.ReadOnly = true;
-            // 
-            // unitnameColumn
-            // 
-            this.unitnameColumn.DataPropertyName = "unitname";
-            this.unitnameColumn.HeaderText = "運賃単位";
-            this.unitnameColumn.Name = "unitnameColumn";
-            this.unitnameColumn.ReadOnly = true;
-            this.unitnameColumn.Visible = false;
-            this.unitnameColumn.Width = 5;
+            this.deleteButtonColumn.HeaderText = "";
+            this.deleteButtonColumn.Name = "deleteButtonColumn";
+            this.deleteButtonColumn.Text = "クリア";
+            this.deleteButtonColumn.ToolTipText = "クリア";
+            this.deleteButtonColumn.UseColumnTextForButtonValue = true;
+            this.deleteButtonColumn.Width = 40;
             // 
             // ProductsControl
             // 
@@ -1538,14 +1539,6 @@
         private System.Windows.Forms.ComboBox unitnameComboBox4;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox productsComboBox3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn transportname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn warehousename;
-        private System.Windows.Forms.DataGridViewTextBoxColumn shopIdColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn productNameColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn orderColumNameColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn deleteButtonColumn;
         private System.Windows.Forms.Button fillMissingButton3;
         private System.Windows.Forms.Button checkButton3;
         private System.Windows.Forms.ComboBox areaComboBox3;
@@ -1566,5 +1559,13 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn transportColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 倉庫Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitnameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn transportname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn warehousename;
+        private System.Windows.Forms.DataGridViewTextBoxColumn shopIdColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productNameColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orderColumNameColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn deleteButtonColumn;
     }
 }

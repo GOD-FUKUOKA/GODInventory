@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.groupByShopDataGridView1 = new System.Windows.Forms.DataGridView();
-            this.shipIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.storenameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.expectTotalColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupByProductDataGridView2 = new System.Windows.Forms.DataGridView();
-            this.productIdColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productNameColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.expectTotalColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fixButton1 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupByShoplabel1 = new System.Windows.Forms.Label();
             this.groupProductLabel2 = new System.Windows.Forms.Label();
+            this.shipIdColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.storenameColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.expectTotalColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productIdColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productNameColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.expectTotalColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupByShopDataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupByProductDataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -68,31 +68,6 @@
             this.groupByShopDataGridView1.Size = new System.Drawing.Size(375, 228);
             this.groupByShopDataGridView1.TabIndex = 0;
             // 
-            // shipIdColumn1
-            // 
-            this.shipIdColumn1.DataPropertyName = "id";
-            this.shipIdColumn1.HeaderText = "店番";
-            this.shipIdColumn1.Name = "shipIdColumn1";
-            // 
-            // storenameColumn1
-            // 
-            this.storenameColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.storenameColumn1.DataPropertyName = "name";
-            this.storenameColumn1.HeaderText = "店名";
-            this.storenameColumn1.Name = "storenameColumn1";
-            // 
-            // countColumn1
-            // 
-            this.countColumn1.DataPropertyName = "total";
-            this.countColumn1.HeaderText = "当前记录数";
-            this.countColumn1.Name = "countColumn1";
-            // 
-            // expectTotalColumn1
-            // 
-            this.expectTotalColumn1.DataPropertyName = "expectTotal";
-            this.expectTotalColumn1.HeaderText = "应有记录数";
-            this.expectTotalColumn1.Name = "expectTotalColumn1";
-            // 
             // groupByProductDataGridView2
             // 
             this.groupByProductDataGridView2.AllowUserToAddRows = false;
@@ -115,48 +90,23 @@
             this.groupByProductDataGridView2.Size = new System.Drawing.Size(375, 228);
             this.groupByProductDataGridView2.TabIndex = 0;
             // 
-            // productIdColumn2
-            // 
-            this.productIdColumn2.DataPropertyName = "id";
-            this.productIdColumn2.HeaderText = "自社コード";
-            this.productIdColumn2.Name = "productIdColumn2";
-            // 
-            // productNameColumn2
-            // 
-            this.productNameColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.productNameColumn2.DataPropertyName = "name";
-            this.productNameColumn2.HeaderText = "商品名";
-            this.productNameColumn2.Name = "productNameColumn2";
-            // 
-            // totalColumn2
-            // 
-            this.totalColumn2.DataPropertyName = "total";
-            this.totalColumn2.HeaderText = "当前数量";
-            this.totalColumn2.Name = "totalColumn2";
-            // 
-            // expectTotalColumn2
-            // 
-            this.expectTotalColumn2.DataPropertyName = "expectTotal";
-            this.expectTotalColumn2.HeaderText = "应有数量";
-            this.expectTotalColumn2.Name = "expectTotalColumn2";
-            // 
             // fixButton1
             // 
-            this.fixButton1.Location = new System.Drawing.Point(300, 24);
+            this.fixButton1.Location = new System.Drawing.Point(286, 24);
             this.fixButton1.Name = "fixButton1";
-            this.fixButton1.Size = new System.Drawing.Size(102, 35);
+            this.fixButton1.Size = new System.Drawing.Size(116, 35);
             this.fixButton1.TabIndex = 1;
-            this.fixButton1.Text = "填充缺失数据";
+            this.fixButton1.Text = "不足データの補完";
             this.fixButton1.UseVisualStyleBackColor = true;
             this.fixButton1.Click += new System.EventHandler(this.fixButton1_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(703, 24);
+            this.button1.Location = new System.Drawing.Point(689, 24);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(102, 35);
+            this.button1.Size = new System.Drawing.Size(116, 35);
             this.button1.TabIndex = 2;
-            this.button1.Text = "填充缺失数据";
+            this.button1.Text = "不足データの補完";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -182,6 +132,56 @@
             this.groupProductLabel2.TabIndex = 4;
             this.groupProductLabel2.Text = "label2";
             // 
+            // shipIdColumn1
+            // 
+            this.shipIdColumn1.DataPropertyName = "id";
+            this.shipIdColumn1.HeaderText = "店番";
+            this.shipIdColumn1.Name = "shipIdColumn1";
+            // 
+            // storenameColumn1
+            // 
+            this.storenameColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.storenameColumn1.DataPropertyName = "name";
+            this.storenameColumn1.HeaderText = "店名";
+            this.storenameColumn1.Name = "storenameColumn1";
+            // 
+            // countColumn1
+            // 
+            this.countColumn1.DataPropertyName = "total";
+            this.countColumn1.HeaderText = "既存記録件数";
+            this.countColumn1.Name = "countColumn1";
+            // 
+            // expectTotalColumn1
+            // 
+            this.expectTotalColumn1.DataPropertyName = "expectTotal";
+            this.expectTotalColumn1.HeaderText = "存在すべき件数";
+            this.expectTotalColumn1.Name = "expectTotalColumn1";
+            // 
+            // productIdColumn2
+            // 
+            this.productIdColumn2.DataPropertyName = "id";
+            this.productIdColumn2.HeaderText = "自社コード";
+            this.productIdColumn2.Name = "productIdColumn2";
+            // 
+            // productNameColumn2
+            // 
+            this.productNameColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.productNameColumn2.DataPropertyName = "name";
+            this.productNameColumn2.HeaderText = "商品名";
+            this.productNameColumn2.Name = "productNameColumn2";
+            // 
+            // totalColumn2
+            // 
+            this.totalColumn2.DataPropertyName = "total";
+            this.totalColumn2.HeaderText = "既存記録件数";
+            this.totalColumn2.Name = "totalColumn2";
+            // 
+            // expectTotalColumn2
+            // 
+            this.expectTotalColumn2.DataPropertyName = "expectTotal";
+            this.expectTotalColumn2.HeaderText = "存在すべき件数";
+            this.expectTotalColumn2.Name = "expectTotalColumn2";
+            // 
             // MissingReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -199,7 +199,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "MissingReportForm";
+            this.Text = "不足データのチェック";
             this.Load += new System.EventHandler(this.MissingReportForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.groupByShopDataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupByProductDataGridView2)).EndInit();

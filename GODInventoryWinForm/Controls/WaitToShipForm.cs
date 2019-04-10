@@ -107,6 +107,8 @@ namespace GODInventoryWinForm.Controls
 
         private void InitializeShipNOComboBox(string shipNO)
         {
+            // 先设置为-1，触发select_change事件，更新列表。否则，如果下面设置datasource为空时，SelectedIndex =-1,无法触发事件。
+            this.shipNOComboBox.SelectedIndex = -1;
 
             var q = OrderSqlHelper.ShippingOrderSql(this.entityDataSource1);
             shippingOrderList = q.ToList();

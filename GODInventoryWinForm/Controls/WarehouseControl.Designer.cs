@@ -159,22 +159,22 @@
             // transportButton
             // 
             this.transportButton.Font = new System.Drawing.Font("MS PGothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.transportButton.Location = new System.Drawing.Point(428, 3);
+            this.transportButton.Location = new System.Drawing.Point(413, 3);
             this.transportButton.Name = "transportButton";
-            this.transportButton.Size = new System.Drawing.Size(144, 58);
+            this.transportButton.Size = new System.Drawing.Size(169, 58);
             this.transportButton.TabIndex = 0;
-            this.transportButton.Text = "物流信息维护";
+            this.transportButton.Text = "配送担当情報編集";
             this.transportButton.UseVisualStyleBackColor = true;
             this.transportButton.Click += new System.EventHandler(this.transportButton_Click);
             // 
             // warehouseButton
             // 
             this.warehouseButton.Font = new System.Drawing.Font("MS PGothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.warehouseButton.Location = new System.Drawing.Point(190, 3);
+            this.warehouseButton.Location = new System.Drawing.Point(175, 3);
             this.warehouseButton.Name = "warehouseButton";
-            this.warehouseButton.Size = new System.Drawing.Size(144, 58);
+            this.warehouseButton.Size = new System.Drawing.Size(169, 58);
             this.warehouseButton.TabIndex = 0;
-            this.warehouseButton.Text = "仓库信息维护";
+            this.warehouseButton.Text = "倉庫情報編集";
             this.warehouseButton.UseVisualStyleBackColor = true;
             this.warehouseButton.Click += new System.EventHandler(this.warehouseButton_Click);
             // 

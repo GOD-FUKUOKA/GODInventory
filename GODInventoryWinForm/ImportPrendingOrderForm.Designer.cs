@@ -107,7 +107,7 @@
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(840, 27);
             this.titleLabel.TabIndex = 7;
-            this.titleLabel.Text = "本発一括入力用";
+            this.titleLabel.Text = "受注内容一括導入";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // closeButton
@@ -257,7 +257,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Prending Order import";
+            this.Text = "受注内容一括導入";
             this.Load += new System.EventHandler(this.ImportShipNumberForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();

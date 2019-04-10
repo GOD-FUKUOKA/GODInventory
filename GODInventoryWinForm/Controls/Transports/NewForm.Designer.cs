@@ -55,7 +55,7 @@
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(106, 32);
             this.submitFormButton.TabIndex = 10000042;
-            this.submitFormButton.Text = "创建";
+            this.submitFormButton.Text = "保存";
             this.submitFormButton.UseVisualStyleBackColor = true;
             this.submitFormButton.Click += new System.EventHandler(this.submitFormButton_Click);
             // 
@@ -86,7 +86,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.TabIndex = 10000045;
-            this.label1.Text = "公司简称";
+            this.label1.Text = "英字記号";
             // 
             // fullNameTextBox
             // 
@@ -101,11 +101,11 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("MS PGothic", 10.5F);
-            this.label13.Location = new System.Drawing.Point(28, 83);
+            this.label13.Location = new System.Drawing.Point(56, 83);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(63, 14);
+            this.label13.Size = new System.Drawing.Size(35, 14);
             this.label13.TabIndex = 10000044;
-            this.label13.Text = "公司全称";
+            this.label13.Text = "全称";
             // 
             // errorProvider1
             // 
@@ -123,11 +123,11 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("MS PGothic", 10.5F);
-            this.label6.Location = new System.Drawing.Point(56, 233);
+            this.label6.Location = new System.Drawing.Point(59, 233);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 14);
+            this.label6.Size = new System.Drawing.Size(32, 14);
             this.label6.TabIndex = 10000050;
-            this.label6.Text = "传真";
+            this.label6.Text = "FAX";
             // 
             // phoneTextBox
             // 
@@ -145,7 +145,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 14);
             this.label5.TabIndex = 10000049;
-            this.label5.Text = "电话";
+            this.label5.Text = "電話";
             // 
             // memoTextBox
             // 
@@ -164,7 +164,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 14);
             this.label7.TabIndex = 10000047;
-            this.label7.Text = "备注";
+            this.label7.Text = "備考";
             // 
             // addressTextBox
             // 
@@ -183,7 +183,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 14);
             this.label4.TabIndex = 10000048;
-            this.label4.Text = "地址";
+            this.label4.Text = "住所";
             // 
             // label3
             // 
@@ -194,7 +194,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(600, 37);
             this.label3.TabIndex = 10000046;
-            this.label3.Text = "创建运输公司";
+            this.label3.Text = "新規配送担当";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NewForm
@@ -224,7 +224,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "NewForm";
+            this.Text = "新規配送担当";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

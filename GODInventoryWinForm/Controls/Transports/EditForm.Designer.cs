@@ -60,11 +60,11 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label13.Location = new System.Drawing.Point(26, 92);
+            this.label13.Location = new System.Drawing.Point(55, 92);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(63, 14);
+            this.label13.Size = new System.Drawing.Size(35, 14);
             this.label13.TabIndex = 17;
-            this.label13.Text = "公司全称";
+            this.label13.Text = "全称";
             // 
             // shortNameTextBox
             // 
@@ -77,11 +77,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(26, 122);
+            this.label1.Location = new System.Drawing.Point(27, 122);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.TabIndex = 19;
-            this.label1.Text = "公司简称";
+            this.label1.Text = "英字記号";
             // 
             // submitFormButton
             // 
@@ -90,7 +90,7 @@
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(106, 32);
             this.submitFormButton.TabIndex = 6;
-            this.submitFormButton.Text = "更新";
+            this.submitFormButton.Text = "保存";
             this.submitFormButton.UseVisualStyleBackColor = true;
             this.submitFormButton.Click += new System.EventHandler(this.submitFormButton_Click);
             // 
@@ -119,7 +119,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(598, 45);
             this.label3.TabIndex = 10000029;
-            this.label3.Text = "创建运输公司";
+            this.label3.Text = "新規配送担当";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // addressTextBox
@@ -134,11 +134,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(54, 152);
+            this.label4.Location = new System.Drawing.Point(55, 152);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 14);
             this.label4.TabIndex = 10000031;
-            this.label4.Text = "地址";
+            this.label4.Text = "住所";
             // 
             // phoneTextBox
             // 
@@ -151,11 +151,11 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(54, 212);
+            this.label5.Location = new System.Drawing.Point(55, 212);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 14);
             this.label5.TabIndex = 10000033;
-            this.label5.Text = "电话";
+            this.label5.Text = "電話";
             // 
             // faxTextBox
             // 
@@ -168,21 +168,21 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(54, 242);
+            this.label6.Location = new System.Drawing.Point(58, 242);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 14);
+            this.label6.Size = new System.Drawing.Size(32, 14);
             this.label6.TabIndex = 10000035;
-            this.label6.Text = "传真";
+            this.label6.Text = "FAX";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(54, 272);
+            this.label7.Location = new System.Drawing.Point(55, 272);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 14);
             this.label7.TabIndex = 10000031;
-            this.label7.Text = "备注";
+            this.label7.Text = "備考";
             // 
             // memoTextBox
             // 
@@ -216,7 +216,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "EditForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edit__Transports";
+            this.Text = "新規配送担当";
             this.Shown += new System.EventHandler(this.EditForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
