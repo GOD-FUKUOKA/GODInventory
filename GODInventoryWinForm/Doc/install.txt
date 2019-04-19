@@ -342,6 +342,13 @@ left join t_shoplist s on s.店番 = p.店番
 left join t_freights f on p.transport_id = f.transport_id and p.warehouse_id = f.warehouse_id and 
 p.自社コード = f.自社コード and p.店番 = f.shop_id;
 
+# 查询商品价格表，得到运费
+#select g.idジャンル as ジャンル,  g.ジャンル名, i.自社コード, i.商品コード, i.JANコード, i.商品名, i.規格,
+#i.PT入数,i.単品重量, i.単位, p.配送担当, p.仕入原価, p.通常原単価, p.売単価, p.店番, IFNULL(f.fee,-1) as fee,  f.columnname  from t_itemlist i
+#left join  t_pricelist p on i.自社コード = p.自社コード left join t_genre g on i.ジャンル = g.idジャンル 
+#left join t_freights f on p.transport_id = f.transport_id and p.warehouse_id =f.warehouse_id and p.自社コード =  f.自社コード and f.shop_id= p.店番
+#where i.自社コード=100139;
+
 # 设置 t_shoplist表中 地域 
 update t_shoplist t1 inner join (select * from t_area t3 group by t3.県別) t2 on t1.県別 = t2.県別  set t1.地域 = t2.地域 where t1.店番>0
 

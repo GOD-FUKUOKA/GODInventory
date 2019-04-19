@@ -39,13 +39,11 @@ namespace GODInventoryWinForm.Controls
             this.transportdataGridView1.AutoGenerateColumns = false;
 
             EditTransportsFeeForm = new EditTransportsFee();
+
+            InitializeDataSource();
             
         }
-
-
-        private void InitializeDataSource()
-        {
-            //freights = new List<t_freights>();
+        private void InitializeDataSource() {
 
             var ctx = this.entityDataSource1.DbContext as GODDbContext;
 
@@ -58,6 +56,14 @@ namespace GODInventoryWinForm.Controls
             this.unitList = (from s in ctx.t_pricelist
                              group s by s.unitname into g
                              select new v_itemunit { unitname = g.Key, total = g.Count() }).ToList();
+        }
+
+
+        private void InitializeTabPrices()
+        {
+            //freights = new List<t_freights>();
+
+
             // 初始化分类
             var genreList = this.genres.Select(s => new MockEntity { Id = s.idジャンル, FullName = s.ジャンル名 }).ToList();
             genreList.Insert(0, new MockEntity { Id = 0, FullName = anyOption });
@@ -272,14 +278,14 @@ namespace GODInventoryWinForm.Controls
                     break;
                 case 1:
 
-                    InitializeDataSource();
+                    InitializeTabPrices();
 
                     break;
                 case 2:
 
-                    InitializeDataSource();
+                    initializeTabFreights();
+                    break;                
 
-                    break;
             }
 
         }

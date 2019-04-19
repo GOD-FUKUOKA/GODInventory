@@ -97,7 +97,7 @@ namespace GODInventoryWinForm.Controls.Freights
                         freight.warehousename = warehouseComboBox.Text;
                         freight.transportname = transportComboBox.Text;
                         freight.unitname = unitnameTextBox.Text;
-                        freight.fee = Convert.ToDecimal(invoiceNOTextBox.Text);
+                        freight.fee = Convert.ToDecimal(feeTextBox.Text);
                         freight.columnname = this.columnnameTextBox.Text;
 
                         freight.自社コード = Convert.ToInt32(productsComboBox.SelectedValue);
@@ -116,7 +116,8 @@ namespace GODInventoryWinForm.Controls.Freights
                     }
                     else
                     {
-                        MessageBox.Show(String.Format("无法添加， 已存在!"));
+                        //无法添加， 已存在!
+                        MessageBox.Show(String.Format("運賃情報はすでに存在していますので、追加できます。"));
                     }
             }
         }
@@ -150,9 +151,9 @@ namespace GODInventoryWinForm.Controls.Freights
             var validated = true;
             string msg = String.Empty;
 
-            if (this.invoiceNOTextBox.Text.Trim() == null || this.invoiceNOTextBox.Text.Trim() == "")
+            if (this.feeTextBox.Text.Trim() == null || this.feeTextBox.Text.Trim() == "")
             {
-                errorProvider1.SetError(invoiceNOTextBox, "不能为空");
+                errorProvider1.SetError(feeTextBox, "運賃単価は空白になっています！");
                 validated = false;
             }
             if (this.unitnameTextBox.Text.Trim() == null || this.unitnameTextBox.Text.Trim() == "")

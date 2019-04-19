@@ -43,7 +43,7 @@ namespace GODInventoryWinForm
             InitializeComponent();
             dataGridView1.AutoGenerateColumns = false;
             dataGridView2.AutoGenerateColumns = false;
-
+            dataGridView3.AutoGenerateColumns = false;
             this.ControlBox = false;   // 设置不出现关闭按钮
         }
 
@@ -507,7 +507,8 @@ namespace GODInventoryWinForm
 
             if (validated == false)
             {
-                msg = "选择的文件表格格式不正确，请重新选择！";
+                //选择的文件表格格式不正确，请重新选择！
+                msg = "選択されたファイルの書式は正しくありません。選択し直してください。";
                 errorProvider1.SetError(pathTextBox, msg);
             }
             return validated;

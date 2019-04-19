@@ -157,10 +157,12 @@ namespace GODInventoryWinForm
                                 }
                                 if (price == null)
                                 {
-                                    throw new Exception(string.Format("can not find pricelist by 自社コード {0}", model.自社コード));
+                                    //can not find pricelist by 自社コード {0}
+                                    throw new Exception(string.Format("自社コード{0}の価格データが不足しています", model.自社コード));
                                 }
                                 if (price.fee < 0) {
-                                    throw new Exception(string.Format("can not find freight by 店舗コード {0} and 自社コード {1}", model.店舗コード, model.自社コード));                                
+                                    //can not find freight by 店舗コード {0} and 自社コード {1}
+                                    throw new Exception(string.Format("店舗コード{0}と自社コード{1}との組合せの価格データが不足しています", model.店舗コード, model.自社コード));                                
                                 }
 
                                 orderdata.伝票番号 = OrderHelper.GenerateOrderNumber(orderdata.店舗コード);

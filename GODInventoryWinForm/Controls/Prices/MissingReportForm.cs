@@ -64,9 +64,10 @@ namespace GODInventoryWinForm.Controls.Prices
             var missingByShop = this.groupByShop.FindAll(o => { return o.total != o.expectTotal;  });
             this.groupByProductDataGridView2.DataSource = missingByProduct;
             this.groupByShopDataGridView1.DataSource = missingByShop;
-        
-            this.groupByShoplabel1.Text=string.Format("共有{0}个店铺缺失价格信息！", missingByShop.Count());
-            this.groupProductLabel2.Text=string.Format("共有{0}个产品缺失价格信息！", missingByProduct.Count());
+
+            //共有{0}个店铺缺失价格信息！
+            this.groupByShoplabel1.Text = string.Format("{0}個の店舗の価格データが不足しています。", missingByShop.Count());
+            this.groupProductLabel2.Text = string.Format("{0}個の商品の価格データが不足しています。", missingByProduct.Count());
         }
 
         private void MissingReportForm_Load(object sender, EventArgs e)
@@ -84,7 +85,9 @@ namespace GODInventoryWinForm.Controls.Prices
             
             var rows = this.groupByShopDataGridView1.SelectedRows;
             if (rows.Count > 0) {
-                if (MessageBox.Show(String.Format("确定要为这{0}个店铺添加商品价格信息吗？", rows.Count), "Confirm", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                //"确定要为这{0}个店铺添加商品价格信息吗？"
+                string msg = String.Format("{0}個の店舗に商品価格情報を追加します。よろしいですか？", rows.Count);
+                if (MessageBox.Show(msg, "Confirm", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
                     using (var ctx = new GODDbContext())
                     {
@@ -146,7 +149,9 @@ namespace GODInventoryWinForm.Controls.Prices
             var rows = this.groupByProductDataGridView2.SelectedRows;
             if (rows.Count > 0)
             {
-                if (MessageBox.Show(String.Format("确定要为这{0}个商品添加价格信息吗？", rows.Count), "Confirm", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                //确定要为这{0}个商品添加价格信息吗？
+                string msg = String.Format("{0}個の商品の価格情報を追加します。よろしいですか？", rows.Count);
+                if (MessageBox.Show(msg, "Confirm", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
                     using (var ctx = new GODDbContext())
                     {
@@ -189,7 +194,8 @@ namespace GODInventoryWinForm.Controls.Prices
 
                         ctx.t_pricelist.AddRange(newPriceList);
                         ctx.SaveChanges();
-                        MessageBox.Show("数据填充成功！");
+                        //数据填充成功
+                        MessageBox.Show("データ補完できました！");
                         this.InitializeData();
                     }
                 }

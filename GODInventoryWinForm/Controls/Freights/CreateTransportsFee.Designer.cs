@@ -46,7 +46,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.unitnameTextBox = new System.Windows.Forms.TextBox();
-            this.invoiceNOTextBox = new System.Windows.Forms.TextBox();
+            this.feeTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
@@ -75,7 +75,7 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.unitnameTextBox);
-            this.groupBox1.Controls.Add(this.invoiceNOTextBox);
+            this.groupBox1.Controls.Add(this.feeTextBox);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(21, 58);
@@ -231,12 +231,12 @@
             this.unitnameTextBox.Size = new System.Drawing.Size(190, 21);
             this.unitnameTextBox.TabIndex = 7;
             // 
-            // invoiceNOTextBox
+            // feeTextBox
             // 
-            this.invoiceNOTextBox.Location = new System.Drawing.Point(109, 149);
-            this.invoiceNOTextBox.Name = "invoiceNOTextBox";
-            this.invoiceNOTextBox.Size = new System.Drawing.Size(190, 21);
-            this.invoiceNOTextBox.TabIndex = 6;
+            this.feeTextBox.Location = new System.Drawing.Point(109, 149);
+            this.feeTextBox.Name = "feeTextBox";
+            this.feeTextBox.Size = new System.Drawing.Size(190, 21);
+            this.feeTextBox.TabIndex = 6;
             // 
             // label2
             // 
@@ -318,7 +318,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox unitnameTextBox;
-        private System.Windows.Forms.TextBox invoiceNOTextBox;
+        private System.Windows.Forms.TextBox feeTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button submitFormButton;
         private System.Windows.Forms.Button cancelFormButton;
