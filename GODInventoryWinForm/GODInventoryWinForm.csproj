@@ -286,6 +286,12 @@
     <Compile Include="Controls\Warehouse\NewForm.Designer.cs">
       <DependentUpon>NewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PendingInnerOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\PendingInnerOrderForm.Designer.cs">
+      <DependentUpon>PendingInnerOrderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GenerateASNTextForm_Auto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -581,6 +587,10 @@
     <EmbeddedResource Include="Controls\Warehouse\NewForm.resx">
       <DependentUpon>NewForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PendingInnerOrderForm.resx">
+      <DependentUpon>PendingInnerOrderForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="GenerateASNTextForm_Auto.resx">
       <DependentUpon>GenerateASNTextForm_Auto.cs</DependentUpon>
     </EmbeddedResource>
@@ -738,6 +748,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\help.txt" />
+    <Content Include="Doc\sql_v20.txt" />
     <Content Include="Doc\todo.txt" />
     <Content Include="nafco_128X128.ico" />
     <EmbeddedResource Include="Reports\ReceivedOrderReportbak.rdlc" />

@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelCallback.cs" />
+    <Compile Include="t_innerorders.cs" />
     <Compile Include="v_orderreason.cs" />
     <Compile Include="OrderQuantityChangeReasonRespository.cs" />
     <Compile Include="v_shipper.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="v_freights.cs" />
     <Compile Include="v_itemunit.cs" />
     <Compile Include="v_shop.cs" />
+    <Compile Include="v_innerorder.cs" />
     <None Include="GODDbContext.Views.csbak" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="t_date.cs" />
