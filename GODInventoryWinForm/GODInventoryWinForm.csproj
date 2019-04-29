@@ -738,7 +738,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\help.txt" />
-    <Content Include="Doc\sql_v20.txt" />
     <Content Include="Doc\todo.txt" />
     <Content Include="nafco_128X128.ico" />
     <EmbeddedResource Include="Reports\ReceivedOrderReportbak.rdlc" />
