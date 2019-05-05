@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GODInventory.ViewModel.EDI
+namespace GODInventory.NAFCO.EDI
 {
     using GODInventory.MyLinq;
+    using GODInventory.ViewModel;
     using MySql.Data.MySqlClient;
     using System.Data.SqlClient;
     using System.Diagnostics;
@@ -323,10 +324,10 @@ namespace GODInventory.ViewModel.EDI
             IsExist = false;
         }
 
-        public t_orderdata ConverToEntity()
+        public NafcoOrder ConverToEntity()
         {
             var now = DateTime.Now;
-            var orderdata = new t_orderdata();
+            var orderdata = new NafcoOrder();
 
             orderdata.受注日 = DateTime.ParseExact(this.受注日, "yyyyMMdd", CultureInfo.InvariantCulture);
             int i = Convert.ToInt32(this.受注時刻);
@@ -421,7 +422,7 @@ namespace GODInventory.ViewModel.EDI
             return orderdata;
 
         }
-        public t_orderdata ConverToEntity(t_shoplist shop, t_itemlist item, v_itemprice price, t_locations location, List<t_orderdata> orders)
+        public NafcoOrder ConverToEntity(t_shoplist shop, t_itemlist item, v_itemprice price, t_locations location, List<NafcoOrder> orders)
         {
             if (IsByFax)
             {
@@ -498,7 +499,7 @@ namespace GODInventory.ViewModel.EDI
             orderdata.warehousename = price.warehousename;
             orderdata.warehouse_id = price.warehouse_id;
 
-            orderdata.社内伝番処理 = OrderSqlHelper.IsInnerCodeRequired(orderdata.ジャンル);
+            orderdata.社内伝番処理 = OrderHelper.IsInnerCodeRequired(orderdata.ジャンル);
             //if (orderdata.実際配送担当 == "MKL" && (orderdata.ジャンル == 1001 || orderdata.ジャンル == 1003))
             //{
             //    orderdata.実際配送担当 = "丸健";
@@ -515,10 +516,9 @@ namespace GODInventory.ViewModel.EDI
             orderdata.仕入金額 = orderdata.実際出荷数量 * price.仕入原価;
             orderdata.粗利金額 = orderdata.納品原価金額 - orderdata.仕入金額;
 
-            orderdata.id = String.Format("{0}a{1}", orderdata.店舗コード, orderdata.伝票番号);
-            orderdata.週目 = OrderHelper.GetOrderWeekOfYear(orderdata.受注日.Value);
-
-            orderdata.運賃 = OrderHelper.ComputeFreight(orderdata, price.fee, price.columnname);
+            //orderdata.id = String.Format("{0}a{1}", orderdata.店舗コード, orderdata.伝票番号);/
+            //orderdata.週目 = OrderHelper.GetOrderWeekOfYear(orderdata.受注日.Value);
+            //orderdata.運賃 = OrderHelper.ComputeFreight(orderdata, price.fee, price.columnname);
 
             if (orders != null)
             {
@@ -531,156 +531,10 @@ namespace GODInventory.ViewModel.EDI
             return orderdata;
         }
 
-        public CustomMySqlParameters ToSqlArguments(t_shoplist shop, t_itemlist item, v_itemprice price, t_locations location, List<t_orderdata> orders)
-        {
-            //`発注日`, `受注日`, `出荷日`, `納品日`, `店舗コード`, `店舗名漢字`, `社内伝番`, `行数`, `最大行数`, `伝票番号`, `ダブリ`, 
-            //`在庫状態`, `キャンセル`, `キャンセル時刻`, `ジャンル`, `ＪＡＮコード`, `商品コード`, `品名漢字`, `規格名漢字`, `発注数量`, 
-            //`実際出荷数量`, `口数`, `納品口数`, `重量`, `単位`, `原単価(税抜)`, `原価金額(税抜)`, `納品原価金額`, `売単価（税抜）`, `一旦保留`, 
-            //`実際配送担当`, `配送担当受信`, `配送担当受信時刻`, `専務受信`, `専務受信時刻`, `納品指示`, `納品場所コード`, `納品場所名漢字`, 
-            //`受領`, `備考`, `週目`, `受領確認`, `受領数量`, `受領金額`, `受領差異数量`, `受領差異金額`, `受注時刻`, `法人コード`, 
-            //`法人名漢字`, `法人名カナ`, `店舗名カナ`, `仕入先コード`, `仕入先名漢字`, `仕入先名カナ`, `出荷業務仕入先コード`, 
-            //`伝票区分`, `行番号`, `納品予定日`, `発注データ有効期限`, `EDI発注区分`, `発注形態区分`, `発注形態名称漢字`, 
-            //`予備（数値）`, `本部発注区分`, `部門コード`, `部門名漢字`, `部門名カナ`, `ラインコード`, `クラスコード`, `商品コード区分`, 
-            //`ロケーションコード`, `オプション使用欄`, `ＧＴＩＮ`, `品名カナ`, `規格名カナ`, `最小発注単位数量`, `発注単位名称漢字`, 
-            //`発注単位名称カナ`, `総額取引区分`, `原単価(税込)`, `原価金額(税込)`, `税額`, `税区分`, `税率`, `売単価（税込）`, `特価区分`, 
-            //`PB区分`, `原価区分`, `用度品区分`, `納期回答区分`, `回答納期`, `色名カナ`, `柄名カナ`, `サイズ名カナ`, `広告コード`, `伝票出力単位`, 
-            //`納品先店舗コード`, `納品先店舗名漢字`, `納品先店舗名カナ`, `納品場所名カナ`, `便区分`, `センター経由区分`, `センターコード`, 
-            //`センター名漢字`, `センター名カナ
-/*
-            !受注時刻 = tTimeJ
-                    !法人コード = Cells(i, 3).Value
-                    !法人名漢字 = Cells(i, 4).Value
-                    !法人名カナ = Cells(i, 5).Value
-                    !店舗コード = Cells(i, 6).Value
-                    !店舗名漢字 = Cells(i, 7).Value
-                    !店舗名カナ = Cells(i, 8).Value
-                    !仕入先コード = Cells(i, 9).Value
-                    !仕入先名漢字 = Cells(i, 10).Value
-                    !仕入先名カナ = Cells(i, 11).Value
-                    !出荷業務仕入先コード = Cells(i, 12).Value
-                    !伝票区分 = Cells(i, 13).Value
-                    !伝票番号 = Cells(i, 14).Value
-                    !行番号 = Cells(i, 15).Value
-                    tDateS = Left(Cells(i, 16).Value, 4) & "/" & Mid(Cells(i, 16).Value, 5, 2) & "/" & Right(Cells(i, 16).Value, 2)
-                    !発注日 = CDate(tDateS)
-                    tDateS = Left(Cells(i, 17).Value, 4) & "/" & Mid(Cells(i, 17).Value, 5, 2) & "/" & Right(Cells(i, 17).Value, 2)
-                    !納品予定日 = CDate(tDateS)
-                    tDateS = Left(Cells(i, 18).Value, 4) & "/" & Mid(Cells(i, 18).Value, 5, 2) & "/" & Right(Cells(i, 18).Value, 2)
-                    !発注データ有効期限 = CDate(tDateS)
-                    !EDI発注区分 = Cells(i, 19).Value
-                    !発注形態区分 = Cells(i, 20).Value
-                    !発注形態名称漢字 = Cells(i, 21).Value
-                    ![予備(数値)] = Cells(i, 22).Value
-                    !本部発注区分 = Cells(i, 23).Value
-                    !部門コード = Cells(i, 24).Value
-                    !部門名漢字 = Cells(i, 25).Value
-                    !部門名カナ = Cells(i, 26).Value
-                    !ラインコード = Cells(i, 27).Value
-                    !クラスコード = Cells(i, 28).Value
-                    !ロケーションコード = Cells(i, 29).Value
-                    !商品コード区分 = Cells(i, 30).Value
-                    !JANコード = Cells(i, 31).Value
-                    !商品コード = Cells(i, 32).Value
-                    !オプション使用欄 = Cells(i, 33).Value
-                    !GTIN = Cells(i, 34).Value
-                    !品名漢字 = Cells(i, 35).Value
-                    !品名カナ = Cells(i, 36).Value
-                    !規格名漢字 = Cells(i, 37).Value
-                    !規格名カナ = Cells(i, 38).Value
-                    !発注数量 = Cells(i, 39).Value
-                    !最小発注単位数量 = Cells(i, 40).Value
-                    !発注単位名称漢字 = Cells(i, 41).Value
-                    !発注単位名称カナ = Cells(i, 42).Value
-                    !総額取引区分 = Cells(i, 43).Value
-                    ![原単価(税抜)] = Cells(i, 44).Value
-                    ![原単価(税込)] = Cells(i, 45).Value
-                    ![原価金額(税抜)] = Cells(i, 46).Value
-                    ![原価金額(税込)] = Cells(i, 47).Value
-                    !税額 = Cells(i, 48).Value
-                    !税区分 = Cells(i, 49).Value
-                    !税率 = Cells(i, 50).Value
-                    ![売単価(税抜)] = Cells(i, 51).Value
-                    ![売単価(税込)] = Cells(i, 52).Value
-                    !特価区分 = Cells(i, 53).Value
-                    !PB区分 = Cells(i, 54).Value
-                    !原価区分 = Cells(i, 55).Value
-                    !用度品区分 = Cells(i, 56).Value
-                    !納期回答区分 = Cells(i, 57).Value
-                    !回答納期 = Cells(i, 58).Value
-                    !色名カナ = Cells(i, 59).Value
-                    !柄名カナ = Cells(i, 60).Value
-                    !サイズ名カナ = Cells(i, 61).Value
-                    !広告コード = Cells(i, 62).Value
-                    !伝票出力単位 = Cells(i, 63).Value
-                    !納品先店舗コード = Cells(i, 64).Value
-                    !納品先店舗名漢字 = Cells(i, 65).Value
-                    !納品先店舗名カナ = Cells(i, 66).Value
-                    !納品場所コード = Cells(i, 67).Value
-                    !納品場所名漢字 = Cells(i, 68).Value
-                    !納品場所名カナ = Cells(i, 69).Value
-                    !便区分 = Cells(i, 70).Value
-                    !センター経由区分 = Cells(i, 71).Value
-                    !センターコード = Cells(i, 72).Value
-                    !センター名漢字 = Cells(i, 73).Value
-                    !センター名カナ = Cells(i, 74).Value
-                    */
-            t_orderdata o = ConverToEntity(shop, item, price, location, orders);
-            string sql = @"INSERT INTO `t_orderdata`(
-`発注日`, `受注日`, `受注時刻`,  `店舗コード`, `店舗名漢字`, 
-`伝票番号`, `ＪＡＮコード`, `商品コード`, `品名漢字`, `規格名漢字`, 
-`発注数量`, `原単価(税抜)`, `原価金額(税抜)`, `納品原価金額`, `売単価（税抜）`,
-`納品場所コード`, `納品場所名漢字`, `法人コード`, `法人名漢字`,`法人名カナ`,
-`店舗名カナ`, `仕入先コード`, `仕入先名漢字`, `仕入先名カナ`, `出荷業務仕入先コード`, 
-`伝票区分`, `行番号`, `納品予定日`, `発注データ有効期限`, `EDI発注区分`, 
-`発注形態区分`, `発注形態名称漢字`, `予備（数値）`, `本部発注区分`, `部門コード`, 
-`部門名漢字`, `部門名カナ`, `ラインコード`, `クラスコード`, `商品コード区分`, 
-`ロケーションコード`, `オプション使用欄`, `ＧＴＩＮ`, `品名カナ`, `規格名カナ`, 
-`最小発注単位数量`, `発注単位名称漢字`, `発注単位名称カナ`, `総額取引区分`, `原単価(税込)`, 
-`原価金額(税込)`, `税額`, `税区分`, `税率`, `売単価（税込）`, 
-`特価区分`, `PB区分`, `原価区分`, `用度品区分`, `納期回答区分`, 
-`回答納期`, `色名カナ`, `柄名カナ`, `サイズ名カナ`, `広告コード`, 
-`伝票出力単位`, `納品先店舗コード`, `納品先店舗名漢字`, `納品先店舗名カナ`, `納品場所名カナ`, 
-`便区分`, `センター経由区分`, `センターコード`, `センター名漢字`, `センター名カナ`,
-`実際配送担当`, `配送担当受信`,`口数`,`重量`,`単位`,
-`ジャンル`) 
-VALUES (
-@p1, @p2, @p3, @p4, @p5, 
-@p6, @p7, @p8, @p9, @p10, 
-@p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, 
-@p21, @p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29, @p30, 
-@p31, @p32, @p33, @p34, @p35, @p36, @p37, @p38, @p39, @p40, 
-@p41, @p42, @p43, @p44, @p45, @p46, @p47, @p48, @p49, @p50, 
-@p51, @p52, @p53, @p54, @p55, @p56, @p57, @p58, @p59, @p60, 
-@p61, @p62, @p63, @p64, @p65, @p66, @p67, @p68, @p69, @p70, 
-@p71, @p72, @p73, @p74, @p75, @p76, @p77, @p78, @p79, @p80,
-@p81, @p82);";
-
-            MySqlParameter[] parameters = { new MySqlParameter("@p1", o.発注日), new MySqlParameter("@p2", o.受注日), new MySqlParameter("@p3", o.受注時刻), new MySqlParameter("@p4", o.店舗コード), new MySqlParameter("@p5", o.店舗名漢字),
-       new MySqlParameter("@p6", o.伝票番号), new MySqlParameter("@p7", o.ＪＡＮコード), new MySqlParameter("@p8", o.商品コード), new MySqlParameter("@p9", o.品名漢字),new MySqlParameter("@p10", o.規格名漢字),
-       new MySqlParameter("@p11", o.発注数量), new MySqlParameter("@p12", o.原単価_税抜_), new MySqlParameter("@p13", o.原価金額_税抜_), new MySqlParameter("@p14", o.納品原価金額),new MySqlParameter("@p15", o.売単価_税抜_),
-       new MySqlParameter("@p16", o.納品場所コード), new MySqlParameter("@p17", o.納品場所名漢字), new MySqlParameter("@p18", o.法人コード), new MySqlParameter("@p19", o.法人名漢字),new MySqlParameter("@p20", o.法人名カナ),
-       new MySqlParameter("@p21", o.店舗名カナ), new MySqlParameter("@p22", o.仕入先コード), new MySqlParameter("@p23", o.仕入先名漢字), new MySqlParameter("@p24", o.仕入先名カナ),new MySqlParameter("@p25", o.出荷業務仕入先コード),
-       new MySqlParameter("@p26", o.伝票区分), new MySqlParameter("@p27", o.行番号), new MySqlParameter("@p28", o.納品予定日), new MySqlParameter("@p29", o.発注データ有効期限),new MySqlParameter("@p30", o.EDI発注区分),
-       new MySqlParameter("@p31", o.発注形態区分), new MySqlParameter("@p32", o.発注形態名称漢字), new MySqlParameter("@p33", o.予備_数値_), new MySqlParameter("@p34", o.本部発注区分),new MySqlParameter("@p35", o.部門コード),
-       new MySqlParameter("@p36", o.部門名漢字), new MySqlParameter("@p37", o.部門名カナ), new MySqlParameter("@p38", o.ラインコード), new MySqlParameter("@p39", o.クラスコード),new MySqlParameter("@p40", o.商品コード区分),
-       new MySqlParameter("@p41", o.ロケーションコード), new MySqlParameter("@p42", o.オプション使用欄), new MySqlParameter("@p43", o.ＧＴＩＮ), new MySqlParameter("@p44", o.品名カナ),new MySqlParameter("@p45", o.規格名カナ),
-       new MySqlParameter("@p46", o.最小発注単位数量), new MySqlParameter("@p47", o.発注単位名称漢字), new MySqlParameter("@p48", o.発注単位名称カナ), new MySqlParameter("@p49", o.総額取引区分),new MySqlParameter("@p50", o.原単価_税込_),
-       new MySqlParameter("@p51", o.原価金額_税込_), new MySqlParameter("@p52", o.税額), new MySqlParameter("@p53", o.税区分), new MySqlParameter("@p54", o.税率),new MySqlParameter("@p55", o.売単価_税込_),
-       new MySqlParameter("@p56", o.特価区分), new MySqlParameter("@p57", o.PB区分), new MySqlParameter("@p58", o.原価区分), new MySqlParameter("@p59", o.用度品区分),new MySqlParameter("@p60", o.納期回答区分),
-       new MySqlParameter("@p61", o.回答納期), new MySqlParameter("@p62", o.色名カナ), new MySqlParameter("@p63", o.柄名カナ), new MySqlParameter("@p64", o.サイズ名カナ),new MySqlParameter("@p65", o.広告コード),
-       new MySqlParameter("@p66", o.伝票出力単位), new MySqlParameter("@p67", o.納品先店舗コード), new MySqlParameter("@p68", o.納品先店舗名漢字), new MySqlParameter("@p69", o.納品先店舗名カナ),new MySqlParameter("@p70", o.納品場所名カナ),
-       new MySqlParameter("@p71", o.便区分), new MySqlParameter("@p72", o.センター経由区分), new MySqlParameter("@p73", o.センターコード), new MySqlParameter("@p74", o.センター名漢字),new MySqlParameter("@p75", o.センター名カナ),
-       new MySqlParameter("@p76", o.実際配送担当),new MySqlParameter("@p77", o.配送担当受信),new MySqlParameter("@p78", o.口数),new MySqlParameter("@p79", o.重量),new MySqlParameter("@p80", o.単位),
-       new MySqlParameter("@p81", o.ジャンル), new MySqlParameter("@p82", o.warehousename)     };
-
-            return new CustomMySqlParameters(parameters, sql);
-
-        }
-
-        public string ToRawSql(t_shoplist shop, t_itemlist item, v_itemprice price, t_locations location, List<t_orderdata> orders)
+        public string ToRawSql(t_shoplist shop, t_itemlist item, v_itemprice price, t_locations location, List<NafcoOrder> orders)
         {
             var isoDateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
-            t_orderdata o = ConverToEntity(shop, item, price, location, orders);
+            var o = ConverToEntity(shop, item, price, location, orders);
             if (o.Status == OrderStatus.Existed) 
             {
                 //o.Status = OrderStatus.Pending;

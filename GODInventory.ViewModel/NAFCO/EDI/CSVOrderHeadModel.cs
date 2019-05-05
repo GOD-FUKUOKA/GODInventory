@@ -5,10 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace GODInventory.ViewModel.EDI
+namespace GODInventory.NAFCO.EDI
 {
-    public class OrderHeadModel
+    public class CSVOrderHeadModel
     {
+        string[] columnNames;
         Byte[] データID; //1 データID        3 1
         Byte[] 管理連番; //2 管理連番        13 4
         Byte[] システム管理日付; //3 システム管理日付 8 17
@@ -20,14 +21,24 @@ namespace GODInventory.ViewModel.EDI
         Byte[] 予備; //9 予備              644 57
         byte[] nr;
 
-        public OrderHeadModel(Byte[] line)
+        //店舗,納品場所,伝票番号,JANコード,商品コード,商品名,規格,発注原単価,発注売単価,発注数量,ASN出荷NO,ASN数量,受領原単価,受領売単価,受領数量,受領受信日,受領計上日
+
+        public CSVOrderHeadModel(StreamReader sr)
+        {
+            string shiftJisColumns = sr.ReadLine();
+            string utf8Columns = EncodingUtility.ConvertShiftJisStringToUtf8(shiftJisColumns);
+
+            this.columnNames = utf8Columns.Split(',');
+        }
+
+        public CSVOrderHeadModel(Byte[] line)
         {
             //arrays.SelectMany(x => x).ToArray();
             //line.
             //this.データID = 
 
         }
-        public OrderHeadModel(BinaryReader br)
+        public CSVOrderHeadModel(BinaryReader br)
         {
             this.データID = br.ReadBytes(3);
             this.管理連番 = br.ReadBytes(13);
@@ -43,6 +54,9 @@ namespace GODInventory.ViewModel.EDI
 
         }
 
+        public bool IsByFax() {
+            return this.columnNames.Count() == 17;
+        }
 
         public int DetailCount {
             get{
@@ -50,13 +64,6 @@ namespace GODInventory.ViewModel.EDI
                 return Convert.ToInt32(s); }
         }
 
-        public int groupId {
-            get
-            {
-                string s = Encoding.ASCII.GetString(this.管理連番);
-                return Convert.ToInt32(s);
-            }
-        }
 
     }
 }

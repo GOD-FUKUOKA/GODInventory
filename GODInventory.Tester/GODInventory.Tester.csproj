@@ -91,9 +91,9 @@
       <Project>{ffc241ed-fd21-4af1-9b53-a57422bf2f6b}</Project>
       <Name>GODInventory.MyLinq</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GODInventory.ViewModel\GODInventory.ViewModel.csproj">
+    <ProjectReference Include="..\GODInventory.ViewModel\GODInventory.csproj">
       <Project>{1d5ddab1-0b38-4bbd-9130-11ba301a7cfc}</Project>
-      <Name>GODInventory.ViewModel</Name>
+      <Name>GODInventory</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

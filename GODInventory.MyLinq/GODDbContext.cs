@@ -32,7 +32,7 @@
         public virtual DbSet<t_transports> t_transports { get; set; }
         public virtual DbSet<t_warehouses_transports> t_warehouses_transports { get; set; }
         public virtual DbSet<t_freights> t_freights { get; set; }
-        public virtual DbSet<t_innerorders> t_innerorders { get; set; }
+        public virtual DbSet<NafcoOrder> t_nafco_orders { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -100,7 +100,147 @@
             modelBuilder.Entity<t_maruken_trans>()
                 .Property(e => e.備考)
                 .IsUnicode(false);
+            //=================================================
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.id)
+                .IsUnicode(false);
 
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.店舗名漢字)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.ダブリ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.在庫状態)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.キャンセル)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.品名漢字)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.規格名漢字)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.単位)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.実際配送担当)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.納品指示)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.納品場所名漢字)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.備考)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.法人名漢字)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.法人名カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.店舗名カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.仕入先名漢字)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.仕入先名カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.発注形態名称漢字)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.部門名漢字)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.部門名カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.ＧＴＩＮ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.品名カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.規格名カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.発注単位名称漢字)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.発注単位名称カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.回答納期)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.色名カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.柄名カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.サイズ名カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.納品先店舗名漢字)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.納品先店舗名カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.納品場所名カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.センター名漢字)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.センター名カナ)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NafcoOrder>()
+                .Property(e => e.Status)
+                .IsRequired();
+// ==========================================================
             modelBuilder.Entity<t_orderdata>()
                 .Property(e => e.id)
                 .IsUnicode(false);
@@ -229,13 +369,6 @@
                 .Property(e => e.納品場所名カナ)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.センター名漢字)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.センター名カナ)
-                .IsUnicode(false);
 
             modelBuilder.Entity<t_orderdata>()
                 .Property(e => e.Status)

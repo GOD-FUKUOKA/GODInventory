@@ -63,6 +63,24 @@ namespace GODInventory.ViewModel
         //& " ORDER BY t_orderdata.`実際配送担当` ASC,t_shoplist.`県別` ASC,t_orderdata.`店舗コード` ASC," _
         //& " t_orderdata.`ＪＡＮコード` ASC,t_orderdata.`受注日` ASC,t_orderdata.`伝票番号` ASC"
 
+        public static List<v_pendingorder> GetPendingOrderList(EntityDataSource dataSource, int pageSize, int offset)
+        {
+            string sql = @" SELECT o.*, o.`原単価(税抜)` as `原単価_税抜_`, o.`原単価(税込)` as `原単価_税込_`, o.`売単価（税抜）` as `売単価_税抜_`, o.`売単価（税込）` as `売単価_税込_`,
+g.`ジャンル名` as `GenreName`, k.`在庫数` as `在庫数`, s.`売上ランク`, p.`厳しさ`, p.`欠品カウンター`
+FROM t_innerorders o
+INNER JOIN t_genre g  on o.ジャンル = g.idジャンル
+INNER JOIN t_shoplist s  on o.法人コード = s.customerId AND  o.店舗コード = s.店番 
+INNER JOIN t_pricelist p on  o.自社コード = p.自社コード AND  o.店舗コード = p.店番 
+LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.warehouse_id = k.WarehouseId 
+WHERE o.Status ={0}
+ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
+
+
+            // create BindingList (sortable/filterable)
+            var list = dataSource.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.Pending, pageSize, offset).ToList();
+            return list;
+        }
+
         public static IQueryable PendingOrderSql(EntityDataSource entityDataSource1)
         {
             var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]

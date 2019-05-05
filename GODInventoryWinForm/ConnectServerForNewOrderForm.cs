@@ -20,6 +20,8 @@ namespace GODInventoryWinForm
             this.ControlBox = false;   // 设置不出现关闭按钮
             this.msgLabel.Text = "";
         }
+        // TODO
+        // 根据当前选择的客户，调用相应的订单接收程序
 
         private void ReceiveForm_Shown(object sender, EventArgs e)
         {

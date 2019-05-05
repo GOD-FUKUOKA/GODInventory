@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace GODInventory.ViewModel.EDI
+namespace GODInventory.NAFCO.EDI
 {
     using GODInventory.MyLinq;
     using System.Data.Entity.Validation;
@@ -225,7 +225,7 @@ namespace GODInventory.ViewModel.EDI
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, EDITxtHandler.ASNFolder, "NYOTEI_" + mid.ToString() + ".txt");
         }
 
-      
+     
         // get ship no for order  
         public static long GenerateEDIShipNO(GODDbContext ctx, t_orderdata order)
         {

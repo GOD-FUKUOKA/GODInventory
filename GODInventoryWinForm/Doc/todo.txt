@@ -9,3 +9,13 @@ CREATE DEFINER=`root`@`%` TRIGGER `追加後整理_copy` BEFORE INSERT ON `t_ord
 set new.`ダブリ`=(case when not exists(select `id` from t_orderdata where new.`店舗コード`=`店舗コード` and new.`品名漢字`=`品名漢字` and `キャンセル`='no' and `納品日` is null union select `id` from t_orderdata where new.`店舗コード`=`店舗コード` and new.`品名漢字`=`品名漢字` and `キャンセル`='no' and `納品日` >= DATE(NOW())) then 'no' else 'yes' end);
 set new.`Status` = (case when new.`ダブリ` ='yes' then 22 else new.`Status` end);
 END$$
+
+
+v2.0
+======================================================================================
+1. 接收订单后，把根据当前客户类型，把订单存在客户订单表（t_nafco_orders）和内部订单表(t_orderdata)
+   
+   ImportOrderTextForm_Auto.ImportOrderTxt
+   
+
+

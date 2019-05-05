@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace GODInventoryWinForm
 {
+    using GODInventory;
     using GODInventory.MyLinq;
     using GODInventory.ViewModel;
     using GODInventory.ViewModel.EDI;
@@ -99,7 +100,7 @@ namespace GODInventoryWinForm
             this.Close();
         }
 
-
+        // 导入订单到 t_nafco_orders 表，同时copy 到t_orderdata
         private bool ImportOrderTxt(string path, BackgroundWorker worker, DoWorkEventArgs e)
         {
             
@@ -111,23 +112,23 @@ namespace GODInventoryWinForm
 
             //var lines = ConvertToUtf8Strings(path);
             List<OrderModel> models = new List<OrderModel>();
-
+            OrderHeadModel orderHead = null;
             try
             {
                 //byte[] first_line = null;
                 //byte[] line = null;
                 using (BinaryReader br = new BinaryReader(new FileStream(path, FileMode.Open, FileAccess.Read)))
                 {
-                    OrderHeadModel order_head = new OrderHeadModel(br);
-                    //Console.WriteLine(" write head ={0}", order_head.DetailCount);
-                    for (var i = 0; i < order_head.DetailCount; i++)
+                    orderHead = new OrderHeadModel(br);
+                    //Console.WriteLine(" write head ={0}", orderHead.DetailCount);
+                    for (var i = 0; i < orderHead.DetailCount; i++)
                     {
                         if (worker.CancellationPending == true)
                         {
                             e.Cancel = true;
                             throw new Exception("キャンセルできました!");
                         }
-                        int progress = Convert.ToInt16((i + 1) * 0.5 / order_head.DetailCount * 100);
+                        int progress = Convert.ToInt16((i + 1) * 0.5 / orderHead.DetailCount * 100);
                         models.Add(new OrderModel(br));
                         //if (progress != last)
                         //
@@ -234,6 +235,10 @@ namespace GODInventoryWinForm
                         backgroundWorker1.ReportProgress(100, arg);
 
                         ctxTransaction.Commit();
+
+                        // TODO
+                        // select () into t_orderdata from t_nafco_orders where t_nafco_orders.受注管理連番 = orderHead.管理連番
+                        // GODInventory.NAFCO.OrderSqlHelper.ImportOrderFromCusotmerOrders(orderHead.groupId); 
 
                         e.Result = string.Format("{0}件の受注伝票が登録できました",count);
                     }

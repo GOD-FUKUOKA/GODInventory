@@ -3,9 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GODInventory.MyLinq", "GODInventory.MyLinq\GODInventory.MyLinq.csproj", "{FFC241ED-FD21-4AF1-9B53-A57422BF2F6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GODInventory.ViewModel", "GODInventory.ViewModel\GODInventory.ViewModel.csproj", "{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GODInventoryWinForm", "GODInventoryWinForm\GODInventoryWinForm.csproj", "{7101444A-CF5A-4F1B-B7E6-E75CD5E50449}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC} = {1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GODInventory.Tester", "GODInventory.Tester\GODInventory.Tester.csproj", "{FBF0F8B9-1325-420D-B77F-E8390CB5E0D2}"
 EndProject
@@ -17,6 +18,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1B8D9A
 	EndProjectSection
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SetupProject", "SetupProject\SetupProject.wixproj", "{88B07403-5D5D-410F-B162-113EF10D961F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7101444A-CF5A-4F1B-B7E6-E75CD5E50449} = {7101444A-CF5A-4F1B-B7E6-E75CD5E50449}
+		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC} = {1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}
+		{FFC241ED-FD21-4AF1-9B53-A57422BF2F6B} = {FFC241ED-FD21-4AF1-9B53-A57422BF2F6B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GODInventory", "GODInventory.ViewModel\GODInventory.csproj", "{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,17 +47,6 @@ Global
 		{FFC241ED-FD21-4AF1-9B53-A57422BF2F6B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FFC241ED-FD21-4AF1-9B53-A57422BF2F6B}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
 		{FFC241ED-FD21-4AF1-9B53-A57422BF2F6B}.Release|x86.ActiveCfg = Release|Any CPU
-		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
-		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Release|x86.ActiveCfg = Release|Any CPU
 		{7101444A-CF5A-4F1B-B7E6-E75CD5E50449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7101444A-CF5A-4F1B-B7E6-E75CD5E50449}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7101444A-CF5A-4F1B-B7E6-E75CD5E50449}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -81,6 +78,16 @@ Global
 		{88B07403-5D5D-410F-B162-113EF10D961F}.Release|Mixed Platforms.Build.0 = Release|x86
 		{88B07403-5D5D-410F-B162-113EF10D961F}.Release|x86.ActiveCfg = Release|x86
 		{88B07403-5D5D-410F-B162-113EF10D961F}.Release|x86.Build.0 = Release|x86
+		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1D5DDAB1-0B38-4BBD-9130-11BA301A7CFC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

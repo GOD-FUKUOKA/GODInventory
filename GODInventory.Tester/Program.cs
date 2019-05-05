@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using GODInventory.Models;
 using GODInventory.MyLinq;
 using System.Data.Entity;
 using System.Linq;
@@ -12,6 +11,7 @@ using MySql.Data.Entity;
 using System.Data.Entity.Infrastructure.Interception;
 using GODInventory.ViewModel;
 using System.IO;
+using System.Data.Entity.Validation;
 
 namespace GODInventory.Tester
 {
@@ -46,7 +46,7 @@ namespace GODInventory.Tester
         static void TestText() {
             string path = @"D:\项目\在庫管理\translated\data\HACCYU_1.txt";
 
-            EDITxtHandler.ImportOrderTxt(path);
+            //EDITxtHandler.ImportOrderTxt(path);
         }
 
 
@@ -152,6 +152,7 @@ namespace GODInventory.Tester
             }
 
         }
+       
         static void ExportASNText()
         {
             string path = @"D:\项目\在庫管理\translated\data\NYOTEI_exp.txt";
@@ -177,5 +178,55 @@ namespace GODInventory.Tester
             }
 
         }
+
+        static void ImportOrderTxt(string path)
+        {
+
+
+            //File.ReadAllBytes(path);
+
+            //var lines = ConvertToUtf8Strings(path);
+            //List<OrderModel> order_models = new List<OrderModel>();
+
+            //try
+            //{
+            //    //byte[] first_line = null;
+            //    //byte[] line = null;
+            //    using (BinaryReader br = new BinaryReader(new FileStream(path, FileMode.Open, FileAccess.Read)))
+            //    {
+            //        OrderHeadModel order_head = new OrderHeadModel(br);
+            //        Console.WriteLine(" write head ={0}", order_head.DetailCount);
+
+            //        for (var i = 0; i < order_head.DetailCount; i++)
+            //        {
+            //            order_models.Add(new OrderModel(br));
+            //        }
+            //        //while (line = br.ReadBytes(702))
+            //        //{
+            //        //}
+            //    }
+            //}
+            //catch (EndOfStreamException e)
+            //{
+
+            //}
+
+            using (var ctx = new GODDbContext())
+            {
+                try
+                {
+                    //var orders = order_models.Select(x => x.ConverToEntity());
+                    //var result = ctx.Entry(orders.First()).GetValidationResult();
+                    //ctx.t_orderdata.AddRange(orders);
+                    //ctx.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+
+            }
+        }
+
     }
 }

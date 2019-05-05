@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace GODInventoryWinForm
 {
+    using GODInventory;
     using GODInventory.MyLinq;
     using GODInventory.ViewModel;
     using GODInventory.ViewModel.EDI;

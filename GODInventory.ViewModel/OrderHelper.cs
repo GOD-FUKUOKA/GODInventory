@@ -11,6 +11,23 @@ namespace GODInventory.ViewModel
 {
     public class OrderHelper
     {
+        public static List<t_genre> genreList = null;
+
+        public static int IsInnerCodeRequired(int genre_id)
+        {
+            int codeRequired = 0;
+            if (genreList == null)
+            {
+                using (var ctx = new GODDbContext())
+                {
+                    genreList = ctx.t_genre.ToList();
+                }
+            }
+            var genre = genreList.Where(o => o.idジャンル == genre_id).First();
+            codeRequired = genre.社内伝番処理;
+            return codeRequired;
+        }
+
         /// <summary>
         /// 初始化一个订单，根据订单的基本属性，设置订单的其它相关值， 为创建订单做准备。
         /// 如 订单的运费

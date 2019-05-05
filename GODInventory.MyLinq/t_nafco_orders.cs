@@ -6,16 +6,14 @@ namespace GODInventory.MyLinq
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("god_inventory.t_innerorders")]
-    public partial class t_innerorders
+    [Table("god_inventory.t_nafco_order")]
+    public partial class NafcoOrder
     {
+        [Key]
+        public int id受注データ { get; set; }
 
-        [Key] 
-        public int id { get; set; } //自增ID
-
-        public int customerid { get; set; } //客户ID
-
-        public int id受注データ { get; set; }   // 客户订单表ID，每个客户有自己的订单表，这个数据可能重复
+        [StringLength(255)]
+        public string id { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime 発注日 { get; set; }
@@ -37,9 +35,9 @@ namespace GODInventory.MyLinq
 
         public int 社内伝番 { get; set; }
 
-        public short 行数 { get; set; }
+        public short? 行数 { get; set; }
 
-        public short 最大行数 { get; set; }
+        public short? 最大行数 { get; set; }
 
         public int 伝票番号 { get; set; }
 
@@ -58,21 +56,24 @@ namespace GODInventory.MyLinq
 
         public int ジャンル { get; set; }
 
-        /// <summary>
-        /// 商品信息
-        /// </summary>
-        [StringLength(255)]
-        public string 品名漢字 { get; set; }
-
-        [StringLength(255)]
-        public string 規格名漢字 { get; set; }
-
         public long ＪＡＮコード { get; set; }
 
         public int 商品コード { get; set; }
 
         public int 自社コード { get; set; }
         
+        [StringLength(255)]
+        public string 品名漢字 { get; set; }
+
+        [StringLength(255)]
+        public string 規格名漢字 { get; set; }
+
+        //导出时需要和発注的一样，字符长度<20
+        [StringLength(255)]
+        public string 発注品名漢字 { get; set; }
+
+        [StringLength(255)]
+        public string 発注規格名漢字 { get; set; }
 
         public int 発注数量 { get; set; }
 
@@ -108,14 +109,9 @@ namespace GODInventory.MyLinq
 
         public DateTime? 配送担当受信時刻 { get; set; }
 
-        /// <summary>
-        /// 客户信息， 包括法人，店铺，纳品场所
-        /// </summary>
-        public short 法人コード { get; set; }
+        public bool 専務受信 { get; set; }
 
-        [StringLength(255)]
-        public string 法人名漢字 { get; set; }
-
+        public DateTime? 専務受信時刻 { get; set; }
 
         [StringLength(255)]
         public string 納品指示 { get; set; }
@@ -124,11 +120,6 @@ namespace GODInventory.MyLinq
 
         [StringLength(255)]
         public string 納品場所名漢字 { get; set; }
-
-        [StringLength(255)]
-        public string 納品場所名カナ { get; set; }
-
-        public int 出荷業務仕入先コード { get; set; } //自身在客户那的代码
 
         public bool 受領 { get; set; }
 
@@ -149,7 +140,26 @@ namespace GODInventory.MyLinq
 
         public TimeSpan? 受注時刻 { get; set; }
 
-       
+        public short 法人コード { get; set; }
+
+        [StringLength(255)]
+        public string 法人名漢字 { get; set; }
+
+        [StringLength(255)]
+        public string 法人名カナ { get; set; }
+
+        [StringLength(255)]
+        public string 店舗名カナ { get; set; }
+
+        public int 仕入先コード { get; set; }
+
+        [StringLength(255)]
+        public string 仕入先名漢字 { get; set; }
+
+        [StringLength(255)]
+        public string 仕入先名カナ { get; set; }
+
+        public int 出荷業務仕入先コード { get; set; }
 
         public short 伝票区分 { get; set; }
 
@@ -168,7 +178,48 @@ namespace GODInventory.MyLinq
         [StringLength(255)]
         public string 発注形態名称漢字 { get; set; }
 
-      
+        [Column("予備（数値）")]
+        public int? 予備_数値_ { get; set; }
+
+        public short? 本部発注区分 { get; set; }
+
+        public short 部門コード { get; set; }
+
+        [StringLength(255)]
+        public string 部門名漢字 { get; set; }
+
+        [StringLength(255)]
+        public string 部門名カナ { get; set; }
+
+        public int? ラインコード { get; set; }
+
+        public int? クラスコード { get; set; }
+
+        public int 商品コード区分 { get; set; }
+
+        public int? ロケーションコード { get; set; }
+
+        public string オプション使用欄 { get; set; }
+
+        [StringLength(255)]
+        public string ＧＴＩＮ { get; set; }
+
+        [StringLength(255)]
+        public string 品名カナ { get; set; }
+
+        [StringLength(255)]
+        public string 規格名カナ { get; set; }
+
+        public int 最小発注単位数量 { get; set; }
+
+        [StringLength(255)]
+        public string 発注単位名称漢字 { get; set; }
+
+        [StringLength(255)]
+        public string 発注単位名称カナ { get; set; }
+
+        public short 総額取引区分 { get; set; }
+
         [Column("原単価(税込)")]
         public double? 原単価_税込_ { get; set; }
 
@@ -194,7 +245,48 @@ namespace GODInventory.MyLinq
 
         public short? 納期回答区分 { get; set; }
 
-             
+        [StringLength(255)]
+        public string 回答納期 { get; set; }
+
+        [StringLength(255)]
+        public string 色名カナ { get; set; }
+
+        [StringLength(255)]
+        public string 柄名カナ { get; set; }
+
+        [StringLength(255)]
+        public string サイズ名カナ { get; set; }
+
+        public int? 広告コード { get; set; }
+
+        public short? 伝票出力単位 { get; set; }
+
+        public short 納品先店舗コード { get; set; }
+
+        [StringLength(255)]
+        public string 納品先店舗名漢字 { get; set; }
+
+        [StringLength(255)]
+        public string 納品先店舗名カナ { get; set; }
+
+        [StringLength(255)]
+        public string 納品場所名カナ { get; set; }
+
+        public short? 便区分 { get; set; }
+
+        public short センター経由区分 { get; set; }
+
+        public int センターコード { get; set; }
+
+        [StringLength(255)]
+        public string センター名漢字 { get; set; }
+
+        [StringLength(255)]
+        public string センター名カナ { get; set; }
+
+        public long ASN管理連番 { get; set; }
+        public long 受注管理連番 { get; set; }
+        
         public long 出荷No { get; set; }
 
         public OrderStatus Status { get; set; }
@@ -224,12 +316,7 @@ namespace GODInventory.MyLinq
         public int warehouse_id { get; set; }
         public int transport_id { get; set; }
 
-        //
-        public long ASN管理連番 { get; set; }  //发送订单 連番
-        public long 受注管理連番 { get; set; } //接收订单 連番
-
-
-        public t_innerorders()
+        public NafcoOrder()
         {
             this.キャンセル = "no";
             this.ダブリ = "no";

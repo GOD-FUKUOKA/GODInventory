@@ -14,6 +14,7 @@ namespace GODInventoryWinForm
     using DocumentFormat.OpenXml.Spreadsheet;
     using DocumentFormat.OpenXml;
 
+    using GODInventory;
     using GODInventory.MyLinq;
     using GODInventory.ViewModel;
     using GODInventory.ViewModel.EDI;

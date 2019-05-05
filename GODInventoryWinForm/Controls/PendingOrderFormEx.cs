@@ -15,7 +15,7 @@ namespace GODInventoryWinForm.Controls
     using MySql.Data.MySqlClient;
     using System.Data.SqlClient;
 
-    public partial class PendingInnerOrderForm : Form
+    public partial class PendingOrderFormEx : Form
     {
         public Size ParentContainerSize { get; set; }
 
@@ -39,7 +39,7 @@ namespace GODInventoryWinForm.Controls
         private List<t_warehouses> warehouseList;
 
 
-        public PendingInnerOrderForm()
+        public PendingOrderFormEx()
         {
             InitializeComponent();
 
@@ -383,7 +383,7 @@ namespace GODInventoryWinForm.Controls
             this.datagrid_changes.Clear();
             this.pendingOrderList.Clear();
 
-            var cq = InnerOrderSqlHelper.PendingOrderQuery(entityDataSource1);
+            var cq = OrderSqlHelper.PendingOrderQuery(entityDataSource1);
             var count = cq.Count();
 
             if (count > 0)
@@ -391,7 +391,7 @@ namespace GODInventoryWinForm.Controls
 
                 // create BindingList (sortable/filterable)
                 int offset = (pager1.PageCurrent > 1 ? pager1.OffSet(pager1.PageCurrent - 1) : 0);
-                pendingOrderList = InnerOrderSqlHelper.GetPendingOrderList(entityDataSource1, pager1.PageSize, offset);
+                pendingOrderList = OrderSqlHelper.GetPendingOrderList(entityDataSource1, pager1.PageSize, offset);
 
                 UpdateStockState(pendingOrderList);
 

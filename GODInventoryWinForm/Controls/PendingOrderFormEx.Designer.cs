@@ -1,6 +1,6 @@
 ﻿namespace GODInventoryWinForm.Controls
 {
-    partial class PendingInnerOrderForm
+    partial class PendingOrderFormEx
     {
         /// <summary>
         /// Required designer variable.
