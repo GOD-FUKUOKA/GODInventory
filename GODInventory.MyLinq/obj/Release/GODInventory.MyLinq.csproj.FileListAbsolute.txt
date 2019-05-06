@@ -35,3 +35,12 @@ D:\projects\GODInventory\GODInventory.MyLinq\bin\Release\MySql.Data.Entity.EF6.d
 D:\projects\GODInventory\GODInventory.MyLinq\bin\Release\EntityFramework.xml
 D:\projects\GODInventory\GODInventory.MyLinq\obj\Release\GODInventory.MyLinq.dll
 D:\projects\GODInventory\GODInventory.MyLinq\obj\Release\GODInventory.MyLinq.pdb
+D:\projects\GODInventory-v1\GODInventory.MyLinq\bin\Release\GODInventory.MyLinq.dll.config
+D:\projects\GODInventory-v1\GODInventory.MyLinq\bin\Release\GODInventory.MyLinq.dll
+D:\projects\GODInventory-v1\GODInventory.MyLinq\bin\Release\GODInventory.MyLinq.pdb
+D:\projects\GODInventory-v1\GODInventory.MyLinq\bin\Release\EntityFramework.dll
+D:\projects\GODInventory-v1\GODInventory.MyLinq\bin\Release\MySql.Data.dll
+D:\projects\GODInventory-v1\GODInventory.MyLinq\bin\Release\MySql.Data.Entity.EF6.dll
+D:\projects\GODInventory-v1\GODInventory.MyLinq\bin\Release\EntityFramework.xml
+D:\projects\GODInventory-v1\GODInventory.MyLinq\obj\Release\GODInventory.MyLinq.dll
+D:\projects\GODInventory-v1\GODInventory.MyLinq\obj\Release\GODInventory.MyLinq.pdb
