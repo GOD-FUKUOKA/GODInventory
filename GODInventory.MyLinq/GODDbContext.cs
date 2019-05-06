@@ -101,9 +101,6 @@
                 .Property(e => e.備考)
                 .IsUnicode(false);
             //=================================================
-            modelBuilder.Entity<NafcoOrder>()
-                .Property(e => e.id)
-                .IsUnicode(false);
 
             modelBuilder.Entity<NafcoOrder>()
                 .Property(e => e.店舗名漢字)

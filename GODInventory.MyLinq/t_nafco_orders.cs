@@ -6,14 +6,14 @@ namespace GODInventory.MyLinq
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("god_inventory.t_nafco_order")]
+    [Table("t_nafco_orders")]
     public partial class NafcoOrder
     {
         [Key]
         public int id受注データ { get; set; }
 
-        [StringLength(255)]
-        public string id { get; set; }
+        //[StringLength(255)]
+        //public string id { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime 発注日 { get; set; }

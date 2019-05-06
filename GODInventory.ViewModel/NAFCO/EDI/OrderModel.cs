@@ -536,7 +536,7 @@ namespace GODInventory.NAFCO.EDI
             orderdata.仕入金額 = orderdata.実際出荷数量 * price.仕入原価;
             orderdata.粗利金額 = orderdata.納品原価金額 - orderdata.仕入金額;
             
-            orderdata.id = String.Format("{0}a{1}", orderdata.店舗コード, orderdata.伝票番号);
+            //orderdata.id = String.Format("{0}a{1}", orderdata.店舗コード, orderdata.伝票番号);
             //orderdata.週目 = OrderHelper.GetOrderWeekOfYear( orderdata.受注日.Value );
             //orderdata.運賃 = OrderHelper.ComputeFreight(orderdata, price.fee, price.columnname);
 
@@ -738,7 +738,7 @@ VALUES ({0}
 '{61}','{62}','{63}','{64}',{65},{66},{67},'{68}','{69}','{70}',
 {71},{72},{73},'{74}','{75}','{76}',{77},{78},{79},'{80}',
 {81},{82},{83},'{84}',{85},'{86}','{87}','{88}',{89},{90},
-'{91}',{92},{93},{94},{95},'{96}',{97},{98},{98});";
+'{91}',{92},{93},{94},{95},'{96}',{97},{98},{99});";
             var now = DateTime.Now;
             var fazhuri = o.発注日.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
             var souzhuri = now.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
