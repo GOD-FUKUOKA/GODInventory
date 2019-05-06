@@ -1,4 +1,4 @@
-﻿using GODInventory.ViewModel;
+﻿using GODInventory;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure.Interception;

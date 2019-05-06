@@ -92,7 +92,7 @@
             this.発注区分Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.備考Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -793,7 +793,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem moveUpToolStripMenuItem;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.ComboBox storeComboBox;
         private System.Windows.Forms.ComboBox countyComboBox1;

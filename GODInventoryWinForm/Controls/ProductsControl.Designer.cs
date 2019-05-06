@@ -62,7 +62,7 @@
             this.pT単位かDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.順番DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.btAddItem = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -1423,7 +1423,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView productsDataGridView;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 配送担当DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 売価DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 価格発動日DataGridViewTextBoxColumn;

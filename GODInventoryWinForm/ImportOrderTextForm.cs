@@ -12,8 +12,8 @@ namespace GODInventoryWinForm
 {
     using GODInventory;
     using GODInventory.MyLinq;
-    using GODInventory.ViewModel;
-    using GODInventory.ViewModel.EDI;
+    using GODInventory;
+    using GODInventory.NAFCO.EDI;
     using System.Data.Entity.Validation;
     using System.IO;
 

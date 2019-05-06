@@ -38,7 +38,7 @@
             this.storeComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.countyComboBox1 = new System.Windows.Forms.ComboBox();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -317,7 +317,7 @@
         private System.Windows.Forms.ComboBox storeComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox countyComboBox1;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Button submitFormButton;
         private System.Windows.Forms.Button cancelFormButton;
         private System.Windows.Forms.Label label3;

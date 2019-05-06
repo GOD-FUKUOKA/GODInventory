@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using GODInventory.MyLinq;
 using System.Data.Entity;
 using System.Linq;
 using System.Data.Linq;
-using GODInventory.ViewModel.EDI;
+using GODInventory.MyLinq;
+using GODInventory;
+using GODInventory.NAFCO.EDI;
 using MySql.Data;
 using MySql.Data.Entity;
 using System.Data.Entity.Infrastructure.Interception;
-using GODInventory.ViewModel;
 using System.IO;
 using System.Data.Entity.Validation;
 
@@ -23,7 +23,7 @@ namespace GODInventory.Tester
         static void Main(string[] args)
         {
 
-            DbInterception.Add(new EFIntercepterLogging());
+            //DbInterception.Add(new EFIntercepterLogging());
             //DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
             
             Console.WriteLine(Properties.Settings.Default.DBConnectionString);

@@ -64,7 +64,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -463,7 +463,7 @@
         private System.Windows.Forms.Button submitFormButton;
         private System.Windows.Forms.Button cancelFormButton;
         private System.Windows.Forms.TextBox shipAtTextBox;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cancelComboBox;
         private System.Windows.Forms.Label label7;

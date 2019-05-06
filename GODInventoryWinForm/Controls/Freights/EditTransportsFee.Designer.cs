@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -309,7 +309,7 @@
 
         #endregion
 
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox transportnameTextBox;
         private System.Windows.Forms.ComboBox whComboBox;

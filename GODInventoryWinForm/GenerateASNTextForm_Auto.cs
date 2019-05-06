@@ -1,5 +1,5 @@
-﻿using GODInventory.ViewModel;
-using GODInventory.ViewModel.EDI;
+﻿using GODInventory;
+using GODInventory.NAFCO.EDI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

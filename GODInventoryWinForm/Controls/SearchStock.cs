@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GODInventory.MyLinq;
-using GODInventory.ViewModel;
+using GODInventory;
 using MySql.Data.MySqlClient;
 
 namespace GODInventoryWinForm.Controls

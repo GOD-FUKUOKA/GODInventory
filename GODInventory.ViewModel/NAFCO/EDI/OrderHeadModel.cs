@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace GODInventory.ViewModel.EDI
+namespace GODInventory.NAFCO.EDI
 {
-    public class ReceivedOrderHeadModel
+    public class OrderHeadModel
     {
         Byte[] データID; //1 データID        3 1
         Byte[] 管理連番; //2 管理連番        13 4
@@ -20,9 +20,14 @@ namespace GODInventory.ViewModel.EDI
         Byte[] 予備; //9 予備              644 57
         byte[] nr;
 
-        public List<ReceivedOrderModel> models;
+        public OrderHeadModel(Byte[] line)
+        {
+            //arrays.SelectMany(x => x).ToArray();
+            //line.
+            //this.データID = 
 
-        public ReceivedOrderHeadModel(BinaryReader br)
+        }
+        public OrderHeadModel(BinaryReader br)
         {
             this.データID = br.ReadBytes(3);
             this.管理連番 = br.ReadBytes(13);
@@ -36,26 +41,22 @@ namespace GODInventory.ViewModel.EDI
             this.nr = br.ReadBytes(2); // \n\r
             Debug.Assert(this.nr[0] == 0x0D && this.nr[1] == 0x0A);
 
-            this.models = new List<ReceivedOrderModel>( DetailCount );
-
-            for (var i = 0; i < DetailCount; i++)
-            {
-                models.Add(new ReceivedOrderModel(br));                
-            }
         }
 
-        public int DetailCount
-        {
+
+        public int DetailCount {
+            get{
+                string s = Encoding.ASCII.GetString(this.レコード件数);
+                return Convert.ToInt32(s); }
+        }
+
+        public int groupId {
             get
             {
-                string s = Encoding.ASCII.GetString(this.レコード件数);
+                string s = Encoding.ASCII.GetString(this.管理連番);
                 return Convert.ToInt32(s);
             }
         }
 
-        public List<ReceivedOrderModel> Models
-        {
-            get { return this.models;  }
-        }
     }
 }

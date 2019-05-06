@@ -6,12 +6,12 @@ using GODInventory;
 using GODInventory.MyLinq;
 using System.ComponentModel;
 using MySql.Data.MySqlClient;
-using GODInventory.ViewModel.EDI;
+using GODInventory.NAFCO.EDI;
 using System.IO;
 using System.Diagnostics;
 using System.Globalization;
 
-namespace GODInventory.ViewModel
+namespace GODInventory
 {
     public class OrderSqlHelper
     {
@@ -299,7 +299,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                          原単価_税抜_ = o.原単価_税抜_,
                          実際配送担当 = o.実際配送担当,
                          県別 = o.県別,
-                         受領 = o.受領,
+                         //受領 = o.受領,
                          発注形態名称漢字 = o.発注形態名称漢字,
                          キャンセル = o.キャンセル,
                          ダブリ = o.ダブリ,

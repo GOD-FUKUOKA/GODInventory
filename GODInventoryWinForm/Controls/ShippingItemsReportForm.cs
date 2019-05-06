@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 using GODInventory.MyLinq;
-using GODInventory.ViewModel;
+using GODInventory;
 using Microsoft.Reporting.WinForms;
-using GODInventory.ViewModel.EDI;
+using GODInventory.NAFCO.EDI;
 using System.Drawing.Printing;
 using System.Drawing.Imaging;
 using ZXing.Common;

@@ -320,56 +320,7 @@
             modelBuilder.Entity<t_orderdata>()
                 .Property(e => e.部門名カナ)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.ＧＴＩＮ)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.品名カナ)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.規格名カナ)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.発注単位名称漢字)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.発注単位名称カナ)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.回答納期)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.色名カナ)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.柄名カナ)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.サイズ名カナ)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.納品先店舗名漢字)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.納品先店舗名カナ)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.納品場所名カナ)
-                .IsUnicode(false);
-
-
+        
             modelBuilder.Entity<t_orderdata>()
                 .Property(e => e.Status)
                 .IsRequired();

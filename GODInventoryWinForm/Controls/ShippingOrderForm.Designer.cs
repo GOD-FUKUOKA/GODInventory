@@ -128,7 +128,7 @@
             this.canceledBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource6 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.printStateColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.配车单单号Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1084,7 +1084,7 @@
 
         #endregion
 
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.Button uploadForEDIButton;
         private System.Drawing.Printing.PrintDocument printDocument;

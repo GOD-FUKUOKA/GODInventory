@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GODInventory.ViewModel
+namespace GODInventory
 {
     public class CustomPropertyHelper
     {

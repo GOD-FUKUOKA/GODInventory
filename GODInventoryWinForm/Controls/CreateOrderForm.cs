@@ -16,8 +16,9 @@ using System.Threading;
 //using Spring.Context.Support;
 //using System.Collections;
 using System.Configuration;
-using GODInventory.ViewModel.EDI;
-using GODInventory.ViewModel;
+using GODInventory.NAFCO.EDI;
+using GODInventory;
+using GODInventory.NAFCO;
 
 
 namespace GODInventoryWinForm.Controls
@@ -30,18 +31,18 @@ namespace GODInventoryWinForm.Controls
         private List<t_shoplist> shopList;
         private List<v_itemprice> itemPriceList;
         private List<t_locations> locationList;
-        private BindingList<t_orderdata> orderList;
+        private BindingList<NafcoOrder> orderList;
         private List<t_pricelist> t_pricelistR;
         private ComboBox specialColumn;
         private List<t_customers> customersList;
         private SelectProductForm selectProductForm;
-        public List<t_orderdata> newOrderList;
+        public List<NafcoOrder> newOrderList;
 
         public CreateOrderForm()
         {
             InitializeComponent();
 
-            orderList = new BindingList<t_orderdata>();
+            orderList = new BindingList<NafcoOrder>();
 
             shopList = new List<t_shoplist>();
             locationList = new List<t_locations>();
@@ -461,7 +462,7 @@ namespace GODInventoryWinForm.Controls
 
             for (int i = 0; i < 10; i++)
             {
-                t_orderdata order = new t_orderdata();
+                var order = new NafcoOrder();
                 order.発注日 = orderCreatedAtDateTimePicker.Value.Date;
                 order.受注日 = orderCreatedAtDateTimePicker.Value.Date;
                 order.納品予定日 = deliveredAtDateTimePicker.Value.Date;
@@ -671,7 +672,7 @@ namespace GODInventoryWinForm.Controls
         }
 
 
-        private void SetOrderBaseInfo(t_orderdata order)
+        private void SetOrderBaseInfo(NafcoOrder order)
         {
             order.税区分 = 1;
             order.発注日 = orderCreatedAtDateTimePicker.Value.Date;
@@ -845,12 +846,12 @@ namespace GODInventoryWinForm.Controls
                                 //{
                                 //    o.実際配送担当 = "丸健";
                                 //}
-                                o.週目 = OrderHelper.GetOrderWeekOfYear(o.受注日.Value);
+                                o.週目 = NafcoOrderHelper.GetOrderWeekOfYear(o.受注日.Value);
 
-                                o.運賃 = OrderHelper.ComputeFreight(o, selectedItem.fee, selectedItem.columnname);
+                                o.運賃 = NafcoOrderHelper.ComputeFreight(o, selectedItem.fee, selectedItem.columnname);
 
                             }
-                            ctx.t_orderdata.AddRange(newOrderList);
+                            ctx.t_nafco_orders.AddRange(newOrderList);
                             ctx.SaveChanges();
                             MessageBox.Show(String.Format("{0} 枚のFAX注文登録完了!", newOrderList.Count));
                             orderList.Clear();

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GODInventory
+namespace GODInventory.NAFCO
 {
-    public class OrderHelper
+    public class NafcoOrderHelper
     {
         public static List<t_genre> genreList = null;
 
@@ -34,8 +34,117 @@ namespace GODInventory
         /// </summary>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static bool InitializeOrderByXlsxOrder(t_orderdata order, v_shop shop, v_itemprice price) {
+        public static bool InitializeOrderByXlsxOrder(NafcoOrder order, v_shop shop, v_itemprice price) {
+            // order 的必填值如下
+            //県別	店舗コード	店舗名漢字	自社コード	品名漢字	最小発注単位数量	口数	発注数量	原単価(税抜)	原価金額(税抜)
+            //order.商品コード = 0;
+            //order.発注数量 = 0;
+            //order.品名漢字 = "";
+            //order.規格名漢字 = "";
+            //order.ＪＡＮコード = 0;
+            //order.最小発注単位数量 = 0;
+            //order.納品口数 = 0;
+            //order.発注数量 = 0;
+            //order.原単価_税抜_ = 0;
+            //order.売単価_税抜_ = 0;
+
+            // 根据 商品コード 初始化商品信息
+            order.商品コード = price.商品コード;
+            order.規格名漢字 = price.規格;
+            order.ＪＡＮコード = price.JANコード;
+
+            // 设置产品分类
+            order.ジャンル = price.ジャンル;
+
+            // 生成订单编号
+
+            // 设置基本值
+            //order.税区分 = 1;
+            var now = DateTime.Now ;
+            order.発注日 = now.Date;
+            order.受注日 = now.Date;
+            /// TODO customer表
+            order.法人コード = 4;
+            order.法人名漢字 = "ナフコ";
+
+            order.部門コード = 9;
+            order.納品予定日 = now.AddDays(2).Date;
+            order.税率 = 0.08;
+            if ( shop.納品場所コード>=0)
+            {
+               
+                order.納品場所コード = (short)shop.納品場所コード;
+                order.納品場所名漢字 = shop.納品場所名漢字;
+                order.納品場所名カナ = shop.納品場所名カナ;
+                
+            }
+            else
+            {
+                order.納品場所コード = -1;
+                order.納品場所名漢字 = "";
+                order.納品場所名カナ = "";
+            }
+            order.発注形態区分 = 10;
+            order.発注形態名称漢字 = "補充";
+            order.一旦保留 = true;
+
+            // 设置 一些常量
+            order.納品先店舗コード = (short)order.店舗コード;
+            order.納品先店舗名漢字 = order.店舗名漢字;
+            order.税率 = 0.08;
+            order.特価区分 = 0;
+            order.PB区分 = 0;
+            order.原価区分 = 0;
+            order.納期回答区分 = 0;
+            order.回答納期 = "00000000";
+            order.入力区分 = 1;
+            order.実際出荷数量 = order.発注数量;
+            order.納品口数 = order.口数;
+
+
+            order.重量 = (int)(Convert.ToDecimal(price.単品重量) * order.発注数量);
+            order.単位 = price.単位;
+            order.県別 = price.県別;
             
+            //order.原単価_税抜_ = (int)selectedItem.原単価;
+            order.原単価_税込_ = ((int)(order.原単価_税抜_ * (1 + order.税率) * 100)) * 1.0 / 100;
+
+            order.原価金額_税抜_ = order.実際出荷数量 * order.原単価_税抜_;
+            order.原価金額_税込_ = (int)(order.実際出荷数量 * order.原単価_税込_);
+
+            order.納品原価金額 = order.原価金額_税抜_;
+
+            //order.売単価_税抜_ = (int)selectedItem.売単価;
+            order.売単価_税込_ = (int)(order.売単価_税抜_ * (1 + order.税率));
+            order.税額 = (int)(order.原価金額_税抜_ * order.税率);
+
+            order.仕入原価 = price.仕入原価;
+            order.仕入金額 = order.実際出荷数量 * order.仕入原価;
+            order.粗利金額 = order.納品原価金額 - order.仕入金額;
+
+            order.発注品名漢字 = order.品名漢字;
+            order.発注規格名漢字 = order.規格名漢字;
+            order.用度品区分 = 0;
+            order.id = String.Format("{0}a{1}", order.店舗コード, order.伝票番号);
+
+            //判断全角半角
+            bool isValidName = isValidOrderName(order.発注品名漢字);
+
+            isValidName = isValidOrderName(order.発注規格名漢字);
+
+ 
+            order.実際配送担当 = price.配送担当;
+            order.warehousename = price.warehousename;
+            order.warehouse_id = order.warehouse_id;
+            order.transport_id = order.transport_id;
+
+            // 社内伝番処理使用缺省配置
+            order.社内伝番処理 = price.社内伝番処理;
+
+            
+            order.週目 = GetOrderWeekOfYear(order.受注日.Value);
+
+            order.運賃 = ComputeFreight(order, price.fee, price.columnname);
 
             return true;
         }
@@ -230,7 +339,7 @@ namespace GODInventory
         /// <param name="order"></param>
         /// <param name="itemprice"> 如果提供itemprice，使用 itemprice中的 fee 计算</param>
         /// <returns></returns>
-        public static int ComputeFreight(t_orderdata order, decimal unitfee = 0, string columnname = null)
+        public static int ComputeFreight(NafcoOrder order, decimal unitfee = 0, string columnname = null)
         {
             int fee = 0;           
 

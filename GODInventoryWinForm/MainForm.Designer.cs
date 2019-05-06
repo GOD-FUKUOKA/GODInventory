@@ -47,7 +47,7 @@
             this.importReceivedCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importFaxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -247,7 +247,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton orderToolStripButton;
         private System.Windows.Forms.ToolStripButton productToolStripButton;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripButton warehouseToolStripButton;

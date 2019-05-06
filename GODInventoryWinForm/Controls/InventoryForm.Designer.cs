@@ -345,7 +345,7 @@
 
         #endregion
 
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btconfirm;
         private System.Windows.Forms.Label label4;

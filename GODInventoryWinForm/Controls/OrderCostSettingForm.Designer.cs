@@ -60,7 +60,7 @@
             this.粗利金額Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.原単価_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.原価金額_税抜_Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.pager1 = new GODInventoryWinForm.Controls.Pager();
@@ -440,7 +440,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView ordersDataGridView;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox countyComboBox;

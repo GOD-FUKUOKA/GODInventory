@@ -1,4 +1,4 @@
-﻿namespace GODInventory.ViewModel
+﻿namespace GODInventory
 {
     partial class EntityDataSource
     {

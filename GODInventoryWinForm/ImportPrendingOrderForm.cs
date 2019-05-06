@@ -16,10 +16,11 @@ namespace GODInventoryWinForm
 
     using GODInventory;
     using GODInventory.MyLinq;
-    using GODInventory.ViewModel;
-    using GODInventory.ViewModel.EDI;
+    using GODInventory;
+    using GODInventory.NAFCO.EDI;
     using System.Data.Entity.Validation;
     using System.IO;
+    using GODInventory.NAFCO;
 
 
     public partial class ImportPrendingOrderForm : Form
@@ -140,7 +141,7 @@ namespace GODInventoryWinForm
                                 progress = Convert.ToInt16(((i + 1) * 1.0 / models.Count) * 100);
                                 model = models.ElementAt(i);
 
-                                t_orderdata orderdata = new t_orderdata();
+                                var orderdata = new NafcoOrder();
                                 orderdata.県別 = model.県別;
                                 orderdata.店舗コード = Convert.ToInt32(model.店舗コード);
                                 orderdata.店舗名漢字 = model.店舗名漢字;
@@ -164,12 +165,12 @@ namespace GODInventoryWinForm
                                     throw new Exception(string.Format("can not find freight by 店舗コード {0} and 自社コード {1}", model.店舗コード, model.自社コード));                                
                                 }
 
-                                orderdata.伝票番号 = OrderHelper.GenerateOrderNumber(orderdata.店舗コード);
+                                orderdata.伝票番号 = NafcoOrderHelper.GenerateOrderNumber(orderdata.店舗コード);
 
-                                bool valid = OrderHelper.InitializeOrderByXlsxOrder(orderdata, shop, price);
+                                bool valid = NafcoOrderHelper.InitializeOrderByXlsxOrder(orderdata, shop, price);
                                 if (valid) {
                                     validModelIndexes.Add(i);
-                                    ctx.t_orderdata.Add(orderdata);
+                                    ctx.t_nafco_orders.Add(orderdata);
                                     var saved = ctx.SaveChanges();
                                     if (saved > 0) { 
                                         SavedOrderCount++;

@@ -83,7 +83,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pager1 = new GODInventoryWinForm.Controls.Pager();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.キャンセル = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.キャンセル時刻 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -950,7 +950,7 @@
 
         #endregion
 
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.BindingSource bindingSource3;
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.TabPage ordersTabPage;

@@ -1,5 +1,5 @@
-﻿using GODInventory.MyLinq;
-using GODInventory.ViewModel;
+﻿using GODInventory;
+using GODInventory.MyLinq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

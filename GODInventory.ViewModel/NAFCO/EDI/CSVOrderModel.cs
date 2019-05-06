@@ -6,7 +6,6 @@ using System.Text;
 namespace GODInventory.NAFCO.EDI
 {
     using GODInventory.MyLinq;
-    using GODInventory.ViewModel;
     using MySql.Data.MySqlClient;
     using System.Data.SqlClient;
     using System.Diagnostics;

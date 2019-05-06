@@ -56,7 +56,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.warehousenamecomboBox1 = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -399,7 +399,7 @@
         private System.Windows.Forms.Button submitFormButton;
         private System.Windows.Forms.Button cancelFormButton;
         private System.Windows.Forms.TextBox storeComboNameTextBox;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox productSpecTextBox;

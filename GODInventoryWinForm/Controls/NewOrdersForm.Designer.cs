@@ -49,7 +49,7 @@
             this.unduplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.OrderPlacedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OrderReceivedAtColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.出荷日 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -473,7 +473,7 @@
 
         #endregion
 
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage ordersTabPage;

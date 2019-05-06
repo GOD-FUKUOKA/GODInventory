@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GODInventory.MyLinq;
-using GODInventory.ViewModel;
+using GODInventory;
 
 namespace GODInventoryWinForm.Controls
 {

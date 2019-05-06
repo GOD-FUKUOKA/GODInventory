@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace GODInventoryWinForm.Controls
 {
     using GODInventory.MyLinq;
-    using GODInventory.ViewModel;
+    using GODInventory;
     using MySql.Data.MySqlClient;
     using System.Data.SqlClient;
 

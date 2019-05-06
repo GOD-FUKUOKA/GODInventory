@@ -1,5 +1,5 @@
 ﻿using GODInventory.MyLinq;
-using GODInventory.ViewModel.EDI;
+using GODInventory.NAFCO.EDI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

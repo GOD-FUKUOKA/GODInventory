@@ -12,8 +12,8 @@ namespace GODInventoryWinForm
 {
     using GODInventory;
     using GODInventory.MyLinq;
-    using GODInventory.ViewModel;
-    using GODInventory.ViewModel.EDI;
+    using GODInventory;
+    using GODInventory.NAFCO.EDI;
     using System.Data.Entity.Validation;
     using System.IO;
 
@@ -172,7 +172,7 @@ namespace GODInventoryWinForm
                 var date = DateTime.Now.Date;
                 var three_month_ago = date.AddMonths(-2);
                 List<t_itemlist> items = ctx.t_itemlist.ToList();
-                List<t_orderdata> orders = (from t_orderdata o in ctx.t_orderdata
+                List<NafcoOrder> orders = (from NafcoOrder o in ctx.t_nafco_orders
                                             where o.発注日 <= date && o.発注日 > three_month_ago
                                             select o).ToList();
                 //= ( from t_orderdata o  in ctx.t_orderdata

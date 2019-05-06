@@ -52,7 +52,7 @@
             this.shipNOLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -298,7 +298,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button saveButton;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.Label shipNOLabel;
         private System.Windows.Forms.Label label1;

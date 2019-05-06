@@ -109,9 +109,9 @@ namespace GODInventory.MyLinq
 
         public DateTime? 配送担当受信時刻 { get; set; }
 
-        public bool 専務受信 { get; set; }
+        //public bool 専務受信 { get; set; }
 
-        public DateTime? 専務受信時刻 { get; set; }
+        //public DateTime? 専務受信時刻 { get; set; }
 
         [StringLength(255)]
         public string 納品指示 { get; set; }
@@ -119,9 +119,9 @@ namespace GODInventory.MyLinq
         public short 納品場所コード { get; set; }
 
         [StringLength(255)]
-        public string 納品場所名漢字 { get; set; }
+        public string 納品場所名漢字 { get; set; }  // ASN 使用
 
-        public bool 受領 { get; set; }
+        // public bool 受領 { get; set; }
 
         [StringLength(255)]
         public string 備考 { get; set; }
@@ -171,15 +171,15 @@ namespace GODInventory.MyLinq
         [Column(TypeName = "date")]
         public DateTime? 発注データ有効期限 { get; set; }
 
-        public short? EDI発注区分 { get; set; }
+        //public short? EDI発注区分 { get; set; }
 
         public short 発注形態区分 { get; set; }
 
         [StringLength(255)]
         public string 発注形態名称漢字 { get; set; }
 
-        [Column("予備（数値）")]
-        public int? 予備_数値_ { get; set; }
+        //[Column("予備（数値）")]
+        //public int? 予備_数値_ { get; set; }
 
         public short? 本部発注区分 { get; set; }
 
@@ -191,34 +191,34 @@ namespace GODInventory.MyLinq
         [StringLength(255)]
         public string 部門名カナ { get; set; }
 
-        public int? ラインコード { get; set; }
+        //public int? ラインコード { get; set; }
 
-        public int? クラスコード { get; set; }
+        //public int? クラスコード { get; set; }
 
         public int 商品コード区分 { get; set; }
 
-        public int? ロケーションコード { get; set; }
+        //public int? ロケーションコード { get; set; }
 
         public string オプション使用欄 { get; set; }
 
-        [StringLength(255)]
-        public string ＧＴＩＮ { get; set; }
+        //[StringLength(255)]
+        //public string ＧＴＩＮ { get; set; }
 
         [StringLength(255)]
-        public string 品名カナ { get; set; }
+        public string 品名カナ { get; set; } // ASN 使用
 
         [StringLength(255)]
-        public string 規格名カナ { get; set; }
+        public string 規格名カナ { get; set; } // ASN 使用
 
         public int 最小発注単位数量 { get; set; }
 
-        [StringLength(255)]
-        public string 発注単位名称漢字 { get; set; }
+        //[StringLength(255)]
+        //public string 発注単位名称漢字 { get; set; }
 
-        [StringLength(255)]
-        public string 発注単位名称カナ { get; set; }
+        //[StringLength(255)]
+        //public string 発注単位名称カナ { get; set; }
 
-        public short 総額取引区分 { get; set; }
+        public short 総額取引区分 { get; set; } // ASN 使用
 
         [Column("原単価(税込)")]
         public double? 原単価_税込_ { get; set; }
@@ -235,54 +235,54 @@ namespace GODInventory.MyLinq
         [Column("売単価（税込）")]
         public double? 売単価_税込_ { get; set; }
 
-        public short? 特価区分 { get; set; }
+        //public short? 特価区分 { get; set; }
 
-        public short? PB区分 { get; set; }
+        //public short? PB区分 { get; set; }
 
-        public short? 原価区分 { get; set; }
+        //public short? 原価区分 { get; set; }
 
-        public short? 用度品区分 { get; set; }
+        //public short? 用度品区分 { get; set; }
 
-        public short? 納期回答区分 { get; set; }
+        //public short? 納期回答区分 { get; set; }
 
-        [StringLength(255)]
-        public string 回答納期 { get; set; }
+        //[StringLength(255)]
+        //public string 回答納期 { get; set; }
 
-        [StringLength(255)]
-        public string 色名カナ { get; set; }
+        //[StringLength(255)]
+        //public string 色名カナ { get; set; }
 
-        [StringLength(255)]
-        public string 柄名カナ { get; set; }
+        //[StringLength(255)]
+        //public string 柄名カナ { get; set; }
 
-        [StringLength(255)]
-        public string サイズ名カナ { get; set; }
+        //[StringLength(255)]
+        //public string サイズ名カナ { get; set; }
 
-        public int? 広告コード { get; set; }
+        //public int? 広告コード { get; set; }
 
-        public short? 伝票出力単位 { get; set; }
+        //public short? 伝票出力単位 { get; set; }
 
         public short 納品先店舗コード { get; set; }
 
-        [StringLength(255)]
-        public string 納品先店舗名漢字 { get; set; }
+        //[StringLength(255)]
+        //public string 納品先店舗名漢字 { get; set; }
+
+        //[StringLength(255)]
+        //public string 納品先店舗名カナ { get; set; }
 
         [StringLength(255)]
-        public string 納品先店舗名カナ { get; set; }
+        public string 納品場所名カナ { get; set; } // ASN 使用
 
-        [StringLength(255)]
-        public string 納品場所名カナ { get; set; }
-
-        public short? 便区分 { get; set; }
+        //public short? 便区分 { get; set; }
 
         public short センター経由区分 { get; set; }
 
-        public int センターコード { get; set; }
+        public int センターコード { get; set; } //物流中心代码
 
-        [StringLength(255)]
-        public string センター名漢字 { get; set; }
+        //[StringLength(255)]
+        //public string センター名漢字 { get; set; }
 
-        [StringLength(255)]
-        public string センター名カナ { get; set; }
+        //[StringLength(255)]
+        //public string センター名カナ { get; set; }
 
         public long ASN管理連番 { get; set; }
         public long 受注管理連番 { get; set; }

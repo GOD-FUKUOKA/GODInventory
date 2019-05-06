@@ -50,7 +50,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
@@ -322,7 +322,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button submitFormButton;
         private System.Windows.Forms.Button cancelFormButton;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox countyComboBox1;
         private System.Windows.Forms.Label label7;

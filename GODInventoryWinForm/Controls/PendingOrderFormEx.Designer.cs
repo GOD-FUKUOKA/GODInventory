@@ -109,8 +109,8 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource2 = new GODInventory.ViewModel.EntityDataSource(this.components);
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource2 = new GODInventory.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.xlsxButton1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
@@ -965,7 +965,7 @@
 
         #endregion
         private System.Windows.Forms.DataGridViewTextBoxColumn id受注データDataGridViewTextBoxColumn;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage ordersTabPage;
         private System.Windows.Forms.DataGridView dataGridView1;
@@ -1001,7 +1001,7 @@
         private System.Windows.Forms.ComboBox storeComboBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.BindingSource bindingSource2;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource2;
+        private GODInventory.EntityDataSource entityDataSource2;
         private System.Windows.Forms.ToolStripMenuItem deleteFaxOrderToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;

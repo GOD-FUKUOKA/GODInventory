@@ -11,7 +11,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace GODInventory.ViewModel
+namespace GODInventory
 {
     /// <summary>
     /// Exposes an DbSet in the current DbContext as a bindable data source.

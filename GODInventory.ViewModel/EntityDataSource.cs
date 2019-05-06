@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Data.Entity.Infrastructure.Interception;
 using System.Data.Linq;
 
-namespace GODInventory.ViewModel
+namespace GODInventory
 {
 
 

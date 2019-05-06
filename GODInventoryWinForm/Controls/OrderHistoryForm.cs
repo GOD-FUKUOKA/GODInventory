@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GODInventory.MyLinq;
-using GODInventory.ViewModel;
+using GODInventory;
 using MySql.Data.MySqlClient;
-using GODInventory.ViewModel.EDI;
+using GODInventory.NAFCO.EDI;
 using System.IO;
 
 namespace GODInventoryWinForm.Controls

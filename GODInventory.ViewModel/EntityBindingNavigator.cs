@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace GODInventory.ViewModel
+namespace GODInventory
 {
     /// <summary>
     /// DataSource component that exposes EntityFramework ObjectSet and provides navigation,

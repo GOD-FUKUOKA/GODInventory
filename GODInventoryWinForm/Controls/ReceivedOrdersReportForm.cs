@@ -9,9 +9,9 @@ using System.Windows.Forms;
 using System.Collections;
 
 using GODInventory.MyLinq;
-using GODInventory.ViewModel;
+using GODInventory;
 using Microsoft.Reporting.WinForms;
-using GODInventory.ViewModel.EDI;
+using GODInventory.NAFCO.EDI;
 using System.Diagnostics;
 using ZXing.Common;
 using ZXing;

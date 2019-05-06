@@ -6,7 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using GODInventory.MyLinq;
-using GODInventory.ViewModel;
+using GODInventory;
 using System.Linq;
 using System.Collections;
 using GODInventoryWinForm.Controls.Freights;

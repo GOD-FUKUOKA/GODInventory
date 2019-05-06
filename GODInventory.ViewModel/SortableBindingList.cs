@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GODInventory.ViewModel
+namespace GODInventory
 {
     //http://www.martinwilley.com/net/code/forms/sortablebindinglist.html
     /// <summary>

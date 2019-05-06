@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GODInventory.ViewModel.EDI
+namespace GODInventory.NAFCO.EDI
 {
     using GODInventory.MyLinq;
     using MySql.Data.MySqlClient;
@@ -377,9 +377,10 @@ namespace GODInventory.ViewModel.EDI
             */
         }
 
-        public t_orderdata ConverToEntity() {
+        public NafcoOrder ConverToEntity()
+        {
             var now = DateTime.Now;
-            var orderdata = new t_orderdata();
+            var orderdata = new NafcoOrder();
 
             orderdata.法人コード = Convert.ToInt16(Encoding.ASCII.GetString(this.法人コード));
             orderdata.法人名漢字 = EncodingUtility.ConvertShiftJisToUtf8(this.法人名漢字).Trim();
@@ -483,7 +484,7 @@ namespace GODInventory.ViewModel.EDI
             return orderdata;
 
         }
-        public t_orderdata ConverToEntity(t_shoplist shop, t_itemlist item, v_itemprice price, List<t_orderdata> orders)
+        public NafcoOrder ConverToEntity(t_shoplist shop, t_itemlist item, v_itemprice price, List<t_orderdata> orders)
         {
             var orderdata = ConverToEntity();
             
@@ -513,7 +514,7 @@ namespace GODInventory.ViewModel.EDI
 
             orderdata.納品口数 = orderdata.口数;
             orderdata.実際出荷数量 = orderdata.発注数量;
-            orderdata.社内伝番処理 = OrderSqlHelper.IsInnerCodeRequired(orderdata.ジャンル);
+            orderdata.社内伝番処理 = OrderHelper.IsInnerCodeRequired(orderdata.ジャンル);
 
             //if (orderdata.実際配送担当 == "MKL" && (orderdata.ジャンル == 1001 || orderdata.ジャンル == 1003))
             //{
@@ -536,8 +537,8 @@ namespace GODInventory.ViewModel.EDI
             orderdata.粗利金額 = orderdata.納品原価金額 - orderdata.仕入金額;
             
             orderdata.id = String.Format("{0}a{1}", orderdata.店舗コード, orderdata.伝票番号);
-            orderdata.週目 = OrderHelper.GetOrderWeekOfYear( orderdata.受注日.Value );
-            orderdata.運賃 = OrderHelper.ComputeFreight(orderdata, price.fee, price.columnname);
+            //orderdata.週目 = OrderHelper.GetOrderWeekOfYear( orderdata.受注日.Value );
+            //orderdata.運賃 = OrderHelper.ComputeFreight(orderdata, price.fee, price.columnname);
 
             if (orders != null)
             {
@@ -644,7 +645,7 @@ namespace GODInventory.ViewModel.EDI
                     !センター名漢字 = Cells(i, 73).Value
                     !センター名カナ = Cells(i, 74).Value
                     */
-            t_orderdata o = ConverToEntity(shop, item, price, orders);
+            var o = ConverToEntity(shop, item, price, orders);
             string sql = @"INSERT INTO `t_orderdata`(
 `発注日`, `受注日`, `受注時刻`,  `店舗コード`, `店舗名漢字`, 
 `伝票番号`, `ＪＡＮコード`, `商品コード`, `品名漢字`, `規格名漢字`, 
@@ -700,7 +701,7 @@ VALUES (
         public string ToRawSql(t_shoplist shop, t_itemlist item, v_itemprice price, List<t_orderdata> orders)
         {
             var isoDateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
-            t_orderdata o = ConverToEntity(shop, item, price, orders);
+            var o = ConverToEntity(shop, item, price, orders);
             if (o.Status == OrderStatus.Existed)
             {
                 return null;

@@ -7,7 +7,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects.DataClasses;
 using System.Diagnostics;
 
-namespace GODInventory.ViewModel
+namespace GODInventory
 {
     /// <summary>
     /// IBindingList with support for sorting.

@@ -18,8 +18,9 @@ using System.Globalization;
 /// 
 namespace GODInventory.NAFCO
 {
-    public class OrderSqlHelper
+    public class NafcoOrderSqlHelper
     {
+        
 
         // 把客户订单表中新下载的订单导入到内部订单表中
         // params: 

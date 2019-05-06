@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GODInventory.ViewModel
+namespace GODInventory
 {
     using System.Data.Entity.Infrastructure.Interception;
     using System.Diagnostics;

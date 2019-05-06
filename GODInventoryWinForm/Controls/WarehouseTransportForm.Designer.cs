@@ -44,7 +44,7 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.btaddtransportitem = new System.Windows.Forms.Button();
             this.btremovetransportItem = new System.Windows.Forms.Button();
-            this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.indexColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ShipperName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Transport_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -304,7 +304,7 @@
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button btaddtransportitem;
         private System.Windows.Forms.Button btremovetransportItem;
-        private GODInventory.ViewModel.EntityDataSource entityDataSource1;
+        private GODInventory.EntityDataSource entityDataSource1;
         private System.Windows.Forms.DataGridViewTextBoxColumn indexColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ShipperName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Transport_name;
