@@ -35,6 +35,8 @@
             this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ordersTabPage = new System.Windows.Forms.TabPage();
+            this.倉庫comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.storeComboBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.countyComboBox1 = new System.Windows.Forms.ComboBox();
@@ -51,6 +53,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.DanDangComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.xlsxButton1 = new System.Windows.Forms.Button();
             this.newOrderbutton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -84,6 +87,10 @@
             this.sendToShipperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteFaxOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBox2 = new System.Windows.Forms.ToolStripComboBox();
             this.toShipperTabPage = new System.Windows.Forms.TabPage();
             this.label17 = new System.Windows.Forms.Label();
             this.shipperComboBox = new System.Windows.Forms.ComboBox();
@@ -112,7 +119,6 @@
             this.entityDataSource2 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.xlsxButton1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -147,6 +153,8 @@
             // 
             // ordersTabPage
             // 
+            this.ordersTabPage.Controls.Add(this.倉庫comboBox1);
+            this.ordersTabPage.Controls.Add(this.label7);
             this.ordersTabPage.Controls.Add(this.storeComboBox);
             this.ordersTabPage.Controls.Add(this.label6);
             this.ordersTabPage.Controls.Add(this.countyComboBox1);
@@ -173,6 +181,27 @@
             this.ordersTabPage.TabIndex = 0;
             this.ordersTabPage.Text = "伝票訂正";
             this.ordersTabPage.UseVisualStyleBackColor = true;
+            // 
+            // 倉庫comboBox1
+            // 
+            this.倉庫comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.倉庫comboBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.倉庫comboBox1.FormattingEnabled = true;
+            this.倉庫comboBox1.Location = new System.Drawing.Point(609, 11);
+            this.倉庫comboBox1.Name = "倉庫comboBox1";
+            this.倉庫comboBox1.Size = new System.Drawing.Size(79, 22);
+            this.倉庫comboBox1.TabIndex = 91;
+            this.倉庫comboBox1.SelectedIndexChanged += new System.EventHandler(this.倉庫comboBox1_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.Location = new System.Drawing.Point(569, 15);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 14);
+            this.label7.TabIndex = 92;
+            this.label7.Text = "倉庫";
             // 
             // storeComboBox
             // 
@@ -257,7 +286,7 @@
             // ClearSelect
             // 
             this.ClearSelect.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ClearSelect.Location = new System.Drawing.Point(589, 11);
+            this.ClearSelect.Location = new System.Drawing.Point(694, 11);
             this.ClearSelect.Name = "ClearSelect";
             this.ClearSelect.Size = new System.Drawing.Size(100, 48);
             this.ClearSelect.TabIndex = 5;
@@ -353,6 +382,18 @@
             this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.TabIndex = 77;
             this.label1.Text = "配送担当";
+            // 
+            // xlsxButton1
+            // 
+            this.xlsxButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.xlsxButton1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.xlsxButton1.Location = new System.Drawing.Point(1010, 11);
+            this.xlsxButton1.Name = "xlsxButton1";
+            this.xlsxButton1.Size = new System.Drawing.Size(106, 32);
+            this.xlsxButton1.TabIndex = 8;
+            this.xlsxButton1.Text = "XLSX注文入力";
+            this.xlsxButton1.UseVisualStyleBackColor = true;
+            this.xlsxButton1.Click += new System.EventHandler(this.xlsxButton1_Click);
             // 
             // newOrderbutton
             // 
@@ -658,9 +699,11 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sendToShipperToolStripMenuItem,
             this.cancelOrderToolStripMenuItem,
-            this.deleteFaxOrderToolStripMenuItem});
+            this.deleteFaxOrderToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 114);
             // 
             // sendToShipperToolStripMenuItem
             // 
@@ -682,6 +725,36 @@
             this.deleteFaxOrderToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.deleteFaxOrderToolStripMenuItem.Text = "伝票を廃棄";
             this.deleteFaxOrderToolStripMenuItem.Click += new System.EventHandler(this.deleteFaxOrderToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBox1});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
+            this.toolStripMenuItem1.Text = "倉庫";
+            // 
+            // toolStripComboBox1
+            // 
+            this.toolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 25);
+            this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBox2});
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(136, 22);
+            this.toolStripMenuItem3.Text = "担当";
+            // 
+            // toolStripComboBox2
+            // 
+            this.toolStripComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBox2.Name = "toolStripComboBox2";
+            this.toolStripComboBox2.Size = new System.Drawing.Size(121, 25);
+            this.toolStripComboBox2.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox2_SelectedIndexChanged);
             // 
             // toShipperTabPage
             // 
@@ -922,18 +995,6 @@
             this.bindingSource1.DataSource = this.entityDataSource1;
             this.bindingSource1.Position = 0;
             // 
-            // xlsxButton1
-            // 
-            this.xlsxButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.xlsxButton1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.xlsxButton1.Location = new System.Drawing.Point(1010, 11);
-            this.xlsxButton1.Name = "xlsxButton1";
-            this.xlsxButton1.Size = new System.Drawing.Size(106, 32);
-            this.xlsxButton1.TabIndex = 8;
-            this.xlsxButton1.Text = "XLSX注文入力";
-            this.xlsxButton1.UseVisualStyleBackColor = true;
-            this.xlsxButton1.Click += new System.EventHandler(this.xlsxButton1_Click);
-            // 
             // PendingOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -1045,5 +1106,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 欠品カウンターColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Button xlsxButton1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBox2;
+        private System.Windows.Forms.ComboBox 倉庫comboBox1;
+        private System.Windows.Forms.Label label7;
     }
 }

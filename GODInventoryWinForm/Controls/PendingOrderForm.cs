@@ -75,8 +75,8 @@ namespace GODInventoryWinForm.Controls
 
 
             //mark   20181009           
-            var transports1 = transportList.Select(s => new {  fullname = s.fullname }).Distinct().ToList();
-            var transports2 = transportList.Select(s => new {  fullname = s.fullname }).Distinct().ToList();
+            var transports1 = transportList.Select(s => new { fullname = s.fullname }).Distinct().ToList();
+            var transports2 = transportList.Select(s => new { fullname = s.fullname }).Distinct().ToList();
 
 
             this.transportColumn1.DisplayMember = "fullname";
@@ -88,6 +88,14 @@ namespace GODInventoryWinForm.Controls
             this.shipperComboBox.DisplayMember = "fullname";
             this.shipperComboBox.ValueMember = "fullname";
             this.shipperComboBox.DataSource = transports2;
+            //右键选择担当
+
+            for (int i = 0; i < transports2.Count; i++)
+            {
+                this.toolStripComboBox2.ComboBox.Items.Add(transports2[i].fullname);
+
+            }
+            this.toolStripComboBox2.ComboBox.SelectedIndex = 0;
 
             //过滤条件添加任意选项
             //shipperCo.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
@@ -97,7 +105,7 @@ namespace GODInventoryWinForm.Controls
 
 
             // 传票订正仓库
-            var warehouse1 = warehouseList.Select(s => new {   fullname = s.FullName }).Distinct().ToList();
+            var warehouse1 = warehouseList.Select(s => new { fullname = s.FullName }).Distinct().ToList();
             this.warehousenameColumn.DisplayMember = "fullname";
             this.warehousenameColumn.ValueMember = "fullname";
             this.warehousenameColumn.DataSource = warehouse1;
@@ -107,7 +115,25 @@ namespace GODInventoryWinForm.Controls
             this.warehousenameColumn2.ValueMember = "fullname";
             this.warehousenameColumn2.DataSource = warehouse2;
 
+            //右键选择仓库
+            for (int i = 0; i < warehouse2.Count; i++)
+            {
+                this.toolStripComboBox1.ComboBox.Items.Add(warehouse2[i].fullname);
 
+            }
+            this.toolStripComboBox1.ComboBox.SelectedIndex = 0;
+            //
+            var warehouse3 = warehouseList.Select(s => new MockEntity { ShortName = s.ShortName, FullName = s.FullName }).Distinct().OrderBy(s => s.Id).ToList();
+            ;
+
+            //var PMHZ = orders.Select(s => new MockEntity { Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().OrderBy(s => s.Id).ToList();
+            //PMHZ.Insert(0, new MockEntity { Id = 0, ShortName = "すべて", FullName = "すべて" });
+
+            warehouse3.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
+
+            this.倉庫comboBox1.DisplayMember = "fullname";
+            this.倉庫comboBox1.ValueMember = "fullname";
+            this.倉庫comboBox1.DataSource = warehouse3;
 
 
         }
@@ -208,13 +234,15 @@ namespace GODInventoryWinForm.Controls
                             OrderSqlHelper.AfterOrderQtyChanged(order, product);
 
                         }
-                        else {
+                        else
+                        {
                             // 重新计算运费
-                            if (isWarehouseChanged || isTransportChanged) {
+                            if (isWarehouseChanged || isTransportChanged)
+                            {
 
                                 pendingorder.運賃 = OrderSqlHelper.ComputeFreight(pendingorder);
                             }
-                            
+
                         }
 
 
@@ -794,7 +822,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         {
             RowRemark = e.RowIndex;
             cloumn = e.ColumnIndex;
- 
+
 
         }
 
@@ -899,6 +927,10 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             else if (storeComboBox.SelectedIndex != 0)
             {
                 storeComboBox.SelectedIndex = 0;
+            }
+            else if (倉庫comboBox1.SelectedIndex != 0)
+            {
+                倉庫comboBox1.SelectedIndex = 0;
             }
 
 
@@ -1094,6 +1126,62 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                 this.dataGridView1.Sort(originalSortedColumn, direction);
             }
         }
+        private void ApplyFilter5(string shipper = "", string stock = "", string genre = "", string product = "", string county = "", int storeId = 0, string cangku = "")
+        {
+            var originalSortOrder = this.dataGridView1.SortOrder;
+            var originalSortedColumn = this.dataGridView1.SortedColumn;
+
+            bindingSource1.DataSource = null;
+            var filteredOrderList = pendingOrderList;
+            datagrid_changes.Clear();
+
+
+            if (shipper.Length > 0 && shipper != "すべて")
+            {
+                filteredOrderList = filteredOrderList.FindAll(o => o.実際配送担当 == shipper);
+            }
+            if (county.Length > 0 && county != "すべて")
+            {
+                filteredOrderList = filteredOrderList.FindAll(o => o.県別 == county);
+            }
+
+            if (product.Length > 0 && product != "すべて")
+            {
+                filteredOrderList = filteredOrderList.FindAll(o => o.品名漢字 == product);
+            }
+            if (genre.Length > 0 && genre != "すべて")
+            {
+
+                filteredOrderList = filteredOrderList.FindAll(o => o.GenreName == genre);
+
+            }
+            if (stock.Length > 0 && stock != "すべて")
+            {
+                filteredOrderList = filteredOrderList.FindAll(o => o.在庫状態 == stock);
+            }
+            if (storeId > 0)
+            {
+                filteredOrderList = filteredOrderList.FindAll(o => o.店舗コード == storeId);
+            }
+
+            if (cangku.Length > 0 && cangku != "すべて")
+            {
+                filteredOrderList = filteredOrderList.FindAll(o => o.warehousename == cangku);
+            }
+            sortablePendingOrderList = new SortableBindingList<v_pendingorder>(filteredOrderList);
+
+            this.bindingSource1.DataSource = sortablePendingOrderList;
+
+            var direction = ListSortDirection.Ascending;
+            if (originalSortOrder == System.Windows.Forms.SortOrder.Descending)
+            {
+                direction = ListSortDirection.Descending;
+            }
+            if (originalSortedColumn != null)
+            {
+                this.dataGridView1.Sort(originalSortedColumn, direction);
+            }
+        }
 
         private void UpdateStockState(List<v_pendingorder> orders)
         {
@@ -1264,7 +1352,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             {
                 order.納品口数 = (int)(order.実際出荷数量 / order.最小発注単位数量);
             }
-            
+
             var product = productList.FirstOrDefault(i => i.商品コード == order.商品コード);
             OrderSqlHelper.AfterOrderQtyChanged(order, product);
 
@@ -1328,9 +1416,88 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             var importForm = new ImportPrendingOrderForm();
             importForm.ShowDialog();
 
-            if (importForm.SavedOrderCount > 0) {
+            if (importForm.SavedOrderCount > 0)
+            {
                 pager1.Bind();
             }
+
+        }
+
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.RowCount < 1)
+                return;
+
+            var orders = GetPendingOrdersBySelectedGridCell();
+
+            if (orders.Count() > 0)
+            {
+                // if (MessageBox.Show("選択された伝票をキャンセル?", "確認メッセージ", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    var orderIds = orders.Select(o => o.id受注データ).ToList();
+
+                    for (int i = 0; i < orderIds.Count; i++)
+                    {
+                        List<v_pendingorder> mlist = pendingOrderList.FindAll(o => o.id受注データ != null && o.id受注データ == orderIds[i]).ToList();
+
+                        mlist[0].warehousename = this.toolStripComboBox1.Text;
+                    }
+
+                    sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
+                    this.bindingSource1.DataSource = sortablePendingOrderList;
+                    dataGridView1.DataSource = this.bindingSource1;
+                    //  pager1.Bind();
+                }
+            }
+            else
+            {
+                MessageBox.Show("先ずは、注文リストには行を選択してください。");
+            }
+        }
+
+        private void toolStripComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.RowCount < 1)
+                return;
+
+            var orders = GetPendingOrdersBySelectedGridCell();
+
+            if (orders.Count() > 0)
+            {
+                {
+                    var orderIds = orders.Select(o => o.id受注データ).ToList();
+
+                    for (int i = 0; i < orderIds.Count; i++)
+                    {
+                        List<v_pendingorder> mlist = pendingOrderList.FindAll(o => o.id受注データ != null && o.id受注データ == orderIds[i]).ToList();
+
+                        mlist[0].実際配送担当 = this.toolStripComboBox2.Text;
+                    }
+
+                    sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
+                    this.bindingSource1.DataSource = sortablePendingOrderList;
+                    dataGridView1.DataSource = this.bindingSource1;
+                    //  pager1.Bind();
+                }
+            }
+            else
+            {
+                MessageBox.Show("先ずは、注文リストには行を選択してください。");
+            }
+        }
+
+        private void 倉庫comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string shipper = DanDangComboBox.Text;
+            string genre = genreComboBox.Text;
+            string product = productComboBox.Text;
+            string stockState = ZKZTcomboBox3.Text;
+            string county = countyComboBox1.Text;
+            int storeId = 0;
+            if (storeComboBox.SelectedValue != null)
+                storeId = (int)storeComboBox.SelectedValue;
+            string cangku = 倉庫comboBox1.Text;
+            ApplyFilter5(shipper, stockState, genre, product, county, storeId, cangku);
 
         }
 
@@ -1347,7 +1514,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         //        //临时更改需求注销
         //        //ComboBox comboBox = e.Control as ComboBox;
         //        //comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
-            
+
         //    }
 
         //}
@@ -1437,7 +1604,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         //        //临时更改需求注销
         //        //ComboBox comboBox = e.Control as ComboBox;
         //        //comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
- 
+
 
         //    }
 
