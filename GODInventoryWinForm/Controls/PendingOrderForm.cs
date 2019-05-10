@@ -37,7 +37,6 @@ namespace GODInventoryWinForm.Controls
         private List<t_transports> transportList;
         //mark 20181008
         private List<t_warehouses> warehouseList;
-        private bool isInitializeTransportCombox;        
 
         public PendingOrderForm()
         {
@@ -471,7 +470,6 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
         private int InitializeOrderData(string shipper, string stockState, string genre, string product, string county, string storeName)
         {
-            this.isInitializeTransportCombox = true;
 
             // 过滤优先顺序
             // 配送担当 > 库存状态 > 产品分类 > 产品
@@ -942,15 +940,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             string name = combox.Text;
             var orders = GetOrdersByTransport(name);
 
-            //如果是第一次初始化化触发 selectedchange 事件，不调用 ApplyFilter5，因为
-            //if (isInitializeTransportCombox)
-            //{
-            //   this.isInitializeTransportCombox = false;
-            //}
-            //else
-            {
-                ApplyFilter5(name);
-            }
+            ApplyFilter5(name);
 
         }
 
