@@ -35,7 +35,7 @@
             this.id受注データDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.ordersTabPage = new System.Windows.Forms.TabPage();
-            this.倉庫comboBox1 = new System.Windows.Forms.ComboBox();
+            this.warehouseComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.storeComboBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -147,13 +147,13 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1236, 529);
+            this.tabControl1.Size = new System.Drawing.Size(1361, 529);
             this.tabControl1.TabIndex = 1;
             this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
             // 
             // ordersTabPage
             // 
-            this.ordersTabPage.Controls.Add(this.倉庫comboBox1);
+            this.ordersTabPage.Controls.Add(this.warehouseComboBox);
             this.ordersTabPage.Controls.Add(this.label7);
             this.ordersTabPage.Controls.Add(this.storeComboBox);
             this.ordersTabPage.Controls.Add(this.label6);
@@ -177,27 +177,27 @@
             this.ordersTabPage.Location = new System.Drawing.Point(4, 22);
             this.ordersTabPage.Name = "ordersTabPage";
             this.ordersTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ordersTabPage.Size = new System.Drawing.Size(1228, 503);
+            this.ordersTabPage.Size = new System.Drawing.Size(1353, 503);
             this.ordersTabPage.TabIndex = 0;
             this.ordersTabPage.Text = "伝票訂正";
             this.ordersTabPage.UseVisualStyleBackColor = true;
             // 
-            // 倉庫comboBox1
+            // warehouseComboBox
             // 
-            this.倉庫comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.倉庫comboBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.倉庫comboBox1.FormattingEnabled = true;
-            this.倉庫comboBox1.Location = new System.Drawing.Point(609, 11);
-            this.倉庫comboBox1.Name = "倉庫comboBox1";
-            this.倉庫comboBox1.Size = new System.Drawing.Size(79, 22);
-            this.倉庫comboBox1.TabIndex = 91;
-            this.倉庫comboBox1.SelectedIndexChanged += new System.EventHandler(this.倉庫comboBox1_SelectedIndexChanged);
+            this.warehouseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.warehouseComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.warehouseComboBox.FormattingEnabled = true;
+            this.warehouseComboBox.Location = new System.Drawing.Point(70, 11);
+            this.warehouseComboBox.Name = "warehouseComboBox";
+            this.warehouseComboBox.Size = new System.Drawing.Size(113, 22);
+            this.warehouseComboBox.TabIndex = 91;
+            this.warehouseComboBox.SelectedIndexChanged += new System.EventHandler(this.倉庫comboBox1_SelectedIndexChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(569, 15);
+            this.label7.Location = new System.Drawing.Point(34, 15);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 14);
             this.label7.TabIndex = 92;
@@ -208,9 +208,9 @@
             this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.storeComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.storeComboBox.FormattingEnabled = true;
-            this.storeComboBox.Location = new System.Drawing.Point(447, 37);
+            this.storeComboBox.Location = new System.Drawing.Point(419, 37);
             this.storeComboBox.Name = "storeComboBox";
-            this.storeComboBox.Size = new System.Drawing.Size(121, 22);
+            this.storeComboBox.Size = new System.Drawing.Size(113, 22);
             this.storeComboBox.TabIndex = 89;
             this.storeComboBox.SelectedIndexChanged += new System.EventHandler(this.storeComboBox_SelectedIndexChanged_1);
             // 
@@ -218,7 +218,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(407, 41);
+            this.label6.Location = new System.Drawing.Point(382, 41);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 14);
             this.label6.TabIndex = 90;
@@ -229,9 +229,9 @@
             this.countyComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.countyComboBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countyComboBox1.FormattingEnabled = true;
-            this.countyComboBox1.Location = new System.Drawing.Point(447, 11);
+            this.countyComboBox1.Location = new System.Drawing.Point(419, 11);
             this.countyComboBox1.Name = "countyComboBox1";
-            this.countyComboBox1.Size = new System.Drawing.Size(121, 22);
+            this.countyComboBox1.Size = new System.Drawing.Size(113, 22);
             this.countyComboBox1.TabIndex = 1;
             this.countyComboBox1.SelectedIndexChanged += new System.EventHandler(this.countyComboBox1_SelectedIndexChanged);
             // 
@@ -239,7 +239,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(407, 15);
+            this.label5.Location = new System.Drawing.Point(382, 15);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 14);
             this.label5.TabIndex = 88;
@@ -254,13 +254,13 @@
             this.panel1.Controls.Add(this.pager1);
             this.panel1.Location = new System.Drawing.Point(3, 470);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1222, 32);
+            this.panel1.Size = new System.Drawing.Size(1347, 32);
             this.panel1.TabIndex = 86;
             // 
             // selectedRowsLabel
             // 
             this.selectedRowsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.selectedRowsLabel.Location = new System.Drawing.Point(1048, 3);
+            this.selectedRowsLabel.Location = new System.Drawing.Point(1173, 3);
             this.selectedRowsLabel.Name = "selectedRowsLabel";
             this.selectedRowsLabel.Size = new System.Drawing.Size(174, 26);
             this.selectedRowsLabel.TabIndex = 26;
@@ -279,14 +279,14 @@
             this.pager1.PageCount = 0;
             this.pager1.PageCurrent = 0;
             this.pager1.PageSize = 50;
-            this.pager1.Size = new System.Drawing.Size(727, 34);
+            this.pager1.Size = new System.Drawing.Size(852, 34);
             this.pager1.TabIndex = 25;
             this.pager1.EventPaging += new GODInventoryWinForm.Controls.EventPagingHandler(this.pager1_EventPaging);
             // 
             // ClearSelect
             // 
             this.ClearSelect.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ClearSelect.Location = new System.Drawing.Point(694, 11);
+            this.ClearSelect.Location = new System.Drawing.Point(742, 11);
             this.ClearSelect.Name = "ClearSelect";
             this.ClearSelect.Size = new System.Drawing.Size(100, 48);
             this.ClearSelect.TabIndex = 5;
@@ -304,9 +304,9 @@
             "あり",
             "一部不足",
             "なし"});
-            this.ZKZTcomboBox3.Location = new System.Drawing.Point(271, 11);
+            this.ZKZTcomboBox3.Location = new System.Drawing.Point(257, 11);
             this.ZKZTcomboBox3.Name = "ZKZTcomboBox3";
-            this.ZKZTcomboBox3.Size = new System.Drawing.Size(120, 22);
+            this.ZKZTcomboBox3.Size = new System.Drawing.Size(113, 22);
             this.ZKZTcomboBox3.TabIndex = 2;
             this.ZKZTcomboBox3.SelectedIndexChanged += new System.EventHandler(this.ZKZTcomboBox3_SelectedIndexChanged);
             // 
@@ -314,7 +314,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(203, 15);
+            this.label4.Location = new System.Drawing.Point(192, 15);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 14);
             this.label4.TabIndex = 83;
@@ -325,9 +325,9 @@
             this.genreComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.genreComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(72, 37);
+            this.genreComboBox.Location = new System.Drawing.Point(70, 37);
             this.genreComboBox.Name = "genreComboBox";
-            this.genreComboBox.Size = new System.Drawing.Size(120, 22);
+            this.genreComboBox.Size = new System.Drawing.Size(113, 22);
             this.genreComboBox.TabIndex = 3;
             this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.GenreNamecomboBox_SelectedIndexChanged);
             // 
@@ -346,9 +346,9 @@
             this.productComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.productComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.productComboBox.FormattingEnabled = true;
-            this.productComboBox.Location = new System.Drawing.Point(271, 37);
+            this.productComboBox.Location = new System.Drawing.Point(257, 37);
             this.productComboBox.Name = "productComboBox";
-            this.productComboBox.Size = new System.Drawing.Size(120, 22);
+            this.productComboBox.Size = new System.Drawing.Size(113, 22);
             this.productComboBox.TabIndex = 4;
             this.productComboBox.SelectedIndexChanged += new System.EventHandler(this.PMHZCombox_SelectedIndexChanged);
             // 
@@ -356,7 +356,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(217, 41);
+            this.label2.Location = new System.Drawing.Point(206, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 14);
             this.label2.TabIndex = 79;
@@ -367,9 +367,9 @@
             this.DanDangComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DanDangComboBox.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.DanDangComboBox.FormattingEnabled = true;
-            this.DanDangComboBox.Location = new System.Drawing.Point(72, 11);
+            this.DanDangComboBox.Location = new System.Drawing.Point(608, 12);
             this.DanDangComboBox.Name = "DanDangComboBox";
-            this.DanDangComboBox.Size = new System.Drawing.Size(120, 22);
+            this.DanDangComboBox.Size = new System.Drawing.Size(113, 22);
             this.DanDangComboBox.TabIndex = 0;
             this.DanDangComboBox.SelectedIndexChanged += new System.EventHandler(this.DanDangComboBox_SelectedIndexChanged);
             // 
@@ -377,7 +377,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(4, 15);
+            this.label1.Location = new System.Drawing.Point(542, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 14);
             this.label1.TabIndex = 77;
@@ -387,7 +387,7 @@
             // 
             this.xlsxButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.xlsxButton1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.xlsxButton1.Location = new System.Drawing.Point(1010, 11);
+            this.xlsxButton1.Location = new System.Drawing.Point(1135, 11);
             this.xlsxButton1.Name = "xlsxButton1";
             this.xlsxButton1.Size = new System.Drawing.Size(106, 32);
             this.xlsxButton1.TabIndex = 8;
@@ -399,7 +399,7 @@
             // 
             this.newOrderbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.newOrderbutton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.newOrderbutton.Location = new System.Drawing.Point(1117, 11);
+            this.newOrderbutton.Location = new System.Drawing.Point(1242, 11);
             this.newOrderbutton.Name = "newOrderbutton";
             this.newOrderbutton.Size = new System.Drawing.Size(106, 32);
             this.newOrderbutton.TabIndex = 8;
@@ -411,7 +411,7 @@
             // 
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.saveButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.saveButton.Location = new System.Drawing.Point(796, 11);
+            this.saveButton.Location = new System.Drawing.Point(921, 11);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(106, 32);
             this.saveButton.TabIndex = 6;
@@ -423,7 +423,7 @@
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelButton.Location = new System.Drawing.Point(903, 11);
+            this.cancelButton.Location = new System.Drawing.Point(1028, 11);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(106, 32);
             this.cancelButton.TabIndex = 7;
@@ -482,7 +482,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1222, 397);
+            this.dataGridView1.Size = new System.Drawing.Size(1347, 397);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -999,7 +999,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1236, 529);
+            this.ClientSize = new System.Drawing.Size(1361, 529);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimizeBox = false;
@@ -1110,7 +1110,7 @@
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox2;
-        private System.Windows.Forms.ComboBox 倉庫comboBox1;
+        private System.Windows.Forms.ComboBox warehouseComboBox;
         private System.Windows.Forms.Label label7;
     }
 }

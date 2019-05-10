@@ -32,6 +32,34 @@ namespace GODInventory.ViewModel
             return 社内伝番処理;
         }
 
+        public static IQueryable GetDuplicateOrderQuery(GODDbContext ctx ) {
+            var q = from t_orderdata o in ctx.t_orderdata
+                    join t_shoplist s in ctx.t_shoplist on o.店舗コード equals s.店番
+                    where o.配送担当受信時刻 == null
+                    orderby o.実際配送担当, s.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
+                    select new
+                    {
+                        o.出荷日,
+                        o.納品日,
+                        o.受注日,
+                        o.店舗コード,
+                        s.店名,
+                        o.伝票番号,
+                        o.口数,
+                        o.品名漢字,
+                        o.規格名漢字,
+                        o.発注数量,
+                        o.実際配送担当,
+                        s.県別,
+                        o.キャンセル,
+                        o.ダブリ,
+                        o.一旦保留
+                    };
+            return q;
+        
+        }
+
+
         //sqlStr = "SELECT t_orderdata.`出荷日`,t_orderdata.`納品日`,t_orderdata.`受注日`,t_orderdata.`キャンセル`,t_orderdata.`一旦保留`," _
         //& " t_orderdata.`伝票番号`,t_orderdata.`社内伝番`,t_orderdata.`行数`,t_orderdata.`最大行数`,t_orderdata.`口数`,t_orderdata.`発注数量`," _
         //& " t_orderdata.`実際配送担当`,t_orderdata.`備考`,t_orderdata.`店舗コード`,t_orderdata.`店舗名漢字`,t_orderdata.`id受注データ`,`発注形態名称漢字`," _
@@ -250,6 +278,7 @@ namespace GODInventory.ViewModel
             return q;
 
         }
+        
         public static IQueryable<v_pendingorder> ShippingOrderSql(EntityDataSource entityDataSource1)
         {
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
@@ -303,6 +332,7 @@ namespace GODInventory.ViewModel
                      );
             return q;
         }
+
         public static IQueryable<t_orderdata> ShippedOrderSql(EntityDataSource entityDataSource1)
         {
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]

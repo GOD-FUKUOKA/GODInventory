@@ -120,7 +120,6 @@ namespace GODInventoryWinForm.Controls
             FROM t_orderdata o1 
             INNER JOIN t_orderdata  o2 on o1.自社コード = o2.自社コード and o1.店舗コード=o2.店舗コード
             INNER JOIN t_genre  o3 on o1.ジャンル = o3.idジャンル 
-
     where o1.`Status`=22 AND (o1.id受注データ = o2.id受注データ OR  o2.`Status`=0 OR o2.`Status`=2 OR o2.`Status`=3 OR (o2.`Status`=5 AND o2.`納品予定日`>NOW()) )
     order by o2.店舗コード, o2.自社コード , o2.受注日, o1.id受注データ";
 
