@@ -75,23 +75,34 @@ namespace GODInventoryWinForm.Controls
             var transports2 = transportList.Select(s => new { fullname = s.fullname }).Distinct().ToList();
 
 
+
+         
             this.transportColumn1.DisplayMember = "fullname";
             this.transportColumn1.ValueMember = "fullname";
             this.transportColumn1.DataSource = transports1;
 
 
             // 担当
+            var transports3 = transportList.Select(s => s.fullname).Distinct().ToList();
+            transports3.Insert(0, "すべて");
+          
+          
             this.shipperComboBox.DisplayMember = "fullname";
             this.shipperComboBox.ValueMember = "fullname";
-            this.shipperComboBox.DataSource = transports2;
+            this.shipperComboBox.DataSource = transports3;
             //右键选择担当
 
             for (int i = 0; i < transports2.Count; i++)
             {
-                this.toolStripComboBox2.ComboBox.Items.Add(transports2[i].fullname);
+
+                ToolStripItem item = new ToolStripMenuItem();
+                item.Name = transports2[i].fullname.ToString();
+                item.Text = transports2[i].fullname.ToString();
+                item.Click += new EventHandler(toolStripComboBox2_SelectedIndexChanged);
+                toolStripMenuItem3.DropDownItems.Add(item);
 
             }
-            this.toolStripComboBox2.ComboBox.SelectedIndex = 0;
+
 
             //过滤条件添加任意选项
             //shipperCo.Insert(0, new MockEntity { ShortName = "すべて", FullName = "すべて" });
@@ -110,17 +121,29 @@ namespace GODInventoryWinForm.Controls
             this.warehousenameColumn2.DisplayMember = "fullname";
             this.warehousenameColumn2.ValueMember = "fullname";
             this.warehousenameColumn2.DataSource = warehouse2;
+          
+            
+            var warehousesnew = warehouseList.Select(s => s.FullName).Distinct().ToList();
+            warehousesnew.Insert(0, "すべて");             
+            this.comboBox1.DisplayMember = "fullname";
+            this.comboBox1.ValueMember = "fullname";
+            this.comboBox1.DataSource = warehousesnew;
+
 
             //右键选择仓库
             for (int i = 0; i < warehouse2.Count; i++)
             {
-                this.toolStripComboBox1.ComboBox.Items.Add(warehouse2[i].fullname);
-
+                //this.toolStripComboBox1.ComboBox.Items.Add(warehouse2[i].fullname);
+                ToolStripItem item = new ToolStripMenuItem();
+                item.Name = warehouse2[i].fullname.ToString();
+                item.Text = warehouse2[i].fullname.ToString();
+                item.Click += new EventHandler(toolStripComboBox1_SelectedIndexChanged);
+                toolStripMenuItem1.DropDownItems.Add(item);
             }
-            this.toolStripComboBox1.ComboBox.SelectedIndex = 0;
+            //this.toolStripComboBox1.ComboBox.SelectedIndex = 0;
             //
             var warehouse3 = warehouseList.Select(s => new MockEntity { ShortName = s.ShortName, FullName = s.FullName }).Distinct().OrderBy(s => s.Id).ToList();
-            
+
 
             //var PMHZ = orders.Select(s => new MockEntity { Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().OrderBy(s => s.Id).ToList();
             //PMHZ.Insert(0, new MockEntity { Id = 0, ShortName = "すべて", FullName = "すべて" });
@@ -494,6 +517,8 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                 this.warehouseComboBox.Text = shipper;
 
 
+
+
                 // PageEvent 时, stockState 在初始化为 “”， 需设置为 “すべて”
                 this.ZKZTcomboBox3.Text = (stockState.Length == 0 ? "すべて" : stockState);
                 this.genreComboBox.Text = genre;
@@ -852,6 +877,11 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             // skip first time initialization
             if (shipperOrderList != null)
             {
+
+                ApplyFilter6(shipperComboBox.Text, comboBox1.Text);
+
+                return;
+
                 //this.dataGridView3.AutoGenerateColumns = false;
                 //this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
                 //new
@@ -863,6 +893,9 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                 this.bindingSource2.DataSource = null;
                 this.bindingSource2.DataSource = sortablePendingOrderList3;
                 dataGridView3.DataSource = this.bindingSource2;
+
+
+
             }
 
         }
@@ -1037,7 +1070,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         private void InitializeCountyComboBox(List<v_pendingorder> orders)
         {
             // County
-            var counties = orders.Select(s => s.県別).Where(s=>!string.IsNullOrEmpty(s)).Distinct().ToList();
+            var counties = orders.Select(s => s.県別).Where(s => !string.IsNullOrEmpty(s)).Distinct().ToList();
             counties.Insert(0, "すべて");
 
             this.countyComboBox1.DataSource = counties;
@@ -1150,7 +1183,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             {
                 storeComboBox.SelectedIndex = 0;
             }
-             
+
 
 
             var originalSortOrder = this.dataGridView1.SortOrder;
@@ -1241,7 +1274,8 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         }
 
 
-        private List<v_pendingorder> GetOrdersByTransport(string transport) {
+        private List<v_pendingorder> GetOrdersByTransport(string transport)
+        {
             List<v_pendingorder> orders = pendingOrderList;
             if (transport != "すべて")
             {
@@ -1440,12 +1474,13 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                 // if (MessageBox.Show("選択された伝票をキャンセル?", "確認メッセージ", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     var orderIds = orders.Select(o => o.id受注データ).ToList();
-
+                    ToolStripItem item = (ToolStripItem)sender;
+                    string txname = item.Name;
                     for (int i = 0; i < orderIds.Count; i++)
                     {
                         List<v_pendingorder> mlist = pendingOrderList.FindAll(o => o.id受注データ != null && o.id受注データ == orderIds[i]).ToList();
 
-                        mlist[0].warehousename = this.toolStripComboBox1.Text;
+                        mlist[0].warehousename = txname;
                     }
 
                     sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
@@ -1471,12 +1506,13 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             {
                 {
                     var orderIds = orders.Select(o => o.id受注データ).ToList();
-
+                    ToolStripItem item = (ToolStripItem)sender;
+                    string txname = item.Name;
                     for (int i = 0; i < orderIds.Count; i++)
                     {
                         List<v_pendingorder> mlist = pendingOrderList.FindAll(o => o.id受注データ != null && o.id受注データ == orderIds[i]).ToList();
-
-                        mlist[0].実際配送担当 = this.toolStripComboBox2.Text;
+                        //e.CellStyle.BackColor = Color.Red;
+                        mlist[0].実際配送担当 = txname;
                     }
 
                     sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
@@ -1498,6 +1534,65 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             var orders = GetOrdersByShipper(shipper);
 
             InitializeStockState(orders);
+
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (shipperOrderList == null || shipperOrderList.Count == 0)
+                return;
+
+            var combox = sender as ComboBox;
+            string name = combox.Text;
+            var orders = GetOrdersByTransport(name);
+
+            ApplyFilter6(shipperComboBox.Text, name);
+
+
+        }
+        private void ApplyFilter6(string cangku = "", string canshu2 = "")
+        {
+            // 重置 其它过滤条件
+            if (comboBox1.SelectedIndex >= 0)
+            {
+                comboBox1.SelectedIndex = 0;
+            }
+            else if (shipperComboBox.SelectedIndex >= 0)
+            {
+                shipperComboBox.SelectedIndex = 0;
+            }
+
+            var originalSortOrder = this.dataGridView3.SortOrder;
+            var originalSortedColumn = this.dataGridView3.SortedColumn;
+
+            bindingSource2.DataSource = null;
+            var filteredOrderList = shipperOrderList;
+            datagrid_changes.Clear();
+
+            if (cangku.Length > 0 && cangku != "すべて")
+            {
+                filteredOrderList = filteredOrderList.FindAll(o => o.実際配送担当 == cangku);
+            }
+            if (canshu2.Length > 0 && canshu2 != "すべて")
+            {
+                filteredOrderList = filteredOrderList.FindAll(o => o.warehousename == canshu2);
+            }
+
+            sortablePendingOrderList = new SortableBindingList<v_pendingorder>(filteredOrderList);
+
+            this.bindingSource2.DataSource = sortablePendingOrderList;
+
+            var direction = ListSortDirection.Ascending;
+            if (originalSortOrder == System.Windows.Forms.SortOrder.Descending)
+            {
+                direction = ListSortDirection.Descending;
+            }
+            if (originalSortedColumn != null)
+            {
+                this.dataGridView3.Sort(originalSortedColumn, direction);
+            }
+
+
 
         }
 
