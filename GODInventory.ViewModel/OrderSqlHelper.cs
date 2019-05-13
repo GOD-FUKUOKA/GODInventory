@@ -32,28 +32,49 @@ namespace GODInventory.ViewModel
             return 社内伝番処理;
         }
 
-        public static IQueryable GetDuplicateOrderQuery(GODDbContext ctx ) {
-            var q = from t_orderdata o in ctx.t_orderdata
-                    join t_shoplist s in ctx.t_shoplist on o.店舗コード equals s.店番
-                    where o.配送担当受信時刻 == null
-                    orderby o.実際配送担当, s.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
-                    select new
+        public static IQueryable<v_duplicatedorder> GetDuplicateOrderQuery(GODDbContext ctx)
+        {
+
+//            string sql = @"SELECT o1.id受注データ as duplicatedId, o2.id受注データ, o2.`発注日`,o2.`出荷日`,o2.`納品日`,o2.`受注日`,o2.`店舗コード`, o2.`店舗名漢字`,
+//          o2.`納品場所名漢字`,o2.`伝票番号`,o2.`納品口数`,o2.`ジャンル`,o2.`品名漢字`,o2.`規格名漢字`, 
+//          o2.`実際出荷数量`,o2.`実際配送担当`,o2.`県別`, 
+//          o2.`発注形態名称漢字`,o2.`キャンセル`,o2.`ダブリ`, o2.Status, o3.ジャンル名 as GenreName
+//            FROM t_orderdata o1 
+//            INNER JOIN t_orderdata  o2 on o1.自社コード = o2.自社コード and o1.店舗コード=o2.店舗コード
+//            INNER JOIN t_genre  o3 on o1.ジャンル = o3.idジャンル 
+//    where o1.`Status`=22 AND (o1.id受注データ = o2.id受注データ OR  o2.`Status`=0 OR o2.`Status`=2 OR o2.`Status`=3 OR (o2.`Status`=5 AND o2.`納品予定日`>NOW()) )
+//    order by o2.店舗コード, o2.自社コード , o2.受注日, o1.id受注データ";
+
+
+
+            var q = from t_orderdata o1 in ctx.t_orderdata
+                    join t_orderdata o2 in ctx.t_orderdata on new { 自社コード= o1.自社コード, 店舗コード= o1.店舗コード } equals new { 自社コード = o2.自社コード, 店舗コード =o2.店舗コード }
+                    join t_genre g in ctx.t_genre on o1.ジャンル equals g.idジャンル
+                    where o1.Status== OrderStatus.Duplicated && (o1.id受注データ == o2.id受注データ ||  o2.Status==OrderStatus.Pending || o2.Status==OrderStatus.NotifyShipper || o2.Status== OrderStatus.WaitToShip || o2.Status== OrderStatus.PendingShipment  )
+                    orderby  o2.店舗コード, o2.自社コード, o2.受注日, o1.id受注データ
+                    select new v_duplicatedorder
                     {
-                        o.出荷日,
-                        o.納品日,
-                        o.受注日,
-                        o.店舗コード,
-                        s.店名,
-                        o.伝票番号,
-                        o.口数,
-                        o.品名漢字,
-                        o.規格名漢字,
-                        o.発注数量,
-                        o.実際配送担当,
-                        s.県別,
-                        o.キャンセル,
-                        o.ダブリ,
-                        o.一旦保留
+                        duplicatedId = o1.id受注データ,
+                        id受注データ = o2.id受注データ,
+                        発注日 = o2.発注日,
+                        出荷日 = o2.出荷日,
+                        納品日 = o2.納品日,
+                        店舗コード = o2.店舗コード,
+                        店舗名漢字 = o2.店舗名漢字,
+                        納品場所名漢字 = o2.納品場所名漢字,
+                        伝票番号 = o2.伝票番号,
+                        納品口数 = o2.納品口数,
+                        ジャンル = o2.ジャンル,
+                        品名漢字 = o2.品名漢字,
+                        規格名漢字 = o2.規格名漢字,
+                        実際出荷数量 = o2.実際出荷数量,
+                        実際配送担当 = o2.実際配送担当,
+                        県別 = o2.県別,
+                        発注形態名称漢字 = o2.発注形態名称漢字,
+                        キャンセル = o2.キャンセル,
+                        ダブリ = o2.ダブリ,
+                        Status = o2.Status,
+                        GenreName= g.ジャンル名                        
                     };
             return q;
         

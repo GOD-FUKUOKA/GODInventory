@@ -316,6 +316,10 @@ ADD COLUMN `transport_id` INT UNSIGNED NOT NULL DEFAULT 0;
 # update t_orderdata t1 inner join t_warehouses t2 on t1.実際配送担当 = t2.ShipperName  set t1.warehouse_id = t2.id where t1.id受注データ>0
 #
 
+ALTER TABLE `god_om2`.`t_orderdata` 
+DROP INDEX `t_orderdata_combo` ,
+ADD INDEX `t_orderdata_combo` (`Status` ASC, `店舗コード` ASC, `商品コード` ASC, `ジャンル` ASC, `自社コード` ASC);
+
 #########################################################################################################
 # 原有数据修正
 # 设置 t_shoplist表中 warehouse_id, transport_id, warehousename
