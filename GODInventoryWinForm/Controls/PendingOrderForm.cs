@@ -76,20 +76,13 @@ namespace GODInventoryWinForm.Controls
 
 
 
-         
+
             this.transportColumn1.DisplayMember = "fullname";
             this.transportColumn1.ValueMember = "fullname";
             this.transportColumn1.DataSource = transports1;
 
 
-            // 担当
-            var transports3 = transportList.Select(s => s.fullname).Distinct().ToList();
-            transports3.Insert(0, "すべて");
-          
-          
-            this.shipperComboBox.DisplayMember = "fullname";
-            this.shipperComboBox.ValueMember = "fullname";
-            this.shipperComboBox.DataSource = transports3;
+
             //右键选择担当
 
             for (int i = 0; i < transports2.Count; i++)
@@ -121,13 +114,8 @@ namespace GODInventoryWinForm.Controls
             this.warehousenameColumn2.DisplayMember = "fullname";
             this.warehousenameColumn2.ValueMember = "fullname";
             this.warehousenameColumn2.DataSource = warehouse2;
-          
-            
-            var warehousesnew = warehouseList.Select(s => s.FullName).Distinct().ToList();
-            warehousesnew.Insert(0, "すべて");             
-            this.comboBox1.DisplayMember = "fullname";
-            this.comboBox1.ValueMember = "fullname";
-            this.comboBox1.DataSource = warehousesnew;
+
+
 
 
             //右键选择仓库
@@ -265,7 +253,8 @@ namespace GODInventoryWinForm.Controls
                         order.備考 = pendingorder.備考;
                         order.納品指示 = pendingorder.納品指示;
                         order.運賃 = pendingorder.運賃; //保存用户直接对运费的修改
-                        if (isWarehouseChanged) {
+                        if (isWarehouseChanged)
+                        {
                             order.warehousename = pendingorder.warehousename;
                             order.warehouse_id = pendingorder.warehouse_id;
                         }
@@ -539,7 +528,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             return 0;
         }
 
-        private void InitializeShipperOrderList(string transportName = null)
+        private void InitializeShipperOrderList(string transportName = null, string warhoseName = null)
         {
             shipperOrderList = new List<v_pendingorder>();
 
@@ -589,6 +578,46 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             this.bindingSource2.DataSource = sortablePendingOrderList3;
             this.dataGridView3.AutoGenerateColumns = false;
             this.dataGridView3.DataSource = this.bindingSource2;
+
+
+            #region 初始化下拉
+            //var PMHZ = orders.Select(s => new MockEntity { Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().OrderBy(s => s.Id).ToList();
+            //PMHZ.Insert(0, new MockEntity { Id = 0, ShortName = "すべて", FullName = "すべて" });
+            //this.productComboBox.DisplayMember = "FullName";
+            //this.productComboBox.ValueMember = "Id";
+            //this.productComboBox.DataSource = PMHZ;
+
+
+            // 担当
+            var transports3 = shipperOrderList.Select(s => new MockEntity { Id = s.自社コード, ShortName = s.実際配送担当, FullName = s.実際配送担当 }).Distinct().OrderBy(s => s.Id).ToList();
+            transports3.Insert(0, new MockEntity { Id = 0, ShortName = "すべて", FullName = "すべて" });
+            this.shipperComboBox.DisplayMember = "FullName";
+            this.shipperComboBox.ValueMember = "Id";
+            this.shipperComboBox.DataSource = transports3;
+
+            //仓库
+
+            var warehousesnew = shipperOrderList.Select(s => new MockEntity { Id = s.自社コード, ShortName = s.warehousename, FullName = s.warehousename }).Distinct().OrderBy(s => s.Id).ToList();
+            warehousesnew.Insert(0, new MockEntity { Id = 0, ShortName = "すべて", FullName = "すべて" });
+            this.comboBox1.DisplayMember = "FullName";
+            this.comboBox1.ValueMember = "Id";
+            this.comboBox1.DataSource = warehousesnew;
+
+            #endregion
+            if (warhoseName == null)
+            {
+                // 触发 change 事件
+                // 第二次回到转发物流界面，如果以前选择的是SelectedIndex =0， 需要先设置-1，才能触发 change 事件。
+                comboBox1.SelectedIndex = -1;
+                comboBox1.SelectedIndex = 0;
+            }
+            else
+            {
+                // 用户退单后刷新
+                this.comboBox1.Text = warhoseName;
+            
+            }
+
 
             // 第一次初始化情况
             if (transportName == null)
@@ -1298,6 +1327,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             string selectedShipperName = this.shipperComboBox.Text;
+            string selectedwarhose = this.shipperComboBox.Text;
             List<v_pendingorder> orders = new List<v_pendingorder>();
             for (int i = 0; i < dataGridView3.SelectedRows.Count; i++)
             {
@@ -1307,7 +1337,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
             RollbackOrder(orders);
 
-            InitializeShipperOrderList(selectedShipperName);
+            InitializeShipperOrderList(selectedShipperName, selectedwarhose);
             // 更新待處理訂單列表
             pager1.Bind();
         }
@@ -1479,9 +1509,10 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             if (rows.Count > 0)
             {
                 ToolStripItem item = (ToolStripItem)sender;
-                var warehouse  = this.warehouseList.Find( w=>w.FullName == item.Name);
+                var warehouse = this.warehouseList.Find(w => w.FullName == item.Name);
 
-                for (var i = 0; i < rows.Count; i++) {
+                for (var i = 0; i < rows.Count; i++)
+                {
                     var row = rows[i];
                     var rowIndex = row.Index;
                     var columnIndex = warehousenameColumn.Index;
@@ -1502,12 +1533,12 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                         v_pendingorder order = row.DataBoundItem as v_pendingorder;
                         order.warehousename = newCellValue;
                         order.warehouse_id = warehouse.Id;
-                    }                
+                    }
                 }
                 //// if (MessageBox.Show("選択された伝票をキャンセル?", "確認メッセージ", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 //{
                 //    var orderIds = orders.Select(o => o.id受注データ).ToList();
-                    
+
                 //    for (int i = 0; i < orderIds.Count; i++)
                 //    {
                 //        List<v_pendingorder> mlist = pendingOrderList.FindAll(o => o.id受注データ != null && o.id受注データ == orderIds[i]).ToList();
@@ -1641,10 +1672,11 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
         }
 
-        private bool isCellValueChanged(Object originalValue, Object newValue) {
+        private bool isCellValueChanged(Object originalValue, Object newValue)
+        {
 
             return ((newValue == null && originalValue != null) || (newValue != null && originalValue == null) || !newValue.Equals(originalValue));
-        
+
         }
 
         //private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
