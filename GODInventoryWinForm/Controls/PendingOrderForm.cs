@@ -1348,12 +1348,14 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         {
             int count = dataGridView1.SelectedRows.Count;
             int total = 0;
+            int weight = 0;
             for (int i = 0; i < count; i++)
             {
                 var order = dataGridView1.SelectedRows[i].DataBoundItem as v_pendingorder;
                 total += order.実際出荷数量;
+                weight += order.重量;
             }
-            selectedRowsLabel.Text = String.Format("選択中の数量合計: {0}", total);
+            selectedRowsLabel.Text = String.Format("選択中の数量合計: {0} 重量合計: {1}", total, weight);
         }
 
         /// <summary>
