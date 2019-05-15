@@ -262,11 +262,18 @@ namespace GODInventoryWinForm.Controls
                         order.訂正理由区分 = pendingorder.訂正理由区分;
 
                         order.発注形態名称漢字 = pendingorder.発注形態名称漢字;
-                        order.実際配送担当 = pendingorder.実際配送担当;
                         order.備考 = pendingorder.備考;
                         order.納品指示 = pendingorder.納品指示;
                         order.運賃 = pendingorder.運賃; //保存用户直接对运费的修改
-                        order.warehousename = pendingorder.warehousename;
+                        if (isWarehouseChanged) {
+                            order.warehousename = pendingorder.warehousename;
+                            order.warehouse_id = pendingorder.warehouse_id;
+                        }
+                        if (isTransportChanged)
+                        {
+                            order.実際配送担当 = pendingorder.実際配送担当;
+                            order.transport_id = pendingorder.transport_id;
+                        }
 
                     }
                     if (isValid)
@@ -354,17 +361,17 @@ namespace GODInventoryWinForm.Controls
 
             string cellKey = GetCellKey(e.RowIndex, e.ColumnIndex);
             string cellChangedKey = GetCellKey(e.RowIndex, e.ColumnIndex, true);
-            var new_cell_value = cell.Value;
-            var original_cell_value = datagrid_changes[cellKey];
-            // original_cell_value could null
-            //Console.WriteLine(" original = {0} {3}, new ={1} {4}, compare = {2}, {5}", original_cell_value, new_cell_value, original_cell_value == new_cell_value, original_cell_value.GetType(), new_cell_value.GetType(), new_cell_value.Equals(original_cell_value));
-            if (new_cell_value == null && original_cell_value == null)
+            var newValue = cell.Value;
+            var originalValue = datagrid_changes[cellKey];
+            // originalValue could null
+            //Console.WriteLine(" original = {0} {3}, new ={1} {4}, compare = {2}, {5}", originalValue, newValue, originalValue == newValue, originalValue.GetType(), newValue.GetType(), newValue.Equals(originalValue));
+            if (newValue == null && originalValue == null)
             {
                 datagrid_changes.Remove(cellChangedKey);
             }
-            else if ((new_cell_value == null && original_cell_value != null) || (new_cell_value != null && original_cell_value == null) || !new_cell_value.Equals(original_cell_value))
+            else if ((newValue == null && originalValue != null) || (newValue != null && originalValue == null) || !newValue.Equals(originalValue))
             {
-                datagrid_changes[cellChangedKey] = new_cell_value;
+                datagrid_changes[cellChangedKey] = newValue;
             }
             else
             {
@@ -1462,32 +1469,57 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
         }
 
+        // 选择了仓库菜单
         private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (dataGridView1.RowCount < 1)
                 return;
+            var rows = this.dataGridView1.SelectedRows;
 
-            var orders = GetPendingOrdersBySelectedGridCell();
-
-            if (orders.Count() > 0)
+            if (rows.Count > 0)
             {
-                // if (MessageBox.Show("選択された伝票をキャンセル?", "確認メッセージ", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                {
-                    var orderIds = orders.Select(o => o.id受注データ).ToList();
-                    ToolStripItem item = (ToolStripItem)sender;
-                    string txname = item.Name;
-                    for (int i = 0; i < orderIds.Count; i++)
+                ToolStripItem item = (ToolStripItem)sender;
+                var warehouse  = this.warehouseList.Find( w=>w.FullName == item.Name);
+
+                for (var i = 0; i < rows.Count; i++) {
+                    var row = rows[i];
+                    var rowIndex = row.Index;
+                    var columnIndex = warehousenameColumn.Index;
+
+                    var cell = row.Cells[columnIndex];
+
+                    string cellKey = GetCellKey(rowIndex, columnIndex);
+                    string cellChangedKey = GetCellKey(rowIndex, columnIndex, true);
+                    var newCellValue = item.Name;
+                    var originalCellValue = datagrid_changes[cellKey] != null ? datagrid_changes[cellKey] : cell.Value;
+
+                    bool changed = isCellValueChanged(originalCellValue, newCellValue);
+
+                    if (changed)
                     {
-                        List<v_pendingorder> mlist = pendingOrderList.FindAll(o => o.id受注データ != null && o.id受注データ == orderIds[i]).ToList();
-
-                        mlist[0].warehousename = txname;
-                    }
-
-                    sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
-                    this.bindingSource1.DataSource = sortablePendingOrderList;
-                    dataGridView1.DataSource = this.bindingSource1;
-                    //  pager1.Bind();
+                        this.datagrid_changes[cellChangedKey] = newCellValue;
+                        this.datagrid_changes[cellKey] = originalCellValue;
+                        v_pendingorder order = row.DataBoundItem as v_pendingorder;
+                        order.warehousename = newCellValue;
+                        order.warehouse_id = warehouse.Id;
+                    }                
                 }
+                //// if (MessageBox.Show("選択された伝票をキャンセル?", "確認メッセージ", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                //{
+                //    var orderIds = orders.Select(o => o.id受注データ).ToList();
+                    
+                //    for (int i = 0; i < orderIds.Count; i++)
+                //    {
+                //        List<v_pendingorder> mlist = pendingOrderList.FindAll(o => o.id受注データ != null && o.id受注データ == orderIds[i]).ToList();
+
+                //        mlist[0].warehousename = txname;
+                //    }
+
+                //    sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
+                //    this.bindingSource1.DataSource = sortablePendingOrderList;
+                //    dataGridView1.DataSource = this.bindingSource1;
+                //    //  pager1.Bind();
+                //}
             }
             else
             {
@@ -1495,30 +1527,43 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             }
         }
 
+        // 选择了物流公司菜单
         private void toolStripComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (dataGridView1.RowCount < 1)
                 return;
 
-            var orders = GetPendingOrdersBySelectedGridCell();
+            var rows = this.dataGridView1.SelectedRows;
 
-            if (orders.Count() > 0)
+            if (rows.Count > 0)
             {
-                {
-                    var orderIds = orders.Select(o => o.id受注データ).ToList();
-                    ToolStripItem item = (ToolStripItem)sender;
-                    string txname = item.Name;
-                    for (int i = 0; i < orderIds.Count; i++)
-                    {
-                        List<v_pendingorder> mlist = pendingOrderList.FindAll(o => o.id受注データ != null && o.id受注データ == orderIds[i]).ToList();
-                        //e.CellStyle.BackColor = Color.Red;
-                        mlist[0].実際配送担当 = txname;
-                    }
 
-                    sortablePendingOrderList = new SortableBindingList<v_pendingorder>(pendingOrderList);
-                    this.bindingSource1.DataSource = sortablePendingOrderList;
-                    dataGridView1.DataSource = this.bindingSource1;
-                    //  pager1.Bind();
+                ToolStripItem item = (ToolStripItem)sender;
+                var transport = this.transportList.Find(w => w.fullname == item.Name);
+
+                for (var i = 0; i < rows.Count; i++)
+                {
+                    var row = rows[i];
+                    var rowIndex = row.Index;
+                    var columnIndex = transportColumn1.Index;
+
+                    var cell = row.Cells[columnIndex];
+
+                    string cellKey = GetCellKey(rowIndex, columnIndex);
+                    string cellChangedKey = GetCellKey(rowIndex, columnIndex, true);
+                    var newCellValue = item.Name;
+                    var originalCellValue = datagrid_changes[cellKey] != null ? datagrid_changes[cellKey] : cell.Value;
+
+                    bool changed = isCellValueChanged(originalCellValue, newCellValue);
+
+                    if (changed)
+                    {
+                        this.datagrid_changes[cellChangedKey] = newCellValue;
+                        this.datagrid_changes[cellKey] = originalCellValue;
+                        v_pendingorder order = row.DataBoundItem as v_pendingorder;
+                        order.実際配送担当 = newCellValue;
+                        order.transport_id = transport.id;
+                    }
                 }
             }
             else
@@ -1594,6 +1639,12 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
 
 
+        }
+
+        private bool isCellValueChanged(Object originalValue, Object newValue) {
+
+            return ((newValue == null && originalValue != null) || (newValue != null && originalValue == null) || !newValue.Equals(originalValue));
+        
         }
 
         //private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
