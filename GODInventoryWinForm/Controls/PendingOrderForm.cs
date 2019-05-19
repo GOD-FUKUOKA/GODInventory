@@ -110,21 +110,21 @@ namespace GODInventoryWinForm.Controls
             this.warehousenameColumn.ValueMember = "fullname";
             this.warehousenameColumn.DataSource = warehouse1;
             // 传送确认仓库
-            var warehouse2 = warehouseList.Select(s => new { fullname = s.FullName }).Distinct().ToList();
-            this.warehousenameColumn2.DisplayMember = "fullname";
-            this.warehousenameColumn2.ValueMember = "fullname";
-            this.warehousenameColumn2.DataSource = warehouse2;
+            //var warehouse2 = warehouseList.Select(s => new { fullname = s.FullName }).Distinct().ToList();
+            //this.warehousenameColumn2.DisplayMember = "fullname";
+            //this.warehousenameColumn2.ValueMember = "fullname";
+            //this.warehousenameColumn2.DataSource = warehouse2;
 
 
 
 
             //右键选择仓库
-            for (int i = 0; i < warehouse2.Count; i++)
+            for (int i = 0; i < warehouseList.Count; i++)
             {
                 //this.toolStripComboBox1.ComboBox.Items.Add(warehouse2[i].fullname);
                 ToolStripItem item = new ToolStripMenuItem();
-                item.Name = warehouse2[i].fullname.ToString();
-                item.Text = warehouse2[i].fullname.ToString();
+                item.Name = warehouseList[i].FullName;
+                item.Text = warehouseList[i].FullName;
                 item.Click += new EventHandler(toolStripComboBox1_SelectedIndexChanged);
                 toolStripMenuItem1.DropDownItems.Add(item);
             }
@@ -528,7 +528,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             return 0;
         }
 
-        private void InitializeShipperOrderList(string transportName = null, string warhoseName = null)
+        private void InitializeShipperOrderList(string warhoseName = null)
         {
             shipperOrderList = new List<v_pendingorder>();
 
@@ -559,7 +559,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             //     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
 
             string sql2 = @"SELECT `id受注データ`,`受注日`,`店舗コード`, `納品場所コード`,
-       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`,`発注形態名称漢字`, `備考`, `社内伝番処理`
+       `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`,`発注形態名称漢字`, `備考`, `社内伝番処理`, `warehousename`,`warehouse_id`, `transport_id`
      FROM t_orderdata
      WHERE  `Status`={0}
      ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
@@ -581,65 +581,28 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
 
             #region 初始化下拉
-            //var PMHZ = orders.Select(s => new MockEntity { Id = s.自社コード, TaxonId = s.ジャンル, ShortName = s.品名漢字, FullName = s.品名漢字 }).Distinct().OrderBy(s => s.Id).ToList();
-            //PMHZ.Insert(0, new MockEntity { Id = 0, ShortName = "すべて", FullName = "すべて" });
-            //this.productComboBox.DisplayMember = "FullName";
-            //this.productComboBox.ValueMember = "Id";
-            //this.productComboBox.DataSource = PMHZ;
-
-
             // 担当
-            var transports3 = shipperOrderList.Select(s => new MockEntity { Id = s.自社コード, ShortName = s.実際配送担当, FullName = s.実際配送担当 }).Distinct().OrderBy(s => s.Id).ToList();
-            transports3.Insert(0, new MockEntity { Id = 0, ShortName = "すべて", FullName = "すべて" });
-            this.shipperComboBox.DisplayMember = "FullName";
-            this.shipperComboBox.ValueMember = "Id";
-            this.shipperComboBox.DataSource = transports3;
+            //var transports3 = shipperOrderList.Select(s => new MockEntity { Id = s.自社コード, ShortName = s.実際配送担当, FullName = s.実際配送担当 }).Distinct().OrderBy(s => s.Id).ToList();
+            //transports3.Insert(0, new MockEntity { Id = 0, ShortName = "すべて", FullName = "すべて" });
+            //this.shipperComboBox2.DisplayMember = "FullName";
+            //this.shipperComboBox2.ValueMember = "Id";
+            //this.shipperComboBox2.DataSource = transports3;
 
-            //仓库
+            //仓库, 仓库过滤比较特殊，warehouseComboBox2.Text 是 仓库名称(X:这个仓库有多少订单)
 
-            var warehousesnew = shipperOrderList.Select(s => new MockEntity { Id = s.自社コード, ShortName = s.warehousename, FullName = s.warehousename }).Distinct().OrderBy(s => s.Id).ToList();
-            warehousesnew.Insert(0, new MockEntity { Id = 0, ShortName = "すべて", FullName = "すべて" });
-            this.comboBox1.DisplayMember = "FullName";
-            this.comboBox1.ValueMember = "Id";
-            this.comboBox1.DataSource = warehousesnew;
+            initializeWarehouseComboBoxForTransport(); 
 
             #endregion
             if (warhoseName == null)
             {
-                // 触发 change 事件
-                // 第二次回到转发物流界面，如果以前选择的是SelectedIndex =0， 需要先设置-1，才能触发 change 事件。
-                comboBox1.SelectedIndex = -1;
-                comboBox1.SelectedIndex = 0;
+                warehouseComboBox2.SelectedIndex = 0;
             }
             else
             {
                 // 用户退单后刷新
-                this.comboBox1.Text = warhoseName;
-            
+                this.warehouseComboBox2.SelectedValue = warhoseName;            
             }
 
-
-            // 第一次初始化情况
-            if (transportName == null)
-            {
-                // 触发 change 事件
-                // 第二次回到转发物流界面，如果以前选择的是SelectedIndex =0， 需要先设置-1，才能触发 change 事件。
-                shipperComboBox.SelectedIndex = -1;
-                shipperComboBox.SelectedIndex = 0;
-
-            }
-            else
-            {
-                // 用户退单后刷新
-                this.shipperComboBox.Text = transportName;
-                //   this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == transportName);
-                //new 
-                //  this.bindingSource2.DataSource = shipperOrderList;
-                //  this.dataGridView3.DataSource = bindingSource2;
-
-
-                // this.entityDataSource2.Refresh();
-            }
         }
 
         #endregion
@@ -908,35 +871,6 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // skip first time initialization
-            if (shipperOrderList != null)
-            {
-
-                ApplyFilter6(shipperComboBox.Text, comboBox1.Text);
-
-                return;
-
-                //this.dataGridView3.AutoGenerateColumns = false;
-                //this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
-                //new
-                List<v_pendingorder> shipperOrderList1 = new List<v_pendingorder>();
-
-                shipperOrderList1 = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
-                sortablePendingOrderList3 = new SortableBindingList<v_pendingorder>(shipperOrderList1);
-                //    this.entityDataSource2.Refresh();
-                this.bindingSource2.DataSource = null;
-                this.bindingSource2.DataSource = sortablePendingOrderList3;
-                dataGridView3.DataSource = this.bindingSource2;
-
-
-
-            }
-
-        }
-
-
 
 
         #region 修改键生成
@@ -1007,7 +941,6 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         {
             var combox = sender as ComboBox;
             string name = combox.Text;
-            var orders = GetOrdersByTransport(name);
 
             ApplyFilter5(name);
 
@@ -1310,15 +1243,15 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         }
 
 
-        private List<v_pendingorder> GetOrdersByTransport(string transport)
-        {
-            List<v_pendingorder> orders = pendingOrderList;
-            if (transport != "すべて")
-            {
-                orders = orders.FindAll(o => o.実際配送担当 == transport);
-            }
-            return orders;
-        }
+        //private List<v_pendingorder> GetOrdersByTransport(string transport)
+        //{
+        //    List<v_pendingorder> orders = pendingOrderList;
+        //    if (transport != "すべて")
+        //    {
+        //        orders = orders.FindAll(o => o.実際配送担当 == transport);
+        //    }
+        //    return orders;
+        //}
         #endregion
 
 
@@ -1326,8 +1259,8 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            string selectedShipperName = this.shipperComboBox.Text;
-            string selectedwarhose = this.shipperComboBox.Text;
+            string selectedwarehouse = getSelectWarehouseNameForTransport();
+
             List<v_pendingorder> orders = new List<v_pendingorder>();
             for (int i = 0; i < dataGridView3.SelectedRows.Count; i++)
             {
@@ -1337,7 +1270,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
             RollbackOrder(orders);
 
-            InitializeShipperOrderList(selectedShipperName, selectedwarhose);
+            InitializeShipperOrderList(selectedwarehouse);
             // 更新待處理訂單列表
             pager1.Bind();
         }
@@ -1396,7 +1329,8 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         private void notifyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<v_pendingorder> orders = new List<v_pendingorder>();
-            string transportName = shipperComboBox.Text;
+            string transportName = shipperComboBox2.Text;
+            string warehouseName = getSelectWarehouseNameForTransport();
             for (int i = 0; i < dataGridView3.SelectedRows.Count; i++)
             {
                 var order = dataGridView3.SelectedRows[i].DataBoundItem as v_pendingorder;
@@ -1413,8 +1347,10 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                 this.shipperOrderList.RemoveAll(o => orders.Contains(o));
                 // this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == transportName); ;
                 //
-                this.bindingSource2.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
-                // this.entityDataSource2.Refresh();
+                this.bindingSource2.DataSource = this.shipperOrderList.FindAll(o => o.warehousename == warehouseName);
+
+                initializeWarehouseComboBoxForTransport();
+
                 MessageBox.Show(String.Format(" {0} 件転送処理しました!", orders.Count));
             }
 
@@ -1615,49 +1551,65 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
         }
 
+        #region 订单传送界面条件过滤
+
+        // 选择了物流公司
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // skip first time initialization
+            var transportname = shipperComboBox2.SelectedValue != null ? shipperComboBox2.SelectedValue.ToString() : string.Empty;
+            ApplyFilter6( getSelectWarehouseNameForTransport(), transportname);
+
+        }
+
+        // 选择了仓库
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (shipperOrderList == null || shipperOrderList.Count == 0)
+            {
+
                 return;
-
+            }
             var combox = sender as ComboBox;
-            string name = combox.Text;
-            var orders = GetOrdersByTransport(name);
+            string warehouseName = combox.SelectedValue.ToString();
+            var orders = shipperOrderList.FindAll(o => o.warehousename == warehouseName);
 
-            ApplyFilter6(shipperComboBox.Text, name);
+            // 担当
+            var transports3 = orders.Select(s =>  s.実際配送担当 ).Distinct().ToList();
 
+            if (transports3.Count > 0)
+            {
+                this.shipperComboBox2.DataSource = transports3;
+            }
+            else {
+                // 触发comboBox1_SelectedIndexChanged
+                this.shipperComboBox2.DataSource = null;            
+            }
 
+          
         }
-        private void ApplyFilter6(string cangku = "", string canshu2 = "")
+        
+        private void ApplyFilter6(string cangku = "", string transport = "")
         {
-            // 重置 其它过滤条件
-            if (comboBox1.SelectedIndex >= 0)
-            {
-                comboBox1.SelectedIndex = 0;
-            }
-            else if (shipperComboBox.SelectedIndex >= 0)
-            {
-                shipperComboBox.SelectedIndex = 0;
-            }
+            
 
             var originalSortOrder = this.dataGridView3.SortOrder;
             var originalSortedColumn = this.dataGridView3.SortedColumn;
 
-            bindingSource2.DataSource = null;
             var filteredOrderList = shipperOrderList;
-            datagrid_changes.Clear();
 
             if (cangku.Length > 0 && cangku != "すべて")
             {
-                filteredOrderList = filteredOrderList.FindAll(o => o.実際配送担当 == cangku);
+                filteredOrderList = filteredOrderList.FindAll(o => o.warehousename == cangku);
             }
-            if (canshu2.Length > 0 && canshu2 != "すべて")
+            if (transport.Length > 0 && transport != "すべて")
             {
-                filteredOrderList = filteredOrderList.FindAll(o => o.warehousename == canshu2);
+                filteredOrderList = filteredOrderList.FindAll(o => o.実際配送担当 == transport);
             }
 
             sortablePendingOrderList = new SortableBindingList<v_pendingorder>(filteredOrderList);
 
+            this.bindingSource2.DataSource = null;
             this.bindingSource2.DataSource = sortablePendingOrderList;
 
             var direction = ListSortDirection.Ascending;
@@ -1673,6 +1625,28 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
 
         }
+
+        //初始化传送界面仓库的过滤条件
+        private void initializeWarehouseComboBoxForTransport() {
+            var warehouses = this.warehouseList.Select(s =>{  
+                int i = this.shipperOrderList.Count( o=>o.warehouse_id == s.Id);
+
+                return new { id = s.Id, name = s.FullName, title = string.Format( "{0}({1})", s.FullName, i) };
+            
+            }).ToList();
+
+            this.warehouseComboBox2.DisplayMember = "title";
+            this.warehouseComboBox2.ValueMember = "name";
+            this.warehouseComboBox2.DataSource = warehouses;
+        
+        }
+
+        private string getSelectWarehouseNameForTransport() {
+
+            return warehouseComboBox2.SelectedValue.ToString();
+        }
+
+        #endregion
 
         private bool isCellValueChanged(Object originalValue, Object newValue)
         {
