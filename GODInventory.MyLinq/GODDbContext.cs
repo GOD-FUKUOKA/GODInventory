@@ -238,9 +238,6 @@
                 .Property(e => e.Status)
                 .IsRequired();
 // ==========================================================
-            modelBuilder.Entity<t_orderdata>()
-                .Property(e => e.id)
-                .IsUnicode(false);
 
             modelBuilder.Entity<t_orderdata>()
                 .Property(e => e.店舗名漢字)

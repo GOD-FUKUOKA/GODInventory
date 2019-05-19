@@ -285,7 +285,7 @@ namespace GODInventory.MyLinq
         public string センター名カナ { get; set; }
 
         public long ASN管理連番 { get; set; }
-        public long 受注管理連番 { get; set; }
+        public Int64 受注管理連番 { get; set; }
         
         public long 出荷No { get; set; }
 

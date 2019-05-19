@@ -708,7 +708,6 @@ namespace GODInventoryWinForm.Controls
             //order.納品先店舗名漢字 = this.locationComboBox.Text;
             order.発注形態区分 = (short)this.orderReasonComboBox.SelectedValue;
             order.発注形態名称漢字 = this.orderReasonComboBox.Text;
-            order.一旦保留 = true;
         }
 
         private void customerComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -756,7 +755,7 @@ namespace GODInventoryWinForm.Controls
                     {
                         int storeCode = (int)this.storeComboBox.SelectedValue;
                         var store = shopList.Find(s => s.店番 == storeCode);
-                        
+                        Int64 mid = NafcoOrderHelper.GenerateMid();
 
                         using (var ctx = new GODDbContext())
                         {
@@ -766,6 +765,8 @@ namespace GODInventoryWinForm.Controls
                                 v_itemprice selectedItem = itemPriceList.Find(i => i.自社コード == o.自社コード);
 
                                 SetOrderBaseInfo(o);
+                                o.受注管理連番 = mid;
+
                                 o.納品先店舗コード = (short)o.店舗コード;
                                 o.納品先店舗名漢字 = o.店舗名漢字;
                                 o.税率 = 0.08;
@@ -814,7 +815,7 @@ namespace GODInventoryWinForm.Controls
                                 o.発注品名漢字 = o.品名漢字;
                                 o.発注規格名漢字 = o.規格名漢字;
                                 o.用度品区分 = 0;
-                                o.id = String.Format("{0}a{1}", o.店舗コード, o.伝票番号);
+                                //o.id = String.Format("{0}a{1}", o.店舗コード, o.伝票番号);
 
                                 //判断全角半角
                                 bool isrun = true;
@@ -852,6 +853,8 @@ namespace GODInventoryWinForm.Controls
 
                             }
                             ctx.t_nafco_orders.AddRange(newOrderList);
+                            string sql = NafcoOrderSqlHelper.BuildImportOrderByMidSql( mid);
+                            ctx.Database.ExecuteSqlCommand(sql);
                             ctx.SaveChanges();
                             MessageBox.Show(String.Format("{0} 枚のFAX注文登録完了!", newOrderList.Count));
                             orderList.Clear();

@@ -316,8 +316,18 @@ ADD COLUMN `transport_id` INT UNSIGNED NOT NULL DEFAULT 0;
 # update t_orderdata t1 inner join t_warehouses t2 on t1.実際配送担当 = t2.ShipperName  set t1.warehouse_id = t2.id where t1.id受注データ>0
 #
 
-ALTER TABLE `t_orderdata` ADD INDEX `t_chuheno` (`出荷No` ASC);
-ALTER TABLE `t_orderdata` ADD INDEX `t_shipno` (`ShipNo` ASC);
+ALTER TABLE `t_orderdata` ADD INDEX `idx_chuheno` (`出荷No` ASC);
+ALTER TABLE `t_orderdata` ADD INDEX `idx_shipno` (`ShipNo` ASC);
+
+ALTER TABLE `t_orderdata` ADD INDEX `idx_orderdata_dates` (`発注日` ASC);
+
+ALTER TABLE `t_orderdata` 
+DROP INDEX `t_orderdata_combo` ,
+ADD INDEX `t_orderdata_combo` (`Status` ASC, `店舗コード` ASC, `商品コード` ASC, `ジャンル` ASC, `自社コード` ASC, `warehouse_id` ASC);
+
+ALTER TABLE `t_orderdata` 
+DROP INDEX `店番＋伝番` ,
+ADD INDEX `店番＋伝番` USING BTREE (`店舗コード` ASC, `伝票番号` ASC, `法人コード` ASC);
 
 #########################################################################################################
 # 原有数据修正

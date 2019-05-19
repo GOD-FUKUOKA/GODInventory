@@ -47,6 +47,7 @@ namespace GODInventoryWinForm.Controls
             InitializeComponent();
 
             dataGridView1.AutoGenerateColumns = false;
+            dataGridView3.AutoGenerateColumns = false;
 
             this.datagrid_changes = new Hashtable();
             this.pendingOrderList = new List<v_pendingorder>();
@@ -106,9 +107,6 @@ namespace GODInventoryWinForm.Controls
             this.warehousenameColumn2.DisplayMember = "fullname";
             this.warehousenameColumn2.ValueMember = "fullname";
             this.warehousenameColumn2.DataSource = warehouse2;
-
-
-
 
         }
 
@@ -482,12 +480,11 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             return 0;
         }
 
-        private void InitializeShipperOrderList(string transportName = null)
+        // 初始化传送订单数据
+        private void InitializeShipperOrderList( )
         {
-            shipperOrderList = new List<v_pendingorder>();
+            string transportName = this.shipperComboBox.Text;
 
-            this.shipperOrderList.Clear();
-            this.bindingSource2.DataSource = null;
             // 记录DataGridView改变数据
             //this.bindingSource2.DataSource = sortablePendingOrderList3;
             //dataGridView3.DataSource = this.bindingSource2;
@@ -512,48 +509,44 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             //     GROUP BY `社内伝番`
             //     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
 
-            string sql2 = @"SELECT `id受注データ`,`受注日`,`店舗コード`, `納品場所コード`,
+            string sql2 = @"SELECT `id受注データ`,`受注日`,`店舗コード`, `納品場所コード`, `warehousename`,
        `店舗名漢字`,`伝票番号`,`社内伝番`,`ジャンル`,`品名漢字`,`規格名漢字`, `納品口数`, `実際出荷数量`, `重量`, `実際配送担当`,`県別`, `納品指示`,`発注形態名称漢字`, `備考`, `社内伝番処理`
      FROM t_orderdata
-     WHERE  `Status`={0}
-     ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
-
+     WHERE  `Status`={0}";
+     //ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
+            var now = DateTime.Now;
             //this.shipperOrderList = this.entityDataSource1.DbContext.Database.SqlQuery<v_pendingorder>(sql2, OrderStatus.NotifyShipper).ToList();
-            this.shipperOrderList = this.entityDataSource2.DbContext.Database.SqlQuery<v_pendingorder>(sql2, OrderStatus.NotifyShipper).ToList();
+            //this.shipperOrderList = this.entityDataSource2.DbContext.Database.SqlQuery<v_pendingorder>(sql2, OrderStatus.NotifyShipper).ToList();
 
-            //var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-            //         where o.Status == OrderStatus.NotifyShipper
-            //         orderby o.実際配送担当,o.県別, o.店舗コード, o.受注日, o.伝票番号
-            //         select o
-            //        );
-
-            sortablePendingOrderList3 = new SortableBindingList<v_pendingorder>(shipperOrderList);
-            this.bindingSource2.DataSource = null;
-            this.bindingSource2.DataSource = sortablePendingOrderList3;
-            this.dataGridView3.AutoGenerateColumns = false;
-            this.dataGridView3.DataSource = this.bindingSource2;
+            this.shipperOrderList = (from t_orderdata o in entityDataSource2.EntitySets["t_orderdata"]
+                     where o.Status == OrderStatus.NotifyShipper
+                     orderby o.実際配送担当,o.県別, o.店舗コード, o.受注日, o.伝票番号
+                     select new v_pendingorder{id受注データ=o.id受注データ,受注日=o.受注日,店舗コード=o.店舗コード, warehousename=o.warehousename,
+                        店舗名漢字=o.店舗名漢字, 伝票番号=o.伝票番号, 社内伝番=o.社内伝番, ジャンル=o.ジャンル,
+                        品名漢字=o.品名漢字,規格名漢字=o.規格名漢字, 納品口数=o.納品口数, 実際出荷数量=o.実際出荷数量, 重量=o.重量, 
+                        実際配送担当=o.実際配送担当, 県別=o.県別, 納品指示=o.納品指示,発注形態名称漢字=o.発注形態名称漢字, 備考=o.備考, 社内伝番処理=o.社内伝番処理 }
+                    ).ToList();
+            filterShipperOrderList();
+            //LogHelper.WriteLog(string.Format("takes {0}", (DateTime.Now.Ticks - now.Ticks) / 10000));
 
             // 第一次初始化情况
-            if (transportName == null)
-            {
-                // 触发 change 事件
-                // 第二次回到转发物流界面，如果以前选择的是SelectedIndex =0， 需要先设置-1，才能触发 change 事件。
-                shipperComboBox.SelectedIndex = -1;
-                shipperComboBox.SelectedIndex = 0;
-
-            }
-            else
-            {
-                // 用户退单后刷新
-                this.shipperComboBox.Text = transportName;
+            //if (transportName == null)
+            //{
+            //    // 触发 change 事件
+            //    // 第二次回到转发物流界面，如果以前选择的是SelectedIndex =0， 需要先设置-1，才能触发 change 事件。
+            //    shipperComboBox.SelectedIndex = -1;
+            //    shipperComboBox.SelectedIndex = 0;
+            //}
+            //else
+            //{
+            //    // 用户退单后刷新
+                // this.shipperComboBox.Text = transportName;
                 //   this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == transportName);
                 //new 
                 //  this.bindingSource2.DataSource = shipperOrderList;
                 //  this.dataGridView3.DataSource = bindingSource2;
-
-
                 // this.entityDataSource2.Refresh();
-            }
+            //}
         }
 
         #endregion
@@ -1163,7 +1156,6 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            string selectedShipperName = this.shipperComboBox.Text;
             List<v_pendingorder> orders = new List<v_pendingorder>();
             for (int i = 0; i < dataGridView3.SelectedRows.Count; i++)
             {
@@ -1173,7 +1165,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
             RollbackOrder(orders);
 
-            InitializeShipperOrderList(selectedShipperName);
+            InitializeShipperOrderList();
             // 更新待處理訂單列表
             pager1.Bind();
         }
@@ -1196,7 +1188,6 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                 {
                     //二次制品订单？
                     order.社内伝番 = 0;
-                    order.一旦保留 = true;
                     order.配送担当受信 = false;
                     order.配送担当受信時刻 = null;
                     order.Status = OrderStatus.Pending;
@@ -1314,6 +1305,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
 
         }
+        
         private int warehouselistBox()
         {
 
@@ -1331,6 +1323,24 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             if (importForm.SavedOrderCount > 0) {
                 pager1.Bind();
             }
+
+        }
+
+        /// <summary>
+        /// 传送订单，物流公司过滤
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void filterShipperOrderList( )
+        {
+            string transportName = this.shipperComboBox.Text;
+             
+            var orders = this.shipperOrderList.FindAll(o => o.実際配送担当 == transportName);
+            sortablePendingOrderList3 = new SortableBindingList<v_pendingorder>(orders);
+            this.bindingSource2.DataSource = null;
+            this.bindingSource2.DataSource = sortablePendingOrderList3;
+            dataGridView3.DataSource = this.bindingSource2;
+             
 
         }
 
@@ -1437,14 +1447,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         //        //临时更改需求注销
         //        //ComboBox comboBox = e.Control as ComboBox;
         //        //comboBox.Click += new EventHandler(comboBox_SelectedIndexChanged);
- 
-
         //    }
-
-
-
-
-
         //}
     }
 }

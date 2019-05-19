@@ -86,7 +86,6 @@ namespace GODInventory.NAFCO
             }
             order.発注形態区分 = 10;
             order.発注形態名称漢字 = "補充";
-            order.一旦保留 = true;
 
             // 设置 一些常量
             order.納品先店舗コード = (short)order.店舗コード;
@@ -125,7 +124,7 @@ namespace GODInventory.NAFCO
             order.発注品名漢字 = order.品名漢字;
             order.発注規格名漢字 = order.規格名漢字;
             order.用度品区分 = 0;
-            order.id = String.Format("{0}a{1}", order.店舗コード, order.伝票番号);
+            //order.id = String.Format("{0}a{1}", order.店舗コード, order.伝票番号);
 
             //判断全角半角
             bool isValidName = isValidOrderName(order.発注品名漢字);
@@ -382,6 +381,7 @@ namespace GODInventory.NAFCO
             return Convert.ToInt32(string.Format("{0:D4}{1:D2}", newTime.Year, week));
         }
 
+
         /// <summary>
         /// 获取类中的属性值
         /// </summary>
@@ -437,7 +437,25 @@ namespace GODInventory.NAFCO
             position += 1;
 
             return (position * 10) + (position % 7);
+        }
 
+        /// <summary>
+        /// 对传真订单生成受注管理連番，便于生成内部订单
+        /// </summary>
+        /// <param name="storeId"></param>
+        /// <returns></returns>
+        public static long GenerateMid()
+        {
+            DateTime dt1970 = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            long timestamp =  (DateTime.Now.Ticks - dt1970.Ticks) / 10000;
+
+            DateTime time = DateTime.Now;
+            // 16-01-01(6位日期) 12:59:01(6位时间)   xy(加2位随机数)
+            var seed = Guid.NewGuid().GetHashCode();
+            Random r = new Random(seed);
+            int i = r.Next(0, 99999);
+
+            return Convert.ToInt64(string.Format("{0:D13}{1:D5}", timestamp, i));
         }
 
     }

@@ -32,6 +32,55 @@ namespace GODInventory
             return 社内伝番処理;
         }
 
+        //取得重复订单信息
+        public static IQueryable<v_duplicatedorder> GetDuplicateOrderQuery(GODDbContext ctx)
+        {
+
+            //            string sql = @"SELECT o1.id受注データ as duplicatedId, o2.id受注データ, o2.`発注日`,o2.`出荷日`,o2.`納品日`,o2.`受注日`,o2.`店舗コード`, o2.`店舗名漢字`,
+            //          o2.`納品場所名漢字`,o2.`伝票番号`,o2.`納品口数`,o2.`ジャンル`,o2.`品名漢字`,o2.`規格名漢字`, 
+            //          o2.`実際出荷数量`,o2.`実際配送担当`,o2.`県別`, 
+            //          o2.`発注形態名称漢字`,o2.`キャンセル`,o2.`ダブリ`, o2.Status, o3.ジャンル名 as GenreName
+            //            FROM t_orderdata o1 
+            //            INNER JOIN t_orderdata  o2 on o1.自社コード = o2.自社コード and o1.店舗コード=o2.店舗コード
+            //            INNER JOIN t_genre  o3 on o1.ジャンル = o3.idジャンル 
+            //    where o1.`Status`=22 AND (o1.id受注データ = o2.id受注データ OR  o2.`Status`=0 OR o2.`Status`=2 OR o2.`Status`=3 OR (o2.`Status`=5 AND o2.`納品予定日`>NOW()) )
+            //    order by o2.店舗コード, o2.自社コード , o2.受注日, o1.id受注データ";
+
+
+
+            var q = from t_orderdata o1 in ctx.t_orderdata
+                    join t_orderdata o2 in ctx.t_orderdata on new { 自社コード = o1.自社コード, 店舗コード = o1.店舗コード } equals new { 自社コード = o2.自社コード, 店舗コード = o2.店舗コード }
+                    join t_genre g in ctx.t_genre on o1.ジャンル equals g.idジャンル
+                    where o1.Status == OrderStatus.Duplicated && (o1.id受注データ == o2.id受注データ || o2.Status == OrderStatus.Pending || o2.Status == OrderStatus.NotifyShipper || o2.Status == OrderStatus.WaitToShip || o2.Status == OrderStatus.PendingShipment)
+                    orderby o2.店舗コード, o2.自社コード, o2.受注日, o1.id受注データ
+                    select new v_duplicatedorder
+                    {
+                        duplicatedId = o1.id受注データ,
+                        id受注データ = o2.id受注データ,
+                        発注日 = o2.発注日,
+                        出荷日 = o2.出荷日,
+                        納品日 = o2.納品日,
+                        店舗コード = o2.店舗コード,
+                        店舗名漢字 = o2.店舗名漢字,
+                        納品場所名漢字 = o2.納品場所名漢字,
+                        伝票番号 = o2.伝票番号,
+                        納品口数 = o2.納品口数,
+                        ジャンル = o2.ジャンル,
+                        品名漢字 = o2.品名漢字,
+                        規格名漢字 = o2.規格名漢字,
+                        実際出荷数量 = o2.実際出荷数量,
+                        実際配送担当 = o2.実際配送担当,
+                        県別 = o2.県別,
+                        発注形態名称漢字 = o2.発注形態名称漢字,
+                        キャンセル = o2.キャンセル,
+                        ダブリ = o2.ダブリ,
+                        Status = o2.Status,
+                        GenreName = g.ジャンル名
+                    };
+            return q;
+
+        }
+        
         //sqlStr = "SELECT t_orderdata.`出荷日`,t_orderdata.`納品日`,t_orderdata.`受注日`,t_orderdata.`キャンセル`,t_orderdata.`一旦保留`," _
         //& " t_orderdata.`伝票番号`,t_orderdata.`社内伝番`,t_orderdata.`行数`,t_orderdata.`最大行数`,t_orderdata.`口数`,t_orderdata.`発注数量`," _
         //& " t_orderdata.`実際配送担当`,t_orderdata.`備考`,t_orderdata.`店舗コード`,t_orderdata.`店舗名漢字`,t_orderdata.`id受注データ`,`発注形態名称漢字`," _
@@ -41,16 +90,7 @@ namespace GODInventory
         //& " ORDER BY t_orderdata.`受注日` DESC,t_orderdata.`社内伝番` ASC,t_orderdata.`行数` ASC,t_orderdata.`伝票番号` ASC"
         //出荷日納品日受注日, 店舗コード,店名, 社内伝番, 伝票番号,品名漢字， 規格名漢字， 発注数量，実際配送担当， 県別，
         //原単価(税抜)，， 原価金額(税抜)， 発注形態名称漢字， キャンセル， 一旦保留， 受領， ダブリ
-        //public static IQueryable<t_orderdata> NewOrderQuery(EntityDataSource entityDataSource1)
-        //{
-        //    var a = entityDataSource1.EntitySets["t_orderdatas"];
-        //    var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-        //            where o.Status == OrderStatus.New
-        //            orderby o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
 
-        //            select o;
-        //    return q;
-        //}
         
         // file 受注管理★受注作業用/m4
         // SELECT t_orderdata.`出荷日`,t_orderdata.`納品日`,t_orderdata.`受注日`,t_orderdata.`店舗コード`," _
@@ -62,6 +102,7 @@ namespace GODInventory
         //& " WHERE t_orderdata.`キャンセル` = 'no' AND t_orderdata.`納品日` IS NULL" _
         //& " ORDER BY t_orderdata.`実際配送担当` ASC,t_shoplist.`県別` ASC,t_orderdata.`店舗コード` ASC," _
         //& " t_orderdata.`ＪＡＮコード` ASC,t_orderdata.`受注日` ASC,t_orderdata.`伝票番号` ASC"
+
 
         public static List<v_pendingorder> GetPendingOrderList(EntityDataSource dataSource, int pageSize, int offset)
         {
@@ -76,36 +117,8 @@ WHERE o.Status ={0}
 ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
 
 
-            // create BindingList (sortable/filterable)
             var list = dataSource.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.Pending, pageSize, offset).ToList();
             return list;
-        }
-
-        public static IQueryable PendingOrderSql(EntityDataSource entityDataSource1)
-        {
-            var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-                    join t_shoplist s in entityDataSource1.EntitySets["t_shoplist"] on o.店舗コード equals s.店番
-                    where o.配送担当受信時刻 == null
-                    orderby o.実際配送担当, s.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
-                    select new
-                    {
-                        o.出荷日,
-                        o.納品日,
-                        o.受注日,
-                        o.店舗コード,
-                        s.店名,
-                        o.伝票番号,
-                        o.口数,
-                        o.品名漢字,
-                        o.規格名漢字,
-                        o.発注数量,
-                        o.実際配送担当,
-                        s.県別,
-                        o.キャンセル,
-                        o.ダブリ,
-                        o.一旦保留
-                    };
-            return q;
         }
 
         public static IQueryable<t_orderdata> PendingOrderQuery(EntityDataSource entityDataSource1)
@@ -119,6 +132,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
         public static IQueryable<v_pendingorder> ECWithoutCodeOrderQuery(EntityDataSource entityDataSource1, int genreId)
         {
+
             var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
                      where o.Status == OrderStatus.NotifyShipper && o.ジャンル == genreId && o.社内伝番 == 0 && o.実際配送担当 == "丸健"
                      orderby o.店舗コード
@@ -147,7 +161,6 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                           発注形態名称漢字 = o.発注形態名称漢字,
                           キャンセル = o.キャンセル,
                           ダブリ = o.ダブリ,
-                          一旦保留 = o.一旦保留,
                           法人名漢字 = o.法人名漢字,
                           備考 = o.備考,
                           納品指示 = o.納品指示,
@@ -156,52 +169,54 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             return q;
         }
 
-        //public static IQueryable<v_pendingorder> PendingOrderQueryEx(EntityDataSource entityDataSource1)
-        //{
-        //    var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
-        //             //join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on new { jid = o.ＪＡＮコード, sid = o.実際配送担当 } equals new { jid = i.JANコード, sid = i.配送担当 }
-        //             //join t_itemlist i in entityDataSource1.EntitySets["t_itemlist"] on o.自社コード equals  i.自社コード
-        //             join t_stockstate k in entityDataSource1.EntitySets["t_stockstate"] on new { pid = o.自社コード, sid = o.実際配送担当 } equals new { pid = k.自社コード, sid = k.ShipperName } into t_join
-        //             from x in t_join.DefaultIfEmpty()
-        //             join t_genre g in entityDataSource1.EntitySets["t_genre"] on o.ジャンル equals g.idジャンル
-        //             where o.Status == OrderStatus.Pending
-        //             orderby o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
-        //             select new v_pendingorder
-        //             {
-        //                 id受注データ = o.id受注データ,
-        //                 出荷日 = o.出荷日,
-        //                 納品日 = o.納品日,
-        //                 受注日 = o.受注日,
-        //                 店舗名漢字 = o.店舗名漢字,
-        //                 店舗コード = o.店舗コード,
-        //                 納品場所名漢字 = o.納品場所名漢字,
-        //                 伝票番号 = o.伝票番号,
-        //                 自社コード = o.自社コード,
-        //                 口数 = o.口数,
-        //                 納品口数 = o.納品口数,
-        //                 重量 = o.重量,
-        //                 ジャンル = o.ジャンル,
-        //                 品名漢字 = o.品名漢字,
-        //                 規格名漢字 = o.規格名漢字,
-        //                 発注数量 = o.発注数量,
-        //                 最小発注単位数量 = o.最小発注単位数量,
-        //                 実際出荷数量 = o.実際出荷数量,
-        //                 実際配送担当 = o.実際配送担当,
-        //                 県別 = o.県別,
-        //                 発注形態名称漢字 = o.発注形態名称漢字,
-        //                 キャンセル = o.キャンセル,
-        //                 ダブリ = o.ダブリ,
-        //                 一旦保留 = o.一旦保留,
-        //                 在庫状態 = "unkown",
-        //                 法人名漢字 = o.法人名漢字,
-        //                 備考 = o.備考,
-        //                 納品指示 = o.納品指示,
-        //                 訂正理由区分 = o.訂正理由区分,
-        //                 在庫数 = x.在庫数,
-        //                 GenreName = g.ジャンル名
-        //             });
-        //    return q;
-        //}
+        public static IQueryable<v_pendingorder> PendingOrderQueryEx(EntityDataSource entityDataSource1)
+        {
+            // https://www.cnblogs.com/weixing/p/4447927.html
+            // o.`原単価(税抜)` as `原単価_税抜_`, o.`原単価(税込)` as `原単価_税込_`, o.`売単価（税抜）` as `売単価_税抜_`, o.`売単価（税込）` as `売単価_税込_`, 
+            // g.`ジャンル名` as `GenreName`, k.`在庫数` as `在庫数`, s.`売上ランク`, p.`厳しさ`, p.`欠品カウンター`
+
+            var q = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
+                     join t_genre g in entityDataSource1.EntitySets["t_genre"] on o.ジャンル equals g.idジャンル
+                     join t_pricelist i in entityDataSource1.EntitySets["t_pricelist"] on new { pid = o.自社コード, sid = o.店舗コード } equals new { pid = i.自社コード, sid = i.店番 }
+                     join t_stockstate k in entityDataSource1.EntitySets["t_stockstate"] on new { pid = o.自社コード, wid = o.warehouse_id } equals new { pid = k.自社コード, wid = k.WarehouseID } into t_join
+                     from x in t_join.DefaultIfEmpty()
+                     where o.Status == OrderStatus.Pending
+                     orderby o.Status, o.実際配送担当, o.県別, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
+                     select new v_pendingorder
+                     {
+                         id受注データ = o.id受注データ,
+                         出荷日 = o.出荷日,
+                         納品日 = o.納品日,
+                         受注日 = o.受注日,
+                         店舗名漢字 = o.店舗名漢字,
+                         店舗コード = o.店舗コード,
+                         納品場所名漢字 = o.納品場所名漢字,
+                         伝票番号 = o.伝票番号,
+                         自社コード = o.自社コード,
+                         口数 = o.口数,
+                         納品口数 = o.納品口数,
+                         重量 = o.重量,
+                         ジャンル = o.ジャンル,
+                         品名漢字 = o.品名漢字,
+                         規格名漢字 = o.規格名漢字,
+                         発注数量 = o.発注数量,
+                         最小発注単位数量 = o.最小発注単位数量,
+                         実際出荷数量 = o.実際出荷数量,
+                         実際配送担当 = o.実際配送担当,
+                         県別 = o.県別,
+                         発注形態名称漢字 = o.発注形態名称漢字,
+                         キャンセル = o.キャンセル,
+                         ダブリ = o.ダブリ,
+                         在庫状態 = "unkown",
+                         法人名漢字 = o.法人名漢字,
+                         備考 = o.備考,
+                         納品指示 = o.納品指示,
+                         訂正理由区分 = o.訂正理由区分,
+                         在庫数 = x.在庫数,
+                         GenreName = g.ジャンル名
+                     });
+            return q;
+        }
 
         //sqlStr = "SELECT t_orderdata.`出荷日`,t_orderdata.`納品日`,t_orderdata.`受注日`,t_orderdata.`キャンセル`,t_orderdata.`一旦保留`," _
         //& " t_orderdata.`伝票番号`,t_orderdata.`社内伝番`,t_orderdata.`行数`,t_orderdata.`最大行数`,t_orderdata.`口数`,t_orderdata.`発注数量`," _
@@ -258,7 +273,6 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                          ダブリ = o.ダブリ,
                          行数 = o.行数,
                          最大行数 = o.最大行数,
-                         一旦保留 = o.一旦保留,
                          納品指示 = o.納品指示,
                          ShipNO = o.ShipNO,
                          GenreName = g.ジャンル名,
@@ -305,7 +319,6 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                          ダブリ = o.ダブリ,
                          ShipNO = o.ShipNO,
                          GenreName = g.ジャンル名,
-                         一旦保留 = o.一旦保留,
                          備考 = o.備考
 
                      });
@@ -581,7 +594,6 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             order.キャンセル時刻 = null;
             order.実際出荷数量 = order.発注数量;
             order.納品口数 = order.口数;
-            order.一旦保留 = true;
 
             var product = ctx.t_itemlist.Find(order.自社コード);
     
@@ -608,7 +620,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                 var orderIds = orders.Select(o => o.id受注データ).ToList();
                 var warehouseList = ctx.t_warehouses.ToList();
                 MySqlParameter[] parameters = { new MySqlParameter("@p1", true), new MySqlParameter("@p2", DateTime.Now), new MySqlParameter("@p3", ((int)OrderStatus.NotifyShipper)) };
-                string sql = String.Format("UPDATE t_orderdata SET `一旦保留`=0,`配送担当受信`=@p1, `配送担当受信時刻`=@p2 ,`Status`=@p3 WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()));
+                string sql = String.Format("UPDATE t_orderdata SET `配送担当受信`=@p1, `配送担当受信時刻`=@p2 ,`Status`=@p3 WHERE `id受注データ` in ({0})", String.Join(",", orderIds.ToArray()));
                 count = ctx.Database.ExecuteSqlCommand(sql, parameters);
 
                 List<t_stockrec> changes = new List<t_stockrec>();
@@ -1149,7 +1161,6 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                 {
                     //二次制品订单？
                     order.社内伝番 = 0;
-                    order.一旦保留 = true;
                     order.配送担当受信 = false;
                     order.配送担当受信時刻 = null;
                     order.Status = OrderStatus.Pending;

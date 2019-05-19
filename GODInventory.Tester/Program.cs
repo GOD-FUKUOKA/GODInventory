@@ -12,6 +12,8 @@ using MySql.Data.Entity;
 using System.Data.Entity.Infrastructure.Interception;
 using System.IO;
 using System.Data.Entity.Validation;
+using GODInventory.NAFCO;
+using System.Collections;
 
 namespace GODInventory.Tester
 {
@@ -37,11 +39,33 @@ namespace GODInventory.Tester
             //ReadOrderText();
             //ReadReceivedText();
 
-            ExportASNText();
+            //ExportASNText();
+            TestGenerateMid();
             Console.Read();
             //ApplicastionCustomInitializer.CreateInstance().Down();
         }
 
+        static void TestGenerateMid() {
+            ArrayList arr = new ArrayList();
+             //(Int64[] rs = new Int64[1000];
+          for(var i=0;i<1000; i++){
+              var r = NafcoOrderHelper.GenerateMid();
+              arr.Add( r );
+          }
+          int num=0;
+          foreach (var s in arr.ToArray().GroupBy(c => c))
+            {
+                Console.WriteLine(s.Key + "重现了:" + s.Count()+"次");
+                if (s.Count()!=1)
+                {
+                    num += s.Count();
+                }
+              
+            }
+            Console.WriteLine("重复出现1次以上的次数和：" + num + "个");
+
+          
+        }
 
         static void TestText() {
             string path = @"D:\项目\在庫管理\translated\data\HACCYU_1.txt";

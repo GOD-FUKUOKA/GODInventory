@@ -51,6 +51,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.DanDangComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.xlsxButton1 = new System.Windows.Forms.Button();
             this.newOrderbutton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
@@ -74,7 +75,6 @@
             this.納品指示Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.備考Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StoreDistrictColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsPendingColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.在庫状態Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.売上ランクColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.厳しさColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,6 +88,14 @@
             this.label17 = new System.Windows.Forms.Label();
             this.shipperComboBox = new System.Windows.Forms.ComboBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.notifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.entityDataSource2 = new GODInventory.EntityDataSource(this.components);
+            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -104,15 +112,6 @@
             this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.発注形態 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.notifyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.entityDataSource2 = new GODInventory.EntityDataSource(this.components);
-            this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.xlsxButton1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.ordersTabPage.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -354,6 +353,18 @@
             this.label1.TabIndex = 77;
             this.label1.Text = "配送担当";
             // 
+            // xlsxButton1
+            // 
+            this.xlsxButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.xlsxButton1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.xlsxButton1.Location = new System.Drawing.Point(1010, 11);
+            this.xlsxButton1.Name = "xlsxButton1";
+            this.xlsxButton1.Size = new System.Drawing.Size(106, 32);
+            this.xlsxButton1.TabIndex = 8;
+            this.xlsxButton1.Text = "XLSX注文入力";
+            this.xlsxButton1.UseVisualStyleBackColor = true;
+            this.xlsxButton1.Click += new System.EventHandler(this.xlsxButton1_Click);
+            // 
             // newOrderbutton
             // 
             this.newOrderbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -428,7 +439,6 @@
             this.納品指示Column1,
             this.備考Column1,
             this.StoreDistrictColumn1,
-            this.IsPendingColumn1,
             this.在庫状態Column,
             this.売上ランクColumn1,
             this.厳しさColumn1,
@@ -608,13 +618,6 @@
             this.StoreDistrictColumn1.ReadOnly = true;
             this.StoreDistrictColumn1.Width = 60;
             // 
-            // IsPendingColumn1
-            // 
-            this.IsPendingColumn1.DataPropertyName = "一旦保留";
-            this.IsPendingColumn1.HeaderText = "一旦保留";
-            this.IsPendingColumn1.Name = "IsPendingColumn1";
-            this.IsPendingColumn1.Width = 60;
-            // 
             // 在庫状態Column
             // 
             this.在庫状態Column.DataPropertyName = "在庫状態";
@@ -764,6 +767,47 @@
             this.dataGridView3.Size = new System.Drawing.Size(1217, 440);
             this.dataGridView3.TabIndex = 16;
             // 
+            // contextMenuStrip3
+            // 
+            this.contextMenuStrip3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.notifyToolStripMenuItem,
+            this.toolStripMenuItem2});
+            this.contextMenuStrip3.Name = "contextMenuStrip1";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(161, 48);
+            // 
+            // notifyToolStripMenuItem
+            // 
+            this.notifyToolStripMenuItem.Name = "notifyToolStripMenuItem";
+            this.notifyToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.notifyToolStripMenuItem.Text = "転送処理";
+            this.notifyToolStripMenuItem.Click += new System.EventHandler(this.notifyToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(160, 22);
+            this.toolStripMenuItem2.Text = "前の画面へ戻す";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // bindingSource2
+            // 
+            this.bindingSource2.DataSource = this.entityDataSource2;
+            this.bindingSource2.Position = 0;
+            // 
+            // entityDataSource2
+            // 
+            this.entityDataSource2.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // entityDataSource1
+            // 
+            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = this.entityDataSource1;
+            this.bindingSource1.Position = 0;
+            // 
             // dataGridViewTextBoxColumn20
             // 
             this.dataGridViewTextBoxColumn20.DataPropertyName = "受注日";
@@ -846,6 +890,7 @@
             // warehousenameColumn2
             // 
             this.warehousenameColumn2.DataPropertyName = "warehousename";
+            this.warehousenameColumn2.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
             this.warehousenameColumn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.warehousenameColumn2.HeaderText = "仓库";
             this.warehousenameColumn2.Name = "warehousenameColumn2";
@@ -880,59 +925,6 @@
             this.dataGridViewTextBoxColumn36.HeaderText = "備考";
             this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
             this.dataGridViewTextBoxColumn36.ReadOnly = true;
-            // 
-            // contextMenuStrip3
-            // 
-            this.contextMenuStrip3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.notifyToolStripMenuItem,
-            this.toolStripMenuItem2});
-            this.contextMenuStrip3.Name = "contextMenuStrip1";
-            this.contextMenuStrip3.Size = new System.Drawing.Size(161, 48);
-            // 
-            // notifyToolStripMenuItem
-            // 
-            this.notifyToolStripMenuItem.Name = "notifyToolStripMenuItem";
-            this.notifyToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.notifyToolStripMenuItem.Text = "転送処理";
-            this.notifyToolStripMenuItem.Click += new System.EventHandler(this.notifyToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(160, 22);
-            this.toolStripMenuItem2.Text = "前の画面へ戻す";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
-            // bindingSource2
-            // 
-            this.bindingSource2.DataSource = this.entityDataSource2;
-            this.bindingSource2.Position = 0;
-            // 
-            // entityDataSource2
-            // 
-            this.entityDataSource2.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // entityDataSource1
-            // 
-            this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = this.entityDataSource1;
-            this.bindingSource1.Position = 0;
-            // 
-            // xlsxButton1
-            // 
-            this.xlsxButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.xlsxButton1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.xlsxButton1.Location = new System.Drawing.Point(1010, 11);
-            this.xlsxButton1.Name = "xlsxButton1";
-            this.xlsxButton1.Size = new System.Drawing.Size(106, 32);
-            this.xlsxButton1.TabIndex = 8;
-            this.xlsxButton1.Text = "XLSX注文入力";
-            this.xlsxButton1.UseVisualStyleBackColor = true;
-            this.xlsxButton1.Click += new System.EventHandler(this.xlsxButton1_Click);
             // 
             // PendingOrderForm
             // 
@@ -1003,22 +995,7 @@
         private System.Windows.Forms.BindingSource bindingSource2;
         private GODInventory.EntityDataSource entityDataSource2;
         private System.Windows.Forms.ToolStripMenuItem deleteFaxOrderToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
-        private System.Windows.Forms.DataGridViewComboBoxColumn warehousenameColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 発注形態;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
+        private System.Windows.Forms.Button xlsxButton1;
         private System.Windows.Forms.DataGridViewTextBoxColumn OrderReceivedAtColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn StoreCodeColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn StoreNameColumn1;
@@ -1038,12 +1015,26 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 納品指示Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 備考Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn StoreDistrictColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsPendingColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 在庫状態Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn 売上ランクColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 厳しさColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 欠品カウンターColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.Button xlsxButton1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 重量Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
+        private System.Windows.Forms.DataGridViewComboBoxColumn warehousenameColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn33;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn35;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 発注形態;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn36;
     }
 }

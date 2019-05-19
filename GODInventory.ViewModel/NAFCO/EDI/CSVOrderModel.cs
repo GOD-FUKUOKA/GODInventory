@@ -571,7 +571,7 @@ VALUES ({0}
 '{61}','{62}','{63}','{64}',{65},{66},{67},'{68}','{69}','{70}',
 {71},{72},{73},'{74}','{75}','{76}',{77},{78},{79},'{80}',
 {81},{82},{83},'{84}',{85},'{86}','{87}','{88}',{89},{90},
-'{91}',{92},{93},{94},{95},'{96}',{97},{98},{99});"; 
+'{91}',{92},{93},{94},{95},'{96}',{97},{98});"; 
             var now = DateTime.Now;
             var fazhuri = o.発注日.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
             var souzhuri = now.ToString(isoDateTimeFormat.UniversalSortableDateTimePattern);
@@ -601,7 +601,7 @@ VALUES ({0}
                 o.実際配送担当, o.配送担当受信,o.口数,o.重量, o.単位,
                 o.ジャンル, o.自社コード, o.実際出荷数量, o.県別, (int)o.Status, 
                 o.ダブリ, o.発注品名漢字, o.発注規格名漢字, o.納品口数, o.週目,
-                o.id, o.仕入原価, o.仕入金額, o.粗利金額, o.社内伝番処理,
+                o.仕入原価, o.仕入金額, o.粗利金額, o.社内伝番処理,
                 o.warehousename, o.運賃, o.warehouse_id, o.transport_id);
                 
         }

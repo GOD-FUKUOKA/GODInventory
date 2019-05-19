@@ -3,3 +3,11 @@
 
 Entity Framework 增删改查和事务操作
 http://www.cnblogs.com/bomo/p/3331602.html
+
+
+MySQL创建用户与授权
+CREATE USER 'username'@'host' IDENTIFIED BY 'password';
+CREATE USER 'pig'@'%' IDENTIFIED BY '123456';
+
+GRANT ALL ON test.* TO 'pig'@'%';
+

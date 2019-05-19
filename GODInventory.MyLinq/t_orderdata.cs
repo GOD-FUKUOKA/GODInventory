@@ -12,8 +12,8 @@ namespace GODInventory.MyLinq
         [Key]
         public int id受注データ { get; set; }
 
-        [StringLength(255)]
-        public string id { get; set; }
+        //[StringLength(255)]
+        //public string id { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime 発注日 { get; set; }
@@ -99,7 +99,7 @@ namespace GODInventory.MyLinq
         [Column("売単価（税抜）")]
         public int 売単価_税抜_ { get; set; }
 
-        public bool 一旦保留 { get; set; }
+        //public bool 一旦保留 { get; set; }
 
         [Required]
         [StringLength(255)]
@@ -168,8 +168,8 @@ namespace GODInventory.MyLinq
         [Column(TypeName = "date")]
         public DateTime? 納品予定日 { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? 発注データ有効期限 { get; set; }
+        //[Column(TypeName = "date")]
+        //public DateTime? 発注データ有効期限 { get; set; }
 
         //public short? EDI発注区分 { get; set; }
 

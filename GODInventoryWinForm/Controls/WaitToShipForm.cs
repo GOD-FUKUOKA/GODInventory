@@ -627,7 +627,6 @@ namespace GODInventoryWinForm.Controls
                 {
                     //二次制品订单？
                     order.社内伝番 = 0;
-                    order.一旦保留 = true;
                     order.配送担当受信 = false;
                     order.配送担当受信時刻 = null;
                     order.Status = OrderStatus.Pending;

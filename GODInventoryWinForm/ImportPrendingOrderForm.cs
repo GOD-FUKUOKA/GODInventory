@@ -130,8 +130,10 @@ namespace GODInventoryWinForm
                     {
  
                         count = models.Count;
+                        Int64 mid = NafcoOrderHelper.GenerateMid();
                         if (count > 0)
                         {
+
                             List<int> validModelIndexes = new List<int>();
                              
                             for (var i = 0; i < models.Count; i++)
@@ -142,6 +144,7 @@ namespace GODInventoryWinForm
                                 model = models.ElementAt(i);
 
                                 var orderdata = new NafcoOrder();
+                                orderdata.受注管理連番 = mid;
                                 orderdata.県別 = model.県別;
                                 orderdata.店舗コード = Convert.ToInt32(model.店舗コード);
                                 orderdata.店舗名漢字 = model.店舗名漢字;
@@ -181,8 +184,9 @@ namespace GODInventoryWinForm
                             }
                             MessageBox.Show(string.Format("{0}件の受注伝票が登録できました", SavedOrderCount));
                         }
-
-                          ctxTransaction.Commit();
+                        string sql = NafcoOrderSqlHelper.BuildImportOrderByMidSql(mid);
+                        ctx.Database.ExecuteSqlCommand(sql);
+                        ctxTransaction.Commit();
 
                     }
 
