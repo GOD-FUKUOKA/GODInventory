@@ -229,7 +229,7 @@ namespace GODInventoryWinForm.Controls
                             // 修正相应 金額
                             order.実際出荷数量 = pendingorder.実際出荷数量;
                             order.納品口数 = pendingorder.納品口数;
-                            var product = productList.FirstOrDefault(i => i.商品コード == order.商品コード);
+                            var product = productList.FirstOrDefault(i => i.自社コード == order.自社コード);
 
                             OrderSqlHelper.AfterOrderQtyChanged(order, product);
 
@@ -1367,7 +1367,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                 order.納品口数 = (int)(order.実際出荷数量 / order.最小発注単位数量);
             }
 
-            var product = productList.FirstOrDefault(i => i.商品コード == order.商品コード);
+            var product = productList.FirstOrDefault(i => i.自社コード == order.自社コード);
             OrderSqlHelper.AfterOrderQtyChanged(order, product);
 
             return true;
