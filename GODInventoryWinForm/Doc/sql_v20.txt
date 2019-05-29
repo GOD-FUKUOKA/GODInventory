@@ -375,3 +375,14 @@ select
 `発注品名漢字`,`発注規格名漢字`,`訂正理由区分`,`仕入原価`,`仕入金額`,`粗利金額`,`運賃`,`PL印刷`,`社内伝番処理`,
 `reportState`,`warehousename`,`warehouse_id`,`transport_id`
 from `t_nafco_orders` where 受注管理連番=?
+
+
+
+# branches(子公司)
+# 公司列表， 添加公司，删除公司，修改公司
+
+# staffs(员工)  name, role, branch_id, 
+# 员工列表，添加员工，删除员工，修改员工，
+
+# branch_store(子公司 负责的 门店)
+#
