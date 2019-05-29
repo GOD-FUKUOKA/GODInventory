@@ -123,6 +123,12 @@
     <Compile Include="ConnectServerForReceivedOrderForm.Designer.cs">
       <DependentUpon>ConnectServerForReceivedOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Branches\IndexForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Branches\IndexForm.Designer.cs">
+      <DependentUpon>IndexForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CancelConfirmForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -328,6 +334,12 @@
     <Compile Include="ImportOrderCSVForm.Designer.cs">
       <DependentUpon>ImportOrderCSVForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -503,6 +515,9 @@
     <EmbeddedResource Include="ConnectServerForReceivedOrderForm.resx">
       <DependentUpon>ConnectServerForReceivedOrderForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Branches\IndexForm.resx">
+      <DependentUpon>IndexForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\CancelConfirmForm.resx">
       <DependentUpon>CancelConfirmForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -608,6 +623,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImportOrderCSVForm.resx">
       <DependentUpon>ImportOrderCSVForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\OrderTemplateReportBak2.rdlc" />
     <EmbeddedResource Include="Reports\ShippingRCItemsReport.rdlc" />

@@ -105,12 +105,15 @@
     <Compile Include="v_receivedorder.cs" />
     <Compile Include="v_pendingorder.cs" />
     <Compile Include="v_storeorder.cs" />
+    <Compile Include="t_branches.cs" />
+    <Compile Include="t_staffs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <Compile Include="t_branches_stores.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

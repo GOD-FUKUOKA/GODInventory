@@ -34,6 +34,10 @@
         public virtual DbSet<t_freights> t_freights { get; set; }
         public virtual DbSet<NafcoOrder> t_nafco_orders { get; set; }
 
+        public virtual DbSet<t_branches> t_branchs { get; set; }
+        public virtual DbSet<t_branches_stores> t_branches_stores { get; set; }
+        public virtual DbSet<t_staffs> t_staffs { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

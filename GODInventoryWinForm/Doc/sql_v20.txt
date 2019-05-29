@@ -378,11 +378,46 @@ from `t_nafco_orders` where 受注管理連番=?
 
 
 
-# branches(子公司)
+# branches(子公司) 
+# id, fullname,  parent_id, address, phone, fax, memo
 # 公司列表， 添加公司，删除公司，修改公司
+CREATE TABLE `god_om2`.`t_branches` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `fullname` VARCHAR(45) NOT NULL,
+  `parent_id` INT NOT NULL DEFAULT 0,
+  `address` VARCHAR(128) NULL,
+  `phone` VARCHAR(45) NULL,
+  `fax` VARCHAR(45) NULL,
+  `memo` TEXT NULL,
+  PRIMARY KEY (`id`));
 
-# staffs(员工)  name, role, branch_id, 
+
+
+# staffs(员工)  
+# fullname, login, role(sales, officer,  admin), branch_id, phone, memo, password, current_sign_in_at, last_sign_in_at, failed_attempts, locked_at
 # 员工列表，添加员工，删除员工，修改员工，
+CREATE TABLE `god_om2`.`t_staffs` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `fullname` VARCHAR(45) NULL,
+  `login` VARCHAR(45) NOT NULL,
+  `role` VARCHAR(12) NULL,
+  `branch_id` INT NOT NULL DEFAULT 0,
+  `phone` VARCHAR(45) NULL,
+  `memo` TEXT NULL,
+  `password` VARCHAR(45) NULL,
+  `current_sign_in_at` DATETIME NULL,
+  `last_sign_in_at` DATETIME NULL,
+  `failed_attempts` INT NOT NULL DEFAULT 0,
+  `locked_at` DATETIME NULL,
+  PRIMARY KEY (`id`));
+
+
 
 # branch_store(子公司 负责的 门店)
-#
+# branch_id, store_id, created_at
+
+CREATE TABLE `god_om2`.`t_branches_stores` (
+`id` INT NOT NULL AUTO_INCREMENT,
+  `branch_id` INT NOT NULL DEFAULT 0,
+  `store_id` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`));
