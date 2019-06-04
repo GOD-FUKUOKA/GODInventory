@@ -123,6 +123,24 @@
     <Compile Include="ConnectServerForReceivedOrderForm.Designer.cs">
       <DependentUpon>ConnectServerForReceivedOrderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Branches\Addbranches.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Branches\Addbranches.Designer.cs">
+      <DependentUpon>Addbranches.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Branches\addstaffs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Branches\addstaffs.Designer.cs">
+      <DependentUpon>addstaffs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Branches\AddStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\Branches\AddStore.Designer.cs">
+      <DependentUpon>AddStore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Branches\IndexForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -515,6 +533,15 @@
     <EmbeddedResource Include="ConnectServerForReceivedOrderForm.resx">
       <DependentUpon>ConnectServerForReceivedOrderForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Branches\Addbranches.resx">
+      <DependentUpon>Addbranches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Branches\addstaffs.resx">
+      <DependentUpon>addstaffs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Branches\AddStore.resx">
+      <DependentUpon>AddStore.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Branches\IndexForm.resx">
       <DependentUpon>IndexForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -734,6 +761,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="GODInventoryWinForm_TemporaryKey.pfx" />
     <None Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
