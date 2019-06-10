@@ -389,7 +389,9 @@ CREATE TABLE `god_om2`.`t_branches` (
   `phone` VARCHAR(45) NULL,
   `fax` VARCHAR(45) NULL,
   `memo` TEXT NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`))
+  DEFAULT CHARACTER SET = utf8;
+
 
 
 
@@ -409,7 +411,9 @@ CREATE TABLE `god_om2`.`t_staffs` (
   `last_sign_in_at` DATETIME NULL,
   `failed_attempts` INT NOT NULL DEFAULT 0,
   `locked_at` DATETIME NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`))
+  DEFAULT CHARACTER SET = utf8;
+
 
 
 
@@ -421,3 +425,5 @@ CREATE TABLE `god_om2`.`t_branches_stores` (
   `branch_id` INT NOT NULL DEFAULT 0,
   `store_id` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`));
+
+

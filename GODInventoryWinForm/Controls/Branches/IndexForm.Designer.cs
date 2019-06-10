@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("分公司1");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("分公司2");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("分公司3");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("总公司", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("分公司1");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("分公司2");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("分公司3");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("总公司", new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6,
+            treeNode7});
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.newButton1 = new System.Windows.Forms.Button();
@@ -46,14 +46,16 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.ct_TreeviewDelete = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.branchColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loginColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countyColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,8 +65,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.ct_TreeviewDelete.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
+            this.ct_TreeviewDelete.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -105,7 +107,9 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fullname,
             this.Id,
-            this.role});
+            this.role,
+            this.branchColumn1,
+            this.loginColumn1});
             this.dataGridView1.Location = new System.Drawing.Point(6, 47);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -178,21 +182,35 @@
             this.dataGridView2.TabIndex = 1;
             this.dataGridView2.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseDown);
             // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除ToolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
+            // 
+            // 删除ToolStripMenuItem1
+            // 
+            this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
+            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.删除ToolStripMenuItem1.Text = "删除";
+            this.删除ToolStripMenuItem1.Click += new System.EventHandler(this.删除ToolStripMenuItem2_Click);
+            // 
             // treeView1
             // 
             this.treeView1.ContextMenuStrip = this.ct_TreeviewDelete;
             this.treeView1.Location = new System.Drawing.Point(22, 47);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "节点1";
-            treeNode1.Text = "分公司1";
-            treeNode2.Name = "节点2";
-            treeNode2.Text = "分公司2";
-            treeNode3.Name = "节点3";
-            treeNode3.Text = "分公司3";
-            treeNode4.Name = "0";
-            treeNode4.Text = "总公司";
+            treeNode5.Name = "节点1";
+            treeNode5.Text = "分公司1";
+            treeNode6.Name = "节点2";
+            treeNode6.Text = "分公司2";
+            treeNode7.Name = "节点3";
+            treeNode7.Text = "分公司3";
+            treeNode8.Name = "0";
+            treeNode8.Text = "总公司";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode8});
             this.treeView1.Size = new System.Drawing.Size(213, 317);
             this.treeView1.TabIndex = 2;
             this.treeView1.Click += new System.EventHandler(this.treeView1_Click);
@@ -240,19 +258,17 @@
             this.label1.Text = "上下文菜单中修改,分公司,员工,以及分公司负责的店铺";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // contextMenuStrip2
+            // branchColumn1
             // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.删除ToolStripMenuItem1});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(101, 26);
+            this.branchColumn1.HeaderText = "公司名称";
+            this.branchColumn1.Name = "branchColumn1";
+            this.branchColumn1.ReadOnly = true;
             // 
-            // 删除ToolStripMenuItem1
+            // loginColumn1
             // 
-            this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
-            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
-            this.删除ToolStripMenuItem1.Text = "删除";
-            this.删除ToolStripMenuItem1.Click += new System.EventHandler(this.删除ToolStripMenuItem2_Click);
+            this.loginColumn1.HeaderText = "登录名";
+            this.loginColumn1.Name = "loginColumn1";
+            this.loginColumn1.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -297,8 +313,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.ct_TreeviewDelete.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
+            this.ct_TreeviewDelete.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -324,6 +340,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn role;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn branchColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn loginColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn countyColumn2;

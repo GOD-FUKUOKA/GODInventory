@@ -37,16 +37,19 @@
             this.productToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.storesToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.settingToolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.generalSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orderSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.branchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.importOrderTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importReceivedOrderTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importReceivedCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importFaxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.branchLabel = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
             this.entityDataSource1 = new GODInventory.EntityDataSource(this.components);
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -61,8 +64,8 @@
             this.productToolStripButton,
             this.storesToolStripButton,
             this.toolStripSeparator1,
-            this.toolStripDropDownButton2,
-            this.toolStripDropDownButton1});
+            this.settingToolStripDropDownButton2,
+            this.importToolStripDropDownButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(844, 57);
@@ -129,19 +132,20 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 57);
             // 
-            // toolStripDropDownButton2
+            // settingToolStripDropDownButton2
             // 
-            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingToolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.settingToolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generalSettingToolStripMenuItem,
-            this.orderSettingToolStripMenuItem});
-            this.toolStripDropDownButton2.Image = global::GODInventoryWinForm.Properties.Resources.setting;
-            this.toolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(63, 54);
-            this.toolStripDropDownButton2.Text = "設定";
-            this.toolStripDropDownButton2.Click += new System.EventHandler(this.toolStripDropDownButton2_Click);
+            this.orderSettingToolStripMenuItem,
+            this.branchToolStripMenuItem});
+            this.settingToolStripDropDownButton2.Image = global::GODInventoryWinForm.Properties.Resources.setting;
+            this.settingToolStripDropDownButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.settingToolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.settingToolStripDropDownButton2.Name = "settingToolStripDropDownButton2";
+            this.settingToolStripDropDownButton2.Size = new System.Drawing.Size(63, 54);
+            this.settingToolStripDropDownButton2.Text = "設定";
+            this.settingToolStripDropDownButton2.Click += new System.EventHandler(this.toolStripDropDownButton2_Click);
             // 
             // generalSettingToolStripMenuItem
             // 
@@ -157,21 +161,28 @@
             this.orderSettingToolStripMenuItem.Text = "商品仕入原価設定";
             this.orderSettingToolStripMenuItem.Click += new System.EventHandler(this.orderSettingToolStripMenuItem_Click);
             // 
-            // toolStripDropDownButton1
+            // branchToolStripMenuItem
             // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.branchToolStripMenuItem.Name = "branchToolStripMenuItem";
+            this.branchToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.branchToolStripMenuItem.Text = "组织机构管理";
+            this.branchToolStripMenuItem.Click += new System.EventHandler(this.branchToolStripMenuItem_Click);
+            // 
+            // importToolStripDropDownButton1
+            // 
+            this.importToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.importToolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importOrderTextToolStripMenuItem,
             this.importReceivedOrderTextToolStripMenuItem,
             this.importCSVToolStripMenuItem,
             this.importReceivedCSVToolStripMenuItem,
             this.importFaxToolStripMenuItem});
-            this.toolStripDropDownButton1.Image = global::GODInventoryWinForm.Properties.Resources.tool;
-            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(63, 54);
-            this.toolStripDropDownButton1.Text = "データ導入";
+            this.importToolStripDropDownButton1.Image = global::GODInventoryWinForm.Properties.Resources.tool;
+            this.importToolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.importToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.importToolStripDropDownButton1.Name = "importToolStripDropDownButton1";
+            this.importToolStripDropDownButton1.Size = new System.Drawing.Size(63, 54);
+            this.importToolStripDropDownButton1.Text = "データ導入";
             // 
             // importOrderTextToolStripMenuItem
             // 
@@ -219,6 +230,30 @@
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // branchLabel
+            // 
+            this.branchLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.branchLabel.BackColor = System.Drawing.Color.Transparent;
+            this.branchLabel.Font = new System.Drawing.Font("MS PGothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.branchLabel.Location = new System.Drawing.Point(667, 7);
+            this.branchLabel.Name = "branchLabel";
+            this.branchLabel.Size = new System.Drawing.Size(162, 20);
+            this.branchLabel.TabIndex = 2;
+            this.branchLabel.Text = "branch";
+            this.branchLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nameLabel.BackColor = System.Drawing.Color.Transparent;
+            this.nameLabel.Font = new System.Drawing.Font("MS PGothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLabel.Location = new System.Drawing.Point(667, 26);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(162, 20);
+            this.nameLabel.TabIndex = 3;
+            this.nameLabel.Text = "fullname";
+            this.nameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // entityDataSource1
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
@@ -228,6 +263,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(844, 411);
+            this.Controls.Add(this.nameLabel);
+            this.Controls.Add(this.branchLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Font = new System.Drawing.Font("MS PGothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -253,15 +290,18 @@
         private System.Windows.Forms.ToolStripButton warehouseToolStripButton;
         private System.Windows.Forms.ToolStripButton storesToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripDropDownButton importToolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem importOrderTextToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importReceivedOrderTextToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importCSVToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importReceivedCSVToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importFaxToolStripMenuItem;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripDropDownButton settingToolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem generalSettingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orderSettingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem branchToolStripMenuItem;
+        private System.Windows.Forms.Label branchLabel;
+        private System.Windows.Forms.Label nameLabel;
     }
 }
 

@@ -108,7 +108,7 @@ namespace GODInventory
         {
             string sql = @" SELECT o.*, o.`原単価(税抜)` as `原単価_税抜_`, o.`原単価(税込)` as `原単価_税込_`, o.`売単価（税抜）` as `売単価_税抜_`, o.`売単価（税込）` as `売単価_税込_`,
 g.`ジャンル名` as `GenreName`, k.`在庫数` as `在庫数`, s.`売上ランク`, p.`厳しさ`, p.`欠品カウンター`
-FROM t_innerorders o
+FROM t_orderdata o
 INNER JOIN t_genre g  on o.ジャンル = g.idジャンル
 INNER JOIN t_shoplist s  on o.法人コード = s.customerId AND  o.店舗コード = s.店番 
 INNER JOIN t_pricelist p on  o.自社コード = p.自社コード AND  o.店舗コード = p.店番 
@@ -218,14 +218,20 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             return q;
         }
 
-        //sqlStr = "SELECT t_orderdata.`出荷日`,t_orderdata.`納品日`,t_orderdata.`受注日`,t_orderdata.`キャンセル`,t_orderdata.`一旦保留`," _
-        //& " t_orderdata.`伝票番号`,t_orderdata.`社内伝番`,t_orderdata.`行数`,t_orderdata.`最大行数`,t_orderdata.`口数`,t_orderdata.`発注数量`," _
-        //& " t_orderdata.`実際配送担当`,t_orderdata.`備考`,t_orderdata.`店舗コード`,t_orderdata.`店舗名漢字`,t_orderdata.`id受注データ`,`発注形態名称漢字`," _
-        //& " t_orderdata.`原単価(税抜)`,t_orderdata.`重量`,'' " _
-        //& " FROM t_orderdata" _
-        //& " WHERE t_orderdata.`店舗コード` = " & Cells(2, 3).Value & " AND t_orderdata.`受注日` BETWEEN DATE_SUB(NOW(),INTERVAL 60 DAY) AND now()" _
-        //& " ORDER BY t_orderdata.`受注日` DESC,t_orderdata.`社内伝番` ASC,t_orderdata.`行数` ASC,t_orderdata.`伝票番号` ASC"
 
+        public static List<v_pendingorder> GetNotifiedOrderList(EntityDataSource entityDataSource)
+        {
+        
+          var list = (from t_orderdata o in entityDataSource.EntitySets["t_orderdata"]
+                     where o.Status == OrderStatus.NotifyShipper
+                     orderby o.実際配送担当,o.県別, o.店舗コード, o.受注日, o.伝票番号
+                     select new v_pendingorder{id受注データ=o.id受注データ,受注日=o.受注日,店舗コード=o.店舗コード, warehousename=o.warehousename,
+                        店舗名漢字=o.店舗名漢字, 伝票番号=o.伝票番号, 社内伝番=o.社内伝番, ジャンル=o.ジャンル,
+                        品名漢字=o.品名漢字,規格名漢字=o.規格名漢字, 納品口数=o.納品口数, 実際出荷数量=o.実際出荷数量, 重量=o.重量, 
+                        実際配送担当=o.実際配送担当, 県別=o.県別, 納品指示=o.納品指示,発注形態名称漢字=o.発注形態名称漢字, 備考=o.備考, 社内伝番処理=o.社内伝番処理 }
+                    ).ToList();
+          return list;
+        }
 
         public static IQueryable<v_pendingorder> WaitToShipOrderSql(EntityDataSource entityDataSource1)
         {
@@ -1296,7 +1302,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         }
         
 
-        public static List<v_itemprice> GetItemPriceList(GODDbContext ctx, List<int> productids=null) { 
+        public static List<v_itemprice> GetItemPriceList(GODDbContext ctx, List<int> productids = null, List<int> shopids = null){
         
 //            List<v_itemprice> prices = (from i in ctx.t_itemlist
 //                                        join p in ctx.t_pricelist on i.自社コード equals p.自社コード
@@ -1327,12 +1333,16 @@ i.PT入数,i.単品重量, i.単位, p.配送担当, p.仕入原価, p.通常原
 from t_itemlist i
 left join  t_pricelist p on i.自社コード = p.自社コード left join t_genre g on i.ジャンル = g.idジャンル 
 left join t_freights f on p.transport_id = f.transport_id and p.warehouse_id =f.warehouse_id and p.自社コード =  f.自社コード and f.shop_id= p.店番 ";
-             var conditions = new List<string>();
+            var conditions = new List<string>();
             if (productids != null) {
                 conditions.Add(  string.Format("i.自社コード in ({0})", string.Join(",", productids)) );
             }
 
-            
+            if (shopids != null)
+            {
+                conditions.Add(string.Format("f.shop_id in ({0})", string.Join(",", shopids)));
+            }
+
             if (conditions.Count > 0) {
 
                 sql += string.Format(" where {0}", string.Join(" AND ", conditions ));

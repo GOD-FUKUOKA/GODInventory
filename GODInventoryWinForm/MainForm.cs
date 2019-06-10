@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace GODInventoryWinForm
 {
+    using GODInventory.MyLinq;
     using GODInventoryWinForm.Controls;
 
     public partial class MainForm : Form
@@ -18,14 +19,24 @@ namespace GODInventoryWinForm
         // initialize it on running, it is time consuming.
         private WarehouseControl warehouseControl;
         private OrdersControl orders_control;
+        private LoginForm loginForm;
+
 
         public MainForm()
         {
             InitializeComponent();
+
+            InitLoginUser();
+
             InitUserControls();
+
+            
         }
 
         private void InitUserControls() {
+
+
+
             LogHelper.WriteLog("Start initialize main control");
             mainControl = new MainControl();
             mainControl.Dock = DockStyle.Fill;
@@ -169,6 +180,26 @@ namespace GODInventoryWinForm
             new OrderCostSettingForm().ShowDialog();
         }
 
+        private void branchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new GODInventoryWinForm.Controls.Branches.IndexForm().ShowDialog();
+        }
 
+        private void InitLoginUser()
+        {
+            var staff = new v_staffs() { branch_id = 1, branchname = "测试部门", id = 1, role = "admin", fullname = "管理员" };
+            staff.BranchStoreIds = new List<int> { };
+            LoginUser.GetInstance().Current = staff;
+
+            this.branchLabel.Text = LoginUser.GetInstance().Current.branchname;
+            this.nameLabel.Text = string.Format( "{0}({1})", LoginUser.GetInstance().Current.fullname, LoginUser.GetInstance().Current.role);
+
+            var loginUser = LoginUser.GetInstance();
+            this.warehouseToolStripButton.Enabled = loginUser.Can(PermissionEnum.AdminWarehouses);
+            this.productToolStripButton.Enabled = loginUser.Can(PermissionEnum.AdminProducts);
+            this.storesToolStripButton.Enabled = loginUser.Can(PermissionEnum.AdminStores);
+            this.settingToolStripDropDownButton2.Enabled = loginUser.Can(PermissionEnum.AdminSettings);
+            this.importToolStripDropDownButton1.Enabled = loginUser.Can(PermissionEnum.AdminOrderImport);
+        }
     }
 }
