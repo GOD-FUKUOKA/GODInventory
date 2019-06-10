@@ -130,11 +130,7 @@ namespace GODInventoryWinForm.Controls
 
                 // shipNODataGridView.DataSource = groupedOrderList;
             }
-            //var q = OrderSqlHelper.ShippingOrderSql(entityDataSource1);            
-            //var count = q.Count();
-            // create BindingList (sortable/filterable)
-            //this.bindingSource1.DataSource = entityDataSource1.CreateView(q);
-            // assign BindingList to grid
+           
             return 0;
 
         }
@@ -149,28 +145,13 @@ namespace GODInventoryWinForm.Controls
  min(o.`県別`) as `県別`, o.`実際配送担当`, o.`reportState`,  
 sum(`納品原価金額`) as TotalPrice, sum(`重量`) as TotalWeight  
 FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`ORDER BY o.出荷日 desc";
-                groupedAsnOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.ASN).ToList();
-
-                //this.bindingSource2.DataSource = OrderSqlHelper.ASNEdiDataList(entityDataSource1);
-                //ediDataGridView.DataSource = groupedAsnOrderList;
-                //new 
-                //groupedAsnOrderList = groupedAsnOrderList.GroupBy(o => new { Status = o.Status, ShipNO = o.ShipNO, 出荷日 = o.出荷日, 納品日 = o.納品日, 実際配送担当 = o.実際配送担当 });
-                var newlist = groupedAsnOrderList.OrderBy(s => s.発注日).ToList();
-
-
-
-                //var dd = sortablePendingOrderList1.ToList().OrderBy(c => c.実際配送担当).ThenBy(c => c.県別).ThenBy(c => c.出荷No).ToList();
-                //mark  20181009  注销
-                //ediDataGridView.DataSource = groupedAsnOrderList;
+                groupedAsnOrderList = OrderSqlHelper.GroupedASNOrderList(entityDataSource1);
 
                 //mark  20181009 add
                 sortablegroupedAsnOrderList = new SortableBindingList<v_groupedorder>(groupedAsnOrderList);
                 this.bindingSource6.DataSource = null;
                 this.bindingSource6.DataSource = sortablegroupedAsnOrderList;
                 ediDataGridView.DataSource = this.bindingSource6;
-
-
-
 
             }
         }

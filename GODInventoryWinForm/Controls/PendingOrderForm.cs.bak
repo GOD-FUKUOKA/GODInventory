@@ -554,7 +554,10 @@ namespace GODInventoryWinForm.Controls
      //ORDER BY `実際配送担当` ASC,`県別` ASC,`店舗コード` ASC,`受注日` ASC,`伝票番号` ASC;";
 
             this.shipperOrderList = OrderSqlHelper.GetNotifiedOrderList(this.entityDataSource2);
-            filterShipperOrderList();
+            this.bindingSource2.DataSource = null;
+            this.bindingSource2.DataSource = sortablePendingOrderList3;
+            this.dataGridView3.AutoGenerateColumns = false;
+            this.dataGridView3.DataSource = this.bindingSource2;
 
             #region 初始化下拉
             // 担当
@@ -569,6 +572,7 @@ namespace GODInventoryWinForm.Controls
             initializeWarehouseComboBoxForTransport();
 
             #endregion
+            
             if (warhoseName == null)
             {
                 warehouseComboBox2.SelectedIndex = 0;
@@ -846,27 +850,6 @@ namespace GODInventoryWinForm.Controls
                 InitializeShipperOrderList();
             }
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // skip first time initialization
-            if (shipperOrderList != null)
-            {
-                //this.dataGridView3.AutoGenerateColumns = false;
-                //this.dataGridView3.DataSource = this.shipperOrderList.FindAll(o => o.実際配送担当 == shipperComboBox.Text);
-                //new
-                List<v_pendingorder> shipperOrderList1 = new List<v_pendingorder>();
-
-                shipperOrderList1 = this.shipperOrderList.FindAll(o => o.実際配送担当 == warehouseComboBox2.Text);
-                sortablePendingOrderList3 = new SortableBindingList<v_pendingorder>(shipperOrderList1);
-                //    this.entityDataSource2.Refresh();
-                this.bindingSource2.DataSource = null;
-                this.bindingSource2.DataSource = sortablePendingOrderList3;
-                dataGridView3.DataSource = this.bindingSource2;
-            }
-
-        }
-
 
 
 
@@ -1368,12 +1351,14 @@ namespace GODInventoryWinForm.Controls
                 // 是否删除FAX订单
                 if (MessageBox.Show("伝票を完全に廃棄（削除）します。よろしいですか？", "伝票を廃棄", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
+                    for (var i = 0; i < selectedRows.Count; i++) {
 
                         v_pendingorder order = selectedRows[i].DataBoundItem as v_pendingorder;
                         if (order.入力区分 == 1)
                         {
                             count = OrderSqlHelper.DeleteFaxOrder(order.id受注データ);
                         }                    
+                    }
 
                 }
             }
@@ -1543,9 +1528,6 @@ namespace GODInventoryWinForm.Controls
         // 选择了物流公司
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // skip first time initialization
-            var transportname = shipperComboBox2.SelectedValue != null ? shipperComboBox2.SelectedValue.ToString() : string.Empty;
-            ApplyFilter6( getSelectWarehouseNameForTransport(), transportname);
 
         }
 

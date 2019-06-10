@@ -128,7 +128,6 @@ namespace GODInventoryWinForm.Controls
             {
                 this.productList = ctx.t_itemlist.Select(s => s).ToList();
                 duplicatedOrderList = OrderSqlHelper.GetDuplicateOrderQuery(ctx).ToList();
-                //duplicatedOrderList = ctx.Database.SqlQuery<v_duplicatedorder>(sql).ToList();
             }
             var shippers = duplicatedOrderList.Select(s =>  s.実際配送担当 ).Distinct().ToList();
             shippers.Insert(0, "すべて" );

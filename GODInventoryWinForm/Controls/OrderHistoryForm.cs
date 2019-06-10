@@ -541,12 +541,10 @@ namespace GODInventoryWinForm.Controls
                     DateTime threeMonthAgo = DateTime.Now.AddMonths(-3);
                     string sql = @"SELECT o.`出荷No`, o.`出荷日`, o.`納品日`, o.`県別`, o.`実際配送担当`, o.`原価金額(税抜)`, o.`重量`
                         FROM  t_orderdata o WHERE o.`出荷No`> 0  ORDER BY  o.`実際配送担当`, o.`出荷No`, o.`出荷日`, o.`納品日`";
-
 //                  string sql = @"SELECT o.`出荷No`, o.`出荷日`, o.`納品日`,
 //     min(o.`県別`) as `県別`, o.`実際配送担当`, 
 //    sum(`原価金額(税抜)`) as TotalPrice, sum(`重量`) as TotalWeight  
 //    FROM  t_orderdata o WHERE o.`出荷No`>0 GROUP BY  o.`実際配送担当`, o.`出荷No`, o.`出荷日`, o.`納品日`";
-//                  groupedOrderList = ctx.Database.SqlQuery<v_groupedorder>(sql).ToList();
                     shippedOrderList = (from t_orderdata o in ctx.t_orderdata
                                         where o.店舗コード==storeId && o.出荷No > 0 && o.受注日 > threeMonthAgo
                                      orderby  o.実際配送担当, o.出荷No, o.出荷日, o.納品日
