@@ -28,23 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lb_ParentiD = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txt_memo = new System.Windows.Forms.TextBox();
             this.txt_password = new System.Windows.Forms.TextBox();
             this.txt_Login = new System.Windows.Forms.TextBox();
             this.txt_StaffsName = new System.Windows.Forms.TextBox();
             this.txt_role = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txt_phone = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label4
@@ -64,20 +63,16 @@
             // 
             this.groupBox1.Controls.Add(this.lb_ParentiD);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txt_memo);
             this.groupBox1.Controls.Add(this.txt_password);
             this.groupBox1.Controls.Add(this.txt_Login);
             this.groupBox1.Controls.Add(this.txt_StaffsName);
             this.groupBox1.Controls.Add(this.txt_role);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.txt_phone);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(34, 59);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(322, 276);
+            this.groupBox1.Size = new System.Drawing.Size(322, 195);
             this.groupBox1.TabIndex = 10000055;
             this.groupBox1.TabStop = false;
             // 
@@ -98,24 +93,9 @@
             this.label1.TabIndex = 10000004;
             this.label1.Text = "职位";
             // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(47, 145);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 14);
-            this.label3.TabIndex = 24;
-            this.label3.Text = "电话";
-            // 
-            // txt_memo
-            // 
-            this.txt_memo.Location = new System.Drawing.Point(102, 183);
-            this.txt_memo.Name = "txt_memo";
-            this.txt_memo.Size = new System.Drawing.Size(190, 21);
-            this.txt_memo.TabIndex = 4;
-            // 
             // txt_password
             // 
-            this.txt_password.Location = new System.Drawing.Point(102, 225);
+            this.txt_password.Location = new System.Drawing.Point(102, 141);
             this.txt_password.Name = "txt_password";
             this.txt_password.Size = new System.Drawing.Size(190, 21);
             this.txt_password.TabIndex = 5;
@@ -141,25 +121,10 @@
             this.txt_role.Size = new System.Drawing.Size(190, 21);
             this.txt_role.TabIndex = 2;
             // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(33, 186);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(63, 21);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "备忘录";
-            // 
-            // txt_phone
-            // 
-            this.txt_phone.Location = new System.Drawing.Point(102, 145);
-            this.txt_phone.Name = "txt_phone";
-            this.txt_phone.Size = new System.Drawing.Size(190, 21);
-            this.txt_phone.TabIndex = 3;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(47, 232);
+            this.label5.Location = new System.Drawing.Point(47, 144);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 14);
             this.label5.TabIndex = 1;
@@ -176,7 +141,7 @@
             // submitFormButton
             // 
             this.submitFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.submitFormButton.Location = new System.Drawing.Point(137, 353);
+            this.submitFormButton.Location = new System.Drawing.Point(137, 275);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(108, 30);
             this.submitFormButton.TabIndex = 0;
@@ -188,7 +153,7 @@
             // 
             this.cancelFormButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelFormButton.Location = new System.Drawing.Point(251, 353);
+            this.cancelFormButton.Location = new System.Drawing.Point(251, 275);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(108, 30);
             this.cancelFormButton.TabIndex = 1;
@@ -196,11 +161,15 @@
             this.cancelFormButton.UseVisualStyleBackColor = true;
             this.cancelFormButton.Click += new System.EventHandler(this.cancelFormButton_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // addstaffs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 400);
+            this.ClientSize = new System.Drawing.Size(388, 318);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.submitFormButton);
@@ -211,6 +180,7 @@
             this.Load += new System.EventHandler(this.addstaffs_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -221,17 +191,14 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lb_ParentiD;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txt_memo;
         private System.Windows.Forms.TextBox txt_password;
         private System.Windows.Forms.TextBox txt_StaffsName;
         private System.Windows.Forms.TextBox txt_role;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txt_phone;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button submitFormButton;
         private System.Windows.Forms.Button cancelFormButton;
         private System.Windows.Forms.TextBox txt_Login;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

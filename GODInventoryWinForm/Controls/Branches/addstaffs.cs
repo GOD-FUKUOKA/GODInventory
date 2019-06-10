@@ -54,8 +54,7 @@ namespace GODInventoryWinForm.Controls.Branches
                         txt_StaffsName.Text = ts.fullname;
                         txt_Login.Text = ts.login;
                         txt_role.Text =ts.role;
-                        txt_phone.Text = ts.phone;
-                        txt_memo.Text = ts.memo;
+
                         txt_password.Text = ts.password;
                     }
                 }
@@ -109,8 +108,6 @@ namespace GODInventoryWinForm.Controls.Branches
                         ts.role = txt_role.Text;
                         ts.branch_id = int.Parse(branchid);
                         ts.password = txt_password.Text;
-                        ts.phone = txt_phone.Text;
-                        ts.memo = txt_memo.Text;
                         ctx.SaveChanges();
                         index = 1;
                     }
@@ -135,43 +132,38 @@ namespace GODInventoryWinForm.Controls.Branches
                 bool pd = false;
                 if (txt_StaffsName.Text.Equals(string.Empty))
                 {
-                    MessageBox.Show("请输入员工姓名");
+
+                    this.errorProvider1.Clear();
+                    this.errorProvider1.SetError(txt_StaffsName, "请输入员工姓名");
                 }
                 else 
                 {
                     if (txt_Login.Text.Equals(string.Empty))
                     {
-                        MessageBox.Show("请输入Login");
+
+                        this.errorProvider1.Clear();
+                        this.errorProvider1.SetError(txt_Login, "请输入Login");
                     }
                     else 
                     {
                         if (txt_role.Text.Equals(string.Empty))
                         {
-                            MessageBox.Show("请输入员工职位");
+
+                            this.errorProvider1.Clear();
+                            this.errorProvider1.SetError(txt_role, "请输入员工职位");
                         }
                         else 
                         {
-                            if (txt_phone.Text.Equals(string.Empty))
+                            if (txt_password.Text.Equals(string.Empty))
                             {
-                                MessageBox.Show("请输入员工电话");
+
+                                this.errorProvider1.Clear();
+                                this.errorProvider1.SetError(txt_password, "请输入员工密码");
                             }
-                            else 
+                            else
                             {
-                                if (txt_memo.Text.Equals(string.Empty))
-                                {
-                                    MessageBox.Show("请输入备忘录");
-                                }
-                                else 
-                                {
-                                    if (txt_password.Text.Equals(string.Empty))
-                                    {
-                                        MessageBox.Show("请输入员工密码");
-                                    }
-                                    else 
-                                    {
-                                        pd = true;
-                                    }
-                                }
+                                this.errorProvider1.Clear();
+                                pd = true;
                             }
                         }
                     }
@@ -194,8 +186,6 @@ namespace GODInventoryWinForm.Controls.Branches
                         stf.role = txt_role.Text;
                         stf.branch_id = int.Parse(branchid);
                         stf.password = txt_password.Text;
-                        stf.phone = txt_phone.Text;
-                        stf.memo = txt_memo.Text;
                         ctx.t_staffs.Add(stf);
                         ctx.SaveChanges();
                         i = 1;

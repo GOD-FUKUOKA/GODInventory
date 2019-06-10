@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label4 = new System.Windows.Forms.Label();
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
@@ -42,7 +43,9 @@
             this.txt_address = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label4
@@ -60,7 +63,7 @@
             // submitFormButton
             // 
             this.submitFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.submitFormButton.Location = new System.Drawing.Point(39, 327);
+            this.submitFormButton.Location = new System.Drawing.Point(39, 321);
             this.submitFormButton.Name = "submitFormButton";
             this.submitFormButton.Size = new System.Drawing.Size(108, 30);
             this.submitFormButton.TabIndex = 2;
@@ -72,7 +75,7 @@
             // 
             this.cancelFormButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelFormButton.Location = new System.Drawing.Point(267, 327);
+            this.cancelFormButton.Location = new System.Drawing.Point(267, 321);
             this.cancelFormButton.Name = "cancelFormButton";
             this.cancelFormButton.Size = new System.Drawing.Size(108, 30);
             this.cancelFormButton.TabIndex = 3;
@@ -91,14 +94,14 @@
             // 
             // txt_fax
             // 
-            this.txt_fax.Location = new System.Drawing.Point(113, 118);
+            this.txt_fax.Location = new System.Drawing.Point(113, 117);
             this.txt_fax.Name = "txt_fax";
             this.txt_fax.Size = new System.Drawing.Size(190, 21);
             this.txt_fax.TabIndex = 2;
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(72, 121);
+            this.label3.Location = new System.Drawing.Point(72, 120);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 14);
             this.label3.TabIndex = 24;
@@ -106,7 +109,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(30, 82);
+            this.label1.Location = new System.Drawing.Point(30, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 15);
             this.label1.TabIndex = 10000004;
@@ -127,13 +130,13 @@
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(39, 61);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(336, 249);
+            this.groupBox1.Size = new System.Drawing.Size(336, 243);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
             // txt_phone
             // 
-            this.txt_phone.Location = new System.Drawing.Point(113, 156);
+            this.txt_phone.Location = new System.Drawing.Point(113, 155);
             this.txt_phone.Name = "txt_phone";
             this.txt_phone.Size = new System.Drawing.Size(190, 21);
             this.txt_phone.TabIndex = 3;
@@ -141,7 +144,7 @@
             // 
             // txt_MEMO
             // 
-            this.txt_MEMO.Location = new System.Drawing.Point(113, 198);
+            this.txt_MEMO.Location = new System.Drawing.Point(113, 197);
             this.txt_MEMO.Name = "txt_MEMO";
             this.txt_MEMO.Size = new System.Drawing.Size(190, 21);
             this.txt_MEMO.TabIndex = 4;
@@ -157,7 +160,7 @@
             // 
             // txt_address
             // 
-            this.txt_address.Location = new System.Drawing.Point(113, 79);
+            this.txt_address.Location = new System.Drawing.Point(113, 78);
             this.txt_address.Name = "txt_address";
             this.txt_address.Size = new System.Drawing.Size(190, 21);
             this.txt_address.TabIndex = 1;
@@ -165,7 +168,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(72, 163);
+            this.label6.Location = new System.Drawing.Point(72, 162);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 14);
             this.label6.TabIndex = 1;
@@ -174,17 +177,21 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(72, 205);
+            this.label5.Location = new System.Drawing.Point(72, 204);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 14);
             this.label5.TabIndex = 1;
             this.label5.Text = "说明";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // Addbranches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(416, 377);
+            this.ClientSize = new System.Drawing.Size(416, 379);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.submitFormButton);
@@ -195,6 +202,7 @@
             this.Load += new System.EventHandler(this.Addbranches_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -215,5 +223,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txt_phone;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

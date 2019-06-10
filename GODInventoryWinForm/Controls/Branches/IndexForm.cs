@@ -30,10 +30,12 @@ namespace GODInventoryWinForm.Controls.Branches
         {
 
         }
-
+        #region 添加公司事件
         private void button2_Click(object sender, EventArgs e)
         {
+            
             Addbranches adb = new Addbranches();
+            adb.zgscount = int.Parse(treeView1.SelectedNode.Name);
             adb.ShowDialog();
             if (adb.DialogResult == DialogResult.OK)
             {
@@ -41,6 +43,8 @@ namespace GODInventoryWinForm.Controls.Branches
             }
 
         }
+        #endregion
+        
 
         private void IndexForm_Load(object sender, EventArgs e)
         {
@@ -53,25 +57,45 @@ namespace GODInventoryWinForm.Controls.Branches
         {
             try
             {
-                treeView1.Nodes[0].Nodes.Clear();
-                using (var cxsk = new GODDbContext())
-                {
-                    branches = cxsk.t_branchs.ToList();
-                    if (branches != null)
-                    {
-                        foreach (t_branches bc in branches)
-                        {
+             
+                   using (var cxsk = new GODDbContext())
+                   {
+                       treeView1.Nodes.Clear();
+                       var query = (from t_branches tb in cxsk.t_branchs
+                                     where tb.parent_id == 0
+                                        select tb).ToList();
+                       if (query.Count!=0)
+                       {
+                           foreach (t_branches bc in query)
+                           {
+                              TreeNode tnc = new TreeNode();
+                               tnc.Text = bc.fullname;
+                               tnc.Name = bc.id.ToString();
+                               treeView1.Nodes.Add(tnc);
+                           }
+                           query =(from t_branches tb in cxsk.t_branchs
+                                     where tb.parent_id != 0
+                                        select tb).ToList();
+                           foreach (t_branches bc in query)
+                           {
+                               TreeNode tn = new TreeNode();
+                               tn.Text = bc.fullname;
+                               tn.Name = bc.id.ToString();
+                               for(int i =0 ;i<treeView1.Nodes.Count;i++)
+                               {
+                                    if(treeView1.Nodes[i].Name == bc.parent_id.ToString())
+                                    {
+                                        treeView1.Nodes[i].Nodes.Add(tn);
+                                    }
+                               }
+                               
 
-                            TreeNode tn = new TreeNode();
-                            tn.Text = bc.fullname;
-                            tn.Name = bc.id.ToString();
-                            treeView1.Nodes[0].Nodes.Add(tn);
+                           }
 
-
-                        }
-
-                    }
-                }
+                       }
+                   }
+               
+                 
             }
             catch (Exception ex)
             {
@@ -87,25 +111,30 @@ namespace GODInventoryWinForm.Controls.Branches
         #region 删除公司事件
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (treeView1.SelectedNode == null)
+            DialogResult dr = MessageBox.Show("确认删除该公司吗?","系统提示",MessageBoxButtons.OKCancel);
+            if (dr == DialogResult.OK) 
             {
-                MessageBox.Show("请选择后再删除");
-            }
-            else if (treeView1.SelectedNode.Name.Equals("0"))
-            {
-                MessageBox.Show("请选择后再删除！");
-            }
-            else
-            {
-                if (deleteBranches() > 0)
+                if (treeView1.SelectedNode == null)
                 {
-                    MessageBox.Show("删除成功!");
-                    loadTreeview();
+                    MessageBox.Show("请选择后再删除");
+                }
+                else if (treeView1.SelectedNode.Name.Equals("0"))
+                {
+                    MessageBox.Show("请选择后再删除！");
                 }
                 else
                 {
-                    MessageBox.Show("删除失败");
+                    if (deleteBranches() > 0)
+                    {
+                        MessageBox.Show("删除成功!");
+                        loadTreeview();
+                    }
+                    else
+                    {
+                        MessageBox.Show("删除失败");
+                    }
                 }
+
             }
         }
 
@@ -121,12 +150,22 @@ namespace GODInventoryWinForm.Controls.Branches
                 using (var ctx = new GODDbContext())
                 {
                     int delid = int.Parse(deleteid);
-                    t_branches tb = ctx.t_branchs.First(tba => tba.id == delid);
-                    if (tb != null)
+                    var query = (from t_staffs t in ctx.t_staffs
+                                 where t.branch_id == delid
+                                 select t).ToList();
+                    if (query.Count <= 0)
                     {
-                        ctx.t_branchs.Remove(tb);
-                        ctx.SaveChanges();
-                        i = 1;
+                        t_branches tb = ctx.t_branchs.First(tba => tba.id == delid);
+                        if (tb != null)
+                        {
+                            ctx.t_branchs.Remove(tb);
+                            ctx.SaveChanges();
+                            i = 1;
+                        }
+                    }
+                    else 
+                    {
+                        MessageBox.Show("该公司还有员工您不能删除");
                     }
                 }
             }
@@ -163,7 +202,6 @@ namespace GODInventoryWinForm.Controls.Branches
                 TreeNode CurrentNode = treeView1.GetNodeAt(ClickPoint);
                 if (CurrentNode != null)//判断你点的是不是一个节点
                 {
-
                     treeView1.SelectedNode = CurrentNode;//选中这个节点
                     if (!treeView1.SelectedNode.Text.Equals("总公司"))
                     {
@@ -202,6 +240,7 @@ namespace GODInventoryWinForm.Controls.Branches
                 adb.updeteid = treeView1.SelectedNode.Name;
                 adb.title = "修改分公司";
                 adb.Text = "修改分公司";
+                adb.zgscount = int.Parse(treeView1.SelectedNode.Parent.Name);
                 adb.ShowDialog();
                 if (adb.DialogResult == DialogResult.OK)
                 {
@@ -267,49 +306,12 @@ namespace GODInventoryWinForm.Controls.Branches
                         stf = q;
                         if (stf.Count != 0)
                         {
-                            if (dataGridView1.Columns["btndelete"] != null)
-                            {
-                                dataGridView1.Columns["btndelete"].Visible = true;
-                            }
-
-                            if (dataGridView1.Columns["btnBj"] != null)
-                            {
-                                dataGridView1.Columns["btnBj"].Visible = true;
-                            }
-                            dataGridView1.AutoGenerateColumns = false;
-                            DataGridViewButtonColumn dgbc = new DataGridViewButtonColumn();
-                            dgbc.Name = "btnBj";
-                            dgbc.HeaderText = "编辑";
-                            dgbc.DefaultCellStyle.NullValue = "编辑";
-                            DataGridViewButtonColumn dgbcDel = new DataGridViewButtonColumn();
-                            dgbcDel.Name = "btndelete";
-                            dgbcDel.HeaderText = "删除";
-                            dgbcDel.DefaultCellStyle.NullValue = "删除";
-                            if (dataGridView1.Columns["btndelete"] == null)
-                            {
-                                dataGridView1.Columns.Add(dgbcDel);
-                            }
-
-                            if (dataGridView1.Columns["btnBj"] == null)
-                            {
-                                dataGridView1.Columns.Add(dgbc);
-                            }
                             dataGridView1.DataSource = stf;
                         }
                         else
                         {
                             dataGridView1.AutoGenerateColumns = false;
                             dataGridView1.DataSource = stf;
-                            if (dataGridView1.Columns["btndelete"] != null)
-                            {
-
-                                dataGridView1.Columns["btndelete"].Visible = false;
-                            }
-
-                            if (dataGridView1.Columns["btnBj"] != null)
-                            {
-                                dataGridView1.Columns["btnBj"].Visible = false;
-                            }
                         }
                     }
             }
@@ -339,6 +341,40 @@ namespace GODInventoryWinForm.Controls.Branches
 
         #endregion
 
+        #region 员工删除点击事件
+        private void 删除ToolStripMenuItem2_Click_1(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("您确定要删除吗？", "系统提示", MessageBoxButtons.OKCancel);
+            if (dr == DialogResult.OK)
+            {
+                #region 删除
+                if (treeView1.SelectedNode == null)
+                {
+                    MessageBox.Show("请选择公司后再删除！");
+
+                }
+                else if (treeView1.SelectedNode.Name.Equals("0"))
+                {
+                    MessageBox.Show("请选择公司后再删除！");
+                }
+                else
+                {
+                    if (delete() > 0)
+                    {
+                        MessageBox.Show("删除成功!");
+                        selectStaffs(treeView1.SelectedNode.Name);
+                    }
+                    else
+                    {
+                        MessageBox.Show("删除失败");
+                    }
+                }
+                #endregion
+            }
+
+        }
+        #endregion
+
         #region 员工删除方法
         private int delete()
         {
@@ -361,6 +397,36 @@ namespace GODInventoryWinForm.Controls.Branches
             }
             return indexa;
 
+        }
+        #endregion
+
+        #region 员工编辑事件
+        private void 修改ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            #region 编辑
+            if (treeView1.SelectedNode == null)
+            {
+                MessageBox.Show("请选择公司后再编辑！");
+
+            }
+            else if (treeView1.SelectedNode.Name.Equals("0"))
+            {
+                MessageBox.Show("请选择公司后再编辑！");
+            }
+            else
+            {
+                int index = dataGridView1.SelectedRows[0].Index;
+                addstaffs adsf = new addstaffs();
+                adsf.staffsid = dataGridView1.Rows[index].Cells["Id"].Value.ToString();
+                adsf.title = dataGridView1.Rows[index].Cells["fullname"].Value.ToString() + "员工的信息修改";
+                adsf.branchid = treeView1.SelectedNode.Name;
+                adsf.ShowDialog();
+                if (adsf.DialogResult == DialogResult.OK)
+                {
+                    selectStaffs(treeView1.SelectedNode.Name);
+                }
+            }
+            #endregion
         }
         #endregion
 
@@ -435,32 +501,35 @@ namespace GODInventoryWinForm.Controls.Branches
         #region 删除店铺事件
         private void 删除ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            if (treeView1.SelectedNode == null)
+            if (MessageBox.Show("您确定要删除吗？", "", MessageBoxButtons.OKCancel) == DialogResult.OK) 
             {
-                MessageBox.Show("请选择公司后再删除！");
+                if (treeView1.SelectedNode == null)
+                {
+                    MessageBox.Show("请选择公司后再删除！");
 
-            }
-            else if (treeView1.SelectedNode.Name.Equals("0"))
-            {
-                MessageBox.Show("请选择公司后再删除！");
-            }
-            else
-            {
-                try
-                {
-                    if (deleteStore() > 0)
-                    {
-                        MessageBox.Show("删除成功");
-                        selectStroe(treeView1.SelectedNode.Name);
-                    }
-                    else
-                    {
-                        MessageBox.Show("删除失败");
-                    }
                 }
-                catch (Exception ex)
+                else if (treeView1.SelectedNode.Name.Equals("0"))
                 {
-                    MessageBox.Show("程序有误");
+                    MessageBox.Show("请选择公司后再删除！");
+                }
+                else
+                {
+                    try
+                    {
+                        if (deleteStore() > 0)
+                        {
+                            MessageBox.Show("删除成功");
+                            selectStroe(treeView1.SelectedNode.Name);
+                        }
+                        else
+                        {
+                            MessageBox.Show("删除失败");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("程序有误");
+                    }
                 }
             }
         }
@@ -486,67 +555,8 @@ namespace GODInventoryWinForm.Controls.Branches
         #endregion
 
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
 
-                if (dataGridView1.Columns[e.ColumnIndex].Name.Equals("btnBj"))
-                {
-                    #region 编辑
-                    if (treeView1.SelectedNode == null)
-                    {
-                        MessageBox.Show("请选择公司后再编辑！");
-
-                    }
-                    else if (treeView1.SelectedNode.Name.Equals("0"))
-                    {
-                        MessageBox.Show("请选择公司后再编辑！");
-                    }
-                    else
-                    {
-                        int index = dataGridView1.SelectedRows[0].Index;
-                        addstaffs adsf = new addstaffs();
-                        adsf.staffsid = dataGridView1.Rows[index].Cells["Id"].Value.ToString();
-                        adsf.title = dataGridView1.Rows[index].Cells["fullname"].Value.ToString() + "员工的信息修改";
-                        adsf.branchid = treeView1.SelectedNode.Name;
-                        adsf.ShowDialog();
-                        if (adsf.DialogResult == DialogResult.OK)
-                        {
-                            selectStaffs(treeView1.SelectedNode.Name);
-                        }
-                    }
-                    #endregion
-
-                }
-                else if (dataGridView1.Columns[e.ColumnIndex].Name.Equals("btndelete"))
-                {
-                    #region 删除
-                    if (treeView1.SelectedNode == null)
-                    {
-                        MessageBox.Show("请选择公司后再删除！");
-
-                    }
-                    else if (treeView1.SelectedNode.Name.Equals("0"))
-                    {
-                        MessageBox.Show("请选择公司后再删除！");
-                    }
-                    else
-                    {
-                        if (delete() > 0)
-                        {
-                            MessageBox.Show("删除成功!");
-                            selectStaffs(treeView1.SelectedNode.Name);
-                        }
-                        else
-                        {
-                            MessageBox.Show("删除失败");
-                        }
-                    }
-                    #endregion
-                }
-            }
-        }
+       
 
 
 
