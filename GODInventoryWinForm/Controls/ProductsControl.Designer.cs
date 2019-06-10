@@ -983,7 +983,7 @@
             this.productsComboBox.FormattingEnabled = true;
             this.productsComboBox.Location = new System.Drawing.Point(231, 16);
             this.productsComboBox.Name = "productsComboBox";
-            this.productsComboBox.Size = new System.Drawing.Size(112, 22);
+            this.productsComboBox.Size = new System.Drawing.Size(270, 22);
             this.productsComboBox.TabIndex = 1;
             // 
             // tabPage3
@@ -1011,7 +1011,7 @@
             this.groupBox5.Controls.Add(this.transportfeeTextBox);
             this.groupBox5.Controls.Add(this.label21);
             this.groupBox5.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(841, 6);
+            this.groupBox5.Location = new System.Drawing.Point(952, 6);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(467, 77);
             this.groupBox5.TabIndex = 45;
@@ -1022,7 +1022,7 @@
             this.columnnameComboBox4.FormattingEnabled = true;
             this.columnnameComboBox4.Items.AddRange(new object[] {
             "重量",
-            "纳品口数",
+            "納品口数",
             "納品原価金額",
             "実際出荷数量"});
             this.columnnameComboBox4.Location = new System.Drawing.Point(227, 44);
@@ -1113,7 +1113,7 @@
             this.groupBox4.Controls.Add(this.bttransportfind);
             this.groupBox4.Location = new System.Drawing.Point(10, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(821, 77);
+            this.groupBox4.Size = new System.Drawing.Size(928, 77);
             this.groupBox4.TabIndex = 44;
             this.groupBox4.TabStop = false;
             // 
@@ -1134,7 +1134,7 @@
             this.productsComboBox3.FormattingEnabled = true;
             this.productsComboBox3.Location = new System.Drawing.Point(594, 18);
             this.productsComboBox3.Name = "productsComboBox3";
-            this.productsComboBox3.Size = new System.Drawing.Size(112, 22);
+            this.productsComboBox3.Size = new System.Drawing.Size(220, 22);
             this.productsComboBox3.TabIndex = 50;
             // 
             // label15
@@ -1263,7 +1263,7 @@
             // bttransportfind
             // 
             this.bttransportfind.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.bttransportfind.Location = new System.Drawing.Point(715, 15);
+            this.bttransportfind.Location = new System.Drawing.Point(821, 15);
             this.bttransportfind.Name = "bttransportfind";
             this.bttransportfind.Size = new System.Drawing.Size(95, 51);
             this.bttransportfind.TabIndex = 3;
@@ -1520,7 +1520,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox genresComboBox3;
-        private System.Windows.Forms.ComboBox columnnameComboBox4;
         private System.Windows.Forms.ComboBox unitnameComboBox4;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox productsComboBox3;
@@ -1551,5 +1550,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fee;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderColumNameColumn;
         private System.Windows.Forms.DataGridViewButtonColumn deleteButtonColumn;
+        private System.Windows.Forms.ComboBox columnnameComboBox4;
     }
 }

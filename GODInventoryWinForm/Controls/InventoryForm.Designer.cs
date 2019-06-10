@@ -258,6 +258,7 @@
             this.未転送Column1.DataPropertyName = "weiChuanSong";
             this.未転送Column1.HeaderText = "未転送";
             this.未転送Column1.Name = "未転送Column1";
+            this.未転送Column1.ReadOnly = true;
             this.未転送Column1.Width = 70;
             // 
             // yingYouKuCunShuColumn

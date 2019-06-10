@@ -1316,9 +1316,10 @@ namespace GODInventory.ViewModel
 
             return fee;
         }
-        
 
-        public static List<v_itemprice> GetItemPriceList(GODDbContext ctx, List<int> productids=null) { 
+
+        public static List<v_itemprice> GetItemPriceList(GODDbContext ctx, List<int> productids = null, List<int> shopids = null)
+        { 
         
 //            List<v_itemprice> prices = (from i in ctx.t_itemlist
 //                                        join p in ctx.t_pricelist on i.自社コード equals p.自社コード
@@ -1353,7 +1354,10 @@ left join t_freights f on p.transport_id = f.transport_id and p.warehouse_id =f.
             if (productids != null) {
                 conditions.Add(  string.Format("i.自社コード in ({0})", string.Join(",", productids)) );
             }
-
+            if (shopids != null)
+            {
+                conditions.Add(string.Format("f.shop_id in ({0})", string.Join(",", shopids)));
+            }
             
             if (conditions.Count > 0) {
 
@@ -1373,6 +1377,7 @@ left join t_freights f on p.transport_id = f.transport_id and p.warehouse_id =f.
         public static List<v_shop> GetShopList(GODDbContext ctx, List<int> shopids = null)
         {
             string sql = @"select s.店番 as 店番,  s.店名, s.県別, s.customerId, l.id as locationid, 
+s.transport_id as transport_id, s.warehouse_id as warehouse_id, s.warehousename as warehousename, s.営業担当 as 営業担当, 
 IFNULL(l.納品場所コード, -1) as 納品場所コード,  IFNULL(l.納品場所名漢字, '') as 納品場所名漢字,  IFNULL(l.納品場所名カナ, '') as 納品場所名カナ
 from t_shoplist s
 left join  t_locations l on l.店舗コード = s.店番 and l.isdefault=true ";

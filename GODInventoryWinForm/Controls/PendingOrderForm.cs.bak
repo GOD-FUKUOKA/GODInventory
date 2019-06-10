@@ -1382,7 +1382,6 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                 // 是否删除FAX订单
                 if (MessageBox.Show("伝票を完全に廃棄（削除）します。よろしいですか？", "伝票を廃棄", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
                 {
-                    for (var i = 0; i < selectedRows.Count; i++) {
 
                         v_pendingorder order = selectedRows[i].DataBoundItem as v_pendingorder;
                         if (order.入力区分 == 1)
@@ -1419,6 +1418,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 
 
         }
+        
         private int warehouselistBox()
         {
 

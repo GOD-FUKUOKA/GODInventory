@@ -285,7 +285,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 14);
             this.label4.TabIndex = 47;
-            this.label4.Text = "入库日期";
+            this.label4.Text = "入庫日期";
             // 
             // stockOutDateTimePicker
             // 

@@ -115,11 +115,11 @@ namespace GODInventory.ViewModel
 
             isValidName = isValidOrderName(order.発注規格名漢字);
 
- 
+            // 根据店铺的缺省 物流公司和仓库 设置订单的对应值
             order.実際配送担当 = price.配送担当;
             order.warehousename = price.warehousename;
-            order.warehouse_id = order.warehouse_id;
-            order.transport_id = order.transport_id;
+            order.warehouse_id = price.warehouse_id;
+            order.transport_id = price.transport_id;
 
             // 社内伝番処理使用缺省配置
             order.社内伝番処理 = price.社内伝番処理;
@@ -129,6 +129,7 @@ namespace GODInventory.ViewModel
 
             order.運賃 = ComputeFreight(order, price.fee, price.columnname);
 
+            order.備考 = "本発";
             return true;
         }
 
