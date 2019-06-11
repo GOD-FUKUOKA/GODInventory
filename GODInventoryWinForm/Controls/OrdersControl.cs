@@ -147,6 +147,12 @@ namespace GODInventoryWinForm.Controls
             new ConnectServerForReceivedOrderForm().ShowDialog();
         }
 
+        private void InitLoginUser() {
+            var loginUser = LoginUser.GetInstance();
+            this.receiveOrderButton.Enabled = loginUser.Can(PermissionEnum.DownloadNewOrders);
+            this.orderConfirmButton.Enabled = loginUser.Can(PermissionEnum.DownloadReceivedOrders);
+        
+        }
 
     }
 }

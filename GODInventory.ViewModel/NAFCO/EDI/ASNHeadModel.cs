@@ -132,18 +132,6 @@ namespace GODInventory.NAFCO.EDI
             return string.Format(format, this.SデータID, I管理連番, this.Iレコード件数, DateTime.Now);
 
         }
-        // generate 管理連番  length = 13 
-        //private byte[] GenerateMID() {
-        //    int count = 0;
-        //    var now = DateTime.Now.Date;
-        //    using (var ctx = new GODDbContext()) {
-        //        string sql = "SELECT count(*) FROM t_edidata where `データID`='CH1' and Date(created_at)=Date(NOW());";
-        //        var list = ctx.Database.SqlQuery<int>( sql);
-        //        count = list.First();
-        //    }
-        //    string s = DateTime.Now.ToString("yyyyMMdd") + (count + 1).ToString("D5");
-        //    return Encoding.ASCII.GetBytes(s);
-        //}
 
     }
 }

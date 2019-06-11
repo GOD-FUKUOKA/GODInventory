@@ -352,7 +352,7 @@ namespace GODInventoryWinForm.Controls
                 {
                     int productCode = Convert.ToInt32(cell.Value);
                     var item = this.itemPriceList.Find(o => o.商品コード == productCode);
-                    if (item != null)
+                    if (item != null && productCode > 0)
                     {
                         order.自社コード = item.自社コード;
                         order.ジャンル = Convert.ToInt16(item.ジャンル);
@@ -457,7 +457,8 @@ namespace GODInventoryWinForm.Controls
             this.orderList.Clear();
             using (var ctx = new GODDbContext())
             {
-                this.itemPriceList = OrderSqlHelper.GetItemPriceList(ctx);
+                var shopids = new List<int> { storeId };
+                this.itemPriceList = OrderSqlHelper.GetItemPriceList(ctx, null, shopids);
             }
 
             for (int i = 0; i < 10; i++)

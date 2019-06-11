@@ -134,8 +134,8 @@ namespace GODInventory.NAFCO
  
             order.実際配送担当 = price.配送担当;
             order.warehousename = price.warehousename;
-            order.warehouse_id = order.warehouse_id;
-            order.transport_id = order.transport_id;
+            order.warehouse_id = price.warehouse_id;
+            order.transport_id = price.transport_id;
 
             // 社内伝番処理使用缺省配置
             order.社内伝番処理 = price.社内伝番処理;

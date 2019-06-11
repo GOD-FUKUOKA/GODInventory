@@ -107,6 +107,7 @@
     <Compile Include="v_storeorder.cs" />
     <Compile Include="t_branches.cs" />
     <Compile Include="t_staffs.cs" />
+    <Compile Include="v_staffs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

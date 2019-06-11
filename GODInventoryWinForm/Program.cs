@@ -96,6 +96,7 @@ namespace GODInventoryWinForm
           //  IterateControlsSetTextBox(frm.Controls, Fontitem);
 
             #endregion
+            //Application.Run(new LoginForm());
             Application.Run(new MainForm());
 
         }

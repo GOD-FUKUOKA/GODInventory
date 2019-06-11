@@ -157,9 +157,11 @@ namespace GODInventoryWinForm
 
                                 var shop = shops.FirstOrDefault(o => o.店番 == orderdata.店舗コード);
                                 var price = itemprices.FirstOrDefault(o =>  o.店番 == orderdata.店舗コード && o.自社コード == orderdata.自社コード);
+
                                 if (shop == null) {
                                     throw new Exception(string.Format("店番 {0} の店舗は登録されていません", model.店舗コード));
                                 }
+
                                 if (price == null)
                                 {
                                     throw new Exception(string.Format("can not find pricelist by 自社コード {0}", model.自社コード));

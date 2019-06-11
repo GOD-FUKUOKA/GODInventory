@@ -262,31 +262,6 @@ namespace GODInventoryWinForm.Controls
                 }
             }
 
-
-
-            //condition_params.Add(new MySqlParameter("@genreId", genreId));
-            //condition_params.Add(new MySqlParameter("@ioState", ioState));
-            //condition_params.Add(new MySqlParameter("@warehouse", warehouse));
-            //condition_params.Add(new MySqlParameter("@manufacturer", manufacturer));
-            //condition_params.Add(new MySqlParameter("@startAt", startAt));
-            //condition_params.Add(new MySqlParameter("@endAt", endAt));
-
-            //            using (var ctx = new GODDbContext())
-            //            {
-            //                string productFormat = @"SELECT s.`自社コード`, i.`規格`,i.`商品名`  FROM t_stockrec s
-            //INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = @genreId 
-            //WHERE (s.日付 > @startAt AND @endAt > s.日付)
-            //GROUP by s.`自社コード`;";
-            //                string qtyFormat = @"SELECT s.* FROM t_stockrec s
-            //INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = @genreId 
-            //WHERE ({0});";
-
-            //                productList = ctx.Database.SqlQuery<v_stockcheck>(productFormat, condition_params.ToArray()).ToList();
-            //                string sql = String.Format(qtyFormat, conditions);
-            //  stockList = ctx.Database.SqlQuery<t_stockrec>(sql, condition_params.ToArray()).ToList();
-
-            //            }
-
             condition_params.Add(new MySqlParameter("@genreId", genreId));
             condition_params.Add(new MySqlParameter("@ioState", ioState));
             condition_params.Add(new MySqlParameter("@warehouse", warehouse));
