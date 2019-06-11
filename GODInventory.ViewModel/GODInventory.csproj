@@ -73,6 +73,7 @@
     <Compile Include="Commands\UpdateProductCommand.cs" />
     <Compile Include="ConfigHelper.cs" />
     <Compile Include="CustomPropertyHelper.cs" />
+    <Compile Include="LoginUser.cs" />
     <Compile Include="NAFCO\EDI\ASNHeadModel.cs" />
     <Compile Include="NAFCO\EDI\ASNModel.cs" />
     <Compile Include="NAFCO\EDI\CSVOrderHeadModel.cs" />

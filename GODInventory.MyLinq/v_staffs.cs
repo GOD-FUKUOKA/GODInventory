@@ -11,6 +11,7 @@ namespace GODInventory.MyLinq
         [Key]
         public int id { get; set; }
         public int branch_id { get; set; }
+        public int branch_parent_id { get; set; }
 
         public string branchname { get; set; }
         public string login { get; set; }

@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace GODInventoryWinForm
 {
+    using GODInventory;
     using GODInventory.MyLinq;
     using GODInventoryWinForm.Controls;
 
@@ -187,7 +188,8 @@ namespace GODInventoryWinForm
 
         private void InitLoginUser()
         {
-            var staff = new v_staffs() { branch_id = 1, branchname = "测试部门", id = 1, role = "admin", fullname = "管理员" };
+            var staff = new v_staffs() { branch_id = 2, branchname = "测试部门", id = 1, role = "sales", fullname = "管理员" };
+            staff.IsRootBranch = false;
             staff.BranchStoreIds = new List<int> { };
             LoginUser.GetInstance().Current = staff;
 

@@ -17,6 +17,22 @@ namespace GODInventory
     {
         public static List<t_genre> genreList = null;
 
+        /// <summary>
+        /// 取得当前登录用户的店铺ids
+        /// </summary>
+        /// <returns> List<int> | null</returns>
+        public static List<int> GetLoginUserStoreIds() {
+            return LoginUser.GetInstance().GetStoreIds();            
+        }
+
+        public static string GetStoreIdsConditions(){
+            string conditions = String.Empty;
+            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            if(storeids != null){
+                conditions = string.Join(",", storeids);
+            }
+            return conditions;
+        }
         public static int IsInnerCodeRequired(int genre_id)
         {
             int 社内伝番処理 = 0;
@@ -32,7 +48,13 @@ namespace GODInventory
             return 社内伝番処理;
         }
 
-        //取得重复订单信息
+        /// <summary>
+        /// 取得订单状态为 “Duplicated” 重复订单列表
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="offset"></param>
+        /// <param name="loginUser.storeIds"></param>
+        /// <returns></returns>
         public static IQueryable<v_duplicatedorder> GetDuplicateOrderQuery(GODDbContext ctx)
         {
 
@@ -77,6 +99,41 @@ namespace GODInventory
                         Status = o2.Status,
                         GenreName = g.ジャンル名
                     };
+            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            if ( storeids != null) 
+            {             
+
+                q = from t_orderdata o1 in ctx.t_orderdata
+                    join t_orderdata o2 in ctx.t_orderdata on new { 自社コード = o1.自社コード, 店舗コード = o1.店舗コード } equals new { 自社コード = o2.自社コード, 店舗コード = o2.店舗コード }
+                    join t_genre g in ctx.t_genre on o1.ジャンル equals g.idジャンル
+                    where storeids.Contains(o1.店舗コード) && o1.Status == OrderStatus.Duplicated && (o1.id受注データ == o2.id受注データ || o2.Status == OrderStatus.Pending || o2.Status == OrderStatus.NotifyShipper || o2.Status == OrderStatus.WaitToShip || o2.Status == OrderStatus.PendingShipment)
+                    orderby o2.店舗コード, o2.自社コード, o2.受注日, o1.id受注データ
+                    select new v_duplicatedorder
+                    {
+                        duplicatedId = o1.id受注データ,
+                        id受注データ = o2.id受注データ,
+                        発注日 = o2.発注日,
+                        出荷日 = o2.出荷日,
+                        納品日 = o2.納品日,
+                        店舗コード = o2.店舗コード,
+                        店舗名漢字 = o2.店舗名漢字,
+                        納品場所名漢字 = o2.納品場所名漢字,
+                        伝票番号 = o2.伝票番号,
+                        納品口数 = o2.納品口数,
+                        ジャンル = o2.ジャンル,
+                        品名漢字 = o2.品名漢字,
+                        規格名漢字 = o2.規格名漢字,
+                        実際出荷数量 = o2.実際出荷数量,
+                        実際配送担当 = o2.実際配送担当,
+                        県別 = o2.県別,
+                        発注形態名称漢字 = o2.発注形態名称漢字,
+                        キャンセル = o2.キャンセル,
+                        ダブリ = o2.ダブリ,
+                        Status = o2.Status,
+                        GenreName = g.ジャンル名
+                    };
+
+            }
             return q;
 
         }
@@ -112,18 +169,28 @@ namespace GODInventory
         /// <returns></returns>
         public static List<v_pendingorder> GetPendingOrderList(EntityDataSource dataSource, int pageSize, int offset)
         {
-            string sql = @" SELECT o.*, o.`原単価(税抜)` as `原単価_税抜_`, o.`原単価(税込)` as `原単価_税込_`, o.`売単価（税抜）` as `売単価_税抜_`, o.`売単価（税込）` as `売単価_税込_`,
+
+
+            string format = @" SELECT o.*, o.`原単価(税抜)` as `原単価_税抜_`, o.`原単価(税込)` as `原単価_税込_`, o.`売単価（税抜）` as `売単価_税抜_`, o.`売単価（税込）` as `売単価_税込_`,
 g.`ジャンル名` as `GenreName`, k.`在庫数` as `在庫数`, s.`売上ランク`, p.`厳しさ`, p.`欠品カウンター`
 FROM t_orderdata o
 INNER JOIN t_genre g  on o.ジャンル = g.idジャンル
 INNER JOIN t_shoplist s  on o.法人コード = s.customerId AND  o.店舗コード = s.店番 
 INNER JOIN t_pricelist p on  o.自社コード = p.自社コード AND  o.店舗コード = p.店番 
 LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.warehouse_id = k.WarehouseId 
-WHERE o.Status ={0}
+WHERE o.Status ={0} {3}
 ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
 
+            string storeIdsCondition = OrderSqlHelper.GetStoreIdsConditions();
+            string conditions = string.Empty;
 
-            var list = dataSource.DbContext.Database.SqlQuery<v_pendingorder>(sql, OrderStatus.Pending, pageSize, offset).ToList();
+            if (storeIdsCondition.Length > 0)
+            {
+                conditions = string.Format("and o.店舗コード in ({0})", storeIdsCondition);
+            }
+
+            string sql = string.Format(format, (int)OrderStatus.Pending, pageSize, offset, conditions);
+            var list = dataSource.DbContext.Database.SqlQuery<v_pendingorder>(sql).ToList();
             return list;
         }
 
@@ -140,6 +207,11 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
                     where o.Status == OrderStatus.Pending
                     select o;
+            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            if (storeids != null)
+            {
+                q = q.Where(o => storeids.Contains(o.店舗コード));
+            }
             return q;
         }
 
@@ -239,15 +311,39 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         /// <returns></returns>
         public static List<v_pendingorder> GetNotifiedOrderList(EntityDataSource entityDataSource)
         {
-        
-          var list = (from t_orderdata o in entityDataSource.EntitySets["t_orderdata"]
+
+            var q = (from t_orderdata o in entityDataSource.EntitySets["t_orderdata"]
                      where o.Status == OrderStatus.NotifyShipper
-                     orderby o.実際配送担当,o.県別, o.店舗コード, o.受注日, o.伝票番号
-                     select new v_pendingorder{id受注データ=o.id受注データ,受注日=o.受注日,店舗コード=o.店舗コード, warehousename=o.warehousename,
-                        店舗名漢字=o.店舗名漢字, 伝票番号=o.伝票番号, 社内伝番=o.社内伝番, ジャンル=o.ジャンル,
-                        品名漢字=o.品名漢字,規格名漢字=o.規格名漢字, 納品口数=o.納品口数, 実際出荷数量=o.実際出荷数量, 重量=o.重量, 
-                        実際配送担当=o.実際配送担当, 県別=o.県別, 納品指示=o.納品指示,発注形態名称漢字=o.発注形態名称漢字, 備考=o.備考, 社内伝番処理=o.社内伝番処理 }
-                    ).ToList();
+                     orderby o.実際配送担当, o.県別, o.店舗コード, o.受注日, o.伝票番号
+                     select new v_pendingorder
+                     {
+                         id受注データ = o.id受注データ,
+                         受注日 = o.受注日,
+                         店舗コード = o.店舗コード,
+                         warehousename = o.warehousename,
+                         店舗名漢字 = o.店舗名漢字,
+                         伝票番号 = o.伝票番号,
+                         社内伝番 = o.社内伝番,
+                         ジャンル = o.ジャンル,
+                         品名漢字 = o.品名漢字,
+                         規格名漢字 = o.規格名漢字,
+                         納品口数 = o.納品口数,
+                         実際出荷数量 = o.実際出荷数量,
+                         重量 = o.重量,
+                         実際配送担当 = o.実際配送担当,
+                         県別 = o.県別,
+                         納品指示 = o.納品指示,
+                         発注形態名称漢字 = o.発注形態名称漢字,
+                         備考 = o.備考,
+                         社内伝番処理 = o.社内伝番処理
+                     });
+            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            if (storeids != null)
+            {
+                q = q.Where(o => storeids.Contains(o.店舗コード));
+            }
+
+          var list = q.ToList();
           return list;
         }
 
@@ -309,6 +405,11 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                          備考 = o.備考
 
                      });
+            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            if (storeids != null)
+            {
+                q = q.Where(o => storeids.Contains(o.店舗コード));
+            }
             return q;
 
         }
@@ -360,6 +461,11 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                          備考 = o.備考
 
                      });
+            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            if (storeids != null)
+            {
+                q = q.Where(o => storeids.Contains(o.店舗コード));
+            }
             return q;
         }
 
@@ -381,11 +487,22 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         /// <returns></returns>
         public static List<v_groupedorder> GroupedASNOrderList(EntityDataSource dataSource)
         {
-            string sql = @"SELECT o.`ShipNO`, o.`出荷日`, o.`納品日`,
+            string format = @"SELECT o.`ShipNO`, o.`出荷日`, o.`納品日`,
  min(o.`県別`) as `県別`, o.`実際配送担当`, o.`reportState`,  
 sum(`納品原価金額`) as TotalPrice, sum(`重量`) as TotalWeight  
-FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`ORDER BY o.出荷日 desc";
-            var list = dataSource.DbContext.Database.SqlQuery<v_groupedorder>(sql, OrderStatus.ASN).ToList();
+FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP BY  o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`ORDER BY o.出荷日 desc";
+
+            string storeIdsCondition = OrderSqlHelper.GetStoreIdsConditions();
+            string conditions = string.Empty;
+
+            if (storeIdsCondition.Length > 0)
+            {
+                conditions = string.Format("and o.店舗コード in ({0})", storeIdsCondition);
+            }
+
+            string sql = string.Format(format, (int)OrderStatus.ASN, conditions);
+            
+            var list = dataSource.DbContext.Database.SqlQuery<v_groupedorder>(sql ).ToList();
 
             return list;
 
@@ -403,7 +520,12 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status = {0} GROUP BY  
                      where o.Status == OrderStatus.Shipped
                      orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                      select o
-                     );
+                     ) as IQueryable<t_orderdata>;
+            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            if (storeids != null)
+            {
+                q =  q.Where(o => storeids.Contains(o.店舗コード));
+            }
             return q;
         }
 

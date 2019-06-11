@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GODInventoryWinForm
+namespace GODInventory
 {
 
     // A接收、录入、修改订单数据
@@ -83,8 +83,8 @@ namespace GODInventoryWinForm
         /// </returns>
         public List<int> GetStoreIds() {
             List<int> storeids = null;
-            if (this.isSales() && !this.isRootBranch()) { 
-                
+            if (this.isSales() && !this.isRootBranch()) {
+                storeids = new List<int> { 1, 2, 3, 4, 7, 15, 17, 20, 22, 24, 26, 28, 30 };
             }
             return storeids;        
         }

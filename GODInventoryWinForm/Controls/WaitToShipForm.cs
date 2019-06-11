@@ -75,14 +75,15 @@ namespace GODInventoryWinForm.Controls
             lastStore = store;
 
             // 担当
-            var shippers = pendingOrderList.Select(s =>  s.実際配送担当 ).Distinct().ToList();
+            // 第二次 調用InitializeDataSource，顯示 WaitToShipForm shipperComboBox.SelectedIndex =0 不會觸發 change 事件,
+            // 所以需要每次都要初始化數據，觸發change事件。
+            
+            var shippers = pendingOrderList.Select(s => s.実際配送担当).Distinct().ToList();
             //shippers.Insert(0, new MockEntity { FullName = "すべて" });
             //this.shipperComboBox.DisplayMember = "FullName";
             //this.shipperComboBox.ValueMember = "FullName";
             this.shipperComboBox.DataSource = shippers;
 
-            // 第二次 調用InitializeDataSource，顯示 WaitToShipForm shipperComboBox.SelectedIndex =0 不會觸發 change 事件,
-            // 所以需要每次都要初始化數據，觸發change事件。
             if (this.orderBindingList.Count > 0)
             {
 
@@ -382,9 +383,10 @@ namespace GODInventoryWinForm.Controls
         }
 
 
-        private void ApplyBindSourceFilter(string shipper, string county = "", string store = "")
+        private void ApplyBindSourceFilter(string shipper, string county = "", string storeName = "")
         {
-
+            // store 这里是店铺名称，shoplist表中的，这个名称和订单表中可能不一致，
+            // ㋤下関店 => 下関店, 所以这里需要以店番为准，根据名称查找店番，再查找订单中的店番
             //if (bindingSource1.Count > 0)
             {
                 string filter = "";
@@ -401,14 +403,15 @@ namespace GODInventoryWinForm.Controls
                     }
                     filter += "(県別=" + "'" + county + "'" + ")";
                 }
-                if (store.Length > 0 && store != "すべて")
+                if (storeName.Length > 0 && storeName != "すべて")
                 {
                     if (filter.Length > 0)
                     {
                         filter += " AND ";
                     }
+                    var store = this.shopList.Find(o => o.店名.Equals(storeName));
 
-                    filter += "(店名=" + "'" + store + "'" + ")";
+                    filter += "(店舗コード=" + store.店番.ToString() + ")";
                 }
                 // 检查查询结果是否为空
                 if (pendingOrderList.Count > 0)
@@ -420,16 +423,10 @@ namespace GODInventoryWinForm.Controls
 
         private void InitializeCountyComboBox(List<v_pendingorder> orders)
         {
-            //var counties = orders.Select(s => new MockEntity { FullName = s.県別 }).Distinct().ToList();
-            //counties.Insert(0, new MockEntity {  FullName = "すべて" });
-            //this.countyComboBox1.DisplayMember = "FullName";
-            //this.countyComboBox1.ValueMember = "FullName";
-            //this.countyComboBox1.DataSource = counties;
+            this.countyComboBox1.SelectedIndex = -1;// 重置contryComboBox, 触发storeComboBoxChanged
 
             var counties = orders.Select(s =>  s.県別 ).Distinct().ToList();
             counties.Insert(0, "すべて" );
-            //this.countyComboBox1.DisplayMember = "FullName";
-            //this.countyComboBox1.ValueMember = "FullName";
             this.countyComboBox1.DataSource = counties;
 
             Boolean exist = counties.Exists((string a) => a == lastCounty);
