@@ -16,6 +16,7 @@ namespace GODInventoryWinForm.Controls.Branches
     {
         public string updeteid;
         public string title;
+        public int zgscount;
         public Addbranches()
         {
             InitializeComponent();
@@ -67,40 +68,47 @@ namespace GODInventoryWinForm.Controls.Branches
         private bool Fkpd() {
             if (!txt_BranchesName.Text.Equals(string.Empty))
             {
-              
+                this.errorProvider1.Clear();
+                
+                    this.errorProvider1.Clear();
                     if (!txt_address.Text.Equals(string.Empty))
                     {
+                        this.errorProvider1.Clear();
                         if (!txt_fax.Text.Equals(string.Empty))
                         {
+                            this.errorProvider1.Clear();
                             if (!txt_phone.Text.Equals(string.Empty))
                             {
+                                this.errorProvider1.Clear();
                                 if (!txt_MEMO.Text.Equals(string.Empty))
                                 {
+                                    this.errorProvider1.Clear();
                                     return true;
                                 }
                                 else
                                 {
-                                    MessageBox.Show("说明不能为空");
+                                    this.errorProvider1.SetError(txt_MEMO, "说明不能为空");
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("电话不能为空");
+                                this.errorProvider1.SetError(txt_phone, "电话不能为空");
                             }
                         }
                         else
                         {
-                            MessageBox.Show("传真不能为空");
+                            this.errorProvider1.SetError(txt_fax, "传真不能为空");
                         }
-                }
-                else
-                {
-                    MessageBox.Show("总公司名不能为空");
-                }
+                    }
+                    else
+                    {
+                        this.errorProvider1.SetError(txt_address, "公司地址不能为空");
+                    }
+              
             }
             else
             {
-                MessageBox.Show("分公司名称不许为空");
+                this.errorProvider1.SetError(txt_BranchesName, "分公司名称不许为空");
             }
             return false;
         }
@@ -116,13 +124,13 @@ namespace GODInventoryWinForm.Controls.Branches
                 using (var ctx = new GODDbContext())
                 {
                     var barnche = (from t_branches tb in ctx.t_branchs
-                                   where tb.fullname == txt_BranchesName.Text && tb.parent_id == 0 && tb.phone == txt_phone.Text && tb.address == txt_address.Text && tb.fax == txt_fax.Text && tb.memo == txt_MEMO.Text
+                                   where tb.fullname == txt_BranchesName.Text && tb.parent_id == zgscount && tb.phone == txt_phone.Text && tb.address == txt_address.Text && tb.fax == txt_fax.Text && tb.memo == txt_MEMO.Text
                                    select tb).ToList();
                     if (barnche.Count  == 0)
                     {
                         t_branches bc = new t_branches();
                         bc.fullname = txt_BranchesName.Text;
-                        bc.parent_id = 0;
+                        bc.parent_id = zgscount;
                         bc.address = txt_address.Text;
                         bc.fax = txt_fax.Text;
                         bc.memo = txt_MEMO.Text;
@@ -166,7 +174,7 @@ namespace GODInventoryWinForm.Controls.Branches
                         {
 
                             bc.fullname = txt_BranchesName.Text;
-                            bc.parent_id = 0;
+                            bc.parent_id = zgscount;
                             bc.address = txt_address.Text;
                             bc.fax = txt_fax.Text;
                             bc.memo = txt_MEMO.Text;
@@ -193,28 +201,28 @@ namespace GODInventoryWinForm.Controls.Branches
         private void loadupdate() 
         {
             try{
-                using (var ctx = new GODDbContext())
-                {
-
-                   
-                    if (updeteid != null)
+                    using (var ctx = new GODDbContext())
                     {
-                        int udid = int.Parse(updeteid);
-                        var query = (from t_branches t in ctx.t_branchs
-                                     where t.id == udid
-                                     select t).ToList();
-                        foreach (t_branches bc in query)
-                        {
-                            txt_BranchesName.Text = bc.fullname;
-                            txt_address.Text = bc.address;
-                            txt_phone.Text = bc.phone;
-                            txt_fax.Text =bc.fax;
-                            txt_MEMO.Text = bc.memo;
-                        }
-                        label4.Text = title;
 
+
+                        if (updeteid != null)
+                        {
+                            int udid = int.Parse(updeteid);
+                            var query = (from t_branches t in ctx.t_branchs
+                                         where t.id == udid
+                                         select t).ToList();
+                            foreach (t_branches bc in query)
+                            {
+                                txt_BranchesName.Text = bc.fullname;
+                                txt_address.Text = bc.address;
+                                txt_phone.Text = bc.phone;
+                                txt_fax.Text = bc.fax;
+                                txt_MEMO.Text = bc.memo;
+                            }
+                            label4.Text = title;
+
+                        }
                     }
-                }
                
             }catch(Exception ex){
                 MessageBox.Show("程序出错！");

@@ -544,6 +544,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Branches\IndexForm.resx">
       <DependentUpon>IndexForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CancelConfirmForm.resx">
       <DependentUpon>CancelConfirmForm.cs</DependentUpon>

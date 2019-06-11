@@ -16,129 +16,234 @@ namespace GODInventoryWinForm.Controls.Branches
     {
         public string title;
         public string compid;
-        protected string storeid;
         public AddStore()
         {
             InitializeComponent();
         }
-        #region text输入时的臭循环
-        private void selectshoplist()
-        {
-            try
-            {
-                using (var cxt  = new GODDbContext())
-                {
-                    var query = (from t_shoplist tsl in cxt.t_shoplist
-                                 where tsl.店名.Contains(txt_StoreName.Text)
-                                 select tsl).ToList();
-                    listBox1.DataSource = query;
-                    listBox1.DisplayMember = "店名";
-                    listBox1.ValueMember = "店番";
-                    listBox1.Visible = true;
-                 
-                    
-                }
-            }
-            catch (Exception ex) 
-            {
-                MessageBox.Show("程序有误！");
-            }
-            
-        }
-        #endregion
+      
         private void txt_StaffsName_TextChanged(object sender, EventArgs e)
         {
-            selectshoplist();
+           
         }
 
         private void AddStore_Load(object sender, EventArgs e)
         {
-            label4.Text = title;
-        }
-        #region 保存按钮点击事件
-        private void submitFormButton_Click(object sender, EventArgs e)
-        {
             try
             {
-                if (!txt_StoreName.Text.Equals(string.Empty))
-                {
-                    if (add() > 0)
-                    {
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
-                    }
-                
-
-                }
-                else 
-                {
-                    MessageBox.Show("请选择店铺！");
-                }
+                selectAllxb();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("程序有误！");
+                MessageBox.Show("程序有误");
             }
-        }
+            label4.Text = title;
 
-        #endregion
+        }
+       
 
         #region 添加店铺方法
-        private int add() 
+        private int add(List<string> no) 
         {
             int index = 0;
              using (var ctx = new GODDbContext())
             {
                  int cpid = int.Parse(compid);
-                 int stid = int.Parse(storeid);
-                 var query = (from t_branches_stores ttbs in ctx.t_branches_stores
-                              where ttbs.branch_id == cpid && ttbs.store_id == stid
-                              select ttbs).ToList();
-                 if (query.Count == 0)
+                 for (int i = 0; i < no.Count; i++)
                  {
-                     t_branches_stores tbs = new t_branches_stores();
-                     tbs.branch_id = cpid;
-                     tbs.store_id = stid;
-                     ctx.t_branches_stores.Add(tbs);
-                     ctx.SaveChanges();
-                     index = 1;
-                 }
-                 else 
-                 {
-                     index = 0;
+                     int noid = int.Parse(no[i]);
+                     var query = (from t_branches_stores ttbs in ctx.t_branches_stores
+                                  where ttbs.branch_id == cpid && ttbs.store_id == noid
+                                  select ttbs).ToList();
+                     if (query.Count == 0)
+                     {
+                         t_branches_stores tbs = new t_branches_stores();
+                         tbs.branch_id = cpid;
+                         tbs.store_id = noid;
+                         ctx.t_branches_stores.Add(tbs);
+                         ctx.SaveChanges();
+                         index = 1;
+                     }
+                     else
+                     {
+                         MessageBox.Show("您选择的店铺有重复！");
+                         index = 0;
+                         break;
+                     }
                  }
             }
             return index;
         }
         #endregion
 
+        #region 查找所有县别
+        private void selectAllxb() 
+        {
+            using(var ctx = new GODDbContext())
+            {
+              var shopxb = ctx.t_shoplist.Select(t => t.県別).Distinct().ToList();
+              comboBox1.ValueMember = "県別";
+              comboBox1.DisplayMember = "県別";
+              comboBox1.DataSource = shopxb;
+            }
+            
+        }
+        #endregion
+
+
+        #region 查找所有区域
+        private void selectAllqy(string name)
+        {
+            using (var ctx = new GODDbContext())
+            {
+                var query = (from t_shoplist ts in ctx.t_shoplist
+                             where ts.県別 == name
+                             select ts).ToList();
+                var shopxb = query.Select(t => t.県内エリア).Distinct().ToList();
+                comboBox2.ValueMember = "県内エリア";
+                comboBox2.DisplayMember = "県内エリア";
+                comboBox2.DataSource = shopxb;
+            }
+
+        }
+        #endregion
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        #region listbox点击事件
-        private void listBox1_DoubleClick(object sender, EventArgs e)
+        private void comboBox2_Click(object sender, EventArgs e)
         {
-            //如果点击listbox之后将点击的事件赋值到textbox里
-            storeid = listBox1.SelectedValue.ToString();
-            txt_StoreName.Text = listBox1.Text;
-            listBox1.Visible = false;
-
+            if (!comboBox1.Text.Equals(string.Empty))
+            {
+                selectAllqy(comboBox1.Text);
+            }
+            else 
+            {
+                MessageBox.Show("请选择県別");
+            }
         }
-
+        #region 检索点击事件
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                selectWhere();
+            }
+            catch (Exception ex)
+            {
+            
+            }
+        }
+        #endregion
+        #region 检索方法
+        private void selectWhere() 
+        {
+            using(var ctx = new GODDbContext())
+            {
+                dataGridView1.AutoGenerateColumns = false;
+                if (comboBox2.Text.Equals(string.Empty))
+                {
+                    var query = (from t_shoplist ts in ctx.t_shoplist
+                                 where ts.県別 == comboBox1.Text
+                                 select ts).ToList();
+                    dataGridView1.DataSource = query;
+                }
+                else
+                {
+                    var query = (from t_shoplist ts in ctx.t_shoplist
+                                 where ts.県別 == comboBox1.Text && ts.県内エリア == comboBox2.Text
+                                 select ts).ToList();
+                    dataGridView1.DataSource = query;
+                }
+            }
+        }
         #endregion
 
-        private void AddStore_MouseClick(object sender, MouseEventArgs e)
-        {
-            listBox1.Visible = false;
-        }
-
-        private void cancelFormButton_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        #region 保存按钮点击事件
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<String> no = new List<string>();
+                int count = dataGridView1.Rows.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    DataGridViewCheckBoxCell checkcell = (DataGridViewCheckBoxCell)dataGridView1.Rows[i].Cells[0];
+                    Boolean pd = Convert.ToBoolean(checkcell.Value);
+                    if (pd == true)
+                    {
+                        no.Add(dataGridView1.Rows[i].Cells["店番"].Value.ToString());
+                    }
+                }
+                if (add(no)!=0) 
+                {
+                    MessageBox.Show("添加成功");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show("程序有误");
+            }
+            
+        }
+
+        #endregion
+       
+
+        private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+       
 
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                int count = dataGridView1.Rows.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)dataGridView1.Rows[i].Cells[0];
+                    Boolean flag = Convert.ToBoolean(checkCell.Value);
+                    if (flag == false)
+                    {
+                        checkCell.Value = true;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+            else
+            {
+                int count = dataGridView1.Rows.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)dataGridView1.Rows[i].Cells[0];
+                    Boolean flag = Convert.ToBoolean(checkCell.Value);
+                    if (flag == true)
+                    {
+                        checkCell.Value = false;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+            }
+        }
+
+
+
     }
 }

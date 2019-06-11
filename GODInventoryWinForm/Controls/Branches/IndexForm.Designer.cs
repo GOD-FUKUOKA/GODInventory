@@ -1,4 +1,183 @@
-﻿namespace GODInventoryWinForm.Controls.Branches
+﻿//namespace GODInventoryWinForm.Controls.Branches
+//{
+//    partial class IndexForm
+//    {
+//        /// <summary>
+//        /// Required designer variable.
+//        /// </summary>
+//        private System.ComponentModel.IContainer components = null;
+
+//        /// <summary>
+//        /// Clean up any resources being used.
+//        /// </summary>
+//        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+//        protected override void Dispose(bool disposing)
+//        {
+//            if (disposing && (components != null))
+//            {
+//                components.Dispose();
+//            }
+//            base.Dispose(disposing);
+//        }
+//        private System.Windows.Forms.TabControl tabControl1;
+//        private System.Windows.Forms.TabPage  tabPage1;
+//        private System.Windows.Forms.Button newButton1;
+//        private System.Windows.Forms.DataGridViewTextBoxColumn fullname;
+//        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+//        private  System.Windows.Forms.DataGridViewTextBoxColumn role;
+//        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+//        private System.Windows.Forms.ToolStripMenuItem  删除ToolStripMenuItem2;
+//        private System.Windows.Forms.ToolStripMenuItem  修改ToolStripMenuItem1;
+//        private System.Windows.Forms.Button button1;
+//        private System.Windows.Forms.TabPage tabPage2;
+//        private  System.Windows.Forms.DataGridView  dataGridView2;
+//        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+//        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+//        private System.Windows.Forms.DataGridViewTextBoxColumn countyColumn2;
+//        private System.Windows.Forms.DataGridViewTextBoxColumn storeid;
+//        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+//        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem1;
+//        private System.Windows.Forms.TreeView treeView1;
+//        private System.Windows.Forms.ContextMenuStrip ct_TreeviewDelete;
+//        private  System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem; 
+//        private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem;
+//        private System.Windows.Forms.Button button2 ;
+//        private System.Windows.Forms.Label label1;
+//        private System.Windows.Forms.DataGridView dataGridView1;
+//        private void InitializeComponent()
+//        {
+//            this.tabControl1 = new System.Windows.Forms.TabControl();
+//            this.tabPage1 = new System.Windows.Forms.TabPage();
+//            this.newButton1 = new System.Windows.Forms.Button();
+//            this.fullname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+//            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+//            this.role = new System.Windows.Forms.DataGridViewTextBoxColumn();
+//            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+//            this.删除ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+//            this.修改ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+//            this.tabPage2 = new System.Windows.Forms.TabPage();
+//            this.button1 = new System.Windows.Forms.Button();
+//            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+//            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+//            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+//            this.countyColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+//            this.storeid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+//            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+//            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+//            this.treeView1 = new System.Windows.Forms.TreeView();
+//            this.ct_TreeviewDelete = new System.Windows.Forms.ContextMenuStrip(this.components);
+//            this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+//            this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+//            this.button2 = new System.Windows.Forms.Button();
+//            this.label1 = new System.Windows.Forms.Label();
+//            this.tabControl1.SuspendLayout();
+//            this.tabPage1.SuspendLayout();
+//            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+//            this.contextMenuStrip1.SuspendLayout();
+//            this.tabPage2.SuspendLayout();
+//            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+//            this.contextMenuStrip2.SuspendLayout();
+//            this.ct_TreeviewDelete.SuspendLayout();
+//            this.SuspendLayout();
+//            // 
+//            // tabControl1
+//            //this.fullname,
+//            //this.Id,
+//            //this.role});
+//            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
+//            this.dataGridView1.Location = new System.Drawing.Point(6, 47);
+//            this.dataGridView1.Name = "dataGridView1";
+//            this.dataGridView1.ReadOnly = true;
+//            this.dataGridView1.Size = new System.Drawing.Size(679, 238);
+//            this.dataGridView1.TabIndex = 0;
+//            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+//            this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
+             
+//            // fullname
+//            this.role.Name = "role";
+//            this.role.ReadOnly = true;
+             
+//            // contextMenuStrip1
+
+//            this.contextmenustrip1.items.addrange(new system.windows.forms.toolstripitem[] {
+//            this.删除toolstripmenuitem2,
+//            this.修改toolstripmenuitem1});
+//            this.contextmenustrip1.name = "contextmenustrip1";
+//            this.contextmenustrip1.size = new system.drawing.size(101, 48);
+             
+//            // 删除ToolStripMenuItem2
+
+//            this.删除ToolStripMenuItem2.Name = "删除ToolStripMenuItem2";
+//            this.删除ToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
+//            this.删除ToolStripMenuItem2.Text = "删除";
+//            this.删除ToolStripMenuItem2.Click += new System.EventHandler(this.删除ToolStripMenuItem2_Click_1);
+             
+//            // 修改ToolStripMenuItem1
+             
+//            this.修改ToolStripMenuItem1.Name = "修改ToolStripMenuItem1";
+//            this.修改ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+//            this.修改ToolStripMenuItem1.Text = "编辑";
+//            this.修改ToolStripMenuItem1.Click += new System.EventHandler(this.修改ToolStripMenuItem1_Click);
+//            }
+            
+             
+//            // tabPage2
+             
+//            //this.tabPage2.Controls.Add(this.button1);
+//            //this.dataGridView2.TabIndex = 1;
+//            //this.dataGridView2.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseDown);
+             
+//            // dataGridViewTextBoxColumn1
+             
+//            //this.dataGridViewTextBoxColumn1.DataPropertyName = "店名";
+//            //this.dataGridViewTextBoxColumn1.HeaderText = "店铺名称";
+//            //this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+             
+//            // dataGridViewTextBoxColumn2
+             
+//            //this.dataGridViewTextBoxColumn2.DataPropertyName = "県内エリア";
+//            //this.dataGridViewTextBoxColumn2.HeaderText = "区域";
+//            //this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+             
+//            // countyColumn2
+             
+//            //this.countyColumn2.DataPropertyName = "県別";
+//            //this.countyColumn2.HeaderText = "県別";
+//            //this.countyColumn2.Name = "countyColumn2";
+             
+//            // storeid
+             
+//            //this.storeid.DataPropertyName = "id";
+//            //this.storeid.HeaderText = "店番";
+//            //this.storeid.Name = "storeid";
+//            //this.storeid.Visible = false;
+             
+//            // contextMenuStrip2
+          
+//            // IndexForm
+             
+//            //this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+//            //this.tabControl1.ResumeLayout(false);
+//            //this.tabPage1.ResumeLayout(false);
+//            //((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+//            //this.contextMenuStrip1.ResumeLayout(false);
+//            //this.tabPage2.ResumeLayout(false);
+//            //((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+//            //this.contextMenuStrip2.ResumeLayout(false);
+//            //this.ct_TreeviewDelete.ResumeLayout(false);
+//            //this.ResumeLayout(false);
+//            //this.PerformLayout();
+//            //private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+//            //private System.Windows.Forms.DataGridViewTextBoxColumn countyColumn2;
+//            //private System.Windows.Forms.DataGridViewTextBoxColumn storeid;
+//            //private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+//            //private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem2;
+//            //private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem1;
+            
+//        }
+//    }
+//}
+namespace GODInventoryWinForm.Controls.Branches
 {
     partial class IndexForm
     {
@@ -46,6 +225,10 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.countyColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.storeid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new System.Windows.Forms.TreeView();
@@ -54,12 +237,9 @@
             this.修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.branchColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.loginColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countyColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.storeid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.修改ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -67,6 +247,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
             this.ct_TreeviewDelete.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -107,9 +288,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fullname,
             this.Id,
-            this.role,
-            this.branchColumn1,
-            this.loginColumn1});
+            this.role});
             this.dataGridView1.Location = new System.Drawing.Point(6, 47);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -118,7 +297,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(679, 238);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
             // 
             // fullname
@@ -181,6 +359,31 @@
             this.dataGridView2.Size = new System.Drawing.Size(679, 238);
             this.dataGridView2.TabIndex = 1;
             this.dataGridView2.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseDown);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "店名";
+            this.dataGridViewTextBoxColumn1.HeaderText = "店铺名称";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "県内エリア";
+            this.dataGridViewTextBoxColumn2.HeaderText = "区域";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // countyColumn2
+            // 
+            this.countyColumn2.DataPropertyName = "県別";
+            this.countyColumn2.HeaderText = "県別";
+            this.countyColumn2.Name = "countyColumn2";
+            // 
+            // storeid
+            // 
+            this.storeid.DataPropertyName = "id";
+            this.storeid.HeaderText = "店番";
+            this.storeid.Name = "storeid";
+            this.storeid.Visible = false;
             // 
             // contextMenuStrip2
             // 
@@ -258,42 +461,27 @@
             this.label1.Text = "上下文菜单中修改,分公司,员工,以及分公司负责的店铺";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // branchColumn1
+            // contextMenuStrip1
             // 
-            this.branchColumn1.HeaderText = "公司名称";
-            this.branchColumn1.Name = "branchColumn1";
-            this.branchColumn1.ReadOnly = true;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除ToolStripMenuItem2,
+            this.修改ToolStripMenuItem1});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
             // 
-            // loginColumn1
+            // 删除ToolStripMenuItem2
             // 
-            this.loginColumn1.HeaderText = "登录名";
-            this.loginColumn1.Name = "loginColumn1";
-            this.loginColumn1.ReadOnly = true;
+            this.删除ToolStripMenuItem2.Name = "删除ToolStripMenuItem2";
+            this.删除ToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.删除ToolStripMenuItem2.Text = "删除";
+            this.删除ToolStripMenuItem2.Click += new System.EventHandler(this.删除ToolStripMenuItem2_Click_2);
             // 
-            // dataGridViewTextBoxColumn1
+            // 修改ToolStripMenuItem1
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "店名";
-            this.dataGridViewTextBoxColumn1.HeaderText = "店铺名称";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "県内エリア";
-            this.dataGridViewTextBoxColumn2.HeaderText = "区域";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // countyColumn2
-            // 
-            this.countyColumn2.DataPropertyName = "県別";
-            this.countyColumn2.HeaderText = "県別";
-            this.countyColumn2.Name = "countyColumn2";
-            // 
-            // storeid
-            // 
-            this.storeid.DataPropertyName = "id";
-            this.storeid.HeaderText = "店番";
-            this.storeid.Name = "storeid";
-            this.storeid.Visible = false;
+            this.修改ToolStripMenuItem1.Name = "修改ToolStripMenuItem1";
+            this.修改ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.修改ToolStripMenuItem1.Text = "修改";
+            this.修改ToolStripMenuItem1.Click += new System.EventHandler(this.修改ToolStripMenuItem1_Click_1);
             // 
             // IndexForm
             // 
@@ -315,6 +503,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
             this.ct_TreeviewDelete.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,11 +529,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn role;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn branchColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn loginColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn countyColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn storeid;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem 修改ToolStripMenuItem1;
     }
 }
