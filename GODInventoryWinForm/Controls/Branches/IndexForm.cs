@@ -223,29 +223,52 @@ namespace GODInventoryWinForm.Controls.Branches
 
         #endregion
 
+        private bool pdGS(int id) 
+        {
+            using(var ctxs = new GODDbContext ())
+            {
+                var query = (from t_branches tb in ctxs.t_branchs
+                             where tb.parent_id == 0 && tb.id == id
+                             select tb).ToList();
+                if (query.Count <= 0) 
+                {
+                    return true;
+                }else 
+                {
+                    return false;
+                }
+            }
+        }
         #region 修改公司事件
         private void 修改ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (treeView1.SelectedNode == null)
+            if (pdGS(int.Parse(treeView1.SelectedNode.Name)))
             {
-                MessageBox.Show("请选择后再修改");
-            }
-            else if (treeView1.SelectedNode.Name.Equals("0"))
-            {
-                MessageBox.Show("请选择后再修改！");
-            }
-            else
-            {
-                Addbranches adb = new Addbranches();
-                adb.updeteid = treeView1.SelectedNode.Name;
-                adb.title = "修改分公司";
-                adb.Text = "修改分公司";
-                adb.zgscount = int.Parse(treeView1.SelectedNode.Parent.Name);
-                adb.ShowDialog();
-                if (adb.DialogResult == DialogResult.OK)
+                if (treeView1.SelectedNode == null)
                 {
-                    loadTreeview();
+                    MessageBox.Show("请选择后再修改");
                 }
+                else if (treeView1.SelectedNode.Name.Equals("0"))
+                {
+                    MessageBox.Show("请选择后再修改！");
+                }
+                else
+                {
+                    Addbranches adb = new Addbranches();
+                    adb.updeteid = treeView1.SelectedNode.Name;
+                    adb.title = "修改分公司";
+                    adb.Text = "修改分公司";
+                    adb.zgscount = int.Parse(treeView1.SelectedNode.Parent.Name);
+                    adb.ShowDialog();
+                    if (adb.DialogResult == DialogResult.OK)
+                    {
+                        loadTreeview();
+                    }
+                }
+            }
+            else 
+            {
+                MessageBox.Show("总公司不能修改");
             }
         }
 
@@ -344,33 +367,7 @@ namespace GODInventoryWinForm.Controls.Branches
         #region 员工删除点击事件
         private void 删除ToolStripMenuItem2_Click_1(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("您确定要删除吗？", "系统提示", MessageBoxButtons.OKCancel);
-            if (dr == DialogResult.OK)
-            {
-                #region 删除
-                if (treeView1.SelectedNode == null)
-                {
-                    MessageBox.Show("请选择公司后再删除！");
-
-                }
-                else if (treeView1.SelectedNode.Name.Equals("0"))
-                {
-                    MessageBox.Show("请选择公司后再删除！");
-                }
-                else
-                {
-                    if (delete() > 0)
-                    {
-                        MessageBox.Show("删除成功!");
-                        selectStaffs(treeView1.SelectedNode.Name);
-                    }
-                    else
-                    {
-                        MessageBox.Show("删除失败");
-                    }
-                }
-                #endregion
-            }
+           
 
         }
         #endregion
@@ -403,30 +400,7 @@ namespace GODInventoryWinForm.Controls.Branches
         #region 员工编辑事件
         private void 修改ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            #region 编辑
-            if (treeView1.SelectedNode == null)
-            {
-                MessageBox.Show("请选择公司后再编辑！");
-
-            }
-            else if (treeView1.SelectedNode.Name.Equals("0"))
-            {
-                MessageBox.Show("请选择公司后再编辑！");
-            }
-            else
-            {
-                int index = dataGridView1.SelectedRows[0].Index;
-                addstaffs adsf = new addstaffs();
-                adsf.staffsid = dataGridView1.Rows[index].Cells["Id"].Value.ToString();
-                adsf.title = dataGridView1.Rows[index].Cells["fullname"].Value.ToString() + "员工的信息修改";
-                adsf.branchid = treeView1.SelectedNode.Name;
-                adsf.ShowDialog();
-                if (adsf.DialogResult == DialogResult.OK)
-                {
-                    selectStaffs(treeView1.SelectedNode.Name);
-                }
-            }
-            #endregion
+           
         }
         #endregion
 
@@ -553,6 +527,65 @@ namespace GODInventoryWinForm.Controls.Branches
         }
 
         #endregion
+
+        private void 删除ToolStripMenuItem2_Click_2(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("您确定要删除吗？", "系统提示", MessageBoxButtons.OKCancel);
+            if (dr == DialogResult.OK)
+            {
+                #region 删除
+                if (treeView1.SelectedNode == null)
+                {
+                    MessageBox.Show("请选择公司后再删除！");
+
+                }
+                else if (treeView1.SelectedNode.Name.Equals("0"))
+                {
+                    MessageBox.Show("请选择公司后再删除！");
+                }
+                else
+                {
+                    if (delete() > 0)
+                    {
+                        MessageBox.Show("删除成功!");
+                        selectStaffs(treeView1.SelectedNode.Name);
+                    }
+                    else
+                    {
+                        MessageBox.Show("删除失败");
+                    }
+                }
+                #endregion
+            }
+        }
+
+        private void 修改ToolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+            #region 编辑
+            if (treeView1.SelectedNode == null)
+            {
+                MessageBox.Show("请选择公司后再编辑！");
+
+            }
+            else if (treeView1.SelectedNode.Name.Equals("0"))
+            {
+                MessageBox.Show("请选择公司后再编辑！");
+            }
+            else
+            {
+                int index = dataGridView1.SelectedRows[0].Index;
+                addstaffs adsf = new addstaffs();
+                adsf.staffsid = dataGridView1.Rows[index].Cells["Id"].Value.ToString();
+                adsf.title = dataGridView1.Rows[index].Cells["fullname"].Value.ToString() + "员工的信息修改";
+                adsf.branchid = treeView1.SelectedNode.Name;
+                adsf.ShowDialog();
+                if (adsf.DialogResult == DialogResult.OK)
+                {
+                    selectStaffs(treeView1.SelectedNode.Name);
+                }
+            }
+            #endregion
+        }
 
 
 
