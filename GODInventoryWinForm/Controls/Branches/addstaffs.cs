@@ -14,17 +14,30 @@ namespace GODInventoryWinForm.Controls.Branches
 {
     public partial class addstaffs : Form
     {
-        
+
         public string title;
         public string branchid;
         public string staffsid;
         DataSet ds;
         MySqlDataAdapter adapter;
+        private List<t_staffs> t_staffsList;
         public addstaffs()
         {
             InitializeComponent();
-        }
+            InitializeOrder();
 
+        }
+        private void InitializeOrder()
+        {
+            t_staffsList = new List<t_staffs>();
+            using (var ctx = new GODDbContext())
+            {
+                t_staffsList = ctx.t_staffs.ToList();
+
+
+            }
+        
+        }
         private void label4_Click(object sender, EventArgs e)
         {
 
@@ -53,7 +66,7 @@ namespace GODInventoryWinForm.Controls.Branches
                     {
                         txt_StaffsName.Text = ts.fullname;
                         txt_Login.Text = ts.login;
-                        txt_role.Text =ts.role;
+                        txt_role.Text = ts.role;
 
                         txt_password.Text = ts.password;
                     }
@@ -84,7 +97,7 @@ namespace GODInventoryWinForm.Controls.Branches
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
-                   
+
                 }
             }
         }
@@ -111,7 +124,7 @@ namespace GODInventoryWinForm.Controls.Branches
                         ctx.SaveChanges();
                         index = 1;
                     }
-                    else 
+                    else
                     {
                         index = 0;
                     }
@@ -125,80 +138,96 @@ namespace GODInventoryWinForm.Controls.Branches
             return index;
         }
         #endregion
-      
+
         #region 非空判断
-            private bool fkpd()
+        private bool fkpd()
+        {
+            bool pd = false;
+            if (txt_StaffsName.Text.Equals(string.Empty))
             {
-                bool pd = false;
-                if (txt_StaffsName.Text.Equals(string.Empty))
+
+                this.errorProvider1.Clear();
+                this.errorProvider1.SetError(txt_StaffsName, "请输入员工姓名");
+            }
+            else
+            {
+                if (txt_Login.Text.Equals(string.Empty))
                 {
 
                     this.errorProvider1.Clear();
-                    this.errorProvider1.SetError(txt_StaffsName, "请输入员工姓名");
+                    this.errorProvider1.SetError(txt_Login, "请输入Login");
                 }
-                else 
+                else
                 {
-                    if (txt_Login.Text.Equals(string.Empty))
+                    if (txt_role.Text.Equals(string.Empty))
                     {
 
                         this.errorProvider1.Clear();
-                        this.errorProvider1.SetError(txt_Login, "请输入Login");
+                        this.errorProvider1.SetError(txt_role, "请输入员工职位");
                     }
-                    else 
+                    else
                     {
-                        if (txt_role.Text.Equals(string.Empty))
+                        if (txt_password.Text.Equals(string.Empty))
                         {
 
                             this.errorProvider1.Clear();
-                            this.errorProvider1.SetError(txt_role, "请输入员工职位");
+                            this.errorProvider1.SetError(txt_password, "请输入员工密码");
                         }
-                        else 
+                        else
                         {
-                            if (txt_password.Text.Equals(string.Empty))
-                            {
-
-                                this.errorProvider1.Clear();
-                                this.errorProvider1.SetError(txt_password, "请输入员工密码");
-                            }
-                            else
-                            {
-                                this.errorProvider1.Clear();
-                                pd = true;
-                            }
+                            this.errorProvider1.Clear();
+                            pd = true;
                         }
                     }
                 }
-                return pd;
             }
+            return pd;
+        }
         #endregion
 
         #region 添加
-            private int add() 
+        private int add()
+        {
+            int i = 0;
+            try
             {
-                int i =0 ;
-                try
+                using (var ctx = new GODDbContext())
                 {
-                    using (var ctx = new GODDbContext())
-                    {
-                        t_staffs stf = new t_staffs();
-                        stf.fullname = this.txt_StaffsName.Text;
-                        stf.login = txt_Login.Text;
-                        stf.role = txt_role.Text;
-                        stf.branch_id = int.Parse(branchid);
-                        stf.password = txt_password.Text;
-                        ctx.t_staffs.Add(stf);
-                        ctx.SaveChanges();
-                        i = 1;
-                    }
-                   
+                    t_staffs stf = new t_staffs();
+                    stf.fullname = this.txt_StaffsName.Text;
+                    stf.login = txt_Login.Text;
+                    stf.role = txt_role.Text;
+                    stf.branch_id = int.Parse(branchid);
+                    stf.password = txt_password.Text;
+                    ctx.t_staffs.Add(stf);
+                    ctx.SaveChanges();
+                    i = 1;
+                }
 
-                }
-                catch (Exception ex) 
-                {
-                    MessageBox.Show("程序有误！");
-                }
-                return i;
+
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("程序有误！");
+            }
+            return i;
+        }
         #endregion
+
+        private void txt_Login_TextChanged(object sender, EventArgs e)
+        {
+            this.errorProvider1.Clear();
+                  
+            if (txt_Login.Text.Length > 0 && t_staffsList!=null)
+            {
+                var pendingorder = t_staffsList.Find(o => o.login == txt_Login.Text);
+
+                if (pendingorder != null)
+                {
+
+                    this.errorProvider1.SetError(txt_Login, "已存在");
+                }
+            }
+        }
     }
 }

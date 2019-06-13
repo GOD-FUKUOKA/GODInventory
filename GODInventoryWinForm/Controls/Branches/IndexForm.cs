@@ -17,13 +17,16 @@ namespace GODInventoryWinForm.Controls.Branches
 {
     public partial class IndexForm : Form
     {
-   
+
         protected List<t_branches> branches;
         protected List<t_staffs> stf;
         protected List<t_shoplist> store;
+        string treeViewtx;
+
         public IndexForm()
         {
             InitializeComponent();
+            treeView1.DrawMode = TreeViewDrawMode.OwnerDrawText;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -33,7 +36,7 @@ namespace GODInventoryWinForm.Controls.Branches
         #region 添加公司事件
         private void button2_Click(object sender, EventArgs e)
         {
-            
+
             Addbranches adb = new Addbranches();
             adb.zgscount = int.Parse(treeView1.SelectedNode.Name);
             adb.ShowDialog();
@@ -42,9 +45,14 @@ namespace GODInventoryWinForm.Controls.Branches
                 this.loadTreeview();
             }
 
+            treeViewtx = adb.treeViewtx ;
+            foreach (TreeNode n in treeView1.Nodes)
+            {
+                ErgodicTreeView(n);
+            }
         }
         #endregion
-        
+
 
         private void IndexForm_Load(object sender, EventArgs e)
         {
@@ -57,45 +65,45 @@ namespace GODInventoryWinForm.Controls.Branches
         {
             try
             {
-             
-                   using (var cxsk = new GODDbContext())
-                   {
-                       treeView1.Nodes.Clear();
-                       var query = (from t_branches tb in cxsk.t_branchs
-                                     where tb.parent_id == 0
-                                        select tb).ToList();
-                       if (query.Count!=0)
-                       {
-                           foreach (t_branches bc in query)
-                           {
-                              TreeNode tnc = new TreeNode();
-                               tnc.Text = bc.fullname;
-                               tnc.Name = bc.id.ToString();
-                               treeView1.Nodes.Add(tnc);
-                           }
-                           query =(from t_branches tb in cxsk.t_branchs
-                                     where tb.parent_id != 0
-                                        select tb).ToList();
-                           foreach (t_branches bc in query)
-                           {
-                               TreeNode tn = new TreeNode();
-                               tn.Text = bc.fullname;
-                               tn.Name = bc.id.ToString();
-                               for(int i =0 ;i<treeView1.Nodes.Count;i++)
-                               {
-                                    if(treeView1.Nodes[i].Name == bc.parent_id.ToString())
-                                    {
-                                        treeView1.Nodes[i].Nodes.Add(tn);
-                                    }
-                               }
-                               
 
-                           }
+                using (var cxsk = new GODDbContext())
+                {
+                    treeView1.Nodes.Clear();
+                    var query = (from t_branches tb in cxsk.t_branchs
+                                 where tb.parent_id == 0
+                                 select tb).ToList();
+                    if (query.Count != 0)
+                    {
+                        foreach (t_branches bc in query)
+                        {
+                            TreeNode tnc = new TreeNode();
+                            tnc.Text = bc.fullname;
+                            tnc.Name = bc.id.ToString();
+                            treeView1.Nodes.Add(tnc);
+                        }
+                        query = (from t_branches tb in cxsk.t_branchs
+                                 where tb.parent_id != 0
+                                 select tb).ToList();
+                        foreach (t_branches bc in query)
+                        {
+                            TreeNode tn = new TreeNode();
+                            tn.Text = bc.fullname;
+                            tn.Name = bc.id.ToString();
+                            for (int i = 0; i < treeView1.Nodes.Count; i++)
+                            {
+                                if (treeView1.Nodes[i].Name == bc.parent_id.ToString())
+                                {
+                                    treeView1.Nodes[i].Nodes.Add(tn);
+                                }
+                            }
 
-                       }
-                   }
-               
-                 
+
+                        }
+
+                    }
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -111,8 +119,8 @@ namespace GODInventoryWinForm.Controls.Branches
         #region 删除公司事件
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("确认删除该公司吗?","系统提示",MessageBoxButtons.OKCancel);
-            if (dr == DialogResult.OK) 
+            DialogResult dr = MessageBox.Show("确认删除该公司吗?", "系统提示", MessageBoxButtons.OKCancel);
+            if (dr == DialogResult.OK)
             {
                 if (treeView1.SelectedNode == null)
                 {
@@ -163,7 +171,7 @@ namespace GODInventoryWinForm.Controls.Branches
                             i = 1;
                         }
                     }
-                    else 
+                    else
                     {
                         MessageBox.Show("该公司还有员工您不能删除");
                     }
@@ -223,17 +231,18 @@ namespace GODInventoryWinForm.Controls.Branches
 
         #endregion
 
-        private bool pdGS(int id) 
+        private bool pdGS(int id)
         {
-            using(var ctxs = new GODDbContext ())
+            using (var ctxs = new GODDbContext())
             {
                 var query = (from t_branches tb in ctxs.t_branchs
                              where tb.parent_id == 0 && tb.id == id
                              select tb).ToList();
-                if (query.Count <= 0) 
+                if (query.Count <= 0)
                 {
                     return true;
-                }else 
+                }
+                else
                 {
                     return false;
                 }
@@ -266,7 +275,7 @@ namespace GODInventoryWinForm.Controls.Branches
                     }
                 }
             }
-            else 
+            else
             {
                 MessageBox.Show("总公司不能修改");
             }
@@ -276,6 +285,8 @@ namespace GODInventoryWinForm.Controls.Branches
 
         private void treeView1_Click(object sender, EventArgs e)
         {
+
+            treeViewtx = treeView1.SelectedNode.Text;
 
         }
 
@@ -367,7 +378,7 @@ namespace GODInventoryWinForm.Controls.Branches
         #region 员工删除点击事件
         private void 删除ToolStripMenuItem2_Click_1(object sender, EventArgs e)
         {
-           
+
 
         }
         #endregion
@@ -400,7 +411,7 @@ namespace GODInventoryWinForm.Controls.Branches
         #region 员工编辑事件
         private void 修改ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-           
+
         }
         #endregion
 
@@ -475,7 +486,7 @@ namespace GODInventoryWinForm.Controls.Branches
         #region 删除店铺事件
         private void 删除ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("您确定要删除吗？", "", MessageBoxButtons.OKCancel) == DialogResult.OK) 
+            if (MessageBox.Show("您确定要删除吗？", "", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 if (treeView1.SelectedNode == null)
                 {
@@ -589,7 +600,59 @@ namespace GODInventoryWinForm.Controls.Branches
 
 
 
-       
+        void ErgodicTreeView(TreeNode tn)
+        {
+            if (tn == null) return;
+            //查找到某节点时
+            if (tn.Text.Equals(treeViewtx))
+            {
+                //遍历递归获取父节点，将父节点全部展开
+                prenode(tn);
+                //选中某节点，并加背景颜色
+                treeView1.SelectedNode = tn;
+                treeView1.SelectedNode.BackColor = System.Drawing.Color.Blue;
+            }
+            foreach (TreeNode n in tn.Nodes)
+            {
+                ErgodicTreeView(n);
+            }
+        }
+        void prenode(TreeNode m)
+        {
+
+            if (m.Parent != null && m.Parent.Text != null)
+            {
+                m.Parent.Expand();
+                //当为项级节点时
+                if (m.Parent.Level == 0)
+                {
+                    m.Parent.Expand();
+                }
+                //不是项级节点时
+                else
+                {
+                    prenode(m.Parent);
+                }
+
+            }
+
+        }
+
+        private void treeView1_DrawNode(object sender, DrawTreeNodeEventArgs e)
+        {
+            if ((e.State & TreeNodeStates.Selected) != 0)
+            {
+                e.Graphics.FillRectangle(Brushes.Red, e.Node.Bounds);
+                Font nodeFont = e.Node.NodeFont;
+                if (nodeFont == null) nodeFont = ((TreeView)sender).Font;
+                e.Graphics.DrawString(e.Node.Text, nodeFont, Brushes.White, Rectangle.Inflate(e.Bounds, 2, 0));
+            }
+            else
+            {
+                e.DrawDefault = true;
+            }
+
+        }
 
 
 

@@ -208,13 +208,13 @@ namespace GODInventoryWinForm.Controls.Branches
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("分公司1");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("分公司2");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("分公司3");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("总公司", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("分公司1");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("分公司2");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("分公司3");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("总公司", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.newButton1 = new System.Windows.Forms.Button();
@@ -289,6 +289,7 @@ namespace GODInventoryWinForm.Controls.Branches
             this.fullname,
             this.Id,
             this.role});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.Location = new System.Drawing.Point(6, 47);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -402,20 +403,22 @@ namespace GODInventoryWinForm.Controls.Branches
             // treeView1
             // 
             this.treeView1.ContextMenuStrip = this.ct_TreeviewDelete;
+            this.treeView1.HideSelection = false;
             this.treeView1.Location = new System.Drawing.Point(22, 47);
             this.treeView1.Name = "treeView1";
-            treeNode5.Name = "节点1";
-            treeNode5.Text = "分公司1";
-            treeNode6.Name = "节点2";
-            treeNode6.Text = "分公司2";
-            treeNode7.Name = "节点3";
-            treeNode7.Text = "分公司3";
-            treeNode8.Name = "0";
-            treeNode8.Text = "总公司";
+            treeNode1.Name = "节点1";
+            treeNode1.Text = "分公司1";
+            treeNode2.Name = "节点2";
+            treeNode2.Text = "分公司2";
+            treeNode3.Name = "节点3";
+            treeNode3.Text = "分公司3";
+            treeNode4.Name = "0";
+            treeNode4.Text = "总公司";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8});
+            treeNode4});
             this.treeView1.Size = new System.Drawing.Size(213, 317);
             this.treeView1.TabIndex = 2;
+            this.treeView1.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeView1_DrawNode);
             this.treeView1.Click += new System.EventHandler(this.treeView1_Click);
             this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
             // 
@@ -467,19 +470,19 @@ namespace GODInventoryWinForm.Controls.Branches
             this.删除ToolStripMenuItem2,
             this.修改ToolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 48);
             // 
             // 删除ToolStripMenuItem2
             // 
             this.删除ToolStripMenuItem2.Name = "删除ToolStripMenuItem2";
-            this.删除ToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.删除ToolStripMenuItem2.Size = new System.Drawing.Size(100, 22);
             this.删除ToolStripMenuItem2.Text = "删除";
             this.删除ToolStripMenuItem2.Click += new System.EventHandler(this.删除ToolStripMenuItem2_Click_2);
             // 
             // 修改ToolStripMenuItem1
             // 
             this.修改ToolStripMenuItem1.Name = "修改ToolStripMenuItem1";
-            this.修改ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.修改ToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
             this.修改ToolStripMenuItem1.Text = "修改";
             this.修改ToolStripMenuItem1.Click += new System.EventHandler(this.修改ToolStripMenuItem1_Click_1);
             // 

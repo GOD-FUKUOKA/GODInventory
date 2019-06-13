@@ -106,6 +106,7 @@
             this.txt_Login.Name = "txt_Login";
             this.txt_Login.Size = new System.Drawing.Size(190, 21);
             this.txt_Login.TabIndex = 1;
+            this.txt_Login.TextChanged += new System.EventHandler(this.txt_Login_TextChanged);
             // 
             // txt_StaffsName
             // 
