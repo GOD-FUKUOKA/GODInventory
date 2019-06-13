@@ -36,19 +36,54 @@ namespace GODInventoryWinForm.Controls.Branches
         #region 添加公司事件
         private void button2_Click(object sender, EventArgs e)
         {
-
-            Addbranches adb = new Addbranches();
-            adb.zgscount = int.Parse(treeView1.SelectedNode.Name);
-            adb.ShowDialog();
-            if (adb.DialogResult == DialogResult.OK)
+            try
             {
-                this.loadTreeview();
+                if (treeView1.SelectedNode != null )
+                {
+                    using (var ctx = new GODDbContext())
+                    {
+                        int bid = int.Parse(treeView1.SelectedNode.Name);
+                        var query = (from t_branches tb in ctx.t_branchs
+                                     where tb.id == bid
+                                     select tb).ToList();
+                        int parentid = 0;
+                        foreach (t_branches tb in query)
+                        {
+                            parentid = tb.parent_id;
+                        }
+                        if (parentid == 0)
+                        {
+                            Addbranches adb = new Addbranches();
+                            adb.zgscount = int.Parse(treeView1.SelectedNode.Name);
+                            adb.ShowDialog();
+                            if (adb.DialogResult == DialogResult.OK)
+                            {
+                                this.loadTreeview();
+                            }
+
+                            treeViewtx = adb.treeViewtx;
+                            foreach (TreeNode n in treeView1.Nodes)
+                            {
+                                ErgodicTreeView(n);
+                            }
+                        }
+                        else 
+                        {
+                            MessageBox.Show("分公司不能添加分公司");
+                        }
+                    }
+                    
+
+                }
+                else
+                {
+                    MessageBox.Show("请选中公司");
+                }
+
             }
-
-            treeViewtx = adb.treeViewtx ;
-            foreach (TreeNode n in treeView1.Nodes)
+            catch (Exception ex) 
             {
-                ErgodicTreeView(n);
+                MessageBox.Show(ex.Message);
             }
         }
         #endregion
@@ -211,20 +246,8 @@ namespace GODInventoryWinForm.Controls.Branches
                 if (CurrentNode != null)//判断你点的是不是一个节点
                 {
                     treeView1.SelectedNode = CurrentNode;//选中这个节点
-                    if (!treeView1.SelectedNode.Text.Equals("总公司"))
-                    {
-                        selectStaffs(treeView1.SelectedNode.Name);
-                        selectStroe(treeView1.SelectedNode.Name);
-                    }
-                    else
-                    {
-                        stf = new List<t_staffs>();
-                        dataGridView1.AutoGenerateColumns = false;
-                        dataGridView1.DataSource = stf;
-                        store = new List<t_shoplist>();
-                        dataGridView2.AutoGenerateColumns = false;
-                        dataGridView2.DataSource = store;
-                    }
+                    selectStaffs(treeView1.SelectedNode.Name);
+                    selectStroe(treeView1.SelectedNode.Name);
                 }
             }
         }
@@ -331,22 +354,69 @@ namespace GODInventoryWinForm.Controls.Branches
             try
             {
                 if (!branchesid.Equals(string.Empty) && branchesid != null)
+                    
                     using (var cxt = new GODDbContext())
                     {
                         int brid = int.Parse(branchesid);
-                        var q = (from t_staffs t in cxt.t_staffs
-                                 where t.branch_id == brid
-                                 select t).ToList();
-                        stf = q;
-                        if (stf.Count != 0)
+                       
+                        var query = (from t_branches tb in cxt.t_branchs
+                                     where tb.id == brid
+                                     select tb).ToList();
+                        int parentid = 0;
+                        foreach (t_branches tb in query ) 
                         {
-                            dataGridView1.DataSource = stf;
+                            parentid = tb.parent_id;
                         }
-                        else
+                        if (parentid != 0)
+                        {
+                            var q = (from t_staffs t in cxt.t_staffs
+                                     where t.branch_id == brid
+                                     select t).ToList();
+                            stf = q;
+                            if (stf.Count != 0)
+                            {
+
+                                dataGridView1.DataSource = stf;
+                            }
+                            else
+                            {
+                                dataGridView1.AutoGenerateColumns = false;
+                                dataGridView1.DataSource = stf;
+                            }
+                        }
+                        else 
                         {
                             dataGridView1.AutoGenerateColumns = false;
+                            List<t_staffs> stf = new List<t_staffs>();
                             dataGridView1.DataSource = stf;
+                       
+                            
+                            var selectZgs = (from t_branches tb in cxt.t_branchs
+                                         where tb.parent_id == brid
+                                         select tb).ToList();
+                            List<t_staffs> sptf = new List<t_staffs>();
+                            foreach (t_branches tb in selectZgs) 
+                            {
+                                var q = (from t_staffs t in cxt.t_staffs
+                                         where t.branch_id == tb.id
+                                         select t).ToList();
+                               
+                                if (q.Count != 0)
+                                {
+                                   
+                                        
+                                            foreach (t_staffs ts in q)
+                                            {
+                                                sptf.Add(ts);
+                                            }
+                                        
+                                    
+                                }
+                                
+                            }
+                            dataGridView1.DataSource = sptf;
                         }
+                        
                     }
             }
             catch (Exception ex)
