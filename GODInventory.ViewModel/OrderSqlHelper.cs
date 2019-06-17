@@ -542,11 +542,17 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP B
             using (GODDbContext ctx = new GODDbContext())
             {
 
-                list = (from t_orderdata o in ctx.t_orderdata
-                     where o.Status == OrderStatus.Cancelled
-                     orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
-                     select o
-                         ).ToList();
+                var q = (from t_orderdata o in ctx.t_orderdata
+                         where o.Status == OrderStatus.Cancelled
+                         orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
+                         select o
+                         ) as IQueryable<t_orderdata>;
+                var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+                if (storeids != null)
+                {
+                    q =  q.Where(o => storeids.Contains(o.店舗コード));
+                }         
+                list = q.ToList();
             }
             return list;
         }
@@ -563,7 +569,12 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP B
                      where o.Status == OrderStatus.Received
                      orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                      select o
-                     );
+                     ) as IQueryable<t_orderdata>;
+            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            if (storeids != null)
+            {
+                q = q.Where(o => storeids.Contains(o.店舗コード));
+            } 
             return q;
         }
 
