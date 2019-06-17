@@ -17,6 +17,8 @@ namespace GODInventoryWinForm.Controls.Branches
         public string updeteid;
         public string title;
         public int zgscount;
+       public string treeViewtx;
+
         public Addbranches()
         {
             InitializeComponent();
@@ -138,6 +140,7 @@ namespace GODInventoryWinForm.Controls.Branches
                         ctx.t_branchs.Add(bc);
                         ctx.SaveChanges();
                         i=1;
+                        treeViewtx = txt_BranchesName.Text;
                     }
                     else 
                     {
@@ -181,6 +184,7 @@ namespace GODInventoryWinForm.Controls.Branches
                             bc.phone = txt_phone.Text;
                             ctx.SaveChanges();
                             index = 1;
+                            treeViewtx = txt_BranchesName.Text;
                         }
                     }
                     else {
