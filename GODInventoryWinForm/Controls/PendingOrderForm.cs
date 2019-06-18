@@ -1625,5 +1625,10 @@ namespace GODInventoryWinForm.Controls
 
         }
 
+        private void dataGridView3_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+
     }
 }
