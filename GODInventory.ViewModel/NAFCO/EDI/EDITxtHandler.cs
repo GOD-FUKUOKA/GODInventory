@@ -245,7 +245,8 @@ namespace GODInventory.NAFCO.EDI
             //             select g
             //        ).Count();
 
-            var max = ctx.Database.SqlQuery<long>(sql, order.店舗コード, order.法人コード, date).FirstOrDefault();
+            var max = ctx.Database.SqlQuery<long?>(sql, order.店舗コード, order.法人コード, date).FirstOrDefault( ) ?? 0;
+
             long chuHeNo = 0;
             if ( max == 0)
             {                 
