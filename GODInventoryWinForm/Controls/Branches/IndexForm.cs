@@ -26,7 +26,7 @@ namespace GODInventoryWinForm.Controls.Branches
         public IndexForm()
         {
             InitializeComponent();
-            treeView1.DrawMode = TreeViewDrawMode.OwnerDrawText;
+            //treeView1.DrawMode = TreeViewDrawMode.OwnerDrawText;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -61,11 +61,7 @@ namespace GODInventoryWinForm.Controls.Branches
                                 this.loadTreeview();
                             }
 
-                            treeViewtx = adb.treeViewtx;
-                            foreach (TreeNode n in treeView1.Nodes)
-                            {
-                                ErgodicTreeView(n);
-                            }
+                            refresh_treeview(adb);
                         }
                         else 
                         {
@@ -85,6 +81,21 @@ namespace GODInventoryWinForm.Controls.Branches
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void refresh_treeview(Addbranches adb)
+        {
+            treeViewtx = adb.treeViewtx;
+            foreach (TreeNode n in treeView1.Nodes)
+            {
+                ErgodicTreeView(n);
+            }
+
+         
+                selectStaffs(treeView1.SelectedNode.Name);
+                selectStroe(treeView1.SelectedNode.Name);
+           
+
         }
         #endregion
 
@@ -171,6 +182,8 @@ namespace GODInventoryWinForm.Controls.Branches
                     {
                         MessageBox.Show("删除成功!");
                         loadTreeview();
+
+                     
                     }
                     else
                     {
@@ -296,6 +309,7 @@ namespace GODInventoryWinForm.Controls.Branches
                     {
                         loadTreeview();
                     }
+                    refresh_treeview(adb);
                 }
             }
             else
@@ -680,7 +694,7 @@ namespace GODInventoryWinForm.Controls.Branches
                 prenode(tn);
                 //选中某节点，并加背景颜色
                 treeView1.SelectedNode = tn;
-                treeView1.SelectedNode.BackColor = System.Drawing.Color.Blue;
+                treeView1.SelectedNode.BackColor = System.Drawing.Color.AliceBlue;
             }
             foreach (TreeNode n in tn.Nodes)
             {

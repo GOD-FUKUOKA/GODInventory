@@ -206,8 +206,8 @@ namespace GODInventoryWinForm
 
         private void toolStripButton1_Click_1(object sender, EventArgs e)
         {
-            var form = new GODInventoryWinForm.Controls.Branches.IndexForm();
-            form.ShowDialog();
+            //var form = new GODInventoryWinForm.Controls.Branches.IndexForm();
+            //form.ShowDialog();
         }
     }
 }

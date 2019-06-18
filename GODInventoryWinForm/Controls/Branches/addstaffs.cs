@@ -25,6 +25,9 @@ namespace GODInventoryWinForm.Controls.Branches
         {
             InitializeComponent();
             InitializeOrder();
+    
+
+
 
         }
         private void InitializeOrder()
@@ -36,7 +39,7 @@ namespace GODInventoryWinForm.Controls.Branches
 
 
             }
-        
+
         }
         private void label4_Click(object sender, EventArgs e)
         {
@@ -217,14 +220,14 @@ namespace GODInventoryWinForm.Controls.Branches
         private void txt_Login_TextChanged(object sender, EventArgs e)
         {
             this.errorProvider1.Clear();
-                  
-            if (txt_Login.Text.Length > 0 && t_staffsList!=null)
+
+            if (txt_Login.Text.Length > 0 && t_staffsList != null)
             {
                 var pendingorder = t_staffsList.Find(o => o.login == txt_Login.Text);
-
-                if (pendingorder != null)
+                if (title.Contains("修改"))
+                    txt_Login.Enabled = false;
+                if (pendingorder != null && !title.Contains("修改"))
                 {
-
                     this.errorProvider1.SetError(txt_Login, "已存在");
                 }
             }
