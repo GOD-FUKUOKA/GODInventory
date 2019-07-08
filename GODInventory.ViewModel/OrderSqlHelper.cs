@@ -618,6 +618,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP B
 
             var orders = (from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
                           join t_shoplist s in entityDataSource1.EntitySets["t_shoplist"] on o.店舗コード equals s.店番
+                          join NafcoOrder norder in entityDataSource1.EntitySets["t_nafco_orders"] on o.origin_order_id equals norder.id受注データ
                           where o.ShipNO == shipNo
                           select new v_pendingorder
                           {
@@ -633,8 +634,8 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP B
                               納品日 = o.納品日,
                               ＪＡＮコード = o.ＪＡＮコード,
                               商品コード = o.商品コード,
-                              品名漢字 = o.発注品名漢字,
-                              規格名漢字 = o.発注規格名漢字,
+                              品名漢字 = norder.発注品名漢字,
+                              規格名漢字 = norder.発注規格名漢字,
                               実際出荷数量 = o.実際出荷数量,
                               原単価_税抜_ = o.原単価_税抜_,
                               口数 = o.口数,
@@ -985,23 +986,29 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP B
         // 返回 管理连番
         public static long GenerateASNByShipNOs(GODDbContext ctx, List<string> shipNOs)
         {
-
+            var shipnos = String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray());
             var now = DateTime.Now;
 
             // generate ASN管理連番
             long mid = EDITxtHandler.GenerateMID(ctx);
             // 无需 条件OrderStatus.ASN, 取消的订单也要生成ASN
-            string sql1 = String.Format("UPDATE t_orderdata SET `ASN管理連番`={1}  WHERE `ShipNO` in ({0}) ", String.Join(",", shipNOs.Select(s => "'" + s + "'").ToArray()), mid);
+            string sql1 = String.Format("UPDATE t_orderdata SET `ASN管理連番`={1}  WHERE `ShipNO` in ({0}) ", shipnos, mid);
             var path = EDITxtHandler.BuildASNFilePath(mid);
 
             ctx.Database.ExecuteSqlCommand(sql1);
 
-            var orders = (from t_orderdata o in ctx.t_orderdata
-                            where shipNOs.Contains(o.ShipNO)
-                            orderby o.出荷No
-                            select o
-                            ).ToList(); 
 
+            //var orders = (from t_orderdata o in ctx.t_orderdata
+            //              join NafcoOrder norder in ctx.t_nafco_orders on o.origin_order_id equals norder.id受注データ
+            //              where shipnos.contains(o.shipno)
+            //              orderby o.出荷no
+            //              select o
+            //                ).tolist(); 
+            string query = string.Format(@"select o.*, norder.発注品名漢字, norder.発注規格名漢字  from t_orderdata o
+             inner join t_nafco_orders norder on o.origin_order_id = norder.id受注データ
+             where o.shipno in [{0}]", shipnos);
+
+            var orders = ctx.Database.SqlQuery< WholeOrder>(query).ToList();
             ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(path, orders);
 
             List<t_pricelist> canceledPriceItems = (from t_pricelist p in ctx.t_pricelist
@@ -1033,21 +1040,26 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP B
         public static long GenerateASNByOrderIds(GODDbContext ctx, List<int> orderIds)
         {
 
+            var orderids = String.Join(",", orderIds.ToArray());
             var now = DateTime.Now;
 
             // generate ASN管理連番
             long mid = EDITxtHandler.GenerateMID(ctx);
             // 无需 条件OrderStatus.ASN, 取消的订单也要生成ASN
-            var sql1 = String.Format("UPDATE t_orderdata SET `ASN管理連番`={1}  WHERE `id受注データ` in ({0}) ", String.Join(",", orderIds.ToArray()), mid);
+            var sql1 = String.Format("UPDATE t_orderdata SET `ASN管理連番`={1}  WHERE `id受注データ` in ({0}) ", orderids, mid);
             var path = EDITxtHandler.BuildASNFilePath(mid);
 
             ctx.Database.ExecuteSqlCommand(sql1);
 
-            var orders = (from t_orderdata o in ctx.t_orderdata
-                          where orderIds.Contains(o.id受注データ)
-                          orderby o.出荷No
-                          select o
-                            ).ToList();
+            //var orders = (from t_orderdata o in ctx.t_orderdata
+            //              where orderIds.Contains(o.id受注データ)
+            //              orderby o.出荷No
+            //              select o
+            //                ).ToList();
+            string query = string.Format(@"select o.*, norder.発注品名漢字, norder.発注規格名漢字  from t_orderdata o
+             inner join t_nafco_orders norder on o.origin_order_id = norder.id受注データ
+             where o.id受注データ in ({0}) order by o.出荷No", orderids);
+            var orders = ctx.Database.SqlQuery<WholeOrder>(query).ToList();
 
             ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(path, orders);
 

@@ -82,7 +82,7 @@ namespace GODInventory.NAFCO.EDI
         //68 予備  （数値  ） 2 471
         //69 予備             28 473
         ASNHeadModel head;
-        t_orderdata entity;
+        WholeOrder entity;
 
         Byte[] データID;//1 データID               3  1
         Byte[] 管理連番;//2 管理連番                13  4
@@ -179,7 +179,7 @@ namespace GODInventory.NAFCO.EDI
         //    this.発注形態区分 = line.Substring(113, 2);//20 発注形態区分         2 114
         //}
 
-        public ASNModel( ASNHeadModel head, t_orderdata order)
+        public ASNModel(ASNHeadModel head, WholeOrder order)
         {
             this.head = head;
             this.entity = order;

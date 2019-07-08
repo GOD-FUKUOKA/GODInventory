@@ -195,7 +195,7 @@ namespace GODInventory.NAFCO.EDI
         }
 
         // t_orderdata为内部订单表
-        public static ASNHeadModel GenerateASNTxt(string path, List<t_orderdata> orders)
+        public static ASNHeadModel GenerateASNTxt(string path, List<WholeOrder> orders)
         {
             var directory_path = Path.GetDirectoryName(path);
             if (!Directory.Exists(directory_path))

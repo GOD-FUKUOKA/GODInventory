@@ -22,11 +22,11 @@ namespace GODInventory.NAFCO.EDI
         public Byte[] レコード長; //8 レコード長       4 53
         public Byte[] 予備; //9 予備              644 57
 
-        public List<t_orderdata> entities;
+        public List<WholeOrder> entities;
         public List<ASNModel> models;
         public int totalQuantity;
 
-        public ASNHeadModel( List<t_orderdata> orders)
+        public ASNHeadModel(List<WholeOrder> orders)
         {
             this.entities = orders;
 

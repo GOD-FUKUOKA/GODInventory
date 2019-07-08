@@ -193,11 +193,11 @@ namespace GODInventory.Tester
             using (BinaryWriter bw = new BinaryWriter(new FileStream(path, FileMode.Create, FileAccess.Write)))
             {
 
-                ASNHeadModel order_head = new ASNHeadModel(orders);
+                //ASNHeadModel order_head = new ASNHeadModel(orders);
 
-                order_head.Serialize( bw);
+                //order_head.Serialize( bw);
 
-                Console.WriteLine(" write head ={0}", order_head.DetailCount);
+                //Console.WriteLine(" write head ={0}", order_head.DetailCount);
                
             }
 

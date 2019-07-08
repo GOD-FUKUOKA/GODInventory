@@ -6,8 +6,8 @@ namespace GODInventory.MyLinq
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("god_inventory.t_orderdata")]
-    public partial class t_orderdata
+    // orderdata + nafco_orderdata, 用于传送订单，或生成报表
+    public partial class WholeOrder
     {
         [Key]
         public int id受注データ { get; set; }
@@ -317,16 +317,15 @@ namespace GODInventory.MyLinq
 
         public int warehouse_id { get; set; }
         public int transport_id { get; set; }
-        
-        public t_orderdata()
+
+
+        // t_nafco_orders
+        public string 発注品名漢字 { get; set; }
+        public string 発注規格名漢字 { get; set; }
+
+        public WholeOrder()
         {
-            this.キャンセル = "no";
-            this.ダブリ = "no";
-            this.発注形態区分 = (int)OrderReasonEnum.補充;
-            this.発注形態名称漢字 = OrderReasonEnum.補充.ToString();
-            this.実際配送担当 = "丸健";
-            this.配送担当受信 = false;
-            this.Status = 0;
+            
         }
 
         

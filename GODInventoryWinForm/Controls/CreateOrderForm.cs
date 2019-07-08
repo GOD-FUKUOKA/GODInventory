@@ -746,7 +746,6 @@ namespace GODInventoryWinForm.Controls
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            {
                 try
                 {
                     //BindingList<t_orderdata> newOrderList = new BindingList<t_orderdata>();
@@ -867,11 +866,8 @@ namespace GODInventoryWinForm.Controls
                 {
                     MessageBox.Show(String.Format("誤った: 単品重量, 商品コード! されていません"));
                     return;
-
-                    throw;
                 }
 
-            }
 
         }
 
