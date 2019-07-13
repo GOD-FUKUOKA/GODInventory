@@ -206,11 +206,7 @@ namespace GODInventory.MyLinq
         //[StringLength(255)]
         //public string ＧＴＩＮ { get; set; }
 
-        [StringLength(255)]
-        public string 品名カナ { get; set; } // ASN 使用
 
-        [StringLength(255)]
-        public string 規格名カナ { get; set; } // ASN 使用
 
         public int 最小発注単位数量 { get; set; }
 
@@ -319,9 +315,14 @@ namespace GODInventory.MyLinq
         public int transport_id { get; set; }
 
 
+        [StringLength(255)]
+        public string 品名カナ { get; set; } // ASN 使用
+
+        [StringLength(255)]
+        public string 規格名カナ { get; set; } // ASN 使用
         // t_nafco_orders
         public string 発注品名漢字 { get; set; }
-        public string 発注規格名漢字 { get; set; }
+        public string 発注規格名漢字 { get; set; } 
 
         public WholeOrder()
         {

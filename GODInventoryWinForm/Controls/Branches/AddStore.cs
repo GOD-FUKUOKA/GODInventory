@@ -196,51 +196,11 @@ namespace GODInventoryWinForm.Controls.Branches
         }
 
         #endregion
-       
 
-        private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-       
-
-        }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
-            {
-                int count = dataGridView1.Rows.Count;
-                for (int i = 0; i < count; i++)
-                {
-                    DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)dataGridView1.Rows[i].Cells[0];
-                    Boolean flag = Convert.ToBoolean(checkCell.Value);
-                    if (flag == false)
-                    {
-                        checkCell.Value = true;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-            }
-            else
-            {
-                int count = dataGridView1.Rows.Count;
-                for (int i = 0; i < count; i++)
-                {
-                    DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)dataGridView1.Rows[i].Cells[0];
-                    Boolean flag = Convert.ToBoolean(checkCell.Value);
-                    if (flag == true)
-                    {
-                        checkCell.Value = false;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-
-            }
+            
         }
 
 

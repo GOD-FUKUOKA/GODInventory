@@ -17,6 +17,7 @@ namespace GODInventory.MyLinq
         public string phone { get; set; }
         public string fax { get; set; }
         public string memo { get; set; }
+        public int is_root { get; set; }
 
     }
 }

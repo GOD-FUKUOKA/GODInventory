@@ -1,6 +1,6 @@
 ﻿namespace GODInventoryWinForm.Controls.Branches
 {
-    partial class Addbranches
+    partial class AddBranchForm
     {
         /// <summary>
         /// Required designer variable.
@@ -53,19 +53,19 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.Font = new System.Drawing.Font("MS PGothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(24, 21);
+            this.label4.Location = new System.Drawing.Point(35, 21);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(344, 37);
+            this.label4.Size = new System.Drawing.Size(532, 37);
             this.label4.TabIndex = 0;
-            this.label4.Text = "添加分公司";
+            this.label4.Text = "创建分公司";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // submitFormButton
             // 
             this.submitFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.submitFormButton.Location = new System.Drawing.Point(39, 321);
+            this.submitFormButton.Location = new System.Drawing.Point(329, 378);
             this.submitFormButton.Name = "submitFormButton";
-            this.submitFormButton.Size = new System.Drawing.Size(108, 30);
+            this.submitFormButton.Size = new System.Drawing.Size(100, 33);
             this.submitFormButton.TabIndex = 2;
             this.submitFormButton.Text = "保存";
             this.submitFormButton.UseVisualStyleBackColor = true;
@@ -75,9 +75,9 @@
             // 
             this.cancelFormButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelFormButton.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cancelFormButton.Location = new System.Drawing.Point(267, 321);
+            this.cancelFormButton.Location = new System.Drawing.Point(444, 378);
             this.cancelFormButton.Name = "cancelFormButton";
-            this.cancelFormButton.Size = new System.Drawing.Size(108, 30);
+            this.cancelFormButton.Size = new System.Drawing.Size(100, 33);
             this.cancelFormButton.TabIndex = 3;
             this.cancelFormButton.Text = "閉じる";
             this.cancelFormButton.UseVisualStyleBackColor = true;
@@ -96,7 +96,7 @@
             // 
             this.txt_fax.Location = new System.Drawing.Point(113, 117);
             this.txt_fax.Name = "txt_fax";
-            this.txt_fax.Size = new System.Drawing.Size(190, 21);
+            this.txt_fax.Size = new System.Drawing.Size(392, 21);
             this.txt_fax.TabIndex = 2;
             // 
             // label3
@@ -109,7 +109,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(30, 81);
+            this.label1.Location = new System.Drawing.Point(30, 80);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 15);
             this.label1.TabIndex = 10000004;
@@ -130,23 +130,24 @@
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(39, 61);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(336, 243);
+            this.groupBox1.Size = new System.Drawing.Size(528, 311);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
             // txt_phone
             // 
-            this.txt_phone.Location = new System.Drawing.Point(113, 155);
+            this.txt_phone.Location = new System.Drawing.Point(113, 157);
             this.txt_phone.Name = "txt_phone";
-            this.txt_phone.Size = new System.Drawing.Size(190, 21);
+            this.txt_phone.Size = new System.Drawing.Size(392, 21);
             this.txt_phone.TabIndex = 3;
             this.txt_phone.TextChanged += new System.EventHandler(this.txt_BranchesName_TextChanged);
             // 
             // txt_MEMO
             // 
             this.txt_MEMO.Location = new System.Drawing.Point(113, 197);
+            this.txt_MEMO.Multiline = true;
             this.txt_MEMO.Name = "txt_MEMO";
-            this.txt_MEMO.Size = new System.Drawing.Size(190, 21);
+            this.txt_MEMO.Size = new System.Drawing.Size(392, 93);
             this.txt_MEMO.TabIndex = 4;
             this.txt_MEMO.TextChanged += new System.EventHandler(this.txt_BranchesName_TextChanged);
             // 
@@ -154,21 +155,21 @@
             // 
             this.txt_BranchesName.Location = new System.Drawing.Point(113, 37);
             this.txt_BranchesName.Name = "txt_BranchesName";
-            this.txt_BranchesName.Size = new System.Drawing.Size(190, 21);
+            this.txt_BranchesName.Size = new System.Drawing.Size(392, 21);
             this.txt_BranchesName.TabIndex = 0;
             this.txt_BranchesName.TextChanged += new System.EventHandler(this.txt_BranchesName_TextChanged);
             // 
             // txt_address
             // 
-            this.txt_address.Location = new System.Drawing.Point(113, 78);
+            this.txt_address.Location = new System.Drawing.Point(113, 77);
             this.txt_address.Name = "txt_address";
-            this.txt_address.Size = new System.Drawing.Size(190, 21);
+            this.txt_address.Size = new System.Drawing.Size(392, 21);
             this.txt_address.TabIndex = 1;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(72, 162);
+            this.label6.Location = new System.Drawing.Point(72, 160);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 14);
             this.label6.TabIndex = 1;
@@ -177,11 +178,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(72, 204);
+            this.label5.Location = new System.Drawing.Point(72, 202);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 14);
             this.label5.TabIndex = 1;
-            this.label5.Text = "说明";
+            this.label5.Text = "备注";
             // 
             // errorProvider1
             // 
@@ -191,14 +192,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(416, 379);
+            this.ClientSize = new System.Drawing.Size(604, 436);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.submitFormButton);
             this.Controls.Add(this.cancelFormButton);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Addbranches";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "添加分公司";
+            this.Text = "分公司创建";
             this.Load += new System.EventHandler(this.Addbranches_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

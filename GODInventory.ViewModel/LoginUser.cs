@@ -90,6 +90,21 @@ namespace GODInventory
         }
 
         /// <summary>
+        /// 取得这个用户负责的仓库
+        /// </summary>
+        /// <returns> null: 负责所有
+        /// </returns>
+        public List<int> GetWarehouseIds()
+        {
+            List<int> storeids = null;
+            if (this.isSales() && !this.isRootBranch())
+            {
+                storeids = new List<int> { 1, 2, 3, 4 };
+            }
+            return storeids;
+        }
+
+        /// <summary>
         /// 是否为管理员
         /// </summary>
         /// <returns></returns>

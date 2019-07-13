@@ -29,32 +29,131 @@ namespace GODInventoryWinForm
             string login = this.loginTextBox.Text.Trim();
             string password = this.passwordTextBox.Text.Trim();
 
+            this.errorProvider1.Clear();
+            if (!ValidateLogin()) {             
+                return;
+            }
+            if (!ValidatePassword()) {
+                return;
+            }
+
+
             // 查询用户 账户，密码，所在分公司，负责的店铺
             using (GODDbContext ctx = new GODDbContext()){
 
-                var user = ctx.t_staffs.First(o=>( o.login.Equals(login) && o.password.Equals(password)));
+                var user = (from s in ctx.t_staffs
+                            join b in ctx.t_branchs on s.branch_id equals b.id
+                            where s.login.Equals(login) && s.password.Equals(password)
+                            select new v_staffs
+                            {
+                                id = s.id,
+                                login = s.login,
+                                fullname = s.fullname,
+                                phone = s.phone,
+                                role = s.role,
+                                memo = s.memo,
+                                password = s.password,
+                                branch_id = s.branch_id,
+                                branch_is_root = b.is_root,
+                                branchname = b.fullname
+                            }).FirstOrDefault();
+                    
+                    ctx.t_staffs.First(o=>( o.login.Equals(login) && o.password.Equals(password)));
 
-                currentUser.IsSignedIn = true;
-                var branch = ctx.t_branchs.Find(currentUser.branch_id);
-                currentUser.IsRootBranch = (branch.parent_id == 0);
-                List<int> storeIds = null;
-                if (!currentUser.IsRootBranch)
+                if (user != null)
                 {
+                    currentUser = user;
+                    
 
-                    storeIds = (from t_branches_stores o in ctx.t_branches_stores
-                                where o.branch_id == currentUser.branch_id
-                                select o.store_id).ToList();
+                    currentUser.IsSignedIn = true;
+                    currentUser.IsRootBranch = (user.branch_is_root == 1);
+                    List<int> ids = null;
+                    if (!currentUser.IsRootBranch)
+                    {
+
+                        ids = (from t_branches_stores o in ctx.t_branches_stores
+                                    where o.branch_id == currentUser.branch_id
+                                    select o.warehouse_id).ToList();
+                    }
+                    currentUser.WarehouseIds = ids;
+
                 }
-                currentUser.BranchStoreIds = storeIds;
+                else {
+                    currentUser.IsSignedIn = false;
+
+                }
             }
 
             // 如果登录成功
             if (currentUser.IsSignedIn)
             {
                 this.dialogResult = System.Windows.Forms.DialogResult.Yes;
+
+                mainForm.FormClosed += mainForm_FormClosed;
                 mainForm.Show();
                 this.Visible = false;
             }
+            else { 
+            
+              MessageBox.Show("用户名和密码不匹配");
+            }
         }
+
+        void mainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void LoginForm_Shown(object sender, EventArgs e)
+        {
+            this.loginTextBox.Focus();
+        }
+
+        private void loginTextBox_TextChanged(object sender, EventArgs e)
+        {
+            ValidateLogin();
+        }
+
+        private void passwordTextBox_TextChanged(object sender, EventArgs e)
+        {
+            ValidatePassword();
+           
+        }
+
+        private bool ValidateLogin(){
+            bool valid = true;
+            var login = loginTextBox.Text;
+            if (string.IsNullOrWhiteSpace(login))
+            {
+                this.errorProvider1.SetError(loginTextBox, "请输入用户名");
+                valid = false;
+            }
+            else {
+                this.errorProvider1.SetError(loginTextBox, null);            
+            }
+            return valid;
+        }
+
+        private bool ValidatePassword()
+        {
+            bool valid = true;
+            var txt = passwordTextBox.Text;
+            if (string.IsNullOrWhiteSpace(txt))
+            {
+                this.errorProvider1.SetError(passwordTextBox, "请输入登录密码");
+                valid = false;
+            }
+            else {
+                this.errorProvider1.SetError(passwordTextBox, null);
+            }
+            return valid;
+
+        }
+
     }
 }

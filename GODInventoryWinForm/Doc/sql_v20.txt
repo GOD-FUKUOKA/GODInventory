@@ -337,8 +337,12 @@ CREATE TABLE `t_branches` (
   `phone` VARCHAR(45) NULL,
   `fax` VARCHAR(45) NULL,
   `memo` TEXT NULL,
+  `is_root` INT NOT NULL DEFAULT 0 comment '是否为总公司', 
   PRIMARY KEY (`id`))
   DEFAULT CHARACTER SET = utf8;
+
+# id, fullname, parent_id, address, phone, fax, memo
+
 
 
 
@@ -346,7 +350,7 @@ CREATE TABLE `t_branches` (
 # staffs(员工)  
 # fullname, login, role(sales, officer,  admin), branch_id, phone, memo, password, current_sign_in_at, last_sign_in_at, failed_attempts, locked_at
 # 员工列表，添加员工，删除员工，修改员工，
-CREATE TABLE `god_om2`.`t_staffs` (
+CREATE TABLE `t_staffs` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fullname` VARCHAR(45) NULL,
   `login` VARCHAR(45) NOT NULL,
@@ -363,15 +367,17 @@ CREATE TABLE `god_om2`.`t_staffs` (
   DEFAULT CHARACTER SET = utf8;
 
 
-
-
 # branch_store(子公司 负责的 门店)
 # branch_id, store_id, created_at
 
 CREATE TABLE `t_branches_stores` (
 `id` INT NOT NULL AUTO_INCREMENT,
   `branch_id` INT NOT NULL DEFAULT 0,
+  `warehouse_id` INT NOT NULL DEFAULT 0,
   `store_id` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`));
 
+INSERT INTO `t_branches` (id, `fullname`, `address`) VALUES (1, '组织机构','地址');
+INSERT INTO `t_branches` (id, `fullname`, `address`, parent_id, is_root) VALUES (2,'总公司','地址',1, 1);
 
+INSERT INTO `t_staffs` (`fullname`,`login`,`role`,`branch_id`,`password`) VALUES ( '管理员', 'admin','admin',0,'123456');

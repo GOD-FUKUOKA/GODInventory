@@ -148,7 +148,6 @@ namespace GODInventoryWinForm
         {
             //In case windows is trying to shut down, don't hold the process up
             if (e.CloseReason == CloseReason.WindowsShutDown) return;
-
             //if (this.DialogResult == DialogResult.Cancel)
             {
                 // Assume that X has been clicked and act accordingly.

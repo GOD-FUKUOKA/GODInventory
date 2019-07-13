@@ -12,33 +12,29 @@ using System.Configuration;
 using GODInventory.MyLinq;
 namespace GODInventoryWinForm.Controls.Branches
 {
-    public partial class addstaffs : Form
+    public partial class AddStaffForm : Form
     {
 
         public string title;
-        public string branchid;
-        public string staffsid;
-        DataSet ds;
-        MySqlDataAdapter adapter;
-        private List<t_staffs> t_staffsList;
-        public addstaffs()
+        public List<v_staffs> StaffList;
+        public t_staffs CurrentStaff { get; set; }
+        public t_branches CurrentBranch { get; set; }
+        public bool isUpdate;
+
+
+        public AddStaffForm()
         {
+            this.CurrentStaff = new t_staffs();
+            this.StaffList = null;
+            this.isUpdate = false;
             InitializeComponent();
-            InitializeOrder();
-    
-
-
+            InitializeData();
 
         }
-        private void InitializeOrder()
+
+
+        private void InitializeData()
         {
-            t_staffsList = new List<t_staffs>();
-            using (var ctx = new GODDbContext())
-            {
-                t_staffsList = ctx.t_staffs.ToList();
-
-
-            }
 
         }
         private void label4_Click(object sender, EventArgs e)
@@ -55,26 +51,28 @@ namespace GODInventoryWinForm.Controls.Branches
         #region 窗体加载事件
         private void addstaffs_Load(object sender, EventArgs e)
         {
-            label4.Text = title;
-            //如果staffsid里面有数据的话,那么当前页就是修改页,反之就是添加页
-            if (staffsid != null)
-            {
-                using (var ctx = new GODDbContext())
-                {
-                    int bid = int.Parse(staffsid);
-                    var query = (from ts in ctx.t_staffs
-                                 where ts.id == bid
-                                 select ts).ToList();
-                    foreach (t_staffs ts in query)
-                    {
-                        txt_StaffsName.Text = ts.fullname;
-                        txt_Login.Text = ts.login;
-                        txt_role.Text = ts.role;
+            isUpdate = CurrentStaff.id > 0;
 
-                        txt_password.Text = ts.password;
-                    }
-                }
+            label4.Text = title;
+            List<string> roles = new List<string> { "sale" };
+
+            if (this.CurrentBranch.is_root == 1)
+            {
+                roles = new List<string> { "sale", "office" };
             }
+            this.roleComboBox1.DataSource = roles;
+
+            //如果staffsid里面有数据的话,那么当前页就是修改页,反之就是添加页
+            if (this.isUpdate)
+            {
+                txt_StaffsName.Text = CurrentStaff.fullname;
+                txt_Login.Text = CurrentStaff.login;
+                txt_password.Text = CurrentStaff.password;
+                txtPhone.Text = CurrentStaff.phone;
+                txtMemo.Text = CurrentStaff.memo;
+                roleComboBox1.Text = CurrentStaff.role;                 
+            }
+
 
         }
 
@@ -85,17 +83,18 @@ namespace GODInventoryWinForm.Controls.Branches
         {
             if (fkpd())
             {
-                if (staffsid == null)
+                if (this.isUpdate)
                 {
-                    if (add() > 0)
+                    if (update() > 0)
                     {
                         this.DialogResult = DialogResult.OK;
                         this.Close();
                     }
+                   
                 }
                 else
                 {
-                    if (update() > 0)
+                    if (add() > 0)
                     {
                         this.DialogResult = DialogResult.OK;
                         this.Close();
@@ -115,15 +114,15 @@ namespace GODInventoryWinForm.Controls.Branches
             {
                 using (var ctx = new GODDbContext())
                 {
-                    int stfid = int.Parse(staffsid);
-                    t_staffs ts = ctx.t_staffs.First(cts => cts.id == stfid);
+                    t_staffs ts = ctx.t_staffs.First(cts => cts.id == CurrentStaff.id);
                     if (ts != null)
                     {
                         ts.fullname = txt_StaffsName.Text;
                         ts.login = txt_Login.Text;
-                        ts.role = txt_role.Text;
-                        ts.branch_id = int.Parse(branchid);
+                        ts.role = roleComboBox1.Text;
                         ts.password = txt_password.Text;
+                        ts.phone = txtPhone.Text;
+                        ts.memo = txtMemo.Text;
                         ctx.SaveChanges();
                         index = 1;
                     }
@@ -145,11 +144,11 @@ namespace GODInventoryWinForm.Controls.Branches
         #region 非空判断
         private bool fkpd()
         {
+            this.errorProvider1.Clear();
             bool pd = false;
             if (txt_StaffsName.Text.Equals(string.Empty))
             {
 
-                this.errorProvider1.Clear();
                 this.errorProvider1.SetError(txt_StaffsName, "请输入员工姓名");
             }
             else
@@ -157,30 +156,19 @@ namespace GODInventoryWinForm.Controls.Branches
                 if (txt_Login.Text.Equals(string.Empty))
                 {
 
-                    this.errorProvider1.Clear();
                     this.errorProvider1.SetError(txt_Login, "请输入Login");
                 }
                 else
                 {
-                    if (txt_role.Text.Equals(string.Empty))
+                    
+                    if (txt_password.Text.Equals(string.Empty))
                     {
 
-                        this.errorProvider1.Clear();
-                        this.errorProvider1.SetError(txt_role, "请输入员工职位");
+                        this.errorProvider1.SetError(txt_password, "请输入员工密码");
                     }
                     else
                     {
-                        if (txt_password.Text.Equals(string.Empty))
-                        {
-
-                            this.errorProvider1.Clear();
-                            this.errorProvider1.SetError(txt_password, "请输入员工密码");
-                        }
-                        else
-                        {
-                            this.errorProvider1.Clear();
-                            pd = true;
-                        }
+                        pd = true;
                     }
                 }
             }
@@ -199,8 +187,8 @@ namespace GODInventoryWinForm.Controls.Branches
                     t_staffs stf = new t_staffs();
                     stf.fullname = this.txt_StaffsName.Text;
                     stf.login = txt_Login.Text;
-                    stf.role = txt_role.Text;
-                    stf.branch_id = int.Parse(branchid);
+                    stf.role = roleComboBox1.Text;
+                    stf.branch_id = CurrentBranch.id;
                     stf.password = txt_password.Text;
                     ctx.t_staffs.Add(stf);
                     ctx.SaveChanges();
@@ -220,17 +208,18 @@ namespace GODInventoryWinForm.Controls.Branches
         private void txt_Login_TextChanged(object sender, EventArgs e)
         {
             this.errorProvider1.Clear();
-
-            if (txt_Login.Text.Length > 0 && t_staffsList != null)
+            var login = txt_Login.Text;
+            if (!string.IsNullOrWhiteSpace(login))
             {
-                var pendingorder = t_staffsList.Find(o => o.login == txt_Login.Text);
-                if (title.Contains("修改"))
-                    txt_Login.Enabled = false;
-                if (pendingorder != null && !title.Contains("修改"))
-                {
-                    this.errorProvider1.SetError(txt_Login, "已存在");
+                var existSameStaff = StaffList.Exists(o => o.login == login && o.id != CurrentStaff.id);
+                if (existSameStaff)
+                {                
+                    this.errorProvider1.SetError(txt_Login, "登录名已存在");
                 }
             }
+            
         }
+
+
     }
 }

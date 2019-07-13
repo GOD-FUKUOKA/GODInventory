@@ -61,7 +61,12 @@ namespace GODInventory.MyLinq
         public int 納品場所コード { get; set; }
         public string 納品場所名漢字 { get; set; }
         public string 納品場所名カナ { get; set; }
-        
-        
+
+        // branches.id
+        public int branch_id { get; set; }
+        public int branch_store_id { get; set; } // Branch/IndexForm使用
+
+        public bool ischeck { get; set; }
+
     }
 }

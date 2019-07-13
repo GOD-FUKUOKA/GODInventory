@@ -25,9 +25,19 @@ namespace GODInventory
             return LoginUser.GetInstance().GetStoreIds();            
         }
 
-        public static string GetStoreIdsConditions(){
+        /// <summary>
+        /// 取得当前登录用户的店铺ids
+        /// </summary>
+        /// <returns> List<int> | null</returns>
+        public static List<int> GetLoginUserWarehouseIds()
+        {
+            return LoginUser.GetInstance().GetWarehouseIds();
+        }
+
+        public static string GetWarehouseIdsConditions()
+        {
             string conditions = String.Empty;
-            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            var storeids = OrderSqlHelper.GetLoginUserWarehouseIds();
             if(storeids != null){
                 conditions = string.Join(",", storeids);
             }
@@ -99,14 +109,14 @@ namespace GODInventory
                         Status = o2.Status,
                         GenreName = g.ジャンル名
                     };
-            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            var storeids = OrderSqlHelper.GetLoginUserWarehouseIds();
             if ( storeids != null) 
             {             
 
                 q = from t_orderdata o1 in ctx.t_orderdata
                     join t_orderdata o2 in ctx.t_orderdata on new { 自社コード = o1.自社コード, 店舗コード = o1.店舗コード } equals new { 自社コード = o2.自社コード, 店舗コード = o2.店舗コード }
                     join t_genre g in ctx.t_genre on o1.ジャンル equals g.idジャンル
-                    where storeids.Contains(o1.店舗コード) && o1.Status == OrderStatus.Duplicated && (o1.id受注データ == o2.id受注データ || o2.Status == OrderStatus.Pending || o2.Status == OrderStatus.NotifyShipper || o2.Status == OrderStatus.WaitToShip || o2.Status == OrderStatus.PendingShipment)
+                    where storeids.Contains(o1.warehouse_id) && o1.Status == OrderStatus.Duplicated && (o1.id受注データ == o2.id受注データ || o2.Status == OrderStatus.Pending || o2.Status == OrderStatus.NotifyShipper || o2.Status == OrderStatus.WaitToShip || o2.Status == OrderStatus.PendingShipment)
                     orderby o2.店舗コード, o2.自社コード, o2.受注日, o1.id受注データ
                     select new v_duplicatedorder
                     {
@@ -181,12 +191,12 @@ LEFT JOIN t_stockstate k on  o.自社コード = k.自社コード AND  o.wareho
 WHERE o.Status ={0} {3}
 ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.店舗コード, o.ＪＡＮコード,  o.伝票番号 LIMIT {1} OFFSET {2};";
 
-            string storeIdsCondition = OrderSqlHelper.GetStoreIdsConditions();
+            string storeIdsCondition = OrderSqlHelper.GetWarehouseIdsConditions();
             string conditions = string.Empty;
 
             if (storeIdsCondition.Length > 0)
             {
-                conditions = string.Format("and o.店舗コード in ({0})", storeIdsCondition);
+                conditions = string.Format("and o.warehouse_id in ({0})", storeIdsCondition);
             }
 
             string sql = string.Format(format, (int)OrderStatus.Pending, pageSize, offset, conditions);
@@ -207,10 +217,10 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
             var q = from t_orderdata o in entityDataSource1.EntitySets["t_orderdata"]
                     where o.Status == OrderStatus.Pending
                     select o;
-            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            var storeids = OrderSqlHelper.GetLoginUserWarehouseIds();
             if (storeids != null)
             {
-                q = q.Where(o => storeids.Contains(o.店舗コード));
+                q = q.Where(o => storeids.Contains(o.warehouse_id));
             }
             return q;
         }
@@ -339,10 +349,10 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                          備考 = o.備考,
                          社内伝番処理 = o.社内伝番処理
                      });
-            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            var storeids = OrderSqlHelper.GetLoginUserWarehouseIds();
             if (storeids != null)
             {
-                q = q.Where(o => storeids.Contains(o.店舗コード));
+                q = q.Where(o => storeids.Contains(o.warehouse_id));
             }
 
           var list = q.ToList();
@@ -407,10 +417,10 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                          備考 = o.備考
 
                      });
-            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            var storeids = OrderSqlHelper.GetLoginUserWarehouseIds();
             if (storeids != null)
             {
-                q = q.Where(o => storeids.Contains(o.店舗コード));
+                q = q.Where(o => storeids.Contains(o.warehouse_id));
             }
             return q;
 
@@ -463,10 +473,10 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
                          備考 = o.備考
 
                      });
-            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            var storeids = OrderSqlHelper.GetLoginUserWarehouseIds();
             if (storeids != null)
             {
-                q = q.Where(o => storeids.Contains(o.店舗コード));
+                q = q.Where(o => storeids.Contains(o.warehouse_id));
             }
             return q;
         }
@@ -494,12 +504,12 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
 sum(`納品原価金額`) as TotalPrice, sum(`重量`) as TotalWeight  
 FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP BY  o.`実際配送担当`, o.`ShipNO`, o.`出荷日`, o.`納品日`ORDER BY o.出荷日 desc";
 
-            string storeIdsCondition = OrderSqlHelper.GetStoreIdsConditions();
+            string storeIdsCondition = OrderSqlHelper.GetWarehouseIdsConditions();
             string conditions = string.Empty;
 
             if (storeIdsCondition.Length > 0)
             {
-                conditions = string.Format("and o.店舗コード in ({0})", storeIdsCondition);
+                conditions = string.Format("and o.warehouse_id in ({0})", storeIdsCondition);
             }
 
             string sql = string.Format(format, (int)OrderStatus.ASN, conditions);
@@ -523,10 +533,10 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP B
                      orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                      select o
                      ) as IQueryable<t_orderdata>;
-            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            var storeids = OrderSqlHelper.GetLoginUserWarehouseIds();
             if (storeids != null)
             {
-                q =  q.Where(o => storeids.Contains(o.店舗コード));
+                q = q.Where(o => storeids.Contains(o.warehouse_id));
             }
             return q;
         }
@@ -549,10 +559,10 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP B
                          orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                          select o
                          ) as IQueryable<t_orderdata>;
-                var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+                var storeids = OrderSqlHelper.GetLoginUserWarehouseIds();
                 if (storeids != null)
                 {
-                    q =  q.Where(o => storeids.Contains(o.店舗コード));
+                    q = q.Where(o => storeids.Contains(o.warehouse_id));
                 }         
                 list = q.ToList();
             }
@@ -572,10 +582,10 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP B
                      orderby o.実際配送担当, o.店舗コード, o.ＪＡＮコード, o.受注日, o.伝票番号
                      select o
                      ) as IQueryable<t_orderdata>;
-            var storeids = OrderSqlHelper.GetLoginUserStoreIds();
+            var storeids = OrderSqlHelper.GetLoginUserWarehouseIds();
             if (storeids != null)
             {
-                q = q.Where(o => storeids.Contains(o.店舗コード));
+                q = q.Where(o => storeids.Contains(o.warehouse_id));
             } 
             return q;
         }
@@ -1004,9 +1014,9 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP B
             //              orderby o.出荷no
             //              select o
             //                ).tolist(); 
-            string query = string.Format(@"select o.*, norder.発注品名漢字, norder.発注規格名漢字  from t_orderdata o
+            string query = string.Format(@"select norder.発注品名漢字, norder.発注規格名漢字, norder.品名カナ, norder.規格名カナ, o.*, o.`売単価（税込）` as 売単価_税込_, o.`売単価（税抜）` as 売単価_税抜_ from t_orderdata o
              inner join t_nafco_orders norder on o.origin_order_id = norder.id受注データ
-             where o.shipno in [{0}]", shipnos);
+             where o.shipno in ({0})", shipnos);
 
             var orders = ctx.Database.SqlQuery< WholeOrder>(query).ToList();
             ASNHeadModel asnhead = EDITxtHandler.GenerateASNTxt(path, orders);
@@ -1056,7 +1066,7 @@ FROM  t_orderdata o WHERE o.`受注管理連番`=0 AND o.Status ={0} {1} GROUP B
             //              orderby o.出荷No
             //              select o
             //                ).ToList();
-            string query = string.Format(@"select o.*, norder.発注品名漢字, norder.発注規格名漢字  from t_orderdata o
+            string query = string.Format(@"select norder.発注品名漢字, norder.発注規格名漢字, norder.品名カナ, norder.規格名カナ, o.*, o.`売単価（税込）` as 売単価_税込_, o.`売単価（税抜）` as 売単価_税抜_ from 
              inner join t_nafco_orders norder on o.origin_order_id = norder.id受注データ
              where o.id受注データ in ({0}) order by o.出荷No", orderids);
             var orders = ctx.Database.SqlQuery<WholeOrder>(query).ToList();

@@ -13,6 +13,7 @@ namespace GODInventory.MyLinq
         public int id { get; set; }
         public int branch_id { get; set; }
         public int store_id { get; set; }
+        public int warehouse_id { get; set; }
 
     }
 }

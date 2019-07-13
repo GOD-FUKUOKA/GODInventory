@@ -12,16 +12,19 @@ using System.Configuration;
 using GODInventory.MyLinq;
 namespace GODInventoryWinForm.Controls.Branches
 {
-    public partial class Addbranches : Form
+    public partial class AddBranchForm : Form
     {
-        public string updeteid;
+        public int ModelId;
         public string title;
-        public int zgscount;
+        public int ParentId { get; set; }
+        public t_branches CurrentBranch { get; set; }
        public string treeViewtx;
 
-        public Addbranches()
+        public AddBranchForm()
         {
             InitializeComponent();
+            CurrentBranch = new t_branches();
+            ModelId = 0;
         }
         #region 保存按钮点击事件
         private void submitFormButton_Click(object sender, EventArgs e)
@@ -29,7 +32,7 @@ namespace GODInventoryWinForm.Controls.Branches
             bool pd = Fkpd();
             if (pd == true)
             {
-                if (updeteid == null)
+                if (ModelId == 0)
                 {
                     #region 添加
                     int i = insertBranches();
@@ -47,8 +50,7 @@ namespace GODInventoryWinForm.Controls.Branches
                 {
                     #region 修改
 
-                    object[] parpm = { txt_BranchesName.Text, 0, txt_address.Text, txt_phone.Text, txt_fax.Text, txt_MEMO.Text };
-                    int i = updateComp(parpm);
+                    int i = updateComp();
                     if (i > 0)
                     {
                         this.DialogResult = DialogResult.OK;
@@ -68,51 +70,26 @@ namespace GODInventoryWinForm.Controls.Branches
 
         #region 非空验证判断
         private bool Fkpd() {
-            if (!txt_BranchesName.Text.Equals(string.Empty))
-            {
-                this.errorProvider1.Clear();
-                
-                    this.errorProvider1.Clear();
-                    if (!txt_address.Text.Equals(string.Empty))
-                    {
-                        this.errorProvider1.Clear();
-                        if (!txt_fax.Text.Equals(string.Empty))
-                        {
-                            this.errorProvider1.Clear();
-                            if (!txt_phone.Text.Equals(string.Empty))
-                            {
-                                this.errorProvider1.Clear();
-                                if (!txt_MEMO.Text.Equals(string.Empty))
-                                {
-                                    this.errorProvider1.Clear();
-                                    return true;
-                                }
-                                else
-                                {
-                                    this.errorProvider1.SetError(txt_MEMO, "说明不能为空");
-                                }
-                            }
-                            else
-                            {
-                                this.errorProvider1.SetError(txt_phone, "电话不能为空");
-                            }
-                        }
-                        else
-                        {
-                            this.errorProvider1.SetError(txt_fax, "传真不能为空");
-                        }
-                    }
-                    else
-                    {
-                        this.errorProvider1.SetError(txt_address, "公司地址不能为空");
-                    }
-              
-            }
-            else
+            this.errorProvider1.Clear();
+
+            if ( string.IsNullOrWhiteSpace(txt_BranchesName.Text))
             {
                 this.errorProvider1.SetError(txt_BranchesName, "分公司名称不许为空");
+                return false;
             }
-            return false;
+
+            if (  string.IsNullOrWhiteSpace(txt_address.Text))
+            {
+                this.errorProvider1.SetError(txt_address, "公司地址不能为空");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txt_phone.Text))
+            {
+                this.errorProvider1.SetError(txt_phone, "电话不能为空");
+                return false;
+            }
+            return true;
+
         }
         #endregion
 
@@ -125,27 +102,12 @@ namespace GODInventoryWinForm.Controls.Branches
                
                 using (var ctx = new GODDbContext())
                 {
-                    var barnche = (from t_branches tb in ctx.t_branchs
-                                   where tb.fullname == txt_BranchesName.Text && tb.parent_id == zgscount && tb.phone == txt_phone.Text && tb.address == txt_address.Text && tb.fax == txt_fax.Text && tb.memo == txt_MEMO.Text
-                                   select tb).ToList();
-                    if (barnche.Count  == 0)
-                    {
-                        t_branches bc = new t_branches();
-                        bc.fullname = txt_BranchesName.Text;
-                        bc.parent_id = zgscount;
-                        bc.address = txt_address.Text;
-                        bc.fax = txt_fax.Text;
-                        bc.memo = txt_MEMO.Text;
-                        bc.phone = txt_phone.Text;
-                        ctx.t_branchs.Add(bc);
-                        ctx.SaveChanges();
-                        i=1;
-                        treeViewtx = txt_BranchesName.Text;
-                    }
-                    else 
-                    {
-                        MessageBox.Show("该分公司已存在！");
-                    }
+                    FillModel();
+                          
+                    ctx.t_branchs.Add(this.CurrentBranch);
+                    ctx.SaveChanges();
+                    i=1;
+                   
                 }
 
             }
@@ -160,36 +122,20 @@ namespace GODInventoryWinForm.Controls.Branches
         #endregion
 
         #region 修改公司
-        private int updateComp(Object[] parpm)
+        private int updateComp()
         {
             int index = 0;
             try
             {
                 using (var ctx = new GODDbContext())
                 {
-                    int udid = int.Parse(updeteid);
-                    var query = (from t_branches t in ctx.t_branchs
-                                 where  t.id == udid
-                                 select t).ToList();
-                    if (query.Count != 0)
-                    {
-                        foreach (t_branches bc in query)
-                        {
-
-                            bc.fullname = txt_BranchesName.Text;
-                            bc.parent_id = zgscount;
-                            bc.address = txt_address.Text;
-                            bc.fax = txt_fax.Text;
-                            bc.memo = txt_MEMO.Text;
-                            bc.phone = txt_phone.Text;
-                            ctx.SaveChanges();
-                            index = 1;
-                            treeViewtx = txt_BranchesName.Text;
-                        }
-                    }
-                    else {
-                        index = 0;
-                    }
+                    this.CurrentBranch = (from t_branches t in ctx.t_branchs
+                                          where t.id == ModelId
+                                          select t).First<t_branches>();
+                    FillModel();                        
+                    ctx.SaveChanges();
+                    index = 1;
+                       
                 }
             }
             catch (Exception ex)
@@ -202,40 +148,56 @@ namespace GODInventoryWinForm.Controls.Branches
         #endregion
 
         #region Addbranches窗体加载方法
-        private void loadupdate() 
+        private void LoadModel() 
         {
-            try{
+
+            if (ModelId > 0)
+            {
+                try
+                {
                     using (var ctx = new GODDbContext())
                     {
 
+                        this.CurrentBranch = (from t_branches t in ctx.t_branchs
+                                      where t.id == ModelId
+                                      select t).First<t_branches>();
+                        FillControls();
+                        label4.Text = title;
 
-                        if (updeteid != null)
-                        {
-                            int udid = int.Parse(updeteid);
-                            var query = (from t_branches t in ctx.t_branchs
-                                         where t.id == udid
-                                         select t).ToList();
-                            foreach (t_branches bc in query)
-                            {
-                                txt_BranchesName.Text = bc.fullname;
-                                txt_address.Text = bc.address;
-                                txt_phone.Text = bc.phone;
-                                txt_fax.Text = bc.fax;
-                                txt_MEMO.Text = bc.memo;
-                            }
-                            label4.Text = title;
 
-                        }
                     }
-               
-            }catch(Exception ex){
-                MessageBox.Show("程序出错！");
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("程序出错！");
+                }
             }
         }
         #endregion
+
+        private void FillControls() {
+            txt_BranchesName.Text = CurrentBranch.fullname;
+            txt_address.Text = CurrentBranch.address;
+            txt_phone.Text = CurrentBranch.phone;
+            txt_fax.Text = CurrentBranch.fax;
+            txt_MEMO.Text = CurrentBranch.memo;
+        }
+
+        private void FillModel() {
+
+            CurrentBranch.fullname = txt_BranchesName.Text;
+            CurrentBranch.parent_id = ParentId;
+            CurrentBranch.address = txt_address.Text;
+            CurrentBranch.fax = txt_fax.Text;
+            CurrentBranch.memo = txt_MEMO.Text;
+            CurrentBranch.phone = txt_phone.Text;
+        
+        }
+
         private void Addbranches_Load(object sender, EventArgs e)
         {
-            loadupdate();
+            LoadModel();
         }
 
         private void cancelFormButton_Click(object sender, EventArgs e)

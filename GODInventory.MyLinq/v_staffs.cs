@@ -12,7 +12,8 @@ namespace GODInventory.MyLinq
         public int id { get; set; }
         public int branch_id { get; set; }
         public int branch_parent_id { get; set; }
-
+        public int branch_is_root { get; set; }
+        
         public string branchname { get; set; }
         public string login { get; set; }
         public string password { get; set; }
@@ -32,5 +33,7 @@ namespace GODInventory.MyLinq
         public bool IsRootBranch { get; set; } // 是不是总公司
 
         public List<int> BranchStoreIds { get; set; }
+        public List<int> WarehouseIds { get; set; }
+        
     }
 }

@@ -853,9 +853,9 @@ namespace GODInventoryWinForm.Controls
 
                             }
                             ctx.t_nafco_orders.AddRange(newOrderList);
-                            string sql = NafcoOrderSqlHelper.BuildImportOrderByMidSql( mid);
-                            ctx.Database.ExecuteSqlCommand(sql);
                             ctx.SaveChanges();
+                            string sql = NafcoOrderSqlHelper.BuildImportOrderByMidSql(mid);
+                            ctx.Database.ExecuteSqlCommand(sql);
                             MessageBox.Show(String.Format("{0} 枚のFAX注文登録完了!", newOrderList.Count));
                             orderList.Clear();
                         }
