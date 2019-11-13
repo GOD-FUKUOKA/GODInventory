@@ -14,18 +14,23 @@ namespace GODInventoryWinForm
 {
     public partial class ImportReceivedTextForm_Auto : Form
     {
+        public string OrderFilePath { get; set; }
+
         public ImportReceivedTextForm_Auto(string pathname)
         {
             InitializeComponent();
             this.ControlBox = false;   // 设置不出现关闭按钮
             this.pathTextBox.Text = pathname;
-
+            this.OrderFilePath = pathname;
             importButton_Click(this, EventArgs.Empty);
 
         }
 
         private void importButton_Click(object sender, EventArgs e)
         {
+            EDITxtHandler.CreateJURYOUEdidata(this.pathTextBox.Text);
+            this.ProgressValue = 0;
+
             this.importButton.Enabled = false;
             this.cancelButton.Enabled = true;
             this.closeButton.Enabled = false;
@@ -97,9 +102,12 @@ namespace GODInventoryWinForm
 
         private bool ImportJuryouTxt(string path, BackgroundWorker worker, DoWorkEventArgs e)
         {
+
+            string localPath = EDITxtHandler.CopyJURYOUFile(path);
+
             bool success = true;
             WorkerArgument arg = e.Argument as WorkerArgument;
-            ReceivedOrderHeadModel order_head = null;
+            ReceivedOrderHeadModel orderHead = null;
             List<ReceivedOrderModel> models;
             try
             {
@@ -107,7 +115,7 @@ namespace GODInventoryWinForm
                 //byte[] line = null;
                 using (BinaryReader br = new BinaryReader(new FileStream(path, FileMode.Open, FileAccess.Read)))
                 {
-                    order_head = new ReceivedOrderHeadModel(br);
+                    orderHead = new ReceivedOrderHeadModel(br);
                     //Console.WriteLine(" write head ={0}", order_head.DetailCount);
                     
                 }
@@ -131,8 +139,8 @@ namespace GODInventoryWinForm
                     {
                         List<string> sqls = new List<string>(100);
                         
-                        arg.OrderCount = order_head.DetailCount;
-                        models = order_head.Models;
+                        arg.OrderCount = orderHead.DetailCount;
+                        models = orderHead.Models;
                         for (var i = 0; i < models.Count; i++)
                         {
                             if (worker.CancellationPending == true)

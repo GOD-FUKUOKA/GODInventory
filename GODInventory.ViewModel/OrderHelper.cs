@@ -17,7 +17,7 @@ namespace GODInventory.ViewModel
         /// </summary>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static bool InitializeOrderByXlsxOrder(t_orderdata order, v_shop shop, v_itemprice price) {
+        public static bool InitializeOrderByXlsxOrder(t_orderdata order, v_shop shop, v_itemprice price, double taxRate=0.10) {
             // order 的必填值如下
             //県別	店舗コード	店舗名漢字	自社コード	品名漢字	最小発注単位数量	口数	発注数量	原単価(税抜)	原価金額(税抜)
             //order.商品コード = 0;
@@ -52,7 +52,7 @@ namespace GODInventory.ViewModel
 
             order.部門コード = 9;
             order.納品予定日 = now.AddDays(2).Date;
-            order.税率 = 0.08;
+            //order.税率 = taxRate;
             if ( shop.納品場所コード>=0)
             {
                
@@ -74,7 +74,7 @@ namespace GODInventory.ViewModel
             // 设置 一些常量
             order.納品先店舗コード = (short)order.店舗コード;
             order.納品先店舗名漢字 = order.店舗名漢字;
-            order.税率 = 0.08;
+            order.税率 = taxRate;
             order.特価区分 = 0;
             order.PB区分 = 0;
             order.原価区分 = 0;

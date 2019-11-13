@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GODInventory.ViewModel.EDI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,6 +61,8 @@ namespace GODInventoryWinForm
                         string path = Properties.Settings.Default.NFWEInstallDir + @"\haccyu\HACCYU.txt";                        
                         if (File.Exists(path))
                         {
+
+
                             new ImportOrderTextForm_Auto( path ).ShowDialog();
                         }
                     }

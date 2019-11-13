@@ -106,6 +106,7 @@
             this.最終出荷数Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ShipperColumn1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.重量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.freightColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.receivedColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.社内伝番 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.行数 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -359,6 +360,7 @@
             this.最終出荷数Column1,
             this.ShipperColumn1,
             this.重量,
+            this.freightColumn1,
             this.receivedColumn,
             this.社内伝番,
             this.行数,
@@ -856,6 +858,14 @@
             this.重量.ReadOnly = true;
             this.重量.Width = 50;
             // 
+            // freightColumn1
+            // 
+            this.freightColumn1.DataPropertyName = "運賃";
+            this.freightColumn1.HeaderText = "運賃";
+            this.freightColumn1.Name = "freightColumn1";
+            this.freightColumn1.ReadOnly = true;
+            this.freightColumn1.Width = 80;
+            // 
             // receivedColumn
             // 
             this.receivedColumn.DataPropertyName = "受領確認";
@@ -1027,6 +1037,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 最終出荷数Column1;
         private System.Windows.Forms.DataGridViewComboBoxColumn ShipperColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 重量;
+        private System.Windows.Forms.DataGridViewTextBoxColumn freightColumn1;
         private System.Windows.Forms.DataGridViewComboBoxColumn receivedColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn 社内伝番;
         private System.Windows.Forms.DataGridViewTextBoxColumn 行数;

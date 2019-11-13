@@ -222,6 +222,17 @@ namespace GODInventory.ViewModel.EDI
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, EDITxtHandler.ASNFolder, "NYOTEI_" + mid.ToString() + ".txt");
         }
 
+        public static string BuildHACCYUFilePath( )
+        {
+            DateTime now = DateTime.Now;
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "edidata", now.Date.ToString("yyyyMMdd"), "HACCYU_" + now.ToString("HHmmss") + ".txt");
+        }
+        public static string BuildJURYOUFilePath()
+        {
+            DateTime now = DateTime.Now;
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "edidata", now.Date.ToString("yyyyMMdd"), "JURYOU_" + now.ToString("HHmmss") + ".txt");
+        }
+
         public static void ImportOrderTxt(string path)
         {
 
@@ -359,6 +370,73 @@ namespace GODInventory.ViewModel.EDI
             }
             return true;
         }
+
+        public static string CopyHACCYUFile(string path)
+        {
+
+            // copy to local path
+            string localPath = EDITxtHandler.BuildHACCYUFilePath();
+            string directoryPath = Path.GetDirectoryName(localPath);
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+            File.Copy(path, localPath, true);
+
+            return localPath;
+        }
+
+        public static string CopyJURYOUFile(string path)
+        {
+
+            // copy to local path
+            string localPath = EDITxtHandler.BuildJURYOUFilePath();
+            string directoryPath = Path.GetDirectoryName(localPath);
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+            File.Copy(path, localPath, true);
+
+            return localPath;
+        }
+
+        public static void CreateHACCYUEdidata(string path)
+        {
+
+
+            using (var ctx = new GODDbContext())
+            {
+                OrderHeadModel orderHead = null;
+
+                using (BinaryReader br = new BinaryReader(new FileStream(path, FileMode.Open, FileAccess.Read)))
+                {
+                    orderHead = new OrderHeadModel(br);
+                    //Console.WriteLine(" write head ={0}", order_head.DetailCount);
+
+                    string sql = orderHead.ToRawSql();
+                    ctx.Database.ExecuteSqlCommand(sql);
+                }
+            }
+        }
+        public static void CreateJURYOUEdidata(string path)
+        {
+            using (var ctx = new GODDbContext()) {
+                ReceivedOrderHeadModel orderHead = null;
+
+                using (BinaryReader br = new BinaryReader(new FileStream(path, FileMode.Open, FileAccess.Read)))
+                {
+                    orderHead = new ReceivedOrderHeadModel(br);
+                    //Console.WriteLine(" write head ={0}", order_head.DetailCount);
+
+                    string sql = orderHead.ToRawSql();
+                    ctx.Database.ExecuteSqlCommand(sql);                    
+                }            
+            }
+        }
+
 
     }
 }

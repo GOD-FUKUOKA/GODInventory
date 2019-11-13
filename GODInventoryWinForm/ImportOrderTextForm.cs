@@ -41,6 +41,9 @@ namespace GODInventoryWinForm
 
         private void importButton_Click(object sender, EventArgs e)
         {
+            EDITxtHandler.CreateHACCYUEdidata(this.pathTextBox.Text);
+            this.ProgressValue = 0;
+
             this.importButton.Enabled = false;
             this.cancelButton.Enabled = true;
             this.closeButton.Enabled = false;
@@ -75,7 +78,9 @@ namespace GODInventoryWinForm
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+            int orderCount = 0;
+            int importedCount = 0;
+
             this.cancelButton.Enabled = false;
             this.closeButton.Enabled = true;
             this.importButton.Enabled = true;
@@ -90,8 +95,40 @@ namespace GODInventoryWinForm
             }
             else
             {
-                MessageBox.Show(string.Format("{0}", e.Result));
-                //this.progressMsgLabel.Text = "Great, it is done!";
+                // {0}件の受注伝票が登録できました
+                // 数据格式为 :orderCount/:importedCount
+                var vals = e.Result.ToString().Split('/');
+                if (vals.Length == 2)
+                {
+                    orderCount = Int32.Parse(vals[0]);
+                    importedCount = Int32.Parse(vals[1]);
+
+                    MessageBox.Show(string.Format("{0}件の受注伝票が登録できました", importedCount));
+                }
+                else {
+                    MessageBox.Show(e.Result.ToString());
+
+                }
+            }
+
+            // 提示重新导入
+            if (orderCount != importedCount)
+            {
+                //订单数据5条，导入数据0条，数据不一致，是否重新导入？
+                // DialogResult res = MessageBox.Show(string.Format("伝票{0}枚に対して、{1}枚導入されました。枚数は一致しませんが、再度導入しますか？", orderCount, importedCount), "誤った", MessageBoxButtons.YesNo);
+
+                var form = new ErrorDialog();
+                form.OrderCount = orderCount;
+                form.ImportedCount = importedCount;
+                form.DataFilePath = pathTextBox.Text;
+
+                form.ShowDialog();
+
+                if (form.ErrorDialogResult == System.Windows.Forms.DialogResult.Yes)
+                {
+                    importButton_Click(this, EventArgs.Empty);
+
+                }
             }
             
         }
@@ -99,7 +136,8 @@ namespace GODInventoryWinForm
 
         private bool ImportOrderTxt(string path, BackgroundWorker worker, DoWorkEventArgs e)
         {
-            
+            string localPath = EDITxtHandler.CopyHACCYUFile(path);
+
             WorkerArgument arg = e.Argument as WorkerArgument;
 
             bool success = true;
@@ -108,23 +146,23 @@ namespace GODInventoryWinForm
 
             //var lines = ConvertToUtf8Strings(path);
             List<OrderModel> models = new List<OrderModel>();
-
+            OrderHeadModel orderHead = null;
             try
             {
                 //byte[] first_line = null;
                 //byte[] line = null;
                 using (BinaryReader br = new BinaryReader(new FileStream(path, FileMode.Open, FileAccess.Read)))
                 {
-                    OrderHeadModel order_head = new OrderHeadModel(br);
+                    orderHead = new OrderHeadModel(br);
                     //Console.WriteLine(" write head ={0}", order_head.DetailCount);
-                    for (var i = 0; i < order_head.DetailCount; i++)
+                    for (var i = 0; i < orderHead.DetailCount; i++)
                     {
                         if (worker.CancellationPending == true)
                         {
                             e.Cancel = true;
                             throw new Exception("キャンセルできました!");
                         }
-                        int progress = Convert.ToInt16((i + 1) * 0.5 / order_head.DetailCount * 100);
+                        int progress = Convert.ToInt16((i + 1) * 0.5 / orderHead.DetailCount * 100);
                         models.Add(new OrderModel(br));
                         //if (progress != last)
                         //
@@ -237,13 +275,17 @@ namespace GODInventoryWinForm
                         }
                         backgroundWorker1.ReportProgress(100, arg);
 
+                        string sql2 = string.Format("Update t_edidata set is_sent = 1, sent_at=NOW() where データID='{0}' and 管理連番={1} and レコード件数={2} and Id>0;", orderHead.SデータID, orderHead.I管理連番, count);
+                        ctx.Database.ExecuteSqlCommand(sql2);
+
                         ctxTransaction.Commit();
 
-                        e.Result = string.Format("{0}件の受注伝票が登録できました",count);
+                        e.Result = string.Format("{0}/{1}", orderHead.DetailCount, count);
                     }
                    
                     catch (Exception exception)
                     {
+                        LogHelper.WriteLog("ImportOrder", exception);
                         ctxTransaction.Rollback();
                         if (!e.Cancel)
                         {
@@ -251,7 +293,7 @@ namespace GODInventoryWinForm
                             //arg.ErrorMessage = exception.Message;
                             e.Result = exception.Message;
                         }
-                        
+
                         success = false;
                     }
                 }

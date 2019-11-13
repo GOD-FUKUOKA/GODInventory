@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GODInventory.MyLinq;
 using GODInventory.ViewModel;
+using System.Data.Entity.Core;
 
 namespace GODInventoryWinForm.Controls
 {
@@ -123,13 +124,23 @@ namespace GODInventoryWinForm.Controls
     where o1.`Status`=22 AND (o1.id受注データ = o2.id受注データ OR  o2.`Status`=0 OR o2.`Status`=2 OR o2.`Status`=3 OR (o2.`Status`=5 AND o2.`納品予定日`>NOW()) )
     order by o2.店舗コード, o2.自社コード , o2.受注日, o1.id受注データ";
 
-            using (var ctx = new GODDbContext())
-            {
-                this.productList = ctx.t_itemlist.Select(s => s).ToList();
 
-                duplicatedOrderList = OrderSqlHelper.GetDuplicateOrderQuery(ctx).ToList();
-                //duplicatedOrderList = ctx.Database.SqlQuery<v_duplicatedorder>(sql).ToList();
+            try
+            {
+                using (var ctx = new GODDbContext())
+                {
+                    this.productList = ctx.t_itemlist.Select(s => s).ToList();
+
+                    duplicatedOrderList = OrderSqlHelper.GetDuplicateOrderQuery(ctx).ToList();
+                    //duplicatedOrderList = ctx.Database.SqlQuery<v_duplicatedorder>(sql).ToList();
+                }
             }
+            catch (EntityCommandExecutionException e) {
+
+                LogHelper.WriteLog("DuplicatedOrderError", e);
+                throw e;
+            }
+
             var shippers = duplicatedOrderList.Select(s =>  s.実際配送担当 ).Distinct().ToList();
             shippers.Insert(0, "すべて" );
             this.shipperComboBox.DataSource = shippers;

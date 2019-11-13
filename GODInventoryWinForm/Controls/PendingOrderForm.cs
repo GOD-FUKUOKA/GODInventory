@@ -71,7 +71,7 @@ namespace GODInventoryWinForm.Controls
 
 
             //mark   20181009           
-            var transports1 = transportList.Select(s => new { fullname = s.fullname }).Distinct().ToList();
+            var transports1 = transportList.Select(s => new { id = s.id, fullname = s.fullname }).Distinct().ToList();
             var transports2 = transportList.Select(s => new { fullname = s.fullname }).Distinct().ToList();
 
 
@@ -105,7 +105,7 @@ namespace GODInventoryWinForm.Controls
 
 
             // 传票订正仓库
-            var warehouse1 = warehouseList.Select(s => new { fullname = s.FullName }).Distinct().ToList();
+            var warehouse1 = warehouseList.Select(s => new { id=s.Id, fullname = s.FullName }).Distinct().ToList();
             this.warehousenameColumn.DisplayMember = "fullname";
             this.warehousenameColumn.ValueMember = "fullname";
             this.warehousenameColumn.DataSource = warehouse1;
@@ -391,10 +391,28 @@ namespace GODInventoryWinForm.Controls
                     MessageBox.Show("実際出荷数量 >発注数量,", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-
+            }
+            if (transportColumn1.Index == e.ColumnIndex)
+            {
+                var order = cell.OwningRow.DataBoundItem as v_pendingorder;
+                string newName = newValue.ToString();
+                var transport = this.transportList.Find(o => o.fullname == newName);
+                if (transport != null) {
+                    order.transport_id = transport.id;
+                }
             }
 
+            if (warehousenameColumn.Index == e.ColumnIndex)
+            {
+                var order = cell.OwningRow.DataBoundItem as v_pendingorder;
+                string newName = newValue.ToString();
+                var warehouse = this.warehouseList.Find(o => o.FullName == newName);
+                if (warehouse != null)
+                {
+                    order.warehouse_id = warehouse.Id;
+                }
+
+            }
 
 
         }

@@ -963,9 +963,11 @@ namespace GODInventory.ViewModel
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="stockrecs"></param>
+        /// <param name="isDeleted">是否为删除的</param>
         /// <returns></returns>
         public static int UpdateStockState(GODDbContext ctx, List<t_stockrec> stockrecs)
         {
+
             int count = 0;
 
             var warehouseList = ctx.t_warehouses.ToList();
@@ -996,7 +998,7 @@ namespace GODInventory.ViewModel
                    //outcome = Convert.ToInt32(outcome);
                    var nullableQty = (from s in ctx.t_stockrec
                               where s.自社コード == pid && s.状態 == "完了" &&  ((s.先 ==warehouse.FullName && s.区分 == "入庫") || (s.元 ==warehouse.FullName && s.区分 == "出庫") )
-                                  select s.数量).Sum();
+                                  select (int?)s.数量).Sum() ?? 0;
                    var qty = Convert.ToInt32(nullableQty);
 
                   
@@ -1346,7 +1348,7 @@ namespace GODInventory.ViewModel
 //                                          columnname = f.columnname
 //                                      }).ToList();
             string sql = @"select g.idジャンル as ジャンル,  g.ジャンル名, g.社内伝番処理, i.自社コード, i.商品コード, i.JANコード, i.商品名, i.規格,
-i.PT入数,i.単品重量, i.単位, p.配送担当, p.仕入原価, p.通常原単価, p.売単価, p.店番, p.県別, p.warehousename, p.warehouse_id, p.配送担当, p.transport_id,  IFNULL(f.fee, -1) as fee,  IFNULL(f.columnname, '') as columnname  
+i.PT入数,i.単品重量, i.単位, p.配送担当, p.仕入原価, p.通常原単価 as 原単価, p.売単価, p.店番, p.県別, p.warehousename, p.warehouse_id, p.配送担当, p.transport_id,  IFNULL(f.fee, -1) as fee,  IFNULL(f.columnname, '') as columnname  
 from t_itemlist i
 left join  t_pricelist p on i.自社コード = p.自社コード left join t_genre g on i.ジャンル = g.idジャンル 
 left join t_freights f on p.transport_id = f.transport_id and p.warehouse_id =f.warehouse_id and p.自社コード =  f.自社コード and f.shop_id= p.店番 ";

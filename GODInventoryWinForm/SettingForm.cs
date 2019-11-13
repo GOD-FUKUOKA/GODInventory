@@ -32,13 +32,17 @@ namespace GODInventoryWinForm
             this.weekEndDayComboBox.DataSource = dayEnums;
 
             this.weekEndDayComboBox.SelectedIndex = CustomPropertyHelper.GetOrderWeekEndDay();
+            this.taxRateTextBox.Text = Properties.Settings.Default.taxRate.ToString();
+
         }
 
         private void saveButton3_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.NFWEInstallDir = this.installDirTextBox.Text;
             Properties.Settings.Default.InventoryStartAt = this.inventoryStartAtDateTimePicker1.Value;
-            CustomPropertyHelper.SetOrderWeekEndDay( (int)this.weekEndDayComboBox.SelectedValue );
+            Properties.Settings.Default.taxRate = Convert.ToDouble( this.taxRateTextBox.Text );
+            CustomPropertyHelper.SetOrderWeekEndDay((int)this.weekEndDayComboBox.SelectedValue);
+            Properties.Settings.Default.Save();
         }
 
         private void folderBrowserButton1_Click(object sender, EventArgs e)

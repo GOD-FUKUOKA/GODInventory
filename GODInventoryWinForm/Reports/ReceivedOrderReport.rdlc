@@ -1655,7 +1655,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!品名漢字.Value &amp; Microsoft.VisualBasic.Constants.vbcrlf &amp; Fields!規格名漢字.Value</Value>
+                              <Value>=Left(Fields!品名漢字.Value,12) &amp; Microsoft.VisualBasic.Constants.vbcrlf &amp; Fields!規格名漢字.Value</Value>
                               <Style>
                                 <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>
@@ -1965,7 +1965,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -2013,7 +2012,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!品名漢字.Value &amp; Microsoft.VisualBasic.Constants.vbcrlf &amp; Fields!規格名漢字.Value</Value>
+                              <Value>=Left(Fields!品名漢字.Value,12) &amp; Microsoft.VisualBasic.Constants.vbcrlf &amp; Fields!規格名漢字.Value</Value>
                               <Style>
                                 <FontFamily>MS PGothic</FontFamily>
                                 <FontSize>9pt</FontSize>

@@ -459,6 +459,7 @@ namespace GODInventoryWinForm.Controls
                     order.最終出荷数 = editOrderForm.Order.最終出荷数;
                     order.納品口数 = editOrderForm.Order.納品口数;
                     order.重量 = editOrderForm.Order.重量;
+                    order.運賃 = editOrderForm.Order.運賃;
                     order.キャンセル = editOrderForm.Order.キャンセル;
                     order.キャンセル時刻 = editOrderForm.Order.キャンセル時刻;
                     order.Status = editOrderForm.Order.Status;

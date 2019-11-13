@@ -53,6 +53,29 @@ namespace GODInventory.ViewModel.EDI
             }
         }
 
+        public string SデータID
+        {
+            get { return Encoding.ASCII.GetString(this.データID); }
+        }
+
+        public long I管理連番
+        {
+            get { return Convert.ToInt64(Encoding.ASCII.GetString(this.管理連番)); }
+        }
+        public int Iレコード件数
+        {
+            get { return Convert.ToInt32(Encoding.ASCII.GetString(this.レコード件数)); }
+        }
+
+        public string ToRawSql()
+        {
+            string format = @"INSERT INTO `t_edidata`( `データID`, `管理連番`, `レコード件数`,  `created_at`)VALUES ( '{0}',{1},{2},'{3:yyyy-MM-dd HH:mm:ss}');";
+
+            return string.Format(format, this.SデータID, I管理連番, this.Iレコード件数, DateTime.Now);
+
+        }
+
+
         public List<ReceivedOrderModel> Models
         {
             get { return this.models;  }

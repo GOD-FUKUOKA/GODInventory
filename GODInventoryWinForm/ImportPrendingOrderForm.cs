@@ -167,7 +167,8 @@ namespace GODInventoryWinForm
 
                                 orderdata.伝票番号 = OrderHelper.GenerateOrderNumber(orderdata.店舗コード);
 
-                                bool valid = OrderHelper.InitializeOrderByXlsxOrder(orderdata, shop, price);
+                                double taxRate = Properties.Settings.Default.taxRate;
+                                bool valid = OrderHelper.InitializeOrderByXlsxOrder(orderdata, shop, price, taxRate);
                                 if (valid) {
                                     validModelIndexes.Add(i);
                                     ctx.t_orderdata.Add(orderdata);

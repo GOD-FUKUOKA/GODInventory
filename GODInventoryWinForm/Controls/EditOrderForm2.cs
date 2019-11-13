@@ -62,6 +62,7 @@ namespace GODInventoryWinForm.Controls
             this.invoiceNOTextBox.Text = Order.伝票番号.ToString();
             this.countyTextBox1.Text = Order.県別;
             this.finalOrderQtyTextBox2.Text = Order.最終出荷数.ToString();
+            this.freightTextBox.Text = Order.運賃.ToString();
 
 
             if (Order.受注日 != null)
@@ -171,6 +172,10 @@ namespace GODInventoryWinForm.Controls
                     Order.訂正理由区分 = (int)qtyChangeReasonComboBox.SelectedValue;
 
                     Order.最終出荷数 = Convert.ToInt32(this.finalOrderQtyTextBox2.Text);
+                    if (this.freightTextBox.Text.Length > 0)
+                    {
+                        Order.運賃 = Convert.ToInt32(this.freightTextBox.Text);
+                    }
 
                     bool isQtyChanged = (Order.実際出荷数量 != OriginalOrder.実際出荷数量);
                     // 历史原因，有些订单没有出货记录

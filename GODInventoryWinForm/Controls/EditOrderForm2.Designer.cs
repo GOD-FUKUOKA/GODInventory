@@ -65,6 +65,8 @@
             this.submitFormButton = new System.Windows.Forms.Button();
             this.cancelFormButton = new System.Windows.Forms.Button();
             this.entityDataSource1 = new GODInventory.ViewModel.EntityDataSource(this.components);
+            this.label16 = new System.Windows.Forms.Label();
+            this.freightTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,6 +130,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.freightTextBox);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.finalOrderQtyTextBox2);
             this.groupBox1.Controls.Add(this.label14);
@@ -161,7 +165,7 @@
             this.groupBox1.Font = new System.Drawing.Font("MS PGothic", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(23, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(647, 291);
+            this.groupBox1.Size = new System.Drawing.Size(647, 302);
             this.groupBox1.TabIndex = 10000006;
             this.groupBox1.TabStop = false;
             // 
@@ -414,6 +418,22 @@
             // 
             this.entityDataSource1.DbContextType = typeof(GODInventory.MyLinq.GODDbContext);
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(397, 267);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(35, 14);
+            this.label16.TabIndex = 10000024;
+            this.label16.Text = "運賃";
+            // 
+            // freightTextBox
+            // 
+            this.freightTextBox.Location = new System.Drawing.Point(438, 264);
+            this.freightTextBox.Name = "freightTextBox";
+            this.freightTextBox.Size = new System.Drawing.Size(190, 21);
+            this.freightTextBox.TabIndex = 10000023;
+            // 
             // EditOrderForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 11F);
@@ -474,5 +494,7 @@
         private System.Windows.Forms.DateTimePicker placedAtDateTimePicker1;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox finalOrderQtyTextBox2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox freightTextBox;
     }
 }

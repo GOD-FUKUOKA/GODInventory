@@ -38,6 +38,8 @@
             this.inventoryStartAtDateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.weekEndDayComboBox = new System.Windows.Forms.ComboBox();
+            this.taxRateTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -72,7 +74,7 @@
             // cancleButton2
             // 
             this.cancleButton2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancleButton2.Location = new System.Drawing.Point(373, 152);
+            this.cancleButton2.Location = new System.Drawing.Point(373, 188);
             this.cancleButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cancleButton2.Name = "cancleButton2";
             this.cancleButton2.Size = new System.Drawing.Size(106, 32);
@@ -83,7 +85,7 @@
             // saveButton3
             // 
             this.saveButton3.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.saveButton3.Location = new System.Drawing.Point(241, 152);
+            this.saveButton3.Location = new System.Drawing.Point(241, 188);
             this.saveButton3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.saveButton3.Name = "saveButton3";
             this.saveButton3.Size = new System.Drawing.Size(106, 32);
@@ -134,11 +136,29 @@
             this.weekEndDayComboBox.Size = new System.Drawing.Size(278, 22);
             this.weekEndDayComboBox.TabIndex = 10;
             // 
+            // taxRateTextBox
+            // 
+            this.taxRateTextBox.Location = new System.Drawing.Point(201, 160);
+            this.taxRateTextBox.Name = "taxRateTextBox";
+            this.taxRateTextBox.Size = new System.Drawing.Size(278, 21);
+            this.taxRateTextBox.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(160, 163);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 14);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "税率";
+            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(532, 209);
+            this.ClientSize = new System.Drawing.Size(532, 255);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.taxRateTextBox);
             this.Controls.Add(this.weekEndDayComboBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.inventoryStartAtDateTimePicker1);
@@ -175,5 +195,7 @@
         private System.Windows.Forms.DateTimePicker inventoryStartAtDateTimePicker1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox weekEndDayComboBox;
+        private System.Windows.Forms.TextBox taxRateTextBox;
+        private System.Windows.Forms.Label label4;
     }
 }

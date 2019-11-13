@@ -22,6 +22,9 @@ namespace GODInventoryWinForm
 
         private void importButton_Click(object sender, EventArgs e)
         {
+            EDITxtHandler.CreateJURYOUEdidata(this.pathTextBox.Text);
+            this.ProgressValue = 0;
+
             this.importButton.Enabled = false;
             this.cancelButton.Enabled = true;
             this.closeButton.Enabled = false;
@@ -92,6 +95,8 @@ namespace GODInventoryWinForm
 
         private bool ImportJuryouTxt(string path, BackgroundWorker worker, DoWorkEventArgs e)
         {
+            string localPath = EDITxtHandler.CopyJURYOUFile(path);
+
             bool success = true;
             WorkerArgument arg = e.Argument as WorkerArgument;
             ReceivedOrderHeadModel order_head = null;

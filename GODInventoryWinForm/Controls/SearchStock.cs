@@ -196,6 +196,7 @@ namespace GODInventoryWinForm.Controls
 
                     deletedCount = stockrecs.Count;
                     this.stockList.RemoveAll(s => deletedStockNumList.Contains(s.納品書番号));
+                    OrderSqlHelper.UpdateStockState(ctx, stockrecs);
 
                 }
             }
@@ -300,7 +301,7 @@ namespace GODInventoryWinForm.Controls
                                select new v_stockcheck { 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
                 string qtyFormat = @"SELECT s.* FROM t_stockrec s
             INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = @genreId 
-             WHERE ({0}) order by i.`順番`;";
+             WHERE ({0}) order by i.`順番`, s.`日付`;";
                 string sql = String.Format(qtyFormat, conditions);
                 stockList = ctx.Database.SqlQuery<t_stockrec>(sql, condition_params.ToArray()).ToList();
 
@@ -330,7 +331,7 @@ namespace GODInventoryWinForm.Controls
             this.qtyDataGridView.Columns.Clear();
             int j = 0;
 
-            var groupedStockList = stockList.GroupBy(s => s.納品書番号);
+            var groupedStockList = stockList.GroupBy(s => s.納品書番号).OrderBy(s=>s.Key.Split('-').ElementAtOrDefault(1));
 
             #region 构建 DataTable
 
@@ -618,7 +619,7 @@ namespace GODInventoryWinForm.Controls
             {
                 qty = Convert.ToInt32(cell.Value);
             }
-            stock.数量 = (stock.区分 == StockIoEnum.入庫.ToString() ? qty : -qty);
+            stock.数量 = qty; // (stock.区分 == StockIoEnum.入庫.ToString() ? qty : -qty);
             //qtyDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.BackColor = Color.Red;
             if (!changedStockList.Contains(stock))
             {

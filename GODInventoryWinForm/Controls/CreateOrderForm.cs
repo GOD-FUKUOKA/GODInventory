@@ -36,11 +36,13 @@ namespace GODInventoryWinForm.Controls
         private List<t_customers> customersList;
         private SelectProductForm selectProductForm;
         public List<t_orderdata> newOrderList;
+        public double taxRate;
 
         public CreateOrderForm()
         {
             InitializeComponent();
 
+            this.taxRate = Properties.Settings.Default.taxRate;
             orderList = new BindingList<t_orderdata>();
 
             shopList = new List<t_shoplist>();
@@ -768,7 +770,7 @@ namespace GODInventoryWinForm.Controls
                                 SetOrderBaseInfo(o);
                                 o.納品先店舗コード = (short)o.店舗コード;
                                 o.納品先店舗名漢字 = o.店舗名漢字;
-                                o.税率 = 0.08;
+                                o.税率 =  this.taxRate;
                                 o.特価区分 = 0;
                                 o.PB区分 = 0;
                                 o.原価区分 = 0;
