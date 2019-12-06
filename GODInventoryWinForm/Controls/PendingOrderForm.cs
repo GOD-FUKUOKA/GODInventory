@@ -1202,7 +1202,7 @@ ORDER BY o.受注日 desc, o.Status, o.transport_id,o.warehouse_id, o.県別, o.
         private void UpdateStockState(List<v_pendingorder> orders)
         {
             // 每次应用过滤条件时，都会生成新的结果集，根据新的结果集更新“在庫状態”
-            var grouped_orders = orders.GroupBy(o => new { 自社コード = o.自社コード, 実際配送担当 = o.実際配送担当 }, o => o);
+            var grouped_orders = orders.GroupBy(o => new { 自社コード = o.自社コード, warehouse_id = o.warehouse_id }, o => o);
             foreach (var gos in grouped_orders)
             {
                 int total = gos.Sum(o => o.実際出荷数量);

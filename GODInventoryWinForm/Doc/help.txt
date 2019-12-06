@@ -3,3 +3,10 @@
 
 Entity Framework 增删改查和事务操作
 http://www.cnblogs.com/bomo/p/3331602.html
+
+
+ef 数据库连接字符串加密
+https://blog.csdn.net/qdluo/article/details/81391503
+
+http://tool.chacuo.net/cryptdes
+DES加密模式: CBC   填充:  PKCS7  密码: 12345678 偏移量: 87654321 输出: base64 字符集：utf8

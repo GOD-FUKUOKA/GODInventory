@@ -41,6 +41,8 @@ namespace GODInventoryWinForm
             Database.SetInitializer<GODDbContext>(null);
             if (DbConnectable())
             {
+                // 后加属性，需要先在当前属性中读一下。
+                CustomPropertyHelper.SetInventoryStartAt(Properties.Settings.Default.InventoryStartAt);
 
                 LogHelper.WriteLog("Start application GodInventory");
                 StartMainForm();
@@ -115,7 +117,7 @@ namespace GODInventoryWinForm
             bool success = false;
             string msg = "";
             //连接字符串拼装  
-            var myconn = new MySqlConnection(DBConfiguration.GetConnectionString("GODDbContext"));
+            var myconn = new MySqlConnection(EfConstant.ConnectionString);
 
 
             //连接 

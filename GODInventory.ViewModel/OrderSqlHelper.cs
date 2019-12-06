@@ -996,8 +996,10 @@ namespace GODInventory.ViewModel
                    // income/outcome may be null
                    //income = Convert.ToInt32(income);
                    //outcome = Convert.ToInt32(outcome);
+                   var startDate = Properties.Settings.Default.InventoryStartAt.Date;
+
                    var nullableQty = (from s in ctx.t_stockrec
-                              where s.自社コード == pid && s.状態 == "完了" &&  ((s.先 ==warehouse.FullName && s.区分 == "入庫") || (s.元 ==warehouse.FullName && s.区分 == "出庫") )
+                              where s.自社コード == pid && s.状態 == "完了" &&  ((s.先 ==warehouse.FullName && s.区分 == "入庫") || (s.元 ==warehouse.FullName && s.区分 == "出庫") ) && s.日付> startDate 
                                   select (int?)s.数量).Sum() ?? 0;
                    var qty = Convert.ToInt32(nullableQty);
 

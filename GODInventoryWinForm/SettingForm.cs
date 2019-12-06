@@ -42,6 +42,7 @@ namespace GODInventoryWinForm
             Properties.Settings.Default.InventoryStartAt = this.inventoryStartAtDateTimePicker1.Value;
             Properties.Settings.Default.taxRate = Convert.ToDouble( this.taxRateTextBox.Text );
             CustomPropertyHelper.SetOrderWeekEndDay((int)this.weekEndDayComboBox.SelectedValue);
+            CustomPropertyHelper.SetInventoryStartAt(this.inventoryStartAtDateTimePicker1.Value);
             Properties.Settings.Default.Save();
         }
 

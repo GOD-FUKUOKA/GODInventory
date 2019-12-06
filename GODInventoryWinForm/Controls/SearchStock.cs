@@ -298,6 +298,7 @@ namespace GODInventoryWinForm.Controls
             {
                 productList = (from s in ctx.t_itemlist
                                where s.ジャンル == (short)genreId
+                               orderby s.順番
                                select new v_stockcheck { 自社コード = s.自社コード, 規格 = s.規格, 商品名 = s.商品名 }).ToList();
                 string qtyFormat = @"SELECT s.* FROM t_stockrec s
             INNER JOIN t_itemlist i on i.`自社コード` = s.`自社コード` and i.ジャンル = @genreId 

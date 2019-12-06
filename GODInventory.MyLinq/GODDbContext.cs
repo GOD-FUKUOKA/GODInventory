@@ -8,7 +8,8 @@
     public partial class GODDbContext : DbContext
     {
         public GODDbContext()
-            : base("name=GODDbContext")
+            // : base("name=GODDbContext")
+             : base( EfConstant.ConnectionString )
         {
 
         }
